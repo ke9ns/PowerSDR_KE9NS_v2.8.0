@@ -1,0 +1,1116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{831AEB2F-CA78-4057-85D7-32B4816ED6AE}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>PowerSDR.ico</ApplicationIcon>
+    <AssemblyKeyContainerName>
+    </AssemblyKeyContainerName>
+    <AssemblyName>PowerSDR</AssemblyName>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>PowerSDR</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>PowerSDR.Console</StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>ftp://web909.ixwebhosting.com:21/darirnk.com/Publish/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ProductName>PowerSDR</ProductName>
+    <PublisherName>ke9ns</PublisherName>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>publish.htm</WebPage>
+    <ApplicationRevision>27</ApplicationRevision>
+    <ApplicationVersion>2.8.0.27</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\..\bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>TRACE;DEBUG;NO_WIDETX;NO_MCL_PM;NO_KE9NS;NO_DJ</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>..\..\bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile>
+    </ConfigurationOverrideFile>
+    <DefineConstants>NO_WIDETX;NO_MCL_PM;NO_KE9NS;NO_DJ</DefineConstants>
+    <DocumentationFile>
+    </DocumentationFile>
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn>
+    </NoWarn>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>CBF4B506A04BF918E03DCB9D4957B7A5F6E6934E</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestTimestampUrl>http://timestamp.digicert.com</ManifestTimestampUrl>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NO_WIDETX;NO_MCL_PM;NO_KE9NS;NO_DJ</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <FileAlignment>4096</FileAlignment>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>NO_WIDETX;NO_MCL_PM;NO_KE9NS;NO_DJ</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <FileAlignment>4096</FileAlignment>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ADODB">
+      <Name>adodb</Name>
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files\Microsoft.NET\Primary Interop Assemblies\adodb.dll</HintPath>
+      <AssemblyFolderKey>hklm\primary interop assemblies</AssemblyFolderKey>
+    </Reference>
+    <Reference Include="atu, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\Release\atu.dll</HintPath>
+    </Reference>
+    <Reference Include="Flex1500USB, Version=2.0.18.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\Release\Flex1500USB.dll</HintPath>
+    </Reference>
+    <Reference Include="FlexControl, Version=2.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\Release\FlexControl.dll</HintPath>
+    </Reference>
+    <Reference Include="FlexCW, Version=1.0.2.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\Release\FlexCW.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.TDxInput, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\Release\Interop.TDxInput.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build" />
+    <Reference Include="Microsoft.JScript" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.Compatibility" />
+    <Reference Include="Microsoft.VisualC" />
+    <Reference Include="NAudio, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.7.3\lib\net35\NAudio.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NAudio.Lame, Version=1.0.3.3048, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.Lame.1.0.4\lib\net20\NAudio.Lame.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="Sanford.Collections">
+      <HintPath>..\..\bin\Release\DJ\Sanford.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Sanford.Multimedia">
+      <HintPath>..\..\bin\Release\DJ\Sanford.Multimedia.dll</HintPath>
+    </Reference>
+    <Reference Include="Sanford.Multimedia.Midi">
+      <HintPath>..\..\bin\Release\DJ\Sanford.Multimedia.Midi.dll</HintPath>
+    </Reference>
+    <Reference Include="Sanford.Multimedia.Timers">
+      <HintPath>..\..\bin\Release\DJ\Sanford.Multimedia.Timers.dll</HintPath>
+    </Reference>
+    <Reference Include="Sanford.Threading">
+      <HintPath>..\..\bin\Release\DJ\Sanford.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Speech" />
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+    </COMReference>
+    <Reference Include="TNF, Version=1.0.0.2, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\Release\TNF.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutForm.Designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ad9854.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ad9854_v2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="alphawarnform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ATUtester.cs" />
+    <Compile Include="audio.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CAT\CATCommands.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CAT\CATParser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CAT\CATTester.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CAT\RemoteProfiles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CAT\SDRSerialPortII.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CAT\SerialPortPTT.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CAT\SerialRxEvent.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CAT\SIOListenerIII.cs" />
+    <Compile Include="CAT\SIOListenerII.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Channel.cs" />
+    <Compile Include="checksum.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="conrec.cs" />
+    <Compile Include="Http.cs" />
+    <Compile Include="ColorButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="common.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="console.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="betawarnform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cwedit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cwx.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="cw\CWInput.cs" />
+    <Compile Include="database.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="deltacp.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="display.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DiversityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DJConsoleUI\Database.cs" />
+    <Compile Include="DJConsoleUI\DJConsole.cs" />
+    <Compile Include="DJConsoleUI\DJConsoleSelect.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DJConsoleUI\DJConsoleSelect.designer.cs">
+      <DependentUpon>DJConsoleSelect.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DJConsoleUI\DJConsole_MK2.cs" />
+    <Compile Include="DJConsoleUI\DJConsole_MP3e2.cs" />
+    <Compile Include="DJConsoleUI\DJConsole_MP3LE.cs" />
+    <Compile Include="DJConsoleUI\GeneralSettings1.Designer.cs" />
+    <Compile Include="DJConsoleUI\MappingMK21.Designer.cs" />
+    <Compile Include="DJConsoleUI\MappingMP3e21.Designer.cs" />
+    <Compile Include="DJConsoleUI\Setup_MK2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DJConsoleUI\Setup_MK2.designer.cs">
+      <DependentUpon>Setup_MK2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DJConsoleUI\Setup_MP3e2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DJConsoleUI\Setup_MP3e2.designer.cs">
+      <DependentUpon>Setup_MP3e2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DJConsoleUI\Setup_MP3LE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DJConsoleUI\Setup_MP3LE.designer.cs">
+      <DependentUpon>Setup_MP3LE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dsp.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DSPTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dttsp.cs" />
+    <Compile Include="eqform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="filter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FilterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FLEX3000ATUForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FlexControlAdvancedForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FlexControlAdvancedForm.Designer.cs">
+      <DependentUpon>FlexControlAdvancedForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FlexControlInterface1.cs" />
+    <Compile Include="FlexControlInterface2.cs" />
+    <Compile Include="FlexControlBasicForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FlexControlBasicForm.designer.cs">
+      <DependentUpon>FlexControlBasicForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FWC\FLEX3000MixerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FWC\FLEX3000TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FWC\FLEX5000DebugForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FWC\FLEX5000FinalTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FWC\FLEX5000LLHWForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FWC\FLEX5000LPFForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FWC\FLEX5000ProdTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FWC\FLEX5000RelayForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FWC\FLEX5000RX2CalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FWC\FLEX5000VUCalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FWC\FLEX5000VUCalForm.Designer.cs">
+      <DependentUpon>FLEX5000VUCalForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FWC\fwc.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FWC\fwcAntForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FWC\fwcatuform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FWC\fwcCalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FWC\fwcmixform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FWC\fwcTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FWC\fwc_atu.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FWC\fwc_eeprom.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FWC\fwc_midi.cs" />
+    <Compile Include="FWC\pal.cs" />
+    <Compile Include="FWC\powermaster.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FWC\PreSelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FWC\PreSelForm.Designer.cs">
+      <DependentUpon>PreSelForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FWC\VUForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FWC\VUForm.Designer.cs">
+      <DependentUpon>VUForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="hardware_v2.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="hiperftimer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="hid\CodecDebug.cs" />
+    <Compile Include="hid\flex1500.cs" />
+    <Compile Include="hid\FLEX1500DebugForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="hid\FLEX1500DebugForm.designer.cs">
+      <DependentUpon>FLEX1500DebugForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="hid\FLEX1500MixerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="hid\hidAntForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="hid\hid_eeprom.cs" />
+    <Compile Include="hid\usbhid.cs" />
+    <Compile Include="HttpServer\GetTRXParamHandler.cs" />
+    <Compile Include="HttpServer\HandlerFactory.cs" />
+    <Compile Include="HttpServer\HttpServer.cs" />
+    <Compile Include="HttpServer\IHandler.cs" />
+    <Compile Include="HttpServer\ImageRequestHandler.cs" />
+    <Compile Include="HttpServer\SetParamRequestHandler.cs" />
+    <Compile Include="HttpServer\UnknownRequestHandler.cs" />
+    <Compile Include="HttpServer\WebPageRequestHandler.cs" />
+    <Compile Include="hw_register.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="helpbox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TOTBOX.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="invoke.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Invoke\buttonts.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Invoke\checkboxts.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Invoke\comboboxts.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Invoke\groupboxts.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Invoke\invoke.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Invoke\labelts.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Invoke\numericupdownts.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Invoke\panelts.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Invoke\radiobuttonts.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Invoke\textboxts.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Invoke\trackbarts.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="keyboard.cs" />
+    <Compile Include="logon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="master.cs" />
+    <Compile Include="Memory\MemoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Memory\MemoryForm.Designer.cs">
+      <DependentUpon>MemoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Memory\DXMemList.cs" />
+    <Compile Include="Memory\MemoryList.cs" />
+    <Compile Include="Memory\DXMemRecord.cs" />
+    <Compile Include="Memory\MemoryRecord.cs" />
+    <Compile Include="midi.cs" />
+    <Compile Include="mixer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="mobilewarnform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="paqualify.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="parallel.cs" />
+    <Compile Include="portaudio.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PrettyTrackBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="process_sample_thread_controller.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="production_debug.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="production_test.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="progress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="radio.cs" />
+    <Compile Include="RadioChoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RadioChoice.Designer.cs">
+      <DependentUpon>RadioChoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="radios_available.cs" />
+    <Compile Include="RamWarnForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="release_notes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ringbuffer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="IDBOX.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="swl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="stack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="setup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Skin.cs" />
+    <Compile Include="SortableBindingList.cs" />
+    <Compile Include="splash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="spot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="svnrev.cs" />
+    <Compile Include="tdxstub.cs" />
+    <Compile Include="ThreadedBindingList.cs" />
+    <Compile Include="titlebar.cs" />
+    <Compile Include="TuneStep.cs" />
+    <Compile Include="ucb.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ucbform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LegacyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LegacyForm.Designer.cs">
+      <DependentUpon>LegacyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="usb.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="scan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="wave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="spot_options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="wave_options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="win32.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="wizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="xvtr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <EmbeddedResource Include="DJConsoleUI\DJConsoleSelect.resx">
+      <DependentUpon>DJConsoleSelect.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DJConsoleUI\Setup_MK2.resx">
+      <DependentUpon>Setup_MK2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DJConsoleUI\Setup_MP3e2.resx">
+      <DependentUpon>Setup_MP3e2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DJConsoleUI\Setup_MP3LE.resx">
+      <DependentUpon>Setup_MP3LE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="hid\FLEX1500DebugForm.resx">
+      <DependentUpon>FLEX1500DebugForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="hid\FLEX1500MixerForm.resx">
+      <DependentUpon>FLEX1500MixerForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="hid\hidAntForm.resx">
+      <DependentUpon>hidAntForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="helpbox.resx">
+      <DependentUpon>helpbox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TOTBOX.resx">
+      <DependentUpon>TOTBOX.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputBox.resx">
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\picD2.png" />
+    <EmbeddedResource Include="HttpServer\template.html" />
+    <None Include="images\meterback1.png" />
+    <None Include="images\meterback2.png" />
+    <Content Include="libmp3lame.32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="libmp3lame.64.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Resources\star.png" />
+    <EmbeddedResource Include="Resources\met3.jpg" />
+    <EmbeddedResource Include="Resources\meterback1.png" />
+    <EmbeddedResource Include="Resources\meterback2.png" />
+    <EmbeddedResource Include="Resources\black needle.png" />
+    <EmbeddedResource Include="Resources\red needle.png" />
+    <EmbeddedResource Include="Resources\yellow needle.png" />
+    <EmbeddedResource Include="Resources\yell2.png" />
+    <EmbeddedResource Include="Resources\black2.png" />
+    <EmbeddedResource Include="Resources\red2.png" />
+    <EmbeddedResource Include="Resources\white2.png" />
+    <EmbeddedResource Include="Resources\moon1.png" />
+    <EmbeddedResource Include="Resources\ISS.png" />
+    <EmbeddedResource Include="Resources\ant2.png" />
+    <EmbeddedResource Include="Resources\disk3.png" />
+    <EmbeddedResource Include="Resources\arrowA.png" />
+    <EmbeddedResource Include="Resources\arrowB.png" />
+    <Content Include="Scripts\json-serialize.js" />
+    <Content Include="Scripts\json-serialize.min.js" />
+    <EmbeddedResource Include="Resources\picD1.png" />
+    <EmbeddedResource Include="Resources\sun.png" />
+    <EmbeddedResource Include="AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="alphawarnform.resx">
+      <DependentUpon>alphawarnform.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CAT\CATTester.resx">
+      <DependentUpon>CATTester.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CAT\RemoteProfiles.resx">
+      <DependentUpon>RemoteProfiles.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ColorButton.resx">
+      <DependentUpon>ColorButton.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="console.resx">
+      <DependentUpon>console.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="betawarnform.resx">
+      <DependentUpon>betawarnform.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cwedit.resx">
+      <DependentUpon>cwedit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cwx.resx">
+      <DependentUpon>cwx.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DiversityForm.resx">
+      <DependentUpon>DiversityForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DSPTestForm.resx">
+      <DependentUpon>DSPTestForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="eqform.resx">
+      <DependentUpon>eqform.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FilterForm.resx">
+      <DependentUpon>FilterForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FLEX3000ATUForm.resx">
+      <DependentUpon>FLEX3000ATUForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FlexControlAdvancedForm.resx">
+      <DependentUpon>FlexControlAdvancedForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FlexControlBasicForm.resx">
+      <DependentUpon>FlexControlBasicForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FWC\FLEX3000MixerForm.resx">
+      <DependentUpon>FLEX3000MixerForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FWC\FLEX3000TestForm.resx">
+      <DependentUpon>FLEX3000TestForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FWC\FLEX5000DebugForm.resx">
+      <DependentUpon>FLEX5000DebugForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FWC\FLEX5000FinalTestForm.resx">
+      <DependentUpon>FLEX5000FinalTestForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FWC\FLEX5000LLHWForm.resx">
+      <DependentUpon>FLEX5000LLHWForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FWC\FLEX5000LPFForm.resx">
+      <DependentUpon>FLEX5000LPFForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FWC\FLEX5000ProdTestForm.resx">
+      <DependentUpon>FLEX5000ProdTestForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FWC\FLEX5000RelayForm.resx">
+      <DependentUpon>FLEX5000RelayForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FWC\FLEX5000RX2CalForm.resx">
+      <DependentUpon>FLEX5000RX2CalForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FWC\FLEX5000VUCalForm.resx">
+      <DependentUpon>FLEX5000VUCalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FWC\fwcAntForm.resx">
+      <DependentUpon>fwcAntForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FWC\fwcatuform.resx">
+      <DependentUpon>fwcatuform.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FWC\fwcCalForm.resx">
+      <DependentUpon>fwcCalForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FWC\fwcmixform.resx">
+      <DependentUpon>fwcmixform.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FWC\fwcTestForm.resx">
+      <DependentUpon>fwcTestForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FWC\PreSelForm.resx">
+      <DependentUpon>PreSelForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FWC\VUForm.resx">
+      <DependentUpon>VUForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="images\clock.jpg" />
+    <EmbeddedResource Include="images\demi144-28frs.jpg" />
+    <EmbeddedResource Include="images\flex-1500.jpg" />
+    <EmbeddedResource Include="images\flex-5000.jpg" />
+    <EmbeddedResource Include="images\no_hardware.jpg" />
+    <EmbeddedResource Include="images\sdr-1000.jpg" />
+    <EmbeddedResource Include="images\sdr-atu.jpg" />
+    <EmbeddedResource Include="images\sdr-pa100.jpg" />
+    <EmbeddedResource Include="images\sdr-rfe.jpg" />
+    <EmbeddedResource Include="images\sdr-usb.jpg" />
+    <EmbeddedResource Include="images\softrock40.jpg" />
+    <EmbeddedResource Include="images\soundcard.jpg" />
+    <EmbeddedResource Include="logon.resx">
+      <DependentUpon>logon.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Memory\MemoryForm.resx">
+      <DependentUpon>MemoryForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mobilewarnform.resx">
+      <DependentUpon>mobilewarnform.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="paqualify.resx">
+      <DependentUpon>paqualify.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="production_debug.resx">
+      <DependentUpon>production_debug.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="production_test.resx">
+      <DependentUpon>production_test.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="progress.resx">
+      <DependentUpon>progress.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RadioChoice.resx">
+      <DependentUpon>RadioChoice.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RamWarnForm.resx">
+      <DependentUpon>RamWarnForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IDBOX.resx">
+      <DependentUpon>IDBOX.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="swl.resx">
+      <DependentUpon>swl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="stack.resx">
+      <DependentUpon>stack.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="setup.resx">
+      <DependentUpon>setup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="splash.resx">
+      <DependentUpon>splash.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="spot.resx">
+      <DependentUpon>spot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucbform.resx">
+      <DependentUpon>ucbform.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LegacyForm.resx">
+      <DependentUpon>LegacyForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="scan.resx">
+      <DependentUpon>scan.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wave.resx">
+      <DependentUpon>wave.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="spot_options.resx">
+      <DependentUpon>spot_options.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wave_options.resx">
+      <DependentUpon>wave_options.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="wizard.resx">
+      <DependentUpon>wizard.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="xvtr.resx">
+      <DependentUpon>xvtr.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Content Include="CAT\CATStructs.xml" />
+    <EmbeddedResource Include="images\flex-3000.jpg" />
+    <Content Include="images\PowerSDR.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Visual.C++.14.0.x64">
+      <Visible>False</Visible>
+      <ProductName>Visual C++ "14" Runtime Libraries %28x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Visual.C++.14.0.x86">
+      <Visible>False</Visible>
+      <ProductName>Visual C++ "14" Runtime Libraries %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
+    <EmbeddedResource Include="Resources\swiss.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swissb.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swissbi.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swissbo.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swissc.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swisscb.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swisscbi.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swisscbo.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swissci.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swissck.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swisscki.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swisscl.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swisscli.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swisse.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swisseb.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swissek.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swissel.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swissi.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swissk.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swisski.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swissko.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swissl.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\swissli.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\Setup.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PowerMate\PowerMate.vcxproj">
+      <Project>{bbd70852-1a81-4232-b094-c87bede243c9}</Project>
+      <Name>PowerMate</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>copy "$(ProjectDir)CAT\CATStructs.xml" "$(OutDir)";</PostBuildEvent>
+  </PropertyGroup>
+</Project>

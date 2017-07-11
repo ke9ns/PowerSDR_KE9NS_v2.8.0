@@ -1,0 +1,98 @@
+/*****************************************************************************
+
+        SweepingSine.h
+        Copyright (c) 2005 Laurent de Soras
+
+--- Legal stuff ---
+
+This program is free software. It comes without any warranty, to
+the extent permitted by applicable law. You can redistribute it
+and/or modify it under the terms of the Do What The Fuck You Want
+To Public License, Version 2, as published by Sam Hocevar. See
+http://sam.zoy.org/wtfpl/COPYING for more details.
+
+*Tab=3***********************************************************************/
+
+
+
+#if ! defined (hiir_test_SweepingSine_HEADER_INCLUDED)
+#define	hiir_test_SweepingSine_HEADER_INCLUDED
+
+#if defined (_MSC_VER)
+	#pragma once
+	#pragma warning (4 : 4250) // "Inherits via dominance."
+#endif
+
+
+
+/*\\\ INCLUDE FILES \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
+
+
+
+namespace hiir
+{
+namespace test
+{
+
+
+
+class SweepingSine
+{
+
+/*\\\ PUBLIC \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
+
+public:
+
+						SweepingSine (float sample_freq, float freq_beg, float freq_end, long nbr_spl);
+	virtual			~SweepingSine () {}
+
+	void				generate (float dest_ptr []) const;
+
+	long				get_len () const;
+	float				get_sample_freq () const;
+	float				get_freq_at_sample (long pos) const;
+	long				get_sample_pos_for (float freq) const;
+
+
+
+/*\\\ PROTECTED \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
+
+protected:
+
+
+
+/*\\\ PRIVATE \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
+
+private:
+
+	float				_sample_freq;
+	float				_freq_beg;
+	float				_freq_end;
+	long				_nbr_spl;
+
+
+
+/*\\\ FORBIDDEN MEMBER FUNCTIONS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/
+
+private:
+
+						SweepingSine ();
+						SweepingSine (const SweepingSine &other);
+	SweepingSine &	operator = (const SweepingSine &other);
+	bool				operator == (const SweepingSine &other);
+	bool				operator != (const SweepingSine &other);
+
+};	// class SweepingSine
+
+
+
+}	// namespace test
+}	// namespace hiir
+
+
+
+#endif	// hiir_test_SweepingSine_HEADER_INCLUDED
+
+
+
+/*\\\ EOF \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\*/

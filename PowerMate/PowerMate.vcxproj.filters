@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="AssemblyInfo">
+      <UniqueIdentifier>{67d250e2-29c3-4b3d-b709-c36e5148617c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PowerMate">
+      <UniqueIdentifier>{c0a5565b-fb1d-46e4-9398-2ede422b5465}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PrecompiledHeader">
+      <UniqueIdentifier>{9291289a-d207-4cdf-a134-aaee24fa48f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EventsHelper">
+      <UniqueIdentifier>{1e6a3016-cf7a-496f-94be-b2f8bb6ba4d2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerMate.h">
+      <Filter>PowerMate</Filter>
+    </ClInclude>
+    <ClInclude Include="Stdafx.h">
+      <Filter>PrecompiledHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="EventsHelper.h">
+      <Filter>EventsHelper</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AssemblyInfo.cpp">
+      <Filter>AssemblyInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerMate.cpp">
+      <Filter>PowerMate</Filter>
+    </ClCompile>
+    <ClCompile Include="Stdafx.cpp">
+      <Filter>PrecompiledHeader</Filter>
+    </ClCompile>
+    <ClCompile Include="EventsHelper.cpp">
+      <Filter>EventsHelper</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

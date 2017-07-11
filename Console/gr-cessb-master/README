@@ -1,0 +1,68 @@
+# Copyright 2016 Ron Economos
+#
+# This file is part of gr-cessb
+#
+# gr-cessb is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3, or (at your option)
+# any later version.
+#
+# gr-cessb is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with gr-cessb; see the file COPYING.  If not, write to
+# the Free Software Foundation, Inc., 51 Franklin Street,
+# Boston, MA 02110-1301, USA.
+
+gr-cessb
+======
+
+Author: Ron Economos
+Email: <w6rz@comcast.net>
+
+The goal of this project is to build a software-defined SSB transmitter
+that implements Controlled Envelope SSB processing. It is based on this
+article by David L. Hershberger, W9GR.
+
+http://www.arrl.org/files/file/QEX_Next_Issue/2014/Nov-Dec_2014/Hershberger_QEX_11_14.pdf
+
+After installation, two GNU Radio blocks called "Magnitude Clipper"
+and "Peak Stretcher" will be available in the "CESSB" category. The
+"Magnitude Clipper" block clips the magnitude of IQ samples to the
+specified clipping level. It is the first stage of the CESSB algorithm.
+The "Peak Stretcher" block does additional clipping. It is the second
+stage of the CESSB algorithm.
+
+There is one parameter for the Magnitude Clipper block.
+
+1) Clipping Level. The magnitude that IQ samples will be clipped to.
+
+A GNU Radio Companion flow graph (ssb.grc) is provided in the apps
+directory. It transmits a test file (ssbaudioprocessed.wav) with a
+UHD sink setup for an Ettus B2X0 SDR. Be sure to select the correct
+sink for your device.
+
+The test file is a male announcer reciting a portion of the Gettysburg
+Address. It has been processed from the file ssbaudio.wav with the sox
+command:
+
+sox ssbaudio.wav -b 16 ssbaudioprocessed.wav compand 0.0,0.01 0.25:-20,-20,0,-20 -0.1 -40 .0005 gain -n -3.0102999566
+
+The sox sound processing utility is available here:
+
+http://sox.sourceforge.net/
+
+Build instructions:
+
+    mkdir build
+    cd build
+    cmake ../
+    make
+    sudo make install
+    sudo ldconfig
+
+Contributions are welcome!
+
