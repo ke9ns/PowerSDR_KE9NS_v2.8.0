@@ -35,46 +35,48 @@ using System.Windows.Forms;
 
 namespace PowerSDR
 {
-	public class Progress : System.Windows.Forms.Form
-	{
-		#region Variable Declaration
+    public class Progress : System.Windows.Forms.Form
+    {
+        #region Variable Declaration
 
-		private float percent_done;
+        private float percent_done;
 
-		private System.Windows.Forms.Panel panel1;
-		private System.Windows.Forms.ButtonTS btnAbort;
-		private System.ComponentModel.Container components = null;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ButtonTS btnAbort;
+        private System.ComponentModel.Container components = null;
 
-		#endregion
+        #endregion
 
-		#region Constructor and Destructor
+        #region Constructor and Destructor
 
-		public Progress(string s)
-		{
-			InitializeComponent();
-			this.SetStyle(ControlStyles.DoubleBuffer, true);
-			this.Text = s;
-			percent_done = 0.0f;
-		}
+        public Progress(string s)
+        {
+            InitializeComponent();
+            this.SetStyle(ControlStyles.DoubleBuffer, true);
+            this.Text = s;
+            this.TopMost = true; // .202
 
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+            percent_done = 0.0f;
+        }
 
-		#endregion
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#region Windows Form Designer generated code
+        #endregion
 
-		private void InitializeComponent()
-		{
+        #region Windows Form Designer generated code
+
+        private void InitializeComponent()
+        {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Progress));
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnAbort = new System.Windows.Forms.ButtonTS();
@@ -113,78 +115,78 @@ namespace PowerSDR
             this.Closing += new System.ComponentModel.CancelEventHandler(this.Progress_Closing);
             this.ResumeLayout(false);
 
-		}
-		#endregion
+        }
+        #endregion
 
-		#region Misc Routines
+        #region Misc Routines
 
-		private delegate void Invoker(float f);
+        private delegate void Invoker(float f);
 
-		public void SetPercent(float f)
-		{
-			percent_done = f * 100;;
-			panel1.Invalidate();
-		}
+        public void SetPercent(float f)
+        {
+            percent_done = f * 100; ;
+            panel1.Invalidate();
+        }
 
-		#endregion
+        #endregion
 
-		#region Event Handlers
+        #region Event Handlers
 
-		private void btnAbort_Click(object sender, System.EventArgs e)
-		{
-			this.Hide();
-			this.Visible = false;
-		}
+        private void btnAbort_Click(object sender, System.EventArgs e)
+        {
+            this.Hide();
+            this.Visible = false;
+        }
 
-		private string digits = "f0";
-		private int percent_digits = 0;
-		public int PercentDigits
-		{
-			get { return percent_digits; }
-			set
-			{
-				percent_digits = value;
-				digits = "f"+percent_digits.ToString();
-			}
-		}
+        private string digits = "f0";
+        private int percent_digits = 0;
+        public int PercentDigits
+        {
+            get { return percent_digits; }
+            set
+            {
+                percent_digits = value;
+                digits = "f" + percent_digits.ToString();
+            }
+        }
 
-		private string percent_symbol = "%";
-		public string PercentSymbol
-		{
-			get { return percent_symbol; }
-			set { percent_symbol = value; }
-		}
+        private string percent_symbol = "%";
+        public string PercentSymbol
+        {
+            get { return percent_symbol; }
+            set { percent_symbol = value; }
+        }
 
-		private void panel1_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
-		{
-			int bar = (int)Math.Floor(panel1.Width * percent_done / 100);
-			if(bar == 0) return;
-			Graphics g = e.Graphics;
-			g.SmoothingMode = SmoothingMode.HighQuality;
-			LinearGradientBrush b = new LinearGradientBrush(
-				new Rectangle(0, 0, bar, panel1.Height),
-				Color.Green,
-				Color.Lime,
-				LinearGradientMode.Horizontal);
-			
-			g.FillRectangle(b, 0, 0, bar, panel1.Height);
+        private void panel1_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        {
+            int bar = (int)Math.Floor(panel1.Width * percent_done / 100);
+            if (bar == 0) return;
+            Graphics g = e.Graphics;
+            g.SmoothingMode = SmoothingMode.HighQuality;
+            LinearGradientBrush b = new LinearGradientBrush(
+                new Rectangle(0, 0, bar, panel1.Height),
+                Color.Green,
+                Color.Lime,
+                LinearGradientMode.Horizontal);
 
-			string s = percent_done.ToString(digits) + percent_symbol;
-			SolidBrush b2 = new SolidBrush(Color.Black);
-			Font f = new Font("Microsoft Sans Serif", 10);
-			StringFormat sf = new StringFormat();
-			sf.Alignment = StringAlignment.Center;
-			sf.LineAlignment = StringAlignment.Center;
+            g.FillRectangle(b, 0, 0, bar, panel1.Height);
 
-			g.DrawString(s,	f, b2, new RectangleF(0, 0, panel1.Width, panel1.Height), sf);
-		}
+            string s = percent_done.ToString(digits) + percent_symbol;
+            SolidBrush b2 = new SolidBrush(Color.Black);
+            Font f = new Font("Microsoft Sans Serif", 10);
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;
+            sf.LineAlignment = StringAlignment.Center;
 
-		private void Progress_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			this.Hide();
-			e.Cancel = true;
-		}
+            g.DrawString(s, f, b2, new RectangleF(0, 0, panel1.Width, panel1.Height), sf);
+        }
 
-		#endregion		
-	}
+        private void Progress_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
+        }
+
+        #endregion
+    }
 }

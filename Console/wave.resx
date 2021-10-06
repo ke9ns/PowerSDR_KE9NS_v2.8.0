@@ -127,18 +127,75 @@
     <value>264, 17</value>
   </metadata>
   <data name="checkBoxTS2.ToolTip" xml:space="preserve">
-    <value>Click the REPLY button to record your Voice or CW,
+    <value>Create Voice Keyer:
+Click the REPLY button to record your Voice (in SSB) or CW,
 Speak, or CW your Callsign as you would when trying to contact a DX station.
 Then click REPLY button again, to end the recording.
 
-Use the REPLY button, found on the main console screen.</value>
+Use F3 or "Reply" button on Console screen as Voice Keyer for this recording
+
+Recording level is based on your MIC level
+Playback level is based on the "TX Gain" value (up above)
+</value>
+  </data>
+  <data name="checkBoxVoice.ToolTip" xml:space="preserve">
+    <value>Record a Voice ID of your callsign (in SSB).
+Used by the voID Timer feature on the main console.
+
+Click to Start/Stop record a CW ID File: IDTIMER.wav
+
+Recording level is based on your MIC level
+Playback level is based on the "TX Gain" value (up above)
+</value>
   </data>
   <data name="checkBoxCQ.ToolTip" xml:space="preserve">
-    <value>Click the CQCQ button to record your Voice or CW,
+    <value>Create Voice Keyer:
+Click the CQCQ button to record your Voice (in SSB) or CW,
 Speak, or CW a "CQ DE &lt;your callsign&gt;" as you would when trying to make a CQ contact.
 Then click CQCQ button again, to end the recording.
 
-Use the CQCQ button, found on the main console screen.
+Use F4 or "CQCQ" button on Console screen as Voice Keyer for this recording
+
+Recording level is based on your MIC level
+Playback level is based on the "TX Gain" value (up above)</value>
+  </data>
+  <data name="checkBoxCW.ToolTip" xml:space="preserve">
+    <value>Record a CW ID of your callsign.
+Used by the cwID Timer feature on the main cosole.
+
+Click to Start/Stop record a CW ID File: IDTIMERCW.wav
+
+Make sure to be in CW mode and open CWX panel.
+
+Recording level is based on your MIC level
+Playback level is based on the "TX Gain" value (up above)
+</value>
+  </data>
+  <data name="checkBoxVK1.ToolTip" xml:space="preserve">
+    <value>Create Voice Keyer:
+Click the VK1 button to record your Voice (in SSB) or CW,
+Speak, or CW 
+Then click VK1 button again, to end the recording.
+
+Use F5 or "VK1" button on Console screen as Voice Keyer for this recording
+
+Recording level is based on your MIC level
+Playback level is based on the "TX Gain" value (up above)
+
+
+</value>
+  </data>
+  <data name="checkBoxVK2.ToolTip" xml:space="preserve">
+    <value>Create Voice Keyer:
+Click the VK2 button to record your Voice (in SSB) or CW,
+Speak, or CW 
+Then click VK2 button again, to end the recording.
+
+Use F6 or "VK2" button on Console screen as Voice Keyer for this recording
+
+Recording level is based on your MIC level
+Playback level is based on the "TX Gain" value (up above)
+
 
 </value>
   </data>

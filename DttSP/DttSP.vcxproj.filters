@@ -27,9 +27,6 @@
     <ClCompile Include="correctIQ.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cwtones.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cxops.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -61,15 +58,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="isoband.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="keyd.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="keyer.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="keyerio.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="lmadf.c">
@@ -129,6 +117,18 @@
     <ClCompile Include="wscompand.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="keyd.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="keyerio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="keyer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cwtones.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Console\svnrev.cs">
@@ -138,6 +138,8 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="..\hiir\hiir.vcxproj" />
+    <None Include="@(NativeLibs)" />
+    <None Include="@(NativeLibs)" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="am_demod.h">
@@ -156,9 +158,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="correctIQ.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="cwtones.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cxops.h">
@@ -213,9 +212,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="isoband.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="keyer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lmadf.h">
@@ -282,6 +278,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="wscompand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="keyer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cwtones.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

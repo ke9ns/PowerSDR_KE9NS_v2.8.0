@@ -8,10 +8,10 @@ namespace HttpServer
 {
     public class SetParamRequestHandler : IHandler
     {
-        public SetParamRequestHandler(String body, TcpClient tcpClient):
+        public SetParamRequestHandler(String body, TcpClient tcpClient) :
             base(body, tcpClient)
         {
-         
+
         }
 
         private const string LEFT_BUTTON_PANORAM_CLICK = "clickLeftOnPanoram";
@@ -48,7 +48,7 @@ namespace HttpServer
         private const string DRM = "DRM";
 
         private const string F1 = "F1";
-		private const string F2 = "F2";
+        private const string F2 = "F2";
         private const string F3 = "F3";
         private const string F4 = "F4";
         private const string F5 = "F5";
@@ -66,13 +66,13 @@ namespace HttpServer
             if (m_tcpClient == null) return;
 
             string CodeStr = "200 " + ((HttpStatusCode)200).ToString();
-            
+
             if (m_body != null && m_body.Length > 0)
             {
                 try
                 {
                     string[] data = m_body.Split(DATA_SEPARATOR);
-                    if(data.Length != 2)
+                    if (data.Length != 2)
                     {
                         Debug.WriteLine("Receive error data from server");
                         CodeStr = "500" + ((HttpStatusCode)500).ToString();
@@ -82,7 +82,7 @@ namespace HttpServer
                         setParam(data[0], data[1]);
                     }
                 }
-                catch(System.Exception e)
+                catch (System.Exception e)
                 {
                     Debug.WriteLine(e.ToString());
                 }
@@ -92,28 +92,28 @@ namespace HttpServer
             string Str = "HTTP/1.1 " + CodeStr + "\nContent-type: text/html\nAccess-Control-Allow-Origin: *\nContent-Length:" + Html.Length.ToString() + "\n\n" + Html;
             byte[] Buffer = Encoding.UTF8.GetBytes(Str);
             sendAnswer(Buffer);
-            
+
         }
 
         void setParam(string paramName, string data)
         {
-            if(paramName.CompareTo(LEFT_BUTTON_PANORAM_CLICK) == 0)
+            if (paramName.CompareTo(LEFT_BUTTON_PANORAM_CLICK) == 0)
             {
                 m_console.setVFOAFreqByPixel(Int32.Parse(data));
             }
-            else if(paramName.CompareTo(SET_BAND) == 0)
+            else if (paramName.CompareTo(SET_BAND) == 0)
             {
-               m_console.SetCATBand(getBand(data));
+                m_console.SetCATBand(getBand(data));
             }
-            else if(paramName.CompareTo(SET_MODE) == 0)
+            else if (paramName.CompareTo(SET_MODE) == 0)
             {
                 m_console.RX1DSPMode = getMode(data);
             }
-            else if(paramName.CompareTo(SET_FILTER) == 0)
+            else if (paramName.CompareTo(SET_FILTER) == 0)
             {
                 m_console.RX1Filter = getFilter(data);
             }
-            else if(paramName.CompareTo(SCROLL_FREQ) == 0)
+            else if (paramName.CompareTo(SCROLL_FREQ) == 0)
             {
                 mouseWhell(data);
             }
@@ -124,7 +124,7 @@ namespace HttpServer
             switch (data)
             {
                 case BAND160: return PowerSDR.Band.B160M;
-                case BAND80:  return PowerSDR.Band.B80M;
+                case BAND80: return PowerSDR.Band.B80M;
                 case BAND60: return PowerSDR.Band.B60M;
                 case BAND40: return PowerSDR.Band.B40M;
                 case BAND30: return PowerSDR.Band.B30M;
@@ -161,7 +161,7 @@ namespace HttpServer
 
         PowerSDR.Filter getFilter(string data)
         {
-           switch (data)
+            switch (data)
             {
                 case F1: return PowerSDR.Filter.F1;
                 case F2: return PowerSDR.Filter.F2;
@@ -179,7 +179,7 @@ namespace HttpServer
 
         void mouseWhell(string dir)
         {
-            if(dir == "1")
+            if (dir == "1")
             {
                 m_console.wheelEventOnWeb(true);
             }

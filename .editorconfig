@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# RCS1036: Remove redundant empty line.
+dotnet_diagnostic.RCS1036.severity = none

@@ -29,6 +29,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>ftp://web909.ixwebhosting.com:21/darirnk.com/Publish/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -56,7 +58,7 @@
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
-    <DefineConstants>TRACE;DEBUG;NO_WIDETX;NO_MCL_PM;NO_KE9NS;NO_DJ</DefineConstants>
+    <DefineConstants>NO_WIDETX;NO_MCL_PM;NO_KE9NS;NO_DJ</DefineConstants>
     <DocumentationFile>
     </DocumentationFile>
     <DebugSymbols>true</DebugSymbols>
@@ -98,7 +100,7 @@
     <WarningLevel>4</WarningLevel>
     <DebugType>none</DebugType>
     <ErrorReport>prompt</ErrorReport>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
@@ -133,13 +135,39 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
+    <OutputPath>..\..\bin\Release\</OutputPath>
     <DefineConstants>NO_WIDETX;NO_MCL_PM;NO_KE9NS;NO_DJ</DefineConstants>
     <BaseAddress>285212672</BaseAddress>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>true</Optimize>
     <FileAlignment>4096</FileAlignment>
     <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>NO_WIDETX;NO_MCL_PM;NO_KE9NS;NO_DJ</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <FileAlignment>4096</FileAlignment>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>NO_WIDETX;NO_MCL_PM;NO_KE9NS;NO_DJ</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <FileAlignment>4096</FileAlignment>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -152,6 +180,15 @@
     <Reference Include="atu, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\Release\atu.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoItX3.Assembly, Version=3.0.0.0, Culture=neutral, PublicKeyToken=a646454c8d475470, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoItX.Dotnet.3.3.14.5\lib\AutoItX3.Assembly.dll</HintPath>
+    </Reference>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Flex1500USB, Version=2.0.18.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -169,22 +206,23 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\Release\Interop.TDxInput.dll</HintPath>
     </Reference>
+    <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.JScript" />
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.VisualBasic.Compatibility" />
     <Reference Include="Microsoft.VisualC" />
-    <Reference Include="NAudio, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NAudio.1.7.3\lib\net35\NAudio.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.Vsa, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="NAudio, Version=1.8.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.8.5\lib\net35\NAudio.dll</HintPath>
     </Reference>
-    <Reference Include="NAudio.Lame, Version=1.0.3.3048, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NAudio.Lame.1.0.4\lib\net20\NAudio.Lame.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="NAudio.Lame, Version=1.0.9.26885, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.Lame.1.0.9\lib\net40\NAudio.Lame.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="Sanford.Collections">
@@ -211,14 +249,23 @@
     <Reference Include="System.Data">
       <Name>System.Data</Name>
     </Reference>
+    <Reference Include="System.Design" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
     </Reference>
+    <Reference Include="System.Json, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Json.4.5.0\lib\netstandard1.0\System.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Speech" />
     <Reference Include="System.Windows.Forms">
       <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
@@ -230,6 +277,7 @@
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
     </COMReference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="TNF, Version=1.0.0.2, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\Release\TNF.dll</HintPath>
@@ -270,6 +318,12 @@
     <Compile Include="CAT\RemoteProfiles.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CAT\SDRSerialPortII2.cs" />
+    <Compile Include="CAT\SDRSerialPortII3.cs" />
+    <Compile Include="CAT\SDRSerialPortII4.cs" />
+    <Compile Include="CAT\SDRSerialPortII6.cs" />
+    <Compile Include="CAT\SDRSerialPortII5.cs" />
+    <Compile Include="CAT\SDRSerialPortIII.cs" />
     <Compile Include="CAT\SDRSerialPortII.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -279,6 +333,11 @@
     <Compile Include="CAT\SerialRxEvent.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CAT\SIOListenerII2.cs" />
+    <Compile Include="CAT\SIOListenerII3.cs" />
+    <Compile Include="CAT\SIOListenerII4.cs" />
+    <Compile Include="CAT\SIOListenerII6.cs" />
+    <Compile Include="CAT\SIOListenerII5.cs" />
     <Compile Include="CAT\SIOListenerIII.cs" />
     <Compile Include="CAT\SIOListenerII.cs">
       <SubType>Code</SubType>
@@ -288,6 +347,23 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="conrec.cs" />
+    <Compile Include="GDF\GDFBuilder.cs" />
+    <Compile Include="GDF\GDFBuilder.UnWrapped.cs" />
+    <Compile Include="GDF\GDFCell.cs" />
+    <Compile Include="GDF\GDFDisplayBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GDF\GDFDisplayBox.designer.cs">
+      <DependentUpon>GDFDisplayBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GDF\GDFPage.cs" />
+    <Compile Include="GDF\GDFPageManager.cs" />
+    <Compile Include="GDF\GDFRow.cs" />
+    <Compile Include="GDF\Tokenizer\RTFBuilderParser.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="helpbox1.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Http.cs" />
     <Compile Include="ColorButton.cs">
       <SubType>Component</SubType>
@@ -495,6 +571,31 @@
     <Compile Include="helpbox.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="RTF\IRTFCell.cs" />
+    <Compile Include="RTF\IRtfProcessor.cs" />
+    <Compile Include="RTF\IRTFRow.cs" />
+    <Compile Include="RTF\RTFAlignment.cs" />
+    <Compile Include="RTF\RTFBorderSide.cs" />
+    <Compile Include="RTF\RTFBuilder.cs" />
+    <Compile Include="RTF\RTFBuilder.RTFFonts.cs" />
+    <Compile Include="RTF\RTFBuilder.RTFFormatWrap.cs" />
+    <Compile Include="RTF\RTFBuilder.RTFParaWrap.cs" />
+    <Compile Include="RTF\RTFBuilder.UnWrapped.cs" />
+    <Compile Include="RTF\RTFBuilderbase.cs" />
+    <Compile Include="RTF\RTFCell.cs" />
+    <Compile Include="RTF\RTFCellDefinition.cs" />
+    <Compile Include="RTF\RTFCellDefinitionBuilder.cs" />
+    <Compile Include="RTF\RTFFont.cs" />
+    <Compile Include="RTF\RTFImage.cs" />
+    <Compile Include="RTF\RTFRow.cs" />
+    <Compile Include="RTF\RTFRowDefinition.cs" />
+    <Compile Include="RTF\RTFUtil.cs" />
+    <Compile Include="spot_decoder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="spot_age.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TOTBOX.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -674,12 +775,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DJConsoleUI\Setup_MK2.resx">
       <DependentUpon>Setup_MK2.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="DJConsoleUI\Setup_MP3e2.resx">
       <DependentUpon>Setup_MP3e2.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="DJConsoleUI\Setup_MP3LE.resx">
       <DependentUpon>Setup_MP3LE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GDF\GDFDisplayBox.resx">
+      <DependentUpon>GDFDisplayBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="helpbox1.resx">
+      <DependentUpon>helpbox1.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="hid\FLEX1500DebugForm.resx">
       <DependentUpon>FLEX1500DebugForm.cs</DependentUpon>
@@ -697,6 +807,14 @@
       <DependentUpon>helpbox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="spot_decoder.resx">
+      <DependentUpon>spot_decoder.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="spot_age.resx">
+      <DependentUpon>spot_age.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="TOTBOX.resx">
       <DependentUpon>TOTBOX.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -708,12 +826,6 @@
     <EmbeddedResource Include="HttpServer\template.html" />
     <None Include="images\meterback1.png" />
     <None Include="images\meterback2.png" />
-    <Content Include="libmp3lame.32.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="libmp3lame.64.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <EmbeddedResource Include="Resources\star.png" />
     <EmbeddedResource Include="Resources\met3.jpg" />
     <EmbeddedResource Include="Resources\meterback1.png" />
@@ -731,6 +843,30 @@
     <EmbeddedResource Include="Resources\disk3.png" />
     <EmbeddedResource Include="Resources\arrowA.png" />
     <EmbeddedResource Include="Resources\arrowB.png" />
+    <EmbeddedResource Include="Resources\Black_TXonly.png" />
+    <EmbeddedResource Include="Resources\Black_combo.png" />
+    <EmbeddedResource Include="Resources\Wmap1.jpg" />
+    <EmbeddedResource Include="Resources\SC.png" />
+    <EmbeddedResource Include="Resources\SCB.png" />
+    <EmbeddedResource Include="Resources\ant3.png" />
+    <None Include="Resources\VFOblueB.png" />
+    <None Include="Resources\VFOred.png" />
+    <None Include="Resources\newvfo.png" />
+    <Content Include="Resources\blue1.png" />
+    <Content Include="Resources\panGray.png" />
+    <Content Include="Resources\PanRed.png" />
+    <Content Include="Resources\red1.png" />
+    <Content Include="Resources\VK1.png" />
+    <Content Include="Resources\VK1Red.png" />
+    <Content Include="Resources\VK2.png" />
+    <Content Include="Resources\VK2Red.png" />
+    <Content Include="Resources\wideblue3.png" />
+    <Content Include="Resources\wideblue4.png" />
+    <Content Include="Resources\wideorg4.png" />
+    <Content Include="Resources\widered3.png" />
+    <Content Include="Resources\widered4.png" />
+    <Content Include="Resources\ZoomGray.png" />
+    <Content Include="Resources\zoomRed.png" />
     <Content Include="Scripts\json-serialize.js" />
     <Content Include="Scripts\json-serialize.min.js" />
     <EmbeddedResource Include="Resources\picD1.png" />
@@ -939,6 +1075,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="spot.resx">
       <DependentUpon>spot.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ucbform.resx">
       <DependentUpon>ucbform.cs</DependentUpon>
@@ -972,9 +1109,12 @@
       <DependentUpon>xvtr.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Content Include="CAT\CATStructs.xml" />
+    <Content Include="CAT\CATStructs.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <EmbeddedResource Include="images\flex-3000.jpg" />
     <Content Include="images\PowerSDR.ico" />
+    <EmbeddedResource Include="Resources\napoli.ttf" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -1106,11 +1246,22 @@
       <Name>PowerMate</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Analyzer Include="..\packages\Roslyn.Analyzers.1.0.3.4\analyzers\dotnet\cs\Roslyn.Analyzers.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
     <PostBuildEvent>copy "$(ProjectDir)CAT\CATStructs.xml" "$(OutDir)";</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\AutoItX.Dotnet.3.3.14.5\build\AutoItX.Dotnet.targets" Condition="Exists('..\packages\AutoItX.Dotnet.3.3.14.5\build\AutoItX.Dotnet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\AutoItX.Dotnet.3.3.14.5\build\AutoItX.Dotnet.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\AutoItX.Dotnet.3.3.14.5\build\AutoItX.Dotnet.targets'))" />
+    <Error Condition="!Exists('..\packages\NAudio.Lame.1.0.9\build\NAudio.Lame.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NAudio.Lame.1.0.9\build\NAudio.Lame.targets'))" />
+  </Target>
+  <Import Project="..\packages\NAudio.Lame.1.0.9\build\NAudio.Lame.targets" Condition="Exists('..\packages\NAudio.Lame.1.0.9\build\NAudio.Lame.targets')" />
 </Project>

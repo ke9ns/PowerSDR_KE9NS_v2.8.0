@@ -26,73 +26,69 @@
 //    USA
 //=================================================================
 
-using System;
 using System.Diagnostics;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace PowerSDR
 {
-	/// <summary>
-	/// Summary description for WaveOptions.
-	/// </summary>
-	public class WaveOptions : System.Windows.Forms.Form
-	{
+    /// <summary>
+    /// Summary description for WaveOptions.
+    /// </summary>
+    public class WaveOptions : System.Windows.Forms.Form
+    {
         #region Variable Declaration
 
-      
+
         private System.Windows.Forms.GroupBoxTS grpReceive;
         public RadioButtonTS radRXPreProcessed;
         private System.Windows.Forms.GroupBoxTS groupBox1;
-		private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip toolTip1;
         public RadioButtonTS radRXPostProcessed;
         public RadioButtonTS radTXPostProcessed;
         public RadioButtonTS radTXPreProcessed;
         private System.Windows.Forms.GroupBoxTS grpAudioSampleRate1;
         public ComboBoxTS comboSampleRate;
         private TextBox txtWaveOptionsForm;
-		private System.ComponentModel.IContainer components;
+        private System.ComponentModel.IContainer components;
 
-		#endregion
+        #endregion
 
-		#region Constructor and Destructor
+        #region Constructor and Destructor
 
-		public WaveOptions()
-		{
-			//
-			// Required for Windows Form Designer support
-			//
-			InitializeComponent();
-			comboSampleRate.Text = Audio.SampleRate1.ToString();
-			Common.RestoreForm(this, "WaveOptions", false);
-		}
+        public WaveOptions()
+        {
+            //
+            // Required for Windows Form Designer support
+            //
+            InitializeComponent();
+            comboSampleRate.Text = Audio.SampleRate1.ToString();
+            Common.RestoreForm(this, "WaveOptions", false);
+        }
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#endregion
+        #endregion
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WaveOptions));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -237,20 +233,20 @@ namespace PowerSDR
             this.ResumeLayout(false);
             this.PerformLayout();
 
-		}
-		#endregion
+        }
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		public int SampleRate
-		{
-			get { return int.Parse(comboSampleRate.Text); }
-		}
+        public int SampleRate
+        {
+            get { return int.Parse(comboSampleRate.Text); }
+        }
 
         public bool temp_record; // ke9ns add save the status of pre to put back when done
-       //-------------------------------------------------------------------------------
-        // ke9ns add  to force audio into POST mode (for quick audio and TX waterfall ID and scheduler)
-        public  bool RECPLAY1
+                                 //-------------------------------------------------------------------------------
+                                 // ke9ns add  to force audio into POST mode (for quick audio and TX waterfall ID and scheduler)
+        public bool RECPLAY1
         {
             get { return false; }
             set
@@ -274,53 +270,53 @@ namespace PowerSDR
             get { return radRXPreProcessed.Checked; }
         }
 
-		#endregion
+        #endregion
 
-		#region Event Handler
+        #region Event Handler
 
-		private void WaveOptions_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			this.Hide();
-			e.Cancel = true;
-			Common.SaveForm(this, "WaveOptions");
-		}
+        private void WaveOptions_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
+            Common.SaveForm(this, "WaveOptions");
+        }
 
-		private void radRXPreProcessed_CheckedChanged(object sender, System.EventArgs e)
-		{
+        private void radRXPreProcessed_CheckedChanged(object sender, System.EventArgs e)
+        {
             if (radRXPreProcessed.Checked)
             {
-                  comboSampleRate.Enabled = false;
+                comboSampleRate.Enabled = false;
                 Audio.RecordRXPreProcessed = true;
             }
             else Debug.WriteLine("Wav");
 
         }
 
-		private void radRXPostProcessed_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radRXPostProcessed.Checked)
-			{
+        private void radRXPostProcessed_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radRXPostProcessed.Checked)
+            {
                 comboSampleRate.Enabled = true;
                 Audio.RecordRXPreProcessed = false;
-			}
-		}
+            }
+        }
 
-		private void radTXPreProcessed_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radTXPreProcessed.Checked)
-			{
-				Audio.RecordTXPreProcessed = true;
-			}
-		}
+        private void radTXPreProcessed_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radTXPreProcessed.Checked)
+            {
+                Audio.RecordTXPreProcessed = true;
+            }
+        }
 
-		private void radTXPostProcessed_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radTXPostProcessed.Checked)
-			{
-				Audio.RecordTXPreProcessed = false;
-			}
-		}
+        private void radTXPostProcessed_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radTXPostProcessed.Checked)
+            {
+                Audio.RecordTXPreProcessed = false;
+            }
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

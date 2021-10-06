@@ -33,6 +33,10 @@ The DTTS Microwave Society
 Bridgewater, NJ 08807
 */
 
+// ke9ns THIS CODE IS NOT USED IN POWERSDR. NOT SURE WHY
+// ke9ns THIS CODE IS NOT USED IN POWERSDR. NOT SURE WHY
+// ke9ns THIS CODE IS NOT USED IN POWERSDR. NOT SURE WHY
+// ke9ns THIS CODE IS NOT USED IN POWERSDR. NOT SURE WHY
 
 #include <keyer.h>
 
@@ -41,8 +45,7 @@ Bridgewater, NJ 08807
 /* Read a straight key connected to a serial port, do debouncing, then
    return the key state */
 
-BOOLEAN
-read_straight_key (KeyerState ks, BOOLEAN keyed)
+BOOLEAN read_straight_key (KeyerState ks, BOOLEAN keyed)
 {
 	int i, j;
 	static BOOLEAN keystate = 0;
@@ -74,13 +77,13 @@ read_straight_key (KeyerState ks, BOOLEAN keyed)
 /* Read an iambic key connected to a serial port, do debouncing, emulate a
    straight key, then return the emulated key state */
 
-BOOLEAN
-read_iambic_key (KeyerState ks, BOOLEAN dash, BOOLEAN dot, KeyerLogic kl,
-				 REAL ticklen)
+BOOLEAN read_iambic_key (KeyerState ks, BOOLEAN dash, BOOLEAN dot, KeyerLogic kl, REAL ticklen)
 {
+	fprintf(stdout, "KEYERSTATE_DIT1\n"), fflush(stdout);
+
 	int i, j;
-	static BOOLEAN dah_debounce_buf[DEBOUNCE_BUF_MAX_SIZE],
-		dit_debounce_buf[DEBOUNCE_BUF_MAX_SIZE];
+	static BOOLEAN dah_debounce_buf[DEBOUNCE_BUF_MAX_SIZE],	dit_debounce_buf[DEBOUNCE_BUF_MAX_SIZE];
+
 	static int dah = 0, debounce_buf_i = 0, dit = 0;
 
 	if (ks->flag.revpdl)
@@ -121,16 +124,7 @@ read_iambic_key (KeyerState ks, BOOLEAN dash, BOOLEAN dot, KeyerLogic kl,
 		dit = (j > ks->debounce / 2) ? 1 : 0;
 	}
 
-	return klogic (kl,
-		dit,
-		dah,
-		ks->wpm,
-		ks->mode,
-		ks->flag.mdlmdB,
-		ks->flag.memory.dit,
-		ks->flag.memory.dah,
-		ks->flag.autospace.khar,
-		ks->flag.autospace.word, ks->weight, ticklen);
+	return klogic (kl, dit, dah, ks->wpm, ks->mode, ks->flag.mdlmdB, ks->flag.memory.dit,	ks->flag.memory.dah, ks->flag.autospace.khar, ks->flag.autospace.word, ks->weight, ticklen);
 }
 
 //========================================================================

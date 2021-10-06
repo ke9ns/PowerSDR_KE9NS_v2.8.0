@@ -131,6 +131,8 @@ namespace PowerSDR
             Common.RestoreForm(this, "FLEX3000ATUForm", false);
             this.ActiveControl = button1;
             rdTune.Focus();
+
+            this.TopMost = true; // ke9ns .174
         }
 
         protected override void Dispose(bool disposing)
@@ -235,7 +237,7 @@ namespace PowerSDR
             this.chckForceRetune.TabIndex = 97;
             this.chckForceRetune.Text = "Force Retune";
             this.toolTip1.SetToolTip(this.chckForceRetune, "The ATU will ignore past tune memory and will do a full tune when the \"Tune\" butt" +
-                    "on is pressed ");
+        "on is pressed ");
             this.chckForceRetune.UseVisualStyleBackColor = true;
             this.chckForceRetune.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
@@ -262,7 +264,7 @@ namespace PowerSDR
             this.swrTargetUpDown.Size = new System.Drawing.Size(51, 20);
             this.swrTargetUpDown.TabIndex = 99;
             this.toolTip1.SetToolTip(this.swrTargetUpDown, "The ATU stop tuning when an SWR less than this number is found.  Higher numbers m" +
-                    "ay speed up tuning time.");
+        "ay speed up tuning time.");
             this.swrTargetUpDown.Value = new decimal(new int[] {
             11,
             0,
@@ -279,7 +281,7 @@ namespace PowerSDR
             this.label5.TabIndex = 100;
             this.label5.Text = "SWR Target";
             this.toolTip1.SetToolTip(this.label5, "The ATU will stop tuning when an SWR less than this number is found.  Higher numb" +
-                    "ers may speed up tuning time.");
+        "ers may speed up tuning time.");
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // retuneSWRupdown
@@ -306,7 +308,7 @@ namespace PowerSDR
             this.retuneSWRupdown.Size = new System.Drawing.Size(51, 20);
             this.retuneSWRupdown.TabIndex = 101;
             this.toolTip1.SetToolTip(this.retuneSWRupdown, "The tune will be considered successful and will be stored in memory if the tuned " +
-                    "SWR is less than this number");
+        "SWR is less than this number");
             this.retuneSWRupdown.Value = new decimal(new int[] {
             210,
             0,
@@ -323,7 +325,7 @@ namespace PowerSDR
             this.label6.TabIndex = 102;
             this.label6.Text = "SWR Successful";
             this.toolTip1.SetToolTip(this.label6, "The tune will be considered successful and will be stored in memory if the tuned " +
-                    "SWR is less than this number");
+        "SWR is less than this number");
             this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // udHighSWR
@@ -903,7 +905,7 @@ namespace PowerSDR
             // FLEX3000ATUForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
-            this.ClientSize = new System.Drawing.Size(269, 461);
+            this.ClientSize = new System.Drawing.Size(267, 463);
             this.Controls.Add(this.chkAutoMode);
             this.Controls.Add(this.MemoryTune);
             this.Controls.Add(this.button1);
@@ -936,10 +938,12 @@ namespace PowerSDR
             this.Controls.Add(this.grpFeedback);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(283, 502);
+            this.MinimumSize = new System.Drawing.Size(283, 502);
             this.Name = "FLEX3000ATUForm";
             this.Text = "FLEX-3000 ATU Settings";
-            this.Load += new System.EventHandler(this.FLEX3000ATUForm_Load);
             this.Closing += new System.ComponentModel.CancelEventHandler(this.FWCATUForm_Closing);
+            this.Load += new System.EventHandler(this.FLEX3000ATUForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.swrTargetUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.retuneSWRupdown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udHighSWR)).EndInit();
@@ -1056,30 +1060,30 @@ namespace PowerSDR
                 rdTune.BackColor = console.ButtonSelectedColor;
                 Thread t;
 
-               
-                if (File.Exists(Application.StartupPath + "\\" + "atu.dll")) // ke9ns fix  atu.dll\\ was a mistake not caught until I applied NET4.5.2
+
+                if (File.Exists(Application.StartupPath + "\\" + "atu.dll")) // ke9ns fix:  atu.dll\\ was a mistake not caught until I applied NET4.5.2
                 {
                     console.oldATU = false;
-                  
+
                 }
                 else
                 {
                     console.oldATU = true;
 
-                  
+
                 }
-                
+
 
 
                 if (console.oldATU)
                 {
-                   
+
                     t = new Thread(new ThreadStart(Tune));
 
                 }
                 else
                 {
-                   
+
                     tuningDLL = true;
                     t = new Thread(new ThreadStart(TuneATU));
                 }
@@ -1538,7 +1542,7 @@ namespace PowerSDR
                 if (comboAntProfileName.Items.Count == 0)
                 {
                     profileList = obj.Init(version, ref currentProfileName, true, ref high_swr,
-                                  ref  high_swr_no_limit, ref  swr_thresh, ref  swr_retune_target);
+                                  ref high_swr_no_limit, ref swr_thresh, ref swr_retune_target);
                 }
                 else
                 {
@@ -1565,7 +1569,7 @@ namespace PowerSDR
                 ///////***
 
 
-                obj.DoWork( (int)console.RX1Band,
+                obj.DoWork((int)console.RX1Band,
                            autoMode,
                            ref high_swr,
                            ref high_swr_no_limit,
@@ -1596,7 +1600,7 @@ namespace PowerSDR
                            SetC,
                            getSWR,
                            console_TunePower,
-                    //console_TunePower, 
+                           //console_TunePower, 
                            Audio_RadioVolume,
                            ref Audio_RadioVolumeSaved,
                            console_TUN,
@@ -1637,7 +1641,7 @@ namespace PowerSDR
             else if (last_tune_result_string == "TuneAutoModeBypass")
                 last_tune_result = TuneResult.TuneAutoModeBypass;
 
-        end:
+            end:
 
             t1.Stop();
             Debug.WriteLine("The SWR has been reduced to " + tun_swr + " from " + byp_swr + "(" + start_swr + ") in " + t1.Duration.ToString("f1") + " seconds");
@@ -1965,11 +1969,11 @@ namespace PowerSDR
                     lblTunRefPow.Text = tun_ref_pow.ToString("f1");
 
                     // if (show_feedback_popup)
-                    //     MessageBox.Show("Tune Completed Successfully (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
+                    //     MessageBox.Show(new Form { TopMost = true }, "Tune Completed Successfully (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
                     //         MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     if (show_feedback_popup)
-                        MessageBox.Show("(" + console.VFOAFreq + " MHz) SWR reduced to " + tun_swr.ToString("f1") + ":1 from " + byp_swr.ToString("f1") + ":1", "ATU Feedback",
+                        MessageBox.Show(new Form { TopMost = true }, "(" + console.VFOAFreq + " MHz) SWR reduced to " + tun_swr.ToString("f1") + ":1 from " + byp_swr.ToString("f1") + ":1", "ATU Feedback",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     //("****The SWR at " + console.VFOAFreq + " MHz has been reduced to " + tun_swr + ":1 from " + byp_swr + "in " + t1.Duration.ToString("f1") + " seconds");
@@ -1987,9 +1991,9 @@ namespace PowerSDR
                         lblTuneComplete.ForeColor = Color.Green;
                         lblTuneComplete.Text = "Tune OK: Above Threshold";
                         if (show_feedback_popup)
-                            //MessageBox.Show("Tune OK (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
+                            //MessageBox.Show(new Form { TopMost = true }, "Tune OK (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
                             //MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            MessageBox.Show("(" + console.VFOAFreq + " MHz) SWR reduced to " + tun_swr.ToString("f1") + ":1 from " + byp_swr.ToString("f1") + ":1", "ATU Feedback",
+                            MessageBox.Show(new Form { TopMost = true }, "(" + console.VFOAFreq + " MHz) SWR reduced to " + tun_swr.ToString("f1") + ":1 from " + byp_swr.ToString("f1") + ":1", "ATU Feedback",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
                         console.SetATUFeedback("Tune OK (" + tun_swr.ToString("f1") + ":1)");
                         LogMessageToFile("(" + console.VFOAFreq + " MHz) SWR reduced to " + tun_swr.ToString("f1") + ":1 from " + byp_swr.ToString("f1") + ":1");
@@ -2000,9 +2004,9 @@ namespace PowerSDR
                         lblTuneComplete.Text = "Tune Failed: High SWR";
                         if (show_feedback_popup)
                         {
-                            //MessageBox.Show("Tune Failed (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
+                            //MessageBox.Show(new Form { TopMost = true }, "Tune Failed (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
                             //    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            MessageBox.Show("Tune Failed (SWR > 10:1)", "ATU Feedback",
+                            MessageBox.Show(new Form { TopMost = true }, "Tune Failed (SWR > 10:1)", "ATU Feedback",
                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         console.SetATUFeedback("Tune Failed (" + tun_swr.ToString("f1") + ":1)");
@@ -2029,19 +2033,19 @@ namespace PowerSDR
                     lblTunRefPow.Text = "";
                     if (show_feedback_popup)
                     {
-                        //            MessageBox.Show("Tuner Bypassed: Good match (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
+                        //            MessageBox.Show(new Form { TopMost = true }, "Tuner Bypassed: Good match (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
                         //                MessageBoxButtons.OK, MessageBoxIcon.Information);
                         //        console.SetATUFeedback("Tuner Bypassed: Good match (" + tun_swr.ToString("f1") + ":1)");
                         if (tun_swr < swr_thresh)
                         {
-                            MessageBox.Show("Tuner Bypassed: Tuner Not Needed (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
+                            MessageBox.Show(new Form { TopMost = true }, "Tuner Bypassed: Tuner Not Needed (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
                                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                             console.SetATUFeedback("Tuner Bypassed: Tuner Not Needed (" + tun_swr.ToString("f1") + ":1)");
                             LogMessageToFile("Output Message: Tuner Bypassed: Tuner Not Needed");
                         }
                         else
                         {
-                            MessageBox.Show("Tuner Bypassed: No Improvement With Tuner (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
+                            MessageBox.Show(new Form { TopMost = true }, "Tuner Bypassed: No Improvement With Tuner (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
                                      MessageBoxButtons.OK, MessageBoxIcon.Information);
                             LogMessageToFile("Output Message: Tuner Bypassed: No Improvement With Tuner (" + tun_swr.ToString("f1") + ":1");
                         }
@@ -2061,7 +2065,7 @@ namespace PowerSDR
                         lblBypRefPow.Text = byp_ref_pow.ToString("f1");
                         lblTunRefPow.Text = "";
                         //    if (show_feedback_popup)
-                        MessageBox.Show("Tune Aborted, Bypassed", "ATU Feedback",
+                        MessageBox.Show(new Form { TopMost = true }, "Tune Aborted, Bypassed", "ATU Feedback",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                         console.SetATUFeedback("Tune Aborted, Bypassed");
                         LogMessageToFile("Output Message: Tune Aborted, Bypassed");
@@ -2080,7 +2084,7 @@ namespace PowerSDR
                         lblBypRefPow.Text = byp_ref_pow.ToString("f1");
                         lblTunRefPow.Text = "";
                         //           if (show_feedback_popup)
-                        //               MessageBox.Show("Tune Aborted, SWR "+tun_swr+" : 1", "ATU Feedback",
+                        //               MessageBox.Show(new Form { TopMost = true }, "Tune Aborted, SWR "+tun_swr+" : 1", "ATU Feedback",
                         //                   MessageBoxButtons.OK, MessageBoxIcon.Error);
                         console.SetATUFeedback("Tune Aborted, Set to Best Found Match");
                         LogMessageToFile("Output Message: Tune Aborted, Set to Best Found Match ");
@@ -2094,7 +2098,7 @@ namespace PowerSDR
                     {
                         lblTuneComplete.Text = "Tune Failed: SWR is greater than " + udHighSWR.Value.ToString("f1");
                         //      if (show_feedback_popup)
-                        MessageBox.Show("Tune Failed: SWR is greater than " + udHighSWR.Value.ToString("f1"), "ATU Feedback",
+                        MessageBox.Show(new Form { TopMost = true }, "Tune Failed: SWR is greater than " + udHighSWR.Value.ToString("f1"), "ATU Feedback",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                         console.SetATUFeedback("Tune Failed: SWR is greater than " + udHighSWR.Value.ToString("f1"));
                         LogMessageToFile("Tune Failed: SWR is greater than " + udHighSWR.Value.ToString("f1"));
@@ -2110,7 +2114,7 @@ namespace PowerSDR
 
                         lblTuneComplete.Text = "Tune Failed";
                         //      if (show_feedback_popup)
-                        MessageBox.Show("Tune Failed", "ATU Feedback",
+                        MessageBox.Show(new Form { TopMost = true }, "Tune Failed", "ATU Feedback",
                            MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                         console.SetATUFeedback("Tune Failed");
@@ -2130,7 +2134,7 @@ namespace PowerSDR
                     lblBypRefPow.Text = byp_ref_pow.ToString("f1");
                     lblTunRefPow.Text = "";
                     //         if (show_feedback_popup)
-                    MessageBox.Show("Tune Failed: RF Carrier Lost", "ATU Feedback",
+                    MessageBox.Show(new Form { TopMost = true }, "Tune Failed: RF Carrier Lost", "ATU Feedback",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     console.SetATUFeedback("Tune Failed: RF Carrier Lost");
                     LogMessageToFile("Output Message: Tune Failed: RF Carrier Lost");
@@ -2147,7 +2151,7 @@ namespace PowerSDR
                     lblBypRefPow.Text = byp_ref_pow.ToString("f1");
                     lblTunRefPow.Text = "";
                     //          if (show_feedback_popup)
-                    MessageBox.Show("Tune Failed: No RF Detected", "ATU Feedback",
+                    MessageBox.Show(new Form { TopMost = true }, "Tune Failed: No RF Detected", "ATU Feedback",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     console.SetATUFeedback("Tune Failed: No RF Detected");
                     LogMessageToFile("Output Message: Tune Failed: No RF Detected");
@@ -2199,7 +2203,7 @@ namespace PowerSDR
                     lblTunRefPow.Text = tun_ref_pow.ToString("f1");
 
                     if (show_feedback_popup)
-                        MessageBox.Show("Tune Completed Successfully (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
+                        MessageBox.Show(new Form { TopMost = true }, "Tune Completed Successfully (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                     console.SetATUFeedback("Tune Completed Successfully (" + tun_swr.ToString("f1") + ":1)");
                     break;
@@ -2210,7 +2214,7 @@ namespace PowerSDR
                         lblTuneComplete.ForeColor = Color.Green;
                         lblTuneComplete.Text = "Tune OK: Above Threshold";
                         if (show_feedback_popup)
-                            MessageBox.Show("Tune OK (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
+                            MessageBox.Show(new Form { TopMost = true }, "Tune OK (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
                         console.SetATUFeedback("Tune OK (" + tun_swr.ToString("f1") + ":1)");
                     }
@@ -2219,7 +2223,7 @@ namespace PowerSDR
                         lblTuneComplete.ForeColor = Color.Red;
                         lblTuneComplete.Text = "Tune Failed: High SWR";
                         if (show_feedback_popup)
-                            MessageBox.Show("Tune Failed (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
+                            MessageBox.Show(new Form { TopMost = true }, "Tune Failed (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                         console.SetATUFeedback("Tune Failed (" + tun_swr.ToString("f1") + ":1)");
                     }
@@ -2243,7 +2247,7 @@ namespace PowerSDR
                     lblBypRefPow.Text = byp_ref_pow.ToString("f1");
                     lblTunRefPow.Text = "";
                     if (show_feedback_popup)
-                        MessageBox.Show("Tuner Bypassed: Good match (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
+                        MessageBox.Show(new Form { TopMost = true }, "Tuner Bypassed: Good match (" + tun_swr.ToString("f1") + ":1)", "ATU Feedback",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                     console.SetATUFeedback("Tuner Bypassed: Good match (" + tun_swr.ToString("f1") + ":1)");
                     break;
@@ -2259,7 +2263,7 @@ namespace PowerSDR
                     lblBypRefPow.Text = byp_ref_pow.ToString("f1");
                     lblTunRefPow.Text = "";
                     if (show_feedback_popup)
-                        MessageBox.Show("Tune Aborted, Bypassed", "ATU Feedback",
+                        MessageBox.Show(new Form { TopMost = true }, "Tune Aborted, Bypassed", "ATU Feedback",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     console.SetATUFeedback("Tune Aborted, Bypassed");
                     break;
@@ -2275,7 +2279,7 @@ namespace PowerSDR
                     lblBypRefPow.Text = byp_ref_pow.ToString("f1");
                     lblTunRefPow.Text = "";
                     if (show_feedback_popup)
-                        MessageBox.Show("Tune Failed: SWR Out of Range (16.7 - 150O)", "ATU Feedback",
+                        MessageBox.Show(new Form { TopMost = true }, "Tune Failed: SWR Out of Range (16.7 - 150O)", "ATU Feedback",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     console.SetATUFeedback("Tune Failed: SWR Out of Range (16.7 - 150O)");
                     break;
@@ -2291,7 +2295,7 @@ namespace PowerSDR
                     lblBypRefPow.Text = byp_ref_pow.ToString("f1");
                     lblTunRefPow.Text = "";
                     if (show_feedback_popup)
-                        MessageBox.Show("Tune Failed: RF Carrier Lost", "ATU Feedback",
+                        MessageBox.Show(new Form { TopMost = true }, "Tune Failed: RF Carrier Lost", "ATU Feedback",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     console.SetATUFeedback("Tune Failed: RF Carrier Lost");
                     break;
@@ -2307,7 +2311,7 @@ namespace PowerSDR
                     lblBypRefPow.Text = byp_ref_pow.ToString("f1");
                     lblTunRefPow.Text = "";
                     if (show_feedback_popup)
-                        MessageBox.Show("Tune Failed: No RF Detected", "ATU Feedback",
+                        MessageBox.Show(new Form { TopMost = true }, "Tune Failed: No RF Detected", "ATU Feedback",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                     console.SetATUFeedback("Tune Failed: No RF Detected");
                     break;
@@ -2446,14 +2450,14 @@ namespace PowerSDR
         {
             if (console.oldATU)
             {
-            
+
             }
             try
             {
 #if(!NO_NEW_ATU)
                 ATUClass obj = new ATUClass();
 
-             
+
 
                 string version = console.getVersion();
                 MemoryTune.Hide();
@@ -2461,7 +2465,7 @@ namespace PowerSDR
                 if (comboAntProfileName.Items.Count == 0)
                 {
                     profileList = obj.Init(version, ref currentProfileName, true, ref high_swr,
-                                  ref  high_swr_no_limit, ref  swr_thresh, ref  swr_retune_target);
+                                  ref high_swr_no_limit, ref swr_thresh, ref swr_retune_target);
                 }
                 else
                 {
@@ -2551,25 +2555,23 @@ namespace PowerSDR
         private void antennaProfileName_SelectedIndexChanged(object sender, EventArgs e)
         {
 #if(!NO_NEW_ATU)
-            if (comboAntProfileName.SelectedIndex < 0)
-                return;
+            if (comboAntProfileName.SelectedIndex < 0) return;
+
             ATUClass obj = new ATUClass();
             currentProfileName = comboAntProfileName.Text;
 
-            obj.Init(console.getVersion(), ref currentProfileName, false, ref high_swr, ref high_swr_no_limit,
-                 ref swr_thresh, ref swr_retune_target);
+            obj.Init(console.getVersion(), ref currentProfileName, false, ref high_swr, ref high_swr_no_limit, ref swr_thresh, ref swr_retune_target);
 #endif
 
         }
 
         private void btnAntProfileAdd_Click(object sender, EventArgs e)
         {
-            string name = InputBox.Show("Create Profile", "Please enter a profile name:",
-            "AntennaProfile1");
+            string name = InputBox.Show("Create Profile", "Please enter a profile name:", "AntennaProfile1");
 
             if (name == "" || name == null)
             {
-                MessageBox.Show("Profile Save cancelled",
+                MessageBox.Show(new Form { TopMost = true }, "Profile Save cancelled",
                     "Antenna Profile",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
@@ -2585,8 +2587,7 @@ namespace PowerSDR
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
 
-                if (result == DialogResult.No)
-                    return;
+                if (result == DialogResult.No) return;
             }
 
             if (!comboAntProfileName.Items.Contains(name))
@@ -2601,8 +2602,7 @@ namespace PowerSDR
                 comboAntProfileName.SelectedItem = name;
 #if(!NO_NEW_ATU)
                 ATUClass obj = new ATUClass();
-                obj.Init(console.getVersion(), ref currentProfileName, false, ref high_swr, ref high_swr_no_limit,
-                         ref swr_thresh, ref swr_retune_target);
+                obj.Init(console.getVersion(), ref currentProfileName, false, ref high_swr, ref high_swr_no_limit, ref swr_thresh, ref swr_retune_target);
 #endif
 
 
@@ -2639,7 +2639,7 @@ namespace PowerSDR
 
         private void btnAntProfileDelete_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Are you sure you want to delete the '" + comboAntProfileName.Text + "' antenna profile?",
+            DialogResult dr = MessageBox.Show(new Form { TopMost = true }, "Are you sure you want to delete the '" + comboAntProfileName.Text + "' antenna profile?",
                                     "Delete Profile?",
                                     MessageBoxButtons.YesNo,
                                     MessageBoxIcon.Warning);
@@ -2893,7 +2893,7 @@ namespace PowerSDR
 
         private void chkAutoMode_CheckedChanged(object sender, EventArgs e)
         {
-            
+
         }
     }
 }

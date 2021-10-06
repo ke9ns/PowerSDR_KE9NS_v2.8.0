@@ -26,8 +26,8 @@
 //    USA
 //=================================================================
 
-using System.IO;
 using System;
+using System.IO;
 using System.Text;
 
 namespace PowerSDR
@@ -151,7 +151,7 @@ namespace PowerSDR
             byte return_value;
             USBHID.ReadI2CValue(0x30, register, out return_value);
             // write a line of text to the file
-            tw.WriteLine(register.ToString("X").PadLeft(2, '0')+" 0x"+return_value.ToString("X").PadLeft(2, '0')+" "+Convert.ToString(return_value, 2).PadLeft(8, '0')+" "+label);
+            tw.WriteLine(register.ToString("X").PadLeft(2, '0') + " 0x" + return_value.ToString("X").PadLeft(2, '0') + " " + Convert.ToString(return_value, 2).PadLeft(8, '0') + " " + label);
         }
 
         private static int[] regs = new int[0x70];
@@ -163,7 +163,7 @@ namespace PowerSDR
             USBHID.ReadI2CValue(0x30, register, out return_value);
             string indicator = (return_value == regs[register] ? " " : "*");
             // write a line of text to the file
-            sb.Append(indicator+register.ToString("X").PadLeft(2, '0') + " 0x" + return_value.ToString("X").PadLeft(2, '0') + " " + Convert.ToString(return_value, 2).PadLeft(8, '0') + " " + label + "\n");
+            sb.Append(indicator + register.ToString("X").PadLeft(2, '0') + " 0x" + return_value.ToString("X").PadLeft(2, '0') + " " + Convert.ToString(return_value, 2).PadLeft(8, '0') + " " + label + "\n");
             regs[register] = return_value;
         }
 

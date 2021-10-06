@@ -23,15 +23,9 @@
 //=================================================================
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Threading;
-using System.Xml;
-using System.Xml.Serialization;
-using System.IO;
-using System.Text;
 using System.Diagnostics;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace PowerSDR
 {
@@ -59,7 +53,7 @@ namespace PowerSDR
         }
 
         private static int current_major_version = 1;
-        private int major_version = 1;        
+        private int major_version = 1;
         public int MajorVersion
         {
             get { return major_version; }
@@ -67,7 +61,7 @@ namespace PowerSDR
         }
 
         private static int current_minor_version = 1;
-        private int minor_version = 1;        
+        private int minor_version = 1;
         public int MinorVersion
         {
             get { return minor_version; }
@@ -83,7 +77,7 @@ namespace PowerSDR
         //======================================================================================================================
         private void Save1(string file_name)
         {
-        TextWriter writer = new StreamWriter(file_name);
+            TextWriter writer = new StreamWriter(file_name);
 
             try
             {
@@ -98,8 +92,8 @@ namespace PowerSDR
 
             writer.Close();
         }
- 
-        
+
+
         //======================================================================================================================
         public void Save1()
         {
@@ -130,7 +124,7 @@ namespace PowerSDR
 
                 reader = new StreamReader(file_name);
 
-                XmlSerializer ser = new XmlSerializer( typeof(DXMemList), new Type[] { typeof(DXMemRecord), typeof(SortableBindingList<DXMemRecord>), typeof(int) } );
+                XmlSerializer ser = new XmlSerializer(typeof(DXMemList), new Type[] { typeof(DXMemRecord), typeof(SortableBindingList<DXMemRecord>), typeof(int) });
 
                 mem_list1 = (DXMemList)ser.Deserialize(reader);
 
@@ -142,7 +136,7 @@ namespace PowerSDR
                 Debug.WriteLine(ex1);
                 // check to see if backup file exists
                 // if so, try to deserialize it
-                if(!File.Exists(bak_file_name)) return mem_list1;  // no memory, no backup
+                if (!File.Exists(bak_file_name)) return mem_list1;  // no memory, no backup
 
                 reader = new StreamReader(bak_file_name);
 
@@ -154,7 +148,7 @@ namespace PowerSDR
                 }
                 catch (Exception ex2)
                 {
-                 Debug.WriteLine(ex2); 
+                    Debug.WriteLine(ex2);
                 }
             }
 
@@ -169,7 +163,7 @@ namespace PowerSDR
         //======================================================================================================================
         public void CheckVersion1()
         {
-            if (this.major_version == DXMemList.current_major_version && this.minor_version == DXMemList.current_minor_version)  return;
+            if (this.major_version == DXMemList.current_major_version && this.minor_version == DXMemList.current_minor_version) return;
 
             if (this.major_version == 1 && this.minor_version == 0)
             {

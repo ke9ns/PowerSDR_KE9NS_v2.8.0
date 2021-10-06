@@ -63,7 +63,7 @@ namespace PowerSDR
         public Channel(double f, int bandwidth)
         {
             freq = f;
-            bw = bandwidth;            
+            bw = bandwidth;
         }
 
         public Channel(double f, int bandwidth, bool perm, int dep)

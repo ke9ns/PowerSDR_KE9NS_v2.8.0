@@ -3,8 +3,7 @@
 
 #define asinh(value) (REAL)log(value + sqrt(value * value + 1))
 
-IIR_2P2Z 
-new_IIR_2P2Z (CXB buf, REAL Gain, REAL Parameter, Filter_Shape_Param ParameterType, Filter_Type FilterType, REAL Fs, REAL F0)
+IIR_2P2Z new_IIR_2P2Z (CXB buf, REAL Gain, REAL Parameter, Filter_Shape_Param ParameterType, Filter_Type FilterType, REAL Fs, REAL F0)
 {
 	REAL w0, sw,cw, alpha;
 	IIR_2P2Z gen = (IIR_2P2Z)malloc(sizeof(iir_2p2z));

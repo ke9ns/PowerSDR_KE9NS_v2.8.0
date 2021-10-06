@@ -7,7 +7,7 @@ namespace HttpServer
 {
     class UnknownRequestHandler : IHandler
     {
-        public UnknownRequestHandler(String body, TcpClient tcpClient):
+        public UnknownRequestHandler(String body, TcpClient tcpClient) :
             base(body, tcpClient)
         {
         }

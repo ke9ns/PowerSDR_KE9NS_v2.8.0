@@ -22,94 +22,93 @@
 
 #define DBG_PRINT
 
-using System;
 
 namespace PowerSDR
 {
-	/// <summary>
-	/// Summary description for SerialPortPTT.
-	/// </summary>
-	public class SerialPortPTT
-	{
+    /// <summary>
+    /// Summary description for SerialPortPTT.
+    /// </summary>
+    public class SerialPortPTT
+    {
 
-		// instance vars 
-		// 
-		private int portNum = 0; 
-		private bool rtsIsPTT = false; 
-		public bool RTSIsPTT 
-		{
-			get {return rtsIsPTT;}
-			set {rtsIsPTT = value;}
-		}
-		private bool dtrIsPTT = false; 
+        // instance vars 
+        // 
+        private int portNum = 0;
+        private bool rtsIsPTT = false;
+        public bool RTSIsPTT
+        {
+            get { return rtsIsPTT; }
+            set { rtsIsPTT = value; }
+        }
+        private bool dtrIsPTT = false;
 
-		public bool DTRIsPTT 
-		{
-			get {return dtrIsPTT;}
-			set {dtrIsPTT = value;}
-		}
-		private SDRSerialPort commPort = null; 
-		private bool Initialized = false; 
+        public bool DTRIsPTT
+        {
+            get { return dtrIsPTT; }
+            set { dtrIsPTT = value; }
+        }
+        private SDRSerialPort commPort = null;
+        private bool Initialized = false;
 
-		//
-		// 
-		//
+        //
+        // 
+        //
 
-		public SerialPortPTT(int portidx, bool rts_is_ptt, bool dtr_is_ptt)
-		{
-			portNum = portidx; 
-			rtsIsPTT = rts_is_ptt; 
-			dtrIsPTT = dtr_is_ptt; 
-		}
+        public SerialPortPTT(int portidx, bool rts_is_ptt, bool dtr_is_ptt)
+        {
+            portNum = portidx;
+            rtsIsPTT = rts_is_ptt;
+            dtrIsPTT = dtr_is_ptt;
+        }
 
-		public void Init() 
-		{ 
-			lock ( this )  // do this only once -- keep the lock until we're ready to go less we hose up the poll ptt thread 
-			{
-				if ( Initialized ) return;  							
-				if ( portNum == 0 ) return; // bail out 
-				commPort = new SDRSerialPort(portNum); 
-				commPort.Create(true); // true says to create bit bang only port  -- fixme needs error checking! 
-				Initialized = true; 
-			}
-			return; 
-		}
+        public void Init()
+        {
+            lock (this)  // do this only once -- keep the lock until we're ready to go less we hose up the poll ptt thread 
+            {
+                if (Initialized) return;
+                if (portNum == 0) return; // bail out 
+                commPort = new SDRSerialPort(portNum);
+                commPort.Create(true); // true says to create bit bang only port  -- fixme needs error checking! 
+                Initialized = true;
+            }
+            return;
+        }
 
-		public bool isPTT() 
-		{
-			if ( !Initialized ) return false; 
-			if ( rtsIsPTT && commPort.isCTS() ) return true; 
-			if ( dtrIsPTT && commPort.isDSR() ) return true; 
-			return false; 
-		}
+        public bool isPTT()
+        {
+            if (!Initialized) return false;
+            if (rtsIsPTT && commPort.isCTS()) return true;
+            if (dtrIsPTT && commPort.isDSR()) return true;
+            return false;
+        }
 
-		public bool isCTS() 
-		{
-			return commPort.isCTS(); 
-		}
+        public bool isCTS()
+        {
+            return commPort.isCTS();
+        }
 
-		public bool isDSR() 
-		{ 
-			return commPort.isDSR(); 
-		}
+        public bool isDSR()
+        {
+            return commPort.isDSR();
+        }
 
-		public void setDTR(bool v) 
-		{
-			commPort.setDTR(v); 
-		}
-		
-		public void Destroy() 
-		{ 
-			lock ( this )  // we only get in here once 
-			{ 
-				if ( !Initialized ) return; 
-				Initialized = false; 
-			}
-			if ( commPort != null ) 
-			{ 
-				commPort.Destroy(); 
-				commPort = null; 
-			}
-		}
-	}
+        public void setDTR(bool v)
+        {
+            commPort.setDTR(v);
+        }
+
+        public void Destroy()
+        {
+            lock (this)  // we only get in here once 
+            {
+                if (!Initialized) return;
+                Initialized = false;
+            }
+            if (commPort != null)
+            {
+                commPort.Destroy();
+                commPort = null;
+            }
+        }
+    }
 }

@@ -193,4 +193,70 @@
   <data name="swissbo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\swissbo.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Black_TXonly" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\black_txonly.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Black_TXonly1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\black_txonly.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="napoli" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\napoli.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Wmap1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\wmap1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SC" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\sc.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SCB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\scb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ant3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\ant3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blue1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\blue1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="red1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\red1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wideblue3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\wideblue3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wideblue4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\wideblue4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wideorg4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\wideorg4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="widered3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\widered3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="widered4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\widered4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="panGray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\pangray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PanRed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\panred.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ZoomGray" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\zoomgray.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zoomRed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\zoomred.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VK1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\vk1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VK1Red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\vk1red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VK2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\vk2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VK2Red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\vk2red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

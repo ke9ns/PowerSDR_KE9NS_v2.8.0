@@ -117,6 +117,62 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>Transverter Setup:
+UCB  = hold mouse over FlexWire button for info
+
+Example of a 435/28mhz transverter:
+LO Offset = 407.0 mhz  (435 - 28 = 407)
+Begin Freq = 430mhz (or specified lower limit)
+End Freq = 440mhz (or specified upper limit)
+
+Split RF = use TX and RX XVTR ports on 5000:
+XVTX/COM = RX and TX if NO SPLIT RF
+XVRX = RX only if SPLIT checked.
+
+ANT panel will show RX1 using XVTR BNC
+VU5K module has its own BNC jacks
+
+0x4C UCB (Universal Control board) PCA9555D Relay selector (part of the Xvtr panel)
+See page: http://k3tuf.com/FW.html , for info on FlexWire and UCB
+</value>
+  </data>
+  <data name="chkFlexWire.ToolTip" xml:space="preserve">
+    <value>Open the FlexWire UCB (Universal Control Board) relay panel
+or use CTRL+ALT + U keys to open
+
+Enable 8bit address 0x4C IIC output to the follow format:
+
+3 byte format (address + 2 data bytes)
+4 lines for 12 bytes sent
+
+0x4c, 0x06, 0
+0x4c, 0x07, 0
+0x4c, 0x02, b1
+0x4c, 0x03, b2
+
+b1 = (relays 1-8) with each bit representing a relay
+b2 = (relays 9-16)
+
+The b1,b2 from the UCB line representing the XVTR line 0 -15
+
+0x4C UCB (Universal Control board) PCA9555D Relay selector (part of the Xvtr panel)
+See page: http://k3tuf.com/FW.html , for info on FlexWire and UCB</value>
+  </data>
+  <data name="chkUseXVTRTUNPWR.ToolTip" xml:space="preserve">
+    <value>When you click the TUN button on the Front Console the power will
+be set to the value you enter in the Power control on this form. Otherwise, the
+Tune Power setting on the Console screen will be used.</value>
+  </data>
+  <data name="lblXVTRRF.ToolTip" xml:space="preserve">
+    <value>Flex-5000: Check if the transverter you are using for this band uses separate connectors for
+transmit and receive RF. In this case connect your transverter to the Back Panel XVTX/COM
+port for transmit RF and the XVRX port for the receive RF. Otherwise, connect it to the XVTX/
+COM port only.</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

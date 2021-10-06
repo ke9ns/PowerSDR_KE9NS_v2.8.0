@@ -27,10 +27,6 @@
 //=================================================================
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
 using System.Diagnostics;
 
 namespace PowerSDR
@@ -113,8 +109,8 @@ namespace PowerSDR
             if (s.ToUpper().StartsWith("COM") && s.Length > 3)
             {
                 int port = 0;
-                bool valid = int.TryParse(s.Substring(3, s.Length-3), out port);
-                
+                bool valid = int.TryParse(s.Substring(3, s.Length - 3), out port);
+
                 if (!valid) return false;
 
                 if (primary_com_port != null)

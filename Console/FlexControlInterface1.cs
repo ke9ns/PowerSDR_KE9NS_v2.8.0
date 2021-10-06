@@ -1,4 +1,4 @@
-﻿//=================================================================
+//=================================================================
 // FlexControlInterface1.cs
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
@@ -31,7 +31,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Flex.Control;
 using System.Diagnostics;
 
@@ -66,7 +65,7 @@ namespace PowerSDR
 
         public FlexControlInterface1(Console c)
         {
-            console = c;                        
+            console = c;
         }
 
         private FlexControl flexControl = null;
@@ -141,7 +140,7 @@ namespace PowerSDR
                 }
 
                 FlexControlKnobFunction new_function = FlexControlKnobFunction.None;
-                switch(value)
+                switch (value)
                 {
                     case KnobMode.A1: new_function = knob_a1; break;
                     case KnobMode.A2: new_function = knob_a2; break;
@@ -311,11 +310,14 @@ namespace PowerSDR
         /// <returns>The Tune Step in Hz</returns>
         private int GetTuneStep(int steps)
         {
+            Debug.WriteLine("1flexcontrol");
             if (tuning_acceleration && steps > 1)
             {
                 int index = console.TuneStepIndex; // get current step index
 
-                if (console.setupForm.chkBoxIND.Checked == true)
+                Debug.WriteLine("2flexcontrol2");
+
+                if (console.setupForm.chkBoxIND2.Checked == true)
                 {
                     index = console.TuneStepIndex2; // get current step index
                 }
@@ -329,13 +331,13 @@ namespace PowerSDR
             }
             else
             {
-                if (console.setupForm.chkBoxIND.Checked == true)
+                if (console.setupForm.chkBoxIND2.Checked == true)
                 {
                     return console.CurrentTuneStepHz2;
                 }
                 return console.CurrentTuneStepHz;
             }
-        }
+        } // gettunestep
 
         public void FlexControl_KnobRotated(FlexControl.RotateDirection dir, int num_steps)
         {
@@ -352,7 +354,7 @@ namespace PowerSDR
             }
 
             int step = GetTuneStep(num_steps);
-            if (num_steps > 1 && tuning_acceleration)    num_steps = 1;
+            if (num_steps > 1 && tuning_acceleration) num_steps = 1;
 
             switch (function)
             {
@@ -374,7 +376,7 @@ namespace PowerSDR
                                 console.CalcDisplayFreq(); // ke9ns keep display from moving
 
                             }
-                            else
+                            else // CTUN == false
                             {
                                 console.VFOAFreq = console.SnapTune(console.VFOAFreq, step, num_steps);
                             }
@@ -395,8 +397,9 @@ namespace PowerSDR
                                 console.CalcDisplayFreq(); // ke9ns keep display from moving
 
 
+
                             }
-                            else
+                            else // CTUN == false
                             {
                                 console.VFOAFreq = console.SnapTune(console.VFOAFreq, step, -num_steps);
                             }
@@ -479,7 +482,7 @@ namespace PowerSDR
             }
         }
 
-        private bool led1=true, led2=true, led3=false;
+        private bool led1 = true, led2 = true, led3 = false;
 
         public void FlexControl_ButtonClicked(FlexControl.Button button, FlexControl.ClickType type)
         {
@@ -518,7 +521,7 @@ namespace PowerSDR
             FlexControlButtonFunction function = FlexControlButtonFunction.ClearRIT;
 
             switch (button)
-            {                    
+            {
                 case FlexControl.Button.Left:
                     switch (type)
                     {
@@ -568,12 +571,12 @@ namespace PowerSDR
                 case FlexControlButtonFunction.ToggleTXVFO:
                     if (console.VFOATX)
                     {
-                        console.VFOBTX = true; 
+                        console.VFOBTX = true;
                         led3 = true;
                     }
                     else
                     {
-                        console.VFOATX = true; 
+                        console.VFOATX = true;
                         led3 = false;
                     }
                     break;
@@ -596,12 +599,12 @@ namespace PowerSDR
                     console.CATCWSpeed -= 1; led3 = false;
                     break;
                 case FlexControlButtonFunction.CWXSpeedUp:
-                    if(console.cwxForm != null)
+                    if (console.cwxForm != null)
                         console.cwxForm.WPM += 1; led3 = false;
                     break;
                 case FlexControlButtonFunction.CWXSpeedDown:
                     if (console.cwxForm != null)
-                    console.cwxForm.WPM -= 1; led3 = false;
+                        console.cwxForm.WPM -= 1; led3 = false;
                     break;
                 case FlexControlButtonFunction.FilterNext:
                     console.RX1Filter += 1; led3 = false;
@@ -609,7 +612,7 @@ namespace PowerSDR
                         console.RX1Filter = Filter.F1;
                     break;
                 case FlexControlButtonFunction.FilterPrevious:
-                    console.RX1Filter -= 1; led3 = false; 
+                    console.RX1Filter -= 1; led3 = false;
                     if (console.RX1Filter == Filter.FIRST)
                         console.RX1Filter = Filter.VAR2;
                     break;

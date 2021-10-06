@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -11,7 +10,7 @@ namespace HttpServer
     public class ImageRequestHandler : IHandler
     {
 
-        public ImageRequestHandler(String body, TcpClient tcpClient):
+        public ImageRequestHandler(String body, TcpClient tcpClient) :
             base(body, tcpClient)
         {
         }
@@ -57,7 +56,7 @@ namespace HttpServer
         }
 
 
-        private byte[]  getImage()
+        private byte[] getImage()
         {
             Bitmap bitmap;
             byte[] picDisplayOutput;

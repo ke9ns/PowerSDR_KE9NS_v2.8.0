@@ -117,6 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="numericUpDown1.ToolTip" xml:space="preserve">
+    <value>Select your Turf Region value here:
+NOTE:  This will NOT effect MARS/CAP/SHARES operation
+
+        US = 0
+        UK = 1           UK, Slovakia, France, Malta
+        Europe = 2    Germany, European Union, IARU1
+        UK_Plus = 3   UK+ (adds 60m band)
+        Italy = 4         
+        Norway = 5    
+        Denmark = 6   
+        Latvia = 7      
+        Slovakia = 8     
+        Bulgaria = 9      
+        Greece = 10      
+        Hungary = 11    
+        Belgium = 12   
+        France = 13     France, Malta
+        Russia = 14       
+        Sweden = 15    
+        IARU3 = 16       China, Australia, New Zealand
+        Japan = 17        
+        Italy_Plus = 18     Italy+ (40m band)
+        ES_CH_FIN = 19   Spain, Switzerland, Finland   
+        Netherlands = 20 
+        EU_Travel = 21    
+        Luxembourg = 22  
+        IARU2 = 23       Central &amp; South America	
+        Australia = 24   
+        China = 25
+</value>
+  </data>
+  <data name="buttonTS1.ToolTip" xml:space="preserve">
+    <value>Extended Operation: should only be applied if you have permission
+to Operate MARS,CAP,SHARES, or 630m band (you will need a RX and TX LPF for this band)
+
+You MUST have A License for the following:
+MARS (Military Auxiliary Radio System)
+CAP (Civil Air Patrol)
+SHARES (SHAred RESources)   https://www.dhs.gov/cisa/shared-resources-shares-high-frequency-hf-radio-program
+630m band Authorization:   https://utc.org/plc-database-amateur-notification-process/
+</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

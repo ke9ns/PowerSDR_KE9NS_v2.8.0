@@ -39,51 +39,61 @@ Bridgewater, NJ 08807
 
 //=================================================================================
 // snapshot of current signal
+// ke9ns: label = type of signal to get a snapshot of:
+// .type = 
+// #define SPEC_PRE_FILT	(1)  samplerate wide
+// #define SPEC_POST_FILT	(2)  bandpass wide
+// #define SPEC_POST_AGC	(3)
+// #define SPEC_POST_DET	(4)
+// #define SPEC_PREMOD		(4)
 //=================================================================================
-void snap_spectrum (SpecBlock * sb, int label)
+void snap_spectrum (SpecBlock * sb, int label) //  snap_spectrum (&uni[thread].spec, uni[thread].spec.type); 
 {
 	int i, j;
 
 	
-	j = sb->fill;                      // where most recent signal started
+	j = sb -> fill;                      // where most recent signal started  ke9ns: member named fill in a structure that sb points to
 
 	// copy starting from there in circular fashion,
 	// applying window as we go
 	
-	if (!sb->polyphase)
+	if (!sb->polyphase) //NO setup->Display->Polyphase FFT (chkSpectrumPolyphase)
 	{
 		for (i = 0; i < sb->size; i++)
 		{
-			CXBdata (sb->timebuf, i) =
-				Cscl (CXBdata (sb->accum, j), sb->window[i]);
-			j = (++j & sb->mask);
-		}
+			CXBdata (sb -> timebuf, i) = Cscl (CXBdata (sb -> accum, j), sb -> window[i]);
+			j = (++j & sb -> mask);
+		} // for loop
 	}
-	else
+	else // YES
 	{
 		int k;
 		for (i = 0; i < sb->size; i++)
 		{
 			CXBreal (sb->timebuf, i) = CXBreal (sb->accum, j) * sb->window[i];
 			CXBimag (sb->timebuf, i) = CXBimag (sb->accum, j) * sb->window[i];
+
 			for (k = 1; k < 8; k++)
 			{
-				int accumidx = (j + k * sb->size) & sb->mask;
-				int winidx = i + k * sb->size;
-				CXBreal (sb->timebuf, i) +=
-					CXBreal (sb->accum, accumidx) * sb->window[winidx];
-				CXBimag (sb->timebuf, i) +=
-					CXBimag (sb->accum, accumidx) * sb->window[winidx];
+				int accumidx = (j + k * sb->size) & sb -> mask;
+				int winidx = i + k * sb -> size;
+
+				CXBreal (sb->timebuf, i) += CXBreal (sb->accum, accumidx) * sb->window[winidx];
+				CXBimag (sb->timebuf, i) += CXBimag (sb->accum, accumidx) * sb->window[winidx];
 			}
+
 			j = (++j & sb->mask);
-		}
+		} // for loop
 
-	}
+	} // polyphase above
+
 	sb->label = label;
-}
 
-void
-snap_scope (SpecBlock * sb, int label)
+} // void snap_spectrum (SpecBlock * sb, int label)
+
+
+//================================================================
+void snap_scope (SpecBlock * sb, int label)
 {
 	int i, j;
 
@@ -93,15 +103,16 @@ snap_scope (SpecBlock * sb, int label)
 	// copy starting from there in circular fashion
 	for (i = 0; i < sb->size; i++)
 	{
-		CXBdata (sb->timebuf, i) = CXBdata (sb->accum, j);
+		CXBdata (sb->timebuf, i) = CXBdata (sb->accum, j); // ke9ns ( ((p)->data)[(i)] )   
 		j = (++j & sb->mask);
 	}
 
 	sb->label = label;
-}
+} // void snap_scope (SpecBlock * sb, int label)
 
-void
-compute_complex_spectrum(SpecBlock * sb)
+
+//================================================================
+void compute_complex_spectrum(SpecBlock * sb)
 {
 	int i, j, half = sb->size / 2;
 
@@ -109,15 +120,17 @@ compute_complex_spectrum(SpecBlock * sb)
 
 	fftwf_execute (sb->plan);
 
-	for (i = 0, j = half; i < half; i++, j++) {
+	for (i = 0, j = half; i < half; i++, j++)
+	{
 		sb->coutput[i] = CXBdata (sb->freqbuf, j);
 		sb->coutput[j] = CXBdata (sb->freqbuf, i);
 	}	
-}
 
+} // void compute_complex_spectrum(SpecBlock * sb)
+
+//=======================================================
 // snapshot -> frequency domain
-void
-compute_spectrum (SpecBlock * sb)
+void compute_spectrum (SpecBlock * sb)
 {
 	int i, j, half = sb->size / 2;
 
@@ -146,35 +159,36 @@ compute_spectrum (SpecBlock * sb)
 				log10 (Csqrmag (CXBdata (sb->freqbuf, i)) + 1e-60));
 		}
 	}
-}
 
-void
-init_spectrum (SpecBlock * sb)
+} // compute_spectrum (SpecBlock * sb)
+
+void init_spectrum (SpecBlock * sb)
 {
 	COMPLEX *p;
 	sb->fill = 0;
 
 	p = newvec_COMPLEX_16(sb->size*16,"spectrum accum");
 	sb->accum = newCXB (sb->size * 16, p, "spectrum accum");
+
 	p = newvec_COMPLEX_16(sb->size, "spectrum timebuf");
 	sb->timebuf = newCXB (sb->size, p, "spectrum timebuf");
-	p = newvec_COMPLEX_16(sb->size, "spectrum timebuf");
+
+	p = newvec_COMPLEX_16(sb->size, "spectrum freqbuf"); // ke9ns: was "spectrum timebuf"
 	sb->freqbuf = newCXB (sb->size, p, "spectrum freqbuf");
+
 	sb->window = newvec_REAL (sb->size * 16, "spectrum window");
 	makewindow (BLACKMANHARRIS_WINDOW, sb->size, sb->window);
 	sb->mask = sb->size - 1;
 	sb->polyphase = FALSE;
-	sb->output =
-		(float *) safealloc (sb->size, sizeof (float), "spectrum output");
+	sb->output = (float *) safealloc (sb->size, sizeof (float), "spectrum output");
 	sb->coutput = (COMPLEX *)safealloc (sb->size, sizeof (COMPLEX), "spectrum output");;
-	sb->plan =
-		fftwf_plan_dft_1d (sb->size, (fftwf_complex *) CXBbase (sb->timebuf),
-		(fftwf_complex *) CXBbase (sb->freqbuf),
-		FFTW_FORWARD, sb->planbits);
-}
+	sb->plan =	fftwf_plan_dft_1d (sb->size, (fftwf_complex *) CXBbase (sb->timebuf), (fftwf_complex *) CXBbase (sb->freqbuf), FFTW_FORWARD, sb->planbits);
 
-void
-reinit_spectrum (SpecBlock * sb)
+} // init_spectrum (SpecBlock * sb)
+
+
+
+void reinit_spectrum (SpecBlock * sb)
 {
 	size_t polysize = 1;
 	sb->fill = 0;
@@ -186,8 +200,7 @@ reinit_spectrum (SpecBlock * sb)
 	memset ((char *) sb->coutput, 0, sb->size * sizeof(COMPLEX));
 }
 
-void
-finish_spectrum (SpecBlock * sb)
+void finish_spectrum (SpecBlock * sb)
 {
 	if (sb)
 	{

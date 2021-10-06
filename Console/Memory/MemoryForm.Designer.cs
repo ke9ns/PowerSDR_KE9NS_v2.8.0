@@ -70,6 +70,8 @@ namespace PowerSDR
             this.MemFreq = new System.Windows.Forms.TextBox();
             this.MemGroup = new System.Windows.Forms.TextBox();
             this.MemName = new System.Windows.Forms.TextBox();
+            this.ScheduleStartTimeUTC = new System.Windows.Forms.DateTimePicker();
+            this.textBox9 = new System.Windows.Forms.TextBox();
             this.buttonTS1 = new System.Windows.Forms.ButtonTS();
             this.ScheduleRepeatm = new System.Windows.Forms.CheckBoxTS();
             this.ScheduleOn = new System.Windows.Forms.CheckBoxTS();
@@ -90,8 +92,6 @@ namespace PowerSDR
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.ScheduleExtra = new System.Windows.Forms.NumericUpDownTS();
             this.chkAlwaysOnTop = new System.Windows.Forms.CheckBoxTS();
-            this.ScheduleStartTimeUTC = new System.Windows.Forms.DateTimePicker();
-            this.textBox9 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScheduleDurationTime)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScheduleExtra)).BeginInit();
@@ -118,6 +118,7 @@ namespace PowerSDR
             this.dataGridView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.dataGridView1_DragDrop);
             this.dataGridView1.DragEnter += new System.Windows.Forms.DragEventHandler(this.dataGridView1_DragEnter);
             this.dataGridView1.DoubleClick += new System.EventHandler(this.btnSelect_Click);
+            this.dataGridView1.MouseEnter += new System.EventHandler(this.MemoryForm_MouseEnter);
             // 
             // textBox4
             // 
@@ -220,6 +221,29 @@ namespace PowerSDR
             this.MemName.TabIndex = 69;
             this.toolTip1.SetToolTip(this.MemName, "Name of currently selected Memory");
             // 
+            // ScheduleStartTimeUTC
+            // 
+            this.ScheduleStartTimeUTC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ScheduleStartTimeUTC.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.ScheduleStartTimeUTC.Location = new System.Drawing.Point(237, 451);
+            this.ScheduleStartTimeUTC.Name = "ScheduleStartTimeUTC";
+            this.ScheduleStartTimeUTC.ShowUpDown = true;
+            this.ScheduleStartTimeUTC.Size = new System.Drawing.Size(90, 20);
+            this.ScheduleStartTimeUTC.TabIndex = 73;
+            this.toolTip1.SetToolTip(this.ScheduleStartTimeUTC, "Initial Time of Schedule for this Selected Memory.\r\nIgnores the seconds.");
+            this.ScheduleStartTimeUTC.ValueChanged += new System.EventHandler(this.ScheduleStartTimeUTC_ValueChanged);
+            // 
+            // textBox9
+            // 
+            this.textBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox9.Location = new System.Drawing.Point(237, 437);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(90, 13);
+            this.textBox9.TabIndex = 74;
+            this.textBox9.Text = "Start Time (UTC)";
+            this.toolTip1.SetToolTip(this.textBox9, "Schedule Start Time to change Frequency and optionally record");
+            // 
             // buttonTS1
             // 
             this.buttonTS1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -250,12 +274,12 @@ namespace PowerSDR
             // 
             this.ScheduleOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ScheduleOn.Image = null;
-            this.ScheduleOn.Location = new System.Drawing.Point(67, 466);
+            this.ScheduleOn.Location = new System.Drawing.Point(12, 466);
             this.ScheduleOn.Name = "ScheduleOn";
-            this.ScheduleOn.Size = new System.Drawing.Size(101, 23);
+            this.ScheduleOn.Size = new System.Drawing.Size(136, 23);
             this.ScheduleOn.TabIndex = 62;
-            this.ScheduleOn.Text = "Schedule On";
-            this.toolTip1.SetToolTip(this.ScheduleOn, "Check box to turn of Scheduler for this Selected Memory.");
+            this.ScheduleOn.Text = "scanner skip memory";
+            this.toolTip1.SetToolTip(this.ScheduleOn, "Check box to ignore (Skip) this memory from any Scanner operations");
             this.ScheduleOn.UseCompatibleTextRendering = true;
             this.ScheduleOn.Visible = false;
             this.ScheduleOn.CheckedChanged += new System.EventHandler(this.ScheduleOn_CheckedChanged);
@@ -324,7 +348,6 @@ namespace PowerSDR
             this.chkMemoryFormClose.TabIndex = 12;
             this.chkMemoryFormClose.Text = "Close after selection";
             this.toolTip1.SetToolTip(this.chkMemoryFormClose, "Check to close the Memory window after an entry has been selected");
-            this.chkMemoryFormClose.CheckedChanged += new System.EventHandler(this.chkMemoryFormClose_CheckedChanged);
             // 
             // btnSelect
             // 
@@ -335,9 +358,11 @@ namespace PowerSDR
             this.btnSelect.Size = new System.Drawing.Size(75, 23);
             this.btnSelect.TabIndex = 5;
             this.btnSelect.Text = "Select";
-            this.toolTip1.SetToolTip(this.btnSelect, "Make the selected memory active ");
+            this.toolTip1.SetToolTip(this.btnSelect, "Make the selected memory active on VFOA\r\n\r\nMouse Wheel Click: Send Memory to VFOB" +
+        " (TX VFOB if RX2 ON)\r\n");
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            this.btnSelect.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnSelect_MouseUp);
             // 
             // btnMemoryRecordDelete
             // 
@@ -477,34 +502,12 @@ namespace PowerSDR
             this.chkAlwaysOnTop.Text = "Always On Top";
             this.chkAlwaysOnTop.CheckedChanged += new System.EventHandler(this.chkAlwaysOnTop_CheckedChanged);
             // 
-            // ScheduleStartTimeUTC
-            // 
-            this.ScheduleStartTimeUTC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ScheduleStartTimeUTC.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.ScheduleStartTimeUTC.Location = new System.Drawing.Point(237, 451);
-            this.ScheduleStartTimeUTC.Name = "ScheduleStartTimeUTC";
-            this.ScheduleStartTimeUTC.ShowUpDown = true;
-            this.ScheduleStartTimeUTC.Size = new System.Drawing.Size(90, 20);
-            this.ScheduleStartTimeUTC.TabIndex = 73;
-            this.toolTip1.SetToolTip(this.ScheduleStartTimeUTC, "Initial Time of Schedule for this Selected Memory.\r\nIgnores the seconds.");
-            this.ScheduleStartTimeUTC.ValueChanged += new System.EventHandler(this.ScheduleStartTimeUTC_ValueChanged);
-            // 
-            // textBox9
-            // 
-            this.textBox9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox9.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox9.Location = new System.Drawing.Point(237, 437);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(90, 13);
-            this.textBox9.TabIndex = 74;
-            this.textBox9.Text = "Start Time (UTC)";
-            this.toolTip1.SetToolTip(this.textBox9, "Schedule Start Time to change Frequency and optionally record");
-            // 
             // MemoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(975, 558);
+            this.Controls.Add(this.ScheduleOn);
             this.Controls.Add(this.textBox9);
             this.Controls.Add(this.ScheduleStartTimeUTC);
             this.Controls.Add(this.buttonTS1);
@@ -517,7 +520,6 @@ namespace PowerSDR
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.ScheduleRemain);
-            this.Controls.Add(this.ScheduleOn);
             this.Controls.Add(this.ScheduleStartTime);
             this.Controls.Add(this.ScheduleStartDate);
             this.Controls.Add(this.chkAlwaysOnTop);
@@ -543,6 +545,7 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MemoryForm_FormClosing);
             this.Load += new System.EventHandler(this.MemoryForm_Load);
+            this.MouseEnter += new System.EventHandler(this.MemoryForm_MouseEnter);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScheduleDurationTime)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ScheduleExtra)).EndInit();
@@ -569,7 +572,6 @@ namespace PowerSDR
         private System.Windows.Forms.CheckBoxTS ScheduleRepeat;
         private System.Windows.Forms.CheckBoxTS ScheduleRecord;
         private System.Windows.Forms.NumericUpDownTS ScheduleDurationTime;
-        private System.Windows.Forms.CheckBoxTS chkAlwaysOnTop;
         private System.Windows.Forms.DateTimePicker ScheduleStartDate;
         private System.Windows.Forms.DateTimePicker ScheduleStartTime;
         private System.Windows.Forms.CheckBoxTS ScheduleOn;
@@ -587,6 +589,7 @@ namespace PowerSDR
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.DateTimePicker ScheduleStartTimeUTC;
         private System.Windows.Forms.TextBox textBox9;
+        public System.Windows.Forms.CheckBoxTS chkAlwaysOnTop;
     } //memoryform
 
 } //PowerSDR

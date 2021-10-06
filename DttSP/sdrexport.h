@@ -90,9 +90,9 @@ extern struct _uni
 		TRXMODE trx;
 	} mode;
 
-	METERBlock meter; // ke9ns this is the RX and TX meter struct
+	METERBlock meter; // ke9ns: this is the RX and TX meter struct
 
-	SpecBlock spec;
+	SpecBlock spec; // ke9ns: spectrum (for panadapter/waterfall data)
 
 	struct
 	{
@@ -139,6 +139,7 @@ extern struct _rx
 	{
 		CXB i, o;
 	} buf;
+
 	IQ iqfix;
 
 	struct
@@ -153,6 +154,8 @@ extern struct _rx
 		BOOLEAN flag;
 		ResStF gen1r,gen1i,gen2r,gen2i;
 	} resample;
+
+
 	float output_gain;
 
 	struct
@@ -166,9 +169,12 @@ extern struct _rx
 
 	struct
 	{
+		int dly; // ke9ns add: .182
+		int ht; // ke9ns add: .182
 		REAL thresh;
 		NB gen;
 		BOOLEAN flag;
+		
 	} nb;
 
 	struct
@@ -198,7 +204,7 @@ extern struct _rx
 
 	struct
 	{
-		AMD gen;
+		AMD gen; //am_demod.h  ADDDesc 
 	} am;
 
 	struct
@@ -275,9 +281,9 @@ extern struct _tx
 
 	struct
 	{
-		ComplexFIR coef;
-		FiltOvSv ovsv, ovsv_pre;
-		COMPLEX *save;
+		ComplexFIR coef;          // ke9ns typedef struct _complex_FIR found in filter.h
+		FiltOvSv ovsv, ovsv_pre;   // ke9ns typedef struct _filt_ov_sav found in ovsv.h
+		COMPLEX *save;             //  ke9ns float struct real, img
 	} filt;
 
 	struct
@@ -287,36 +293,44 @@ extern struct _tx
 
 	struct
 	{
-		REAL cvtmod2freq;
+		REAL cvtmod2freq;     // ke9ns deviation here
 		double phase;
 		REAL preemphasis_filter;
 		REAL deemphasis_out;
+		
 		REAL k_preemphasis;
 		REAL k_deemphasis;	
-		REAL k_preemphasis1;
-		REAL k_deemphasis1;
+
+		REAL k_preemphasis1; // ke9ns add for WFM lowpass TX input
+		REAL k_deemphasis1;  // ke9ns add for WFM lowpass RX output
+
 		REAL clip_threshold;
 		IIR_BPF_2P input_BPF;
+
 		IIR_LPF_2P output_LPF1;
 		IIR_LPF_2P output_LPF2;
 
-		IIR_LPF_2P output_LPF3; // ke9ns add
+		IIR_LPF_2P output_LPF3; // ke9ns add for WFM lowpass output
 		IIR_LPF_2P output_LPF4;
 
 		IIR_LPF_2P input_BPF1;
 		IIR_LPF_2P input_BPF2;
 		IIR_LPF_2P input_BPF3;
 		IIR_LPF_2P input_BPF4;
+
 		IIR_LPF_2P input_LPF1;
 		IIR_LPF_2P input_LPF2;
+
 		IIR_HPF_2P input_HPF1;
 		IIR_HPF_2P input_HPF2;
 
-		IIR_LPF_2P input_LPF3; // ke9ns add
+		IIR_LPF_2P input_LPF3; // ke9ns add for WFM lowpass input
 		IIR_LPF_2P input_LPF4;
-		IIR_HPF_2P input_HPF3;
+
+		IIR_HPF_2P input_HPF3; // ke9ns add for WFM highpass input
 		IIR_HPF_2P input_HPF4;
-		BOOLEAN fmdata;  // ke9ns add
+
+		BOOLEAN fmdata;  // ke9ns add: for WFM data mode (10khz dev)
  
 		struct
 		{

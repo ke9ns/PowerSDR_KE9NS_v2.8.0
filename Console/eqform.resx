@@ -120,6 +120,23 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="labelTS18.Text" xml:space="preserve">
+    <value>Equalizing your Microphone for Transmit:
+Most Microphones have little low end (mostly mids)
+
+50 Hz - 150 Hz: Bass, Energy and Fullness
+150 Hz - 500 Hz: Muddiness and Boxiness 
+500 Hz - 1 kHz: Punch and Intelligibility
+1 kHz to 5 kHz: Attack, Harmonics, Clarity, Presense
+
+Adding Gain to Harmonic Bass Bands can help improve 
+Bass 
+
+</value>
+  </data>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>66</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

@@ -1,9 +1,9 @@
-﻿using System.Net.Sockets;
-using System;
-using System.Text.RegularExpressions;
-using System.Net;
-using System.Text;
+﻿using System;
 using System.Diagnostics;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace HttpServer
@@ -57,7 +57,7 @@ namespace HttpServer
                         Thread.Sleep(50);
                     }
                     while (stream.DataAvailable);
-                     
+
                     //Debug.WriteLine(Request);
                     int indexData = Request.IndexOf("\r\n\r\n");
                     if (indexData > 0)
@@ -75,7 +75,7 @@ namespace HttpServer
                 Debug.WriteLine(e.ToString());
             }
             //stream.Close();
-       
+
             /*
             while ((Count = tcpClient.GetStream().Read(Buffer, 0, Buffer.Length)) > 0)
             {
@@ -117,7 +117,7 @@ namespace HttpServer
             {
                 return RequestType.SET_PARAM;
             }
-            else if(RequestUri.CompareTo(GET_TRX_PARAM_REQUEST) == 0)
+            else if (RequestUri.CompareTo(GET_TRX_PARAM_REQUEST) == 0)
             {
                 return RequestType.GET_TRX_PARAM;
             }

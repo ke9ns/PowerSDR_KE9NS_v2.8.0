@@ -35,53 +35,53 @@ using System.Windows.Forms;
 
 namespace PowerSDR
 {
-	public class FWCTestForm : System.Windows.Forms.Form
-	{
-		#region Variable Declaration
+    public class FWCTestForm : System.Windows.Forms.Form
+    {
+        #region Variable Declaration
 
-		private Console console;
-		private System.Windows.Forms.TextBox txtVolts;
+        private Console console;
+        private System.Windows.Forms.TextBox txtVolts;
         private System.Windows.Forms.TextBox txtTemp;
         private System.Windows.Forms.TextBox txtInfoText;
-		private System.ComponentModel.Container components = null;
+        private System.ComponentModel.Container components = null;
 
-		#endregion
+        #endregion
 
-		#region Constructor and Destructor
+        #region Constructor and Destructor
 
-		public FWCTestForm(Console c)
-		{
-			InitializeComponent();
-			console = c;
+        public FWCTestForm(Console c)
+        {
+            InitializeComponent();
+            console = c;
 
-			Thread t = new Thread(new ThreadStart(PollADC));
-			t.Name = "Poll ADC Thread";
-			t.IsBackground = true;
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
+            Thread t = new Thread(new ThreadStart(PollADC));
+            t.Name = "Poll ADC Thread";
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
 
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#endregion
+        #endregion
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FWCTestForm));
             this.txtVolts = new System.Windows.Forms.TextBox();
             this.txtTemp = new System.Windows.Forms.TextBox();
@@ -128,38 +128,41 @@ namespace PowerSDR
             this.Controls.Add(this.txtInfoText);
             this.Controls.Add(this.txtTemp);
             this.Controls.Add(this.txtVolts);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(183, 167);
+            this.MinimumSize = new System.Drawing.Size(183, 167);
             this.Name = "FWCTestForm";
             this.Text = "PA Info";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.FWCTestForm_Closing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
-		}
-		#endregion
+        }
+        #endregion
 
-		#region Misc Routines
+        #region Misc Routines
 
-		private bool closing = false;
-		private void PollADC()
-		{
-			int chan = 0;
-			switch(console.CurrentModel)
-			{
-				case Model.FLEX5000:
-					chan = 4;
-					break;
-				case Model.FLEX3000:
-					chan = 3;
-					break;
-			}
+        private bool closing = false;
+        private void PollADC()
+        {
+            int chan = 0;
+            switch (console.CurrentModel)
+            {
+                case Model.FLEX5000:
+                    chan = 4;
+                    break;
+                case Model.FLEX3000:
+                    chan = 3;
+                    break;
+            }
 
             while (!closing)
             {
                 int val;
                 if (FWC.ReadPAADC(2, out val) == 0) break;
                 float volts = (float)val / 4096 * 2.5f * 11;
-                if(volts >= 15.0) txtVolts.BackColor = Color.Red;
+                if (volts >= 15.0) txtVolts.BackColor = Color.Red;
                 else txtVolts.BackColor = SystemColors.Control;
                 if (!closing) txtVolts.Text = "Voltage: " + volts.ToString("f1");
                 Thread.Sleep(1000);
@@ -167,7 +170,7 @@ namespace PowerSDR
                 if (FWC.ReadPAADC(chan, out val) == 0) break;
                 volts = (float)val / 4096 * 2.5f;
                 double temp_c = 301 - volts * 1000 / 2.2;
-                if(temp_c >= 100) txtTemp.BackColor = Color.Red;
+                if (temp_c >= 100) txtTemp.BackColor = Color.Red;
                 else txtTemp.BackColor = SystemColors.Control;
                 if (!closing)
                 {
@@ -183,37 +186,37 @@ namespace PowerSDR
                 }
                 Thread.Sleep(1000);
             }
-		}
+        }
 
-		#endregion
-
-		#region Event Handlers
-
-		private void FWCTestForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			closing = true;
-		}
-
-		private enum TempFormat
-		{
-			Celsius = 0,
-			Fahrenheit,
-		}
-
-		private TempFormat temp_format = TempFormat.Celsius;
-		private void txtTemp_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
-		{
-			switch(temp_format)
-			{
-				case TempFormat.Celsius:
-					temp_format = TempFormat.Fahrenheit;
-					break;
-				case TempFormat.Fahrenheit:
-					temp_format = TempFormat.Celsius;
-					break;
-			}
-		}
-		
         #endregion
-	}
+
+        #region Event Handlers
+
+        private void FWCTestForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            closing = true;
+        }
+
+        private enum TempFormat
+        {
+            Celsius = 0,
+            Fahrenheit,
+        }
+
+        private TempFormat temp_format = TempFormat.Celsius;
+        private void txtTemp_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            switch (temp_format)
+            {
+                case TempFormat.Celsius:
+                    temp_format = TempFormat.Fahrenheit;
+                    break;
+                case TempFormat.Fahrenheit:
+                    temp_format = TempFormat.Celsius;
+                    break;
+            }
+        }
+
+        #endregion
+    }
 }

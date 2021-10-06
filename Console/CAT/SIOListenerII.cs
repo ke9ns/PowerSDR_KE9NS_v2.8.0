@@ -23,138 +23,135 @@
 #define DBG_PRINT
 
 using System;
-using System.IO;
-using System.Text;
-using System.Collections;
-using System.Threading;
-using System.Windows.Forms; // needed for MessageBox (wjt)
-using System.Text.RegularExpressions;
 using System.Diagnostics;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Windows.Forms; // needed for MessageBox (wjt)
 
 namespace PowerSDR
-{	
-	public class SIOListenerII
-	{
-		#region Constructor
+{
+    public class SIOListenerII
+    {
+        #region Constructor
 
-		public SIOListenerII(Console c)
-		{
-			console = c;
-			console.Activated += new EventHandler(console_Activated);
-			console.Closing += new System.ComponentModel.CancelEventHandler(console_Closing);
-			parser = new CATParser(console);
+        public SIOListenerII(Console c)
+        {
+            console = c;
+            console.Activated += new EventHandler(console_Activated);
+            console.Closing += new System.ComponentModel.CancelEventHandler(console_Closing);
+            parser = new CATParser(console);
 
-			//event handler for Serial RX Events
-			SDRSerialPort.serial_rx_event += new SerialRXEventHandler(SerialRXEventHandler);
-		
-			if ( console.CATEnabled )  // if CAT is on, fire it up 
-			{ 
-				try 
-				{ 
-					enableCAT();  
-				}
-				catch ( Exception ex ) 
-				{					
-					// fixme??? how cool is to to pop a msg box from an exception handler in a constructor ?? 
-					//  seems ugly to me (wjt) 
-					console.CATEnabled = false; 
-					if ( console.setupForm != null ) 
-					{ 
-						console.setupForm.copyCATPropsToDialogVars(); // need to make sure the props on the setup page get reset 
-					}
-					MessageBox.Show("Could not initialize CAT control.  Exception was:\n\n " + ex.Message + 
-						"\n\nCAT control has been disabled.", "Error Initializing CAT control", 
-						MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
-			}
+            //event handler for Serial RX Events
+            SDRSerialPort.serial_rx_event += new SerialRXEventHandler(SerialRXEventHandler);
 
-//			SIOMonitor = new System.Timers.Timer();
-//			SIOMonitor.Elapsed+=new
-//				System.Timers.ElapsedEventHandler(SIOMonitor_Elapsed);
-//
-//			SIOMonitor.Interval = 60000;
-//			SIOMonitor.Start();
-//
-//			if(!File.Exists("SIOTestLog.txt"))
-//				File.Create("SIOTestLog.txt");
+            if (console.CATEnabled)  // if CAT is on, fire it up 
+            {
+                try
+                {
+                    enableCAT();
+                }
+                catch (Exception ex)
+                {
+                    // fixme??? how cool is to to pop a msg box from an exception handler in a constructor ?? 
+                    //  seems ugly to me (wjt) 
+                    console.CATEnabled = false;
+                    if (console.setupForm != null)
+                    {
+                        console.setupForm.copyCATPropsToDialogVars(); // need to make sure the props on the setup page get reset 
+                    }
+                    MessageBox.Show("Could not initialize CAT control.  Exception was:\n\n " + ex.Message +
+                        "\n\nCAT control has been disabled.", "Error Initializing CAT control",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
 
-		}
+            //			SIOMonitor = new System.Timers.Timer();
+            //			SIOMonitor.Elapsed+=new
+            //				System.Timers.ElapsedEventHandler(SIOMonitor_Elapsed);
+            //
+            //			SIOMonitor.Interval = 60000;
+            //			SIOMonitor.Start();
+            //
+            //			if(!File.Exists("SIOTestLog.txt"))
+            //				File.Create("SIOTestLog.txt");
 
-//		private void SIOMonitor_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-//		{
-//			if(!console.MOX) 
-//			{
-//				SIOMonitorCount++;			// increments the counter when in receive
-//				Debug.WriteLine("SIOMonitorCount: "+SIOMonitorCount.ToString());
-//				if(SIOMonitorCount < 12)	// if the counter is less than 12 (60 seconds),reinitialize the serial port
-//				{
-//					Debug.WriteLine("The SIO Timer has elapsed");			
-//					if(!SIO.PortIsOpen)
-//					{
-//						Debug.WriteLine("The port is closed");
-//						SIO.OpenPort = true;
-//						StreamWriter sw = new StreamWriter("SIOTestLog.txt", true);
-//						sw.WriteLine("The serial port was forced open");
-//						sw.WriteLine("Time: "+DateTime.Now.ToString());
-//						sw.Flush();
-//						sw.Close();
-//						SIOMonitor.Enabled = true;
-//						SIOMonitorCount = 0;
-//						Fpass = true;
-//						disableCAT();
-//						enableCAT();
-//					}
-//					//Initialize();
-//				}
-//				else						// consider the remote program on the serial port as being shut down
-//				{
-//					if(SIO.PortIsOpen)
-//					{
-//						port_status = "open";
-//					}
-//					else
-//					{
-//
-//						port_status = "closed";
-//					}
-//
-//
-//					SIOMonitorCount = 0;
-//					disableCAT();
-//					enableCAT();
-//	//				SIOMonitor.Stop();
-//				}
-//			}
-//			else
-//				SIOMonitorCount = 0;
-//		}
+        }
 
-		public void enableCAT() 
-		{
-			lock ( this ) 
-			{
-				if ( cat_enabled ) return; // nothing to do already enabled 
-				cat_enabled = true; 
-			}
+        //		private void SIOMonitor_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        //		{
+        //			if(!console.MOX) 
+        //			{
+        //				SIOMonitorCount++;			// increments the counter when in receive
+        //				Debug.WriteLine("SIOMonitorCount: "+SIOMonitorCount.ToString());
+        //				if(SIOMonitorCount < 12)	// if the counter is less than 12 (60 seconds),reinitialize the serial port
+        //				{
+        //					Debug.WriteLine("The SIO Timer has elapsed");			
+        //					if(!SIO.PortIsOpen)
+        //					{
+        //						Debug.WriteLine("The port is closed");
+        //						SIO.OpenPort = true;
+        //						StreamWriter sw = new StreamWriter("SIOTestLog.txt", true);
+        //						sw.WriteLine("The serial port was forced open");
+        //						sw.WriteLine("Time: "+DateTime.Now.ToString());
+        //						sw.Flush();
+        //						sw.Close();
+        //						SIOMonitor.Enabled = true;
+        //						SIOMonitorCount = 0;
+        //						Fpass = true;
+        //						disableCAT();
+        //						enableCAT();
+        //					}
+        //					//Initialize();
+        //				}
+        //				else						// consider the remote program on the serial port as being shut down
+        //				{
+        //					if(SIO.PortIsOpen)
+        //					{
+        //						port_status = "open";
+        //					}
+        //					else
+        //					{
+        //
+        //						port_status = "closed";
+        //					}
+        //
+        //
+        //					SIOMonitorCount = 0;
+        //					disableCAT();
+        //					enableCAT();
+        //	//				SIOMonitor.Stop();
+        //				}
+        //			}
+        //			else
+        //				SIOMonitorCount = 0;
+        //		}
+
+        public void enableCAT()
+        {
+            lock (this)
+            {
+                if (cat_enabled) return; // nothing to do already enabled 
+                cat_enabled = true;
+            }
             Debug.WriteLine("==============CAT PORT OPEN");
 
-            int port_num = console.CATPort; 
+            int port_num = console.CATPort;
 
-			SIO = new SDRSerialPort(port_num);
-			SIO.setCommParms(console.CATBaudRate, 
-							console.CATParity, 
-							console.CATDataBits, 
-							console.CATStopBits,
-                            console.CATHandshake); 
-		
-			Initialize();	
-		}
+            SIO = new SDRSerialPort(port_num);
+            SIO.setCommParms(console.CATBaudRate,
+                            console.CATParity,
+                            console.CATDataBits,
+                            console.CATStopBits,
+                            console.CATHandshake);
+
+            Initialize();
+        }
 
         public bool UseForKeyPTT
         {
             set
             {
-                if(SIO != null)
+                if (SIO != null)
                     SIO.UseForKeyPTT = value;
             }
         }
@@ -162,9 +159,9 @@ namespace PowerSDR
         public bool UseForPaddles
         {
             set
-            { 
-                if (SIO != null) 
-                    SIO.UseForPaddles = value; 
+            {
+                if (SIO != null)
+                    SIO.UseForPaddles = value;
             }
         }
 
@@ -172,7 +169,7 @@ namespace PowerSDR
         {
             set
             {
-                if (SIO != null) 
+                if (SIO != null)
                     SIO.PTTOnDTR = value;
             }
         }
@@ -180,86 +177,86 @@ namespace PowerSDR
         public bool PTTOnRTS
         {
             set
-            { 
-                if (SIO != null) 
-                    SIO.PTTOnRTS = value; 
+            {
+                if (SIO != null)
+                    SIO.PTTOnRTS = value;
             }
         }
 
         public bool KeyOnDTR
         {
             set
-            { 
-                if (SIO != null) 
+            {
+                if (SIO != null)
                     SIO.KeyOnDTR = value;
             }
         }
 
         public bool KeyOnRTS
         {
-            set 
-            { 
-                if (SIO != null) 
-                    SIO.KeyOnRTS = value; 
+            set
+            {
+                if (SIO != null)
+                    SIO.KeyOnRTS = value;
             }
         }
 
 
-		// typically called when the end user has disabled CAT control through a UI element ... this 
-		// closes the serial port and neutralized the listeners we have in place
-		public void disableCAT() 
-		{
-			lock ( this ) 
-			{
-				if ( !cat_enabled )  return; /* nothing to do already disabled */ 
-				cat_enabled = false; 
-			}
+        // typically called when the end user has disabled CAT control through a UI element ... this 
+        // closes the serial port and neutralized the listeners we have in place
+        public void disableCAT()
+        {
+            lock (this)
+            {
+                if (!cat_enabled) return; /* nothing to do already disabled */
+                cat_enabled = false;
+            }
             Debug.WriteLine("==============CAT PORT CLOSED");
 
-            if ( SIO != null ) 
-			{
-				SIO.Destroy(); 
-				SIO = null; 
-			}
-			Fpass = true; // reset init flag 
-			return; 									
-		}
+            if (SIO != null)
+            {
+                SIO.Destroy();
+                SIO = null;
+            }
+            Fpass = true; // reset init flag 
+            return;
+        }
 
-		#endregion Constructor
+        #endregion Constructor
 
-		#region Variables
+        #region Variables
 
         //HiPerfTimer testTimer1 = new HiPerfTimer();
         //HiPerfTimer testTimer2 = new HiPerfTimer();
-		public SDRSerialPort SIO; 
-		Console console;
-		ASCIIEncoding AE = new ASCIIEncoding();
-		private bool Fpass = true;
-		private bool cat_enabled = false;  // is cat currently enabled by user? 
-//		private System.Timers.Timer SIOMonitor;
-		CATParser parser;		
-//		private int SIOMonitorCount = 0;
+        public SDRSerialPort SIO;
+        Console console;
+        ASCIIEncoding AE = new ASCIIEncoding();
+        private bool Fpass = true;
+        private bool cat_enabled = false;  // is cat currently enabled by user? 
+                                           //		private System.Timers.Timer SIOMonitor;
+        CATParser parser;
+        //		private int SIOMonitorCount = 0;
 
-		#endregion variables
+        #endregion variables
 
-		#region Methods
+        #region Methods
 
-		private static void dbgWriteLine(string s) 
-		{ 
-#if(!DBG_PRINT) 
+        private static void dbgWriteLine(string s)
+        {
+#if (!DBG_PRINT)
 			Console.dbgWriteLine("SIOListener: " + s); 
 #endif
-		}
+        }
 
-		// Called when the console is activated for the first time.  
-		private void Initialize()
-		{	
-			if(Fpass)
-			{
-				SIO.Create();
-				Fpass = false;
-			}
-		}		
+        // Called when the console is activated for the first time.  
+        private void Initialize()
+        {
+            if (Fpass)
+            {
+                SIO.Create();
+                Fpass = false;
+            }
+        }
 #if UseParser
 		private char[] ParseLeftover = null; 
 
@@ -318,77 +315,81 @@ namespace PowerSDR
 
 #endif
 
-		#endregion Methods
+        #endregion Methods
 
-		#region Events
+        #region Events
 
-		private void console_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			if ( SIO != null ) 
-			{ 
-				SIO.Destroy(); 
-			}
-		}
+        private void console_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (SIO != null)
+            {
+                SIO.Destroy();
+            }
+        }
 
-		private void console_Activated(object sender, EventArgs e)
-		{
-			if ( console.CATEnabled ) 
-			{ 
-				// Initialize();   // wjt enable CAT calls Initialize 
-				enableCAT(); 
-			}
-		}
+        private void console_Activated(object sender, EventArgs e)
+        {
+            if (console.CATEnabled)
+            {
+                // Initialize();   // wjt enable CAT calls Initialize 
+                enableCAT();
+            }
+        }
 
-		StringBuilder CommBuffer = new StringBuilder();//"";				//holds incoming serial data from the port
-		private void SerialRXEventHandler(object source, SerialRXEvent e)
-		{
-//			SIOMonitor.Interval = 5000;		// set the timer for 5 seconds
-//			SIOMonitor.Enabled = true;		// start or restart the timer
+        StringBuilder CommBuffer = new StringBuilder();//"";				//holds incoming serial data from the port
+        private void SerialRXEventHandler(object source, SerialRXEvent e)
+        {
+            //			SIOMonitor.Interval = 5000;		// set the timer for 5 seconds
+            //			SIOMonitor.Enabled = true;		// start or restart the timer
 
             //double T0 = 0.00;
             //double T1 = 0.00;
             //int bufferLen = 0;
 
-            CommBuffer.Append(e.buffer);                                		// put the data in the string
-			if(parser != null)													// is the parser instantiated
-			{
+            CommBuffer.Append(e.buffer);                                        // put the data in the string
+            if (parser != null)                                                 // is the parser instantiated
+            {
                 //bufferLen = CommBuffer.Length;
-				try
-				{
-					Regex rex = new Regex(".*?;");										//accept any string ending in ;
-					string answer;
-					uint result;
+                try
+                {
+                    Regex rex = new Regex(".*?;");                                      //accept any string ending in ;
+                    string answer;
+                    uint result;
 
-					for(Match m = rex.Match(CommBuffer.ToString()); m.Success; m = m.NextMatch())	//loop thru the buffer and find matches
-					{
+                    for (Match m = rex.Match(CommBuffer.ToString()); m.Success; m = m.NextMatch())  //loop thru the buffer and find matches
+                    {
+                        console.SpoofAB = false;
                         //testTimer1.Start();
+                        console.KWAI1 = true; // .214
                         answer = parser.Get(m.Value);                                   //send the match to the parser
+                        console.KWAI1 = false; // .214
+
                         //testTimer1.Stop();
                         //T0 = testTimer1.DurationMsec;
                         //testTimer2.Start();
-                        if(answer.Length > 0)
-    						result = SIO.put(answer);                           		//send the answer to the serial port
-                        //testTimer2.Stop();
-                        //T1 = testTimer2.DurationMsec;
-						CommBuffer = CommBuffer.Replace(m.Value, "", 0, m.Length);                   //remove the match from the buffer
-                        //Debug.WriteLine("Parser decode time for "+m.Value.ToString()+":  "+T0.ToString()+ "ms");
-                        //Debug.WriteLine("SIO send answer time:  " + T1.ToString() + "ms");
-                        //Debug.WriteLine("CommBuffer Length:  " + bufferLen.ToString());
-                        //if (bufferLen > 100)
-                            //Debug.WriteLine("Buffer contents:  "+CommBuffer.ToString());
+                        if (answer.Length > 0)
+                            result = SIO.put(answer);                                   //send the answer to the serial port
+                                                                                        //testTimer2.Stop();
+                                                                                        //T1 = testTimer2.DurationMsec;
+                        CommBuffer = CommBuffer.Replace(m.Value, "", 0, m.Length);                   //remove the match from the buffer
+                                                                                                     //Debug.WriteLine("Parser decode time for "+m.Value.ToString()+":  "+T0.ToString()+ "ms");
+                                                                                                     //Debug.WriteLine("SIO send answer time:  " + T1.ToString() + "ms");
+                                                                                                     //Debug.WriteLine("CommBuffer Length:  " + bufferLen.ToString());
+                                                                                                     //if (bufferLen > 100)
+                                                                                                     //Debug.WriteLine("Buffer contents:  "+CommBuffer.ToString());
                     }
-				}
-				catch(Exception)
-				{
-					//Add ex name to exception above to enable
-					//Debug.WriteLine("RX Event:  "+ex.Message);
-					//Debug.WriteLine("RX Event:  "+ex.StackTrace);
-				}
-			}
-		}
+                }
+                catch (Exception)
+                {
+                    //Add ex name to exception above to enable
+                    //Debug.WriteLine("RX Event:  "+ex.Message);
+                    //Debug.WriteLine("RX Event:  "+ex.StackTrace);
+                }
+            }
+        }
 
 
-		#endregion Events
-	}
+        #endregion Events
+    }
 }
 

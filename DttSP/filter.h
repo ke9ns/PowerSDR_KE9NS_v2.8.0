@@ -51,8 +51,7 @@ Bridgewater, NJ 08807
 
 typedef enum
 {
-  FIR_Undef, FIR_Lowpass, FIR_Bandpass, FIR_Highpass, FIR_Hilbert,
-  FIR_Bandstop
+  FIR_Undef, FIR_Lowpass, FIR_Bandpass, FIR_Highpass, FIR_Hilbert, FIR_Bandstop // 0,1,2,3,4,5
 } FIR_response_type;
 
 typedef enum

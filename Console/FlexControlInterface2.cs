@@ -1,4 +1,4 @@
-﻿//=================================================================
+//=================================================================
 // FlexControlInterface1.cs
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
@@ -35,13 +35,12 @@ using System.Text;
 
 using Flex.Control;
 using System.Diagnostics;
-
 namespace PowerSDR
 {
     public class FlexControlInterface2
     {
         private Console console = null;
-        
+
         private FlexControl flexControl = null;
         public FlexControl FlexControl
         {
@@ -72,7 +71,7 @@ namespace PowerSDR
 
         public FlexControlInterface2(Console c)
         {
-            console = c;                        
+            console = c;
         }
 
         public void Cleanup()
@@ -84,14 +83,14 @@ namespace PowerSDR
                 flexControl.SetLEDStatus(false, false, false);
             }
             catch { }
-        }        
+        }
 
         private bool tuning_acceleration = true;
         public bool TuningAcceleration
         {
             get { return tuning_acceleration; }
             set { tuning_acceleration = value; }
-        }       
+        }
 
         private FlexControlKnobFunction current_knob_function = FlexControlKnobFunction.TuneVFOA;
 
@@ -99,7 +98,7 @@ namespace PowerSDR
         public FlexControlKnobFunction ButtonLeftFunction
         {
             get { return button_left_function; }
-            set 
+            set
             {
                 button_left_function = value;
                 if (last_button_clicked == FlexControl.Button.Left)
@@ -111,7 +110,7 @@ namespace PowerSDR
         public FlexControlKnobFunction ButtonMidFunction
         {
             get { return button_mid_function; }
-            set 
+            set
             {
                 button_mid_function = value;
                 if (last_button_clicked == FlexControl.Button.Middle)
@@ -153,15 +152,16 @@ namespace PowerSDR
         /// <returns>The Tune Step in Hz</returns>
         private int GetTuneStep(int steps)
         {
+
             if (tuning_acceleration && steps > 1)
             {
                 int index = console.TuneStepIndex; // get current step index
 
-                if (console.setupForm.chkBoxIND.Checked == true)
+                if (console.setupForm.chkBoxIND2.Checked == true)
                 {
-                     index = console.TuneStepIndex2; // get current step index
+                    index = console.TuneStepIndex2; // get current step index
                 }
-                    int var_index = index + (steps = 1); // increment the step index based on accerated input
+                int var_index = index + (steps = 1); // increment the step index based on accerated input
 
                 if (var_index > console.TuneStepList.Count - 1) // cap at the top index
                     var_index = console.TuneStepList.Count - 1;
@@ -170,7 +170,7 @@ namespace PowerSDR
             }
             else
             {
-                if (console.setupForm.chkBoxIND.Checked == true)
+                if (console.setupForm.chkBoxIND2.Checked == true)
                 {
                     return console.CurrentTuneStepHz2;
                 }
@@ -183,11 +183,11 @@ namespace PowerSDR
 
         public void FlexControl_KnobRotated(FlexControl.RotateDirection dir, int num_steps)
         {
-            if (console == null) return;                       
+            if (console == null) return;
 
             int step = GetTuneStep(num_steps);
 
-            if (num_steps > 1 && tuning_acceleration)  num_steps = 1;
+            if (num_steps > 1 && tuning_acceleration) num_steps = 1;
 
             switch (current_knob_function)
             {
@@ -202,12 +202,6 @@ namespace PowerSDR
                                 {
                                     Console.UPDATEOFF = 2; // ke9ns add let system know not to update screen for a little while pan
                                 }
-                              
-                              //  double temp1 = console.SnapTune((double)Console.CTUN1_HZ / 1e6, step, num_steps);
-                              //  Console.CTUN1_HZ = (long)(temp1 * 1e6);
-                              //  console.tempVFOAFreq = console.VFOAFreq + temp1; // vfoafreq in mhz
-
-                             //   console.CalcDisplayFreq(); // ke9ns keep display from moving
 
                                 double temp1 = console.SnapTune(0.0, step, num_steps); // in mhz
                                 Console.CTUN1_HZ = Console.CTUN1_HZ + (long)(temp1 * 1e6);// ke9ns add allow bandpass window to scroll across display instead of display freq scroll under bandpass.
@@ -215,7 +209,7 @@ namespace PowerSDR
                                 console.CalcDisplayFreq(); // ke9ns keep display from moving
 
                             }
-                            else
+                            else // CTUN == false
                             {
                                 console.VFOAFreq = console.SnapTune(console.VFOAFreq, step, num_steps);
                             }
@@ -236,7 +230,7 @@ namespace PowerSDR
                                 console.CalcDisplayFreq(); // ke9ns keep display from moving
 
                             }
-                            else
+                            else // CTUN == false
                             {
                                 console.VFOAFreq = console.SnapTune(console.VFOAFreq, step, -num_steps);
                             }
@@ -325,10 +319,10 @@ namespace PowerSDR
 
             switch (button)
             {
-                case FlexControl.Button.Left:   function = button_left_function;  break;
-                case FlexControl.Button.Middle: function = button_mid_function;   break;
-                case FlexControl.Button.Right:  function = button_right_function; break;
-                case FlexControl.Button.Knob:   function = button_knob_function;  break;
+                case FlexControl.Button.Left: function = button_left_function; break;
+                case FlexControl.Button.Middle: function = button_mid_function; break;
+                case FlexControl.Button.Right: function = button_right_function; break;
+                case FlexControl.Button.Knob: function = button_knob_function; break;
             }
 
             if (function == FlexControlKnobFunction.TuneRIT && type == FlexControl.ClickType.Double)

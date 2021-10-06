@@ -128,6 +128,10 @@ or Drag &amp; Drop directly to the Add button to create new Memory
 
 TO USE THE HYPERLINK:
 RIGHT CLICK mouse on the Memory (Row)
+Note: You cannot run PowerSDR in ADMIN mode to use this feature
+
+Mouse Wheel Click: Send Memory to VFOB (TX VFOB if RX2 ON)
+
 </value>
   </data>
   <data name="MemoryRecordAdd.ToolTip" xml:space="preserve">

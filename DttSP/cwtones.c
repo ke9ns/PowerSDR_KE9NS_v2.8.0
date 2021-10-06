@@ -31,10 +31,16 @@ The DTTS Microwave Society
 Bridgewater, NJ 08807
 */
 
+
+// ke9ns THIS CODE IS NOT USED
+// FLEX SWITCHED OVER TO THEIR FLEXCW.DLL
+
+
+
+
 #include <cwtones.h>
 
-void
-CWComplexOSC (OSC p, double harmonic, double phase, double amplitude)
+void CWComplexOSC (OSC p, double harmonic, double phase, double amplitude)
 {
 	int i;
 
@@ -60,10 +66,10 @@ CWComplexOSC (OSC p, double harmonic, double phase, double amplitude)
 // A/R use sine shaping.
 //------------------------------------------------------------------------
 
-BOOLEAN
-CWTone (CWToneGen cwt)
+BOOLEAN CWTone (CWToneGen cwt)
 {
 	int i, n = cwt->size;
+	//fprintf(stdout, "CW ON"), fflush(stdout);
 
 	CWComplexOSC (cwt->osc.gen, cwt->harmonic, cwt->phase, cwt->amplitude);
 
@@ -119,9 +125,9 @@ CWTone (CWToneGen cwt)
 //------------------------------------------------------------------------
 // turn tone on with current settings
 
-void
-CWToneOn (CWToneGen cwt)
+void CWToneOn (CWToneGen cwt)
 {
+	//fprintf(stdout, "CW ON"), fflush(stdout);
 	// gain is in dB
 	cwt->scl = (REAL) pow (10.0, cwt->gain / 20.0);
 	cwt->curr = cwt->mul = 0.0;
@@ -151,16 +157,15 @@ CWToneOn (CWToneGen cwt)
 //------------------------------------------------------------------------
 // initiate turn-off
 
-void
-CWToneOff (CWToneGen cwt)
+void CWToneOff (CWToneGen cwt)
 {
+	//fprintf(stdout, "CW OFF"), fflush(stdout); 
 	cwt->stage = CWTone_FALL;
 }
 
 //------------------------------------------------------------------------
 
-void
-setCWToneGenVals (CWToneGen cwt, REAL gain, REAL freq, REAL rise, REAL fall)
+void setCWToneGenVals (CWToneGen cwt, REAL gain, REAL freq, REAL rise, REAL fall)
 {
 	cwt->gain = gain;
 	cwt->osc.freq = freq;
@@ -168,8 +173,7 @@ setCWToneGenVals (CWToneGen cwt, REAL gain, REAL freq, REAL rise, REAL fall)
 	cwt->fall.dur = fall;
 }
 
-CWToneGen
-newCWToneGen (
+CWToneGen newCWToneGen (
 			  REAL gain,	// dB
 			  REAL freq,	// ms
 			  REAL rise,	// ms
@@ -177,8 +181,9 @@ newCWToneGen (
 			  int size,		// samples
 			  REAL samplerate) // samples/sec
 {
-	CWToneGen cwt = (CWToneGen) safealloc (1, sizeof (CWToneGenDesc),
-		"CWToneGenDesc");
+	CWToneGen cwt = (CWToneGen) safealloc (1, sizeof (CWToneGenDesc),"CWToneGenDesc");
+
+	//fprintf(stdout, "CW ON1"), fflush(stdout);
 
 	setCWToneGenVals (cwt, gain, freq, rise, fall);
 	cwt->size = size;

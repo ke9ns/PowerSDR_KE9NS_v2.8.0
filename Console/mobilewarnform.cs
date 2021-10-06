@@ -36,43 +36,43 @@ using System.Windows.Forms;
 
 namespace PowerSDR
 {
-	public class MobileWarnForm : System.Windows.Forms.Form
-	{
-		private Console console;
-		private System.Windows.Forms.RichTextBox rtxtWarning;
-		private System.Windows.Forms.CheckBox chkShowThisOnStartup;
-		private System.Windows.Forms.Button btnContinue;		
-		private System.ComponentModel.Container components = null;
+    public class MobileWarnForm : System.Windows.Forms.Form
+    {
+        private Console console;
+        private System.Windows.Forms.RichTextBox rtxtWarning;
+        private System.Windows.Forms.CheckBox chkShowThisOnStartup;
+        private System.Windows.Forms.Button btnContinue;
+        private System.ComponentModel.Container components = null;
 
-		public MobileWarnForm(Console c)
-		{
-			InitializeComponent();
-			console = c;
-			this.ActiveControl = btnContinue;
-		}
+        public MobileWarnForm(Console c)
+        {
+            InitializeComponent();
+            console = c;
+            this.ActiveControl = btnContinue;
+        }
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MobileWarnForm));
             this.rtxtWarning = new System.Windows.Forms.RichTextBox();
             this.chkShowThisOnStartup = new System.Windows.Forms.CheckBox();
@@ -133,28 +133,28 @@ namespace PowerSDR
             this.Closing += new System.ComponentModel.CancelEventHandler(this.MobileWarnForm_Closing);
             this.ResumeLayout(false);
 
-		}
-		#endregion
+        }
+        #endregion
 
-		private Stream GetResource(string name)
-		{
-			return this.GetType().Assembly.GetManifestResourceStream(name);
-		}
+        private Stream GetResource(string name)
+        {
+            return this.GetType().Assembly.GetManifestResourceStream(name);
+        }
 
-		private void btnContinue_Click(object sender, System.EventArgs e)
-		{
-			this.Close();
-		}
+        private void btnContinue_Click(object sender, System.EventArgs e)
+        {
+            this.Close();
+        }
 
-		private void MobileWarnForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			this.Hide();
-			if(!chkShowThisOnStartup.Checked)
-			{
-				ArrayList a = new ArrayList();
-				a.Add("show_mobile_warning/False");
-				DB.SaveVars("State", ref a);
-			}
-		}
-	}
+        private void MobileWarnForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Hide();
+            if (!chkShowThisOnStartup.Checked)
+            {
+                ArrayList a = new ArrayList();
+                a.Add("show_mobile_warning/False");
+                DB.SaveVars("State", ref a);
+            }
+        }
+    }
 }

@@ -121,7 +121,9 @@
     <value>17, 17</value>
   </metadata>
   <data name="txttimer_message.Text" xml:space="preserve">
-    <value>Click to Start 10min ID Timer min = Synced to the nearest Minute
+    <value>(setup-&gt;general-&gt;hardware config-&gt;30min option)
+
+Click to Start 10min ID Timer min = Synced to the nearest Minute
 Click again to Start 10min ID Timer minI = Synced to the next 10 minute Interval
 
 Right Click toggle between: Voice, CW, and Waterfall ID
@@ -143,8 +145,14 @@ WaterFall: Type your Callsign in the TX WaterID callsign box, found at the top o
 
 NOAA.com&gt;&gt; WWV Solar Flux Index, A and K index values
 sidc.oma.be&gt;&gt;  Estimated SunSpot#: Official Sun Spot # updated hourly.
+
 NWRA.com&gt;&gt; Effective SunSpot# based on ionospheric measurements, updated hourly.
-Effective SSN# is a more accurate SSN# since it takes time for actual SunSpots to effect the ionoshere. 
+Effective SSN# is a more accurate SSN# since it takes time for actual SunSpots to effect the ionoshere.
+
+ALSO certain times of year the following are very important:
+Tropospheric Ducting Propagation (see http://www.dxinfocentre.com/tropo.html  )
+and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&amp;Frec=MUF&amp;ML=M&amp;HF=N  )
+ 
 </value>
   </data>
   <data name="PropagationTextBox.Text" xml:space="preserve">
@@ -183,6 +191,169 @@ Optionally you can Display Country, or Call sign to DX Spots found in your Pan o
 Shift key to see LAT/LONG grid numbers
 </value>
   </data>
+  <data name="SWRScanner.Text" xml:space="preserve">
+    <value>F1 help: SWR Scanner / Plotter / Logger (For Flex-5000 and Flex-3000 only):
+
+Set Low Freq (no lower than the low end of the band)
+Set High Freq (no higher than the high end of the band)
+Set Step rate: 1.0, 2.0,3.0, or 4.0 khz 
+Set Rate (250 msec or higher)
+
+Set Run# 1-5 (up to 5 runs can be recorded, if you want to compare antenna adjustments between Run's)
+
+Click SWR Scan (TX)
+TUNE is automatically set to 10 and the Radio is Transmits using TUNE
+and records the SWR.
+
+PLOTTING:
+Check  Display SWR Plot(s)
+SWR logged data will appear in the Panadapter with a number 
+and a Line representing the SWR in color and proportional length
+(short green = 1:1 to 2:0) (med Yellow = 2.1:1 to 2.9)(long Red = 3.0:1 to 25:1)
+
+Panadapter: You can view up to 5 Runs at the same time.
+Panafall: You can view any 1 of 5 Runs.
+
+LOGGING:
+All SWR Data is recorded by Run#, ANT (Flex-5000) &amp; Band in a file called ke9ns_SWR1.dat
+And automatically saved when you close PowerSDR, or Click setup-&gt;Save
+</value>
+  </data>
+  <data name="AntennaDelay.Text" xml:space="preserve">
+    <value>Antenna TR Delay:
+
+On the Flex-1500 the Antenna TR delay is located under the ANT panel.
+On the Flex-3000 the Antenna TR delay is located under Setup-&gt;General-&gt;Options.
+On the Flex-5000 the Antenna TR delay is located under the ANT panel.
+
+On the Flex-1500 and Flex-3000 the TR delay operation:
+1) PTT ON: Radio goes into TX but no Output.
+2) After the DELAY, the TX (PA) ON and TX Out Jack activates.
+3) PTT OFF: Radio back into Receive and TX OUT jack shuts OFF immediately
+
+------------------------------------------------------------------------------
+On the Flex-5000 you have 3 TX OUT &amp; Delay Jacks to allow Sequential Switching:
+Each TX OUT jack (1,2,3) works like the Flex-1500/3000 when used individually.
+But when you use TX1 and TX2 at the same time,
+ the Delay on TX2 comes after the Delay on TX1 (TX3 will start after the first 2 delays)
+
+For the Flex-5000:
+But there are effects beyond the simple Sequential Delays:
+
+1) If you use the RCA TX3 (Enable it) to key your amp , and enable TX1 and set the TX1 delay:
+    The Amp keys up, and the Flex delays transmit. Then when you unkey the AMP and FLEX unkey with no delay.
+
+2) If you use the RCA TX1 to key your amp and select just the TX1 delay, then the 
+Amp keys up immediately, and the Flex delays transmit. Then when you unkey, the Flex goes into RX and the Amp delays release.
+
+---------------------------------------------------------------------------
+When using all 3 TX1,TX2, TX3 the following occurs in this sequence:
+
+PTT ON:
+
+&gt;&gt;&gt;Flex5000 Receiver turns OFF&lt;&lt;&lt;
+
+RCA TX1 output ON (no delay)
+  Wait TX1 Delay time
+RCA TX2 output ON
+  Wait TX2 Delay time
+RCA TX3 output ON
+  Wait TX3 Delay time
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT ON &lt;&lt;&lt;
+
+PTT OFF:
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT OFF&lt;&lt;&lt;
+&gt;&gt;&gt;Flex5000 Receiver turns ON&lt;&lt;&lt;(but you will not hear anything until the AMP unkeys)
+
+  Wait TX3 Delay time
+RCA TX3 output OFF
+  Wait TX2 Delay time
+RCA TX2 output OFF
+  Wait TX1 Delay time
+RCA TX1 output OFF
+
+
+
+
+
+</value>
+  </data>
+  <data name="HTTPSERVER.Text" xml:space="preserve">
+    <value>Http Server information:
+
+Basic: Display area is transmitted (Panadapter and Waterfall)
+
+Full Console: When Basic is ON, you can transmit the full Console window 
+(and any window you place on top of the PowerSDR Console window)
+
+--------------------------------------------------------------
+Below is what you can insert on your own web page for others to see your Flex Pan:
+ 
+&lt;style&gt;
+#wrap { width: 1400px; height: 600px; padding: 0; overflow: hidden; }
+#frame { width: 1400px; height: 600px; border: 1px solid black; }
+#frame { zoom: 1.00; -moz-transform: scale(1.00); -moz-transform-origin: 0 0; }
+&lt;/style&gt;
+
+ &lt;div id="wrap"&gt;
+    &lt;iframe id="frame" src="http://YOUR_IP_ADDRESS_HERE.net:8081"&gt;&lt;/iframe&gt;  
+ &lt;/div&gt;
+</value>
+  </data>
+  <data name="LoTW_help.Text" xml:space="preserve">
+    <value>LoTW (ARRL Log Book of The World)
+
+If you do NOT have an LoTW account, SIGN UP AT: &lt;http://www.arrl.org/quick-start&gt;
+Yes its overly complicated, but you only need to do it one time!
+
+DX Spotter Screen:
+1) You must have your Callsign entered in the box in the bottom Right corner
+2) Right click on the Callsign box and enter in your LoTW password.
+This is the password that you use to login to: &lt;https://lotw.arrl.org/lotw/login&gt;
+
+LoTW Button:______________________________________________________
+
+[Left Click]  = (On/Off):
+PowerSDR will check to see if you have a “LoTW_LOG.adi” file, and “FCCDATA.dat” file in your database folder.
+
+Files YES= Open/Read “LoTW_LOG.adi” and “FCCDATA.dat” files, and start checking DX Spots for Dups, DXCC Countries list, and US States.
+Files NO= PowerSDR will go to ARRL and download your FULL LoTW Log file. (This may take a few minutes to download) If you don’t have a “FCCDATA.dat” file, PowerSDR will attempt to find EN.dat and convert it to “FCCDATA.dat”
+
+[Right Click]  = incremental Log file update:
+PowerSDR will go to ARRL and download incremental QSO/QSL updates to your LoTW Log file (based on the Date of the Last Update). This requires only a few seconds to update.
+
+LoTW  when running.
+LoTW  when downloading a LoTW Log QSO/QSLfile
+LoTW  when a fault occured.
+
+
+Color Coded DX Spots: 
+
+Green: You have this DX Station confirmed on this Band (dont need this Dx Station)
+LightGreen: You have this DX Station confirmed on some other Band 
+Yellow: You have this DX station confirmed on some other band, and some other station already confirmed on this band (dont need this DX Station)
+
+Orange: You have this DXCC country confirmed on this Band (you dont need this DX Station
+LightPurple: You have this DXCC country CONFIRMED on some other Band (you WANT this DX Station)
+Purple: You WANT this DXCC country (you WANT this DX Station)
+
+DeepPink: You have worked this DX Station on this Band (But they have not  confirmed)
+Pink: You have worked DX Station on some other Band (But they have not confirmed)
+
+LightBlue: You have this US State confirmed on some other band (you WANT this DX Station)
+Blue: You WANT this US State (You Want this DX Station).
+
+Gray: Beacon Station
+
+
+
+</value>
+  </data>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>41</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

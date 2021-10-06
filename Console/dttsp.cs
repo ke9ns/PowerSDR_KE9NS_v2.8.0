@@ -37,59 +37,59 @@ using System.Diagnostics;
 
 namespace PowerSDR
 {
-	unsafe class DttSP
-	{
-		#region Enums
+    unsafe class DttSP
+    {
+        #region Enums
 
-		public enum MeterType
-		{
-			SIGNAL_STRENGTH=0, 
-			AVG_SIGNAL_STRENGTH, 
-			ADC_REAL, 
-			ADC_IMAG,
-			AGC_GAIN,
-			MIC,  
-			PWR,
-			ALC,
-			EQ,
-			LEVELER,
-			COMP,
-			CPDR,
-			ALC_G,
-			LVL_G,
-			MIC_PK,
-			ALC_PK,
-			EQ_PK,
-			LEVELER_PK,
-			COMP_PK,
-			CPDR_PK,
-		}
+        public enum MeterType
+        {
+            SIGNAL_STRENGTH = 0,
+            AVG_SIGNAL_STRENGTH,
+            ADC_REAL,
+            ADC_IMAG,
+            AGC_GAIN,
+            MIC,
+            PWR,
+            ALC,
+            EQ,
+            LEVELER,
+            COMP,
+            CPDR,
+            ALC_G,
+            LVL_G,
+            MIC_PK,
+            ALC_PK,
+            EQ_PK,
+            LEVELER_PK,
+            COMP_PK,
+            CPDR_PK,
+        }
 
-		#endregion
+        #endregion
 
-		#region Dll Method Definitions
-		// ======================================================
-		// DLL Method Definitions
-		// ======================================================
+        #region Dll Method Definitions
+        // ======================================================
+        // DLL Method Definitions
+        // ======================================================
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Setup_SDR")]
-			/// <summary>
-			/// This function sets up the SDR functions and data structures
-			/// </summary>
-			/// <returns></returns>
-		public static extern void SetupSDR(System.String app_data_path);
+        /// <summary>
+        /// This function sets up the SDR functions and data structures
+        /// </summary>
+        /// <returns></returns>
+        public static extern void SetupSDR(System.String app_data_path);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetDSPBuflen")]  // ke9ns found in winmain.c
-		public static extern void ResizeSDR(uint thread, int DSPsize);
+        public static extern void ResizeSDR(uint thread, int DSPsize);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Destroy_SDR")]
-		public static extern void Exit();
+        public static extern void Exit();
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "process_samples_thread")]
-		public static extern void ProcessSamplesThread(uint thread);
+        public static extern void ProcessSamplesThread(uint thread);
 
-//		DllImport("DttSP.dll", EntryPoint="AudioReset")]
-//		public static extern void AudioReset();
+        //		DllImport("DttSP.dll", EntryPoint="AudioReset")]
+        //		public static extern void AudioReset();
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetSwchFlag")]
         public static extern void SetSwchFlag(uint thread, bool val);
@@ -98,24 +98,24 @@ namespace PowerSDR
         public static extern void SetSwchRiseThresh(uint thread, float val);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetThreadProcessingMode")]
-		public static extern void SetThreadProcessingMode(uint thread, int runmode);
+        public static extern void SetThreadProcessingMode(uint thread, int runmode);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Audio_Callback")]
-		public static extern void ExchangeSamples(void *input_l, void *input_r, void *output_l, void *output_r, int numsamples);
+        public static extern void ExchangeSamples(void* input_l, void* input_r, void* output_l, void* output_r, int numsamples);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Audio_Callback2")]   // ke9ns used in the transmit / receive audio   winmain.c
-		public static extern void ExchangeSamples2(void* input, void *output, int numsamples);
+        public static extern void ExchangeSamples2(void* input, void* output, int numsamples);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetAudioSize")]///
 		public static extern void SetAudioSize(int size);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetMode")]///
 		public static extern int SetMode(uint thread, uint subrx, DSPMode m);
-				
-		public static int SetTXMode(uint thread, DSPMode m)
-		{
-			return SetMode(thread, 0, m);
-		}
+
+        public static int SetTXMode(uint thread, DSPMode m)
+        {
+            return SetMode(thread, 0, m);
+        }
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetRXFilter")]///
 		public static extern int SetRXFilter(uint thread, uint subrx, double low, double high);
@@ -127,8 +127,13 @@ namespace PowerSDR
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetTXOsc")]///
 		public static extern int SetTXOsc(uint thread, double freq);
 
-        [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetSampleRate")]
-		public static extern int SetSampleRate(double sampleRate);
+        [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetSampleRate")] // ke9ns: change sample rate pauses all 3 threads, then changes rate
+        public static extern int SetSampleRate(double sampleRate);
+
+
+        [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetHiResPan")] // ke9ns: add tell process_panadapter for a larger buffer size (Calls update.c)
+        public static extern void SetHiResPan(int hires);
+
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetNR")]///
 		public static extern void SetNR(uint thread, uint subrx, bool setit);
@@ -170,10 +175,10 @@ namespace PowerSDR
         public static extern void SetRXDCBlock(uint thread, uint subrx, bool setit);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetRXDCBlockGain")]///
-        public static extern void SetRXDCBlockGain(uint thread, uint subrx,float gain);
+        public static extern void SetRXDCBlockGain(uint thread, uint subrx, float gain);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetTXEQ")]
-		public static extern void SetTXEQ(uint thread, int[] txeq);
+        public static extern void SetTXEQ(uint thread, int[] txeq);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetGrphTXEQcmd")]///
 		public static extern void SetGrphTXEQcmd(uint thread, bool state);
@@ -182,7 +187,20 @@ namespace PowerSDR
 		public static extern void SetGrphTXEQ(uint thread, int[] txeq);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetGrphTXEQ10")]///
-		public static extern void SetGrphTXEQ10(uint thread, int[] txeq);
+		public static extern void SetGrphTXEQ10(uint thread, int[] txeq10);
+
+
+        [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetGrphTXEQ37")]///
+		public static extern void SetGrphTXEQ37(uint thread, int[] txeq28, int[] peq); //ke9ns add 28 band eq and 9 band peq
+
+
+        [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetGrphTXEQ28")]///
+		public static extern void SetGrphTXEQ28(uint thread, int[] txeq28); //ke9ns add 28 band eq
+
+
+        [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetGrphTXPEQ")]///
+		public static extern void SetGrphTXPEQ(uint thread, int[] peq); //ke9ns add: parametric EQ .162
+
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetTXFMDeviation")]///
         public static extern void SetTXFMDeviation(uint thread, double deviation);
@@ -192,11 +210,16 @@ namespace PowerSDR
         public static extern void SetTXFMDataMode(uint thread, bool fmdata); // ke9ns add for FM data mode (Calls update.c)
 
 
+
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetRXFMDeviation")]///
         public static extern void SetRXFMDeviation(uint thread, uint subrx, double deviation);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetFMSquelchThreshold")]///
         public static extern void SetFMSquelchThreshold(uint thread, uint subrx, float threshold);
+
+        [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "GetFMSquelchBreak")] // ke9ns add
+        public static extern void GetFMSquelchBreak(uint thread, uint subrx, bool* fmsquelchbreak);
+
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetCTCSSFreq")]///
         public static extern void SetCTCSSFreq(uint thread, double freq_hz);
@@ -208,34 +231,34 @@ namespace PowerSDR
 		public static extern void SetGrphRXEQcmd(uint thread, uint subrx, bool state);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetGrphRXEQ")]///
-		public static extern void SetGrphRXEQ(uint thread, uint subrx,int[] rxeq);
+		public static extern void SetGrphRXEQ(uint thread, uint subrx, int[] rxeq);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetGrphRXEQ10")]///
-		public static extern void SetGrphRXEQ10(uint thread, uint subrx,int[] rxeq);
+		public static extern void SetGrphRXEQ10(uint thread, uint subrx, int[] rxeq);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetNotch160")]///
 		public static extern void SetNotch160(uint thread, bool state);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetNB")]///
-		public static extern void SetNB(uint thread, uint subrx, bool setit);
+		public static extern void SetNB(uint thread, uint subrx, bool setit); // ke9ns: update.c
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetNBvals")]///
-		public static extern void SetNBvals(uint thread, uint subrx, double threshold);
+		public static extern void SetNBvals(uint thread, uint subrx, double threshold, int hangTime, int delayTime); // ke9ns mod: update.c
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "GetSAMFreq")]///
-		public static extern void GetSAMFreq(uint thread, uint subrx, float *freq);
+		public static extern void GetSAMFreq(uint thread, uint subrx, float* freq);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "GetSAMPLLvals")]///
-		public static extern void GetSAMPLLvals(uint thread, uint subrx, float *alpha, float *beta);
+		public static extern void GetSAMPLLvals(uint thread, uint subrx, float* alpha, float* beta);
 
-        [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetSAMPLLvals")]///
+        [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetSAMPLLvals")]/// ke9ns: update.c
 		public static extern void SetSAMPLLvals(uint thread, uint subrx, float alpha, float beta);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetCorrectIQEnable")]
-		public static extern void SetCorrectIQEnable(uint setit);
+        public static extern void SetCorrectIQEnable(uint setit);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "GetCorrectRXIQw")]
-		public static extern void GetCorrectRXIQw(uint thread, uint subrx, float* real, float* imag, uint index);
+        public static extern void GetCorrectRXIQw(uint thread, uint subrx, float* real, float* imag, uint index);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetCorrectRXIQwReal")]///
 		public static extern void SetCorrectRXIQwReal(uint thread, uint subrx, float setit, uint index);
@@ -310,7 +333,7 @@ namespace PowerSDR
 		public static extern void SetTXALCHang(uint thread, int hang);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetTXLevelerTop")]
-		public static extern void SetTXLevelerMaxGain(uint thread, double max_agc);
+        public static extern void SetTXLevelerMaxGain(uint thread, double max_agc);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetTXLevelerAttack")]///
 		public static extern void SetTXLevelerAttack(uint thread, int attack);
@@ -329,6 +352,8 @@ namespace PowerSDR
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetSpectrumPolyphase")]///
 		public static extern void SetSpectrumPolyphase(uint thread, bool state);
+
+
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetBIN")]///
 		public static extern void SetBIN(uint thread, uint subrx, bool setit);
@@ -356,58 +381,58 @@ namespace PowerSDR
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetPWSmode")]///
 		public static extern void SetPWSmode(uint thread, uint subrx, bool setit);
-		public static void SetTXPWSmode(uint thread, bool setit)
-		{
-			SetPWSmode(thread, 0, setit);
-		}
+        public static void SetTXPWSmode(uint thread, bool setit)
+        {
+            SetPWSmode(thread, 0, setit);
+        }
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Process_Spectrum")]
-		unsafe public static extern void GetSpectrum(uint thread, float* results);
+        unsafe public static extern void GetSpectrum(uint thread, float* results);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Process_ComplexSpectrum")]
-		unsafe public static extern void GetComplexSpectrum(uint thread, float* results);
+        unsafe public static extern void GetComplexSpectrum(uint thread, float* results);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Process_Panadapter")]   // ke9ns   found in update.c   used on console.cs
-		unsafe public static extern void GetPanadapter(uint thread, float* results);
+        unsafe public static extern void GetPanadapter(uint thread, float* results);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Process_Phase")]
-		unsafe public static extern void GetPhase(uint thread, float* results, int numpoints);
+        unsafe public static extern void GetPhase(uint thread, float* results, int numpoints);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Process_Scope")]
-		unsafe public static extern void GetScope(uint thread, float* results, int numpoints);
+        unsafe public static extern void GetScope(uint thread, float* results, int numpoints);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetTRX")]
-		unsafe public static extern void SetTRX(uint thread, bool trx_on);
+        unsafe public static extern void SetTRX(uint thread, bool trx_on);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "FlushAllBufs")]
         unsafe public static extern void FlushAllBufs(uint thread, bool trx);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "CalculateRXMeter")]
-		public static extern float CalculateRXMeter(uint thread, uint subrx, MeterType MT);
+        public static extern float CalculateRXMeter(uint thread, uint subrx, MeterType MT);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "CalculateTXMeter")]
-		public static extern float CalculateTXMeter(uint thread,MeterType MT);
+        public static extern float CalculateTXMeter(uint thread, MeterType MT);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Release_Update")]
-		unsafe public static extern void ReleaseUpdate();
+        unsafe public static extern void ReleaseUpdate();
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "NewResampler")]
-		unsafe public static extern void *NewResampler(int sampin, int sampout);
+        unsafe public static extern void* NewResampler(int sampin, int sampout);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "DoResampler")]
-		unsafe public static extern void DoResampler(float *input, float *output, int numsamps, int *outsamps,void *ptr);
+        unsafe public static extern void DoResampler(float* input, float* output, int numsamps, int* outsamps, void* ptr);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "DelPolyPhaseFIR")]
-		unsafe public static extern void DelResampler(void *ptr);
+        unsafe public static extern void DelResampler(void* ptr);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "NewResamplerF")]
-		unsafe public static extern void *NewResamplerF(int sampin, int sampout);
+        unsafe public static extern void* NewResamplerF(int sampin, int sampout);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "DoResamplerF")]
-		unsafe public static extern void DoResamplerF(float *input, float *output, int numsamps, int *outsamps,void *ptr);
+        unsafe public static extern void DoResamplerF(float* input, float* output, int numsamps, int* outsamps, void* ptr);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "DelPolyPhaseFIRF")]
-		unsafe public static extern void DelResamplerF(void *ptr);
+        unsafe public static extern void DelResamplerF(void* ptr);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetThreadNo")]///
 		unsafe public static extern void SetThreadNo(uint threadno);
@@ -426,7 +451,7 @@ namespace PowerSDR
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetOscPhase")]///
 		unsafe public static extern int SetOscPhase(double phase);
- 
+
         #region Diversity
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetDiversity")]
@@ -440,6 +465,9 @@ namespace PowerSDR
 
         #endregion
 
-		#endregion
-	}
+        #endregion
+
+
+
+    }
 }

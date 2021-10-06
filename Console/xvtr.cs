@@ -27,235 +27,233 @@
 //=================================================================
 
 using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Collections;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace PowerSDR
 {
-	public class XVTRForm : System.Windows.Forms.Form
-	{
-		#region Variable Declaration
+    public class XVTRForm : System.Windows.Forms.Form
+    {
+        #region Variable Declaration
 
-		private Console console;
+        private Console console;
         //private VUForm VUForm;
-		private NumericUpDownTS[] ucb_addr;
-		private NumericUpDownTS[] begin;
-		private NumericUpDownTS[] end;
-		private CheckBoxTS[] enabled;
-		private NumericUpDownTS[] lo_offset;
-		private NumericUpDownTS[] lo_error;
-		private NumericUpDownTS[] rx_gain;
-		private CheckBoxTS[] rx_only;
-		private NumericUpDownTS[] power;
-		private CheckBoxTS[] xvtr_rf;
+        private NumericUpDownTS[] ucb_addr;
+        private NumericUpDownTS[] begin;
+        private NumericUpDownTS[] end;
+        private CheckBoxTS[] enabled;
+        private NumericUpDownTS[] lo_offset;
+        private NumericUpDownTS[] lo_error;
+        private NumericUpDownTS[] rx_gain;
+        private CheckBoxTS[] rx_only;
+        private NumericUpDownTS[] power;
+        private CheckBoxTS[] xvtr_rf;
 
-		private System.Windows.Forms.TextBoxTS txtBandButton0;
-		private System.Windows.Forms.TextBoxTS txtBandButton1;
-		private System.Windows.Forms.TextBoxTS txtBandButton2;
-		private System.Windows.Forms.TextBoxTS txtBandButton3;
-		private System.Windows.Forms.TextBoxTS txtBandButton4;
-		private System.Windows.Forms.TextBoxTS txtBandButton5;
-		private System.Windows.Forms.TextBoxTS txtBandButton6;
-		private System.Windows.Forms.TextBoxTS txtBandButton7;
-		private System.Windows.Forms.TextBoxTS txtBandButton8;
-		private System.Windows.Forms.TextBoxTS txtBandButton9;
-		private System.Windows.Forms.TextBoxTS txtBandButton10;
-		private System.Windows.Forms.TextBoxTS txtBandButton11;
-		private System.Windows.Forms.TextBoxTS txtBandButton12;
-		private System.Windows.Forms.TextBoxTS txtBandButton13;
-		private System.Windows.Forms.TextBoxTS txtBandButton14;
-		private System.Windows.Forms.TextBoxTS txtBandButton15;
+        private System.Windows.Forms.TextBoxTS txtBandButton0;
+        private System.Windows.Forms.TextBoxTS txtBandButton1;
+        private System.Windows.Forms.TextBoxTS txtBandButton2;
+        private System.Windows.Forms.TextBoxTS txtBandButton3;
+        private System.Windows.Forms.TextBoxTS txtBandButton4;
+        private System.Windows.Forms.TextBoxTS txtBandButton5;
+        private System.Windows.Forms.TextBoxTS txtBandButton6;
+        private System.Windows.Forms.TextBoxTS txtBandButton7;
+        private System.Windows.Forms.TextBoxTS txtBandButton8;
+        private System.Windows.Forms.TextBoxTS txtBandButton9;
+        private System.Windows.Forms.TextBoxTS txtBandButton10;
+        private System.Windows.Forms.TextBoxTS txtBandButton11;
+        private System.Windows.Forms.TextBoxTS txtBandButton12;
+        private System.Windows.Forms.TextBoxTS txtBandButton13;
+        private System.Windows.Forms.TextBoxTS txtBandButton14;
+        private System.Windows.Forms.TextBoxTS txtBandButton15;
         private System.Windows.Forms.NumericUpDownTS udUCBAddr0;//
         private System.Windows.Forms.NumericUpDownTS udUCBAddr1;//
-		private System.Windows.Forms.NumericUpDownTS udUCBAddr2;
-		private System.Windows.Forms.NumericUpDownTS udUCBAddr3;
-		private System.Windows.Forms.NumericUpDownTS udUCBAddr4;
-		private System.Windows.Forms.NumericUpDownTS udUCBAddr5;
-		private System.Windows.Forms.NumericUpDownTS udUCBAddr6;
-		private System.Windows.Forms.NumericUpDownTS udUCBAddr7;
-		private System.Windows.Forms.NumericUpDownTS udUCBAddr8;
-		private System.Windows.Forms.NumericUpDownTS udUCBAddr9;
-		private System.Windows.Forms.NumericUpDownTS udUCBAddr10;
-		private System.Windows.Forms.NumericUpDownTS udUCBAddr11;
-		private System.Windows.Forms.NumericUpDownTS udUCBAddr12;
-		private System.Windows.Forms.NumericUpDownTS udUCBAddr13;
-		private System.Windows.Forms.NumericUpDownTS udUCBAddr14;
-		private System.Windows.Forms.NumericUpDownTS udUCBAddr15;
+        private System.Windows.Forms.NumericUpDownTS udUCBAddr2;
+        private System.Windows.Forms.NumericUpDownTS udUCBAddr3;
+        private System.Windows.Forms.NumericUpDownTS udUCBAddr4;
+        private System.Windows.Forms.NumericUpDownTS udUCBAddr5;
+        private System.Windows.Forms.NumericUpDownTS udUCBAddr6;
+        private System.Windows.Forms.NumericUpDownTS udUCBAddr7;
+        private System.Windows.Forms.NumericUpDownTS udUCBAddr8;
+        private System.Windows.Forms.NumericUpDownTS udUCBAddr9;
+        private System.Windows.Forms.NumericUpDownTS udUCBAddr10;
+        private System.Windows.Forms.NumericUpDownTS udUCBAddr11;
+        private System.Windows.Forms.NumericUpDownTS udUCBAddr12;
+        private System.Windows.Forms.NumericUpDownTS udUCBAddr13;
+        private System.Windows.Forms.NumericUpDownTS udUCBAddr14;
+        private System.Windows.Forms.NumericUpDownTS udUCBAddr15;
         private System.Windows.Forms.CheckBoxTS chkEnable0;//
         private System.Windows.Forms.CheckBoxTS chkEnable1;//
-		private System.Windows.Forms.CheckBoxTS chkEnable2;
-		private System.Windows.Forms.CheckBoxTS chkEnable3;
-		private System.Windows.Forms.CheckBoxTS chkEnable4;
-		private System.Windows.Forms.CheckBoxTS chkEnable5;
-		private System.Windows.Forms.CheckBoxTS chkEnable6;
-		private System.Windows.Forms.CheckBoxTS chkEnable7;
-		private System.Windows.Forms.CheckBoxTS chkEnable8;
-		private System.Windows.Forms.CheckBoxTS chkEnable9;
-		private System.Windows.Forms.CheckBoxTS chkEnable10;
-		private System.Windows.Forms.CheckBoxTS chkEnable11;
-		private System.Windows.Forms.CheckBoxTS chkEnable12;
-		private System.Windows.Forms.CheckBoxTS chkEnable13;
-		private System.Windows.Forms.CheckBoxTS chkEnable14;
-		private System.Windows.Forms.CheckBoxTS chkEnable15;
-		private System.Windows.Forms.LabelTS lblBandButton;
-		private System.Windows.Forms.LabelTS lblUCBAddress;
-		private System.Windows.Forms.LabelTS lblButtonText;
-		private System.Windows.Forms.LabelTS lblEnabled;
-		private System.Windows.Forms.TextBoxTS txtButtonText15;
-		private System.Windows.Forms.TextBoxTS txtButtonText14;
-		private System.Windows.Forms.TextBoxTS txtButtonText13;
-		private System.Windows.Forms.TextBoxTS txtButtonText12;
-		private System.Windows.Forms.TextBoxTS txtButtonText11;
-		private System.Windows.Forms.TextBoxTS txtButtonText10;
-		private System.Windows.Forms.TextBoxTS txtButtonText9;
-		private System.Windows.Forms.TextBoxTS txtButtonText8;
-		private System.Windows.Forms.TextBoxTS txtButtonText7;
-		private System.Windows.Forms.TextBoxTS txtButtonText6;
-		private System.Windows.Forms.TextBoxTS txtButtonText5;
-		private System.Windows.Forms.TextBoxTS txtButtonText4;
-		private System.Windows.Forms.TextBoxTS txtButtonText3;
-		private System.Windows.Forms.TextBoxTS txtButtonText2;
+        private System.Windows.Forms.CheckBoxTS chkEnable2;
+        private System.Windows.Forms.CheckBoxTS chkEnable3;
+        private System.Windows.Forms.CheckBoxTS chkEnable4;
+        private System.Windows.Forms.CheckBoxTS chkEnable5;
+        private System.Windows.Forms.CheckBoxTS chkEnable6;
+        private System.Windows.Forms.CheckBoxTS chkEnable7;
+        private System.Windows.Forms.CheckBoxTS chkEnable8;
+        private System.Windows.Forms.CheckBoxTS chkEnable9;
+        private System.Windows.Forms.CheckBoxTS chkEnable10;
+        private System.Windows.Forms.CheckBoxTS chkEnable11;
+        private System.Windows.Forms.CheckBoxTS chkEnable12;
+        private System.Windows.Forms.CheckBoxTS chkEnable13;
+        private System.Windows.Forms.CheckBoxTS chkEnable14;
+        private System.Windows.Forms.CheckBoxTS chkEnable15;
+        private System.Windows.Forms.LabelTS lblBandButton;
+        private System.Windows.Forms.LabelTS lblUCBAddress;
+        private System.Windows.Forms.LabelTS lblButtonText;
+        private System.Windows.Forms.LabelTS lblEnabled;
+        private System.Windows.Forms.TextBoxTS txtButtonText15;
+        private System.Windows.Forms.TextBoxTS txtButtonText14;
+        private System.Windows.Forms.TextBoxTS txtButtonText13;
+        private System.Windows.Forms.TextBoxTS txtButtonText12;
+        private System.Windows.Forms.TextBoxTS txtButtonText11;
+        private System.Windows.Forms.TextBoxTS txtButtonText10;
+        private System.Windows.Forms.TextBoxTS txtButtonText9;
+        private System.Windows.Forms.TextBoxTS txtButtonText8;
+        private System.Windows.Forms.TextBoxTS txtButtonText7;
+        private System.Windows.Forms.TextBoxTS txtButtonText6;
+        private System.Windows.Forms.TextBoxTS txtButtonText5;
+        private System.Windows.Forms.TextBoxTS txtButtonText4;
+        private System.Windows.Forms.TextBoxTS txtButtonText3;
+        private System.Windows.Forms.TextBoxTS txtButtonText2;
         private System.Windows.Forms.TextBoxTS txtButtonText1;//
         private System.Windows.Forms.TextBoxTS txtButtonText0;//
-		private System.Windows.Forms.LabelTS lblLOOffset;
-		private System.Windows.Forms.NumericUpDownTS udLOOffset15;
-		private System.Windows.Forms.NumericUpDownTS udLOOffset14;
-		private System.Windows.Forms.NumericUpDownTS udLOOffset13;
-		private System.Windows.Forms.NumericUpDownTS udLOOffset12;
-		private System.Windows.Forms.NumericUpDownTS udLOOffset11;
-		private System.Windows.Forms.NumericUpDownTS udLOOffset10;
-		private System.Windows.Forms.NumericUpDownTS udLOOffset9;
-		private System.Windows.Forms.NumericUpDownTS udLOOffset8;
-		private System.Windows.Forms.NumericUpDownTS udLOOffset7;
-		private System.Windows.Forms.NumericUpDownTS udLOOffset6;
-		private System.Windows.Forms.NumericUpDownTS udLOOffset5;
-		private System.Windows.Forms.NumericUpDownTS udLOOffset4;
-		private System.Windows.Forms.NumericUpDownTS udLOOffset3;
-		private System.Windows.Forms.NumericUpDownTS udLOOffset2;
+        private System.Windows.Forms.LabelTS lblLOOffset;
+        private System.Windows.Forms.NumericUpDownTS udLOOffset15;
+        private System.Windows.Forms.NumericUpDownTS udLOOffset14;
+        private System.Windows.Forms.NumericUpDownTS udLOOffset13;
+        private System.Windows.Forms.NumericUpDownTS udLOOffset12;
+        private System.Windows.Forms.NumericUpDownTS udLOOffset11;
+        private System.Windows.Forms.NumericUpDownTS udLOOffset10;
+        private System.Windows.Forms.NumericUpDownTS udLOOffset9;
+        private System.Windows.Forms.NumericUpDownTS udLOOffset8;
+        private System.Windows.Forms.NumericUpDownTS udLOOffset7;
+        private System.Windows.Forms.NumericUpDownTS udLOOffset6;
+        private System.Windows.Forms.NumericUpDownTS udLOOffset5;
+        private System.Windows.Forms.NumericUpDownTS udLOOffset4;
+        private System.Windows.Forms.NumericUpDownTS udLOOffset3;
+        private System.Windows.Forms.NumericUpDownTS udLOOffset2;
         private System.Windows.Forms.NumericUpDownTS udLOOffset1;//
         private System.Windows.Forms.NumericUpDownTS udLOOffset0;//
-		private System.Windows.Forms.NumericUpDownTS udFreqBegin15;
-		private System.Windows.Forms.NumericUpDownTS udFreqBegin14;
-		private System.Windows.Forms.NumericUpDownTS udFreqBegin13;
-		private System.Windows.Forms.NumericUpDownTS udFreqBegin12;
-		private System.Windows.Forms.NumericUpDownTS udFreqBegin11;
-		private System.Windows.Forms.NumericUpDownTS udFreqBegin10;
-		private System.Windows.Forms.NumericUpDownTS udFreqBegin9;
-		private System.Windows.Forms.NumericUpDownTS udFreqBegin8;
-		private System.Windows.Forms.NumericUpDownTS udFreqBegin7;
-		private System.Windows.Forms.NumericUpDownTS udFreqBegin6;
-		private System.Windows.Forms.NumericUpDownTS udFreqBegin5;
-		private System.Windows.Forms.NumericUpDownTS udFreqBegin4;
-		private System.Windows.Forms.NumericUpDownTS udFreqBegin3;
-		private System.Windows.Forms.NumericUpDownTS udFreqBegin2;
+        private System.Windows.Forms.NumericUpDownTS udFreqBegin15;
+        private System.Windows.Forms.NumericUpDownTS udFreqBegin14;
+        private System.Windows.Forms.NumericUpDownTS udFreqBegin13;
+        private System.Windows.Forms.NumericUpDownTS udFreqBegin12;
+        private System.Windows.Forms.NumericUpDownTS udFreqBegin11;
+        private System.Windows.Forms.NumericUpDownTS udFreqBegin10;
+        private System.Windows.Forms.NumericUpDownTS udFreqBegin9;
+        private System.Windows.Forms.NumericUpDownTS udFreqBegin8;
+        private System.Windows.Forms.NumericUpDownTS udFreqBegin7;
+        private System.Windows.Forms.NumericUpDownTS udFreqBegin6;
+        private System.Windows.Forms.NumericUpDownTS udFreqBegin5;
+        private System.Windows.Forms.NumericUpDownTS udFreqBegin4;
+        private System.Windows.Forms.NumericUpDownTS udFreqBegin3;
+        private System.Windows.Forms.NumericUpDownTS udFreqBegin2;
         private System.Windows.Forms.NumericUpDownTS udFreqBegin1;//
         private System.Windows.Forms.NumericUpDownTS udFreqBegin0;//
-		private System.Windows.Forms.LabelTS lblFreqBegin;
-		private System.Windows.Forms.LabelTS lblFreqEnd;
-		private System.Windows.Forms.NumericUpDownTS udFreqEnd15;
-		private System.Windows.Forms.NumericUpDownTS udFreqEnd14;
-		private System.Windows.Forms.NumericUpDownTS udFreqEnd13;
-		private System.Windows.Forms.NumericUpDownTS udFreqEnd12;
-		private System.Windows.Forms.NumericUpDownTS udFreqEnd11;
-		private System.Windows.Forms.NumericUpDownTS udFreqEnd10;
-		private System.Windows.Forms.NumericUpDownTS udFreqEnd9;
-		private System.Windows.Forms.NumericUpDownTS udFreqEnd8;
-		private System.Windows.Forms.NumericUpDownTS udFreqEnd7;
-		private System.Windows.Forms.NumericUpDownTS udFreqEnd6;
-		private System.Windows.Forms.NumericUpDownTS udFreqEnd5;
-		private System.Windows.Forms.NumericUpDownTS udFreqEnd4;
-		private System.Windows.Forms.NumericUpDownTS udFreqEnd3;
-		private System.Windows.Forms.NumericUpDownTS udFreqEnd2;
+        private System.Windows.Forms.LabelTS lblFreqBegin;
+        private System.Windows.Forms.LabelTS lblFreqEnd;
+        private System.Windows.Forms.NumericUpDownTS udFreqEnd15;
+        private System.Windows.Forms.NumericUpDownTS udFreqEnd14;
+        private System.Windows.Forms.NumericUpDownTS udFreqEnd13;
+        private System.Windows.Forms.NumericUpDownTS udFreqEnd12;
+        private System.Windows.Forms.NumericUpDownTS udFreqEnd11;
+        private System.Windows.Forms.NumericUpDownTS udFreqEnd10;
+        private System.Windows.Forms.NumericUpDownTS udFreqEnd9;
+        private System.Windows.Forms.NumericUpDownTS udFreqEnd8;
+        private System.Windows.Forms.NumericUpDownTS udFreqEnd7;
+        private System.Windows.Forms.NumericUpDownTS udFreqEnd6;
+        private System.Windows.Forms.NumericUpDownTS udFreqEnd5;
+        private System.Windows.Forms.NumericUpDownTS udFreqEnd4;
+        private System.Windows.Forms.NumericUpDownTS udFreqEnd3;
+        private System.Windows.Forms.NumericUpDownTS udFreqEnd2;
         private System.Windows.Forms.NumericUpDownTS udFreqEnd1;//
         private System.Windows.Forms.NumericUpDownTS udFreqEnd0;//
-		private System.Windows.Forms.LabelTS lblRXOnly;
-		private System.Windows.Forms.CheckBoxTS chkRXOnly15;
-		private System.Windows.Forms.CheckBoxTS chkRXOnly14;
-		private System.Windows.Forms.CheckBoxTS chkRXOnly13;
-		private System.Windows.Forms.CheckBoxTS chkRXOnly12;
-		private System.Windows.Forms.CheckBoxTS chkRXOnly11;
-		private System.Windows.Forms.CheckBoxTS chkRXOnly10;
-		private System.Windows.Forms.CheckBoxTS chkRXOnly9;
-		private System.Windows.Forms.CheckBoxTS chkRXOnly8;
-		private System.Windows.Forms.CheckBoxTS chkRXOnly7;
-		private System.Windows.Forms.CheckBoxTS chkRXOnly6;
-		private System.Windows.Forms.CheckBoxTS chkRXOnly5;
-		private System.Windows.Forms.CheckBoxTS chkRXOnly4;
-		private System.Windows.Forms.CheckBoxTS chkRXOnly3;
-		private System.Windows.Forms.CheckBoxTS chkRXOnly2;
+        private System.Windows.Forms.LabelTS lblRXOnly;
+        private System.Windows.Forms.CheckBoxTS chkRXOnly15;
+        private System.Windows.Forms.CheckBoxTS chkRXOnly14;
+        private System.Windows.Forms.CheckBoxTS chkRXOnly13;
+        private System.Windows.Forms.CheckBoxTS chkRXOnly12;
+        private System.Windows.Forms.CheckBoxTS chkRXOnly11;
+        private System.Windows.Forms.CheckBoxTS chkRXOnly10;
+        private System.Windows.Forms.CheckBoxTS chkRXOnly9;
+        private System.Windows.Forms.CheckBoxTS chkRXOnly8;
+        private System.Windows.Forms.CheckBoxTS chkRXOnly7;
+        private System.Windows.Forms.CheckBoxTS chkRXOnly6;
+        private System.Windows.Forms.CheckBoxTS chkRXOnly5;
+        private System.Windows.Forms.CheckBoxTS chkRXOnly4;
+        private System.Windows.Forms.CheckBoxTS chkRXOnly3;
+        private System.Windows.Forms.CheckBoxTS chkRXOnly2;
         private System.Windows.Forms.CheckBoxTS chkRXOnly1;//
-        private System.Windows.Forms.CheckBoxTS chkRXOnly0;//
-		private System.Windows.Forms.NumericUpDownTS udLOError15;
-		private System.Windows.Forms.NumericUpDownTS udLOError14;
-		private System.Windows.Forms.NumericUpDownTS udLOError13;
-		private System.Windows.Forms.NumericUpDownTS udLOError12;
-		private System.Windows.Forms.NumericUpDownTS udLOError11;
-		private System.Windows.Forms.NumericUpDownTS udLOError10;
-		private System.Windows.Forms.NumericUpDownTS udLOError9;
-		private System.Windows.Forms.NumericUpDownTS udLOError8;
-		private System.Windows.Forms.NumericUpDownTS udLOError7;
-		private System.Windows.Forms.NumericUpDownTS udLOError6;
-		private System.Windows.Forms.NumericUpDownTS udLOError5;
-		private System.Windows.Forms.NumericUpDownTS udLOError4;
-		private System.Windows.Forms.NumericUpDownTS udLOError3;
-		private System.Windows.Forms.NumericUpDownTS udLOError2;
+        public CheckBoxTS chkRXOnly0;
+        private System.Windows.Forms.NumericUpDownTS udLOError15;
+        private System.Windows.Forms.NumericUpDownTS udLOError14;
+        private System.Windows.Forms.NumericUpDownTS udLOError13;
+        private System.Windows.Forms.NumericUpDownTS udLOError12;
+        private System.Windows.Forms.NumericUpDownTS udLOError11;
+        private System.Windows.Forms.NumericUpDownTS udLOError10;
+        private System.Windows.Forms.NumericUpDownTS udLOError9;
+        private System.Windows.Forms.NumericUpDownTS udLOError8;
+        private System.Windows.Forms.NumericUpDownTS udLOError7;
+        private System.Windows.Forms.NumericUpDownTS udLOError6;
+        private System.Windows.Forms.NumericUpDownTS udLOError5;
+        private System.Windows.Forms.NumericUpDownTS udLOError4;
+        private System.Windows.Forms.NumericUpDownTS udLOError3;
+        private System.Windows.Forms.NumericUpDownTS udLOError2;
         private System.Windows.Forms.NumericUpDownTS udLOError1;//
         private System.Windows.Forms.NumericUpDownTS udLOError0;//
-		private System.Windows.Forms.LabelTS lblLOError;
-		private System.Windows.Forms.NumericUpDownTS udPower15;
-		private System.Windows.Forms.NumericUpDownTS udPower14;
-		private System.Windows.Forms.NumericUpDownTS udPower13;
-		private System.Windows.Forms.NumericUpDownTS udPower12;
-		private System.Windows.Forms.NumericUpDownTS udPower11;
-		private System.Windows.Forms.NumericUpDownTS udPower10;
-		private System.Windows.Forms.NumericUpDownTS udPower9;
-		private System.Windows.Forms.NumericUpDownTS udPower8;
-		private System.Windows.Forms.NumericUpDownTS udPower7;
-		private System.Windows.Forms.NumericUpDownTS udPower6;
-		private System.Windows.Forms.NumericUpDownTS udPower5;
-		private System.Windows.Forms.NumericUpDownTS udPower4;
-		private System.Windows.Forms.NumericUpDownTS udPower3;
-		private System.Windows.Forms.NumericUpDownTS udPower2;
+        private System.Windows.Forms.LabelTS lblLOError;
+        private System.Windows.Forms.NumericUpDownTS udPower15;
+        private System.Windows.Forms.NumericUpDownTS udPower14;
+        private System.Windows.Forms.NumericUpDownTS udPower13;
+        private System.Windows.Forms.NumericUpDownTS udPower12;
+        private System.Windows.Forms.NumericUpDownTS udPower11;
+        private System.Windows.Forms.NumericUpDownTS udPower10;
+        private System.Windows.Forms.NumericUpDownTS udPower9;
+        private System.Windows.Forms.NumericUpDownTS udPower8;
+        private System.Windows.Forms.NumericUpDownTS udPower7;
+        private System.Windows.Forms.NumericUpDownTS udPower6;
+        private System.Windows.Forms.NumericUpDownTS udPower5;
+        private System.Windows.Forms.NumericUpDownTS udPower4;
+        private System.Windows.Forms.NumericUpDownTS udPower3;
+        private System.Windows.Forms.NumericUpDownTS udPower2;
         private System.Windows.Forms.NumericUpDownTS udPower1;//
         private System.Windows.Forms.NumericUpDownTS udPower0;//
-		private System.Windows.Forms.LabelTS lblPower;
-		private System.Windows.Forms.CheckBoxTS chkXVTRRF15;
-		private System.Windows.Forms.CheckBoxTS chkXVTRRF14;
-		private System.Windows.Forms.CheckBoxTS chkXVTRRF13;
-		private System.Windows.Forms.CheckBoxTS chkXVTRRF12;
-		private System.Windows.Forms.CheckBoxTS chkXVTRRF11;
-		private System.Windows.Forms.CheckBoxTS chkXVTRRF10;
-		private System.Windows.Forms.CheckBoxTS chkXVTRRF9;
-		private System.Windows.Forms.CheckBoxTS chkXVTRRF8;
-		private System.Windows.Forms.CheckBoxTS chkXVTRRF7;
-		private System.Windows.Forms.CheckBoxTS chkXVTRRF6;
-		private System.Windows.Forms.CheckBoxTS chkXVTRRF5;
-		private System.Windows.Forms.CheckBoxTS chkXVTRRF4;
-		private System.Windows.Forms.CheckBoxTS chkXVTRRF3;
-		private System.Windows.Forms.CheckBoxTS chkXVTRRF2;
+        private System.Windows.Forms.LabelTS lblPower;
+        private System.Windows.Forms.CheckBoxTS chkXVTRRF15;
+        private System.Windows.Forms.CheckBoxTS chkXVTRRF14;
+        private System.Windows.Forms.CheckBoxTS chkXVTRRF13;
+        private System.Windows.Forms.CheckBoxTS chkXVTRRF12;
+        private System.Windows.Forms.CheckBoxTS chkXVTRRF11;
+        private System.Windows.Forms.CheckBoxTS chkXVTRRF10;
+        private System.Windows.Forms.CheckBoxTS chkXVTRRF9;
+        private System.Windows.Forms.CheckBoxTS chkXVTRRF8;
+        private System.Windows.Forms.CheckBoxTS chkXVTRRF7;
+        private System.Windows.Forms.CheckBoxTS chkXVTRRF6;
+        private System.Windows.Forms.CheckBoxTS chkXVTRRF5;
+        private System.Windows.Forms.CheckBoxTS chkXVTRRF4;
+        private System.Windows.Forms.CheckBoxTS chkXVTRRF3;
+        private System.Windows.Forms.CheckBoxTS chkXVTRRF2;
         private System.Windows.Forms.CheckBoxTS chkXVTRRF1;//
         private System.Windows.Forms.CheckBoxTS chkXVTRRF0;//
-		private System.Windows.Forms.LabelTS lblXVTRRF;
-		private System.Windows.Forms.NumericUpDownTS udRXGain15;
-		private System.Windows.Forms.NumericUpDownTS udRXGain14;
-		private System.Windows.Forms.NumericUpDownTS udRXGain13;
-		private System.Windows.Forms.NumericUpDownTS udRXGain12;
-		private System.Windows.Forms.NumericUpDownTS udRXGain11;
-		private System.Windows.Forms.NumericUpDownTS udRXGain10;
-		private System.Windows.Forms.NumericUpDownTS udRXGain9;
-		private System.Windows.Forms.NumericUpDownTS udRXGain8;
-		private System.Windows.Forms.NumericUpDownTS udRXGain7;
-		private System.Windows.Forms.NumericUpDownTS udRXGain6;
-		private System.Windows.Forms.NumericUpDownTS udRXGain5;
-		private System.Windows.Forms.NumericUpDownTS udRXGain4;
-		private System.Windows.Forms.NumericUpDownTS udRXGain3;
-		private System.Windows.Forms.NumericUpDownTS udRXGain2;
+        private System.Windows.Forms.LabelTS lblXVTRRF;
+        private System.Windows.Forms.NumericUpDownTS udRXGain15;
+        private System.Windows.Forms.NumericUpDownTS udRXGain14;
+        private System.Windows.Forms.NumericUpDownTS udRXGain13;
+        private System.Windows.Forms.NumericUpDownTS udRXGain12;
+        private System.Windows.Forms.NumericUpDownTS udRXGain11;
+        private System.Windows.Forms.NumericUpDownTS udRXGain10;
+        private System.Windows.Forms.NumericUpDownTS udRXGain9;
+        private System.Windows.Forms.NumericUpDownTS udRXGain8;
+        private System.Windows.Forms.NumericUpDownTS udRXGain7;
+        private System.Windows.Forms.NumericUpDownTS udRXGain6;
+        private System.Windows.Forms.NumericUpDownTS udRXGain5;
+        private System.Windows.Forms.NumericUpDownTS udRXGain4;
+        private System.Windows.Forms.NumericUpDownTS udRXGain3;
+        private System.Windows.Forms.NumericUpDownTS udRXGain2;
         private System.Windows.Forms.NumericUpDownTS udRXGain1;//
         private System.Windows.Forms.NumericUpDownTS udRXGain0;//
-		private System.Windows.Forms.LabelTS lblRXGain;
+        private System.Windows.Forms.LabelTS lblRXGain;
         private System.Windows.Forms.CheckBoxTS chkUseXVTRTUNPWR;
         private GroupBox groupBox1;
         private Label label_VUModuleNotPresent;//
@@ -266,25 +264,30 @@ namespace PowerSDR
         private CheckBoxTS chkUHFIFGain;//
         private CheckBoxTS chkVHFPAEnable;//
         private CheckBoxTS chkUHFPAEnable;//////
-        private System.ComponentModel.Container components = null;////
+        public CheckBoxTS chkAlwaysOnTop1;
+        private CheckBoxTS chkFlexWire;
+        private ToolTip toolTip1;
+        private RichTextBox richTextBox1;
+        private IContainer components;
+
         //bool init = true;
 
-        
 
-		#endregion
 
-		#region Constructor and Destructor
+        #endregion
 
-		public XVTRForm(Console c)
-		{
-			//
-			// Required for Windows Form Designer support
-			//
-            
+        #region Constructor and Destructor
+
+        public XVTRForm(Console c)
+        {
+            //
+            // Required for Windows Form Designer support
+            //
+
             InitializeComponent();
             console = c;
             SetupControlArrays();
-            
+
             //this section is done in console with Common.Restore
 
             /*
@@ -337,29 +340,29 @@ namespace PowerSDR
                 label_VUModuleNotPresent.Visible = true;
             }
          */
-			if(console.fwc_init && console.CurrentModel == Model.FLEX5000)
-				lblXVTRRF.Text = "Split RF";
-			else if(console.fwc_init && console.CurrentModel == Model.FLEX3000)
-			{
-				lblXVTRRF.Visible = false;
-				chkXVTRRF0.Visible = false;
-				chkXVTRRF1.Visible = false;
-				chkXVTRRF2.Visible = false;
-				chkXVTRRF3.Visible = false;
-				chkXVTRRF4.Visible = false;
-				chkXVTRRF5.Visible = false;
-				chkXVTRRF6.Visible = false;
-				chkXVTRRF7.Visible = false;
-				chkXVTRRF8.Visible = false;
-				chkXVTRRF9.Visible = false;
-				chkXVTRRF10.Visible = false;
-				chkXVTRRF11.Visible = false;
-				chkXVTRRF12.Visible = false;
-				chkXVTRRF13.Visible = false;
-				chkXVTRRF14.Visible = false;
-				chkXVTRRF15.Visible = false;
-			}
-            
+            if (console.fwc_init && console.CurrentModel == Model.FLEX5000)
+                lblXVTRRF.Text = "Split RF";
+            else if (console.fwc_init && console.CurrentModel == Model.FLEX3000)
+            {
+                lblXVTRRF.Visible = false;
+                chkXVTRRF0.Visible = false;
+                chkXVTRRF1.Visible = false;
+                chkXVTRRF2.Visible = false;
+                chkXVTRRF3.Visible = false;
+                chkXVTRRF4.Visible = false;
+                chkXVTRRF5.Visible = false;
+                chkXVTRRF6.Visible = false;
+                chkXVTRRF7.Visible = false;
+                chkXVTRRF8.Visible = false;
+                chkXVTRRF9.Visible = false;
+                chkXVTRRF10.Visible = false;
+                chkXVTRRF11.Visible = false;
+                chkXVTRRF12.Visible = false;
+                chkXVTRRF13.Visible = false;
+                chkXVTRRF14.Visible = false;
+                chkXVTRRF15.Visible = false;
+            }
+
             Common.RestoreForm(this, "XVTR", false);
             if (FWCEEPROM.VUOK)
             {
@@ -371,10 +374,10 @@ namespace PowerSDR
                 //FWC.SetEN2M(true); //XVINT
                 udUCBAddr0.Value = 0;
                 txtButtonText0.Text = "2m";
-                udLOOffset0.Value = 125;              // ke9ns was 125
-             //   udLOError0.Value = 0;  // ke9ns was not commented out
-                udFreqBegin0.Value = 144;            // ke9ns was 144
-                udFreqEnd0.Value = 148;              // ke9ns was 148
+                udLOOffset0.Value = 125;              // ke9ns was 125 .217
+                                                      //   udLOError0.Value = 0;  // ke9ns was not commented out
+                udFreqBegin0.Value = 128;            // ke9ns was 134 144 .217
+                udFreqEnd0.Value = 180;              // ke9ns was 148
                 //udRXGain0.Value = 32;
                 //chkRXOnly0.Checked = false;
                 //udPower0.Value = 100;
@@ -385,7 +388,7 @@ namespace PowerSDR
                 udLOOffset1.Value = 400;
                 // udLOError1.Value = 0;    // ke9ns was not commented out
                 udFreqBegin1.Value = 430;
-                udFreqEnd1.Value = 450;
+                udFreqEnd1.Value = 470;  // .224 was 450
                 //udRXGain1.Value = 28;
                 //chkRXOnly1.Checked = false;
                 //udPower1.Value = 100;
@@ -405,9 +408,9 @@ namespace PowerSDR
             {
 
 
-                  chkEnable0.Checked = false;
-                   chkEnable1.Checked = false;
-              
+                chkEnable0.Checked = false;
+                chkEnable1.Checked = false;
+
                 chkVHFIFGain.Enabled = false;
                 chkUHFIFGain.Enabled = false;
                 chkVHFPAEnable.Enabled = false;
@@ -417,57 +420,62 @@ namespace PowerSDR
                 label_VUModulePresent.Visible = false;
                 label_VUModuleNotPresent.Visible = true;
             }
-            
+
             //init = false;
-		}
+        }
 
-        
 
-    //    public XVTRForm(VUForm v)
-    //    {
-    //        VUForm = v;
-    //    }
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        //    public XVTRForm(VUForm v)
+        //    {
+        //        VUForm = v;
+        //    }
 
-		#endregion
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #endregion
+
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XVTRForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label_VUModuleNotPresent = new System.Windows.Forms.Label();
+            this.label_VUModulePresent = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.chkFlexWire = new System.Windows.Forms.CheckBoxTS();
+            this.chkAlwaysOnTop1 = new System.Windows.Forms.CheckBoxTS();
+            this.lblPAEnable = new System.Windows.Forms.LabelTS();
+            this.lblIFGain = new System.Windows.Forms.LabelTS();
             this.chkUHFPAEnable = new System.Windows.Forms.CheckBoxTS();
             this.chkVHFPAEnable = new System.Windows.Forms.CheckBoxTS();
             this.chkUHFIFGain = new System.Windows.Forms.CheckBoxTS();
             this.chkVHFIFGain = new System.Windows.Forms.CheckBoxTS();
-            this.label_VUModuleNotPresent = new System.Windows.Forms.Label();
-            this.label_VUModulePresent = new System.Windows.Forms.Label();
             this.udRXGain1 = new System.Windows.Forms.NumericUpDownTS();
             this.udRXGain0 = new System.Windows.Forms.NumericUpDownTS();
             this.chkXVTRRF1 = new System.Windows.Forms.CheckBoxTS();
             this.chkXVTRRF0 = new System.Windows.Forms.CheckBoxTS();
             this.udPower1 = new System.Windows.Forms.NumericUpDownTS();
             this.udPower0 = new System.Windows.Forms.NumericUpDownTS();
-            this.udLOError1 = new System.Windows.Forms.NumericUpDownTS();
-            this.udLOError0 = new System.Windows.Forms.NumericUpDownTS();
             this.chkRXOnly1 = new System.Windows.Forms.CheckBoxTS();
             this.chkRXOnly0 = new System.Windows.Forms.CheckBoxTS();
             this.udFreqEnd1 = new System.Windows.Forms.NumericUpDownTS();
@@ -484,8 +492,8 @@ namespace PowerSDR
             this.chkEnable0 = new System.Windows.Forms.CheckBoxTS();
             this.udUCBAddr1 = new System.Windows.Forms.NumericUpDownTS();
             this.udUCBAddr0 = new System.Windows.Forms.NumericUpDownTS();
-            this.lblPAEnable = new System.Windows.Forms.LabelTS();
-            this.lblIFGain = new System.Windows.Forms.LabelTS();
+            this.udLOError0 = new System.Windows.Forms.NumericUpDownTS();
+            this.udLOError1 = new System.Windows.Forms.NumericUpDownTS();
             this.chkUseXVTRTUNPWR = new System.Windows.Forms.CheckBoxTS();
             this.udRXGain15 = new System.Windows.Forms.NumericUpDownTS();
             this.udRXGain14 = new System.Windows.Forms.NumericUpDownTS();
@@ -672,8 +680,6 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udRXGain0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPower1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPower0)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udLOError1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udLOError0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udFreqEnd1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udFreqEnd0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udFreqBegin1)).BeginInit();
@@ -682,6 +688,8 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udLOOffset0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udUCBAddr1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udUCBAddr0)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udLOError0)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udLOError1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udRXGain15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udRXGain14)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udRXGain13)).BeginInit();
@@ -821,6 +829,85 @@ namespace PowerSDR
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "VHF/UHF";
             // 
+            // label_VUModuleNotPresent
+            // 
+            this.label_VUModuleNotPresent.AutoSize = true;
+            this.label_VUModuleNotPresent.ForeColor = System.Drawing.Color.Firebrick;
+            this.label_VUModuleNotPresent.Location = new System.Drawing.Point(6, 0);
+            this.label_VUModuleNotPresent.Name = "label_VUModuleNotPresent";
+            this.label_VUModuleNotPresent.Size = new System.Drawing.Size(152, 13);
+            this.label_VUModuleNotPresent.TabIndex = 214;
+            this.label_VUModuleNotPresent.Text = "VHF/UHF Module Not Present";
+            // 
+            // label_VUModulePresent
+            // 
+            this.label_VUModulePresent.AutoSize = true;
+            this.label_VUModulePresent.ForeColor = System.Drawing.Color.Green;
+            this.label_VUModulePresent.Location = new System.Drawing.Point(6, 0);
+            this.label_VUModulePresent.Name = "label_VUModulePresent";
+            this.label_VUModulePresent.Size = new System.Drawing.Size(132, 13);
+            this.label_VUModulePresent.TabIndex = 213;
+            this.label_VUModulePresent.Text = "VHF/UHF Module Present";
+            // 
+            // toolTip1
+            // 
+            this.toolTip1.AutoPopDelay = 10000;
+            this.toolTip1.InitialDelay = 500;
+            this.toolTip1.ReshowDelay = 100;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(868, 122);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(235, 278);
+            this.richTextBox1.TabIndex = 332;
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            // 
+            // chkFlexWire
+            // 
+            this.chkFlexWire.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkFlexWire.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkFlexWire.Image = null;
+            this.chkFlexWire.Location = new System.Drawing.Point(907, 428);
+            this.chkFlexWire.Name = "chkFlexWire";
+            this.chkFlexWire.Size = new System.Drawing.Size(88, 24);
+            this.chkFlexWire.TabIndex = 331;
+            this.chkFlexWire.Text = "FlexWire";
+            this.chkFlexWire.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.chkFlexWire, resources.GetString("chkFlexWire.ToolTip"));
+            this.chkFlexWire.CheckedChanged += new System.EventHandler(this.chkFlexWire_CheckedChanged);
+            // 
+            // chkAlwaysOnTop1
+            // 
+            this.chkAlwaysOnTop1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkAlwaysOnTop1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.chkAlwaysOnTop1.Image = null;
+            this.chkAlwaysOnTop1.Location = new System.Drawing.Point(897, 460);
+            this.chkAlwaysOnTop1.Name = "chkAlwaysOnTop1";
+            this.chkAlwaysOnTop1.Size = new System.Drawing.Size(103, 24);
+            this.chkAlwaysOnTop1.TabIndex = 208;
+            this.chkAlwaysOnTop1.Text = "Always On Top";
+            this.chkAlwaysOnTop1.CheckedChanged += new System.EventHandler(this.ChkAlwaysOnTop1_CheckedChanged);
+            // 
+            // lblPAEnable
+            // 
+            this.lblPAEnable.Image = null;
+            this.lblPAEnable.Location = new System.Drawing.Point(942, 24);
+            this.lblPAEnable.Name = "lblPAEnable";
+            this.lblPAEnable.Size = new System.Drawing.Size(58, 16);
+            this.lblPAEnable.TabIndex = 207;
+            this.lblPAEnable.Text = "PA Enable";
+            // 
+            // lblIFGain
+            // 
+            this.lblIFGain.Image = null;
+            this.lblIFGain.Location = new System.Drawing.Point(894, 24);
+            this.lblIFGain.Name = "lblIFGain";
+            this.lblIFGain.Size = new System.Drawing.Size(42, 16);
+            this.lblIFGain.TabIndex = 206;
+            this.lblIFGain.Text = "IF Gain";
+            // 
             // chkUHFPAEnable
             // 
             this.chkUHFPAEnable.AutoSize = true;
@@ -872,26 +959,6 @@ namespace PowerSDR
             this.chkVHFIFGain.TabIndex = 215;
             this.chkVHFIFGain.UseVisualStyleBackColor = true;
             this.chkVHFIFGain.CheckedChanged += new System.EventHandler(this.chkVHFIFGain_CheckedChanged);
-            // 
-            // label_VUModuleNotPresent
-            // 
-            this.label_VUModuleNotPresent.AutoSize = true;
-            this.label_VUModuleNotPresent.ForeColor = System.Drawing.Color.Firebrick;
-            this.label_VUModuleNotPresent.Location = new System.Drawing.Point(6, 0);
-            this.label_VUModuleNotPresent.Name = "label_VUModuleNotPresent";
-            this.label_VUModuleNotPresent.Size = new System.Drawing.Size(152, 13);
-            this.label_VUModuleNotPresent.TabIndex = 214;
-            this.label_VUModuleNotPresent.Text = "VHF/UHF Module Not Present";
-            // 
-            // label_VUModulePresent
-            // 
-            this.label_VUModulePresent.AutoSize = true;
-            this.label_VUModulePresent.ForeColor = System.Drawing.Color.Green;
-            this.label_VUModulePresent.Location = new System.Drawing.Point(6, 0);
-            this.label_VUModulePresent.Name = "label_VUModulePresent";
-            this.label_VUModulePresent.Size = new System.Drawing.Size(132, 13);
-            this.label_VUModulePresent.TabIndex = 213;
-            this.label_VUModulePresent.Text = "VHF/UHF Module Present";
             // 
             // udRXGain1
             // 
@@ -1027,62 +1094,6 @@ namespace PowerSDR
             0});
             this.udPower0.ValueChanged += new System.EventHandler(this.udPower_ValueChanged);
             // 
-            // udLOError1
-            // 
-            this.udLOError1.DecimalPlaces = 3;
-            this.udLOError1.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udLOError1.Location = new System.Drawing.Point(366, 45);
-            this.udLOError1.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.udLOError1.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.udLOError1.Name = "udLOError1";
-            this.udLOError1.Size = new System.Drawing.Size(56, 20);
-            this.udLOError1.TabIndex = 17;
-            this.udLOError1.Value = new decimal(new int[] {
-            0, //ke9ns was 7
-            0,
-            0,
-            0});
-            // 
-            // udLOError0
-            // 
-            this.udLOError0.DecimalPlaces = 3;
-            this.udLOError0.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udLOError0.Location = new System.Drawing.Point(366, 19);
-            this.udLOError0.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.udLOError0.Minimum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            -2147483648});
-            this.udLOError0.Name = "udLOError0";
-            this.udLOError0.Size = new System.Drawing.Size(56, 20);
-            this.udLOError0.TabIndex = 5;
-            this.udLOError0.Value = new decimal(new int[] {
-            0,   // ke9ns was 2
-            0,
-            0,
-            0});
-            // 
             // chkRXOnly1
             // 
             this.chkRXOnly1.Image = null;
@@ -1153,6 +1164,7 @@ namespace PowerSDR
             this.udFreqEnd0.Name = "udFreqEnd0";
             this.udFreqEnd0.Size = new System.Drawing.Size(96, 20);
             this.udFreqEnd0.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.udFreqEnd0, "2m upper edge 148 mhz\r\nbut will go up to 163mhz");
             this.udFreqEnd0.Value = new decimal(new int[] {
             4,
             0,
@@ -1211,6 +1223,7 @@ namespace PowerSDR
             this.udFreqBegin0.Name = "udFreqBegin0";
             this.udFreqBegin0.Size = new System.Drawing.Size(96, 20);
             this.udFreqBegin0.TabIndex = 6;
+            this.toolTip1.SetToolTip(this.udFreqBegin0, "2m bottom edge = 144mhz");
             this.udFreqBegin0.Value = new decimal(new int[] {
             3,
             0,
@@ -1262,13 +1275,14 @@ namespace PowerSDR
             0,
             0});
             this.udLOOffset0.Minimum = new decimal(new int[] {
-            144,
+            134,
             0,
             0,
             -2147483648});
             this.udLOOffset0.Name = "udLOOffset0";
             this.udLOOffset0.Size = new System.Drawing.Size(80, 20);
             this.udLOOffset0.TabIndex = 4;
+            this.toolTip1.SetToolTip(this.udLOOffset0, "125mhz");
             this.udLOOffset0.Value = new decimal(new int[] {
             1,
             0,
@@ -1394,23 +1408,61 @@ namespace PowerSDR
             0,
             0});
             // 
-            // lblPAEnable
+            // udLOError0
             // 
-            this.lblPAEnable.Image = null;
-            this.lblPAEnable.Location = new System.Drawing.Point(942, 24);
-            this.lblPAEnable.Name = "lblPAEnable";
-            this.lblPAEnable.Size = new System.Drawing.Size(58, 16);
-            this.lblPAEnable.TabIndex = 207;
-            this.lblPAEnable.Text = "PA Enable";
+            this.udLOError0.DecimalPlaces = 3;
+            this.udLOError0.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udLOError0.Location = new System.Drawing.Point(366, 19);
+            this.udLOError0.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.udLOError0.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.udLOError0.Name = "udLOError0";
+            this.udLOError0.Size = new System.Drawing.Size(56, 20);
+            this.udLOError0.TabIndex = 5;
+            this.udLOError0.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             // 
-            // lblIFGain
+            // udLOError1
             // 
-            this.lblIFGain.Image = null;
-            this.lblIFGain.Location = new System.Drawing.Point(894, 24);
-            this.lblIFGain.Name = "lblIFGain";
-            this.lblIFGain.Size = new System.Drawing.Size(42, 16);
-            this.lblIFGain.TabIndex = 206;
-            this.lblIFGain.Text = "IF Gain";
+            this.udLOError1.DecimalPlaces = 3;
+            this.udLOError1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udLOError1.Location = new System.Drawing.Point(366, 45);
+            this.udLOError1.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.udLOError1.Minimum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            -2147483648});
+            this.udLOError1.Name = "udLOError1";
+            this.udLOError1.Size = new System.Drawing.Size(56, 20);
+            this.udLOError1.TabIndex = 17;
+            this.udLOError1.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
             // 
             // chkUseXVTRTUNPWR
             // 
@@ -1421,6 +1473,7 @@ namespace PowerSDR
             this.chkUseXVTRTUNPWR.TabIndex = 204;
             this.chkUseXVTRTUNPWR.Text = "Use XVTR PWR for Tune";
             this.chkUseXVTRTUNPWR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.chkUseXVTRTUNPWR, resources.GetString("chkUseXVTRTUNPWR.ToolTip"));
             this.chkUseXVTRTUNPWR.CheckedChanged += new System.EventHandler(this.chkUseXVTRTUNPWR_CheckedChanged);
             // 
             // udRXGain15
@@ -2002,6 +2055,7 @@ namespace PowerSDR
             this.lblXVTRRF.Size = new System.Drawing.Size(40, 32);
             this.lblXVTRRF.TabIndex = 170;
             this.lblXVTRRF.Text = "XVTR RF TX";
+            this.toolTip1.SetToolTip(this.lblXVTRRF, resources.GetString("lblXVTRRF.ToolTip"));
             // 
             // udPower15
             // 
@@ -5067,6 +5121,7 @@ namespace PowerSDR
             this.lblUCBAddress.Size = new System.Drawing.Size(80, 16);
             this.lblUCBAddress.TabIndex = 1;
             this.lblUCBAddress.Text = "UCB Address";
+            this.toolTip1.SetToolTip(this.lblUCBAddress, "Universal Control Board I2C 8bit address 0x4C");
             // 
             // lblBandButton
             // 
@@ -5080,7 +5135,10 @@ namespace PowerSDR
             // XVTRForm
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.ClientSize = new System.Drawing.Size(1013, 483);
+            this.ClientSize = new System.Drawing.Size(1115, 486);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.chkFlexWire);
+            this.Controls.Add(this.chkAlwaysOnTop1);
             this.Controls.Add(this.lblPAEnable);
             this.Controls.Add(this.lblIFGain);
             this.Controls.Add(this.groupBox1);
@@ -5265,18 +5323,18 @@ namespace PowerSDR
             this.Controls.Add(this.lblButtonText);
             this.Controls.Add(this.lblUCBAddress);
             this.Controls.Add(this.lblBandButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "XVTRForm";
             this.Text = "XVTR Setup";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.XVTRForm_Closing);
+            this.MouseEnter += new System.EventHandler(this.XVTRForm_MouseEnter);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udRXGain1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udRXGain0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPower1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPower0)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udLOError1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udLOError0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udFreqEnd1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udFreqEnd0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udFreqBegin1)).EndInit();
@@ -5285,6 +5343,8 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udLOOffset0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udUCBAddr1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udUCBAddr0)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udLOError0)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udLOError1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udRXGain15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udRXGain14)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udRXGain13)).EndInit();
@@ -5386,8 +5446,8 @@ namespace PowerSDR
             this.ResumeLayout(false);
             this.PerformLayout();
 
-		}
-		#endregion
+        }
+        #endregion
 
         #region Properties
 
@@ -5403,12 +5463,12 @@ namespace PowerSDR
 
         public bool VPA
         {
-            get { return chkVHFPAEnable.Checked;}
+            get { return chkVHFPAEnable.Checked; }
         }
-        
+
         public bool UPA
         {
-            get { return chkUHFPAEnable.Checked;}
+            get { return chkUHFPAEnable.Checked; }
         }
 
         #endregion
@@ -5422,262 +5482,263 @@ namespace PowerSDR
 		/// <returns>The index of the band that contains the frequency or -1 if
 		/// the frequency is not found.</returns>
 		public int XVTRFreq(double freq)
-		{
-			for(int i=0; i < 16; i++)
-			{
-				if(enabled[i].Checked)
-				{
-					if(freq >= (double)begin[i].Value && freq <= (double)end[i].Value)
-						return i;
-				}
-			}
-			return -1;
-		}
+        {
+            for (int i = 0; i < 16; i++)
+            {
+                if (enabled[i].Checked)
+                {
+                    if (freq >= (double)begin[i].Value && freq <= (double)end[i].Value)
+                        return i;
+                }
+            }
+            return -1;
+        }
 
-		/// <summary>
-		/// Returns a translated frequency based on the xvtr data.  Takes into
-		/// account the LO Offset and correction.
-		/// </summary>
-		/// <param name="freq">Input Frequency in MHz</param>
-		/// <returns>The translated frequency based on the xvtr data.  If the
-		/// frequency is not within a defined xvtr setup, then just return the
-		/// input freq.</returns>
-		public double TranslateFreq(double freq)
-		{
-			for(int i=0; i < 16; i++)
-			{
-				if(enabled[i].Checked)
-				{
-					if(freq >= (double)begin[i].Value && freq <= (double)end[i].Value)
-					{
-						return (double)(freq - (double)lo_offset[i].Value + ((double)lo_error[i].Value / 1000.0));
-					}
-				}
-			}
+        /// <summary>
+        /// Returns a translated frequency based on the xvtr data.  Takes into
+        /// account the LO Offset and correction.
+        /// </summary>
+        /// <param name="freq">Input Frequency in MHz</param>
+        /// <returns>The translated frequency based on the xvtr data.  If the
+        /// frequency is not within a defined xvtr setup, then just return the
+        /// input freq.</returns>
+        public double TranslateFreq(double freq)
+        {
+            for (int i = 0; i < 16; i++)
+            {
+                if (enabled[i].Checked)
+                {
+                    if (freq >= (double)begin[i].Value && freq <= (double)end[i].Value)
+                    {
+                        return (double)(freq - (double)lo_offset[i].Value + ((double)lo_error[i].Value / 1000.0));
+                    }
+                }
+            }
 
-			return freq;
-		}
+            
+            return freq;
+        }
 
-		private void SetupControlArrays()
-		{
-			ucb_addr = new NumericUpDownTS[16];
-			ucb_addr[0] = udUCBAddr0;
-			ucb_addr[1] = udUCBAddr1;
-			ucb_addr[2] = udUCBAddr2;
-			ucb_addr[3] = udUCBAddr3;
-			ucb_addr[4] = udUCBAddr4;
-			ucb_addr[5] = udUCBAddr5;
-			ucb_addr[6] = udUCBAddr6;
-			ucb_addr[7] = udUCBAddr7;
-			ucb_addr[8] = udUCBAddr8;
-			ucb_addr[9] = udUCBAddr9;
-			ucb_addr[10] = udUCBAddr10;
-			ucb_addr[11] = udUCBAddr11;
-			ucb_addr[12] = udUCBAddr12;
-			ucb_addr[13] = udUCBAddr13;
-			ucb_addr[14] = udUCBAddr14;
-			ucb_addr[15] = udUCBAddr15;
+        private void SetupControlArrays()
+        {
+            ucb_addr = new NumericUpDownTS[16];
+            ucb_addr[0] = udUCBAddr0;
+            ucb_addr[1] = udUCBAddr1;
+            ucb_addr[2] = udUCBAddr2;
+            ucb_addr[3] = udUCBAddr3;
+            ucb_addr[4] = udUCBAddr4;
+            ucb_addr[5] = udUCBAddr5;
+            ucb_addr[6] = udUCBAddr6;
+            ucb_addr[7] = udUCBAddr7;
+            ucb_addr[8] = udUCBAddr8;
+            ucb_addr[9] = udUCBAddr9;
+            ucb_addr[10] = udUCBAddr10;
+            ucb_addr[11] = udUCBAddr11;
+            ucb_addr[12] = udUCBAddr12;
+            ucb_addr[13] = udUCBAddr13;
+            ucb_addr[14] = udUCBAddr14;
+            ucb_addr[15] = udUCBAddr15;
 
-			begin = new NumericUpDownTS[16];
-			begin[0] = udFreqBegin0;
-			begin[1] = udFreqBegin1;
-			begin[2] = udFreqBegin2;
-			begin[3] = udFreqBegin3;
-			begin[4] = udFreqBegin4;
-			begin[5] = udFreqBegin5;
-			begin[6] = udFreqBegin6;
-			begin[7] = udFreqBegin7;
-			begin[8] = udFreqBegin8;
-			begin[9] = udFreqBegin9;
-			begin[10] = udFreqBegin10;
-			begin[11] = udFreqBegin11;
-			begin[12] = udFreqBegin12;
-			begin[13] = udFreqBegin13;
-			begin[14] = udFreqBegin14;
-			begin[15] = udFreqBegin15;
+            begin = new NumericUpDownTS[16];
+            begin[0] = udFreqBegin0;
+            begin[1] = udFreqBegin1;
+            begin[2] = udFreqBegin2;
+            begin[3] = udFreqBegin3;
+            begin[4] = udFreqBegin4;
+            begin[5] = udFreqBegin5;
+            begin[6] = udFreqBegin6;
+            begin[7] = udFreqBegin7;
+            begin[8] = udFreqBegin8;
+            begin[9] = udFreqBegin9;
+            begin[10] = udFreqBegin10;
+            begin[11] = udFreqBegin11;
+            begin[12] = udFreqBegin12;
+            begin[13] = udFreqBegin13;
+            begin[14] = udFreqBegin14;
+            begin[15] = udFreqBegin15;
 
-			end = new NumericUpDownTS[16];
-			end[0] = udFreqEnd0;
-			end[1] = udFreqEnd1;
-			end[2] = udFreqEnd2;
-			end[3] = udFreqEnd3;
-			end[4] = udFreqEnd4;
-			end[5] = udFreqEnd5;
-			end[6] = udFreqEnd6;
-			end[7] = udFreqEnd7;
-			end[8] = udFreqEnd8;
-			end[9] = udFreqEnd9;
-			end[10] = udFreqEnd10;
-			end[11] = udFreqEnd11;
-			end[12] = udFreqEnd12;
-			end[13] = udFreqEnd13;
-			end[14] = udFreqEnd14;
-			end[15] = udFreqEnd15;	
+            end = new NumericUpDownTS[16];
+            end[0] = udFreqEnd0;
+            end[1] = udFreqEnd1;
+            end[2] = udFreqEnd2;
+            end[3] = udFreqEnd3;
+            end[4] = udFreqEnd4;
+            end[5] = udFreqEnd5;
+            end[6] = udFreqEnd6;
+            end[7] = udFreqEnd7;
+            end[8] = udFreqEnd8;
+            end[9] = udFreqEnd9;
+            end[10] = udFreqEnd10;
+            end[11] = udFreqEnd11;
+            end[12] = udFreqEnd12;
+            end[13] = udFreqEnd13;
+            end[14] = udFreqEnd14;
+            end[15] = udFreqEnd15;
 
-			enabled = new CheckBoxTS[16];
-			enabled[0] = chkEnable0;
-			enabled[1] = chkEnable1;
-			enabled[2] = chkEnable2;
-			enabled[3] = chkEnable3;
-			enabled[4] = chkEnable4;
-			enabled[5] = chkEnable5;
-			enabled[6] = chkEnable6;
-			enabled[7] = chkEnable7;
-			enabled[8] = chkEnable8;
-			enabled[9] = chkEnable9;
-			enabled[10] = chkEnable10;
-			enabled[11] = chkEnable11;
-			enabled[12] = chkEnable12;
-			enabled[13] = chkEnable13;
-			enabled[14] = chkEnable14;
-			enabled[15] = chkEnable15;
+            enabled = new CheckBoxTS[16];
+            enabled[0] = chkEnable0;
+            enabled[1] = chkEnable1;
+            enabled[2] = chkEnable2;
+            enabled[3] = chkEnable3;
+            enabled[4] = chkEnable4;
+            enabled[5] = chkEnable5;
+            enabled[6] = chkEnable6;
+            enabled[7] = chkEnable7;
+            enabled[8] = chkEnable8;
+            enabled[9] = chkEnable9;
+            enabled[10] = chkEnable10;
+            enabled[11] = chkEnable11;
+            enabled[12] = chkEnable12;
+            enabled[13] = chkEnable13;
+            enabled[14] = chkEnable14;
+            enabled[15] = chkEnable15;
 
-			lo_offset = new NumericUpDownTS[16];
-			lo_offset[0] = udLOOffset0;
-			lo_offset[1] = udLOOffset1;
-			lo_offset[2] = udLOOffset2;
-			lo_offset[3] = udLOOffset3;
-			lo_offset[4] = udLOOffset4;
-			lo_offset[5] = udLOOffset5;
-			lo_offset[6] = udLOOffset6;
-			lo_offset[7] = udLOOffset7;
-			lo_offset[8] = udLOOffset8;
-			lo_offset[9] = udLOOffset9;
-			lo_offset[10] = udLOOffset10;
-			lo_offset[11] = udLOOffset11;
-			lo_offset[12] = udLOOffset12;
-			lo_offset[13] = udLOOffset13;
-			lo_offset[14] = udLOOffset14;
-			lo_offset[15] = udLOOffset15;
+            lo_offset = new NumericUpDownTS[16];
+            lo_offset[0] = udLOOffset0;
+            lo_offset[1] = udLOOffset1;
+            lo_offset[2] = udLOOffset2;
+            lo_offset[3] = udLOOffset3;
+            lo_offset[4] = udLOOffset4;
+            lo_offset[5] = udLOOffset5;
+            lo_offset[6] = udLOOffset6;
+            lo_offset[7] = udLOOffset7;
+            lo_offset[8] = udLOOffset8;
+            lo_offset[9] = udLOOffset9;
+            lo_offset[10] = udLOOffset10;
+            lo_offset[11] = udLOOffset11;
+            lo_offset[12] = udLOOffset12;
+            lo_offset[13] = udLOOffset13;
+            lo_offset[14] = udLOOffset14;
+            lo_offset[15] = udLOOffset15;
 
-			lo_error = new NumericUpDownTS[16];
-			lo_error[0] = udLOError0;
-			lo_error[1] = udLOError1;
-			lo_error[2] = udLOError2;
-			lo_error[3] = udLOError3;
-			lo_error[4] = udLOError4;
-			lo_error[5] = udLOError5;
-			lo_error[6] = udLOError6;
-			lo_error[7] = udLOError7;
-			lo_error[8] = udLOError8;
-			lo_error[9] = udLOError9;
-			lo_error[10] = udLOError10;
-			lo_error[11] = udLOError11;
-			lo_error[12] = udLOError12;
-			lo_error[13] = udLOError13;
-			lo_error[14] = udLOError14;
-			lo_error[15] = udLOError15;
+            lo_error = new NumericUpDownTS[16];
+            lo_error[0] = udLOError0;
+            lo_error[1] = udLOError1;
+            lo_error[2] = udLOError2;
+            lo_error[3] = udLOError3;
+            lo_error[4] = udLOError4;
+            lo_error[5] = udLOError5;
+            lo_error[6] = udLOError6;
+            lo_error[7] = udLOError7;
+            lo_error[8] = udLOError8;
+            lo_error[9] = udLOError9;
+            lo_error[10] = udLOError10;
+            lo_error[11] = udLOError11;
+            lo_error[12] = udLOError12;
+            lo_error[13] = udLOError13;
+            lo_error[14] = udLOError14;
+            lo_error[15] = udLOError15;
 
-			rx_gain = new NumericUpDownTS[16];
-			rx_gain[0] = udRXGain0;
-			rx_gain[1] = udRXGain1;
-			rx_gain[2] = udRXGain2;
-			rx_gain[3] = udRXGain3;
-			rx_gain[4] = udRXGain4;
-			rx_gain[5] = udRXGain5;
-			rx_gain[6] = udRXGain6;
-			rx_gain[7] = udRXGain7;
-			rx_gain[8] = udRXGain8;
-			rx_gain[9] = udRXGain9;
-			rx_gain[10] = udRXGain10;
-			rx_gain[11] = udRXGain11;
-			rx_gain[12] = udRXGain12;
-			rx_gain[13] = udRXGain13;
-			rx_gain[14] = udRXGain14;
-			rx_gain[15] = udRXGain15;
+            rx_gain = new NumericUpDownTS[16];
+            rx_gain[0] = udRXGain0;
+            rx_gain[1] = udRXGain1;
+            rx_gain[2] = udRXGain2;
+            rx_gain[3] = udRXGain3;
+            rx_gain[4] = udRXGain4;
+            rx_gain[5] = udRXGain5;
+            rx_gain[6] = udRXGain6;
+            rx_gain[7] = udRXGain7;
+            rx_gain[8] = udRXGain8;
+            rx_gain[9] = udRXGain9;
+            rx_gain[10] = udRXGain10;
+            rx_gain[11] = udRXGain11;
+            rx_gain[12] = udRXGain12;
+            rx_gain[13] = udRXGain13;
+            rx_gain[14] = udRXGain14;
+            rx_gain[15] = udRXGain15;
 
-			rx_only = new CheckBoxTS[16];
-			rx_only[0] = chkRXOnly0;
-			rx_only[1] = chkRXOnly1;
-			rx_only[2] = chkRXOnly2;
-			rx_only[3] = chkRXOnly3;
-			rx_only[4] = chkRXOnly4;
-			rx_only[5] = chkRXOnly5;
-			rx_only[6] = chkRXOnly6;
-			rx_only[7] = chkRXOnly7;
-			rx_only[8] = chkRXOnly8;
-			rx_only[9] = chkRXOnly9;
-			rx_only[10] = chkRXOnly10;
-			rx_only[11] = chkRXOnly11;
-			rx_only[12] = chkRXOnly12;
-			rx_only[13] = chkRXOnly13;
-			rx_only[14] = chkRXOnly14;
-			rx_only[15] = chkRXOnly15;
+            rx_only = new CheckBoxTS[16];
+            rx_only[0] = chkRXOnly0;
+            rx_only[1] = chkRXOnly1;
+            rx_only[2] = chkRXOnly2;
+            rx_only[3] = chkRXOnly3;
+            rx_only[4] = chkRXOnly4;
+            rx_only[5] = chkRXOnly5;
+            rx_only[6] = chkRXOnly6;
+            rx_only[7] = chkRXOnly7;
+            rx_only[8] = chkRXOnly8;
+            rx_only[9] = chkRXOnly9;
+            rx_only[10] = chkRXOnly10;
+            rx_only[11] = chkRXOnly11;
+            rx_only[12] = chkRXOnly12;
+            rx_only[13] = chkRXOnly13;
+            rx_only[14] = chkRXOnly14;
+            rx_only[15] = chkRXOnly15;
 
-			power = new NumericUpDownTS[16];
-			power[0] = udPower0;
-			power[1] = udPower1;
-			power[2] = udPower2;
-			power[3] = udPower3;
-			power[4] = udPower4;
-			power[5] = udPower5;
-			power[6] = udPower6;
-			power[7] = udPower7;
-			power[8] = udPower8;
-			power[9] = udPower9;
-			power[10] = udPower10;
-			power[11] = udPower11;
-			power[12] = udPower12;
-			power[13] = udPower13;
-			power[14] = udPower14;
-			power[15] = udPower15;
+            power = new NumericUpDownTS[16];
+            power[0] = udPower0;
+            power[1] = udPower1;
+            power[2] = udPower2;
+            power[3] = udPower3;
+            power[4] = udPower4;
+            power[5] = udPower5;
+            power[6] = udPower6;
+            power[7] = udPower7;
+            power[8] = udPower8;
+            power[9] = udPower9;
+            power[10] = udPower10;
+            power[11] = udPower11;
+            power[12] = udPower12;
+            power[13] = udPower13;
+            power[14] = udPower14;
+            power[15] = udPower15;
 
-			xvtr_rf = new CheckBoxTS[16];
-			xvtr_rf[0] = chkXVTRRF0;
-			xvtr_rf[1] = chkXVTRRF1;
-			xvtr_rf[2] = chkXVTRRF2;
-			xvtr_rf[3] = chkXVTRRF3;
-			xvtr_rf[4] = chkXVTRRF4;
-			xvtr_rf[5] = chkXVTRRF5;
-			xvtr_rf[6] = chkXVTRRF6;
-			xvtr_rf[7] = chkXVTRRF7;
-			xvtr_rf[8] = chkXVTRRF8;
-			xvtr_rf[9] = chkXVTRRF9;
-			xvtr_rf[10] = chkXVTRRF10;
-			xvtr_rf[11] = chkXVTRRF11;
-			xvtr_rf[12] = chkXVTRRF12;
-			xvtr_rf[13] = chkXVTRRF13;
-			xvtr_rf[14] = chkXVTRRF14;
-			xvtr_rf[15] = chkXVTRRF15;
-		}
+            xvtr_rf = new CheckBoxTS[16];
+            xvtr_rf[0] = chkXVTRRF0;
+            xvtr_rf[1] = chkXVTRRF1;
+            xvtr_rf[2] = chkXVTRRF2;
+            xvtr_rf[3] = chkXVTRRF3;
+            xvtr_rf[4] = chkXVTRRF4;
+            xvtr_rf[5] = chkXVTRRF5;
+            xvtr_rf[6] = chkXVTRRF6;
+            xvtr_rf[7] = chkXVTRRF7;
+            xvtr_rf[8] = chkXVTRRF8;
+            xvtr_rf[9] = chkXVTRRF9;
+            xvtr_rf[10] = chkXVTRRF10;
+            xvtr_rf[11] = chkXVTRRF11;
+            xvtr_rf[12] = chkXVTRRF12;
+            xvtr_rf[13] = chkXVTRRF13;
+            xvtr_rf[14] = chkXVTRRF14;
+            xvtr_rf[15] = chkXVTRRF15;
+        }
 
-		public bool GetEnabled(int index)
-		{
-			return enabled[index].Checked;
-		}
+        public bool GetEnabled(int index)
+        {
+            return enabled[index].Checked;
+        }
 
-		public float GetBegin(int index)
-		{
-			return (float)begin[index].Value;
-		}
+        public float GetBegin(int index)
+        {
+            return (float)begin[index].Value;
+        }
 
-		public float GetEnd(int index)
-		{
-			return (float)end[index].Value;
-		}
+        public float GetEnd(int index)
+        {
+            return (float)end[index].Value;
+        }
 
-		public int GetPower(int index)
-		{
-			return (int)power[index].Value;
-		}
+        public int GetPower(int index)
+        {
+            return (int)power[index].Value;
+        }
 
-		public void SetPower(int index, int pwr)
-		{
-			power[index].Value = pwr;
-		}
+        public void SetPower(int index, int pwr)
+        {
+            power[index].Value = pwr;
+        }
 
-		public bool GetRXOnly(int index)
-		{
-			return rx_only[index].Checked;
-		}
+        public bool GetRXOnly(int index)
+        {
+            return rx_only[index].Checked;
+        }
 
-		public void SetRXOnly(int index, bool b)
-		{
-			rx_only[index].Checked = b;
-		}
+        public void SetRXOnly(int index, bool b)
+        {
+            rx_only[index].Checked = b;
+        }
 
-		public float GetRXGain(int index)
-		{
+        public float GetRXGain(int index)
+        {
             float ret_val = 0.0f;
             switch (index)
             {
@@ -5698,40 +5759,40 @@ namespace PowerSDR
                     break;
             }
             return ret_val;
-		}
-        
+        }
+
         /*
         public float GetRXGainHigh(int index)
         {
             return (float)rx_gainHigh[index].Value;
         }
         */
-		public byte GetXVTRAddr(int index)
-		{
-			return (byte)ucb_addr[index].Value;
-		}
+        public byte GetXVTRAddr(int index)
+        {
+            return (byte)ucb_addr[index].Value;
+        }
 
-		public bool GetXVTRRF(int index)
-		{
-			return xvtr_rf[index].Checked;
-		}
+        public bool GetXVTRRF(int index)
+        {
+            return xvtr_rf[index].Checked;
+        }
 
-		#endregion
+        #endregion
 
-		#region Event Handlers
+        #region Event Handlers
 
-		private void XVTRForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			this.Hide();
-			e.Cancel = true;
-			Common.SaveForm(this, "XVTR");
-		}
+        private void XVTRForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
+            Common.SaveForm(this, "XVTR");
+        }
 
-		#region Enabled
+        #region Enabled
 
-		private void chkEnable0_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool b = chkEnable0.Checked;
+        private void chkEnable0_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool b = chkEnable0.Checked;
             udLOError0.Enabled = b;
 
             /*
@@ -5746,13 +5807,13 @@ namespace PowerSDR
 			udPower0.Enabled = b;
 			chkXVTRRF0.Enabled = b;
             */
-			
-            console.SetVHFEnabled(0, b);
-		}
 
-		private void chkEnable1_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool b = chkEnable1.Checked;
+            console.SetVHFEnabled(0, b);
+        }
+
+        private void chkEnable1_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool b = chkEnable1.Checked;
 
             udLOError1.Enabled = b;
             /*
@@ -5768,313 +5829,331 @@ namespace PowerSDR
            chkXVTRRF1.Enabled = b;
            */
             console.SetVHFEnabled(1, b);
-		}
+        }
 
-		private void chkEnable2_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool b = chkEnable2.Checked;
-          
-			udUCBAddr2.Enabled = b;
-			txtButtonText2.Enabled = b;
-			udLOOffset2.Enabled = b;
-			udLOError2.Enabled = b;
-			udFreqBegin2.Enabled = b;
-			udFreqEnd2.Enabled = b;
-			udRXGain2.Enabled = b;
-			chkRXOnly2.Enabled = b;
-			udPower2.Enabled = b;
-			chkXVTRRF2.Enabled = b;
-            
-			console.SetVHFEnabled(2, b);
-		}
+        private void chkEnable2_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool b = chkEnable2.Checked;
 
-		private void chkEnable3_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool b = chkEnable3.Checked;
-            
-			udUCBAddr3.Enabled = b;
-			txtButtonText3.Enabled = b;
-			udLOOffset3.Enabled = b;
-			udLOError3.Enabled = b;
-			udFreqBegin3.Enabled = b;
-			udFreqEnd3.Enabled = b;
-			udRXGain3.Enabled = b;
-			chkRXOnly3.Enabled = b;
-			udPower3.Enabled = b;
-			chkXVTRRF3.Enabled = b;
-           
-			console.SetVHFEnabled(3, b);
-		}
+            udUCBAddr2.Enabled = b;
+            txtButtonText2.Enabled = b;
+            udLOOffset2.Enabled = b;
+            udLOError2.Enabled = b;
+            udFreqBegin2.Enabled = b;
+            udFreqEnd2.Enabled = b;
+            udRXGain2.Enabled = b;
+            chkRXOnly2.Enabled = b;
+            udPower2.Enabled = b;
+            chkXVTRRF2.Enabled = b;
 
-		private void chkEnable4_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool b = chkEnable4.Checked;
+            console.SetVHFEnabled(2, b);
+        }
 
-			udUCBAddr4.Enabled = b;
-			txtButtonText4.Enabled = b;
-			udLOOffset4.Enabled = b;
-			udLOError4.Enabled = b;
-			udFreqBegin4.Enabled = b;
-			udFreqEnd4.Enabled = b;
-			udRXGain4.Enabled = b;
-			chkRXOnly4.Enabled = b;
-			udPower4.Enabled = b;
-			chkXVTRRF4.Enabled = b;
+        private void chkEnable3_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool b = chkEnable3.Checked;
 
-			console.SetVHFEnabled(4, b);
-		}
+            udUCBAddr3.Enabled = b;
+            txtButtonText3.Enabled = b;
+            udLOOffset3.Enabled = b;
+            udLOError3.Enabled = b;
+            udFreqBegin3.Enabled = b;
+            udFreqEnd3.Enabled = b;
+            udRXGain3.Enabled = b;
+            chkRXOnly3.Enabled = b;
+            udPower3.Enabled = b;
+            chkXVTRRF3.Enabled = b;
 
-		private void chkEnable5_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool b = chkEnable5.Checked;
+            console.SetVHFEnabled(3, b);
+        }
 
-			udUCBAddr5.Enabled = b;
-			txtButtonText5.Enabled = b;
-			udLOOffset5.Enabled = b;
-			udLOError5.Enabled = b;
-			udFreqBegin5.Enabled = b;
-			udFreqEnd5.Enabled = b;
-			udRXGain5.Enabled = b;
-			chkRXOnly5.Enabled = b;
-			udPower5.Enabled = b;
-			chkXVTRRF5.Enabled = b;
+        private void chkEnable4_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool b = chkEnable4.Checked;
 
-			console.SetVHFEnabled(5, b);
-		}
+            udUCBAddr4.Enabled = b;
+            txtButtonText4.Enabled = b;
+            udLOOffset4.Enabled = b;
+            udLOError4.Enabled = b;
+            udFreqBegin4.Enabled = b;
+            udFreqEnd4.Enabled = b;
+            udRXGain4.Enabled = b;
+            chkRXOnly4.Enabled = b;
+            udPower4.Enabled = b;
+            chkXVTRRF4.Enabled = b;
 
-		private void chkEnable6_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool b = chkEnable6.Checked;
+            console.SetVHFEnabled(4, b);
+        }
 
-			udUCBAddr6.Enabled = b;
-			txtButtonText6.Enabled = b;
-			udLOOffset6.Enabled = b;
-			udLOError6.Enabled = b;
-			udFreqBegin6.Enabled = b;
-			udFreqEnd6.Enabled = b;
-			udRXGain6.Enabled = b;
-			chkRXOnly6.Enabled = b;
-			udPower6.Enabled = b;
-			chkXVTRRF6.Enabled = b;
+        private void chkEnable5_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool b = chkEnable5.Checked;
 
-			console.SetVHFEnabled(6, b);
-		}
+            udUCBAddr5.Enabled = b;
+            txtButtonText5.Enabled = b;
+            udLOOffset5.Enabled = b;
+            udLOError5.Enabled = b;
+            udFreqBegin5.Enabled = b;
+            udFreqEnd5.Enabled = b;
+            udRXGain5.Enabled = b;
+            chkRXOnly5.Enabled = b;
+            udPower5.Enabled = b;
+            chkXVTRRF5.Enabled = b;
 
-		private void chkEnable7_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool b = chkEnable7.Checked;
+            console.SetVHFEnabled(5, b);
+        }
 
-			udUCBAddr7.Enabled = b;
-			txtButtonText7.Enabled = b;
-			udLOOffset7.Enabled = b;
-			udLOError7.Enabled = b;
-			udFreqBegin7.Enabled = b;
-			udFreqEnd7.Enabled = b;
-			udRXGain7.Enabled = b;
-			chkRXOnly7.Enabled = b;
-			udPower7.Enabled = b;
-			chkXVTRRF7.Enabled = b;
+        private void chkEnable6_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool b = chkEnable6.Checked;
 
-			console.SetVHFEnabled(7, b);
-		}
+            udUCBAddr6.Enabled = b;
+            txtButtonText6.Enabled = b;
+            udLOOffset6.Enabled = b;
+            udLOError6.Enabled = b;
+            udFreqBegin6.Enabled = b;
+            udFreqEnd6.Enabled = b;
+            udRXGain6.Enabled = b;
+            chkRXOnly6.Enabled = b;
+            udPower6.Enabled = b;
+            chkXVTRRF6.Enabled = b;
 
-		private void chkEnable8_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool b = chkEnable8.Checked;
+            console.SetVHFEnabled(6, b);
+        }
 
-			udUCBAddr8.Enabled = b;
-			txtButtonText8.Enabled = b;
-			udLOOffset8.Enabled = b;
-			udLOError8.Enabled = b;
-			udFreqBegin8.Enabled = b;
-			udFreqEnd8.Enabled = b;
-			udRXGain8.Enabled = b;
-			chkRXOnly8.Enabled = b;
-			udPower8.Enabled = b;
-			chkXVTRRF8.Enabled = b;
+        private void chkEnable7_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool b = chkEnable7.Checked;
 
-			console.SetVHFEnabled(8, b);
-		}
+            udUCBAddr7.Enabled = b;
+            txtButtonText7.Enabled = b;
+            udLOOffset7.Enabled = b;
+            udLOError7.Enabled = b;
+            udFreqBegin7.Enabled = b;
+            udFreqEnd7.Enabled = b;
+            udRXGain7.Enabled = b;
+            chkRXOnly7.Enabled = b;
+            udPower7.Enabled = b;
+            chkXVTRRF7.Enabled = b;
 
-		private void chkEnable9_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool b = chkEnable9.Checked;
+            console.SetVHFEnabled(7, b);
+        }
 
-			udUCBAddr9.Enabled = b;
-			txtButtonText9.Enabled = b;
-			udLOOffset9.Enabled = b;
-			udLOError9.Enabled = b;
-			udFreqBegin9.Enabled = b;
-			udFreqEnd9.Enabled = b;
-			udRXGain9.Enabled = b;
-			chkRXOnly9.Enabled = b;
-			udPower9.Enabled = b;
-			chkXVTRRF9.Enabled = b;
+        private void chkEnable8_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool b = chkEnable8.Checked;
 
-			console.SetVHFEnabled(9, b);
-		}
+            udUCBAddr8.Enabled = b;
+            txtButtonText8.Enabled = b;
+            udLOOffset8.Enabled = b;
+            udLOError8.Enabled = b;
+            udFreqBegin8.Enabled = b;
+            udFreqEnd8.Enabled = b;
+            udRXGain8.Enabled = b;
+            chkRXOnly8.Enabled = b;
+            udPower8.Enabled = b;
+            chkXVTRRF8.Enabled = b;
 
-		private void chkEnable10_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool b = chkEnable10.Checked;
+            console.SetVHFEnabled(8, b);
+        }
 
-			udUCBAddr10.Enabled = b;
-			txtButtonText10.Enabled = b;
-			udLOOffset10.Enabled = b;
-			udLOError10.Enabled = b;
-			udFreqBegin10.Enabled = b;
-			udFreqEnd10.Enabled = b;
-			udRXGain10.Enabled = b;
-			chkRXOnly10.Enabled = b;
-			udPower10.Enabled = b;
-			chkXVTRRF10.Enabled = b;
+        private void chkEnable9_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool b = chkEnable9.Checked;
 
-			console.SetVHFEnabled(10, b);
-		}
+            udUCBAddr9.Enabled = b;
+            txtButtonText9.Enabled = b;
+            udLOOffset9.Enabled = b;
+            udLOError9.Enabled = b;
+            udFreqBegin9.Enabled = b;
+            udFreqEnd9.Enabled = b;
+            udRXGain9.Enabled = b;
+            chkRXOnly9.Enabled = b;
+            udPower9.Enabled = b;
+            chkXVTRRF9.Enabled = b;
 
-		private void chkEnable11_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool b = chkEnable11.Checked;
+            console.SetVHFEnabled(9, b);
+        }
 
-			udUCBAddr11.Enabled = b;
-			txtButtonText11.Enabled = b;
-			udLOOffset11.Enabled = b;
-			udLOError11.Enabled = b;
-			udFreqBegin11.Enabled = b;
-			udFreqEnd11.Enabled = b;
-			udRXGain11.Enabled = b;
-			chkRXOnly11.Enabled = b;
-			udPower11.Enabled = b;
-			chkXVTRRF11.Enabled = b;
+        private void chkEnable10_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool b = chkEnable10.Checked;
 
-			console.SetVHFEnabled(11, b);
-		}
+            udUCBAddr10.Enabled = b;
+            txtButtonText10.Enabled = b;
+            udLOOffset10.Enabled = b;
+            udLOError10.Enabled = b;
+            udFreqBegin10.Enabled = b;
+            udFreqEnd10.Enabled = b;
+            udRXGain10.Enabled = b;
+            chkRXOnly10.Enabled = b;
+            udPower10.Enabled = b;
+            chkXVTRRF10.Enabled = b;
 
-		private void chkEnable12_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool b = chkEnable12.Checked;
+            console.SetVHFEnabled(10, b);
+        }
 
-			udUCBAddr12.Enabled = b;
-			txtButtonText12.Enabled = b;
-			udLOOffset12.Enabled = b;
-			udLOError12.Enabled = b;
-			udFreqBegin12.Enabled = b;
-			udFreqEnd12.Enabled = b;
-			udRXGain12.Enabled = b;
-			chkRXOnly12.Enabled = b;
-			udPower12.Enabled = b;
-			chkXVTRRF12.Enabled = b;
+        private void chkEnable11_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool b = chkEnable11.Checked;
 
-			console.SetVHFEnabled(12, b);
-		}
+            udUCBAddr11.Enabled = b;
+            txtButtonText11.Enabled = b;
+            udLOOffset11.Enabled = b;
+            udLOError11.Enabled = b;
+            udFreqBegin11.Enabled = b;
+            udFreqEnd11.Enabled = b;
+            udRXGain11.Enabled = b;
+            chkRXOnly11.Enabled = b;
+            udPower11.Enabled = b;
+            chkXVTRRF11.Enabled = b;
 
-		private void chkEnable13_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool b = chkEnable13.Checked;
+            console.SetVHFEnabled(11, b);
+        }
 
-			udUCBAddr13.Enabled = b;
-			txtButtonText13.Enabled = b;
-			udLOOffset13.Enabled = b;
-			udLOError13.Enabled = b;
-			udFreqBegin13.Enabled = b;
-			udFreqEnd13.Enabled = b;
-			udRXGain13.Enabled = b;
-			chkRXOnly13.Enabled = b;
-			udPower13.Enabled = b;
-			chkXVTRRF13.Enabled = b;
+        private void chkEnable12_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool b = chkEnable12.Checked;
 
-			console.SetVHFEnabled(13, b);
-		}
+            udUCBAddr12.Enabled = b;
+            txtButtonText12.Enabled = b;
+            udLOOffset12.Enabled = b;
+            udLOError12.Enabled = b;
+            udFreqBegin12.Enabled = b;
+            udFreqEnd12.Enabled = b;
+            udRXGain12.Enabled = b;
+            chkRXOnly12.Enabled = b;
+            udPower12.Enabled = b;
+            chkXVTRRF12.Enabled = b;
 
-		private void chkEnable14_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool b = chkEnable14.Checked;
+            console.SetVHFEnabled(12, b);
+        }
 
-			udUCBAddr14.Enabled = b;
-			txtButtonText14.Enabled = b;
-			udLOOffset14.Enabled = b;
-			udLOError14.Enabled = b;
-			udFreqBegin14.Enabled = b;
-			udFreqEnd14.Enabled = b;
-			udRXGain14.Enabled = b;
-			chkRXOnly14.Enabled = b;
-			udPower14.Enabled = b;
-			chkXVTRRF14.Enabled = b;
-		}
+        private void chkEnable13_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool b = chkEnable13.Checked;
 
-		private void chkEnable15_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool b = chkEnable15.Checked;
+            udUCBAddr13.Enabled = b;
+            txtButtonText13.Enabled = b;
+            udLOOffset13.Enabled = b;
+            udLOError13.Enabled = b;
+            udFreqBegin13.Enabled = b;
+            udFreqEnd13.Enabled = b;
+            udRXGain13.Enabled = b;
+            chkRXOnly13.Enabled = b;
+            udPower13.Enabled = b;
+            chkXVTRRF13.Enabled = b;
 
-			udUCBAddr15.Enabled = b;
-			txtButtonText15.Enabled = b;
-			udLOOffset15.Enabled = b;
-			udLOError15.Enabled = b;
-			udFreqBegin15.Enabled = b;
-			udFreqEnd15.Enabled = b;
-			udRXGain15.Enabled = b;
-			chkRXOnly15.Enabled = b;
-			udPower15.Enabled = b;
-			chkXVTRRF15.Enabled = b;
-		}
+            console.SetVHFEnabled(13, b);
+        }
 
-		#endregion 
+        private void chkEnable14_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool b = chkEnable14.Checked;
 
-		private void txtButtonText_TextChanged(object sender, System.EventArgs e)
-		{
-			int val = Int32.Parse(((Control)sender).Name.Substring(13));
-			console.SetVHFText(val, ((TextBoxTS)sender).Text);
-		}
+            udUCBAddr14.Enabled = b;
+            txtButtonText14.Enabled = b;
+            udLOOffset14.Enabled = b;
+            udLOError14.Enabled = b;
+            udFreqBegin14.Enabled = b;
+            udFreqEnd14.Enabled = b;
+            udRXGain14.Enabled = b;
+            chkRXOnly14.Enabled = b;
+            udPower14.Enabled = b;
+            chkXVTRRF14.Enabled = b;
+        }
 
-		#endregion
+        private void chkEnable15_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool b = chkEnable15.Checked;
 
-		private void chkUseXVTRTUNPWR_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.XVTRTunePower = chkUseXVTRTUNPWR.Checked;
-		}
+            udUCBAddr15.Enabled = b;
+            txtButtonText15.Enabled = b;
+            udLOOffset15.Enabled = b;
+            udLOError15.Enabled = b;
+            udFreqBegin15.Enabled = b;
+            udFreqEnd15.Enabled = b;
+            udRXGain15.Enabled = b;
+            chkRXOnly15.Enabled = b;
+            udPower15.Enabled = b;
+            chkXVTRRF15.Enabled = b;
+        }
 
-		private void chkXVTRRF_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int index = int.Parse(((Control)sender).Name.Substring(9));
-			if(console.RX1XVTRIndex == index)
-			{
-				console.LastRX1XVTRIndex = -1; // force reset
-				console.VFOAFreq = console.VFOAFreq;
-			}
+        #endregion
 
-			if(console.RX2XVTRIndex == index)
-			{
-				console.LastRX2XVTRIndex = -1; // force reset
-				console.VFOBFreq = console.VFOBFreq;
-			}
+        private void txtButtonText_TextChanged(object sender, System.EventArgs e)
+        {
+            int val = Int32.Parse(((Control)sender).Name.Substring(13));
+            console.SetVHFText(val, ((TextBoxTS)sender).Text);
+        }
 
-			if(console.TXXVTRIndex == index)
-			{
-				console.LastTXXVTRIndex = -1; // force reset
-				if(console.RX2Enabled && console.VFOSplit)
-					console.VFOASubFreq = console.VFOASubFreq;
-				else if(console.VFOSplit)
-					console.VFOBFreq = console.VFOBFreq;
-				else
-					console.VFOAFreq = console.VFOAFreq;
-			}
-		}
+        #endregion
 
-		private void udRXGain_ValueChanged(object sender, System.EventArgs e)
-		{
-			int index = int.Parse(((Control)sender).Name.Substring(8));
-			if(console.RX1XVTRIndex == index)
-			{
-				console.LastRX1XVTRIndex = -1; // force reset
-				console.VFOAFreq = console.VFOAFreq;
-			}
+        private void chkUseXVTRTUNPWR_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.XVTRTunePower = chkUseXVTRTUNPWR.Checked;
+        }
 
-			if(console.RX2XVTRIndex == index)
-			{
-				console.LastRX2XVTRIndex = -1; // force reset
-				console.VFOBFreq = console.VFOBFreq;
-			}
-		}
+        private void chkXVTRRF_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int index = int.Parse(((Control)sender).Name.Substring(9)); // ke9ns: 0=vu5k 2m, 1= vu5k 70cm, 2 = external xvtr  chkXVTRRF2.Checked = xvtr_rf[x].Checked
+
+            if (console.RX1XVTRIndex == index)
+            {
+                console.LastRX1XVTRIndex = -1; // force reset
+                console.VFOAFreq = console.VFOAFreq;
+            }
+
+            if (console.RX2XVTRIndex == index)
+            {
+                console.LastRX2XVTRIndex = -1; // force reset
+                console.VFOBFreq = console.VFOBFreq;
+            }
+
+            if (console.TXXVTRIndex == index)
+            {
+                console.LastTXXVTRIndex = -1; // force reset
+                if (console.RX2Enabled && console.VFOSplit)
+                    console.VFOASubFreq = console.VFOASubFreq;
+                else if (console.VFOSplit)
+                    console.VFOBFreq = console.VFOBFreq;
+                else
+                    console.VFOAFreq = console.VFOAFreq;
+            }
+
+            if ((console.RX1XVTRIndex > 1) && console.CurrentModel == Model.FLEX5000) // .213
+            {
+                if (GetXVTRRF(console.RX1XVTRIndex) == true)
+                {
+
+                    console.lblAntRX1a.Text = "XVRX";
+                    console.lblAntTXa.Text = "XVTX";
+                }
+                else
+                {
+                    console.lblAntRX1a.Text = "XVTX/C";
+                    console.lblAntTXa.Text = "XVTX/C";
+                }
+
+            }
+
+        } //chkXVTRRF_CheckedChanged
+
+        private void udRXGain_ValueChanged(object sender, System.EventArgs e)
+        {
+            int index = int.Parse(((Control)sender).Name.Substring(8));
+            if (console.RX1XVTRIndex == index)
+            {
+                console.LastRX1XVTRIndex = -1; // force reset
+                console.VFOAFreq = console.VFOAFreq;
+            }
+
+            if (console.RX2XVTRIndex == index)
+            {
+                console.LastRX2XVTRIndex = -1; // force reset
+                console.VFOBFreq = console.VFOBFreq;
+            }
+        }
 
         private void udRXGainHigh0_ValueChanged(object sender, EventArgs e)
         {
@@ -6151,7 +6230,7 @@ namespace PowerSDR
                     console.RX2XVTRGainOffset = console.uhf_level_table[0];
             }
 
-            
+
         }
 
         private void chkUHFPAEnable_CheckedChanged(object sender, EventArgs e)
@@ -6182,6 +6261,38 @@ namespace PowerSDR
         }
 
         private void udLOOffset0_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChkAlwaysOnTop1_CheckedChanged(object sender, EventArgs e)
+        {
+            this.TopMost = chkAlwaysOnTop1.Checked;
+        }
+
+        private void XVTRForm_MouseEnter(object sender, EventArgs e)
+        {
+            if (console.setupForm.chkBoxAutoFocus.Checked == true && chkAlwaysOnTop1.Checked == true) this.Activate();
+        }
+
+        private void chkFlexWire_CheckedChanged(object sender, EventArgs e)
+        {
+            if (console.ucbForm == null || console.ucbForm.IsDisposed)
+                console.ucbForm = new UCBForm(console);
+
+            if (chkFlexWire.Checked == true)
+            {
+                chkFlexWire.BackColor = Color.Yellow;
+                console.ucbForm.Show();
+                console.ucbForm.Focus();
+            }
+            else
+            {
+                chkFlexWire.BackColor = SystemColors.ControlLight;
+            }
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
 
         }

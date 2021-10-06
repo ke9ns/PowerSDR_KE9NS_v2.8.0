@@ -36,29 +36,29 @@ using System.Windows.Forms;
 
 namespace PowerSDR
 {
-	public class FWCCalForm : System.Windows.Forms.Form
-	{
-		#region Variable Declaration
+    public class FWCCalForm : System.Windows.Forms.Form
+    {
+        #region Variable Declaration
 
-		private Console console;
-		private System.Windows.Forms.ButtonTS btnSaveToEEPROM;
-		private System.Windows.Forms.ButtonTS btnRestoreFromEEPROM;
-		private System.Windows.Forms.GroupBox grpTRX;
-		private System.Windows.Forms.GroupBox grpRX2;
-		private System.Windows.Forms.ButtonTS btnSaveRX2ToEEPROM;
-		private System.Windows.Forms.ButtonTS btnRestoreRX2FromEEPROM;
-		private System.Windows.Forms.Button btnResetTRXChecksums;
+        private Console console;
+        private System.Windows.Forms.ButtonTS btnSaveToEEPROM;
+        private System.Windows.Forms.ButtonTS btnRestoreFromEEPROM;
+        private System.Windows.Forms.GroupBox grpTRX;
+        private System.Windows.Forms.GroupBox grpRX2;
+        private System.Windows.Forms.ButtonTS btnSaveRX2ToEEPROM;
+        private System.Windows.Forms.ButtonTS btnRestoreRX2FromEEPROM;
+        private System.Windows.Forms.Button btnResetTRXChecksums;
         private System.Windows.Forms.Button btnResetRX2Checksums;
-		private System.ComponentModel.Container components = null;
+        private System.ComponentModel.Container components = null;
 
-		#endregion
+        #endregion
 
-		#region Constructor and Destructor
+        #region Constructor and Destructor
 
-		public FWCCalForm(Console c)
-		{
-			InitializeComponent();
-			console = c;
+        public FWCCalForm(Console c)
+        {
+            InitializeComponent();
+            console = c;
             switch (console.CurrentModel)
             {
                 case Model.FLEX5000:
@@ -81,41 +81,41 @@ namespace PowerSDR
                     this.Height -= (grpRX2.Height + btnResetTRXChecksums.Height);
                     break;
             }
-		}
+        }
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#endregion
+        #endregion
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FWCCalForm));
             this.grpTRX = new System.Windows.Forms.GroupBox();
+            this.btnRestoreFromEEPROM = new System.Windows.Forms.ButtonTS();
+            this.btnSaveToEEPROM = new System.Windows.Forms.ButtonTS();
             this.btnResetTRXChecksums = new System.Windows.Forms.Button();
             this.grpRX2 = new System.Windows.Forms.GroupBox();
             this.btnResetRX2Checksums = new System.Windows.Forms.Button();
             this.btnRestoreRX2FromEEPROM = new System.Windows.Forms.ButtonTS();
             this.btnSaveRX2ToEEPROM = new System.Windows.Forms.ButtonTS();
-            this.btnRestoreFromEEPROM = new System.Windows.Forms.ButtonTS();
-            this.btnSaveToEEPROM = new System.Windows.Forms.ButtonTS();
             this.grpTRX.SuspendLayout();
             this.grpRX2.SuspendLayout();
             this.SuspendLayout();
@@ -132,6 +132,28 @@ namespace PowerSDR
             this.grpTRX.TabIndex = 16;
             this.grpTRX.TabStop = false;
             this.grpTRX.Text = "RX1 / PA";
+            // 
+            // btnRestoreFromEEPROM
+            // 
+            this.btnRestoreFromEEPROM.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRestoreFromEEPROM.Image = null;
+            this.btnRestoreFromEEPROM.Location = new System.Drawing.Point(8, 24);
+            this.btnRestoreFromEEPROM.Name = "btnRestoreFromEEPROM";
+            this.btnRestoreFromEEPROM.Size = new System.Drawing.Size(112, 48);
+            this.btnRestoreFromEEPROM.TabIndex = 15;
+            this.btnRestoreFromEEPROM.Text = "Restore Calibration Data To Database from EEPROM";
+            this.btnRestoreFromEEPROM.Click += new System.EventHandler(this.btnRestoreFromEEPROM_Click);
+            // 
+            // btnSaveToEEPROM
+            // 
+            this.btnSaveToEEPROM.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveToEEPROM.Image = null;
+            this.btnSaveToEEPROM.Location = new System.Drawing.Point(128, 24);
+            this.btnSaveToEEPROM.Name = "btnSaveToEEPROM";
+            this.btnSaveToEEPROM.Size = new System.Drawing.Size(112, 48);
+            this.btnSaveToEEPROM.TabIndex = 0;
+            this.btnSaveToEEPROM.Text = "Save Calibration Data To EEPROM";
+            this.btnSaveToEEPROM.Click += new System.EventHandler(this.btnSaveToEEPROM_Click);
             // 
             // btnResetTRXChecksums
             // 
@@ -188,66 +210,47 @@ namespace PowerSDR
             this.btnSaveRX2ToEEPROM.Text = "Save Calibration Data To EEPROM";
             this.btnSaveRX2ToEEPROM.Click += new System.EventHandler(this.btnSaveRX2ToEEPROM_Click);
             // 
-            // btnRestoreFromEEPROM
-            // 
-            this.btnRestoreFromEEPROM.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRestoreFromEEPROM.Image = null;
-            this.btnRestoreFromEEPROM.Location = new System.Drawing.Point(8, 24);
-            this.btnRestoreFromEEPROM.Name = "btnRestoreFromEEPROM";
-            this.btnRestoreFromEEPROM.Size = new System.Drawing.Size(112, 48);
-            this.btnRestoreFromEEPROM.TabIndex = 15;
-            this.btnRestoreFromEEPROM.Text = "Restore Calibration Data To Database from EEPROM";
-            this.btnRestoreFromEEPROM.Click += new System.EventHandler(this.btnRestoreFromEEPROM_Click);
-            // 
-            // btnSaveToEEPROM
-            // 
-            this.btnSaveToEEPROM.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveToEEPROM.Image = null;
-            this.btnSaveToEEPROM.Location = new System.Drawing.Point(128, 24);
-            this.btnSaveToEEPROM.Name = "btnSaveToEEPROM";
-            this.btnSaveToEEPROM.Size = new System.Drawing.Size(112, 48);
-            this.btnSaveToEEPROM.TabIndex = 0;
-            this.btnSaveToEEPROM.Text = "Save Calibration Data To EEPROM";
-            this.btnSaveToEEPROM.Click += new System.EventHandler(this.btnSaveToEEPROM_Click);
-            // 
             // FWCCalForm
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(272, 296);
             this.Controls.Add(this.grpRX2);
             this.Controls.Add(this.grpTRX);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(288, 335);
+            this.MinimumSize = new System.Drawing.Size(288, 335);
             this.Name = "FWCCalForm";
             this.Text = "FLEX-5000 EEPROM";
             this.grpTRX.ResumeLayout(false);
             this.grpRX2.ResumeLayout(false);
             this.ResumeLayout(false);
 
-		}
-		#endregion
+        }
+        #endregion
 
-		#region Event Handlers
+        #region Event Handlers
 
-		private void btnRestoreFromEEPROM_Click(object sender, System.EventArgs e)
-		{
-			DialogResult dr = MessageBox.Show("Are you sure you want to read the current RX1/PA EEPROM data into\n"+
-				"the database overwriting any current values?",
-				"Overwrite database?",
-				MessageBoxButtons.YesNo,
-				MessageBoxIcon.Question);
-			if(dr == DialogResult.No) return;
-			
-			btnRestoreFromEEPROM.BackColor = console.ButtonSelectedColor;
-			btnRestoreFromEEPROM.Enabled = false;
-			Thread t = new Thread(new ThreadStart(RestoreFromEEPROM));
-			t.Name = "Restore From EEPROM Thread";
-			t.IsBackground = true;
-			t.Priority = ThreadPriority.Normal;
-			t.Start();
-		}
+        private void btnRestoreFromEEPROM_Click(object sender, System.EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Are you sure you want to read the current RX1/PA EEPROM data into\n" +
+                "the database overwriting any current values?",
+                "Overwrite database?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+            if (dr == DialogResult.No) return;
 
-		private void RestoreFromEEPROM()
-		{
+            btnRestoreFromEEPROM.BackColor = console.ButtonSelectedColor;
+            btnRestoreFromEEPROM.Enabled = false;
+            Thread t = new Thread(new ThreadStart(RestoreFromEEPROM));
+            t.Name = "Restore From EEPROM Thread";
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.Normal;
+            t.Start();
+        }
+
+        private void RestoreFromEEPROM()
+        {
             switch (console.CurrentModel)
             {
                 case Model.FLEX5000:
@@ -258,29 +261,29 @@ namespace PowerSDR
                     console.Restore1500CalData();
                     break;
             }
-			btnRestoreFromEEPROM.BackColor = SystemColors.Control;
-			btnRestoreFromEEPROM.Enabled = true;
-		}
+            btnRestoreFromEEPROM.BackColor = SystemColors.Control;
+            btnRestoreFromEEPROM.Enabled = true;
+        }
 
-		private void btnSaveToEEPROM_Click(object sender, System.EventArgs e)
-		{
-			DialogResult dr = MessageBox.Show("Are you sure you want to write the current RX1/PA database calibration values to the EEPROM?",
-				"Overwrite EEPROM?",
-				MessageBoxButtons.YesNo,
-				MessageBoxIcon.Question);
-			if(dr == DialogResult.No) return;
-			
-			btnSaveToEEPROM.BackColor = console.ButtonSelectedColor;
-			btnSaveToEEPROM.Enabled = false;
-			Thread t = new Thread(new ThreadStart(WriteToEEPROM));
-			t.Name = "Write To EEPROM Thread";
-			t.IsBackground = true;
-			t.Priority = ThreadPriority.Normal;
-			t.Start();
-		}
+        private void btnSaveToEEPROM_Click(object sender, System.EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Are you sure you want to write the current RX1/PA database calibration values to the EEPROM?",
+                "Overwrite EEPROM?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+            if (dr == DialogResult.No) return;
 
-		private void WriteToEEPROM()
-		{
+            btnSaveToEEPROM.BackColor = console.ButtonSelectedColor;
+            btnSaveToEEPROM.Enabled = false;
+            Thread t = new Thread(new ThreadStart(WriteToEEPROM));
+            t.Name = "Write To EEPROM Thread";
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.Normal;
+            t.Start();
+        }
+
+        private void WriteToEEPROM()
+        {
             switch (console.CurrentModel)
             {
                 case Model.FLEX5000:
@@ -291,68 +294,68 @@ namespace PowerSDR
                     console.Write1500CalData();
                     break;
             }
-			btnSaveToEEPROM.BackColor = SystemColors.Control;
-			btnSaveToEEPROM.Enabled = true;
-		}
+            btnSaveToEEPROM.BackColor = SystemColors.Control;
+            btnSaveToEEPROM.Enabled = true;
+        }
 
-		#endregion
+        #endregion
 
-		private void btnRestoreRX2FromEEPROM_Click(object sender, System.EventArgs e)
-		{
-			DialogResult dr = MessageBox.Show("Are you sure you want to read the current RX2 EEPROM data into\n"+
-				"the database overwriting any current values?",
-				"Overwrite database?",
-				MessageBoxButtons.YesNo,
-				MessageBoxIcon.Question);
-			if(dr == DialogResult.No) return;
-			
-			btnRestoreRX2FromEEPROM.BackColor = console.ButtonSelectedColor;
-			btnRestoreRX2FromEEPROM.Enabled = false;
-			Thread t = new Thread(new ThreadStart(RestoreRX2FromEEPROM));
-			t.Name = "Restore RX2 from EEPROM Thread";
-			t.IsBackground = true;
-			t.Priority = ThreadPriority.Normal;
-			t.Start();
-		}
+        private void btnRestoreRX2FromEEPROM_Click(object sender, System.EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Are you sure you want to read the current RX2 EEPROM data into\n" +
+                "the database overwriting any current values?",
+                "Overwrite database?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+            if (dr == DialogResult.No) return;
 
-		private void RestoreRX2FromEEPROM()
-		{
-			console.RX2RestoreCalData();
-			btnRestoreRX2FromEEPROM.BackColor = SystemColors.Control;
-			btnRestoreRX2FromEEPROM.Enabled = true;
-		}
+            btnRestoreRX2FromEEPROM.BackColor = console.ButtonSelectedColor;
+            btnRestoreRX2FromEEPROM.Enabled = false;
+            Thread t = new Thread(new ThreadStart(RestoreRX2FromEEPROM));
+            t.Name = "Restore RX2 from EEPROM Thread";
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.Normal;
+            t.Start();
+        }
 
-		private void btnSaveRX2ToEEPROM_Click(object sender, System.EventArgs e)
-		{
-			DialogResult dr = MessageBox.Show("Are you sure you want to write the current RX2 database calibration values to the EEPROM?",
-				"Overwrite EEPROM?",
-				MessageBoxButtons.YesNo,
-				MessageBoxIcon.Question);
-			if(dr == DialogResult.No) return;
-			
-			btnSaveRX2ToEEPROM.BackColor = console.ButtonSelectedColor;
-			btnSaveRX2ToEEPROM.Enabled = false;
-			Thread t = new Thread(new ThreadStart(WriteRX2ToEEPROM));
-			t.Name = "Write RX2 To EEPROM Thread";
-			t.IsBackground = true;
-			t.Priority = ThreadPriority.Normal;
-			t.Start();
-		}
+        private void RestoreRX2FromEEPROM()
+        {
+            console.RX2RestoreCalData();
+            btnRestoreRX2FromEEPROM.BackColor = SystemColors.Control;
+            btnRestoreRX2FromEEPROM.Enabled = true;
+        }
 
-		private void WriteRX2ToEEPROM()
-		{
-			console.WriteRX2CalData();
-			btnSaveRX2ToEEPROM.BackColor = SystemColors.Control;
-			btnSaveRX2ToEEPROM.Enabled = true;
-		}
+        private void btnSaveRX2ToEEPROM_Click(object sender, System.EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Are you sure you want to write the current RX2 database calibration values to the EEPROM?",
+                "Overwrite EEPROM?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+            if (dr == DialogResult.No) return;
 
-		private void btnResetTRXChecksums_Click(object sender, System.EventArgs e)
-		{
-			DialogResult dr = MessageBox.Show("Are you sure you want to reset the RX1/PA checksums?",
-				"Reset Checksums?",
-				MessageBoxButtons.YesNo,
-				MessageBoxIcon.Question);
-			if(dr == DialogResult.No) return;
+            btnSaveRX2ToEEPROM.BackColor = console.ButtonSelectedColor;
+            btnSaveRX2ToEEPROM.Enabled = false;
+            Thread t = new Thread(new ThreadStart(WriteRX2ToEEPROM));
+            t.Name = "Write RX2 To EEPROM Thread";
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.Normal;
+            t.Start();
+        }
+
+        private void WriteRX2ToEEPROM()
+        {
+            console.WriteRX2CalData();
+            btnSaveRX2ToEEPROM.BackColor = SystemColors.Control;
+            btnSaveRX2ToEEPROM.Enabled = true;
+        }
+
+        private void btnResetTRXChecksums_Click(object sender, System.EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Are you sure you want to reset the RX1/PA checksums?",
+                "Reset Checksums?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+            if (dr == DialogResult.No) return;
 
             switch (console.CurrentModel)
             {
@@ -361,17 +364,17 @@ namespace PowerSDR
                     FWCEEPROM.TRXChecksumPresent = false;
                     break;
             }
-		}
+        }
 
-		private void btnResetRX2Checksums_Click(object sender, System.EventArgs e)
-		{
-			DialogResult dr = MessageBox.Show("Are you sure you want to reset the RX2 checksums?",
-				"Reset Checksums?",
-				MessageBoxButtons.YesNo,
-				MessageBoxIcon.Question);
-			if(dr == DialogResult.No) return;
+        private void btnResetRX2Checksums_Click(object sender, System.EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Are you sure you want to reset the RX2 checksums?",
+                "Reset Checksums?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+            if (dr == DialogResult.No) return;
 
-			FWCEEPROM.RX2ChecksumPresent = false;
-		}
-	}
+            FWCEEPROM.RX2ChecksumPresent = false;
+        }
+    }
 }

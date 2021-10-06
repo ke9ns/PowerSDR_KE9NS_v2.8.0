@@ -66,16 +66,16 @@ namespace PowerSDR
                         "ERROR: Master DB is Unusable",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation);
-                    
+
                     ds = new DataSet("Master");
                     NewMaster();
                 }
             }
             else // file doesn't exist -- create a new master
             {
-                NewMaster();        
-            }               
-            
+                NewMaster();
+            }
+
             foreach (DataRow dr in ds.Tables["Radios"].Rows)
             {
                 try
@@ -120,7 +120,7 @@ namespace PowerSDR
 
             return found;
         }
-        
+
         /// <summary>
         /// Adds/Updates the master file with a single radio
         /// </summary>
@@ -164,13 +164,13 @@ namespace PowerSDR
             {
                 if ((string)dr["Model"] == r.Model.ToString() && // model match
                     (string)dr["Serial"] == r.SerialNumber) // serial number match
-                {                    
+                {
                     found = true;
                     ds.Tables["Radios"].Rows.Remove(dr);
                     break;
                 }
-            }        
-            
+            }
+
             return found;
         }
 

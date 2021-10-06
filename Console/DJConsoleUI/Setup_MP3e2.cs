@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Resources;
-using System.IO;
 
 namespace PowerSDR
 {
@@ -442,7 +434,7 @@ namespace PowerSDR
             {
                 m_parent.DJConsoleObj.DJConsole_MP3e2.LoadB = (int)cBoxLoadB.SelectedValue;
             };
-            
+
             if (cBoxMasterTempoA.SelectedValue != null)
             {
                 m_parent.DJConsoleObj.DJConsole_MP3e2.MasterTempoA = (int)cBoxMasterTempoA.SelectedValue;

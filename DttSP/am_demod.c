@@ -41,11 +41,10 @@ Bridgewater, NJ 08807
 /* private to AM */
 /*------------------------------------------------------------------------------*/
 
-static void
-init_pll (AMD am,
-	  REAL samprate, REAL freq, REAL lofreq, REAL hifreq, REAL bandwidth)
+static void init_pll (AMD am,REAL samprate, REAL freq, REAL lofreq, REAL hifreq, REAL bandwidth)
 {
 	REAL fac = (REAL) (TWOPI / samprate);
+
 	am->pll.freq.f = freq * fac;
 	am->pll.freq.l = lofreq * fac;
 	am->pll.freq.h = hifreq * fac;
@@ -58,36 +57,34 @@ init_pll (AMD am,
 	am->pll.fast_alpha = am->pll.alpha;
 }
 
-static void
-pll (AMD am, COMPLEX sig)
+static void pll (AMD am, COMPLEX sig)
 {
 	COMPLEX z = Cmplx ((REAL) cos (am->pll.phs), (REAL) sin (am->pll.phs));
 	REAL diff;
 
 	am->pll.delay.re = z.re * sig.re + z.im * sig.im;
 	am->pll.delay.im = -z.im * sig.re + z.re * sig.im;
+
 	diff = fast_atan2 (am->pll.delay.im, am->pll.delay.re);
 
 	am->pll.freq.f += am->pll.beta * diff;
 
-	if (am->pll.freq.f < am->pll.freq.l)
-		am->pll.freq.f = am->pll.freq.l;
-	if (am->pll.freq.f > am->pll.freq.h)
-		am->pll.freq.f = am->pll.freq.h;
+	if (am->pll.freq.f < am->pll.freq.l) am->pll.freq.f = am->pll.freq.l;
+
+	if (am->pll.freq.f > am->pll.freq.h) am->pll.freq.f = am->pll.freq.h;
 
 	am->pll.phs += am->pll.freq.f + am->pll.alpha * diff;
 
 	while (am->pll.phs >= TWOPI)
 		am->pll.phs -= (REAL) TWOPI;
+
 	while (am->pll.phs < 0)
 		am->pll.phs += (REAL) TWOPI;
 }
 
-static REAL
-dem (AMD am)
+static REAL dem (AMD am)
 {
-	am->lock.curr =
-		(REAL) (0.999 * am->lock.curr + 0.001 * fabs (am->pll.delay.im));
+	am->lock.curr =	(REAL) (0.999 * am->lock.curr + 0.001 * fabs (am->pll.delay.im));
 
 	/* env collapse? */
 	/* if ((am->lock.curr < 0.05) && (am->lock.prev >= 0.05))
@@ -108,8 +105,7 @@ dem (AMD am)
 /* public */
 /*------------------------------------------------------------------------------*/
 
-void
-AMDemod (AMD am)
+void AMDemod (AMD am)
 {
 	int i;
 	REAL demout;
@@ -136,12 +132,7 @@ AMDemod (AMD am)
 	}
 }
 
-AMD
-newAMD (REAL samprate,
-	REAL f_initial,
-	REAL f_lobound,
-	REAL f_hibound,
-	REAL f_bandwid,
+AMD newAMD (REAL samprate,REAL f_initial,REAL f_lobound,REAL f_hibound,REAL f_bandwid,
 	int size, COMPLEX * ivec, COMPLEX * ovec, AMMode mode, char *tag)
 {
 	AMD am = (AMD) safealloc (1, sizeof (AMDDesc), tag);
@@ -159,8 +150,7 @@ newAMD (REAL samprate,
 	return am;
 }
 
-void
-delAMD (AMD am)
+void delAMD (AMD am)
 {
 	if (am)
 	{

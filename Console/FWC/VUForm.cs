@@ -42,12 +42,12 @@ namespace PowerSDR
     {
         bool sendToHardware = true;
         private Console console;
-       // private XVTRForm XVTRForm;
+        // private XVTRForm XVTRForm;
 
         public VUForm(Console c)
         {
             console = c;
-            InitializeComponent();            
+            InitializeComponent();
         }
 
         private void chkFanHigh_CheckedChanged(object sender, EventArgs e)
@@ -360,7 +360,7 @@ namespace PowerSDR
 
         private void chkVU_VIFGain_CheckedChanged(object sender, EventArgs e)
         {
-            setUserModeV();            
+            setUserModeV();
         }
 
         private void chkVU_VPAEnable_CheckedChanged(object sender, EventArgs e)
@@ -377,7 +377,7 @@ namespace PowerSDR
         {
             setUserModeU();
         }
-        
+
         public void setUserModeV()
         {
             if (!chkVU_VIFGain.Checked && !chkVU_VPAEnable.Checked && (console.RX1XVTRIndex == 0 || console.RX2Enabled && console.RX2XVTRIndex == 0))
@@ -394,14 +394,14 @@ namespace PowerSDR
                 chkVUVIFHG2.Checked = true;	    //K6 +  
                 chkVUVIFHG1.Checked = false;	//K7 -
                 //TX
-                Debug.WriteLine("SetVU_FAN_enable = false;"); 
+                Debug.WriteLine("SetVU_FAN_enable = false;");
                 Debug.WriteLine("SetVU_K15_enable = false;");
                 Debug.WriteLine("SetVU_TXV_enable = false;");
                 chkVUK14.Checked = true;		//K14+
                 chkVULPwrV.Checked = true;	//K1+
                 chkVUDrvU.Checked = false;		//K3-
                 chkVUDrvV.Checked = true;		//K2+
-                chkVUTXIFU.Checked= false;		//K4-
+                chkVUTXIFU.Checked = false;		//K4-
                 Debug.WriteLine("SetVU_KeyV_enable = true;");
                 Debug.WriteLine("SetVU_KeyVU_enable = true;");
                 sendToHardware = true;
@@ -524,7 +524,7 @@ namespace PowerSDR
                     FWC.SetVU_VRX2Enable(false);
                 }
             }
-            
+
         }
         public void setUserModeU()
         {
@@ -669,7 +669,7 @@ namespace PowerSDR
 
         private void chkVRX2_CheckedChanged(object sender, EventArgs e)
         {
-            setUserModeV();  
+            setUserModeV();
         }
 
         private void chkURX2_CheckedChanged(object sender, EventArgs e)

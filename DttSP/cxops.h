@@ -56,8 +56,7 @@ Cscl (COMPLEX x, REAL a)
 	return z;
 }
 
-static INLINE COMPLEX
-Cadd (COMPLEX x, COMPLEX y)
+static INLINE COMPLEX Cadd (COMPLEX x, COMPLEX y)
 {
 	COMPLEX z;
 	c_re (z) = c_re (x) + c_re (y);
@@ -102,8 +101,7 @@ Cappmag(COMPLEX z)
 	return tmp;
 }
 
-static INLINE REAL
-Cmag (COMPLEX z)
+static INLINE REAL Cmag (COMPLEX z)
 {
 	return (REAL) sqrt (sqr (z.re) + sqr (z.im));
 	//return (REAL) hypot(z.re,z.im);
@@ -121,8 +119,7 @@ Csqrmag (COMPLEX z)
 	return (REAL) (sqr (z.re) + sqr (z.im));
 }
 
-static INLINE COMPLEX
-Cmplx (REAL x, IMAG y)
+static INLINE COMPLEX Cmplx (REAL x, IMAG y)
 {
 	COMPLEX z;
 	z.re = x, z.im = y;

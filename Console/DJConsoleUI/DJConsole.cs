@@ -1,26 +1,19 @@
-﻿using System;
+﻿using Sanford.Multimedia.Midi;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using Sanford.Multimedia.Midi;
-using System.Timers;
-using System.Threading;
-using System.Resources;
 
 
 namespace PowerSDR
 {
 
-    public enum DJConsoleModels  
+    public enum DJConsoleModels
     {
-        NotSupported, 
-        HerculesMK2, 
-        HerculesMP3e2, 
-        HerculesMP3LE 
+        NotSupported,
+        HerculesMK2,
+        HerculesMP3e2,
+        HerculesMP3LE
     };
 
     public partial class DJConsole
@@ -44,7 +37,7 @@ namespace PowerSDR
         private Dictionary<int, string> ConnectedConsoles = new Dictionary<int, string>();
 
 
-            
+
 
         #region Properties
 
@@ -80,9 +73,9 @@ namespace PowerSDR
 
         public int SelectedConsole
         {
-            get{ return selectedConsole;}
-            set 
-            { 
+            get { return selectedConsole; }
+            set
+            {
                 selectedConsole = value;
                 SaveSettings();
             }
@@ -100,7 +93,7 @@ namespace PowerSDR
             DJConsole_MK2 = new PowerSDR.DJConsoleUI.DJConsole_MK2(this);
             DJConsole_MP3e2 = new PowerSDR.DJConsoleUI.DJConsole_MP3e2(this);
             DJConsole_MP3LE = new PowerSDR.DJConsoleUI.DJConsole_MP3LE(this);
-            
+
             LoadSettings();
 
             if ((Load_inDevice() == true) & (Load_outDevice() == true))
@@ -795,7 +788,7 @@ namespace PowerSDR
             DictButtons.Add(66, "Stop CWX Sending");
             DictButtons.Add(67, "MON");
             DictButtons.Add(68, "Pan Center");
-            
+
             //VAC
             DictButtons.Add(69, "VAC On/Off"); //ZZVA
             DictButtons.Add(70, "I/Q to VAC1"); // ZZVH
@@ -837,7 +830,7 @@ namespace PowerSDR
             DictButtons.Add(503, "Mode LSB");
             DictButtons.Add(504, "Mode USB");
             DictButtons.Add(505, "Mode DSB");
-       //     DictButtons.Add(506, "Mode CW");
+            DictButtons.Add(506, "XIT FLIP");    //     DictButtons.Add(506, "Mode CW");  ke9ns .185 add
             DictButtons.Add(507, "Mode CWL");
             DictButtons.Add(508, "Mode CWU");
             DictButtons.Add(509, "Mode FM");
@@ -847,6 +840,7 @@ namespace PowerSDR
             DictButtons.Add(513, "Mode DIGL");
             DictButtons.Add(514, "Mode SAM");
             DictButtons.Add(515, "Mode DRM");
+
 
 
             //Incremental Knobs 100...199
@@ -963,7 +957,7 @@ namespace PowerSDR
 
         private void inDevice_ChannelMessageReceived(object sender, ChannelMessageEventArgs e)
         {
-            if (this.SelectedConsole == (int)DJConsoleModels.HerculesMK2)  
+            if (this.SelectedConsole == (int)DJConsoleModels.HerculesMK2)
             {
 
                 switch (e.Message.Data1)
@@ -1226,8 +1220,8 @@ namespace PowerSDR
 
             if (this.SelectedConsole == (int)DJConsoleModels.HerculesMP3LE)  //Hercules DJ Console MP3LE
             {
-               //Debugging: //MessageBox.Show("Data1: " + e.Message.Data1.ToString() + " Data2: " + e.Message.Data2.ToString());
-               switch (e.Message.Data1)
+                //Debugging: //MessageBox.Show("Data1: " + e.Message.Data1.ToString() + " Data2: " + e.Message.Data2.ToString());
+                switch (e.Message.Data1)
                 {
                     case 1: // Key 1 DeckA
                         {
@@ -1645,7 +1639,7 @@ namespace PowerSDR
                         }
 
                 }
-            
+
             }
 
 
@@ -2093,7 +2087,7 @@ namespace PowerSDR
                         break;
                     }
 
-                case 3:// ke9ns should be A<>B but its said to be only the VFO and not the mode
+                case 3:// ke9ns: should be A<>B but its said to be only the VFO and not the mode
                     {
                         VfoSwap(msg);
                         break;
@@ -2499,7 +2493,7 @@ namespace PowerSDR
                         MuteRX2OnOff(msg);
                         break;
                     }
-                
+
                 case 76:
                     {
                         Tun(msg);
@@ -2654,7 +2648,8 @@ namespace PowerSDR
                     }
                 case 506:
                     {
-                        ModeCW(msg);
+                        XITFLIP(msg); // ke9ns add was CW unused mode
+                       // ModeCW(msg);
                         break;
                     }
                 case 507:
@@ -2738,7 +2733,7 @@ namespace PowerSDR
                         XIT_inc(msg);
                         break;
                     }
-                
+
                 case 106:
                     {
                         ZoomSliderInc(msg);
@@ -3022,8 +3017,8 @@ namespace PowerSDR
 
                 m_parent.CopyVFOAtoB();
 
-              //  string FreqA = commands.ZZFA("");
-              //  commands.ZZFB(FreqA);
+                //  string FreqA = commands.ZZFA("");
+                //  commands.ZZFB(FreqA);
             }
         }
 
@@ -3037,8 +3032,8 @@ namespace PowerSDR
 
                 m_parent.CopyVFOBtoA();
 
-              //  string FreqB = commands.ZZFB("");
-               // commands.ZZFA(FreqB);
+                //  string FreqB = commands.ZZFB("");
+                // commands.ZZFA(FreqB);
             }
         }
 
@@ -3103,7 +3098,7 @@ namespace PowerSDR
 
             if (msg == 127)
             {
-               commands.ZZRD("");
+                commands.ZZRD("");
             }
 
             if (msg == 1)
@@ -3120,7 +3115,7 @@ namespace PowerSDR
             long freq = Convert.ToInt32(commands.ZZXF(""));
             int mode = Convert.ToInt16(commands.ZZMD(""));
 
-            if ((msg == 127) && (freq >-99995))
+            if ((msg == 127) && (freq > -99995))
             {
                 if ((mode == 0) || (mode == 1)) freq = freq - 50;
                 if ((mode == 3) || (mode == 4)) freq = freq - 10;
@@ -3128,7 +3123,7 @@ namespace PowerSDR
                 if (freq >= 0) commands.ZZXF("+" + freq.ToString("D4"));
             }
 
-            if ((msg == 1) && (freq <99995))
+            if ((msg == 1) && (freq < 99995))
             {
                 if ((mode == 0) || (mode == 1)) freq = freq + 50;
                 if ((mode == 3) || (mode == 4)) freq = freq + 10;
@@ -3630,8 +3625,27 @@ namespace PowerSDR
             int mode = Convert.ToInt16(commands.ZZMD(""));
 
 
+            // ke9ns mod: just use ZZAU, and ZZAD which will use the tunestep and snaptune if snaptune option is selected .178
+            if (Console.CTUN == true)
+            {
+                if (msg == 127) // neg step
+                {
 
-            switch (mode)  
+                   //  commands.ZZAD("01"); // does not work
+
+                   m_parent.setupForm.parser.Get("ZZAD01;"); //.178
+                }
+                else if (msg == 1) // pos step
+                {
+                    // commands.ZZAU("01");
+
+                    m_parent.setupForm.parser.Get("ZZAU01;"); //.178
+                }
+
+                return;
+            }
+
+            switch (mode)
             {
                 case 7: //DIGU
                     {
@@ -3747,12 +3761,12 @@ namespace PowerSDR
         {
             parser.nSet = 2;
             parser.nGet = 0;
-            int step = StringToFreq(commands.ZZAC(""));
+            int step = StringToFreq(commands.ZZAC("")); // read step size
             parser.nSet = 11;
-            long freq = Convert.ToInt32(commands.ZZFB(""));
+            long freq = Convert.ToInt32(commands.ZZFB("")); // read vfob
             parser.nAns = 11;
 
-            int mode = Convert.ToInt16(commands.ZZMD(""));
+            int mode = Convert.ToInt16(commands.ZZMD("")); // read rx1 mode
 
 
             switch (mode)
@@ -4412,8 +4426,8 @@ namespace PowerSDR
                             {
                                 commands.ZZPA("3");
                                 return;
-                            } 
-                            
+                            }
+
                             break;
                         }
                     case 3: //Flex1500
@@ -4781,7 +4795,7 @@ namespace PowerSDR
             }
 
         }
-        
+
         private void AGCModeUp(int msg)
         {
             parser.nGet = 0;
@@ -4806,7 +4820,7 @@ namespace PowerSDR
                 }
             }
         }
-        
+
         private void AGCModeDown(int msg)
         {
             parser.nGet = 0;
@@ -4862,7 +4876,7 @@ namespace PowerSDR
                 }
             }
         }
-       
+
         private void DisplayAverage(int msg)
         {
             if (msg == 127)
@@ -4891,7 +4905,7 @@ namespace PowerSDR
                 }
             }
         }
-        
+
         private void DisplayPeak(int msg)
         {
             if (msg == 127)
@@ -5079,7 +5093,7 @@ namespace PowerSDR
                 try
                 {
                     int dpm = Convert.ToInt16(commands.ZZDM(""));
-                    
+
                     if ((dpm > 0) && (dpm <= 7))
                     {
                         dpm = dpm - 1;
@@ -5182,26 +5196,26 @@ namespace PowerSDR
                     int zoom = Convert.ToInt16(commands.ZZPZ(""));
                     int zoomf = Convert.ToInt16(commands.ZZPY("")); //check slider position and select closest step
 
-                        if ((zoomf >= 10) && (zoomf <= 49))
-                        {
-                            commands.ZZPZ("0"); //050
-                            return;
-                        }
-                        if ((zoomf >= 50) && (zoomf <= 149))
-                        {
-                            commands.ZZPZ("1"); //150
-                            return;
-                        }
-                        if ((zoomf >= 150) && (zoomf <= 199))
-                        {
-                            commands.ZZPZ("2"); //200
-                            return;
-                        }
-                        if ((zoomf >= 200) && (zoomf <= 225))
-                        {
-                            commands.ZZPZ("3"); //225
-                            return;
-                        }
+                    if ((zoomf >= 10) && (zoomf <= 49))
+                    {
+                        commands.ZZPZ("0"); //050
+                        return;
+                    }
+                    if ((zoomf >= 50) && (zoomf <= 149))
+                    {
+                        commands.ZZPZ("1"); //150
+                        return;
+                    }
+                    if ((zoomf >= 150) && (zoomf <= 199))
+                    {
+                        commands.ZZPZ("2"); //200
+                        return;
+                    }
+                    if ((zoomf >= 200) && (zoomf <= 225))
+                    {
+                        commands.ZZPZ("3"); //225
+                        return;
+                    }
                 }
                 catch
                 {
@@ -5228,18 +5242,18 @@ namespace PowerSDR
             try
             {
                 int zoom = Convert.ToInt16(commands.ZZPY(""));
-            if ((msg == 127) && (zoom >= 15))
-            {
-                zoom = zoom - 5;
-                commands.ZZPY(zoom.ToString("000"));
-                return;
-            }
-            if ((msg == 1) && (zoom <= 235))
-            {
-                zoom = zoom + 5;
-                commands.ZZPY(zoom.ToString("000"));
-                return;
-            }
+                if ((msg == 127) && (zoom >= 15))
+                {
+                    zoom = zoom - 5;
+                    commands.ZZPY(zoom.ToString("000"));
+                    return;
+                }
+                if ((msg == 1) && (zoom <= 235))
+                {
+                    zoom = zoom + 5;
+                    commands.ZZPY(zoom.ToString("000"));
+                    return;
+                }
             }
             catch
             {
@@ -5334,7 +5348,7 @@ namespace PowerSDR
             }
         }
 
-        private void CWXMacro1 (int msg)
+        private void CWXMacro1(int msg)
         {
             if (msg == 127)
             {
@@ -5524,6 +5538,7 @@ namespace PowerSDR
             }
         }
 
+        bool MONother = false; // ke9ns add
         private void MONOnOff(int msg)
         {
             if (msg == 127)
@@ -5531,17 +5546,27 @@ namespace PowerSDR
                 parser.nGet = 0;
                 parser.nSet = 1;
 
-                int MONState = Convert.ToInt16(commands.ZZMO(""));
+                int MONState = Convert.ToInt16(commands.ZZMO("")); // ke9ns: get current status of MON
 
                 if (MONState == 0)
                 {
-                    commands.ZZMO("1");
+                    commands.ZZMO("1");  // ke9ns: if MON was OFF, then turn ON MONpr
+                    MONother = true;
                     return;
                 }
-                if (MONState == 1)
+                else if (MONState == 1)
                 {
-                    commands.ZZMO("0");
-                    return;
+                    if (MONother == true)
+                    {
+                        commands.ZZMO("2"); // ke9ns add: MONpr, then MONps (because modify of the ZZMO command in .147
+                        MONother = false;
+                        return;
+                    }
+                    else
+                    {
+                        commands.ZZMO("0"); // ke9ns: if MON was ON, then turn OFF
+                        return;
+                    }
                 }
             }
         }
@@ -5633,9 +5658,9 @@ namespace PowerSDR
                 parser.nSet = 5;
                 parser.nGet = 0;
                 parser.nAns = 5;
-                
+
                 string s = commands.ZZFH("");
-                
+
                 int UpperEdge = Convert.ToInt32(s);
 
 
@@ -5645,10 +5670,10 @@ namespace PowerSDR
                     commands.ZZFH(UpperEdge.ToString("00000"));
                     return;
                 }
-                
+
                 if ((msg == 1) && (UpperEdge < 0))
                 {
-                    if (UpperEdge > (-tuningstep-1))
+                    if (UpperEdge > (-tuningstep - 1))
                     {
                         UpperEdge = UpperEdge + tuningstep;
                         commands.ZZFH(UpperEdge.ToString("00000"));
@@ -5738,7 +5763,7 @@ namespace PowerSDR
 
                 if ((msg == 1) && (LowerEdge < 0))
                 {
-                    if (LowerEdge > (-tuningstep -1))
+                    if (LowerEdge > (-tuningstep - 1))
                     {
                         LowerEdge = LowerEdge + tuningstep;
                         commands.ZZFL(LowerEdge.ToString("00000"));
@@ -5789,9 +5814,9 @@ namespace PowerSDR
 
             try
             {
-                    int vac = (int)((msg - 63) * 0.64);
-                    commands.ZZVB(vac.ToString("000;-00;000"));
-                    return;
+                int vac = (int)((msg - 63) * 0.64);
+                commands.ZZVB(vac.ToString("000;-00;000"));
+                return;
 
             }
             catch
@@ -5817,18 +5842,18 @@ namespace PowerSDR
                 return;
             }
         }
-    
 
-            private void VAC2GainRX(int msg)
+
+        private void VAC2GainRX(int msg)
         {
             parser.nGet = 0;
             parser.nSet = 3;
 
             try
             {
-                    int vac = (int)((msg - 63) * 0.64);
-                    commands.ZZVW(vac.ToString("000;-00;000"));
-                    return;
+                int vac = (int)((msg - 63) * 0.64);
+                commands.ZZVW(vac.ToString("000;-00;000"));
+                return;
 
             }
             catch
@@ -5855,7 +5880,7 @@ namespace PowerSDR
             }
         }
 
-       
+
 
         private void ESCOnOff(int msg)
         {
@@ -6512,6 +6537,15 @@ namespace PowerSDR
             }
         }
 
+        // ke9ns add: .185
+        private void XITFLIP(int msg)
+        {
+          //  if (msg == 127)
+           // {
+                m_parent.XITFlip = true;
+           // }
+        } // XITFLIP
+
         private void ModeCW(int msg)
         {
             if (msg == 127)
@@ -6705,7 +6739,7 @@ namespace PowerSDR
         }
 
 
-    
+
     }
 
 

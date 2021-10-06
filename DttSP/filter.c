@@ -71,8 +71,9 @@ delFIR_REAL (RealFIR p)
 	}
 }
 
-void
-delFIR_COMPLEX (ComplexFIR p)
+
+//=================================================
+void delFIR_COMPLEX (ComplexFIR p)
 {
 	if (p)
 	{
@@ -195,8 +196,8 @@ newFIR_Bandpass_REAL (REAL lo, REAL hi, REAL sr, int size)
     }
 }
 
-ComplexFIR
-newFIR_Bandpass_COMPLEX (REAL lo, REAL hi, REAL sr, int size)
+//====================================================================================
+ComplexFIR newFIR_Bandpass_COMPLEX (REAL lo, REAL hi, REAL sr, int size)
 {
 	if ((lo < -(sr / 2.0)) || (hi > (sr / 2.0)) || (hi <= lo))
 		return 0;

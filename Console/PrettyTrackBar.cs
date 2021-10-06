@@ -81,7 +81,7 @@ namespace PowerSDR
                     {
                         width = this.Width - head_image.Width - Padding.Horizontal;
                         head_x = (int)Math.Round((val - min) / (double)(max - min) * width) + Padding.Left;
-                        head_y = (int)((this.Height-Padding.Vertical) / 2 - head_image.Height / 2) + Padding.Top;
+                        head_y = (int)((this.Height - Padding.Vertical) / 2 - head_image.Height / 2) + Padding.Top;
                     }
                     break;
                 case Orientation.Vertical:
@@ -161,7 +161,7 @@ namespace PowerSDR
         public int Value
         {
             get { return val; }
-            set 
+            set
             {
                 val = value;
                 if (val < min) val = min;
@@ -210,10 +210,10 @@ namespace PowerSDR
         {
             if (e.Button != MouseButtons.Left) // ke9ns ie a right click or middle
             {
-               
+
                 return;
             }
-          
+
 
             if (head_rect.IsEmpty) return;
 
@@ -282,40 +282,40 @@ namespace PowerSDR
                         width = this.Width - head_image.Width - Padding.Horizontal;
 
                         if (head_rect.X <= Padding.Left && delta < 0) return;
-                        else if (head_rect.X >= (width+Padding.Left) && delta > 0) return;
+                        else if (head_rect.X >= (width + Padding.Left) && delta > 0) return;
 
                         percent = (head_rect.X - Padding.Left + delta) / (double)width;
-                        new_val = min+(int)Math.Round((percent * (max-min)));
+                        new_val = min + (int)Math.Round((percent * (max - min)));
                         if (new_val < min) new_val = min;
                         if (new_val > max) new_val = max;
 
                         down_x = e.X;
                         if (down_x < Padding.Left) down_x = Padding.Left;
-                        if (down_x > width+Padding.Left+head_image.Width) down_x = width+Padding.Left+head_image.Width;
+                        if (down_x > width + Padding.Left + head_image.Width) down_x = width + Padding.Left + head_image.Width;
 
                         head_rect.X += delta;
                         if (head_rect.X < Padding.Left) head_rect.X = Padding.Left;
-                        if (head_rect.X > width+Padding.Left) head_rect.X = width+Padding.Left;
+                        if (head_rect.X > width + Padding.Left) head_rect.X = width + Padding.Left;
                         break;
                     case Orientation.Vertical:
                         delta = e.Y - down_y;
                         height = this.Height - head_image.Height - Padding.Vertical;
 
                         if (head_rect.Y <= Padding.Top && delta < 0) return;
-                        else if (head_rect.Y >= (height+Padding.Top) && delta > 0) return;
+                        else if (head_rect.Y >= (height + Padding.Top) && delta > 0) return;
 
                         percent = 1.0 - (head_rect.Y - Padding.Top + delta) / (double)height;
-                        new_val = min+(int)(percent * (max-min));
+                        new_val = min + (int)(percent * (max - min));
                         if (new_val < min) new_val = min;
                         if (new_val > max) new_val = max;
 
                         down_y = e.Y;
                         if (down_y < Padding.Top) down_y = Padding.Top;
-                        if (down_y > height+Padding.Top+head_image.Height) down_y = height+Padding.Top+head_image.Height;
+                        if (down_y > height + Padding.Top + head_image.Height) down_y = height + Padding.Top + head_image.Height;
 
                         head_rect.Y += delta;
                         if (head_rect.Y < Padding.Top) head_rect.Y = Padding.Top;
-                        if (head_rect.Y > height+Padding.Top) head_rect.Y = height+Padding.Top;
+                        if (head_rect.Y > height + Padding.Top) head_rect.Y = height + Padding.Top;
                         break;
                 }
 
@@ -333,10 +333,10 @@ namespace PowerSDR
         {
             if (e.Button != MouseButtons.Left) // ke9ns  not left means looking for Right click or Middle
             {
-             
+
                 return;
             }
-          
+
 
             if (head_rect.IsEmpty) return;
 
@@ -354,7 +354,7 @@ namespace PowerSDR
                     g.DrawImage(base.BackgroundImage, 0, 0);*/
 
                 // draw head
-                if(head_image != null)
+                if (head_image != null)
                     g.DrawImage(head_image, head_rect.X, head_rect.Y, head_image.Width, head_image.Height);
             }
             else
@@ -375,7 +375,7 @@ namespace PowerSDR
                 imageAttributes.ClearColorMatrix();
                 imageAttributes.SetColorMatrix(new ColorMatrix(ptsArray), ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
                 imageAttributes.SetGamma(gamma, ColorAdjustType.Bitmap);
-                
+
                 // draw background
                 /*if(base.BackgroundImage != null)
                     g.DrawImage(base.BackgroundImage,
@@ -385,13 +385,13 @@ namespace PowerSDR
                         imageAttributes);*/
 
                 // draw head
-                if(head_image != null)
+                if (head_image != null)
                     g.DrawImage(head_image,
                         new Rectangle(head_rect.X, head_rect.Y, head_image.Width, head_image.Height),
                         0, 0, head_image.Width, head_image.Height,
                         GraphicsUnit.Pixel,
                         imageAttributes);
- 
+
                 imageAttributes.Dispose();
                 imageAttributes = null;
             }

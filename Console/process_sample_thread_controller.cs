@@ -46,18 +46,18 @@ using System.Windows.Forms;
 
 namespace PowerSDR
 {
-	public class ProcessSampleThreadController
-	{
-		uint thread;
-		public ProcessSampleThreadController(uint threadno)
-		{
-			this.thread = threadno;
-		}
+    public class ProcessSampleThreadController
+    {
+        uint thread;
+        public ProcessSampleThreadController(uint threadno)
+        {
+            this.thread = threadno;
+        }
 
         //private static int next_cpu = 1;
 
-		public void ProcessSampleThread()
-		{
+        public void ProcessSampleThread()
+        {
             /*Thread.BeginThreadAffinity();
             int id = AppDomain.GetCurrentThreadId();
             int num_cpus = Environment.ProcessorCount;
@@ -76,7 +76,7 @@ namespace PowerSDR
                 }
             }*/
 
-			DttSP.ProcessSamplesThread(thread);
-		}
-	}
+            DttSP.ProcessSamplesThread(thread);
+        }
+    }
 }

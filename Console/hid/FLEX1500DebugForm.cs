@@ -27,32 +27,29 @@
 //=================================================================
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Windows.Forms;
-using System.Collections;
-using PowerSDR;
 using WDU_DEVICE_HANDLE = System.IntPtr;
 
 
 namespace PowerSDR
 {
+
     unsafe public partial class FLEX1500DebugForm : Form
     {
         float tone1 = 350.0f;
         float tone2 = 440.0f;
+        Console console;
 
-        public FLEX1500DebugForm()
+        public FLEX1500DebugForm(Console c)
         {
             InitializeComponent();
+            console = c;
+
+            this.TopMost = true; // ke9ns .174
         }
 
         public static string SerialToString(uint serial)
@@ -73,69 +70,69 @@ namespace PowerSDR
             s += ((byte)(rev >> 0)).ToString();
             return s;
         }
-/*
-        private void FLEX1500DebugForm_Load(object sender, EventArgs e)
-        {
-            PowerSDR.Flex1500USB.D_STATE_CHANGE_CALLBACK PTT_Callback = PTT;
-            PowerSDR.Flex1500USB.D_STATE_CHANGE_CALLBACK FlexPTT_Callback = FlexPTT;
-            PowerSDR.Flex1500USB.D_STATE_CHANGE_CALLBACK Dash_Callback = Dash;
-            PowerSDR.Flex1500USB.D_STATE_CHANGE_CALLBACK Dot_Callback = Dot;
-            PowerSDR.Flex1500USB.D_INTERCHANGE_BUFFER_CALLBACK InterchangeCallback = AudioSine;
-            PowerSDR.Flex1500USB.D_ATTACH_DETACH_CALLBACK attach = attachCallback;
-            PowerSDR.Flex1500USB.D_ATTACH_DETACH_CALLBACK detach = detachCallback;
-
-            try
-            {
-                Flex1500USB Flex1500 = new Flex1500USB(attach, detach);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            Thread.Sleep(1000);
-            radioCollection = Flex1500USB.radioArray;
-           
-            if (Flex1500USB.number_devices == 2 && radioCollection.Count == 2)
-            {
-                int i = 0;
-                foreach (var item in radioCollection.Keys)
+        /*
+                private void FLEX1500DebugForm_Load(object sender, EventArgs e)
                 {
-                    myRadios[i++] = item;
-                }
-                Flex1500.Init(PTT_Callback, FlexPTT_Callback, Dash_Callback, Dot_Callback, InterchangeCallback, true, false, false, 1024);
-                string sn;
-                Flex1500.GetSerialNumber(out sn);
-                sn1.Text = sn;
-                radioCollection[myRadios[1]].Init(PTT_Callback, FlexPTT_Callback, Dash_Callback, Dot_Callback, InterchangeCallback, false, false, false, 1024);
-                radioCollection[myRadios[1]].GetSerialNumber(out sn);
-                sn2.Text = sn;
-            }
-            else if (Flex1500USB.number_devices == 1 && radioCollection.Count == 1)
-            {
-                int i = 0;
-                foreach (var item in radioCollection.Keys)
-                {
-                    myRadios[i++] = item;
-                }
-                string sn;
-                Flex1500.Init(PTT_Callback, FlexPTT_Callback, Dash_Callback, Dot_Callback, InterchangeCallback, true, false, false, 2048);
-                Flex1500.GetSerialNumber(out sn);
-                myRadios[1] = (WDU_DEVICE_HANDLE)0;
-            }
-            else
-            {
-                MessageBox.Show("No hardware found");
-                foreach (Control c in this.Controls)
-                    c.Enabled = false;
-                return;
-            }
-           
+                    PowerSDR.Flex1500USB.D_STATE_CHANGE_CALLBACK PTT_Callback = PTT;
+                    PowerSDR.Flex1500USB.D_STATE_CHANGE_CALLBACK FlexPTT_Callback = FlexPTT;
+                    PowerSDR.Flex1500USB.D_STATE_CHANGE_CALLBACK Dash_Callback = Dash;
+                    PowerSDR.Flex1500USB.D_STATE_CHANGE_CALLBACK Dot_Callback = Dot;
+                    PowerSDR.Flex1500USB.D_INTERCHANGE_BUFFER_CALLBACK InterchangeCallback = AudioSine;
+                    PowerSDR.Flex1500USB.D_ATTACH_DETACH_CALLBACK attach = attachCallback;
+                    PowerSDR.Flex1500USB.D_ATTACH_DETACH_CALLBACK detach = detachCallback;
 
-            uint rev;
-            Flex1500.GetFirmwareRev(out rev);
-            this.Text += "   " + RevToString(rev);            
-        }
-        */
+                    try
+                    {
+                        Flex1500USB Flex1500 = new Flex1500USB(attach, detach);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    Thread.Sleep(1000);
+                    radioCollection = Flex1500USB.radioArray;
+
+                    if (Flex1500USB.number_devices == 2 && radioCollection.Count == 2)
+                    {
+                        int i = 0;
+                        foreach (var item in radioCollection.Keys)
+                        {
+                            myRadios[i++] = item;
+                        }
+                        Flex1500.Init(PTT_Callback, FlexPTT_Callback, Dash_Callback, Dot_Callback, InterchangeCallback, true, false, false, 1024);
+                        string sn;
+                        Flex1500.GetSerialNumber(out sn);
+                        sn1.Text = sn;
+                        radioCollection[myRadios[1]].Init(PTT_Callback, FlexPTT_Callback, Dash_Callback, Dot_Callback, InterchangeCallback, false, false, false, 1024);
+                        radioCollection[myRadios[1]].GetSerialNumber(out sn);
+                        sn2.Text = sn;
+                    }
+                    else if (Flex1500USB.number_devices == 1 && radioCollection.Count == 1)
+                    {
+                        int i = 0;
+                        foreach (var item in radioCollection.Keys)
+                        {
+                            myRadios[i++] = item;
+                        }
+                        string sn;
+                        Flex1500.Init(PTT_Callback, FlexPTT_Callback, Dash_Callback, Dot_Callback, InterchangeCallback, true, false, false, 2048);
+                        Flex1500.GetSerialNumber(out sn);
+                        myRadios[1] = (WDU_DEVICE_HANDLE)0;
+                    }
+                    else
+                    {
+                        MessageBox.Show("No hardware found");
+                        foreach (Control c in this.Controls)
+                            c.Enabled = false;
+                        return;
+                    }
+
+
+                    uint rev;
+                    Flex1500.GetFirmwareRev(out rev);
+                    this.Text += "   " + RevToString(rev);            
+                }
+                */
         private void attachCallback(WDU_DEVICE_HANDLE pDev)
         {
             Debug.Print("attach");
@@ -147,14 +144,14 @@ namespace PowerSDR
         }
 
         static double Iacc, Qacc;
-        private int AudioSine(float[] AudioInBufI, float[] AudioInBufQ, 
+        private int AudioSine(float[] AudioInBufI, float[] AudioInBufQ,
             float[] AudioOutBufI, float[] AudioOutBufQ, uint paFlags)
         {
             double phaseStep = 1.0 / 48000.0 * 2 * Math.PI;
             for (int i = 0; i < AudioOutBufI.Length; i++)
             {
-                Iacc += phaseStep*tone1;
-                Qacc += phaseStep*tone2;
+                Iacc += phaseStep * tone1;
+                Qacc += phaseStep * tone2;
                 AudioOutBufI[i] = (float)Math.Sin(Iacc);// / 10.0f;
                 AudioOutBufQ[i] = (float)Math.Sin(Qacc);// / 10.0f;
                 Debug.Assert(AudioInBufI.Length == AudioOutBufI.Length);
@@ -173,7 +170,7 @@ namespace PowerSDR
             for (int i = 0; i < AudioOutBufI.Length; i++)
             {
                 Iacc += phaseStep;
-                Qacc += phaseStep*1.5;
+                Qacc += phaseStep * 1.5;
                 if (Iacc > 0.999) Iacc -= 2.0;
                 if (Qacc > 0.999) Qacc -= 2.0;
                 AudioOutBufI[i] = (float)Iacc;// Math.Sin(Iacc);// / 10.0f;
@@ -280,7 +277,7 @@ namespace PowerSDR
 
             t1.Stop();
 
-            Debug.WriteLine("ReadOp: "+val+"  ("+t1.DurationMsec.ToString("f2")+")");
+            Debug.WriteLine("ReadOp: " + val + "  (" + t1.DurationMsec.ToString("f2") + ")");
             txtResult.Text = result.ToString();
         }
 
@@ -304,15 +301,15 @@ namespace PowerSDR
             }
 
             byte[] data = new byte[num_bytes];
-            for(int i=0; i<num_bytes; i++)
-                data[i] = byte.Parse(txtData.Text.Substring(i*2, 2), NumberStyles.HexNumber);
+            for (int i = 0; i < num_bytes; i++)
+                data[i] = byte.Parse(txtData.Text.Substring(i * 2, 2), NumberStyles.HexNumber);
 
             HiPerfTimer t1 = new HiPerfTimer();
             t1.Start();
 
             int val;
             //fixed(byte* ptr = &data[0])
-                val = Flex1500.WriteEEPROM(offset, data);
+            val = Flex1500.WriteEEPROM(offset, data);
 
             t1.Stop();
             Debug.WriteLine("EEWrite: " + val + "  (" + t1.DurationMsec.ToString("f2") + ")");
@@ -335,7 +332,7 @@ namespace PowerSDR
             txtEERead.Text = "";
             for (int i = 0; i < num_bytes; i++)
                 txtEERead.Text += data[i].ToString("X").PadLeft(2, '0');
-           
+
             Debug.WriteLine("EERead: " + val + "  (" + t1.DurationMsec.ToString("f2") + ")");
         }
 
@@ -355,7 +352,7 @@ namespace PowerSDR
             t1.Stop();
 
             txtEERead.Text = f.ToString("f6");
-            
+
             Debug.WriteLine("EERead Float: " + val + "  (" + t1.DurationMsec.ToString("f2") + ")");
         }
 
@@ -846,7 +843,142 @@ namespace PowerSDR
             txtGPIOResult.Text = b.ToString("X");
         }
 
-       
+        //==========================================================================
+        // TURF selector
+        private void buttonTS3_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Warning: You are changing your Turf Region.\n",
+                                        "Do you have authorization?",
+                      MessageBoxButtons.YesNo,
+                      MessageBoxIcon.Question);
+            int val = 0;
+            byte[] data = new byte[1]; // 1 byte long
+
+            if (dr == DialogResult.Yes)
+            {
+                data[0] = (byte)numericUpDown1.Value;
+                Debug.WriteLine("Byte value " + (byte)numericUpDown1.Value);
+
+                val = Flex1500.WriteEEPROM(0x1819, data);
+
+            }
+
+            MessageBox.Show("You must close PowerSDR and cycle power to the radio. Then go to setup->General->Options->BandText Udpate", "Cycle Power",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        } // buttonTS3_Click (TURF)
+
+        //===============================================================================
+        // Extended selector
+        private void buttonTS1_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Warning: You must have Authorization as a MARS/CAP/SHARES Licensed Operator or permission to operate 630m band.\n",
+                                          "Do you have authorization?",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+            int val = 0;
+            byte[] data = new byte[1];
+
+            data[0] = 0x78;   // 0xff is normal value  0x78 is extended
+
+            if (dr == DialogResult.Yes)
+            {
+                val = Flex1500.WriteEEPROM(0x1818, data);  // x1818, 
+            }
+
+
+            MessageBox.Show("You must cycle power to the radio", "Cycle Power",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        } // buttonTS1_Click
+
+        private void buttonTS2_Click(object sender, EventArgs e)
+        {
+
+            DialogResult dr = MessageBox.Show("This will reset any MARS/CAP/SHARES operate back to Normal Standard Operation\n",
+
+                         "Yes?",
+                         MessageBoxButtons.YesNo,
+                         MessageBoxIcon.Question);
+
+            int val = 0;
+            byte[] data = new byte[1];
+
+            data[0] = 0xff;
+
+            if (dr == DialogResult.Yes)
+            {
+
+                val = Flex1500.WriteEEPROM(0x1818, data); // return to normal
+
+            }
+
+        } // buttonTS2_Click
+
+        private void btnEEPROMRead1_Click(object sender, EventArgs e)
+        {
+            // if (txtEEPROMOffset.Text == "") return;
+            //   txtEEPROMRead.BackColor = Color.Red;
+            Application.DoEvents();
+            //  uint offset = uint.Parse(txtEEPROMOffset.Text, System.Globalization.NumberStyles.HexNumber);
+
+
+
+            Debug.WriteLine("TRYING TO OPEN EEPROM TXT FILE TO WRITE TO ");
+
+
+            string file_name2 = console.AppDataPath + "USBEEEPROMDATA.txt"; // save data for my mods
+
+            FileStream stream2 = new FileStream(file_name2, FileMode.Create); // open   file
+            BinaryWriter writer2 = new BinaryWriter(stream2);
+
+            Debug.WriteLine("OPENED EEPROM TXT FILE TO WRITE TO ");
+
+            ushort offset; // 16bit int
+
+            byte[] data;
+            string datastring;
+            string final;
+            string offsetstring;
+            int val;
+
+            for (offset = 0x0; offset < 0x4000; offset++) // valid data here  
+            {
+
+                Debug.Write("   Reading offset-> " + offset);
+
+                val = Flex1500.ReadEEPROM(offset, 1, out data);
+
+                //  MessageBox.Show("Error in ReadTRXEEPROM.");
+
+                // if (FWC.ReadTRXEEPROMByte(offset, out data) == 0)
+
+
+
+
+                Debug.WriteLine("   Data-> " + data[0]);
+
+                //   txtEEPROMRead.BackColor = SystemColors.Control;
+
+                datastring = String.Format("{0:X4}", data[0]);
+
+                //   txtEEPROMRead.Text = datastring;
+
+                offsetstring = String.Format("{0:X4}", offset);
+
+                //   txtEEPROMOffset.Text = offsetstring;
+
+                final = offsetstring + " , " + datastring + "\n";
+
+                writer2.Write(final);
+
+
+            } // for offset loop
+
+
+            writer2.Close();    // close  file
+            stream2.Close();   // close stream
+
+
+        } // btneepromread1_click
 
         private void btnTune_Click(object sender, EventArgs e)
         {
@@ -856,7 +988,7 @@ namespace PowerSDR
             bool b = double.TryParse(txtTune.Text, out freq);
             if (!b) return;
 
-            uint ftw = (uint)(Math.Pow(2.0, 32) * freq*2 / 384.0);
+            uint ftw = (uint)(Math.Pow(2.0, 32) * freq * 2 / 384.0);
 
             HiPerfTimer t1 = new HiPerfTimer();
             t1.Start();
@@ -866,7 +998,7 @@ namespace PowerSDR
             t1.Stop();
             Debug.WriteLine("Tune: " + val + "  (" + t1.DurationMsec.ToString("f2") + ")");
         }
-     
+
         /*
         private void button1_Click(object sender, EventArgs e)
         {

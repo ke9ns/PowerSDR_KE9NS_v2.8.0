@@ -26,8 +26,6 @@
 //    USA
 //=================================================================
 
-using System;
-
 namespace PowerSDR
 {
     class SVNRev

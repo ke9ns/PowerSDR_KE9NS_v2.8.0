@@ -36,11 +36,11 @@ using System.Threading;
 
 namespace PowerSDR
 {
-	/// <summary>
-	/// Summary description for WaveOptions.
-	/// </summary>
-	public class IDBOX : System.Windows.Forms.Form
-	{
+    /// <summary>
+    /// Summary description for WaveOptions.
+    /// </summary>
+    public class IDBOX : System.Windows.Forms.Form
+    {
 
         public static Console console;   // ke9ns mod  to allow console to pass back values to setup screen
 
@@ -52,52 +52,52 @@ namespace PowerSDR
         private ToolTip toolTip1;
         public Button btnTrack;
 
-       // public static IDBOX IDBOXForm;                       // ke9ns add 
+        // public static IDBOX IDBOXForm;                       // ke9ns add 
 
         #endregion
 
         #region Constructor and Destructor
 
         public IDBOX(Console c)  // called the very first time
-		{
-			//
-			// Required for Windows Form Designer support
-			//
-			InitializeComponent();
-			
-			Common.RestoreForm(this, "IDBOX", false);
+        {
+            //
+            // Required for Windows Form Designer support
+            //
+            InitializeComponent();
+
+            Common.RestoreForm(this, "IDBOX", false);
 
             this.TopMost = true;
 
-           
+
         }
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
 
             console.TIMETOID = false;
         }
 
-		#endregion
+        #endregion
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IDBOX));
             this.btnTrack = new System.Windows.Forms.Button();
@@ -167,42 +167,42 @@ namespace PowerSDR
             this.VisibleChanged += new System.EventHandler(this.IDBOX_VisibleChanged);
             this.ResumeLayout(false);
 
-		}
-		#endregion
+        }
+        #endregion
 
-		#region Properties
-
-		
+        #region Properties
 
 
-       
 
-		#endregion
-
-		#region Event Handler
-
-		private void IDBOX_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-            
-            this.Hide();
-			e.Cancel = true;
-			Common.SaveForm(this, "IDBOX");
-		}
 
 
 
         #endregion
 
-      
+        #region Event Handler
 
-      
+        private void IDBOX_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+            this.Hide();
+            e.Cancel = true;
+            Common.SaveForm(this, "IDBOX");
+        }
+
+
+
+        #endregion
+
+
+
+
         private void btnTrack_Click(object sender, EventArgs e)
         {
             console.TIMETOID = false;
             Common.SaveForm(this, "IDBOX");    // w4tme
             timerrunning = false;
             this.Close();
-            
+
         }
 
         private void chkAlwaysOnTop_CheckedChanged(object sender, EventArgs e)
@@ -218,31 +218,31 @@ namespace PowerSDR
         // start timer
         private void chkBoxTimed_CheckedChanged(object sender, EventArgs e)
         {
-           
-                if ((chkBoxTimed.Checked == true)  && (timerrunning == false))
-                {
 
-                   Thread t = new Thread(new ThreadStart(mompop_timer));  // turn on track map (sun, grayline, voacap, or beacon)
+            if ((chkBoxTimed.Checked == true) && (timerrunning == false))
+            {
 
-                    t.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
-                    t.CurrentUICulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
+                Thread t = new Thread(new ThreadStart(mompop_timer));  // turn on track map (sun, grayline, voacap, or beacon)
+
+                t.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
+                t.CurrentUICulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
 
 
-                    t.Name = "momentary popup timer";
-                    t.IsBackground = true;
-                    t.Priority = ThreadPriority.BelowNormal;
-                    t.Start();
-                }
-                
-           
-           
+                t.Name = "momentary popup timer";
+                t.IsBackground = true;
+                t.Priority = ThreadPriority.BelowNormal;
+                t.Start();
+            }
+
+
+
         } // chkBoxTimed_CheckedChanged
 
 
-       
+
         //=======================================================
         // THREAD for 5 second
-        private  void mompop_timer()
+        private void mompop_timer()
         {
             timerrunning = true;
 
@@ -265,9 +265,9 @@ namespace PowerSDR
 
             poptimer.Stop();
 
-          
 
-          //  timerrunning = false;
+
+            //  timerrunning = false;
 
         } // mompop_timer()
 
@@ -281,27 +281,27 @@ namespace PowerSDR
 
         }
 
-     
+
 
         private void IDBOX_VisibleChanged(object sender, EventArgs e)
         {
-           
-            
-                if ((chkBoxTimed.Checked == true) && (timerrunning == false) )
-                {
-
-                   Thread t = new Thread(new ThreadStart(mompop_timer));  // turn on track map (sun, grayline, voacap, or beacon)
-
-                    t.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
-                    t.CurrentUICulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
 
 
-                    t.Name = "momentary popup timer";
-                    t.IsBackground = true;
-                    t.Priority = ThreadPriority.BelowNormal;
-                    t.Start();
-                }
-           
+            if ((chkBoxTimed.Checked == true) && (timerrunning == false))
+            {
+
+                Thread t = new Thread(new ThreadStart(mompop_timer));  // turn on track map (sun, grayline, voacap, or beacon)
+
+                t.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
+                t.CurrentUICulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
+
+
+                t.Name = "momentary popup timer";
+                t.IsBackground = true;
+                t.Priority = ThreadPriority.BelowNormal;
+                t.Start();
+            }
+
 
         } // IDBOX_VisibleChanged
 

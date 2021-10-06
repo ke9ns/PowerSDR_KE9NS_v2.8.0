@@ -28,16 +28,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
-
 using System.Threading;
+using System.Windows.Forms;
 #if(!NO_MCL_PM)
 using mcl_pm;
 #endif
@@ -69,7 +64,7 @@ namespace PowerSDR
         #region Level
 
         private void btnLevel_Click(object sender, EventArgs e)
-        {            
+        {
             btnLevel.Enabled = false;
             btnPA.Enabled = false;
             btnTXCarrier.Enabled = false;
@@ -122,7 +117,7 @@ namespace PowerSDR
             DttSP.SetCorrectIQEnable(0); // turn off I/Q correction
 
             double[] freq = { 144.2, 432.6 };
-            float[] level = {(float)udLevelV.Value, (float)udLevelU.Value};
+            float[] level = { (float)udLevelV.Value, (float)udLevelU.Value };
             //float[] level = { -65.2f, -62.4f };
 
             int counter = 0;
@@ -186,7 +181,7 @@ namespace PowerSDR
                     }
 
                     for (int j = 0; j < SETTLE_TIME / SLEEP_TIME; j++)
-                    {                        
+                    {
                         Thread.Sleep(SLEEP_TIME); // allow things to settle
                         if (!p.Visible) goto end;
                         p.SetPercent((float)((float)++counter / total_counts));
@@ -226,21 +221,21 @@ namespace PowerSDR
                     float high_avg = num / NUM_LOOPS;
 
                     // now we have the data ... do something useful with it
-                    Debug.WriteLine(i + "- low: " + (low_avg+console.rx1_meter_cal_offset).ToString("f1") +
-                        "  high: " + (high_avg+console.rx1_meter_cal_offset).ToString("f1"));
+                    Debug.WriteLine(i + "- low: " + (low_avg + console.rx1_meter_cal_offset).ToString("f1") +
+                        "  high: " + (high_avg + console.rx1_meter_cal_offset).ToString("f1"));
 
                     // insert pass/fail code here
                     bool b = ((Math.Abs(20.0 - (high_avg - low_avg)) < 1.0f) && // test for 20+/-1dB between low and high
-                        (Math.Abs(-50.0 - (low_avg+console.rx1_meter_cal_offset)) < 10.0f)); // test for absolute value of low
+                        (Math.Abs(-50.0 - (low_avg + console.rx1_meter_cal_offset)) < 10.0f)); // test for absolute value of low
 
                     string s = "Level Cal ";
-                    switch(i)
+                    switch (i)
                     {
                         case 0: s += "2m: "; break;
                         case 1: s += "70cm: "; break;
                     }
 
-                    if (b)  
+                    if (b)
                     {
                         s += "Passed";
                     }
@@ -265,7 +260,7 @@ namespace PowerSDR
                             break;
                     }
 
-                    s += " (" + (low_avg+console.rx1_meter_cal_offset).ToString("f1") + ", " +
+                    s += " (" + (low_avg + console.rx1_meter_cal_offset).ToString("f1") + ", " +
                             low_offset.ToString("f1") + ", " +
                             high_offset.ToString("f1") + ", " +
                             (high_avg - low_avg).ToString("f1") + ")";
@@ -311,7 +306,7 @@ namespace PowerSDR
                 lstDebug.Items[0] = "Saving Level data to EEPROM...done";
             }
 
-            switch(console.RX1Band)
+            switch (console.RX1Band)
             {
                 case Band.VHF0:
                     if (!console.xvtrForm.VIFGain)
@@ -320,7 +315,7 @@ namespace PowerSDR
                         console.RX1XVTRGainOffset = console.vhf_level_table[1];
                     break;
                 case Band.VHF1:
-                    if(!console.xvtrForm.UIFGain)
+                    if (!console.xvtrForm.UIFGain)
                         console.RX1XVTRGainOffset = console.uhf_level_table[0];
                     else
                         console.RX1XVTRGainOffset = console.uhf_level_table[1];
@@ -353,8 +348,8 @@ namespace PowerSDR
         #region PA
 
         private void btnPA_Click(object sender, EventArgs e)
-        {            
-            
+        {
+
             btnLevel.Enabled = false;
             btnPA.Enabled = false;
             btnTXCarrier.Enabled = false;
@@ -368,9 +363,9 @@ namespace PowerSDR
             t.IsBackground = true;
             t.Priority = ThreadPriority.Normal;
             t.Start();
-          
+
         }
-        
+
         private void CalPAGain()
         {
             #region INIT
@@ -386,17 +381,17 @@ namespace PowerSDR
 #endif
             int errorCount = 0;
             int count_progressBar = 0;
-            string powerString = "powerString not set";            
+            string powerString = "powerString not set";
 
             Thread.Sleep(50);
-            
+
             if (val != 1)
             {
                 p.Text = "";
                 p.Hide();
                 lstDebug.Items.Insert(0, "PA Gain Cal Failed: No power sensor found");
                 MessageBox.Show("Error: Unable to find Power Sensor.\n" +
-                    "Please ensure the power sensor is connected to the PC and try again.\n"+
+                    "Please ensure the power sensor is connected to the PC and try again.\n" +
                     "Make sure all Mini-Circuits Power Sensor application windows are closed.",
                     "Error: Sensor Not Found",
                     MessageBoxButtons.OK,
@@ -463,7 +458,7 @@ namespace PowerSDR
             {
                 double[] freqs = new double[0];
                 bool do_band = false;
-                
+
                 switch (bands[i])
                 {
                     case Band.VHF0: do_band = ck2m.Checked; freqs = console.freqs_2m; break;
@@ -472,7 +467,7 @@ namespace PowerSDR
 
                 float target;
                 if (do_band)
-                {                    
+                {
                     float loss = 0.0f;
                     console.VFOAFreq = freqs[0];
                     if (chkHighPowerCal.Checked)
@@ -495,16 +490,16 @@ namespace PowerSDR
                         case 0:
                             FWC.SetRCATX2(false);
                             loss = (float)udVBoxLoss.Value;
-                            target += loss;                            
+                            target += loss;
                             break;
-                        case 1: 
+                        case 1:
                             FWC.SetRCATX2(true);
                             loss = (float)udUBoxLoss.Value;
-                            target += loss; 
+                            target += loss;
                             break;
                     }
                     count_progressBar = 0;
-                    for (int j = freqs.Length-1; j >= 0; j--)
+                    for (int j = freqs.Length - 1; j >= 0; j--)
                     {
                         count_progressBar++;
 #if(!NO_MCL_PM)
@@ -524,10 +519,10 @@ namespace PowerSDR
                             if (!p.Visible) goto end;
                             Thread.Sleep(50);
                         }
-            #endregion
+                        #endregion
 
-            #region CALCULATE AND SAVE
-#if(!NO_MCL_PM)
+                        #region CALCULATE AND SAVE
+#if (!NO_MCL_PM)
                         float read_db = Sensor.ReadPower();
 #else
                         float read_db = 0.0f;
@@ -544,18 +539,18 @@ namespace PowerSDR
                                 if (!p.Visible) goto end;
                                 Thread.Sleep(50);
                             }
-#if(!NO_MCL_PM)
+#if (!NO_MCL_PM)
                             read_db = Sensor.ReadPower();
 #endif
 
                             //Calculate, correct and save Audio.RadioVolume (udAttempts.Value number of tries)
-                            
+
                             for (int k = 0; k < udAttempts.Value; k++)  //number of calibration attempts
                             {
                                 //progress bar update
                                 if (ck2m.Checked && ck70cm.Checked)
                                 {
-                                    barPercent = barPercent + 0.1f / (float)(console.freqs_2m.Length + console.freqs_70cm.Length);                                    
+                                    barPercent = barPercent + 0.1f / (float)(console.freqs_2m.Length + console.freqs_70cm.Length);
                                 }
                                 else
                                 {
@@ -598,10 +593,10 @@ namespace PowerSDR
                                         read_db = Sensor.ReadPower();
 #endif
                                     }
-                                    
+
                                     Debug.WriteLine("***k = " + k);
-                                    if(chkHighPowerCal.Checked)
-                                        powerString =  " Power: " + dBm_to_watts(read_db - pad - loss).ToString("f1") + " W";
+                                    if (chkHighPowerCal.Checked)
+                                        powerString = " Power: " + dBm_to_watts(read_db - pad - loss).ToString("f1") + " W";
                                     else
                                         powerString = " Power: " + (read_db - pad - loss).ToString("f2") + " dBm";
 
@@ -619,7 +614,7 @@ namespace PowerSDR
 
                                     if (bands[i] == Band.VHF0)
                                     {
-                                        lstDebug.Items.Insert(0, "PA " + console.freqs_2m[j].ToString("f1") + ": " + powerString +" (" + Audio.RadioVolume.ToString("f4") + ")");
+                                        lstDebug.Items.Insert(0, "PA " + console.freqs_2m[j].ToString("f1") + ": " + powerString + " (" + Audio.RadioVolume.ToString("f4") + ")");
                                         console.vhf_power_table[j] = (float)Audio.RadioVolume;
                                     }
                                     else if (bands[i] == Band.VHF1)
@@ -650,9 +645,9 @@ namespace PowerSDR
                                     goto end;
                                 }
                             }//end 10 tries
-            #endregion  //end region CALCULATE AND SAVE
+                            #endregion  //end region CALCULATE AND SAVE
 
-            #region DEAL WITH UNMET CONDITIONS
+                            #region DEAL WITH UNMET CONDITIONS
 
                             //ten tries over, conditions not met
                             if (chkHighPowerCal.Checked)
@@ -661,7 +656,7 @@ namespace PowerSDR
                                 powerString = " Power: " + (read_db - pad - loss).ToString("f2") + " dBm";
 
                             //low power
-                            if (!chkHighPowerCal.Checked)  
+                            if (!chkHighPowerCal.Checked)
                             {
                                 if (i == 0)
                                 {
@@ -678,36 +673,36 @@ namespace PowerSDR
                             }
 
                             //high power V (144 MHz - 148 MHz), Power < 53.95 W
-                            else if ((read_db - pad - loss) <= 47.32 && chkHighPowerCal.Checked && i == 0) 
+                            else if ((read_db - pad - loss) <= 47.32 && chkHighPowerCal.Checked && i == 0)
                             {
                                 lstDebug.Items.Insert(0, "*PA Cal Failed " + console.freqs_2m[j].ToString("f1") + " : " + powerString + " (" + Audio.RadioVolume.ToString("f4") + ")");
                                 console.vhf_power_table[j] = (float)Audio.RadioVolume;
                                 btnPA.BackColor = Color.Red;
                             }
                             //high power U (420 MHz - 440 MHz), Power < 53.95 W
-                            else if ((read_db - pad - loss) <= 47.32 && chkHighPowerCal.Checked && i == 1 && console.freqs_70cm[j] <= 440) 
+                            else if ((read_db - pad - loss) <= 47.32 && chkHighPowerCal.Checked && i == 1 && console.freqs_70cm[j] <= 440)
                             {
-                                lstDebug.Items.Insert(0, "*PA Cal Failed "+console.freqs_70cm[j].ToString("f1")+" : Power < 54W (Power: " + powerString + " (" + Audio.RadioVolume.ToString("f4") + ")");
+                                lstDebug.Items.Insert(0, "*PA Cal Failed " + console.freqs_70cm[j].ToString("f1") + " : Power < 54W (Power: " + powerString + " (" + Audio.RadioVolume.ToString("f4") + ")");
                                 console.uhf_power_table[j] = (float)Audio.RadioVolume;
                                 btnPA.BackColor = Color.Red;
                             }
                             //high power, U (440 MHz - 448 MHz), Power < 49.89 W
-                            else if ((read_db - pad - loss) <= 46.98 && chkHighPowerCal.Checked && i == 1 && console.freqs_70cm[j] >= 440 && console.freqs_70cm[j] <= 448) 
+                            else if ((read_db - pad - loss) <= 46.98 && chkHighPowerCal.Checked && i == 1 && console.freqs_70cm[j] >= 440 && console.freqs_70cm[j] <= 448)
                             {
                                 lstDebug.Items.Insert(0, "*PA Cal Failed " + console.freqs_70cm[j].ToString("f1") + " : Power < 50W (Power: " + powerString + " (" + Audio.RadioVolume.ToString("f4") + ")");
                                 console.uhf_power_table[j] = (float)Audio.RadioVolume;
                                 btnPA.BackColor = Color.Red;
                             }
                             //high power, U (448 MHz - 450 MHz), Power < 39.99 W
-                            else if ((read_db - pad - loss) <= 46.02 && chkHighPowerCal.Checked && i == 1 && console.freqs_70cm[j] >= 448) 
+                            else if ((read_db - pad - loss) <= 46.02 && chkHighPowerCal.Checked && i == 1 && console.freqs_70cm[j] >= 448)
                             {
                                 lstDebug.Items.Insert(0, "*PA Cal Failed " + console.freqs_70cm[j].ToString("f1") + " : Power < 40W (Power: " + powerString + " (" + Audio.RadioVolume.ToString("f4") + ")");
                                 console.uhf_power_table[j] = (float)Audio.RadioVolume;
                                 btnPA.BackColor = Color.Red;
                             }
 
-                           //Power > 63.09 W, V or U, Power is too high
-                            else if ((read_db - pad - loss) > 48.0 && chkHighPowerCal.Checked) 
+                            //Power > 63.09 W, V or U, Power is too high
+                            else if ((read_db - pad - loss) > 48.0 && chkHighPowerCal.Checked)
                             {
                                 if (i == 0)
                                 {
@@ -723,7 +718,7 @@ namespace PowerSDR
                             }
 
                             //successful, but original tight tolerance not met (60 W)
-                            else 
+                            else
                             {
                                 if (chkHighPowerCal.Checked)
                                     powerString = " Power: " + dBm_to_watts(read_db - pad - loss).ToString("f1") + " W";
@@ -750,10 +745,10 @@ namespace PowerSDR
                             if (ck2m.Checked && ck70cm.Checked) //will take twice as long if both are checked
                             {
                                 //barPercent = barPercent + 1f / (float)(console.freqs_2m.Length + console.freqs_70cm.Length);
-                                if(i == 1)
+                                if (i == 1)
                                     barPercent = (float)(console.freqs_2m.Length + count_progressBar + 1) / (float)(console.freqs_2m.Length + console.freqs_70cm.Length);
                                 else if (i == 0)
-                                    barPercent = (float)(count_progressBar + 1) / (float)(console.freqs_2m.Length + console.freqs_70cm.Length);                                    
+                                    barPercent = (float)(count_progressBar + 1) / (float)(console.freqs_2m.Length + console.freqs_70cm.Length);
                             }
                             else
                             {
@@ -768,7 +763,7 @@ namespace PowerSDR
                         }
 
                         //volume too high at very beginning, power sensor probably not connected
-                        else  
+                        else
                         {
                             if (chkHighPowerCal.Checked)
                                 powerString = " Power: " + dBm_to_watts(read_db - pad - loss).ToString("f1") + " W";
@@ -779,7 +774,7 @@ namespace PowerSDR
                                 lstDebug.Items.Insert(0, "*PA " + console.freqs_2m[j].ToString("f1") + ": Error, Check Connections " + powerString + " (" + Audio.RadioVolume.ToString("f4") + ")");
                             else if (bands[i] == Band.VHF1)
                                 lstDebug.Items.Insert(0, "*PA " + console.freqs_70cm[j].ToString("f1") + ": Error, Check Connections " + powerString + " (" + Audio.RadioVolume.ToString("f4") + ")");
-                            
+
                             //Audio.RadioVolume = 0.02;
                             //try this frequency 4 times before quitting
                             if (errorCount < 4)
@@ -818,17 +813,17 @@ namespace PowerSDR
                                         console.uhf_power_table[j] = (float)Audio.RadioVolume;
                                     }
                                     //console.uhf_power_table[j] = (float)Audio.RadioVolume;
-                                }                       
+                                }
 
                                 btnPA.BackColor = Color.Red;
                                 console.MOX = false;
                                 goto end2;
                             }
                         }
-            #endregion
-                        
+                    #endregion
+
                     end:
-                        
+
                         Audio.TXInputSignal = Audio.SignalSource.RADIO;
                         console.RX1DSPMode = dsp_mode;
                         if (!p.Visible) break;
@@ -837,7 +832,7 @@ namespace PowerSDR
                     console.MOX = false;
                     if (!p.Visible)
                         goto end2;
-                }                
+                }
             } // end of outside loop
 
         end2:
@@ -862,7 +857,7 @@ namespace PowerSDR
 
             //restore original PA states
             FWC.SetVU_VPA(console.xvtrForm.VPA);
-            FWC.SetVU_UPA(console.xvtrForm.UPA);            
+            FWC.SetVU_UPA(console.xvtrForm.UPA);
 
             if (p.Text != "") // test for abort
             {
@@ -924,7 +919,7 @@ namespace PowerSDR
         {
             if (chkHighPowerCal.Checked)
             {
-                
+
                 DialogResult dr = MessageBox.Show("Warning: Enabling High Power Cal.\n" +
                                 "Power Sensor may get damaged if not properly connected.\n",
                                 "Warning: High Power Cal",
@@ -932,7 +927,7 @@ namespace PowerSDR
                                 MessageBoxIcon.Warning);
                 if (dr == DialogResult.No)
                     chkHighPowerCal.Checked = false;
-                
+
             }
         }
 
@@ -1020,13 +1015,13 @@ namespace PowerSDR
             band_freqs.Add(144.2);
             const int NUM_V_POINTS = 9;
             for (int i = 0; i < NUM_V_POINTS; i++)
-                band_freqs.Add(144.0 + (148.0 - 144.0) / (NUM_V_POINTS-1) * i);
+                band_freqs.Add(144.0 + (148.0 - 144.0) / (NUM_V_POINTS - 1) * i);
 
             band_freqs.Add(432.1);
             band_freqs.Add(432.2);
             const int NUM_U_POINTS = 41;
             for (int i = 0; i < NUM_U_POINTS; i++)
-                band_freqs.Add(430.0 + (450.0 - 430.0) / (NUM_U_POINTS-1) * i);
+                band_freqs.Add(430.0 + (450.0 - 430.0) / (NUM_U_POINTS - 1) * i);
 
             int begin = 0;
             if (!ck2m.Checked && ck70cm.Checked) // skip V freqs
@@ -1053,7 +1048,7 @@ namespace PowerSDR
 
                 float min = console.tx_carrier_min;
                 if (min > tol)
-                {                    
+                {
                     if (!test_tx_carrier.StartsWith("TX Carrier: Failed ("))
                         test_tx_carrier = "TX Carrier: Failed (";
                     test_tx_carrier += band_freqs[i].ToString("f1") + ",";
@@ -1121,5 +1116,5 @@ namespace PowerSDR
         {
             console.Enable_VU_Power_Curve = ckPwrRemap.Checked;
         }
-    }         
+    }
 }

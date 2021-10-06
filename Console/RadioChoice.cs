@@ -89,7 +89,7 @@ namespace PowerSDR
             btnColumnRemove.CellTemplate.Style.Font = new Font("Arial", 10.0f, FontStyle.Bold);
             btnColumnRemove.CellTemplate.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
             btnColumnRemove.CellTemplate.Style.ForeColor = Color.Red;
-            
+
             dataGridView1.Columns.Add(btnColumnRemove);
 
 
@@ -110,14 +110,14 @@ namespace PowerSDR
         {
             bool pal_init = false;
 
-            while(!closing)
+            while (!closing)
             {
                 if (!pal_init)
                     pal_init = Pal.Init();
                 else
                     pal_init = RadiosAvailable.ScanPal();
 
-                RadiosAvailable.Scan1500();             
+                RadiosAvailable.Scan1500();
                 Thread.Sleep(1000);
             }
         }
@@ -153,8 +153,8 @@ namespace PowerSDR
 
             Radio r = RadiosAvailable.RadioList[e.RowIndex];
             //DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-            
-            if(e.ColumnIndex == dataGridView1.Columns["Use"].Index) // Use clicked
+
+            if (e.ColumnIndex == dataGridView1.Columns["Use"].Index) // Use clicked
             {
                 if (r.Present)
                 {
@@ -211,7 +211,7 @@ namespace PowerSDR
         {
             if (e.RowIndex < 0) return;
 
-            if(e.ColumnIndex == dataGridView1.Columns["Present"].Index)
+            if (e.ColumnIndex == dataGridView1.Columns["Present"].Index)
             {
                 DataGridViewDisableButtonCell buttonCell =
                     (DataGridViewDisableButtonCell)dataGridView1.
@@ -272,7 +272,7 @@ namespace PowerSDR
     }
 
     public class DataGridViewColoredTextButtonCell : DataGridViewButtonCell
-    {        
+    {
         // Override the Clone method so that the Enabled property is copied.
         public override object Clone()
         {
@@ -416,7 +416,7 @@ namespace PowerSDR
                 }
             }
             else
-            {                
+            {
                 // The button cell is enabled, so let the base class 
                 // handle the painting.
                 base.Paint(graphics, clipBounds, cellBounds, rowIndex,

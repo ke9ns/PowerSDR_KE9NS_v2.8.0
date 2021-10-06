@@ -20,13 +20,13 @@
 #include <filt2p2z.h>
 
 
-typedef struct _fm_demod
+typedef struct _fm_demod // RX
 {
   int size;
   CXB ibuf, obuf, squelch_obuf;
   REAL deviation;
   REAL k_deemphasis;
-  REAL k_deemphasis1; // ke9ns add
+  REAL k_deemphasis1; // ke9ns add to bypass deemphasis during WFM
 
   REAL deemphasis_out; 
   REAL squelch_envelope;
@@ -46,7 +46,7 @@ typedef struct _fm_demod
   IIR_HPF_2P input_HPF1;
   IIR_HPF_2P input_HPF2;
 
-  IIR_LPF_2P input_LPF3; // ke9ns add
+  IIR_LPF_2P input_LPF3; // ke9ns add to bypass deemphasis during WFM
   IIR_LPF_2P input_LPF4;
   IIR_HPF_2P input_HPF3;
   IIR_HPF_2P input_HPF4;

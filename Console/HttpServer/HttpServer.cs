@@ -1,9 +1,9 @@
-﻿using System.Net;
+﻿using HttpServer;
+using System;
+using System.Diagnostics;
+using System.Net;
 using System.Net.Sockets;
 using System.Threading;
-using HttpServer;
-using System.Diagnostics;
-using System;
 
 namespace PowerSDR
 {
@@ -33,12 +33,12 @@ namespace PowerSDR
             {
                 m_listener = new TcpListener(IPAddress.Any, port);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.WriteLine("7exception" + e);
                 return;
             }
-            
+
             Thread thread = new Thread(loop);
             thread.Name = "TCP SERVER THREAD";
             thread.IsBackground = true;
@@ -82,7 +82,7 @@ namespace PowerSDR
                 try
                 {
                     IHandler handler = HandlerFactory.getHandler(m_listener.AcceptTcpClient());
-                    if(m_terminated)
+                    if (m_terminated)
                     {
                         Thread.Sleep(1000);
                         return;
@@ -97,7 +97,11 @@ namespace PowerSDR
                 {
                     Debug.WriteLine("get TCP RECEIVE fault " + e);
                 }
-            }
-        }
-    }
-}
+
+            } // while
+
+        } // loop
+
+    } // Class HttpServer
+
+} // PowerSDR

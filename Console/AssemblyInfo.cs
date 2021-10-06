@@ -40,7 +40,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("FlexRadio Systems")]
 [assembly: AssemblyProduct("PowerSDR")]
-[assembly: AssemblyCopyright("© 2003-2017 FlexRadio Systems. All rights reserved.")]
+[assembly: AssemblyCopyright("© 2003-2021 FlexRadio Systems. All rights reserved.")]
 [assembly: AssemblyTrademark("FlexRadio Systems")]
 [assembly: AssemblyCulture("")]
 
@@ -55,7 +55,7 @@ using System.Runtime.CompilerServices;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("2.8.0.43")]
+[assembly: AssemblyVersion("2.8.0.226")]
 
 //
 // In order to sign your assembly you must specify a key to use. Refer to the 
@@ -85,5 +85,5 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyDelaySign(false)]
 [assembly: AssemblyKeyFile("")]
 [assembly: AssemblyKeyName("")]
-[assembly: AssemblyFileVersion("2.8.0.43")]
+[assembly: AssemblyFileVersion("2.8.0.226")]
 

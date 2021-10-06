@@ -2,6 +2,14 @@
 
 common defs and code for parm update
 
+KE9NS: from PowerSDR....
+dsp.cs routines use dttsp.cs as the interface with the DttSP.dll routine which points to >>>  update.c (here)
+update.c will access all the remaining Dttsp project files
+
+update.c is just a way to set setup.cs and console.cs settings into ALL the c structs (almost no documentation...) 
+
+
+
 This file is part of a program that implements a Software-Defined Radio.
 
 Copyright (C) 2004, 2005, 2006, 2007 by Frank Brickle, AB2KT and Bob McGwier, N4HY
@@ -38,14 +46,14 @@ Bridgewater, NJ 08807
 
 ////////////////////////////////////////////////////////////////////////////
 // for commands affecting RX, which RX is Listening
-unsigned int threadno=2;
+unsigned int threadno = 2;
 unsigned int thread_com;
 
 #define RL (uni[thread].multirx.lis)
 #define asinh(value) (REAL)log(value + sqrt(value * value + 1))
 ////////////////////////////////////////////////////////////////////////////
 
-PRIVATE REAL INLINE dB2lin (REAL dB)
+PRIVATE REAL INLINE dB2lin (REAL dB) // just  = 10^(db/20)
 {
 	return (REAL) pow (10.0, (REAL) dB / 20.0);
 }
@@ -263,21 +271,25 @@ DttSP_EXP void SetTXDCBlock (unsigned int thread, BOOLEAN setit)
 	sem_post(&top[thread].sync.upd.sem);
 }
 
+
+//============================================================================================
+// ke9ns: WFM mode also needs to turn off pre-emphasis of the FM (or data will not properly transmit)
+
 DttSP_EXP void SetTXFMDeviation(unsigned int thread, double deviation)
 {
-	
+	sem_wait(&top[thread].sync.upd.sem);
+
 	fprintf(stderr, "TX dttsp SetTXFMDeviation: %f\n", deviation);
 	fflush(stderr);
 
-	sem_wait(&top[thread].sync.upd.sem);
-	tx[thread].fm.cvtmod2freq = (REAL) (deviation * TWOPI / uni[thread].samplerate);
+	tx[thread].fm.cvtmod2freq = (REAL) (deviation * TWOPI / uni[thread].samplerate); // 
 	
 	sem_post(&top[thread].sync.upd.sem);
 }
 
 //===============================================================================
-// ke9ns add (sdr.c is where its used) called from console.cs  dsp.GetDSPTX(0).TXFMDataMode = true; 
-// not really needed since I also set deviation = 10000, that can be used as a trigger for FM data mode
+// ke9ns add: (sdr.c is where its used) called from console.cs  dsp.GetDSPTX(0).TXFMDataMode = true; 
+// not really needed since I also set WFM deviation = 17000, that can be used as a trigger for FM data mode (.218 17khz)
 
 DttSP_EXP void SetTXFMDataMode(unsigned int thread, BOOLEAN fmdata)
 {
@@ -293,23 +305,49 @@ DttSP_EXP void SetTXFMDataMode(unsigned int thread, BOOLEAN fmdata)
 } // SetTXFMDataMode
 
 
+//===============================================================================
+// ke9ns add (sdr.c is where its used) called from console.cs 
+// setupform. chkspectrumHiRes
+//int hires = 4096;
+DttSP_EXP void SetHiResPan(int hires)
+{
+	extern int reset_for_samplerate(REAL); // ke9ns: because the routine is in winmain.c
+
+	unsigned int thread;
+
+	for (thread = 0; thread < 3; thread++)
+	{
+	    loc[thread].def.spec = hires;   // ke9ns: adjust the number of data points over the entire SR bandwidth (usually 4096, hires = 16384)
+	    uni[thread].spec.size = hires;  // ke9ns: adjust the number of data points over the entire SR bandwidth (usually 4096, hires = 16384)
+ 
+	} // for loop all 3 threads
+
+	reset_for_samplerate(uni[0].samplerate); // update everything
+
+} // SetHiResPan
+
 
 DttSP_EXP void SetRXFMDeviation(unsigned int thread, unsigned int k, double deviation)
 {
 	sem_wait(&top[thread].sync.upd.sem);
+
 	rx[thread][k].fm.gen->deviation = (REAL)deviation;
 	rx[thread][k].fm.gen->cvt = (REAL)(uni[thread].samplerate / (deviation * TWOPI));
 
 	fprintf(stderr, "dttsp SetRXFMDeviation: %f\n", deviation);
 	fflush(stderr);
+
 	sem_post(&top[thread].sync.upd.sem);
 }
 
 DttSP_EXP void SetCTCSSFreq(unsigned int thread, double freq_hz)
 {
 	sem_wait(&top[thread].sync.upd.sem);
+
 	//tx[thread].fm.ctcss.freq_hz = (REAL)freq_hz;
+	
 	OSCfreq(tx[thread].fm.ctcss.osc) = TWOPI * (REAL)freq_hz / uni[thread].samplerate;
+
 	sem_post(&top[thread].sync.upd.sem);
 
 }
@@ -454,8 +492,7 @@ DttSP_EXP void SetRXOutputGain(unsigned int thread, unsigned int subrx, double g
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void
-SetOscPhase(double phase)
+DttSP_EXP void SetOscPhase(double phase)
 {
 	int i,j;
 	sem_wait(&top[0].sync.upd.sem);
@@ -475,8 +512,7 @@ SetOscPhase(double phase)
 
 DttSP_EXP int SetRXOsc (unsigned int thread, unsigned subrx, double newfreq)
 {
-	if (fabs (newfreq) >= 0.5 * uni[thread].samplerate)
-		return -1;
+	if (fabs (newfreq) >= 0.5 * uni[thread].samplerate)	return -1;
 
 	newfreq *= 2.0 * M_PI / uni[thread].samplerate;
 	sem_wait(&top[thread].sync.upd.sem);
@@ -497,8 +533,10 @@ DttSP_EXP int SetTXOsc (unsigned int thread, double newfreq)
 	return 0;
 }
 
-DttSP_EXP int
-SetSampleRate (double newSampleRate)
+
+// ke9ns: setup->change sample rate->DSP.SyncState()->dttsp.setsamplerate()->update here
+
+DttSP_EXP int SetSampleRate (double newSampleRate)
 {
 	extern int reset_for_samplerate (REAL);
 	int rtn = -1;
@@ -512,24 +550,32 @@ SetSampleRate (double newSampleRate)
 		top[thread].susp = TRUE;
 		sem_wait (&top[thread].sync.upd.sem);
 	}
+
+	// ke9ns: hires
 	if (samplerate != uni[0].samplerate)
 	{
-		if (reset_for_samplerate (samplerate) != -1)
-			rtn = 0;
+		if (reset_for_samplerate (samplerate) != -1) rtn = 0;
 	}
-	for(thread = 0;thread < 3; thread++)
+
+	for (thread = 0; thread < 3; thread++)
+	{
 		top[thread].susp = FALSE;
+	}
+
 	sem_post (&top[2].sync.upd.sem);
 	sem_post (&top[1].sync.upd.sem);
 	sem_post (&top[0].sync.upd.sem);
-	return rtn;
-}
 
-DttSP_EXP void
-SetNR (unsigned int thread, unsigned subrx, BOOLEAN setit)
+	return rtn;
+
+} //  SetSampleRate (double newSampleRate)
+
+DttSP_EXP void SetNR (unsigned int thread, unsigned subrx, BOOLEAN setit)
 {
 	sem_wait(&top[thread].sync.upd.sem);
+
 	rx[thread][subrx].anr.flag = setit;
+
 	if (!setit) 
 	{
 		/*int size = rx[thread][subrx].anr.gen->adaptive_filter_size; // EW: Would it be better to reset this to something other than zero?
@@ -537,17 +583,19 @@ SetNR (unsigned int thread, unsigned subrx, BOOLEAN setit)
 		int i;*/
 
 		memset(rx[thread][subrx].anr.gen->adaptive_filter, 0, sizeof(COMPLEX)*128);
+		
 		/*for(i=0; i<size; i++)
 		{
 			rx[thread][subrx].anr.gen->adaptive_filter[i].re = def;
 			rx[thread][subrx].anr.gen->adaptive_filter[i].im = 0.0f;
 		}*/
 	}
-	sem_post(&top[thread].sync.upd.sem);
-}
 
-DttSP_EXP void
-SetNRvals (unsigned int thread, unsigned subrx, int taps, int delay, double gain, double leakage)
+	sem_post(&top[thread].sync.upd.sem);
+
+} // SetNR
+
+DttSP_EXP void SetNRvals (unsigned int thread, unsigned subrx, int taps, int delay, double gain, double leakage)
 {
 	sem_wait(&top[thread].sync.upd.sem);
 	rx[thread][subrx].anr.gen->adaptive_filter_size = taps;
@@ -559,40 +607,35 @@ SetNRvals (unsigned int thread, unsigned subrx, int taps, int delay, double gain
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void
-SetTXCompandSt (unsigned int thread, BOOLEAN setit)
+DttSP_EXP void SetTXCompandSt (unsigned int thread, BOOLEAN setit)
 {
 	sem_wait(&top[thread].sync.upd.sem);
 	tx[thread].cpd.flag = setit;
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void
-SetTXCompand (unsigned int thread, double setit)
+DttSP_EXP void SetTXCompand (unsigned int thread, double setit)
 {
 	sem_wait(&top[thread].sync.upd.sem);
 	WSCReset (tx[thread].cpd.gen, -(REAL)setit);
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void
-SetTXSquelchSt (unsigned int thread, BOOLEAN setit)
+DttSP_EXP void SetTXSquelchSt (unsigned int thread, BOOLEAN setit)
 {
 	sem_wait(&top[thread].sync.upd.sem);
 	tx[thread].squelch.flag = setit;
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void
-SetTXSquelchVal (unsigned int thread, float setit)
+DttSP_EXP void SetTXSquelchVal (unsigned int thread, float setit)
 {
 	sem_wait(&top[thread].sync.upd.sem);
 	tx[thread].squelch.thresh = setit;
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void
-SetTXSquelchAtt (unsigned int thread, float setit)
+DttSP_EXP void SetTXSquelchAtt (unsigned int thread, float setit)
 {
 	sem_wait(&top[thread].sync.upd.sem);
 	tx[thread].squelch.atten = setit;
@@ -609,8 +652,7 @@ SetANF (unsigned int thread, unsigned subrx, BOOLEAN setit)
 }
 
 
-DttSP_EXP void
-SetANFvals (unsigned int thread, unsigned subrx, int taps, int delay, double gain, double leakage)
+DttSP_EXP void SetANFvals (unsigned int thread, unsigned subrx, int taps, int delay, double gain, double leakage)
 {
 	sem_wait(&top[thread].sync.upd.sem);
 
@@ -624,28 +666,34 @@ SetANFvals (unsigned int thread, unsigned subrx, int taps, int delay, double gai
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void
-SetNB (unsigned int thread, unsigned subrx, BOOLEAN setit)
+//ke9ns: NB sdr.c
+DttSP_EXP void SetNB (unsigned int thread, unsigned subrx, BOOLEAN setit) // ke9ns: NB OFF/ON here
 {
 	sem_wait(&top[thread].sync.upd.sem);
 
 	rx[thread][subrx].nb.flag = setit;
+	
 
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void
-SetNBvals (unsigned int thread, unsigned subrx, double threshold)
+//ke9ns: NB  sdr.c and noiseblanker.c
+DttSP_EXP void SetNBvals (unsigned int thread, unsigned subrx, double threshold, int hangTime, int delayTime) // ke9ns mod add hangtime and delaytime: threshold value here
 {
 	sem_wait(&top[thread].sync.upd.sem);
 
+	//fprintf(stderr,"SetNBvals = %d\n",hangTime),fflush(stderr);
+
 	rx[thread][subrx].nb.gen->threshold = (REAL)threshold;
+
+	rx[thread][subrx].nb.gen->ht = (int)hangTime; // ke9ns add .182
+	rx[thread][subrx].nb.gen->dly = (int)delayTime; // ke9ns add .182
 
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void
-SetSDROM (unsigned int thread, unsigned subrx, BOOLEAN setit)
+//ke9ns: NB2 sdr.c
+DttSP_EXP void SetSDROM (unsigned int thread, unsigned subrx, BOOLEAN setit)
 {
 	sem_wait(&top[thread].sync.upd.sem);
 
@@ -654,8 +702,8 @@ SetSDROM (unsigned int thread, unsigned subrx, BOOLEAN setit)
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void
-SetSDROMvals (unsigned int thread, unsigned subrx, double threshold)
+//ke9ns: NB2 sdr.c
+DttSP_EXP void SetSDROMvals (unsigned int thread, unsigned subrx, double threshold)
 {
 	sem_wait(&top[thread].sync.upd.sem);
 
@@ -664,8 +712,7 @@ SetSDROMvals (unsigned int thread, unsigned subrx, double threshold)
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void
-SetBIN (unsigned int thread, unsigned subrx, BOOLEAN setit)
+DttSP_EXP void SetBIN (unsigned int thread, unsigned subrx, BOOLEAN setit)
 {
 	sem_wait(&top[thread].sync.upd.sem);
 
@@ -947,18 +994,16 @@ SetFixedAGC (unsigned int thread, unsigned int subrx, double fixed_agc)
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void
-SetRXAGCTop (unsigned int thread, unsigned int subrx, double max_agc)
+DttSP_EXP void SetRXAGCTop (unsigned int thread, unsigned int subrx, double max_agc)
 {
 	sem_wait(&top[thread].sync.upd.sem);
-	rx[thread][subrx].dttspagc.gen->gain.top = 
-		max(rx[thread][subrx].dttspagc.gen->gain.bottom,dB2lin((REAL)max_agc));
+	rx[thread][subrx].dttspagc.gen->gain.top = 	max(rx[thread][subrx].dttspagc.gen->gain.bottom,dB2lin((REAL)max_agc));
 	rx[thread][subrx].dttspagc.gen->hangindex = 0;
 	sem_post(&top[thread].sync.upd.sem);
 }
 
 //==============================================================
-// ke9ns ?? find the real carrier for SAM mode ??
+// ke9ns: get SAM PLL value parameters a,b
 DttSP_EXP void GetSAMPLLvals(int thread, int subrx, REAL *alpha, REAL *beta)
 {
 	sem_wait(&top[thread].sync.upd.sem);
@@ -968,7 +1013,7 @@ DttSP_EXP void GetSAMPLLvals(int thread, int subrx, REAL *alpha, REAL *beta)
 }
 
 //==============================================================
-// ke9ns ?? find the real carrier for SAM mode ??
+// ke9ns: set SAM PLL value parameters a,b
 DttSP_EXP void SetSAMPLLvals(int thread, int subrx, REAL alpha, REAL beta)
 {
 	sem_wait(&top[thread].sync.upd.sem);
@@ -981,15 +1026,27 @@ DttSP_EXP void SetSAMPLLvals(int thread, int subrx, REAL alpha, REAL beta)
 }
 
 //==============================================================
-// ke9ns ?? find the real carrier for SAM mode ??
+// ke9ns: get SAM Frequency (get the PLL input signal at which the signal will be phase locked with the reference freq)??? (ie offset) how far from phase lock are you?
 DttSP_EXP void GetSAMFreq(int thread, int subrx, REAL *freq)
 {
 	sem_wait(&top[thread].sync.upd.sem);
-	*freq = rx[thread][subrx].am.gen->pll.freq.f;
+
+	*freq = rx[thread][subrx].am.gen -> pll.freq.f;  // _rx[0][0].am.gne = sdrexport.h sdrexport.c   pll.freq.f = (Floating part of Freq of the PLL) am_demod.h
+
 	sem_post(&top[thread].sync.upd.sem);
 }
 
 
+//==============================================================
+// ke9ns add: get squelch break, true = Squelch, false = break
+DttSP_EXP void GetFMSquelchBreak(int thread, int subrx, boolean *fmsquelchbreak)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+
+	*fmsquelchbreak= rx[thread][subrx].fm.gen->squelch_muted;  // _rx[0][0].am.gne = sdrexport.h sdrexport.c   pll.freq.f = (Floating part of Freq of the PLL) am_demod.h
+
+	sem_post(&top[thread].sync.upd.sem);
+}
 
 
 
@@ -1132,8 +1189,7 @@ SetCorrectTXIQW (unsigned int thread, double wr, double wi)
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void
-SetPWSmode (unsigned thread, unsigned subrx, int setit)
+DttSP_EXP void SetPWSmode (unsigned thread, unsigned subrx, int setit)
 {
 	if (rx[thread][subrx].mode == SPEC)
 		setit = SPEC_SEMI_RAW;
@@ -1159,20 +1215,27 @@ SetPWSmode (unsigned thread, unsigned subrx, int setit)
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void
-SetWindow (unsigned int thread, Windowtype window)
+//==================================================================================
+DttSP_EXP void SetWindow (unsigned int thread, Windowtype window)
 {
 	sem_wait(&top[thread].sync.upd.sem);
-	if (!uni[thread].spec.polyphase)
-		makewindow (window, uni[thread].spec.size, uni[thread].spec.window);
+
+
+	if (!uni[thread].spec.polyphase) // ke9ns: if no polyphase
+	{
+		makewindow(window, uni[thread].spec.size, uni[thread].spec.window);
+	}
+
 	uni[thread].spec.wintype = window;
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void
-SetSpectrumPolyphase (unsigned int thread, BOOLEAN setit)
+//==================================================================================
+DttSP_EXP void SetSpectrumPolyphase (unsigned int thread, BOOLEAN setit)
 {
 	sem_wait(&top[thread].sync.upd.sem);
+
+
 	if (uni[thread].spec.polyphase != setit)
 	{
 		if (setit)
@@ -1183,19 +1246,22 @@ SetSpectrumPolyphase (unsigned int thread, BOOLEAN setit)
 				RealFIR WOLAfir;
 				REAL MaxTap = 0;
 				int i;
-				WOLAfir =
-					newFIR_Lowpass_REAL (1.0, (REAL) uni[thread].spec.size,
-					8 * uni[thread].spec.size - 1);
+				WOLAfir = newFIR_Lowpass_REAL (1.0, (REAL) uni[thread].spec.size, 8 * uni[thread].spec.size - 1);
 				memset (uni[thread].spec.window, 0, 8 * sizeof (REAL) * uni[thread].spec.size);
-				memcpy (uni[thread].spec.window, FIRcoef (WOLAfir),
-					sizeof (REAL) * (8 * uni[thread].spec.size - 1));
+				memcpy (uni[thread].spec.window, FIRcoef (WOLAfir), sizeof (REAL) * (8 * uni[thread].spec.size - 1));
 				for (i = 0; i < 8 * uni[thread].spec.size; i++)
-					MaxTap = max (MaxTap, (REAL) fabs (uni[thread].spec.window[i]));
+				{
+					MaxTap = max(MaxTap, (REAL)fabs(uni[thread].spec.window[i]));
+				}
 				MaxTap = 0.707107f / MaxTap;
 				for (i = 0; i < 8 * uni[thread].spec.size; i++)
+				{
 					uni[thread].spec.window[i] *= MaxTap;
+				}
 				delFIR_REAL (WOLAfir);
 			}
+
+
 		}
 		else
 		{
@@ -1207,67 +1273,103 @@ SetSpectrumPolyphase (unsigned int thread, BOOLEAN setit)
 		reinit_spectrum (&uni[thread].spec);
 	}
 	sem_post(&top[thread].sync.upd.sem);
-}
 
-DttSP_EXP void
-SetGrphTXEQ (unsigned int thread, int *txeq)
+} // SetSpectrumPolyphase
+
+//==================================================================================
+// ke9ns EQFORM -> move 3 band Eq slider -> TXEQ3 -> dttsp.setgrphtxeq -> here
+DttSP_EXP void SetGrphTXEQ (unsigned int thread, int *txeq)
 {
 	int i;
 	fftwf_plan ptmp;
+	
 	COMPLEX *filtcoef, *tmpcoef;
+	
 	ComplexFIR tmpfilt;
+	
 	REAL preamp, gain[3];
 
 	filtcoef = newvec_COMPLEX (512, "filter for EQ");
+
 	tmpcoef = newvec_COMPLEX (257, "tmp filter for EQ");
+
 	preamp  = (REAL) dB2lin ((REAL) txeq[0]) * 0.5f;
-	gain[0] = (REAL) dB2lin ((REAL) txeq[1]) * preamp;
-	gain[1] = (REAL) dB2lin ((REAL) txeq[2]) * preamp;
-	gain[2] = (REAL) dB2lin ((REAL) txeq[3]) * preamp;
+
+	gain[0] = (REAL) dB2lin ((REAL) txeq[1] * 1.2 ) * preamp; // ke9ns mod .168
+	gain[1] = (REAL) dB2lin ((REAL) txeq[2] * 1.2 ) * preamp;
+	gain[2] = (REAL) dB2lin ((REAL) txeq[3] * 1.2 ) * preamp;
 
 	sem_wait(&top[thread].sync.upd.sem);
 
-	tmpfilt = newFIR_Bandpass_COMPLEX (-400, 400, uni[thread].samplerate, 257);
+	
+	//...................................................................................
+	tmpfilt = newFIR_Bandpass_COMPLEX (-400, 400, uni[thread].samplerate, 257); //
 	for (i = 0; i < 257; i++)
-		tmpcoef[i] = Cscl (tmpfilt->coef[i], (REAL)gain[0]);
+	{
+		tmpcoef[i] = Cscl(tmpfilt->coef[i], (REAL)gain[0]);
+	}
 	delFIR_Bandpass_COMPLEX (tmpfilt);
 
-	tmpfilt = newFIR_Bandpass_COMPLEX (400, 1500, uni[thread].samplerate, 257);
+    //...................................................................................
+	tmpfilt = newFIR_Bandpass_COMPLEX (400, 1500, uni[thread].samplerate, 257);  // above, below
 	for (i = 0; i < 257; i++)
-		tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], (REAL)gain[1]));
+	{
+		tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], (REAL)gain[1]));
+	}
 	delFIR_Bandpass_COMPLEX (tmpfilt);
 
-	tmpfilt = newFIR_Bandpass_COMPLEX (-1500, -400, uni[thread].samplerate, 257);
+	tmpfilt = newFIR_Bandpass_COMPLEX (-1500, -400, uni[thread].samplerate, 257);  //below and above
 	for (i = 0; i < 257; i++)
-		tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], (REAL)gain[1]));
+	{
+		tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], (REAL)gain[1]));
+	}
 	delFIR_Bandpass_COMPLEX (tmpfilt);
 
-	tmpfilt = newFIR_Bandpass_COMPLEX (1500, 6000, uni[thread].samplerate, 257);
+	//.................................................................................
+	tmpfilt = newFIR_Bandpass_COMPLEX (1500, 6000, uni[thread].samplerate, 257);  //
 	for (i = 0; i < 257; i++)
-		tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], (REAL)gain[2]));
+	{
+		tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], (REAL)gain[2]));
+	}
 	delFIR_Bandpass_COMPLEX (tmpfilt);
 
-	tmpfilt = newFIR_Bandpass_COMPLEX (-6000, -1500, uni[thread].samplerate, 257);
+	tmpfilt = newFIR_Bandpass_COMPLEX (-6000, -1500, uni[thread].samplerate, 257); //
 	for (i = 0; i < 257; i++)
-		tmpcoef[i] = Cadd (tmpcoef[i], Cscl (tmpfilt->coef[i], (REAL)gain[2]));
+	{
+		tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], (REAL)gain[2]));
+	}
 	delFIR_Bandpass_COMPLEX (tmpfilt);
+	//.................................................................................
+
 	for (i = 0; i < 257; i++)
-		filtcoef[255 + i] = Cscl(tmpcoef[i],(REAL)(1.0/512.0));
-	ptmp =
-		fftwf_plan_dft_1d (512, (fftwf_complex *) filtcoef,
-		(fftwf_complex *) tx[thread].grapheq.gen->p->zfvec,
-		FFTW_FORWARD, uni[thread].wisdom.bits);
+	{
+		filtcoef[255 + i] = Cscl(tmpcoef[i], (REAL)(1.0 / 512.0));
+	}
+
+	ptmp = fftwf_plan_dft_1d (512, (fftwf_complex *) filtcoef, (fftwf_complex *) tx[thread].grapheq.gen->p->zfvec, FFTW_FORWARD, uni[thread].wisdom.bits);
 
 	fftwf_execute (ptmp);
 	fftwf_destroy_plan (ptmp);
 	delvec_COMPLEX (filtcoef);
 	delvec_COMPLEX(tmpcoef);
 
-	sem_post(&top[thread].sync.upd.sem);
-}
+	sem_post(&top[thread].sync.upd.sem); // end of 3band
 
-DttSP_EXP void
-SetGrphTXEQ10(unsigned int thread, int *txeq) 
+//	fprintf(stderr, "3band:");
+
+} // SetGrphTXEQ  (3 band EQ)
+
+
+// ke9ns add  (512 or 769) (257 or 514) (no point to using larger# unless you up the value on the other end where it actually alters your audio
+
+#define large  512
+#define large1 512.0
+#define small  257
+
+//==================================================================================
+// ke9ns EQFORM -> move 10 band Eq slider -> TXEQ10 -> dttsp.setgrphtxeq10 -> update.c (here)
+
+DttSP_EXP void SetGrphTXEQ10(unsigned int thread, int *txeq10) 
 {
 /*  if (n < 11)
     return -1;
@@ -1280,66 +1382,410 @@ SetGrphTXEQ10(unsigned int thread, int *txeq)
     REAL preamp = dB2lin(atof(p[0])) * 0.5; */
 
     int i,j,band;
-	fftwf_plan ptmp;
-	COMPLEX *filtcoef = newvec_COMPLEX(512, "filter for EQ"),
-		*tmpcoef  = newvec_COMPLEX(257, "tmp filter for EQ");
-	ComplexFIR tmpfilt;
-	REAL preamp;
+
+	fftwf_plan ptmp; //fftw3.h   FFTW_DEFINE_API(FFTW_MANGLE_FLOAT, float, fftwf_complex) this is huge 2nd order macro
 
 
-	preamp = dB2lin((REAL) txeq[0]) * 0.5f;
+	//ke9ns to allocate a pointer to a buffer of a struct of COMPLEX (which is just 2 REAL values: re, im  (REAL is just a float)
+	COMPLEX *filtcoef = newvec_COMPLEX(512, "filter for EQ");
+	COMPLEX *tmpcoef  = newvec_COMPLEX(257, "tmp filter for EQ");   // call to bufvec.c 
 
-	for (j = 1, band = 15; j <= 10; j++, band += 3) 
+	ComplexFIR tmpfilt; // ke9ns struct = COMPLEX, int, enum(0-5), BOOLEAN (which is just uchr), struct of freq (real lo, hi)
+		
+	REAL preamp = dB2lin((REAL) txeq10[0]) * 0.5f;  // ke9ns preamp slider =  (10^(txeq[0]/20)) / 2
+
+//	sem_wait(&top[thread].sync.upd.sem);
+
+	//.............................................................................
+	// ke9ns 10 txeq bands (see isoband.c table)
+	for (j = 1, band = 15; j <= 10; j++, band += 3)  // band = 15, ++3 each cycle    ISOband_get_info only allows band= 1 to 43 as legal
 	{
-		REAL f_here  = ISOband_get_nominal(band),
-			f_below = gmean(f_here / 2.0f, f_here),
-			f_above = gmean(f_here, f_here * 2.0f),
-			g_here  = dB2lin((REAL) txeq[j]) * preamp;
+	 
+		REAL f_here = ISOband_get_nominal(band);       // isoband.c = ISOband_get_info(band)->nominal, exact, low, high for band 1 to 43
+		
+		REAL f_below = gmean(f_here / 2.0f, f_here);   // sqrt(x*y) ke9ns: 2.0f value = 1 octave BW
+		REAL f_above = gmean(f_here, f_here * 2.0f);   // sqrt(x*y)
+		REAL g_here = dB2lin((REAL)txeq10[j] * 1.2) * preamp;  // g_here = (10^(txeq[j]))*preamp (I think this is just the overall gain) .168
 
-		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, 257);
-		for (i = 0; i < 257; i++)
+		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, small); // ke9ns low, high, samplerate, size
+	
+		for (i = 0; i < small; i++)
+		{
 			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here));
+		}
 		delFIR_Bandpass_COMPLEX(tmpfilt);
 
-		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, 257);
-		for (i = 0; i < 257; i++)
+		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, small);
+		
+		for (i = 0; i < small; i++)
+		{
 			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here));
+		}
 		delFIR_Bandpass_COMPLEX(tmpfilt);
+
+	} // for (j = 1, band = 15; j <= 10; j++, band += 3) 
+
+	//...................................................................................
+
+	for (i = 0; i < small; i++)
+	{
+		filtcoef[254 + i] = Cscl(tmpcoef[i], (REAL)(1.0 / large1));
 	}
 
-	for (i = 0; i < 257; i++)
-		filtcoef[254 + i] = Cscl(tmpcoef[i],(REAL)(1.0/512.0));
-
-    ptmp = fftwf_plan_dft_1d(512,
-		(fftwf_complex *) filtcoef,
-		(fftwf_complex *) tx[thread].grapheq.gen->p->zfvec,
-		FFTW_FORWARD,
-		uni->wisdom.bits);
+    ptmp = fftwf_plan_dft_1d(large, (fftwf_complex *) filtcoef, (fftwf_complex *) tx[thread].grapheq.gen->p->zfvec, FFTW_FORWARD, uni->wisdom.bits);
 
 	fftwf_execute(ptmp);
 	fftwf_destroy_plan(ptmp);
-	delvec_COMPLEX(filtcoef);
+
+	delvec_COMPLEX(filtcoef); // release the memory (free)
 	delvec_COMPLEX(tmpcoef);
-}
+
+	//sem_post(&top[thread].sync.upd.sem);
+
+	//fprintf(stdout, "10Band: Done\n"), fflush(stdout);
 
 
-DttSP_EXP void
-SetGrphTXEQcmd (unsigned int thread, BOOLEAN state)
+} // SetGrphTXEQ10
+
+
+  //==================================================================================
+  // ke9ns add: EQFORM -> move 28 band Eq slider -> TXEQ28 -> dttsp.setgrphtxeq28 -> update.c (here)
+// https://courses.physics.illinois.edu/phys406/sp2017/Lab_Handouts/Octave_Bands.pdf
+
+DttSP_EXP void SetGrphTXEQ28(unsigned int thread, int *txeq28)
+{
+	// fprintf(stdout, "28band EQ\n"), fflush(stdout);
+
+	int i, j, band;
+
+	fftwf_plan ptmp; //fftw3.h   FFTW_DEFINE_API(FFTW_MANGLE_FLOAT, float, fftwf_complex) this is huge 2nd order macro
+
+
+					 //ke9ns to allocate a pointer to a buffer of a struct of COMPLEX (which is just 2 REAL values: re, im  (REAL is just a float)
+	COMPLEX *filtcoef = newvec_COMPLEX(512, "filter for EQ"); // COMPLEX =   REAL re, im; 512  769
+	COMPLEX *tmpcoef = newvec_COMPLEX(257, "tmp filter for EQ");   // call to bufvec.c   257  514
+
+	ComplexFIR tmpfilt; // ke9ns struct = COMPLEX, int, enum(0-5), BOOLEAN (which is just uchr), struct of freq (real lo, hi)
+
+	REAL preamp = dB2lin((REAL)txeq28[0]) * 0.5f;  // ke9ns preamp slider =  (10^(txeq[0]/20)) / 2
+
+	//sem_wait(&top[thread].sync.upd.sem); // 
+
+	//.............................................................................
+	 // ke9ns:  txeq28 bands (see isoband.c table)
+	for (j = 1, band = 15; j <= 28; j++, band += 1)  // band = 15, ++3 each cycle    ISOband_get_info only allows band= 1 to 43 as legal
+	{
+
+		REAL f_here = ISOband_get_nominal(band);       // isoband.c = ISOband_get_info(band)->nominal,         exact, low, high for band 1 to 43
+
+	//	REAL f_below = gmean(f_here / 1.26f, f_here);   // ke9ns: sqrt(x*y)  2.0f: 100hz input = 70hz f_below this is considered 1 full octave (1.3f = 1/3 octave)
+	//	REAL f_above = gmean(f_here, f_here * 1.26f);   // ke9ns: sqrt(x*y)  100hz input = 141 f_above
+
+		REAL f_below = (REAL)f_here / 1.12246; // ke9ns: calculate low and high frequency based on 1/3 octave value
+		REAL f_above = (REAL)f_here * 1.12246;
+
+		REAL g_here = dB2lin((REAL)txeq28[j] * 1.2) * preamp;  // g_here = (10^(txeq[j]))*preamp (I think this is just the overall gain)
+
+		if (f_here <= 120)
+		{
+			g_here = dB2lin((REAL)txeq28[j] * 2) * preamp;
+		}
+		//.............................................................................
+		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, small); // ke9ns: low, high, samplerate, size  514
+
+		for (i = 0; i < small; i++)
+		{
+			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here) ); // Cadd=Complex# add,  Cscl=Complex# scaler                re, im
+		}
+		delFIR_Bandpass_COMPLEX(tmpfilt); // delete FIR complex numbers
+
+		//.............................................................................
+		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, small);
+
+		for (i = 0; i < small; i++)
+		{
+			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here));
+		}
+		delFIR_Bandpass_COMPLEX(tmpfilt);
+
+	//	fprintf(stderr, "28band:  %f %f\n", f_here,  g_here), fflush(stderr);
+
+	} // for (j = 1, band = 15; j <= 10; j++, band += 3) 
+
+	//...................................................................................
+
+	for (i = 0; i < small; i++)
+	{
+		filtcoef[254 + i] = Cscl(tmpcoef[i], (REAL)(1.0 / large1));
+	}
+
+	ptmp = fftwf_plan_dft_1d(large, (fftwf_complex *)filtcoef, (fftwf_complex *)tx[thread].grapheq.gen->p->zfvec, FFTW_FORWARD, uni->wisdom.bits);
+
+	fftwf_execute(ptmp);
+	fftwf_destroy_plan(ptmp);
+
+	delvec_COMPLEX(filtcoef); // release the memory (free)
+	delvec_COMPLEX(tmpcoef);
+
+//	sem_post(&top[thread].sync.upd.sem); // end of 28band
+
+//	fprintf(stdout, "28Band: Done\n"), fflush(stdout);
+
+
+} // SetGrphTXEQ28
+
+
+
+ //==================================================================================
+ //==================================================================================
+ // ke9ns: combo of 28band GEQ and 9band PEQ
+
+DttSP_EXP void SetGrphTXEQ37(unsigned int thread, int* txeq28, int* peq)
+{
+
+	// fprintf(stdout, "28band EQ\n"), fflush(stdout);
+
+	int i, j, band;
+
+	fftwf_plan ptmp; //fftw3.h   FFTW_DEFINE_API(FFTW_MANGLE_FLOAT, float, fftwf_complex) this is huge 2nd order macro
+
+	double xx;
+
+
+					 //ke9ns to allocate a pointer to a buffer of a struct of COMPLEX (which is just 2 REAL values: re, im  (REAL is just a float)
+	COMPLEX* filtcoef = newvec_COMPLEX(large, "filter for EQ"); // COMPLEX =   REAL re, im;  512 769
+	COMPLEX* tmpcoef = newvec_COMPLEX(small, "tmp filter for EQ");   // call to bufvec.c    257 514
+
+	ComplexFIR tmpfilt; // ke9ns struct = COMPLEX, int, enum(0-5), BOOLEAN (which is just uchr), struct of freq (real lo, hi)
+
+	
+	//.............................................................................
+	// ke9ns:  txeq28 bands (see isoband.c table)
+
+	REAL preamp = dB2lin((REAL)txeq28[0]) * 0.5f;  // ke9ns preamp slider =  (10^(txeq[0]/20)) / 2
+	
+//	sem_wait(&top[thread].sync.upd.sem); // end of 3band
+
+
+	for (j = 1, band = 15; j <= 28; j++, band += 1)  // band = 15, ++3 each cycle    ISOband_get_info only allows band= 1 to 43 as legal
+	{
+
+		REAL f_here = ISOband_get_nominal(band);       // isoband.c = ISOband_get_info(band)->nominal,         exact, low, high for band 1 to 43
+
+	//	REAL f_below = gmean(f_here / 1.26f, f_here);   // ke9ns: sqrt(x*y)  2.0f: 100hz input = 70hz f_below this is considered 1 full octave (1.3f = 1/3 octave)
+	//	REAL f_above = gmean(f_here, f_here * 1.26f);   // ke9ns: sqrt(x*y)  100hz input = 141 f_above
+
+		REAL f_below = (REAL)f_here / 1.12246; // ke9ns: calculate low and high frequency based on 1/3 octave value
+		REAL f_above = (REAL)f_here * 1.12246;
+
+		REAL g_here = dB2lin((REAL)txeq28[j] * 1.2) * preamp;  // g_here = (10^(txeq[j]))*preamp (I think this is just the overall gain)
+
+	
+		//.............................................................................
+		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, small); // ke9ns: low, high, samplerate, size
+
+		for (i = 0; i < small; i++)
+		{
+			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here)); // Cadd=Complex# add,  Cscl=Complex# scaler                re, im
+		}
+		delFIR_Bandpass_COMPLEX(tmpfilt); // delete FIR complex numbers
+
+		//.............................................................................
+		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, small);
+
+		for (i = 0; i < small; i++)
+		{
+			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here));
+		}
+		delFIR_Bandpass_COMPLEX(tmpfilt);
+
+		//	fprintf(stderr, "37 28band:  %f %f %f %f\n", f_here, f_below, f_above, g_here), fflush(stderr);
+
+	} // for (j = 1, band = 15; j <= 10; j++, band += 3) 
+
+	//.........................................................................
+	 preamp = dB2lin((REAL)peq[0]) * 0.5f;  // ke9ns preamp slider =  (10^(txeq[0]/20)) / 2
+
+	
+	for (j = 1; j <= 9; j++)  // band = 15, ++3 each cycle    ISOband_get_info only allows band= 1 to 43 as legal
+	{
+
+		REAL f_here = peq[j + 18]; // freq ISOband_get_nominal(band);       // isoband.c = ISOband_get_info(band)->nominal,         exact, low, high for band 1 to 43
+
+
+		xx = (double)peq[j + 9] / 10.0; // octave .1 to 4 octave converts 1.3 = 1/3 octave  and 2.0 = 1 octave
+
+
+		REAL f_below = (REAL)f_here / (REAL)pow(1.414, xx); // ke9ns: calculate low and high frequency based on octave value
+		REAL f_above = (REAL)f_here * (REAL)pow(1.414, xx);
+
+
+		REAL g_here = dB2lin((REAL)peq[j] * 1.2) * preamp;  // g_here = (10^(peq[j]/20)) *preamp (I think this is just the overall gain)  add *2 as test
+
+	
+		//	fprintf(stderr,"37 9Band PEQ:  %f %f %f %f\n", f_here, f_below, f_above, g_here),fflush(stderr);
+
+
+			//.............................................................................
+		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, small); // ke9ns: low, high, samplerate, size  257
+
+		for (i = 0; i < small; i++) // 257
+		{
+			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here)); // Cadd=Complex# add,  Cscl=Complex# scaler                re, im
+		}
+		delFIR_Bandpass_COMPLEX(tmpfilt); // delete FIR complex numbers
+
+		//.............................................................................
+		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, small); // 257
+
+		for (i = 0; i < small; i++) // 257 514
+		{
+			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here));
+		}
+		delFIR_Bandpass_COMPLEX(tmpfilt);
+
+	} // for (j = 1, band = 15; j <= 10; j++, band += 3) 
+
+
+	//...................................................................................
+
+	for (i = 0; i < small; i++) // 257 
+	{
+		filtcoef[254 + i] = Cscl(tmpcoef[i], (REAL)(1.0 / large1));
+	}
+
+	ptmp = fftwf_plan_dft_1d(large, (fftwf_complex*)filtcoef, (fftwf_complex*)tx[thread].grapheq.gen->p->zfvec, FFTW_FORWARD, uni->wisdom.bits);
+
+	fftwf_execute(ptmp);
+	fftwf_destroy_plan(ptmp);
+
+	delvec_COMPLEX(filtcoef); // release the memory (free)
+	delvec_COMPLEX(tmpcoef);
+
+	//sem_post(&top[thread].sync.upd.sem); // end of 37band
+
+
+
+} // SetGrphTX37
+
+
+
+
+
+ //==================================================================================
+  // ke9ns add: EQFORM -> move PEQ 9 band Eq slider -> PEQ -> dttsp.setgrphtxPEQ -> update.c (here)
+// https://courses.physics.illinois.edu/phys406/sp2017/Lab_Handouts/Octave_Bands.pdf
+
+DttSP_EXP void SetGrphTXPEQ(unsigned int thread, int* peq)
+{
+//	fprintf(stdout, "9Band: PEQ EQ\n"), fflush(stdout);
+	
+	int i, j, band;
+
+	fftwf_plan ptmp; //fftw3.h   FFTW_DEFINE_API(FFTW_MANGLE_FLOAT, float, fftwf_complex) this is huge 2nd order macro
+
+	double xx;
+
+					 //ke9ns to allocate a pointer to a buffer of a struct of COMPLEX (which is just 2 REAL values: re, im  (REAL is just a float)
+	COMPLEX* filtcoef = newvec_COMPLEX(large, "filter for EQ"); // COMPLEX =   REAL re, im;  512  769
+	COMPLEX* tmpcoef = newvec_COMPLEX(small, "tmp filter for EQ");   // call to bufvec.c    257  514
+
+	ComplexFIR tmpfilt; // ke9ns struct = COMPLEX, int, enum(0-5), BOOLEAN (which is just uchr), struct of freq (real lo, hi)
+
+	REAL preamp = dB2lin((REAL)peq[0]) * 0.5f;  // ke9ns preamp slider =  (10^(txeq[0]/20)) / 2
+
+	//sem_wait(&top[thread].sync.upd.sem); // end of 3band
+
+	//.............................................................................
+	 // ke9ns:  txeq bands (see isoband.c table)
+	for (j = 1; j <= 9; j++)  // band = 15, ++3 each cycle    ISOband_get_info only allows band= 1 to 43 as legal
+	{
+		
+		REAL f_here = peq[j + 18]; // freq ISOband_get_nominal(band);       // isoband.c = ISOband_get_info(band)->nominal,         exact, low, high for band 1 to 43
+		
+	
+		xx = (double)peq[j + 9] / 10.0; // octave .1 to 4 octave converts 1.3 = 1/3 octave  and 2.0 = 1 octave
+
+	
+		REAL f_below = (REAL)f_here / (REAL)pow(1.414, xx); // ke9ns: calculate low and high frequency based on octave value
+		REAL f_above = (REAL)f_here * (REAL)pow(1.414, xx);
+
+
+		REAL g_here = dB2lin((REAL)peq[j] * 1.2 ) * preamp;  // g_here = (10^(peq[j]/20)) *preamp (I think this is just the overall gain)  add *2 as test
+
+		if (f_here <= 120)
+		{
+			g_here = dB2lin((REAL)peq[j] * 2) * preamp;
+		}
+
+		//fprintf(stderr,"9Band PEQ:  %f %f     %f %f\n", f_here, g_here, f_below, f_above ),fflush(stderr);
+
+
+		//.............................................................................
+		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, small); // ke9ns: low, high, samplerate, size  257
+
+		for (i = 0; i < small; i++) // 257
+		{
+			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here)); // Cadd=Complex# add,  Cscl=Complex# scaler                re, im
+		}
+		delFIR_Bandpass_COMPLEX(tmpfilt); // delete FIR complex numbers
+
+		//.............................................................................
+		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, small); // 257
+
+		for (i = 0; i < small; i++) // 257
+		{
+			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here));
+		}
+		delFIR_Bandpass_COMPLEX(tmpfilt);
+
+	} // for (j = 1, band = 15; j <= 10; j++, band += 3) 
+
+	  //...................................................................................
+
+	for (i = 0; i < small; i++) // 257
+	{
+		filtcoef[254 + i] = Cscl(tmpcoef[i], (REAL)(1.0 / large1)); // 254  512
+	}
+
+	
+
+	ptmp = fftwf_plan_dft_1d(large, (fftwf_complex*)filtcoef, (fftwf_complex*)tx[thread].grapheq.gen->p->zfvec, FFTW_FORWARD, uni->wisdom.bits);
+
+	fftwf_execute(ptmp);
+	fftwf_destroy_plan(ptmp);
+
+	delvec_COMPLEX(filtcoef); // release the memory (free)
+	delvec_COMPLEX(tmpcoef);
+	
+//	sem_post(&top[thread].sync.upd.sem); // end of 9band
+
+	//fprintf(stdout, "9Band: PEQ EQ DONE\n"), fflush(stdout);
+
+
+} // SetGrphTXPEQ
+
+
+
+//==================================================================================
+// ke9ns EQFORM -> Enable TX checkbox -> TXEQON -> dttsp.setgrphtxeqcmd -> here
+DttSP_EXP void SetGrphTXEQcmd (unsigned int thread, BOOLEAN state)
 {
 	sem_wait(&top[thread].sync.upd.sem);
 	tx[thread].grapheq.flag = state;
 	sem_post(&top[thread].sync.upd.sem);
-}
+
+} // SetGrphTXEQcmd
 
 
-DttSP_EXP void
-SetNotch160 (unsigned int thread, BOOLEAN state)
+//==================================================================================
+DttSP_EXP void SetNotch160 (unsigned int thread, BOOLEAN state)
 {
 
 }
 
-DttSP_EXP void
-SetGrphRXEQ (unsigned int thread, unsigned int subrx, int *rxeq)
+//==================================================================================
+DttSP_EXP void SetGrphRXEQ (unsigned int thread, unsigned int subrx, int *rxeq)
 {
     int i;
     fftwf_plan ptmp;
@@ -1350,9 +1796,9 @@ SetGrphRXEQ (unsigned int thread, unsigned int subrx, int *rxeq)
 	filtcoef = newvec_COMPLEX (512, "filter for EQ");
 	tmpcoef = newvec_COMPLEX (257, "tmp filter for EQ");
     preamp  = (REAL) dB2lin ((REAL) rxeq[0]) * 0.5f;
-    gain[0] = (REAL) dB2lin ((REAL) rxeq[1]) * preamp;
-    gain[1] = (REAL) dB2lin ((REAL) rxeq[2]) * preamp;
-    gain[2] = (REAL) dB2lin ((REAL) rxeq[3]) * preamp;
+    gain[0] = (REAL) dB2lin ((REAL) rxeq[1] * 1.5) * preamp;
+    gain[1] = (REAL) dB2lin ((REAL) rxeq[2] * 1.5) * preamp;
+    gain[2] = (REAL) dB2lin ((REAL) rxeq[3] * 1.5) * preamp;
 
 
     sem_wait(&top[thread].sync.upd.sem);
@@ -1397,8 +1843,9 @@ SetGrphRXEQ (unsigned int thread, unsigned int subrx, int *rxeq)
 	//fprintf(stderr,"%f %f %f %f\n",preamp, gain[0],gain[1],gain[2]),fflush(stderr);
 }
 
-DttSP_EXP void
-SetGrphRXEQ10(unsigned int thread, unsigned int subrx, int *rxeq) 
+//==================================================================================
+// 10 band rx
+DttSP_EXP void SetGrphRXEQ10(unsigned int thread, unsigned int subrx, int *rxeq) 
 {
 /*  if (n < 11)
 	return -1;
@@ -1422,36 +1869,40 @@ SetGrphRXEQ10(unsigned int thread, unsigned int subrx, int *rxeq)
     for (j = 1, band = 15; j <= 10; j++, band += 3)
 	{
 		REAL f_here  = ISOband_get_nominal(band),
-			f_below = gmean(f_here / 2.0f, f_here),
+			f_below = gmean(f_here / 2.0f, f_here), // sqrt(x*y);
 			f_above = gmean(f_here, f_here * 2.0f),
-			g_here  = dB2lin((REAL) rxeq[j]) * preamp;
-
+			g_here  = dB2lin((REAL) rxeq[j] * 1.5) * preamp; // ke9ns mod .168 (add 1.5 gain to each band)
+		 
 		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, 257);
+
 		for (i = 0; i < 257; i++)
 			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here));
+
 		delFIR_Bandpass_COMPLEX(tmpfilt);
 
 		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, 257);
+
 		for (i = 0; i < 257; i++)
 			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here));
+
 		delFIR_Bandpass_COMPLEX(tmpfilt);
 	}
 
     for (i = 0; i < 257; i++)
-		filtcoef[254 + i] = Cscl(tmpcoef[i],(REAL)(1.0/512.0));;
+		filtcoef[254 + i] = Cscl(tmpcoef[i],(REAL)(1.0/512.0));
 
-    ptmp = fftwf_plan_dft_1d(512,
-		(fftwf_complex *) filtcoef,
-		(fftwf_complex *) rx[thread][subrx].grapheq.gen->p->zfvec,
-		FFTW_FORWARD,
-		uni->wisdom.bits);
+    ptmp = fftwf_plan_dft_1d(512,(fftwf_complex *) filtcoef,(fftwf_complex *) rx[thread][subrx].grapheq.gen->p->zfvec,FFTW_FORWARD,uni->wisdom.bits);
 
     fftwf_execute(ptmp);
     fftwf_destroy_plan(ptmp);
     delvec_COMPLEX(filtcoef);
     delvec_COMPLEX(tmpcoef);
-}
 
+
+
+} //  SetGrphRXEQ10(
+
+//==================================================================================
 DttSP_EXP void SetGrphRXEQcmd (unsigned int thread, unsigned int subrx,BOOLEAN state)
 {
 	sem_wait(&top[thread].sync.upd.sem);
@@ -1459,7 +1910,7 @@ DttSP_EXP void SetGrphRXEQcmd (unsigned int thread, unsigned int subrx,BOOLEAN s
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-
+//==================================================================================
 DttSP_EXP void SetTXAGCFF (unsigned int thread, BOOLEAN setit)
 {
 	sem_wait(&top[thread].sync.upd.sem);
@@ -1483,7 +1934,7 @@ DttSP_EXP void SetTXAGCFFCompression (unsigned int thread, double txcompression)
 
 
 //=========================================================================================
-// ke9ns  console uses this to 
+// ke9ns  console uses this to set squelch threshold
 //=========================================================================================
 DttSP_EXP void SetSquelchVal (unsigned int thread, unsigned int subrx, float setit)
 {
@@ -1495,7 +1946,7 @@ DttSP_EXP void SetSquelchVal (unsigned int thread, unsigned int subrx, float set
 
 
 //=========================================================================================
-// ke9ns  console uses this to 
+// ke9ns  console uses this to turn squelch ON/OFF
 //=========================================================================================
 DttSP_EXP SetSquelchState (unsigned int thread, unsigned int subrx,BOOLEAN setit)
 {
@@ -1631,7 +2082,9 @@ DttSP_EXP void SetTXAGCCompression (unsigned int thread, double txcompression)
 //=========================================================================================
 DttSP_EXP void Process_ComplexSpectrum (unsigned int thread, float *results)
 {
-	uni[thread].spec.type = SPEC_POST_FILT;
+
+
+	uni[thread].spec.type = SPEC_POST_FILT; // ke9ns TX
 	
 	uni[thread].spec.scale = SPEC_PWR;
 	//sem_wait (&top[thread].sync.upd.sem);
@@ -1652,7 +2105,9 @@ DttSP_EXP void Process_ComplexSpectrum (unsigned int thread, float *results)
 //=========================================================================================
 DttSP_EXP void Process_Spectrum (unsigned int thread, float *results)
 {
-	uni[thread].spec.type = SPEC_POST_FILT;                   // ke9ns define the "type" of spectrum, in this case POST_FILT = just the bandpass (based on low and high filter setpoints)
+
+
+	uni[thread].spec.type = SPEC_POST_FILT;                   // TX ke9ns define the "type" of spectrum, in this case POST_FILT = just the bandpass (based on low and high filter setpoints)
 
 	uni[thread].spec.scale = SPEC_PWR;                        // ke9ns define the scale of the output??? in spot.cs I see -200 values that need to be scaled back to -135 dBm
 
@@ -1669,38 +2124,65 @@ DttSP_EXP void Process_Spectrum (unsigned int thread, float *results)
 
 //=========================================================================================
 // ke9ns  console uses this to get 4096 data points for panadapter and waterfall info
+//        BUT its always 4096 based on the SR and not whats in view on the panadapter
+//        SO zooming in does not show more detail
+// #define SPEC_PRE_FILT	(1)  samplerate wide
+// #define SPEC_POST_FILT	(2)  bandpass wide
+// #define SPEC_POST_AGC	(3)
+// #define SPEC_POST_DET	(4)
+// #define SPEC_PREMOD		(4)
+//                               typedef struct _spec_block
+//                               {
+//	                                BOOLEAN flag;
+//	                                int label;
+//	                                CXB accum, timebuf, freqbuf;
+//	                                int fill, buflen, rxk, scale, size, type, mask;
+//	                                Windowtype wintype;
+//	                                REAL* window;
+//	                                float* output, * oscope;
+//	                                COMPLEX* coutput;
+//	                                int planbits;
+//	                                fftwf_plan plan;
+//	                                BOOLEAN polyphase;
+//
+//                               } SpecBlock;
 //=========================================================================================
 DttSP_EXP void Process_Panadapter (unsigned int thread, float *results)
 {
 	extern BOOLEAN reset_em; // winmain.c
 
+
 	//sem_wait (&top[thread].sync.upd.sem);
 	
 	if (uni[thread].mode.trx == TX)  // if in TX mode
 	{
-		uni[thread].spec.type = SPEC_POST_FILT; // ke9ns spectrum.h
+		uni[thread].spec.type = SPEC_POST_FILT; // ke9ns: TX spectrum.h
 	}
-	else // else in RX mode ?
+	else // else in RX mode 
 	{
-		uni[thread].spec.type = SPEC_PRE_FILT; // ke9ns set filter type   PRE_FILT = entire width of PAN  (POST_FILT = just the bandpass)
+		 uni[thread].spec.type = SPEC_PRE_FILT; // ke9ns: set filter type   PRE_FILT = entire width of PAN  (POST_FILT = just the bandpass)
 	}
 
 	uni[thread].spec.scale = SPEC_PWR;  // ke9ns set scale of power level
 
-	if (reset_em)
+	if (reset_em) // reset block of memory
 	{
-		memset(results,0,uni[thread].spec.size * sizeof (float));               // ke9ns   reset block of memory with all 0's
-
+		memset(results,0,uni[thread].spec.size * sizeof (float));               // ke9ns:   reset block of memory with all 0's
 		//sem_post (&top[thread].sync.upd.sem);
 		return;
 	}
 
-	snap_spectrum (&uni[thread].spec, uni[thread].spec.type);  //ke9ns ??
+	snap_spectrum (&uni[thread].spec, uni[thread].spec.type);  //ke9ns: now get a snapshot of the spectrum?
 
 	//sem_post (&top[thread].sync.upd.sem);
-	compute_spectrum (&uni[thread].spec);
 
-	memcpy ((void *) results, uni[thread].spec.output, uni[thread].spec.size * sizeof (float));    // ke9ns copy uni[] into results pointer.
+	compute_spectrum (&uni[thread].spec); // ke9ns: FFT on spectrum into .output
+
+	memcpy ((void *) results, uni[thread].spec.output, uni[thread].spec.size * sizeof (float));    // ke9ns: copy .output into results pointer.
+
+
+//	fprintf(stdout, "Process_Panadapter:  %d \n", uni[thread].spec.size);
+//	fflush(stdout);
 
 } // Process_Panadapter =  DttSP.GetSpectrum(,)
 
@@ -1714,6 +2196,8 @@ DttSP_EXP void Process_Phase (unsigned int thread, float *results, int numpoints
 {
 	int i, j;
 	extern BOOLEAN reset_em;
+
+
 	if (reset_em) 
 	{
 		memset(results,0,numpoints * sizeof (float));
@@ -1739,18 +2223,24 @@ DttSP_EXP void Process_Scope (unsigned int thread, float *results, int numpoints
 {
 	int i;
 	extern BOOLEAN reset_em;
+
+	
+
 	if (reset_em)
 	{
 		memset(results,0,numpoints * sizeof (float));
 		return;
 	}
+
 	//sem_wait (&top[thread].sync.upd.sem);
 	uni[thread].spec.type = SPEC_POST_AGC;
 	uni[thread].spec.scale = SPEC_PWR;
 	uni[thread].spec.rxk = 0;
 
 	snap_scope (&uni[thread].spec, uni[thread].spec.type);
+
 	//sem_post (&top[thread].sync.upd.sem);
+
 	for (i = 0; i < numpoints; i++)
 	{
 		results[i] = (float) CXBreal (uni[thread].spec.timebuf, i);

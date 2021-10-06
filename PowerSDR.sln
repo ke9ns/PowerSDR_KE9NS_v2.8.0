@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerSDR", "Console\PowerSDR.csproj", "{831AEB2F-CA78-4057-85D7-32B4816ED6AE}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -57,17 +57,15 @@ Global
 		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Interleaved|x64.Build.0 = Release|Any CPU
 		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Interleaved|x86.ActiveCfg = Release|x86
 		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Interleaved|x86.Build.0 = Release|x86
-		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|Any CPU.ActiveCfg = Release|x86
 		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|ARM.ActiveCfg = Release|Any CPU
 		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|ARM.Build.0 = Release|Any CPU
 		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|Win32.ActiveCfg = Release|Any CPU
-		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|Win32.Build.0 = Release|Any CPU
+		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|Win32.ActiveCfg = Release|x86
 		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|x64.ActiveCfg = Release|Any CPU
-		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|x86.ActiveCfg = Release|x86
-		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|x86.Build.0 = Release|x86
+		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|x86.ActiveCfg = Release|Any CPU
+		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|x86.Build.0 = Release|Any CPU
 		{E8E40DF8-8A3B-422D-B7A1-44BB036F4994}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{E8E40DF8-8A3B-422D-B7A1-44BB036F4994}.Debug|ARM.ActiveCfg = Debug|ARM
 		{E8E40DF8-8A3B-422D-B7A1-44BB036F4994}.Debug|ARM.Build.0 = Debug|ARM
@@ -95,7 +93,7 @@ Global
 		{E8E40DF8-8A3B-422D-B7A1-44BB036F4994}.Release|ARM.Build.0 = Release|ARM
 		{E8E40DF8-8A3B-422D-B7A1-44BB036F4994}.Release|Mixed Platforms.ActiveCfg = Release|Win32
 		{E8E40DF8-8A3B-422D-B7A1-44BB036F4994}.Release|Win32.ActiveCfg = Release|Win32
-		{E8E40DF8-8A3B-422D-B7A1-44BB036F4994}.Release|x64.ActiveCfg = Release|Win32
+		{E8E40DF8-8A3B-422D-B7A1-44BB036F4994}.Release|x64.ActiveCfg = Release|x64
 		{E8E40DF8-8A3B-422D-B7A1-44BB036F4994}.Release|x86.ActiveCfg = Release|Win32
 		{E8E40DF8-8A3B-422D-B7A1-44BB036F4994}.Release|x86.Build.0 = Release|Win32
 		{BBD70852-1A81-4232-B094-C87BEDE243C9}.Debug|Any CPU.ActiveCfg = Debug|Win32
@@ -124,12 +122,20 @@ Global
 		{BBD70852-1A81-4232-B094-C87BEDE243C9}.Release|Mixed Platforms.ActiveCfg = Release|Win32
 		{BBD70852-1A81-4232-B094-C87BEDE243C9}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{BBD70852-1A81-4232-B094-C87BEDE243C9}.Release|Win32.ActiveCfg = Release|Win32
-		{BBD70852-1A81-4232-B094-C87BEDE243C9}.Release|Win32.Build.0 = Release|Win32
-		{BBD70852-1A81-4232-B094-C87BEDE243C9}.Release|x64.ActiveCfg = Release|Win32
+		{BBD70852-1A81-4232-B094-C87BEDE243C9}.Release|x64.ActiveCfg = Release|x64
 		{BBD70852-1A81-4232-B094-C87BEDE243C9}.Release|x86.ActiveCfg = Release|Win32
 		{BBD70852-1A81-4232-B094-C87BEDE243C9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A43F7D75-3B4C-41C3-B58E-B54C3228ACBF}
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

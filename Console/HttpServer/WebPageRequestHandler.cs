@@ -10,10 +10,10 @@ namespace HttpServer
 
     class WebPageRequestHandler : IHandler
     {
-        public WebPageRequestHandler(String body, TcpClient tcpClient):
+        public WebPageRequestHandler(String body, TcpClient tcpClient) :
             base(body, tcpClient)
         {
-            
+
         }
 
         private string UPDATE_TIME = "#UPDATE_TIME";
@@ -27,7 +27,7 @@ namespace HttpServer
             string CodeStr = "200 " + ((HttpStatusCode)200).ToString();
             string Html = Resources.template;
             Html = Html.Replace(UPDATE_TIME, timeRefresh_in_ms);
-            
+
             string Str = "HTTP/1.1 " + CodeStr + "\nContent-Type: text/html\nContent-Length:" + Html.Length.ToString() + "\n\n" + Html;
 
             Debug.WriteLine("STRING TO SEND: " + Str);
@@ -43,5 +43,5 @@ namespace HttpServer
         }
     }
 
-    
+
 }

@@ -27,384 +27,380 @@
 //=================================================================
 
 using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Collections;
 using System.ComponentModel;
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 
 namespace PowerSDR
 {
-	/// <summary>
-	/// Summary description for UCBForm.
-	/// </summary>
-	public class UCBForm : System.Windows.Forms.Form
-	{
-		#region Variable Declaration
+    /// <summary>
+    /// Summary description for UCBForm.
+    /// </summary>
+    public class UCBForm : System.Windows.Forms.Form
+    {
+        #region Variable Declaration
 
-		private Console console;
-		private bool ucb_busy = false;
-		private HW hw;
-		private byte address;
-		private int val;
-		private UCB.CMD cmd;
+        private Console console;
+        private bool ucb_busy = false;
+        private HW hw;
+        private byte address;
+        private int val;
+        private UCB.CMD cmd;
 
-		private System.Windows.Forms.ButtonTS btnEnable;
-		private System.Windows.Forms.ButtonTS btnDisable;
-		private System.Windows.Forms.ButtonTS btnDisableClear;
-		private System.Windows.Forms.CheckBoxTS chkL00R01;
-		private System.Windows.Forms.CheckBoxTS chkL00R02;
-		private System.Windows.Forms.CheckBoxTS chkL00R03;
-		private System.Windows.Forms.CheckBoxTS chkL00R04;
-		private System.Windows.Forms.CheckBoxTS chkL00R05;
-		private System.Windows.Forms.CheckBoxTS chkL00R06;
-		private System.Windows.Forms.CheckBoxTS chkL00R07;
-		private System.Windows.Forms.CheckBoxTS chkL00R08;
-		private System.Windows.Forms.CheckBoxTS chkL00R09;
-		private System.Windows.Forms.CheckBoxTS chkL00R10;
-		private System.Windows.Forms.CheckBoxTS chkL00R11;
-		private System.Windows.Forms.CheckBoxTS chkL00R12;
-		private System.Windows.Forms.CheckBoxTS chkL00R13;
-		private System.Windows.Forms.CheckBoxTS chkL00R14;
-		private System.Windows.Forms.CheckBoxTS chkL00R15;
-		private System.Windows.Forms.CheckBoxTS chkL00R16;
-		private System.Windows.Forms.LabelTS lblR1;
-		private System.Windows.Forms.LabelTS lblR2;
-		private System.Windows.Forms.LabelTS lblR3;
-		private System.Windows.Forms.LabelTS lblR4;
-		private System.Windows.Forms.LabelTS lblR5;
-		private System.Windows.Forms.LabelTS lblR6;
-		private System.Windows.Forms.LabelTS lblR7;
-		private System.Windows.Forms.LabelTS lblR8;
-		private System.Windows.Forms.LabelTS lblR9;
-		private System.Windows.Forms.LabelTS lblR10;
-		private System.Windows.Forms.LabelTS lblR11;
-		private System.Windows.Forms.LabelTS lblR12;
-		private System.Windows.Forms.LabelTS lblR13;
-		private System.Windows.Forms.LabelTS lblR14;
-		private System.Windows.Forms.LabelTS lblR15;
-		private System.Windows.Forms.LabelTS lblR16;
-		private System.Windows.Forms.LabelTS lblAddr;
-		private System.Windows.Forms.LabelTS lblLine0;
-		private System.Windows.Forms.ButtonTS btnWriteLine0;
-		private System.Windows.Forms.ButtonTS btnWriteAll;
-		private System.Windows.Forms.RadioButtonTS radLine0;
-		private System.Windows.Forms.LabelTS lblRelays;
-		private System.Windows.Forms.RadioButtonTS radLine1;
-		private System.Windows.Forms.RadioButtonTS radLine2;
-		private System.Windows.Forms.RadioButtonTS radLine3;
-		private System.Windows.Forms.RadioButtonTS radLine4;
-		private System.Windows.Forms.RadioButtonTS radLine5;
-		private System.Windows.Forms.RadioButtonTS radLine6;
-		private System.Windows.Forms.RadioButtonTS radLine7;
-		private System.Windows.Forms.RadioButtonTS radLine8;
-		private System.Windows.Forms.RadioButtonTS radLine9;
-		private System.Windows.Forms.RadioButtonTS radLine10;
-		private System.Windows.Forms.RadioButtonTS radLine11;
-		private System.Windows.Forms.RadioButtonTS radLine12;
-		private System.Windows.Forms.RadioButtonTS radLine13;
-		private System.Windows.Forms.RadioButtonTS radLine14;
-		private System.Windows.Forms.RadioButtonTS radLine15;
-		private System.Windows.Forms.ButtonTS btnWriteLine1;
-		private System.Windows.Forms.ButtonTS btnWriteLine2;
-		private System.Windows.Forms.ButtonTS btnWriteLine3;
-		private System.Windows.Forms.ButtonTS btnWriteLine4;
-		private System.Windows.Forms.ButtonTS btnWriteLine5;
-		private System.Windows.Forms.ButtonTS btnWriteLine6;
-		private System.Windows.Forms.ButtonTS btnWriteLine7;
-		private System.Windows.Forms.ButtonTS btnWriteLine8;
-		private System.Windows.Forms.ButtonTS btnWriteLine9;
-		private System.Windows.Forms.ButtonTS btnWriteLine10;
-		private System.Windows.Forms.ButtonTS btnWriteLine11;
-		private System.Windows.Forms.ButtonTS btnWriteLine12;
-		private System.Windows.Forms.ButtonTS btnWriteLine13;
-		private System.Windows.Forms.ButtonTS btnWriteLine14;
-		private System.Windows.Forms.ButtonTS btnWriteLine15;
-		private System.Windows.Forms.CheckBoxTS chkL01R09;
-		private System.Windows.Forms.CheckBoxTS chkL01R10;
-		private System.Windows.Forms.CheckBoxTS chkL01R11;
-		private System.Windows.Forms.CheckBoxTS chkL01R12;
-		private System.Windows.Forms.CheckBoxTS chkL01R13;
-		private System.Windows.Forms.CheckBoxTS chkL01R14;
-		private System.Windows.Forms.CheckBoxTS chkL01R15;
-		private System.Windows.Forms.CheckBoxTS chkL01R16;
-		private System.Windows.Forms.CheckBoxTS chkL01R08;
-		private System.Windows.Forms.CheckBoxTS chkL01R07;
-		private System.Windows.Forms.CheckBoxTS chkL01R06;
-		private System.Windows.Forms.CheckBoxTS chkL01R05;
-		private System.Windows.Forms.CheckBoxTS chkL01R04;
-		private System.Windows.Forms.CheckBoxTS chkL01R03;
-		private System.Windows.Forms.CheckBoxTS chkL01R02;
-		private System.Windows.Forms.CheckBoxTS chkL01R01;
-		private System.Windows.Forms.CheckBoxTS chkL02R09;
-		private System.Windows.Forms.CheckBoxTS chkL02R10;
-		private System.Windows.Forms.CheckBoxTS chkL02R11;
-		private System.Windows.Forms.CheckBoxTS chkL02R12;
-		private System.Windows.Forms.CheckBoxTS chkL02R13;
-		private System.Windows.Forms.CheckBoxTS chkL02R14;
-		private System.Windows.Forms.CheckBoxTS chkL02R15;
-		private System.Windows.Forms.CheckBoxTS chkL02R16;
-		private System.Windows.Forms.CheckBoxTS chkL02R08;
-		private System.Windows.Forms.CheckBoxTS chkL02R07;
-		private System.Windows.Forms.CheckBoxTS chkL02R06;
-		private System.Windows.Forms.CheckBoxTS chkL02R05;
-		private System.Windows.Forms.CheckBoxTS chkL02R04;
-		private System.Windows.Forms.CheckBoxTS chkL02R03;
-		private System.Windows.Forms.CheckBoxTS chkL02R02;
-		private System.Windows.Forms.CheckBoxTS chkL02R01;
-		private System.Windows.Forms.CheckBoxTS chkL03R09;
-		private System.Windows.Forms.CheckBoxTS chkL03R10;
-		private System.Windows.Forms.CheckBoxTS chkL03R11;
-		private System.Windows.Forms.CheckBoxTS chkL03R12;
-		private System.Windows.Forms.CheckBoxTS chkL03R13;
-		private System.Windows.Forms.CheckBoxTS chkL03R14;
-		private System.Windows.Forms.CheckBoxTS chkL03R15;
-		private System.Windows.Forms.CheckBoxTS chkL03R16;
-		private System.Windows.Forms.CheckBoxTS chkL03R08;
-		private System.Windows.Forms.CheckBoxTS chkL03R07;
-		private System.Windows.Forms.CheckBoxTS chkL03R06;
-		private System.Windows.Forms.CheckBoxTS chkL03R05;
-		private System.Windows.Forms.CheckBoxTS chkL03R04;
-		private System.Windows.Forms.CheckBoxTS chkL03R03;
-		private System.Windows.Forms.CheckBoxTS chkL03R02;
-		private System.Windows.Forms.CheckBoxTS chkL03R01;
-		private System.Windows.Forms.CheckBoxTS chkL04R09;
-		private System.Windows.Forms.CheckBoxTS chkL04R10;
-		private System.Windows.Forms.CheckBoxTS chkL04R11;
-		private System.Windows.Forms.CheckBoxTS chkL04R12;
-		private System.Windows.Forms.CheckBoxTS chkL04R13;
-		private System.Windows.Forms.CheckBoxTS chkL04R14;
-		private System.Windows.Forms.CheckBoxTS chkL04R15;
-		private System.Windows.Forms.CheckBoxTS chkL04R16;
-		private System.Windows.Forms.CheckBoxTS chkL04R08;
-		private System.Windows.Forms.CheckBoxTS chkL04R07;
-		private System.Windows.Forms.CheckBoxTS chkL04R06;
-		private System.Windows.Forms.CheckBoxTS chkL04R05;
-		private System.Windows.Forms.CheckBoxTS chkL04R04;
-		private System.Windows.Forms.CheckBoxTS chkL04R03;
-		private System.Windows.Forms.CheckBoxTS chkL04R02;
-		private System.Windows.Forms.CheckBoxTS chkL04R01;
-		private System.Windows.Forms.CheckBoxTS chkL05R09;
-		private System.Windows.Forms.CheckBoxTS chkL05R10;
-		private System.Windows.Forms.CheckBoxTS chkL05R11;
-		private System.Windows.Forms.CheckBoxTS chkL05R12;
-		private System.Windows.Forms.CheckBoxTS chkL05R13;
-		private System.Windows.Forms.CheckBoxTS chkL05R14;
-		private System.Windows.Forms.CheckBoxTS chkL05R15;
-		private System.Windows.Forms.CheckBoxTS chkL05R16;
-		private System.Windows.Forms.CheckBoxTS chkL05R08;
-		private System.Windows.Forms.CheckBoxTS chkL05R07;
-		private System.Windows.Forms.CheckBoxTS chkL05R06;
-		private System.Windows.Forms.CheckBoxTS chkL05R05;
-		private System.Windows.Forms.CheckBoxTS chkL05R04;
-		private System.Windows.Forms.CheckBoxTS chkL05R03;
-		private System.Windows.Forms.CheckBoxTS chkL05R02;
-		private System.Windows.Forms.CheckBoxTS chkL05R01;
-		private System.Windows.Forms.CheckBoxTS chkL06R09;
-		private System.Windows.Forms.CheckBoxTS chkL06R10;
-		private System.Windows.Forms.CheckBoxTS chkL06R11;
-		private System.Windows.Forms.CheckBoxTS chkL06R12;
-		private System.Windows.Forms.CheckBoxTS chkL06R13;
-		private System.Windows.Forms.CheckBoxTS chkL06R14;
-		private System.Windows.Forms.CheckBoxTS chkL06R15;
-		private System.Windows.Forms.CheckBoxTS chkL06R16;
-		private System.Windows.Forms.CheckBoxTS chkL06R08;
-		private System.Windows.Forms.CheckBoxTS chkL06R07;
-		private System.Windows.Forms.CheckBoxTS chkL06R06;
-		private System.Windows.Forms.CheckBoxTS chkL06R05;
-		private System.Windows.Forms.CheckBoxTS chkL06R04;
-		private System.Windows.Forms.CheckBoxTS chkL06R03;
-		private System.Windows.Forms.CheckBoxTS chkL06R02;
-		private System.Windows.Forms.CheckBoxTS chkL06R01;
-		private System.Windows.Forms.CheckBoxTS chkL07R09;
-		private System.Windows.Forms.CheckBoxTS chkL07R10;
-		private System.Windows.Forms.CheckBoxTS chkL07R11;
-		private System.Windows.Forms.CheckBoxTS chkL07R12;
-		private System.Windows.Forms.CheckBoxTS chkL07R13;
-		private System.Windows.Forms.CheckBoxTS chkL07R14;
-		private System.Windows.Forms.CheckBoxTS chkL07R15;
-		private System.Windows.Forms.CheckBoxTS chkL07R16;
-		private System.Windows.Forms.CheckBoxTS chkL07R08;
-		private System.Windows.Forms.CheckBoxTS chkL07R07;
-		private System.Windows.Forms.CheckBoxTS chkL07R06;
-		private System.Windows.Forms.CheckBoxTS chkL07R05;
-		private System.Windows.Forms.CheckBoxTS chkL07R04;
-		private System.Windows.Forms.CheckBoxTS chkL07R03;
-		private System.Windows.Forms.CheckBoxTS chkL07R02;
-		private System.Windows.Forms.CheckBoxTS chkL07R01;
-		private System.Windows.Forms.CheckBoxTS chkL08R09;
-		private System.Windows.Forms.CheckBoxTS chkL08R10;
-		private System.Windows.Forms.CheckBoxTS chkL08R11;
-		private System.Windows.Forms.CheckBoxTS chkL08R12;
-		private System.Windows.Forms.CheckBoxTS chkL08R13;
-		private System.Windows.Forms.CheckBoxTS chkL08R14;
-		private System.Windows.Forms.CheckBoxTS chkL08R15;
-		private System.Windows.Forms.CheckBoxTS chkL08R16;
-		private System.Windows.Forms.CheckBoxTS chkL08R08;
-		private System.Windows.Forms.CheckBoxTS chkL08R07;
-		private System.Windows.Forms.CheckBoxTS chkL08R06;
-		private System.Windows.Forms.CheckBoxTS chkL08R05;
-		private System.Windows.Forms.CheckBoxTS chkL08R04;
-		private System.Windows.Forms.CheckBoxTS chkL08R03;
-		private System.Windows.Forms.CheckBoxTS chkL08R02;
-		private System.Windows.Forms.CheckBoxTS chkL08R01;
-		private System.Windows.Forms.CheckBoxTS chkL09R09;
-		private System.Windows.Forms.CheckBoxTS chkL09R10;
-		private System.Windows.Forms.CheckBoxTS chkL09R11;
-		private System.Windows.Forms.CheckBoxTS chkL09R12;
-		private System.Windows.Forms.CheckBoxTS chkL09R13;
-		private System.Windows.Forms.CheckBoxTS chkL09R14;
-		private System.Windows.Forms.CheckBoxTS chkL09R15;
-		private System.Windows.Forms.CheckBoxTS chkL09R16;
-		private System.Windows.Forms.CheckBoxTS chkL09R08;
-		private System.Windows.Forms.CheckBoxTS chkL09R07;
-		private System.Windows.Forms.CheckBoxTS chkL09R06;
-		private System.Windows.Forms.CheckBoxTS chkL09R05;
-		private System.Windows.Forms.CheckBoxTS chkL09R04;
-		private System.Windows.Forms.CheckBoxTS chkL09R03;
-		private System.Windows.Forms.CheckBoxTS chkL09R02;
-		private System.Windows.Forms.CheckBoxTS chkL09R01;
-		private System.Windows.Forms.CheckBoxTS chkL10R09;
-		private System.Windows.Forms.CheckBoxTS chkL10R10;
-		private System.Windows.Forms.CheckBoxTS chkL10R11;
-		private System.Windows.Forms.CheckBoxTS chkL10R12;
-		private System.Windows.Forms.CheckBoxTS chkL10R13;
-		private System.Windows.Forms.CheckBoxTS chkL10R14;
-		private System.Windows.Forms.CheckBoxTS chkL10R15;
-		private System.Windows.Forms.CheckBoxTS chkL10R16;
-		private System.Windows.Forms.CheckBoxTS chkL10R08;
-		private System.Windows.Forms.CheckBoxTS chkL10R07;
-		private System.Windows.Forms.CheckBoxTS chkL10R06;
-		private System.Windows.Forms.CheckBoxTS chkL10R05;
-		private System.Windows.Forms.CheckBoxTS chkL10R04;
-		private System.Windows.Forms.CheckBoxTS chkL10R03;
-		private System.Windows.Forms.CheckBoxTS chkL10R02;
-		private System.Windows.Forms.CheckBoxTS chkL10R01;
-		private System.Windows.Forms.CheckBoxTS chkL11R09;
-		private System.Windows.Forms.CheckBoxTS chkL11R10;
-		private System.Windows.Forms.CheckBoxTS chkL11R11;
-		private System.Windows.Forms.CheckBoxTS chkL11R12;
-		private System.Windows.Forms.CheckBoxTS chkL11R13;
-		private System.Windows.Forms.CheckBoxTS chkL11R14;
-		private System.Windows.Forms.CheckBoxTS chkL11R15;
-		private System.Windows.Forms.CheckBoxTS chkL11R16;
-		private System.Windows.Forms.CheckBoxTS chkL11R08;
-		private System.Windows.Forms.CheckBoxTS chkL11R07;
-		private System.Windows.Forms.CheckBoxTS chkL11R06;
-		private System.Windows.Forms.CheckBoxTS chkL11R05;
-		private System.Windows.Forms.CheckBoxTS chkL11R04;
-		private System.Windows.Forms.CheckBoxTS chkL11R03;
-		private System.Windows.Forms.CheckBoxTS chkL11R02;
-		private System.Windows.Forms.CheckBoxTS chkL11R01;
-		private System.Windows.Forms.CheckBoxTS chkL12R09;
-		private System.Windows.Forms.CheckBoxTS chkL12R10;
-		private System.Windows.Forms.CheckBoxTS chkL12R11;
-		private System.Windows.Forms.CheckBoxTS chkL12R12;
-		private System.Windows.Forms.CheckBoxTS chkL12R13;
-		private System.Windows.Forms.CheckBoxTS chkL12R14;
-		private System.Windows.Forms.CheckBoxTS chkL12R15;
-		private System.Windows.Forms.CheckBoxTS chkL12R16;
-		private System.Windows.Forms.CheckBoxTS chkL12R08;
-		private System.Windows.Forms.CheckBoxTS chkL12R07;
-		private System.Windows.Forms.CheckBoxTS chkL12R06;
-		private System.Windows.Forms.CheckBoxTS chkL12R05;
-		private System.Windows.Forms.CheckBoxTS chkL12R04;
-		private System.Windows.Forms.CheckBoxTS chkL12R03;
-		private System.Windows.Forms.CheckBoxTS chkL12R02;
-		private System.Windows.Forms.CheckBoxTS chkL12R01;
-		private System.Windows.Forms.CheckBoxTS chkL13R09;
-		private System.Windows.Forms.CheckBoxTS chkL13R10;
-		private System.Windows.Forms.CheckBoxTS chkL13R11;
-		private System.Windows.Forms.CheckBoxTS chkL13R12;
-		private System.Windows.Forms.CheckBoxTS chkL13R13;
-		private System.Windows.Forms.CheckBoxTS chkL13R14;
-		private System.Windows.Forms.CheckBoxTS chkL13R15;
-		private System.Windows.Forms.CheckBoxTS chkL13R16;
-		private System.Windows.Forms.CheckBoxTS chkL13R08;
-		private System.Windows.Forms.CheckBoxTS chkL13R07;
-		private System.Windows.Forms.CheckBoxTS chkL13R06;
-		private System.Windows.Forms.CheckBoxTS chkL13R05;
-		private System.Windows.Forms.CheckBoxTS chkL13R04;
-		private System.Windows.Forms.CheckBoxTS chkL13R03;
-		private System.Windows.Forms.CheckBoxTS chkL13R02;
-		private System.Windows.Forms.CheckBoxTS chkL13R01;
-		private System.Windows.Forms.CheckBoxTS chkL14R09;
-		private System.Windows.Forms.CheckBoxTS chkL14R10;
-		private System.Windows.Forms.CheckBoxTS chkL14R11;
-		private System.Windows.Forms.CheckBoxTS chkL14R12;
-		private System.Windows.Forms.CheckBoxTS chkL14R13;
-		private System.Windows.Forms.CheckBoxTS chkL14R14;
-		private System.Windows.Forms.CheckBoxTS chkL14R15;
-		private System.Windows.Forms.CheckBoxTS chkL14R16;
-		private System.Windows.Forms.CheckBoxTS chkL14R08;
-		private System.Windows.Forms.CheckBoxTS chkL14R07;
-		private System.Windows.Forms.CheckBoxTS chkL14R06;
-		private System.Windows.Forms.CheckBoxTS chkL14R05;
-		private System.Windows.Forms.CheckBoxTS chkL14R04;
-		private System.Windows.Forms.CheckBoxTS chkL14R03;
-		private System.Windows.Forms.CheckBoxTS chkL14R02;
-		private System.Windows.Forms.CheckBoxTS chkL14R01;
-		private System.Windows.Forms.CheckBoxTS chkL15R09;
-		private System.Windows.Forms.CheckBoxTS chkL15R10;
-		private System.Windows.Forms.CheckBoxTS chkL15R11;
-		private System.Windows.Forms.CheckBoxTS chkL15R12;
-		private System.Windows.Forms.CheckBoxTS chkL15R13;
-		private System.Windows.Forms.CheckBoxTS chkL15R14;
-		private System.Windows.Forms.CheckBoxTS chkL15R15;
-		private System.Windows.Forms.CheckBoxTS chkL15R16;
-		private System.Windows.Forms.CheckBoxTS chkL15R08;
-		private System.Windows.Forms.CheckBoxTS chkL15R07;
-		private System.Windows.Forms.CheckBoxTS chkL15R06;
-		private System.Windows.Forms.CheckBoxTS chkL15R05;
-		private System.Windows.Forms.CheckBoxTS chkL15R04;
-		private System.Windows.Forms.CheckBoxTS chkL15R03;
-		private System.Windows.Forms.CheckBoxTS chkL15R02;
-		private System.Windows.Forms.CheckBoxTS chkL15R01;
-		private System.Windows.Forms.LabelTS lblLine1;
-		private System.Windows.Forms.LabelTS lblLine2;
-		private System.Windows.Forms.LabelTS lblLine3;
-		private System.Windows.Forms.LabelTS lblLine4;
-		private System.Windows.Forms.LabelTS lblLine5;
-		private System.Windows.Forms.LabelTS lblLine6;
-		private System.Windows.Forms.LabelTS lblLine7;
-		private System.Windows.Forms.LabelTS lblLine8;
-		private System.Windows.Forms.LabelTS lblLine9;
-		private System.Windows.Forms.LabelTS lblLine10;
-		private System.Windows.Forms.LabelTS lblLine11;
-		private System.Windows.Forms.LabelTS lblLine12;
-		private System.Windows.Forms.LabelTS lblLine13;
-		private System.Windows.Forms.LabelTS lblLine14;
-		private System.Windows.Forms.LabelTS lblLine15;
-		private System.Windows.Forms.LabelTS lblDelay;
-		private System.Windows.Forms.ComboBoxTS comboDelay;
-		private System.Windows.Forms.Button btnSetDelay;
-		private System.Windows.Forms.Button btnSetupXVTR;
-		private System.Windows.Forms.CheckBoxTS chkFlexWire;
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		private System.ComponentModel.Container components = null;
+        private System.Windows.Forms.ButtonTS btnEnable;
+        private System.Windows.Forms.ButtonTS btnDisable;
+        private System.Windows.Forms.ButtonTS btnDisableClear;
+        private System.Windows.Forms.CheckBoxTS chkL00R01;
+        private System.Windows.Forms.CheckBoxTS chkL00R02;
+        private System.Windows.Forms.CheckBoxTS chkL00R03;
+        private System.Windows.Forms.CheckBoxTS chkL00R04;
+        private System.Windows.Forms.CheckBoxTS chkL00R05;
+        private System.Windows.Forms.CheckBoxTS chkL00R06;
+        private System.Windows.Forms.CheckBoxTS chkL00R07;
+        private System.Windows.Forms.CheckBoxTS chkL00R08;
+        private System.Windows.Forms.CheckBoxTS chkL00R09;
+        private System.Windows.Forms.CheckBoxTS chkL00R10;
+        private System.Windows.Forms.CheckBoxTS chkL00R11;
+        private System.Windows.Forms.CheckBoxTS chkL00R12;
+        private System.Windows.Forms.CheckBoxTS chkL00R13;
+        private System.Windows.Forms.CheckBoxTS chkL00R14;
+        private System.Windows.Forms.CheckBoxTS chkL00R15;
+        private System.Windows.Forms.CheckBoxTS chkL00R16;
+        private System.Windows.Forms.LabelTS lblR1;
+        private System.Windows.Forms.LabelTS lblR2;
+        private System.Windows.Forms.LabelTS lblR3;
+        private System.Windows.Forms.LabelTS lblR4;
+        private System.Windows.Forms.LabelTS lblR5;
+        private System.Windows.Forms.LabelTS lblR6;
+        private System.Windows.Forms.LabelTS lblR7;
+        private System.Windows.Forms.LabelTS lblR8;
+        private System.Windows.Forms.LabelTS lblR9;
+        private System.Windows.Forms.LabelTS lblR10;
+        private System.Windows.Forms.LabelTS lblR11;
+        private System.Windows.Forms.LabelTS lblR12;
+        private System.Windows.Forms.LabelTS lblR13;
+        private System.Windows.Forms.LabelTS lblR14;
+        private System.Windows.Forms.LabelTS lblR15;
+        private System.Windows.Forms.LabelTS lblR16;
+        private System.Windows.Forms.LabelTS lblAddr;
+        private System.Windows.Forms.LabelTS lblLine0;
+        private System.Windows.Forms.ButtonTS btnWriteLine0;
+        private System.Windows.Forms.ButtonTS btnWriteAll;
+        private System.Windows.Forms.RadioButtonTS radLine0;
+        private System.Windows.Forms.LabelTS lblRelays;
+        private System.Windows.Forms.RadioButtonTS radLine1;
+        private System.Windows.Forms.RadioButtonTS radLine2;
+        private System.Windows.Forms.RadioButtonTS radLine3;
+        private System.Windows.Forms.RadioButtonTS radLine4;
+        private System.Windows.Forms.RadioButtonTS radLine5;
+        private System.Windows.Forms.RadioButtonTS radLine6;
+        private System.Windows.Forms.RadioButtonTS radLine7;
+        private System.Windows.Forms.RadioButtonTS radLine8;
+        private System.Windows.Forms.RadioButtonTS radLine9;
+        private System.Windows.Forms.RadioButtonTS radLine10;
+        private System.Windows.Forms.RadioButtonTS radLine11;
+        private System.Windows.Forms.RadioButtonTS radLine12;
+        private System.Windows.Forms.RadioButtonTS radLine13;
+        private System.Windows.Forms.RadioButtonTS radLine14;
+        private System.Windows.Forms.RadioButtonTS radLine15;
+        private System.Windows.Forms.ButtonTS btnWriteLine1;
+        private System.Windows.Forms.ButtonTS btnWriteLine2;
+        private System.Windows.Forms.ButtonTS btnWriteLine3;
+        private System.Windows.Forms.ButtonTS btnWriteLine4;
+        private System.Windows.Forms.ButtonTS btnWriteLine5;
+        private System.Windows.Forms.ButtonTS btnWriteLine6;
+        private System.Windows.Forms.ButtonTS btnWriteLine7;
+        private System.Windows.Forms.ButtonTS btnWriteLine8;
+        private System.Windows.Forms.ButtonTS btnWriteLine9;
+        private System.Windows.Forms.ButtonTS btnWriteLine10;
+        private System.Windows.Forms.ButtonTS btnWriteLine11;
+        private System.Windows.Forms.ButtonTS btnWriteLine12;
+        private System.Windows.Forms.ButtonTS btnWriteLine13;
+        private System.Windows.Forms.ButtonTS btnWriteLine14;
+        private System.Windows.Forms.ButtonTS btnWriteLine15;
+        private System.Windows.Forms.CheckBoxTS chkL01R09;
+        private System.Windows.Forms.CheckBoxTS chkL01R10;
+        private System.Windows.Forms.CheckBoxTS chkL01R11;
+        private System.Windows.Forms.CheckBoxTS chkL01R12;
+        private System.Windows.Forms.CheckBoxTS chkL01R13;
+        private System.Windows.Forms.CheckBoxTS chkL01R14;
+        private System.Windows.Forms.CheckBoxTS chkL01R15;
+        private System.Windows.Forms.CheckBoxTS chkL01R16;
+        private System.Windows.Forms.CheckBoxTS chkL01R08;
+        private System.Windows.Forms.CheckBoxTS chkL01R07;
+        private System.Windows.Forms.CheckBoxTS chkL01R06;
+        private System.Windows.Forms.CheckBoxTS chkL01R05;
+        private System.Windows.Forms.CheckBoxTS chkL01R04;
+        private System.Windows.Forms.CheckBoxTS chkL01R03;
+        private System.Windows.Forms.CheckBoxTS chkL01R02;
+        private System.Windows.Forms.CheckBoxTS chkL01R01;
+        private System.Windows.Forms.CheckBoxTS chkL02R09;
+        private System.Windows.Forms.CheckBoxTS chkL02R10;
+        private System.Windows.Forms.CheckBoxTS chkL02R11;
+        private System.Windows.Forms.CheckBoxTS chkL02R12;
+        private System.Windows.Forms.CheckBoxTS chkL02R13;
+        private System.Windows.Forms.CheckBoxTS chkL02R14;
+        private System.Windows.Forms.CheckBoxTS chkL02R15;
+        private System.Windows.Forms.CheckBoxTS chkL02R16;
+        private System.Windows.Forms.CheckBoxTS chkL02R08;
+        private System.Windows.Forms.CheckBoxTS chkL02R07;
+        private System.Windows.Forms.CheckBoxTS chkL02R06;
+        private System.Windows.Forms.CheckBoxTS chkL02R05;
+        private System.Windows.Forms.CheckBoxTS chkL02R04;
+        private System.Windows.Forms.CheckBoxTS chkL02R03;
+        private System.Windows.Forms.CheckBoxTS chkL02R02;
+        private System.Windows.Forms.CheckBoxTS chkL02R01;
+        private System.Windows.Forms.CheckBoxTS chkL03R09;
+        private System.Windows.Forms.CheckBoxTS chkL03R10;
+        private System.Windows.Forms.CheckBoxTS chkL03R11;
+        private System.Windows.Forms.CheckBoxTS chkL03R12;
+        private System.Windows.Forms.CheckBoxTS chkL03R13;
+        private System.Windows.Forms.CheckBoxTS chkL03R14;
+        private System.Windows.Forms.CheckBoxTS chkL03R15;
+        private System.Windows.Forms.CheckBoxTS chkL03R16;
+        private System.Windows.Forms.CheckBoxTS chkL03R08;
+        private System.Windows.Forms.CheckBoxTS chkL03R07;
+        private System.Windows.Forms.CheckBoxTS chkL03R06;
+        private System.Windows.Forms.CheckBoxTS chkL03R05;
+        private System.Windows.Forms.CheckBoxTS chkL03R04;
+        private System.Windows.Forms.CheckBoxTS chkL03R03;
+        private System.Windows.Forms.CheckBoxTS chkL03R02;
+        private System.Windows.Forms.CheckBoxTS chkL03R01;
+        private System.Windows.Forms.CheckBoxTS chkL04R09;
+        private System.Windows.Forms.CheckBoxTS chkL04R10;
+        private System.Windows.Forms.CheckBoxTS chkL04R11;
+        private System.Windows.Forms.CheckBoxTS chkL04R12;
+        private System.Windows.Forms.CheckBoxTS chkL04R13;
+        private System.Windows.Forms.CheckBoxTS chkL04R14;
+        private System.Windows.Forms.CheckBoxTS chkL04R15;
+        private System.Windows.Forms.CheckBoxTS chkL04R16;
+        private System.Windows.Forms.CheckBoxTS chkL04R08;
+        private System.Windows.Forms.CheckBoxTS chkL04R07;
+        private System.Windows.Forms.CheckBoxTS chkL04R06;
+        private System.Windows.Forms.CheckBoxTS chkL04R05;
+        private System.Windows.Forms.CheckBoxTS chkL04R04;
+        private System.Windows.Forms.CheckBoxTS chkL04R03;
+        private System.Windows.Forms.CheckBoxTS chkL04R02;
+        private System.Windows.Forms.CheckBoxTS chkL04R01;
+        private System.Windows.Forms.CheckBoxTS chkL05R09;
+        private System.Windows.Forms.CheckBoxTS chkL05R10;
+        private System.Windows.Forms.CheckBoxTS chkL05R11;
+        private System.Windows.Forms.CheckBoxTS chkL05R12;
+        private System.Windows.Forms.CheckBoxTS chkL05R13;
+        private System.Windows.Forms.CheckBoxTS chkL05R14;
+        private System.Windows.Forms.CheckBoxTS chkL05R15;
+        private System.Windows.Forms.CheckBoxTS chkL05R16;
+        private System.Windows.Forms.CheckBoxTS chkL05R08;
+        private System.Windows.Forms.CheckBoxTS chkL05R07;
+        private System.Windows.Forms.CheckBoxTS chkL05R06;
+        private System.Windows.Forms.CheckBoxTS chkL05R05;
+        private System.Windows.Forms.CheckBoxTS chkL05R04;
+        private System.Windows.Forms.CheckBoxTS chkL05R03;
+        private System.Windows.Forms.CheckBoxTS chkL05R02;
+        private System.Windows.Forms.CheckBoxTS chkL05R01;
+        private System.Windows.Forms.CheckBoxTS chkL06R09;
+        private System.Windows.Forms.CheckBoxTS chkL06R10;
+        private System.Windows.Forms.CheckBoxTS chkL06R11;
+        private System.Windows.Forms.CheckBoxTS chkL06R12;
+        private System.Windows.Forms.CheckBoxTS chkL06R13;
+        private System.Windows.Forms.CheckBoxTS chkL06R14;
+        private System.Windows.Forms.CheckBoxTS chkL06R15;
+        private System.Windows.Forms.CheckBoxTS chkL06R16;
+        private System.Windows.Forms.CheckBoxTS chkL06R08;
+        private System.Windows.Forms.CheckBoxTS chkL06R07;
+        private System.Windows.Forms.CheckBoxTS chkL06R06;
+        private System.Windows.Forms.CheckBoxTS chkL06R05;
+        private System.Windows.Forms.CheckBoxTS chkL06R04;
+        private System.Windows.Forms.CheckBoxTS chkL06R03;
+        private System.Windows.Forms.CheckBoxTS chkL06R02;
+        private System.Windows.Forms.CheckBoxTS chkL06R01;
+        private System.Windows.Forms.CheckBoxTS chkL07R09;
+        private System.Windows.Forms.CheckBoxTS chkL07R10;
+        private System.Windows.Forms.CheckBoxTS chkL07R11;
+        private System.Windows.Forms.CheckBoxTS chkL07R12;
+        private System.Windows.Forms.CheckBoxTS chkL07R13;
+        private System.Windows.Forms.CheckBoxTS chkL07R14;
+        private System.Windows.Forms.CheckBoxTS chkL07R15;
+        private System.Windows.Forms.CheckBoxTS chkL07R16;
+        private System.Windows.Forms.CheckBoxTS chkL07R08;
+        private System.Windows.Forms.CheckBoxTS chkL07R07;
+        private System.Windows.Forms.CheckBoxTS chkL07R06;
+        private System.Windows.Forms.CheckBoxTS chkL07R05;
+        private System.Windows.Forms.CheckBoxTS chkL07R04;
+        private System.Windows.Forms.CheckBoxTS chkL07R03;
+        private System.Windows.Forms.CheckBoxTS chkL07R02;
+        private System.Windows.Forms.CheckBoxTS chkL07R01;
+        private System.Windows.Forms.CheckBoxTS chkL08R09;
+        private System.Windows.Forms.CheckBoxTS chkL08R10;
+        private System.Windows.Forms.CheckBoxTS chkL08R11;
+        private System.Windows.Forms.CheckBoxTS chkL08R12;
+        private System.Windows.Forms.CheckBoxTS chkL08R13;
+        private System.Windows.Forms.CheckBoxTS chkL08R14;
+        private System.Windows.Forms.CheckBoxTS chkL08R15;
+        private System.Windows.Forms.CheckBoxTS chkL08R16;
+        private System.Windows.Forms.CheckBoxTS chkL08R08;
+        private System.Windows.Forms.CheckBoxTS chkL08R07;
+        private System.Windows.Forms.CheckBoxTS chkL08R06;
+        private System.Windows.Forms.CheckBoxTS chkL08R05;
+        private System.Windows.Forms.CheckBoxTS chkL08R04;
+        private System.Windows.Forms.CheckBoxTS chkL08R03;
+        private System.Windows.Forms.CheckBoxTS chkL08R02;
+        private System.Windows.Forms.CheckBoxTS chkL08R01;
+        private System.Windows.Forms.CheckBoxTS chkL09R09;
+        private System.Windows.Forms.CheckBoxTS chkL09R10;
+        private System.Windows.Forms.CheckBoxTS chkL09R11;
+        private System.Windows.Forms.CheckBoxTS chkL09R12;
+        private System.Windows.Forms.CheckBoxTS chkL09R13;
+        private System.Windows.Forms.CheckBoxTS chkL09R14;
+        private System.Windows.Forms.CheckBoxTS chkL09R15;
+        private System.Windows.Forms.CheckBoxTS chkL09R16;
+        private System.Windows.Forms.CheckBoxTS chkL09R08;
+        private System.Windows.Forms.CheckBoxTS chkL09R07;
+        private System.Windows.Forms.CheckBoxTS chkL09R06;
+        private System.Windows.Forms.CheckBoxTS chkL09R05;
+        private System.Windows.Forms.CheckBoxTS chkL09R04;
+        private System.Windows.Forms.CheckBoxTS chkL09R03;
+        private System.Windows.Forms.CheckBoxTS chkL09R02;
+        private System.Windows.Forms.CheckBoxTS chkL09R01;
+        private System.Windows.Forms.CheckBoxTS chkL10R09;
+        private System.Windows.Forms.CheckBoxTS chkL10R10;
+        private System.Windows.Forms.CheckBoxTS chkL10R11;
+        private System.Windows.Forms.CheckBoxTS chkL10R12;
+        private System.Windows.Forms.CheckBoxTS chkL10R13;
+        private System.Windows.Forms.CheckBoxTS chkL10R14;
+        private System.Windows.Forms.CheckBoxTS chkL10R15;
+        private System.Windows.Forms.CheckBoxTS chkL10R16;
+        private System.Windows.Forms.CheckBoxTS chkL10R08;
+        private System.Windows.Forms.CheckBoxTS chkL10R07;
+        private System.Windows.Forms.CheckBoxTS chkL10R06;
+        private System.Windows.Forms.CheckBoxTS chkL10R05;
+        private System.Windows.Forms.CheckBoxTS chkL10R04;
+        private System.Windows.Forms.CheckBoxTS chkL10R03;
+        private System.Windows.Forms.CheckBoxTS chkL10R02;
+        private System.Windows.Forms.CheckBoxTS chkL10R01;
+        private System.Windows.Forms.CheckBoxTS chkL11R09;
+        private System.Windows.Forms.CheckBoxTS chkL11R10;
+        private System.Windows.Forms.CheckBoxTS chkL11R11;
+        private System.Windows.Forms.CheckBoxTS chkL11R12;
+        private System.Windows.Forms.CheckBoxTS chkL11R13;
+        private System.Windows.Forms.CheckBoxTS chkL11R14;
+        private System.Windows.Forms.CheckBoxTS chkL11R15;
+        private System.Windows.Forms.CheckBoxTS chkL11R16;
+        private System.Windows.Forms.CheckBoxTS chkL11R08;
+        private System.Windows.Forms.CheckBoxTS chkL11R07;
+        private System.Windows.Forms.CheckBoxTS chkL11R06;
+        private System.Windows.Forms.CheckBoxTS chkL11R05;
+        private System.Windows.Forms.CheckBoxTS chkL11R04;
+        private System.Windows.Forms.CheckBoxTS chkL11R03;
+        private System.Windows.Forms.CheckBoxTS chkL11R02;
+        private System.Windows.Forms.CheckBoxTS chkL11R01;
+        private System.Windows.Forms.CheckBoxTS chkL12R09;
+        private System.Windows.Forms.CheckBoxTS chkL12R10;
+        private System.Windows.Forms.CheckBoxTS chkL12R11;
+        private System.Windows.Forms.CheckBoxTS chkL12R12;
+        private System.Windows.Forms.CheckBoxTS chkL12R13;
+        private System.Windows.Forms.CheckBoxTS chkL12R14;
+        private System.Windows.Forms.CheckBoxTS chkL12R15;
+        private System.Windows.Forms.CheckBoxTS chkL12R16;
+        private System.Windows.Forms.CheckBoxTS chkL12R08;
+        private System.Windows.Forms.CheckBoxTS chkL12R07;
+        private System.Windows.Forms.CheckBoxTS chkL12R06;
+        private System.Windows.Forms.CheckBoxTS chkL12R05;
+        private System.Windows.Forms.CheckBoxTS chkL12R04;
+        private System.Windows.Forms.CheckBoxTS chkL12R03;
+        private System.Windows.Forms.CheckBoxTS chkL12R02;
+        private System.Windows.Forms.CheckBoxTS chkL12R01;
+        private System.Windows.Forms.CheckBoxTS chkL13R09;
+        private System.Windows.Forms.CheckBoxTS chkL13R10;
+        private System.Windows.Forms.CheckBoxTS chkL13R11;
+        private System.Windows.Forms.CheckBoxTS chkL13R12;
+        private System.Windows.Forms.CheckBoxTS chkL13R13;
+        private System.Windows.Forms.CheckBoxTS chkL13R14;
+        private System.Windows.Forms.CheckBoxTS chkL13R15;
+        private System.Windows.Forms.CheckBoxTS chkL13R16;
+        private System.Windows.Forms.CheckBoxTS chkL13R08;
+        private System.Windows.Forms.CheckBoxTS chkL13R07;
+        private System.Windows.Forms.CheckBoxTS chkL13R06;
+        private System.Windows.Forms.CheckBoxTS chkL13R05;
+        private System.Windows.Forms.CheckBoxTS chkL13R04;
+        private System.Windows.Forms.CheckBoxTS chkL13R03;
+        private System.Windows.Forms.CheckBoxTS chkL13R02;
+        private System.Windows.Forms.CheckBoxTS chkL13R01;
+        private System.Windows.Forms.CheckBoxTS chkL14R09;
+        private System.Windows.Forms.CheckBoxTS chkL14R10;
+        private System.Windows.Forms.CheckBoxTS chkL14R11;
+        private System.Windows.Forms.CheckBoxTS chkL14R12;
+        private System.Windows.Forms.CheckBoxTS chkL14R13;
+        private System.Windows.Forms.CheckBoxTS chkL14R14;
+        private System.Windows.Forms.CheckBoxTS chkL14R15;
+        private System.Windows.Forms.CheckBoxTS chkL14R16;
+        private System.Windows.Forms.CheckBoxTS chkL14R08;
+        private System.Windows.Forms.CheckBoxTS chkL14R07;
+        private System.Windows.Forms.CheckBoxTS chkL14R06;
+        private System.Windows.Forms.CheckBoxTS chkL14R05;
+        private System.Windows.Forms.CheckBoxTS chkL14R04;
+        private System.Windows.Forms.CheckBoxTS chkL14R03;
+        private System.Windows.Forms.CheckBoxTS chkL14R02;
+        private System.Windows.Forms.CheckBoxTS chkL14R01;
+        private System.Windows.Forms.CheckBoxTS chkL15R09;
+        private System.Windows.Forms.CheckBoxTS chkL15R10;
+        private System.Windows.Forms.CheckBoxTS chkL15R11;
+        private System.Windows.Forms.CheckBoxTS chkL15R12;
+        private System.Windows.Forms.CheckBoxTS chkL15R13;
+        private System.Windows.Forms.CheckBoxTS chkL15R14;
+        private System.Windows.Forms.CheckBoxTS chkL15R15;
+        private System.Windows.Forms.CheckBoxTS chkL15R16;
+        private System.Windows.Forms.CheckBoxTS chkL15R08;
+        private System.Windows.Forms.CheckBoxTS chkL15R07;
+        private System.Windows.Forms.CheckBoxTS chkL15R06;
+        private System.Windows.Forms.CheckBoxTS chkL15R05;
+        private System.Windows.Forms.CheckBoxTS chkL15R04;
+        private System.Windows.Forms.CheckBoxTS chkL15R03;
+        private System.Windows.Forms.CheckBoxTS chkL15R02;
+        private System.Windows.Forms.CheckBoxTS chkL15R01;
+        private System.Windows.Forms.LabelTS lblLine1;
+        private System.Windows.Forms.LabelTS lblLine2;
+        private System.Windows.Forms.LabelTS lblLine3;
+        private System.Windows.Forms.LabelTS lblLine4;
+        private System.Windows.Forms.LabelTS lblLine5;
+        private System.Windows.Forms.LabelTS lblLine6;
+        private System.Windows.Forms.LabelTS lblLine7;
+        private System.Windows.Forms.LabelTS lblLine8;
+        private System.Windows.Forms.LabelTS lblLine9;
+        private System.Windows.Forms.LabelTS lblLine10;
+        private System.Windows.Forms.LabelTS lblLine11;
+        private System.Windows.Forms.LabelTS lblLine12;
+        private System.Windows.Forms.LabelTS lblLine13;
+        private System.Windows.Forms.LabelTS lblLine14;
+        private System.Windows.Forms.LabelTS lblLine15;
+        private System.Windows.Forms.LabelTS lblDelay;
+        private System.Windows.Forms.ComboBoxTS comboDelay;
+        private System.Windows.Forms.Button btnSetDelay;
+        private System.Windows.Forms.Button btnSetupXVTR;
+        private System.Windows.Forms.CheckBoxTS chkFlexWire;
+        private ToolTip toolTip1;
+        private IContainer components;
 
-		#endregion
+        #endregion
 
-		#region Constructor and Destructor
+        #region Constructor and Destructor
 
-		public UCBForm(Console c)
-		{
-			//
-			// Required for Windows Form Designer support
-			//
-			InitializeComponent();
-			console = c;
-			hw = console.Hdw;
-			comboDelay.SelectedIndex = 0;
-			Common.RestoreForm(this, "UCB", false);
+        public UCBForm(Console c)
+        {
+            //
+            // Required for Windows Form Designer support
+            //
+            InitializeComponent();
+            console = c;
+            hw = console.Hdw;
+            comboDelay.SelectedIndex = 0;
+            Common.RestoreForm(this, "UCB", false);
 
-			switch(console.CurrentModel)
-			{
-				case Model.FLEX3000:
-				case Model.FLEX5000:
+            switch (console.CurrentModel)
+            {
+                case Model.FLEX3000:
+                case Model.FLEX5000:
                 case Model.FLEX1500:
                     btnEnable.Visible = false;
                     btnDisable.Visible = false;
@@ -429,43 +425,44 @@ namespace PowerSDR
                     btnWriteLine13.Visible = false;
                     btnWriteLine14.Visible = false;
                     btnWriteLine15.Visible = false;
-					break;
-				default:
-					chkFlexWire.Visible = false;
-					break;
-			}
+                    break;
+                default:
+                    chkFlexWire.Visible = false;
+                    break;
+            }
 
-//			Thread t = new Thread(new ThreadStart(KeepAlive));
-//			t.IsBackground = true;
-//			t.Name = "UCB KeepAlive Thread";
-//			t.Priority = ThreadPriority.Lowest;
-//			t.Start();
-		}
+            //			Thread t = new Thread(new ThreadStart(KeepAlive));
+            //			t.IsBackground = true;
+            //			t.Name = "UCB KeepAlive Thread";
+            //			t.Priority = ThreadPriority.Lowest;
+            //			t.Start();
+        }
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#endregion
+        #endregion
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UCBForm));
             this.btnEnable = new System.Windows.Forms.ButtonTS();
             this.btnDisable = new System.Windows.Forms.ButtonTS();
@@ -798,6 +795,7 @@ namespace PowerSDR
             this.btnSetDelay = new System.Windows.Forms.Button();
             this.btnSetupXVTR = new System.Windows.Forms.Button();
             this.chkFlexWire = new System.Windows.Forms.CheckBoxTS();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // btnEnable
@@ -3628,6 +3626,7 @@ namespace PowerSDR
             this.radLine0.TabIndex = 309;
             this.radLine0.TabStop = true;
             this.radLine0.Text = "radioButton1";
+            this.toolTip1.SetToolTip(this.radLine0, "For SDR-1000 only");
             this.radLine0.CheckedChanged += new System.EventHandler(this.radLine_CheckedChanged);
             // 
             // radLine1
@@ -3843,6 +3842,7 @@ namespace PowerSDR
             this.chkFlexWire.TabIndex = 330;
             this.chkFlexWire.Text = "FlexWire";
             this.chkFlexWire.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.chkFlexWire, resources.GetString("chkFlexWire.ToolTip"));
             this.chkFlexWire.CheckedChanged += new System.EventHandler(this.chkFlexWire_CheckedChanged);
             // 
             // UCBForm
@@ -4182,867 +4182,868 @@ namespace PowerSDR
             this.Controls.Add(this.btnEnable);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "UCBForm";
-            this.Text = "UCB Configuration and Setup";
+            this.Text = "UCB (Universal Control Board) Configuration and Setup";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.UCBForm_Closing);
             this.ResumeLayout(false);
 
-		}
-		#endregion
+        }
+        #endregion
 
-		#region Thread Routines
+        #region Thread Routines
 
-		private void KeepAlive()
-		{
-			while(true)
-			{
-				if(!ucb_busy)
-				{
-					UCB.KeepAlive(hw);
-					Thread.Sleep(4000);
-				}
-				else Thread.Sleep(1000);
-			}
-		}
+        private void KeepAlive()
+        {
+            while (true)
+            {
+                if (!ucb_busy)
+                {
+                    UCB.KeepAlive(hw);
+                    Thread.Sleep(4000);
+                }
+                else Thread.Sleep(1000);
+            }
+        }
 
-		private void SendCommand()
-		{
-			ucb_busy = true;
-			UCB.SendCommand(hw, cmd);
-			ucb_busy = false;
-			ControlsEnabled(true);
-		}
+        private void SendCommand()
+        {
+            ucb_busy = true;
+            UCB.SendCommand(hw, cmd);
+            ucb_busy = false;
+            ControlsEnabled(true);
+        }
 
-		private void WriteReg()
-		{
-			ucb_busy = true;
-			UCB.WriteReg(hw, address, val);
-			ucb_busy = false;
-			ControlsEnabled(true);
-		}
+        private void WriteReg()
+        {
+            ucb_busy = true;
+            UCB.WriteReg(hw, address, val);
+            ucb_busy = false;
+            ControlsEnabled(true);
+        }
 
-		private void WriteAll()
-		{
-			btnWriteLine0_Click(this, EventArgs.Empty);
-			while(!btnEnable.Enabled)
-				Thread.Sleep(250);
+        private void WriteAll()
+        {
+            btnWriteLine0_Click(this, EventArgs.Empty);
+            while (!btnEnable.Enabled)
+                Thread.Sleep(250);
 
-			btnWriteLine1_Click(this, EventArgs.Empty);
-			while(!btnEnable.Enabled)
-				Thread.Sleep(250);
+            btnWriteLine1_Click(this, EventArgs.Empty);
+            while (!btnEnable.Enabled)
+                Thread.Sleep(250);
 
-			btnWriteLine2_Click(this, EventArgs.Empty);
-			while(!btnEnable.Enabled)
-				Thread.Sleep(250);
+            btnWriteLine2_Click(this, EventArgs.Empty);
+            while (!btnEnable.Enabled)
+                Thread.Sleep(250);
 
-			btnWriteLine3_Click(this, EventArgs.Empty);
-			while(!btnEnable.Enabled)
-				Thread.Sleep(250);
+            btnWriteLine3_Click(this, EventArgs.Empty);
+            while (!btnEnable.Enabled)
+                Thread.Sleep(250);
 
-			btnWriteLine4_Click(this, EventArgs.Empty);
-			while(!btnEnable.Enabled)
-				Thread.Sleep(250);
+            btnWriteLine4_Click(this, EventArgs.Empty);
+            while (!btnEnable.Enabled)
+                Thread.Sleep(250);
 
-			btnWriteLine5_Click(this, EventArgs.Empty);
-			while(!btnEnable.Enabled)
-				Thread.Sleep(250);
+            btnWriteLine5_Click(this, EventArgs.Empty);
+            while (!btnEnable.Enabled)
+                Thread.Sleep(250);
 
-			btnWriteLine6_Click(this, EventArgs.Empty);
-			while(!btnEnable.Enabled)
-				Thread.Sleep(250);
+            btnWriteLine6_Click(this, EventArgs.Empty);
+            while (!btnEnable.Enabled)
+                Thread.Sleep(250);
 
-			btnWriteLine7_Click(this, EventArgs.Empty);
-			while(!btnEnable.Enabled)
-				Thread.Sleep(250);
+            btnWriteLine7_Click(this, EventArgs.Empty);
+            while (!btnEnable.Enabled)
+                Thread.Sleep(250);
 
-			btnWriteLine8_Click(this, EventArgs.Empty);
-			while(!btnEnable.Enabled)
-				Thread.Sleep(250);
+            btnWriteLine8_Click(this, EventArgs.Empty);
+            while (!btnEnable.Enabled)
+                Thread.Sleep(250);
 
-			btnWriteLine9_Click(this, EventArgs.Empty);
-			while(!btnEnable.Enabled)
-				Thread.Sleep(250);
+            btnWriteLine9_Click(this, EventArgs.Empty);
+            while (!btnEnable.Enabled)
+                Thread.Sleep(250);
 
-			btnWriteLine10_Click(this, EventArgs.Empty);
-			while(!btnEnable.Enabled)
-				Thread.Sleep(250);
+            btnWriteLine10_Click(this, EventArgs.Empty);
+            while (!btnEnable.Enabled)
+                Thread.Sleep(250);
 
-			btnWriteLine11_Click(this, EventArgs.Empty);
-			while(!btnEnable.Enabled)
-				Thread.Sleep(250);
+            btnWriteLine11_Click(this, EventArgs.Empty);
+            while (!btnEnable.Enabled)
+                Thread.Sleep(250);
 
-			btnWriteLine12_Click(this, EventArgs.Empty);
-			while(!btnEnable.Enabled)
-				Thread.Sleep(250);
+            btnWriteLine12_Click(this, EventArgs.Empty);
+            while (!btnEnable.Enabled)
+                Thread.Sleep(250);
 
-			btnWriteLine13_Click(this, EventArgs.Empty);
-			while(!btnEnable.Enabled)
-				Thread.Sleep(250);
+            btnWriteLine13_Click(this, EventArgs.Empty);
+            while (!btnEnable.Enabled)
+                Thread.Sleep(250);
 
-			btnWriteLine14_Click(this, EventArgs.Empty);
-			while(!btnEnable.Enabled)
-				Thread.Sleep(250);
+            btnWriteLine14_Click(this, EventArgs.Empty);
+            while (!btnEnable.Enabled)
+                Thread.Sleep(250);
 
-			btnWriteLine15_Click(this, EventArgs.Empty);
-			while(!btnEnable.Enabled)
-				Thread.Sleep(250);
+            btnWriteLine15_Click(this, EventArgs.Empty);
+            while (!btnEnable.Enabled)
+                Thread.Sleep(250);
 
-			MessageBox.Show("Writing to UCB is complete.",
-				"Writing Complete",
-				MessageBoxButtons.OK,
-				MessageBoxIcon.Information);
-		}
+            MessageBox.Show("Writing to UCB is complete.",
+                "Writing Complete",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
 
-		private void Resume()
-		{
-			ucb_busy = true;
-			UCB.SendCommand(hw, UCB.CMD.RESUME);
-			ucb_busy = false;
-			ControlsEnabled(true);
-		}
+        private void Resume()
+        {
+            ucb_busy = true;
+            UCB.SendCommand(hw, UCB.CMD.RESUME);
+            ucb_busy = false;
+            ControlsEnabled(true);
+        }
 
-		private void Disable()
-		{
-			ucb_busy = true;
-			UCB.SendCommand(hw, UCB.CMD.DISABLE_OUTPUTS);
-			ucb_busy = false;
-			ControlsEnabled(true);
-		}
+        private void Disable()
+        {
+            ucb_busy = true;
+            UCB.SendCommand(hw, UCB.CMD.DISABLE_OUTPUTS);
+            ucb_busy = false;
+            ControlsEnabled(true);
+        }
 
-		private void DisableAndClear()
-		{
-			ucb_busy = true;
-			UCB.SendCommand(hw, UCB.CMD.DISABLE_OUTPUTS_AND_CLEAR_MATRIX);
-			ucb_busy = false;
-			ControlsEnabled(true);
-		}
+        private void DisableAndClear()
+        {
+            ucb_busy = true;
+            UCB.SendCommand(hw, UCB.CMD.DISABLE_OUTPUTS_AND_CLEAR_MATRIX);
+            ucb_busy = false;
+            ControlsEnabled(true);
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		private ushort[] line = new ushort[16];
+        private ushort[] line = new ushort[16];
         public ushort GetLine(int index)
-		{
-			return line[index];
-		}		
+        {
+            return line[index];
+        }
 
-		#endregion
+        #endregion
 
-		#region Misc Routines
+        #region Misc Routines
 
-		private void ControlsEnabled(bool b)
-		{
-			radLine0.Enabled = b;
-			radLine1.Enabled = b;
-			radLine2.Enabled = b;
-			radLine3.Enabled = b;
-			radLine4.Enabled = b;
-			radLine5.Enabled = b;
-			radLine6.Enabled = b;
-			radLine7.Enabled = b;
-			radLine8.Enabled = b;
-			radLine9.Enabled = b;
-			radLine10.Enabled = b;
-			radLine11.Enabled = b;
-			radLine12.Enabled = b;
-			radLine13.Enabled = b;
-			radLine14.Enabled = b;
-			radLine15.Enabled = b;
-			btnEnable.Enabled = b;
-			btnDisable.Enabled = b;
-			btnDisableClear.Enabled = b;
-			btnWriteAll.Enabled = b;
-			btnWriteLine0.Enabled = b;
-			btnWriteLine1.Enabled = b;
-			btnWriteLine2.Enabled = b;
-			btnWriteLine3.Enabled = b;
-			btnWriteLine4.Enabled = b;
-			btnWriteLine5.Enabled = b;
-			btnWriteLine6.Enabled = b;
-			btnWriteLine7.Enabled = b;
-			btnWriteLine8.Enabled = b;
-			btnWriteLine9.Enabled = b;
-			btnWriteLine10.Enabled = b;
-			btnWriteLine11.Enabled = b;
-			btnWriteLine12.Enabled = b;
-			btnWriteLine13.Enabled = b;
-			btnWriteLine14.Enabled = b;
-			btnWriteLine15.Enabled = b;
-			btnSetDelay.Enabled = b;
-		}
+        private void ControlsEnabled(bool b)
+        {
+            radLine0.Enabled = b;
+            radLine1.Enabled = b;
+            radLine2.Enabled = b;
+            radLine3.Enabled = b;
+            radLine4.Enabled = b;
+            radLine5.Enabled = b;
+            radLine6.Enabled = b;
+            radLine7.Enabled = b;
+            radLine8.Enabled = b;
+            radLine9.Enabled = b;
+            radLine10.Enabled = b;
+            radLine11.Enabled = b;
+            radLine12.Enabled = b;
+            radLine13.Enabled = b;
+            radLine14.Enabled = b;
+            radLine15.Enabled = b;
+            btnEnable.Enabled = b;
+            btnDisable.Enabled = b;
+            btnDisableClear.Enabled = b;
+            btnWriteAll.Enabled = b;
+            btnWriteLine0.Enabled = b;
+            btnWriteLine1.Enabled = b;
+            btnWriteLine2.Enabled = b;
+            btnWriteLine3.Enabled = b;
+            btnWriteLine4.Enabled = b;
+            btnWriteLine5.Enabled = b;
+            btnWriteLine6.Enabled = b;
+            btnWriteLine7.Enabled = b;
+            btnWriteLine8.Enabled = b;
+            btnWriteLine9.Enabled = b;
+            btnWriteLine10.Enabled = b;
+            btnWriteLine11.Enabled = b;
+            btnWriteLine12.Enabled = b;
+            btnWriteLine13.Enabled = b;
+            btnWriteLine14.Enabled = b;
+            btnWriteLine15.Enabled = b;
+            btnSetDelay.Enabled = b;
+        }
 
-		#endregion
+        #endregion
 
-		#region Event Handlers
+        #region Event Handlers
 
-		private void label_DoubleClick(object sender, System.EventArgs e)
-		{
+        private void label_DoubleClick(object sender, System.EventArgs e)
+        {
             string s = InputBox.Show("New Label", "Enter a new Label and press OK.", "<new Label>");
             if (s == "" || s == null) return;
-			((LabelTS)sender).Text = s;
-		}
+            ((LabelTS)sender).Text = s;
+        }
 
-		private void radLine_CheckedChanged(object sender, System.EventArgs e)
-		{
-			switch(console.CurrentModel)
-			{
-				case Model.SDR1000:
-					if(((RadioButtonTS)sender).Checked)
-					{
-						string temp = ((RadioButtonTS)sender).Name;
-						byte val = byte.Parse(temp.Substring(7));
-						hw.X2 = (byte)((hw.X2 & 0xF0) | val);
-					}
-					break;
-			}
-		}
+        private void radLine_CheckedChanged(object sender, System.EventArgs e)
+        {
+            switch (console.CurrentModel)
+            {
+                case Model.SDR1000:
+                    if (((RadioButtonTS)sender).Checked)
+                    {
+                        string temp = ((RadioButtonTS)sender).Name;
+                        byte val = byte.Parse(temp.Substring(7));
+                        hw.X2 = (byte)((hw.X2 & 0xF0) | val);
+                    }
+                    break;
+            }
+        }
 
-		private void UCBForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			this.Hide();
-			e.Cancel = true;
-			Common.SaveForm(this, "UCB");
-		}
+        private void UCBForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
+            Common.SaveForm(this, "UCB");
+        }
 
-		private void btnSetDelay_Click(object sender, System.EventArgs e)
-		{
-			switch(comboDelay.Text)
-			{
-				case "80ms":
-					cmd = UCB.CMD.DELAY_80;
-					break;
-				case "40ms":
-					cmd = UCB.CMD.DELAY_40;
-					break;
-				case "20ms":
-					cmd = UCB.CMD.DELAY_20;
-					break;
-				case "10ms":
-					cmd = UCB.CMD.DELAY_10;
-					break;
-				case "5ms":
-					cmd = UCB.CMD.DELAY_5;
-					break;
-				case "2ms":
-					cmd = UCB.CMD.DELAY_2;
-					break;
-				default:
-					cmd = UCB.CMD.DELAY_80;
-					break;
-			}
+        private void btnSetDelay_Click(object sender, System.EventArgs e)
+        {
+            switch (comboDelay.Text)
+            {
+                case "80ms":
+                    cmd = UCB.CMD.DELAY_80;
+                    break;
+                case "40ms":
+                    cmd = UCB.CMD.DELAY_40;
+                    break;
+                case "20ms":
+                    cmd = UCB.CMD.DELAY_20;
+                    break;
+                case "10ms":
+                    cmd = UCB.CMD.DELAY_10;
+                    break;
+                case "5ms":
+                    cmd = UCB.CMD.DELAY_5;
+                    break;
+                case "2ms":
+                    cmd = UCB.CMD.DELAY_2;
+                    break;
+                default:
+                    cmd = UCB.CMD.DELAY_80;
+                    break;
+            }
 
-			ControlsEnabled(false);
+            ControlsEnabled(false);
 
-			Thread t = new Thread(new ThreadStart(SendCommand));
-			t.Name = "UCB Control Thread";
-			t.IsBackground = true;
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
+            Thread t = new Thread(new ThreadStart(SendCommand));
+            t.Name = "UCB Control Thread";
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
 
-		private void btnEnable_Click(object sender, System.EventArgs e)
-		{
-			ControlsEnabled(false);
+        private void btnEnable_Click(object sender, System.EventArgs e)
+        {
+            ControlsEnabled(false);
 
-			Thread t = new Thread(new ThreadStart(Resume));
-			t.Name = "UCB Control Thread";
-			t.IsBackground = true;
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
+            Thread t = new Thread(new ThreadStart(Resume));
+            t.Name = "UCB Control Thread";
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
 
-		private void btnDisable_Click(object sender, System.EventArgs e)
-		{
-			ControlsEnabled(false);
+        private void btnDisable_Click(object sender, System.EventArgs e)
+        {
+            ControlsEnabled(false);
 
-			Thread t = new Thread(new ThreadStart(Disable));
-			t.Name = "UCB Control Thread";
-			t.IsBackground = true;
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
+            Thread t = new Thread(new ThreadStart(Disable));
+            t.Name = "UCB Control Thread";
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
 
-		private void btnDisableClear_Click(object sender, System.EventArgs e)
-		{
-			DialogResult dr = MessageBox.Show(
-				"Are you sure you want to erase the existing data stored in the PIC matrix?",
-				"Erase matrix?",
-				MessageBoxButtons.YesNo,
-				MessageBoxIcon.Warning);
-			
-			if(dr == DialogResult.No)
-				return;
+        private void btnDisableClear_Click(object sender, System.EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show(
+                "Are you sure you want to erase the existing data stored in the PIC matrix?",
+                "Erase matrix?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
 
-			ControlsEnabled(false);
+            if (dr == DialogResult.No)
+                return;
 
-			Thread t = new Thread(new ThreadStart(DisableAndClear));
-			t.Name = "UCB Control Thread";
-			t.IsBackground = true;
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
+            ControlsEnabled(false);
 
-		private void btnWriteAll_Click(object sender, System.EventArgs e)
-		{
-			Thread t = new Thread(new ThreadStart(WriteAll));
-			t.Name = "UCB Control Thread";
-			t.IsBackground = true;
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
+            Thread t = new Thread(new ThreadStart(DisableAndClear));
+            t.Name = "UCB Control Thread";
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
 
-		private void btnSetupXVTR_Click(object sender, System.EventArgs e)
-		{
-			if(console.xvtrForm == null)
-				console.xvtrForm = new XVTRForm(console);
+        private void btnWriteAll_Click(object sender, System.EventArgs e)
+        {
+            Thread t = new Thread(new ThreadStart(WriteAll));
+            t.Name = "UCB Control Thread";
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
 
-			console.xvtrForm.Show();
-			console.xvtrForm.Focus();
-		}
+        private void btnSetupXVTR_Click(object sender, System.EventArgs e)
+        {
+            if (console.xvtrForm == null)
+                console.xvtrForm = new XVTRForm(console);
 
-		#endregion
+            console.xvtrForm.Show();
+            console.xvtrForm.Focus();
+        }
 
-		#region Write Line Handlers
+        #endregion
 
-		private void btnWriteLine0_Click(object sender, System.EventArgs e)
-		{
-			address = 0;
-			val = 0;
-			if(chkL00R01.Checked) val += 1<<0;
-			if(chkL00R02.Checked) val += 1<<1;
-			if(chkL00R03.Checked) val += 1<<2;
-			if(chkL00R04.Checked) val += 1<<3;
-			if(chkL00R05.Checked) val += 1<<4;
-			if(chkL00R06.Checked) val += 1<<5;
-			if(chkL00R07.Checked) val += 1<<6;
-			if(chkL00R08.Checked) val += 1<<7;
-			if(chkL00R09.Checked) val += 1<<8;
-			if(chkL00R10.Checked) val += 1<<9;
-			if(chkL00R11.Checked) val += 1<<10;
-			if(chkL00R12.Checked) val += 1<<11;
-			if(chkL00R13.Checked) val += 1<<12;
-			if(chkL00R14.Checked) val += 1<<13;
-			if(chkL00R15.Checked) val += 1<<14;
-			if(chkL00R16.Checked) val += 1<<15;
+        #region Write Line Handlers
 
-			ControlsEnabled(false);
+        private void btnWriteLine0_Click(object sender, System.EventArgs e)
+        {
+            address = 0;
+            val = 0;
+            if (chkL00R01.Checked) val += 1 << 0;
+            if (chkL00R02.Checked) val += 1 << 1;
+            if (chkL00R03.Checked) val += 1 << 2;
+            if (chkL00R04.Checked) val += 1 << 3;
+            if (chkL00R05.Checked) val += 1 << 4;
+            if (chkL00R06.Checked) val += 1 << 5;
+            if (chkL00R07.Checked) val += 1 << 6;
+            if (chkL00R08.Checked) val += 1 << 7;
+            if (chkL00R09.Checked) val += 1 << 8;
+            if (chkL00R10.Checked) val += 1 << 9;
+            if (chkL00R11.Checked) val += 1 << 10;
+            if (chkL00R12.Checked) val += 1 << 11;
+            if (chkL00R13.Checked) val += 1 << 12;
+            if (chkL00R14.Checked) val += 1 << 13;
+            if (chkL00R15.Checked) val += 1 << 14;
+            if (chkL00R16.Checked) val += 1 << 15;
 
-			Thread t = new Thread(new ThreadStart(WriteReg));
-			t.IsBackground = true;
-			t.Name = "UCB WriteReg Thread";
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
+            ControlsEnabled(false);
 
-		private void btnWriteLine1_Click(object sender, System.EventArgs e)
-		{
-			address = 1;
-			val = 0;
-			if(chkL01R01.Checked) val += 1<<0;
-			if(chkL01R02.Checked) val += 1<<1;
-			if(chkL01R03.Checked) val += 1<<2;
-			if(chkL01R04.Checked) val += 1<<3;
-			if(chkL01R05.Checked) val += 1<<4;
-			if(chkL01R06.Checked) val += 1<<5;
-			if(chkL01R07.Checked) val += 1<<6;
-			if(chkL01R08.Checked) val += 1<<7;
-			if(chkL01R09.Checked) val += 1<<8;
-			if(chkL01R10.Checked) val += 1<<9;
-			if(chkL01R11.Checked) val += 1<<10;
-			if(chkL01R12.Checked) val += 1<<11;
-			if(chkL01R13.Checked) val += 1<<12;
-			if(chkL01R14.Checked) val += 1<<13;
-			if(chkL01R15.Checked) val += 1<<14;
-			if(chkL01R16.Checked) val += 1<<15;
+            Thread t = new Thread(new ThreadStart(WriteReg));
+            t.IsBackground = true;
+            t.Name = "UCB WriteReg Thread";
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
 
-			line[address] = (ushort)val;
-
-			ControlsEnabled(false);
-
-			Thread t = new Thread(new ThreadStart(WriteReg));
-			t.IsBackground = true;
-			t.Name = "UCB WriteReg Thread";
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
-
-		private void btnWriteLine2_Click(object sender, System.EventArgs e)
-		{
-			address = 2;
-			val = 0;
-			if(chkL02R01.Checked) val += 1<<0;
-			if(chkL02R02.Checked) val += 1<<1;
-			if(chkL02R03.Checked) val += 1<<2;
-			if(chkL02R04.Checked) val += 1<<3;
-			if(chkL02R05.Checked) val += 1<<4;
-			if(chkL02R06.Checked) val += 1<<5;
-			if(chkL02R07.Checked) val += 1<<6;
-			if(chkL02R08.Checked) val += 1<<7;
-			if(chkL02R09.Checked) val += 1<<8;
-			if(chkL02R10.Checked) val += 1<<9;
-			if(chkL02R11.Checked) val += 1<<10;
-			if(chkL02R12.Checked) val += 1<<11;
-			if(chkL02R13.Checked) val += 1<<12;
-			if(chkL02R14.Checked) val += 1<<13;
-			if(chkL02R15.Checked) val += 1<<14;
-			if(chkL02R16.Checked) val += 1<<15;
-
-			line[address] = (ushort)val;
-
-			ControlsEnabled(false);
-
-			Thread t = new Thread(new ThreadStart(WriteReg));
-			t.IsBackground = true;
-			t.Name = "UCB WriteReg Thread";
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
-
-		private void btnWriteLine3_Click(object sender, System.EventArgs e)
-		{
-			address = 3;
-			val = 0;
-			if(chkL03R01.Checked) val += 1<<0;
-			if(chkL03R02.Checked) val += 1<<1;
-			if(chkL03R03.Checked) val += 1<<2;
-			if(chkL03R04.Checked) val += 1<<3;
-			if(chkL03R05.Checked) val += 1<<4;
-			if(chkL03R06.Checked) val += 1<<5;
-			if(chkL03R07.Checked) val += 1<<6;
-			if(chkL03R08.Checked) val += 1<<7;
-			if(chkL03R09.Checked) val += 1<<8;
-			if(chkL03R10.Checked) val += 1<<9;
-			if(chkL03R11.Checked) val += 1<<10;
-			if(chkL03R12.Checked) val += 1<<11;
-			if(chkL03R13.Checked) val += 1<<12;
-			if(chkL03R14.Checked) val += 1<<13;
-			if(chkL03R15.Checked) val += 1<<14;
-			if(chkL03R16.Checked) val += 1<<15;
-
-			line[address] = (ushort)val;
-
-			ControlsEnabled(false);
-
-			Thread t = new Thread(new ThreadStart(WriteReg));
-			t.IsBackground = true;
-			t.Name = "UCB WriteReg Thread";
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
-
-		private void btnWriteLine4_Click(object sender, System.EventArgs e)
-		{
-			address = 4;
-			val = 0;
-			if(chkL04R01.Checked) val += 1<<0;
-			if(chkL04R02.Checked) val += 1<<1;
-			if(chkL04R03.Checked) val += 1<<2;
-			if(chkL04R04.Checked) val += 1<<3;
-			if(chkL04R05.Checked) val += 1<<4;
-			if(chkL04R06.Checked) val += 1<<5;
-			if(chkL04R07.Checked) val += 1<<6;
-			if(chkL04R08.Checked) val += 1<<7;
-			if(chkL04R09.Checked) val += 1<<8;
-			if(chkL04R10.Checked) val += 1<<9;
-			if(chkL04R11.Checked) val += 1<<10;
-			if(chkL04R12.Checked) val += 1<<11;
-			if(chkL04R13.Checked) val += 1<<12;
-			if(chkL04R14.Checked) val += 1<<13;
-			if(chkL04R15.Checked) val += 1<<14;
-			if(chkL04R16.Checked) val += 1<<15;
+        private void btnWriteLine1_Click(object sender, System.EventArgs e)
+        {
+            address = 1;
+            val = 0;
+            if (chkL01R01.Checked) val += 1 << 0;
+            if (chkL01R02.Checked) val += 1 << 1;
+            if (chkL01R03.Checked) val += 1 << 2;
+            if (chkL01R04.Checked) val += 1 << 3;
+            if (chkL01R05.Checked) val += 1 << 4;
+            if (chkL01R06.Checked) val += 1 << 5;
+            if (chkL01R07.Checked) val += 1 << 6;
+            if (chkL01R08.Checked) val += 1 << 7;
+            if (chkL01R09.Checked) val += 1 << 8;
+            if (chkL01R10.Checked) val += 1 << 9;
+            if (chkL01R11.Checked) val += 1 << 10;
+            if (chkL01R12.Checked) val += 1 << 11;
+            if (chkL01R13.Checked) val += 1 << 12;
+            if (chkL01R14.Checked) val += 1 << 13;
+            if (chkL01R15.Checked) val += 1 << 14;
+            if (chkL01R16.Checked) val += 1 << 15;
 
             line[address] = (ushort)val;
 
-			ControlsEnabled(false);
+            ControlsEnabled(false);
 
-			Thread t = new Thread(new ThreadStart(WriteReg));
-			t.IsBackground = true;
-			t.Name = "UCB WriteReg Thread";
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
+            Thread t = new Thread(new ThreadStart(WriteReg));
+            t.IsBackground = true;
+            t.Name = "UCB WriteReg Thread";
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
 
-		private void btnWriteLine5_Click(object sender, System.EventArgs e)
-		{
-			address = 5;
-			val = 0;
-			if(chkL05R01.Checked) val += 1<<0;
-			if(chkL05R02.Checked) val += 1<<1;
-			if(chkL05R03.Checked) val += 1<<2;
-			if(chkL05R04.Checked) val += 1<<3;
-			if(chkL05R05.Checked) val += 1<<4;
-			if(chkL05R06.Checked) val += 1<<5;
-			if(chkL05R07.Checked) val += 1<<6;
-			if(chkL05R08.Checked) val += 1<<7;
-			if(chkL05R09.Checked) val += 1<<8;
-			if(chkL05R10.Checked) val += 1<<9;
-			if(chkL05R11.Checked) val += 1<<10;
-			if(chkL05R12.Checked) val += 1<<11;
-			if(chkL05R13.Checked) val += 1<<12;
-			if(chkL05R14.Checked) val += 1<<13;
-			if(chkL05R15.Checked) val += 1<<14;
-			if(chkL05R16.Checked) val += 1<<15;
-
-            line[address] = (ushort)val;
-
-			ControlsEnabled(false);
-
-			Thread t = new Thread(new ThreadStart(WriteReg));
-			t.IsBackground = true;
-			t.Name = "UCB WriteReg Thread";
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
-
-		private void btnWriteLine6_Click(object sender, System.EventArgs e)
-		{
-			address = 6;
-			val = 0;
-			if(chkL06R01.Checked) val += 1<<0;
-			if(chkL06R02.Checked) val += 1<<1;
-			if(chkL06R03.Checked) val += 1<<2;
-			if(chkL06R04.Checked) val += 1<<3;
-			if(chkL06R05.Checked) val += 1<<4;
-			if(chkL06R06.Checked) val += 1<<5;
-			if(chkL06R07.Checked) val += 1<<6;
-			if(chkL06R08.Checked) val += 1<<7;
-			if(chkL06R09.Checked) val += 1<<8;
-			if(chkL06R10.Checked) val += 1<<9;
-			if(chkL06R11.Checked) val += 1<<10;
-			if(chkL06R12.Checked) val += 1<<11;
-			if(chkL06R13.Checked) val += 1<<12;
-			if(chkL06R14.Checked) val += 1<<13;
-			if(chkL06R15.Checked) val += 1<<14;
-			if(chkL06R16.Checked) val += 1<<15;
+        private void btnWriteLine2_Click(object sender, System.EventArgs e)
+        {
+            address = 2;
+            val = 0;
+            if (chkL02R01.Checked) val += 1 << 0;
+            if (chkL02R02.Checked) val += 1 << 1;
+            if (chkL02R03.Checked) val += 1 << 2;
+            if (chkL02R04.Checked) val += 1 << 3;
+            if (chkL02R05.Checked) val += 1 << 4;
+            if (chkL02R06.Checked) val += 1 << 5;
+            if (chkL02R07.Checked) val += 1 << 6;
+            if (chkL02R08.Checked) val += 1 << 7;
+            if (chkL02R09.Checked) val += 1 << 8;
+            if (chkL02R10.Checked) val += 1 << 9;
+            if (chkL02R11.Checked) val += 1 << 10;
+            if (chkL02R12.Checked) val += 1 << 11;
+            if (chkL02R13.Checked) val += 1 << 12;
+            if (chkL02R14.Checked) val += 1 << 13;
+            if (chkL02R15.Checked) val += 1 << 14;
+            if (chkL02R16.Checked) val += 1 << 15;
 
             line[address] = (ushort)val;
 
-			ControlsEnabled(false);
+            ControlsEnabled(false);
 
-			Thread t = new Thread(new ThreadStart(WriteReg));
-			t.IsBackground = true;
-			t.Name = "UCB WriteReg Thread";
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
+            Thread t = new Thread(new ThreadStart(WriteReg));
+            t.IsBackground = true;
+            t.Name = "UCB WriteReg Thread";
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
 
-		private void btnWriteLine7_Click(object sender, System.EventArgs e)
-		{
-			address = 7;
-			val = 0;
-			if(chkL07R01.Checked) val += 1<<0;
-			if(chkL07R02.Checked) val += 1<<1;
-			if(chkL07R03.Checked) val += 1<<2;
-			if(chkL07R04.Checked) val += 1<<3;
-			if(chkL07R05.Checked) val += 1<<4;
-			if(chkL07R06.Checked) val += 1<<5;
-			if(chkL07R07.Checked) val += 1<<6;
-			if(chkL07R08.Checked) val += 1<<7;
-			if(chkL07R09.Checked) val += 1<<8;
-			if(chkL07R10.Checked) val += 1<<9;
-			if(chkL07R11.Checked) val += 1<<10;
-			if(chkL07R12.Checked) val += 1<<11;
-			if(chkL07R13.Checked) val += 1<<12;
-			if(chkL07R14.Checked) val += 1<<13;
-			if(chkL07R15.Checked) val += 1<<14;
-			if(chkL07R16.Checked) val += 1<<15;
-
-            line[address] = (ushort)val;
-
-			ControlsEnabled(false);
-
-			Thread t = new Thread(new ThreadStart(WriteReg));
-			t.IsBackground = true;
-			t.Name = "UCB WriteReg Thread";
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
-
-		private void btnWriteLine8_Click(object sender, System.EventArgs e)
-		{
-			address = 8;
-			val = 0;
-			if(chkL08R01.Checked) val += 1<<0;
-			if(chkL08R02.Checked) val += 1<<1;
-			if(chkL08R03.Checked) val += 1<<2;
-			if(chkL08R04.Checked) val += 1<<3;
-			if(chkL08R05.Checked) val += 1<<4;
-			if(chkL08R06.Checked) val += 1<<5;
-			if(chkL08R07.Checked) val += 1<<6;
-			if(chkL08R08.Checked) val += 1<<7;
-			if(chkL08R09.Checked) val += 1<<8;
-			if(chkL08R10.Checked) val += 1<<9;
-			if(chkL08R11.Checked) val += 1<<10;
-			if(chkL08R12.Checked) val += 1<<11;
-			if(chkL08R13.Checked) val += 1<<12;
-			if(chkL08R14.Checked) val += 1<<13;
-			if(chkL08R15.Checked) val += 1<<14;
-			if(chkL08R16.Checked) val += 1<<15;
+        private void btnWriteLine3_Click(object sender, System.EventArgs e)
+        {
+            address = 3;
+            val = 0;
+            if (chkL03R01.Checked) val += 1 << 0;
+            if (chkL03R02.Checked) val += 1 << 1;
+            if (chkL03R03.Checked) val += 1 << 2;
+            if (chkL03R04.Checked) val += 1 << 3;
+            if (chkL03R05.Checked) val += 1 << 4;
+            if (chkL03R06.Checked) val += 1 << 5;
+            if (chkL03R07.Checked) val += 1 << 6;
+            if (chkL03R08.Checked) val += 1 << 7;
+            if (chkL03R09.Checked) val += 1 << 8;
+            if (chkL03R10.Checked) val += 1 << 9;
+            if (chkL03R11.Checked) val += 1 << 10;
+            if (chkL03R12.Checked) val += 1 << 11;
+            if (chkL03R13.Checked) val += 1 << 12;
+            if (chkL03R14.Checked) val += 1 << 13;
+            if (chkL03R15.Checked) val += 1 << 14;
+            if (chkL03R16.Checked) val += 1 << 15;
 
             line[address] = (ushort)val;
 
-			ControlsEnabled(false);
+            ControlsEnabled(false);
 
-			Thread t = new Thread(new ThreadStart(WriteReg));
-			t.IsBackground = true;
-			t.Name = "UCB WriteReg Thread";
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
+            Thread t = new Thread(new ThreadStart(WriteReg));
+            t.IsBackground = true;
+            t.Name = "UCB WriteReg Thread";
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
 
-		private void btnWriteLine9_Click(object sender, System.EventArgs e)
-		{
-			address = 9;
-			val = 0;
-			if(chkL09R01.Checked) val += 1<<0;
-			if(chkL09R02.Checked) val += 1<<1;
-			if(chkL09R03.Checked) val += 1<<2;
-			if(chkL09R04.Checked) val += 1<<3;
-			if(chkL09R05.Checked) val += 1<<4;
-			if(chkL09R06.Checked) val += 1<<5;
-			if(chkL09R07.Checked) val += 1<<6;
-			if(chkL09R08.Checked) val += 1<<7;
-			if(chkL09R09.Checked) val += 1<<8;
-			if(chkL09R10.Checked) val += 1<<9;
-			if(chkL09R11.Checked) val += 1<<10;
-			if(chkL09R12.Checked) val += 1<<11;
-			if(chkL09R13.Checked) val += 1<<12;
-			if(chkL09R14.Checked) val += 1<<13;
-			if(chkL09R15.Checked) val += 1<<14;
-			if(chkL09R16.Checked) val += 1<<15;
-
-            line[address] = (ushort)val;
-
-			ControlsEnabled(false);
-
-			Thread t = new Thread(new ThreadStart(WriteReg));
-			t.IsBackground = true;
-			t.Name = "UCB WriteReg Thread";
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
-
-		private void btnWriteLine10_Click(object sender, System.EventArgs e)
-		{
-			address = 10;
-			val = 0;
-			if(chkL10R01.Checked) val += 1<<0;
-			if(chkL10R02.Checked) val += 1<<1;
-			if(chkL10R03.Checked) val += 1<<2;
-			if(chkL10R04.Checked) val += 1<<3;
-			if(chkL10R05.Checked) val += 1<<4;
-			if(chkL10R06.Checked) val += 1<<5;
-			if(chkL10R07.Checked) val += 1<<6;
-			if(chkL10R08.Checked) val += 1<<7;
-			if(chkL10R09.Checked) val += 1<<8;
-			if(chkL10R10.Checked) val += 1<<9;
-			if(chkL10R11.Checked) val += 1<<10;
-			if(chkL10R12.Checked) val += 1<<11;
-			if(chkL10R13.Checked) val += 1<<12;
-			if(chkL10R14.Checked) val += 1<<13;
-			if(chkL10R15.Checked) val += 1<<14;
-			if(chkL10R16.Checked) val += 1<<15;
+        private void btnWriteLine4_Click(object sender, System.EventArgs e)
+        {
+            address = 4;
+            val = 0;
+            if (chkL04R01.Checked) val += 1 << 0;
+            if (chkL04R02.Checked) val += 1 << 1;
+            if (chkL04R03.Checked) val += 1 << 2;
+            if (chkL04R04.Checked) val += 1 << 3;
+            if (chkL04R05.Checked) val += 1 << 4;
+            if (chkL04R06.Checked) val += 1 << 5;
+            if (chkL04R07.Checked) val += 1 << 6;
+            if (chkL04R08.Checked) val += 1 << 7;
+            if (chkL04R09.Checked) val += 1 << 8;
+            if (chkL04R10.Checked) val += 1 << 9;
+            if (chkL04R11.Checked) val += 1 << 10;
+            if (chkL04R12.Checked) val += 1 << 11;
+            if (chkL04R13.Checked) val += 1 << 12;
+            if (chkL04R14.Checked) val += 1 << 13;
+            if (chkL04R15.Checked) val += 1 << 14;
+            if (chkL04R16.Checked) val += 1 << 15;
 
             line[address] = (ushort)val;
 
-			ControlsEnabled(false);
+            ControlsEnabled(false);
 
-			Thread t = new Thread(new ThreadStart(WriteReg));
-			t.IsBackground = true;
-			t.Name = "UCB WriteReg Thread";
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
+            Thread t = new Thread(new ThreadStart(WriteReg));
+            t.IsBackground = true;
+            t.Name = "UCB WriteReg Thread";
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
 
-		private void btnWriteLine11_Click(object sender, System.EventArgs e)
-		{
-			address = 11;
-			val = 0;
-			if(chkL11R01.Checked) val += 1<<0;
-			if(chkL11R02.Checked) val += 1<<1;
-			if(chkL11R03.Checked) val += 1<<2;
-			if(chkL11R04.Checked) val += 1<<3;
-			if(chkL11R05.Checked) val += 1<<4;
-			if(chkL11R06.Checked) val += 1<<5;
-			if(chkL11R07.Checked) val += 1<<6;
-			if(chkL11R08.Checked) val += 1<<7;
-			if(chkL11R09.Checked) val += 1<<8;
-			if(chkL11R10.Checked) val += 1<<9;
-			if(chkL11R11.Checked) val += 1<<10;
-			if(chkL11R12.Checked) val += 1<<11;
-			if(chkL11R13.Checked) val += 1<<12;
-			if(chkL11R14.Checked) val += 1<<13;
-			if(chkL11R15.Checked) val += 1<<14;
-			if(chkL11R16.Checked) val += 1<<15;
-
-            line[address] = (ushort)val;
-
-			ControlsEnabled(false);
-
-			Thread t = new Thread(new ThreadStart(WriteReg));
-			t.IsBackground = true;
-			t.Name = "UCB WriteReg Thread";
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
-
-		private void btnWriteLine12_Click(object sender, System.EventArgs e)
-		{
-			address = 12;
-			val = 0;
-			if(chkL12R01.Checked) val += 1<<0;
-			if(chkL12R02.Checked) val += 1<<1;
-			if(chkL12R03.Checked) val += 1<<2;
-			if(chkL12R04.Checked) val += 1<<3;
-			if(chkL12R05.Checked) val += 1<<4;
-			if(chkL12R06.Checked) val += 1<<5;
-			if(chkL12R07.Checked) val += 1<<6;
-			if(chkL12R08.Checked) val += 1<<7;
-			if(chkL12R09.Checked) val += 1<<8;
-			if(chkL12R10.Checked) val += 1<<9;
-			if(chkL12R11.Checked) val += 1<<10;
-			if(chkL12R12.Checked) val += 1<<11;
-			if(chkL12R13.Checked) val += 1<<12;
-			if(chkL12R14.Checked) val += 1<<13;
-			if(chkL12R15.Checked) val += 1<<14;
-			if(chkL12R16.Checked) val += 1<<15;
+        private void btnWriteLine5_Click(object sender, System.EventArgs e)
+        {
+            address = 5;
+            val = 0;
+            if (chkL05R01.Checked) val += 1 << 0;
+            if (chkL05R02.Checked) val += 1 << 1;
+            if (chkL05R03.Checked) val += 1 << 2;
+            if (chkL05R04.Checked) val += 1 << 3;
+            if (chkL05R05.Checked) val += 1 << 4;
+            if (chkL05R06.Checked) val += 1 << 5;
+            if (chkL05R07.Checked) val += 1 << 6;
+            if (chkL05R08.Checked) val += 1 << 7;
+            if (chkL05R09.Checked) val += 1 << 8;
+            if (chkL05R10.Checked) val += 1 << 9;
+            if (chkL05R11.Checked) val += 1 << 10;
+            if (chkL05R12.Checked) val += 1 << 11;
+            if (chkL05R13.Checked) val += 1 << 12;
+            if (chkL05R14.Checked) val += 1 << 13;
+            if (chkL05R15.Checked) val += 1 << 14;
+            if (chkL05R16.Checked) val += 1 << 15;
 
             line[address] = (ushort)val;
 
-			ControlsEnabled(false);
+            ControlsEnabled(false);
 
-			Thread t = new Thread(new ThreadStart(WriteReg));
-			t.IsBackground = true;
-			t.Name = "UCB WriteReg Thread";
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
+            Thread t = new Thread(new ThreadStart(WriteReg));
+            t.IsBackground = true;
+            t.Name = "UCB WriteReg Thread";
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
 
-		private void btnWriteLine13_Click(object sender, System.EventArgs e)
-		{
-			address = 13;
-			val = 0;
-			if(chkL13R01.Checked) val += 1<<0;
-			if(chkL13R02.Checked) val += 1<<1;
-			if(chkL13R03.Checked) val += 1<<2;
-			if(chkL13R04.Checked) val += 1<<3;
-			if(chkL13R05.Checked) val += 1<<4;
-			if(chkL13R06.Checked) val += 1<<5;
-			if(chkL13R07.Checked) val += 1<<6;
-			if(chkL13R08.Checked) val += 1<<7;
-			if(chkL13R09.Checked) val += 1<<8;
-			if(chkL13R10.Checked) val += 1<<9;
-			if(chkL13R11.Checked) val += 1<<10;
-			if(chkL13R12.Checked) val += 1<<11;
-			if(chkL13R13.Checked) val += 1<<12;
-			if(chkL13R14.Checked) val += 1<<13;
-			if(chkL13R15.Checked) val += 1<<14;
-			if(chkL13R16.Checked) val += 1<<15;
-
-            line[address] = (ushort)val;
-
-			ControlsEnabled(false);
-
-			Thread t = new Thread(new ThreadStart(WriteReg));
-			t.IsBackground = true;
-			t.Name = "UCB WriteReg Thread";
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
-
-		private void btnWriteLine14_Click(object sender, System.EventArgs e)
-		{
-			address = 14;
-			val = 0;
-			if(chkL14R01.Checked) val += 1<<0;
-			if(chkL14R02.Checked) val += 1<<1;
-			if(chkL14R03.Checked) val += 1<<2;
-			if(chkL14R04.Checked) val += 1<<3;
-			if(chkL14R05.Checked) val += 1<<4;
-			if(chkL14R06.Checked) val += 1<<5;
-			if(chkL14R07.Checked) val += 1<<6;
-			if(chkL14R08.Checked) val += 1<<7;
-			if(chkL14R09.Checked) val += 1<<8;
-			if(chkL14R10.Checked) val += 1<<9;
-			if(chkL14R11.Checked) val += 1<<10;
-			if(chkL14R12.Checked) val += 1<<11;
-			if(chkL14R13.Checked) val += 1<<12;
-			if(chkL14R14.Checked) val += 1<<13;
-			if(chkL14R15.Checked) val += 1<<14;
-			if(chkL14R16.Checked) val += 1<<15;
+        private void btnWriteLine6_Click(object sender, System.EventArgs e)
+        {
+            address = 6;
+            val = 0;
+            if (chkL06R01.Checked) val += 1 << 0;
+            if (chkL06R02.Checked) val += 1 << 1;
+            if (chkL06R03.Checked) val += 1 << 2;
+            if (chkL06R04.Checked) val += 1 << 3;
+            if (chkL06R05.Checked) val += 1 << 4;
+            if (chkL06R06.Checked) val += 1 << 5;
+            if (chkL06R07.Checked) val += 1 << 6;
+            if (chkL06R08.Checked) val += 1 << 7;
+            if (chkL06R09.Checked) val += 1 << 8;
+            if (chkL06R10.Checked) val += 1 << 9;
+            if (chkL06R11.Checked) val += 1 << 10;
+            if (chkL06R12.Checked) val += 1 << 11;
+            if (chkL06R13.Checked) val += 1 << 12;
+            if (chkL06R14.Checked) val += 1 << 13;
+            if (chkL06R15.Checked) val += 1 << 14;
+            if (chkL06R16.Checked) val += 1 << 15;
 
             line[address] = (ushort)val;
 
-			ControlsEnabled(false);
+            ControlsEnabled(false);
 
-			Thread t = new Thread(new ThreadStart(WriteReg));
-			t.IsBackground = true;
-			t.Name = "UCB WriteReg Thread";
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
+            Thread t = new Thread(new ThreadStart(WriteReg));
+            t.IsBackground = true;
+            t.Name = "UCB WriteReg Thread";
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
 
-		private void btnWriteLine15_Click(object sender, System.EventArgs e)
-		{
-			address = 15;
-			val = 0;
-			if(chkL15R01.Checked) val += 1<<0;
-			if(chkL15R02.Checked) val += 1<<1;
-			if(chkL15R03.Checked) val += 1<<2;
-			if(chkL15R04.Checked) val += 1<<3;
-			if(chkL15R05.Checked) val += 1<<4;
-			if(chkL15R06.Checked) val += 1<<5;
-			if(chkL15R07.Checked) val += 1<<6;
-			if(chkL15R08.Checked) val += 1<<7;
-			if(chkL15R09.Checked) val += 1<<8;
-			if(chkL15R10.Checked) val += 1<<9;
-			if(chkL15R11.Checked) val += 1<<10;
-			if(chkL15R12.Checked) val += 1<<11;
-			if(chkL15R13.Checked) val += 1<<12;
-			if(chkL15R14.Checked) val += 1<<13;
-			if(chkL15R15.Checked) val += 1<<14;
-			if(chkL15R16.Checked) val += 1<<15;
+        private void btnWriteLine7_Click(object sender, System.EventArgs e)
+        {
+            address = 7;
+            val = 0;
+            if (chkL07R01.Checked) val += 1 << 0;
+            if (chkL07R02.Checked) val += 1 << 1;
+            if (chkL07R03.Checked) val += 1 << 2;
+            if (chkL07R04.Checked) val += 1 << 3;
+            if (chkL07R05.Checked) val += 1 << 4;
+            if (chkL07R06.Checked) val += 1 << 5;
+            if (chkL07R07.Checked) val += 1 << 6;
+            if (chkL07R08.Checked) val += 1 << 7;
+            if (chkL07R09.Checked) val += 1 << 8;
+            if (chkL07R10.Checked) val += 1 << 9;
+            if (chkL07R11.Checked) val += 1 << 10;
+            if (chkL07R12.Checked) val += 1 << 11;
+            if (chkL07R13.Checked) val += 1 << 12;
+            if (chkL07R14.Checked) val += 1 << 13;
+            if (chkL07R15.Checked) val += 1 << 14;
+            if (chkL07R16.Checked) val += 1 << 15;
 
             line[address] = (ushort)val;
 
-			ControlsEnabled(false);
+            ControlsEnabled(false);
 
-			Thread t = new Thread(new ThreadStart(WriteReg));
-			t.IsBackground = true;
-			t.Name = "UCB WriteReg Thread";
-			t.Priority = ThreadPriority.BelowNormal;
-			t.Start();
-		}
+            Thread t = new Thread(new ThreadStart(WriteReg));
+            t.IsBackground = true;
+            t.Name = "UCB WriteReg Thread";
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
 
-		#endregion
+        private void btnWriteLine8_Click(object sender, System.EventArgs e)
+        {
+            address = 8;
+            val = 0;
+            if (chkL08R01.Checked) val += 1 << 0;
+            if (chkL08R02.Checked) val += 1 << 1;
+            if (chkL08R03.Checked) val += 1 << 2;
+            if (chkL08R04.Checked) val += 1 << 3;
+            if (chkL08R05.Checked) val += 1 << 4;
+            if (chkL08R06.Checked) val += 1 << 5;
+            if (chkL08R07.Checked) val += 1 << 6;
+            if (chkL08R08.Checked) val += 1 << 7;
+            if (chkL08R09.Checked) val += 1 << 8;
+            if (chkL08R10.Checked) val += 1 << 9;
+            if (chkL08R11.Checked) val += 1 << 10;
+            if (chkL08R12.Checked) val += 1 << 11;
+            if (chkL08R13.Checked) val += 1 << 12;
+            if (chkL08R14.Checked) val += 1 << 13;
+            if (chkL08R15.Checked) val += 1 << 14;
+            if (chkL08R16.Checked) val += 1 << 15;
 
-		private void chkRelay_CheckedChanged(object sender, System.EventArgs e)
-		{
-			CheckBox chk = sender as CheckBox;
-			if(chk == null) return;
+            line[address] = (ushort)val;
 
-			int index = int.Parse(chk.Name.Substring(4, 2));
-			int relay = int.Parse(chk.Name.Substring(7, 2));
-			if(chk.Checked)
-				line[index] |= (ushort)(1<<(relay-1));
-			else
-                line[index] &= (ushort)(0xFFFF - (1 << (relay - 1)));
+            ControlsEnabled(false);
+
+            Thread t = new Thread(new ThreadStart(WriteReg));
+            t.IsBackground = true;
+            t.Name = "UCB WriteReg Thread";
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
+
+        private void btnWriteLine9_Click(object sender, System.EventArgs e)
+        {
+            address = 9;
+            val = 0;
+            if (chkL09R01.Checked) val += 1 << 0;
+            if (chkL09R02.Checked) val += 1 << 1;
+            if (chkL09R03.Checked) val += 1 << 2;
+            if (chkL09R04.Checked) val += 1 << 3;
+            if (chkL09R05.Checked) val += 1 << 4;
+            if (chkL09R06.Checked) val += 1 << 5;
+            if (chkL09R07.Checked) val += 1 << 6;
+            if (chkL09R08.Checked) val += 1 << 7;
+            if (chkL09R09.Checked) val += 1 << 8;
+            if (chkL09R10.Checked) val += 1 << 9;
+            if (chkL09R11.Checked) val += 1 << 10;
+            if (chkL09R12.Checked) val += 1 << 11;
+            if (chkL09R13.Checked) val += 1 << 12;
+            if (chkL09R14.Checked) val += 1 << 13;
+            if (chkL09R15.Checked) val += 1 << 14;
+            if (chkL09R16.Checked) val += 1 << 15;
+
+            line[address] = (ushort)val;
+
+            ControlsEnabled(false);
+
+            Thread t = new Thread(new ThreadStart(WriteReg));
+            t.IsBackground = true;
+            t.Name = "UCB WriteReg Thread";
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
+
+        private void btnWriteLine10_Click(object sender, System.EventArgs e)
+        {
+            address = 10;
+            val = 0;
+            if (chkL10R01.Checked) val += 1 << 0;
+            if (chkL10R02.Checked) val += 1 << 1;
+            if (chkL10R03.Checked) val += 1 << 2;
+            if (chkL10R04.Checked) val += 1 << 3;
+            if (chkL10R05.Checked) val += 1 << 4;
+            if (chkL10R06.Checked) val += 1 << 5;
+            if (chkL10R07.Checked) val += 1 << 6;
+            if (chkL10R08.Checked) val += 1 << 7;
+            if (chkL10R09.Checked) val += 1 << 8;
+            if (chkL10R10.Checked) val += 1 << 9;
+            if (chkL10R11.Checked) val += 1 << 10;
+            if (chkL10R12.Checked) val += 1 << 11;
+            if (chkL10R13.Checked) val += 1 << 12;
+            if (chkL10R14.Checked) val += 1 << 13;
+            if (chkL10R15.Checked) val += 1 << 14;
+            if (chkL10R16.Checked) val += 1 << 15;
+
+            line[address] = (ushort)val;
+
+            ControlsEnabled(false);
+
+            Thread t = new Thread(new ThreadStart(WriteReg));
+            t.IsBackground = true;
+            t.Name = "UCB WriteReg Thread";
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
+
+        private void btnWriteLine11_Click(object sender, System.EventArgs e)
+        {
+            address = 11;
+            val = 0;
+            if (chkL11R01.Checked) val += 1 << 0;
+            if (chkL11R02.Checked) val += 1 << 1;
+            if (chkL11R03.Checked) val += 1 << 2;
+            if (chkL11R04.Checked) val += 1 << 3;
+            if (chkL11R05.Checked) val += 1 << 4;
+            if (chkL11R06.Checked) val += 1 << 5;
+            if (chkL11R07.Checked) val += 1 << 6;
+            if (chkL11R08.Checked) val += 1 << 7;
+            if (chkL11R09.Checked) val += 1 << 8;
+            if (chkL11R10.Checked) val += 1 << 9;
+            if (chkL11R11.Checked) val += 1 << 10;
+            if (chkL11R12.Checked) val += 1 << 11;
+            if (chkL11R13.Checked) val += 1 << 12;
+            if (chkL11R14.Checked) val += 1 << 13;
+            if (chkL11R15.Checked) val += 1 << 14;
+            if (chkL11R16.Checked) val += 1 << 15;
+
+            line[address] = (ushort)val;
+
+            ControlsEnabled(false);
+
+            Thread t = new Thread(new ThreadStart(WriteReg));
+            t.IsBackground = true;
+            t.Name = "UCB WriteReg Thread";
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
+
+        private void btnWriteLine12_Click(object sender, System.EventArgs e)
+        {
+            address = 12;
+            val = 0;
+            if (chkL12R01.Checked) val += 1 << 0;
+            if (chkL12R02.Checked) val += 1 << 1;
+            if (chkL12R03.Checked) val += 1 << 2;
+            if (chkL12R04.Checked) val += 1 << 3;
+            if (chkL12R05.Checked) val += 1 << 4;
+            if (chkL12R06.Checked) val += 1 << 5;
+            if (chkL12R07.Checked) val += 1 << 6;
+            if (chkL12R08.Checked) val += 1 << 7;
+            if (chkL12R09.Checked) val += 1 << 8;
+            if (chkL12R10.Checked) val += 1 << 9;
+            if (chkL12R11.Checked) val += 1 << 10;
+            if (chkL12R12.Checked) val += 1 << 11;
+            if (chkL12R13.Checked) val += 1 << 12;
+            if (chkL12R14.Checked) val += 1 << 13;
+            if (chkL12R15.Checked) val += 1 << 14;
+            if (chkL12R16.Checked) val += 1 << 15;
+
+            line[address] = (ushort)val;
+
+            ControlsEnabled(false);
+
+            Thread t = new Thread(new ThreadStart(WriteReg));
+            t.IsBackground = true;
+            t.Name = "UCB WriteReg Thread";
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
+
+        private void btnWriteLine13_Click(object sender, System.EventArgs e)
+        {
+            address = 13;
+            val = 0;
+            if (chkL13R01.Checked) val += 1 << 0;
+            if (chkL13R02.Checked) val += 1 << 1;
+            if (chkL13R03.Checked) val += 1 << 2;
+            if (chkL13R04.Checked) val += 1 << 3;
+            if (chkL13R05.Checked) val += 1 << 4;
+            if (chkL13R06.Checked) val += 1 << 5;
+            if (chkL13R07.Checked) val += 1 << 6;
+            if (chkL13R08.Checked) val += 1 << 7;
+            if (chkL13R09.Checked) val += 1 << 8;
+            if (chkL13R10.Checked) val += 1 << 9;
+            if (chkL13R11.Checked) val += 1 << 10;
+            if (chkL13R12.Checked) val += 1 << 11;
+            if (chkL13R13.Checked) val += 1 << 12;
+            if (chkL13R14.Checked) val += 1 << 13;
+            if (chkL13R15.Checked) val += 1 << 14;
+            if (chkL13R16.Checked) val += 1 << 15;
+
+            line[address] = (ushort)val;
+
+            ControlsEnabled(false);
+
+            Thread t = new Thread(new ThreadStart(WriteReg));
+            t.IsBackground = true;
+            t.Name = "UCB WriteReg Thread";
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
+
+        private void btnWriteLine14_Click(object sender, System.EventArgs e)
+        {
+            address = 14;
+            val = 0;
+            if (chkL14R01.Checked) val += 1 << 0;
+            if (chkL14R02.Checked) val += 1 << 1;
+            if (chkL14R03.Checked) val += 1 << 2;
+            if (chkL14R04.Checked) val += 1 << 3;
+            if (chkL14R05.Checked) val += 1 << 4;
+            if (chkL14R06.Checked) val += 1 << 5;
+            if (chkL14R07.Checked) val += 1 << 6;
+            if (chkL14R08.Checked) val += 1 << 7;
+            if (chkL14R09.Checked) val += 1 << 8;
+            if (chkL14R10.Checked) val += 1 << 9;
+            if (chkL14R11.Checked) val += 1 << 10;
+            if (chkL14R12.Checked) val += 1 << 11;
+            if (chkL14R13.Checked) val += 1 << 12;
+            if (chkL14R14.Checked) val += 1 << 13;
+            if (chkL14R15.Checked) val += 1 << 14;
+            if (chkL14R16.Checked) val += 1 << 15;
+
+            line[address] = (ushort)val;
+
+            ControlsEnabled(false);
+
+            Thread t = new Thread(new ThreadStart(WriteReg));
+            t.IsBackground = true;
+            t.Name = "UCB WriteReg Thread";
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
+
+        private void btnWriteLine15_Click(object sender, System.EventArgs e)
+        {
+            address = 15;
+            val = 0;
+            if (chkL15R01.Checked) val += 1 << 0;
+            if (chkL15R02.Checked) val += 1 << 1;
+            if (chkL15R03.Checked) val += 1 << 2;
+            if (chkL15R04.Checked) val += 1 << 3;
+            if (chkL15R05.Checked) val += 1 << 4;
+            if (chkL15R06.Checked) val += 1 << 5;
+            if (chkL15R07.Checked) val += 1 << 6;
+            if (chkL15R08.Checked) val += 1 << 7;
+            if (chkL15R09.Checked) val += 1 << 8;
+            if (chkL15R10.Checked) val += 1 << 9;
+            if (chkL15R11.Checked) val += 1 << 10;
+            if (chkL15R12.Checked) val += 1 << 11;
+            if (chkL15R13.Checked) val += 1 << 12;
+            if (chkL15R14.Checked) val += 1 << 13;
+            if (chkL15R15.Checked) val += 1 << 14;
+            if (chkL15R16.Checked) val += 1 << 15;
+
+            line[address] = (ushort)val;
+
+            ControlsEnabled(false);
+
+            Thread t = new Thread(new ThreadStart(WriteReg));
+            t.IsBackground = true;
+            t.Name = "UCB WriteReg Thread";
+            t.Priority = ThreadPriority.BelowNormal;
+            t.Start();
+        }
+
+        #endregion
+
+        private void chkRelay_CheckedChanged(object sender, System.EventArgs e)
+        {
+            CheckBox chk = sender as CheckBox;
+            if (chk == null) return;
+
+            int index = int.Parse(chk.Name.Substring(4, 2)); // get the name of the item click on in the form  (chkL02R06: index = 2, relay = 6)
+            int relay = int.Parse(chk.Name.Substring(7, 2));
+
+            if (chk.Checked)
+                line[index] |= (ushort)(1 << (relay - 1)); // add it to the line[2] = line[2] | 0001 0000 = 0x10 (for relay 6) relay1 has no shift
+            else
+                line[index] &= (ushort)(0xFFFF - (1 << (relay - 1))); // remove it from the line[index]
 
             //Debug.WriteLine("line[" + index + "]: " + line[index]);
-		}
+        }
 
-		private void chkFlexWire_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(chkFlexWire.Checked)
-			{
-				chkFlexWire.BackColor = console.ButtonSelectedColor;
-			}
-			else
-			{
-				chkFlexWire.BackColor = SystemColors.Control;
-			}
+        private void chkFlexWire_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (chkFlexWire.Checked)
+            {
+                chkFlexWire.BackColor = console.ButtonSelectedColor;
+            }
+            else
+            {
+                chkFlexWire.BackColor = SystemColors.Control;
+            }
 
-			console.FlexWireUCB = chkFlexWire.Checked;			
-		}
-	}
+            console.FlexWireUCB = chkFlexWire.Checked;
+        }
+    }
 }

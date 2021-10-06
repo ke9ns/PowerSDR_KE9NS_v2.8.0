@@ -37,297 +37,302 @@ using System.Diagnostics;
 
 namespace PowerSDR
 {
-	public class AD9854_v2
-	{
-		#region Enums
+    public class AD9854_v2
+    {
+        #region Enums
 
-		public enum ControlMode
-		{
-			SDR = 0,
-			EVAL,
-		}
+        public enum ControlMode
+        {
+            SDR = 0,
+            EVAL,
+        }
 
-		private enum LPTPort
-		{
-			DATA = 0,
-			STATUS = 1,
-			CTRL = 2,
-		}
+        private enum LPTPort
+        {
+            DATA = 0,
+            STATUS = 1,
+            CTRL = 2,
+        }
 
-		#endregion
+        #endregion
 
-		#region Variable Declarations
+        #region Variable Declarations
 
-		private Register8[] registers;	// array of registers that represent the 29 8-bit registers on the AD9854
-		private ushort lpt_addr = 0x378;	// parallel port address
-		private ControlMode current_control_mode = ControlMode.SDR;
-		private Register8WriteDel write_reg;
+        private Register8[] registers;  // array of registers that represent the 29 8-bit registers on the AD9854
+        private ushort lpt_addr = 0x378;    // parallel port address
+        private ControlMode current_control_mode = ControlMode.SDR;
+        private Register8WriteDel write_reg;
 
-		#endregion
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		public AD9854_v2()
-		{
-			byte[] default_vals = {   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-									  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-									  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-									  0x00, 0x40, 0x00, 0x00, 0x00, 0x10, 0x64, 0x01, 
-									  0x20, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00 };
-			write_reg = new Register8WriteDel(WriteRegister);
-			registers = new Register8[40];
-			for(int i=0; i<40; i++)
-				registers[i] = new Register8(i.ToString(), write_reg, (byte)i, default_vals[i]);
-		}
+        public AD9854_v2()
+        {
+            byte[] default_vals = {   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                      0x00, 0x40, 0x00, 0x00, 0x00, 0x10, 0x64, 0x01,
+                                      0x20, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00 };
+            write_reg = new Register8WriteDel(WriteRegister);
+            registers = new Register8[40];
+            for (int i = 0; i < 40; i++)
+                registers[i] = new Register8(i.ToString(), write_reg, (byte)i, default_vals[i]);
+        }
 
-		public AD9854_v2(ushort addr)
-		{
-			lpt_addr = addr;
-			byte[] default_vals = {   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-									  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-									  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-									  0x00, 0x40, 0x00, 0x00, 0x00, 0x10, 0x64, 0x01, 
-									  0x20, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00 };
-			write_reg = new Register8WriteDel(WriteRegister);
-			registers = new Register8[40];
-			for(int i=0; i<40; i++)
-				registers[i] = new Register8(i.ToString(), write_reg, (byte)i, default_vals[i]);
-		}
+        public AD9854_v2(ushort addr)
+        {
+            lpt_addr = addr;
+            byte[] default_vals = {   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                      0x00, 0x40, 0x00, 0x00, 0x00, 0x10, 0x64, 0x01,
+                                      0x20, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00 };
+            write_reg = new Register8WriteDel(WriteRegister);
+            registers = new Register8[40];
+            for (int i = 0; i < 40; i++)
+                registers[i] = new Register8(i.ToString(), write_reg, (byte)i, default_vals[i]);
+        }
 
-		public AD9854_v2(ControlMode mode)
-		{
-			byte[] default_vals = {   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-									  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-									  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-									  0x00, 0x40, 0x00, 0x00, 0x00, 0x10, 0x64, 0x01, 
-									  0x20, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00 };
-			write_reg = new Register8WriteDel(WriteRegister);
-			registers = new Register8[40];
-			for(int i=0; i<40; i++)
-				registers[i] = new Register8(i.ToString(), write_reg, (byte)i, default_vals[i]);
-			current_control_mode = mode;
-		}
+        public AD9854_v2(ControlMode mode)
+        {
+            byte[] default_vals = {   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                      0x00, 0x40, 0x00, 0x00, 0x00, 0x10, 0x64, 0x01,
+                                      0x20, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00 };
+            write_reg = new Register8WriteDel(WriteRegister);
+            registers = new Register8[40];
+            for (int i = 0; i < 40; i++)
+                registers[i] = new Register8(i.ToString(), write_reg, (byte)i, default_vals[i]);
+            current_control_mode = mode;
+        }
 
-		public AD9854_v2(ushort addr, ControlMode mode)
-		{
-			byte[] default_vals = {   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-									  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-									  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-									  0x00, 0x40, 0x00, 0x00, 0x00, 0x10, 0x64, 0x01, 
-									  0x20, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00 };
-			write_reg = new Register8WriteDel(WriteRegister);
-			registers = new Register8[40];
-			for(int i=0; i<40; i++)
-				registers[i] = new Register8(i.ToString(), write_reg, (byte)i, default_vals[i]);
-			lpt_addr = addr;
-			current_control_mode = mode;
-		}
+        public AD9854_v2(ushort addr, ControlMode mode)
+        {
+            byte[] default_vals = {   0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                      0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+                                      0x00, 0x40, 0x00, 0x00, 0x00, 0x10, 0x64, 0x01,
+                                      0x20, 0x00, 0x00, 0x00, 0x00, 0x80, 0x00, 0x00 };
+            write_reg = new Register8WriteDel(WriteRegister);
+            registers = new Register8[40];
+            for (int i = 0; i < 40; i++)
+                registers[i] = new Register8(i.ToString(), write_reg, (byte)i, default_vals[i]);
+            lpt_addr = addr;
+            current_control_mode = mode;
+        }
 
-		#endregion
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		private bool update = false;
-		public bool Update
-		{
-			get { return update; }
-			set
-			{
-				update = value;
-				for(int i=0; i<40; i++)
-					registers[i].UpdateHardware = value;
-			}
-		}
+        private bool update = false;
+        public bool Update
+        {
+            get { return update; }
+            set
+            {
+                update = value;
+                for (int i = 0; i < 40; i++)
+                    registers[i].UpdateHardware = value;
+            }
+        }
 
-		private int delay = 0;	// Value that sets the delay in ms
-		public int Delay
-		{
-			get { return delay; }
-			set { delay = value; }
-		}
+        private int delay = 0;  // Value that sets the delay in ms
+        public int Delay
+        {
+            get { return delay; }
+            set { delay = value; }
+        }
 
-		private long ftw1 = 0;
-		public long FTW1
-		{
-			get { return ftw1; }
-			set
-			{
-				ftw1 = value;		   //save new tuning word
-				ComparatorPowerDown = false;
-				for(int i=0; i<6; i++)
-				{
-					registers[4+i].SetData((byte)(ftw1 >> (40-i*8)));
-				}
-			}
-		}
+        private long ftw1 = 0;
+        public long FTW1
+        {
+            get { return ftw1; }
+            set
+            {
+                ftw1 = value;          //save new tuning word
+                ComparatorPowerDown = false;
+                for (int i = 0; i < 6; i++)
+                {
+                    registers[4 + i].SetData((byte)(ftw1 >> (40 - i * 8)));
+                }
+            }
+        }
 
-		private bool bypass_inverse_sinc = false;
-		public bool BypassInverseSinc
-		{
-			get { return bypass_inverse_sinc; }
-			set
-			{
-				bypass_inverse_sinc = value;
-				if(value) registers[0x20].SetBit(6);
-				else registers[0x20].ClearBit(6);
-			}
-		}
+        private bool bypass_inverse_sinc = false;
+        public bool BypassInverseSinc
+        {
+            get { return bypass_inverse_sinc; }
+            set
+            {
+                bypass_inverse_sinc = value;
+                if (value) registers[0x20].SetBit(6);
+                else registers[0x20].ClearBit(6);
+            }
+        }
 
-		// valid values are 1 - 20.  1 indicates disable pll.
-		private byte pll_mult = 1;
-		public byte PLLMult
-		{
-			get { return pll_mult; }
-			set 
-			{
-				if(pll_mult < 1 || pll_mult > 20) return;
-				pll_mult = value;
-				if(pll_mult == 1)
-					registers[0x1E].SetBit(6);
-				else
-					registers[0x1E].SetData((byte)((registers[0x1E].GetData() & 0x40) | value));
-			}
-		}
+        // valid values are 1 - 20.  1 indicates disable pll.
+        private byte pll_mult = 1;
+        public byte PLLMult
+        {
+            get { return pll_mult; }
+            set
+            {
+                if (pll_mult < 1 || pll_mult > 20) return;
+                pll_mult = value;
+                if (pll_mult == 1)
+                    registers[0x1E].SetBit(6);
+                else
+                    registers[0x1E].SetData((byte)((registers[0x1E].GetData() & 0x40) | value));
+            }
+        }
 
-		private bool comparator_power_down = false;
-		public bool ComparatorPowerDown
-		{
-			get { return comparator_power_down; }
-			set 
-			{
-				comparator_power_down = value;
-				if(value) registers[0x1D].SetBit(4);
-				else registers[0x1D].ClearBit(4);
-			}
-		}
+        private bool comparator_power_down = false;
+        public bool ComparatorPowerDown
+        {
+            get { return comparator_power_down; }
+            set
+            {
+                comparator_power_down = value;
+                if (value) registers[0x1D].SetBit(4);
+                else registers[0x1D].ClearBit(4);
+            }
+        }
 
-		private bool output_shape_key_enable = true;
-		public bool OutputShapeKeyEnable
-		{
-			get { return output_shape_key_enable; }
-			set
-			{
-				output_shape_key_enable = value;
-				if(value) registers[0x20].SetBit(5);
-				else registers[0x20].ClearBit(5);
-			}
-		}
+        private bool output_shape_key_enable = true;
+        public bool OutputShapeKeyEnable
+        {
+            get { return output_shape_key_enable; }
+            set
+            {
+                output_shape_key_enable = value;
+                if (value) registers[0x20].SetBit(5);
+                else registers[0x20].ClearBit(5);
+            }
+        }
 
-		#endregion
+        #endregion
 
-		#region Private Routines
+        #region Private Routines
 
-		private void LatchData()
-		{
-			byte b1 = 0xF, b2 = 0xB;
-			switch(current_control_mode)
-			{
-				case ControlMode.SDR:
-					b1 = 0xF; b2 = 0xB;
-					break;
-				case ControlMode.EVAL:
-					b1 = 0xA; b2 = 0xB;
-					break;
-			}
-			Parallel.outport((ushort)(lpt_addr+LPTPort.CTRL), b1);		// Drive bit high.
-			Thread.Sleep(new TimeSpan(delay));
-			Parallel.outport((ushort)(lpt_addr+LPTPort.CTRL), b2);		// Drive bit low.
-			Thread.Sleep(new TimeSpan(delay));
-		}
-        
-		private void LatchAddr()
-		{
-			byte b1 = 0x3, b2 = 0xB;
-			switch(current_control_mode)
-			{
-				case ControlMode.SDR:
-					b1 = 0x3; b2 = 0xB;
-					break;
-				case ControlMode.EVAL:
-					b1 = 0x9; b2 = 0xB;
-					break;
-			}
-			Parallel.outport((ushort)(lpt_addr+LPTPort.CTRL), b1);		// Drive bit high.
-			Thread.Sleep(new TimeSpan(delay));
-			Parallel.outport((ushort)(lpt_addr+LPTPort.CTRL), b2);		// Drive bit low.
-			Thread.Sleep(new TimeSpan(delay));
-		}
+        private void LatchData()
+        {
+            byte b1 = 0xF, b2 = 0xB;
+            switch (current_control_mode)
+            {
+                case ControlMode.SDR:
+                    b1 = 0xF; b2 = 0xB;
+                    break;
+                case ControlMode.EVAL:
+                    b1 = 0xA; b2 = 0xB;
+                    break;
 
-		private void LatchCtrl()
-		{
-			byte b1 = 0x3, b2 = 0xB;
-			switch(current_control_mode)
-			{
-				case ControlMode.SDR:
-					b1 = 0x3; b2 = 0xB;
-					break;
-				case ControlMode.EVAL:
-					b1 = 0x3; b2 = 0xB;
-					break;
-			}
-			Parallel.outport((ushort)(lpt_addr+LPTPort.CTRL), b1);		// Drive bit high.
-			Thread.Sleep(new TimeSpan(delay));
-			Parallel.outport((ushort)(lpt_addr+LPTPort.CTRL), b2);		// Drive bit low.
-			Thread.Sleep(new TimeSpan(delay));
-		}
+                default:
+                    break;
+            }
+            Parallel.outport((ushort)(lpt_addr + LPTPort.CTRL), b1);        // Drive bit high.
+            Thread.Sleep(new TimeSpan(delay));
+            Parallel.outport((ushort)(lpt_addr + LPTPort.CTRL), b2);        // Drive bit low.
+            Thread.Sleep(new TimeSpan(delay));
+        }
 
-		private void WriteRegister(byte data, object user)
-		{
-			byte register = (byte)user;
+        private void LatchAddr()
+        {
+            byte b1 = 0x3, b2 = 0xB;
+            switch (current_control_mode)
+            {
+                case ControlMode.SDR:
+                    b1 = 0x3; b2 = 0xB;
+                    break;
+                case ControlMode.EVAL:
+                    b1 = 0x9; b2 = 0xB;
+                    break;
+            }
+            Parallel.outport((ushort)(lpt_addr + LPTPort.CTRL), b1);        // Drive bit high.
+            Thread.Sleep(new TimeSpan(delay));
+            Parallel.outport((ushort)(lpt_addr + LPTPort.CTRL), b2);        // Drive bit low.
+            Thread.Sleep(new TimeSpan(delay));
+        }
 
-			byte b1 = data;
-			byte b2 = (byte)(register | 0x40);
-			byte b3 = register;
-			byte b4 = (byte)0x40;
-			switch(current_control_mode)
-			{
-				case ControlMode.SDR:
-					b1 = data;
-					b2 = (byte)(register | 0x40);	// DDSWRB high
-					b3 = register;
-					b4 = 0x40;						// DDSWRB low
-					break;
-				case ControlMode.EVAL:
-					b1 = (byte)~data;
-					b3 = (byte)~register;
-					b3 = 0xED;
-					b4 = 0xEC;
-					break;
-			}
-			// Set up data bits.
-			Parallel.outport((ushort)(lpt_addr+LPTPort.DATA), b1);
-			LatchData();
+        private void LatchCtrl()
+        {
+            byte b1 = 0x3, b2 = 0xB;
+            switch (current_control_mode)
+            {
+                case ControlMode.SDR:
+                    b1 = 0x3; b2 = 0xB;
+                    break;
+                case ControlMode.EVAL:
+                    b1 = 0x3; b2 = 0xB;
+                    break;
+                default:
+                    break;
+            }
+            Parallel.outport((ushort)(lpt_addr + LPTPort.CTRL), b1);        // Drive bit high.
+            Thread.Sleep(new TimeSpan(delay));
+            Parallel.outport((ushort)(lpt_addr + LPTPort.CTRL), b2);        // Drive bit low.
+            Thread.Sleep(new TimeSpan(delay));
+        }
 
-			// Set up addr bits.
-			Parallel.outport((ushort)(lpt_addr+LPTPort.DATA), b2);
-			LatchAddr();
+        private void WriteRegister(byte data, object user)
+        {
+            byte register = (byte)user;
 
-			// WRBAR,RESET,UDCLK = lo
-			// RDBAR,PMODE = hi
-			Parallel.outport((ushort)(lpt_addr+LPTPort.DATA), b3);
-			LatchCtrl();
+            byte b1 = data;
+            byte b2 = (byte)(register | 0x40);
+            byte b3 = register;
+            byte b4 = (byte)0x40;
+            switch (current_control_mode)
+            {
+                case ControlMode.SDR:
+                    b1 = data;
+                    b2 = (byte)(register | 0x40);   // DDSWRB high
+                    b3 = register;
+                    b4 = 0x40;                      // DDSWRB low
+                    break;
+                case ControlMode.EVAL:
+                    b1 = (byte)~data;
+                    b3 = (byte)~register;
+                    b3 = 0xED;
+                    b4 = 0xEC;
+                    break;
+            }
+            // Set up data bits.
+            Parallel.outport((ushort)(lpt_addr + LPTPort.DATA), b1);
+            LatchData();
 
-			// RESET,UDCLK = lo
-			// WRBAR,RDBAR,PMODE = hi
-			Parallel.outport((ushort)(lpt_addr+LPTPort.DATA), b4);
-			LatchCtrl();
-		}
+            // Set up addr bits.
+            Parallel.outport((ushort)(lpt_addr + LPTPort.DATA), b2);
+            LatchAddr();
 
-		#endregion
+            // WRBAR,RESET,UDCLK = lo
+            // RDBAR,PMODE = hi
+            Parallel.outport((ushort)(lpt_addr + LPTPort.DATA), b3);
+            LatchCtrl();
 
-		#region Public Routines
+            // RESET,UDCLK = lo
+            // WRBAR,RDBAR,PMODE = hi
+            Parallel.outport((ushort)(lpt_addr + LPTPort.DATA), b4);
+            LatchCtrl();
+        }
 
-		public void Reset()
-		{
-			registers[0x1D].SetData(0x10);
-		}
+        #endregion
 
-		public void ForceUpdate()
-		{
-			for(int i=0; i<40; i++)
-				registers[i].ForceUpdate();
-		}
+        #region Public Routines
 
-		#endregion
-	}
+        public void Reset()
+        {
+            registers[0x1D].SetData(0x10);
+        }
+
+        public void ForceUpdate()
+        {
+            for (int i = 0; i < 40; i++)
+                registers[i].ForceUpdate();
+        }
+
+        #endregion
+    }
 }

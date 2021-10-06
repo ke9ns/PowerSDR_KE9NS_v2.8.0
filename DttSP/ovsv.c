@@ -117,16 +117,15 @@ FiltOvSv_storepoint(FiltOvSv pflt) {
 /* NB strategy. This is the number of good samples in the
    left half of the true buffer. Samples in right half
    are circular artifacts and are ignored. */
-int
-FiltOvSv_storesize(FiltOvSv pflt) {
+int FiltOvSv_storesize(FiltOvSv pflt)
+{
   return (pflt->fftlen - pflt->buflen);
 }
 
 /*------------------------------------------------------------*/
 /* create a new overlap/save filter from complex coefficients */
 
-FiltOvSv
-newFiltOvSv(COMPLEX * coefs, int ncoef, int pbits) {
+FiltOvSv newFiltOvSv(COMPLEX * coefs, int ncoef, int pbits) {
   int buflen, fftlen;
   FiltOvSv p;
   fftwf_plan pfwd, pinv;

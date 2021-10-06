@@ -35,60 +35,60 @@ using System.Windows.Forms;
 
 namespace PowerSDR
 {
-	/// <summary>
-	/// Summary description for production_debug.
-	/// </summary>
-	public class ProductionDebug : System.Windows.Forms.Form
-	{
-		#region Variable Declaration
+    /// <summary>
+    /// Summary description for production_debug.
+    /// </summary>
+    public class ProductionDebug : System.Windows.Forms.Form
+    {
+        #region Variable Declaration
 
-		private Console console;
-		private System.Windows.Forms.GroupBox groupBox1;
-		private System.Windows.Forms.RadioButton radPIOOff;
-		private System.Windows.Forms.RadioButton radPIORotate;
-		private System.Windows.Forms.RadioButton radPIOSetClearAll;
-		private System.Windows.Forms.RadioButton radPIOSetEven;
-		private System.Windows.Forms.RadioButton radPIOSetOdd;
-		private System.ComponentModel.Container components = null;
+        private Console console;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton radPIOOff;
+        private System.Windows.Forms.RadioButton radPIORotate;
+        private System.Windows.Forms.RadioButton radPIOSetClearAll;
+        private System.Windows.Forms.RadioButton radPIOSetEven;
+        private System.Windows.Forms.RadioButton radPIOSetOdd;
+        private System.ComponentModel.Container components = null;
 
-		#endregion
+        #endregion
 
-		#region Constructor and Destructor
+        #region Constructor and Destructor
 
-		public ProductionDebug(Console c)
-		{
-			//
-			// Required for Windows Form Designer support
-			//
-			InitializeComponent();
-			
-			console = c;
-		}
+        public ProductionDebug(Console c)
+        {
+            //
+            // Required for Windows Form Designer support
+            //
+            InitializeComponent();
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+            console = c;
+        }
 
-		#endregion
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #endregion
+
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductionDebug));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.radPIOSetOdd = new System.Windows.Forms.RadioButton();
@@ -172,84 +172,84 @@ namespace PowerSDR
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
-		}
-		#endregion
+        }
+        #endregion
 
-		#region Thread Routines
+        #region Thread Routines
 
-		private void PIORotate()
-		{
-			while(radPIORotate.Checked)
-			{
-				console.Hdw.TestPIO1();
-				Thread.Sleep(100);
-			}
-		}
+        private void PIORotate()
+        {
+            while (radPIORotate.Checked)
+            {
+                console.Hdw.TestPIO1();
+                Thread.Sleep(100);
+            }
+        }
 
-		private void PIOSetClearAll()
-		{
-			while(radPIOSetClearAll.Checked)
-			{
-				console.Hdw.TestPIO3();
-				Thread.Sleep(100);
-			}
-		}
+        private void PIOSetClearAll()
+        {
+            while (radPIOSetClearAll.Checked)
+            {
+                console.Hdw.TestPIO3();
+                Thread.Sleep(100);
+            }
+        }
 
-		#endregion
+        #endregion
 
-		#region Event Handlers
+        #region Event Handlers
 
-		private void ProductionDebug_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			this.Hide();
-			radPIOOff.Checked = true;
-			e.Cancel = true;
-		}
+        private void ProductionDebug_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Hide();
+            radPIOOff.Checked = true;
+            e.Cancel = true;
+        }
 
-		private void radPIOOff_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radPIOOff.Checked)
-			{
-				console.Hdw.PowerOn();
-				Thread.Sleep(100);
-				console.PowerOn = true;
-			}
-		}
+        private void radPIOOff_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radPIOOff.Checked)
+            {
+                console.Hdw.PowerOn();
+                Thread.Sleep(100);
+                console.PowerOn = true;
+            }
+        }
 
-		private void radPIORotate_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radPIORotate.Checked)
-			{
-				Thread t = new Thread(new ThreadStart(PIORotate));
-				t.Name = "PIORotate Thread";
-				t.IsBackground = true;
-				t.Priority = ThreadPriority.Normal;
-				t.Start();
-			}
-		}
+        private void radPIORotate_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radPIORotate.Checked)
+            {
+                Thread t = new Thread(new ThreadStart(PIORotate));
+                t.Name = "PIORotate Thread";
+                t.IsBackground = true;
+                t.Priority = ThreadPriority.Normal;
+                t.Start();
+            }
+        }
 
-		private void radPIOSetClearAll_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radPIOSetClearAll.Checked)
-			{
-				Thread t = new Thread(new ThreadStart(PIOSetClearAll));
-				t.Name = "PIOSetClearAll Thread";
-				t.IsBackground = true;
-				t.Priority = ThreadPriority.Normal;
-				t.Start();
-			}
-		}
+        private void radPIOSetClearAll_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radPIOSetClearAll.Checked)
+            {
+                Thread t = new Thread(new ThreadStart(PIOSetClearAll));
+                t.Name = "PIOSetClearAll Thread";
+                t.IsBackground = true;
+                t.Priority = ThreadPriority.Normal;
+                t.Start();
+            }
+        }
 
-		private void radPIOSetEven_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.Hdw.TestPIO2(true);
-		}
+        private void radPIOSetEven_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.Hdw.TestPIO2(true);
+        }
 
-		private void radPIOSetOdd_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.Hdw.TestPIO2(false);
-		}
+        private void radPIOSetOdd_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.Hdw.TestPIO2(false);
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

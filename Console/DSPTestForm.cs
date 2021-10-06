@@ -34,35 +34,35 @@ using System.Windows.Forms;
 
 namespace PowerSDR
 {
-	unsafe public class DSPTestForm : System.Windows.Forms.Form
-	{
-		private Console console;
-		private System.Windows.Forms.CheckBox chkMu;
-		private System.Windows.Forms.GroupBox grpWBIQ;
-		private System.Windows.Forms.NumericUpDown udMu;
-		private System.Windows.Forms.GroupBoxTS grpDSPLMSNR;
-		private System.Windows.Forms.LabelTS lblLMSNRLeak;
-		private System.Windows.Forms.NumericUpDownTS udLMSNRLeak;
-		private System.Windows.Forms.LabelTS lblLMSNRgain;
-		private System.Windows.Forms.NumericUpDownTS udLMSNRgain;
-		private System.Windows.Forms.NumericUpDownTS udLMSNRdelay;
-		private System.Windows.Forms.LabelTS lblLMSNRdelay;
-		private System.Windows.Forms.NumericUpDownTS udLMSNRtaps;
-		private System.Windows.Forms.LabelTS lblLMSNRtaps;
-		private System.Windows.Forms.GroupBoxTS grpDSPLMSANF;
-		private System.Windows.Forms.LabelTS lblLMSANFLeak;
-		private System.Windows.Forms.NumericUpDownTS udLMSANFLeak;
-		private System.Windows.Forms.LabelTS lblLMSANFgain;
-		private System.Windows.Forms.NumericUpDownTS udLMSANFgain;
-		private System.Windows.Forms.LabelTS lblLMSANFdelay;
-		private System.Windows.Forms.NumericUpDownTS udLMSANFdelay;
-		private System.Windows.Forms.LabelTS lblLMSANFTaps;
-		private System.Windows.Forms.NumericUpDownTS udLMSANFtaps;
-		private System.Windows.Forms.CheckBox checkBoxIQEnable;
-		private System.Windows.Forms.Button btnSAMPLL;
-		private System.Windows.Forms.TextBox txtSAMPLL;
-		private System.Windows.Forms.TextBox txtIQWReal;
-		private System.Windows.Forms.Button btnIQW;
+    unsafe public class DSPTestForm : System.Windows.Forms.Form
+    {
+        private Console console;
+        private System.Windows.Forms.CheckBox chkMu;
+        private System.Windows.Forms.GroupBox grpWBIQ;
+        private System.Windows.Forms.NumericUpDown udMu;
+        private System.Windows.Forms.GroupBoxTS grpDSPLMSNR;
+        private System.Windows.Forms.LabelTS lblLMSNRLeak;
+        private System.Windows.Forms.NumericUpDownTS udLMSNRLeak;
+        private System.Windows.Forms.LabelTS lblLMSNRgain;
+        private System.Windows.Forms.NumericUpDownTS udLMSNRgain;
+        private System.Windows.Forms.NumericUpDownTS udLMSNRdelay;
+        private System.Windows.Forms.LabelTS lblLMSNRdelay;
+        private System.Windows.Forms.NumericUpDownTS udLMSNRtaps;
+        private System.Windows.Forms.LabelTS lblLMSNRtaps;
+        private System.Windows.Forms.GroupBoxTS grpDSPLMSANF;
+        private System.Windows.Forms.LabelTS lblLMSANFLeak;
+        private System.Windows.Forms.NumericUpDownTS udLMSANFLeak;
+        private System.Windows.Forms.LabelTS lblLMSANFgain;
+        private System.Windows.Forms.NumericUpDownTS udLMSANFgain;
+        private System.Windows.Forms.LabelTS lblLMSANFdelay;
+        private System.Windows.Forms.NumericUpDownTS udLMSANFdelay;
+        private System.Windows.Forms.LabelTS lblLMSANFTaps;
+        private System.Windows.Forms.NumericUpDownTS udLMSANFtaps;
+        private System.Windows.Forms.CheckBox checkBoxIQEnable;
+        private System.Windows.Forms.Button btnSAMPLL;
+        private System.Windows.Forms.TextBox txtSAMPLL;
+        private System.Windows.Forms.TextBox txtIQWReal;
+        private System.Windows.Forms.Button btnIQW;
         private System.Windows.Forms.TextBox txtIQWImag;
         private GroupBox grpRXDCBlock;
         private NumericUpDown udDCBlock;
@@ -72,33 +72,33 @@ namespace PowerSDR
         private NumericUpDownTS udMNFreq;
         private CheckBox checkBoxMNEnable;
         private Label NotchFreq;
-		private System.ComponentModel.Container components = null;
+        private System.ComponentModel.Container components = null;
 
-		public DSPTestForm(Console c)
-		{
-			InitializeComponent();
-			console = c;
-		}
+        public DSPTestForm(Console c)
+        {
+            InitializeComponent();
+            console = c;
+        }
 
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DSPTestForm));
             this.chkMu = new System.Windows.Forms.CheckBox();
             this.grpWBIQ = new System.Windows.Forms.GroupBox();
@@ -741,73 +741,73 @@ namespace PowerSDR
             this.ResumeLayout(false);
             this.PerformLayout();
 
-		}
-		#endregion
+        }
+        #endregion
 
-		private void chkMu_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(chkMu.Checked)
-			{
-				chkMu.BackColor = console.ButtonSelectedColor;
-				DttSP.SetCorrectIQMu(0, 0, (double)udMu.Value);
-			}
-			else
-			{
-				chkMu.BackColor = SystemColors.Control;
-				DttSP.SetCorrectIQMu(0, 0, 0.000);
-			}
-		}
+        private void chkMu_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (chkMu.Checked)
+            {
+                chkMu.BackColor = console.ButtonSelectedColor;
+                DttSP.SetCorrectIQMu(0, 0, (double)udMu.Value);
+            }
+            else
+            {
+                chkMu.BackColor = SystemColors.Control;
+                DttSP.SetCorrectIQMu(0, 0, 0.000);
+            }
+        }
 
-		private void udMu_ValueChanged(object sender, System.EventArgs e)
-		{
-			if(chkMu.Checked) DttSP.SetCorrectIQMu(0, 0, (double)udMu.Value);
-		}
+        private void udMu_ValueChanged(object sender, System.EventArgs e)
+        {
+            if (chkMu.Checked) DttSP.SetCorrectIQMu(0, 0, (double)udMu.Value);
+        }
 
-		private void udLMSNR_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.dsp.GetDSPRX(0, 0).SetNRVals(
-				(int)udLMSNRtaps.Value,
-				(int)udLMSNRdelay.Value,
-				0.00001*(double)udLMSNRgain.Value,
-				0.0000001*(double)udLMSNRLeak.Value);
-			console.dsp.GetDSPRX(0, 1).SetNRVals(
-				(int)udLMSNRtaps.Value,
-				(int)udLMSNRdelay.Value,
-				0.00001*(double)udLMSNRgain.Value,
-				0.0000001*(double)udLMSNRLeak.Value);
-		}
+        private void udLMSNR_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.dsp.GetDSPRX(0, 0).SetNRVals(
+                (int)udLMSNRtaps.Value,
+                (int)udLMSNRdelay.Value,
+                0.00001 * (double)udLMSNRgain.Value,
+                0.0000001 * (double)udLMSNRLeak.Value);
+            console.dsp.GetDSPRX(0, 1).SetNRVals(
+                (int)udLMSNRtaps.Value,
+                (int)udLMSNRdelay.Value,
+                0.00001 * (double)udLMSNRgain.Value,
+                0.0000001 * (double)udLMSNRLeak.Value);
+        }
 
-		private void udLMSANF_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.dsp.GetDSPRX(0, 0).SetANFVals(
-				(int)udLMSANFtaps.Value,
-				(int)udLMSANFdelay.Value,
-				0.00001*(double)udLMSANFgain.Value,
-				0.00005);
-		}
+        private void udLMSANF_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.dsp.GetDSPRX(0, 0).SetANFVals(
+                (int)udLMSANFtaps.Value,
+                (int)udLMSANFdelay.Value,
+                0.00001 * (double)udLMSANFgain.Value,
+                0.00005);
+        }
 
-		private void checkBoxIQEnable_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if (checkBoxIQEnable.Checked)
-				DttSP.SetCorrectIQEnable(0);
-			else DttSP.SetCorrectIQEnable(1);
-		}
+        private void checkBoxIQEnable_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (checkBoxIQEnable.Checked)
+                DttSP.SetCorrectIQEnable(0);
+            else DttSP.SetCorrectIQEnable(1);
+        }
 
-		private void btnSAMPLL_Click(object sender, System.EventArgs e)
-		{
-			float freq;
-			DttSP.GetSAMFreq(0, 0, &freq);
-			freq = (float)(freq*console.SampleRate1/(2*Math.PI));
-			txtSAMPLL.Text = freq.ToString("f0");
-		}
+        private void btnSAMPLL_Click(object sender, System.EventArgs e)
+        {
+            float freq;
+            DttSP.GetSAMFreq(0, 0, &freq);
+            freq = (float)(freq * console.SampleRate1 / (2 * Math.PI));
+            txtSAMPLL.Text = freq.ToString("f0");
+        }
 
-		private void btnIQW_Click(object sender, System.EventArgs e)
-		{
-			float real, imag;
-			DttSP.GetCorrectRXIQw(0, 0, &real, &imag, 0);
-			txtIQWReal.Text = real.ToString("f6");
-			txtIQWImag.Text = imag.ToString("f6");
-		}
+        private void btnIQW_Click(object sender, System.EventArgs e)
+        {
+            float real, imag;
+            DttSP.GetCorrectRXIQw(0, 0, &real, &imag, 0);
+            txtIQWReal.Text = real.ToString("f6");
+            txtIQWImag.Text = imag.ToString("f6");
+        }
 
         private void udDCBlock_ValueChanged(object sender, EventArgs e)
         {
@@ -822,7 +822,7 @@ namespace PowerSDR
 
         private void checkBoxRXDCBlockEnable_CheckedChanged(object sender, EventArgs e)
         {
-            DttSP.SetRXDCBlock(0,0,checkBoxRXDCBlockEnable.Checked);
+            DttSP.SetRXDCBlock(0, 0, checkBoxRXDCBlockEnable.Checked);
 
         }
 
@@ -835,14 +835,14 @@ namespace PowerSDR
         {
             if (checkBoxMNEnable.Checked)
                 DttSP.SetRXManualNotchEnable(0, 0, 0, true);
-            else 
+            else
                 DttSP.SetRXManualNotchEnable(0, 0, 0, false);
-   
+
         }
 
         private void udMNFreq_ValueChanged(object sender, EventArgs e)
         {
             DttSP.SetRXManualNotchFreq(0, 0, 0, (double)udMNFreq.Value);
         }
-	}
+    }
 }

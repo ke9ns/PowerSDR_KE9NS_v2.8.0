@@ -37,6 +37,7 @@ using System.Windows.Forms;
 
 using System.Threading;
 using Flex.Control;
+using System.Diagnostics;
 
 namespace PowerSDR
 {
@@ -102,7 +103,7 @@ namespace PowerSDR
                 comboModeA2.Items.Add(s);
                 comboModeB1.Items.Add(s);
                 comboModeB2.Items.Add(s);
-            }           
+            }
 
             // populate button combobox controls
             foreach (FlexControlButtonFunction function in Enum.GetValues(typeof(FlexControlButtonFunction)))
@@ -131,7 +132,7 @@ namespace PowerSDR
             comboModeB1_SelectedIndexChanged(this, EventArgs.Empty);
             comboModeB2_SelectedIndexChanged(this, EventArgs.Empty);
 
-            
+
             fc_interface.CurrentKnobModeChanged += new FlexControlInterface1.KnobModeChanged(UpdateCurrentKnobMode);
 
             hlKnobA1 = new PanelHighlighter(panelModeA1);
@@ -159,9 +160,15 @@ namespace PowerSDR
         private FlexControl flexControl = null;
         public FlexControl FlexControl
         {
-            get { return flexControl; }
+            get
+            {
+
+                return flexControl;
+            }
             set
             {
+
+
                 if (flexControl != null)
                 {
                     flexControl.KnobRotated -= KnobRotated;
@@ -319,7 +326,7 @@ namespace PowerSDR
             if (!this.Visible) return;
 
             current_knob_mode = mode;
-            Invoke(new FlexControlInterface1.KnobModeChanged(UpdateActiveComboBox), new object[] {mode});            
+            Invoke(new FlexControlInterface1.KnobModeChanged(UpdateActiveComboBox), new object[] { mode });
         }
 
         private void UpdateActiveComboBox(FlexControlInterface1.KnobMode mode)
@@ -378,7 +385,7 @@ namespace PowerSDR
         private FlexControlKnobFunction String2KnobFunction(string s)
         {
             FlexControlKnobFunction ret_val = FlexControlKnobFunction.TuneVFOA;
-            switch(s)
+            switch (s)
             {
                 case "Tune VFO A": ret_val = FlexControlKnobFunction.TuneVFOA; break;
                 case "Tune VFO B": ret_val = FlexControlKnobFunction.TuneVFOB; break;
@@ -387,7 +394,7 @@ namespace PowerSDR
                 case "Tune XIT": ret_val = FlexControlKnobFunction.TuneXIT; break;
                 case "Audio Gain": ret_val = FlexControlKnobFunction.TuneAF; break;
                 case "Tune AGC-T": ret_val = FlexControlKnobFunction.TuneAGCT; break;
-                case "None": ret_val = FlexControlKnobFunction.None; break;        
+                case "None": ret_val = FlexControlKnobFunction.None; break;
             }
 
             return ret_val;
@@ -722,8 +729,8 @@ namespace PowerSDR
         private void radModeBasic_CheckedChanged(object sender, EventArgs e)
         {
             if (radModeBasic.Checked)
-            {     
-                if(fc_interface != null)
+            {
+                if (fc_interface != null)
                     fc_interface.FlexControl = null;
 
                 object obj = null;
@@ -748,7 +755,7 @@ namespace PowerSDR
             {
                 if (fc_interface.FlexControl != flexControl)
                     fc_interface.FlexControl = flexControl;
-                
+
                 if (flexControl != null)
                 {
                     flexControl.KnobRotated += new FlexControl.KnobRotatedEventHandler(KnobRotated);

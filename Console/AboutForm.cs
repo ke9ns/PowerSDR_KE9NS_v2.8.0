@@ -33,6 +33,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
@@ -44,12 +45,13 @@ namespace PowerSDR
     {
         public AboutForm()
         {
+          
             InitializeComponent();
-            this.Text = String.Format("About FlexRadio Systems™ {0}™", AssemblyTitle);
-            this.labelProductName.Text = String.Format("Application: FlexRadio Systems™ {0}™", AssemblyProduct);
-            this.labelVersion.Text = String.Format("Version: {0}", AssemblyVersion);
-            this.labelCopyright.Text = String.Format("{0}", AssemblyCopyright);
-            this.labelCompanyName.Text = String.Format("{0} is a registered trademark of Bronze Bear Communications, Inc.", AssemblyCompany);
+            this.Text = String.Format( "About FlexRadio Systems™ {0}™", AssemblyTitle);
+            this.labelProductName.Text = String.Format( "Application: FlexRadio Systems™ {0}™", AssemblyProduct);
+            this.labelVersion.Text = String.Format( "Version: {0}", AssemblyVersion);
+            this.labelCopyright.Text = String.Format( "{0}", AssemblyCopyright);
+            this.labelCompanyName.Text = String.Format( "{0} is a registered trademark of Bronze Bear Communications, Inc.", AssemblyCompany);
             //this.textBoxDescription.Text = AssemblyDescription;
         }
 
@@ -163,12 +165,12 @@ namespace PowerSDR
             // System.Diagnostics.Process.Start("IExplore.exe", e.LinkText);
 
 
-           
+
             var result = new StringBuilder(Environment.ExpandEnvironmentVariables("%userprofile%"));
 
             try
             {
-          
+
                 System.Diagnostics.Process.Start(e.LinkText);    // HTTP
             }
             catch
@@ -179,7 +181,7 @@ namespace PowerSDR
                     link = link.Replace("%20", " ");
 
                     result.Append(link);
-                   
+
                     Debug.WriteLine("link2 " + result.ToString());
 
                     Process.Start("explorer.exe", result.ToString());
@@ -194,24 +196,31 @@ namespace PowerSDR
         private void okButton_Click(object sender, EventArgs e)
         {
 
-    /*
-             <?xml version="1.0" encoding = "utf-8"?>
-             <powersdr>
-                 <version>2.8.0.28</version>
-                <url>http://ke9ns.com/flexpage.html/</url>
-             </powersdr>
-        */
+            /*
+                     <?xml version="1.0" encoding = "utf-8"?>
+                     <powersdr>
+                         <version>2.8.0.28</version>
+                        <url>https://ke9ns.com/flexpage.html/</url>
+                     </powersdr>
+                */
 
             string downloadUrl = "";
             Version newVersion = null;
-            string xmlUrl = "http://ke9ns.com/update.xml";
+            string xmlUrl = "https://ke9ns.com/update.xml";
             XmlTextReader reader = null;
 
             try
             {
                 Debug.WriteLine("HERE0");
+                ServicePointManager.Expect100Continue = true;
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                // Use SecurityProtocolType.Ssl3 if needed for compatibility reasons
+                // ServicePointManager.ServerCertificateValidationCallback += new System.Net.Security.RemoteCertificateValidationCallback((s, ce, ch, ssl) => true); // if you want to validate any ssl good or bad
+                HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(xmlUrl);
+                HttpWebResponse webResponse = (HttpWebResponse)webRequest.GetResponse();
 
-                reader = new XmlTextReader(xmlUrl);
+                reader = new XmlTextReader(webResponse.GetResponseStream());
+                //  reader = new XmlTextReader(xmlUrl);
                 Debug.WriteLine("HERE1");
 
                 reader.MoveToContent();
@@ -221,7 +230,7 @@ namespace PowerSDR
 
                 if ((reader.NodeType == XmlNodeType.Element) && (reader.Name == "powersdr"))
                 {
-                    while(reader.Read())
+                    while (reader.Read())
                     {
                         if (reader.NodeType == XmlNodeType.Element)
                         {
@@ -245,7 +254,7 @@ namespace PowerSDR
                     }
                 }
             }
-            catch(Exception e1)
+            catch (Exception e1)
             {
                 if (reader != null) reader.Close();
                 MessageBox.Show("Failed to get update information. " + e1,
@@ -260,7 +269,7 @@ namespace PowerSDR
                 if (reader != null) reader.Close();
             }
 
-            
+
             Version appVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version; // ke9ns this is your current installed version
 
             if (appVersion.CompareTo(newVersion) < 0)
@@ -296,9 +305,9 @@ namespace PowerSDR
 
         } // okButton_Click
 
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
 
-
-
-
+        }
     } // class about
 }

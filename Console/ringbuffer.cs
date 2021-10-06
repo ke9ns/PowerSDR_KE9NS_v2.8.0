@@ -30,7 +30,6 @@
 //=================================================================
 
 using System;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace PowerSDR
@@ -150,9 +149,11 @@ namespace PowerSDR
         public int ReadPtr(float* dest, int cnt)
         {
             int free_cnt = ReadSpace();
+
             if (free_cnt == 0) return 0;
 
             int to_read = cnt > free_cnt ? free_cnt : cnt;
+
             int cnt2 = rptr + to_read;
             int n1 = 0, n2 = 0;
 
@@ -167,7 +168,8 @@ namespace PowerSDR
                 n2 = 0;
             }
 
-            Marshal.Copy(buf, rptr, new IntPtr(dest), n1);
+            Marshal.Copy(buf, rptr, new IntPtr(dest), n1); // source, startindex,dest,length
+
             rptr = (rptr + n1) & mask;
 
             if (n2 != 0)
@@ -209,7 +211,7 @@ namespace PowerSDR
                 n2 = 0;
             }
 
-            
+
             Array.Copy(src, 0, buf, wptr, n1); //   copy   source, source index to start at, dest, dest index to copy to, length to copy 
             wptr = (wptr + n1) & mask;
 

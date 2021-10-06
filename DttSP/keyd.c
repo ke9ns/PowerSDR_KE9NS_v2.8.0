@@ -31,6 +31,12 @@ The DTTS Microwave Society
 Bridgewater, NJ 08807
 */
 
+// KE9NS ONLY 2 ROUTINES NEEDED IN THIS CODE SEE BELOW
+// NewCriticalSection
+
+// ke9ns THIS CODE IS NOT USED
+// FLEX SWITCHED OVER TO THEIR FLEXCW.DLL
+
 //#include <linux/rtc.h>
 #include <fromsys.h>
 #include <banal.h>
@@ -68,7 +74,6 @@ unsigned int SIZEBUF = 768;
 //#define RING_SIZE (1<<017)
 #define RING_SIZE 4096
 
-
 KeyerState ks;
 KeyerLogic kl;
 
@@ -79,6 +84,8 @@ ringb_float_t *lring, *rring;
 
 
 CWToneGen gen;
+static BOOLEAN playing1 = FALSE; // ke9ns add
+
 static BOOLEAN playing = FALSE, iambic = FALSE, bug = FALSE, 
 	cw_ring_reset = FALSE;
 static REAL wpm = 18.0, freq = 600.0, ramp = 5.0, gain = 0.0;
@@ -91,8 +98,8 @@ static BOOLEAN auto_space_char = FALSE;
 
 static int count = 0;
 
-DttSP_EXP void
-CWtoneExchange (float *bufl, float *bufr, int nframes)
+
+DttSP_EXP void CWtoneExchange (float *bufl, float *bufr, int nframes)
 {
 	size_t numsamps, bytesize = sizeof (float) * nframes;
 
@@ -150,8 +157,7 @@ CWtoneExchange (float *bufl, float *bufr, int nframes)
 }
 
 // generated tone -> output ringbuffer
-void
-send_tone (void)
+void send_tone (void)
 {
 	if (ringb_float_write_space (lring) < TONE_SIZE)
 	{
@@ -175,8 +181,7 @@ send_tone (void)
 }
 
 // silence -> output ringbuffer
-void
-send_silence (void)
+void send_silence (void)
 {
 	if (ringb_float_write_space (lring) < TONE_SIZE)
 	{
@@ -201,8 +206,7 @@ send_silence (void)
 // sound/silence generation
 // tone turned on/off asynchronously
 
-CALLBACK
-timer_callback (UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1,
+CALLBACK timer_callback (UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1,
 		DWORD_PTR dw2)
 {
 	sem_post (&poll_fired);
@@ -210,8 +214,7 @@ timer_callback (UINT uTimerID, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1,
 
 
 
-DttSP_EXP void
-sound_thread_keyd (void)
+DttSP_EXP void sound_thread_keyd (void)
 {
 	for (;;)
 	{
@@ -223,30 +226,37 @@ sound_thread_keyd (void)
 			// in order to allow for a decay envelope;
 			// returns FALSE when it's actually done.
 			playing = CWTone (gen);
+			playing1 = TRUE;
+			
+			fprintf(stdout, "keyer PLAYING\n");
+			
 			EnterCriticalSection(update_ok);
 			send_tone ();
 			LeaveCriticalSection(update_ok);
 		}
 		else
 		{
+			playing1 = FALSE;
+			
+
 			EnterCriticalSection(update_ok);
 			send_silence ();
 			// only let updates run when we've just generated silence
 			LeaveCriticalSection(update_ok);
 		}
+		
 	}
 
 	pthread_exit (0);
 }
 
 
-BOOLEAN
-read_key (REAL del, BOOLEAN dot, BOOLEAN dash)
+BOOLEAN read_key (REAL del, BOOLEAN dot, BOOLEAN dash)
 {
 	extern BOOLEAN read_straight_key (KeyerState ks, BOOLEAN keyed);
 	extern BOOLEAN read_iambic_key (KeyerState ks, BOOLEAN dot,
 				  BOOLEAN dash, KeyerLogic kl, REAL ticklen);
-
+	fprintf(stdout, "Read key\n"); fflush(stdout);
 	if (bug)
 	{
 		if (dash)
@@ -261,16 +271,16 @@ read_key (REAL del, BOOLEAN dot, BOOLEAN dash)
 
 /// Main keyer function,  called by a thread in the C#
 BOOLEAN dotkey = FALSE;
-PRIVATE BOOLEAN INLINE
-whichkey (BOOLEAN dot, BOOLEAN dash)
+PRIVATE BOOLEAN INLINE whichkey (BOOLEAN dot, BOOLEAN dash)
 {
+	fprintf(stdout, "whichkey \n"); fflush(stdout);
+
 	if (dotkey)
 		return dot;
 	return dash;
 }
 
-DttSP_EXP void
-SetWhichKey (BOOLEAN isdot)
+DttSP_EXP void SetWhichKey (BOOLEAN isdot)
 {
 	if (isdot)
 		dotkey = TRUE;
@@ -278,10 +288,12 @@ SetWhichKey (BOOLEAN isdot)
 		dotkey = FALSE;
 }
 
-DttSP_EXP void
-key_thread_process (REAL del, BOOLEAN dash, BOOLEAN dot, BOOLEAN keyprog)
+DttSP_EXP void key_thread_process (REAL del, BOOLEAN dash, BOOLEAN dot, BOOLEAN keyprog)
 {
 	BOOLEAN keydown;
+
+	fprintf(stdout, "key_thread\n"); fflush(stdout);
+
 	extern BOOLEAN read_straight_key (KeyerState ks, BOOLEAN keyed);
 	// read key; tell keyer elapsed time since last call
 	if (!keyprog)
@@ -289,25 +301,32 @@ key_thread_process (REAL del, BOOLEAN dash, BOOLEAN dot, BOOLEAN keyprog)
 	else
 		keydown = read_straight_key (ks, whichkey (dot, dash));
 
-	if (!playing && keydown)
-		CWToneOn (gen), playing = TRUE;
-	else if (playing && !keydown)
-		CWToneOff (gen);
+	if (!playing && keydown) CWToneOn (gen), playing = TRUE;
+	else if (playing && !keydown) CWToneOff (gen);
 
 	sem_post (&clock_fired);
 }
 
-DttSP_EXP BOOLEAN
-KeyerPlaying ()
+DttSP_EXP BOOLEAN KeyerPlaying ()
 {
-	return playing;
+	if (playing)
+	{
+		fprintf(stdout, "keyer PLAYING\n"); fflush(stdout);
+	}
+	else
+	{
+		fprintf(stdout, "keyer NOT playing\n"); fflush(stdout);
+	}
+	fflush(stdout);
+
+	
+	return playing1;
 }
 
 //------------------------------------------------------------------------
 
 
-DttSP_EXP void
-SetKeyerBug (BOOLEAN bg)
+DttSP_EXP void SetKeyerBug (BOOLEAN bg)
 {
 	EnterCriticalSection(update_ok);
 	if (bg)
@@ -470,6 +489,7 @@ SetKeyerRevPdl (BOOLEAN rvp)
 	gen->osc.freq = 2.0 * M_PI * freq / SampleRate;
 } */
 
+
 #if 0
 DttSP_EXP void
 SetKeyerPerf (BOOLEAN hiperf)
@@ -509,9 +529,7 @@ SetKeyerPerf (BOOLEAN hiperf)
 }
 #endif // if 0
 
-DttSP_EXP void
-NewKeyer (REAL freq, BOOLEAN niambic, REAL gain, REAL ramp, REAL wpm,
-	  REAL SampleRate)
+DttSP_EXP void NewKeyer (REAL freq, BOOLEAN niambic, REAL gain, REAL ramp, REAL wpm, REAL SampleRate)
 {
 	BOOL out;
 	kl = newKeyerLogic ();
@@ -559,8 +577,10 @@ NewKeyer (REAL freq, BOOLEAN niambic, REAL gain, REAL ramp, REAL wpm,
 	//  }
 }
 
-DttSP_EXP void
-*NewCriticalSection()
+//=====================================================================================
+// KE9NS THIS IS THE ONLY CODE NEEDED (USED IN AUDIO.CS)
+
+DttSP_EXP void *NewCriticalSection()
 {
 	LPCRITICAL_SECTION cs_ptr;
 	cs_ptr = (LPCRITICAL_SECTION)safealloc(1,sizeof(CRITICAL_SECTION),"Critical Section");
@@ -572,6 +592,9 @@ DestroyCriticalSection(LPCRITICAL_SECTION cs_ptr)
 {
 	safefree((char *)cs_ptr);
 }
+
+//=================================================================================
+
 
 
 DttSP_EXP void
@@ -674,22 +697,19 @@ PollTimerWait ()
 	sem_wait (&poll_fired);
 }
 
-DttSP_EXP void
-PollTimerRelease ()
+DttSP_EXP void PollTimerRelease ()
 {
 	sem_post (&poll_fired);
 }
 
-DttSP_EXP void
-SetKeyerResetSize (unsigned int sizer)
+DttSP_EXP void SetKeyerResetSize (unsigned int sizer)
 {
 	SIZEBUF = sizer;
 	//fprintf(stdout, "SetKeyerResetSize: cw_ring_reset = TRUE\n"), fflush(stdout);
 	cw_ring_reset = TRUE;
 }
 
-DttSP_EXP void
-SetKeyerSampleRate (REAL sr)
+DttSP_EXP void SetKeyerSampleRate (REAL sr)
 {
 	int factor = (int) (sr / 48000.0f);
 

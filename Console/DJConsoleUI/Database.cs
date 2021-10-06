@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Data;
 using System.IO;
-using System.Data;
 
 
 namespace PowerSDR.DJConsoleUI
@@ -16,7 +12,7 @@ namespace PowerSDR.DJConsoleUI
 
         public static string FileName
         {
-            set { file_name = value;}
+            set { file_name = value; }
         }
 
         public static void Init()

@@ -26,16 +26,11 @@
 //    USA
 //=================================================================
 
+using FlexCW;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using WDU_DEVICE_HANDLE = System.IntPtr;
-
-using FlexCW;
 
 namespace PowerSDR
 {
@@ -51,7 +46,7 @@ namespace PowerSDR
         {
             if (F1500 == null)
             {
-                Flex1500USB.D_ATTACH_DETACH_CALLBACK attach = attachCallback;  
+                Flex1500USB.D_ATTACH_DETACH_CALLBACK attach = attachCallback;
                 Flex1500USB.D_ATTACH_DETACH_CALLBACK detach = detachCallback;
                 F1500 = new Flex1500USB(attach, detach);
                 Thread.Sleep(1000);
@@ -80,39 +75,39 @@ namespace PowerSDR
             return true;
         }
 
-            /*// cleanup previous active radio
-            if (r != IntPtr.Zero)
+        /*// cleanup previous active radio
+        if (r != IntPtr.Zero)
+        {
+            Flex1500USB.radioArray[r].StopAudioListener();
+            Flex1500USB.radioArray[r].StopListener();
+        }
+
+        bool found = false;
+        foreach (IntPtr key in Flex1500USB.radioArray.Keys)
+        {
+            string serial = "";
+            Flex1500USB.radioArray[key].GetSerialNumber(out serial);
+            if (sn == serial)
             {
-                Flex1500USB.radioArray[r].StopAudioListener();
-                Flex1500USB.radioArray[r].StopListener();
+                found = true;
+
+                r = key;
+                PowerSDR.Flex1500USB.D_STATE_CHANGE_CALLBACK PTT_Callback = MicPTT;
+                PowerSDR.Flex1500USB.D_STATE_CHANGE_CALLBACK FlexPTT_Callback = FlexPTT;
+                PowerSDR.Flex1500USB.D_STATE_CHANGE_CALLBACK Dash_Callback = Dash;
+                PowerSDR.Flex1500USB.D_STATE_CHANGE_CALLBACK Dot_Callback = Dot;
+                PowerSDR.Flex1500USB.D_INTERCHANGE_BUFFER_CALLBACK AudioCallback = Audio.Callback1500;
+                Flex1500USB.radioArray[r].Init(MicPTT, FlexPTT, Dash, Dot, AudioCallback, true, false, false, (uint)Audio.BlockSize);
+                break;
             }
+        }
 
-            bool found = false;
-            foreach (IntPtr key in Flex1500USB.radioArray.Keys)
-            {
-                string serial = "";
-                Flex1500USB.radioArray[key].GetSerialNumber(out serial);
-                if (sn == serial)
-                {
-                    found = true;
-
-                    r = key;
-                    PowerSDR.Flex1500USB.D_STATE_CHANGE_CALLBACK PTT_Callback = MicPTT;
-                    PowerSDR.Flex1500USB.D_STATE_CHANGE_CALLBACK FlexPTT_Callback = FlexPTT;
-                    PowerSDR.Flex1500USB.D_STATE_CHANGE_CALLBACK Dash_Callback = Dash;
-                    PowerSDR.Flex1500USB.D_STATE_CHANGE_CALLBACK Dot_Callback = Dot;
-                    PowerSDR.Flex1500USB.D_INTERCHANGE_BUFFER_CALLBACK AudioCallback = Audio.Callback1500;
-                    Flex1500USB.radioArray[r].Init(MicPTT, FlexPTT, Dash, Dot, AudioCallback, true, false, false, (uint)Audio.BlockSize);
-                    break;
-                }
-            }
-
-            return found;
-        }*/
+        return found;
+    }*/
 
         public static bool SetActiveRadio(IntPtr key)
         {
-            if(!Flex1500USB.radioArray.ContainsKey(key))
+            if (!Flex1500USB.radioArray.ContainsKey(key))
                 return false;
             r = key;
             PowerSDR.Flex1500USB.D_STATE_CHANGE_CALLBACK PTT_Callback = MicPTT;
@@ -147,7 +142,7 @@ namespace PowerSDR
         }
 
         // will return false after a radio reboot (even after radio is powered back on until the radio is selected again)
-        public static bool IsRadioPresent() 
+        public static bool IsRadioPresent()
         {
             return (r != IntPtr.Zero);
         }
@@ -338,7 +333,7 @@ namespace PowerSDR
         {
             if (r == IntPtr.Zero) return;
             Flex1500USB.radioArray[r].StartAudioListener();
-            
+
             // commented while using hybrid driver
         }
 
@@ -381,8 +376,8 @@ namespace PowerSDR
         public static double GetCurrentLatency()
         {
             if (r == IntPtr.Zero) return 0.0;
-            double d = Flex1500USB.radioArray[r].GetCurrentLatency()/192.0;
-            Debug.WriteLine("CurrentLatency: "+d.ToString("f1"));
+            double d = Flex1500USB.radioArray[r].GetCurrentLatency() / 192.0;
+            Debug.WriteLine("CurrentLatency: " + d.ToString("f1"));
             return d;
         }
 

@@ -34,59 +34,59 @@ using System.Windows.Forms;
 
 namespace PowerSDR
 {
-	/// <summary>
-	/// Summary description for InputBox.
-	/// </summary>
-	public class InputBox : System.Windows.Forms.Form
-	{
-		#region Variable Declaration
+    /// <summary>
+    /// Summary description for InputBox.
+    /// </summary>
+    public class InputBox : System.Windows.Forms.Form
+    {
+        #region Variable Declaration
 
-		private string retval;
-		private System.Windows.Forms.TextBox textbox;
-		private System.Windows.Forms.Label label;
-		private System.Windows.Forms.Button btnOK;
-		private System.Windows.Forms.Button btnCancel;
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		private System.ComponentModel.Container components = null;
+        private string retval;
+        private System.Windows.Forms.TextBox textbox;
+        private System.Windows.Forms.Label label;
+        private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Button btnCancel;
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.Container components = null;
 
-		#endregion
+        #endregion
 
-		#region Constructor and Destructor
+        #region Constructor and Destructor
 
-		public InputBox()
-		{
-			//
-			// Required for Windows Form Designer support
-			//
-			InitializeComponent();
-		}
+        public InputBox()
+        {
+            //
+            // Required for Windows Form Designer support
+            //
+            InitializeComponent();
+        }
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#endregion
+        #endregion
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputBox));
             this.textbox = new System.Windows.Forms.TextBox();
             this.label = new System.Windows.Forms.Label();
@@ -144,40 +144,40 @@ namespace PowerSDR
             this.ResumeLayout(false);
             this.PerformLayout();
 
-		}
-		#endregion
+        }
+        #endregion
 
-		#region Misc Routines
+        #region Misc Routines
 
-		public static string Show(string title, string label, string textbox)
-		{
-			InputBox box = new InputBox();
-			box.Text = title;
-			box.label.Text = label;
-			box.textbox.Text = textbox;
+        public static string Show(string title, string label, string textbox)
+        {
+            InputBox box = new InputBox();
+            box.Text = title;
+            box.label.Text = label;
+            box.textbox.Text = textbox;
 
-			box.ShowDialog();
-			string retval = box.retval;
-			box.Dispose();
-			return retval;
-		}
+            box.ShowDialog();
+            string retval = box.retval;
+            box.Dispose();
+            return retval;
+        }
 
-		#endregion
+        #endregion
 
-		#region Event Handlers
+        #region Event Handlers
 
-		private void btnOK_Click(object sender, System.EventArgs e)
-		{
-			retval = textbox.Text;
-			this.Close();
-		}
+        private void btnOK_Click(object sender, System.EventArgs e)
+        {
+            retval = textbox.Text;
+            this.Close();
+        }
 
-		private void btnCancel_Click(object sender, System.EventArgs e)
-		{
-			retval = "";
-			this.Close();
-		}
+        private void btnCancel_Click(object sender, System.EventArgs e)
+        {
+            retval = "";
+            this.Close();
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

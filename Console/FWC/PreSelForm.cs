@@ -40,7 +40,7 @@ namespace PowerSDR
 {
     public partial class PreSelForm : Form
     {
-        Console console; 
+        Console console;
 
         public PreSelForm(Console c)
         {
@@ -91,8 +91,7 @@ namespace PowerSDR
 
         private void chkBypassTR_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkBypassTR.Checked)
-                chkBypassTR.BackColor = console.ButtonSelectedColor;
+            if (chkBypassTR.Checked) chkBypassTR.BackColor = console.ButtonSelectedColor;
             else chkBypassTR.BackColor = SystemColors.Control;
             UpdatePreSel();
         }
@@ -101,16 +100,15 @@ namespace PowerSDR
         {
             byte temp = 0;
             for (int i = 0; i < 8; i++)
-                temp += (byte)(((b >> i) & 0x01) << (7-i));
+                temp += (byte)(((b >> i) & 0x01) << (7 - i));
             return temp;
         }
 
-        private void UpdatePreSel()
+        public void UpdatePreSel()
         {
-            byte reg0=0, reg1=0;
+            byte reg0 = 0, reg1 = 0;
 
-            if (radBandA.Checked)
-                reg0 += (1 << 4); // Port 04
+            if (radBandA.Checked) reg0 += (1 << 4); // Port 04
             else if (radBandB.Checked)
                 reg0 += (1 << 1); // Port 01
             else if (radBandC.Checked)
@@ -136,15 +134,19 @@ namespace PowerSDR
             {
                 case Model.FLEX5000:
                 case Model.FLEX3000:
-                    if(console.fwc_init)
+                    if (console.fwc_init)
+                    {
+                        //   Debug.WriteLine("===I2C=== HERO preselform");
                         FWC.FlexWire_Write2Value(0x40, reg0, reg1);
+                    }
                     break;
                 case Model.FLEX1500:
                     if(console.hid_init)
                         USBHID.FlexWire_Write2Value(0x40, reg0, reg1);
                     break;
             }
-        }
+
+        } // UpdatePreSel()
 
         private void PreSelForm_FormClosing(object sender, FormClosingEventArgs e)
         {

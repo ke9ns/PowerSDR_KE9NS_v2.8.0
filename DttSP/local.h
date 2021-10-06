@@ -60,16 +60,19 @@ extern struct _loc
       parm[MAXPATHLEN],
       meter[MAXPATHLEN], spec[MAXPATHLEN], wisdom[MAXPATHLEN];
   } path;
+
   struct
   {
     REAL rate;
     int size, nrx, spec, comp;
     SDRMODE mode;
   } def;
+
   struct
   {
     int ring;
   } mult;
+
 } loc[3];
 
 

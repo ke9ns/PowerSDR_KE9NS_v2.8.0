@@ -1,4 +1,4 @@
-﻿namespace PowerSDR
+namespace PowerSDR
 {
     partial class FlexControlBasicForm
     {
@@ -41,10 +41,10 @@
             this.btnTuneStepChangeLarger2 = new System.Windows.Forms.ButtonTS();
             this.btnTuneStepChangeSmaller2 = new System.Windows.Forms.ButtonTS();
             this.groupBoxTS1 = new System.Windows.Forms.GroupBoxTS();
-            this.labelTS2 = new System.Windows.Forms.LabelTS();
             this.labelTS1 = new System.Windows.Forms.LabelTS();
             this.chkBoxPM = new System.Windows.Forms.CheckBoxTS();
             this.udSpeedPM = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS2 = new System.Windows.Forms.LabelTS();
             this.txtWheelTune2 = new System.Windows.Forms.TextBoxTS();
             this.labelTS15 = new System.Windows.Forms.LabelTS();
             this.chkAutoDetect = new System.Windows.Forms.CheckBoxTS();
@@ -159,16 +159,6 @@
             this.groupBoxTS1.Text = "PowerMate";
             this.groupBoxTS1.Visible = false;
             // 
-            // labelTS2
-            // 
-            this.labelTS2.Image = null;
-            this.labelTS2.Location = new System.Drawing.Point(515, 31);
-            this.labelTS2.Name = "labelTS2";
-            this.labelTS2.Size = new System.Drawing.Size(126, 82);
-            this.labelTS2.TabIndex = 80;
-            this.labelTS2.Text = "For Alternate Tune Step Rate for FlexControl:\r\nSetup->General->User Interface->Po" +
-    "werMate and FlexControl";
-            // 
             // labelTS1
             // 
             this.labelTS1.Image = null;
@@ -217,6 +207,16 @@
             0});
             this.udSpeedPM.ValueChanged += new System.EventHandler(this.udSpeedPM_ValueChanged);
             // 
+            // labelTS2
+            // 
+            this.labelTS2.Image = null;
+            this.labelTS2.Location = new System.Drawing.Point(515, 31);
+            this.labelTS2.Name = "labelTS2";
+            this.labelTS2.Size = new System.Drawing.Size(126, 82);
+            this.labelTS2.TabIndex = 80;
+            this.labelTS2.Text = "For Alternate Tune Step Rate for FlexControl:\r\nSetup->General->User Interface->Po" +
+    "werMate and FlexControl";
+            // 
             // txtWheelTune2
             // 
             this.txtWheelTune2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
@@ -241,7 +241,7 @@
             this.labelTS15.Name = "labelTS15";
             this.labelTS15.Size = new System.Drawing.Size(89, 51);
             this.labelTS15.TabIndex = 13;
-            this.labelTS15.Text = "Tune Step for FlexControl and PowerMate";
+            this.labelTS15.Text = "Tune Step for FlexControl ";
             this.labelTS15.Visible = false;
             // 
             // chkAutoDetect
@@ -329,7 +329,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(646, 515);
+            this.ClientSize = new System.Drawing.Size(647, 522);
             this.Controls.Add(this.labelTS2);
             this.Controls.Add(this.chkBoxIND);
             this.Controls.Add(this.btnTuneStepChangeLarger2);
@@ -349,6 +349,7 @@
             this.Controls.Add(this.comboButtonMid);
             this.Controls.Add(this.comboButtonLeft);
             this.Controls.Add(this.picFlexControl);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FlexControlBasicForm";
             this.Text = "FlexControl - Basic";

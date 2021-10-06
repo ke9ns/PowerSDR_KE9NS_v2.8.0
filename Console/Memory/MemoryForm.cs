@@ -26,6 +26,9 @@
 //    USA
 //=================================================================
 
+using NAudio.Lame;
+//reference Nuget Package NAudio.Lame
+using NAudio.Wave;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -33,11 +36,6 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-
-//reference Nuget Package NAudio.Lame
-using NAudio;
-using NAudio.Wave;
-using NAudio.Lame;
 
 
 namespace PowerSDR
@@ -127,11 +125,11 @@ namespace PowerSDR
 
             dataGridView1.DataSource = console.MemoryList.List; // ke9ns get list of memories from memorylist.cs is where the file is opened and saved
 
-            dataGridView1.RowHeadersWidthSizeMode =  DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
 
-            dataGridView1.ColumnHeadersHeightSizeMode =  DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
-            dataGridView1.AutoSizeColumnsMode =   DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
 
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
@@ -139,7 +137,7 @@ namespace PowerSDR
 
             // Create ComboBox Column
             // DSPMode
-            DataGridViewComboBoxColumn comboboxColumnDSPMode = new DataGridViewComboBoxColumn();            
+            DataGridViewComboBoxColumn comboboxColumnDSPMode = new DataGridViewComboBoxColumn();
             comboboxColumnDSPMode.DataPropertyName = "DSPMode";
             comboboxColumnDSPMode.Name = "DSPMode";
             comboboxColumnDSPMode.HeaderText = "DSP Mode";
@@ -151,7 +149,7 @@ namespace PowerSDR
             comboboxColumnTuneStep.Name = "TuneStep";
             comboboxColumnTuneStep.HeaderText = "Tune Step";
             comboboxColumnTuneStep.ValueType = typeof(string);
-            
+
             // RPT repeater mode
             DataGridViewComboBoxColumn comboboxColumnRPTR = new DataGridViewComboBoxColumn();
             comboboxColumnRPTR.DataPropertyName = "RPTR";
@@ -164,10 +162,10 @@ namespace PowerSDR
             comboboxColumnCTCSS.DataPropertyName = "CTCSSFreq";
             comboboxColumnCTCSS.Name = "CTCSSFreq";
             comboboxColumnCTCSS.HeaderText = "CTCSS Freq";
-            comboboxColumnCTCSS.ValueType = typeof(double);            
+            comboboxColumnCTCSS.ValueType = typeof(double);
 
             // Dev
-            DataGridViewComboBoxColumn comboboxColumnDeviation = new DataGridViewComboBoxColumn();
+            DataGridViewComboBoxColumn comboboxColumnDeviation = new DataGridViewComboBoxColumn(); // ke9ns was just 2500, 5000, now add 9000
             comboboxColumnDeviation.DataPropertyName = "Deviation";
             comboboxColumnDeviation.Name = "Deviation";
             comboboxColumnDeviation.HeaderText = "Deviation";
@@ -186,7 +184,7 @@ namespace PowerSDR
             comboboxColumnAGCMode.Name = "AGCMode";
             comboboxColumnAGCMode.HeaderText = "AGC Mode";
             comboboxColumnAGCMode.ValueType = typeof(AGCMode);
-            
+
 
             // populate combobox items -- type is important here!
             comboboxColumnDSPMode.Items.Add(DSPMode.LSB);
@@ -221,7 +219,7 @@ namespace PowerSDR
                 comboboxColumnFilter.Items.Add((Filter)i);
 
             for (int i = 0; i < (int)AGCMode.LAST; i++)
-                comboboxColumnAGCMode.Items.Add((AGCMode)i);  
+                comboboxColumnAGCMode.Items.Add((AGCMode)i);
 
 
             // Remove the default DSPMode column (remember index first), and add new combobox column
@@ -238,7 +236,7 @@ namespace PowerSDR
             dataGridView1.Columns.Insert(index, comboboxColumnRPTR);
 
 
-            
+
             index = dataGridView1.Columns["CTCSSFreq"].Index;
             dataGridView1.Columns.Remove("CTCSSFreq");
             dataGridView1.Columns.Insert(index, comboboxColumnCTCSS);
@@ -270,6 +268,7 @@ namespace PowerSDR
             dataGridView1.Columns["Repeating"].HeaderText = "Weekly"; // ke9ns add
             dataGridView1.Columns["Repeatingm"].HeaderText = "Monthly"; // ke9ns add
 
+            //    dataGridView1.Columns["ScheduleOn"].HeaderText = "ScheduleON"; // ke9ns add .155
 
 
             // set the default display for floating point values
@@ -279,7 +278,7 @@ namespace PowerSDR
             dataGridView1.Columns["TXFreq"].DefaultCellStyle.Format = "f6";
             dataGridView1.Columns["RPTROffset"].DefaultCellStyle.Format = "f";
 
-            this.dataGridView1.Columns["Scan"].Visible = false;//
+            this.dataGridView1.Columns["Scan"].Visible = true;// false
 
             dataGridView1.CellValidating += new DataGridViewCellValidatingEventHandler(dataGridView1_CellValidating);
 
@@ -327,16 +326,16 @@ namespace PowerSDR
         private void dataGridView1_DragEnter(object sender, DragEventArgs e)
         {
 
-          //  Trace.WriteLine("Dragenter");
-           
+            //  Trace.WriteLine("Dragenter");
+
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) // ke9ns check for file dragdrop
             {
-              
+
                 e.Effect = DragDropEffects.Copy;
                 e.Effect = DragDropEffects.All;
 
                 filename = (string[])e.Data.GetData(DataFormats.FileDrop);
-     
+
                 URLTEXT = filename[0]; // grab file name
 
                 return;
@@ -345,9 +344,9 @@ namespace PowerSDR
 
             droppedUrl = ReadURL(e.Data); // ke9ns check for URL e.data is the data received during the drag/drop
 
-            if ((droppedUrl != null) && ( droppedUrl.Trim().Length != 0))
+            if ((droppedUrl != null) && (droppedUrl.Trim().Length != 0))
             {
-               //  Trace.WriteLine("dragdrop URL>" + droppedUrl);
+                //  Trace.WriteLine("dragdrop URL>" + droppedUrl);
                 URLTEXT = droppedUrl;
                 e.Effect = DragDropEffects.Link; // must activate the EFFECT before the _dragdrop will work
             }
@@ -360,14 +359,14 @@ namespace PowerSDR
         } //   Trace.WriteLine("Dragover");
 
 
-         //==============================================================================================
+        //==============================================================================================
         //ke9ns add ONCE DRAGENTER VALIDATES YOUR URL, YOU RELEASE YOUR MOUSE OVER THE WINDOW AND COMMENT FIELD IS UPDATED WITH THE URL
         private void dataGridView1_DragDrop(object sender, DragEventArgs e)
         {
-        //    Trace.WriteLine("datagrid drag and drop");
-       
-                dataGridView1["comments",RIndex].Value = URLTEXT;
-  
+            //    Trace.WriteLine("datagrid drag and drop");
+
+            dataGridView1["comments", RIndex].Value = URLTEXT;
+
         } // dataGridView1_DragDrop
 
 
@@ -375,29 +374,63 @@ namespace PowerSDR
         //ke9ns add USED TO OPEN WEB BROWSER if comment field has URL
         private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
+         //   Debug.WriteLine("CELLMOUSEDOWN");
 
             MouseEventArgs me = (MouseEventArgs)e;
-         
+
             if (me.Button == System.Windows.Forms.MouseButtons.Right)
             {
-  
+
                 try
                 {
-                  
+
                     System.Diagnostics.Process.Start((string)dataGridView1["comments", RIndex].Value);   // System.Diagnostics.Process.Start("http://www.microsoft.com");
                 }
                 catch
                 {
-                    
+
                 }
 
 
             } // right mouse button click
-            else if (me.Button == System.Windows.Forms.MouseButtons.Left)
+            else if (me.Button == System.Windows.Forms.MouseButtons.Left) // single click not used (only double click)
             {
-                //   Trace.WriteLine("left click ");
+                //   Debug.WriteLine("left click ");
 
             }
+            else if (e.Button == MouseButtons.Middle) // ke9ns add .206 mouse wheel click for vfob
+            {
+
+                var p = dataGridView1.PointToClient(Cursor.Position);
+                var info = dataGridView1.HitTest(p.X, p.Y);
+
+                RIndex = info.RowIndex;
+                //  RIndex = dataGridView1.CurrentRow.Index;
+
+                Debug.WriteLine("MOUSE WHEEL " + RIndex);
+
+                //   RIndex = e.RowIndex; // last row you clicked on 
+                //   CIndex = e.ColumnIndex; // last column you clicked on 
+
+                if (console.MemoryList.List.Count == 0) return; // nothing in the list, exit
+
+                int index = RIndex;
+
+                if (index < 0 || index > console.MemoryList.List.Count - 1) // index out of range
+                    return;
+
+                console.changeComboFMMemoryB(index); // ke9ns this will call recallmemory in console 
+
+
+                if (chkMemoryFormClose.Checked) // ke9ns this saves position of memory form window on your screen when you closed it.
+                {
+                    Common.SaveForm(this, "MemoryForm");    // w4tme
+                    console.MemoryList.Save();              // w4tme 
+                    this.Close();
+                }
+
+
+            } // mouse wheel click
 
             ScheduleUpdate(); // ke9ns add update schedule boxes from selected memory
 
@@ -412,14 +445,17 @@ namespace PowerSDR
         // ke9ns add COMES HERE AFTER YOU CLICK ON A FIELD BOX TO DETERMINE WHICH ROW YOU ARE WORKING IN
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-        //    Trace.WriteLine("cell click");
+            //    Trace.WriteLine("cell click");
 
-       //     Trace.WriteLine("Cell Name " + dataGridView1.Columns[e.ColumnIndex].Name);  // this causes fault if you click in the far left column
-       //    Trace.WriteLine("Call Value " + dataGridView1[e.ColumnIndex, e.RowIndex].Value); // 
+            //     Trace.WriteLine("Cell Name " + dataGridView1.Columns[e.ColumnIndex].Name);  // this causes fault if you click in the far left column
+            //    Trace.WriteLine("Call Value " + dataGridView1[e.ColumnIndex, e.RowIndex].Value); // 
 
             RIndex = e.RowIndex; // last row you clicked on 
                                  //   CIndex = e.ColumnIndex; // last column you clicked on 
 
+         //  Debug.WriteLine("CELL DATAGRIDVIEW INDEX " + RIndex);
+
+        
             ScheduleUpdate(); // ke9ns add update schedule boxes from selected memory
 
         } // dataGridView1_CellClick
@@ -428,14 +464,14 @@ namespace PowerSDR
         //============================================================================================================================================
         void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-     
+
             // handle floating point fields
             if (dataGridView1.Columns[e.ColumnIndex].Name == "RXFreq" ||
                 dataGridView1.Columns[e.ColumnIndex].Name == "TXFreq" ||
                 dataGridView1.Columns[e.ColumnIndex].Name == "RPTROffset")
             {
-                double temp; 
-                if(!double.TryParse((string)e.FormattedValue, out temp))  dataGridView1[e.ColumnIndex, e.RowIndex].Value = 0.0;
+                double temp;
+                if (!double.TryParse((string)e.FormattedValue, out temp)) dataGridView1[e.ColumnIndex, e.RowIndex].Value = 0.0;
                 return;
             }
 
@@ -446,7 +482,7 @@ namespace PowerSDR
                 dataGridView1.Columns[e.ColumnIndex].Name == "AGCT")
             {
                 int temp;
-                if (!int.TryParse((string)e.FormattedValue, out temp))   dataGridView1[e.ColumnIndex, e.RowIndex].Value = 0;
+                if (!int.TryParse((string)e.FormattedValue, out temp)) dataGridView1[e.ColumnIndex, e.RowIndex].Value = 0;
                 return;
             }
 
@@ -465,7 +501,7 @@ namespace PowerSDR
         {
 
             //  Trace.WriteLine("add dragenter");
-           // ChangeWindowsMessageFilterEx
+            // ChangeWindowsMessageFilterEx
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) // ke9ns check for file dragdrop
             {
 
@@ -484,8 +520,8 @@ namespace PowerSDR
 
             if (droppedUrl != null && droppedUrl.Trim().Length != 0)
             {
-                  URLTEXT = droppedUrl;
-             
+                URLTEXT = droppedUrl;
+
                 e.Effect = DragDropEffects.Link; // got a URL so activate the drop event when mouse button released
             }
             else
@@ -497,22 +533,22 @@ namespace PowerSDR
 
         } //MemoryRecordAdd_DragEnter
 
-     
+
 
         //=========================================================================================================================================
         // Ke9ns add YOUR URL (after being VERIFIED) YOU LET GO THE LEFT MOUSE BUTTON TO DROP ONTO THE ADD BUTTON
         private void MemoryRecordAdd_DragDrop(object sender, DragEventArgs e)
         {
-                    
-                string mem_name = Convert.ToString(console.VFOAFreq);   //W4TME
 
-                // ke9ns Below URLTEXT goes where normally the comment goes with a ""
+            string mem_name = Convert.ToString(console.VFOAFreq);   //W4TME
+
+            // ke9ns Below URLTEXT goes where normally the comment goes with a ""
 
             console.MemoryList.List.Add(new MemoryRecord("", console.VFOAFreq, mem_name, console.RX1DSPMode, true, console.TuneStepList[console.TuneStepIndex].Name,
                 console.CurrentFMTXMode, console.FMTXOffsetMHz, console.dsp.GetDSPTX(0).CTCSSFlag, console.dsp.GetDSPTX(0).CTCSSFreqHz, console.PWR,
                 (int)console.dsp.GetDSPTX(0).TXFMDeviation, console.VFOSplit, console.TXFreq, console.RX1Filter, console.RX1FilterLow,
                 console.RX1FilterHigh, URLTEXT, console.dsp.GetDSPRX(0, 0).RXAGCMode, console.RF,
-                DateTime.Now, ScheduleOn.Checked,(int)ScheduleDurationTime.Value, ScheduleRepeat.Checked, ScheduleRecord.Checked, ScheduleRepeatm.Checked, (int)ScheduleExtra.Value
+                DateTime.Now, ScheduleOn.Checked, (int)ScheduleDurationTime.Value, ScheduleRepeat.Checked, ScheduleRecord.Checked, ScheduleRepeatm.Checked, (int)ScheduleExtra.Value
 
                 ));
 
@@ -527,7 +563,7 @@ namespace PowerSDR
         } // MemoryRecordAdd_DragDrop
 
 
-     
+
 
         //=========================================================================================================================================
         // Ke9ns  this is the ADD button
@@ -608,7 +644,7 @@ namespace PowerSDR
                     return;
             }
 
-            DialogResult dr = MessageBox.Show("Are you sure you want to remove the selected row(s)?",
+            DialogResult dr = MessageBox.Show(new Form { TopMost = true }, "Are you sure you want to remove the selected row(s)?",
                 "Remove Row(s)?",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
@@ -617,7 +653,7 @@ namespace PowerSDR
 
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                for (int i = 0; i < dataGridView1.SelectedRows.Count; ) // no i++ because the selected rows count gets decremented
+                for (int i = 0; i < dataGridView1.SelectedRows.Count;) // no i++ because the selected rows count gets decremented
                     console.MemoryList.List.Remove(console.MemoryList.List[dataGridView1.SelectedRows[i].Index]);
             }
             else // no rows selected, use current cell
@@ -627,7 +663,7 @@ namespace PowerSDR
 
             Common.SaveForm(this, "MemoryForm");    // w4tme
             console.MemoryList.Save();              // w4tme 
-           
+
         } // delete memory
 
 
@@ -641,6 +677,7 @@ namespace PowerSDR
         /// <param name="e"></param>
         private void btnSelect_Click(object sender, EventArgs e)
         {
+           
 
             if (console.MemoryList.List.Count == 0) return; // nothing in the list, exit
 
@@ -653,9 +690,9 @@ namespace PowerSDR
 
             console.changeComboFMMemory(index); // ke9ns this will call recallmemory in console 
 
-            Debug.WriteLine("INDEX clicked "+index);
-           
-          //  Debug.WriteLine("INDEX clicked " + dataGridView1.);
+            Debug.WriteLine("INDEX clicked " + index);
+
+            //  Debug.WriteLine("INDEX clicked " + dataGridView1.);
 
             if (chkMemoryFormClose.Checked) // ke9ns this saves position of memory form window on your screen when you closed it.
             {
@@ -687,7 +724,7 @@ namespace PowerSDR
         #endregion
 
 
-    
+
 
 
 
@@ -711,18 +748,18 @@ namespace PowerSDR
         // ke9ns look for URL or file
         private string ReadURL(IDataObject data)  // try reading as unicode URL  (data comes from the e.data of the drag/drop operation and is supposed to contain a URL or FILE
         {
-           // try unicode first then ascii
+            // try unicode first then ascii
             string unicodetest = Readurl(data, _unicodeUrlDataFormatName, _unicodeUrlEncoding); // _unicodeUrlDataFormatName = "UniformResourceLocatorW"; Encoding _unicodeUrlEncoding = Encoding.Unicode;
 
-            if (unicodetest != null) 
+            if (unicodetest != null)
             {
                 return unicodetest;   // Unicode URL found from the data 
             }
-               
+
             return Readurl(data, _asciiUrlDataFormatName, _asciiUrlEncoding); // ASCII URL found _asciiUrlDataFormatName = "UniformResourceLocator";   Encoding _asciiUrlEncoding = Encoding.ASCII
 
         } // UNICODE & ASCII testing
-        
+
         //==================================================================================================
         private string Readurl(IDataObject data, string urlDataFormatName, Encoding urlEncoding)    // try reading as ASCII URL
         {
@@ -745,16 +782,16 @@ namespace PowerSDR
                     url = reader.ReadToEnd();  // Read the URL from the data
                 }
             }
-           
+
             return url.TrimEnd('\0');  // URLs in drag/drop data are often padded with null characters so remove these
 
         } // ASCII URL
 
-      
+
         //==================================================================================================
         private static bool DoesDragDropDataContainUrl1(IDataObject data, string urlDataFormatName)
         {
-            
+
             return (data != null) && (data.GetDataPresent(urlDataFormatName)); // return true = yes URL or file is in specified format
 
         }
@@ -785,7 +822,7 @@ namespace PowerSDR
                 dataGridView1["Duration", RIndex].Value = ScheduleDurationTime.Value; // ke9ns add put schedule start duration in selected in field box
                 console.MemoryList.Save();
             }
-            catch(Exception)
+            catch (Exception)
             {
 
             }
@@ -804,7 +841,7 @@ namespace PowerSDR
 
             try
             {
-                 dataGridView1["Repeating", RIndex].Value = ScheduleRepeat.Checked; // ke9ns add put schedule start duration in selected in field box
+                dataGridView1["Repeating", RIndex].Value = ScheduleRepeat.Checked; // ke9ns add put schedule start duration in selected in field box
 
                 if ((ScheduleRepeat.Checked == false) && (ScheduleRepeatm.Checked == false))
                 {
@@ -834,7 +871,7 @@ namespace PowerSDR
 
             try
             {
-               
+
                 dataGridView1["Repeatingm", RIndex].Value = ScheduleRepeatm.Checked; // ke9ns add put schedule start duration in selected in field box
 
                 if ((ScheduleRepeat.Checked == false) && (ScheduleRepeatm.Checked == false))
@@ -877,27 +914,43 @@ namespace PowerSDR
         // ke9ns add Schedule ON/OFF (NOT USED AT THIS TIME)
         private void ScheduleOn_CheckedChanged(object sender, EventArgs e)
         {
+
             try
             {
-               
-                if (ScheduleOn.Checked == false)
-                {
-                    if (DurationCount > 1)
-                    {
-                        LASTUTC = UTCNEW;
-                        DurationCount = 1; // to turn things off immediatly if you toggle on/off into off
-                        
-                    }
-                }
-
-                LASTUTC = 0;
                 dataGridView1["ScheduleOn", RIndex].Value = ScheduleOn.Checked; // ke9ns add put schedule ON/OFF in selected in field box
                 console.MemoryList.Save();
+
             }
             catch (Exception)
             {
 
             }
+
+
+
+            /*   try
+               {
+
+                   if (ScheduleOn.Checked == false)
+                   {
+                       if (DurationCount > 1)
+                       {
+                           LASTUTC = UTCNEW;
+                           DurationCount = 1; // to turn things off immediatly if you toggle on/off into off
+
+                       }
+                   }
+
+                   LASTUTC = 0;
+                   dataGridView1["ScheduleOn", RIndex].Value = ScheduleOn.Checked; // ke9ns add put schedule ON/OFF in selected in field box
+                   console.MemoryList.Save();
+               }
+               catch (Exception)
+               {
+
+               }
+
+               */
         }
 
         //===============================================================================
@@ -924,7 +977,7 @@ namespace PowerSDR
             {
                 ScheduleStartTimeUTC.Value = ScheduleStartTime.Value.ToUniversalTime();
             }
-           
+
             try
             {
                 LASTUTC = 0;
@@ -988,7 +1041,7 @@ namespace PowerSDR
 
             MemComments.Text = (string)dataGridView1["comments", RIndex].Value; // ke9ns add put comments selected in field box
 
-           
+
             MemGroup.Text = (string)dataGridView1["Group", RIndex].Value;
             MemName.Text = (string)dataGridView1["Name", RIndex].Value;
 
@@ -1001,13 +1054,13 @@ namespace PowerSDR
             {
 
                 ScheduleStartDate.ValueChanged -= new System.EventHandler(ScheduleStartDate_ValueChanged);  // ke9ns turn off checkchanged temporarily    // ke9ns turn off valuechanged temporarily 
-              
+
                 ScheduleStartDate.Value = (DateTime)dataGridView1["StartDate", RIndex].Value; // ke9ns add put schedule start date in selected in field box
                 ScheduleStartTime.Value = (DateTime)dataGridView1["StartDate", RIndex].Value; // ke9ns add put schedule start date in selected in field box
 
                 ScheduleStartDate.ValueChanged += new System.EventHandler(ScheduleStartDate_ValueChanged);  // ke9ns turn off checkchanged temporarily    // ke9ns turn off valuechanged temporarily 
 
-                ScheduleOn.Checked = (bool)dataGridView1["ScheduleOn", RIndex].Value; // ke9ns add put schedule ON/OFF in selected in field box
+                ScheduleOn.Checked = (bool)dataGridView1["ScheduleOn", RIndex].Value; // ke9ns add .155 scanner skip this                   put schedule ON/OFF in selected in field box
 
                 if ((int)dataGridView1["Duration", RIndex].Value > 120) dataGridView1["Duration", RIndex].Value = 120;
                 else if ((int)dataGridView1["Duration", RIndex].Value < 0) dataGridView1["Duration", RIndex].Value = 0;
@@ -1049,7 +1102,7 @@ namespace PowerSDR
         public static int DurationCount = 0; // ke9ns duration audio recording counter
 
         private int daycheck = 0; // ke9ns temp day of week repeat
-        private int ScheduleOnce = 0; // ke9ns 1=already scheduled
+        private int ScheduleOnce = 0; // ke9ns     1=already scheduled
         private int poweroff = 0; // ke9ns 1=power was off at start of recording so turn it back off when done.
 
         //====================================================================================================
@@ -1062,7 +1115,7 @@ namespace PowerSDR
         {
             Debug.WriteLine("SCHEDULER==========================================");
 
-            for (;;)
+            for (; ; )
             {
                 UTCD = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Utc);
                 FD = UTCD.ToString("HHmm");
@@ -1073,15 +1126,15 @@ namespace PowerSDR
 
                     if ((UTCNEW != LASTUTC) && (dataGridView1.Rows.Count > 0)) // check 1 time per minute
                     {
-                       
+
                         LASTUTC = UTCNEW;
 
-                       
+
                         if (DurationCount > 1) // check audio recording start/stop
                         {
 
                             DurationCount--;
-                           
+
                             ScheduleRemain.Text = DurationCount.ToString();
 
                             Debug.WriteLine("Audio countdown" + DurationCount);
@@ -1104,7 +1157,7 @@ namespace PowerSDR
 
                             console.RECPOST1 = true; // restore SR back to original
 
-                            Thread t1 = new Thread(new ThreadStart(TOMP3));
+                            Thread t1 = new Thread(new ThreadStart(TOMP3)); // ke9ns: convert wav to MP3 in the background
 
                             t1.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
                             t1.CurrentUICulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
@@ -1120,9 +1173,9 @@ namespace PowerSDR
                                 poweroff = 0; // reset flag
                             }
 
-                          
-                         //   Audio.RecordRXPreProcessed = temp_record; //return to original state
-                         //   WaveOptions.comboSampleRate.Text = quickmp3SR; // restore file size
+
+                            //   Audio.RecordRXPreProcessed = temp_record; //return to original state
+                            //   WaveOptions.comboSampleRate.Text = quickmp3SR; // restore file size
 
 
                         } // duration==1
@@ -1138,7 +1191,7 @@ namespace PowerSDR
                             if (((bool)dataGridView1["Repeating", aa].Value == true) || ((bool)dataGridView1["Repeatingm", aa].Value == true)) // check only memories that the schedule is enabled
                             {
 
-                              //  Debug.WriteLine("Date and Time " + dataGridView1["StartDate", aa].Value);
+                                //  Debug.WriteLine("Date and Time " + dataGridView1["StartDate", aa].Value);
 
                                 DateTime temp1 = (DateTime)dataGridView1["StartDate", aa].Value; // save date and time for checking
 
@@ -1147,7 +1200,7 @@ namespace PowerSDR
                                 // ke9ns check if Memory repeats every week 
                                 if ((bool)dataGridView1["Repeating", aa].Value == true) // check every week
                                 {
-                                    Debug.WriteLine("Weekly Enabled current day: " + DateTime.Now.DayOfWeek + " Day recorded: "+temp1.DayOfWeek);
+                                    Debug.WriteLine("Weekly Enabled current day: " + DateTime.Now.DayOfWeek + " Day recorded: " + temp1.DayOfWeek);
 
                                     if (DateTime.Now.DayOfWeek == temp1.DayOfWeek)
                                     {
@@ -1173,7 +1226,7 @@ namespace PowerSDR
                                         int totalmonthweeks = 0;
                                         int originalweek = 0;
 
-                                        for (int x=1;x < 32;x++) // find what week your day of the week was in to check for repeats
+                                        for (int x = 1; x < 32; x++) // find what week your day of the week was in to check for repeats
                                         {
                                             try
                                             {
@@ -1193,14 +1246,14 @@ namespace PowerSDR
                                                     } //if (temp2.Day == temp1.Day)
 
                                                 } //if (temp2.DayOfWeek == temp1.DayOfWeek) 
-                                          
+
                                             }
-                                            catch(Exception) // exceeded days of month
+                                            catch (Exception) // exceeded days of month
                                             {
                                                 Debug.WriteLine("End of Month before 31 days.");
                                                 break;
                                             }
-       
+
                                         } // for x loop through entire month
 
                                         Debug.WriteLine("End of Month found # of weeks of the scheduled day: " + totalmonthweeks);
@@ -1254,7 +1307,7 @@ namespace PowerSDR
                                         //---------------------------------------------------------------------------------------------------------
                                         //---------------------------------------------------------------------------------------------------------
                                         // now check the if today is the matching week for the original schedule day of week (monday) (1st,2nd,3rd, or last week)
-                                       
+
                                         if (originalweek == 10) // looking for last week of the current month
                                         {
                                             if (totalcurrentmonthweeks == 3) // only 3 weeks in current month
@@ -1262,7 +1315,7 @@ namespace PowerSDR
                                                 if (week[3] == DateTime.Now.Day) // if last week of this month matches the current Day#
                                                 {
                                                     Debug.WriteLine("LAST(3rd) WEEK OF THE MONTH MATCHES GOOD " + DateTime.Now.Day);
-                                                   daycheck = 1; // matches the day of week
+                                                    daycheck = 1; // matches the day of week
                                                 }
                                             }
                                             else
@@ -1292,7 +1345,7 @@ namespace PowerSDR
                                             }
                                             else
                                             {
-                                                Debug.WriteLine("Second WEEK OF THE MONTH MATCHES BAD " + DateTime.Now.Day + " week[2] "+week[2]);
+                                                Debug.WriteLine("Second WEEK OF THE MONTH MATCHES BAD " + DateTime.Now.Day + " week[2] " + week[2]);
                                             }
                                         }
                                         else if (originalweek == 3)
@@ -1323,7 +1376,7 @@ namespace PowerSDR
                                 if ((temp1.Date == DateTime.Now.Date) || (daycheck == 1)) // check for Schedule DATE matchup
                                 {
                                     Debug.WriteLine("DATE Match " + temp1.Date);
-                               
+
                                     if ((temp1.TimeOfDay.Hours == DateTime.Now.TimeOfDay.Hours) && (temp1.TimeOfDay.Minutes == DateTime.Now.TimeOfDay.Minutes))
                                     {
 
@@ -1365,7 +1418,7 @@ namespace PowerSDR
 
                                             if ((bool)dataGridView1["Recording", aa].Value == true)
                                             {
-                                                AutoClosingMessageBox.Show("A Scheduled Recording has been started.\nYou can end the recording early by Checking OFF both Weekly & Monthly boxes. ", "Scheduled Recording Started", 4000);
+                                                AutoClosingMessageBox.Show( "A Scheduled Recording has been started.\nYou can end the recording early by Checking OFF both Weekly & Monthly boxes. ", "Scheduled Recording Started", 4000);
 
                                                 Debug.WriteLine("Start AUDIO RECORDING1 ");
 
@@ -1373,14 +1426,14 @@ namespace PowerSDR
 
                                                 ScheduleRecord.ForeColor = Color.Red;
                                                 ScheduleRemain.ForeColor = Color.Red;
-    
+
                                                 console.REC1 = true; // red sign over Wave menu item
 
                                             } // Recording ON
                                             else
                                             {
-                                                AutoClosingMessageBox.Show("Scheduled Frequency Change has occured\n", "Scheduled Frequency change", 4000);
-                                                
+                                                AutoClosingMessageBox.Show( "Scheduled Frequency Change has occured\n", "Scheduled Frequency change", 4000);
+
                                             }
 
                                             // check for audio recording
@@ -1392,7 +1445,7 @@ namespace PowerSDR
 
 
                                             /*
-                                            MessageBox.Show("You were transmitting during a Scheduled Frequency change.\n" +
+                                            MessageBox.Show(new Form { TopMost = true }, tYou were transmitting during a Scheduled Frequency change.\n" +
                                                "You will need to manually go to the Frequency to keep your Schedule.",
                                                "Frequency: " + dataGridView1["RXFreq", aa].Value + " Mhz.",
                                                MessageBoxButtons.OK,
@@ -1413,7 +1466,7 @@ namespace PowerSDR
                     } //wait time to increment by 1 minute before checking
 
                 } // try
-                catch(Exception)
+                catch (Exception)
                 {
                     // thread not ready yet since database doesnt contain schedule data yet
                     Debug.WriteLine("Thread not ready3===============");
@@ -1432,7 +1485,7 @@ namespace PowerSDR
 
         } // thread SCHEDULER() 
 
-     
+
         private string wave_folder = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) + "\\PowerSDR";
 
         private void buttonTS1_Click(object sender, EventArgs e)
@@ -1442,9 +1495,9 @@ namespace PowerSDR
 
             System.Diagnostics.Process.Start("explorer.exe", argument);
 
-          //  Debug.WriteLine("WaveControl.scheduleName " + WaveControl.scheduleName);
-          //  WaveToMP3(WaveControl.scheduleName, WaveControl.scheduleName1, 128);
-          //  Debug.WriteLine("WaveControl.scheduleNameMP3 " + WaveControl.scheduleName1);
+            //  Debug.WriteLine("WaveControl.scheduleName " + WaveControl.scheduleName);
+            //  WaveToMP3(WaveControl.scheduleName, WaveControl.scheduleName1, 128);
+            //  Debug.WriteLine("WaveControl.scheduleNameMP3 " + WaveControl.scheduleName1);
 
         }
 
@@ -1469,15 +1522,18 @@ namespace PowerSDR
                     reader.CopyTo(writer);
                 }
             }
-            catch(Exception)
+            catch (Exception e)
             {
+                AutoClosingMessageBox.Show( "Failure to create an MP3. " + e, "MP3 Creation failure", 4000);
 
             }
             Debug.WriteLine("DONE WITH MP3 CREATION" + WaveControl.scheduleName1);
 
+            AutoClosingMessageBox.Show( "MP3 File created. DONE ", "MP3 file created.", 4000);
+
             try
             {
-               
+
                 System.IO.File.Delete(WaveControl.scheduleName);
 
                 Debug.WriteLine("DEL the WAV FILE" + WaveControl.scheduleName);
@@ -1492,8 +1548,8 @@ namespace PowerSDR
         } // MP3 conversion thread. ends when conversion from wav to mp3 is done.
 
 
-       //  MemoryStream ms = new MemoryStream();
-       // ke9ns add
+        //  MemoryStream ms = new MemoryStream();
+        // ke9ns add
         public static void ConvertWavStreamToMp3File(ref MemoryStream ms, string savetofilename)
         {
             //rewind to beginning of stream
@@ -1506,7 +1562,7 @@ namespace PowerSDR
                 rdr.CopyTo(wtr);
             }
         }
-    
+
 
 
 
@@ -1524,9 +1580,9 @@ namespace PowerSDR
 
                 using (_timeoutTimer)
                 {
-                    //  MessageBox.Show("Time server connection failed! /r error: " + EX1, " the system prompts", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+                    //  MessageBox.Show(new Form { TopMost = true }, tTime server connection failed! /r error: " + EX1, " the system prompts", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
 
-                  //  MessageBox.Show(text, caption);
+                    //  MessageBox.Show(text, caption);
                     MessageBox.Show(text, caption, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
 
                 }
@@ -1541,7 +1597,7 @@ namespace PowerSDR
             {
                 IntPtr mbWnd = FindWindow("#32770", _caption); // lpClassName is #32770 for MessageBox
 
-                if (mbWnd != IntPtr.Zero)     SendMessage(mbWnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+                if (mbWnd != IntPtr.Zero) SendMessage(mbWnd, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
 
                 _timeoutTimer.Dispose();
             }
@@ -1555,14 +1611,42 @@ namespace PowerSDR
 
         } // AutoClosingMessageBox
 
-        private void chkMemoryFormClose_CheckedChanged(object sender, EventArgs e)
+        private void MemoryForm_MouseEnter(object sender, EventArgs e)
         {
-
+           
+            if (console.setupForm.chkBoxAutoFocus.Checked == true && chkAlwaysOnTop.Checked == true) this.Activate();
         }
 
-      
+        private void btnSelect_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (console.MemoryList.List.Count == 0) return; // nothing in the list, exit
 
+            MouseEventArgs me = (MouseEventArgs)e;
 
+            int index = dataGridView1.CurrentCell.RowIndex;
+
+            if (index < 0 || index > console.MemoryList.List.Count - 1) // index out of range
+                return;
+
+            if (e.Button == MouseButtons.Middle) // ke9ns add .206 mouse wheel click for vfob
+            {
+                Debug.WriteLine("MOUSE WHEEL " + index);
+     
+                console.changeComboFMMemoryB(index); // ke9ns this will call recallmemory in console 
+
+            } // mouse wheel click
+
+            ScheduleUpdate(); // ke9ns add update schedule boxes from selected memory
+
+            if (chkMemoryFormClose.Checked) // ke9ns this saves position of memory form window on your screen when you closed it.
+            {
+                Common.SaveForm(this, "MemoryForm");    // w4tme
+                console.MemoryList.Save();              // w4tme 
+                this.Close();
+            }
+
+            //console.RecallMemory(MemoryList.List[index]);
+        }
     } // memoryform
 
-    } // powerSDR
+} // powerSDR

@@ -1,5 +1,6 @@
 //=================================================================
 // SDRSerialPort.cs
+// this is for standard CAT COM port Communication
 //=================================================================
 // Copyright (C) 2005  Bill Tracey
 //
@@ -22,168 +23,211 @@
 
 #define DBG_PRINT
 
-using System;
-using System.Threading;
-using System.IO.Ports;
-
 using FlexCW;
+using System;
+using System.Diagnostics;
+using System.IO.Ports;
 
 namespace PowerSDR
 {
-	public class SDRSerialPort
-	{
-		public static event SerialRXEventHandler serial_rx_event;
-		
-		private SerialPort commPort;
+    public class SDRSerialPort
+    {
+        public static event SerialRXEventHandler serial_rx_event;
+
+
+        private SerialPort commPort;
         public SerialPort BasePort
         {
             get { return commPort; }
         }
 
-		private bool isOpen = false; 
-		private bool bitBangOnly = false; 
+        private bool isOpen = false;
+        private bool bitBangOnly = false;
 
-		//Added 2/14/2008 BT
-		public bool IsOpen
-		{
-			get { return commPort.IsOpen; }
-		}
+        //Added 2/14/2008 BT
+        public bool IsOpen
+        {
+            get { return commPort.IsOpen; }
+        }
 
-		public void Open()
-		{
-    		commPort.Open();
-		}
+        public void Open()
+        {
+            commPort.Open();
+        }
 
-		public void Close()
+        public void Close()
         {
             commPort.Close();
-		}
+        }
 
-		public static Parity StringToParity(string s) 
-		{
-			if (s == "none") return Parity.None; 
-			if (s == "odd") return Parity.Odd;
-			if (s == "even") return Parity.Even; 
-			if (s == "space") return Parity.Space; 
-			if (s == "mark") return Parity.Mark; 
-			return Parity.None;  // error -- default to none
-		}
+        public static Parity StringToParity(string s)
+        {
+            if (s == "none") return Parity.None;
+            if (s == "odd") return Parity.Odd;
+            if (s == "even") return Parity.Even;
+            if (s == "space") return Parity.Space;
+            if (s == "mark") return Parity.Mark;
+            return Parity.None;  // error -- default to none
+        }
 
-		public static StopBits StringToStopBits(string s) 
-		{
+        public static StopBits StringToStopBits(string s)
+        {
             if (s == "0") return StopBits.None;
-			if (s == "1") return StopBits.One; 
-			if (s == "1.5") return StopBits.OnePointFive; 
-			if (s == "2") return StopBits.Two; 
-			return StopBits.One; // error -- default 
-		}
+            if (s == "1") return StopBits.One;
+            if (s == "1.5") return StopBits.OnePointFive;
+            if (s == "2") return StopBits.Two;
+            return StopBits.One; // error -- default 
+        }
 
-		public SDRSerialPort(int portidx)
-		{
-			commPort = new SerialPort();
-			commPort.Encoding = System.Text.Encoding.ASCII;
-			commPort.RtsEnable = true; // hack for soft rock ptt 
-			commPort.DtrEnable = true; // set dtr off 
+        public SDRSerialPort(int portidx)
+        {
+            commPort = new SerialPort();
+            commPort.Encoding = System.Text.Encoding.ASCII;
+            commPort.RtsEnable = true; // hack for soft rock ptt 
+            commPort.DtrEnable = true; // set dtr off 
             //commPort.ErrorReceived += new SerialErrorReceivedEventHandler(this.SerialErrorReceived);
             commPort.DataReceived += new SerialDataReceivedEventHandler(this.SerialReceivedData);
-			commPort.PinChanged += new SerialPinChangedEventHandler(this.SerialPinChanged);
+            commPort.PinChanged += new SerialPinChangedEventHandler(this.SerialPinChanged);
 
-			commPort.PortName = "COM" + portidx.ToString(); 
+            commPort.PortName = "COM" + portidx.ToString();
 
-			commPort.Parity = Parity.None; 
-			commPort.StopBits = StopBits.One;
+            commPort.Parity = Parity.None;
+            commPort.StopBits = StopBits.One;
             commPort.Handshake = Handshake.None;
-			commPort.DataBits = 8; 
-			commPort.BaudRate = 9600;
-			commPort.ReadTimeout = 5000;
-			commPort.WriteTimeout = 500;	
-			commPort.ReceivedBytesThreshold = 1;
-		}
-		// set the comm parms ... can only be done if port is not open -- silently fails if port is open (fixme -- add some error checking) 
-		// 
-		public void setCommParms(int baudrate, Parity p, int databits, StopBits stop, Handshake handshake)  
-		{ 
-			if ( commPort.IsOpen ) return; // bail out if it's already open 
-			
-			commPort.BaudRate = baudrate;
+            commPort.DataBits = 8;
+            commPort.BaudRate = 9600;
+            commPort.ReadTimeout = 5000;
+            commPort.WriteTimeout = 500;
+            commPort.ReceivedBytesThreshold = 1;
+        }
+
+
+
+        // set the comm parms ... can only be done if port is not open -- silently fails if port is open (fixme -- add some error checking) 
+        // 
+        public void setCommParms(int baudrate, Parity p, int databits, StopBits stop, Handshake handshake)
+        {
+            if (commPort.IsOpen) return; // bail out if it's already open 
+
+            commPort.BaudRate = baudrate;
             commPort.Parity = p;
-            commPort.StopBits = stop;						
-			commPort.DataBits = databits;
-            commPort.Handshake = handshake;		
-		}
-		
-		public uint put(string s) 
-		{
-			if ( bitBangOnly ) return 0;  // fixme -- throw exception?			
-			commPort.Write(s);
-			return (uint)s.Length; // wjt fixme -- hack -- we don't know if we actually wrote things 			
-		}
+            commPort.StopBits = stop;
+            commPort.DataBits = databits;
+            commPort.Handshake = handshake;
+        }
 
-		public int Create()
-		{
-			return Create(false); 
-		}
+        public uint put(string s)
+        {
+            if (bitBangOnly) return 0;  // fixme -- throw exception?			
+            commPort.Write(s);
+  
+            return (uint)s.Length; // wjt fixme -- hack -- we don't know if we actually wrote things 			
+        }
 
-		// create port 
-		public int Create(bool bit_bang_only) 
-		{ 
-			bitBangOnly = bit_bang_only; 
-			if ( isOpen ){ return -1; }
-			commPort.Open();  
-			isOpen = commPort.IsOpen; 			
-			if ( isOpen )
+        // ke9ns add
+        public string put1(string s)
+        {
+            string answer = "---";
+
+            if (bitBangOnly) return answer;  // fixme -- throw exception?			
+
+            commPort.Write("AI1;");
+
+            try
+            {
+
+                byte[] test = new byte[10];
+
+                //  var tes1 = commPort.Read(test, 0, 4);
+
+                //  test[0] = commPort.ReadByte();
+
+
+                // answer = test.ToString();
+
+                //  Debug.WriteLine("BEAM: " + test[0] + " , " + test[1] + " , " + test[2] + " , " + test[3]);
+
+                // answer = commPort.ReadExisting();
+
+                Debug.WriteLine("BEAM: " + answer);
+
+                //  answer = System.Text.Encoding.Default.GetString(test);
+
+            }
+            catch (Exception e)
+            {
+                //  Debug.WriteLine("BEAM: " + e);
+                answer = "===";
+            }
+
+            return answer; // wjt fixme -- hack -- we don't know if we actually wrote things 			
+        } // put1
+
+        public int Create()
+        {
+            return Create(false);
+        }
+
+        // create port 
+        public int Create(bool bit_bang_only)
+        {
+            bitBangOnly = bit_bang_only;
+            if (isOpen) { return -1; }
+            commPort.Open();
+            isOpen = commPort.IsOpen;
+            if (isOpen)
                 return 0; // all is well
-			else
-				return -1;  //error
-		}				  
-				  
-		public void Destroy()
-		{
-			try 
-			{
-				commPort.Close(); 
-			}
-			catch(Exception)
-			{
+            else
+                return -1;  //error
+        }
 
-			}
-			isOpen = false;
-		}
+        public void Destroy()
+        {
+            try
+            {
+                commPort.Close();
+            }
+            catch (Exception)
+            {
 
-		public bool isCTS() 
-		{ 		
-			if ( !isOpen ) return false; // fixme error check 
-			return commPort.CtsHolding; 			
-		}
+            }
+            isOpen = false;
+        }
 
-		public bool isDSR() 
-		{
-			if ( !isOpen ) return false; // fixme error check 
-			return commPort.DsrHolding; 
-			
-		}
-		public bool isRI()
-		{
-			if ( !isOpen ) return false; // fixme error check 
-			return false; 
-		}
+        public bool isCTS()
+        {
+            if (!isOpen) return false; // fixme error check 
+            return commPort.CtsHolding;
+        }
 
-		public bool isRLSD() 
-		{
-			if ( !isOpen ) return false; // fixme error check 
-			return commPort.CDHolding; 
-		}
+        public bool isDSR()
+        {
+            if (!isOpen) return false; // fixme error check 
+            return commPort.DsrHolding;
 
-		public void setDTR(bool v) 
-		{ 
-			if ( !isOpen ) return; 
-			commPort.DtrEnable = v; 
-		}	
+        }
+        public bool isRI()
+        {
+            if (!isOpen) return false; // fixme error check 
+            return false;
+        }
 
-		void SerialErrorReceived(object source, SerialErrorReceivedEventArgs e)
-		{
-			
-		}
+        public bool isRLSD()
+        {
+            if (!isOpen) return false; // fixme error check 
+            return commPort.CDHolding;
+        }
+
+        public void setDTR(bool v)
+        {
+            if (!isOpen) return;
+            commPort.DtrEnable = v;
+        }
+
+        void SerialErrorReceived(object source, SerialErrorReceivedEventArgs e)
+        {
+
+        }
 
         private bool use_for_keyptt = false;
         public bool UseForKeyPTT
@@ -235,7 +279,7 @@ namespace PowerSDR
         }
 
         void SerialPinChanged(object source, SerialPinChangedEventArgs e)
-		{
+        {
             if (!use_for_keyptt && !use_for_paddles) return;
 
             if (use_for_keyptt)
@@ -292,12 +336,15 @@ namespace PowerSDR
                         break;
                 }
             }
-		}	
-		
-		void SerialReceivedData(object source, SerialDataReceivedEventArgs e)
-		{
-            serial_rx_event(this, new SerialRXEvent(commPort.ReadExisting()));
-		}
+        }
 
-	}
+        void SerialReceivedData(object source, SerialDataReceivedEventArgs e)
+        {
+            serial_rx_event(this, new SerialRXEvent(commPort.ReadExisting()));
+
+
+        }
+
+
+    }
 }

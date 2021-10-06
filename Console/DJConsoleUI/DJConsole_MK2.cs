@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace PowerSDR.DJConsoleUI
+﻿namespace PowerSDR.DJConsoleUI
 {
     public class DJConsole_MK2
     {
@@ -52,7 +47,7 @@ namespace PowerSDR.DJConsoleUI
         private int selectFxA = 0;
         private int selectFxB = 0;
 
-#endregion
+        #endregion
 
         #region Properties
 
@@ -431,7 +426,7 @@ namespace PowerSDR.DJConsoleUI
             {
                 if (checkValueButton(value) == true)
                 {
-                    pitchDownA= value;
+                    pitchDownA = value;
                 }
                 else
                 {

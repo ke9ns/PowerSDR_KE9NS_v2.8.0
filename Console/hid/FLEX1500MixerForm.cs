@@ -29,80 +29,80 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.Threading;
 using System.Windows.Forms;
 
 namespace PowerSDR
 {
-	public class FLEX1500MixerForm : System.Windows.Forms.Form
-	{
-		#region Variable Declaration
+    public class FLEX1500MixerForm : System.Windows.Forms.Form
+    {
+        #region Variable Declaration
 
-		private Console console;
-		private System.Windows.Forms.TrackBarTS tbMic;
-		private System.Windows.Forms.GroupBoxTS grpInput;
-		private System.Windows.Forms.LabelTS lblMic;
-		private System.Windows.Forms.GroupBoxTS grpOutput;
-		private System.Windows.Forms.CheckBoxTS chkInputMuteAll;
-		private System.Windows.Forms.CheckBoxTS chkMicSel;
-		private System.Windows.Forms.LabelTS lblFlexWireIn;
-		private System.Windows.Forms.CheckBoxTS chkFlexWireInSel;
-		private System.Windows.Forms.TrackBarTS tbFlexWireIn;
-		private System.Windows.Forms.CheckBoxTS chkOutputMuteAll;
-		private System.Windows.Forms.LabelTS lblPhones;
+        private Console console;
+        private System.Windows.Forms.TrackBarTS tbMic;
+        private System.Windows.Forms.GroupBoxTS grpInput;
+        private System.Windows.Forms.LabelTS lblMic;
+        private System.Windows.Forms.GroupBoxTS grpOutput;
+        private System.Windows.Forms.CheckBoxTS chkInputMuteAll;
+        private System.Windows.Forms.CheckBoxTS chkMicSel;
+        private System.Windows.Forms.LabelTS lblFlexWireIn;
+        private System.Windows.Forms.CheckBoxTS chkFlexWireInSel;
+        private System.Windows.Forms.TrackBarTS tbFlexWireIn;
+        private System.Windows.Forms.CheckBoxTS chkOutputMuteAll;
+        private System.Windows.Forms.LabelTS lblPhones;
         public CheckBoxTS chkPhonesSel;
         private System.Windows.Forms.TrackBarTS tbPhones;
-		private System.Windows.Forms.ToolTip toolTip1;
-		private System.Windows.Forms.LabelTS lblFlexWireOut;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.LabelTS lblFlexWireOut;
         public CheckBoxTS chkFlexWireOutSel;
         private System.Windows.Forms.TrackBarTS tbFlexWireOut;
         private ButtonTS btnCodecDump;
-		private System.ComponentModel.IContainer components;
+        private System.ComponentModel.IContainer components;
 
-		#endregion
+        #endregion
 
-		#region Constructor and Destructor
+        #region Constructor and Destructor
 
-		public FLEX1500MixerForm(Console c)
-		{
-			InitializeComponent();
-			console = c;
-			
-			Common.RestoreForm(this, "FLEX1500MixerForm", false);
+        public FLEX1500MixerForm(Console c)
+        {
+            InitializeComponent();
+            console = c;
 
-			chkMicSel_CheckedChanged(this, EventArgs.Empty);
-			chkFlexWireInSel_CheckedChanged(this, EventArgs.Empty);
-			chkPhonesSel_CheckedChanged(this, EventArgs.Empty);
-			chkFlexWireOutSel_CheckedChanged(this, EventArgs.Empty);
-			tbMic_Scroll(this, EventArgs.Empty);
-			tbFlexWireIn_Scroll(this, EventArgs.Empty);
-			tbPhones_Scroll(this, EventArgs.Empty);
-			tbFlexWireOut_Scroll(this, EventArgs.Empty);
-		}
+            Common.RestoreForm(this, "FLEX1500MixerForm", false);
 
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+            chkMicSel_CheckedChanged(this, EventArgs.Empty);
+            chkFlexWireInSel_CheckedChanged(this, EventArgs.Empty);
+            chkPhonesSel_CheckedChanged(this, EventArgs.Empty);
+            chkFlexWireOutSel_CheckedChanged(this, EventArgs.Empty);
+            tbMic_Scroll(this, EventArgs.Empty);
+            tbFlexWireIn_Scroll(this, EventArgs.Empty);
+            tbPhones_Scroll(this, EventArgs.Empty);
+            tbFlexWireOut_Scroll(this, EventArgs.Empty);
 
-		#endregion
+            this.TopMost = true; // ke9ns .174
+        }
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
+
+        #endregion
+
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FLEX1500MixerForm));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -357,8 +357,11 @@ namespace PowerSDR
             this.Controls.Add(this.btnCodecDump);
             this.Controls.Add(this.grpOutput);
             this.Controls.Add(this.grpInput);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
+            this.MaximumSize = new System.Drawing.Size(297, 269);
+            this.MinimumSize = new System.Drawing.Size(297, 269);
             this.Name = "FLEX1500MixerForm";
             this.Text = "FLEX-1500 Audio Mixer";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.FLEX1500MixerForm_Closing);
@@ -373,30 +376,30 @@ namespace PowerSDR
             this.grpOutput.PerformLayout();
             this.ResumeLayout(false);
 
-		}
-		#endregion
+        }
+        #endregion
 
-		#region Properties
+        #region Properties
 
-		public int MicInput
-		{
-			get { return tbMic.Value; }
-			set
-			{
-				tbMic.Value = value;
-				tbMic_Scroll(this,EventArgs.Empty);
+        public int MicInput
+        {
+            get { return tbMic.Value; }
+            set
+            {
+                tbMic.Value = value;
+                tbMic_Scroll(this, EventArgs.Empty);
             }
-		}
+        }
 
-		public int FlexWireIn
-		{
-			get { return tbFlexWireIn.Value; }
-			set
-			{
-				tbFlexWireIn.Value = value;
-				tbFlexWireIn_Scroll(this,EventArgs.Empty);
+        public int FlexWireIn
+        {
+            get { return tbFlexWireIn.Value; }
+            set
+            {
+                tbFlexWireIn.Value = value;
+                tbFlexWireIn_Scroll(this, EventArgs.Empty);
             }
-		}
+        }
 
         public bool MicInputSelected
         {
@@ -408,77 +411,82 @@ namespace PowerSDR
             }
         }
 
-		public string MicInputSelectedStr
-		{
-			get
-			{
-				if(chkMicSel.Checked)
-					return "1";
-				else
-					return "0";}
+        public string MicInputSelectedStr
+        {
+            get
+            {
+                if (chkMicSel.Checked)
+                    return "1";
+                else
+                    return "0";
+            }
 
-			set
-			{
-				if(value == "1")
-					chkMicSel.Checked = true;
-				else
-					chkMicSel.Checked = false;
-			}
-		}
+            set
+            {
+                if (value == "1")
+                    chkMicSel.Checked = true;
+                else
+                    chkMicSel.Checked = false;
+            }
+        }
 
-		public string LineInDB9Selected
-		{
-			get
-			{
-				if(chkFlexWireInSel.Checked)
-					return "1";
-				else
-					return "0";}
+        public string LineInDB9Selected
+        {
+            get
+            {
+                if (chkFlexWireInSel.Checked)
+                    return "1";
+                else
+                    return "0";
+            }
 
-			set
-			{
-				if(value == "1")
-					chkFlexWireInSel.Checked = true;
-				else
-					chkFlexWireInSel.Checked = false;
-			}
-		}
+            set
+            {
+                if (value == "1")
+                    chkFlexWireInSel.Checked = true;
+                else
+                    chkFlexWireInSel.Checked = false;
+            }
+        }
 
-		public string InputMuteAll
-		{
-			get
-			{
-				if(chkInputMuteAll.Checked)
-					return "1";
-				else
-					return "0";}
+        public string InputMuteAll
+        {
+            get
+            {
+                if (chkInputMuteAll.Checked)
+                    return "1";
+                else
+                    return "0";
+            }
 
-			set
-			{
-				if(value == "1")
-					chkInputMuteAll.Checked = true;
-				else
-					chkInputMuteAll.Checked = false;
-			}
-		}
+            set
+            {
+                if (value == "1")
+                    chkInputMuteAll.Checked = true;
+                else
+                    chkInputMuteAll.Checked = false;
+            }
+        }
 
-		public int Phones
-		{
-			get{return tbPhones.Value;}
-			set
-			{
-				tbPhones.Value = value;
-				tbPhones_Scroll(this,EventArgs.Empty);}
-		}
+        public int Phones
+        {
+            get { return tbPhones.Value; }
+            set
+            {
+                tbPhones.Value = value;
+                tbPhones_Scroll(this, EventArgs.Empty);
+            }
+        }
 
-		public int FlexWireOut
-		{
-			get{return tbFlexWireOut.Value;}
-			set
-			{
-				tbFlexWireOut.Value = value;
-				tbFlexWireOut_Scroll(this,EventArgs.Empty);}
-		}
+        public int FlexWireOut
+        {
+            get { return tbFlexWireOut.Value; }
+            set
+            {
+                tbFlexWireOut.Value = value;
+                tbFlexWireOut_Scroll(this, EventArgs.Empty);
+            }
+        }
 
         public bool PhonesSelected
         {
@@ -486,23 +494,24 @@ namespace PowerSDR
             set { chkPhonesSel.Checked = value; }
         }
 
-		public string PhonesSelectedStr
-		{
-			get
-			{
-				if(chkPhonesSel.Checked)
-					return "1";
-				else
-					return "0";}
+        public string PhonesSelectedStr
+        {
+            get
+            {
+                if (chkPhonesSel.Checked)
+                    return "1";
+                else
+                    return "0";
+            }
 
-			set
-			{
-				if(value == "1")
-					chkPhonesSel.Checked = true;
-				else
-					chkPhonesSel.Checked = false;
-			}
-		}
+            set
+            {
+                if (value == "1")
+                    chkPhonesSel.Checked = true;
+                else
+                    chkPhonesSel.Checked = false;
+            }
+        }
 
         public bool FlexWireOutSelected
         {
@@ -510,57 +519,59 @@ namespace PowerSDR
             set { chkFlexWireOutSel.Checked = value; }
         }
 
-		public string FlexWireOutSelectedStr
-		{
-			get
-			{
-				if(chkFlexWireOutSel.Checked)
-					return "1";
-				else
-					return "0";}
+        public string FlexWireOutSelectedStr
+        {
+            get
+            {
+                if (chkFlexWireOutSel.Checked)
+                    return "1";
+                else
+                    return "0";
+            }
 
-			set
-			{
-				if(value == "1")
-					chkFlexWireOutSel.Checked = true;
-				else
-					chkFlexWireOutSel.Checked = false;
-			}
-		}
+            set
+            {
+                if (value == "1")
+                    chkFlexWireOutSel.Checked = true;
+                else
+                    chkFlexWireOutSel.Checked = false;
+            }
+        }
 
-		public string OutputMuteAll
-		{
-			get
-			{
-				if(chkOutputMuteAll.Checked)
-					return "1";
-				else
-					return "0";}
+        public string OutputMuteAll
+        {
+            get
+            {
+                if (chkOutputMuteAll.Checked)
+                    return "1";
+                else
+                    return "0";
+            }
 
-			set
-			{
-				if(value == "1")
-					chkOutputMuteAll.Checked = true;
-				else
-					chkOutputMuteAll.Checked = false;
-			}
-		}
+            set
+            {
+                if (value == "1")
+                    chkOutputMuteAll.Checked = true;
+                else
+                    chkOutputMuteAll.Checked = false;
+            }
+        }
 
-		#endregion Properties
+        #endregion Properties
 
-		#region Input Event Handlers
+        #region Input Event Handlers
 
-		private void tbMic_Scroll(object sender, System.EventArgs e)
-		{
+        private void tbMic_Scroll(object sender, System.EventArgs e)
+        {
             if (chkMicSel.Checked && !chkInputMuteAll.Checked)
             {
                 //Debug.WriteLine("Mic Vol: 0x" + tbMic.Value.ToString("X").PadLeft(2, '0'));
                 USBHID.SetTXGain(tbMic.Value);
             }
-		}
+        }
 
-		private void tbFlexWireIn_Scroll(object sender, System.EventArgs e)
-		{
+        private void tbFlexWireIn_Scroll(object sender, System.EventArgs e)
+        {
             if (chkFlexWireInSel.Checked && !chkInputMuteAll.Checked)
             {
                 int val = tbFlexWireIn.Value;
@@ -570,10 +581,10 @@ namespace PowerSDR
                 Debug.WriteLine("reg_val: " + reg_val);
                 //USBHID.SetTXGain(tbFlexWireIn.Value);
             }
-		}
+        }
 
-		private void chkMicSel_CheckedChanged(object sender, System.EventArgs e)
-		{
+        private void chkMicSel_CheckedChanged(object sender, System.EventArgs e)
+        {
             if (chkMicSel.Checked)
             {
                 chkFlexWireInSel.Checked = false;
@@ -587,10 +598,10 @@ namespace PowerSDR
             }
             else if (!chkFlexWireInSel.Checked)
                 chkMicSel.Checked = true;
-		}
+        }
 
-		private void chkFlexWireInSel_CheckedChanged(object sender, System.EventArgs e)
-		{
+        private void chkFlexWireInSel_CheckedChanged(object sender, System.EventArgs e)
+        {
             if (chkFlexWireInSel.Checked)
             {
                 chkMicSel.Checked = false;
@@ -604,78 +615,78 @@ namespace PowerSDR
             }
             else if (!chkMicSel.Checked)
                 chkFlexWireInSel.Checked = true;
-		}
+        }
 
-		private void chkInputMuteAll_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(chkInputMuteAll.Checked)
-			{
-				chkInputMuteAll.BackColor = console.ButtonSelectedColor;
+        private void chkInputMuteAll_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (chkInputMuteAll.Checked)
+            {
+                chkInputMuteAll.BackColor = console.ButtonSelectedColor;
                 USBHID.SetTXGain(0x80);
-			}
-			else
-			{
-				chkInputMuteAll.BackColor = SystemColors.Control;
-				if(chkMicSel.Checked) tbMic_Scroll(this, EventArgs.Empty);
-				if(chkFlexWireInSel.Checked) tbFlexWireIn_Scroll(this, EventArgs.Empty);
-			}
-		}
+            }
+            else
+            {
+                chkInputMuteAll.BackColor = SystemColors.Control;
+                if (chkMicSel.Checked) tbMic_Scroll(this, EventArgs.Empty);
+                if (chkFlexWireInSel.Checked) tbFlexWireIn_Scroll(this, EventArgs.Empty);
+            }
+        }
 
-		#endregion
+        #endregion
 
-		#region Output Event Handlers
+        #region Output Event Handlers
 
-		private void tbPhones_Scroll(object sender, System.EventArgs e)
-		{
+        private void tbPhones_Scroll(object sender, System.EventArgs e)
+        {
             USBHID.SetSpkGain(0x80 + 127 - tbPhones.Value);
-		}
+        }
 
-		private void tbFlexWireOut_Scroll(object sender, System.EventArgs e)
-		{
-			USBHID.SetLineOutGain(0x80 + 127 - tbFlexWireOut.Value);
-		}
+        private void tbFlexWireOut_Scroll(object sender, System.EventArgs e)
+        {
+            USBHID.SetLineOutGain(0x80 + 127 - tbFlexWireOut.Value);
+        }
 
-		private void chkPhonesSel_CheckedChanged(object sender, System.EventArgs e)
-		{
+        private void chkPhonesSel_CheckedChanged(object sender, System.EventArgs e)
+        {
             if (!chkOutputMuteAll.Checked)
                 USBHID.SetSpkOn(chkPhonesSel.Checked);
             else USBHID.SetSpkOn(false);
-		}
+        }
 
-		private void chkFlexWireOutSel_CheckedChanged(object sender, System.EventArgs e)
-		{
+        private void chkFlexWireOutSel_CheckedChanged(object sender, System.EventArgs e)
+        {
             if (!chkOutputMuteAll.Checked)
                 USBHID.SetLineOutOn(chkFlexWireOutSel.Checked);
             else USBHID.SetLineOutOn(false);
-		}
+        }
 
-		private void chkOutputMuteAll_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(chkOutputMuteAll.Checked)
-			{
-				chkOutputMuteAll.BackColor = console.ButtonSelectedColor;
-			}
-			else
-			{
-				chkOutputMuteAll.BackColor = SystemColors.ControlLight;
+        private void chkOutputMuteAll_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (chkOutputMuteAll.Checked)
+            {
+                chkOutputMuteAll.BackColor = console.ButtonSelectedColor;
+            }
+            else
+            {
+                chkOutputMuteAll.BackColor = SystemColors.ControlLight;
             }
 
             chkPhonesSel_CheckedChanged(this, EventArgs.Empty); Thread.Sleep(20);
-			chkFlexWireOutSel_CheckedChanged(this, EventArgs.Empty);			
-		}
+            chkFlexWireOutSel_CheckedChanged(this, EventArgs.Empty);
+        }
 
-		#endregion
+        #endregion
 
-		#region Other Event Handlers
+        #region Other Event Handlers
 
-		private void FLEX1500MixerForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			this.Hide();
-			e.Cancel = true;
-			Common.SaveForm(this, "FLEX1500MixerForm");
-		}
+        private void FLEX1500MixerForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
+            Common.SaveForm(this, "FLEX1500MixerForm");
+        }
 
-		#endregion
+        #endregion
 
         private int dump_num = 0;
         private void btnCodecDump_Click(object sender, EventArgs e)
@@ -688,5 +699,5 @@ namespace PowerSDR
             if (e.Control && e.Alt && e.KeyCode == Keys.D)
                 btnCodecDump.Visible = true;
         }
-	}
+    }
 }

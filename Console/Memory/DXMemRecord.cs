@@ -24,9 +24,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace PowerSDR
 {
@@ -44,17 +41,17 @@ namespace PowerSDR
 
         public DXMemRecord(string _dxurl)
         {
-           
+
             dxurl = _dxurl;
-          
+
 
         }
 
         public DXMemRecord(DXMemRecord rec)
         {
-            
+
             dxurl = rec.dxurl;
-          
+
         }
 
         #endregion
@@ -73,7 +70,7 @@ namespace PowerSDR
 
         #region Properties
 
-        private string dxurl = "k1rfi.com:7300";
+        private string dxurl = "wb8zrl.no-ip.org:7300"; // was k1rfi.com
         public string DXURL
         {
             get { return dxurl; }
@@ -100,7 +97,7 @@ namespace PowerSDR
                 return this.DXURL.CompareTo(rec.DXURL);
             }
 
-           
+
 
             return this.DXURL.CompareTo(rec.DXURL);
 

@@ -293,46 +293,19 @@ NO WARRANTY
 12. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</value>
   </data>
   <data name="richTextBox1.Text" xml:space="preserve">
-    <value>KE9NS Revision History:
+    <value>PowerSDR KE9NS v2.8.0 Revision History:
 
-For Revision history visit: http://ke9ns.com/flexpage.html#GPLREV
+Complete list of v2.8 Revision history visit: https://ke9ns.com/flexpage.html#GPLREV
+
+For v2.8 Feature Videos: https://ke9ns.com/flexpage.html#videos
 
 DX Cluster List (if you wish to add/change DX Clusters in the Spotter windows): http://www.dxcluster.info/telnet/index.php
-
-Features add PDF file:
-"file://%userprofile%\AppData\Roaming\FlexRadio%20Systems\PowerSDR%20v2.8.0\PowerSDR%20ke9ns%20v2.8%20features.pdf"
-
 
 TX Waterfall ID PDF file:
 "file://%userprofile%\AppData\Roaming\FlexRadio%20Systems\PowerSDR%20v2.8.0\PowerSDR%20TX%20Waterfall%20ID.pdf"
 
-Each Video covers additional features not covered in earlier videos:
-
-YouTube Video Describing 2.8.0.38 (Updates to ID TImer, Pan Spotting, VFO Dials): https://www.youtube.com/embed/y5VLJEBOoZE
-YouTube Video Describing 2.8.0.27 (Updates to Scanner, Meters, Time Sync, SWL): https://www.youtube.com/embed/t3AWOG94w1Q
-YouTube Video Describing 2.8.0.18 (Scanner and DX Spotting): https://www.youtube.com/embed/YRG6ifwosAo
-YouTube Video Describing 2.8.0.16 (TX WaterID images): https://www.youtube.com/embed/Bsoz0c_mo5k
-YouTube Video Describing 2.8.0.2 (ID and Wav recording features): https://www.youtube.com/embed/VdzK-H5SXNc
-YouTube Video Describing RevT11 (ID Timer): https://www.youtube.com/embed/-KSlMNyN8U0
-YouTube Video Describing RevT11 (BandStack): https://www.youtube.com/embed/CQFvdhAtMaE
-YouTube Video Describing RevT11 (Pulser): https://www.youtube.com/embed/uruyOtyLRvM
-YouTube Video Describing RevT11 (VOACAP): https://www.youtube.com/embed/nBkeqs9No2E
-YouTube Video Describing RevT11 (NIST Time Sync): https://www.youtube.com/embed/p-5wKRw2xdY
-YouTube Video Describing RevT11 (NCDXF Beacon): https://www.youtube.com/embed/tJBvmF5t9zc
-YouTube Video Describing RevT10 (Rotor Control): https://www.youtube.com/embed/8hAMc_WUa2Q
-YouTube Video Describing RevT10 (Beam Heading): https://www.youtube.com/embed/AOEclAFXI0s
-YouTube Video Describing RevT10 (Scheduler): https://www.youtube.com/embed/JtKY6lwMTVY
-YouTube Video Describing RevT9 (SWL Search): https://www.youtube.com/embed/Cv-Jm2j3jw8
-
-YouTube Video Describing RevT8 (BandStack): https://www.youtube.com/embed/1JHV_CDQwIU
-YouTube Video Describing RevT8 (Space Wthr): https://www.youtube.com/embed/5xjzl5IkiJg
-YouTube Video Describing RevT8(PowerMate):  https://www.youtube.com/watch?v=sEQ2bzZn4bQ
-YouTube Video Describing RevT7(2nd TX meter): https://www.youtube.com/embed/635dur8SoKo
-YouTube Video Describing RevT6 to RevS11: https://www.youtube.com/embed/uPTpZCXCFw0
-YouTube Video Describing RevS10 to RevS2: https://www.youtube.com/embed/zninPwfSgJY
-YouTube Video Describing RevS1 to RevR4 : https://www.youtube.com/embed/fr523IwrApU
-YouTube Video Describing RevR3 to RevP2 : https://www.youtube.com/embed/mOwYpAMm8S0
-YouTube Video Describing RevP1 to Rev A : https://www.youtube.com/embed/aQN9KStSuPI
-</value>
+To download a new fcc database: ftp://wirelessftp.fcc.gov/pub/uls/complete/l_amat.zip
+Extract the EN.dat file out and move it to the database folder: %userprofile%\AppData\Roaming\FlexRadio Systems\PowerSDR v2.8.0\
+Delete the old FCCDATA.dat file. Next time you Right Click on the LoTW button in the Spotter screen, a new FCCDATA.dat will be created from the EN.dat file.</value>
   </data>
 </root>

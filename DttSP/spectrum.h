@@ -58,9 +58,16 @@ Bridgewater, NJ 08807
 #include <update.h>
 #include <window.h>
 
+
+// ke9ns: carries panadapter information?
+
+// scale
+// example: uni[thread].spec.scale = SPEC_PWR;
 #define SPEC_MAG	(0)
 #define SPEC_PWR	(1)
 
+// type
+// example: uni[thread].spec.type = SPEC_POST_FILT;
 #define SPEC_SEMI_RAW	(0)
 #define SPEC_PRE_FILT	(1)
 #define SPEC_POST_FILT	(2)
@@ -68,12 +75,18 @@ Bridgewater, NJ 08807
 #define SPEC_POST_DET	(4)
 #define SPEC_PREMOD		(4)
 
+// flag
+// label
+
+// size= size of the buffer? 4096?
+
+
 typedef struct _spec_block
 {
   BOOLEAN flag;
   int label;
   CXB accum, timebuf, freqbuf;
-  int fill, buflen, rxk, scale, size, type, mask;
+  int fill, buflen, rxk, scale, size, type, mask; // ke9ns: size=4096 points of specturm for panadapter display
   Windowtype wintype;
   REAL *window;
   float *output, *oscope;

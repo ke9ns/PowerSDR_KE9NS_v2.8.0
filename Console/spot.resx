@@ -125,21 +125,56 @@
 This list includes Short Wave AM Broadcast, Maritime, Military, Beacons
 and Digital signals: ALE, HFDL, Digital Audio (DRM), Stanag, Fax, DSC, Navtex</value>
   </data>
+  <data name="textBox1.ToolTip" xml:space="preserve">
+    <value>Hit F1 (mouse over LoTW button) for more HELP.
+
+LoTW Feature DUP,DXCC, and US States check (see LoTW button for setup):
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+Green: You have this DX Station confirmed on this Band (dont need this Dx Station)
+LightGreen: You have this DX Station confirmed on some other Band 
+Yellow: You have this DX station confirmed on some other band, and some other station already confirmed on this band (dont need this DX Station)
+
+Orange: You have this DXCC country confirmed on this Band (you dont need this DX Station
+LightPurple: You have this DXCC country CONFIRMED on some other Band (you WANT this DX Station)
+Purple: You WANT this DXCC country (you WANT this DX Station)
+
+DeepPink: You have worked this DX Station on this Band (But they have not  confirmed)
+Pink: You have worked DX Station on some other Band (But they have not confirmed)
+
+LightBlue: You have this US State confirmed on some other band (you WANT this DX Station)
+Blue: You WANT this US State (You Want this DX Station).
+
+Gray: Beacon Station
+
+</value>
+  </data>
   <data name="textBox3.Text" xml:space="preserve">
-    <value>&lt;&lt;&lt;Additional DX telnet addresses: http://www.dxcluster.info/telnet/index.php.
-Left Click on Spot to go to Freq and set Mode, or Right Click on spot to open QRZ page.
+    <value>Left Click = VFOA (Freq and Mode), Wheel Click=VFOB, Right Click = QRZ lookup
 Left Click on Spot BEAM HEADING to Freq &amp; Mode and Move Antenna using DDUtil
-Panadapter: Left Click + CTRL on Red Dots, DX, Memory, or SWL to set Freq, Mode, Split
-Panadapter: Left Click + CTRL on last letter of DX Spot to Move Antenna using DDUtil
+
+Panadapter: Focus + CTRL on Red Dots, DX, Memory, or SWL to set Freq, Mode, Split
+Panadapter: Focus + CTRL on last letter of DX Spot to Move Antenna using DDUtil
 Panadapter: Right Click on DX  to open QRZ page 
 Panadapter: Right Click on Memory to open up Memory Comments URL internet address
 Panadapter: Right Click on SWL to open up Google Search
 Panadapter: Left Click anywhere in PowerSDR + Shift key to see DX Spotters</value>
   </data>
+  <data name="callBox.ToolTip" xml:space="preserve">
+    <value>Enter Your Call sign to login to the DX Cluster here.
+
+Right click: on the callsign box and enter in your LOTW password.
+This is the password that you use to login to: https://lotw.arrl.org/lotw/login
+
+Then Right Click again to close the password box (it will be permanently saved)</value>
+  </data>
   <data name="btnTrack.ToolTip" xml:space="preserve">
-    <value>Click to Turn on/off World Map, and/or  GrayLine (Earth Dark &amp; Light Areas),
+    <value>HIT F2 to watch video showing how to use World map 
+
+
+Click to Turn on/off World Map, and/or  GrayLine (Earth Dark &amp; Light Areas),
 and/or Sun Tracking (position of Sun directly overhead a spot on Earth) on Panadapter.
-Sun Tracking Includes Space Weather (Requires Internet for Weather)</value>
+Sun Tracking Includes Space Weather (Requires Internet for Weather)"</value>
   </data>
   <data name="SWLbutton2.ToolTip" xml:space="preserve">
     <value>Searchable SWL listing window. Showing only SWL stations curently 
@@ -157,7 +192,9 @@ JA1IGY, RR9O, VR2B, 4S7B, ZS6DN, 5Z4B, 4X6TU, OH2B, CS3B, LU4AA,
 OA4B, and YV5B in 10 second intervals. </value>
   </data>
   <data name="btnTime.ToolTip" xml:space="preserve">
-    <value>!!!!!Requires running PowerSDR in ADMIN mode!!!!
+    <value>Hit F2 to watch video showing how to use Time Sync
+
+!!!!!Requires running PowerSDR in ADMIN mode!!!!
 !!!!!Requires Internet Connection!!!!!!
 !!!!!Your PC must be set to the correct Local Time Zone!!!!!
 !!!!! Your PC must be set to the correct Daylight Savings setting!!!!!
@@ -167,21 +204,149 @@ Sync up your PC clock time to NIST.
 Use this feature before running a Beacon Scan,
 or before running WJST (JT65) or WSPR digital modes</value>
   </data>
-  <data name="chkISS.ToolTip" xml:space="preserve">
-    <value>True (Zenith) position of the ISS will show on Panadapter screen 
-When you Click on the TRACK button to activate the World Map
-In Panadapter or Special PanaFall modes
-NOTE: This is internet based ISS Location Data (not a PSDR calculation)</value>
+  <data name="DXPost.ToolTip" xml:space="preserve">
+    <value>Posts your Contact to the DX Cluster
+
+Fill in DX Callsign with Contact 
+OR
+select DX spot line above
+
+Left Click on "Callout" button to Post spot from VFOA Frequency
+Right Click on "Callout" button to Post spot from VFOB Frequency
+</value>
   </data>
-  <data name="chkMoon.ToolTip" xml:space="preserve">
-    <value>True (Zenith) position of the Moon will show on Panadapter screen 
-When you Click on the TRACK button to activate the World Map
-In Panadapter or Special PanaFall modes
+  <data name="textBoxDXCall.ToolTip" xml:space="preserve">
+    <value>Enter the Call Sign of the DX station you made Contact with.
+
+If you do not enter a Call Sign, you must select a DX station from a line above.
+
+Left Click on "Callout" button to Post spot from VFOA Frequency
+Right Click on "Callout" button to Post spot from VFOB Frequency</value>
+  </data>
+  <data name="RotorHead.ToolTip" xml:space="preserve">
+    <value>When Connected to your Antenna Rotor Controller via DDUtil
+This shows the current Antenna Rotor Heading 0-359
+
+NA = you are not connected to your Rotor Control. 
+DDUtil may not be running, or configured correctly.
+</value>
+  </data>
+  <data name="button4.ToolTip" xml:space="preserve">
+    <value>HIT F1 for HELPBOX
+HIT F2 to watch video showing how to use LoTW
+
+LoTW (ARRL Log Book of The World)
+
+If you do NOT have an LoTW account, SIGN UP AT: &lt;http://www.arrl.org/quick-start&gt;
+Yes its overly complicated, but you only need to do it one time!
+
+---------------------------------------------------------------------------------------
+DX Spotter Screen:
+1) You must have your Callsign entered in the box in the bottom Right corner
+2) Right click on the Callsign box and enter in your LoTW password.
+This is the password that you use to login to: &lt;https://lotw.arrl.org/lotw/login&gt;
+
+---------------------------------------------------------------------------------------
+[Left Click] LoTW Button = (On/Off):
+PowerSDR will check to see if you have a “LoTW_LOG.adi” file, and “FCCDATA.dat” file in your database folder.
+
+Files YES= Open/Read “LoTW_LOG.adi” and “FCCDATA.dat” files, and start checking DX Spots for Dups, DXCC Countries list, and US States.
+
+Files NO= PowerSDR will go to ARRL and download your FULL LoTW Log file. (This may take a few minutes to download) 
+If you don’t have a “FCCDATA.dat” file, PowerSDR will attempt to find EN.dat and convert it to “FCCDATA.dat”
+
+-----------------------------------------------------------------------------------------------------
+[Right Click]   LoTW Button = incremental Log file update:
+PowerSDR will go to ARRL and download incremental QSO/QSL updates to your LoTW Log file (based on the Date of the Last Update). 
+This requires only a few seconds to update.
+
+GREEN LoTW  when running.
+YELLOW LoTW  when downloading a LoTW Log QSO/QSLfile
+RED LoTW  when a fault occured.
+
+To download a new fcc database: ftp://wirelessftp.fcc.gov/pub/uls/complete/l_amat.zip</value>
+  </data>
+  <data name="chkISS.ToolTip" xml:space="preserve">
+    <value>True (Zenith) position of the ISS will show on Panadapter screen (includes Elevation to you)
+When you Click on the TRACK/Map button to activate the World Map
+
+NOTE: This is internet based ISS Location Data (not a PSDR calculation)
 
 Left Click on the Moon and hit the CTRL key to Rotate your Antenna</value>
   </data>
+  <data name="chkMoon.ToolTip" xml:space="preserve">
+    <value>True (Zenith) position of the Moon will show on Panadapter screen (including Elevation to you)
+When you Click on the TRACK/Map button to activate the World Map
+
+
+Left Click on the Moon and hit the CTRL key to Rotate your Antenna</value>
+  </data>
+  <data name="chkBoxContour.ToolTip" xml:space="preserve">
+    <value>HIT F2 to watch video showing how to use VOACAP
+
+VOACAP: Check for Contour instead of dots
+
+Blue       Strongest Signal (AM)
+Green    Strong Signal  (AM/SSB)
+Yellow   Fair Signal (SSB, CW)
+Orange  Weak Signal  (CW, FT8)
+Gray       Weakest Signal (CW, FT8)
+
+</value>
+  </data>
+  <data name="chkBoxAnt.ToolTip" xml:space="preserve">
+    <value>HIT F2 to watch video showing how to use VOACAP
+
+Check this box if your using a Beam Antenna instead of a Dipole
+
+Use VOACAP to map Signal Strength from your station, 
+based on your Lat &amp; Long
+
+View using TRACK button
+
+Blue       Strongest Signal (AM)
+Green    Strong Signal  (AM/SSB)
+Yellow   Fair Signal (SSB, CW)
+Orange  Weak Signal  (CW, FT8)
+Gray       Weakest Signal (CW, FT8)
+
+
+</value>
+  </data>
+  <data name="checkBoxMUF.ToolTip" xml:space="preserve">
+    <value>Hit F1 for a Full Description
+HIT F2 to watch video showing how to use VOACAP
+
+Use VOACAP to map Signal Strength from your station, 
+based on your Lat &amp; Long
+
+View using TRACK/Map button
+
+Blue       Strongest Signal (AM)
+Green    Strong Signal  (AM/SSB)
+Yellow   Fair Signal (SSB, CW)
+Orange  Weak Signal  (CW, FT8)
+Gray       Weakest Signal (CW, FT8)
+
+</value>
+  </data>
+  <data name="udDisplayWWV.ToolTip" xml:space="preserve">
+    <value>If you check the "use WWV HF" Box:
+Hit F2 to watch video showing how to use Time Sync
+
+Select a WWV station with a stron non-fading signal.
+Usually 10mhz and 15mhz are the cleanest signals
+1=2.5mhz 
+2=5.0mhz
+3=10.0mhz
+4=15.0mhz
+
+</value>
+  </data>
   <data name="checkBoxWWV.ToolTip" xml:space="preserve">
-    <value>Check this box, then Click  on "Time Sync"
+    <value>Hit F2 to watch video showing how to use Time Sync
+
+Check this box, then Click  on "Time Sync"
 
 Time Sync will listen to Radio WWV BCD time code 
 found on a 100hz sub-carrier.

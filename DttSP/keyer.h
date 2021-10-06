@@ -37,6 +37,12 @@ The DTTS Microwave Society
 Bridgewater, NJ 08807
 */
 
+// ke9ns THIS CODE IS NOT USED IN POWERSDR. NOT SURE WHY
+// ke9ns THIS CODE IS NOT USED
+// FLEX SWITCHED OVER TO THEIR FLEXCW.DLL
+
+
+
 #ifndef _keyer_h
 #define _keyer_h
 

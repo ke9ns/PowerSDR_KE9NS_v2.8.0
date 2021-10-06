@@ -41,12 +41,15 @@ typedef struct _nbstate
 {
   CXB sigbuf;			/* Signal Buffer */
   REAL threshold;		/* Noise Blanker Threshold */
-  COMPLEX average_sig;
+  int ht; // ke9ns add: .182
+  int dly; // ke9ns add: .182
+  COMPLEX average_sig; // ke9ns: used by NB2 only
   REAL average_mag;
-  COMPLEX delay[8];
-  int delayindex;
+  COMPLEX delay[64]; // was 8
+   int delayindex;
   int sigindex;
-  int hangtime;
+  int hangtime;       // ke9ns: now has a changable value .182
+ 
 } *NB, nbstate;
 
 extern NB new_noiseblanker (CXB sigbuf, REAL threshold);

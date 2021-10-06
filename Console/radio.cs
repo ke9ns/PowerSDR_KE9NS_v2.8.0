@@ -142,9 +142,9 @@ namespace PowerSDR
             if (this.model != r.model)
                 return this.model.CompareTo(r.model);
 
-            if(this.nickname != r.nickname) 
+            if(this.nickname != r.nickname)
                 return this.nickname.CompareTo(r.nickname);
-            
+
             return this.serial_number.CompareTo(r.serial_number);
         }
 
@@ -155,7 +155,7 @@ namespace PowerSDR
 
 
         //=======================================================================================================
-    
+
         public string GetDBFilename()
         {
             string s = "";
@@ -169,7 +169,7 @@ namespace PowerSDR
                 case Model.DEMO: s = "Demo"; break;
             }
 
-          
+
             return "database_" + s + "_" + serial_number + ".xml"; // ke9ns here is the database that will be used 
         }
 
@@ -191,8 +191,8 @@ namespace PowerSDR
 
             return "database_RevQ_" + s + "_" + serial_number + ".xml"; // ke9ns here is the database that will be used 
         }
-       
-      
+
+
 
     }
 }

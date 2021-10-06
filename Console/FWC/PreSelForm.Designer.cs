@@ -67,7 +67,7 @@ namespace PowerSDR
             // 
             this.chkBypassTR.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkBypassTR.Image = null;
-            this.chkBypassTR.Location = new System.Drawing.Point(165, 143);
+            this.chkBypassTR.Location = new System.Drawing.Point(160, 131);
             this.chkBypassTR.Name = "chkBypassTR";
             this.chkBypassTR.Size = new System.Drawing.Size(69, 23);
             this.chkBypassTR.TabIndex = 4;
@@ -128,13 +128,12 @@ namespace PowerSDR
             // 
             // tbTune
             // 
-            this.tbTune.LargeChange = 16;
             this.tbTune.Location = new System.Drawing.Point(12, 172);
             this.tbTune.Maximum = 255;
             this.tbTune.Name = "tbTune";
-            this.tbTune.Size = new System.Drawing.Size(132, 45);
+            this.tbTune.Size = new System.Drawing.Size(237, 45);
             this.tbTune.TabIndex = 1;
-            this.tbTune.TickFrequency = 32;
+            this.tbTune.TickFrequency = 10;
             this.tbTune.Value = 128;
             this.tbTune.Scroll += new System.EventHandler(this.tbTune_Scroll);
             // 
@@ -225,7 +224,7 @@ namespace PowerSDR
             this.Controls.Add(this.grpBand);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PreSelForm";
-            this.Text = "Preselector";
+            this.Text = "Preselector IIC";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PreSelForm_FormClosing);
             this.grpAnt.ResumeLayout(false);
             this.grpAnt.PerformLayout();
@@ -240,16 +239,16 @@ namespace PowerSDR
         #endregion
 
         private System.Windows.Forms.GroupBoxTS grpBand;
-        private System.Windows.Forms.RadioButtonTS radBandA;
-        private System.Windows.Forms.RadioButtonTS radBandE;
-        private System.Windows.Forms.RadioButtonTS radBandD;
-        private System.Windows.Forms.RadioButtonTS radBandC;
-        private System.Windows.Forms.RadioButtonTS radBandB;
-        private System.Windows.Forms.TrackBarTS tbTune;
-        private System.Windows.Forms.RadioButtonTS radAnt1;
         private System.Windows.Forms.GroupBoxTS grpAnt;
-        private System.Windows.Forms.RadioButtonTS radAnt2;
-        private System.Windows.Forms.CheckBoxTS chkBypassTR;
-        private System.Windows.Forms.RadioButtonTS radAntRXOnly;
+        public System.Windows.Forms.RadioButtonTS radBandA;
+        public System.Windows.Forms.RadioButtonTS radBandE;
+        public System.Windows.Forms.RadioButtonTS radBandD;
+        public System.Windows.Forms.RadioButtonTS radBandC;
+        public System.Windows.Forms.RadioButtonTS radBandB;
+        public System.Windows.Forms.TrackBarTS tbTune;
+        public System.Windows.Forms.RadioButtonTS radAnt1;
+        public System.Windows.Forms.RadioButtonTS radAnt2;
+        public System.Windows.Forms.CheckBoxTS chkBypassTR;
+        public System.Windows.Forms.RadioButtonTS radAntRXOnly;
     }
 }

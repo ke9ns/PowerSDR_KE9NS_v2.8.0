@@ -23,30 +23,21 @@
 //=================================================================
 
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
-
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Drawing.Text;
-using System.Collections;
-using System.ComponentModel;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Threading;
 using System.Windows.Forms;
-using System.Threading.Tasks;
 
 namespace PowerSDR
 {
     public class StackControl : System.Windows.Forms.Form
     {
 
-       
+
         public static SpotControl SpotForm;                     // ke9ns add  communications with spot.cs 
         public ScanControl ScanForm;                            // ke9ns add freq Scanner function
-        
-       
+
+
         public static Console console;   // ke9ns mod  to allow console to pass back values to stack screen
         public Setup setupForm;   // ke9ns communications with setupform  (i.e. allow combometertype.text update from inside console.cs) 
 
@@ -57,15 +48,16 @@ namespace PowerSDR
         private System.Windows.Forms.GroupBoxTS grpPlayback;
         private System.Windows.Forms.GroupBox grpPlaylist;
         private System.Windows.Forms.MainMenu mainMenu1;
-        private CheckBoxTS chkAlwaysOnTop;
+        public CheckBoxTS chkAlwaysOnTop;
         public TextBox textBox1;
         public Button buttonSort;
         public Button buttonAdd;
         public Button buttonDel;
         private TextBox textBox3;
+        public TextBox textBox2;
         private IContainer components;
 
-     //   public DXMemList dxmemlist;
+        //   public DXMemList dxmemlist;
 
         #region Constructor and Destructor
 
@@ -75,10 +67,10 @@ namespace PowerSDR
             console = c;
 
             Common.RestoreForm(this, "StackForm", true);
-  
+
 
             bandstackupdate();
-           
+
 
 
         } // stackcontrol
@@ -111,6 +103,7 @@ namespace PowerSDR
             this.buttonDel = new System.Windows.Forms.Button();
             this.chkAlwaysOnTop = new System.Windows.Forms.CheckBoxTS();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBox1
@@ -122,22 +115,24 @@ namespace PowerSDR
             this.textBox1.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.HideSelection = false;
             this.textBox1.Location = new System.Drawing.Point(12, 112);
-            this.textBox1.MaximumSize = new System.Drawing.Size(254, 222);
+            this.textBox1.MaximumSize = new System.Drawing.Size(176, 174);
             this.textBox1.MaxLength = 1000;
+            this.textBox1.MinimumSize = new System.Drawing.Size(176, 174);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(176, 210);
+            this.textBox1.Size = new System.Drawing.Size(176, 174);
             this.textBox1.TabIndex = 60;
             this.textBox1.TabStop = false;
             this.textBox1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             this.textBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.textBox1_MouseDown);
+            this.textBox1.MouseEnter += new System.EventHandler(this.StackControl_MouseEnter);
             this.textBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.textBox1_MouseUp);
             // 
             // buttonSort
             // 
             this.buttonSort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonSort.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.buttonSort.Location = new System.Drawing.Point(55, 333);
+            this.buttonSort.Location = new System.Drawing.Point(55, 477);
             this.buttonSort.Name = "buttonSort";
             this.buttonSort.Size = new System.Drawing.Size(45, 23);
             this.buttonSort.TabIndex = 61;
@@ -149,7 +144,7 @@ namespace PowerSDR
             // 
             this.buttonAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonAdd.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.buttonAdd.Location = new System.Drawing.Point(3, 333);
+            this.buttonAdd.Location = new System.Drawing.Point(3, 477);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(46, 23);
             this.buttonAdd.TabIndex = 62;
@@ -161,7 +156,7 @@ namespace PowerSDR
             // 
             this.buttonDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonDel.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.buttonDel.Location = new System.Drawing.Point(106, 333);
+            this.buttonDel.Location = new System.Drawing.Point(106, 477);
             this.buttonDel.Name = "buttonDel";
             this.buttonDel.Size = new System.Drawing.Size(45, 23);
             this.buttonDel.TabIndex = 63;
@@ -173,7 +168,7 @@ namespace PowerSDR
             // 
             this.chkAlwaysOnTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkAlwaysOnTop.Image = null;
-            this.chkAlwaysOnTop.Location = new System.Drawing.Point(154, 328);
+            this.chkAlwaysOnTop.Location = new System.Drawing.Point(154, 472);
             this.chkAlwaysOnTop.Name = "chkAlwaysOnTop";
             this.chkAlwaysOnTop.Size = new System.Drawing.Size(47, 35);
             this.chkAlwaysOnTop.TabIndex = 59;
@@ -183,21 +178,40 @@ namespace PowerSDR
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(12, 12);
+            this.textBox3.Location = new System.Drawing.Point(12, 8);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
-            this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox3.Size = new System.Drawing.Size(176, 94);
+            this.textBox3.Size = new System.Drawing.Size(176, 98);
             this.textBox3.TabIndex = 9;
             this.textBox3.TabStop = false;
-            this.textBox3.Text = "Click on line to change freq.\r\nRight Click on line to LOCK/UNLOCK.\r\nDEL key or Wh" +
-    "eel Click to Delete Entry.\r\nCTRL + Right Click on BAND button to ADD to BandStac" +
-    "k";
+            this.textBox3.Text = "Click on line to change freq.\r\nRight Click on line to LOCK/UNLOCK.\r\nADD,SORT,DEL " +
+    "\r\nLeft Click works on VFOA\r\nRight Click works on VFOB";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBox2.BackColor = System.Drawing.Color.LightYellow;
+            this.textBox2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBox2.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.HideSelection = false;
+            this.textBox2.Location = new System.Drawing.Point(12, 296);
+            this.textBox2.MaximumSize = new System.Drawing.Size(176, 174);
+            this.textBox2.MaxLength = 1000;
+            this.textBox2.MinimumSize = new System.Drawing.Size(176, 174);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(176, 174);
+            this.textBox2.TabIndex = 64;
+            this.textBox2.TabStop = false;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.textBox2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.textBox2_MouseUp);
             // 
             // StackControl
             // 
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(200, 361);
+            this.ClientSize = new System.Drawing.Size(200, 505);
+            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.buttonDel);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.buttonSort);
@@ -205,12 +219,13 @@ namespace PowerSDR
             this.Controls.Add(this.chkAlwaysOnTop);
             this.Controls.Add(this.textBox3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(274, 400);
-            this.MinimumSize = new System.Drawing.Size(200, 200);
+            this.MaximumSize = new System.Drawing.Size(216, 544);
+            this.MinimumSize = new System.Drawing.Size(216, 544);
             this.Name = "StackControl";
             this.Text = "Band Stack";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StackControl_FormClosing);
             this.Load += new System.EventHandler(this.StackControl_Load);
+            this.MouseEnter += new System.EventHandler(this.StackControl_MouseEnter);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -239,18 +254,24 @@ namespace PowerSDR
         private void StackControl_Load(object sender, EventArgs e)
         {
             bandstackupdate();
-           
+
+
+            console.buttonbs.BackColor = Color.Blue; // ke9ns ad .211 active
+
+
         }
 
 
         //=======================================================================================================================
         private void StackControl_FormClosing(object sender, FormClosingEventArgs e)
         {
-           
+            if (console.chkBoxBS.Checked) console.buttonbs.BackColor = Color.Green; // ke9ns ad .211 active
+            else  console.buttonbs.BackColor = Color.Black; // ke9ns ad .211 active
+
             this.Hide();
             e.Cancel = true;
             Common.SaveForm(this, "StackForm");
-         
+
 
         }
 
@@ -263,16 +284,22 @@ namespace PowerSDR
         string locker;
 
         public double[] freq1 = new double[20];
+        public string[] filter1 = new string[20];
+        public string[] filter2 = new string[20]; // ke9ns add   F4 would indicate a unlocked bandstack memory, but F4L would indicate its a locked bandstank memory
+        public string[] mode1 = new string[20];
 
-       public string[] filter1 = new string[20];
-       public string[] filter2 = new string[20]; // ke9ns add   F4 would indicate a unlocked bandstack memory, but F4L would indicate its a locked bandstank memory
-       public string[] mode1 = new string[20];
+        // ke9ns add .209
+        public double[] freq12 = new double[20];
+        public string[] filter12 = new string[20];
+        public string[] filter22 = new string[20]; // ke9ns add   F4 would indicate a unlocked bandstack memory, but F4L would indicate its a locked bandstank memory
+        public string[] mode12 = new string[20];
 
-       public int BSLength = 22;  // 31 length of a BandStack Line
+        public int BSLength = 22;  // 31 length of a BandStack Line
 
-       public int nnn = 0; // 0-41 based on last_band
+        public int nnn = 0; // 0-41 based on last_band
+        public int nnn2 = 0; // .209
 
-       public string[] band_list = {"160M", "80M", "60M", "40M", "30M", "20M", "17M",
+        public string[] band_list = {"160M", "80M", "60M", "40M", "30M", "20M", "17M",
                                      "15M", "12M", "10M", "6M", "2M", "WWV", "GEN",
                                       "LMF","120M","90M","61M","49M","41M","31M","25M",
                                      "22M","19M","16M","14M","13M","11M",
@@ -280,13 +307,11 @@ namespace PowerSDR
                                      "VHF6", "VHF7", "VHF8", "VHF9", "VHF10", "VHF11",
                                      "VHF12", "VHF13" };
 
-       //===========================================================================================================
+        //===========================================================================================================
+        // ke9ns: update VFOA and B bandstacks
         public void bandstackupdate()
         {
             string bigmessage = null; // full textbox string (combine 1 and 2)
-            string bigmessagea = null; // full textbox string (combine 1 and 2)
-
-            string bigmessage1a = null; // each freq string
             string bigmessage1 = null; // each freq string
             string bigmessage2 = null; // each memory string
             string bigmessage3 = null; // each lock or unlock
@@ -296,8 +321,8 @@ namespace PowerSDR
                 if (band_list[nnn] == console.last_band) break; // this is the current band_list index 
             }
 
-      
-            for (int ii = 0; ii < console.band_stacks[nnn]; ii++)
+
+            for (int ii = 0; ii < console.band_stacks[nnn]; ii++) // VFOA
             {
                 if (DB.GetBandStack(band_list[nnn], ii, out mode, out filter, out freq))
                 {
@@ -320,13 +345,13 @@ namespace PowerSDR
                         console.filter2[ii] = "";
 
                     }
-                  //  Debug.WriteLine("BANDSTACK: " + freq);
+                    //  Debug.WriteLine("BANDSTACK: " + freq);
 
-                  
+
                     freq1[ii] = freq;
 
-                  //   if (ii >= 9) bigmessage1 = (ii + 1).ToString() + ": " + freq.ToString("N" + 6).PadLeft(11) + ":"; //.PadLeft(11)
-                  //    else bigmessage1 = (ii + 1).ToString() + " : " + freq.ToString("N" + 6).PadLeft(11) + ":";
+                    //   if (ii >= 9) bigmessage1 = (ii + 1).ToString() + ": " + freq.ToString("N" + 6).PadLeft(11) + ":"; //.PadLeft(11)
+                    //    else bigmessage1 = (ii + 1).ToString() + " : " + freq.ToString("N" + 6).PadLeft(11) + ":";
 
                     bigmessage1 = freq.ToString("####.000000").PadLeft(11) + ":"; // was N6 4 less than having index numbers
 
@@ -336,14 +361,14 @@ namespace PowerSDR
 
                     if (SpotForm != null)
                     {
-                      //  Debug.WriteLine("1Rows Count " + SpotForm.dataGridView2.Rows.Count);
+                        //  Debug.WriteLine("1Rows Count " + SpotForm.dataGridView2.Rows.Count);
 
                         for (int aa = 0; aa < SpotForm.dataGridView2.Rows.Count; aa++) // get current # of memories we have available; ii++)     // Index through entire DXspot to find what is on this panadapter (draw vert lines first)
                         {
 
                             if (freq == Convert.ToDouble(SpotForm.dataGridView2[1, aa].Value))
                             {
-                                Debug.WriteLine("found memory" + SpotForm.dataGridView2[0, aa]);
+                               // Debug.WriteLine("found memoryA: " + SpotForm.dataGridView2[0, aa]);
                                 bigmessage2 = "mem:";
 
                                 break; // end the aa loop
@@ -357,13 +382,13 @@ namespace PowerSDR
                     //----------------------------------------------------------------
 
                     bigmessage1 = bigmessage1 + bigmessage2 + bigmessage3;
-                 
-                //    bigmessage1 = bigmessage1.PadRight(BSLength -2); // 29 was 28 char long
+
+                    //    bigmessage1 = bigmessage1.PadRight(BSLength -2); // 29 was 28 char long
 
                     bigmessage += bigmessage1 + "\r\n"; // + 3 more was 31 now 33
- 
 
-                   //  Debug.WriteLine("LENGTH===== " + bigmessage.Length);
+
+                    //  Debug.WriteLine("LENGTH===== " + bigmessage.Length);
 
 
                 } // if bandstack available for band
@@ -375,9 +400,8 @@ namespace PowerSDR
 
             } // for
 
-         
-            textBox1.Text = bigmessage; // update screen
 
+            textBox1.Text = bigmessage; // update screen
             console.textBox1.Text = bigmessage; // update screen
 
 
@@ -385,7 +409,7 @@ namespace PowerSDR
             textBox1.Focus();
             textBox1.Show();
 
-        
+
             int value;
 
             if (int.TryParse(console.regBox1.Text, out value))
@@ -400,7 +424,7 @@ namespace PowerSDR
                     console.textBox1.SelectionLength = BSLength;                    // length of each bandstack line
 
 
-                    //   Debug.WriteLine("Value "+ value + " , " + BSLength);
+                    Debug.WriteLine("ValueA " + value + " , " + BSLength);
 
                 }
                 else
@@ -423,101 +447,239 @@ namespace PowerSDR
                 console.textBox1.SelectionLength = BSLength;
             }
 
+
+            //===========================================================================
+            //===========================================================================
+            //===========================================================================
+            // VFOB .209
+
+
+            string bigmessage02 = null; // full textbox string (combine 1 and 2)
+
+                string bigmessage12 = null; // each freq string
+                string bigmessage22 = null; // each memory string
+                string bigmessage32 = null; // each lock or unlock
+
+                for (nnn2 = 0; nnn2 < 41; nnn2++) // total number of possible Bands
+                {
+                    if (band_list[nnn2] == console.last_band2) break; // this is the current band_list index   nnn2 set here
+                }
+
+
+                for (int ii = 0; ii < console.band_stacks[nnn2]; ii++) // VFOB
+                {
+                    if (DB.GetBandStack2(band_list[nnn2], ii, out mode, out filter, out freq))
+                    {
+                      
+                        mode12[ii] = mode;
+
+                        filter12[ii] = filter;
+
+
+                        if (filter.Contains("@"))
+                        {
+                            bigmessage32 = "Lock";
+                            console.filter22[ii] = "@";
+                        }
+                        else
+                        {
+                            bigmessage32 = "----";
+                            console.filter22[ii] = "";
+
+                        }
+                        //  Debug.WriteLine("BANDSTACK: " + freq);
+
+
+                        freq12[ii] = freq;
+
+                      
+                        bigmessage12 = freq.ToString("####.000000").PadLeft(11) + ":"; // was N6 4 less than having index numbers
+
+                        bigmessage22 = "---:";
+                        //----------------------------------------------------------------
+
+
+                        if (SpotForm != null)
+                        {
+                            //  Debug.WriteLine("1Rows Count " + SpotForm.dataGridView2.Rows.Count);
+
+                            for (int aa = 0; aa < SpotForm.dataGridView2.Rows.Count; aa++) // get current # of memories we have available; ii++)     // Index through entire DXspot to find what is on this panadapter (draw vert lines first)
+                            {
+
+                                if (freq == Convert.ToDouble(SpotForm.dataGridView2[1, aa].Value))
+                                {
+                                  //  Debug.WriteLine("found memoryB: " + SpotForm.dataGridView2[0, aa]);
+                                    bigmessage22 = "mem:";
+
+                                    break; // end the aa loop
+                                }
+
+
+                            } // for loop through MEMORIES
+
+                        } // if (SpotForm != null)
+
+                        //----------------------------------------------------------------
+
+                        bigmessage12 = bigmessage12 + bigmessage22 + bigmessage32;
+                       
+                        bigmessage02 += bigmessage12 + "\r\n"; // + 3 more was 31 now 33
+
+
+                        //  Debug.WriteLine("LENGTH===== " + bigmessage.Length);
+
+
+                    } // if bandstack available for band
+                    else
+                    {
+                        //  Debug.WriteLine("no bandstack for band "+band_list[nnn]);
+                        break;
+                    }
+
+                } // for
+
+            textBox2.Text = bigmessage02; // update screen
+            console.textBox2.Text = bigmessage02; // update screen
+
+                //---------------------------------------------------------
+                textBox1.Focus();
+                textBox1.Show();
+
+
+                int value2;
+
+                if (int.TryParse(console.regBox12, out value2))
+                {
+
+                    if (value2 > 0)
+                    {
+                       textBox2.SelectionStart = (value2 - 1) * BSLength;       // start of each bandstack line
+                       textBox2.SelectionLength = BSLength;                    // length of each bandstack line
+
+                        console.textBox2.SelectionStart = (value2 - 1) * BSLength;       // start of each bandstack line
+                        console.textBox2.SelectionLength = BSLength;                    // length of each bandstack line
+
+                        Debug.WriteLine("ValueB " + value2 + " , " + BSLength);
+
+                    }
+                    else
+                    {
+                        textBox2.SelectionStart = 0;
+                        textBox2.SelectionLength = BSLength;
+
+                        console.textBox2.SelectionStart = 0;
+                        console.textBox2.SelectionLength = BSLength;
+                    }
+
+                }
+                else
+                {
+                    Debug.WriteLine("no value");
+
+                    textBox2.SelectionStart = 0;
+                     textBox2.SelectionLength = BSLength;
+
+                     console.textBox2.SelectionStart = 0;
+                    console.textBox2.SelectionLength = BSLength;
+                }
+
+        
+
         } // bandstackupdate
 
 
         //======================================================================== 
-    public void updateindex()    
-    {
-        switch(console.RX1Band)
-			{
-				case Band.B160M:
+        public void updateindex()
+        {
+            switch (console.RX1Band)
+            {
+                case Band.B160M:
                     console.band_160m_index = xxx;
-		
-					break;
-				case Band.B80M:
+
+                    break;
+                case Band.B80M:
                     console.band_80m_index = xxx;
 
                     break;
-				case Band.B60M:
+                case Band.B60M:
                     console.band_60m_index = xxx;
 
                     break;
-				case Band.B40M:
+                case Band.B40M:
                     console.band_40m_index = xxx;
                     break;
-				case Band.B30M:
+                case Band.B30M:
                     console.band_30m_index = xxx;
                     break;
-				case Band.B20M:
+                case Band.B20M:
                     console.band_20m_index = xxx;
                     break;
-				case Band.B17M:
+                case Band.B17M:
                     console.band_17m_index = xxx;
                     break;
-				case Band.B15M:
+                case Band.B15M:
                     console.band_15m_index = xxx;
                     break;
-				case Band.B12M:
+                case Band.B12M:
                     console.band_12m_index = xxx;
                     break;
-				case Band.B10M:
+                case Band.B10M:
                     console.band_10m_index = xxx;
                     break;
-				case Band.B6M:
+                case Band.B6M:
                     console.band_6m_index = xxx;
                     break;
-				case Band.B2M:
+                case Band.B2M:
                     console.band_2m_index = xxx;
                     break;
-				case Band.WWV:
-					console.band_wwv_index = xxx;
-					break;
+                case Band.WWV:
+                    console.band_wwv_index = xxx;
+                    break;
                 case Band.GEN:
                     console.band_gen_index = xxx;
                     break;
 
-             
-				case Band.VHF0:
+
+                case Band.VHF0:
                     console.band_vhf0_index = xxx;
                     break;
-				case Band.VHF1:
+                case Band.VHF1:
                     console.band_vhf1_index = xxx;
                     break;
-				case Band.VHF2:
+                case Band.VHF2:
                     console.band_vhf2_index = xxx;
                     break;
-				case Band.VHF3:
+                case Band.VHF3:
                     console.band_vhf3_index = xxx;
                     break;
-				case Band.VHF4:
+                case Band.VHF4:
                     console.band_vhf4_index = xxx;
                     break;
-				case Band.VHF5:
+                case Band.VHF5:
                     console.band_vhf5_index = xxx;
                     break;
-				case Band.VHF6:
+                case Band.VHF6:
                     console.band_vhf6_index = xxx;
                     break;
-				case Band.VHF7:
+                case Band.VHF7:
                     console.band_vhf7_index = xxx;
                     break;
-				case Band.VHF8:
+                case Band.VHF8:
                     console.band_vhf8_index = xxx;
                     break;
-				case Band.VHF9:
+                case Band.VHF9:
                     console.band_vhf9_index = xxx;
                     break;
-				case Band.VHF10:
+                case Band.VHF10:
                     console.band_vhf10_index = xxx;
                     break;
-				case Band.VHF11:
+                case Band.VHF11:
                     console.band_vhf11_index = xxx;
                     break;
-				case Band.VHF12:
+                case Band.VHF12:
                     console.band_vhf12_index = xxx;
                     break;
-				case Band.VHF13:
+                case Band.VHF13:
                     console.band_vhf13_index = xxx;
                     break;
 
@@ -572,8 +734,156 @@ namespace PowerSDR
 
             } // switch rx1band
 
-    } // updateindex
-       //====================================================================================
+        } // updateindex
+
+
+        public void updateindex2() // .209
+        {
+            switch (console.RX2Band)
+            {
+                case Band.B160M:
+                    console.band_160m_index = xxx2;
+
+                    break;
+                case Band.B80M:
+                    console.band_80m_index = xxx2;
+
+                    break;
+                case Band.B60M:
+                    console.band_60m_index = xxx2;
+
+                    break;
+                case Band.B40M:
+                    console.band_40m_index = xxx2;
+                    break;
+                case Band.B30M:
+                    console.band_30m_index = xxx2;
+                    break;
+                case Band.B20M:
+                    console.band_20m_index = xxx2;
+                    break;
+                case Band.B17M:
+                    console.band_17m_index = xxx2;
+                    break;
+                case Band.B15M:
+                    console.band_15m_index = xxx2;
+                    break;
+                case Band.B12M:
+                    console.band_12m_index = xxx2;
+                    break;
+                case Band.B10M:
+                    console.band_10m_index = xxx2;
+                    break;
+                case Band.B6M:
+                    console.band_6m_index = xxx2;
+                    break;
+                case Band.B2M:
+                    console.band_2m_index = xxx2;
+                    break;
+                case Band.WWV:
+                    console.band_wwv_index = xxx2;
+                    break;
+                case Band.GEN:
+                    console.band_gen_index = xxx2;
+                    break;
+
+
+                case Band.VHF0:
+                    console.band_vhf0_index = xxx2;
+                    break;
+                case Band.VHF1:
+                    console.band_vhf1_index = xxx2;
+                    break;
+                case Band.VHF2:
+                    console.band_vhf2_index = xxx2;
+                    break;
+                case Band.VHF3:
+                    console.band_vhf3_index = xxx2;
+                    break;
+                case Band.VHF4:
+                    console.band_vhf4_index = xxx2;
+                    break;
+                case Band.VHF5:
+                    console.band_vhf5_index = xxx2;
+                    break;
+                case Band.VHF6:
+                    console.band_vhf6_index = xxx2;
+                    break;
+                case Band.VHF7:
+                    console.band_vhf7_index = xxx2;
+                    break;
+                case Band.VHF8:
+                    console.band_vhf8_index = xxx2;
+                    break;
+                case Band.VHF9:
+                    console.band_vhf9_index = xxx2;
+                    break;
+                case Band.VHF10:
+                    console.band_vhf10_index = xxx2;
+                    break;
+                case Band.VHF11:
+                    console.band_vhf11_index = xxx2;
+                    break;
+                case Band.VHF12:
+                    console.band_vhf12_index = xxx2;
+                    break;
+                case Band.VHF13:
+                    console.band_vhf13_index = xxx2;
+                    break;
+
+
+
+                case Band.BLMF:                                                                     // ke9ns add down below vhf
+                    console.band_LMF_index = xxx2;
+                    break;
+                case Band.B120M:
+                    console.band_120m_index = xxx2;
+                    break;
+                case Band.B90M:
+                    console.band_90m_index = xxx2;
+                    break;
+                case Band.B61M:
+                    console.band_61m_index = xxx2;
+                    break;
+                case Band.B49M:
+                    console.band_49m_index = xxx2;
+                    break;
+                case Band.B41M:
+                    console.band_41m_index = xxx2;
+                    break;
+                case Band.B31M:
+                    console.band_31m_index = xxx2;
+                    break;
+                case Band.B25M:
+                    console.band_25m_index = xxx2;
+                    break;
+                case Band.B22M:
+                    console.band_22m_index = xxx2;
+                    break;
+
+                case Band.B19M:
+                    console.band_19m_index = xxx2;
+                    break;
+
+                case Band.B16M:
+                    console.band_16m_index = xxx2;
+                    break;
+                case Band.B14M:
+                    console.band_14m_index = xxx2;
+                    break;
+
+                case Band.B13M:
+                    console.band_13m_index = xxx2;
+                    break;
+
+                case Band.B11M:
+                    console.band_11m_index = xxx2;
+                    break;
+
+            } // switch rx2band
+
+        } // updateindex2
+          //====================================================================================
 
         private void chkAlwaysOnTop_CheckedChanged(object sender, EventArgs e)
         {
@@ -586,9 +896,15 @@ namespace PowerSDR
 
         }
 
+        private void textBox2_MouseDown(object sender, MouseEventArgs e)
+        {
+            textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up
 
+        }
         public int xxx = 0;
+        public int xxx2 = 0; // .209
         public int yyy = 0;
+        public int yyy2 = 0; // .209
 
         //=========================================================================================================
         private void textBox1_MouseUp(object sender, MouseEventArgs e)
@@ -598,6 +914,7 @@ namespace PowerSDR
 
             if (e.Button == MouseButtons.Left)
             {
+                Debug.WriteLine("LEFT BUTTON");
                 try
                 {
                     int ii = textBox1.GetCharIndexFromPosition(e.Location);
@@ -617,7 +934,7 @@ namespace PowerSDR
                     if (console.filter2[console.iii] == "") // check if current index locked
                     {
                         yyy = 1;
-                        console.SaveBand(); // put away last freq you were on before moving
+                        console.SaveBandA(); // put away last freq you were on before moving
                         Debug.WriteLine("OPEN SO SAVE");
                     }
                     else
@@ -657,61 +974,7 @@ namespace PowerSDR
             else if (e.Button == MouseButtons.Right) // ke9ns right click = lock or unlock bandstank memory
             {
 
-                //-----------------------------------------------------------
-                // This saves the bandstack (if unlocked)
-                try
-                {
-                    int ii = textBox1.GetCharIndexFromPosition(e.Location);
-
-                    xxx = (ii / BSLength); //find row 
-
-                    if (xxx >= console.band_stacks[nnn]) return; // if you click past the last index freq, then do nothing.
-
-
-                    textBox1.SelectionStart = (xxx * BSLength);
-                    textBox1.SelectionLength = BSLength;
-
-                    Debug.WriteLine("index at start of click " + console.iii);
-
-                    if (console.filter2[console.iii] == "") // check if current index locked
-                    {
-                        yyy = 1;
-                        console.SaveBand(); // put away last freq you were on before moving
-                        Debug.WriteLine("OPEN SO SAVE");
-                    }
-                    else
-                    {
-                        Debug.WriteLine("LOCKED SO DONT SAVE " + console.iii + " says " + console.filter2[console.iii]);
-                    }
-
-                    console.iii = xxx; // update new position in bandstack for checking if its locked
-
-                    Debug.WriteLine("index after click " + console.iii);
-
-                    yyy = 0;
-
-                    updateindex();
-
-                    console.SetBand(mode1[xxx], filter1[xxx], freq1[xxx]);
-
-                    console.UpdateWaterfallLevelValues();
-                }
-                catch
-                {
-                    Debug.WriteLine("Failed to determine index or cannot save bandstack because its locked");
-
-                    if (yyy == 1)
-                    {
-                        updateindex();
-
-                        console.SetBand(mode1[xxx], filter1[xxx], freq1[xxx]);
-
-                        console.UpdateWaterfallLevelValues();
-                    }
-
-                }
-
-
+               
                 //-----------------------------------------------------------
                 // This toggles the LOCK / UNLOCK and saves it
                 try
@@ -731,7 +994,7 @@ namespace PowerSDR
                     textBox1.SelectionStart = (xxx * BSLength);
                     textBox1.SelectionLength = BSLength;
 
-                    console.SaveBand(); // put away last freq you were on before moving
+                    console.SaveBandA(); // put away last freq you were on before moving
 
                     updateindex();
 
@@ -750,7 +1013,6 @@ namespace PowerSDR
 
                     }
 
-
                     DB.SaveBandStack(console.last_band, xxx, mode1[xxx], filter1[xxx], freq1[xxx]);
 
                     Debug.WriteLine("band== " + console.last_band);
@@ -768,56 +1030,148 @@ namespace PowerSDR
 
                 }
 
-            } // RIGHT CLICK MOUSE
-            else if (e.Button == MouseButtons.Middle) // ke9ns Middle erases bandstack entries 1 at a time
-            {
-
-                try
-                {
-                    if (console.band_stacks[nnn] < 3) return;    // dont allow removing all the bandstacks
-
-                    int ii = textBox1.GetCharIndexFromPosition(e.Location);
-
-                    xxx = (ii / BSLength);                                // find row 
-
-                    if (xxx >= console.band_stacks[nnn]) return;    // if you click past the last index freq, then do nothing.
-
-                   
-                    textBox1.SelectionStart = (xxx * BSLength);
-                    textBox1.SelectionLength = BSLength;
-                 
-                    console.iii = xxx;                            // update new position in bandstack for checking if its locked
-
-
-                    if (filter1[xxx].Contains("@") == false)      // can only delete an unlocked entry in the bandstack
-                    {
-
-                        console.PurgeBandStack(xxx, mode1[xxx], filter1[xxx], freq1[xxx].ToString());
-
-                        console.BandStackUpdate();
-                        bandstackupdate();
-                        updateindex();
-                    }
-                }
-                catch(Exception)
-                {
-                    Debug.WriteLine("Bad location2");
-
-                }
-
-
-            } // MIDDLE CLICK MOUSE
-
-
+            } // RIGHT CLICK MOUSE (LOCK)
+            
             buttonSort.Focus();  // put focus back on button
 
         } //textBox1_MouseUp
 
 
+        //=========================================================================================================
+        private void textBox2_MouseUp(object sender, MouseEventArgs e)
+        {
+            textBox2.ShortcutsEnabled = false;
+
+
+            if (e.Button == MouseButtons.Left)
+            {
+                Debug.WriteLine("LEFT BUTTON");
+                try
+                {
+                    int ii = textBox2.GetCharIndexFromPosition(e.Location);
+
+                    xxx2 = (ii / BSLength); //find row 
+
+                    if (xxx2 >= console.band_stacks[nnn2]) return; // if you click past the last index freq, then do nothing.
+
+                    Debug.WriteLine("xxx2 " + xxx2 + " , " + ii);
+
+                    textBox2.SelectionStart = (xxx2 * BSLength);
+                    textBox2.SelectionLength = BSLength;
+
+                    Debug.WriteLine("index at start of click2 " + console.iii2);
+
+                    if (console.filter22[console.iii2] == "") // check if current index locked
+                    {
+                        yyy2 = 1;
+                        console.SaveBandB(); // put away last freq you were on before moving
+                        Debug.WriteLine("OPEN SO SAVE2");
+                    }
+                    else
+                    {
+                        Debug.WriteLine("LOCKED SO DONT SAVE2 " + console.iii2 + " says " + console.filter22[console.iii2]);
+                    }
+
+                    console.iii2 = xxx2; // update new position in bandstack for checking if its locked
+
+                    Debug.WriteLine("index after click2 " + console.iii2);
+
+                    yyy2 = 0;
+
+                    updateindex2();
+
+                    console.SetBand2(mode12[xxx2], filter12[xxx2], freq12[xxx2]);
+
+                    console.UpdateWaterfallLevelValues();
+                }
+                catch
+                {
+                    Debug.WriteLine("Failed to determine index or cannot save bandstack because its locked");
+
+                    if (yyy2 == 1)
+                    {
+                        updateindex2();
+
+                        console.SetBand2(mode12[xxx2], filter12[xxx2], freq12[xxx2]);
+
+                        console.UpdateWaterfallLevelValues();
+                    }
+
+                }
+
+            } // LEFT CLICK MOUSE
+
+            else if (e.Button == MouseButtons.Right) // ke9ns right click = lock or unlock bandstank memory
+            {
+ 
+                //-----------------------------------------------------------
+                // This toggles the LOCK / UNLOCK and saves it
+                try
+                {
+
+                    int ii = textBox2.GetCharIndexFromPosition(e.Location);
+
+                    Debug.WriteLine("BOX POS2 " + ii);
+
+                    xxx2 = (ii / BSLength); //find row 
+
+                    Debug.WriteLine("==CONSOLE RIGHT CLICK2 " + xxx2 + " , " + ii + " , " + console.band_stacks[nnn2]);
+
+
+                    if (xxx2 >= console.band_stacks[nnn2]) return; // if you click past the last index freq, then do nothing.
+
+                    textBox2.SelectionStart = (xxx2 * BSLength);
+                    textBox2.SelectionLength = BSLength;
+
+                    console.SaveBandB(); // put away last freq you were on before moving
+
+                    updateindex2();
+
+                    console.SetBand2(mode12[xxx2], filter12[xxx2], freq12[xxx2]);
+
+                    console.UpdateWaterfallLevelValues();
+
+
+                    if (filter12[xxx2].Contains("@"))
+                    {
+                        filter12[xxx2] = filter12[xxx2].Substring(0, (filter12[xxx2].Length) - 1); // toggle LOCK OFF
+                    }
+                    else
+                    {
+                        filter12[xxx2] = filter12[xxx2] + "@"; // toggle LOCK ON
+
+                    }
+
+
+                    DB.SaveBandStack2(console.last_band2, xxx2, mode12[xxx2], filter12[xxx2], freq12[xxx2]);
+
+                    Debug.WriteLine("band== " + console.last_band2);
+                    Debug.WriteLine("xxx== " + xxx2);
+                    Debug.WriteLine("bandstack== " + filter);
+                    Debug.WriteLine("freq== " + freq12[xxx2]);
+
+                    bandstackupdate(); // update bandstack screen
+                    updateindex2();
+
+                }
+                catch
+                {
+                    Debug.WriteLine("Bad location1");
+
+                }
+
+            } // RIGHT CLICK MOUSE (LOCK)
+           
+
+            buttonSort.Focus();  // put focus back on button
+
+        } //textBox2_MouseUp
+
+
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
-         //   Debug.WriteLine("key press1 " + e.KeyCode);
+            //   Debug.WriteLine("key press1 " + e.KeyCode);
 
 
             if (e.KeyCode == Keys.Delete) // ke9ns add to check for DELETE key press
@@ -911,6 +1265,8 @@ namespace PowerSDR
                 {
                     if (freq1[ii] == Math.Round(console.VFOAFreq, 6))
                     {
+                        Debug.WriteLine("BANDSTACK DUP FOUND");
+
                         dupfound = true;
                         break;
                     }
@@ -920,11 +1276,14 @@ namespace PowerSDR
                 {
                     DB.AddBandStack(band_list[nnn], console.RX1DSPMode.ToString(), console.RX1Filter.ToString(), Math.Round(console.VFOAFreq, 6)); // take current band, DSP mode, filter, and freq
 
+                    Debug.WriteLine("BANDSTACK add: " + console.RX1DSPMode.ToString());
+
                     console.BandStackUpdate();
                     bandstackupdate();
-                   
 
-                  xxx =  console.band_stacks[nnn] - 1; // go to end of list and highlight it
+                    Debug.WriteLine("BANDSTACK done");
+
+                    xxx = console.band_stacks[nnn] - 1; // go to end of list and highlight it
 
                     textBox1.SelectionStart = (xxx * BSLength);
                     textBox1.SelectionLength = BSLength;
@@ -938,7 +1297,7 @@ namespace PowerSDR
 
             } //  if (xxx < 12)
 
-         
+
 
         } // button1_Click(
 
@@ -950,11 +1309,11 @@ namespace PowerSDR
         {
             int index = console.band_stacks[nnn];
 
-         //   Debug.WriteLine("buttonsort0000");
+            //   Debug.WriteLine("buttonsort0000");
 
             try
             {
-               if (index < 2) return; // nothing to sort
+                if (index < 2) return; // nothing to sort
 
 
                 // bubble sort
@@ -965,7 +1324,7 @@ namespace PowerSDR
                     {
                         if (freq1[d] > freq1[f])
                         {
-  
+
                             string tempmode = mode1[d];
                             string tempfilter = filter1[d];
                             double tempfreq = freq1[d];
@@ -986,14 +1345,14 @@ namespace PowerSDR
                     } // for f
 
                     if (bubble == false) d++;
-                    else  bubble = false;  // reset
+                    else bubble = false;  // reset
 
                 } // for d
-            
+
                 for (int g = 0; g < index; g++)  // update database with new sorted bandstack
                 {
 
-                     console.SortBandStack(g, mode1[g], filter1[g], freq1[g]);     //   DB.SaveBandStack(console.last_band, g, mode1[g], filter1[g], freq1[g]);
+                    console.SortBandStack(g, mode1[g], filter1[g], freq1[g]);     //   DB.SaveBandStack(console.last_band, g, mode1[g], filter1[g], freq1[g]);
 
                 }
 
@@ -1009,7 +1368,15 @@ namespace PowerSDR
             }
         } // buttonSort_Click
 
+        private void StackControl_MouseEnter(object sender, EventArgs e)
+        {
+            if (console.setupForm.chkBoxAutoFocus.Checked == true && chkAlwaysOnTop.Checked == true) this.Activate();
+        }
 
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
 
         public static int RIndex1 = 0;
 

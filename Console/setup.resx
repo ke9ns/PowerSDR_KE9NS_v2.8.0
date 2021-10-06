@@ -120,97 +120,639 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>157, 17</value>
   </metadata>
-  <data name="chkBoxTOT.ToolTip" xml:space="preserve">
-    <value>Check to Enable Time-Out Timer.
-Which Shuts down Transmitter if you keep the Radio in TX mode beyond the Time Limit
+  <data name="chkBoxShutdown.ToolTip" xml:space="preserve">
+    <value>Normally PowerSDR does not allow Windows to close PowerSDR during a shutdown (unless forced)
 
-If TX Time Active exceeds Timer Limit, Flex goes into RX mode Until  POP-UP Screen is cleared</value>
+When Checked will allow a Windows shutdown to Close PowerSDR
+However no updates to your Database will take place.
+
+</value>
   </data>
-  <data name="udHttpRefresh.ToolTip" xml:space="preserve">
-    <value>Select Port# to allow Remote Login by adding the Port# 
-to the end of the URL
-Example:  http://192.168.0.100:8081
-or http://localhost:8081
+  <data name="chkBoxAutoFocus.ToolTip" xml:space="preserve">
+    <value>When Checked: Mouse over the Console will Auto Focus PowerSDR console.
+This will bring the Keyboard automatically back into Focus for PowerSDR
+without having to Click somewhere on the PowerSDR console screen.
 
-But you must also add this port# to your Routers "Port Forward" options
-If Windows Firewall Pops up on the screen, Click on the Allow access.</value>
+Use this only if you have multiple Display monitors, where PowerSDR has its own Monitor.</value>
   </data>
-  <data name="udHttpPort.ToolTip" xml:space="preserve">
-    <value>Select Port# to allow Remote Login by adding the Port# 
-to the end of the URL
-Example:  http://192.168.0.100:8081
-or http://localhost:8081
+  <data name="chkBoxRestart.ToolTip" xml:space="preserve">
+    <value>When Checked: Will examine panadapter data to determine if DttSP has frozen 
+due to DPC latency issues. If its frozen, will issue a STOP/START to unfreeze it.
 
-But you must also add this port# to your Routers "Port Forward" options
-If Windows Firewall Pops up on the screen, Click on the Allow access.</value>
+If you are experiencing DPC Latency, a PC program that has background operations 
+may be consuming too much time. Chrome can be an offender, or Serial port CAT programs.</value>
+  </data>
+  <data name="udDDSCorrection.ToolTip" xml:space="preserve">
+    <value>Correction for DDS frequency 
+(Make sure radio has been on for at least 30 minutes prior)
+This auto updates by using the Generial-&gt;Calibration-&gt;Freq Cal routine
+OR 
+Tune to WWV, set to USB, set display to PHASE
+Tune for no movement CW or CCW (Stationary rotation about the center)
+It will never be stationary due to band conditions, but close
+
+INC values cause CW rotation
+DEC values cause CCW rotation</value>
+  </data>
+  <data name="lblClockCorrection.ToolTip" xml:space="preserve">
+    <value>Correction for DDS frequency 
+(Make sure radio has been on for at least 30 minutes prior)
+This auto updates by using the Generial-&gt;Calibration-&gt;Freq Cal routine
+OR 
+Tune to WWV, set to USB, set display to PHASE
+Tune for no movement CW or CCW (Stationary rotation about the center)
+It will never be stationary due to band conditions, but close
+
+INC values cause CW rotation
+DEC values cause CCW rotation
+</value>
+  </data>
+  <data name="chkBoxPM1.ToolTip" xml:space="preserve">
+    <value>Check box to communicate with PowerMaster (via serial port) and display Power and SWR output from your AMP.
+
+You must configure your PowerMaster (via its menu) for 38400 baud
+and select a real COM port to talk to the PowerMaster.
+</value>
+  </data>
+  <data name="chkBoxIICON.ToolTip" xml:space="preserve">
+    <value>Check to send IIC signal to activate SS AMP (ON/OFF).
+The IIC bus will send 3 bytes of data:  4E (and 4A),  01, &lt;DATA&gt;
+
+Where &lt;DATA&gt; bit6 (64) will always be SET when this box is checked.
+Except on VHF/UHF bands
+
+The AMP uses the relay controlled W6PQL Output FIlter board and a relay for ON/OFF of the AMP 
+and a relay to enable PTT operation
+
+For reading the IIC bus, you can use a  PCA9534 device and some relays, and use the FlexWire port for power.
+
+Upon startup and band change, PowerSDR will send 2 IIC command strings:
+1)  Address 0x4E  Register 0x01 Value = &lt;DATA&gt;
+2)  Address 0x4E, Register 0x03, Value = 0x00
+(repeats for 0x4A address)
+
+Address 0x4E is for the orignal w6pql LDMOS filter board layout
+Address 0x4A is for the newer w6pql LDMOS filter boad layout
+Both addresses will be sent
+
+Where &lt;DATA&gt; runs from the following map:
+
+1 = Select bands: L/MW, 160m, 120m (no relay needed with W6PQL design filter board)
+2 = Select bands: 90m, 80m, 61m, 60m, 49m
+4 = Select bands: 41m, 40m, 31m ,30m
+
+8 = Select bands: 25m, 22m, 20m, 17m, 16m, 15m, 14m (Address 0x4E only)
+16 = Select bands: 13m, 12m, 11m, 10m (Address 0x4E only)
+and
+8 = Select bands: 25m, 22m, 20m, 17m, 16m(Address 0x4A only)
+16 = Select bands:  15m, 14m 13m, 12m, 11m, 10m (Address 0x4A only)
+
+
+32 = Select bands: 6m
+64 = Remote ON/OFF (used N.C. contact... 64 relay on = remote control)
+128 = Selected bands: VHF/UHF  (bit7 is turned OFF)
+
+&lt;DATA&gt; bit6 (64) is SET only if IIC AMP ON/OFF checkbox is set and on an HF/6m band
+
+For NON-W6PQL LPF band selectors use:
+0X42 and 0x44 Band selector output for PCA9534 8bit I2C chip
+OR
+0x46 Band selector output for MCP23017 16bit I2c chip 
+OR
+0x4C UCB (Universal Control board) PCA9555D Relay selector (part of the Xvtr panel)
+See page: http://k3tuf.com/FW.html , for info on FlexWire and UCB
+</value>
+  </data>
+  <data name="chkBoxIIC.ToolTip" xml:space="preserve">
+    <value>Check to use IIC FlexWire bus (8bit address 0x4E &amp; 4A) to send commands to an external device for AMP control.
+NOTE: 8bit address 0x40 = Heros Preselector, 0x4C = UCB XVTR, 0x42 &amp; 0x44 &amp; 0x46 = HF band select (starting with 2200m = 1)
+
+The AMP uses the relay controlled W6PQL Output FIlter board and a relay for ON/OFF of the AMP 
+and a relay to enable PTT operation
+
+For reading the IIC bus, you can use a  PCA9534 device and some relays, and use the FlexWire port for power.
+
+Upon startup and band change, PowerSDR will send 2 IIC command strings:
+1)  8bit Address 0x4E  Register 0x01 Value = &lt;DATA&gt;
+2)  8bit Address 0x4E, Register 0x03, Value = 0x00
+(repeats for 0x4A address)
+
+8bit Address 0x4E is for the orignal w6pql LDMOS filter board layout
+8bit Address 0x4A is for the newer w6pql LDMOS filter boad layout
+Both addresses will be sent
+
+Where &lt;DATA&gt; runs from the following map:
+
+1 = Select bands: L/MW, 160m, 120m (no relay needed with W6PQL design filter board)
+2 = Select bands: 90m, 80m, 61m, 60m, 49m
+4 = Select bands: 41m, 40m, 31m ,30m
+
+8 = Select bands: 25m, 22m, 20m, 17m, 16m, 15m, 14m (Address 0x4E only)
+16 = Select bands: 13m, 12m, 11m, 10m (Address 0x4E only)
+and
+8 = Select bands: 25m, 22m, 20m, 17m, 16m(Address 0x4A only)
+16 = Select bands:  15m, 14m 13m, 12m, 11m, 10m (Address 0x4A only)
+
+
+32 = Select bands: 6m
+64 = Remote ON/OFF (used N.C. contact... 64 relay on = remote control)
+128 = Selected bands: VHF/UHF  (bit7 is turned OFF)
+
+&lt;DATA&gt; bit6 (64) is SET only if IIC AMP ON/OFF checkbox is set and on an HF/6m band
+
+NOTE example: 8bit address 0x4E = 0,1,0,0, A2,A1,A0, 0 = (01001110)
+
+For NON-W6PQL LPF band selectors use:
+0X42 and 0x44 Band selector output for PCA9534 8bit I2C chip
+OR
+0x46 Band selector output for MCP23017 16bit I2c chip 
+OR
+0x4C UCB (Universal Control board) PCA9555D Relay selector (part of the Xvtr panel)
+See page: http://k3tuf.com/FW.html , for info on FlexWire and UCB
+
+</value>
+  </data>
+  <data name="chkOptCWFilterPitch.ToolTip" xml:space="preserve">
+    <value>Unchecked: CW RX (Low -  High) automatically adjust around the CW Pitch value.
+So when you manually enter a Low - High value will change (after its saved) to divide the bandwidth around the CW Pitch value.
+(This is the original mode of operation)
+
+Checked: CW RX Low - High can be user selected and will stay exactly as you set them. (similiar to SSB operation)</value>
+  </data>
+  <data name="chkBoxHERO.ToolTip" xml:space="preserve">
+    <value>I2C output when you change into each Ham band
+
+Upon band change, PowerSDR will send 2 IIC command strings:
+(For PCS9534 I2C port replacement chip)
+1)  8bit Address 0x42 Register 0x01 Value = &lt;DATAA&gt;
+2)  8bit Address 0x42, Register 0x03, Value = 0x00
+
+&lt;DATAA&gt; (below)
+2200m = 1, 630m = 2, 160m = 4, 80m = 8, 60m = 16, 40m = 32, 30m =64, 20m = 128
+
+(For PCA9534 I2C port replacement chip)
+1) 8bit Address 0x44 Register 0x01 Value = &lt;DATAB&gt;
+2) 8bit Address 0x44, Register 0x03, Value = 0x00 (all output)
+
+&lt;DATAB&gt; (below)
+17m =1, 15m = 2, 12m = 4, 10m = 8, 6m = 16, reserved = 32, reserved = 64, reserved = 128
+
+AND 
+
+(For MPC23017 I2C 16bit port replacement chip):
+8bit address 0x46, register 0 &amp; 1 to 0 (all output on PortA &amp; B)
+8bit address 0x46, register 0x12&lt;DATAA&gt;
+8bit address 0x46, register 0x13 &lt;DATAB&gt;
+
+NOTE example: 8bit address 0x46 = 0,1,0,0, A2,A1,A0, 0 = (01000110)</value>
   </data>
   <data name="chkBoxHTTP.ToolTip" xml:space="preserve">
-    <value>Check to turn ON Http Server.
+    <value>Setup your Router “Port Forward” to pass the Port# you select. 8081 is default
+get an No-IP.com account which is a permanent URL linked back to your home IP address
+set your router to update your No-Ip.com account (usually under apps and gaming)
+Now if you type in your no-ip.com URL:port#  from a web browser you will see your Panadapter
 
-Basic: view Display only
-
-Below is what you can insert on your own web page for others to see your Flex Pan:
- 
-&lt;style&gt;
-#wrap { width: 1400px; height: 600px; padding: 0; overflow: hidden; }
-#frame { width: 1400px; height: 600px; border: 1px solid black; }
-#frame { zoom: 1.00; -moz-transform: scale(1.00); -moz-transform-origin: 0 0; }
-&lt;/style&gt;
-
- &lt;div id="wrap"&gt;
-    &lt;iframe id="frame" src="http://YOUR_IP_ADDRESS_HERE.net:8081"&gt;&lt;/iframe&gt;  
- &lt;/div&gt;</value>
+You can place code into a web page to allow visitors to view your Panadapter.
+ &lt;iframe id="frame" src="https://your_no-ip_URL:8081"&gt;&lt;/iframe&gt;
+</value>
   </data>
-  <data name="groupBox2.ToolTip" xml:space="preserve">
-    <value>Allows you to view the Display are of PowerSDR remotely
+  <data name="radVAC1SelectB.ToolTip" xml:space="preserve">
+    <value>Select the Virtual Cable B setup
 
-To view your Display.
-1) Locate the IP address off your computer (example: 192.168.1.100)
-2) Open your Web browser and type:  http://&lt;your local IP address&gt;:8081
+Example setup B:
+Driver:   DirectSound
+Input:    Microphone (plugged into your PC)
+Output: Speakers (Plugged into your PC)
+
+Use for PC Speaker and PC Mic connection with PowerSDR
+</value>
+  </data>
+  <data name="groupBoxTS6.ToolTip" xml:space="preserve">
+    <value>VAC1: AF Volume Slider &amp; "Mute 1&gt;" box do NOT function in PowerSDR. (VAC2: AF slider &amp; Mute functions DO)
+NOTE: PowerSDR will not get INPUT audio from VAC1 unless you select VFOA as TX
+NOTE: VAC1 will ignore VFOB and Flex-5000 RX2
+
+This allows PowerSDR to send or receive audio to your PC 
+(As though PowerSDR was seperate from your PC and you were using RCA audio cables)
+
+MME:              Multimedia Extensions. Oldest standard with the highest latency (120mSec), but the most compatible drivers.
+DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 90mSec)
+WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec) 
+
+ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR</value>
+  </data>
+  <data name="grpAudioDetails2.ToolTip" xml:space="preserve">
+    <value>VAC1: AF Volume Slider &amp; "Mute 1&gt;" box do NOT function in PowerSDR. (VAC2: AF slider &amp; Mute functions DO)
+NOTE: PowerSDR will not get INPUT audio from VAC1 unless you select VFOA as TX
+NOTE: VAC1 will ignore VFOB and Flex-5000 RX2
+
+This allows PowerSDR to send or receive audio to your PC 
+(As though PowerSDR was seperate from your PC and you were using RCA audio cables)
+
+MME:              Multimedia Extensions. Oldest standard with the highest latency (120mSec), but the most compatible drivers.
+DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 90mSec)
+WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec) 
+
+ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR</value>
+  </data>
+  <data name="tpVAC.ToolTip" xml:space="preserve">
+    <value>VAC1: AF Volume Slider &amp; "Mute 1&gt;" box do NOT function in PowerSDR. (VAC2: AF slider &amp; Mute functions DO)
+NOTE: PowerSDR will not get INPUT audio from VAC1 unless you select VFOA as TX
+NOTE: VAC1 will ignore VFOB and Flex-5000 RX2
+
+This allows PowerSDR to send or receive audio to your PC 
+(As though PowerSDR was seperate from your PC and you were using RCA audio cables)
+
+MME:              Multimedia Extensions. Oldest standard with the highest latency (120mSec), but the most compatible drivers.
+DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 90mSec)
+WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec) 
+
+ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR
+</value>
+  </data>
+  <data name="grpAudioDetails3.ToolTip" xml:space="preserve">
+    <value>VAC2: AF Volume Slider &amp; "Mute 1&gt;" box function in PowerSDR and will adjust this volume of RX1 (VAC1 will not). 
+NOTE: PowerSDR will not get VAC MIC INPUT audio from VAC2 unless you select VFOB as TX
+NOTE: If you have a Flex-5000 (with 2nd rec) VAC2 provides audio for RX2 when you enable RX2 &amp; "&lt;2 MUTE" box will function
+
+This allows PowerSDR to send or receive audio to your PC 
+(As though PowerSDR was seperate from your PC and you were using RCA audio cables)
+
+MME:              Multimedia Extensions. Oldest standard with the highest latency (120mSec), but the most compatible drivers.
+DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 90mSec)
+WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec).
+
+ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR
+</value>
+  </data>
+  <data name="tpVAC2.ToolTip" xml:space="preserve">
+    <value>VAC2: AF Volume Slider &amp; "Mute 1&gt;" box function in PowerSDR and will adjust this volume of RX1 (VAC1 will not). 
+NOTE: PowerSDR will not get VAC MIC INPUT audio from VAC2 unless you select VFOB as TX
+NOTE: If you have a Flex-5000 (with 2nd rec) VAC2 provides audio for RX2 when you enable RX2 &amp; "&lt;2 MUTE" box will function
+
+This allows PowerSDR to send or receive audio to your PC 
+(As though PowerSDR was seperate from your PC and you were using RCA audio cables)
+
+MME:              Multimedia Extensions. Oldest standard with the highest latency (120mSec), but the most compatible drivers.
+DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 90mSec)
+WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec).
+
+ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR
+
+</value>
+  </data>
+  <data name="labelTS38.ToolTip" xml:space="preserve">
+    <value>Slider adjusts where the noise floor will show up on the Waterfall screen
+Noise Floor gets DARKER &lt;---&gt; Noise Floor gets LIGHTER
+
+when "auto wtr/pan" checkbox is checked, the slider Lightens/Darkens the signal as the slider move.
+If unchecked, you must click on the Auto Water/Pan text (just below the Panadater screen). 
+</value>
+  </data>
+  <data name="chkSpectrumHiRes.ToolTip" xml:space="preserve">
+    <value>Check box to increase the resolution of the Panadapter and Waterfall display
+From 4096 points to 16384 points (x4) for much finer detail
+Most noticable when you zoom in on a signal
+NOTE: Because of the finer detail, you may see more signals on the screen, but also more Spurs. 
+
+Warning: This will require higher CPU usage</value>
+  </data>
+  <data name="labelTS14.ToolTip" xml:space="preserve">
+    <value>Slider adjusts where the noise floor will show up on the Waterfall screen
+Noise Floor gets DARKER &lt;---&gt; Noise Floor gets LIGHTER
+
+when "auto wtr/pan" checkbox is checked, the slider Lightens/Darkens the signal as the slider move.
+If unchecked, you must click on the Auto Water/Pan text (just below the Panadater screen). 
+</value>
+  </data>
+  <data name="tbWaterOffset.ToolTip" xml:space="preserve">
+    <value>Slider adjusts where the noise floor will show up on the Waterfall screen
+Noise Floor gets DARKER &lt;---&gt; Noise Floor gets LIGHTER
+
+when "auto wtr/pan" checkbox is checked, the slider Lightens/Darkens the signal as the slider move.
+If unchecked, you must click on the Auto Water/Pan text (just below the Panadater screen). 
+</value>
+  </data>
+  <data name="labelTS13.ToolTip" xml:space="preserve">
+    <value>Slider adjusts where the noise floor will show up on the Panadapter screen 
+Noise Floor Moves DOWN &lt;---&gt; Noise Floor Moves UP
+
+when "auto wtr/pan" checkbox is checked, the slider moves the signal as the slider move.
+If unchecked, you must click on the Auto Water/Pan text (just below the Panadater screen). 
+</value>
+  </data>
+  <data name="tbGridOffset.ToolTip" xml:space="preserve">
+    <value>Slider adjusts where the noise floor will show up on the Panadapter screen 
+Noise Floor Moves DOWN &lt;---&gt; Noise Floor Moves UP
+
+when "auto wtr/pan" checkbox is checked, the slider moves the signal as the slider move.
+If unchecked, you must click on the Auto Water/Pan text (just below the Panadater screen). 
+</value>
+  </data>
+  <data name="comboDisplayLabelAlign.ToolTip" xml:space="preserve">
+    <value>Sets the alignment of the grid callouts on the display.
+
+For S-units to show a correct scale on the right side matched to the left side,
+Set Spectrum Grid-&gt;Max = -19, Min= -135, Step = 6 (S signals are 6 dBm apart).
+</value>
+  </data>
+  <data name="udDisplayGridStep.ToolTip" xml:space="preserve">
+    <value>Horizontal Grid Step Size in dBm for the full screen Panadapter. 
+Split screen modes will display a grid step size 2x greater.
+
+In order to see a correct scale on the right side matched to the left side,
+Set Spectrum Grid-&gt;Max = -19, Min = -135, Step = 6 (S signals are 6 dBm apart).
+</value>
+  </data>
+  <data name="udDisplayGridMin.ToolTip" xml:space="preserve">
+    <value>Signal Level at bottom of the Panadapter display in dBm.
+
+In order to see a correct scale on the right side matched to the left side,
+Set Spectrum Grid-&gt;Max = -19, Min = -135, Step = 6 (S signals are 6 dBm apart).
+
+"Auto wtr/pan" box will automatically adjust this for both RX &amp; TX modes
+</value>
+  </data>
+  <data name="udDisplayGridMax.ToolTip" xml:space="preserve">
+    <value>Signal level at top of Panadapter display in dB.
+
+In order to see a correct scale on the right side matched to the left side,
+Set Spectrum Grid-&gt;Max = -19, Min = -135, Step = 6 (S signals are 6 dBm apart).
+
+"Auto wtr/pan" box will automatically adjust this for RX mode only
+TX mode is set permanently to 10 dBm for its virtual "Max" (since you should not exceed 0 dBm)
+</value>
+  </data>
+  <data name="grpDisplaySpectrumGrid.ToolTip" xml:space="preserve">
+    <value>Spectrum Grid is mainly for RX mode
+
+In order to see a correct scale on the right side matched to the left side,
+Set Spectrum Grid-&gt;Max = -19, Min = -135, Step = 6 (S signals are 6 dBm apart).
+
+"Auto wtr/pan" box will automatically adjust "Max" for RX mode only, but "Min" works for both RX &amp; TX modes.
+TX mode is set permanently to 10 dBm for its virtual "Max" (since you should not exceed 0 dBm)
+</value>
+  </data>
+  <data name="chkBoxAutoWtrPan.ToolTip" xml:space="preserve">
+    <value>Check to Automatically update the waterfall (brightness), and Panadapter Noise Floor levels (height)
+based on the Sliders.
+
+You can still Left and Right Click on the "Auto Wtr/Pan Lvl" console button
+for a semi-automatic level adjust</value>
+  </data>
+  <data name="udDSPNB.ToolTip" xml:space="preserve">
+    <value>Detection threshold for impulse noise.  
+
+Low values will distort signals.
+High values may not capture noise.
+
+Strong adjacent signals that invade the passband may 
+prevent the NB from catching noise.</value>
+  </data>
+  <data name="chkDSPLevelerEnabled.ToolTip" xml:space="preserve">
+    <value>The Leveler is intended to even out the sound level variations through your microphone caused by
+varying distance from or angle to it. It is an attempt to level the amplitude presented to the rest of the
+DSP audio processing. The leveler is disabled in DIGU and DIGL modes.</value>
+  </data>
+  <data name="grpDSPLeveler.ToolTip" xml:space="preserve">
+    <value>The Leveler is intended to even out the sound level variations through your microphone caused by
+varying distance from or angle to it. It is an attempt to level the amplitude presented to the rest of the
+DSP audio processing. The leveler is disabled in DIGU and DIGL modes.</value>
+  </data>
+  <data name="grpDSPALC.ToolTip" xml:space="preserve">
+    <value>The ALC is what you would typically consider ALC to be in a transmitter. It is an attempt to prevent
+overdrive of the power amplifier and the distortion that would result. Because of the dual track ALC
+algorithm we use (similar to the AGC), this ALC will allow very high average power while maintaining
+peaks at a controlled level. The Compander (DX and CPDR on the Front Console - see Mode Specific
+Controls – Phone on page 82) work very well together with the ALC to increase average power without
+overdrive.</value>
+  </data>
+  <data name="udDSPAGCMaxGaindB.ToolTip" xml:space="preserve">
+    <value>AGC Max Gain T=Threshold - Operates similarly to traditional RF Gain (but this way the Panadapter signal does not change when you change the gain)
+This provides for a “threshold” AGC  (see AGC-T on the main Console Screen)
+Irrespective of how weak a signal is, no gain over this Max Gain is applied. (-20 dB to +120 dB gain)
+AGC-T = 90 (means the AGC will not add more than 90dBm of gain to any signal you hear)
+
+RIGHT CLICK (on top of AGC-T text): Toggle Panadapter Control (Grab Green line with your Mouse and pull up/down)
+</value>
+  </data>
+  <data name="lblDSPAGCMaxGain.ToolTip" xml:space="preserve">
+    <value>AGC Max Gain T=Threshold - Operates similarly to traditional RF Gain (but this way the Panadapter signal does not change when you change the gain)
+This provides for a “threshold” AGC  (see AGC-T on the main console screen)
+Irrespective of how weak a signal is, no gain over this Max Gain is applied. (-20 dB to +120 dB gain)
+AGC-T = 90 (means the AGC will not add more than 90dBm of gain to any signal you hear)
+
+RIGHT CLICK (on top of AGC-T text): Toggle Panadapter Control (Grab Green line with your Mouse and pull up/down)
+</value>
+  </data>
+  <data name="grpDSPAGC.ToolTip" xml:space="preserve">
+    <value>The AGC is a state of the art, dual track AGC with anticipatory response on both fast and slower tracks.
+Or, stated differently, the AGC is in essence the combination of two AGCs, one with a very fast time
+constant, the other with a much slower time constant</value>
+  </data>
+  <data name="chkBandModeSave.ToolTip" xml:space="preserve">
+    <value>When Checked, will save Transmit DRIVE Slider setpoint, and Drive Max setpoint per Band and per Mode
+
+Normally (unchecked), Only Transmit Drive Slider setpoint is saved per Band 
+
+AGC-T continues to be saves on a per Band basis only.
+
+Do not use this feature if an external program like DDUtil, controls your Drive levels.</value>
+  </data>
+  <data name="chkRememberTXProfileOnModeChange.ToolTip" xml:space="preserve">
+    <value>When checked the previous TX Profile used for a particular mode is remembered.
+
+Example: LSB -&gt; SAM: The last TXProfile used to SAM will be USED.
+
+UnChecked = Changing Modes will not change TXProfiles, 
+                         but changing the TXProfile will change Modes 
+                         to whatever mode was saved to the selected TXProfile</value>
+  </data>
+  <data name="udTXAMCarrierLevel.ToolTip" xml:space="preserve">
+    <value>One suggested way to setup for AM mode: 
+
+With your MIC already adjusted to prevent any ALC clipping, 
+Set Drive level to 100, 
+Set Carrier to 0,
+PTT the radio (with no Audio)
+Adjust Carrier Level for 25% of maximum wattage. (around 8 or so)
+
+(Example: If Max is 100watts, then set Carrier for 25watts)
+(Example: If Max is 1500watts, then set Carrier for 375watts)
+
+Your Audio should now allow for Peaks of Max power out with a Carrier of 25% max
+(Compander can help increase average talk power)</value>
+  </data>
+  <data name="comboTXProfileName.ToolTip" xml:space="preserve">
+    <value>Sets the transmit profile to be used(PWR, EQ, MIC, CPDR, Mode etc.)
+
+TXProfile saves almost everything related to transmit including Mode
+TXProfile will change Modes to whatever mode was saved to the selected TXProfile.
+
+Will NOT change modes if "Remember TX Profile on Mode Change is Checked.
+</value>
+  </data>
+  <data name="chkKWAI7.ToolTip" xml:space="preserve">
+    <value>Check if your CAT device does not POLL for Frequency
+and needs PowerSDR to send CAT FA and FB frequency to your device 
+each time the VFOA or B is changed.
+
+If your CAT device sends an AI OFF command it will not disable AI for the other CAT ports</value>
+  </data>
+  <data name="chkCatURLON.ToolTip" xml:space="preserve">
+    <value>TCP Server based on this computers IP address and a user selected PORT.
+
+This allows CAT commands to/from PowerSDR form any TCP/IP device linked to your IP and Port
+
+Right click to open Display screen for CAT communications Received and Transmitted.
+</value>
+  </data>
+  <data name="chkKWAI6.ToolTip" xml:space="preserve">
+    <value>Check if your CAT device does not POLL for Frequency
+and needs PowerSDR to send CAT FA and FB frequency to your device 
+each time the VFOA or B is changed.
+
+If your CAT device sends an AI OFF command it will not disable AI for the other CAT ports</value>
+  </data>
+  <data name="chkKWAI5.ToolTip" xml:space="preserve">
+    <value>Check if your CAT device does not POLL for Frequency
+and needs PowerSDR to send CAT FA and FB frequency to your device 
+each time the VFOA or B is changed.
+
+If your CAT device sends an AI OFF command it will not disable AI for the other CAT ports</value>
+  </data>
+  <data name="chkKWAI4.ToolTip" xml:space="preserve">
+    <value>Check if your CAT device does not POLL for Frequency
+and needs PowerSDR to send CAT FA and FB frequency to your device 
+each time the VFOA or B is changed.
+
+If your CAT device sends an AI OFF command it will not disable AI for the other CAT ports</value>
+  </data>
+  <data name="chkKWAI3.ToolTip" xml:space="preserve">
+    <value>Check if your CAT device does not POLL for Frequency
+and needs PowerSDR to send CAT FA and FB frequency to your device 
+each time the VFOA or B is changed.
+
+If your CAT device sends an AI OFF command it will not disable AI for the other CAT ports</value>
+  </data>
+  <data name="chkKWAI2.ToolTip" xml:space="preserve">
+    <value>Check if your CAT device does not POLL for Frequency
+and needs PowerSDR to send CAT FA and FB frequency to your device 
+each time the VFOA or B is changed.
+
+If your CAT device sends an AI OFF command it will not disable AI for the other CAT ports</value>
+  </data>
+  <data name="comboCATPort6.ToolTip" xml:space="preserve">
+    <value>Requires the Flex-5000 and a 2nd RX unit to activate:
+
+Assign a COM port, used to send/receive CAT commands with PowerSDR.
+Use a program like VspMgr to create virtual COM port Pairs.
+One side of each COM port Pair goes here, the other side is assigned to the program like WSJT-X
+
+This COM port spoofs the connected PC Digital program into controlling RX2 VFOB,
+even though the Digital program believes its controlling RX1 VFOA
+
+This would be used on a 2nd Instance of a PC Digital program 
+Example:  WSJT-X can have 2 instances running together. Each can run its own VFO.
+
+Icon#1:  C:\WSJT\wsjtx\bin\wsjtx.exe --rig-name=Flex5000RX1 
+This uses VAC1
+
+Icon#2:  C:\WSJT\wsjtx\bin\wsjtx.exe --rig-name=Flex5000RX2
+This uses VAC2
+
+This requires 2 seperate Virtual Audio Cables (VoiceMeeeter and DAX will work)
 
 
 </value>
   </data>
-  <data name="tbWaterOffset.ToolTip" xml:space="preserve">
-    <value>Use this to Lighten or Darken the Waterfall by 20db UP or DOWN from the "Automatic" avg found
-If you find the "AutoWater Level" is too dark, increase this slider
-if you find it too light, decrease this slider.</value>
-  </data>
-  <data name="tbGridOffset.ToolTip" xml:space="preserve">
-    <value>Use this to shift the Panadapter Signal up to 20db UP or DOWN the Pandapater from the "Automatic" avg finding
-If you find the Panadapter signal too high up in the window, decrease the slider.
-If you find the Panadapter signal too low in the window, increase the slider.</value>
-  </data>
-  <data name="chkDSPLevelerEnabled.ToolTip" xml:space="preserve">
-    <value>Check this box to Enabled (activate) the leveler feature.
+  <data name="chkCATEnable6.ToolTip" xml:space="preserve">
+    <value>Requires the Flex-5000 and a 2nd RX unit to activate:
 
-Stage 1: MIXER slider
-Stage 2: MIC slider (stay under -10 dBm on MIC meter)
-Stage 3: Expander / EQ (stay under -2 dBm on EQ meter)
-Stage 4: Leveler  (stay under &lt; 0 dBm on LEV meter)
-Stage 5: ALC / TX Filter / Modulation / DX / Compander</value>
-  </data>
-  <data name="grpDSPLeveler.ToolTip" xml:space="preserve">
-    <value>Stage 1: MIXER slider
-Stage 2: MIC slider (stay under -10 dBm on MIC meter)
-Stage 3: Expander / EQ (stay under -2 dBm on EQ meter)
-Stage 4: Leveler  (stay under &lt; 0 dBm on LEV meter)
-Stage 5: ALC / TX Filter / Modulation / DX / Compander</value>
-  </data>
-  <data name="grpDSPALC.ToolTip" xml:space="preserve">
-    <value>Stage 1: MIXER slider
-Stage 2: MIC slider (stay under -10 dBm on MIC meter)
-Stage 3: Expander / EQ (stay under -2 dBm on EQ meter)
-Stage 4: Leveler  (stay under &lt; 0 dBm on LEV meter)
-Stage 5: ALC / TX Filter / Modulation / DX / Compander</value>
-  </data>
-  <data name="chkROTOREnable.ToolTip" xml:space="preserve">
-    <value>Enable DDUtil to control your antenna rotor control.
-Note: You must configure DDUtil with the other end of the
-Virtual port pair.
+Assign a COM port, used to send/receive CAT commands with PowerSDR.
+Use a program like VspMgr to create virtual COM port Pairs.
+One side of each COM port Pair goes here, the other side is assigned to the program like WSJT-X
 
-Left Click on Beam Heading in DX Spot window to Move Antenna
-Left Click on Right half of DX Spot in Pan + CTRL key to Move Antenna
+This COM port spoofs the connected PC Digital program into controlling RX2 VFOB,
+even though the Digital program believes its controlling RX1 VFOA
+
+This would be used on a 2nd Instance of a PC Digital program 
+Example:  WSJT-X can have 2 instances running together. Each can run its own VFO.
+
+Icon#1:  C:\WSJT\wsjtx\bin\wsjtx.exe --rig-name=Flex5000RX1 
+This uses VAC1
+
+Icon#2:  C:\WSJT\wsjtx\bin\wsjtx.exe --rig-name=Flex5000RX2
+This uses VAC2
+
+This requires 2 seperate Virtual Audio Cables (VoiceMeeeter and DAX will work)
+</value>
+  </data>
+  <data name="chkKWAI.ToolTip" xml:space="preserve">
+    <value>Check if your CAT device does not POLL for Frequency
+and needs PowerSDR to send CAT FA and FB frequency to your device 
+each time the VFOA or B is changed.
+
+If your CAT device sends an AI OFF command it will not disable AI for the other CAT ports</value>
+  </data>
+  <data name="txtCATPort1.ToolTip" xml:space="preserve">
+    <value>Assign a name to this COM port, used to send/receive CAT commands with PowerSDR.
+Example:  This COM maybe used by your Logging software or DDUtil or WSJT-X
+
+Use a program like VspMgr to create virtual COM port Pairs.
+One side of each COM port Pair goes to the Right, the other side is assigned to the program like WSJT-X
+</value>
+  </data>
+  <data name="comboCATPort5.ToolTip" xml:space="preserve">
+    <value>Assign a COM port, used to send/receive CAT commands with PowerSDR.
+
+Use a program like VspMgr to create virtual COM port Pairs.
+One side of each COM port Pair goes here, the other side is assigned to the program like WSJT-X
+</value>
+  </data>
+  <data name="comboCATPort4.ToolTip" xml:space="preserve">
+    <value>Assign a COM port, used to send/receive CAT commands with PowerSDR.
+
+Use a program like VspMgr to create virtual COM port Pairs.
+One side of each COM port Pair goes here, the other side is assigned to the program like WSJT-X
+</value>
+  </data>
+  <data name="comboCATPort3.ToolTip" xml:space="preserve">
+    <value>Assign a COM port, used to send/receive CAT commands with PowerSDR.
+
+Use a program like VspMgr to create virtual COM port Pairs.
+One side of each COM port Pair goes here, the other side is assigned to the program like WSJT-X
+</value>
+  </data>
+  <data name="comboCATPort2.ToolTip" xml:space="preserve">
+    <value>Assign a COM port, used to send/receive CAT commands with PowerSDR.
+
+Use a program like VspMgr to create virtual COM port Pairs.
+One side of each COM port Pair goes here, the other side is assigned to the program like WSJT-X
+</value>
+  </data>
+  <data name="comboCATPort.ToolTip" xml:space="preserve">
+    <value>Assign a COM port, used to send/receive CAT commands with PowerSDR.
+
+Use a program like VspMgr (or COM0COM) to create virtual COM port Pairs.
+One side of each COM port Pair goes here, the other side is assigned to the program, like WSJT-X</value>
+  </data>
+  <data name="labelTS57.ToolTip" xml:space="preserve">
+    <value>Requires the Flex-5000 and a 2nd RX unit to activate:
+
+This COM port spoofs the connected PC Digital program into controlling RX2 VFOB,
+even though the Digital program believes its controlling RX1 VFOA
+
+This would be used on a 2nd Instance of a PC Digital program 
+Example:  WSJT-X can have 2 instances running together. Each can run its own VFO.
+
+Icon#1:  C:\WSJT\wsjtx\bin\wsjtx.exe --rig-name=Flex5000RX1 
+This uses VAC1
+
+Icon#2:  C:\WSJT\wsjtx\bin\wsjtx.exe --rig-name=Flex5000RX2
+This uses VAC2
+
+This requires 2 seperate Virtual Audio Cables (VoiceMeeeter and DAX will work)
 </value>
   </data>
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -225,261 +767,50 @@ Left Click on Right half of DX Spot in Pan + CTRL key to Move Antenna
   <metadata name="saveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>491, 17</value>
   </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>69</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        AAABAAMAEBAAAAAAIABoBAAANgAAACAgAAAAACAAqBAAAJ4EAAAwMAAAAAAgAKglAABGFQAAKAAAABAA
-        AAAgAAAAAQAgAAAAAABABAAAAAAAAAAAAAAAAAAAAAAAAPX19f/xqKf/8omH//KJh//yi4n/8q2s//LL
-        yv/y3dz/8snJ//KJh//yiYf/8omH//KJh//yiYf/8ZqZ//Px8f/yw8D//w8F//9WUP//sK3///Hw///s
-        6///raj//5WQ//+Mh///R0D//ysj//8MAf//DAH//wwB//8MAf/xnZr/89jW///a2P///////8S+//+m
-        nv//s67//+zr///v7f//tq7//5mP//9+c///PS3//yoY//8XA///FwP/8pGJ//b29v//4t7//6qf///f
-        3P///////8C3//+Xiv//qqH//97a///4+P//yMD//6KV//9/b///Mxr//yYK//KVif/03tr//8K4////
-        ////3NX//5mI///Z0////////8/G//+pmv//rqH//9nT///29P//0sn//7Ci//9jSP/ymYr/9vb2////
-        ////tqX//7Sl////////5N7//7Gg///g2v///////8u///94Wv//PRT//zMI//8zCP//Mwj/8p2L//Xp
-        5v//nIL//9jP////////x7j//8y/////////3NL//2pD//87Cf//Own//zsJ//87Cf//Own//zsJ//Kg
-        i//05+P///n4///08f//t6H//+Tc////////rpX//0YP//9CCv//Qgr//0IK//9CCv//Qgr//0IK//9C
-        Cv/yo4z/9e/t///BrP//v6r///z7///18v//r5X//4Ze//+LZf//i2X//4Ze//+AV///d0r//2o4//9Z
-        Iv//Sg3/8qaM//Tp5f//9/T///n3///MuP//lnD//49m//+PZv//j2b//49m//+PZv//j2b//49m//+P
-        Zv//j2b//4pg//K7p//05N7//7OW//+Xbf//kWb//5Fm//+RZv//kWb//5Fm//+RZv//kWb//5Fm//+R
-        Zv//kWb//5Fm//+RZv/zxbP/89jN//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+U
-        Z///lGf//5Rn//+UZ///lGf/88e0//PZzf//lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+W
-        Z///lmf//5Zn//+WZ///lmf//5Zn//PHtP/z2c3//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+X
-        Z///l2f//5dn//+XZ///l2f//5dn//+XZ//zyLT/8+La//6YZ///l2f//5dn//+XZ///l2f//5dn//+X
-        Z///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f/89LC//b29v/z4tr/89nN//PZzf/z2c3/89nN//PZ
-        zf/z2c3/89nN//PZzf/z2c3/89nN//PZzf/z2c3/897U//X19f8AAP//AAD//wAA//8AAP//AAD//wAA
-        //8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//KAAAACAAAABAAAAAAQAgAAAA
-        AACAEAAAAAAAAAAAAAAAAAAAAAAAAPr6+v/v7+//7Ozs/+nb2//p1NT/6dTU/+nU1P/p1NT/6dTU/+nU
-        1P/p1NT/6dTU/+nU1P/p1NT/6dTU/+nU1P/p1NT/6dTU/+nU1P/p1NT/6dTU/+nU1P/p1NT/6dTU/+nU
-        1P/p1NT/6dTU/+nU1P/p19f/6+fn/+7u7v/19fX/8PDw//r6+v/3kpH/+khF//o+O//6Pjv/+j47//o+
-        O//6Pjv/+kVC//p1dP/6mJf/+ru6//rJyP/65eX/+uXl//rb2v/6o6H/+j47//o+O//6Pjv/+j47//o+
-        O//6Pjv/+j47//o+O//6Pjv/+j47//pBPv/4aWf/+/T0/+7u7v/t7e3/9q+s//8JAf//CQH//wkB//8d
-        Fv//TEf//4aD///Ozf//+Pf///////////////////Hw///T0f//xcP//7i1//+Lh///CQH//wkB//8J
-        Af//CQH//wkB//8JAf//CQH//wkB//8JAf//CQH//wkB//8JAf/4bGj/6+jn/+3t7f/2gXv//w4C//8c
-        EP//dW7//768///t7f//////////////////9fT//8C8//9za///Ukj//1RL//9oYP//bmf//395//+G
-        gP//hoD//3Vu//8lGv//DgL//w4C//8OAv//DgL//w4C//8OAv//DgL//w4C//pJQP/p2Nf/7e3t//eY
-        kf//hX3//+vp///////////////////y8f//ubP//4V7//9fU///gnn//8O////x8f//////////////
-        ////9fT//+Lf///V0f//xcD//2le//8VA///FQP//xUD//8VA///FQP//xUD//8VA///FQP/+ks9/+nV
-        1P/t7e3//Ozr///7+///////////////////s6v//2xe//+Wjf//w77//+7t///////////////////1
-        9P//ycP//4N3//9gUP//UD///1xN//9fUP//a17//2VX//9lV///WEn//yYS//8ZBP//GQT//xkE//8Z
-        BP/6Tj7/6dbU/+3t7f/////////////7+///wrv//4Fy//+UiP//7Or//////////////////+zq//+4
-        r///emn//1tI//9wYP//qqD//8/K////////////////////////8vD//+Pf///Y0///aFb//x8F//8f
-        Bf//HwX//x8F//pTP//p1tT/7e3t////////8vH//5qM//+Sg///0sz///////////////////////+w
-        pP//Z1H//3tp//+yqP//5OH///r5///////////////////m4///qp3//3lm//9hSv//Ujn//2tW//9S
-        O///SC///0gv//81Gv//JAX/+lY//+nX1P/t7e3//ePe//96Zf//uK3///////////////////n4//+1
-        qP//bVX//4p4///g3P//////////////////+fj//8i///+ZiP//blf//3Fa//+fkP//yMD//+zq////
-        ///////////////8+///8O3//8O5//9AIf/6WkD/6dfU/+3t7f/3uq///9fQ///9/f/////////////q
-        5v//jXj//3hg///Jwf//+/v//////////////////8W6//9/Z///jnr//7eq///f2v//+vn/////////
-        /////////+3q//+2qP//k3///3BW//9kSP//Vjf//zIN//pdQP/p19T/7e3t///////////////////6
-        +f//yr///2ND//+nlf///////////////////Pv//8e7//+Lc///nYn//+fj///////////////////2
-        9P//yr///5eB//9XNP//NAv//zII//8yCP//Mgj//zII//8yCP//Mgj/+mBB/+nY1P/t7e3/////////
-        /////////6+d//9jQP//zcL///r5//////////////Px//+ijf//m4X//9XN////////////////////
-        ////vKz//3te//9HH///Ngr//zUI//81CP//NQj//zUI//81CP//NQj//zUI//81CP/6Y0H/6djU/+3t
-        7f///////97V//+EZf//hWj//+jj//////////////z7///Yz///im3//8a4///////////////////5
-        +P//va3//2ZA//86Cf//Ogn//zoJ//86Cf//Ogn//zoJ//86Cf//Ogn//zoJ//86Cf//Ogn//zoJ//pm
-        Qv/p2NT/7e3t//vLvv//bUb//6CH///08f//////////////////vqz//4ps///i2////f3/////////
-        ////6eP//45v//9IF///PQr//z0K//89Cv//PQr//z0K//89Cv//PQr//z0K//89Cv//PQr//z0K//89
-        Cv//PQr/+mlD/+nZ1f/t7e3/+cS1///p4///////////////////6uP//6WL//+ih///9PH/////////
-        ////+Pb//8a1//9RHv//QQr//0EK//9BCv//QQr//0EK//9BCv//QQr//0EK//9BCv//QQr//0EK//9B
-        Cv//QQr//0EK//9BCv/6bEP/6dnV/+3t7f///////////////////////9XI//+PbP//var///z7////
-        //////////////+liv//VSD//0QL//9EC///RAv//0QL//9EC///RAv//0QL//9EC///RAv//0QL//9E
-        C///RAv//0QL//9EC///RAv//0QL//puQ//p2dX/7e3t////////+fj//9vP//+Xdv//l3X///Tx////
-        ///////////////p4v//qY3//39W//9/Vv//iGP//4pl//+KZf//imX//4FY//9/Vv//eEz//3JF//9m
-        NP//XSn//1Yf//9OFf//SAz//0cL//9HC///Rwv/+nFD/+na1f/t7e3//eTb//+VcP//mnf//9XH///4
-        9v/////////////9/P//2s3//59+//+NZ///jGb//4xm//+MZv//jGb//4xm//+MZv//jGb//4xm//+M
-        Zv//jGb//4xm//+LZP//hVv//31R//9zRP//YSz//08T//9KDP/6c0T/6drV/+3t7f/5zLz//+DW////
-        ///////////////6+P//5Nr//6uO//+PaP//jmb//45m//+OZv//jmb//45m//+OZv//jmb//45m//+O
-        Zv//jmb//45m//+OZv//jmb//45m//+OZv//jmb//45m//+OZv//jGP//39R//uJYP/p3Nf/7e3t////
-        ///////////////9/P//6uP//7ab//+adP//j2b//49m//+PZv//j2b//49m//+PZv//j2b//49m//+P
-        Zv//j2b//49m//+PZv//j2b//49m//+PZv//j2b//49m//+PZv//j2b//49m//+PZv//j2b//KiJ/+rh
-        3f/t7e3//e/q///d0P//ybT//6WB//+SaP//kWb//5Fm//+RZv//kWb//5Fm//+RZv//kWb//5Fm//+R
-        Zv//kWb//5Fm//+RZv//kWb//5Fm//+RZv//kWb//5Fm//+RZv//kWb//5Fm//+RZv//kWb//5Fm//+R
-        Zv/8qYn/6+He/+3t7f/6x7T//5Zs//+SZv//kmb//5Jm//+SZv//kmb//5Jm//+SZv//kmb//5Jm//+S
-        Zv//kmb//5Jm//+SZv//kmb//5Jm//+SZv//kmb//5Jm//+SZv//kmb//5Jm//+SZv//kmb//5Jm//+S
-        Zv//kmb//5Jm//yqiv/r4d7/7e3t//nDrf//lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+U
-        Z///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+U
-        Z///lGf//5Rn//+UZ///lGf//KyK/+vi3v/t7e3/+cSt//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+U
-        Z///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+U
-        Z///lGf//5Rn//+UZ///lGf//5Rn//+UZ//8rIr/6+Le/+3t7f/5xa3//5Zn//+WZ///lmf//5Zn//+W
-        Z///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+W
-        Z///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//ytiv/r4t7/7e3t//nFrf//lmf//5Zn//+W
-        Z///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+W
-        Z///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//K2K/+vi3v/t7e3/+cWt//+X
-        Z///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+X
-        Z///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ//8ror/6+Le/+3t
-        7f/5xa3//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+X
-        Z///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//yu
-        iv/r4t7/7e3t//nIsf//l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+X
-        Z///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+X
-        Z///l2f//LCN/+vk4f/t7e3/+ubd//6Zav//mGf//5hn//+YZ///mGf//5hn//+YZ///mGf//5hn//+Y
-        Z///mGf//5hn//+YZ///mGf//5hn//+YZ///mGf//5hn//+YZ///mGf//5hn//+YZ///mGf//5hn//+Y
-        Z///mGf//5hn//+YZ//5yLH/7Ozr//Ly8v/5+fn/+ubd//nIsf/5xa3/+cWt//nFrf/5xa3/+cWt//nF
-        rf/5xa3/+cWt//nFrf/5xa3/+cWt//nFrf/5xa3/+cWt//nFrf/5xa3/+cWt//nFrf/5xa3/+cWt//nF
-        rf/5xa3/+cWt//nFrf/5xa3/+dfH//v7+//v7+///Pz8//Ly8v/t7e3/7e3t/+3t7f/t7e3/7e3t/+3t
-        7f/t7e3/7e3t/+3t7f/t7e3/7e3t/+3t7f/t7e3/7e3t/+3t7f/t7e3/7e3t/+3t7f/t7e3/7e3t/+3t
-        7f/t7e3/7e3t/+3t7f/t7e3/7e3t/+3t7f/t7e3/7+/v//n5+f8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAABAAEAICAAAAEACACoCAAAFgAAACgAAAAgAAAAQAAAAAEACAAAAAAAAAQAAAAAAAAAAAAAAAEAAAAB
+        AAAAAAAA/wkBAP8OAgD/FQMA/xkEAP8fBQD/HBAA/x0WAP8kBQD/MggA/zUIAP8yDQD/OgkA/z0KAP8m
+        EgD/JRoA/zUaAPo+OwD/QQoA/0QLAP9JDAD/TxMA/0gXAP9OFQD/Rx8A/1EeAP9WHwD/QCEA/0gvAP9V
+        IAD/XSkA+kE+APpLPQD6Tj4A/1Y1AP9SOgD6Uz8A/1A/APpWPwD/YSwA/2Y0APpFQgD6SUAA+khFAP9M
+        RwD6WkAA+l1AAP9SSAD/VEsA/1lIAP9cTQD/X1EA+mFBAP9jQQD6ZkIA/2ZAAPppQwD6bUMA/21GAP9h
+        SgD/ZEgA+nFDAPpzRAD/ckQA/3hMAP9gUAD/Z1EA/2VXAP9pVgD/bVYA/2peAP9sXgD/cFYA/35RAP9/
+        VgD/cVoA/3teAP9oYAD4aWcA/25nAPhsaAD/cGAA/3hgAP95ZQD/f2cA/3NrAP91bgD/emkA+nV0AP9/
+        eQD/gVgA/4VbAP+EZQD7iWAA/4hjAP+MYwD/imQA/41mAP+FaAD/j2gA/4psAP+ObQD/kWYA/5VnAP+Y
+        ZwD/kmgA/5ZsAP6ZagD/gXIA/4N3AP+LcwD2gXsA/4J5AP+FewD/hX0A/4p4AP+NeQD/lXAA/5d1AP+a
+        dQD/k38A/59+AP+GgQD/i4cA/5KDAP+XgQD/m4UA/5SIAP+WjQD/mYgA/52JAP+ajAD3kpEA95iRAP+f
+        kAD6mJcA/6WBAP+hhwD/pYoA/6KNAPypiQD8rYoA/6qNAPywjQD/p5UA/6qdAP+vnQD/tpsA+qOhAP+q
+        oAD2r6wA/7CkAP+yqQD/tqgA97qvAP+9qgD/uK4A/72sAP+5swD/uLUA+ru6AP++vAD5w60A+cStAPnF
+        tAD/xrUA+cixAP/JtAD/wroA/8a5AP/CvQD7y74A/8m/APnMvAD/xcEA/8jBAP/NwgD6ycgA/8/KAP/O
+        zQD518cA/9XHAP/VyAD/0swA/9XNAP/ZzgDp1NQA6djUAOnc1wDp29sA/9PRAP/W0AD/2NMA/93QAP/e
+        1QD629oA/9/aAOrh3QD/4NYA/+LbAP7k2gD+4t4A+ubdAOvk4QDr5+cA6+jnAOzs6wDt7e0A/+XiAPrl
+        5QD/6eIA/+rmAP/r6QD+7OoA/+3tAP/w7QDx8fEA9fX1AP/x8AD/9PEA+/T0AP/19AD/+PYA+fn5AP/5
+        +QD//PsA/v7+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgAAAAwAAAAYAAAAAEA
-        IAAAAAAAgCUAAAAAAAAAAAAAAAAAAAAAAAD/////+Pj4/+Xl5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl
-        5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl
-        5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl
-        5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl5f/l5eX/6+vr////////////5eXl////////////9fX1//Kz
-        sv/ys7L/8rOy//Kzsv/ys7L/8rOy//Kzsv/ys7L/8rOy//Kzsv/ys7L/8rOy//Kzsv/ys7L/8rOy//Kz
-        sv/ys7L/8rOy//Kzsv/ys7L/8rOy//Kzsv/ys7L/8rOy//Kzsv/ys7L/8rOy//Kzsv/ys7L/8rOy//Kz
-        sv/ys7L/8rOy//Kzsv/ys7L/8rOy//Kzsv/ys7L/8tLS//v7+///////+Pj4/+vr6//l5eX///////v7
-        +//yhYP/+xEN//8EAP//BAD//wQA//8EAP//BAD//wQA//8EAP//BAD//wQA//8UEP//QkD//4F///+Q
-        j///wL///8C////f3////////////////////////8/P//+Bf///BAD//wQA//8EAP//BAD//wQA//8E
-        AP//BAD//wQA//8EAP//BAD//wQA//8EAP//BAD//wQA//8EAP//BAD//wQA//U5Nv/46ej//////+Xl
-        5f/l5eX///////Klo///CAH//wgB//8IAf//CAH//wgB//8IAf//CAH//xcR//9kYP//op///+Df////
-        //////////////////////////////////////////////////////////////+yr///CAH//wgB//8I
-        Af//CAH//wgB//8IAf//CAH//wgB//8IAf//CAH//wgB//8IAf//CAH//wgB//8IAf//CAH//wgB//8I
-        Af/1PDf/+/v7/+Xl5f/l5eX///////JLRP//DAL//wwC//8MAv//DAL//wwC//9nYP//sq//////////
-        ///////////////////////////////////////////////Cv///hoD//2dg//9JQf//OjH//wwC//8M
-        Av//DAL//wwC//8MAv//DAL//wwC//8MAv//DAL//wwC//8MAv//DAL//wwC//8MAv//DAL//wwC//8M
-        Av//DAL//wwC//8MAv//DAL/8tTS/+Xl5f/l5eX///////I/Nf//EAL//xAC//8uIv//h4D///Dv////
-        /////////////////////////////////////////9LP//+Igf//PTL//xAC//8QAv//PDL//0tB//+H
-        gP//h4D//6Wg///Dv///w7///8O////Dv///w7///3hx//8QAv//EAL//xAC//8QAv//EAL//xAC//8Q
-        Av//EAL//xAC//8QAv//EAL//xAC//8QAv//EAL/8raz/+Xl5f/l5eX///////JCNf//IhL//6ag////
-        /////////////////////////////////////////+Hf//97cf//MSL//xQD//9cUf//l5D//8PA////
-        //////////////////////////////////////////////////////////////9OQv//FAP//xQD//8U
-        A///FAP//xQD//8UA///FAP//xQD//8UA///FAP//xQD//8UA///FAP/8rez/+Xl5f/l5eX///////Ws
-        p///8O/////////////////////////////////////////FwP//UUL//yYT//9uYv//trD/////////
-        ///////////////////////////////////////////////Tz///t7D//4uB//99cf//UkL//1JC//8X
-        BP//FwT//xcE//8XBP//FwT//xcE//8XBP//FwT//xcE//8XBP//FwT//xcE//8XBP//FwT/8riz/+Xl
-        5f/l5eX/////////////////////////////////////////////uLD//zcj//83I///qaD///Dv////
-        /////////////////////////////////////////9TQ//+bkf//VEP//ykU//8bBP//GwT//zcj//9U
-        Q///VEP//4yB//+Mgf//jIH//4yB//+Mgf//jIH//1RD//8bBP//GwT//xsE//8bBP//GwT//xsE//8b
-        BP//GwT/8rmz/+Xl5f/l5eX//////////////////////////////////9XQ//9XQ///OiT//6qh////
-        /////////////////////////////////////////9XQ//+Bcv//OiT//x4F//86JP//cmL//5yR///G
-        wP////////////////////////////////////////////////////////////86JP//HgX//x4F//8e
-        Bf//HgX//x4F//8eBf//HgX/8rqz/+Xl5f/l5eX////////////////////////x7///gnL//y8V//+r
-        of////////////////////////////////////////////+sof//WUT//yIF//89JP//npH//9XQ////
-        ////////////////////////////////////////////////////49///8jA//+ekv//kIL//4Jy//8i
-        Bf//IgX//yIF//8iBf//IgX//yIF//8iBf//IgX/8ruz/+Xl5f/l5eX//////////////////8jA//9A
-        Jf//hHL///Hv////////////////////////////////////////raH//0Al//8yFf//dmP//9XQ////
-        ///////////////////////////////////////////////IwP//koL//1xE//8lBv//JQb//yUG//8l
-        Bv//W0T//1tE//9bRP//W0T//1tE//9bRP//TTT//yUG//8lBv//JQb/8ru0/+Xl5f/l5eX/////////
-        ////lIP//zUW///JwP///////////////////////////////////////7yx//9DJf//NRb//5OC///x
-        7/////////////////////////////////////////Hv//+vov//a1T//ygG//81Fv//XUT//5OC//+7
-        sf//1tD//////////////////////////////////////////////////3hj//8oBv//KAb/8ry0/+Xl
-        5f/l5eX///////iBbf//UzX///Hv///////////////////////////////////k4P//YEX//ysH//+V
-        g///8e/////////////////////////////////////////k4P//e2T//zkW//9GJv//h3P//9fQ////
-        /////////////////////////////////////////////////////////+Tg///Kwf//ysH//2BF//8r
-        B///Kwf/8r20/+Xl5f/l5eX///////Kjlf///////////////////////////////////////6SS//87
-        F///YkX//+Tg////////////////////////////////////////y8H//2JF//87F///iXP//9fQ////
-        ///////////////////////////////////////////////Y0P//pJL//3BV//9VNv//Lgf//y4H//8u
-        B///Lgf//y4H//8uB///Lgf/8r60/+Xl5f/l5eX////////////////////////////////////////y
-        7///ZEX//z4X//+kkv///////////////////////////////////////9jQ//9kRf//Sib//7Gi///y
-        7/////////////////////////////////////////Lv//+yov//fmT//z4X//8xCP//MQj//zEI//8x
-        CP//MQj//zEI//8xCP//MQj//zEI//8xCP//MQj/8r60/+Xl5f/l5eX/////////////////////////
-        /////////9nQ//9BF///TSf//9jQ///////////////////////////////////y7///jXT//0AX//+y
-        ov/////////////////////////////////////////////Z0P//gGX//0EX//80CP//NAj//zQI//80
-        CP//NAj//zQI//80CP//NAj//zQI//80CP//NAj//zQI//80CP//NAj/8r+0/+Xl5f/l5eX/////////
-        ////////////////////tKL//0MY//9oRv//8u///////////////////////////////////83B//9P
-        J///jnT///Lv////////////////////////////////////////tKL//2lG//82Cf//Ngn//zYJ//82
-        Cf//Ngn//zYJ//82Cf//Ngn//zYJ//82Cf//Ngn//zYJ//82Cf//Ngn//zYJ//82Cf//Ngn/8sC0/+Xl
-        5f/l5eX///////////////////Lv//93Vv//OQn//5uE////////////////////////////////////
-        ////kHT//1In///Z0P///////////////////////////////////////83B//9SKP//OQn//zkJ//85
-        Cf//OQn//zkJ//85Cf//OQn//zkJ//85Cf//OQn//zkJ//85Cf//OQn//zkJ//85Cf//OQn//zkJ//85
-        Cf//OQn/8sC0/+Xl5f/l5eX/////////////zsH//1Qo//9IGf//zsH/////////////////////////
-        /////////+bg//9gN///hGX///Lv///////////////////////////////////m4P//bEf//zwK//88
-        Cv//PAr//zwK//88Cv//PAr//zwK//88Cv//PAr//zwK//88Cv//PAr//zwK//88Cv//PAr//zwK//88
-        Cv//PAr//zwK//88Cv//PAr/8sG1/+Xl5f/l5eX///////iMbv//Pgr//3pW///y7///////////////
-        ////////////////////z8H//0oZ//+qk////////////////////////////////////////56E//8+
-        Cv//Pgr//z4K//8+Cv//Pgr//z4K//8+Cv//Pgr//z4K//8+Cv//Pgr//z4K//8+Cv//Pgr//z4K//8+
-        Cv//Pgr//z4K//8+Cv//Pgr//z4K//8+Cv//Pgr/8sK1/+Xl5f/l5eX///////J7Wf//z8H/////////
-        //////////////////////////////+fhP//TBn//8/B///////////////////////////////////n
-        4P//ZDj//0AK//9ACv//QAr//0AK//9ACv//QAr//0AK//9ACv//QAr//0AK//9ACv//QAr//0AK//9A
-        Cv//QAr//0AK//9ACv//QAr//0AK//9ACv//QAr//0AK//9ACv//QAr/8sK1/+Xl5f/l5eX/////////
-        ////////////////////////////////////5+D//3JI//9xSP//8+//////////////////////////
-        /////////8Sy//9OGv//Qwv//0ML//9DC///Qwv//0ML//9DC///Qwv//0ML//9DC///Qwv//0ML//9D
-        C///Qwv//0ML//9DC///Qwv//0ML//9DC///Qwv//0ML//9DC///Qwv//0ML//9DC///Qwv/8sO1/+Xl
-        5f/l5eX///////////////////////////////////////+ihf//XCn//62U////////////////////
-        ////////////////////ooX//0UL//9FC///RQv//0UL//9FC///RQv//0UL//9FC///RQv//0UL//9F
-        C///RQv//0UL//9FC///RQv//0UL//9FC///RQv//0UL//9FC///RQv//0UL//9FC///RQv//0UL//9F
-        C///RQv/8sO1/+Xl5f/l5eX/////////////////////////////xbP//14q//90SP//5+D/////////
-        //////////////////////////f1//+Wdf//eU///3lP//95T///hmD//4pl//+KZf//imX//4pl//+K
-        Zf//flT//3lP//95T///cUT//2g4//9kM///VyL//0sR//9HC///Rwv//0cL//9HC///Rwv//0cL//9H
-        C///Rwv//0cL//9HC///Rwv/8sS1/+Xl5f/l5eX//////////////////9HC//92SP//Xyr//8Wz////
-        ////////////////////////////////////28///5Nv//+MZv//jGb//4xm//+MZv//jGb//4xm//+M
-        Zv//jGb//4xm//+MZv//jGb//4xm//+MZv//jGb//4xm//+MZv//jGb//4xm//+HYP//e0///2o5//9Z
-        Iv//TRH//0kM//9JDP//SQz//0kM//9JDP//SQz/8sS1/+Xl5f/l5eX///////vDr///bDn//2Eq//+7
-        o/////////////////////////////////////////f1//+wlf//jWb//41m//+NZv//jWb//41m//+N
-        Zv//jWb//41m//+NZv//jWb//41m//+NZv//jWb//41m//+NZv//jWb//41m//+NZv//jWb//41m//+N
-        Zv//jWb//41m//+NZv//jWb//3xP//9nM///Vxz//0sM//9LDP//Swz/8sW1/+Xl5f/l5eX///////KN
-        af//u6P/////////////////////////////////////////////zbz//5Vv//+OZv//jmb//45m//+O
-        Zv//jmb//45m//+OZv//jmb//45m//+OZv//jmb//45m//+OZv//jmb//45m//+OZv//jmb//45m//+O
-        Zv//jmb//45m//+OZv//jmb//45m//+OZv//jmb//45m//+OZv//jmb//4Za//9xPv//VBf/8sW1/+Xl
-        5f/l5eX//////////////////////////////////////////////////9XF//+def//j2b//49m//+P
-        Zv//j2b//49m//+PZv//j2b//49m//+PZv//j2b//49m//+PZv//j2b//49m//+PZv//j2b//49m//+P
-        Zv//j2b//49m//+PZv//j2b//49m//+PZv//j2b//49m//+PZv//j2b//49m//+PZv//j2b//49m//+P
-        Zv//j2b/9dnP/+Xl5f/l5eX///////////////////////////////////j1///Vxf//nnn//5Bm//+Q
-        Zv//kGb//5Bm//+QZv//kGb//5Bm//+QZv//kGb//5Bm//+QZv//kGb//5Bm//+QZv//kGb//5Bm//+Q
-        Zv//kGb//5Bm//+QZv//kGb//5Bm//+QZv//kGb//5Bm//+QZv//kGb//5Bm//+QZv//kGb//5Bm//+Q
-        Zv//kGb//5Bm//+QZv//kGb/99vQ/+Xl5f/l5eX///////////////////j1///cz///up///5hv//+R
-        Zv//kWb//5Fm//+RZv//kWb//5Fm//+RZv//kWb//5Fm//+RZv//kWb//5Fm//+RZv//kWb//5Fm//+R
-        Zv//kWb//5Fm//+RZv//kWb//5Fm//+RZv//kWb//5Fm//+RZv//kWb//5Fm//+RZv//kWb//5Fm//+R
-        Zv//kWb//5Fm//+RZv//kWb//5Fm//+RZv//kWb/99vQ/+Xl5f/l5eX///////m7o///poL//5Jm//+S
-        Zv//kmb//5Jm//+SZv//kmb//5Jm//+SZv//kmb//5Jm//+SZv//kmb//5Jm//+SZv//kmb//5Jm//+S
-        Zv//kmb//5Jm//+SZv//kmb//5Jm//+SZv//kmb//5Jm//+SZv//kmb//5Jm//+SZv//kmb//5Jm//+S
-        Zv//kmb//5Jm//+SZv//kmb//5Jm//+SZv//kmb//5Jm//+SZv//kmb/99vQ/+Xl5f/l5eX///////el
-        hf//kmf//5Jn//+SZ///kmf//5Jn//+SZ///kmf//5Jn//+SZ///kmf//5Jn//+SZ///kmf//5Jn//+S
-        Z///kmf//5Jn//+SZ///kmf//5Jn//+SZ///kmf//5Jn//+SZ///kmf//5Jn//+SZ///kmf//5Jn//+S
-        Z///kmf//5Jn//+SZ///kmf//5Jn//+SZ///kmf//5Jn//+SZ///kmf//5Jn//+SZ///kmf/99vR/+Xl
-        5f/l5eX///////emhf//lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+U
-        Z///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+U
-        Z///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+U
-        Z///lGf/99zR/+Xl5f/l5eX///////emhf//lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+U
-        Z///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+U
-        Z///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+UZ///lGf//5Rn//+U
-        Z///lGf//5Rn//+UZ///lGf/99zR/+Xl5f/l5eX///////enhf//lWf//5Vn//+VZ///lWf//5Vn//+V
-        Z///lWf//5Vn//+VZ///lWf//5Vn//+VZ///lWf//5Vn//+VZ///lWf//5Vn//+VZ///lWf//5Vn//+V
-        Z///lWf//5Vn//+VZ///lWf//5Vn//+VZ///lWf//5Vn//+VZ///lWf//5Vn//+VZ///lWf//5Vn//+V
-        Z///lWf//5Vn//+VZ///lWf//5Vn//+VZ///lWf/99zR/+Xl5f/l5eX///////eohf//lmf//5Zn//+W
-        Z///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+W
-        Z///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+W
-        Z///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf/99zR/+Xl5f/l5eX///////eo
-        hf//lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+W
-        Z///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+W
-        Z///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf/99zR/+Xl
-        5f/l5eX///////eohf//lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+W
-        Z///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+W
-        Z///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+WZ///lmf//5Zn//+W
-        Z///lmf/99zR/+Xl5f/l5eX///////ephf//l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+X
-        Z///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+X
-        Z///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+X
-        Z///l2f//5dn//+XZ///l2f/993R/+Xl5f/l5eX///////ephf//l2f//5dn//+XZ///l2f//5dn//+X
-        Z///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+X
-        Z///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+X
-        Z///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f/993R/+Xl5f/l5eX///////ephf//l2f//5dn//+X
-        Z///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+X
-        Z///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+X
-        Z///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f/993R/+Xl5f/l5eX///////ep
-        hf//l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+X
-        Z///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+X
-        Z///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f//5dn//+XZ///l2f/993R/+Xl
-        5f/l5eX///////e2mP//mGf//5hn//+YZ///mGf//5hn//+YZ///mGf//5hn//+YZ///mGf//5hn//+Y
-        Z///mGf//5hn//+YZ///mGf//5hn//+YZ///mGf//5hn//+YZ///mGf//5hn//+YZ///mGf//5hn//+Y
-        Z///mGf//5hn//+YZ///mGf//5hn//+YZ///mGf//5hn//+YZ///mGf//5hn//+YZ///mGf//5hn//+Y
-        Z///mGf/9/Dt/+Xl5f/l5eX///////ns5v/9nG7//5hn//+YZ///mGf//5hn//+YZ///mGf//5hn//+Y
-        Z///mGf//5hn//+YZ///mGf//5hn//+YZ///mGf//5hn//+YZ///mGf//5hn//+YZ///mGf//5hn//+Y
-        Z///mGf//5hn//+YZ///mGf//5hn//+YZ///mGf//5hn//+YZ///mGf//5hn//+YZ///mGf//5hn//+Y
-        Z///mGf//5hn//+YZ//1u6D//////+Xl5f/r6+v/+Pj4///////57Ob/97aY//ephf/3qYX/96mF//ep
-        hf/3qYX/96mF//ephf/3qYX/96mF//ephf/3qYX/96mF//ephf/3qYX/96mF//ephf/3qYX/96mF//ep
-        hf/3qYX/96mF//ephf/3qYX/96mF//ephf/3qYX/96mF//ephf/3qYX/96mF//ephf/3qYX/96mF//ep
-        hf/3qYX/96mF//ephf/3qYX/96mF//fQvv/9/f3//////+Xl5f//////6+vr//j4+P//////////////
-        ////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////6+vr//j4+P///////////+vr
-        6//l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl
-        5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl
-        5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl5f/l5eX/5eXl/+Xl5f/l5eX/+Pj4////
-        //8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAA
-        AAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA
-        //8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAA
-        AAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA
-        //8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAA
-        AAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8AAAAAAAD//wAAAAAAAP//AAAAAAAA
-        //8AAAAAAAD//wAAAAAAAP//AAAAAAAA//8=
+        AAD///8A39jYu7q6urq6urq6urq6urq6urq6urq6urq6urrY2NjY34QrERERERErWIegsdHRw5QRERER
+        ERERERERH07a2NiWAQEBByx6sd/f39/dvq6fewEBAQEBAQEBAQEBAU7M2G8BB1Wg2t/f39+uVS8vTU9Z
+        enpVDwECAQIBAgECKrvYhHHU39/f3p9yM3Gu3d/f397Jvq5HAgQEAgQEBAIhutjR39/f359Hg67a39/f
+        37BxMyUyM0dEMzIOBAQEBCW62N/f37Bsf9rf39/an1cyUZWx39/f393RwUQFBQUFJLrY396Df7Lf39/f
+        mURUl9He39/f2pFXOyVEJRwcEAUtu9jJVJnf39/fnURzyd/f39+wg1FEi7Da39/f39quGC262Jqy39/f
+        2nNUrN/f39+wVHKbxt7f39/anX9IPCIJLrvY39/f37A8kN/f39+wc4LU39/f37CCIgkJCQkJCQk8utjf
+        39+XN6zf39/ei4Ky39/f351UGAkMCQkJCQkJCTe72N/JYGLU39/fwWSu39/f3506DAwMDAwMDAwMDAwM
+        NrvYrDqJ3d/f351zxt/f39plFgwMDAwMDBIMEhISEgw6u9ii1N/f39qOidrf39+nGRISEhISEhISEhIS
+        EhISEji72N/f39+5ZJ3f39/fjh0SEhQSFBIUEhQSEhISEhISPbvY39/Gd3fa39/f2o5KSmBgYGBaSkA9
+        KCcaFRQUFBQ9u9jJd3ey3t/f38F5YGBgYGRmYGBgZmBgYFtKPScVFD272K3B39/f39KOZWZmZWZmYGZl
+        ZmZgZWZmYGZmYGBKW8XY39/f39qTd2ZmYGZmYGZmYGZgZmZmZmZmYGZmZmaOxdjawaeIZmZmZmZmZmZm
+        ZmZmZmZmZmZmZmZmZmZmZojM2KJqZWZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmjsXYomZoZmhmaGZo
+        ZmZoZmZoZmhmZmhmZmhmZmhmaGaOxdiiZmZoZmhmZmhmaGZoZmZoZmhmZmhmZmhmaGZmaI7F2KJoaGZo
+        aGhoZmhoZmhoaGZoaGhoZmhoaGhmaGhmj8XYomZoaGZoZmhoZmhoZmhoaGZoZmhoZmhmaGhoZmiPxdii
+        aGZoaGhoZmhoaGhoaGZoaGhoZmhoaGhoaGhoaI7F2KJoaGhoZmhoaGhmaGhoaGhoZmhoaGhoaGZoaGho
+        j8XYomhoZmhoaGhmaGhoZmhoZmhoaGhmaGhoaGhmaGiPy9jKaGhoaGhoaGhoaGhoaGhoaGhoaGhoaGho
+        aGhoaKfY2NnKraKjo6Ojo6Ojo6Ojo6Ojo6Ojo6Ojo6Ojo6O039jf2NjN2NjY2NjY2NjY2NjY2NjY2NjY
+        2NjY2NjY2NjY2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
 </root>

@@ -92,11 +92,11 @@ Bridgewater, NJ 08807
 #define ONE_OVER_TWOPI  0.159154943091895335       //(0.159154943091895) ke9ns mod
 #endif
 
-#define  FMDataDeviation  7000     // ke9ns add
-#define  FMDataLowHigh 10000      // ke9ns add low = -10000 , high = 10000
-#define  FMDataLow 0      // ke9ns add 
-#define  FMDataPre 1.5 // ke9ns pre-emphasis
-#define  FMDataDe 1 //
+#define  FMDataDeviation  17000     // ke9ns add (17khz .218)
+#define  FMDataLowHigh 20000      // ke9ns add low = -10000 , high = 10000 (.218 20khz)
+#define  FMDataLow 10      // ke9ns add 
+#define  FMDataPre 3 // ke9ns pre-emphasis (boost signal as freq increases, 1khz is usually the cross over point)
+#define  FMDataDe 1 // ke9ns de-emphasis (reduce signal as freq increases, standard de-emph  122 = 192k SR 62 = 96k SR   30 = 48k SR
 
 extern void InitSPEEDTRIG (void);
 extern REAL fast_sin (REAL);

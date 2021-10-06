@@ -42,6 +42,11 @@ Bridgewater, NJ 08807
 
 #include <keyer.h>
 
+// ke9ns THIS CODE IS NOT USED IN POWERSDR
+
+// ke9ns THIS CODE IS NOT USED
+// FLEX SWITCHED OVER TO THEIR FLEXCW.DLL
+
 //========================================================================
 // nothing affected by physical port connection here
 
@@ -54,17 +59,7 @@ Bridgewater, NJ 08807
 
 
 
-BOOLEAN
-klogic (KeyerLogic kl,
-	BOOLEAN dit,
-	BOOLEAN dah,
-	REAL wpm,
-	int iambicmode,
-	BOOLEAN midelementmodeB,
-	BOOLEAN ditmemory,
-	BOOLEAN dahmemory,
-	BOOLEAN autocharspacing,
-	BOOLEAN autowordspacing, int weight, REAL ticklen)
+BOOLEAN klogic (KeyerLogic kl, BOOLEAN dit,	BOOLEAN dah, REAL wpm, int iambicmode, BOOLEAN midelementmodeB,	BOOLEAN ditmemory, BOOLEAN dahmemory, BOOLEAN autocharspacing,	BOOLEAN autowordspacing, int weight, REAL ticklen)
 {
 	REAL ditlen = 1200 / wpm;
 	//REAL element_space = ditlen;
@@ -86,6 +81,9 @@ klogic (KeyerLogic kl,
 	//squeezeReleasedBeforeMidpoint set to 0 after current element is completed
 	static BOOLEAN afterflagdebug = 0;
 	//afterflagdebug used to prevent debug line from being called multiple times
+
+	
+	fprintf(stdout, "KEYERSTATE\n"), fflush(stdout);
 
 	switch(keyerState)
 	{
@@ -117,7 +115,7 @@ klogic (KeyerLogic kl,
 			break;
 
 		case (KEYERSTATE_DIT):
-			//fprintf(stdout, "KEYERSTATE_DIT\n"), fflush(stdout);
+		//	fprintf(stdout, "KEYERSTATE_DIT\n"), fflush(stdout);
 
 			if(dit && dah)
 				squeezeStartedAfterCurrentElementStartedPlaying = 1;
@@ -169,8 +167,8 @@ klogic (KeyerLogic kl,
 			break;
 
 		case(KEYERSTATE_DAH):	
-			//fprintf(stdout, "KEYERSTATE_DAH\n"), fflush(stdout);
-
+		//	fprintf(stdout, "KEYERSTATE_DAH\n"), fflush(stdout);
+			
 			if(dit && dah)
 				squeezeStartedAfterCurrentElementStartedPlaying = 1;
 
@@ -366,26 +364,23 @@ klogic (KeyerLogic kl,
 	return (kl->timeout.beep > 0) && (kl->timeout.dlay <= 0);
 }
 
-KeyerState
-newKeyerState (void)
+
+KeyerState newKeyerState (void)
 {
 	return (KeyerState) safealloc (1, sizeof (KeyerStateInfo), "newKeyerState");
 }
 
-void
-delKeyerState (KeyerState ks)
+void delKeyerState (KeyerState ks)
 {
 	safefree ((char *) ks);
 }
 
-KeyerLogic
-newKeyerLogic (void)
+KeyerLogic newKeyerLogic (void)
 {
 	return (KeyerLogic) safealloc (1, sizeof (KeyerLogicInfo), "newKeyerLogic");
 }
 
-void
-delKeyerLogic (KeyerLogic kl)
+void delKeyerLogic (KeyerLogic kl)
 {
 	safefree ((char *) kl);
 }

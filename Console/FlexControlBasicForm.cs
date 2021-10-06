@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,19 +14,20 @@ namespace PowerSDR
 {
     public partial class FlexControlBasicForm : Form
     {
+        private Console console;
         private FlexControlInterface2 fc_interface = null;
-        private Console console = null;
-        public Setup setupForm;                             // ke9ns communications with setupform  (i.e. allow combometertype.text update from inside console.cs) 
 
-      //  HidDevice.PowerMate powerMate = new HidDevice.PowerMate();  // link back to PowerMate.cpp and PowerMate.h
+        //   public Setup setupForm;                             // ke9ns communications with setupform  (i.e. allow combometertype.text update from inside console.cs) 
+
+        //  HidDevice.PowerMate powerMate = new HidDevice.PowerMate();  // link back to PowerMate.cpp and PowerMate.h
 
         public FlexControlBasicForm(Console c)
         {
             InitializeComponent();
             console = c;
-           
-        // setup the actual FlexControl Interface
-        fc_interface = new FlexControlInterface2(c);
+
+            // setup the actual FlexControl Interface
+            fc_interface = new FlexControlInterface2(c);
 
             // populate knob combobox controls
             foreach (FlexControlKnobFunction function in Enum.GetValues(typeof(FlexControlKnobFunction)))
@@ -46,18 +47,22 @@ namespace PowerSDR
 
             // restore any saved configuration
             Common.RestoreForm(this, "FlexControlBasicForm", false);
+
+            this.TopMost = true; // ke9ns .174
         }
 
         private FlexControl flexControl;
         public FlexControl FlexControl
         {
-            get { return flexControl; }
+            get
+            {
+                return flexControl;
+            }
             set
             {
                 flexControl = value;
 
-                if (flex_control_mode == FlexControlMode.Basic)
-                    fc_interface.FlexControl = value;
+                if (flex_control_mode == FlexControlMode.Basic) fc_interface.FlexControl = value;
 
                 if (flexControl != null)
                 {
@@ -218,8 +223,7 @@ namespace PowerSDR
 
             if (console == null) return;
 
-            if (console.FlexControlAutoDetect != auto_detect)
-                console.FlexControlAutoDetect = chkAutoDetect.Checked;
+            if (console.FlexControlAutoDetect != auto_detect) console.FlexControlAutoDetect = chkAutoDetect.Checked;
         }
 
 
@@ -229,30 +233,30 @@ namespace PowerSDR
         // ke9ns add all below
         private void udSpeedPM_ValueChanged(object sender, EventArgs e)
         {
-        //    if (setupForm == null || setupForm.IsDisposed) setupForm = new Setup(console);
-        //    setupForm.udSpeedPM.Value = udSpeedPM.Value;
+            //    if (setupForm == null || setupForm.IsDisposed) setupForm = new Setup(console);
+            //    setupForm.udSpeedPM.Value = udSpeedPM.Value;
         }
 
         private void txtWheelTune2_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-            //    if (setupForm == null || setupForm.IsDisposed) setupForm = new Setup(console);
-            //    setupForm.ChangeTuneStepUp2();
+                //    if (setupForm == null || setupForm.IsDisposed) setupForm = new Setup(console);
+                //    setupForm.ChangeTuneStepUp2();
             }
         }
 
         private void btnTuneStepChangeSmaller2_Click(object sender, EventArgs e)
         {
-          //  if (setupForm == null || setupForm.IsDisposed) setupForm = new Setup(console);
-          //  setupForm.ChangeTuneStepDown2();
+            //  if (setupForm == null || setupForm.IsDisposed) setupForm = new Setup(console);
+            //  setupForm.ChangeTuneStepDown2();
         }
 
         private void btnTuneStepChangeLarger2_Click(object sender, EventArgs e)
         {
 
-          //  if (setupForm == null || setupForm.IsDisposed) setupForm = new Setup(console);
-          //  setupForm.ChangeTuneStepUp2();
+            //  if (setupForm == null || setupForm.IsDisposed) setupForm = new Setup(console);
+            //  setupForm.ChangeTuneStepUp2();
         }
 
         private void chkBoxPM_CheckedChanged(object sender, EventArgs e)
@@ -305,8 +309,8 @@ namespace PowerSDR
 
         private void txtWheelTune2_TextChanged(object sender, EventArgs e)
         {
-          //  if (setupForm == null || setupForm.IsDisposed) setupForm = new Setup(console);
-         //   setupForm.txtWheelTune2.Text = txtWheelTune2.Text;
+            //  if (setupForm == null || setupForm.IsDisposed) setupForm = new Setup(console);
+            //   setupForm.txtWheelTune2.Text = txtWheelTune2.Text;
         }
     } // FlexControl
 

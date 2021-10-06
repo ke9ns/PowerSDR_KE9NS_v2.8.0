@@ -120,48 +120,205 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="tbMic.ToolTip" xml:space="preserve">
-    <value>Stage 1 Adjusts the Mic Input Volume:
+  <data name="lblLineInDB9.ToolTip" xml:space="preserve">
+    <value>FlexWire Audio Input (DB9 on back panel)
+Stage 1 Adjusts the Mic Input Volume:
 
-Stage 1: MIXER slider
-Stage 2: MIC slider (stay under -10 dBm on MIC meter)
-Stage 3: Expander / EQ (stay under -2 dBm on EQ meter)
-Stage 4: Leveler  (stay under &lt; 0 dBm on LEV meter)
-Stage 5: ALC / TX Filter / Modulation / DX / Compander</value>
+Audio INPUT Stages:
+A/D   =   Stage0 Front End to Digital
+Mixer =  Stage1 Mixer (after the A/D converter)
+MIC    = Stage2 input dBm after MIXER and MIC sliders
+DEXP  = Stage3 Downward Expander / Gate
+EQ      = Stage4 input dBm after EQ sliders
+Lev     = Stage5 input dBm afer leveler gain
+LevG   = Stage5 Leveler Gain display only
+CPDR  = Stage6 Compander 
+DX       = Stage6  DX Compressor
+Mod    = Stage7 Modulation Mode
+FLTR   = Stage 8 TX Filter
+ALC    = Stage9 input dBm after DX, Cmpd, Mode, TX Filter
+ALCG  = Stage9 ALC attack dBm, foldback amount
+I/Q      = Stage10 I/Q correction
+Scale   = Stage11 Audio Scaling
+D/A     = Stage12 back to Analog (to the PA)
+</value>
   </data>
   <data name="tbLineInDB9.ToolTip" xml:space="preserve">
     <value>Stage 1 Adjusts the Line In DB9 Input Volume:
 
-Stage 1: MIXER slider
-Stage 2: MIC slider (stay under -10 dBm on MIC meter)
-Stage 3: Expander / EQ (stay under -2 dBm on EQ meter)
-Stage 4: Leveler  (stay under &lt; 0 dBm on LEV meter)
-Stage 5: ALC / TX Filter / Modulation / DX / Compander</value>
+Audio INPUT Stages:
+A/D   =   Stage0 Front End to Digital
+Mixer =  Stage1 Mixer (after the A/D converter)
+MIC    = Stage2 input dBm after MIXER and MIC sliders
+DEXP  = Stage3 Downward Expander / Gate
+EQ      = Stage4 input dBm after EQ sliders
+Lev     = Stage5 input dBm afer leveler gain
+LevG   = Stage5 Leveler Gain display only
+CPDR  = Stage6 Compander 
+DX       = Stage6  DX Compressor
+Mod    = Stage7 Modulation Mode
+FLTR   = Stage 8 TX Filter
+ALC    = Stage9 input dBm after DX, Cmpd, Mode, TX Filter
+ALCG  = Stage9 ALC attack dBm, foldback amount
+I/Q      = Stage10 I/Q correction
+Scale   = Stage11 Audio Scaling
+D/A     = Stage12 back to Analog (to the PA)
+</value>
+  </data>
+  <data name="lblLineInPhono.ToolTip" xml:space="preserve">
+    <value>Balanced Line Input (Phono Plug on back panel)
+Stage 1: Adjusts the Balanced Line In Volume: -128 bot to 0 top
+
+Audio INPUT Stages:
+A/D   =   Stage0 Front End to Digital
+Mixer =  Stage1 Mixer (after the A/D converter)
+MIC    = Stage2 input dBm after MIXER and MIC sliders
+DEXP  = Stage3 Downward Expander / Gate
+EQ      = Stage4 input dBm after EQ sliders
+Lev     = Stage5 input dBm afer leveler gain
+LevG   = Stage5 Leveler Gain display only
+CPDR  = Stage6 Compander 
+DX       = Stage6  DX Compressor
+Mod    = Stage7 Modulation Mode
+FLTR   = Stage 8 TX Filter
+ALC    = Stage9 input dBm after DX, Cmpd, Mode, TX Filter
+ALCG  = Stage9 ALC attack dBm, foldback amount
+I/Q      = Stage10 I/Q correction
+Scale   = Stage11 Audio Scaling
+D/A     = Stage12 back to Analog (to the PA)
+</value>
   </data>
   <data name="tbLineInPhono.ToolTip" xml:space="preserve">
-    <value>Stage 1 Adjusts the Line In Phono Input Volume:
+    <value>Stage 1: Adjusts the Balanced Line In Volume: -128 bot to 0 top
 
-Stage 1: MIXER slider
-Stage 2: MIC slider (stay under -10 dBm on MIC meter)
-Stage 3: Expander / EQ (stay under -2 dBm on EQ meter)
-Stage 4: Leveler  (stay under &lt; 0 dBm on LEV meter)
-Stage 5: ALC / TX Filter / Modulation / DX / Compander</value>
+Audio INPUT Stages:
+A/D   =   Stage0 Front End to Digital
+Mixer =  Stage1 Mixer (after the A/D converter)
+MIC    = Stage2 input dBm after MIXER and MIC sliders
+DEXP  = Stage3 Downward Expander / Gate
+EQ      = Stage4 input dBm after EQ sliders
+Lev     = Stage5 input dBm afer leveler gain
+LevG   = Stage5 Leveler Gain display only
+CPDR  = Stage6 Compander 
+DX       = Stage6  DX Compressor
+Mod    = Stage7 Modulation Mode
+FLTR   = Stage 8 TX Filter
+ALC    = Stage9 input dBm after DX, Cmpd, Mode, TX Filter
+ALCG  = Stage9 ALC attack dBm, foldback amount
+I/Q      = Stage10 I/Q correction
+Scale   = Stage11 Audio Scaling
+D/A     = Stage12 back to Analog (to the PA)
+</value>
+  </data>
+  <data name="lblLineInRCA.ToolTip" xml:space="preserve">
+    <value>Line Input (White RCA on back panel)
+Stage 1 Adjusts the Mic Input Volume:
+
+Audio INPUT Stages:
+A/D   =   Stage0 Front End to Digital
+Mixer =  Stage1 Mixer (after the A/D converter)
+MIC    = Stage2 input dBm after MIXER and MIC sliders
+DEXP  = Stage3 Downward Expander / Gate
+EQ      = Stage4 input dBm after EQ sliders
+Lev     = Stage5 input dBm afer leveler gain
+LevG   = Stage5 Leveler Gain display only
+CPDR  = Stage6 Compander 
+DX       = Stage6  DX Compressor
+Mod    = Stage7 Modulation Mode
+FLTR   = Stage 8 TX Filter
+ALC    = Stage9 input dBm after DX, Cmpd, Mode, TX Filter
+ALCG  = Stage9 ALC attack dBm, foldback amount
+I/Q      = Stage10 I/Q correction
+Scale   = Stage11 Audio Scaling
+D/A     = Stage12 back to Analog (to the PA)
+</value>
   </data>
   <data name="tbLineInRCA.ToolTip" xml:space="preserve">
-    <value>Stage 1Adjusts the Line In RCA Input Volume:
+    <value>Stage 1: Adjusts the Line In RCA Input Volume: -128 bot to 0 top
 
-Stage 1: MIXER slider
-Stage 2: MIC slider (stay under -10 dBm on MIC meter)
-Stage 3: Expander / EQ (stay under -2 dBm on EQ meter)
-Stage 4: Leveler  (stay under &lt; 0 dBm on LEV meter)
-Stage 5: ALC / TX Filter / Modulation / DX / Compander</value>
+Audio INPUT Stages:
+A/D   =   Stage0 Front End to Digital
+Mixer =  Stage1 Mixer (after the A/D converter)
+MIC    = Stage2 input dBm after MIXER and MIC sliders
+DEXP  = Stage3 Downward Expander / Gate
+EQ      = Stage4 input dBm after EQ sliders
+Lev     = Stage5 input dBm afer leveler gain
+LevG   = Stage5 Leveler Gain display only
+CPDR  = Stage6 Compander 
+DX       = Stage6  DX Compressor
+Mod    = Stage7 Modulation Mode
+FLTR   = Stage 8 TX Filter
+ALC    = Stage9 input dBm after DX, Cmpd, Mode, TX Filter
+ALCG  = Stage9 ALC attack dBm, foldback amount
+I/Q      = Stage10 I/Q correction
+Scale   = Stage11 Audio Scaling
+D/A     = Stage12 back to Analog (to the PA)
+</value>
+  </data>
+  <data name="lblMic.ToolTip" xml:space="preserve">
+    <value>8 Pin front panel connector
+Stage 1 Adjusts the Mic Input Volume:
+
+Audio INPUT Stages:
+A/D   =   Stage0 Front End to Digital
+Mixer =  Stage1 Mixer (after the A/D converter)
+MIC    = Stage2 input dBm after MIXER and MIC sliders
+DEXP  = Stage3 Downward Expander / Gate
+EQ      = Stage4 input dBm after EQ sliders
+Lev     = Stage5 input dBm afer leveler gain
+LevG   = Stage5 Leveler Gain display only
+CPDR  = Stage6 Compander 
+DX       = Stage6  DX Compressor
+Mod    = Stage7 Modulation Mode
+FLTR   = Stage 8 TX Filter
+ALC    = Stage9 input dBm after DX, Cmpd, Mode, TX Filter
+ALCG  = Stage9 ALC attack dBm, foldback amount
+I/Q      = Stage10 I/Q correction
+Scale   = Stage11 Audio Scaling
+D/A     = Stage12 back to Analog (to the PA)
+</value>
+  </data>
+  <data name="tbMic.ToolTip" xml:space="preserve">
+    <value>Stage 1 Adjusts the Mic Input Volume:
+
+Audio INPUT Stages:
+A/D   =   Stage0 Front End to Digital
+Mixer =  Stage1 Mixer (after the A/D converter)
+MIC    = Stage2 input dBm after MIXER and MIC sliders
+DEXP  = Stage3 Downward Expander / Gate
+EQ      = Stage4 input dBm after EQ sliders
+Lev     = Stage5 input dBm afer leveler gain
+LevG   = Stage5 Leveler Gain display only
+CPDR  = Stage6 Compander 
+DX       = Stage6  DX Compressor
+Mod    = Stage7 Modulation Mode
+FLTR   = Stage 8 TX Filter
+ALC    = Stage9 input dBm after DX, Cmpd, Mode, TX Filter
+ALCG  = Stage9 ALC attack dBm, foldback amount
+I/Q      = Stage10 I/Q correction
+Scale   = Stage11 Audio Scaling
+D/A     = Stage12 back to Analog (to the PA)
+</value>
   </data>
   <data name="grpInput.ToolTip" xml:space="preserve">
-    <value>Stage 1: MIXER slider
-Stage 2: MIC slider (stay under -10 dBm on MIC meter)
-Stage 3: Expander / EQ (stay under -2 dBm on EQ meter)
-Stage 4: Leveler  (stay under &lt; 0 dBm on LEV meter)
-Stage 5: ALC / TX Filter / Modulation / DX / Compander</value>
+    <value>Audio INPUT Stages:
+A/D   =   Stage0 Front End to Digital
+Mixer =  Stage1 Mixer (after the A/D converter)
+MIC    = Stage2 input dBm after MIXER and MIC sliders
+DEXP  = Stage3 Downward Expander / Gate
+EQ      = Stage4 input dBm after EQ sliders
+Lev     = Stage5 input dBm afer leveler gain
+LevG   = Stage5 Leveler Gain display only
+CPDR  = Stage6 Compander 
+DX       = Stage6  DX Compressor
+Mod    = Stage7 Modulation Mode
+FLTR   = Stage 8 TX Filter
+ALC    = Stage9 input dBm after DX, Cmpd, Mode, TX Filter
+ALCG  = Stage9 ALC attack dBm, foldback amount
+I/Q      = Stage10 I/Q correction
+Scale   = Stage11 Audio Scaling
+D/A     = Stage12 back to Analog (to the PA)
+</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

@@ -122,7 +122,7 @@
             this.btnDefaults.TabIndex = 3;
             this.btnDefaults.Text = "Defaults";
             this.toolTip1.SetToolTip(this.btnDefaults, "Click this button to return to the default settings for the controls shown on thi" +
-                    "s form");
+        "s form");
             this.btnDefaults.UseVisualStyleBackColor = true;
             this.btnDefaults.Click += new System.EventHandler(this.btnDefaults_Click);
             // 
@@ -674,14 +674,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(556, 434);
+            this.ClientSize = new System.Drawing.Size(557, 433);
             this.Controls.Add(this.radModeAdvanced);
             this.Controls.Add(this.radModeBasic);
             this.Controls.Add(this.chkAutoDetect);
             this.Controls.Add(this.btnDefaults);
             this.Controls.Add(this.grpButton);
             this.Controls.Add(this.grpKnob);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(573, 472);
+            this.MinimumSize = new System.Drawing.Size(573, 472);
             this.Name = "FlexControlAdvancedForm";
             this.Text = "FlexControl - Advanced";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FlexControlForm_FormClosing);

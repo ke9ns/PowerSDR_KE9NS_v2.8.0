@@ -45,7 +45,8 @@ Bridgewater, NJ 08807
 #include <fftw3.h>
 #include <fftw3_fix.h>
 
-typedef struct _filt_ov_sav {
+typedef struct _filt_ov_sav
+{
   int buflen, fftlen;
   COMPLEX *zfvec, *zivec, *zovec, *zrvec;
   fftwf_plan pfwd, pinv;

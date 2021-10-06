@@ -36,8 +36,8 @@ Bridgewater, NJ 08807
 //========================================================================
 /* initialization and termination */
 int const MAX_NOTCHES_IN_PASSBAND = 18;
-void
-reset_meters (unsigned int thread)
+
+void reset_meters (unsigned int thread)
 {
 	if (uni[thread].meter.flag)
 	{                           // reset metering completely
@@ -50,15 +50,13 @@ reset_meters (unsigned int thread)
 	}
 }
 
-void
-reset_spectrum (unsigned int thread)
+void reset_spectrum (unsigned int thread)
 {
 	if (uni[thread].spec.flag)
 		reinit_spectrum (&uni[thread].spec);
 }
 
-void
-reset_counters (unsigned thread)
+void reset_counters (unsigned thread)
 {
 	int k;
 	for (k = 0; k < uni[thread].multirx.nrx; k++)
@@ -72,9 +70,7 @@ reset_counters (unsigned thread)
    not specifically attached to
    tx, rx, or scheduling */
 
-PRIVATE void
-setup_all (REAL rate, int buflen, SDRMODE mode, char *wisdom,
-	int specsize, int numrecv, int cpdsize, unsigned int thread)
+PRIVATE void setup_all (REAL rate, int buflen, SDRMODE mode, char *wisdom, int specsize, int numrecv, int cpdsize, unsigned int thread)
 {
 	uni[thread].samplerate = rate;
 	uni[thread].buflen = buflen;
@@ -105,7 +101,7 @@ setup_all (REAL rate, int buflen, SDRMODE mode, char *wisdom,
 	uni[thread].spec.buflen = uni[thread].buflen;
 	uni[thread].spec.scale = SPEC_PWR;
 	uni[thread].spec.type = SPEC_POST_FILT;
-	uni[thread].spec.size = specsize;
+	uni[thread].spec.size = specsize;  // ke9ns: set size of buffer 4096?
 	uni[thread].spec.planbits = uni[thread].wisdom.bits;
 	init_spectrum (&uni[thread].spec);
 	//fprintf(stderr,"Created spectrum\n"),fflush(stderr);
@@ -123,15 +119,16 @@ setup_all (REAL rate, int buflen, SDRMODE mode, char *wisdom,
 	uni[thread].tick = uni[thread].oldtick = 0;
 }
 
+
 /* purely rx */
 
-PRIVATE void
-setup_rx (int k, unsigned int thread)
+PRIVATE void setup_rx (int k, unsigned int thread)
 {
 	int i;
 
 	/* conditioning */
-	if (thread == 0) {
+	if (thread == 0) 
+	{
 		diversity.gain = 1.0;
 		diversity.scalar = Cmplx(1.0,0);
 	}
@@ -139,32 +136,22 @@ setup_rx (int k, unsigned int thread)
 	// Remove the next line
 	rx[thread][k].iqfix->wbir_state = JustSayNo;
 	// Remove the previous line
-	rx[thread][k].filt.coef = newFIR_Bandpass_COMPLEX (150.0,
-		2850.0,	uni[thread].samplerate, uni[thread].buflen + 1);
-	rx[thread][k].filt.ovsv =
-		newFiltOvSv (FIRcoef (rx[thread][k].filt.coef), FIRsize (rx[thread][k].filt.coef),
-		uni[thread].wisdom.bits);
+	rx[thread][k].filt.coef = newFIR_Bandpass_COMPLEX (150.0, 2850.0, uni[thread].samplerate, uni[thread].buflen + 1);
+	rx[thread][k].filt.ovsv = newFiltOvSv (FIRcoef (rx[thread][k].filt.coef), FIRsize (rx[thread][k].filt.coef), uni[thread].wisdom.bits);
 	rx[thread][k].resample.flag = FALSE;
 	normalize_vec_COMPLEX (rx[thread][k].filt.ovsv->zfvec, rx[thread][k].filt.ovsv->fftlen, rx[thread][k].filt.ovsv->scale);
 
-	rx[thread][k].output_gain=1.0f;
+	rx[thread][k].output_gain = 1.0f;
 
 	// hack for EQ
-	rx[thread][k].filt.save =
-		newvec_COMPLEX (rx[thread][k].filt.ovsv->fftlen, "RX filter cache");
-	memcpy ((char *) rx[thread][k].filt.save, (char *) rx[thread][k].filt.ovsv->zfvec,
-		rx[thread][k].filt.ovsv->fftlen * sizeof (COMPLEX));
+	rx[thread][k].filt.save = newvec_COMPLEX (rx[thread][k].filt.ovsv->fftlen, "RX filter cache");
+	memcpy ((char *) rx[thread][k].filt.save, (char *) rx[thread][k].filt.ovsv->zfvec, rx[thread][k].filt.ovsv->fftlen * sizeof (COMPLEX));
 
 	/* buffers */
-	/* note we overload the internal filter buffers
-	we just created */
-	rx[thread][k].buf.i = newCXB (FiltOvSv_fetchsize (rx[thread][k].filt.ovsv),
-		FiltOvSv_fetchpoint (rx[thread][k].filt.ovsv),
-		"init rx[thread][k].buf.i");
+	/* note we overload the internal filter buffers	we just created */
+	rx[thread][k].buf.i = newCXB (FiltOvSv_fetchsize (rx[thread][k].filt.ovsv), FiltOvSv_fetchpoint (rx[thread][k].filt.ovsv), "init rx[thread][k].buf.i");
 
-	rx[thread][k].buf.o = newCXB (FiltOvSv_storesize (rx[thread][k].filt.ovsv),
-		FiltOvSv_storepoint (rx[thread][k].filt.ovsv),
-		"init rx[thread][k].buf.o");
+	rx[thread][k].buf.o = newCXB (FiltOvSv_storesize (rx[thread][k].filt.ovsv),	FiltOvSv_storepoint (rx[thread][k].filt.ovsv), "init rx[thread][k].buf.o");
 
 	rx[thread][k].dcb = newDCBlocker(DCB_SINGLE_POLE, rx[thread][k].buf.i);
 	rx[thread][k].dcb->flag = FALSE;
@@ -172,11 +159,7 @@ setup_rx (int k, unsigned int thread)
 	/* conversion */
 	rx[thread][k].osc.freq = -9000.0;
 	rx[thread][k].osc.phase = 0.0;
-	rx[thread][k].osc.gen = newOSC (uni[thread].buflen,
-		ComplexTone,
-		rx[thread][k].osc.freq,
-		rx[thread][k].osc.phase,
-		uni[thread].samplerate, "SDR RX Oscillator");
+	rx[thread][k].osc.gen = newOSC (uni[thread].buflen,	ComplexTone, rx[thread][k].osc.freq, rx[thread][k].osc.phase, uni[thread].samplerate, "SDR RX Oscillator");
 
 	rx[thread][k].dttspagc.gen = newDttSPAgc (
 		agcMED,							// mode kept around for control reasons alone
@@ -262,15 +245,16 @@ setup_rx (int k, unsigned int thread)
 	rx[thread][k].banr.flag = FALSE;
 
 
-	rx[thread][k].nb.thresh = 3.3f;
-	rx[thread][k].nb.gen = new_noiseblanker (rx[thread][k].buf.i, rx[thread][k].nb.thresh);
+	rx[thread][k].nb.thresh = 3.3f; // ke9ns: setup threshold * .165 (so 20 * .165 = 3.3)
+//	rx[thread][k].nb.gen = new_noiseblanker (rx[thread][k].buf.i, rx[thread][k].nb.thresh); // ke9ns original way
+	rx[thread][k].nb.gen = new_noiseblanker(rx[thread][k].buf.i, rx[thread][k].nb.thresh, rx[thread][k].nb.ht, rx[thread][k].nb.dly); // ke9ns mode: .182
 	rx[thread][k].nb.flag = FALSE;
 
 	rx[thread][k].nb_sdrom.thresh = 2.5f;
-	rx[thread][k].nb_sdrom.gen = new_noiseblanker (rx[thread][k].buf.i, rx[thread][k].nb_sdrom.thresh);
+	rx[thread][k].nb_sdrom.gen = new_noiseblanker (rx[thread][k].buf.i, rx[thread][k].nb_sdrom.thresh, rx[thread][k].nb.ht, rx[thread][k].nb.dly);
 	rx[thread][k].nb_sdrom.flag = FALSE;
 
-	for(i=0; i<MAX_NOTCHES_IN_PASSBAND; i++)
+	for(i = 0; i < MAX_NOTCHES_IN_PASSBAND; i++)
 	{
 		rx[thread][k].notch[i].gen = new_IIR_2P2Z(
 			rx[thread][k].buf.o,	// Buffer
@@ -328,14 +312,14 @@ PRIVATE void setup_tx (unsigned int thread)
 
 	tx[thread].filt.ovsv = newFiltOvSv (FIRcoef (tx[thread].filt.coef), FIRsize (tx[thread].filt.coef), uni[thread].wisdom.bits);
 
-	tx[thread].filt.ovsv_pre = newFiltOvSv (FIRcoef (tx[thread].filt.coef), FIRsize (tx[thread].filt.coef), uni[thread].wisdom.bits);
+	tx[thread].filt.ovsv_pre = newFiltOvSv (FIRcoef (tx[thread].filt.coef), FIRsize (tx[thread].filt.coef), uni[thread].wisdom.bits); // ke9ns pre-emphasis?
 
 	normalize_vec_COMPLEX (tx[thread].filt.ovsv->zfvec, tx[thread].filt.ovsv->fftlen, tx[thread].filt.ovsv->scale);
 
 	// hack for EQ
 	tx[thread].filt.save = newvec_COMPLEX (tx[thread].filt.ovsv->fftlen, "TX filter cache");
 
-	memcpy ((char *) tx[thread].filt.save,   (char *) tx[thread].filt.ovsv->zfvec,    tx[thread].filt.ovsv->fftlen * sizeof (COMPLEX)); // D,S, SIZE
+	memcpy ((char *) tx[thread].filt.save,   (char *) tx[thread].filt.ovsv->zfvec,    tx[thread].filt.ovsv->fftlen * sizeof (COMPLEX)); // D, S, SIZE
 
 	/* buffers */
 	tx[thread].buf.i = newCXB (FiltOvSv_fetchsize (tx[thread].filt.ovsv), FiltOvSv_fetchpoint (tx[thread].filt.ovsv), "init tx[thread].buf.i");
@@ -357,7 +341,7 @@ PRIVATE void setup_tx (unsigned int thread)
 
 	tx[thread].am.carrier_level = 0.5f;
 
-	tx[thread].fm.cvtmod2freq = (REAL) (5000.0f * TWOPI / uni[thread].samplerate); //5 kHz deviation..used to be 3
+	tx[thread].fm.cvtmod2freq = (REAL) (5000.0f * TWOPI / uni[thread].samplerate);    //5 kHz deviation..used to be 3
 	tx[thread].fm.phase = 0.0;
 
 	
@@ -374,22 +358,25 @@ PRIVATE void setup_tx (unsigned int thread)
 	tx[thread].fm.output_LPF1 = new_IIR_LPF_2P(tx[thread].buf.i, uni[thread].samplerate, 3500.0f, 0.25f);	//4 pole butterworth Q = 0.76537, 1.84776	
 	tx[thread].fm.output_LPF2 = new_IIR_LPF_2P(tx[thread].buf.i, uni[thread].samplerate, 3500.0f, 1.75f);	//4 pole butterworth Q = 0.76537, 1.84776	
 
+
     // DaTA FM mode	
-	tx[thread].fm.k_preemphasis1 = FMDataPre; // (REAL)(1.0f + uni[thread].samplerate / (TWOPI * 3000.0f));  // FMDATA MODE
-	tx[thread].fm.k_deemphasis1 = FMDataDe; // (REAL)(1.0f + uni[thread].samplerate / (TWOPI * 250.0f));  // 
+	tx[thread].fm.k_preemphasis1 = FMDataPre; // ke9ns (REAL)(1.0f + uni[thread].samplerate / (TWOPI * 3000.0f));  // FMDATA MODE 5= 96k SR
+	
+	tx[thread].fm.k_deemphasis1 = FMDataDe;   // ke9ns (REAL)(1.0f + uni[thread].samplerate / (TWOPI * 250.0f));  // ke9ns: RX output appears to be working (will receive digital data)
 
 	tx[thread].fm.input_LPF3 = new_IIR_LPF_2P(tx[thread].buf.i, uni[thread].samplerate, FMDataLowHigh, 0.25f);	//4 pole butterworth Q = 0.76537, 1.84776	
 	tx[thread].fm.input_LPF4 = new_IIR_LPF_2P(tx[thread].buf.i, uni[thread].samplerate, FMDataLowHigh, 1.75f);	//4 pole butterworth Q = 0.76537, 1.84776
 	tx[thread].fm.input_HPF3 = new_IIR_HPF_2P(tx[thread].buf.i, uni[thread].samplerate, FMDataLow, 0.34f);	//4 pole butterworth Q = 0.76537, 1.84776	
 	tx[thread].fm.input_HPF4 = new_IIR_HPF_2P(tx[thread].buf.i, uni[thread].samplerate, FMDataLow, 0.94f);	//4 pole butterworth Q = 0.76537, 1.84776	
 
+	// DATA FM MODE TX OUTPUT Filter
 	tx[thread].fm.output_LPF3 = new_IIR_LPF_2P(tx[thread].buf.i, uni[thread].samplerate, FMDataLowHigh, 0.25f);	//4 pole butterworth Q = 0.76537, 1.84776	
 	tx[thread].fm.output_LPF4 = new_IIR_LPF_2P(tx[thread].buf.i, uni[thread].samplerate, FMDataLowHigh, 1.75f);	//4 pole butterworth Q = 0.76537, 1.84776	
 
 	
 	//fprintf(stderr, "1FMDATA OFF\n"), fflush(stderr);
 
-	tx[thread].fm.preemphasis_filter = 0.0f;
+	tx[thread].fm.preemphasis_filter = 0.0f; // ke9ns: this value is just a placeholder, see  do_tx_fm() where the value is based on k_preemphasis 
 	tx[thread].fm.deemphasis_out = 0.0f;
 
 	tx[thread].fm.clip_threshold = 0.75f;
@@ -466,10 +453,11 @@ PRIVATE void setup_tx (unsigned int thread)
 
 } // setup_tx
 
-/* how the outside world sees it */
 
-void setup_workspace (REAL rate, int buflen, SDRMODE mode,
-                 char *wisdom, int specsize, int numrecv, int cpdsize, unsigned int thread)
+  
+  /* how the outside world sees it */
+
+void setup_workspace (REAL rate, int buflen, SDRMODE mode, char *wisdom, int specsize, int numrecv, int cpdsize, unsigned int thread)
 {
 	int k;
 
@@ -871,8 +859,7 @@ do_rx_diversity_combine()
 }
 #endif
 /* pre-condition for (nearly) all RX modes */
-PRIVATE void
-do_rx_pre (int k, unsigned int thread)
+PRIVATE void do_rx_pre (int k, unsigned int thread)
 {
 	int i, n = min (CXBhave (rx[thread][k].buf.i), uni[thread].buflen);
 
@@ -882,9 +869,10 @@ do_rx_pre (int k, unsigned int thread)
 	if (rx[thread][k].dcb->flag) DCBlock(rx[thread][k].dcb);
 
 	if (rx[thread][k].nb.flag)
-		noiseblanker (rx[thread][k].nb.gen);
-	if (rx[thread][k].nb_sdrom.flag)
-		SDROMnoiseblanker (rx[thread][k].nb_sdrom.gen);
+	{
+		noiseblanker(rx[thread][k].nb.gen); // ke9ns: NB if ON call 
+	}
+	if (rx[thread][k].nb_sdrom.flag)	SDROMnoiseblanker (rx[thread][k].nb_sdrom.gen); // ke9ns: NB2
 
 	correctIQ (rx[thread][k].buf.i, rx[thread][k].iqfix, FALSE, k);
 
@@ -1063,38 +1051,32 @@ do_rx_post (int k, unsigned int thread)
 
 /* demod processing */
 
-PRIVATE void
-do_rx_SBCW (int k, unsigned int thread)
+PRIVATE void do_rx_SBCW (int k, unsigned int thread)
 {
 
 }
 
-PRIVATE void
-do_rx_AM (int k, unsigned int thread)
+PRIVATE void do_rx_AM (int k, unsigned int thread)
 {
 	AMDemod (rx[thread][k].am.gen);
 }
 
-PRIVATE void
-do_rx_FM (int k, unsigned int thread)
+PRIVATE void do_rx_FM (int k, unsigned int thread)
 {
 	FMDemod (rx[thread][k].fm.gen);
 }
 
-PRIVATE void
-do_rx_DRM (int k, unsigned int thread)
+PRIVATE void do_rx_DRM (int k, unsigned int thread)
 {
 
 }
 
-PRIVATE void
-do_rx_SPEC (int k, unsigned int thread)
+PRIVATE void do_rx_SPEC (int k, unsigned int thread)
 {
 
 }
 
-PRIVATE void
-do_rx_NIL (int k, unsigned int thread)
+PRIVATE void do_rx_NIL (int k, unsigned int thread)
 {
 	int i, n = min (CXBhave (rx[thread][k].buf.i), uni[thread].buflen);
 	for (i = 0; i < n; i++)
@@ -1103,8 +1085,7 @@ do_rx_NIL (int k, unsigned int thread)
 
 /* overall dispatch for RX processing */
 
-void
-dump_buf (const char* filename, CXB buf)
+void dump_buf (const char* filename, CXB buf)
 {
 	int n = CXBsize(buf);
 	int i = 0;
@@ -1173,8 +1154,7 @@ dump_buf (const char* filename, CXB buf)
 			writer.Flush();											// write the file*/
 }
 
-PRIVATE void
-do_rx (int k, unsigned int thread)
+PRIVATE void do_rx (int k, unsigned int thread)
 {
 	do_rx_pre (k, thread);
 	switch (rx[thread][k].mode)
@@ -1447,12 +1427,13 @@ PRIVATE void do_tx_FM (unsigned int thread) // ke9ns called from do_tx above
 	REAL mag = 0;
 	REAL deemphasis_in = 0;
 	REAL preemphasis_in = 0;
+
 	REAL k_preemphasis = tx[thread].fm.k_preemphasis; // (REAL)(1.0f + uni[thread].samplerate/(TWOPI * 3000.0f));  //11.19
 	REAL k_deemphasis = tx[thread].fm.k_deemphasis;
 
 	
-	if (tx[thread].fm.fmdata == TRUE) // ke9ns at this point cvtmod2freq = 10000
-	{
+	if (tx[thread].fm.fmdata == TRUE) // ke9ns at this point cvtmod2freq = 10000  (see fm_demod for RX FM mode)
+	{ 
 		k_preemphasis = tx[thread].fm.k_preemphasis1; // (REAL)(1.0f + uni[thread].samplerate/(TWOPI * 3000.0f));  //11.19
 	    k_deemphasis = tx[thread].fm.k_deemphasis1;
 		
@@ -1476,26 +1457,46 @@ PRIVATE void do_tx_FM (unsigned int thread) // ke9ns called from do_tx above
 
 	
 
-	for (i = 0; i < n; i++) // ke9ns length of buffer
-	{
-		//Preemphasis (high-pass filter)
-		//		temp = (1/k)in + (k-1)/k * temp
-		//		out = in - temp
-		//		k = 1 + Fs/(2*pi*fo)
+		for (i = 0; i < n; i++) // ke9ns length of buffer 4096
+		{
+			//Preemphasis (high-pass filter)
+			//		temp = (1/k)in + (k-1)/k * temp
+			//		out = in - temp
+			//		k = 1 + Fs/(2*pi*fo)
 
-		preemphasis_in = CXBreal (tx[thread].buf.i, i);
-		
-		tx[thread].fm.preemphasis_filter = (preemphasis_in / k_preemphasis) + (k_preemphasis - 1.0f) / k_preemphasis * tx[thread].fm.preemphasis_filter;
-		
-		CXBreal(tx[thread].buf.i, i) = 3.0f * (preemphasis_in - tx[thread].fm.preemphasis_filter);
-	
-		////Soft Clipper
-		mag = abs(CXBreal(tx[thread].buf.i, i));
+			if (tx[thread].fm.fmdata == TRUE) // ke9ns: wide data mode, so no Pre-emphasis
+			{
+				preemphasis_in = CXBreal(tx[thread].buf.i, i);
+			//	tx[thread].fm.preemphasis_filter =  (preemphasis_in / k_preemphasis) + (k_preemphasis - 1.0f) / k_preemphasis * tx[thread].fm.preemphasis_filter;
+			
+			//	CXBreal(tx[thread].buf.i, i) = 3.0f * (preemphasis_in - tx[thread].fm.preemphasis_filter);
 
-		if (CXBreal(tx[thread].buf.i, i) > threshold) CXBreal(tx[thread].buf.i, i) = (1.0f-threshold)*(1.0f - expf((mag-threshold)/(threshold-1.0f)))+threshold;
-		else if (CXBreal(tx[thread].buf.i, i) < -threshold) CXBreal(tx[thread].buf.i, i) = -((1.0f-threshold)*(1.0f - expf((mag-threshold)/(threshold-1.0f)))+threshold);
+				CXBreal(tx[thread].buf.i, i) = 3.0f * preemphasis_in;
+
+
+			//	if (i > 10 && i < 15) // pre: 11  -0.000016  -0.000016   0.000002
+			//	{
+				//	fprintf(stderr, "pre: %d  %f  %f %f\n", i, tx[thread].fm.preemphasis_filter, preemphasis_in, (3.0f * (preemphasis_in - tx[thread].fm.preemphasis_filter))), fflush(stderr);
+			//	}
+			}
+			else // ke9ns: standard pre-emphasis
+			{
+				preemphasis_in = CXBreal(tx[thread].buf.i, i);
+				tx[thread].fm.preemphasis_filter = (preemphasis_in / k_preemphasis) + (k_preemphasis - 1.0f) / k_preemphasis * tx[thread].fm.preemphasis_filter;
+				CXBreal(tx[thread].buf.i, i) = 3.0f * (preemphasis_in - tx[thread].fm.preemphasis_filter);
+
+			}
+
+
+			////Soft Clipper
+			mag = abs(CXBreal(tx[thread].buf.i, i));
+
+			if (CXBreal(tx[thread].buf.i, i) > threshold) CXBreal(tx[thread].buf.i, i) = (1.0f - threshold) * (1.0f - expf((mag - threshold) / (threshold - 1.0f))) + threshold;
+			else if (CXBreal(tx[thread].buf.i, i) < -threshold) CXBreal(tx[thread].buf.i, i) = -((1.0f - threshold) * (1.0f - expf((mag - threshold) / (threshold - 1.0f))) + threshold);
+
+		} // for n loop
+
 	
-	} // for n loop
 	
 	if (tx[thread].fm.fmdata == TRUE) // cvtmod2freq
 	{
@@ -1536,8 +1537,9 @@ PRIVATE void do_tx_FM (unsigned int thread) // ke9ns called from do_tx above
 
 } // do_tx_FM
 
-PRIVATE void
-do_tx_NIL (thread)
+
+
+PRIVATE void do_tx_NIL (thread)
 {
 	int i, n = min (CXBhave (tx[thread].buf.i), uni[thread].buflen);
 	for (i = 0; i < n; i++)

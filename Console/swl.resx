@@ -119,10 +119,13 @@
   </resheader>
   <data name="textBox3.Text" xml:space="preserve">
     <value>SWL STATIONS CURRENTLY ON THE AIR: BY FREQUENCY
-LEFT CLICK : Go to that STATION frequency.
+LEFT CLICK : Set VFOA to SWL frequency.
+RIGHT CLICK: Set VFOB to SWL frequency.
 USE THE SEARCH WINDOW TO NARROW
 Example: Type cuba for "radio habana cuba"
-Note: Many stations will not be heard since they may not be beaming in your direction.  Note: Flex will not hear much below 500 khz.</value>
+Note: Many stations will not be heard since they may not be beaming in your direction.  Note: Flex will not hear much below 400 khz (3db drop), 
+and you will need an AM broadcast band filter to notch out 550khz to 1700khz. An Extended Flex (MARS) will not transmit much below 160m band
+due to transformer frequency cutoff which adds a 3db drop at 400khz on both receive and transmit.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

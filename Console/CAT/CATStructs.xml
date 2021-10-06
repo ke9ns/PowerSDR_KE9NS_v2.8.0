@@ -2107,6 +2107,13 @@
     <ngetparms>0</ngetparms>
     <nansparms>3</nansparms>
   </catstruct>
+  <catstruct code="ZZPW">
+    <desc>Disply ZoomRX2</desc>
+    <active>true</active>
+    <nsetparms>3</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>3</nansparms>
+  </catstruct>
   <catstruct code="ZZLA">
     <desc>RX0 Gain</desc>
     <active>true</active>
@@ -2144,6 +2151,13 @@
   </catstruct>
   <catstruct code="ZZPE">
     <desc>Display Pan Position</desc>
+    <active>true</active>
+    <nsetparms>4</nsetparms>
+    <ngetparms>0</ngetparms>
+    <nansparms>4</nansparms>
+  </catstruct>
+  <catstruct code="ZZPF">
+    <desc>Display PanRX2 Position</desc>
     <active>true</active>
     <nsetparms>4</nsetparms>
     <ngetparms>0</ngetparms>

@@ -1,75 +1,70 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace PowerSDR.DJConsoleUI
+﻿namespace PowerSDR.DJConsoleUI
 {
     public class DJConsole_MP3e2
     {
-            private DJConsole m_parent;
+        private DJConsole m_parent;
 
-            public DJConsole_MP3e2(DJConsole frm1)
-            {
-                m_parent = frm1;
-            }
+        public DJConsole_MP3e2(DJConsole frm1)
+        {
+            m_parent = frm1;
+        }
 
 
-            #region variables
+        #region variables
 
-            private int trebleA = 0;
-            private int trebleB = 0;
-            private int mediumA = 0;
-            private int mediumB = 0;
-            private int bassA = 0;
-            private int bassB = 0;
-            private int volumeA = 0;
-            private int volumeB = 0;
-            private int crossfader = 0;
-            private int pitchA = 0;
-            private int pitchB = 0;
-            private int jogWheelA = 0;
-            private int jogWheelB = 0;
-            private int playA = 0;
-            private int playB = 0;
-            private int cueA = 0;
-            private int cueB = 0;
-            private int trackNextA = 0;
-            private int trackPrevA = 0;
-            private int trackNextB = 0;
-            private int trackPrevB = 0;
-            private int pitchDownA = 0;
-            private int pitchUpA = 0;
-            private int pitchUpB = 0;
-            private int pitchDownB = 0;
-            private int oneA = 0;
-            private int oneB = 0;
-            private int twoA = 0;
-            private int twoB = 0;
-            private int threeA = 0;
-            private int threeB = 0;
-            private int fourA = 0;
-            private int fourB = 0;
-            private int listenA = 0;
-            private int listenB = 0;
-            private int syncA = 0;
-            private int syncB = 0;
-            private int up = 0;
-            private int down = 0;
-            private int masterTempoA = 0;
-            private int masterTempoB = 0;
-            private int loadA = 0;
-            private int loadB = 0;
-            private int files = 0;
-            private int folders = 0;
-            private int scratch = 0;
-            private int automix = 0;
+        private int trebleA = 0;
+        private int trebleB = 0;
+        private int mediumA = 0;
+        private int mediumB = 0;
+        private int bassA = 0;
+        private int bassB = 0;
+        private int volumeA = 0;
+        private int volumeB = 0;
+        private int crossfader = 0;
+        private int pitchA = 0;
+        private int pitchB = 0;
+        private int jogWheelA = 0;
+        private int jogWheelB = 0;
+        private int playA = 0;
+        private int playB = 0;
+        private int cueA = 0;
+        private int cueB = 0;
+        private int trackNextA = 0;
+        private int trackPrevA = 0;
+        private int trackNextB = 0;
+        private int trackPrevB = 0;
+        private int pitchDownA = 0;
+        private int pitchUpA = 0;
+        private int pitchUpB = 0;
+        private int pitchDownB = 0;
+        private int oneA = 0;
+        private int oneB = 0;
+        private int twoA = 0;
+        private int twoB = 0;
+        private int threeA = 0;
+        private int threeB = 0;
+        private int fourA = 0;
+        private int fourB = 0;
+        private int listenA = 0;
+        private int listenB = 0;
+        private int syncA = 0;
+        private int syncB = 0;
+        private int up = 0;
+        private int down = 0;
+        private int masterTempoA = 0;
+        private int masterTempoB = 0;
+        private int loadA = 0;
+        private int loadB = 0;
+        private int files = 0;
+        private int folders = 0;
+        private int scratch = 0;
+        private int automix = 0;
 
-            #endregion
+        #endregion
 
-            #region Properties
+        #region Properties
 
-         public int TrebleA
+        public int TrebleA
         {
             get { return trebleA; }
             set
@@ -412,7 +407,7 @@ namespace PowerSDR.DJConsoleUI
             {
                 if (checkValueButton(value) == true)
                 {
-                    pitchDownA= value;
+                    pitchDownA = value;
                 }
                 else
                 {
@@ -469,399 +464,399 @@ namespace PowerSDR.DJConsoleUI
                 }
             }
         }
-           
-            public int OneA
+
+        public int OneA
+        {
+            get { return oneA; }
+            set
             {
-                get { return oneA; }
-                set
+                if (checkValueButton(value) == true)
                 {
-                    if (checkValueButton(value) == true)
-                    {
-                        oneA = value;
-                    }
-                    else
-                    {
-                        oneA = 0;
-                    }
-                }
-            }
-
-            public int OneB
-            {
-                get { return oneB; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        oneB = value;
-                    }
-                    else
-                    {
-                        oneB = 0;
-                    }
-                }
-            }
-
-            public int TwoA
-            {
-                get { return twoA; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        twoA = value;
-                    }
-                    else
-                    {
-                        twoA = 0;
-                    }
-                }
-            }
-
-            public int TwoB
-            {
-                get { return twoB; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        twoB = value;
-                    }
-                    else
-                    {
-                        twoB = 0;
-                    }
-                }
-            }
-
-            public int ThreeA
-            {
-                get { return threeA; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        threeA = value;
-                    }
-                    else
-                    {
-                        threeA = 0;
-                    }
-                }
-            }
-
-
-            public int ThreeB
-            {
-                get { return threeB; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        threeB = value;
-                    }
-                    else
-                    {
-                        threeB = 0;
-                    }
-                }
-            }
-
-            public int FourA
-            {
-                get { return fourA; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        fourA = value;
-                    }
-                    else
-                    {
-                        fourA = 0;
-                    }
-                }
-            }
-
-            public int FourB
-            {
-                get { return fourB; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        fourB = value;
-                    }
-                    else
-                    {
-                        fourB = 0;
-                    }
-                }
-            }
-
-            public int ListenA
-            {
-                get { return listenA; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        listenA = value;
-                    }
-                    else
-                    {
-                        listenA = 0;
-                    }
-                }
-            }
-
-            public int ListenB
-            {
-                get { return listenB; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        listenB = value;
-                    }
-                    else
-                    {
-                        listenB = 0;
-                    }
-                }
-            }
-
-            public int SyncA
-            {
-                get { return syncA; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        syncA = value;
-                    }
-                    else
-                    {
-                        syncA = 0;
-                    }
-                }
-            }
-
-            public int SyncB
-            {
-                get { return syncB; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        syncB = value;
-                    }
-                    else
-                    {
-                        syncB = 0;
-                    }
-                }
-            }
-
-            public int Up
-            {
-                get { return up; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        up = value;
-                    }
-                    else
-                    {
-                        up = 0;
-                    }
-                }
-            }
-
-            public int Down
-            {
-                get { return down; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        down = value;
-                    }
-                    else
-                    {
-                        down = 0;
-                    }
-                }
-            }
-
-            public int MasterTempoA
-            {
-                get { return masterTempoA; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        masterTempoA = value;
-                    }
-                    else
-                    {
-                        masterTempoA = 0;
-                    }
-                }
-            }
-
-            public int MasterTempoB
-            {
-                get { return masterTempoB; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        masterTempoB = value;
-                    }
-                    else
-                    {
-                        masterTempoB = 0;
-                    }
-                }
-            }
-
-            public int LoadA
-            {
-                get { return loadA; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        loadA = value;
-                    }
-                    else
-                    {
-                        loadA = 0;
-                    }
-                }
-            }
-
-            public int LoadB
-            {
-                get { return loadB; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        loadB = value;
-                    }
-                    else
-                    {
-                        loadB = 0;
-                    }
-                }
-            }
-
-            public int Files
-            {
-                get { return files; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        files = value;
-                    }
-                    else
-                    {
-                        files = 0;
-                    }
-                }
-            }
-
-            public int Folders
-            {
-                get { return folders; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        folders = value;
-                    }
-                    else
-                    {
-                        folders = 0;
-                    }
-                }
-            }
-
-            public int Scratch
-            {
-                get { return scratch; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        scratch = value;
-                    }
-                    else
-                    {
-                        scratch = 0;
-                    }
-                }
-            }
-
-            public int Automix
-            {
-                get { return automix; }
-                set
-                {
-                    if (checkValueButton(value) == true)
-                    {
-                        automix = value;
-                    }
-                    else
-                    {
-                        automix = 0;
-                    }
-                }
-            }
-
-
-            #endregion
-
-            private bool checkValueButton(int i)
-            {
-                if (((i > 0) && (i <= 99)) || ((i >= 500) && (i <= 599)))
-                {
-                    return (true);
+                    oneA = value;
                 }
                 else
                 {
-                    return (false);
+                    oneA = 0;
                 }
             }
-
-            private bool checkValueIncKnob(int i)
-            {
-                if ((i >= 100) && (i <= 199))
-                {
-                    return (true);
-                }
-                else
-                {
-                    return (false);
-                }
-            }
-
-            private bool checkValueFixKnob(int i)
-            {
-                if ((i >= 200) && (i <= 299))
-                {
-                    return (true);
-                }
-                else
-                {
-                    return (false);
-                }
-            }
-
         }
+
+        public int OneB
+        {
+            get { return oneB; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    oneB = value;
+                }
+                else
+                {
+                    oneB = 0;
+                }
+            }
+        }
+
+        public int TwoA
+        {
+            get { return twoA; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    twoA = value;
+                }
+                else
+                {
+                    twoA = 0;
+                }
+            }
+        }
+
+        public int TwoB
+        {
+            get { return twoB; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    twoB = value;
+                }
+                else
+                {
+                    twoB = 0;
+                }
+            }
+        }
+
+        public int ThreeA
+        {
+            get { return threeA; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    threeA = value;
+                }
+                else
+                {
+                    threeA = 0;
+                }
+            }
+        }
+
+
+        public int ThreeB
+        {
+            get { return threeB; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    threeB = value;
+                }
+                else
+                {
+                    threeB = 0;
+                }
+            }
+        }
+
+        public int FourA
+        {
+            get { return fourA; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    fourA = value;
+                }
+                else
+                {
+                    fourA = 0;
+                }
+            }
+        }
+
+        public int FourB
+        {
+            get { return fourB; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    fourB = value;
+                }
+                else
+                {
+                    fourB = 0;
+                }
+            }
+        }
+
+        public int ListenA
+        {
+            get { return listenA; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    listenA = value;
+                }
+                else
+                {
+                    listenA = 0;
+                }
+            }
+        }
+
+        public int ListenB
+        {
+            get { return listenB; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    listenB = value;
+                }
+                else
+                {
+                    listenB = 0;
+                }
+            }
+        }
+
+        public int SyncA
+        {
+            get { return syncA; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    syncA = value;
+                }
+                else
+                {
+                    syncA = 0;
+                }
+            }
+        }
+
+        public int SyncB
+        {
+            get { return syncB; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    syncB = value;
+                }
+                else
+                {
+                    syncB = 0;
+                }
+            }
+        }
+
+        public int Up
+        {
+            get { return up; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    up = value;
+                }
+                else
+                {
+                    up = 0;
+                }
+            }
+        }
+
+        public int Down
+        {
+            get { return down; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    down = value;
+                }
+                else
+                {
+                    down = 0;
+                }
+            }
+        }
+
+        public int MasterTempoA
+        {
+            get { return masterTempoA; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    masterTempoA = value;
+                }
+                else
+                {
+                    masterTempoA = 0;
+                }
+            }
+        }
+
+        public int MasterTempoB
+        {
+            get { return masterTempoB; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    masterTempoB = value;
+                }
+                else
+                {
+                    masterTempoB = 0;
+                }
+            }
+        }
+
+        public int LoadA
+        {
+            get { return loadA; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    loadA = value;
+                }
+                else
+                {
+                    loadA = 0;
+                }
+            }
+        }
+
+        public int LoadB
+        {
+            get { return loadB; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    loadB = value;
+                }
+                else
+                {
+                    loadB = 0;
+                }
+            }
+        }
+
+        public int Files
+        {
+            get { return files; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    files = value;
+                }
+                else
+                {
+                    files = 0;
+                }
+            }
+        }
+
+        public int Folders
+        {
+            get { return folders; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    folders = value;
+                }
+                else
+                {
+                    folders = 0;
+                }
+            }
+        }
+
+        public int Scratch
+        {
+            get { return scratch; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    scratch = value;
+                }
+                else
+                {
+                    scratch = 0;
+                }
+            }
+        }
+
+        public int Automix
+        {
+            get { return automix; }
+            set
+            {
+                if (checkValueButton(value) == true)
+                {
+                    automix = value;
+                }
+                else
+                {
+                    automix = 0;
+                }
+            }
+        }
+
+
+        #endregion
+
+        private bool checkValueButton(int i)
+        {
+            if (((i > 0) && (i <= 99)) || ((i >= 500) && (i <= 599)))
+            {
+                return (true);
+            }
+            else
+            {
+                return (false);
+            }
+        }
+
+        private bool checkValueIncKnob(int i)
+        {
+            if ((i >= 100) && (i <= 199))
+            {
+                return (true);
+            }
+            else
+            {
+                return (false);
+            }
+        }
+
+        private bool checkValueFixKnob(int i)
+        {
+            if ((i >= 200) && (i <= 299))
+            {
+                return (true);
+            }
+            else
+            {
+                return (false);
+            }
+        }
+
     }
+}
 

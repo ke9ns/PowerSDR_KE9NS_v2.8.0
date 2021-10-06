@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace PowerSDR.DJConsoleUI
@@ -20,7 +14,7 @@ namespace PowerSDR.DJConsoleUI
         public DJConsoleSelect(Console console)
         {
             m_parent = console;
-            InitializeComponent(); 
+            InitializeComponent();
             Init();
         }
 

@@ -31,6 +31,12 @@ The DTTS Microwave Society
 Bridgewater, NJ 08807
 */
 
+
+// ke9ns THIS CODE IS NOT USED
+// FLEX SWITCHED OVER TO THEIR FLEXCW.DLL
+
+
+
 #ifndef _cwtone_h
 #define _cwtone_h
 
@@ -49,6 +55,7 @@ Bridgewater, NJ 08807
 #define CWTone_FALL (4)
 #define CWTone_HOLD (5)
 #define CWSIN	sin
+
 typedef struct _cw_tone_gen
 {
   REAL curr, gain, mul, scl, sr;
@@ -63,7 +70,9 @@ typedef struct _cw_tone_gen
     REAL dur, incr;
     int want, have;
   } rise, fall;
+
   int size, stage;
+
   CXB buf;
 } CWToneGenDesc, *CWToneGen;
 
@@ -73,9 +82,10 @@ extern CWToneGen newCWToneGen (REAL gain,	// dB
 			       REAL fall,	// msec
 			       int size,	// buflen
 			       REAL samplerate);
+
 extern void delCWToneGen (CWToneGen gen);
-extern void setCWToneGenVals (CWToneGen gen,
-			      REAL gain, REAL freq, REAL rise, REAL fall);
+
+extern void setCWToneGenVals (CWToneGen gen, REAL gain, REAL freq, REAL rise, REAL fall);
 extern void CWToneOn (CWToneGen gen);
 extern void CWToneOff (CWToneGen gen);
 extern BOOLEAN CWTone (CWToneGen gen);

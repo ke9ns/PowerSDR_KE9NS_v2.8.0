@@ -29,11 +29,7 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.IO;
-using System.IO.Ports;
-using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -131,9 +127,10 @@ namespace PowerSDR
         private CheckBoxTS ckTestTXPA;
         private ButtonTS btnRunAll1500;
         private System.ComponentModel.IContainer components;
-
+        private CheckBoxTS checkGENBAL;
+        public CheckBoxTS ckPM2;
         private string common_data_path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\FlexRadio Systems\\PowerSDR\\";
-        
+
         #endregion
 
         #region Constructor and Destructor
@@ -190,7 +187,7 @@ namespace PowerSDR
                     "Warning: DSP RX Buffer Size Low",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);*/
-                //console.SetupForm.DSPPhoneRXBuffer = 4096;*/
+            //console.SetupForm.DSPPhoneRXBuffer = 4096;*/
 
             switch (console.CurrentModel)
             {
@@ -286,7 +283,7 @@ namespace PowerSDR
             // populate COM port selection with only ports that are available
             comboCOMPort.Items.Clear();
             comboCOMPort.Items.AddRange(Common.SortedComPorts());
-            if(comboCOMPort.Items.Count > 0)
+            if (comboCOMPort.Items.Count > 0)
                 comboCOMPort.SelectedIndex = 0;
 
             // set powermaster COM port based on data in powermaster.txt file if it exists
@@ -341,9 +338,11 @@ namespace PowerSDR
             this.btnRXImage = new System.Windows.Forms.ButtonTS();
             this.btnRXFilter = new System.Windows.Forms.ButtonTS();
             this.btnRXLevel = new System.Windows.Forms.ButtonTS();
+            this.checkGENBAL = new System.Windows.Forms.CheckBoxTS();
             this.lstDebug = new System.Windows.Forms.ListBox();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.btnRunAll1500 = new System.Windows.Forms.ButtonTS();
             this.btnPostFence = new System.Windows.Forms.ButtonTS();
             this.grpIO = new System.Windows.Forms.GroupBoxTS();
             this.grpComPort = new System.Windows.Forms.GroupBoxTS();
@@ -414,7 +413,7 @@ namespace PowerSDR
             this.grpGeneral = new System.Windows.Forms.GroupBoxTS();
             this.grpReceiver = new System.Windows.Forms.GroupBoxTS();
             this.udLevel = new System.Windows.Forms.NumericUpDown();
-            this.btnRunAll1500 = new System.Windows.Forms.ButtonTS();
+            this.ckPM2 = new System.Windows.Forms.CheckBoxTS();
             this.grpIO.SuspendLayout();
             this.grpComPort.SuspendLayout();
             this.grpTestTransmitter.SuspendLayout();
@@ -440,7 +439,7 @@ namespace PowerSDR
             // btnGenATTN
             // 
             this.btnGenATTN.Image = null;
-            this.btnGenATTN.Location = new System.Drawing.Point(104, 80);
+            this.btnGenATTN.Location = new System.Drawing.Point(96, 80);
             this.btnGenATTN.Name = "btnGenATTN";
             this.btnGenATTN.Size = new System.Drawing.Size(75, 23);
             this.btnGenATTN.TabIndex = 8;
@@ -452,7 +451,7 @@ namespace PowerSDR
             // btnGenPreamp
             // 
             this.btnGenPreamp.Image = null;
-            this.btnGenPreamp.Location = new System.Drawing.Point(16, 80);
+            this.btnGenPreamp.Location = new System.Drawing.Point(8, 80);
             this.btnGenPreamp.Name = "btnGenPreamp";
             this.btnGenPreamp.Size = new System.Drawing.Size(75, 23);
             this.btnGenPreamp.TabIndex = 7;
@@ -463,7 +462,7 @@ namespace PowerSDR
             // btnNoise
             // 
             this.btnNoise.Image = null;
-            this.btnNoise.Location = new System.Drawing.Point(16, 48);
+            this.btnNoise.Location = new System.Drawing.Point(8, 48);
             this.btnNoise.Name = "btnNoise";
             this.btnNoise.Size = new System.Drawing.Size(75, 23);
             this.btnNoise.TabIndex = 2;
@@ -475,7 +474,7 @@ namespace PowerSDR
             // btnGenBal
             // 
             this.btnGenBal.Image = null;
-            this.btnGenBal.Location = new System.Drawing.Point(104, 16);
+            this.btnGenBal.Location = new System.Drawing.Point(96, 16);
             this.btnGenBal.Name = "btnGenBal";
             this.btnGenBal.Size = new System.Drawing.Size(75, 23);
             this.btnGenBal.TabIndex = 1;
@@ -486,7 +485,7 @@ namespace PowerSDR
             // btnPLL
             // 
             this.btnPLL.Image = null;
-            this.btnPLL.Location = new System.Drawing.Point(16, 16);
+            this.btnPLL.Location = new System.Drawing.Point(8, 16);
             this.btnPLL.Name = "btnPLL";
             this.btnPLL.Size = new System.Drawing.Size(75, 23);
             this.btnPLL.TabIndex = 0;
@@ -497,7 +496,7 @@ namespace PowerSDR
             // btnImpulse
             // 
             this.btnImpulse.Image = null;
-            this.btnImpulse.Location = new System.Drawing.Point(104, 48);
+            this.btnImpulse.Location = new System.Drawing.Point(96, 48);
             this.btnImpulse.Name = "btnImpulse";
             this.btnImpulse.Size = new System.Drawing.Size(75, 23);
             this.btnImpulse.TabIndex = 6;
@@ -538,6 +537,17 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.btnRXLevel, "RX Level Test: Not Run");
             this.btnRXLevel.Click += new System.EventHandler(this.btnRXLevel_Click);
             // 
+            // checkGENBAL
+            // 
+            this.checkGENBAL.Image = null;
+            this.checkGENBAL.Location = new System.Drawing.Point(195, 23);
+            this.checkGENBAL.Margin = new System.Windows.Forms.Padding(0);
+            this.checkGENBAL.Name = "checkGENBAL";
+            this.checkGENBAL.Size = new System.Drawing.Size(27, 24);
+            this.checkGENBAL.TabIndex = 31;
+            this.toolTip1.SetToolTip(this.checkGENBAL, "Automatic Repeat of the GEN/BAL test until unchecked.\r\nNOTE: Does not update the " +
+        "LOG file");
+            // 
             // lstDebug
             // 
             this.lstDebug.HorizontalScrollbar = true;
@@ -559,6 +569,18 @@ namespace PowerSDR
             // printDocument1
             // 
             this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
+            // 
+            // btnRunAll1500
+            // 
+            this.btnRunAll1500.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRunAll1500.Image = null;
+            this.btnRunAll1500.Location = new System.Drawing.Point(387, 343);
+            this.btnRunAll1500.Name = "btnRunAll1500";
+            this.btnRunAll1500.Size = new System.Drawing.Size(88, 32);
+            this.btnRunAll1500.TabIndex = 31;
+            this.btnRunAll1500.Text = "Run All 1500 Tests";
+            this.btnRunAll1500.Visible = false;
+            this.btnRunAll1500.Click += new System.EventHandler(this.btnRunAll1500_Click);
             // 
             // btnPostFence
             // 
@@ -1326,7 +1348,7 @@ namespace PowerSDR
             this.grpGeneral.Controls.Add(this.btnImpulse);
             this.grpGeneral.Location = new System.Drawing.Point(8, 8);
             this.grpGeneral.Name = "grpGeneral";
-            this.grpGeneral.Size = new System.Drawing.Size(200, 112);
+            this.grpGeneral.Size = new System.Drawing.Size(184, 112);
             this.grpGeneral.TabIndex = 3;
             this.grpGeneral.TabStop = false;
             this.grpGeneral.Text = "General Tests";
@@ -1368,22 +1390,21 @@ namespace PowerSDR
             -2147418112});
             this.udLevel.Visible = false;
             // 
-            // btnRunAll1500
+            // ckPM2
             // 
-            this.btnRunAll1500.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRunAll1500.Image = null;
-            this.btnRunAll1500.Location = new System.Drawing.Point(387, 343);
-            this.btnRunAll1500.Name = "btnRunAll1500";
-            this.btnRunAll1500.Size = new System.Drawing.Size(88, 32);
-            this.btnRunAll1500.TabIndex = 31;
-            this.btnRunAll1500.Text = "Run All 1500 Tests";
-            this.btnRunAll1500.Visible = false;
-            this.btnRunAll1500.Click += new System.EventHandler(this.btnRunAll1500_Click);
+            this.ckPM2.Image = null;
+            this.ckPM2.Location = new System.Drawing.Point(219, 325);
+            this.ckPM2.Name = "ckPM2";
+            this.ckPM2.Size = new System.Drawing.Size(56, 24);
+            this.ckPM2.TabIndex = 32;
+            this.ckPM2.Text = "PM2";
+            this.toolTip1.SetToolTip(this.ckPM2, "Check for PowerMaster II");
             // 
             // FLEX5000ProdTestForm
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(592, 486);
+            this.Controls.Add(this.ckPM2);
             this.Controls.Add(this.btnRunAll1500);
             this.Controls.Add(this.btnPostFence);
             this.Controls.Add(this.grpIO);
@@ -1401,6 +1422,7 @@ namespace PowerSDR
             this.Controls.Add(this.grpTransmitter);
             this.Controls.Add(this.grpGeneral);
             this.Controls.Add(this.grpReceiver);
+            this.Controls.Add(this.checkGENBAL);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.Name = "FLEX5000ProdTestForm";
@@ -1548,17 +1570,11 @@ namespace PowerSDR
             t.Start();
         }
 
+
+        // ke9ns mod: to allow continuous test run checkgenbal
         private string test_genbal = "Gen/Bal Test: Not Run";
         private void TestGenBal()
         {
-            /*if(!console.PowerOn)
-            {
-                MessageBox.Show("Power must be on to run this test.",
-                    "Power not on",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-                return;
-            }*/
 
             if (!console.PowerOn)
             {
@@ -1566,8 +1582,7 @@ namespace PowerSDR
                 Thread.Sleep(500);
             }
 
-            if (console.VFOSync)
-                console.VFOSync = false;
+            if (console.VFOSync) console.VFOSync = false;
 
             console.VFOSplit = false;
             double vfob_freq = console.VFOBFreq;
@@ -1596,6 +1611,19 @@ namespace PowerSDR
 
             HIDAnt hid_ant = console.RXAnt1500;
 
+            // ke9ns add do loop .157 checkGENBAL 
+
+            float adc_l = 0.0f;
+            float adc_r = 0.0f;
+            float off_l = 0.0f;
+            bool b = true;
+
+
+            adc_l = 0.0f;
+            adc_r = 0.0f;
+            off_l = 0.0f;
+            b = true;
+
             switch (console.CurrentModel)
             {
                 case Model.FLEX5000:
@@ -1609,7 +1637,7 @@ namespace PowerSDR
                     FWC.SetFullDuplex(true);
                     FWC.SetTXMon(false);
                     FWC.SetRX1Filter(-1.0f);
-                    Thread.Sleep(1000);
+                    Thread.Sleep(1000); // ke9ns 1000
                     break;
                 case Model.FLEX1500:
                     console.RX1FilterLow = -(int)(console.IFFreq * 1e6) + console.CWPitch - 100;
@@ -1642,25 +1670,32 @@ namespace PowerSDR
                     break;
             }
 
-            float adc_l = 0.0f;
+
             DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.ADC_REAL);
             Thread.Sleep(50);
             for (int j = 0; j < 5; j++)
             {
                 adc_l += DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.ADC_REAL);
-                if (j != 4) Thread.Sleep(50);
+                if (j != 4) Thread.Sleep(50); // 50
             }
             adc_l /= 5;
 
-            float adc_r = 0.0f;
+
             DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.ADC_IMAG);
             Thread.Sleep(50);
             for (int j = 0; j < 5; j++)
             {
                 adc_r += DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.ADC_IMAG);
-                if (j != 4) Thread.Sleep(50);
+                if (j != 4) Thread.Sleep(50);// 50
             }
             adc_r /= 5;
+
+            do
+            {
+                Thread.Sleep(50); // wait until you stop it.
+            }
+            while (checkGENBAL.Checked == true);
+
 
             switch (console.CurrentModel)
             {
@@ -1671,7 +1706,7 @@ namespace PowerSDR
                     FWC.SetSig(false);
                     //Thread.Sleep(50);
                     FWC.SetGen(false);
-                    Thread.Sleep(500);
+                    Thread.Sleep(500); // ke9ns 500
                     break;
                 case Model.FLEX1500:
                     Audio.RX1OutputSignal = Audio.SignalSource.RADIO;
@@ -1682,9 +1717,10 @@ namespace PowerSDR
                     Thread.Sleep(1000);
                     break;
             }
-            float off_l = 0.0f;
+
             DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.ADC_REAL);
             Thread.Sleep(50);
+
             for (int j = 0; j < 5; j++)
             {
                 off_l += DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.ADC_REAL);
@@ -1700,11 +1736,10 @@ namespace PowerSDR
                 case Model.FLEX1500: target = 40.0f; break;
             }
 
-            if (console.CurrentModel == Model.FLEX1500)
-                USBHID.WriteI2C2Value(0x30, 0x0C, 0x00); // turn off hardware HPF
+            if (console.CurrentModel == Model.FLEX1500) USBHID.WriteI2C2Value(0x30, 0x0C, 0x00); // turn off hardware HPF
 
             test_genbal = "Gen/Bal Test: ";
-            bool b = true;
+
             if (adc_l - off_l < target)
             {
                 lstDebug.Items.Insert(0, " Gen/Bal Test: Failed ADC_L S/N <" + target.ToString("f0") + "dB (" + (adc_l - off_l).ToString("f1") + ")");
@@ -1755,6 +1790,8 @@ namespace PowerSDR
                 btnGenBal.BackColor = Color.Green;
                 test_genbal = "Gen/Bal Test: Passed (" + adc_l.ToString("f1") + ", " + adc_r.ToString("f1") + ")";
                 lstDebug.Items.Insert(0, test_genbal);
+
+                //   if (checkGENBAL.Checked == false) break;
             }
             else
             {
@@ -1762,7 +1799,14 @@ namespace PowerSDR
             }
             toolTip1.SetToolTip(btnGenBal, test_genbal);
 
+
+            test_genbal = "                              \r\n";
+            lstDebug.Items.Insert(0, test_genbal);
+
+
+
             DttSP.SetCorrectIQEnable(1); // turn on I/Q correction
+
             console.VFOAFreq = vfoa_freq;
             console.FullDuplex = full_duplex;
             console.VFOBFreq = vfob_freq;
@@ -1807,7 +1851,9 @@ namespace PowerSDR
             grpReceiver.Enabled = true;
             grpTransmitter.Enabled = true;
             grpIO.Enabled = true;
-        }
+
+
+        } //TestGenBal()
 
         #endregion
 
@@ -2686,7 +2732,7 @@ namespace PowerSDR
                 {
                     case Band.B160M: do_band = ck160.Checked; break;
                     case Band.B80M: do_band = ck80.Checked; break;
-                    case Band.B60M: 
+                    case Band.B60M:
                         {
                             if (console.CurrentRegion == FRSRegion.US) { do_band = ck60.Checked; break; }
                             else
@@ -3583,7 +3629,7 @@ namespace PowerSDR
                     console.VFOAFreq = band_freqs[i] + 2 * console.IFFreq;
                     console.VFOBFreq = band_freqs[i];
                     bool b = console.CalibrateRXImage(band_freqs[i], p, true);
-                    
+
                     if (!b || console.rx_image_rejection[(int)bands[i]] < rejection_tol ||
                         console.rx_image_from_floor[(int)bands[i]] > floor_tol)
                     {
@@ -4591,7 +4637,7 @@ namespace PowerSDR
             for (int i = 0; i < bands.Length; i++)
             {
                 for (int j = 0; j < 4; j++)
-                    writer.Write((console.tx_carrier_cal[Math.Round(band_freqs[i], 3)]>>8*(3-j)).ToString() + ",");
+                    writer.Write((console.tx_carrier_cal[Math.Round(band_freqs[i], 3)] >> 8 * (3 - j)).ToString() + ",");
                 writer.Write(console.min_tx_carrier[(int)bands[i]].ToString("f1") + ",");
             }
             writer.WriteLine("");
@@ -5006,7 +5052,7 @@ namespace PowerSDR
             PowerMaster pm;
             try
             {
-                pm = new PowerMaster(comboCOMPort.Text);
+                pm = new PowerMaster(comboCOMPort.Text, ckPM2.Checked); // ke9ns add .212
             }
             catch (Exception)
             {
@@ -5277,7 +5323,7 @@ namespace PowerSDR
                 }
             }
 
-        //end2:
+            //end2:
             p.Hide();
             console.MOX = false;
             Audio.TXInputSignal = Audio.SignalSource.RADIO;
@@ -5489,7 +5535,7 @@ namespace PowerSDR
             // re-run any RX tests that failed
             if (ckTestRXFilter.Checked && btnRXFilter.BackColor != Color.Green)
             {
-                if(console.CurrentModel == Model.FLEX1500)
+                if (console.CurrentModel == Model.FLEX1500)
                     SetBandFrom1500FilterString(toolTip1.GetToolTip(btnRXFilter));
                 else
                     SetBandFromString(toolTip1.GetToolTip(btnRXFilter));
@@ -5504,7 +5550,7 @@ namespace PowerSDR
 
                 // reset bands back to start
                 SetBandFromString(start_bands);
-            }            
+            }
 
             if (ckTestRXImage.Checked)
             {
@@ -5560,7 +5606,7 @@ namespace PowerSDR
 
                 // reset bands back to start
                 SetBandFromString(start_bands);
-            }            
+            }
 
             /*if((ckTestRXFilter.Checked && btnRXFilter.BackColor != Color.Green) ||
                 (ckTestRXLevel.Checked && btnRXLevel.BackColor != Color.Green) ||
@@ -5698,9 +5744,9 @@ namespace PowerSDR
                     if (btnTX1500PA.Enabled) break;
                 }
                 if (p.Text == "") goto end;
-            }            
+            }
 
-            #endregion
+        #endregion
 
         end:
             SetBandFromString(start_bands);
@@ -6389,7 +6435,7 @@ namespace PowerSDR
             console.DisablePTT = true;
 
             double scale = Audio.SourceScale;
-            Audio.SourceScale = 0.25;            
+            Audio.SourceScale = 0.25;
 
             DttSP.SetCorrectIQEnable(0); // turn off I/Q correction
             DttSP.SetCorrectRXIQw(0, 0, 0.0f, 0.0f, 0);
@@ -6887,7 +6933,7 @@ namespace PowerSDR
                 lstDebug.Items.Insert(0, "IO Dot: Failed");
                 test_io_dot = "IO Dot Test: Failed";
             }
-            toolTip1.SetToolTip(btnIODot, test_io_dot);            
+            toolTip1.SetToolTip(btnIODot, test_io_dot);
 
             string path = console.AppDataPath + "Tests";
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
@@ -7181,7 +7227,7 @@ namespace PowerSDR
                 lstDebug.Items.Insert(0, "IO RCA PTT: Failed");
                 test_io_rcaptt = "IO RCA PTT Test: Failed";
             }
-            toolTip1.SetToolTip(btnIORCAPTT, test_io_rcaptt);           
+            toolTip1.SetToolTip(btnIORCAPTT, test_io_rcaptt);
 
             string path = console.AppDataPath + "Tests";
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);

@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<iasettings>
+  <projectproperties>
+    <manufacturer>KE9NS</manufacturer>
+    <productname>PowerSDR ke9ns</productname>
+    <productversion>2.8.0.224</productversion>
+    <productcode>{efc529ae-f309-4af1-9693-1b6b36847bbb}</productcode>
+    <upgradecode>{78b30d27-8bd3-4d14-a72a-42795c5e7183}</upgradecode>
+    <language>0</language>
+    <languagename>English</languagename>
+  </projectproperties>
+  <summary>
+    <title>PowerSDR ke9ns</title>
+    <subject>PowerSDR</subject>
+    <author>KE9NS</author>
+    <summarycomments>PowerSDR ke9ns</summarycomments>
+    <revisioncode>{d359d082-47ec-4aa5-96e1-8e0265a86db1}</revisioncode>
+    <uacelevation>highestAvailable</uacelevation>
+  </summary>
+  <addremove>
+    <publishername>KE9NS</publishername>
+    <contactname>Darrin Kohn</contactname>
+    <helplink>https://ke9ns.com/flexpage.html</helplink>
+    <productupdatelink>https://ke9ns.com/flexpage.html</productupdatelink>
+    <addremovecomments>All Rights Reserved</addremovecomments>
+    <iconfile />
+  </addremove>
+  <codegen>
+    <generateincludefiles>0</generateincludefiles>
+    <generatefeatures>0</generatefeatures>
+    <refreshscript>0</refreshscript>
+  </codegen>
+  <compilervariables>
+    <variables />
+  </compilervariables>
+  <build>
+    <buildtype>0</buildtype>
+    <buildasmsi>False</buildasmsi>
+    <cachesources>1</cachesources>
+  </build>
+  <targetfolders />
+  <files>
+    <filedetails filename="C:\Users\RADIO\source\PowerSDR_v2.8.0\Source\Console\..\..\bin\Release\PowerSDR.exe" targetlocation="$TARGETDIR$" type="1" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="1" runprogram="0" installfilecommand="1" VsProjectOutputfile="1" />
+    <filedetails filename="C:\Users\RADIO\source\PowerSDR_v2.8.0\temp\Release\DttSP\DttSP.dll" targetlocation="$TARGETDIR$" type="3" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="1" />
+    <filedetails filename="C:\Users\RADIO\source\PowerSDR_v2.8.0\Source\Release\PowerMate.dll" targetlocation="$TARGETDIR$" type="3" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="1" />
+    <filedetails filename="C:\Users\RADIO\source\PowerSDR_v2.8.0\bin\Release\PowerSDR.exe.config" targetlocation="$TARGETDIR$" type="0" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="0" />
+    <filedetails filename="C:\Users\RADIO\source\PowerSDR_v2.8.0\bin\Release\api-ms-win-crt-heap-l1-1-0.dll" targetlocation="$TARGETDIR$" type="3" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="0" />
+    <filedetails filename="C:\Users\RADIO\source\PowerSDR_v2.8.0\bin\Release\api-ms-win-crt-runtime-l1-1-0.dll" targetlocation="$TARGETDIR$" type="3" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="0" />
+    <filedetails filename="C:\Users\RADIO\source\PowerSDR_v2.8.0\bin\Release\AutoItX3.Assembly.dll" targetlocation="$TARGETDIR$" type="3" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="0" />
+    <filedetails filename="C:\Users\RADIO\source\PowerSDR_v2.8.0\bin\Release\AutoItX3_x64.dll" targetlocation="$TARGETDIR$" type="3" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="0" />
+    <filedetails filename="C:\Users\RADIO\source\PowerSDR_v2.8.0\bin\Release\AutoItX3.dll" targetlocation="$TARGETDIR$" type="3" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="0" />
+    <filedetails filename="C:\Users\RADIO\source\PowerSDR_v2.8.0\bin\Release\AutoItX3.Assembly.xml" targetlocation="$TARGETDIR$" type="0" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="0" />
+    <filedetails filename="C:\Users\RADIO\source\PowerSDR_v2.8.0\bin\Release\pthreadVC.dll" targetlocation="$TARGETDIR$" type="3" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="0" />
+    <filedetails filename="C:\ProgramData\FlexRadio Systems\PowerSDR\ke9ns\SWL.csv" targetlocation="$COMMONFILES$" type="0" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="0" />
+    <filedetails filename="C:\ProgramData\FlexRadio Systems\PowerSDR\ke9ns\SWL2.csv" targetlocation="$COMMONFILES$" type="0" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="0" />
+    <filedetails filename="C:\ProgramData\FlexRadio Systems\PowerSDR\ke9ns\DXLOC.txt" targetlocation="$COMMONFILES$" type="0" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="0" />
+    <filedetails filename="C:\ProgramData\FlexRadio Systems\PowerSDR\ke9ns\FCCDATA.dat" targetlocation="$COMMONFILES$" type="0" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="0" />
+    <filedetails filename="C:\ProgramData\FlexRadio Systems\PowerSDR\ke9ns\Quindar_tone_end.wav" targetlocation="$COMMONFILES$" type="0" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="0" />
+    <filedetails filename="C:\ProgramData\FlexRadio Systems\PowerSDR\ke9ns\Quindar_tone_start.wav" targetlocation="$COMMONFILES$" type="0" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="0" />
+    <filedetails filename="C:\ProgramData\FlexRadio Systems\PowerSDR\ke9ns\tower.bmp" targetlocation="$COMMONFILES$" type="0" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="0" />
+    <filedetails filename="C:\ProgramData\FlexRadio Systems\PowerSDR\ke9ns\test24.bmp" targetlocation="$COMMONFILES$" type="0" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="0" />
+    <filedetails filename="C:\ProgramData\FlexRadio Systems\PowerSDR\ke9ns\OP.bmp" targetlocation="$COMMONFILES$" type="0" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="0" />
+    <filedetails filename="C:\ProgramData\FlexRadio Systems\PowerSDR\ke9ns\PowerSDR ke9ns keyboard shortcuts.pdf" targetlocation="$COMMONFILES$" type="0" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="0" />
+    <filedetails filename="C:\ProgramData\FlexRadio Systems\PowerSDR\ke9ns\PowerSDR ke9ns v2.8 features_white.pdf" targetlocation="$COMMONFILES$" type="0" generatenativeimage="0" registerassembly="0" runinstallerclass="0" createshortcut="0" runprogram="0" installfilecommand="1" VsProjectOutputfile="0" />
+  </files>
+  <dependencies />
+  <registry />
+  <dialogtheme>
+    <themename>Official</themename>
+  </dialogtheme>
+  <authenticode>
+    <sign>0</sign>
+    <mode>0</mode>
+    <certificatefile />
+    <keyfile />
+    <pfxfile />
+    <productinfourl />
+    <authpassword />
+    <timestampurl>http://time.certum.pl</timestampurl>
+    <signall>0</signall>
+  </authenticode>
+  <compression>
+    <compressiontype>6</compressiontype>
+    <encrypt>0</encrypt>
+    <compressionpassword />
+  </compression>
+  <output>
+    <outputtype>0</outputtype>
+    <location />
+    <filename />
+    <calculatefilehash>0</calculatefilehash>
+    <refreshrevisioncode>1</refreshrevisioncode>
+  </output>
+</iasettings>

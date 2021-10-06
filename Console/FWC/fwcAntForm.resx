@@ -112,24 +112,342 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="comboRX2Ant.ToolTip" xml:space="preserve">
+    <value>Selects the second receivers antenna (only available if optional 2nd RX is installed)
+
+Expert Mode: When RX2 is ON, Band should be set to the 2nd Receiver Band for the Antenna selector to work properly.</value>
+  </data>
+  <data name="textBoxTS1.ToolTip" xml:space="preserve">
+    <value>When using all 3 TX1,TX2, TX3 the following occurs in this sequence:
+
+PTT ON:
+
+&gt;&gt;&gt;Flex5000 Receiver turns OFF&lt;&lt;&lt;
+
+RCA TX1 output ON (no delay)
+  Wait TX1 Delay time
+RCA TX2 output ON
+  Wait TX2 Delay time
+RCA TX3 output ON
+  Wait TX3 Delay time
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT ON &lt;&lt;&lt;
+
+PTT OFF:
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT OFF&lt;&lt;&lt;
+&gt;&gt;&gt;Flex5000 Receiver turns ON&lt;&lt;&lt;(but you will not hear anything until the AMP unkeys)
+
+  Wait TX3 Delay time
+RCA TX3 output OFF
+  Wait TX2 Delay time
+RCA TX2 output OFF
+  Wait TX1 Delay time
+RCA TX1 output OFF
+
+</value>
+  </data>
   <data name="udTX3Delay.ToolTip" xml:space="preserve">
-    <value>Sets the Delay period to wait after switching TX Out before TR when enabled above.  Note that adding TX delay may truncate the initial part of your transmission, which can adversely affect CW and digital modes that transmit immediatly.</value>
+    <value>Sets the Delay period to wait after switching TX Out before TR when enabled above.  Note that adding TX delay may truncate the initial part of your transmission, which can adversely affect CW and digital modes that transmit immediatly.
+
+When using all 3 TX1,TX2, TX3 the following occurs in this sequence:
+
+PTT ON:
+
+&gt;&gt;&gt;Flex5000 Receiver turns OFF&lt;&lt;&lt;
+
+RCA TX1 output ON (no delay)
+  Wait TX1 Delay time
+RCA TX2 output ON
+  Wait TX2 Delay time
+RCA TX3 output ON
+  Wait TX3 Delay time
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT ON &lt;&lt;&lt;
+
+PTT OFF:
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT OFF&lt;&lt;&lt;
+&gt;&gt;&gt;Flex5000 Receiver turns ON&lt;&lt;&lt;(but you will not hear anything until the AMP unkeys)
+
+  Wait TX3 Delay time
+RCA TX3 output OFF
+  Wait TX2 Delay time
+RCA TX2 output OFF
+  Wait TX1 Delay time
+RCA TX1 output OFF
+
+</value>
+  </data>
+  <data name="chkTX3DelayEnable.ToolTip" xml:space="preserve">
+    <value>When checked, the Yellow RCA plug labeled TX3 will delay before switching on TR transitions by the amount selected in milliseconds.
+
+When using all 3 TX1,TX2, TX3 the following occurs in this sequence:
+
+
+PTT ON:
+
+&gt;&gt;&gt;Flex5000 Receiver turns OFF&lt;&lt;&lt;
+
+RCA TX1 output ON (no delay)
+  Wait TX1 Delay time
+RCA TX2 output ON
+  Wait TX2 Delay time
+RCA TX3 output ON
+  Wait TX3 Delay time
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT ON &lt;&lt;&lt;
+
+PTT OFF:
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT OFF&lt;&lt;&lt;
+&gt;&gt;&gt;Flex5000 Receiver turns ON&lt;&lt;&lt;(but you will not hear anything until the AMP unkeys)
+
+  Wait TX3 Delay time
+RCA TX3 output OFF
+  Wait TX2 Delay time
+RCA TX2 output OFF
+  Wait TX1 Delay time
+RCA TX1 output OFF
+
+</value>
   </data>
   <data name="udTX2Delay.ToolTip" xml:space="preserve">
-    <value>Sets the Delay period to wait after switching TX Out before TR when enabled above.  Note that adding TX delay may truncate the initial part of your transmission, which can adversely affect CW and digital modes that transmit immediatly.</value>
+    <value>Sets the Delay period to wait after switching TX Out before TR when enabled above.  Note that adding TX delay may truncate the initial part of your transmission, which can adversely affect CW and digital modes that transmit immediatly.
+
+When using all 3 TX1,TX2, TX3 the following occurs in this sequence:
+
+PTT ON:
+
+&gt;&gt;&gt;Flex5000 Receiver turns OFF&lt;&lt;&lt;
+
+RCA TX1 output ON (no delay)
+  Wait TX1 Delay time
+RCA TX2 output ON
+  Wait TX2 Delay time
+RCA TX3 output ON
+  Wait TX3 Delay time
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT ON &lt;&lt;&lt;
+
+PTT OFF:
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT OFF&lt;&lt;&lt;
+&gt;&gt;&gt;Flex5000 Receiver turns ON&lt;&lt;&lt;(but you will not hear anything until the AMP unkeys)
+
+  Wait TX3 Delay time
+RCA TX3 output OFF
+  Wait TX2 Delay time
+RCA TX2 output OFF
+  Wait TX1 Delay time
+RCA TX1 output OFF
+
+</value>
+  </data>
+  <data name="chkTX2DelayEnable.ToolTip" xml:space="preserve">
+    <value>When checked, the White RCA plug labeled TX2 will delay before switching on TR transitions by the amount selected in milliseconds.
+
+When using all 3 TX1,TX2, TX3 the following occurs in this sequence:
+
+
+PTT ON:
+
+&gt;&gt;&gt;Flex5000 Receiver turns OFF&lt;&lt;&lt;
+
+RCA TX1 output ON (no delay)
+  Wait TX1 Delay time
+RCA TX2 output ON
+  Wait TX2 Delay time
+RCA TX3 output ON
+  Wait TX3 Delay time
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT ON &lt;&lt;&lt;
+
+PTT OFF:
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT OFF&lt;&lt;&lt;
+&gt;&gt;&gt;Flex5000 Receiver turns ON&lt;&lt;&lt;(but you will not hear anything until the AMP unkeys)
+
+  Wait TX3 Delay time
+RCA TX3 output OFF
+  Wait TX2 Delay time
+RCA TX2 output OFF
+  Wait TX1 Delay time
+RCA TX1 output OFF
+
+</value>
   </data>
   <data name="udTX1Delay.ToolTip" xml:space="preserve">
-    <value>Sets the Delay period to wait after switching TX Out before TR when enabled above.  Note that adding TX delay may truncate the initial part of your transmission, which can adversely affect CW and digital modes that transmit immediatly.</value>
+    <value>Sets the Delay period to wait after switching TX Out before TR when enabled above.  Note that adding TX delay may truncate the initial part of your transmission, which can adversely affect CW and digital modes that transmit immediatly.
+
+When using all 3 TX1,TX2, TX3 the following occurs in this sequence:
+
+PTT ON:
+
+&gt;&gt;&gt;Flex5000 Receiver turns OFF&lt;&lt;&lt;
+
+RCA TX1 output ON (no delay)
+  Wait TX1 Delay time
+RCA TX2 output ON
+  Wait TX2 Delay time
+RCA TX3 output ON
+  Wait TX3 Delay time
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT ON &lt;&lt;&lt;
+
+PTT OFF:
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT OFF&lt;&lt;&lt;
+&gt;&gt;&gt;Flex5000 Receiver turns ON&lt;&lt;&lt;(but you will not hear anything until the AMP unkeys)
+
+  Wait TX3 Delay time
+RCA TX3 output OFF
+  Wait TX2 Delay time
+RCA TX2 output OFF
+  Wait TX1 Delay time
+RCA TX1 output OFF
+
+</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="chkTX1DelayEnable.ToolTip" xml:space="preserve">
+    <value>When checked, the Red RCA plug labeled TX1 will delay before switching on TR transitions by the amount selected in milliseconds.
+
+When using all 3 TX1,TX2, TX3 the following occurs in this sequence:
+
+
+PTT ON:
+
+&gt;&gt;&gt;Flex5000 Receiver turns OFF&lt;&lt;&lt;
+
+RCA TX1 output ON (no delay)
+  Wait TX1 Delay time
+RCA TX2 output ON
+  Wait TX2 Delay time
+RCA TX3 output ON
+  Wait TX3 Delay time
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT ON &lt;&lt;&lt;
+
+PTT OFF:
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT OFF&lt;&lt;&lt;
+&gt;&gt;&gt;Flex5000 Receiver turns ON&lt;&lt;&lt;(but you will not hear anything until the AMP unkeys)
+
+  Wait TX3 Delay time
+RCA TX3 output OFF
+  Wait TX2 Delay time
+RCA TX2 output OFF
+  Wait TX1 Delay time
+RCA TX1 output OFF
+</value>
+  </data>
+  <data name="chkRCATX3.ToolTip" xml:space="preserve">
+    <value>When checked, the Yellow RCA plug labeled TX3 will switch with TR transitions.  This can be used to switch an external linear, transverter, preselector, etc.
+
+When using all 3 TX1,TX2, TX3 the following occurs in this sequence:
+
+PTT ON:
+
+&gt;&gt;&gt;Flex5000 Receiver turns OFF&lt;&lt;&lt;
+
+RCA TX1 output ON (no delay)
+  Wait TX1 Delay time
+RCA TX2 output ON
+  Wait TX2 Delay time
+RCA TX3 output ON
+  Wait TX3 Delay time
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT ON &lt;&lt;&lt;
+
+PTT OFF:
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT OFF&lt;&lt;&lt;
+&gt;&gt;&gt;Flex5000 Receiver turns ON&lt;&lt;&lt;(but you will not hear anything until the AMP unkeys)
+
+  Wait TX3 Delay time
+RCA TX3 output OFF
+  Wait TX2 Delay time
+RCA TX2 output OFF
+  Wait TX1 Delay time
+RCA TX1 output OFF
+
+</value>
+  </data>
+  <data name="chkRCATX2.ToolTip" xml:space="preserve">
+    <value>When checked, the White RCA plug labeled TX2 will switch with TR transitions.  This can be used to switch an external linear, transverter, preselector, etc.
+
+When using all 3 TX1,TX2, TX3 the following occurs in this sequence:
+
+
+PTT ON:
+
+&gt;&gt;&gt;Flex5000 Receiver turns OFF&lt;&lt;&lt;
+
+RCA TX1 output ON (no delay)
+  Wait TX1 Delay time
+RCA TX2 output ON
+  Wait TX2 Delay time
+RCA TX3 output ON
+  Wait TX3 Delay time
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT ON &lt;&lt;&lt;
+
+PTT OFF:
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT OFF&lt;&lt;&lt;
+&gt;&gt;&gt;Flex5000 Receiver turns ON&lt;&lt;&lt;(but you will not hear anything until the AMP unkeys)
+
+  Wait TX3 Delay time
+RCA TX3 output OFF
+  Wait TX2 Delay time
+RCA TX2 output OFF
+  Wait TX1 Delay time
+RCA TX1 output OFF
+
+</value>
+  </data>
+  <data name="chkRCATX1.ToolTip" xml:space="preserve">
+    <value>When checked, the Red RCA plug labeled TX1 will switch with TR transitions.  This can be used to switch an external linear, transverter, preselector, etc.
+
+When using all 3 TX1,TX2, TX3 the following occurs in this sequence:
+
+PTT ON:
+
+&gt;&gt;&gt;Flex5000 Receiver turns OFF&lt;&lt;&lt;
+
+RCA TX1 output ON (no delay)
+  Wait TX1 Delay time
+RCA TX2 output ON
+  Wait TX2 Delay time
+RCA TX3 output ON
+  Wait TX3 Delay time
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT ON &lt;&lt;&lt;
+
+PTT OFF:
+
+&gt;&gt;&gt;Flex5000 RF OUTPUT OFF&lt;&lt;&lt;
+&gt;&gt;&gt;Flex5000 Receiver turns ON&lt;&lt;&lt;(but you will not hear anything until the AMP unkeys)
+
+  Wait TX3 Delay time
+RCA TX3 output OFF
+  Wait TX2 Delay time
+RCA TX2 output OFF
+  Wait TX1 Delay time
+RCA TX1 output OFF
+
+
+</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAMAEBAAAAAAIABoBAAANgAAACAgAAAAACAAqBAAAJ4EAAAwMAAAAAAgAKglAABGFQAAKAAAABAA

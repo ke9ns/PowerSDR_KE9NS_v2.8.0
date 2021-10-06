@@ -28,20 +28,17 @@
 
 using System;
 using System.Diagnostics;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace PowerSDR
 {
-	/// <summary>
-	/// Summary description for WaveOptions.
-	/// </summary>
-	public class SpotOptions : System.Windows.Forms.Form
-	{
+    /// <summary>
+    /// Summary description for WaveOptions.
+    /// </summary>
+    public class SpotOptions : System.Windows.Forms.Form
+    {
         #region Variable Declaration
-		private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip toolTip1;
         public NumericUpDownTS udMethod;
         private Label label5;
         public Label label1;
@@ -67,41 +64,41 @@ namespace PowerSDR
         #region Constructor and Destructor
 
         public SpotOptions()
-		{
-			//
-			// Required for Windows Form Designer support
-			//
-			InitializeComponent();
-			
-			Common.RestoreForm(this, "SpotOptions", false);
+        {
+            //
+            // Required for Windows Form Designer support
+            //
+            InitializeComponent();
+
+            Common.RestoreForm(this, "SpotOptions", false);
 
 
-		}
+        }
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#endregion
+        #endregion
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpotOptions));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -470,27 +467,27 @@ namespace PowerSDR
             this.ResumeLayout(false);
             this.PerformLayout();
 
-		}
-		#endregion
+        }
+        #endregion
 
-		#region Properties
-
-		
+        #region Properties
 
 
-       
 
-		#endregion
 
-		#region Event Handler
 
-		private void SpotOptions_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
+
+        #endregion
+
+        #region Event Handler
+
+        private void SpotOptions_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
             SpotForm.VOACAP_FORCE = false;
             this.Hide();
-			e.Cancel = true;
-			Common.SaveForm(this, "SpotOptions");
-		}
+            e.Cancel = true;
+            Common.SaveForm(this, "SpotOptions");
+        }
 
 
 
@@ -498,45 +495,45 @@ namespace PowerSDR
 
         private void udMethod_ValueChanged(object sender, EventArgs e)
         {
-          //  SpotForm.VOACAP_FORCE = true;
-         //   SpotForm.VOACAP_CHECK();
+            //  SpotForm.VOACAP_FORCE = true;
+            //   SpotForm.VOACAP_CHECK();
         }
 
         private void udSSN_ValueChanged(object sender, EventArgs e)
         {
-           // SpotForm.VOACAP_FORCE = true;
-          //  SpotForm.VOACAP_CHECK();
+            // SpotForm.VOACAP_FORCE = true;
+            //  SpotForm.VOACAP_CHECK();
         }
 
         private void udMTA_ValueChanged(object sender, EventArgs e)
         {
-          //  SpotForm.VOACAP_FORCE = true;
-         //   SpotForm.VOACAP_CHECK();
+            //  SpotForm.VOACAP_FORCE = true;
+            //   SpotForm.VOACAP_CHECK();
         }
 
         private void udRCR_ValueChanged(object sender, EventArgs e)
         {
-          //  SpotForm.VOACAP_FORCE = true;
-          //  SpotForm.VOACAP_CHECK();
+            //  SpotForm.VOACAP_FORCE = true;
+            //  SpotForm.VOACAP_CHECK();
         }
 
         private void udSNR_ValueChanged(object sender, EventArgs e)
         {
-          //  SpotForm.VOACAP_FORCE = true;
-          //  SpotForm.VOACAP_CHECK();
+            //  SpotForm.VOACAP_FORCE = true;
+            //  SpotForm.VOACAP_CHECK();
         }
 
         private void udWATTS_ValueChanged(object sender, EventArgs e)
         {
-          //  SpotForm.VOACAP_FORCE = true;
-          //  SpotForm.VOACAP_CHECK();
+            //  SpotForm.VOACAP_FORCE = true;
+            //  SpotForm.VOACAP_CHECK();
 
         }
 
         private void numericUpDownTS1_ValueChanged(object sender, EventArgs e)
         {
-         //   SpotForm.VOACAP_FORCE = true;
-          //  SpotForm.VOACAP_CHECK();
+            //   SpotForm.VOACAP_FORCE = true;
+            //  SpotForm.VOACAP_CHECK();
         }
 
         private void btnTrack_Click(object sender, EventArgs e)

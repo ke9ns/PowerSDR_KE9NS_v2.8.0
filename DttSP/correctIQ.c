@@ -41,15 +41,15 @@ Bridgewater, NJ 08807
 IQ newCorrectIQ (REAL phase, REAL gain, REAL mu)
 {
 	IQ iq = (IQ) safealloc (1, sizeof (iqstate), "IQ state");
-	iq->phase = phase;
-	iq->gain = gain;
-	iq->mu = mu;
-	iq->leakage = 0.000000f;
-	iq->MASK=15;
-	iq->index=0;
-	iq->w = (COMPLEX *)safealloc(16,sizeof(COMPLEX),"correctIQ w");
-	iq->y = (COMPLEX *)safealloc(16,sizeof(COMPLEX),"correctIQ y");
-	iq->del = (COMPLEX *)safealloc(16,sizeof(COMPLEX),"correctIQ del");
+	iq-> phase = phase;
+	iq-> gain = gain;
+	iq-> mu = mu;
+	iq-> leakage = 0.000000f;
+	iq-> MASK=15;
+	iq-> index=0;
+	iq-> w = (COMPLEX *)safealloc(16,sizeof(COMPLEX),"correctIQ w");
+	iq-> y = (COMPLEX *)safealloc(16,sizeof(COMPLEX),"correctIQ y");
+	iq-> del = (COMPLEX *)safealloc(16,sizeof(COMPLEX),"correctIQ del");
 	memset((void *)iq->w,0,16*sizeof(COMPLEX));
 	iq->wbir_tuned = TRUE;
 	iq->wbir_state = FastAdapt;
@@ -77,7 +77,8 @@ void correctIQ (CXB sigbuf, IQ iq, BOOLEAN isTX, int subchan)
 	{
 
 		// if (subchan == 0) // removed so that sub rx's will get IQ correction
-		switch (iq->wbir_state) {
+		switch (iq-> wbir_state)
+		{
 			case FastAdapt:
 				break;
 			case SlowAdapt:

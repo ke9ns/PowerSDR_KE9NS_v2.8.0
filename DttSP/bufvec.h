@@ -42,9 +42,11 @@ Bridgewater, NJ 08807
 #include <complex.h>
 #include <cxops.h>
 
-typedef struct _complex_buffer_desc {
+typedef struct _complex_buffer_desc 
+{
   COMPLEX *data;
   int size, ovlp, want, have, done, mine;
+
 } CXBuffer, *CXB;
 
 /* all these should be OK rhs or lhs */
@@ -60,9 +62,11 @@ typedef struct _complex_buffer_desc {
 #define CXBdone(p) ((p)->done)
 #define CXBmine(p) ((p)->mine)
 
-typedef struct _real_buffer_desc {
+typedef struct _real_buffer_desc 
+{
   REAL *data;
   int size, ovlp, want, have, done, mine;
+
 } RLBuffer, *RLB;
 
 #define RLBbase(p) ((p)->data)

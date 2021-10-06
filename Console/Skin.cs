@@ -94,7 +94,7 @@ namespace PowerSDR
             writer.WriteStartElement("Form");
 
             SaveForm(f, writer);
-            
+
             writer.WriteStartElement("Controls");
 
             foreach (Control c in f.Controls) //  for loop from 0 to length of f.Controls[]
@@ -105,7 +105,7 @@ namespace PowerSDR
             writer.WriteEndElement();
             writer.WriteEndElement();
             writer.WriteEndDocument();
-            writer.Close();    
+            writer.Close();
         }
 
         /// <summary>
@@ -120,9 +120,24 @@ namespace PowerSDR
             Skin.path = p + "\\" + name;
             Skin.name = name;
 
+            //   Debug.WriteLine("SKIN RESTORE BEFORE>" + f.Name + "<");
 
-            f.Name = f.Name.Replace("btnBandHF1", "btnBandHF"); // ke9ns add so we can use other band png file for the SWL bands
-            f.Name = f.Name.Replace("GN", "VHF"); // ke9ns add so we can use other band png file for the SWL band
+            if (f.Name.Contains("RX2") && (f.Name.Contains("radBand") || f.Name.Contains("btnBand")))
+                f.Name = f.Name.Replace("RX2", ""); // ke9ns add .203
+
+            f.Name = f.Name.Replace("btnBandHF1", "btnBandHF"); // ke9ns add: HF1 is HAM button on the panelBandGN (SWL panel), HF is HF the button on panelBandVHF
+            f.Name = f.Name.Replace("GN", "VHF"); // ke9ns add: GN are the radBandGN0-13 buttons,  VHF are the radBandVHF0-13 buttons on the panelBandVHF 
+
+           
+            f.Name = f.Name.Replace("ptbDisplayZoom2", "ptbDisplayZoom"); // ke9ns .219
+            f.Name = f.Name.Replace("ptbDisplayPan2", "ptbDisplayPan"); // ke9ns
+
+
+            f.Name = f.Name.Replace("checkVOX", "chkVOX"); // ke9ns add
+            f.Name = f.Name.Replace("prettyTrackBarVOX", "ptbVOX"); // ke9ns add
+
+          //  Debug.WriteLine("SKIN RESTORE AFTER>" + f.Name + "<");
+
 
             if (File.Exists(path + "\\" + f.Name + "\\" + f.Name + pic_file_ext)) // pic_file_ext = .png
             {
@@ -131,13 +146,13 @@ namespace PowerSDR
             }
             else
             {
-                             
-                    f.BackgroundImage = null;
-              //  Trace.WriteLine("image missing");
-               
+
+                f.BackgroundImage = null;
+                //  Trace.WriteLine("image missing");
+
             }
 
-            foreach (Control c in f.Controls) // load in images
+            foreach (Control c in f.Controls) // load in images ke9ns Match the names of the images to the controls found within Console (including the name Console.png)
                 ReadImages(c);
 
             if (!File.Exists(path + "\\" + name + ".xml"))
@@ -177,7 +192,7 @@ namespace PowerSDR
 
             foreach (Control c in f.Controls)
             {
-                 Restore(c, doc);
+                Restore(c, doc);
             }
 
             return true;
@@ -300,7 +315,7 @@ namespace PowerSDR
             temp = c as Panel;
             if (temp != null)
             {
-            
+
                 Panel pnl = (Panel)c;
                 RestorePanel(pnl, doc);
                 foreach (Control c2 in pnl.Controls)
@@ -354,7 +369,7 @@ namespace PowerSDR
             if (temp != null)
             {
 
-             //   Trace.WriteLine("pictgurebox3=====");
+                //   Trace.WriteLine("pictgurebox3=====");
 
                 RestorePictureBox((PictureBox)c, doc);
                 return;
@@ -381,73 +396,74 @@ namespace PowerSDR
         {
             Control temp;
 
-            temp = c as GroupBox;
+            temp = c as GroupBox;                 // GroupBox
             if (temp != null)
             {
                 GroupBox grp = (GroupBox)c;
                 SetBackgroundImage(c);
+
                 foreach (Control c2 in grp.Controls)
                     ReadImages(c2);
                 return;
             }
 
-         temp = c as Panel;
+            temp = c as Panel;                   // Panel
             if (temp != null)
             {
-              //  Debug.WriteLine("C.NMAE " + c.Name);
+                //  Debug.WriteLine("C.NMAE " + c.Name);
 
-                    Panel pnl = (Panel)c;
-                    SetBackgroundImage(c);
-              
+                Panel pnl = (Panel)c;
+                SetBackgroundImage(c);
+
                 foreach (Control c2 in pnl.Controls)
                 {
-                  
+
                     ReadImages(c2);
                 }
-                
+
                 return;
             }
 
-            temp = c as Button;
+            temp = c as Button;                 // Button
             if (temp != null)
             {
                 SetupButtonImages((Button)c);
                 return;
             }
 
-            temp = c as CheckBox;
+            temp = c as CheckBox;                 // CheckBox
             if (temp != null)
             {
-                if(((CheckBox)c).Appearance == Appearance.Button)
+                if (((CheckBox)c).Appearance == Appearance.Button)
                     SetupCheckBoxImages((CheckBox)c);
                 return;
             }
 
-            temp = c as Label;
+            temp = c as Label;                   // Label
             if (temp != null)
             {
                 SetBackgroundImage(c);
                 return;
             }
 
-            temp = c as PrettyTrackBar;
+            temp = c as PrettyTrackBar;           //PettyTrackBar
             if (temp != null)
             {
                 SetupPrettyTrackBarImages((PrettyTrackBar)c);
                 return;
             }
 
-            temp = c as PictureBox;
+            temp = c as PictureBox;                     // PictureBox
             if (temp != null)
             {
 
-             //   Trace.WriteLine("pictgurebox1=====");
+                //   Trace.WriteLine("pictgurebox1=====");
 
                 SetBackgroundImage((PictureBox)c);
                 return;
             }
 
-            temp = c as RadioButton;
+            temp = c as RadioButton;                    //RadioButton
             if (temp != null)
             {
                 if (((RadioButton)c).Appearance == Appearance.Button)
@@ -464,11 +480,11 @@ namespace PowerSDR
 
         private static void SaveForm(Form ctrl, XmlTextWriter writer)
         {
-            writer.WriteElementString("Name", ctrl.Name);            
+            writer.WriteElementString("Name", ctrl.Name);
             writer.WriteElementString("BackColor", ctrl.BackColor.Name);
             writer.WriteElementString("BackgroundImageLayout", ctrl.BackgroundImageLayout.ToString());
             SaveFont(ctrl.Font, writer);
-            writer.WriteElementString("ForeColor", ctrl.ForeColor.Name);           
+            writer.WriteElementString("ForeColor", ctrl.ForeColor.Name);
             SaveSize(ctrl.Size, writer);
             writer.WriteElementString("Text", ctrl.Text);
             writer.WriteElementString("TransparencyKey", ctrl.TransparencyKey.Name);
@@ -504,9 +520,9 @@ namespace PowerSDR
                     case "Text":
                         ctrl.Text = node.InnerText;
                         break;
-                    /*case "TransparencyKey":
-                        ctrl.TransparencyKey = StringToColor(node.InnerText);
-                        break;*/
+                        /*case "TransparencyKey":
+                            ctrl.TransparencyKey = StringToColor(node.InnerText);
+                            break;*/
                 }
             }
         }
@@ -569,7 +585,7 @@ namespace PowerSDR
         #region Panel
 
         private static void SavePanel(Panel ctrl, XmlTextWriter writer)
-        {            
+        {
             writer.WriteElementString("Type", "Panel");
             writer.WriteElementString("BackColor", ctrl.BackColor.Name);
             writer.WriteElementString("BackGroundImageLayout", ctrl.BackgroundImageLayout.ToString());
@@ -620,7 +636,7 @@ namespace PowerSDR
             writer.WriteElementString("BackColor", ctrl.BackColor.Name);
             writer.WriteElementString("BackGroundImageLayout", ctrl.BackgroundImageLayout.ToString());
             SaveFlatAppearance(ctrl.FlatAppearance, writer);
-            writer.WriteElementString("FlatStyle", ctrl.FlatStyle.ToString());            
+            writer.WriteElementString("FlatStyle", ctrl.FlatStyle.ToString());
             SaveFont(ctrl.Font, writer);
             writer.WriteElementString("ForeColor", ctrl.ForeColor.Name);
             SaveLocation(ctrl.Location, writer);
@@ -649,7 +665,7 @@ namespace PowerSDR
                         ctrl.BackgroundImageLayout = (ImageLayout)Enum.Parse(typeof(ImageLayout), node.InnerText);
                         break;
                     case "FlatAppearance":
-                        foreach(XmlNode x in node.ChildNodes)
+                        foreach (XmlNode x in node.ChildNodes)
                         {
                             switch (x.LocalName)
                             {
@@ -697,23 +713,36 @@ namespace PowerSDR
 
 
 
-        
             // load images into image list property
             string s = path + "\\" + ctrl.TopLevelControl.Name + "\\" + ctrl.Name + "-";
+
+  
+            if (s.Contains("RX2") && (s.Contains("radBand") || s.Contains("btnBand")) )
+            s = s.Replace("RX2", ""); // ke9ns add .203
+
+          
+            s = s.Replace("ptbDisplayZoom2", "ptbDisplayZoom"); // ke9ns add .219
+            s = s.Replace("ptbDisplayPan2", "ptbDisplayPan"); // ke9ns add
 
             s = s.Replace("btnBandHF1", "btnBandHF"); // ke9ns add
             s = s.Replace("GN", "VHF"); // ke9ns add 
 
+
+            s = s.Replace("checkVOX", "chkVOX"); // ke9ns add
+            s = s.Replace("prettyTrackBarVOX", "ptbVOX"); // ke9ns add
+
+          
+
             for (int i = 0; i < 8; i++)
             {
-               
+
                 if (File.Exists(s + i.ToString() + pic_file_ext))
                 {
                     ctrl.ImageList.Images.Add(((ImageState)i).ToString(), Image.FromFile(s + i.ToString() + pic_file_ext));
                 }
                 else
                 {
-                  //  Trace.WriteLine("no image "+s);
+                    //  Trace.WriteLine("no image "+s);
                 }
 
             }
@@ -746,11 +775,11 @@ namespace PowerSDR
             Button ctrl = (Button)sender;
             ImageState state = ImageState.NormalUp;
 
-            if (!ctrl.Enabled &&  ctrl.ImageList.Images.IndexOfKey(ImageState.DisabledUp.ToString()) >= 0)
+            if (!ctrl.Enabled && ctrl.ImageList.Images.IndexOfKey(ImageState.DisabledUp.ToString()) >= 0)
             {
                 state = ImageState.DisabledUp;
             }
-            else if (ctrl.Focused &&  ctrl.ImageList.Images.IndexOfKey(ImageState.FocusedUp.ToString()) >= 0)
+            else if (ctrl.Focused && ctrl.ImageList.Images.IndexOfKey(ImageState.FocusedUp.ToString()) >= 0)
             {
                 state = ImageState.FocusedUp;
             }
@@ -889,7 +918,7 @@ namespace PowerSDR
         private static void SetupCheckBoxImages(CheckBox ctrl)
         {
 
-          
+
             if (ctrl.ImageList == null)
                 ctrl.ImageList = new ImageList();
             else ctrl.ImageList.Images.Clear();
@@ -899,10 +928,21 @@ namespace PowerSDR
             // load images into image list property
             string s = path + "\\" + ctrl.TopLevelControl.Name + "\\" + ctrl.Name + "-";
 
+            if (s.Contains("RX2") && (s.Contains("radBand") || s.Contains("btnBand")))
+                s = s.Replace("RX2", ""); // ke9ns add .203
+
+          
+            s = s.Replace("ptbDisplayZoom2", "ptbDisplayZoom"); // ke9ns add .219
+            s = s.Replace("ptbDisplayPan2", "ptbDisplayPan"); // ke9ns add
+
             s = s.Replace("btnBandHF1", "btnBandHF"); // ke9ns add
             s = s.Replace("GN", "VHF"); // ke9ns add
 
-            for (int i=0; i < 8; i++)
+           
+            s = s.Replace("checkVOX", "chkVOX"); // ke9ns add
+            s = s.Replace("prettyTrackBarVOX", "ptbVOX"); // ke9ns add
+
+            for (int i = 0; i < 8; i++)
             {
                 if (File.Exists(s + i.ToString() + pic_file_ext))
                     ctrl.ImageList.Images.Add(((ImageState)i).ToString(), Image.FromFile(s + i.ToString() + pic_file_ext));
@@ -939,7 +979,7 @@ namespace PowerSDR
                 else
                     state = ImageState.DisabledUp;
             }
-            else if (ctrl.Focused && 
+            else if (ctrl.Focused &&
                 ctrl.ImageList.Images.IndexOfKey(ImageState.FocusedDown.ToString()) >= 0 &&
                 ctrl.ImageList.Images.IndexOfKey(ImageState.FocusedUp.ToString()) >= 0)
             {
@@ -978,7 +1018,7 @@ namespace PowerSDR
             ctrl.BackgroundImage = ctrl.ImageList.Images[index];
         }
 
-#endregion
+        #endregion
 
         #region ComboBox
 
@@ -1167,7 +1207,7 @@ namespace PowerSDR
         public static void RestorePictureBox(PictureBox ctrl, XmlDocument doc)
         {
 
-          //  Trace.WriteLine("pictgurebox2=====");
+            //  Trace.WriteLine("pictgurebox2=====");
 
             XmlNodeList matches = doc.GetElementsByTagName(ctrl.Name);
             if (matches.Count == 0) // not found
@@ -1300,8 +1340,8 @@ namespace PowerSDR
         private static void SetupRadioButtonImages(RadioButton ctrl)
         {
 
-         
-            if (ctrl.ImageList == null)  ctrl.ImageList = new ImageList();
+
+            if (ctrl.ImageList == null) ctrl.ImageList = new ImageList();
             else ctrl.ImageList.Images.Clear();
 
             ctrl.ImageList.ImageSize = ctrl.Size; // may be an issue with smaller images
@@ -1310,8 +1350,19 @@ namespace PowerSDR
             // load images into image list property
             string s = path + "\\" + ctrl.TopLevelControl.Name + "\\" + ctrl.Name + "-";
 
+            if (s.Contains("RX2") && (s.Contains("radBand") || s.Contains("btnBand")))
+                s = s.Replace("RX2", ""); // ke9ns add .203
+
+          
+            s = s.Replace("ptbDisplayZoom2", "ptbDisplayZoom"); // ke9ns add .219
+            s = s.Replace("ptbDisplayPan2", "ptbDisplayPan"); // ke9ns add
+
             s = s.Replace("btnBandHF1", "btnBandHF"); // ke9ns add
-            s =  s.Replace("GN", "VHF"); // ke9ns add
+            s = s.Replace("GN", "VHF"); // ke9ns add
+           
+
+            s = s.Replace("checkVOX", "chkVOX"); // ke9ns add
+            s = s.Replace("prettyTrackBarVOX", "ptbVOX"); // ke9ns add
 
             for (int i = 0; i < 8; i++)
             {
@@ -1353,17 +1404,17 @@ namespace PowerSDR
             RadioButton ctrl = (RadioButton)sender;
             ImageState state = ImageState.NormalUp;
 
-            if (!ctrl.Enabled &&  (ctrl.ImageList.Images.IndexOfKey(ImageState.DisabledDown.ToString()) >= 0) &&  (ctrl.ImageList.Images.IndexOfKey(ImageState.DisabledUp.ToString()) >= 0) )
+            if (!ctrl.Enabled && (ctrl.ImageList.Images.IndexOfKey(ImageState.DisabledDown.ToString()) >= 0) && (ctrl.ImageList.Images.IndexOfKey(ImageState.DisabledUp.ToString()) >= 0))
             {
-               
+
                 if (ctrl.Checked)
                     state = ImageState.DisabledDown;
                 else
                     state = ImageState.DisabledUp;
             }
-            else if (ctrl.Focused &&  ctrl.ImageList.Images.IndexOfKey(ImageState.FocusedDown.ToString()) >= 0 &&  ctrl.ImageList.Images.IndexOfKey(ImageState.FocusedUp.ToString()) >= 0)
+            else if (ctrl.Focused && ctrl.ImageList.Images.IndexOfKey(ImageState.FocusedDown.ToString()) >= 0 && ctrl.ImageList.Images.IndexOfKey(ImageState.FocusedUp.ToString()) >= 0)
             {
-              
+
                 if (ctrl.Checked)
                     state = ImageState.FocusedDown;
                 else
@@ -1371,7 +1422,7 @@ namespace PowerSDR
             }
             else
             {
-              
+
                 if (ctrl.Checked)
                     state = ImageState.NormalDown;
                 else
@@ -1381,7 +1432,7 @@ namespace PowerSDR
             SetRadioButtonImageState(ctrl, state);
 
             meterPause = false; // ke9ns add pause image pointer on meter while updating button images
-           
+
 
         } //  RadioButton_StateChanged
 
@@ -1390,7 +1441,7 @@ namespace PowerSDR
 
         private static void RadioButton_MouseEnter(object sender, EventArgs e)
         {
-          
+
 
             RadioButton ctrl = (RadioButton)sender;
             if (!ctrl.Enabled) return;
@@ -1403,10 +1454,10 @@ namespace PowerSDR
 
         private static void SetRadioButtonImageState(RadioButton ctrl, ImageState state)
         {
-          
+
             if (ctrl.ImageList == null)
             {
-              
+
                 return;
             }
 
@@ -1414,10 +1465,10 @@ namespace PowerSDR
 
             if (index < 0)
             {
-              
+
                 return;
             }
-          
+
             ctrl.BackgroundImage = ctrl.ImageList.Images[index]; // ke9ns this is where the buttons image is set
             ctrl.Invalidate(); // ke9ns add
 
@@ -1534,12 +1585,21 @@ namespace PowerSDR
             // load images
             string s = path + "\\" + ctrl.TopLevelControl.Name + "\\" + ctrl.Name + "-";
 
+            if (s.Contains("RX2") && (s.Contains("radBand") || s.Contains("btnBand")))
+                s = s.Replace("RX2", ""); // ke9ns add .203
+                      
+            s = s.Replace("ptbDisplayZoom2", "ptbDisplayZoom"); // ke9ns add .219
+            s = s.Replace("ptbDisplayPan2", "ptbDisplayPan"); // ke9ns add
+
             s = s.Replace("btnBandHF1", "btnBandHF"); // ke9ns add to allow HF1 to use the skin of HF buttons
             s = s.Replace("GN", "VHF"); // ke9ns add  to allow GN to use the skin of VHF buttons
-
+          
 
             s = s.Replace("ptbTune", "ptbPWR");  // ke9ns add to allow ptbTune to use the skin of ptbPWR slider (back and head)
             s = s.Replace("ptbMON", "ptbAF");  // ke9ns add to allow ptbTune to use the skin of ptbAF slider (back and head)
+
+            s = s.Replace("checkVOX", "chkVOX"); // ke9ns add
+            s = s.Replace("prettyTrackBarVOX", "ptbVOX"); // ke9ns add
 
 
             if (File.Exists(s + "back" + pic_file_ext))
@@ -1680,7 +1740,7 @@ namespace PowerSDR
         private static Color StringToColor(string s)
         {
             Color c = Color.FromName(s);
-            if(!c.IsKnownColor)
+            if (!c.IsKnownColor)
                 c = Color.FromArgb(int.Parse(s, NumberStyles.HexNumber));
             return c;
         }
@@ -1692,19 +1752,37 @@ namespace PowerSDR
             if (c.Name == "panelModeSpecificFM") return; // ke9ns add
             if (c.Name == "panelModeSpecificCW") return; // ke9ns add
             if (c.Name == "panelModeSpecificDigital") return; // ke9ns add
+
             if (c.Name == "panelBandHF") return; // ke9ns add
             if (c.Name == "panelBandGN") return; // ke9ns add
             if (c.Name == "panelBandVHF") return; // ke9ns add
+           
+            if (c.Name == "panelBandHFRX2") return; // ke9ns add .203
+           if (c.Name == "panelBandGNRX2") return; // ke9ns add
+            if (c.Name == "panelBandVHFRX2") return; // ke9ns add 
+
             if (c.Name == "panelMode") return; // ke9ns add
             if (c.Name == "panelFilter") return; // ke9ns add
             if (c.Name == "panelRX2Filter") return; // ke9ns add
             if (c.Name == "panelRX2Mode") return; // ke9ns add
 
+            if (c.Name.Contains("RX2") && (c.Name.Contains("radBand") || c.Name.Contains("btnBand")))
+                c.Name = c.Name.Replace("RX2", ""); // ke9ns add .203
 
+           
+            c.Name = c.Name.Replace("ptbDisplayZoom2", "ptbDisplayZoom"); //.219
+            c.Name = c.Name.Replace("ptbDisplayPan2", "ptbDisplayPan");
 
+            c.Name = c.Name.Replace("btnBandHF1", "btnBandHF");
             c.Name = c.Name.Replace("GN", "VHF"); // ke9ns add
 
-            if (File.Exists(path + "\\" + c.TopLevelControl.Name + "\\" + c.Name + pic_file_ext))
+
+            c.Name = c.Name.Replace("checkVOX", "chkVOX"); // ke9ns add
+            c.Name = c.Name.Replace("prettyTrackBarVOX", "ptbVOX"); // ke9ns add
+
+           
+
+            if (File.Exists(path + "\\" + c.TopLevelControl.Name + "\\" + c.Name + pic_file_ext)) // pic_file_ext = .png
             {
                 c.BackgroundImage = Image.FromFile(path + "\\" + c.TopLevelControl.Name + "\\" + c.Name + pic_file_ext);
                 c.Invalidate(); // ke9ns add

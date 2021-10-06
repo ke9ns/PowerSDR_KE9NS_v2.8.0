@@ -27,20 +27,15 @@
 //=================================================================
 
 using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.Windows.Forms;
-using System.Threading;
 
 namespace PowerSDR
 {
-	/// <summary>
-	/// Summary description for WaveOptions.
-	/// </summary>
-	public class TOTBOX : System.Windows.Forms.Form
-	{
+    /// <summary>
+    /// Summary description for WaveOptions.
+    /// </summary>
+    public class TOTBOX : System.Windows.Forms.Form
+    {
 
         public static Console console;   // ke9ns mod  to allow console to pass back values to setup screen
 
@@ -51,53 +46,58 @@ namespace PowerSDR
         private ToolTip toolTip1;
         public Button btnTrack;
 
-       // public static TOTBOX TOTBOXForm;                       // ke9ns add 
+        // public static TOTBOX TOTBOXForm;                       // ke9ns add 
 
         #endregion
 
         #region Constructor and Destructor
 
         public TOTBOX(Console c)  // called the very first time
-		{
-			//
-			// Required for Windows Form Designer support
-			//
-			InitializeComponent();
-			
-			Common.RestoreForm(this, "TOTBOX", false);
+        {
+            //
+            // Required for Windows Form Designer support
+            //
+            InitializeComponent();
+
+            Common.RestoreForm(this, "TOTBOX", false);
 
             this.TopMost = true;
 
-           
+
         }
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
 
-            console.RXOnly = false; // reset radio
+
+            if (console.setupForm != null)
+            {
+                if (console.setupForm.chkBoxTOT.Checked) console.RXOnly = false; // reset radio
+            }
+
             console.TOT_TRIP = false; // reset timer
         }
 
-		#endregion
+        #endregion
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TOTBOX));
             this.btnTrack = new System.Windows.Forms.Button();
@@ -171,33 +171,41 @@ namespace PowerSDR
 
         // ke9ns close big pop-up box
         private void TOTBOX_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-            console.RXOnly = false; // reset radio
+        {
+
+            if (console.setupForm != null)
+            {
+                if (console.setupForm.chkBoxTOT.Checked) console.RXOnly = false; // reset radio
+            }
             console.TOT_TRIP = false; // reset timer
 
             this.Hide();
-			e.Cancel = true;
-			Common.SaveForm(this, "TOTBOX");
+            e.Cancel = true;
+            Common.SaveForm(this, "TOTBOX");
 
-           
-		}
+
+        }
 
 
 
         #endregion
 
-      
 
-      // ke9ns click on big button in center of pop-up box
+
+        // ke9ns click on big button in center of pop-up box
         private void btnTrack_Click(object sender, EventArgs e)
         {
-            console.RXOnly = false; // reset radio
+
+            if (console.setupForm != null)
+            {
+                if (console.setupForm.chkBoxTOT.Checked) console.RXOnly = false; // reset radio
+            }
             console.TOT_TRIP = false; // reset timer
 
             Common.SaveForm(this, "TOTBOX");    // w4tme
-           
+
             this.Close();
-            
+
         }
 
 
@@ -217,16 +225,16 @@ namespace PowerSDR
         // start timer
         private void chkBoxTimed_CheckedChanged(object sender, EventArgs e)
         {
-           
-              
-           
-           
+
+
+
+
         } // chkBoxTimed_CheckedChanged
 
 
-      
 
-     
+
+
 
 
 

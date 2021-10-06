@@ -517,12 +517,12 @@ DttSP_EXP void Audio_Callback2 (float **input, float **output, unsigned int nfra
 //========================================================================
 
 
-DttSP_EXP void
-process_samples_thread (unsigned int proc_thread)
+DttSP_EXP void process_samples_thread (unsigned int proc_thread)
 {
 	while (top[proc_thread].running)
 	{
 		sem_wait (&top[proc_thread].sync.buf.sem);
+
 		while (gethold(proc_thread)) 
 		{
 			sem_wait (&top[proc_thread].sync.upd.sem);
@@ -639,10 +639,12 @@ PRIVATE void setup_defaults (unsigned int thread)
 	loc[thread].def.size = DEFSIZE;
 	loc[thread].def.nrx = MAXRX;
 	loc[thread].def.mode = DEFMODE;
-	loc[thread].def.spec = DEFSPEC;
+	loc[thread].def.spec = DEFSPEC; // ke9ns: this is specsize= uni[thread].spec.size;
+	
 	loc[thread].mult.ring = RINGMULT;
 	loc[thread].def.comp = DEFCOMP;
-}
+
+} // setup_defaults
 
 //========================================================================
 void setup (char *app_data_path)
@@ -684,10 +686,9 @@ void setup (char *app_data_path)
 		top[thread].swch.env.fall.incr = 1.0f/(float)top[thread].swch.env.fall.size;
 		//fprintf(stderr,"setup: switch done\n"),fflush(stderr);
 		//fprintf(stderr,"setup: Entering workspace setup, thread %u\n", thread),fflush(stderr);
-		setup_workspace (loc[thread].def.rate,
-				loc[thread].def.size,
-				loc[thread].def.mode,
-				app_data_path, loc[thread].def.spec, loc[thread].def.nrx, loc[thread].def.comp, thread);
+
+		setup_workspace (loc[thread].def.rate, loc[thread].def.size, loc[thread].def.mode, app_data_path, loc[thread].def.spec, loc[thread].def.nrx, loc[thread].def.comp, thread); // ke9ns: 
+		
 		//fprintf(stderr,"setup: workspace done thread %u\n", thread),fflush(stderr);
 
 		setup_local_audio (thread);
@@ -732,10 +733,7 @@ int reset_for_buflen (unsigned int thread, int new_buflen)
 	destroy_workspace (thread);
 //	reset_buflen = FALSE;
 	loc[thread].def.size = new_buflen;
-	setup_workspace (loc[thread].def.rate,
-		   loc[thread].def.size,
-		   loc[thread].def.mode,
-		   APP_DATA_PATH, loc[thread].def.spec, loc[thread].def.nrx, loc[thread].def.size, thread);
+	setup_workspace (loc[thread].def.rate, loc[thread].def.size, loc[thread].def.mode, APP_DATA_PATH, loc[thread].def.spec, loc[thread].def.nrx, loc[thread].def.size, thread);
 
 	setup_local_audio (thread);
 
@@ -748,8 +746,7 @@ int reset_for_buflen (unsigned int thread, int new_buflen)
 
 
 
-int
-reset_for_samplerate (REAL new_samplerate)
+int reset_for_samplerate (REAL new_samplerate)
 {
 	unsigned int thread;
 
@@ -769,10 +766,15 @@ reset_for_samplerate (REAL new_samplerate)
 		top[thread].swch.env.curr.cnt = 0;
 		top[thread].swch.env.fall.incr = 1.0f/(float)top[thread].swch.env.fall.size;
 		top[thread].swch.env.rise.incr = 1.0f/(float)top[thread].swch.env.rise.size;
-		setup_workspace (loc[thread].def.rate,
-				loc[thread].def.size,
-				loc[thread].def.mode,
-				APP_DATA_PATH, loc[thread].def.spec, loc[thread].def.nrx, loc[thread].def.size,thread);
+	
+	//	fprintf(stderr, "1Reset for samplerate now: %d\n", loc[thread].def.spec);
+	//fflush(stderr);
+
+		setup_workspace (loc[thread].def.rate, loc[thread].def.size, loc[thread].def.mode, APP_DATA_PATH, loc[thread].def.spec, loc[thread].def.nrx, loc[thread].def.size,thread);
+		
+		//fprintf(stderr, "2Reset for samplerate now: %d\n", loc[thread].def.spec);
+	//	fflush(stderr);
+
 		setup_local_audio (thread);
 
 		reset_meters (thread);

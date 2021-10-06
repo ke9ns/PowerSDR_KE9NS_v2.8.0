@@ -27,275 +27,284 @@
 //=================================================================
 
 using System;
-using System.Drawing;
-using System.Collections;
-using System.Diagnostics;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
-using System.Data;
-using System.IO;
 
 namespace PowerSDR
 {
-	public class FLEX5000LLHWForm : System.Windows.Forms.Form
-	{
-		#region Variable Declaration
+    public class FLEX5000LLHWForm : System.Windows.Forms.Form
+    {
+        #region Variable Declaration
 
-		Console console;
-		bool trx_ok = true;
-		bool pa_ok = true;
-		bool rfio_ok = true;
-		bool rx2_ok = true;
+        Console console;
+        bool trx_ok = true;
+        bool pa_ok = true;
+        bool rfio_ok = true;
+        bool rx2_ok = true;
 
-		private System.Windows.Forms.GroupBoxTS grpClockGen;
-		private System.Windows.Forms.ComboBoxTS comboClockGenReg;
-		private System.Windows.Forms.TextBox txtClockGenReadVal;
-		private System.Windows.Forms.TextBox txtClockGenWriteVal;
-		private System.Windows.Forms.LabelTS lblClockGenReg;
-		private System.Windows.Forms.ButtonTS btnClockGenWrite;
-		private System.Windows.Forms.ButtonTS btnClockGenRead;
-		private System.Windows.Forms.GroupBoxTS grpDDS;
-		private System.Windows.Forms.ComboBoxTS comboDDSChan;
-		private System.Windows.Forms.LabelTS lblDDSChan;
-		private System.Windows.Forms.ComboBoxTS comboDDSReg;
-		private System.Windows.Forms.TextBox txtDDSWrite;
-		private System.Windows.Forms.LabelTS lblDDSReg;
-		private System.Windows.Forms.ButtonTS btnDDSWrite;
-		private System.Windows.Forms.TextBox txtDDSReadVal;
-		private System.Windows.Forms.ButtonTS btnDDSRead;
-		private System.Windows.Forms.GroupBoxTS grpPIO;
-		private System.Windows.Forms.ComboBoxTS comboPIOChip;
-		private System.Windows.Forms.LabelTS lblPIOChip;
-		private System.Windows.Forms.ComboBoxTS comboPIOReg;
-		private System.Windows.Forms.TextBox txtPIORead;
-		private System.Windows.Forms.TextBox txtPIOWrite;
-		private System.Windows.Forms.LabelTS lblPIORegister;
-		private System.Windows.Forms.ButtonTS btnPIOWrite;
-		private System.Windows.Forms.ButtonTS btnPIORead;
-		private System.Windows.Forms.GroupBoxTS grpEEPROM;
-		private System.Windows.Forms.TextBox txtEEPROMRead;
-		private System.Windows.Forms.TextBox txtEEPROMWrite;
-		private System.Windows.Forms.LabelTS lblEEPROMOffset;
-		private System.Windows.Forms.ButtonTS btnEEPROMWrite;
-		private System.Windows.Forms.ButtonTS btnEEPROMRead;
-		private System.Windows.Forms.TextBox txtEEPROMOffset;
-		private System.Windows.Forms.ComboBoxTS comboMuxChan;
-		private System.Windows.Forms.LabelTS lblMuxChannel;
-		private System.Windows.Forms.GroupBoxTS grpGPIODDR;
-		private System.Windows.Forms.ButtonTS btnGPIODDRWrite;
-		private System.Windows.Forms.ButtonTS btnGPIODDRRead;
-		private System.Windows.Forms.CheckBoxTS chkGPIODDR4;
-		private System.Windows.Forms.CheckBoxTS chkGPIODDR7;
-		private System.Windows.Forms.CheckBoxTS chkGPIODDR2;
-		private System.Windows.Forms.CheckBoxTS chkGPIODDR1;
-		private System.Windows.Forms.CheckBoxTS chkGPIODDR6;
-		private System.Windows.Forms.CheckBoxTS chkGPIODDR5;
-		private System.Windows.Forms.CheckBoxTS chkGPIODDR3;
-		private System.Windows.Forms.CheckBoxTS chkGPIODDR8;
-		private System.Windows.Forms.GroupBoxTS grpGPIO;
-		private System.Windows.Forms.ButtonTS btnGPIOWriteVal;
-		private System.Windows.Forms.ButtonTS btnGPIORead;
-		private System.Windows.Forms.LabelTS label5;
-		private System.Windows.Forms.LabelTS label4;
-		private System.Windows.Forms.LabelTS label3;
-		private System.Windows.Forms.LabelTS label2;
-		private System.Windows.Forms.CheckBoxTS chkGPIO4;
-		private System.Windows.Forms.CheckBoxTS chkGPIO7;
-		private System.Windows.Forms.CheckBoxTS chkGPIO2;
-		private System.Windows.Forms.CheckBoxTS chkGPIO1;
-		private System.Windows.Forms.CheckBoxTS chkGPIO6;
-		private System.Windows.Forms.CheckBoxTS chkGPIO5;
-		private System.Windows.Forms.CheckBoxTS chkGPIO3;
-		private System.Windows.Forms.CheckBoxTS chkGPIO8;
-		private System.Windows.Forms.LabelTS label1;
-		private System.Windows.Forms.LabelTS label6;
-		private System.Windows.Forms.LabelTS label7;
-		private System.Windows.Forms.LabelTS label8;
-		private System.Windows.Forms.LabelTS label9;
-		private System.Windows.Forms.LabelTS label10;
-		private System.Windows.Forms.LabelTS label11;
-		private System.Windows.Forms.LabelTS label12;
-		private System.Windows.Forms.LabelTS label13;
-		private System.Windows.Forms.LabelTS label14;
-		private System.Windows.Forms.LabelTS label15;
-		private System.Windows.Forms.LabelTS label16;
-		private System.Windows.Forms.TextBox txtGPIORead;
-		private System.Windows.Forms.TextBox txtGPIOWrite;
-		private System.Windows.Forms.TextBox txtGPIODDRRead;
-		private System.Windows.Forms.TextBox txtGPIODDRWrite;
-		private System.Windows.Forms.CheckBoxTS chkClockGenReset;
-		private System.Windows.Forms.CheckBoxTS chkDDSReset;
-		private System.Windows.Forms.CheckBoxTS chkClockGenCS;
-		private System.Windows.Forms.CheckBoxTS chkDDSCS;
-		private System.Windows.Forms.GroupBoxTS grpCodec;
-		private System.Windows.Forms.ComboBoxTS comboCodecReg;
-		private System.Windows.Forms.TextBox txtCodecRead;
-		private System.Windows.Forms.TextBox txtCodecWrite;
-		private System.Windows.Forms.LabelTS lblCodecRegister;
-		private System.Windows.Forms.ButtonTS btnCodecWrite;
-		private System.Windows.Forms.ButtonTS btnCodecRead;
-		private System.Windows.Forms.GroupBoxTS grpTRXPot;
-		private System.Windows.Forms.TextBox txtTRXPotRead;
-		private System.Windows.Forms.TextBox txtTRXPotWrite;
-		private System.Windows.Forms.ButtonTS btnTRXPotWrite;
-		private System.Windows.Forms.ButtonTS btnTRXPotRead;
-		private System.Windows.Forms.ComboBoxTS comboTRXPotIndex;
-		private System.Windows.Forms.LabelTS lblTRXPotIndex;
-		private System.Windows.Forms.GroupBoxTS grpPAPot;
-		private System.Windows.Forms.TextBox txtPAPotRead;
-		private System.Windows.Forms.TextBox txtPAPotWrite;
-		private System.Windows.Forms.ButtonTS btnPAPotWrite;
-		private System.Windows.Forms.ButtonTS btnPAPotRead;
-		private System.Windows.Forms.ComboBoxTS comboPAPotIndex;
-		private System.Windows.Forms.LabelTS lblPAPotIndex;
-		private System.Windows.Forms.GroupBoxTS grpATU;
-		private System.Windows.Forms.TextBox txtATU1;
-		private System.Windows.Forms.ButtonTS btnATUSendCmd;
-		private System.Windows.Forms.TextBox txtATU2;
-		private System.Windows.Forms.TextBox txtATU3;
-		private System.Windows.Forms.ButtonTS btnATUFull;
-		private System.Windows.Forms.GroupBoxTS grpFlexWire;
-		private System.Windows.Forms.ButtonTS btnFlexWireWriteVal;
-		private System.Windows.Forms.TextBox txtFlexWireVal2;
-		private System.Windows.Forms.TextBox txtFlexWireVal1;
-		private System.Windows.Forms.TextBox txtFlexWireAddr;
-		private System.Windows.Forms.ButtonTS btnFlexWireWrite2Val;
-		private System.Windows.Forms.LabelTS lblFlexWireAddr;
-		private System.Windows.Forms.LabelTS lblFlexWireVal1;
-		private System.Windows.Forms.LabelTS lblFlexWireVal2;
-		private System.Windows.Forms.CheckBoxTS chkRX2DDS;
-		private System.Windows.Forms.CheckBoxTS chkRX2EEPROM;
-		private System.Windows.Forms.ButtonTS btnEEPROMWriteFloat;
-		private System.Windows.Forms.ButtonTS btnEEPROMReadFloat;
-		private System.Windows.Forms.TextBox txtEEPROMReadFloat;
-		private System.Windows.Forms.TextBox txtEEPROMWriteFloat;
-		private System.Windows.Forms.GroupBoxTS grpATURelays;
-		private System.Windows.Forms.CheckBoxTS chkL5;
-		private System.Windows.Forms.CheckBoxTS chkL8;
-		private System.Windows.Forms.CheckBoxTS chkL3;
-		private System.Windows.Forms.CheckBoxTS chkL2;
-		private System.Windows.Forms.CheckBoxTS chkL7;
-		private System.Windows.Forms.CheckBoxTS chkL6;
-		private System.Windows.Forms.CheckBoxTS chkL4;
-		private System.Windows.Forms.CheckBoxTS chkL9;
-		private System.Windows.Forms.LabelTS lblL8;
-		private System.Windows.Forms.LabelTS lblL7;
-		private System.Windows.Forms.LabelTS lblL6;
-		private System.Windows.Forms.LabelTS lblL5;
-		private System.Windows.Forms.LabelTS lblL4;
-		private System.Windows.Forms.LabelTS lblL3;
-		private System.Windows.Forms.LabelTS lblL2;
-		private System.Windows.Forms.LabelTS lblL9;
-		private System.Windows.Forms.LabelTS lblC6;
-		private System.Windows.Forms.LabelTS lblC5;
-		private System.Windows.Forms.LabelTS lblC4;
-		private System.Windows.Forms.LabelTS lblC3;
-		private System.Windows.Forms.LabelTS lblC2;
-		private System.Windows.Forms.LabelTS lblC1;
-		private System.Windows.Forms.LabelTS lblC0;
-		private System.Windows.Forms.CheckBoxTS chkC3;
-		private System.Windows.Forms.CheckBoxTS chkC6;
-		private System.Windows.Forms.CheckBoxTS chkC1;
-		private System.Windows.Forms.CheckBoxTS chkC0;
-		private System.Windows.Forms.CheckBoxTS chkC5;
-		private System.Windows.Forms.CheckBoxTS chkC4;
-		private System.Windows.Forms.CheckBoxTS chkC2;
-		private System.Windows.Forms.CheckBoxTS chkATUEnable;
-		private System.Windows.Forms.CheckBoxTS chkATUATTN;
-		private System.Windows.Forms.LabelTS lblHiZ;
-		private System.Windows.Forms.CheckBoxTS chkHiZ;
-		private System.Windows.Forms.NumericUpDown udATUL;
-		private System.Windows.Forms.LabelTS lblATUL;
-		private System.Windows.Forms.LabelTS lblATUC;
-		private System.Windows.Forms.NumericUpDown udATUC;
-		private System.Windows.Forms.ButtonTS btnFlexWireReadVal;
-		private System.Windows.Forms.ButtonTS btnFlexWireRead2Val;
+        private System.Windows.Forms.GroupBoxTS grpClockGen;
+        private System.Windows.Forms.ComboBoxTS comboClockGenReg;
+        private System.Windows.Forms.TextBox txtClockGenReadVal;
+        private System.Windows.Forms.TextBox txtClockGenWriteVal;
+        private System.Windows.Forms.LabelTS lblClockGenReg;
+        private System.Windows.Forms.ButtonTS btnClockGenWrite;
+        private System.Windows.Forms.ButtonTS btnClockGenRead;
+        private System.Windows.Forms.GroupBoxTS grpDDS;
+        private System.Windows.Forms.ComboBoxTS comboDDSChan;
+        private System.Windows.Forms.LabelTS lblDDSChan;
+        private System.Windows.Forms.ComboBoxTS comboDDSReg;
+        private System.Windows.Forms.TextBox txtDDSWrite;
+        private System.Windows.Forms.LabelTS lblDDSReg;
+        private System.Windows.Forms.ButtonTS btnDDSWrite;
+        private System.Windows.Forms.TextBox txtDDSReadVal;
+        private System.Windows.Forms.ButtonTS btnDDSRead;
+        private System.Windows.Forms.GroupBoxTS grpPIO;
+        private System.Windows.Forms.ComboBoxTS comboPIOChip;
+        private System.Windows.Forms.LabelTS lblPIOChip;
+        private System.Windows.Forms.ComboBoxTS comboPIOReg;
+        private System.Windows.Forms.TextBox txtPIORead;
+        private System.Windows.Forms.TextBox txtPIOWrite;
+        private System.Windows.Forms.LabelTS lblPIORegister;
+        private System.Windows.Forms.ButtonTS btnPIOWrite;
+        private System.Windows.Forms.ButtonTS btnPIORead;
+        private System.Windows.Forms.GroupBoxTS grpEEPROM;
+        private System.Windows.Forms.TextBox txtEEPROMRead;
+        private System.Windows.Forms.TextBox txtEEPROMWrite;
+        private System.Windows.Forms.LabelTS lblEEPROMOffset;
+        private System.Windows.Forms.ButtonTS btnEEPROMWrite;
+        private System.Windows.Forms.ButtonTS btnEEPROMRead;
+        private System.Windows.Forms.TextBox txtEEPROMOffset;
+        private System.Windows.Forms.ComboBoxTS comboMuxChan;
+        private System.Windows.Forms.LabelTS lblMuxChannel;
+        private System.Windows.Forms.GroupBoxTS grpGPIODDR;
+        private System.Windows.Forms.ButtonTS btnGPIODDRWrite;
+        private System.Windows.Forms.ButtonTS btnGPIODDRRead;
+        private System.Windows.Forms.CheckBoxTS chkGPIODDR4;
+        private System.Windows.Forms.CheckBoxTS chkGPIODDR7;
+        private System.Windows.Forms.CheckBoxTS chkGPIODDR2;
+        private System.Windows.Forms.CheckBoxTS chkGPIODDR1;
+        private System.Windows.Forms.CheckBoxTS chkGPIODDR6;
+        private System.Windows.Forms.CheckBoxTS chkGPIODDR5;
+        private System.Windows.Forms.CheckBoxTS chkGPIODDR3;
+        private System.Windows.Forms.CheckBoxTS chkGPIODDR8;
+        private System.Windows.Forms.GroupBoxTS grpGPIO;
+        private System.Windows.Forms.ButtonTS btnGPIOWriteVal;
+        private System.Windows.Forms.ButtonTS btnGPIORead;
+        private System.Windows.Forms.LabelTS label5;
+        private System.Windows.Forms.LabelTS label4;
+        private System.Windows.Forms.LabelTS label3;
+        private System.Windows.Forms.LabelTS label2;
+        private System.Windows.Forms.CheckBoxTS chkGPIO4;
+        private System.Windows.Forms.CheckBoxTS chkGPIO7;
+        private System.Windows.Forms.CheckBoxTS chkGPIO2;
+        private System.Windows.Forms.CheckBoxTS chkGPIO1;
+        private System.Windows.Forms.CheckBoxTS chkGPIO6;
+        private System.Windows.Forms.CheckBoxTS chkGPIO5;
+        private System.Windows.Forms.CheckBoxTS chkGPIO3;
+        private System.Windows.Forms.CheckBoxTS chkGPIO8;
+        private System.Windows.Forms.LabelTS label1;
+        private System.Windows.Forms.LabelTS label6;
+        private System.Windows.Forms.LabelTS label7;
+        private System.Windows.Forms.LabelTS label8;
+        private System.Windows.Forms.LabelTS label9;
+        private System.Windows.Forms.LabelTS label10;
+        private System.Windows.Forms.LabelTS label11;
+        private System.Windows.Forms.LabelTS label12;
+        private System.Windows.Forms.LabelTS label13;
+        private System.Windows.Forms.LabelTS label14;
+        private System.Windows.Forms.LabelTS label15;
+        private System.Windows.Forms.LabelTS label16;
+        private System.Windows.Forms.TextBox txtGPIORead;
+        private System.Windows.Forms.TextBox txtGPIOWrite;
+        private System.Windows.Forms.TextBox txtGPIODDRRead;
+        private System.Windows.Forms.TextBox txtGPIODDRWrite;
+        private System.Windows.Forms.CheckBoxTS chkClockGenReset;
+        private System.Windows.Forms.CheckBoxTS chkDDSReset;
+        private System.Windows.Forms.CheckBoxTS chkClockGenCS;
+        private System.Windows.Forms.CheckBoxTS chkDDSCS;
+        private System.Windows.Forms.GroupBoxTS grpCodec;
+        private System.Windows.Forms.ComboBoxTS comboCodecReg;
+        private System.Windows.Forms.TextBox txtCodecRead;
+        private System.Windows.Forms.TextBox txtCodecWrite;
+        private System.Windows.Forms.LabelTS lblCodecRegister;
+        private System.Windows.Forms.ButtonTS btnCodecWrite;
+        private System.Windows.Forms.ButtonTS btnCodecRead;
+        private System.Windows.Forms.GroupBoxTS grpTRXPot;
+        private System.Windows.Forms.TextBox txtTRXPotRead;
+        private System.Windows.Forms.TextBox txtTRXPotWrite;
+        private System.Windows.Forms.ButtonTS btnTRXPotWrite;
+        private System.Windows.Forms.ButtonTS btnTRXPotRead;
+        private System.Windows.Forms.ComboBoxTS comboTRXPotIndex;
+        private System.Windows.Forms.LabelTS lblTRXPotIndex;
+        private System.Windows.Forms.GroupBoxTS grpPAPot;
+        private System.Windows.Forms.TextBox txtPAPotRead;
+        private System.Windows.Forms.TextBox txtPAPotWrite;
+        private System.Windows.Forms.ButtonTS btnPAPotWrite;
+        private System.Windows.Forms.ButtonTS btnPAPotRead;
+        private System.Windows.Forms.ComboBoxTS comboPAPotIndex;
+        private System.Windows.Forms.LabelTS lblPAPotIndex;
+        private System.Windows.Forms.GroupBoxTS grpATU;
+        private System.Windows.Forms.TextBox txtATU1;
+        private System.Windows.Forms.ButtonTS btnATUSendCmd;
+        private System.Windows.Forms.TextBox txtATU2;
+        private System.Windows.Forms.TextBox txtATU3;
+        private System.Windows.Forms.ButtonTS btnATUFull;
+        private System.Windows.Forms.GroupBoxTS grpFlexWire;
+        private System.Windows.Forms.ButtonTS btnFlexWireWriteVal;
+        private System.Windows.Forms.TextBox txtFlexWireVal2;
+        private System.Windows.Forms.TextBox txtFlexWireVal1;
+        private System.Windows.Forms.TextBox txtFlexWireAddr;
+        private System.Windows.Forms.ButtonTS btnFlexWireWrite2Val;
+        private System.Windows.Forms.LabelTS lblFlexWireAddr;
+        private System.Windows.Forms.LabelTS lblFlexWireVal1;
+        private System.Windows.Forms.LabelTS lblFlexWireVal2;
+        private System.Windows.Forms.CheckBoxTS chkRX2DDS;
+        private System.Windows.Forms.CheckBoxTS chkRX2EEPROM;
+        private System.Windows.Forms.ButtonTS btnEEPROMWriteFloat;
+        private System.Windows.Forms.ButtonTS btnEEPROMReadFloat;
+        private System.Windows.Forms.TextBox txtEEPROMReadFloat;
+        private System.Windows.Forms.TextBox txtEEPROMWriteFloat;
+        private System.Windows.Forms.GroupBoxTS grpATURelays;
+        private System.Windows.Forms.CheckBoxTS chkL5;
+        private System.Windows.Forms.CheckBoxTS chkL8;
+        private System.Windows.Forms.CheckBoxTS chkL3;
+        private System.Windows.Forms.CheckBoxTS chkL2;
+        private System.Windows.Forms.CheckBoxTS chkL7;
+        private System.Windows.Forms.CheckBoxTS chkL6;
+        private System.Windows.Forms.CheckBoxTS chkL4;
+        private System.Windows.Forms.CheckBoxTS chkL9;
+        private System.Windows.Forms.LabelTS lblL8;
+        private System.Windows.Forms.LabelTS lblL7;
+        private System.Windows.Forms.LabelTS lblL6;
+        private System.Windows.Forms.LabelTS lblL5;
+        private System.Windows.Forms.LabelTS lblL4;
+        private System.Windows.Forms.LabelTS lblL3;
+        private System.Windows.Forms.LabelTS lblL2;
+        private System.Windows.Forms.LabelTS lblL9;
+        private System.Windows.Forms.LabelTS lblC6;
+        private System.Windows.Forms.LabelTS lblC5;
+        private System.Windows.Forms.LabelTS lblC4;
+        private System.Windows.Forms.LabelTS lblC3;
+        private System.Windows.Forms.LabelTS lblC2;
+        private System.Windows.Forms.LabelTS lblC1;
+        private System.Windows.Forms.LabelTS lblC0;
+        private System.Windows.Forms.CheckBoxTS chkC3;
+        private System.Windows.Forms.CheckBoxTS chkC6;
+        private System.Windows.Forms.CheckBoxTS chkC1;
+        private System.Windows.Forms.CheckBoxTS chkC0;
+        private System.Windows.Forms.CheckBoxTS chkC5;
+        private System.Windows.Forms.CheckBoxTS chkC4;
+        private System.Windows.Forms.CheckBoxTS chkC2;
+        private System.Windows.Forms.CheckBoxTS chkATUEnable;
+        private System.Windows.Forms.CheckBoxTS chkATUATTN;
+        private System.Windows.Forms.LabelTS lblHiZ;
+        private System.Windows.Forms.CheckBoxTS chkHiZ;
+        private System.Windows.Forms.NumericUpDown udATUL;
+        private System.Windows.Forms.LabelTS lblATUL;
+        private System.Windows.Forms.LabelTS lblATUC;
+        private System.Windows.Forms.NumericUpDown udATUC;
+        private System.Windows.Forms.ButtonTS btnFlexWireReadVal;
+        private System.Windows.Forms.ButtonTS btnFlexWireRead2Val;
         private CheckBoxTS chkManualIOUpdate;
         private ButtonTS btnIOUpdate;
         private ButtonTS btnEEPROMRead1;
         private ButtonTS buttonTS1;
+        private ButtonTS buttonTS2;
+        private LabelTS labelTS1;
+        private ToolTip toolTip1;
+        private NumericUpDown numericUpDown1;
+        private ButtonTS buttonTS3;
+        private IContainer components;
 
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.Container components = null;
+        #endregion
 
-		#endregion
+        #region Constructor and Destructor
 
-		#region Constructor and Destructor
-
-		public FLEX5000LLHWForm() // FLEX-5000 Low Level Hardware Control
-		{
-			InitializeComponent();
+        public FLEX5000LLHWForm() // FLEX-5000 Low Level Hardware Control
+        {
+            InitializeComponent();
             //if(!FWC.Open1394Driver())
             //    MessageBox.Show("Error opening driver.");
 
-			trx_ok = FWCEEPROM.TRXOK;
-			pa_ok = FWCEEPROM.PAOK;
-			rfio_ok = FWCEEPROM.RFIOOK;
-			rx2_ok = FWCEEPROM.RX2OK;
+            trx_ok = FWCEEPROM.TRXOK;
+            pa_ok = FWCEEPROM.PAOK;
+            rfio_ok = FWCEEPROM.RFIOOK;
+            rx2_ok = FWCEEPROM.RX2OK;
 
-			Init();
-		}
+            Init();
 
-		public FLEX5000LLHWForm(Console c)
-		{
-			InitializeComponent();
-			console = c;
+            this.TopMost = true; // ke9ns .174
+        }
 
-			trx_ok = FWCEEPROM.TRXOK;
-			pa_ok = FWCEEPROM.PAOK;
-			rfio_ok = FWCEEPROM.RFIOOK;
-			rx2_ok = FWCEEPROM.RX2OK;
+        public FLEX5000LLHWForm(Console c)
+        {
+            InitializeComponent();
+            console = c;
+            this.TopMost = true; // ke9ns .174
+            trx_ok = FWCEEPROM.TRXOK;
+            pa_ok = FWCEEPROM.PAOK;
+            rfio_ok = FWCEEPROM.RFIOOK;
+            rx2_ok = FWCEEPROM.RX2OK;
 
-			grpPAPot.Enabled = pa_ok;
+            grpPAPot.Enabled = pa_ok;
 
-			switch(console.CurrentModel)
-			{
-				case Model.FLEX5000:
-					break;
-				case Model.FLEX3000:
-					comboPIOChip.Items.Clear();
-					comboPIOChip.Items.Add("TRX IC27");
-					comboPIOChip.Items.Add("TRX IC37");					
-					comboPIOChip.Items.Add("PA IC13");
-					comboPIOChip.Items.Add("PA IC16");
-					break;
-			}
+            switch (console.CurrentModel)
+            {
+                case Model.FLEX5000:
+                    break;
+                case Model.FLEX3000:
+                    comboPIOChip.Items.Clear();
+                    comboPIOChip.Items.Add("TRX IC27");
+                    comboPIOChip.Items.Add("TRX IC37");
+                    comboPIOChip.Items.Add("PA IC13");
+                    comboPIOChip.Items.Add("PA IC16");
+                    break;
+            }
 
-			Init();
-			Common.RestoreForm(this, "FLEX5000LLHWForm", false);
-		}
+            Init();
+            Common.RestoreForm(this, "FLEX5000LLHWForm", false);
+        }
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if (components != null) 
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#endregion
+        #endregion
 
-		#region Windows Form Designer generated code
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
+        #region Windows Form Designer generated code
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FLEX5000LLHWForm));
             this.udATUL = new System.Windows.Forms.NumericUpDown();
             this.udATUC = new System.Windows.Forms.NumericUpDown();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.buttonTS3 = new System.Windows.Forms.ButtonTS();
+            this.labelTS1 = new System.Windows.Forms.LabelTS();
+            this.buttonTS1 = new System.Windows.Forms.ButtonTS();
+            this.buttonTS2 = new System.Windows.Forms.ButtonTS();
+            this.btnEEPROMRead1 = new System.Windows.Forms.ButtonTS();
             this.lblATUC = new System.Windows.Forms.LabelTS();
             this.lblATUL = new System.Windows.Forms.LabelTS();
             this.grpATURelays = new System.Windows.Forms.GroupBoxTS();
@@ -425,7 +434,6 @@ namespace PowerSDR
             this.lblEEPROMOffset = new System.Windows.Forms.LabelTS();
             this.btnEEPROMWrite = new System.Windows.Forms.ButtonTS();
             this.btnEEPROMRead = new System.Windows.Forms.ButtonTS();
-            this.btnEEPROMRead1 = new System.Windows.Forms.ButtonTS();
             this.grpPIO = new System.Windows.Forms.GroupBoxTS();
             this.comboPIOReg = new System.Windows.Forms.ComboBoxTS();
             this.txtPIORead = new System.Windows.Forms.TextBox();
@@ -460,9 +468,9 @@ namespace PowerSDR
             this.btnDDSRead = new System.Windows.Forms.ButtonTS();
             this.comboMuxChan = new System.Windows.Forms.ComboBoxTS();
             this.lblMuxChannel = new System.Windows.Forms.LabelTS();
-            this.buttonTS1 = new System.Windows.Forms.ButtonTS();
             ((System.ComponentModel.ISupportInitialize)(this.udATUL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udATUC)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.grpATURelays.SuspendLayout();
             this.grpFlexWire.SuspendLayout();
             this.grpATU.SuspendLayout();
@@ -502,6 +510,72 @@ namespace PowerSDR
             this.udATUC.Size = new System.Drawing.Size(48, 20);
             this.udATUC.TabIndex = 41;
             this.udATUC.ValueChanged += new System.EventHandler(this.udATUC_ValueChanged);
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(272, 508);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(48, 20);
+            this.numericUpDown1.TabIndex = 47;
+            this.toolTip1.SetToolTip(this.numericUpDown1, resources.GetString("numericUpDown1.ToolTip"));
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // buttonTS3
+            // 
+            this.buttonTS3.Image = null;
+            this.buttonTS3.Location = new System.Drawing.Point(336, 507);
+            this.buttonTS3.Name = "buttonTS3";
+            this.buttonTS3.Size = new System.Drawing.Size(88, 23);
+            this.buttonTS3.TabIndex = 48;
+            this.buttonTS3.Text = "Update Turf";
+            this.toolTip1.SetToolTip(this.buttonTS3, resources.GetString("buttonTS3.ToolTip"));
+            this.buttonTS3.Click += new System.EventHandler(this.buttonTS3_Click);
+            // 
+            // labelTS1
+            // 
+            this.labelTS1.Image = null;
+            this.labelTS1.Location = new System.Drawing.Point(157, 512);
+            this.labelTS1.Name = "labelTS1";
+            this.labelTS1.Size = new System.Drawing.Size(112, 16);
+            this.labelTS1.TabIndex = 45;
+            this.labelTS1.Text = "Select Turf Region:";
+            this.toolTip1.SetToolTip(this.labelTS1, resources.GetString("labelTS1.ToolTip"));
+            // 
+            // buttonTS1
+            // 
+            this.buttonTS1.Image = null;
+            this.buttonTS1.Location = new System.Drawing.Point(187, 553);
+            this.buttonTS1.Name = "buttonTS1";
+            this.buttonTS1.Size = new System.Drawing.Size(141, 23);
+            this.buttonTS1.TabIndex = 45;
+            this.buttonTS1.Text = "MARS/CAP/SHARES";
+            this.toolTip1.SetToolTip(this.buttonTS1, resources.GetString("buttonTS1.ToolTip"));
+            this.buttonTS1.Click += new System.EventHandler(this.buttonTS1_Click);
+            // 
+            // buttonTS2
+            // 
+            this.buttonTS2.Image = null;
+            this.buttonTS2.Location = new System.Drawing.Point(358, 553);
+            this.buttonTS2.Name = "buttonTS2";
+            this.buttonTS2.Size = new System.Drawing.Size(58, 23);
+            this.buttonTS2.TabIndex = 46;
+            this.buttonTS2.Text = "Normal";
+            this.buttonTS2.Click += new System.EventHandler(this.buttonTS2_Click);
+            // 
+            // btnEEPROMRead1
+            // 
+            this.btnEEPROMRead1.Image = null;
+            this.btnEEPROMRead1.Location = new System.Drawing.Point(476, 595);
+            this.btnEEPROMRead1.Name = "btnEEPROMRead1";
+            this.btnEEPROMRead1.Size = new System.Drawing.Size(152, 23);
+            this.btnEEPROMRead1.TabIndex = 45;
+            this.btnEEPROMRead1.Text = "Record ALL EEPROM";
+            this.btnEEPROMRead1.Click += new System.EventHandler(this.btnEEPROMRead1_Click);
             // 
             // lblATUC
             // 
@@ -1809,16 +1883,6 @@ namespace PowerSDR
             this.btnEEPROMRead.Text = "Read";
             this.btnEEPROMRead.Click += new System.EventHandler(this.btnEEPROMRead_Click);
             // 
-            // btnEEPROMRead1
-            // 
-            this.btnEEPROMRead1.Image = null;
-            this.btnEEPROMRead1.Location = new System.Drawing.Point(352, 596);
-            this.btnEEPROMRead1.Name = "btnEEPROMRead1";
-            this.btnEEPROMRead1.Size = new System.Drawing.Size(152, 23);
-            this.btnEEPROMRead1.TabIndex = 45;
-            this.btnEEPROMRead1.Text = "Record ALL EEPROM";
-            this.btnEEPROMRead1.Click += new System.EventHandler(this.btnEEPROMRead1_Click);
-            // 
             // grpPIO
             // 
             this.grpPIO.Controls.Add(this.comboPIOReg);
@@ -2198,20 +2262,14 @@ namespace PowerSDR
             this.lblMuxChannel.TabIndex = 1;
             this.lblMuxChannel.Text = "Mux:";
             // 
-            // buttonTS1
-            // 
-            this.buttonTS1.Image = null;
-            this.buttonTS1.Location = new System.Drawing.Point(272, 596);
-            this.buttonTS1.Name = "buttonTS1";
-            this.buttonTS1.Size = new System.Drawing.Size(58, 23);
-            this.buttonTS1.TabIndex = 45;
-            this.buttonTS1.Text = "MARS";
-            this.buttonTS1.Click += new System.EventHandler(this.buttonTS1_Click);
-            // 
             // FLEX5000LLHWForm
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.ClientSize = new System.Drawing.Size(640, 508);
+            this.ClientSize = new System.Drawing.Size(640, 588);
+            this.Controls.Add(this.buttonTS3);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.labelTS1);
+            this.Controls.Add(this.buttonTS2);
             this.Controls.Add(this.buttonTS1);
             this.Controls.Add(this.btnEEPROMRead1);
             this.Controls.Add(this.lblATUC);
@@ -2236,8 +2294,10 @@ namespace PowerSDR
             this.Name = "FLEX5000LLHWForm";
             this.Text = "FLEX-5000 Low Level Hardware Control";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.FLEX5000LLHWForm_Closing);
+            this.Load += new System.EventHandler(this.FLEX5000LLHWForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.udATUL)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udATUC)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.grpATURelays.ResumeLayout(false);
             this.grpFlexWire.ResumeLayout(false);
             this.grpFlexWire.PerformLayout();
@@ -2263,245 +2323,245 @@ namespace PowerSDR
             this.grpDDS.PerformLayout();
             this.ResumeLayout(false);
 
-		}
-		#endregion
+        }
+        #endregion
 
-		#region Main
+        #region Main
 
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
-		static void Main() 
-		{
-			Application.Run(new FLEX5000LLHWForm());
-		}
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            Application.Run(new FLEX5000LLHWForm());
+        }
 
-		#endregion
+        #endregion
 
-		#region Misc Routines
+        #region Misc Routines
 
-		public void Init()
-		{
-			for(int i=0; i<=0x5A; i++)
-			{
-				if((i >= 1 && i <= 3) ||
-					(i >= 0x0E && i <= 0x33) ||
-					(i >= 0x37 && i <= 0x3C) ||
-					(i >= 0x42 && i <= 0x44) ||
-					(i >= 0x46 && i <= 0x49) ||
-					(i >= 0x54 && i <= 0x57) ||
-					i == 0x59)
-				{
+        public void Init()
+        {
+            for (int i = 0; i <= 0x5A; i++)
+            {
+                if ((i >= 1 && i <= 3) ||
+                    (i >= 0x0E && i <= 0x33) ||
+                    (i >= 0x37 && i <= 0x3C) ||
+                    (i >= 0x42 && i <= 0x44) ||
+                    (i >= 0x46 && i <= 0x49) ||
+                    (i >= 0x54 && i <= 0x57) ||
+                    i == 0x59)
+                {
 
-				}
-				else
-				{
-					comboClockGenReg.Items.Add(String.Format("{0:X2}", i));
-				}
-			}
+                }
+                else
+                {
+                    comboClockGenReg.Items.Add(String.Format("{0:X2}", i));
+                }
+            }
 
-			for(int i=0; i<=0x18; i++)
-				comboDDSReg.Items.Add(String.Format("{0:X2}", i));
+            for (int i = 0; i <= 0x18; i++)
+                comboDDSReg.Items.Add(String.Format("{0:X2}", i));
 
-			for(int i=1; i<=0x1B; i++)
-				comboCodecReg.Items.Add(String.Format("{0:X2}", i));
+            for (int i = 1; i <= 0x1B; i++)
+                comboCodecReg.Items.Add(String.Format("{0:X2}", i));
 
-			comboClockGenReg.SelectedIndex = 0;
-			comboDDSChan.SelectedIndex = 0;
-			comboDDSReg.SelectedIndex = 0;
-			comboPIOChip.SelectedIndex = 0;
-			comboPIOReg.SelectedIndex = 2;
-			comboTRXPotIndex.SelectedIndex = 0;
-			comboPAPotIndex.SelectedIndex = 0;
-			comboMuxChan.SelectedIndex = 1;
-			comboCodecReg.SelectedIndex = 0;
-		}
+            comboClockGenReg.SelectedIndex = 0;
+            comboDDSChan.SelectedIndex = 0;
+            comboDDSReg.SelectedIndex = 0;
+            comboPIOChip.SelectedIndex = 0;
+            comboPIOReg.SelectedIndex = 2;
+            comboTRXPotIndex.SelectedIndex = 0;
+            comboPAPotIndex.SelectedIndex = 0;
+            comboMuxChan.SelectedIndex = 1;
+            comboCodecReg.SelectedIndex = 0;
+        }
 
-		#endregion
+        #endregion
 
-		#region Event Handlers
+        #region Event Handlers
 
-		private void btnClockGenRead_Click(object sender, System.EventArgs e)
-		{
-			if(!trx_ok) return;
-			if(comboClockGenReg.Text == "") return;
-			txtClockGenReadVal.BackColor = Color.Red;
-			Application.DoEvents();
-			int reg = int.Parse(comboClockGenReg.Text, System.Globalization.NumberStyles.HexNumber);
-			int data = 0;
-			if(FWC.ReadClockReg(reg, out data) == 0)
-			{
-				MessageBox.Show("Error in ReadClockReg.");
-			}
-			
-			txtClockGenReadVal.BackColor = SystemColors.Control;
-			txtClockGenReadVal.Text = String.Format("{0:X2}", data);
-		}
+        private void btnClockGenRead_Click(object sender, System.EventArgs e)
+        {
+            if (!trx_ok) return;
+            if (comboClockGenReg.Text == "") return;
+            txtClockGenReadVal.BackColor = Color.Red;
+            Application.DoEvents();
+            int reg = int.Parse(comboClockGenReg.Text, System.Globalization.NumberStyles.HexNumber);
+            int data = 0;
+            if (FWC.ReadClockReg(reg, out data) == 0)
+            {
+                MessageBox.Show("Error in ReadClockReg.");
+            }
 
-		private void comboClockGenReg_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboClockGenReg.Text != "")
-				btnClockGenRead_Click(this, EventArgs.Empty);
-		}
+            txtClockGenReadVal.BackColor = SystemColors.Control;
+            txtClockGenReadVal.Text = String.Format("{0:X2}", data);
+        }
 
-		private void btnClockGenWrite_Click(object sender, System.EventArgs e)
-		{
-			if(!trx_ok) return;
-			if(comboClockGenReg.Text == "") return;
-			if(txtClockGenWriteVal.Text == "") return;
-			txtClockGenWriteVal.BackColor = Color.Red;
-			Application.DoEvents();
-			int reg = int.Parse(comboClockGenReg.Text, System.Globalization.NumberStyles.HexNumber);
-			int val = int.Parse(txtClockGenWriteVal.Text, System.Globalization.NumberStyles.HexNumber);
-			
-			if(FWC.WriteClockReg(reg, val) == 0)
-				MessageBox.Show("Error in WriteClockReg.");
+        private void comboClockGenReg_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboClockGenReg.Text != "")
+                btnClockGenRead_Click(this, EventArgs.Empty);
+        }
 
-			txtClockGenWriteVal.BackColor = SystemColors.Window;
-			btnClockGenRead_Click(this, EventArgs.Empty);
-		}
+        private void btnClockGenWrite_Click(object sender, System.EventArgs e)
+        {
+            if (!trx_ok) return;
+            if (comboClockGenReg.Text == "") return;
+            if (txtClockGenWriteVal.Text == "") return;
+            txtClockGenWriteVal.BackColor = Color.Red;
+            Application.DoEvents();
+            int reg = int.Parse(comboClockGenReg.Text, System.Globalization.NumberStyles.HexNumber);
+            int val = int.Parse(txtClockGenWriteVal.Text, System.Globalization.NumberStyles.HexNumber);
 
-		private void comboDDSReg_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboDDSReg.Text != "" && comboDDSChan.Text != "")
-				btnDDSRead_Click(this, EventArgs.Empty);
-		}
+            if (FWC.WriteClockReg(reg, val) == 0)
+                MessageBox.Show("Error in WriteClockReg.");
 
-		private void btnDDSRead_Click(object sender, System.EventArgs e)
-		{
-			if(!trx_ok) return;
-			if(comboDDSReg.Text == "") return;
-			if(comboDDSChan.Text == "") return;
-			txtDDSReadVal.BackColor = Color.Red;
-			Application.DoEvents();
-			int chan = int.Parse(comboDDSChan.Text);
-			int reg = int.Parse(comboDDSReg.Text, System.Globalization.NumberStyles.HexNumber);
-			uint data = 0;
-			if(!chkRX2DDS.Checked)
-			{
-				if(FWC.ReadTRXDDSReg(chan, reg, out data) == 0)
-				{
-					MessageBox.Show("Error in ReadTRXDDSReg.");
-				}
-			}
-			else
-			{
-				if(FWC.ReadRX2DDSReg(chan, reg, out data) == 0)
-				{
-					MessageBox.Show("Error in ReadRX2DDSReg.");
-				}
-			}
-			
-			txtDDSReadVal.BackColor = SystemColors.Control;
-			txtDDSReadVal.Text = String.Format("{0:X8}", data);
-		}
+            txtClockGenWriteVal.BackColor = SystemColors.Window;
+            btnClockGenRead_Click(this, EventArgs.Empty);
+        }
 
-		private void btnDDSWrite_Click(object sender, System.EventArgs e)
-		{
-			if(!trx_ok) return;
-			if(comboDDSReg.Text == "") return;
-			if(txtDDSWrite.Text == "") return;
-			txtDDSWrite.BackColor = Color.Red;
-			Application.DoEvents();
-			int chan = int.Parse(comboDDSChan.Text);
-			int reg = int.Parse(comboDDSReg.Text, System.Globalization.NumberStyles.HexNumber);
-			uint val = uint.Parse(txtDDSWrite.Text, System.Globalization.NumberStyles.HexNumber);
-			
-			if(!chkRX2DDS.Checked)
-			{
-				if(FWC.WriteTRXDDSReg(chan, reg, val) == 0)
-					MessageBox.Show("Error in WriteTRXDDSReg.");
-			}
-			else
-			{
-				if(FWC.WriteRX2DDSReg(chan, reg, val) == 0)
-					MessageBox.Show("Error in WriteRX2DDSReg.");
-			}
+        private void comboDDSReg_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboDDSReg.Text != "" && comboDDSChan.Text != "")
+                btnDDSRead_Click(this, EventArgs.Empty);
+        }
 
-			txtDDSWrite.BackColor = SystemColors.Window;
-			btnDDSRead_Click(this, EventArgs.Empty);
-		}
+        private void btnDDSRead_Click(object sender, System.EventArgs e)
+        {
+            if (!trx_ok) return;
+            if (comboDDSReg.Text == "") return;
+            if (comboDDSChan.Text == "") return;
+            txtDDSReadVal.BackColor = Color.Red;
+            Application.DoEvents();
+            int chan = int.Parse(comboDDSChan.Text);
+            int reg = int.Parse(comboDDSReg.Text, System.Globalization.NumberStyles.HexNumber);
+            uint data = 0;
+            if (!chkRX2DDS.Checked)
+            {
+                if (FWC.ReadTRXDDSReg(chan, reg, out data) == 0)
+                {
+                    MessageBox.Show("Error in ReadTRXDDSReg.");
+                }
+            }
+            else
+            {
+                if (FWC.ReadRX2DDSReg(chan, reg, out data) == 0)
+                {
+                    MessageBox.Show("Error in ReadRX2DDSReg.");
+                }
+            }
 
-		private void comboDDSChan_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboDDSReg.Text != "" && comboDDSChan.Text != "")
-				btnDDSRead_Click(this, EventArgs.Empty);	
-		}
+            txtDDSReadVal.BackColor = SystemColors.Control;
+            txtDDSReadVal.Text = String.Format("{0:X8}", data);
+        }
 
-		private void btnPIORead_Click(object sender, System.EventArgs e)
-		{
-			if(comboPIOReg.Text == "") return;
-			if(comboPIOChip.Text == "") return;
-			txtPIORead.BackColor = Color.Red;
-			Application.DoEvents();
-			int chip = comboPIOChip.SelectedIndex;
-			int reg = comboPIOReg.SelectedIndex;
-			uint data = 0;
-			if(FWC.ReadPIOReg(chip, reg, out data) == 0)
-			{
-				MessageBox.Show("Error in ReadPIOReg.");
-			}
-			
-			txtPIORead.BackColor = SystemColors.Control;
-			txtPIORead.Text = String.Format("{0:X4}", data);
-		}
+        private void btnDDSWrite_Click(object sender, System.EventArgs e)
+        {
+            if (!trx_ok) return;
+            if (comboDDSReg.Text == "") return;
+            if (txtDDSWrite.Text == "") return;
+            txtDDSWrite.BackColor = Color.Red;
+            Application.DoEvents();
+            int chan = int.Parse(comboDDSChan.Text);
+            int reg = int.Parse(comboDDSReg.Text, System.Globalization.NumberStyles.HexNumber);
+            uint val = uint.Parse(txtDDSWrite.Text, System.Globalization.NumberStyles.HexNumber);
 
-		private void comboPIOReg_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboPIOReg.Text != "" && comboPIOChip.Text != "")
-				btnPIORead_Click(this, EventArgs.Empty);
-		}
+            if (!chkRX2DDS.Checked)
+            {
+                if (FWC.WriteTRXDDSReg(chan, reg, val) == 0)
+                    MessageBox.Show("Error in WriteTRXDDSReg.");
+            }
+            else
+            {
+                if (FWC.WriteRX2DDSReg(chan, reg, val) == 0)
+                    MessageBox.Show("Error in WriteRX2DDSReg.");
+            }
 
-		private void comboPIOChip_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboPIOReg.Text != "" && comboPIOChip.Text != "")
-				btnPIORead_Click(this, EventArgs.Empty);
-		}
+            txtDDSWrite.BackColor = SystemColors.Window;
+            btnDDSRead_Click(this, EventArgs.Empty);
+        }
 
-		private void btnPIOWrite_Click(object sender, System.EventArgs e)
-		{
-			if(comboPIOReg.Text == "") return;
-			if(comboPIOChip.Text == "") return;
-			if(txtPIOWrite.Text == "") return;
-			txtPIOWrite.BackColor = Color.Red;
-			Application.DoEvents();
-			int chip = comboPIOChip.SelectedIndex;
-			int reg = comboPIOReg.SelectedIndex;
-			int val = int.Parse(txtPIOWrite.Text, System.Globalization.NumberStyles.HexNumber);
-			
-			if(FWC.WritePIOReg(chip, reg, val) == 0)
-				MessageBox.Show("Error in WriteDDSReg.");
+        private void comboDDSChan_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboDDSReg.Text != "" && comboDDSChan.Text != "")
+                btnDDSRead_Click(this, EventArgs.Empty);
+        }
 
-			txtPIOWrite.BackColor = SystemColors.Window;
-			btnPIORead_Click(this, EventArgs.Empty);
-		}
+        private void btnPIORead_Click(object sender, System.EventArgs e)
+        {
+            if (comboPIOReg.Text == "") return;
+            if (comboPIOChip.Text == "") return;
+            txtPIORead.BackColor = Color.Red;
+            Application.DoEvents();
+            int chip = comboPIOChip.SelectedIndex;
+            int reg = comboPIOReg.SelectedIndex;
+            uint data = 0;
+            if (FWC.ReadPIOReg(chip, reg, out data) == 0)
+            {
+                MessageBox.Show("Error in ReadPIOReg.");
+            }
+
+            txtPIORead.BackColor = SystemColors.Control;
+            txtPIORead.Text = String.Format("{0:X4}", data);
+        }
+
+        private void comboPIOReg_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboPIOReg.Text != "" && comboPIOChip.Text != "")
+                btnPIORead_Click(this, EventArgs.Empty);
+        }
+
+        private void comboPIOChip_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboPIOReg.Text != "" && comboPIOChip.Text != "")
+                btnPIORead_Click(this, EventArgs.Empty);
+        }
+
+        private void btnPIOWrite_Click(object sender, System.EventArgs e)
+        {
+            if (comboPIOReg.Text == "") return;
+            if (comboPIOChip.Text == "") return;
+            if (txtPIOWrite.Text == "") return;
+            txtPIOWrite.BackColor = Color.Red;
+            Application.DoEvents();
+            int chip = comboPIOChip.SelectedIndex;
+            int reg = comboPIOReg.SelectedIndex;
+            int val = int.Parse(txtPIOWrite.Text, System.Globalization.NumberStyles.HexNumber);
+
+            if (FWC.WritePIOReg(chip, reg, val) == 0)
+                MessageBox.Show("Error in WriteDDSReg.");
+
+            txtPIOWrite.BackColor = SystemColors.Window;
+            btnPIORead_Click(this, EventArgs.Empty);
+        }
 
 
         //=====================================================================================
         // ke9ns read offset hex value, get eeprom value from radio and display it.
         private void btnEEPROMRead_Click(object sender, System.EventArgs e)
-		{
-			if(txtEEPROMOffset.Text == "") return;
-			txtEEPROMRead.BackColor = Color.Red;
-			Application.DoEvents();
-			uint offset = uint.Parse(txtEEPROMOffset.Text, System.Globalization.NumberStyles.HexNumber);
+        {
+            if (txtEEPROMOffset.Text == "") return;
+            txtEEPROMRead.BackColor = Color.Red;
+            Application.DoEvents();
+            uint offset = uint.Parse(txtEEPROMOffset.Text, System.Globalization.NumberStyles.HexNumber);
 
-			byte data;
-			if(!chkRX2EEPROM.Checked)
-			{
-				if(FWC.ReadTRXEEPROMByte(offset, out data) == 0)
-					MessageBox.Show("Error in ReadTRXEEPROM.");
-			}
-			else
-			{
-				if(FWC.ReadRX2EEPROMByte(offset, out data) == 0)
-					MessageBox.Show("Error in ReadRX2EEPROM.");
-			}
+            byte data;
+            if (!chkRX2EEPROM.Checked)
+            {
+                if (FWC.ReadTRXEEPROMByte(offset, out data) == 0)
+                    MessageBox.Show("Error in ReadTRXEEPROM.");
+            }
+            else
+            {
+                if (FWC.ReadRX2EEPROMByte(offset, out data) == 0)
+                    MessageBox.Show("Error in ReadRX2EEPROM.");
+            }
 
-			txtEEPROMRead.BackColor = SystemColors.Control;
-			txtEEPROMRead.Text = String.Format("{0:X4}", data);
-		}
+            txtEEPROMRead.BackColor = SystemColors.Control;
+            txtEEPROMRead.Text = String.Format("{0:X4}", data);
+        }
 
 
 
@@ -2509,7 +2569,7 @@ namespace PowerSDR
         // ke9ns ADD  get all of eeprom and save it in a file called EEPROMDATA.txt in the database folder
         private void btnEEPROMRead1_Click(object sender, System.EventArgs e)
         {
-           // if (txtEEPROMOffset.Text == "") return;
+            // if (txtEEPROMOffset.Text == "") return;
             txtEEPROMRead.BackColor = Color.Red;
             Application.DoEvents();
             //  uint offset = uint.Parse(txtEEPROMOffset.Text, System.Globalization.NumberStyles.HexNumber);
@@ -2534,7 +2594,7 @@ namespace PowerSDR
             for (offset = 0; offset < 3000; offset++)
             {
 
-                Debug.Write("   Reading offset-> "+ offset);
+                Debug.Write("   Reading offset-> " + offset);
 
                 if (!chkRX2EEPROM.Checked)
                 {
@@ -2550,7 +2610,7 @@ namespace PowerSDR
                 Debug.WriteLine("   Data-> " + data);
 
                 txtEEPROMRead.BackColor = SystemColors.Control;
-             
+
                 datastring = String.Format("{0:X4}", data);
 
                 txtEEPROMRead.Text = datastring;
@@ -2558,7 +2618,7 @@ namespace PowerSDR
                 offsetstring = String.Format("{0:X4}", offset);
 
                 txtEEPROMOffset.Text = offsetstring;
-                    
+
                 final = offsetstring + " , " + datastring + "\n";
 
                 writer2.Write(final);
@@ -2574,13 +2634,12 @@ namespace PowerSDR
         } // btnEEPROMRead1_Click
 
 
-       //==========================================================================================
-       // ke9ns add change 3000 or 5000 radio to Extended
+        //==========================================================================================
+        // ke9ns add change 3000 or 5000 radio to Extended
         private void buttonTS1_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Warning: You must have Authorization as an offical MARS Licensed Operator\n",
-                         
-                           "Do you have authorization?",
+            DialogResult dr = MessageBox.Show(new Form { TopMost = true }, "Warning: You must have Authorization as a MARS,CAPS, or SHARES Licensed Operator.\n",
+                                             "Do you have authorization?",
                            MessageBoxButtons.YesNo,
                            MessageBoxIcon.Question);
 
@@ -2617,498 +2676,503 @@ namespace PowerSDR
 
             }
 
+
+
+
+            MessageBox.Show("You must cycle power to the radio", "Cycle Power",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
         } // buttonTS1_Click
 
 
 
         private void btnEEPROMWrite_Click(object sender, System.EventArgs e)
-		{
-			if(txtEEPROMOffset.Text == "") return;
-			txtEEPROMWrite.BackColor = Color.Red;
-			Application.DoEvents();
-			uint offset = uint.Parse(txtEEPROMOffset.Text, System.Globalization.NumberStyles.HexNumber);
-			byte val = byte.Parse(txtEEPROMWrite.Text, System.Globalization.NumberStyles.HexNumber);
+        {
+            if (txtEEPROMOffset.Text == "") return;
+            txtEEPROMWrite.BackColor = Color.Red;
+            Application.DoEvents();
+            uint offset = uint.Parse(txtEEPROMOffset.Text, System.Globalization.NumberStyles.HexNumber);
+            byte val = byte.Parse(txtEEPROMWrite.Text, System.Globalization.NumberStyles.HexNumber);
 
-			if(!chkRX2EEPROM.Checked)
-			{
-				if(FWC.WriteTRXEEPROMByte(offset, val) == 0)
-					MessageBox.Show("Error in WriteTRXEEPROM");
-			}
-			else
-			{
-				if(FWC.WriteRX2EEPROMByte(offset, val) == 0)
-					MessageBox.Show("Error in WriteRX2EEPROM");
-			}
+            if (!chkRX2EEPROM.Checked)
+            {
+                if (FWC.WriteTRXEEPROMByte(offset, val) == 0)
+                    MessageBox.Show("Error in WriteTRXEEPROM");
+            }
+            else
+            {
+                if (FWC.WriteRX2EEPROMByte(offset, val) == 0)
+                    MessageBox.Show("Error in WriteRX2EEPROM");
+            }
 
-			txtEEPROMWrite.BackColor = SystemColors.Window;
-			btnEEPROMRead_Click(this, EventArgs.Empty);
-		}
+            txtEEPROMWrite.BackColor = SystemColors.Window;
+            btnEEPROMRead_Click(this, EventArgs.Empty);
+        }
 
-		private void btnTRXPotRead_Click(object sender, System.EventArgs e)
-		{
-			txtTRXPotRead.BackColor = Color.Red;
-			Application.DoEvents();
-			uint val;
-			if(FWC.TRXPotGetRDAC(out val) == 0)
-				MessageBox.Show("Error in TRXPotGetRDAC");
+        private void btnTRXPotRead_Click(object sender, System.EventArgs e)
+        {
+            txtTRXPotRead.BackColor = Color.Red;
+            Application.DoEvents();
+            uint val;
+            if (FWC.TRXPotGetRDAC(out val) == 0)
+                MessageBox.Show("Error in TRXPotGetRDAC");
 
-			txtTRXPotRead.BackColor = SystemColors.Control;
-			txtTRXPotRead.Text = String.Format("{0:X4}", val);
-		}
+            txtTRXPotRead.BackColor = SystemColors.Control;
+            txtTRXPotRead.Text = String.Format("{0:X4}", val);
+        }
 
-		private void comboTRXPotIndex_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			btnTRXPotRead_Click(this, EventArgs.Empty);
-		}
+        private void comboTRXPotIndex_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            btnTRXPotRead_Click(this, EventArgs.Empty);
+        }
 
-		private void btnTRXPotWrite_Click(object sender, System.EventArgs e)
-		{
-			if(comboTRXPotIndex.Text == "") return;
-			txtTRXPotWrite.BackColor = Color.Red;
-			Application.DoEvents();
-			int index = comboTRXPotIndex.SelectedIndex;
-			int val = int.Parse(txtTRXPotWrite.Text, System.Globalization.NumberStyles.HexNumber);
-			
-			if(FWC.TRXPotSetRDAC(index, val) == 0)
-				MessageBox.Show("Error in TRXPotSetRDAC");
+        private void btnTRXPotWrite_Click(object sender, System.EventArgs e)
+        {
+            if (comboTRXPotIndex.Text == "") return;
+            txtTRXPotWrite.BackColor = Color.Red;
+            Application.DoEvents();
+            int index = comboTRXPotIndex.SelectedIndex;
+            int val = int.Parse(txtTRXPotWrite.Text, System.Globalization.NumberStyles.HexNumber);
 
-			txtTRXPotWrite.BackColor = SystemColors.Window;
-			btnTRXPotRead_Click(this, EventArgs.Empty);
-		}
+            if (FWC.TRXPotSetRDAC(index, val) == 0)
+                MessageBox.Show("Error in TRXPotSetRDAC");
 
-		private void comboMuxChan_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(FWC.SetMux(comboMuxChan.SelectedIndex) == 0)
-				MessageBox.Show("Error in SetMux");
-		}
+            txtTRXPotWrite.BackColor = SystemColors.Window;
+            btnTRXPotRead_Click(this, EventArgs.Empty);
+        }
 
-		private void chkGPIO_CheckedChanged(object sender, System.EventArgs e)
-		{
-			uint val = 0;
-			if(chkGPIO1.Checked) val += 1<<0;
-			if(chkGPIO2.Checked) val += 1<<1;
-			if(chkGPIO3.Checked) val += 1<<2;
-			if(chkGPIO4.Checked) val += 1<<3;
-			if(chkGPIO5.Checked) val += 1<<4;
-			if(chkGPIO6.Checked) val += 1<<5;
-			if(chkGPIO7.Checked) val += 1<<6;
-			if(chkGPIO8.Checked) val += 1<<7;
+        private void comboMuxChan_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (FWC.SetMux(comboMuxChan.SelectedIndex) == 0)
+                MessageBox.Show("Error in SetMux");
+        }
 
-			if(FWC.GPIOWrite(val) == 0)
-				MessageBox.Show("Error in GPIOWrite");
+        private void chkGPIO_CheckedChanged(object sender, System.EventArgs e)
+        {
+            uint val = 0;
+            if (chkGPIO1.Checked) val += 1 << 0;
+            if (chkGPIO2.Checked) val += 1 << 1;
+            if (chkGPIO3.Checked) val += 1 << 2;
+            if (chkGPIO4.Checked) val += 1 << 3;
+            if (chkGPIO5.Checked) val += 1 << 4;
+            if (chkGPIO6.Checked) val += 1 << 5;
+            if (chkGPIO7.Checked) val += 1 << 6;
+            if (chkGPIO8.Checked) val += 1 << 7;
 
-			btnGPIORead_Click(this, EventArgs.Empty);
-		}
+            if (FWC.GPIOWrite(val) == 0)
+                MessageBox.Show("Error in GPIOWrite");
 
-		private void btnGPIORead_Click(object sender, System.EventArgs e)
-		{
-			uint val;
-			if(FWC.GPIORead(out val) == 0)
-				MessageBox.Show("Error in GPIORead");
+            btnGPIORead_Click(this, EventArgs.Empty);
+        }
 
-			txtGPIORead.Text = String.Format("{0:X4}", val);
-		}
+        private void btnGPIORead_Click(object sender, System.EventArgs e)
+        {
+            uint val;
+            if (FWC.GPIORead(out val) == 0)
+                MessageBox.Show("Error in GPIORead");
 
-		private void btnGPIOWriteVal_Click(object sender, System.EventArgs e)
-		{
-			if(txtGPIOWrite.Text == "") return;
-			uint val = uint.Parse(txtGPIOWrite.Text, System.Globalization.NumberStyles.HexNumber);
+            txtGPIORead.Text = String.Format("{0:X4}", val);
+        }
 
-			if(FWC.GPIOWrite(val) == 0)
-				MessageBox.Show("Error in GPIOWrite");
+        private void btnGPIOWriteVal_Click(object sender, System.EventArgs e)
+        {
+            if (txtGPIOWrite.Text == "") return;
+            uint val = uint.Parse(txtGPIOWrite.Text, System.Globalization.NumberStyles.HexNumber);
 
-			btnGPIORead_Click(this, EventArgs.Empty);
-		}
+            if (FWC.GPIOWrite(val) == 0)
+                MessageBox.Show("Error in GPIOWrite");
 
-		private void chkGPIODDR_CheckedChanged(object sender, System.EventArgs e)
-		{
-			uint val = 0;
-			if(chkGPIODDR1.Checked) val += 1<<0;
-			if(chkGPIODDR2.Checked) val += 1<<1;
-			if(chkGPIODDR3.Checked) val += 1<<2;
-			if(chkGPIODDR4.Checked) val += 1<<3;
-			if(chkGPIODDR5.Checked) val += 1<<4;
-			if(chkGPIODDR6.Checked) val += 1<<5;
-			if(chkGPIODDR7.Checked) val += 1<<6;
-			if(chkGPIODDR8.Checked) val += 1<<7;
+            btnGPIORead_Click(this, EventArgs.Empty);
+        }
 
-			if(FWC.GPIODDRWrite(val) == 0)
-				MessageBox.Show("Error in GPIODDRWrite");
+        private void chkGPIODDR_CheckedChanged(object sender, System.EventArgs e)
+        {
+            uint val = 0;
+            if (chkGPIODDR1.Checked) val += 1 << 0;
+            if (chkGPIODDR2.Checked) val += 1 << 1;
+            if (chkGPIODDR3.Checked) val += 1 << 2;
+            if (chkGPIODDR4.Checked) val += 1 << 3;
+            if (chkGPIODDR5.Checked) val += 1 << 4;
+            if (chkGPIODDR6.Checked) val += 1 << 5;
+            if (chkGPIODDR7.Checked) val += 1 << 6;
+            if (chkGPIODDR8.Checked) val += 1 << 7;
 
-			btnGPIODDRRead_Click(this, EventArgs.Empty);
-		}
+            if (FWC.GPIODDRWrite(val) == 0)
+                MessageBox.Show("Error in GPIODDRWrite");
 
-		private void btnGPIODDRRead_Click(object sender, System.EventArgs e)
-		{
-			uint val;
-			if(FWC.GPIODDRRead(out val) == 0)
-				MessageBox.Show("Error in GPIODDRRead");
+            btnGPIODDRRead_Click(this, EventArgs.Empty);
+        }
 
-			txtGPIODDRRead.Text = String.Format("{0:X4}", val);
-		}
+        private void btnGPIODDRRead_Click(object sender, System.EventArgs e)
+        {
+            uint val;
+            if (FWC.GPIODDRRead(out val) == 0)
+                MessageBox.Show("Error in GPIODDRRead");
 
-		private void btnGPIODDRWrite_Click(object sender, System.EventArgs e)
-		{
-			if(txtGPIODDRWrite.Text == "") return;
-			uint val = uint.Parse(txtGPIODDRWrite.Text, System.Globalization.NumberStyles.HexNumber);
+            txtGPIODDRRead.Text = String.Format("{0:X4}", val);
+        }
 
-			if(FWC.GPIODDRWrite(val) == 0)
-				MessageBox.Show("Error in GPIODDRWrite");
+        private void btnGPIODDRWrite_Click(object sender, System.EventArgs e)
+        {
+            if (txtGPIODDRWrite.Text == "") return;
+            uint val = uint.Parse(txtGPIODDRWrite.Text, System.Globalization.NumberStyles.HexNumber);
 
-			btnGPIODDRRead_Click(this, EventArgs.Empty);
-		}
+            if (FWC.GPIODDRWrite(val) == 0)
+                MessageBox.Show("Error in GPIODDRWrite");
 
-		private void chkClockGenReset_CheckedChanged(object sender, System.EventArgs e)
-		{
-			uint val;
-			FWC.I2C_WriteValue(0x42, 0x3);
-			FWC.I2C_ReadValue(0x42, out val);
+            btnGPIODDRRead_Click(this, EventArgs.Empty);
+        }
 
-			if(chkClockGenReset.Checked)
-				val &= 0xFB;
-			else
-				val |= 0x04;
+        private void chkClockGenReset_CheckedChanged(object sender, System.EventArgs e)
+        {
+            uint val;
+            FWC.I2C_WriteValue(0x42, 0x3);
+            FWC.I2C_ReadValue(0x42, out val);
 
-			FWC.I2C_Write2Value(0x42, 0x3, (byte)val);
-		}
+            if (chkClockGenReset.Checked)
+                val &= 0xFB;
+            else
+                val |= 0x04;
 
-		private void chkDDSReset_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(chkRX2DDS.Checked)
-			{
-				FWC.ResetRX2DDS();
-			}
-			else
-			{
-				uint val;
-				FWC.I2C_WriteValue(0x42, 0x3);
-				FWC.I2C_ReadValue(0x42, out val);
+            FWC.I2C_Write2Value(0x42, 0x3, (byte)val);
+        }
 
-				if(chkDDSReset.Checked)
-					val &= 0xDF;
-				else
-					val |= 0x20;
+        private void chkDDSReset_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (chkRX2DDS.Checked)
+            {
+                FWC.ResetRX2DDS();
+            }
+            else
+            {
+                uint val;
+                FWC.I2C_WriteValue(0x42, 0x3);
+                FWC.I2C_ReadValue(0x42, out val);
 
-				FWC.I2C_Write2Value(0x42, 0x3, (byte)val);
-			}
-		}
+                if (chkDDSReset.Checked)
+                    val &= 0xDF;
+                else
+                    val |= 0x20;
 
-		private void chkClockGenCS_CheckedChanged(object sender, System.EventArgs e)
-		{
-			uint val;
-			FWC.I2C_WriteValue(0x42, 0x3);
-			FWC.I2C_ReadValue(0x42, out val);
+                FWC.I2C_Write2Value(0x42, 0x3, (byte)val);
+            }
+        }
 
-			if(chkClockGenCS.Checked)
-				val &= 0xFE;
-			else
-				val |= 0x01;
+        private void chkClockGenCS_CheckedChanged(object sender, System.EventArgs e)
+        {
+            uint val;
+            FWC.I2C_WriteValue(0x42, 0x3);
+            FWC.I2C_ReadValue(0x42, out val);
 
-			FWC.I2C_Write2Value(0x42, 0x3, (byte)val);
-		}
+            if (chkClockGenCS.Checked)
+                val &= 0xFE;
+            else
+                val |= 0x01;
 
-		private void chkDDSCS_CheckedChanged(object sender, System.EventArgs e)
-		{
-			uint val;
-			FWC.I2C_WriteValue(0x42, 0x3);
-			FWC.I2C_ReadValue(0x42, out val);
+            FWC.I2C_Write2Value(0x42, 0x3, (byte)val);
+        }
 
-			if(chkDDSCS.Checked)
-				val &= 0xBF;
-			else
-				val |= 0x40;
+        private void chkDDSCS_CheckedChanged(object sender, System.EventArgs e)
+        {
+            uint val;
+            FWC.I2C_WriteValue(0x42, 0x3);
+            FWC.I2C_ReadValue(0x42, out val);
 
-			FWC.I2C_Write2Value(0x42, 0x3, (byte)val);
-		}
+            if (chkDDSCS.Checked)
+                val &= 0xBF;
+            else
+                val |= 0x40;
 
-		private void btnCodecRead_Click(object sender, System.EventArgs e)
-		{
-			if(comboCodecReg.Text == "") return;
+            FWC.I2C_Write2Value(0x42, 0x3, (byte)val);
+        }
+
+        private void btnCodecRead_Click(object sender, System.EventArgs e)
+        {
+            if (comboCodecReg.Text == "") return;
             byte reg = byte.Parse(comboCodecReg.Text, System.Globalization.NumberStyles.HexNumber);
-			
-			byte val;
-			if(FWC.ReadCodecReg(reg, out val) == 0)
-				MessageBox.Show("Error in ReadCodecReg");
 
-			txtCodecRead.Text = String.Format("{0:X2}", val);
-		}
+            byte val;
+            if (FWC.ReadCodecReg(reg, out val) == 0)
+                MessageBox.Show("Error in ReadCodecReg");
 
-		private void comboCodecReg_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			btnCodecRead_Click(this, EventArgs.Empty);
-		}
+            txtCodecRead.Text = String.Format("{0:X2}", val);
+        }
 
-		private void btnCodecWrite_Click(object sender, System.EventArgs e)
-		{
-			if(comboCodecReg.Text == "") return;
+        private void comboCodecReg_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            btnCodecRead_Click(this, EventArgs.Empty);
+        }
+
+        private void btnCodecWrite_Click(object sender, System.EventArgs e)
+        {
+            if (comboCodecReg.Text == "") return;
             byte reg = byte.Parse(comboCodecReg.Text, System.Globalization.NumberStyles.HexNumber);
             byte val = byte.Parse(txtCodecWrite.Text, System.Globalization.NumberStyles.HexNumber);
 
-			if(FWC.WriteCodecReg(reg, val) == 0)
-				MessageBox.Show("Error in WriteCodecReg");
+            if (FWC.WriteCodecReg(reg, val) == 0)
+                MessageBox.Show("Error in WriteCodecReg");
 
-			btnCodecRead_Click(this, EventArgs.Empty);
-		}
+            btnCodecRead_Click(this, EventArgs.Empty);
+        }
 
-		private void FLEX5000LLHWForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			this.Hide();
-			e.Cancel = true;
-			Common.SaveForm(this, "FLEX5000LLHWForm");
-		}
+        private void FLEX5000LLHWForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
+            Common.SaveForm(this, "FLEX5000LLHWForm");
+        }
 
-		private void comboPAPotIndex_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			btnPAPotRead_Click(this, EventArgs.Empty);
-		}
+        private void comboPAPotIndex_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            btnPAPotRead_Click(this, EventArgs.Empty);
+        }
 
-		private void btnPAPotRead_Click(object sender, System.EventArgs e)
-		{
-			if(!pa_ok) return;
-			txtPAPotRead.BackColor = Color.Red;
-			Application.DoEvents();
-			uint val;
-			if(FWC.PAPotGetRDAC(out val) == 0)
-				MessageBox.Show("Error in PAPotGetRDAC");
+        private void btnPAPotRead_Click(object sender, System.EventArgs e)
+        {
+            if (!pa_ok) return;
+            txtPAPotRead.BackColor = Color.Red;
+            Application.DoEvents();
+            uint val;
+            if (FWC.PAPotGetRDAC(out val) == 0)
+                MessageBox.Show("Error in PAPotGetRDAC");
 
-			txtPAPotRead.BackColor = SystemColors.Control;
-			txtPAPotRead.Text = String.Format("{0:X4}", val);
-		}
+            txtPAPotRead.BackColor = SystemColors.Control;
+            txtPAPotRead.Text = String.Format("{0:X4}", val);
+        }
 
-		private void btnPAPotWrite_Click(object sender, System.EventArgs e)
-		{
-			if(!pa_ok) return;
-			if(comboPAPotIndex.Text == "") return;
-			txtPAPotWrite.BackColor = Color.Red;
-			Application.DoEvents();
-			int index = comboPAPotIndex.SelectedIndex;
-			int val = int.Parse(txtPAPotWrite.Text, System.Globalization.NumberStyles.HexNumber);
-			
-			if(FWC.PAPotSetRDAC(index, val) == 0)
-				MessageBox.Show("Error in PAPotSetRDAC");
+        private void btnPAPotWrite_Click(object sender, System.EventArgs e)
+        {
+            if (!pa_ok) return;
+            if (comboPAPotIndex.Text == "") return;
+            txtPAPotWrite.BackColor = Color.Red;
+            Application.DoEvents();
+            int index = comboPAPotIndex.SelectedIndex;
+            int val = int.Parse(txtPAPotWrite.Text, System.Globalization.NumberStyles.HexNumber);
 
-			txtPAPotWrite.BackColor = SystemColors.Window;
-			btnPAPotRead_Click(this, EventArgs.Empty);
-		}
+            if (FWC.PAPotSetRDAC(index, val) == 0)
+                MessageBox.Show("Error in PAPotSetRDAC");
 
-		private void btnATUSendCmd_Click(object sender, System.EventArgs e)
-		{
-			if(txtATU1.Text == "" || txtATU2.Text == "" || txtATU3.Text == "") return;
-			byte b1 = byte.Parse(txtATU1.Text);
-			byte b2 = byte.Parse(txtATU2.Text);
-			byte b3 = byte.Parse(txtATU3.Text);
-			uint timeout_ms = 200;
+            txtPAPotWrite.BackColor = SystemColors.Window;
+            btnPAPotRead_Click(this, EventArgs.Empty);
+        }
 
-			FWC.ATUSendCmd(b1, b2, b3);
+        private void btnATUSendCmd_Click(object sender, System.EventArgs e)
+        {
+            if (txtATU1.Text == "" || txtATU2.Text == "" || txtATU3.Text == "") return;
+            byte b1 = byte.Parse(txtATU1.Text);
+            byte b2 = byte.Parse(txtATU2.Text);
+            byte b3 = byte.Parse(txtATU3.Text);
+            uint timeout_ms = 200;
 
-			switch(b1)
-			{
-				case 5:
-				case 6:
-					timeout_ms = 6000;
-					break;
-			}
+            FWC.ATUSendCmd(b1, b2, b3);
 
-			byte count;
-			string s = "";
+            switch (b1)
+            {
+                case 5:
+                case 6:
+                    timeout_ms = 6000;
+                    break;
+            }
+
+            byte count;
+            string s = "";
             Thread.Sleep((int)timeout_ms);
-			do
-			{
-				FWC.ATUGetResult(out b1, out b2, out b3, out count, timeout_ms);
-				s += b1.ToString()+" "+b2.ToString()+" "+b3.ToString()+" ("+count.ToString()+" left)\n";
-			} while(count > 0);
-			MessageBox.Show(s);
-		}
+            do
+            {
+                FWC.ATUGetResult(out b1, out b2, out b3, out count, timeout_ms);
+                s += b1.ToString() + " " + b2.ToString() + " " + b3.ToString() + " (" + count.ToString() + " left)\n";
+            } while (count > 0);
+            MessageBox.Show(s);
+        }
 
-		#endregion		
+        #endregion
 
-		private void btnATUFull_Click(object sender, System.EventArgs e)
-		{
-			FWCATU.FullTune();
-		}
+        private void btnATUFull_Click(object sender, System.EventArgs e)
+        {
+            FWCATU.FullTune();
+        }
 
-		private void btnEEPROMWriteFloat_Click(object sender, System.EventArgs e)
-		{
-			if(txtEEPROMOffset.Text == "") return;
-			txtEEPROMWriteFloat.BackColor = Color.Red;
-			Application.DoEvents();
-			uint offset = uint.Parse(txtEEPROMOffset.Text, System.Globalization.NumberStyles.HexNumber);
-			float val = float.Parse(txtEEPROMWriteFloat.Text);
+        private void btnEEPROMWriteFloat_Click(object sender, System.EventArgs e)
+        {
+            if (txtEEPROMOffset.Text == "") return;
+            txtEEPROMWriteFloat.BackColor = Color.Red;
+            Application.DoEvents();
+            uint offset = uint.Parse(txtEEPROMOffset.Text, System.Globalization.NumberStyles.HexNumber);
+            float val = float.Parse(txtEEPROMWriteFloat.Text);
 
-			if(!chkRX2EEPROM.Checked)
-			{
-				if(FWC.WriteTRXEEPROMFloat(offset, val) == 0)
-					MessageBox.Show("Error in WriteTRXEEPROMFloat");
-			}
-			else
-			{
-				if(FWC.WriteRX2EEPROMFloat(offset, val) == 0)
-					MessageBox.Show("Error in WriteRX2EEPROMFloat");
-			}
+            if (!chkRX2EEPROM.Checked)
+            {
+                if (FWC.WriteTRXEEPROMFloat(offset, val) == 0)
+                    MessageBox.Show("Error in WriteTRXEEPROMFloat");
+            }
+            else
+            {
+                if (FWC.WriteRX2EEPROMFloat(offset, val) == 0)
+                    MessageBox.Show("Error in WriteRX2EEPROMFloat");
+            }
 
-			txtEEPROMWriteFloat.BackColor = SystemColors.Window;
-			btnEEPROMReadFloat_Click(this, EventArgs.Empty);
-		}
+            txtEEPROMWriteFloat.BackColor = SystemColors.Window;
+            btnEEPROMReadFloat_Click(this, EventArgs.Empty);
+        }
 
         //===========================================================================================
         // ke9ns 
-		private void btnEEPROMReadFloat_Click(object sender, System.EventArgs e)
-		{
-			if(txtEEPROMOffset.Text == "") return;
-			txtEEPROMReadFloat.BackColor = Color.Red;
-			Application.DoEvents();
-			uint offset = uint.Parse(txtEEPROMOffset.Text, System.Globalization.NumberStyles.HexNumber);
+        private void btnEEPROMReadFloat_Click(object sender, System.EventArgs e)
+        {
+            if (txtEEPROMOffset.Text == "") return;
+            txtEEPROMReadFloat.BackColor = Color.Red;
+            Application.DoEvents();
+            uint offset = uint.Parse(txtEEPROMOffset.Text, System.Globalization.NumberStyles.HexNumber);
 
-			float data;
-			if(!chkRX2EEPROM.Checked)
-			{
-				if(FWC.ReadTRXEEPROMFloat(offset, out data) == 0)
-					MessageBox.Show("Error in ReadTRXEEPROMFloat");
-			}
-			else
-			{
-				if(FWC.ReadRX2EEPROMFloat(offset, out data) == 0)
-					MessageBox.Show("Error in ReadRX2EEPROMFloat");
-			}
+            float data;
+            if (!chkRX2EEPROM.Checked)
+            {
+                if (FWC.ReadTRXEEPROMFloat(offset, out data) == 0)
+                    MessageBox.Show("Error in ReadTRXEEPROMFloat");
+            }
+            else
+            {
+                if (FWC.ReadRX2EEPROMFloat(offset, out data) == 0)
+                    MessageBox.Show("Error in ReadRX2EEPROMFloat");
+            }
 
-			txtEEPROMReadFloat.BackColor = SystemColors.Control;
-			txtEEPROMReadFloat.Text = data.ToString("f4");
-		}
+            txtEEPROMReadFloat.BackColor = SystemColors.Control;
+            txtEEPROMReadFloat.Text = data.ToString("f4");
+        }
 
-		private void btnFlexWireWriteVal_Click(object sender, System.EventArgs e)
-		{
-			try
-			{
-                byte addr = byte.Parse(txtFlexWireAddr.Text, NumberStyles.HexNumber);	
-				byte val = byte.Parse(txtFlexWireVal1.Text, NumberStyles.HexNumber);
+        private void btnFlexWireWriteVal_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                byte addr = byte.Parse(txtFlexWireAddr.Text, NumberStyles.HexNumber);
+                byte val = byte.Parse(txtFlexWireVal1.Text, NumberStyles.HexNumber);
 
-				FWC.FlexWire_WriteValue(addr, val);
-			}
-			catch(Exception ex)
-			{
-				MessageBox.Show(ex.Message+"\n\n"+ex.StackTrace);
-			}
-		}
+                FWC.FlexWire_WriteValue(addr, val);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n\n" + ex.StackTrace);
+            }
+        }
 
-		private void btnFlexWireWrite2Val_Click(object sender, System.EventArgs e)
-		{
-			try
-			{
-				byte addr = byte.Parse(txtFlexWireAddr.Text, NumberStyles.HexNumber);	
-				byte v1 = byte.Parse(txtFlexWireVal1.Text, NumberStyles.HexNumber);
-				byte v2 = byte.Parse(txtFlexWireVal2.Text, NumberStyles.HexNumber);
+        private void btnFlexWireWrite2Val_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                byte addr = byte.Parse(txtFlexWireAddr.Text, NumberStyles.HexNumber);
+                byte v1 = byte.Parse(txtFlexWireVal1.Text, NumberStyles.HexNumber);
+                byte v2 = byte.Parse(txtFlexWireVal2.Text, NumberStyles.HexNumber);
 
-				FWC.FlexWire_Write2Value(addr, v1, v2);
-			}
-			catch(Exception ex)
-			{
-				MessageBox.Show(ex.Message+"\n\n"+ex.StackTrace);
-			}
-		}
+                FWC.FlexWire_Write2Value(addr, v1, v2);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n\n" + ex.StackTrace);
+            }
+        }
 
-		private void btnFlexWireReadVal_Click(object sender, System.EventArgs e)
-		{
-			try
-			{
-				byte addr = byte.Parse(txtFlexWireAddr.Text, NumberStyles.HexNumber);	
-				uint val;
+        private void btnFlexWireReadVal_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                byte addr = byte.Parse(txtFlexWireAddr.Text, NumberStyles.HexNumber);
+                uint val;
 
-				FWC.FlexWire_ReadValue(addr, out val);
-				txtFlexWireVal2.Text = String.Format("{0:X2}", val);
-			}
-			catch(Exception ex)
-			{
-				MessageBox.Show(ex.Message+"\n\n"+ex.StackTrace);
-			}
-		}
+                FWC.FlexWire_ReadValue(addr, out val);
+                txtFlexWireVal2.Text = String.Format("{0:X2}", val);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n\n" + ex.StackTrace);
+            }
+        }
 
-		private void btnFlexWireRead2Val_Click(object sender, System.EventArgs e)
-		{
-			try
-			{
-				byte addr = byte.Parse(txtFlexWireAddr.Text, NumberStyles.HexNumber);	
-				uint val;
+        private void btnFlexWireRead2Val_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                byte addr = byte.Parse(txtFlexWireAddr.Text, NumberStyles.HexNumber);
+                uint val;
 
-				FWC.FlexWire_Read2Value(addr, out val);
-				txtFlexWireVal1.Text = String.Format("{0:X2}", val>>8);
-				txtFlexWireVal2.Text = String.Format("{0:X2}", (byte)val);
-			}
-			catch(Exception ex)
-			{
-				MessageBox.Show(ex.Message+"\n\n"+ex.StackTrace);
-			}
-		}
+                FWC.FlexWire_Read2Value(addr, out val);
+                txtFlexWireVal1.Text = String.Format("{0:X2}", val >> 8);
+                txtFlexWireVal2.Text = String.Format("{0:X2}", (byte)val);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + "\n\n" + ex.StackTrace);
+            }
+        }
 
-		private void chkL_CheckedChanged(object sender, System.EventArgs e)
-		{
-			byte data = 0;
+        private void chkL_CheckedChanged(object sender, System.EventArgs e)
+        {
+            byte data = 0;
 
-			if(chkL2.Checked) data |= 0x01;
-			if(chkL3.Checked) data |= 0x02;
-			if(chkL4.Checked) data |= 0x04;
-			if(chkL5.Checked) data |= 0x08;
-			if(chkL6.Checked) data |= 0x10;
-			if(chkL7.Checked) data |= 0x20;
-			if(chkL8.Checked) data |= 0x40;
-			if(chkL9.Checked) data |= 0x80;
+            if (chkL2.Checked) data |= 0x01;
+            if (chkL3.Checked) data |= 0x02;
+            if (chkL4.Checked) data |= 0x04;
+            if (chkL5.Checked) data |= 0x08;
+            if (chkL6.Checked) data |= 0x10;
+            if (chkL7.Checked) data |= 0x20;
+            if (chkL8.Checked) data |= 0x40;
+            if (chkL9.Checked) data |= 0x80;
 
-			FWC.I2C_Write2Value(0x4E, 0x02, data);
-		}
+            FWC.I2C_Write2Value(0x4E, 0x02, data);
+        }
 
-		private void chkC_CheckedChanged(object sender, System.EventArgs e)
-		{
-			byte data = 0;
+        private void chkC_CheckedChanged(object sender, System.EventArgs e)
+        {
+            byte data = 0;
 
-			if(chkC0.Checked) data |= 0x01;
-			if(chkC1.Checked) data |= 0x02;
-			if(chkC2.Checked) data |= 0x04;
-			if(chkC3.Checked) data |= 0x08;
-			if(chkC4.Checked) data |= 0x10;
-			if(chkC5.Checked) data |= 0x20;
-			if(chkC6.Checked) data |= 0x40;
+            if (chkC0.Checked) data |= 0x01;
+            if (chkC1.Checked) data |= 0x02;
+            if (chkC2.Checked) data |= 0x04;
+            if (chkC3.Checked) data |= 0x08;
+            if (chkC4.Checked) data |= 0x10;
+            if (chkC5.Checked) data |= 0x20;
+            if (chkC6.Checked) data |= 0x40;
 
-			FWC.I2C_Write2Value(0x4E, 0x03, data);
-		}
+            FWC.I2C_Write2Value(0x4E, 0x03, data);
+        }
 
-		private void chkHiZ_CheckedChanged(object sender, System.EventArgs e)
-		{
-			FWC.SetHiZ(chkHiZ.Checked);
-		}
+        private void chkHiZ_CheckedChanged(object sender, System.EventArgs e)
+        {
+            FWC.SetHiZ(chkHiZ.Checked);
+        }
 
-		private void chkATUEnable_CheckedChanged(object sender, System.EventArgs e)
-		{
-			FWC.SetATUEnable(chkATUEnable.Checked);
-		}
+        private void chkATUEnable_CheckedChanged(object sender, System.EventArgs e)
+        {
+            FWC.SetATUEnable(chkATUEnable.Checked);
+        }
 
-		private void chkATUATTN_CheckedChanged(object sender, System.EventArgs e)
-		{
-			FWC.SetATUATTN(chkATUATTN.Checked);
-		}
+        private void chkATUATTN_CheckedChanged(object sender, System.EventArgs e)
+        {
+            FWC.SetATUATTN(chkATUATTN.Checked);
+        }
 
-		private void udATUL_ValueChanged(object sender, System.EventArgs e)
-		{
-			int val = (int)udATUL.Value;
-			chkL9.Checked = ((val & 0x01) == 0x01);
-			chkL8.Checked = ((val & 0x02) == 0x02);
-			chkL7.Checked = ((val & 0x04) == 0x04);
-			chkL6.Checked = ((val & 0x08) == 0x08);
-			chkL5.Checked = ((val & 0x10) == 0x10);
-			chkL4.Checked = ((val & 0x20) == 0x20);
-			chkL3.Checked = ((val & 0x40) == 0x40);
-			chkL2.Checked = ((val & 0x80) == 0x80);
-		}
+        private void udATUL_ValueChanged(object sender, System.EventArgs e)
+        {
+            int val = (int)udATUL.Value;
+            chkL9.Checked = ((val & 0x01) == 0x01);
+            chkL8.Checked = ((val & 0x02) == 0x02);
+            chkL7.Checked = ((val & 0x04) == 0x04);
+            chkL6.Checked = ((val & 0x08) == 0x08);
+            chkL5.Checked = ((val & 0x10) == 0x10);
+            chkL4.Checked = ((val & 0x20) == 0x20);
+            chkL3.Checked = ((val & 0x40) == 0x40);
+            chkL2.Checked = ((val & 0x80) == 0x80);
+        }
 
-		private void udATUC_ValueChanged(object sender, System.EventArgs e)
-		{
-			int val = (int)udATUC.Value;
-			chkC0.Checked = ((val & 0x01) == 0x01);
-			chkC1.Checked = ((val & 0x02) == 0x02);
-			chkC2.Checked = ((val & 0x04) == 0x04);
-			chkC3.Checked = ((val & 0x08) == 0x08);
-			chkC4.Checked = ((val & 0x10) == 0x10);
-			chkC5.Checked = ((val & 0x20) == 0x20);
-			chkC6.Checked = ((val & 0x40) == 0x40);
-		}
+        private void udATUC_ValueChanged(object sender, System.EventArgs e)
+        {
+            int val = (int)udATUC.Value;
+            chkC0.Checked = ((val & 0x01) == 0x01);
+            chkC1.Checked = ((val & 0x02) == 0x02);
+            chkC2.Checked = ((val & 0x04) == 0x04);
+            chkC3.Checked = ((val & 0x08) == 0x08);
+            chkC4.Checked = ((val & 0x10) == 0x10);
+            chkC5.Checked = ((val & 0x20) == 0x20);
+            chkC6.Checked = ((val & 0x40) == 0x40);
+        }
 
         private void chkManualIOUpdate_CheckedChanged(object sender, EventArgs e)
         {
@@ -3130,6 +3194,85 @@ namespace PowerSDR
 
         }
 
-      
+        private void buttonTS2_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("This will reset any MARS,CAP,SHARES operate back to Normal Standard Operation\n",
+
+                         "Yes?",
+                         MessageBoxButtons.YesNo,
+                         MessageBoxIcon.Question);
+
+            if (dr == DialogResult.Yes)
+            {
+
+                if (FWC.WriteTRXEEPROMByte(0x0034, 0xff) == 0) MessageBox.Show("Error in WriteEEPROM 34");
+                txtEEPROMWrite.BackColor = SystemColors.Window;
+                btnEEPROMRead_Click(this, EventArgs.Empty);
+                if (FWC.WriteTRXEEPROMByte(0x0035, 0xff) == 0) MessageBox.Show("Error in WriteEEPROM 35");
+                txtEEPROMWrite.BackColor = SystemColors.Window;
+                btnEEPROMRead_Click(this, EventArgs.Empty);
+                if (FWC.WriteTRXEEPROMByte(0x0036, 0xff) == 0) MessageBox.Show("Error in WriteEEPROM 36");
+                txtEEPROMWrite.BackColor = SystemColors.Window;
+                btnEEPROMRead_Click(this, EventArgs.Empty);
+                if (FWC.WriteTRXEEPROMByte(0x0037, 0xff) == 0) MessageBox.Show("Error in WriteEEPROM 37");
+                txtEEPROMWrite.BackColor = SystemColors.Window;
+                btnEEPROMRead_Click(this, EventArgs.Empty);
+                if (FWC.WriteTRXEEPROMByte(0x0038, 0xff) == 0) MessageBox.Show("Error in WriteEEPROM 38");
+                txtEEPROMWrite.BackColor = SystemColors.Window;
+                btnEEPROMRead_Click(this, EventArgs.Empty);
+                if (FWC.WriteTRXEEPROMByte(0x0039, 0xff) == 0) MessageBox.Show("Error in WriteEEPROM 39");
+                txtEEPROMWrite.BackColor = SystemColors.Window;
+                btnEEPROMRead_Click(this, EventArgs.Empty);
+                if (FWC.WriteTRXEEPROMByte(0x003A, 0xff) == 0) MessageBox.Show("Error in WriteEEPROM 3a");
+                txtEEPROMWrite.BackColor = SystemColors.Window;
+                btnEEPROMRead_Click(this, EventArgs.Empty);
+                if (FWC.WriteTRXEEPROMByte(0x003B, 0xff) == 0) MessageBox.Show("Error in WriteEEPROM 3b");
+                txtEEPROMWrite.BackColor = SystemColors.Window;
+                btnEEPROMRead_Click(this, EventArgs.Empty);
+                if (FWC.WriteTRXEEPROMByte(0x003C, 0xff) == 0) MessageBox.Show("Error in WriteEEPROM 3c");
+                txtEEPROMWrite.BackColor = SystemColors.Window;
+                btnEEPROMRead_Click(this, EventArgs.Empty);
+
+            }
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
+
+        } // numericUpDown1_ValueChanged
+
+        private void buttonTS3_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("Warning: You are changing your Turf Region.\n",
+                                          "Do you have authorization?",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Question);
+
+            if (dr == DialogResult.Yes)
+            {
+                Debug.WriteLine("Byte value " + (byte)numericUpDown1.Value);
+
+                FWC.WriteTRXEEPROMByte(0x001D, (byte)numericUpDown1.Value);
+                txtEEPROMWrite.BackColor = SystemColors.Window;
+                btnEEPROMRead_Click(this, EventArgs.Empty);
+
+
+            }
+
+            MessageBox.Show("You must close PowerSDR and cycle power to the radio. Then go to setup->General->Options->BandText Udpate", "Cycle Power",
+                              MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+        } //  buttonTS3_Click
+
+        private void FLEX5000LLHWForm_Load(object sender, EventArgs e)
+        {
+            byte data;
+            this.TopMost = true; // ke9ns .174
+            FWC.ReadTRXEEPROMByte(0x001D, out data);
+
+            numericUpDown1.Value = data;
+        }
     }
 }

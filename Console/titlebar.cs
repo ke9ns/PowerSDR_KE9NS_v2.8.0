@@ -26,7 +26,6 @@
 //    USA
 //=================================================================
 
-using System;
 using System.Diagnostics;
 using System.Reflection;
 
@@ -35,7 +34,7 @@ namespace PowerSDR
     class TitleBar
     {
 
-        public static Console console;   // ke9ns mod  to allow console to pass back values to setup screen
+        //  public static Console console;   // ke9ns mod  to allow console to pass back values to setup screen
 
 #if (NO_DJ)
         //  public const string BUILT_BY = "Mods Compiled by [KE9NS]";
@@ -51,20 +50,21 @@ namespace PowerSDR
 
         public const string SVN = "SVN: " + SVNRev.LATEST_REV; // + "+"; // change to "" for production, remove + for CCNET
 
+
         public static string GetString()
         {
             string version = GetVerNum(); // 2.8.0
 
             string s = "FlexRadio Systems™  PowerSDR™";
 
-            
+
             if (ALPHABETA != "") s += "  " + ALPHABETA;
 
             s += "  v" + version;  // 2.8.0
 
-         //   if (VERSION_SUFFIX != "") s += "." + VERSION_SUFFIX;
+            //   if (VERSION_SUFFIX != "") s += "." + VERSION_SUFFIX;
 
-         //   if (SVN != "") s += "   " + SVN; 
+            //   if (SVN != "") s += "   " + SVN; 
 
             if (BUILT_BY != "") s += "   " + BUILT_BY;
 
@@ -76,7 +76,7 @@ namespace PowerSDR
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-          //  return fvi.FileVersion.Substring(0, fvi.FileVersion.LastIndexOf(".")); // ke9ns mod
+            //  return fvi.FileVersion.Substring(0, fvi.FileVersion.LastIndexOf(".")); // ke9ns mod
 
             return fvi.FileVersion.ToString();
 
