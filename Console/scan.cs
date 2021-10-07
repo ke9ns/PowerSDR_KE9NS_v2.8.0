@@ -2878,6 +2878,14 @@ namespace PowerSDR
                                 MessageBoxIcon.Error);
                         return;
                     }
+                    if (console.VFOAFreq > 54.0)
+                    {
+                        MessageBox.Show(new Form { TopMost = true }, "No SWR detection above 6m.",
+                               "Error",
+                               MessageBoxButtons.OK,
+                               MessageBoxIcon.Error);
+                        return;
+                    }
                     break;
                 default:
                     MessageBox.Show(new Form { TopMost = true }, "Your Flex Radio does not have an SWR circuit",
@@ -4589,7 +4597,7 @@ namespace PowerSDR
 
         private void checkBoxSWR_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (console.VFOAFreq > 54) checkBoxSWR.Checked = false; // .226 no swr above 6m
         }
 
         private void chkBoxSQLBRKWait_CheckedChanged(object sender, EventArgs e)

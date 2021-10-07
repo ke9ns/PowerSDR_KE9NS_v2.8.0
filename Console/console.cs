@@ -41171,6 +41171,22 @@ namespace PowerSDR
                         ScanForm.lowFBox.Text = ScanControl.freq_Low.ToString("f6");
                     }
 
+                 
+                    try
+                    {
+                     
+                        if (Convert.ToDouble(ScanForm.lowFBox.Text) > 54.0) // .226
+                        {
+                            ScanForm.checkBoxSWR.Checked = false; // .226 no swr beyond 6m
+                        }
+                     
+                    }
+                    catch (Exception)
+                    {
+                       
+
+                    }
+
                     if (RX1Band >= 0 && SLowScan[(int)RX1Band] != " ")
                     {
                         ScanForm.highFBox.Text = SHighScan[(int)RX1Band];
@@ -41178,6 +41194,22 @@ namespace PowerSDR
                     else
                     {
                         ScanForm.highFBox.Text = ScanControl.freq_High.ToString("f6");
+                    }
+
+                    try
+                    {
+                        if (Convert.ToDouble(ScanForm.highFBox.Text) > 54.0) // .226
+                        {
+                            ScanForm.checkBoxSWR.Checked = false; // .226 no swr beyond 6m
+                        }
+
+
+                    }
+                    catch (Exception)
+                    {
+
+
+
                     }
 
 
