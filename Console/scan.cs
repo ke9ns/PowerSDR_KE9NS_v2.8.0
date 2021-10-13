@@ -1905,7 +1905,7 @@ namespace PowerSDR
         int[] memIndex = new int[1000]; // holder for memories that match the group name
         int memtotal = 0; // total matching group name memories found
         int memcount = 0; // total memories found
-        string[] memsignal = new string[1000];
+        string[] memsignal = new string[1000]; // db signal and sql brk
 
 
         //=======================================================================================================================
@@ -3562,10 +3562,10 @@ namespace PowerSDR
 
         //=========================================================================================
         // ke9ns add   select scanner file name (text file freq in hz, name)
-        string[] customString = new string[1000]; // name
-        string[] customFilter = new string[1000]; // filter
-        string[] customMode = new string[1000]; // mode
-        double[] customMem = new double[1000]; // list of custom memory frequency
+        string[] customString = new string[200]; // name
+        string[] customFilter = new string[200]; // filter
+        string[] customMode = new string[200]; // mode
+        double[] customMem = new double[200]; // list of custom memory frequency
 
         public static FileStream stream2;          // for reading SWL.csv file
         public static BinaryReader reader2;
@@ -3574,11 +3574,19 @@ namespace PowerSDR
 
         private void btnCustomList_Click(object sender, EventArgs e)
         {
-            ST3.Stop();
-            ST3.Reset();
 
             ScanPause = false;
+           
+            comboBoxTS1.Text = "";
+            textBox1.Text = "";
+            Gname = "";
+            memcount = 0;
+            memtotal = 0;  //.226
+           
 
+            ST3.Stop();
+            ST3.Reset();
+           
 
             if (ScanRun == false) // if stopped
             {
@@ -3618,6 +3626,8 @@ namespace PowerSDR
                 var result = new StringBuilder();
 
                 Debug.WriteLine("OPEN THE FILE ");
+
+                custSize = 0; // new size of custom freq list
 
                 int x = 0;
                 for (; ; )
@@ -3677,11 +3687,10 @@ namespace PowerSDR
 
 
                 } // for loop 
-
-
+              
                 reader2.Close();    // close  file
                 stream2.Close();   // close stream
-
+               
                 custSize = x; // new size of custom freq list
 
                 ScanRun = true; // start up the scanner
@@ -3717,19 +3726,19 @@ namespace PowerSDR
 
             string temp1 = "";
 
+           
             for (int ii = 0; ii < custSize; ii++)
             {
-
-
+               
                 string freq3 = customMem[ii].ToString("###0.000000"); // was N6 4 less than having index numbers
                 string name = customString[ii];
                 string mm = "Custom Memory List";
 
+                if (memsignal[ii] == "") memsignal[ii] = " ";
                 if (memsignal[ii] == null) memsignal[ii] = " ";
 
-                //  temp1 = temp1 + (ii + 1).ToString().PadLeft(2) + ": " + freq3.PadLeft(12) + " , " + name.PadRight(20).Substring(0,20) + " , " + memsignal[ii].PadRight(20).Substring(0,20) + "\r\n";
-                temp1 = temp1 + (memtotal + 1).ToString().PadLeft(2) + ": " + mm.PadRight(20).Substring(0, 20) + ", " + freq3.PadLeft(12).Substring(0, 12) + ", " + name.PadRight(20).Substring(0, 20) + ", " + memsignal[memtotal].PadRight(20).Substring(0, 20) + "\r\n"; // 74 char long
-
+                temp1 = temp1 + (ii + 1).ToString().PadLeft(2) + ": " + mm.PadRight(20).Substring(0, 20) + ", " + freq3.PadLeft(12).Substring(0, 12) + ", " + name.PadRight(20).Substring(0, 20) + ", " + memsignal[ii].PadRight(20).Substring(0, 20) + "\r\n"; // 74 char long //.226 fix ii
+              
 
             } // for
 
