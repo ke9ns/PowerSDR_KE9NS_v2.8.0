@@ -2560,8 +2560,7 @@ namespace PowerSDR
                 }
                 else if (s.Length == parser.nGet)
                 {
-                    if (console.setupForm.RttyOffsetEnabledA &&
-                        (console.RX1DSPMode == DSPMode.DIGU || console.RX1DSPMode == DSPMode.DIGL))
+                    if (console.setupForm.RttyOffsetEnabledA && (console.RX1DSPMode == DSPMode.DIGU || console.RX1DSPMode == DSPMode.DIGL))
                     {
                         int f = Convert.ToInt32(Math.Round(console.CATVFOA, 6) * 1e6);
                         if (console.RX1DSPMode == DSPMode.DIGU)

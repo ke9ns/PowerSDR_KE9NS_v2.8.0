@@ -71456,10 +71456,10 @@ namespace PowerSDR
             dsp.GetDSPRX(0, 1).DSPMode = new_mode; // ke9ns  ( 0,1) sets the multiRX receiver to the same DSP mode
 
 
-            if (disable_split_on_modechange & !initializing)
-            {
-                if (chkVFOSplit.Checked) chkVFOSplit.Checked = false;
-            }
+        //    if (disable_split_on_modechange & !initializing) // .227 moved to bottom 
+         //   {
+          //      if (chkVFOSplit.Checked) chkVFOSplit.Checked = false;
+          //  }
 
             if (chkVFOATX.Checked || !rx2_enabled)
             {
@@ -72216,6 +72216,10 @@ namespace PowerSDR
                 }
             }
 
+            if (disable_split_on_modechange & !initializing) //.227 moved to here
+            {
+                if (chkVFOSplit.Checked) chkVFOSplit.Checked = false;
+            }
 
         } // SetRX1Mode()
 
