@@ -1,0 +1,84 @@
+ICEPAC output parameter definitions
+         1         2         3         4         5         6         7
+1234567890123456789012345678901234567890123456789012345678901234567890
+MUF   = Maximum Usable Frequency - median (MHz)
+        MUF (median) (MHz)
+        1. 0  0. 30. 5. 1.
+FOT   = Frequency of Optimum Transmission (MHz)
+        FOT (MHz)
+        1. 0  0. 30. 5. 1.
+ANGLE = Radiation angle (degrees)
+        Radiation Angle (degrees)
+        1. 1  0. 0. 10.  1.
+ANGLER= Receiver Radiation angle (degrees)
+        Radiation Angle (Receiver) (degrees)
+        1. 1  0. 0. 10.  1.
+DELAY = Time delay (milliseconds)
+        Time Delay (milliseconds)
+        1. 1  0. 0. 5.  1.
+VHITE = Virtual height (km)
+        Virtual Height (km)
+        1. 1  0. 0. 100.  10.
+MUFday= % of days/month sky-wave propagation expected at MUF mode
+        MUF days/month (%)
+        100. 0  0. 100. 10. 2.
+LOSS  = Median system loss (dB)
+        System Loss (Median) (dB)
+        1. 1  0. 0. 10.  1.
+DBU   = Median field strength at receive location (dBu)
+        Field Strength (Median) (dBu)
+        1. 1  0. 0. 10.  1.
+TGAIN = Transmitter Antenna Gain (dB)
+        Transmitter Antenna Gain (dB)
+        1. 1  0. 0. 10.  1.
+RGAIN = Receiver Antenna Gain (dB)
+        Receiver Antenna Gain (dB)
+        1. 1  0. 0. 10.  1.
+DBM   = Median signal power at receiver (dBm)
+        Signal Power (Median) (dBm)
+        1. 1  0. 0. 10.  1.
+SDBW  = Median signal power at receiver (dBW)
+        Signal Power at Receiver (dBW)
+        1. 1  0. 0. 10.  1.
+NDBW  = Median noise  power at receiver (dBW)
+        Noise Power at Receiver (dBW)
+        1. 1  0. 0. 10.  1.
+SNR   = Median signal-to-noise ratio (dB)
+        Signal-to-Noise (Median) (dB)
+        1. 1  0. 0. 10.  1.
+SNRxx = Signal-to-Noise ratio (dB) at Req. Rel.
+        Signal-to-Noise at Req. Rel. (dB)
+        1. 1  0. 0. 10.  1.
+RPWRG = Required power & antenna gain to achieve reliab (dB)
+        Required Power & Antenna Gain (dB)
+        1. 1  0. 0. 10.  1.
+REL   = Time availability, % time SNR exceeds required SNR
+        Reliability   SNR > Req SNR (%)
+        100. 0  0. 100. 10. 2.
+MPROB = Probability additional mode in multipath tolerances
+        Multipath Probability (%)
+        100. 0  0. 100. 10. 2.
+SPRB  = Service probability, required reliabilty will be met
+        Service Probability (%)
+        100. 0  0. 100. 10. 2.
+SIGLW = Lower decile signal pwr (field strength & loss) (dB)
+        Signal Power (Lower Decile) (dB)
+        1. 1  0. 0. 10.  1.
+SIGUP = Upper decile signal pwr (field strength & loss) (dB)
+        Signal Power (Upper Decile) (dB)
+        1. 1  0. 0. 10.  1.
+VHFDBU= VHF median field strength (dBu)
+        VHF Median Field Strength (dBu)
+        1. 1  0. 0. 10.  1.
+VHFLW = VHF lower decile increment (dB)
+        VHF LW (Lower Decile) (dB)
+        1. 1  0. 0. 10.  1.
+VHFUP = VHF upper decile increment (dB)
+        VHF UP (Upper Decile) (dB)
+        1. 1  0. 0. 10.  1.
+SNRLW = Lower decile SNR increment (dB)
+        SNR LW (Lower Decile) (dB)
+        1. 1  0. 0. 10.  1.
+SNRUP = Upper decile SNR increment (dB)
+        SNR UP (Upper Decile) (dB)
+        1. 1  0. 0. 10.  1.

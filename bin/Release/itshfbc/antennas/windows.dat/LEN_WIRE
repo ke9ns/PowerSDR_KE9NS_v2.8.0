@@ -1,0 +1,6 @@
+-9.9901 999.901
+Wire Length
+Range [-9.99 to 999.9] meters or wavelengths
+Enter the Wire Length
+If positive, units are meters.
+If negative, units are wavelengths.

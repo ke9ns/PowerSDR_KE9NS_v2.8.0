@@ -1,0 +1,7 @@
+-9.9901 999.901
+Horizontal Distance between Dipole Centers
+Range [-9.99 to 999.9] meters or wavelengths
+Enter the Horizontal Distance between Dipole Centers.
+This is the spacing between bays.
+If positive, units are meters.
+If negative, units are wavelengths.

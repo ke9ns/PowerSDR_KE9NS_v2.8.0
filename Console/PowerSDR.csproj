@@ -171,6 +171,12 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ADODB">
       <Name>adodb</Name>
@@ -824,58 +830,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\picD2.png" />
     <EmbeddedResource Include="HttpServer\template.html" />
-    <None Include="bin\Release\PowerSDR.application" />
-    <None Include="bin\Release\PowerSDR.exe.config" />
-    <None Include="bin\Release\PowerSDR.exe.manifest" />
-    <None Include="bin\Release\Resources\swiss.ttf" />
-    <None Include="bin\Release\Resources\swissb.ttf" />
-    <None Include="bin\Release\Resources\swissbi.ttf" />
-    <None Include="bin\Release\Resources\swissbo.ttf" />
-    <None Include="bin\Release\Resources\swissc.ttf" />
-    <None Include="bin\Release\Resources\swisscb.ttf" />
-    <None Include="bin\Release\Resources\swisscbi.ttf" />
-    <None Include="bin\Release\Resources\swisscbo.ttf" />
-    <None Include="bin\Release\Resources\swissci.ttf" />
-    <None Include="bin\Release\Resources\swissck.ttf" />
-    <None Include="bin\Release\Resources\swisscki.ttf" />
-    <None Include="bin\Release\Resources\swisscl.ttf" />
-    <None Include="bin\Release\Resources\swisscli.ttf" />
-    <None Include="bin\Release\Resources\swisse.ttf" />
-    <None Include="bin\Release\Resources\swisseb.ttf" />
-    <None Include="bin\Release\Resources\swissek.ttf" />
-    <None Include="bin\Release\Resources\swissel.ttf" />
-    <None Include="bin\Release\Resources\swissi.ttf" />
-    <None Include="bin\Release\Resources\swissk.ttf" />
-    <None Include="bin\Release\Resources\swisski.ttf" />
-    <None Include="bin\Release\Resources\swissko.ttf" />
-    <None Include="bin\Release\Resources\swissl.ttf" />
-    <None Include="bin\Release\Resources\swissli.ttf" />
-    <None Include="bin\x86\Release\PowerSDR.application" />
-    <None Include="bin\x86\Release\PowerSDR.exe.config" />
-    <None Include="bin\x86\Release\PowerSDR.exe.manifest" />
-    <None Include="bin\x86\Release\Resources\swiss.ttf" />
-    <None Include="bin\x86\Release\Resources\swissb.ttf" />
-    <None Include="bin\x86\Release\Resources\swissbi.ttf" />
-    <None Include="bin\x86\Release\Resources\swissbo.ttf" />
-    <None Include="bin\x86\Release\Resources\swissc.ttf" />
-    <None Include="bin\x86\Release\Resources\swisscb.ttf" />
-    <None Include="bin\x86\Release\Resources\swisscbi.ttf" />
-    <None Include="bin\x86\Release\Resources\swisscbo.ttf" />
-    <None Include="bin\x86\Release\Resources\swissci.ttf" />
-    <None Include="bin\x86\Release\Resources\swissck.ttf" />
-    <None Include="bin\x86\Release\Resources\swisscki.ttf" />
-    <None Include="bin\x86\Release\Resources\swisscl.ttf" />
-    <None Include="bin\x86\Release\Resources\swisscli.ttf" />
-    <None Include="bin\x86\Release\Resources\swisse.ttf" />
-    <None Include="bin\x86\Release\Resources\swisseb.ttf" />
-    <None Include="bin\x86\Release\Resources\swissek.ttf" />
-    <None Include="bin\x86\Release\Resources\swissel.ttf" />
-    <None Include="bin\x86\Release\Resources\swissi.ttf" />
-    <None Include="bin\x86\Release\Resources\swissk.ttf" />
-    <None Include="bin\x86\Release\Resources\swisski.ttf" />
-    <None Include="bin\x86\Release\Resources\swissko.ttf" />
-    <None Include="bin\x86\Release\Resources\swissl.ttf" />
-    <None Include="bin\x86\Release\Resources\swissli.ttf" />
     <None Include="images\meterback1.png" />
     <None Include="images\meterback2.png" />
     <EmbeddedResource Include="Resources\star.png" />
@@ -901,57 +855,10 @@
     <EmbeddedResource Include="Resources\SC.png" />
     <EmbeddedResource Include="Resources\SCB.png" />
     <EmbeddedResource Include="Resources\ant3.png" />
+    <None Include="Properties\app.manifest" />
     <None Include="Resources\VFOblueB.png" />
     <None Include="Resources\VFOred.png" />
     <None Include="Resources\newvfo.png" />
-    <Content Include="bin\Release\ADODB.dll" />
-    <Content Include="bin\Release\app.publish\PowerSDR.exe" />
-    <Content Include="bin\Release\atu.dll" />
-    <Content Include="bin\Release\Flex1500USB.dll" />
-    <Content Include="bin\Release\FlexControl.dll" />
-    <Content Include="bin\Release\FlexCW.dll" />
-    <Content Include="bin\Release\Interop.TDxInput.dll" />
-    <Content Include="bin\Release\libmp3lame.32.dll" />
-    <Content Include="bin\Release\libmp3lame.64.dll" />
-    <Content Include="bin\Release\NAudio.dll" />
-    <Content Include="bin\Release\NAudio.Lame.dll" />
-    <Content Include="bin\Release\NAudio.xml" />
-    <Content Include="bin\Release\Newtonsoft.Json.dll" />
-    <Content Include="bin\Release\Newtonsoft.Json.xml" />
-    <Content Include="bin\Release\PowerMate.dll" />
-    <Content Include="bin\Release\PowerSDR.exe" />
-    <Content Include="bin\Release\Sanford.Collections.dll" />
-    <Content Include="bin\Release\Sanford.Multimedia.dll" />
-    <Content Include="bin\Release\Sanford.Multimedia.Midi.dll" />
-    <Content Include="bin\Release\Sanford.Multimedia.Timers.dll" />
-    <Content Include="bin\Release\Sanford.Threading.dll" />
-    <Content Include="bin\Release\System.Json.dll" />
-    <Content Include="bin\Release\TNF.dll" />
-    <Content Include="bin\Release\wdapi_dotnet1040.dll" />
-    <Content Include="bin\x86\Release\ADODB.dll" />
-    <Content Include="bin\x86\Release\app.publish\PowerSDR.exe" />
-    <Content Include="bin\x86\Release\atu.dll" />
-    <Content Include="bin\x86\Release\Flex1500USB.dll" />
-    <Content Include="bin\x86\Release\FlexControl.dll" />
-    <Content Include="bin\x86\Release\FlexCW.dll" />
-    <Content Include="bin\x86\Release\Interop.TDxInput.dll" />
-    <Content Include="bin\x86\Release\libmp3lame.32.dll" />
-    <Content Include="bin\x86\Release\libmp3lame.64.dll" />
-    <Content Include="bin\x86\Release\NAudio.dll" />
-    <Content Include="bin\x86\Release\NAudio.Lame.dll" />
-    <Content Include="bin\x86\Release\NAudio.xml" />
-    <Content Include="bin\x86\Release\Newtonsoft.Json.dll" />
-    <Content Include="bin\x86\Release\Newtonsoft.Json.xml" />
-    <Content Include="bin\x86\Release\PowerMate.dll" />
-    <Content Include="bin\x86\Release\PowerSDR.exe" />
-    <Content Include="bin\x86\Release\Sanford.Collections.dll" />
-    <Content Include="bin\x86\Release\Sanford.Multimedia.dll" />
-    <Content Include="bin\x86\Release\Sanford.Multimedia.Midi.dll" />
-    <Content Include="bin\x86\Release\Sanford.Multimedia.Timers.dll" />
-    <Content Include="bin\x86\Release\Sanford.Threading.dll" />
-    <Content Include="bin\x86\Release\System.Json.dll" />
-    <Content Include="bin\x86\Release\TNF.dll" />
-    <Content Include="bin\x86\Release\wdapi_dotnet1040.dll" />
     <Content Include="Resources\blue1.png" />
     <Content Include="Resources\panGray.png" />
     <Content Include="Resources\PanRed.png" />
@@ -1349,16 +1256,12 @@
   <ItemGroup>
     <Analyzer Include="..\packages\Roslyn.Analyzers.1.0.3.4\analyzers\dotnet\cs\Roslyn.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\x64\Debug\" />
-    <Folder Include="bin\x64\Release\" />
-    <Folder Include="bin\x86\Debug\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
-    <PostBuildEvent>copy "$(ProjectDir)CAT\CATstructs.xml" "$(TargetDir)";</PostBuildEvent>
+    <PostBuildEvent>copy "$(ProjectDir)CAT\CATstructs.xml" "$(ProjectDir)..\bin\Release";</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\AutoItX.Dotnet.3.3.14.5\build\AutoItX.Dotnet.targets" Condition="Exists('..\packages\AutoItX.Dotnet.3.3.14.5\build\AutoItX.Dotnet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

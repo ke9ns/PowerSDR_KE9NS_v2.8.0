@@ -1,0 +1,16 @@
+Coeffs   :CCIR
+Months   : 1994= 6.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00
+Ssns     :        100    0    0    0    0    0    0    0    0    0
+Qindexs  :        0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0
+Hours    :    1   24    1 U=UT  at Transmitter
+Receive  : 44.90N    20.50E   BELGRADE
+Rec Ant  :DEFAULT \SWWHIP.VOA        0.00      0.00
+Freqs    :  6075  7200  9700 11850 13700 15350 17725 21650 25885     0     0
+System   :  145     0.100   90   73     3.000     0.100
+S/I Parms:   4800.00     42.00     90.00     52.00
+Wanted   : 35.80N     5.90W   TANGIER, Morocco    Short   20
+W_antenna:   0.000 DEFAULT \CONST17.VOA     0.0 500.00000
+W_Fprob  : 1.00 1.00 1.00 0.70
+Unwanted : 15.37N   120.63E   TINANG, Philippines Short   20
+U_antenna:   0.000 DEFAULT \CONST17.VOA     0.0 500.00000
+U_Fprob  : 1.00 1.00 1.00 0.70

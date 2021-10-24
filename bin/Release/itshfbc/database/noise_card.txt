@@ -1,0 +1,66 @@
+--------------------------------------------------------------------------------
+New input card (for ICEPAC POINT-to-POINT only) to define measured noise
+--------------------------------------------------------------------------------
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+NOISE     xxxxxyyyyyaaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeefffffffff
+--------------------------------------------------------------------------------
+Where:
+      xxxxx      = Noise Type (1=Man-Made noise,  2=Total noise)
+      yyyyy      = Band Width in KHz (default=1KHz)
+      aaaaaaaaaa = measured Noise @  2.5 MHz
+      bbbbbbbbbb = measured Noise @  5.0 MHz
+      cccccccccc = measured Noise @  7.5 MHz
+      dddddddddd = measured Noise @ 10.0 MHz
+      eeeeeeeeee = measured Noise @ 20.0 MHz
+      ffffffffff = measured Noise @ 30.0 MHz
+------------------------------------------------------------------------------
+Measured noise is from the paper:
+Measurement of HF Monopole Antenna Array Ground Wave Gain, Antenna Factor,
+and Antenna Noise Factor by Virgilio P. Arafiles.
+The measured noise values are from equation 8 and are really En+Gr.
+The value of the measurement bandwidth (b) is the input value yyyyy.
+------------------------------------------------------------------------------
+Not for use in this GUI interface.
+Should only be used by the sponsor who requested the change as they are
+aware of the limitations.
+------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+New input card (for ICEAREA only) to define measured noise
+Place this card at the END of the xxxxx.ICE data file.
+This will be AFTER the "Tx Ants" card.
+No ":" is needed in column 10, but it can be there to be consistent with the others.
+Realize that this will cause the same same noise values at each grid point.
+This will be true if "Noise Type=2=Total noise".
+If "Noise Type=1=Man-Made noise" is selected, only man-made noise will be
+the same at each grid point. Since the noise at each grid point is a combination
+of Atmospheric+ManMade+Galactic, the total noise will be different.
+But the important thing to know is IT IS NOT CORRECT!
+But the sponsor knows this.
+--------------------------------------------------------------------------------
+         1         2         3         4         5         6         7         8
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+NOISE     xxxxxyyyyyaaaaaaaaaabbbbbbbbbbccccccccccddddddddddeeeeeeeeeeefffffffff
+--------------------------------------------------------------------------------
+Where:
+      xxxxx      = Noise Type (1=Man-Made noise,  2=Total noise)
+      yyyyy      = Band Width in KHz (default=1KHz)
+      aaaaaaaaaa = measured Noise @  2.5 MHz
+      bbbbbbbbbb = measured Noise @  5.0 MHz
+      cccccccccc = measured Noise @  7.5 MHz
+      dddddddddd = measured Noise @ 10.0 MHz
+      eeeeeeeeee = measured Noise @ 20.0 MHz
+      ffffffffff = measured Noise @ 30.0 MHz
+------------------------------------------------------------------------------
+Measured noise is from the paper:
+Measurement of HF Monopole Antenna Array Ground Wave Gain, Antenna Factor,
+and Antenna Noise Factor by Virgilio P. Arafiles.
+The measured noise values are from equation 8 and are really En+Gr.
+The value of the measurement bandwidth (b) is the input value yyyyy.
+------------------------------------------------------------------------------
+Not for use in this GUI interface.
+Should only be used by the sponsor who requested the change as they are
+aware of the limitations.
+------------------------------------------------------------------------------

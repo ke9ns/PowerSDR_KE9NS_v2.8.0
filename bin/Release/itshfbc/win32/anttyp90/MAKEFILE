@@ -1,0 +1,6 @@
+
+OBJECTS = anttyp90.obj ant90.obj \
+	lenchar.obj ucase.obj
+
+anttyp90.exe: $(OBJECTS)
+	slink anttyp90.lnk

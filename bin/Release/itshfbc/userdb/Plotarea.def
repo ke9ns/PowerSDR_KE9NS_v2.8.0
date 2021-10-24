@@ -1,0 +1,12 @@
+ TRANSMITTER name      Lat   Long <>PROJ CENTER name      Lat   Long
+                                    X-min    X-max     Y-min    Y-max
+ RHODES, Greece       36N18  28E00<>TANGIER, Morocco     35N48   5W54
+                                    -1000.   6000.     -1000.   4000.
+ TANGIER, Morocco     35N48   5W54<>BUDAPEST             47N30  19E03
+                                     -500.    500.      -500.    500.
+ TANGIER, Morocco     35N48   5W54<>NE Hemisphere         0N00   0E00
+             21   37                    0.    180.         0.     90.
+ TANGIER, Morocco     35N48   5W54<>TANGIER, Morocco     35N48   5W54
+                                    -1000.   6000.     -1000.   4000.
+ TANGIER, Morocco     35N48   5W54<>TANGIER, Morocco     35N48   5W54
+                                    -2000.   2000.     -1500.   1500.

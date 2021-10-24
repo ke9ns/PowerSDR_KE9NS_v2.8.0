@@ -1,0 +1,20 @@
+Model    :VOACAP
+Colors   :Black    :Blue     :Ignore   :Ignore   :Red      :Black with shading
+Cities   :Receive.cty
+Nparms   :    2
+Parameter:MUF      0
+Parameter:SDBW     0
+Transmit : 42.00N    82.00W   me                   Short
+Pcenter  :  0.00N     0.00E   center
+Area     :    -180.0     180.0     -90.0      90.0
+Gridsize :   31    1
+Method   :   30
+Coeffs   :URSI
+Months   :  11.10   0.00   0.00   0.00   0.00   0.00   0.00   0.00   0.00
+Ssns     :     29      0      0      0      0      0      0      0      0
+Hours    :      2      0      0      0      0      0      0      0      0
+Freqs    :  7.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000
+System   :  145     0.100   90   73     3.000     0.100
+Fprob    : 1.00 1.00 1.00 0.00
+Rec Ants :[DEFAULT \SWWHIP.VOA  ]  gain=   0.0   0.0
+Tx Ants  :[DEFAULT \CONST17.VOA ]  0.000  57.0     0.1000

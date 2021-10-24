@@ -1,0 +1,13 @@
+01 Feb  2009    News for NTIA/ITS HF Propagation Models (WINDOWS version)
+
+01 Feb  2009   1. A problem was found in REC533.
+                  If the receive location is in the western hemisphere, such as 90W,
+                  the output file would show a value like 270W.
+                  The calculations were all correct, just the display of the
+                  receive location was wrong. This has been fixed.
+                  A lot of strange things contributed to this.
+                  1. For some unknown reason in REC533, east longitude is NEGATIVE.
+                  2. For noise calculations, a longitude between 0-360 was needed.
+                  I think these conflicting problems arose because REC533 was
+                  created by cannibalizing software from different developers.
+                  

@@ -1,0 +1,21 @@
+RECAREA output parameter definitions
+         1         2         3         4         5         6         7
+1234567890123456789012345678901234567890123456789012345678901234567890
+MUF   = Maximum Usable Frequency (MHz)
+        Max Usable Freq     MUF                 [MHz]
+        1. 1  2 2. 0.
+ANGL  = Radiation angle (degrees)
+        Radiation Angle                         [degrees]
+        1. 2  0
+DBU   = Median field strength at receiver (dBu)
+        Field Strength      Median              [dBu]
+        1. 1  2 5. 0.
+S/N   = Median Signal-to-noise ratio (dB)
+        Signal-to-Noise     Median Decile       [dB]
+        1. 1  2 5. 0.
+FS/N  = Probability SNR exceeds required SNR
+        Probability         SNR > Req SNR       [%]
+        100.  0  6 1. 20. 50. 80. 90. 110.
+SNxx  = Signal-to-Noise ratio (dB) at Req. Rel.
+        Signal-to-Noise     at Req. Rel.        [dB]
+        1. 1  2 5. 0.

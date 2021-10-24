@@ -1,0 +1,19 @@
+Model    :VOACAP
+Colors   :Black    :Blue     :Ignore   :Ignore   :Red      :Black with shading
+Cities   :RECEIVE.CTY
+Nparms   :    1
+Parameter:DBU      0
+Receive  : 44.00N    88.00W   chicago              Short
+Pcenter  :  0.00N     0.00E   gmt
+Area     :    -180.0     180.0     -90.0      90.0
+Gridsize :   31    1
+Method   :   20
+Coeffs   :CCIR
+Months   :  12.00   0.00   0.00   0.00   0.00   0.00   0.00   0.00   0.00
+Ssns     :     10      0      0      0      0      0      0      0      0
+Hours    :      3      0      0      0      0      0      0      0      0
+Freqs    :  7.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000
+System   :  145     0.100   90   73     3.000     0.100
+Fprob    : 1.00 1.00 1.00 0.00
+Rec Ants :[DEFAULT \SWWHIP.VOA  ]  gain=   0.0   0.0
+Tx Ants  :[DEFAULT \CONST17.VOA ]  0.000  -1.0     0.2000

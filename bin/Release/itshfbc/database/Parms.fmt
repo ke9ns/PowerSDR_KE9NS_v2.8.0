@@ -1,0 +1,455 @@
+ 0  2                           Constant Gain Isotope
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+ 1 13                           ITU-R Rec 705 Multiband Aperiodic Reflector
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+I(20H[ 6] # Row   Elems.:,i4)
+I(20H[ 7] # Stack Elems.:,i4)
+F(20H[ 8] Design    Freq:,f6.3)
+F(20H[ 9] Ht. abv Ground:,f6.2)
+I(20H[10] Slew Angle....:,i4)
+F(20H[11] Reflector Dist:,f6.2)
+F(20H[12] Ref Wire space:,f6.2)
+I(20H[13] Ref Wire diam.:,i4)
+ 2 11                           ITU-R Rec 705 Dual-Band Center-Fed Half-Wave
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+I(20H[ 6] # Row   Elems.:,i4)
+I(20H[ 7] # Stack Elems.:,i4)
+F(20H[ 8] Design    Freq:,f6.3)
+F(20H[ 9] Ht. abv Ground:,f6.2)
+I(20H[10] Slew Angle....:,i4)
+F(20H[11] Current Ratio.:,f5.1)
+ 3 11                           ITU-R Rec 705 Dual-Band    End-Fed Half-Wave
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+I(20H[ 6] # Row   Elems.:,i4)
+I(20H[ 7] # Stack Elems.:,i4)
+F(20H[ 8] Design    Freq:,f6.3)
+F(20H[ 9] Ht. abv Ground:,f6.2)
+I(20H[10] Slew Angle....:,i4)
+F(20H[11] Current Ratio.:,f5.1)
+ 4 10                           ITU-R Rec 705 Tropical array
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+I(20H[ 6] # Row   Elems.:,i4)
+I(20H[ 7] # Stack Elems.:,i4)
+F(20H[ 8] Design    Freq:,f6.3)
+F(20H[ 9] Ht. abv Ground:,f6.2)
+I(20H[10] Slew Angle....:,i4)
+ 5 12                           ITU-R Rec 705 Horizontal Log-Periodic Array
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+I(20H[ 6] # Elements....:,i4)
+F(20H[ 7] Shortest Elem.:,f6.1)
+F(20H[ 8] Longest  Elem.:,f6.1)
+F(20H[ 9] S/L Center Dis:,f6.1)
+F(20H[10] Shrtest Height:,f7.2)
+F(20H[11] Longest Height:,f7.2)
+F(20H[12] Feeder Impedan:,f6.1)
+ 6 12                           ITU-R Rec 705 Vertical   Log-Periodic Array
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+I(20H[ 6] # Elements....:,i4)
+F(20H[ 7] Shortest Elem.:,f6.1)
+F(20H[ 8] Longest  Elem.:,f6.1)
+F(20H[ 9] S/L Center Dis:,f6.1)
+F(20H[10] Shrtest Height:,f7.2)
+F(20H[11] Longest Height:,f7.2)
+F(20H[12] Feeder Impedan:,f6.1)
+ 7  8                           ITU-R Rec 705 Horizontal Rhombic
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Rhombus Length:,f6.2)
+F(20H[ 7] Ht. abv Ground:,f6.2)
+F(20H[ 8] 1/2 obtuse ang:,f6.2)
+ 8  7                           ITU-R Rec 705 Quadrant antenna
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f6.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Design    Freq:,f6.3)
+F(20H[ 7] Ht. abv Ground:,f6.2)
+ 9  7                           ITU-R Rec 705 Crossed Dipole Antenna
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Design    Freq:,f6.3)
+F(20H[ 7] Ht. abv Ground:,f6.2)
+10  9                           ITU-R Rec 705 Vertical Monopole
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Ht. abv Ground:,f6.2)
+F(20H[ 7] Earth radius..:,f6.1)
+I(20H[ 8] Wire diameter.:,i4)
+I(20H[ 9] Wire number...:,i4)
+11  3                           Gain Table Versus Elevation Angle
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+F(20H[ 3] Efficiency....:,f6.2)
+12 15                           Curtain Array from NTIA Report 87-215
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+I(20H[ 6] # Row   Elems.:,i4)
+I(20H[ 7] # Stack Elems.:,i4)
+F(20H[ 8] Design    Freq:,f6.3)
+F(20H[ 9] Element Length:,f6.3)
+F(20H[10] Ht. abv Ground:,f6.3)
+F(20H[11] Horiz bet Cent:,f6.2)
+F(20H[12] Vert spacing  :,f6.2)
+F(20H[13] Reflector Dist:,f6.2)
+I(20H[14] Excitation mod:,i4)
+I(20H[15] Slew Angle....:,i4)
+13  4                           Gain Table Versus Azimuth & Elevation Angle
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+F(20H[ 3] Efficiency....:,f6.2)
+F(20H[ 4] Frequency.....:,f6.3)
+14  3                           Point-to-Point Gain Table (Elevation & Freq)
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+F(20H[ 3] Operating Freq:,f6.3)
+15  0                           Not yet used
+16  0                           Not yet used
+17  0                           Not yet used
+18  0                           Not yet used
+19  0                           Not yet used
+20  0                           Not yet used
+21  8                           ITSA-1 IONCAP  Terminated Horizontal Rhombic
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] 1/2 obtuse ang:,f6.2)
+F(20H[ 7] Leg Length    :,f6.2)
+F(20H[ 8] Ht. abv Ground:,f6.2)
+22  7                           ITSA-1 IONCAP  Vertical Monopole
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Antenna Height:,f6.2)
+F(20H[ 7] Gain ab dipole:,f6.2)
+23  8                           ITSA-1 IONCAP  Horizontal Dipole
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Antenna Length:,f6.2)
+F(20H[ 7] Antenna Height:,f6.2)
+F(20H[ 8] Gain ab dipole:,f6.2)
+24  8                           ITSA-1 IONCAP  Horizontal Yagi
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Antenna Length:,f6.2)
+F(20H[ 7] Antenna Height:,f6.2)
+F(20H[ 8] Gain ab dipole:,f6.2)
+25  6                           ITSA-1 IONCAP  Vertical Log-Periodic
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Gain ab dipole:,f6.2)
+26 12                           ITSA-1 IONCAP  Curtain
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+I(20H[ 6] # of Bays     :,i4)
+F(20H[ 7] Element Length:,f6.2)
+F(20H[ 8] Element Height:,f6.2)
+I(20H[ 9] # elements/bay:,i4)
+F(20H[10] dist/elements :,f6.2)
+F(20H[11] Vertical space:,f6.2)
+F(20H[12] Dist to Screen:,f6.2)
+27  9                           ITSA-1 IONCAP  Sloping Vee
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] 1/2 apex angle:,f6.2)
+F(20H[ 7] Leg Length    :,f6.2)
+F(20H[ 8] Ht. abv Ground:,f6.2)
+F(20H[ 9] Terminate hite:,f6.3)
+28  7                           ITSA-1 IONCAP  Inverted L
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Antenna Length:,f6.2)
+F(20H[ 7] Antenna Height:,f6.2)
+29  9                           ITSA-1 IONCAP  Sloping Rhombic
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] 1/2 apex angle:,f6.2)
+F(20H[ 7] Leg Length    :,f6.2)
+F(20H[ 8] Ht. abv Ground:,f6.2)
+F(20H[ 9] Terminate hite:,f6.3)
+30 10                           ITSA-1 IONCAP  Interlaced Rhombic
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] 1/2 apex angle:,f6.2)
+F(20H[ 7] Leg Length    :,f6.2)
+F(20H[ 8] Lower height  :,f6.2)
+F(20H[ 9] Vertical Displ:,f6.2)
+F(20H[10] Horiz feed dis:,f6.3)
+31  8                           ITS-78 HFMUFES Terminated Horizontal Rhombic
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] 1/2 obtuse ang:,f6.2)
+F(20H[ 7] Leg Length    :,f6.2)
+F(20H[ 8] Ht. abv Ground:,f6.2)
+32  7                           ITS-78 HFMUFES Vertical Monopole
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Antenna Height:,f6.2)
+F(20H[ 7] Gain ab dipole:,f6.2)
+33  8                           ITS-78 HFMUFES Horizontal Half-Wave Dipole
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Antenna Length:,f6.2)
+F(20H[ 7] Antenna Height:,f6.2)
+F(20H[ 8] Gain ab dipole:,f6.2)
+34 12                           ITS-78 HFMUFES Horizontal Yagi
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Antenna Height:,f6.2)
+F(20H[ 7] Driven Length :,f6.2)
+F(20H[ 8] Reflector Len :,f6.2)
+F(20H[ 9] Director Lengt:,f6.2)
+F(20H[10] Director Spacn:,f6.3)
+F(20H[11] Reflector Spac:,f6.3)
+I(20H[12] # of elements :,i4)
+35  8                           ITS-78 HFMUFES Vertical Dipole
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Antenna Length:,f6.2)
+F(20H[ 7] Feed    Height:,f6.2)
+F(20H[ 8] Gain ab dipole:,f6.2)
+36 12                           ITS-78 HFMUFES Curtain
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+I(20H[ 6] # of Bays     :,i4)
+F(20H[ 7] Element Length:,f6.2)
+F(20H[ 8] Element Height:,f6.2)
+I(20H[ 9] # elements/bay:,i4)
+F(20H[10] dist/elements :,f6.2)
+F(20H[11] Vertical space:,f6.2)
+F(20H[12] Dist to Screen:,f6.2)
+37  9                           ITS-78 HFMUFES Terminated Sloping Vee
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] 1/2 apex angle:,f6.2)
+F(20H[ 7] Leg Length    :,f6.2)
+F(20H[ 8] Ht. abv Ground:,f6.2)
+F(20H[ 9] Terminate hite:,f6.3)
+38  7                           ITS-78 HFMUFES Inverted L
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Antenna Length:,f6.2)
+F(20H[ 7] Antenna Height:,f6.2)
+39  9                           ITS-78 HFMUFES Terminated Sloping Rhombic
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] 1/2 apex angle:,f6.2)
+F(20H[ 7] Leg Length    :,f6.2)
+F(20H[ 8] Ht. abv Ground:,f6.2)
+F(20H[ 9] Terminate hite:,f6.3)
+40  0       (Not implemented)   ITS-78 HFMUFES Antenna gains in stored array
+41  8                           ITS-78 HFMUFES Sloping Long Wire
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Slope from Hor:,f6.2)
+F(20H[ 7] Wire Length   :,f6.2)
+F(20H[ 8] Feed Height   :,f6.2)
+42  0       (Not implemented)   ITS-78 HFMUFES Constant gain
+43 12                           ITS-78 HFMUFES Horiz Crossed-Dipole Log Periodic
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Feed Height   :,f7.4)
+F(20H[ 7] Rear element L:,f7.3)
+F(20H[ 8] Slope from Vert,f6.2)
+F(20H[ 9] Impedance (Ohm),f6.1)
+F(20H[10] Axis-tips Angle,f6.2)
+F(20H[11] Geometric Ratio,f6.3)
+I(20H[12] # of elements  ,i6)
+44  8                           ITS-78 HFMUFES Arbitrary Tilted Dipole
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Tilt from Horz:,f6.2)
+F(20H[ 7] Length        :,f6.2)
+F(20H[ 8] Feed Height   :,f6.2)
+45  7                           ITS-78 HFMUFES Side-Loaded Vertical Half-Rhombic
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Leg-ground Ang:,f6.2)
+F(20H[ 7] Leg Length    :,f6.2)
+46 12                           ITS-78 HFMUFES Sloping Double-Rhomboid
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Feed Height   :,f6.2)
+F(20H[ 7] Short leg leng:,f6.2)
+F(20H[ 8] Principal angl:,f6.2)
+F(20H[ 9] Major-short Ang,f6.2)
+F(20H[10] Major-long  Ang,f6.2)
+F(20H[11] Long leg length,f6.2)
+F(20H[12] Terminate hite:,f6.2)
+47  9                           ITS-78 HFMUFES Vertical Monopole w/Ground System
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+F(20H[ 5] Operating Freq:,f6.3)
+F(20H[ 6] Antenna Length:,f6.2)
+F(20H[ 7] Radial lengths:,f6.2)
+F(20H[ 8] Radial radii  :,f6.3)
+I(20H[ 9] # of radials  :,i6)
+48  2                           NOSC-95 Inverted Cone Antenna
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+49  0                           Not yet used
+50  0                           Not yet used
+51  0                           Not yet used
+52  0                           Not yet used
+53  0                           Not yet used
+54  0                           Not yet used
+55  0                           Not yet used
+56  0                           Not yet used
+57  0                           Not yet used
+58  0                           Not yet used
+59  0                           Not yet used
+60  0                           Not yet used
+61  0                           Not yet used
+62  0                           Not yet used
+63  0                           Not yet used
+64  0                           Not yet used
+65  0                           Not yet used
+66  0                           Not yet used
+67  0                           Not yet used
+68  0                           Not yet used
+69  0                           Not yet used
+70  0                           Not yet used
+71  0                           Not yet used
+72  0                           Not yet used
+73  0                           Not yet used
+74  0                           Not yet used
+75  0                           Not yet used
+76  0                           Not yet used
+77  0                           Not yet used
+78  0                           Not yet used
+79  0                           Not yet used
+80  0                           Not yet used
+81  0                           Not yet used
+82  0                           Not yet used
+83  0                           Not yet used
+84  0                           Not yet used
+85  0                           Not yet used
+86  0                           Not yet used
+87  0                           Not yet used
+88  0                           Not yet used
+89  0                           Not yet used
+90  4                           Type 90 data file
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)
+I(20H[ 3] Dielectric....:,i4)
+F(20H[ 4] Conductivity..:,f7.5)
+91  0                           Not yet used
+92  0                           Not yet used
+93  0                           Not yet used
+94  0                           Not yet used
+95  0                           Not yet used
+96  0                           Not yet used
+97  0                           Not yet used
+98  0                           Not yet used
+99  2                           Type 99 data file
+F(20H[ 1] Max Gain dBi..:,f6.2)
+I(20H[ 2] Antenna Type..:,i4)

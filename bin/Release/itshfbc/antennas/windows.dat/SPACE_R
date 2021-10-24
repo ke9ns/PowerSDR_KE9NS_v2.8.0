@@ -1,0 +1,6 @@
+-9.9901 999.901
+Spacing between Reflector and Driven Element
+Range [-9.99 to 999.9] meters or wavelengths
+Enter the spacing between the Reflector and the Driven Element.
+If positive, units are meters.
+If negative, units are wavelengths.

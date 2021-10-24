@@ -1,0 +1,15 @@
+Coeffs   :CCIR
+Months   : 1994=    3    0    0    0    0    0    0    0    0    0
+Ssns     :         12    0    0    0    0    0    0    0    0    0
+Hours    :    1   24    1 U=UT  at Transmitter
+Receive  :  9.91N    72.78W   San Jose
+Rec Ant  :DEFAULT \SWWHIP.VOA        0.00      0.00
+Freqs    :  6190     0     0     0     0     0     0     0     0     0     0
+System   :  145     0.100   90   73     3.000     0.100
+S/I Parms:   8000.00     42.00     90.00     65.00
+Wanted   : 35.47N    77.20W   VOA-Greenville,USA  Short   20
+W_antenna:   6.070 DEFAULT \CCIR.017      174.0 177.00000
+W_Fprob  : 1.00 1.00 1.00 0.00
+Unwanted : 47.58N    19.87E   Jaszbereny, Hungary Short   20
+U_antenna:   6.070 DEFAULT \CCIR.001      306.0 177.00000
+U_Fprob  : 1.00 1.00 1.00 0.00

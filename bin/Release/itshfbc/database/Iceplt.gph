@@ -1,0 +1,96 @@
+ICEAREA output parameter definitions
+         1         2         3         4         5         6         7
+1234567890123456789012345678901234567890123456789012345678901234567890
+MUF   = Maximum Usable Frequency (MHz)
+        Max Usable Freq     MUF                 [MHz]
+        1. 1  2 2. 0.
+ANGLE = Radiation angle (degrees)
+        Radiation Angle                         [degrees]
+        1. 2  0
+ANGLER= Receiver Radiation angle (degrees)
+        Radiation Angle     Receiver            [degrees]
+        1. 2  0
+DELAY = Time delay (milliseconds)
+        Time Delay                              [milliseconds]
+        1. 2  0
+VHITE = Virtual height (km)
+        Virtual Height                          [km]
+        1. 0  6 100. 200. 300. 400. 500. 9999.9
+MUFda = % of days/month sky-wave propagation expected at MUF mode
+        MUF days            expected            [%]
+        100. 0  6   1. 10. 50. 90. 99. 110.
+LOSS  = Median system loss (dB)
+        System Loss         Median              [dB]
+        1. 3  2 10. 300.
+DBU   = Median field strength at receive location (dBu)
+        Field Strength      Median              [dBu]
+        1. 1  2 5. 0.
+TGAIN = Transmitter Antenna Gain (dB)
+        Transmitter         Antenna Gain        [dB]
+        1. 1  2 3. -30.
+RGAIN = Receiver Antenna Gain (dB)
+        Receiver            Antenna Gain        [dB]
+        1. 1  2 3. -30.
+DBM   = Median signal power at receiver (dBm)
+        Signal Power        Median              [dBm]
+        1. 1  2 5. -200.
+SDBW  = Median signal power at receiver (dBW)
+        Signal Power        at Receiver         [dBW]
+        1. 1  2 5. -200.
+NDBW  = Median noise  power at receiver (dBW)
+        Noise Power         at Receiver         [dBW]
+        1. 2  0
+SNR   = Median signal-to-noise ratio (dB)
+        Signal-to-Noise     Median Decile       [dB]
+        1. 1  2 5. 0.
+SNRxx = Signal-to-Noise ratio (dB) at Req. Rel.
+        Signal-to-Noise     at Req. Rel.        [dB]
+        1. 1  2 5. 0.
+RPWRG = Required power & antenna gain to achieve reliab (dB)
+        Required Power      & Antenna Gain      [dB]
+        1. 3  2 10. 200.
+REL   = Time availability, % time SNR exceeds required SNR
+        Time availability   SNR > Req SNR       [%]
+        100.  0  6  10. 20. 50. 80. 90. 110.
+MPROB = Probability additional mode in multipath tolerances
+        Probability         Multipath           [%]
+        100.  0  6  10. 20. 50. 80. 90. 110.
+SPROB = Service probability, required reliabilty will be met
+        Service             Probability         [%]
+        100.  0  6  10. 20. 50. 80. 90. 110.
+DL    = Lower decile NOISE power (dB)
+        Noise Power         Lower Decile        [dB]
+        1. 2  0
+DU    = Upper decile NOISE power (dB)
+        Noise Power         Upper Decile        [dB]
+        1. 2  0
+SIGLW = Lower decile signal pwr (field strength & loss) (dB)
+        Signal Power        Lower Decile        [dB]
+        1. 2  0
+SIGUP = Upper decile signal pwr (field strength & loss) (dB)
+        Signal Power        Upper Decile        [dB]
+        1. 2  0
+BIN   = Binned values
+        Bin
+        1.  2  0
+SIR10 = Upper decile of the S/I ratio (dB)
+        S/I at 10%                              [dB]
+        1. 1  2 5. 0.
+SIR50 = Median of the S/I ratio (dB)
+        S/I at 50%                              [dB]
+        1. 1  2 5. 0.
+SIR90 = Lower decile of the S/I ratio (dB)
+        S/I at 90%                              [dB]
+        1. 1  2 5. 0.
+SIPGN = Required power & antenna gain to achieve S/I Protection Ratio (dB)
+        S/I Required Power  & Antenna Gain      [dB]
+        1. 3  2 10. 200.
+SIREL = S/I Reliability, % time SIR exceeds S/I Protection Ratio
+        S/I Reliability     SIR>S/I Prot Rat    [%]
+        100.  0  6 1. 20. 50. 80. 90. 110.
+SIRxx = Signal-to-Interference ratio (dB) at Req. Prob.
+        Signal-to-Interf    at Req. Prob.       [dB]
+        1. 1  2 5. 0.
+PWRCT = % Power Cut Available
+        Power Cut           Available           [%]
+        100.  0  6  10. 25. 50. 70. 74.9 110.

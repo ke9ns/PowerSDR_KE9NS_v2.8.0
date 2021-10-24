@@ -1,0 +1,23 @@
+Index Name   Description     Output parameter available to print
+      MODE   Number of hops for MUF and mode type
+      ANGLE  Radiation angle at transmitter, degrees
+      DELAY  Time delay most reliable mode, milliseconds
+      V HITE Virtual height most reliable mode, kilometers
+      MUFday % of days/month sky-wave propagation expected at MUF mode
+      LOSS   System loss most reliable mode, median, dB
+      DBU    Field strength, median, dBu (dB above 1 microVolt/meter)
+      S DBW  Signal power, median,   dBw (dB above 1 Watt)
+      N DBW  Noise strength, median, dBw
+      SNR    Signal-to-Noise Ratio, median, dB
+      RPWRG  Required power gain for most reliable mode, dB
+      REL    Reliability. Probability SNR exceeds required SNR
+      MPROB  Probability of additional mode within multipath tolerance
+      SPRB   Service Probability-that required reliabilty will be met
+      SIGLW  Signal Power lower decile increment, dB
+      SIGUP  Signal Power upper decile increment, dB
+      SNRLW  SNR lower decile increment, dB
+      SNRUP  SNR upper decile increment, dB
+      T GAIN Transmitter gain most reliable mode, dB
+      R GAIN Receiver    gain most reliable mode, dB
+      SNRxx  Signal-to-Noise Ratio, at requested reliability, dB
+      DBM    Signal Power, median, dBm=S DBW+30 (dB above milliWatt)

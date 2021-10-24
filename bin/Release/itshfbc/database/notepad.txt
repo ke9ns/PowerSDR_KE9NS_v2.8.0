@@ -1,0 +1,10 @@
+notepad.exe
+
+Put on the first line the path to the program you want to use
+to view the output from Run/Circuit results.
+This affects ICEPAC, VOACAP, REC533, HFANT, S_I ICEPAC, and S_I VOACAP.
+So, if you wish, you can change the program to use wordpad.exe.
+You may need to put in the full pathname.
+On my computer, it is:
+C:\Program Files\Windows NT\Accessories\wordpad.exe
+Your system may have a different path.

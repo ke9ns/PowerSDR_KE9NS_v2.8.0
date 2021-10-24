@@ -1,0 +1,8 @@
+ERASE debug window
+
+If first record of this file is:
+ERASE debug window
+
+Then the window will be erased.
+Otherwise, the window will not be erased, thus saving
+any debug information written to the screen.

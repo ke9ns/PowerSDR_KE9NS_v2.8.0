@@ -1,0 +1,15 @@
+%nl%cnby
+%nl%tc[RED]%cn%it%bfGreg Hand%`bf%`it%tc[BLUE] (retired Feb2005)%tc[BLACK]
+%nl
+%nl%cnU.S. Department of Commerce
+%nl%cnNational Telecommunications and Information Administration
+%nl%cnInstitute for Telecommunication Sciences
+%nl%cnBoulder, Colorado 80305
+%nl%nl%cnEmail%tc[RED](new since retirement)%tc[BLACK]: gregory.hand@gmail.com
+%nl%cnWeb: %tc[BLUE]http://www.greg-hand.com/hf.html%tc[BLACK]
+%nl%cnAlt Web: %tc[BLUE]http://www.voacap.com%tc[BLACK]
+%nl%cnOriginal Web: %tc[BLUE]http://elbert.its.bldrdoc.gov/hf.html%tc[BLACK]
+%nl%cnAlt Web: %tc[BLUE]http://www.its.bldrdoc.gov/elbert/hf.html%tc[BLACK]
+#%tc[BLACK]%nl%cnPhone: (303)497-3375
+#%nl%cnFax  : (303)497-3680
+%nl%cn

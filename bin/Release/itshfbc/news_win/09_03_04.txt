@@ -1,0 +1,5 @@
+04 Mar  2009    News for NTIA/ITS HF Propagation Models (WINDOWS version)
+
+04 Mar  2009   1. I made a change to ICEPAC a while ago that has caused
+                  the area calculations to fail if you had inserted
+                  COMMENTS into the data input file. I have fixed this.

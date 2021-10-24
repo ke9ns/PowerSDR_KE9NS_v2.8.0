@@ -1,0 +1,34 @@
+0
+
+
+Select your Turf Region value (and replace the 0 at the very top with your new TURF number)
+BUT when you change TURF region, you will need to create a fresh new database.
+
+        US = 0
+        UK = 1           UK, Slovakia, France, Malta
+        Europe = 2    Germany, European Union, IARU1
+        UK_Plus = 3   UK+ (adds 60m band)
+        Italy = 4         
+        Norway = 5    
+        Denmark = 6   
+        Latvia = 7      
+        Slovakia = 8     
+        Bulgaria = 9      
+        Greece = 10      
+        Hungary = 11    
+        Belgium = 12   
+        France = 13     France, Malta
+        Russia = 14       
+        Sweden = 15    
+        IARU3 = 16       China, Australia, New Zealand
+        Japan = 17        
+        Italy_Plus = 18     Italy+ (40m band)
+        ES_CH_FIN = 19   Spain, Switzerland, Finland   
+        Netherlands = 20 
+        EU_Travel = 21    
+        Luxembourg = 22  
+        IARU2 = 23       Central & South America	
+        Australia = 24  
+        China = 25
+        
+        If you place a file named:  extended1.edf in this folder, it will unlock PowerSDR

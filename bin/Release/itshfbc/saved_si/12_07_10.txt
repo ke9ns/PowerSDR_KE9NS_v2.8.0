@@ -1,0 +1,7 @@
+10 Jul  2012    News for NTIA/ITS HF Propagation Models (WINDOWS version)
+
+10 Jul  2012   1. I fixed the Point-to-Point and Area Coverage interfaces
+                  to allow to control changing the ..\database\verson.w32
+                  file within the "SYSTEM" button.
+                  Remember this is only for those studying the proposed
+                  changes by Alex.

@@ -1,0 +1,22 @@
+COMMENT   VOACAP    voaprop\voaprop.voa
+COMMENT       0    4   -1   -1    1    0 RECEIVE.CTY
+COMMENT      42.0000  -84.0000 xxxxx                   0.0 Short
+AREA          0.0000    0.0000   -180.00    180.00    -90.00     90.00   31   31    1
+COMMENT   Parameters:    1
+COMMENT   SDBW     615=-151.00 2=-139.0010=-127.00 9=-115.00 3=-103.00 1=   5.00
+COMMENT    Any VOACAP default cards may be placed in the file: VOACAP.DEF
+LINEMAX      55       number of lines-per-page
+COEFFS    CCIR
+TIME          4    4    1    1
+MONTH      199312.00
+SUNSPOT      6.
+FREQUENCY $ 7.000
+LABEL     xxxxx
+CIRCUIT   42.00N    84.00W     0.00N     0.00E  S     0
+SYSTEM       1. 145.10.00  90. 40.0 3.00 0.10
+FPROB      1.00 1.00 1.00 0.70
+ANTENNA       1    1    2   30     2.200[default\isotrope     ]  0.0    0.4000
+ANTENNA       2    2    2   30     0.000[default\isotrope     ]  0.0    2.2000
+METHOD      122    0
+EXECUTE
+QUIT

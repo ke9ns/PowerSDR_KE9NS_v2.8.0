@@ -1,0 +1,19 @@
+Model    :VOACAP
+Colors   :Black    :Blue     :Ignore   :Ignore   :Red      :Black with shading
+Cities   :Receive.cty
+Nparms   :    1
+Parameter:SDBW     7 10 -145.00  9 -135.00 14 -125.00 13 -115.00  3 -105.00  7  -95.00 15    5.00
+Transmit : 42.00N    82.00W   me                   Short
+Pcenter  :  0.00N     0.00E   center
+Area     :    -180.0     180.0     -90.0      90.0
+Gridsize :   31    1
+Method   :   30
+Coeffs   :CCIR
+Months   :  12.00   0.00   0.00   0.00   0.00   0.00   0.00   0.00   0.00
+Ssns     :     10      0      0      0      0      0      0      0      0
+Hours    :      3      0      0      0      0      0      0      0      0
+Freqs    :  7.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000
+System   :  145     3.000   90   45     3.000     0.100
+Fprob    : 1.00 1.00 1.00 0.00
+Rec Ants :[hamcap  \Dipole35.N14]  gain=   0.0   0.0
+Tx Ants  :[hamcap  \Dipole35.N14]  0.000  57.0     0.3000

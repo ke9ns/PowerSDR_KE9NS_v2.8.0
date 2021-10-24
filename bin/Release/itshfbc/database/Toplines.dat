@@ -1,0 +1,8 @@
+  ON? Description     Heading lines to print in METHOD 23 output
+      Month, Year, SunSpot Number, Minimum angle
+      Transmitter/Receiver names
+      Transmitter/Receiver coordinates, azimuths, & distances
+      Transmitter antenna information & Power
+      Receiver    antenna information
+      Man-made Noise, Required Reliability, Required SNR
+      Multipath power & delay time tolerances

@@ -1,0 +1,13 @@
+14 Feb  2009    News for NTIA/ITS HF Propagation Models (WINDOWS version)
+
+14 Feb  2009   1. This version should only affect REC533.
+                  Chris Behm of NTIA/ITS (behm@its.bldrdoc.gov) has been
+                  modifying REC533 to add digital modulation calculations.
+                  This is in conjuction with the ITU in Geneva.
+                  This required some changes in the input GUI, as you will
+                  notice an extra input line for Modulation.
+                  VOACAP & ICEPAC are not affected.
+                  Currently, this only works for the REC533 Point-to-Point model.
+                  It is being tested, and eventually, will be added to
+                  RECAREA (the area coverage model).
+                  Eventually, I will have Chris write some information about it.

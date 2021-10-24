@@ -1,0 +1,455 @@
+ 0  2 Type 00 Constant Gain Isotope
+dbi       (F6.2,2x,'[ 1] Max Antenna Gain (dBi) (Relative to Isotrope)')
+          (i4  ,4x,'[ 2] Antenna Type')
+ 1 13 Type 01 ITU-R Rec705 Multiband Aperiodic Reflector Array
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+row9      (I4  ,4x,'[ 6] # Elements in same ROW (1-9)')
+stack9    (I4  ,4x,'[ 7] # Elements in same STACK (1-9)')
+          (f6.3,2x,'[ 8] Design    Freq')
+hite705   (F6.2,2x,'[ 9] Height above ground (0.10-9.99)')
+slew      (I4  ,4x,'[10] Slew Angle (+/-30 degrees)')
+r_dist    (F6.2,2x,'[11] Reflector Distance      (0.15-0.35 wavelengths)')
+r_wire_s  (F6.2,2x,'[12] Reflector Wire Spacing  (0.10-9.99 meters)')
+r_wire_d  (I4  ,4x,'[13] Reflector Wire Diameter (1-9 millimeters)')
+ 2 11 Type 02 ITU-R Rec705 Dual-Band Center-Fed Half-Wave Dipole Array
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+row9      (I4  ,4x,'[ 6] Elements in same ROW (1-9)')
+stack9    (I4  ,4x,'[ 7] # Elements in same STACK (1-9)')
+          (f6.3,2x,'[ 8] Design    Freq')
+hite705   (F6.2,2x,'[ 9] Height above ground (0.10-9.99 wavelengths)')
+slew      (I4  ,4x,'[10] Slew Angle (+/-30 degrees)')
+curratio  (F6.1,2x,'[11] Current Ratio (0.1-0.9)')
+ 3 11 Type 03 ITU-R Rec705 Dual-Band    End-Fed Half-Wave Dipole Array
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+row9      (I4  ,4x,'[ 6] Elements in same ROW (1-9)')
+stack9    (I4  ,4x,'[ 7] # Elements in same STACK (1-9)')
+          (f6.3,2x,'[ 8] Design    Freq')
+hite705   (F6.2,2x,'[ 9] Height above ground (0.10-9.99 wavelengths)')
+slew      (I4  ,4x,'[10] Slew Angle (+/-30 degrees)')
+curratio  (F6.1,2x,'[11] Current Ratio (0.1-0.9)')
+ 4 10 Type 04 ITU-R Rec705 Tropical Array
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+row9      (I4  ,4x,'[ 6] Elements in same ROW (1-9)')
+stack9    (I4  ,4x,'[ 7] # Elements in same STACK (1-9)')
+          (f6.3,2x,'[ 8] Design    Freq')
+hite705   (F6.2,2x,'[ 9] Height above ground (0.10-9.99 wavelengths)')
+slew      (I4  ,4x,'[10] Slew Angle (+/-30 degrees)')
+ 5 12 Type 05 ITU-R Rec705 Horizontal Log-Periodic Array
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+elem30    (I4  ,4x,'[ 6] # Elements (30 maximum)')
+short_l   (F6.1,2x,'[ 7] Shortest Element total length (meters)')
+long_l    (F6.1,2x,'[ 8] Longest  Element total length (meters)')
+dist_sl   (F6.1,2x,'[ 9] Distance bet centers Shortest-Longest (meters)')
+hite_s    (F7.2,1x,'[10] Shortest element height above ground (m)')
+hite_l    (F7.2,1x,'[11] Longest  element height above ground (m)')
+feeder    (F6.1,2x,'[12] Feeder Impedance (999 Ohm maximum)')
+ 6 12 Type 06 ITU-R Rec705 Vertical   Log-Periodic Array
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+elem30    (I4  ,4x,'[ 6] # Elements (30 maximum)')
+short_l   (F6.1,2x,'[ 7] Shortest Element total length (meters)')
+long_l    (F6.1,2x,'[ 8] Longest  Element total length (meters)')
+dist_sl   (F6.1,2x,'[ 9] Distance bet centers Shortest-Longest (meters)')
+hite_s    (F7.2,1x,'[10] Shortest element height above ground (m)')
+hite_l    (F7.2,1x,'[11] Longest  element height above ground (m)')
+feeder    (F6.1,2x,'[12] Feeder Impedance (999 Ohm maximum)')
+ 7  8 Type 07 ITU-R Rec705 Horizontal Rhombic
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+side_rh   (F6.2,2x,'[ 6] Rhombus side length (400m maximum)')
+hite_07   (F6.2,2x,'[ 7] Height above ground (99m maximum)')
+tilt705   (F6.2,2x,'[ 8] Rhombus interior half-obtuse angle (degrees)')
+ 8  7 Type 08 ITU-R Rec705 Quadrant Antenna
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+          (f6.3,2x,'[ 6] Design    Freq')
+hite705   (F6.2,2x,'[ 7] Height above ground (0.10-9.99 wavelengths)')
+ 9  7 Type 09 ITU-R Rec705 Crossed Dipole Antenna
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+          (f6.3,2x,'[ 6] Design    Freq')
+hite705   (F6.2,2x,'[ 7] Height above ground (0.10-9.99 wavelengths)')
+10  9 Type 10 ITU-R Rec705 Vertical Monopole
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+hite_07   (F6.2,2x,'[ 6] Height above ground (meters)')
+earth_r   (F6.1,2x,'[ 7] Earth System Radius (meters, 0=none)')
+earth_d   (I4  ,4x,'[ 8] Earth System Wire diameter (mm)')
+earth_n   (I4  ,4x,'[ 9] Number of Radial wires')
+11  3 Type 11 ITS-94  Gain Table Versus Elevation Angle
+dbi       (F6.2,2x,'[ 1] Max Antenna Gain (dBi) (Relative to Isotrope)')
+          (i4  ,4x,'[ 2] Antenna Type')
+eff       (F6.2,2x,'[ 3] IONCAP Antenna Efficiency')
+12 15 Type 12 ITS-94  Curtain Array from NTIA Report 87-215
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+row14     (I4  ,4x,'[ 6] # of (horizontal) Bays (1-14)')
+stack8    (I4  ,4x,'[ 7] # of (vertical) STACKs (1-8)')
+des_freq  (F6.3,2x,'[ 8] Design    Freq')
+len_elem  (F6.3,2x,'[ 9] Antenna Element Length')
+hite      (F6.3,2x,'[10] Height of lowest STACK above Ground')
+dist_cen  (F6.3,2x,'[11] Horizontal Distance between Dipole Centers')
+space_v   (F6.3,2x,'[12] Vertical Spacing between STACKs')
+screen_d  (F6.3,2x,'[13] Distance from reflecting Screen')
+excite    (I4  ,4x,'[14] Excitation mode')
+slew      (I4  ,4x,'[15] Slew Angle (+/-30 degrees)')
+13  4 Type 13 ITS-94  Gain Table Versus Azimuth & Elevation Angle
+dbi       (F6.2,2x,'[ 1] Max Antenna Gain (dBi) (Relative to Isotrope)')
+          (i4  ,4x,'[ 2] Antenna Type')
+eff       (F6.2,2x,'[ 3] IONCAP Antenna Efficiency')
+freq_op   (F6.3,2x,'[ 4] Operating Frequency')
+14  3 Type 14 ITS-94  Point-to-Point Gain Table (Elevation & Freq)
+dbi       (F6.2,2x,'[ 1] Max Antenna Gain (dBi) (Relative to Isotrope)')
+          (i4  ,4x,'[ 2] Antenna Type')
+          (f6.3,2x,'[ 3] Operating Frequency')
+15  0                           Not yet used
+16  0                           Not yet used
+17  0                           Not yet used
+18  0                           Not yet used
+19  0                           Not yet used
+20  0                           Not yet used
+21  8 Type 21 ITSA-1 IONCAP  Terminated Horizontal Rhombic
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+tilt      (F6.2,2x,'[ 6] Tilt Angle (deg)  (1/2 large interior angle)')
+length    (F6.2,2x,'[ 7] Antenna Leg Length (m, wavelengths if < 0)')
+hite      (F6.2,2x,'[ 8] Antenna Height     (m, wavelengths if < 0)')
+22  7 Type 22 ITSA-1 IONCAP  Vertical Monopole
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+hite      (F6.2,2x,'[ 6] Antenna Height (meters, wavelengths if < 0)')
+gain_add  (F6.2,2x,'[ 7] Gain above a dipole (dB)')
+23  8 Type 23 ITSA-1 IONCAP  Horizontal Dipole
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+length    (F6.2,2x,'[ 6] Antenna Length (meters, wavelengths if < 0)')
+hite      (F6.2,2x,'[ 7] Antenna Height (meters, wavelengths if < 0)')
+gain_2    (F6.2,2x,'[ 8] Gain above 1/2 wavelength horiz dipole (dB)')
+24  8 Type 24 ITSA-1 IONCAP  Horizontal Yagi
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+length    (F6.2,2x,'[ 6] Antenna Length (meters, wavelengths if < 0)')
+hite      (F6.2,2x,'[ 7] Antenna Height (meters, wavelengths if < 0)')
+gain_2    (F6.2,2x,'[ 8] Gain above 1/2 wavelength horiz dipole (dB)')
+25  6 Type 25 ITSA-1 IONCAP  Vertical Log-Periodic
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+note25    (F6.2,2x,'[ 6] Gain above 1/4 wavelength vert monopole (dB)')
+26 12 Type 26 ITSA-1 IONCAP  Curtain
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+bays      (I4  ,4x,'[ 6] # of Bays')
+len_elem  (F6.2,2x,'[ 7] Antenna Element Length (m, wavelengths if < 0)')
+hite_1st  (F6.2,2x,'[ 8] Height to 1st Element  (m, wavelengths if < 0)')
+stack8    (I4  ,4x,'[ 9] # Elements per Bay')
+dist_cen  (F6.2,2x,'[10] Dist bet Elem Centers(m, wavelengths if < 0)')
+space_v   (F6.2,2x,'[11] Vertical Element Space(m, wavelengths if < 0)')
+screen_d  (F6.2,2x,'[12] Distance from Screen (m, wavelengths if < 0)')
+27  9 Type 27 ITSA-1 IONCAP  Sloping Vee
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+tilt.vee  (F6.2,2x,'[ 6] 1/2 apex angle in plane of wires (degrees)')
+length    (F6.2,2x,'[ 7] Antenna Leg Length(meters, wavelengths if < 0)')
+hite      (F6.2,2x,'[ 8] Antenna Height    (meters, wavelengths if < 0)')
+hite_t    (F6.3,2x,'[ 9] Terminate Height  (meters, wavelengths if < 0)')
+28  7 Type 28 ITSA-1 IONCAP  Inverted L
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+length    (F6.2,2x,'[ 6] Antenna Length (meters, wavelengths if < 0)')
+hite      (F6.2,2x,'[ 7] Antenna Height (meters, wavelengths if < 0)')
+29  9 Type 29 ITSA-1 IONCAP  Sloping Rhombic
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+tilt2     (F6.2,2x,'[ 6] Tilt Angle (deg)  (1/2 small interior angle)')
+length    (F6.2,2x,'[ 7] Antenna Leg Length(meters, wavelengths if < 0)')
+hite      (F6.2,2x,'[ 8] Antenna Height    (meters, wavelengths if < 0)')
+hite_t    (F6.3,2x,'[ 9] Terminate Height  (meters, wavelengths if < 0)')
+30 10 Type 30 ITSA-1 IONCAP  Interlaced Rhombic
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+tilt      (F6.2,2x,'[ 6] Tilt Angle (deg)  (1/2 large interior angle)')
+length    (F6.2,2x,'[ 7] Antenna Leg Length   (m, wavelengths if < 0)')
+hite_low  (F6.2,2x,'[ 8] Lower Antenna Height (m, wavelengths if < 0)')
+vert_dsp  (F6.2,2x,'[ 9] Vertical Displacement(m, wavelengths if < 0)')
+horz_dsp  (F6.3,2x,'[10] Horizontal Feed Point(m, wavelengths if < 0)')
+31  8 Type 31 ITS-78 HFMUFES Terminated Horizontal Rhombic
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+tilt      (F6.2,2x,'[ 6] Tilt Angle (deg)  (1/2 large interior angle)')
+length    (F6.2,2x,'[ 7] Antenna Leg Length(meters, wavelengths if < 0)')
+hite      (F6.2,2x,'[ 8] Antenna Height    (meters, wavelengths if < 0)')
+32  7 Type 32 ITS-78 HFMUFES Vertical Monopole
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+hite      (F6.2,2x,'[ 6] Antenna Height (meters, wavelengths if < 0)')
+gain_add  (F6.2,2x,'[ 7] Gain above a dipole (dB)')
+33  8 Type 33 ITS-78 HFMUFES Horizontal Half-Wave Dipole
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+length    (F6.2,2x,'[ 6] Antenna Length (meters, wavelengths if < 0)')
+hite      (F6.2,2x,'[ 7] Antenna Height (meters, wavelengths if < 0)')
+gain_2    (F6.2,2x,'[ 8] Gain above 1/2 wavelength horiz dipole (dB)')
+34 12 Type 34 ITS-78 HFMUFES Horizontal Yagi
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+hite      (F6.2,2x,'[ 6] Antenna Height       (m, wavelengths if < 0)')
+len_driv  (F6.2,2x,'[ 7] Driven Element Length(m, wavelengths if < 0)')
+len_ref   (F6.2,2x,'[ 8] Length of Reflector  (m, wavelengths if < 0)')
+len_dir   (F6.2,2x,'[ 9] Director Length      (m, wavelengths if < 0)')
+space_d   (F6.2,2x,'[10] Director Spacing     (m, wavelengths if < 0)')
+space_r   (F6.2,2x,'[11] Reflector Spacing    (m, wavelengths if < 0)')
+elem30    (I4  ,4x,'[12] Number of Elements')
+35  8 Type 34 ITS-78 HFMUFES Vertical Dipole
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+length    (F6.2,2x,'[ 6] Antenna Length (meters, wavelengths if < 0)')
+hite_f    (F6.2,2x,'[ 7] Feed    Height (meters, wavelengths if < 0)')
+gain_add  (F6.2,2x,'[ 8] Additional Gain (dB)')
+36 12 Type 36 ITS-78 HFMUFES Curtain
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+bays      (I4  ,4x,'[ 6] # of Bays')
+len_elem  (F6.2,2x,'[ 7] Antenna Element Length(m, wavelengths if < 0)')
+hite_1st  (F6.2,2x,'[ 8] Height to 1st Element (m, wavelengths if < 0)')
+stack8    (I4  ,4x,'[ 9] # Elements per Bay')
+dist_cen  (F6.2,2x,'[10] Distance bet Centers  (m, wavelengths if < 0)')
+space_v   (F6.2,2x,'[11] Vertical Element Space(m, wavelengths if < 0)')
+screen_d  (F6.2,2x,'[12] Distance from Screen  (m, wavelengths if < 0)')
+37  9 Type 37 ITS-78 HFMUFES Terminated Sloping Vee
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+apex      (F6.2,2x,'[ 6] 1/2 apex angle in plane of wires (degrees)')
+length    (F6.2,2x,'[ 7] Antenna Leg Length(meters, wavelengths if < 0)')
+hite      (F6.2,2x,'[ 8] Antenna Height    (meters, wavelengths if < 0)')
+hite_t    (F6.3,2x,'[ 9] Terminate Height  (meters, wavelengths if < 0)')
+38  7 Type 38 ITS-78 HFMUFES Inverted L
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+length    (F6.2,2x,'[ 6] Antenna Length (meters, wavelengths if < 0)')
+hite      (F6.2,2x,'[ 7] Antenna Height (meters, wavelengths if < 0)')
+39  9 Type 39 ITS-78 HFMUFES Terminated Sloping Rhombic
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+tilt2     (F6.2,2x,'[ 6] Tilt Angle (deg)  (1/2 small interior angle)')
+length    (F6.2,2x,'[ 7] Antenna Leg Length(meters, wavelengths if < 0)')
+hite      (F6.2,2x,'[ 8] Antenna Height    (meters, wavelengths if < 0)')
+hite_t    (F6.3,2x,'[ 9] Terminate Height  (meters, wavelengths if < 0)')
+40  0       (Not implemented)   ITS-78 HFMUFES Antenna gains in stored array
+41  8 Type 41 ITS-78 HFMUFES Sloping Long Wire
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+slope     (F6.2,2x,'[ 6] Slope from Horizontal (degrees)')
+len_wire  (F6.2,2x,'[ 7] Wire Length (meters, wavelengths if negative)')
+hite_f    (F6.2,2x,'[ 8] Feed Height (meters, wavelengths if negative)')
+42  0       (Not implemented)   ITS-78 HFMUFES Constant gain
+43 12 Type 43 ITS-78 HFMUFES Horiz Crossed-Dipole Log Periodic
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+hite_f    (F7.4,1x,'[ 6] Feed Height         (m, wavelengths if < 0)')
+len_rear  (F7.3,1x,'[ 7] Rear Element Length (m, wavelengths if < 0)')
+slope_43  (F6.2,2x,'[ 8] Array Slope measured from Vertical (deg)')
+impede    (F6.2,2x,'[ 9] Unloaded Transmission Line Impedance (Ohm)')
+axis_ang  (F6.2,2x,'[10] Angle between Array Axis & Element Tips (deg)')
+len_rat   (F6.3,2x,'[11] Geometric Ratio of Element Length')
+elem30    (I4  ,4x,'[12] # of Elements')
+44  8 Type 44 ITS-78 HFMUFES Arbitrary Tilted Dipole
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+tilt_44   (F6.2,2x,'[ 6] Tilt of Element from Horizontal (degrees)')
+length    (F6.2,2x,'[ 7] Length      (meters, wavelengths if negative)')
+hite_f    (F6.2,2x,'[ 8] Feed Height (meters, wavelengths if negative)')
+45  7 Type 45 ITS-78 HFMUFES Side-Loaded Vertical Half-Rhombic
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+leg_ang   (F6.2,2x,'[ 6] Angle between Leg and Ground (degrees)')
+length    (F6.2,2x,'[ 7] Leg Length (meters, wavelengths if negative)')
+46 12 Type 46 ITS-78 HFMUFES Sloping Double-Rhomboid
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+hite_f    (F6.2,2x,'[ 6] Feed Height     (meters, wavelengths if < 0)')
+len_shrt  (F6.2,2x,'[ 7] Short Leg Length(meters, wavelengths if < 0)')
+ang_maj   (F6.2,2x,'[ 8] Angle bet Antenna & Major Rhomboid Axes (deg)')
+ang_shrt  (F6.2,2x,'[ 9] Angle bet Major Rhomboid Axis & Short Leg(deg)')
+ang_long  (F6.2,2x,'[10] Angle bet Major Rhomboid Axis & Long  Leg(deg)')
+len_long  (F6.2,2x,'[11] Long  Leg Length(meters, wavelengths if < 0)')
+hite_t    (F6.2,2x,'[12] Terminate Height(meters, wavelengths if < 0)')
+47  9 Type 47 ITS-78 HFMUFES Vertical Monopole w/Ground System
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+          (f6.3,2x,'[ 5] Operating Freq')
+length    (F6.2,2x,'[ 6] Antenna Length   (meters, wavelengths if < 0)')
+len_rad   (F6.2,2x,'[ 7] Length of Radials(meters, wavelengths if < 0)')
+rad_rad   (F6.3,2x,'[ 8] Radius of Radials(millimeters)')
+earth_n   (I4  ,4x,'[ 9] Number of Radials in conducting ground system')
+48  2 Type 48 Inverted Cone Antenna
+dbi       (F6.2,2x,'[ 1] Max Antenna Gain (dBi) (Relative to Isotrope)')
+          (i4  ,4x,'[ 2] Antenna Type')
+49  0                           Not yet used
+50  0                           Not yet used
+51  0                           Not yet used
+52  0                           Not yet used
+53  0                           Not yet used
+54  0                           Not yet used
+55  0                           Not yet used
+56  0                           Not yet used
+57  0                           Not yet used
+58  0                           Not yet used
+59  0                           Not yet used
+60  0                           Not yet used
+61  0                           Not yet used
+62  0                           Not yet used
+63  0                           Not yet used
+64  0                           Not yet used
+65  0                           Not yet used
+66  0                           Not yet used
+67  0                           Not yet used
+68  0                           Not yet used
+69  0                           Not yet used
+70  0                           Not yet used
+71  0                           Not yet used
+72  0                           Not yet used
+73  0                           Not yet used
+74  0                           Not yet used
+75  0                           Not yet used
+76  0                           Not yet used
+77  0                           Not yet used
+78  0                           Not yet used
+79  0                           Not yet used
+80  0                           Not yet used
+81  0                           Not yet used
+82  0                           Not yet used
+83  0                           Not yet used
+84  0                           Not yet used
+85  0                           Not yet used
+86  0                           Not yet used
+87  0                           Not yet used
+88  0                           Not yet used
+89  0                           Not yet used
+90  4 Type 90 Generic data file
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')
+dielectr  (I4  ,4x,'[ 3] Ground Dielectric Constant (1-80)')
+conduct   (F7.5,1x,'[ 4] Ground Conductivity (.00003-5.0 mhos/m)')
+91  0                           Not yet used
+92  0                           Not yet used
+93  0                           Not yet used
+94  0                           Not yet used
+95  0                           Not yet used
+96  0                           Not yet used
+97  0                           Not yet used
+98  0                           Not yet used
+99  2 Type 99 Harris external data file
+          (f6.2,2x,'[ 1] Max Gain dBi')
+          (i4  ,4x,'[ 2] Antenna Type')

@@ -1,0 +1,14 @@
+COEFFS    CCIR
+TIME          1   24    1    1
+MONTH      2011 2.00
+SUNSPOT     22.
+LABEL     Transmitter         Receiver
+CIRCUIT   41.80N    87.70W    38.41N    78.29W  S     0
+SYSTEM       1. 145. 6.00  90. 45.0 3.00 0.10
+FPROB      1.00 1.00 1.00 0.70
+ANTENNA       1    1    2   30     2.200[default\Isotrope     ]  0.0    0.1000
+ANTENNA       2    2    2   30     0.000[default\Isotrope     ]  0.0    2.2000
+FREQUENCY  2.00 4.00 6.00 8.0010.0012.0014.0016.0018.0020.0022.00
+METHOD       22    0
+EXECUTE
+QUIT

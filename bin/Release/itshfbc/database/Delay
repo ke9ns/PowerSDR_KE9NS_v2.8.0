@@ -1,0 +1,5 @@
+ 0    delay # seconds during auto plot of maps
+      delay =  0 will wait 0 seconds and continue
+      delay =  5 will wait 5 seconds and continue
+      delay = -1 will wait for you to hit a key
+      delay = -2 will wait for you to hit a key (with no bell ringing)

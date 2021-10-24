@@ -1,0 +1,36 @@
+REC533 output parameter definitions
+         1         2         3         4         5         6         7
+1234567890123456789012345678901234567890123456789012345678901234567890
+MUF   = Maximum Usable Frequency - median (MHz)
+        MUF (median) (MHz)
+        1. 0  0. 30. 5. 1.
+FOT   = Frequency of Optimum Transmission (MHz)
+        FOT (MHz)
+        1. 0  0. 30. 5. 1.
+ANGL  = Radiation angle (degrees)
+        Radiation Angle (degrees)
+        1. 1  0. 0. 10.  1.
+DBU   = Median field strength at receiver (dBu)
+        Field Strength (Median) (dBu)
+        1. 1  0. 0. 10.  1.
+dBpW  = Median signal power at receiver (dBpW)
+        Signal Power at Receiver (dBW)
+        1. 1  0. 0. 10.  1.
+S/N   = Median Signal-to-noise ratio (dB)
+        Signal-to-Noise (Median) (dB)
+        1. 1  0. 0. 10.  1.
+FS/N  = Probability SNR exceeds required SNR
+        Probability   SNR > Req SNR (%)
+        100. 0  0. 100. 10. 2.
+SNxx  = Signal-to-Noise ratio (dB) at Req. Rel.
+        Signal-to-Noise at Req. Rel. (dB)
+        1. 1  0. 0. 10.  1.
+MIR   = Multi-Mode Interference Ratio
+        Multi-Mode Interference Ratio at Receiver [%]
+        100. 0  0. 100. 10. 2.
+OACR  = Overall circuit reliability (%)
+        Overall Circuit Reliability at Receiver [%]
+        100. 0  0. 100. 10. 2.
+SACR  = Scattering circuit reliability (%)
+        Scattering Circuit Reliability at Receiver [%]
+        100. 0  0. 100. 10. 2.

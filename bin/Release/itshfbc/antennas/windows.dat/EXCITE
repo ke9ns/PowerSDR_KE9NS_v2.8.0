@@ -1,0 +1,21 @@
+1 15
+NTIA Report 87-215  Excitation modes
+Range [1 to 15]
+Enter the Excitation mode from the table below:
+
+mode Excitation
+  1  +000
+  2  0+00
+  3  00+0
+  4  ++00
+  5  +0+0
+  6  0++0
+  7  +-00
+  8  +0-0
+  9  0+-0
+ 10  +++0
+ 11  ++-0
+ 12  +-+0
+ 13  +--0
+ 14  ++++
+ 15  ++--

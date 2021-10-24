@@ -1,0 +1,16 @@
+    8    7    1    2    3   15       Color indexes
+    1    4    6   56   58   59       Black/White shade codes
+ dark grey  red gren yell whit
+ grey
+
+This controls the colors used for Point-to-Point graph shading.
+On the first line, place 6 colors used for auto shading.
+On the 2nd line, place the shading codes to be used for black/white shading.
+The right-most value corresponds to the highest value shaded.
+Below is a list of the value colors that may be used.
+Using an invalid color value will cause the default values to be used.
+
+    0=Black     4=Blue       8=Dark grey    12=Lite blue
+    1=Red       5=Magenta    9=Orange       13=Pink
+    2=Green     6=Cyan      10=Lite green   14=Pale blue
+    3=Yellow    7=Grey      11=Brown        15=White

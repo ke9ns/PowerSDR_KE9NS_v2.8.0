@@ -1,0 +1,11 @@
+Coeffs   :CCIR
+Months   : 1994=    6    0    0    0    0    0    0    0    0    0
+Ssns     :        100    0    0    0    0    0    0    0    0    0
+Hours    :    1   24    1 U=UT at Transmitter   
+Transmit : 35.80N     5.90W   TANGIER, Morocco    
+Receive  : 44.90N    20.50E   BELGRADE             SHORT
+Freqs    :  6075  7200  9700 11850 13700 15350 17725 21650 25885     0     0
+System   :  145     3.000   90   73     1.000      .100
+Rec Ants :DEFAULT \SWWHIP.VOA         .00       .00
+Numants  :    1
+Xmtr Ants: 1=  2 30   .000 DEFAULT \CONST17.VOA      .0 500.00000

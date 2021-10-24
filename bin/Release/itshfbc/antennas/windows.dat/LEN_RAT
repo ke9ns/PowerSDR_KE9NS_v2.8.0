@@ -1,0 +1,5 @@
+.000999 1.0001
+Geometric Ratio of Element Length
+Range [.001 to 1.0]
+This ratio is L(n)/L(n+1).
+As you go from Longest to Shortest element.

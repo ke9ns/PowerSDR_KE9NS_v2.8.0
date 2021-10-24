@@ -1,0 +1,15 @@
+1 80
+Ground Dielectric Constant
+Range [1 to 80]
+Enter the ground Dielectric constant from the table below:
+ 
+Ground type   Conductivity   Dielectric
+Very Dry       .0001 mhos/m       3
+Medium Dry     .001              15
+Good Ground    .01               10
+Wet Ground     .01               30
+Poor Ground    .001               4
+Sea Ice        .001               4
+Polar Ice Cap  .0001              1
+Fresh Water    .002              80
+Sea Water      5.0               80

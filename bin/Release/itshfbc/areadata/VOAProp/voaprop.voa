@@ -1,0 +1,19 @@
+Model    :VOACAP
+Colors   :Black    :Blue     :Ignore   :Ignore   :Red      :Black with shading
+Cities   :RECEIVE.CTY
+Nparms   :    1
+Parameter:SDBW     6 15 -151.00  2 -139.00 10 -127.00  9 -115.00  3 -103.00  1    5.00
+Transmit : 42.00N    84.00W   xxxxx                Short
+Pcenter  :  0.00N     0.00E
+Area     :    -180.0     180.0     -90.0      90.0
+Gridsize :   31    1
+Method   :   22
+Coeffs   :CCIR
+Months   :  12.00   0.00   0.00   0.00   0.00   0.00   0.00   0.00   0.00
+Ssns     :      6      0      0      0      0      0      0      0      0
+Hours    :      4      0      0      0      0      0      0      0      0
+Freqs    :  7.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000  0.000
+System   :  145    10.000   90   40     3.000     0.100
+Fprob    : 1.00 1.00 1.00 0.70
+Rec Ants :[default \Isotrope    ]  gain=   2.2   0.0
+Tx Ants  :[default \Isotrope    ]  2.200  0.0     0.4000
