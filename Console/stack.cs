@@ -311,6 +311,7 @@ namespace PowerSDR
         // ke9ns: update VFOA and B bandstacks
         public void bandstackupdate()
         {
+           
             string bigmessage = null; // full textbox string (combine 1 and 2)
             string bigmessage1 = null; // each freq string
             string bigmessage2 = null; // each memory string
@@ -345,7 +346,7 @@ namespace PowerSDR
                         console.filter2[ii] = "";
 
                     }
-                    //  Debug.WriteLine("BANDSTACK: " + freq);
+                   //   Debug.WriteLine("BANDSTACK: " + freq);
 
 
                     freq1[ii] = freq;

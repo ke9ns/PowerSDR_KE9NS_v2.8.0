@@ -1273,6 +1273,7 @@ namespace PowerSDR
         private LabelTS labelTS63;
         private CheckBoxTS chkKWAI7;
         public CheckBoxTS checkBoxRX2;
+        public CheckBoxTS chkVFOLargeWindow;
         private System.ComponentModel.IContainer components;
 
         #endregion
@@ -1564,6 +1565,8 @@ namespace PowerSDR
             tbPan3DAlpha_Scroll(this, e); // ke9ns add 3d slider
             chkBoxTitle_CheckedChanged_1(this, e); // ke9ns 
             chkBoxMax_CheckedChanged(this, e); // ke9ns 
+            chkVFOLargeWindow_CheckedChanged(this, e); // ke9ns .228
+
 
             // ChkBoxPTTLatch_CheckedChanged(this, e); // ke9ns add
 
@@ -2329,6 +2332,7 @@ namespace PowerSDR
             this.clrbtnOutOfBand = new PowerSDR.ColorButton();
             this.lblOutOfBand = new System.Windows.Forms.LabelTS();
             this.grpAppearanceVFO = new System.Windows.Forms.GroupBoxTS();
+            this.chkVFOLargeWindow = new System.Windows.Forms.CheckBoxTS();
             this.chkVFOOpenFont = new System.Windows.Forms.CheckBoxTS();
             this.chkVFOBoldFont = new System.Windows.Forms.CheckBoxTS();
             this.labelTS24 = new System.Windows.Forms.LabelTS();
@@ -13617,7 +13621,8 @@ namespace PowerSDR
             this.chkBoxMax.Size = new System.Drawing.Size(152, 18);
             this.chkBoxMax.TabIndex = 89;
             this.chkBoxMax.Text = "Console Maximize";
-            this.toolTip1.SetToolTip(this.chkBoxMax, "Maximize the console screen when CHECKED\r\nNormal size when UNCHECKED.\r\n");
+            this.toolTip1.SetToolTip(this.chkBoxMax, "Maximize the console screen when CHECKED\r\nThis disables the Windows Tray at the b" +
+        "ottom of the screen.\r\n\r\nNormal size when UNCHECKED.\r\n");
             this.chkBoxMax.CheckedChanged += new System.EventHandler(this.chkBoxMax_CheckedChanged);
             // 
             // btnSkinExport
@@ -13780,6 +13785,7 @@ namespace PowerSDR
             // 
             // grpAppearanceVFO
             // 
+            this.grpAppearanceVFO.Controls.Add(this.chkVFOLargeWindow);
             this.grpAppearanceVFO.Controls.Add(this.chkVFOOpenFont);
             this.grpAppearanceVFO.Controls.Add(this.chkVFOBoldFont);
             this.grpAppearanceVFO.Controls.Add(this.labelTS24);
@@ -13795,15 +13801,26 @@ namespace PowerSDR
             this.grpAppearanceVFO.Controls.Add(this.lblVFOPowerOff);
             this.grpAppearanceVFO.Location = new System.Drawing.Point(144, 8);
             this.grpAppearanceVFO.Name = "grpAppearanceVFO";
-            this.grpAppearanceVFO.Size = new System.Drawing.Size(144, 272);
+            this.grpAppearanceVFO.Size = new System.Drawing.Size(144, 307);
             this.grpAppearanceVFO.TabIndex = 39;
             this.grpAppearanceVFO.TabStop = false;
             this.grpAppearanceVFO.Text = "VFO";
             // 
+            // chkVFOLargeWindow
+            // 
+            this.chkVFOLargeWindow.Image = null;
+            this.chkVFOLargeWindow.Location = new System.Drawing.Point(9, 136);
+            this.chkVFOLargeWindow.Name = "chkVFOLargeWindow";
+            this.chkVFOLargeWindow.Size = new System.Drawing.Size(129, 24);
+            this.chkVFOLargeWindow.TabIndex = 80;
+            this.chkVFOLargeWindow.Text = "Larger VFO window";
+            this.toolTip1.SetToolTip(this.chkVFOLargeWindow, "Check when VFO freq is above 10 ghz and above to show extra digits");
+            this.chkVFOLargeWindow.CheckedChanged += new System.EventHandler(this.chkVFOLargeWindow_CheckedChanged);
+            // 
             // chkVFOOpenFont
             // 
             this.chkVFOOpenFont.Image = null;
-            this.chkVFOOpenFont.Location = new System.Drawing.Point(38, 111);
+            this.chkVFOOpenFont.Location = new System.Drawing.Point(9, 112);
             this.chkVFOOpenFont.Name = "chkVFOOpenFont";
             this.chkVFOOpenFont.Size = new System.Drawing.Size(90, 24);
             this.chkVFOOpenFont.TabIndex = 79;
@@ -13816,7 +13833,7 @@ namespace PowerSDR
             this.chkVFOBoldFont.Checked = true;
             this.chkVFOBoldFont.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkVFOBoldFont.Image = null;
-            this.chkVFOBoldFont.Location = new System.Drawing.Point(16, 88);
+            this.chkVFOBoldFont.Location = new System.Drawing.Point(9, 87);
             this.chkVFOBoldFont.Name = "chkVFOBoldFont";
             this.chkVFOBoldFont.Size = new System.Drawing.Size(104, 24);
             this.chkVFOBoldFont.TabIndex = 78;
@@ -13827,7 +13844,7 @@ namespace PowerSDR
             // labelTS24
             // 
             this.labelTS24.Image = null;
-            this.labelTS24.Location = new System.Drawing.Point(16, 244);
+            this.labelTS24.Location = new System.Drawing.Point(16, 267);
             this.labelTS24.Name = "labelTS24";
             this.labelTS24.Size = new System.Drawing.Size(72, 24);
             this.labelTS24.TabIndex = 77;
@@ -13839,7 +13856,7 @@ namespace PowerSDR
             this.clrbtnVFORing.Automatic = "Automatic";
             this.clrbtnVFORing.Color = System.Drawing.Color.DarkGreen;
             this.clrbtnVFORing.Image = null;
-            this.clrbtnVFORing.Location = new System.Drawing.Point(88, 239);
+            this.clrbtnVFORing.Location = new System.Drawing.Point(88, 262);
             this.clrbtnVFORing.MoreColors = "More Colors...";
             this.clrbtnVFORing.Name = "clrbtnVFORing";
             this.clrbtnVFORing.Size = new System.Drawing.Size(40, 23);
@@ -13852,7 +13869,7 @@ namespace PowerSDR
             this.clrbtnVFOBackground.Automatic = "Automatic";
             this.clrbtnVFOBackground.Color = System.Drawing.Color.Black;
             this.clrbtnVFOBackground.Image = null;
-            this.clrbtnVFOBackground.Location = new System.Drawing.Point(88, 141);
+            this.clrbtnVFOBackground.Location = new System.Drawing.Point(88, 173);
             this.clrbtnVFOBackground.MoreColors = "More Colors...";
             this.clrbtnVFOBackground.Name = "clrbtnVFOBackground";
             this.clrbtnVFOBackground.Size = new System.Drawing.Size(40, 23);
@@ -13862,7 +13879,7 @@ namespace PowerSDR
             // lblVFOBackground
             // 
             this.lblVFOBackground.Image = null;
-            this.lblVFOBackground.Location = new System.Drawing.Point(13, 146);
+            this.lblVFOBackground.Location = new System.Drawing.Point(13, 178);
             this.lblVFOBackground.Name = "lblVFOBackground";
             this.lblVFOBackground.Size = new System.Drawing.Size(72, 24);
             this.lblVFOBackground.TabIndex = 72;
@@ -13873,7 +13890,7 @@ namespace PowerSDR
             this.clrbtnVFOSmallColor.Automatic = "Automatic";
             this.clrbtnVFOSmallColor.Color = System.Drawing.Color.OrangeRed;
             this.clrbtnVFOSmallColor.Image = null;
-            this.clrbtnVFOSmallColor.Location = new System.Drawing.Point(88, 200);
+            this.clrbtnVFOSmallColor.Location = new System.Drawing.Point(88, 232);
             this.clrbtnVFOSmallColor.MoreColors = "More Colors...";
             this.clrbtnVFOSmallColor.Name = "clrbtnVFOSmallColor";
             this.clrbtnVFOSmallColor.Size = new System.Drawing.Size(40, 23);
@@ -13883,7 +13900,7 @@ namespace PowerSDR
             // lblVFOSmallColor
             // 
             this.lblVFOSmallColor.Image = null;
-            this.lblVFOSmallColor.Location = new System.Drawing.Point(16, 205);
+            this.lblVFOSmallColor.Location = new System.Drawing.Point(16, 237);
             this.lblVFOSmallColor.Name = "lblVFOSmallColor";
             this.lblVFOSmallColor.Size = new System.Drawing.Size(72, 24);
             this.lblVFOSmallColor.TabIndex = 70;
@@ -13894,7 +13911,7 @@ namespace PowerSDR
             this.chkVFOSmallLSD.Checked = true;
             this.chkVFOSmallLSD.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkVFOSmallLSD.Image = null;
-            this.chkVFOSmallLSD.Location = new System.Drawing.Point(19, 170);
+            this.chkVFOSmallLSD.Location = new System.Drawing.Point(9, 200);
             this.chkVFOSmallLSD.Name = "chkVFOSmallLSD";
             this.chkVFOSmallLSD.Size = new System.Drawing.Size(104, 24);
             this.chkVFOSmallLSD.TabIndex = 69;
@@ -35260,7 +35277,16 @@ namespace PowerSDR
 
         } //checkBoxRX2_CheckedChanged
 
-       
+        private void chkVFOLargeWindow_CheckedChanged(object sender, EventArgs e) // .228
+        {
+
+            // ke9ns: .228 must resize console when size of grpVFO changes:   Console_Resize(this, EventArgs.Empty);
+            console.Invalidate();
+            console.Console_Resize(this, EventArgs.Empty);
+
+        }
+
+
 
 
 

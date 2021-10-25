@@ -18616,11 +18616,21 @@ namespace PowerSDR
                 PWM2A_DIFF = vfoa_hz - PWM2A_LAST;
                 PWM2A_LAST = vfoa_hz;               // new last value
 
+                if (Math.Abs(PWM2A_DIFF) >= 10000000) // .228 to prevent a math.abs crash
+                {
+                    PWM2A_DIFF = 0;
+                }
+
+
                 PWM4 = ((float)(High - Low) / (float)num_samples); // number of hz on screen
 
                 PWM1 = ((float)PWM2A_DIFF / PWM4 / slope); // how many pixels to move the bmp frame  (-=going down in freq +=going up in freq)
 
                 PWM1A = (int)Math.Floor(((PWM1 / (float)W) * (float)num_samples)); // this is supposed to be the # of points in the data stream array to move
+
+                Debug.WriteLine("228: " + PWM1A + " W:" + W + " N:"+num_samples + " P:"+ PWM1 + " P4:" + PWM4 + " S:" + slope + " P2:"+ PWM2A_DIFF);
+
+                Debug.WriteLine("228: " + Math.Abs(PWM1A));
 
 
                 if ((Math.Abs(PWM1A) < num_samples) && PWM1A != 0) // check for valid number
@@ -18672,6 +18682,14 @@ namespace PowerSDR
 
                 PWM2B_DIFF = vfob_hz - PWM2B_LAST;
                 PWM2B_LAST = vfob_hz;               // new last value
+
+                if (Math.Abs(PWM2B_DIFF) >= 10000000) // .228 to prevent a math.abs crash
+                {
+                    PWM2B_DIFF = 0;
+                }
+
+
+
                 PWM4 = ((float)(High - Low) / (float)num_samples); // number of hz on screen
 
                 PWM1 = ((float)PWM2B_DIFF / PWM4 / slope); // how many pixels to move the bmp frame -=going down in freq +=going up in freq

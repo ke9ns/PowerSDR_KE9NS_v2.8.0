@@ -1625,8 +1625,8 @@ namespace PowerSDR
         private System.Windows.Forms.TextBoxTS txtVFOABand;
         public TextBoxTS txtVFOBFreq;
         public PictureBox picDisplay;
-        private System.Windows.Forms.PanelTS grpVFOA;
-        private System.Windows.Forms.PanelTS grpVFOB;
+        public PanelTS grpVFOA;
+        public PanelTS grpVFOB;
         private System.Windows.Forms.TextBoxTS txtVFOBBand;
         public CheckBoxTS chkPower;
         private System.Windows.Forms.RichTextBox lblCPUMeter; // ke9ns mod   private System.Windows.Forms.LabelTS lblCPUMeter;
@@ -1730,8 +1730,8 @@ namespace PowerSDR
         private System.Windows.Forms.TextBoxTS txtDisplayPeakOffset;
         private System.Windows.Forms.TextBoxTS txtDisplayPeakFreq;
         public TextBoxTS txtDisplayPeakPower;
-        private System.Windows.Forms.TextBoxTS txtVFOAMSD;
-        private System.Windows.Forms.TextBoxTS txtVFOBMSD;
+        public TextBoxTS txtVFOAMSD;
+        public TextBoxTS txtVFOBMSD;
         private System.Windows.Forms.TextBoxTS txtVFOALSD;
         private System.Windows.Forms.TextBoxTS txtVFOBLSD;
         public CheckBoxTS chkSR;
@@ -8605,17 +8605,17 @@ namespace PowerSDR
             // 
             // panelVFOBHover
             // 
-            this.panelVFOBHover.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.panelVFOBHover, "panelVFOBHover");
+            this.panelVFOBHover.BackColor = System.Drawing.Color.Black;
             this.panelVFOBHover.Name = "panelVFOBHover";
             this.panelVFOBHover.Paint += new System.Windows.Forms.PaintEventHandler(this.panelVFOBHover_Paint);
             this.panelVFOBHover.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelVFOBHover_MouseMove);
             // 
             // txtVFOBLSD
             // 
+            resources.ApplyResources(this.txtVFOBLSD, "txtVFOBLSD");
             this.txtVFOBLSD.BackColor = System.Drawing.Color.Black;
             this.txtVFOBLSD.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            resources.ApplyResources(this.txtVFOBLSD, "txtVFOBLSD");
             this.txtVFOBLSD.ForeColor = System.Drawing.Color.Olive;
             this.txtVFOBLSD.Name = "txtVFOBLSD";
             this.txtVFOBLSD.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtVFOBLSD_MouseDown);
@@ -8623,9 +8623,9 @@ namespace PowerSDR
             // 
             // txtVFOBMSD
             // 
+            resources.ApplyResources(this.txtVFOBMSD, "txtVFOBMSD");
             this.txtVFOBMSD.BackColor = System.Drawing.Color.Black;
             this.txtVFOBMSD.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            resources.ApplyResources(this.txtVFOBMSD, "txtVFOBMSD");
             this.txtVFOBMSD.ForeColor = System.Drawing.Color.Olive;
             this.txtVFOBMSD.Name = "txtVFOBMSD";
             this.txtVFOBMSD.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtVFOBMSD_MouseDown);
@@ -8646,9 +8646,9 @@ namespace PowerSDR
             // 
             // txtVFOBFreq
             // 
+            resources.ApplyResources(this.txtVFOBFreq, "txtVFOBFreq");
             this.txtVFOBFreq.BackColor = System.Drawing.Color.Black;
             this.txtVFOBFreq.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            resources.ApplyResources(this.txtVFOBFreq, "txtVFOBFreq");
             this.txtVFOBFreq.ForeColor = System.Drawing.Color.Olive;
             this.txtVFOBFreq.Name = "txtVFOBFreq";
             this.txtVFOBFreq.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtVFOBFreq_KeyPress);
@@ -8675,26 +8675,26 @@ namespace PowerSDR
             // 
             // panelVFOASubHover
             // 
+            resources.ApplyResources(this.panelVFOASubHover, "panelVFOASubHover");
             this.panelVFOASubHover.BackColor = System.Drawing.Color.Black;
             this.panelVFOASubHover.ForeColor = System.Drawing.Color.Black;
-            resources.ApplyResources(this.panelVFOASubHover, "panelVFOASubHover");
             this.panelVFOASubHover.Name = "panelVFOASubHover";
             this.panelVFOASubHover.Paint += new System.Windows.Forms.PaintEventHandler(this.panelVFOASubHover_Paint);
             this.panelVFOASubHover.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelVFOASubHover_MouseMove);
             // 
             // panelVFOAHover
             // 
-            this.panelVFOAHover.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.panelVFOAHover, "panelVFOAHover");
+            this.panelVFOAHover.BackColor = System.Drawing.Color.Black;
             this.panelVFOAHover.Name = "panelVFOAHover";
             this.panelVFOAHover.Paint += new System.Windows.Forms.PaintEventHandler(this.panelVFOAHover_Paint);
             this.panelVFOAHover.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelVFOAHover_MouseMove);
             // 
             // txtVFOALSD
             // 
+            resources.ApplyResources(this.txtVFOALSD, "txtVFOALSD");
             this.txtVFOALSD.BackColor = System.Drawing.Color.Black;
             this.txtVFOALSD.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            resources.ApplyResources(this.txtVFOALSD, "txtVFOALSD");
             this.txtVFOALSD.ForeColor = System.Drawing.Color.Olive;
             this.txtVFOALSD.Name = "txtVFOALSD";
             this.txtVFOALSD.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtVFOALSD_MouseDown);
@@ -16638,7 +16638,9 @@ namespace PowerSDR
             //---------------------------- VFOA
             try
             {
+               
                 StackForm.bandstackupdate(); // ke9ns add: to update filter2[]
+              
 
                 iii = Convert.ToInt32((string)regBox1.Text);
                 Debug.WriteLine("LOCK STATUS filter2[] = " + filter2[iii]);
@@ -17174,6 +17176,10 @@ namespace PowerSDR
             {
                 filter = filter.Substring(0, (filter.Length) - 1); // ke9ns add: for bandstack lockout
             }
+            if (freq > 9999.999999) // .228
+            {
+                if (setupForm != null && setupForm.chkVFOLargeWindow.Checked == false) setupForm.chkVFOLargeWindow.Checked = true;
+            }
 
             // Set mode, filter, and frequency according to passed parameters
             RX1DSPMode = (DSPMode)Enum.Parse(typeof(DSPMode), mode, true);
@@ -17206,6 +17212,11 @@ namespace PowerSDR
             if (filter.Contains("@"))
             {
                 filter = filter.Substring(0, (filter.Length) - 1); // ke9ns add: for bandstack lockout
+            }
+
+            if (freq > 9999.999999) // .228
+            {
+                if (setupForm != null && setupForm.chkVFOLargeWindow.Checked == false) setupForm.chkVFOLargeWindow.Checked = true;
             }
 
             // Set mode, filter, and frequency according to passed parameters
@@ -17259,7 +17270,9 @@ namespace PowerSDR
 			SetTXBandButtonColor(tx_band);
 			SetRX2BandButtonColor(rx2_band);*/
 
+           
             SetRX1BandButton(rx1_band);
+            
             if (FWCEEPROM.RX2OK)  SetRX2BandButton(rx2_band);
         }
 
@@ -17791,11 +17804,13 @@ namespace PowerSDR
 
             }
 
+           
             StackForm.bandstackupdate(); // ke9ns add update band stack screen 
+
+          
 
 
         } // setrx1 band button
-
         public string regBox2 = "";
         public string regBox12 = "";
 
@@ -25789,17 +25804,17 @@ namespace PowerSDR
 
             dialcheckA = true;  // update DIAL if active
 
-            if (VFOAFreq > 9999.999999)
-            {
-                txtVFOALSD.Visible = false;
-                txtVFOAMSD.Visible = false;
+         //   if (VFOAFreq > 9999.999999)
+          //  {
+             //   txtVFOALSD.Visible = false;
+             //   txtVFOAMSD.Visible = false;
 
-            }
-            else
-            {
+           // }
+          //  else
+          //  {
                 txtVFOALSD.Visible = SmallLSD;
                 txtVFOAMSD.Visible = SmallLSD;
-            }
+          //  }
 
             txtVFOAFreq.Text = freq;
             txtVFOAMSD.Text = freq;
@@ -25810,8 +25825,8 @@ namespace PowerSDR
 
 
             index = temp.IndexOf(separator) + 4; // 3 digits
-            txtVFOALSD.Width = 75;
-            txtVFOALSD.Location = new Point(184, 17);
+            txtVFOALSD.Width = 75; // default is 73
+         //   txtVFOALSD.Location = new Point(184, 17); // default is 184,17 .228
 
 
             txtVFOALSD.Text = temp.Remove(0, index);  // 3 small orange digits (remove digits xxx.xxx)
@@ -25913,17 +25928,17 @@ namespace PowerSDR
 
             dialcheckB = true; // there was a update to the VFOB freq, so notify DIALB
 
-            if (VFOBFreq > 9999.999999)
-            {
-                txtVFOBLSD.Visible = false;
-                txtVFOBMSD.Visible = false;
+         //   if (VFOBFreq > 9999.999999)
+          //  {
+            //    txtVFOBLSD.Visible = false;
+             //   txtVFOBMSD.Visible = false;
 
-            }
-            else
-            {
+          //  }
+          //  else
+          //  {
                 txtVFOBLSD.Visible = SmallLSD;
                 txtVFOBMSD.Visible = SmallLSD;
-            }
+         //   }
 
 
             txtVFOBFreq.Text = freq;
@@ -25936,7 +25951,7 @@ namespace PowerSDR
 
             index = temp.IndexOf(separator) + 4; // 3 digits
             txtVFOBLSD.Width = 75;
-            txtVFOBLSD.Location = new Point(184, 17);
+          //  txtVFOBLSD.Location = new Point(184, 17); //.228
 
 
 
@@ -67489,16 +67504,16 @@ namespace PowerSDR
                 txtVFOBFreq_LostFocus(this, EventArgs.Empty);
             }
 
-            if (small_lsd && VFOAFreq < 10000.0) // ke9ns mod
-            {
-                txtVFOAMSD.Visible = true;
-                txtVFOALSD.Visible = true;
-            }
-            else
-            {
-                txtVFOAMSD.Visible = false;
-                txtVFOALSD.Visible = false;
-            }
+         //   if (small_lsd && VFOAFreq < 10000.0) // ke9ns mod   //.228
+         //   {
+         //       txtVFOAMSD.Visible = true;
+         //       txtVFOALSD.Visible = true;
+         //   }
+         //   else
+         //   {
+         //       txtVFOAMSD.Visible = false;
+          //      txtVFOALSD.Visible = false;
+          //  }
 
             if (Display.PeakOn) Display.ResetRX1DisplayPeak();
 
@@ -68458,17 +68473,17 @@ namespace PowerSDR
                 txtVFOAFreq_LostFocus(this, EventArgs.Empty);
             }
 
-            if (small_lsd && VFOBFreq < 10000.0)
-            {
-                txtVFOBMSD.Visible = true;
-                txtVFOBLSD.Visible = true;
-            }
-            else
-            {
-                txtVFOBMSD.Visible = false;
-                txtVFOBLSD.Visible = false;
+         //   if (small_lsd && VFOBFreq < 10000.0)
+          //  {
+           //     txtVFOBMSD.Visible = true;
+           //     txtVFOBLSD.Visible = true;
+           // }
+          //  else
+          //  {
+            //    txtVFOBMSD.Visible = false;
+            //    txtVFOBLSD.Visible = false;
 
-            }
+          //  }
 
             //provides proper operation when using split with either V or U on VFOB
             if ((VFOBFreq >= 134.0 && VFOBFreq <= 163.0) || (VFOBFreq >= 420.0 && VFOBFreq <= 470.0)) // ke9ns test was 144.0 and 148.0 and 450.0
@@ -71382,7 +71397,7 @@ namespace PowerSDR
                 }
             }
 
-            last_band = new_band; // ke9ns let the rest of console know the new band
+            last_band = new_band; // ke9ns: let the rest of console know the new band
 
             string filter, mode;
             double freq;
@@ -75910,15 +75925,12 @@ namespace PowerSDR
                         grpRX2Meter.Location = new Point(grpVFOBetween.Location.X + grpVFOBetween.Size.Width + 6, grpVFOBetween.Location.Y);
 
                         int grpV = ((grpMultimeter.Location.X - panelDisplay.Location.X) / 2) + panelDisplay.Location.X - (grpVFOA.Size.Width / 2); // half way between panelDisplay 0x and grpMultimeter 0x
-
-                        //  int grpV = (grpMultimeter.Location.X - 6) - grpVFOA.Size.Width;
-
+                       
                         grpVFOA.Location = new Point(grpV, gr_VFOA_basis_location.Y + MeterMoveY1); //ke9ns if gap between VFOA and CENTER is large, then move VFOA closer to Center
 
+
                         grpV = (((panelDisplay.Location.X + panelDisplay.Size.Width) - (grpRX2Meter.Location.X + grpRX2Meter.Size.Width)) / 2) + (grpRX2Meter.Location.X + grpRX2Meter.Size.Width) - (grpVFOB.Size.Width / 2);
-
-                        //   grpV = grpRX2Meter.Location.X + grpRX2Meter.Size.Width + 6;
-
+                       
                         grpVFOB.Location = new Point(grpV, gr_VFOB_basis_location.Y + MeterMoveY1); // 
 
                         grpVFOBetween.Location = new Point(gr_vfobetween_basis_location.X + (h_delta1 / 2), gr_vfobetween_basis_location.Y + MeterMoveY1); // ke9ns: move here from below
@@ -78512,6 +78524,62 @@ namespace PowerSDR
             {
                 //   N1MM = false;
                 N1MM_RESIZE = true;
+            }
+
+            if (setupForm != null && setupForm.chkVFOLargeWindow.Checked) //.228
+            {
+                grpVFOA.Width = 262 + 50;
+                grpVFOB.Width = 262 + 50;
+                grpVFOA.Location = new Point(110 - 50, 22);
+                grpVFOB.Location = new Point(110 - 50, 22);
+
+                txtVFOAFreq.Location = new Point(4,11);
+                txtVFOBFreq.Location = new Point(4,11);
+
+                txtVFOAMSD.Location = new Point(4, 11);
+                txtVFOBMSD.Location = new Point(4, 11);
+
+                panelVFOAHover.Width = 243 + 50;
+                panelVFOBHover.Width = 243 + 50;
+
+                txtVFOAFreq.Width = 253 + 50;
+                txtVFOBFreq.Width = 253 + 50;
+                
+                txtVFOAMSD.Width = 253 + 50;
+                txtVFOBMSD.Width = 253 + 50;
+
+                txtVFOABand.Width = 220 + 50;
+                txtVFOBBand.Width = 219 + 50;
+
+
+            }
+            else // normal size and location
+            {
+                grpVFOA.Width = 262;
+                grpVFOB.Width = 262;
+                grpVFOA.Location = new Point(110, 22);
+                grpVFOB.Location = new Point(110, 22);
+
+                txtVFOAFreq.Location = new Point(4, 11);
+                txtVFOBFreq.Location = new Point(4, 11);
+
+                txtVFOAMSD.Location = new Point(4, 11);
+                txtVFOBMSD.Location = new Point(4, 11);
+
+                panelVFOAHover.Width = 243;
+                panelVFOBHover.Width = 243;
+
+
+
+                txtVFOAFreq.Width = 253;
+                txtVFOBFreq.Width = 253;
+               
+                txtVFOAMSD.Width = 253;
+                txtVFOBMSD.Width = 253;
+
+                txtVFOABand.Width = 220;
+                txtVFOBBand.Width = 219;
+
             }
 
             if (this.WindowState == FormWindowState.Minimized)
@@ -86967,9 +87035,10 @@ namespace PowerSDR
 
                     DB.SaveBandStack(last_band, StackForm.xxx, StackForm.mode1[StackForm.xxx], StackForm.filter1[StackForm.xxx], StackForm.freq1[StackForm.xxx]);
 
-
+                  
                     StackForm.bandstackupdate(); // update bandstack screen
-                  //  StackForm.updateindex();
+                   
+                    //  StackForm.updateindex();
 
                 }
                 catch
