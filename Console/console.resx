@@ -12140,7 +12140,7 @@ Right Click on DRIVE: text to toggle between Lock and UnLock.
     <value>4, 17</value>
   </data>
   <data name="textBox1.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>151, 250</value>
+    <value>161, 250</value>
   </data>
   <data name="textBox1.MaxLength" type="System.Int32, mscorlib">
     <value>1000</value>
@@ -12149,7 +12149,7 @@ Right Click on DRIVE: text to toggle between Lock and UnLock.
     <value>True</value>
   </data>
   <data name="textBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 100</value>
+    <value>161, 100</value>
   </data>
   <data name="textBox1.TabIndex" type="System.Int32, mscorlib">
     <value>118</value>
@@ -12218,7 +12218,7 @@ Right Click to ADD new entry to VFOB Bandstack list
     <value>Off</value>
   </data>
   <data name="buttonSort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 223</value>
+    <value>61, 224</value>
   </data>
   <data name="buttonSort.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 23</value>
@@ -12255,7 +12255,7 @@ Right Click to sort VFOB Bandstack list Low to High
     <value>Off</value>
   </data>
   <data name="buttonDel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 223</value>
+    <value>114, 223</value>
   </data>
   <data name="buttonDel.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 23</value>
@@ -14920,7 +14920,7 @@ Right Click: Create using Wave menu-&gt;VK1 button
     <value>4, 120</value>
   </data>
   <data name="textBox2.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>151, 250</value>
+    <value>161, 250</value>
   </data>
   <data name="textBox2.MaxLength" type="System.Int32, mscorlib">
     <value>1000</value>
@@ -14929,7 +14929,7 @@ Right Click: Create using Wave menu-&gt;VK1 button
     <value>True</value>
   </data>
   <data name="textBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 100</value>
+    <value>161, 100</value>
   </data>
   <data name="textBox2.TabIndex" type="System.Int32, mscorlib">
     <value>121</value>
@@ -18493,10 +18493,10 @@ and activate SWL Spotting on the Panadapter</value>
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="panelTSBandStack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>556, 6</value>
+    <value>546, 6</value>
   </data>
   <data name="panelTSBandStack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 250</value>
+    <value>168, 250</value>
   </data>
   <data name="panelTSBandStack.TabIndex" type="System.Int32, mscorlib">
     <value>117</value>

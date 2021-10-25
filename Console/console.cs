@@ -2638,7 +2638,7 @@ namespace PowerSDR
             {
                 panelAntenna.Size = new Size(115, 44); // ke9ns add .212 shrink ant panel if not 2nd rx
 
-                textBox1.Size = new System.Drawing.Size(151, 200); // ke9ns add .209 no need to have VFOB bandstack if no 2nd receiver RX2
+                textBox1.Size = new System.Drawing.Size(161, 200); //.228 was 151 ke9ns add .209 no need to have VFOB bandstack if no 2nd receiver RX2
                 textBox2.Size = new System.Drawing.Size(1, 1);
 
                 console_basis_size.Height -= (panelRX2Filter.Height + 8); // panelRX2Filter
@@ -75657,9 +75657,9 @@ namespace PowerSDR
                 {
                     panelTSBandStack.Location = new Point(gr_BandHF_basis_location.X + h_delta1 + 2, 22); // ke9ns add move to upper right corner
 
-                    textBox1.Size = new Size(151, 100); // ke9ns add .211 
+                    textBox1.Size = new Size(161, 100); // .228 ke9ns add .211 
                     textBox2.Location = new Point(4, 120);
-                    textBox2.Size = new Size(151, 100);
+                    textBox2.Size = new Size(161, 100); // .228
 
                     panelBandHFRX2.Location = new Point(gr_BandHFRX2_basis_location.X + h_delta1,  gr_BandHFRX2_basis_location.Y + v_delta );  // ke9ns have it stay close to rx1 meter
                     panelBandGNRX2.Location = new Point(gr_BandGENRX2_basis_location.X + h_delta1,  gr_BandGENRX2_basis_location.Y + (v_delta));  // ke9ns have it stay close to rx1 meter
@@ -75753,11 +75753,11 @@ namespace PowerSDR
 
 
                     panelTSBandStack.Location = new Point(gr_display_size_basis.Width + h_delta1 - 162, 6); // ke9ns add: move next to band buttons in the panadapter area
-                    panelTSBandStack.Size = new Size(158, picDisplay.Size.Height - 6);
+                    panelTSBandStack.Size = new Size(168, picDisplay.Size.Height - 6); // .228 was 158
 
-                    textBox1.Size = new Size(151, 200); // ke9ns add .211 
+                    textBox1.Size = new Size(161, 200); // ke9ns add .211  .228 was 151
                     textBox2.Location = new Point(4, 220);
-                    textBox2.Size = new Size(151, 200);
+                    textBox2.Size = new Size(161, 200); // .228 was 151
 
                     ptbDisplayZoom.Location = new Point(tb_display_zoom_basis.X + h_delta1, tb_display_zoom_basis.Y + v_delta);
                     ptbDisplayZoom2.Location = new Point(tb2_display_zoom_basis.X + h_delta1, tb2_display_zoom_basis.Y + v_delta); //.219
@@ -87197,7 +87197,7 @@ namespace PowerSDR
                     panelDisplay.Parent.Controls.Remove(panelTSBandStack); // ke9ns add: remove bandstack from display are
                     this.Controls.Add(panelTSBandStack);
 
-                    panelTSBandStack.Size = new Size(163, 250);
+                    panelTSBandStack.Size = new Size(168, 250); // .228 was 163
                     panelTSBandStack.Anchor = AnchorStyles.Top | AnchorStyles.Left;
                     panelTSBandStack.Location = new Point(556, 6);
 
@@ -87211,7 +87211,7 @@ namespace PowerSDR
                         this.Controls.Remove(panelTSBandStack);
 
                         panelTSBandStack.Location = new Point(556, 6);
-                        panelTSBandStack.Size = new Size(158, 222);
+                        panelTSBandStack.Size = new Size(168, 222); // .228 was 158
                         panelTSBandStack.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
 
                         this.panelDisplay.Controls.Add(this.panelTSBandStack);

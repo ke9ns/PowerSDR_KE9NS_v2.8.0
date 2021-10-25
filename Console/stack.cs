@@ -294,7 +294,7 @@ namespace PowerSDR
         public string[] filter22 = new string[20]; // ke9ns add   F4 would indicate a unlocked bandstack memory, but F4L would indicate its a locked bandstank memory
         public string[] mode12 = new string[20];
 
-        public int BSLength = 22;  // 31 length of a BandStack Line
+        public int BSLength = 23;  // 22   31 length of a BandStack Line
 
         public int nnn = 0; // 0-41 based on last_band
         public int nnn2 = 0; // .209
@@ -354,7 +354,7 @@ namespace PowerSDR
                     //   if (ii >= 9) bigmessage1 = (ii + 1).ToString() + ": " + freq.ToString("N" + 6).PadLeft(11) + ":"; //.PadLeft(11)
                     //    else bigmessage1 = (ii + 1).ToString() + " : " + freq.ToString("N" + 6).PadLeft(11) + ":";
 
-                    bigmessage1 = freq.ToString("####.000000").PadLeft(11) + ":"; // was N6 4 less than having index numbers
+                    bigmessage1 = freq.ToString("#####.000000").PadLeft(12) + ":"; // was N6 4 less than having index numbers
 
                     bigmessage2 = "---:";
                     //----------------------------------------------------------------
@@ -494,7 +494,7 @@ namespace PowerSDR
                         freq12[ii] = freq;
 
                       
-                        bigmessage12 = freq.ToString("####.000000").PadLeft(11) + ":"; // was N6 4 less than having index numbers
+                        bigmessage12 = freq.ToString("#####.000000").PadLeft(12) + ":"; // was N6 4 less than having index numbers
 
                         bigmessage22 = "---:";
                         //----------------------------------------------------------------

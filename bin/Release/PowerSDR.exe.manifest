@@ -211,14 +211,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerSDR.exe" size="16228352">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerSDR.exe" size="16224256">
       <assemblyIdentity name="PowerSDR" version="2.8.0.228" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>lojUrhhSfaQLUvGOXPCeStouxY6qnXSAR4cB8M+RMsE=</dsig:DigestValue>
+        <dsig:DigestValue>83Y3zboK+WK/s4Fv/xTQkuB0Tdto4sRehRhlZ18laww=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
