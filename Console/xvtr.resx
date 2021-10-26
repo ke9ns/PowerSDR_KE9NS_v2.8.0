@@ -120,26 +120,9 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="richTextBox1.Text" xml:space="preserve">
-    <value>Transverter Setup:
-UCB  = hold mouse over FlexWire button for info
-
-Example of a 435/28mhz transverter:
-LO Offset = 407.0 mhz  (435 - 28 = 407)
-Begin Freq = 430mhz (or specified lower limit)
-End Freq = 440mhz (or specified upper limit)
-
-Split RF = use TX and RX XVTR ports on 5000:
-XVTX/COM = RX and TX if NO SPLIT RF
-XVRX = RX only if SPLIT checked.
-
-ANT panel will show RX1 using XVTR BNC
-VU5K module has its own BNC jacks
-
-0x4C UCB (Universal Control board) PCA9555D Relay selector (part of the Xvtr panel)
-See page: http://k3tuf.com/FW.html , for info on FlexWire and UCB
-</value>
-  </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="chkFlexWire.ToolTip" xml:space="preserve">
     <value>Open the FlexWire UCB (Universal Control Board) relay panel
 or use CTRL+ALT + U keys to open
@@ -172,6 +155,27 @@ Tune Power setting on the Console screen will be used.</value>
 transmit and receive RF. In this case connect your transverter to the Back Panel XVTX/COM
 port for transmit RF and the XVRX port for the receive RF. Otherwise, connect it to the XVTX/
 COM port only.</value>
+  </data>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>Transverter Setup:
+UCB  = hold mouse over FlexWire button for info
+
+Example of a 435/28mhz transverter:
+LO Offset = 407.0 mhz  (435 - 28 = 407)
+Begin Freq = 430mhz (or specified lower limit)
+End Freq = 440mhz (or specified upper limit)
+HOLD MOUSE OVER "BUTTON TEXT" TO SEE RESULTS
+
+Split RF = use TX and RX XVTR ports on 5000:
+XVTX/COM = RX and TX if NO SPLIT RF
+XVRX = RX only if SPLIT checked.
+
+ANT panel will show RX1 using XVTR BNC
+VU5K module has its own BNC jacks
+
+0x4C UCB (Universal Control board) PCA9555D Relay selector (part of the Xvtr panel)
+See page: http://k3tuf.com/FW.html , for info on FlexWire and UCB
+</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

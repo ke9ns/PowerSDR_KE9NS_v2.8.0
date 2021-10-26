@@ -71360,7 +71360,7 @@ namespace PowerSDR
             double start_freq = xvtrForm.GetBegin(xvtr_index);
             double end_freq = xvtrForm.GetEnd(xvtr_index);
 
-            if (register < 3) // ke9ns create a bandstack since there is none in the database.cs file
+            if (register < 3) // ke9ns: create a bandstack since there is none in the database.cs file
             {
                 for (int i = 0; i < 3 - register; i++)
                     DB.AddBandStack(new_band, "USB", "2600", start_freq + i * 0.0010);

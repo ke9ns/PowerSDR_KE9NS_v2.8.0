@@ -537,6 +537,10 @@
   <ItemGroup>
     <ResourceCompile Include="DttSP.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Library Include="libfftw3f-3.lib" />
+    <Library Include="pthreadVC.lib" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>

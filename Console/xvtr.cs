@@ -458,18 +458,12 @@ namespace PowerSDR
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(XVTRForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label_VUModuleNotPresent = new System.Windows.Forms.Label();
-            this.label_VUModulePresent = new System.Windows.Forms.Label();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.chkFlexWire = new System.Windows.Forms.CheckBoxTS();
-            this.chkAlwaysOnTop1 = new System.Windows.Forms.CheckBoxTS();
-            this.lblPAEnable = new System.Windows.Forms.LabelTS();
-            this.lblIFGain = new System.Windows.Forms.LabelTS();
             this.chkUHFPAEnable = new System.Windows.Forms.CheckBoxTS();
             this.chkVHFPAEnable = new System.Windows.Forms.CheckBoxTS();
             this.chkUHFIFGain = new System.Windows.Forms.CheckBoxTS();
             this.chkVHFIFGain = new System.Windows.Forms.CheckBoxTS();
+            this.label_VUModuleNotPresent = new System.Windows.Forms.Label();
+            this.label_VUModulePresent = new System.Windows.Forms.Label();
             this.udRXGain1 = new System.Windows.Forms.NumericUpDownTS();
             this.udRXGain0 = new System.Windows.Forms.NumericUpDownTS();
             this.chkXVTRRF1 = new System.Windows.Forms.CheckBoxTS();
@@ -494,7 +488,15 @@ namespace PowerSDR
             this.udUCBAddr0 = new System.Windows.Forms.NumericUpDownTS();
             this.udLOError0 = new System.Windows.Forms.NumericUpDownTS();
             this.udLOError1 = new System.Windows.Forms.NumericUpDownTS();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.chkFlexWire = new System.Windows.Forms.CheckBoxTS();
             this.chkUseXVTRTUNPWR = new System.Windows.Forms.CheckBoxTS();
+            this.lblXVTRRF = new System.Windows.Forms.LabelTS();
+            this.lblUCBAddress = new System.Windows.Forms.LabelTS();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.chkAlwaysOnTop1 = new System.Windows.Forms.CheckBoxTS();
+            this.lblPAEnable = new System.Windows.Forms.LabelTS();
+            this.lblIFGain = new System.Windows.Forms.LabelTS();
             this.udRXGain15 = new System.Windows.Forms.NumericUpDownTS();
             this.udRXGain14 = new System.Windows.Forms.NumericUpDownTS();
             this.udRXGain13 = new System.Windows.Forms.NumericUpDownTS();
@@ -524,7 +526,6 @@ namespace PowerSDR
             this.chkXVTRRF4 = new System.Windows.Forms.CheckBoxTS();
             this.chkXVTRRF3 = new System.Windows.Forms.CheckBoxTS();
             this.chkXVTRRF2 = new System.Windows.Forms.CheckBoxTS();
-            this.lblXVTRRF = new System.Windows.Forms.LabelTS();
             this.udPower15 = new System.Windows.Forms.NumericUpDownTS();
             this.udPower14 = new System.Windows.Forms.NumericUpDownTS();
             this.udPower13 = new System.Windows.Forms.NumericUpDownTS();
@@ -673,7 +674,6 @@ namespace PowerSDR
             this.udUCBAddr3 = new System.Windows.Forms.NumericUpDownTS();
             this.udUCBAddr2 = new System.Windows.Forms.NumericUpDownTS();
             this.lblButtonText = new System.Windows.Forms.LabelTS();
-            this.lblUCBAddress = new System.Windows.Forms.LabelTS();
             this.lblBandButton = new System.Windows.Forms.LabelTS();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udRXGain1)).BeginInit();
@@ -829,85 +829,6 @@ namespace PowerSDR
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "VHF/UHF";
             // 
-            // label_VUModuleNotPresent
-            // 
-            this.label_VUModuleNotPresent.AutoSize = true;
-            this.label_VUModuleNotPresent.ForeColor = System.Drawing.Color.Firebrick;
-            this.label_VUModuleNotPresent.Location = new System.Drawing.Point(6, 0);
-            this.label_VUModuleNotPresent.Name = "label_VUModuleNotPresent";
-            this.label_VUModuleNotPresent.Size = new System.Drawing.Size(152, 13);
-            this.label_VUModuleNotPresent.TabIndex = 214;
-            this.label_VUModuleNotPresent.Text = "VHF/UHF Module Not Present";
-            // 
-            // label_VUModulePresent
-            // 
-            this.label_VUModulePresent.AutoSize = true;
-            this.label_VUModulePresent.ForeColor = System.Drawing.Color.Green;
-            this.label_VUModulePresent.Location = new System.Drawing.Point(6, 0);
-            this.label_VUModulePresent.Name = "label_VUModulePresent";
-            this.label_VUModulePresent.Size = new System.Drawing.Size(132, 13);
-            this.label_VUModulePresent.TabIndex = 213;
-            this.label_VUModulePresent.Text = "VHF/UHF Module Present";
-            // 
-            // toolTip1
-            // 
-            this.toolTip1.AutoPopDelay = 10000;
-            this.toolTip1.InitialDelay = 500;
-            this.toolTip1.ReshowDelay = 100;
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(868, 122);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(235, 278);
-            this.richTextBox1.TabIndex = 332;
-            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
-            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
-            // 
-            // chkFlexWire
-            // 
-            this.chkFlexWire.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkFlexWire.Appearance = System.Windows.Forms.Appearance.Button;
-            this.chkFlexWire.Image = null;
-            this.chkFlexWire.Location = new System.Drawing.Point(907, 428);
-            this.chkFlexWire.Name = "chkFlexWire";
-            this.chkFlexWire.Size = new System.Drawing.Size(88, 24);
-            this.chkFlexWire.TabIndex = 331;
-            this.chkFlexWire.Text = "FlexWire";
-            this.chkFlexWire.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.chkFlexWire, resources.GetString("chkFlexWire.ToolTip"));
-            this.chkFlexWire.CheckedChanged += new System.EventHandler(this.chkFlexWire_CheckedChanged);
-            // 
-            // chkAlwaysOnTop1
-            // 
-            this.chkAlwaysOnTop1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkAlwaysOnTop1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.chkAlwaysOnTop1.Image = null;
-            this.chkAlwaysOnTop1.Location = new System.Drawing.Point(897, 460);
-            this.chkAlwaysOnTop1.Name = "chkAlwaysOnTop1";
-            this.chkAlwaysOnTop1.Size = new System.Drawing.Size(103, 24);
-            this.chkAlwaysOnTop1.TabIndex = 208;
-            this.chkAlwaysOnTop1.Text = "Always On Top";
-            this.chkAlwaysOnTop1.CheckedChanged += new System.EventHandler(this.ChkAlwaysOnTop1_CheckedChanged);
-            // 
-            // lblPAEnable
-            // 
-            this.lblPAEnable.Image = null;
-            this.lblPAEnable.Location = new System.Drawing.Point(942, 24);
-            this.lblPAEnable.Name = "lblPAEnable";
-            this.lblPAEnable.Size = new System.Drawing.Size(58, 16);
-            this.lblPAEnable.TabIndex = 207;
-            this.lblPAEnable.Text = "PA Enable";
-            // 
-            // lblIFGain
-            // 
-            this.lblIFGain.Image = null;
-            this.lblIFGain.Location = new System.Drawing.Point(894, 24);
-            this.lblIFGain.Name = "lblIFGain";
-            this.lblIFGain.Size = new System.Drawing.Size(42, 16);
-            this.lblIFGain.TabIndex = 206;
-            this.lblIFGain.Text = "IF Gain";
-            // 
             // chkUHFPAEnable
             // 
             this.chkUHFPAEnable.AutoSize = true;
@@ -959,6 +880,26 @@ namespace PowerSDR
             this.chkVHFIFGain.TabIndex = 215;
             this.chkVHFIFGain.UseVisualStyleBackColor = true;
             this.chkVHFIFGain.CheckedChanged += new System.EventHandler(this.chkVHFIFGain_CheckedChanged);
+            // 
+            // label_VUModuleNotPresent
+            // 
+            this.label_VUModuleNotPresent.AutoSize = true;
+            this.label_VUModuleNotPresent.ForeColor = System.Drawing.Color.Firebrick;
+            this.label_VUModuleNotPresent.Location = new System.Drawing.Point(6, 0);
+            this.label_VUModuleNotPresent.Name = "label_VUModuleNotPresent";
+            this.label_VUModuleNotPresent.Size = new System.Drawing.Size(152, 13);
+            this.label_VUModuleNotPresent.TabIndex = 214;
+            this.label_VUModuleNotPresent.Text = "VHF/UHF Module Not Present";
+            // 
+            // label_VUModulePresent
+            // 
+            this.label_VUModulePresent.AutoSize = true;
+            this.label_VUModulePresent.ForeColor = System.Drawing.Color.Green;
+            this.label_VUModulePresent.Location = new System.Drawing.Point(6, 0);
+            this.label_VUModulePresent.Name = "label_VUModulePresent";
+            this.label_VUModulePresent.Size = new System.Drawing.Size(132, 13);
+            this.label_VUModulePresent.TabIndex = 213;
+            this.label_VUModulePresent.Text = "VHF/UHF Module Present";
             // 
             // udRXGain1
             // 
@@ -1123,7 +1064,7 @@ namespace PowerSDR
             0});
             this.udFreqEnd1.Location = new System.Drawing.Point(534, 45);
             this.udFreqEnd1.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -1152,7 +1093,7 @@ namespace PowerSDR
             0});
             this.udFreqEnd0.Location = new System.Drawing.Point(534, 19);
             this.udFreqEnd0.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -1182,7 +1123,7 @@ namespace PowerSDR
             0});
             this.udFreqBegin1.Location = new System.Drawing.Point(430, 45);
             this.udFreqBegin1.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -1211,7 +1152,7 @@ namespace PowerSDR
             0});
             this.udFreqBegin0.Location = new System.Drawing.Point(430, 19);
             this.udFreqBegin0.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -1241,7 +1182,7 @@ namespace PowerSDR
             0});
             this.udLOOffset1.Location = new System.Drawing.Point(278, 45);
             this.udLOOffset1.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -1270,7 +1211,7 @@ namespace PowerSDR
             0});
             this.udLOOffset0.Location = new System.Drawing.Point(278, 19);
             this.udLOOffset0.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -1300,6 +1241,7 @@ namespace PowerSDR
             this.txtButtonText1.Text = "70cm";
             this.txtButtonText1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtButtonText1.TextChanged += new System.EventHandler(this.txtButtonText_TextChanged);
+            this.txtButtonText1.MouseHover += new System.EventHandler(this.txtButtonText1_MouseHover);
             // 
             // txtButtonText0
             // 
@@ -1311,6 +1253,7 @@ namespace PowerSDR
             this.txtButtonText0.Text = "2m";
             this.txtButtonText0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtButtonText0.TextChanged += new System.EventHandler(this.txtButtonText_TextChanged);
+            this.txtButtonText0.MouseHover += new System.EventHandler(this.txtButtonText0_MouseHover);
             // 
             // txtBandButton1
             // 
@@ -1464,6 +1407,26 @@ namespace PowerSDR
             0,
             0});
             // 
+            // toolTip1
+            // 
+            this.toolTip1.AutoPopDelay = 10000;
+            this.toolTip1.InitialDelay = 500;
+            this.toolTip1.ReshowDelay = 100;
+            // 
+            // chkFlexWire
+            // 
+            this.chkFlexWire.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkFlexWire.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkFlexWire.Image = null;
+            this.chkFlexWire.Location = new System.Drawing.Point(907, 428);
+            this.chkFlexWire.Name = "chkFlexWire";
+            this.chkFlexWire.Size = new System.Drawing.Size(88, 24);
+            this.chkFlexWire.TabIndex = 331;
+            this.chkFlexWire.Text = "FlexWire";
+            this.chkFlexWire.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.chkFlexWire, resources.GetString("chkFlexWire.ToolTip"));
+            this.chkFlexWire.CheckedChanged += new System.EventHandler(this.chkFlexWire_CheckedChanged);
+            // 
             // chkUseXVTRTUNPWR
             // 
             this.chkUseXVTRTUNPWR.Image = null;
@@ -1475,6 +1438,66 @@ namespace PowerSDR
             this.chkUseXVTRTUNPWR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip1.SetToolTip(this.chkUseXVTRTUNPWR, resources.GetString("chkUseXVTRTUNPWR.ToolTip"));
             this.chkUseXVTRTUNPWR.CheckedChanged += new System.EventHandler(this.chkUseXVTRTUNPWR_CheckedChanged);
+            // 
+            // lblXVTRRF
+            // 
+            this.lblXVTRRF.Enabled = false;
+            this.lblXVTRRF.Image = null;
+            this.lblXVTRRF.Location = new System.Drawing.Point(838, 16);
+            this.lblXVTRRF.Name = "lblXVTRRF";
+            this.lblXVTRRF.Size = new System.Drawing.Size(40, 32);
+            this.lblXVTRRF.TabIndex = 170;
+            this.lblXVTRRF.Text = "XVTR RF TX";
+            this.toolTip1.SetToolTip(this.lblXVTRRF, resources.GetString("lblXVTRRF.ToolTip"));
+            // 
+            // lblUCBAddress
+            // 
+            this.lblUCBAddress.Image = null;
+            this.lblUCBAddress.Location = new System.Drawing.Point(144, 24);
+            this.lblUCBAddress.Name = "lblUCBAddress";
+            this.lblUCBAddress.Size = new System.Drawing.Size(80, 16);
+            this.lblUCBAddress.TabIndex = 1;
+            this.lblUCBAddress.Text = "UCB Address";
+            this.toolTip1.SetToolTip(this.lblUCBAddress, "Universal Control Board I2C 8bit address 0x4C");
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(868, 122);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(235, 278);
+            this.richTextBox1.TabIndex = 332;
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            // 
+            // chkAlwaysOnTop1
+            // 
+            this.chkAlwaysOnTop1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkAlwaysOnTop1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.chkAlwaysOnTop1.Image = null;
+            this.chkAlwaysOnTop1.Location = new System.Drawing.Point(897, 460);
+            this.chkAlwaysOnTop1.Name = "chkAlwaysOnTop1";
+            this.chkAlwaysOnTop1.Size = new System.Drawing.Size(103, 24);
+            this.chkAlwaysOnTop1.TabIndex = 208;
+            this.chkAlwaysOnTop1.Text = "Always On Top";
+            this.chkAlwaysOnTop1.CheckedChanged += new System.EventHandler(this.ChkAlwaysOnTop1_CheckedChanged);
+            // 
+            // lblPAEnable
+            // 
+            this.lblPAEnable.Image = null;
+            this.lblPAEnable.Location = new System.Drawing.Point(942, 24);
+            this.lblPAEnable.Name = "lblPAEnable";
+            this.lblPAEnable.Size = new System.Drawing.Size(58, 16);
+            this.lblPAEnable.TabIndex = 207;
+            this.lblPAEnable.Text = "PA Enable";
+            // 
+            // lblIFGain
+            // 
+            this.lblIFGain.Image = null;
+            this.lblIFGain.Location = new System.Drawing.Point(894, 24);
+            this.lblIFGain.Name = "lblIFGain";
+            this.lblIFGain.Size = new System.Drawing.Size(42, 16);
+            this.lblIFGain.TabIndex = 206;
+            this.lblIFGain.Text = "IF Gain";
             // 
             // udRXGain15
             // 
@@ -2045,17 +2068,6 @@ namespace PowerSDR
             this.chkXVTRRF2.Size = new System.Drawing.Size(16, 16);
             this.chkXVTRRF2.TabIndex = 35;
             this.chkXVTRRF2.CheckedChanged += new System.EventHandler(this.chkXVTRRF_CheckedChanged);
-            // 
-            // lblXVTRRF
-            // 
-            this.lblXVTRRF.Enabled = false;
-            this.lblXVTRRF.Image = null;
-            this.lblXVTRRF.Location = new System.Drawing.Point(838, 16);
-            this.lblXVTRRF.Name = "lblXVTRRF";
-            this.lblXVTRRF.Size = new System.Drawing.Size(40, 32);
-            this.lblXVTRRF.TabIndex = 170;
-            this.lblXVTRRF.Text = "XVTR RF TX";
-            this.toolTip1.SetToolTip(this.lblXVTRRF, resources.GetString("lblXVTRRF.ToolTip"));
             // 
             // udPower15
             // 
@@ -3034,7 +3046,7 @@ namespace PowerSDR
             0});
             this.udFreqEnd15.Location = new System.Drawing.Point(560, 436);
             this.udFreqEnd15.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3063,7 +3075,7 @@ namespace PowerSDR
             0});
             this.udFreqEnd14.Location = new System.Drawing.Point(560, 412);
             this.udFreqEnd14.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3092,7 +3104,7 @@ namespace PowerSDR
             0});
             this.udFreqEnd13.Location = new System.Drawing.Point(560, 388);
             this.udFreqEnd13.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3121,7 +3133,7 @@ namespace PowerSDR
             0});
             this.udFreqEnd12.Location = new System.Drawing.Point(560, 364);
             this.udFreqEnd12.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3150,7 +3162,7 @@ namespace PowerSDR
             0});
             this.udFreqEnd11.Location = new System.Drawing.Point(560, 340);
             this.udFreqEnd11.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3179,7 +3191,7 @@ namespace PowerSDR
             0});
             this.udFreqEnd10.Location = new System.Drawing.Point(560, 316);
             this.udFreqEnd10.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3208,7 +3220,7 @@ namespace PowerSDR
             0});
             this.udFreqEnd9.Location = new System.Drawing.Point(560, 292);
             this.udFreqEnd9.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3237,7 +3249,7 @@ namespace PowerSDR
             0});
             this.udFreqEnd8.Location = new System.Drawing.Point(560, 268);
             this.udFreqEnd8.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3266,7 +3278,7 @@ namespace PowerSDR
             0});
             this.udFreqEnd7.Location = new System.Drawing.Point(560, 244);
             this.udFreqEnd7.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3295,7 +3307,7 @@ namespace PowerSDR
             0});
             this.udFreqEnd6.Location = new System.Drawing.Point(560, 220);
             this.udFreqEnd6.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3324,7 +3336,7 @@ namespace PowerSDR
             0});
             this.udFreqEnd5.Location = new System.Drawing.Point(560, 196);
             this.udFreqEnd5.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3353,7 +3365,7 @@ namespace PowerSDR
             0});
             this.udFreqEnd4.Location = new System.Drawing.Point(560, 172);
             this.udFreqEnd4.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3382,7 +3394,7 @@ namespace PowerSDR
             0});
             this.udFreqEnd3.Location = new System.Drawing.Point(560, 148);
             this.udFreqEnd3.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3411,7 +3423,7 @@ namespace PowerSDR
             0});
             this.udFreqEnd2.Location = new System.Drawing.Point(560, 124);
             this.udFreqEnd2.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3449,7 +3461,7 @@ namespace PowerSDR
             0});
             this.udFreqBegin15.Location = new System.Drawing.Point(456, 436);
             this.udFreqBegin15.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3478,7 +3490,7 @@ namespace PowerSDR
             0});
             this.udFreqBegin14.Location = new System.Drawing.Point(456, 412);
             this.udFreqBegin14.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3507,7 +3519,7 @@ namespace PowerSDR
             0});
             this.udFreqBegin13.Location = new System.Drawing.Point(456, 388);
             this.udFreqBegin13.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3536,7 +3548,7 @@ namespace PowerSDR
             0});
             this.udFreqBegin12.Location = new System.Drawing.Point(456, 364);
             this.udFreqBegin12.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3565,7 +3577,7 @@ namespace PowerSDR
             0});
             this.udFreqBegin11.Location = new System.Drawing.Point(456, 340);
             this.udFreqBegin11.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3594,7 +3606,7 @@ namespace PowerSDR
             0});
             this.udFreqBegin10.Location = new System.Drawing.Point(456, 316);
             this.udFreqBegin10.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3623,7 +3635,7 @@ namespace PowerSDR
             0});
             this.udFreqBegin9.Location = new System.Drawing.Point(456, 292);
             this.udFreqBegin9.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3652,7 +3664,7 @@ namespace PowerSDR
             0});
             this.udFreqBegin8.Location = new System.Drawing.Point(456, 268);
             this.udFreqBegin8.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3681,7 +3693,7 @@ namespace PowerSDR
             0});
             this.udFreqBegin7.Location = new System.Drawing.Point(456, 244);
             this.udFreqBegin7.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3710,7 +3722,7 @@ namespace PowerSDR
             0});
             this.udFreqBegin6.Location = new System.Drawing.Point(456, 220);
             this.udFreqBegin6.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3739,7 +3751,7 @@ namespace PowerSDR
             0});
             this.udFreqBegin5.Location = new System.Drawing.Point(456, 196);
             this.udFreqBegin5.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3768,7 +3780,7 @@ namespace PowerSDR
             0});
             this.udFreqBegin4.Location = new System.Drawing.Point(456, 172);
             this.udFreqBegin4.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3797,7 +3809,7 @@ namespace PowerSDR
             0});
             this.udFreqBegin3.Location = new System.Drawing.Point(456, 148);
             this.udFreqBegin3.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3826,7 +3838,7 @@ namespace PowerSDR
             0});
             this.udFreqBegin2.Location = new System.Drawing.Point(456, 124);
             this.udFreqBegin2.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3864,7 +3876,7 @@ namespace PowerSDR
             0});
             this.udLOOffset15.Location = new System.Drawing.Point(304, 436);
             this.udLOOffset15.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3893,7 +3905,7 @@ namespace PowerSDR
             0});
             this.udLOOffset14.Location = new System.Drawing.Point(304, 412);
             this.udLOOffset14.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3922,7 +3934,7 @@ namespace PowerSDR
             0});
             this.udLOOffset13.Location = new System.Drawing.Point(304, 388);
             this.udLOOffset13.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3951,7 +3963,7 @@ namespace PowerSDR
             0});
             this.udLOOffset12.Location = new System.Drawing.Point(304, 364);
             this.udLOOffset12.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -3980,7 +3992,7 @@ namespace PowerSDR
             0});
             this.udLOOffset11.Location = new System.Drawing.Point(304, 340);
             this.udLOOffset11.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -4009,7 +4021,7 @@ namespace PowerSDR
             0});
             this.udLOOffset10.Location = new System.Drawing.Point(304, 316);
             this.udLOOffset10.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -4038,7 +4050,7 @@ namespace PowerSDR
             0});
             this.udLOOffset9.Location = new System.Drawing.Point(304, 292);
             this.udLOOffset9.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -4067,7 +4079,7 @@ namespace PowerSDR
             0});
             this.udLOOffset8.Location = new System.Drawing.Point(304, 268);
             this.udLOOffset8.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -4096,7 +4108,7 @@ namespace PowerSDR
             0});
             this.udLOOffset7.Location = new System.Drawing.Point(304, 244);
             this.udLOOffset7.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -4125,7 +4137,7 @@ namespace PowerSDR
             0});
             this.udLOOffset6.Location = new System.Drawing.Point(304, 220);
             this.udLOOffset6.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -4154,7 +4166,7 @@ namespace PowerSDR
             0});
             this.udLOOffset5.Location = new System.Drawing.Point(304, 196);
             this.udLOOffset5.Maximum = new decimal(new int[] {
-            99000,
+            250000,
             0,
             0,
             0});
@@ -4183,7 +4195,7 @@ namespace PowerSDR
             0});
             this.udLOOffset4.Location = new System.Drawing.Point(304, 172);
             this.udLOOffset4.Maximum = new decimal(new int[] {
-            99000,
+            2500000,
             0,
             0,
             0});
@@ -4212,7 +4224,7 @@ namespace PowerSDR
             0});
             this.udLOOffset3.Location = new System.Drawing.Point(304, 148);
             this.udLOOffset3.Maximum = new decimal(new int[] {
-            99000,
+            2500000,
             0,
             0,
             0});
@@ -4241,7 +4253,7 @@ namespace PowerSDR
             0});
             this.udLOOffset2.Location = new System.Drawing.Point(304, 124);
             this.udLOOffset2.Maximum = new decimal(new int[] {
-            99000,
+            2500000,
             0,
             0,
             0});
@@ -4280,6 +4292,7 @@ namespace PowerSDR
             this.txtButtonText15.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtButtonText15.Visible = false;
             this.txtButtonText15.TextChanged += new System.EventHandler(this.txtButtonText_TextChanged);
+            this.txtButtonText15.MouseHover += new System.EventHandler(this.txtButtonText15_MouseHover);
             // 
             // txtButtonText14
             // 
@@ -4292,6 +4305,7 @@ namespace PowerSDR
             this.txtButtonText14.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtButtonText14.Visible = false;
             this.txtButtonText14.TextChanged += new System.EventHandler(this.txtButtonText_TextChanged);
+            this.txtButtonText14.MouseHover += new System.EventHandler(this.txtButtonText14_MouseHover);
             // 
             // txtButtonText13
             // 
@@ -4304,6 +4318,7 @@ namespace PowerSDR
             this.txtButtonText13.Text = "13";
             this.txtButtonText13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtButtonText13.TextChanged += new System.EventHandler(this.txtButtonText_TextChanged);
+            this.txtButtonText13.MouseHover += new System.EventHandler(this.txtButtonText13_MouseHover);
             // 
             // txtButtonText12
             // 
@@ -4316,6 +4331,7 @@ namespace PowerSDR
             this.txtButtonText12.Text = "12";
             this.txtButtonText12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtButtonText12.TextChanged += new System.EventHandler(this.txtButtonText_TextChanged);
+            this.txtButtonText12.MouseHover += new System.EventHandler(this.txtButtonText12_MouseHover);
             // 
             // txtButtonText11
             // 
@@ -4328,6 +4344,7 @@ namespace PowerSDR
             this.txtButtonText11.Text = "11";
             this.txtButtonText11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtButtonText11.TextChanged += new System.EventHandler(this.txtButtonText_TextChanged);
+            this.txtButtonText11.MouseHover += new System.EventHandler(this.txtButtonText11_MouseHover);
             // 
             // txtButtonText10
             // 
@@ -4340,6 +4357,7 @@ namespace PowerSDR
             this.txtButtonText10.Text = "10";
             this.txtButtonText10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtButtonText10.TextChanged += new System.EventHandler(this.txtButtonText_TextChanged);
+            this.txtButtonText10.MouseHover += new System.EventHandler(this.txtButtonText10_MouseHover);
             // 
             // txtButtonText9
             // 
@@ -4352,6 +4370,7 @@ namespace PowerSDR
             this.txtButtonText9.Text = "9";
             this.txtButtonText9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtButtonText9.TextChanged += new System.EventHandler(this.txtButtonText_TextChanged);
+            this.txtButtonText9.MouseHover += new System.EventHandler(this.txtButtonText9_MouseHover);
             // 
             // txtButtonText8
             // 
@@ -4364,6 +4383,7 @@ namespace PowerSDR
             this.txtButtonText8.Text = "8";
             this.txtButtonText8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtButtonText8.TextChanged += new System.EventHandler(this.txtButtonText_TextChanged);
+            this.txtButtonText8.MouseHover += new System.EventHandler(this.txtButtonText8_MouseHover);
             // 
             // txtButtonText7
             // 
@@ -4376,6 +4396,7 @@ namespace PowerSDR
             this.txtButtonText7.Text = "7";
             this.txtButtonText7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtButtonText7.TextChanged += new System.EventHandler(this.txtButtonText_TextChanged);
+            this.txtButtonText7.MouseHover += new System.EventHandler(this.txtButtonText7_MouseHover);
             // 
             // txtButtonText6
             // 
@@ -4388,6 +4409,7 @@ namespace PowerSDR
             this.txtButtonText6.Text = "6";
             this.txtButtonText6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtButtonText6.TextChanged += new System.EventHandler(this.txtButtonText_TextChanged);
+            this.txtButtonText6.MouseHover += new System.EventHandler(this.txtButtonText6_MouseHover);
             // 
             // txtButtonText5
             // 
@@ -4400,6 +4422,7 @@ namespace PowerSDR
             this.txtButtonText5.Text = "5";
             this.txtButtonText5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtButtonText5.TextChanged += new System.EventHandler(this.txtButtonText_TextChanged);
+            this.txtButtonText5.MouseHover += new System.EventHandler(this.txtButtonText5_MouseHover);
             // 
             // txtButtonText4
             // 
@@ -4412,6 +4435,7 @@ namespace PowerSDR
             this.txtButtonText4.Text = "4";
             this.txtButtonText4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtButtonText4.TextChanged += new System.EventHandler(this.txtButtonText_TextChanged);
+            this.txtButtonText4.MouseHover += new System.EventHandler(this.txtButtonText4_MouseHover);
             // 
             // txtButtonText3
             // 
@@ -4424,6 +4448,7 @@ namespace PowerSDR
             this.txtButtonText3.Text = "3";
             this.txtButtonText3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtButtonText3.TextChanged += new System.EventHandler(this.txtButtonText_TextChanged);
+            this.txtButtonText3.MouseHover += new System.EventHandler(this.txtButtonText3_MouseHover);
             // 
             // txtButtonText2
             // 
@@ -4436,6 +4461,7 @@ namespace PowerSDR
             this.txtButtonText2.Text = "2";
             this.txtButtonText2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtButtonText2.TextChanged += new System.EventHandler(this.txtButtonText_TextChanged);
+            this.txtButtonText2.MouseHover += new System.EventHandler(this.txtButtonText2_MouseHover);
             // 
             // txtBandButton15
             // 
@@ -5112,16 +5138,6 @@ namespace PowerSDR
             this.lblButtonText.Size = new System.Drawing.Size(72, 16);
             this.lblButtonText.TabIndex = 2;
             this.lblButtonText.Text = "Button Text";
-            // 
-            // lblUCBAddress
-            // 
-            this.lblUCBAddress.Image = null;
-            this.lblUCBAddress.Location = new System.Drawing.Point(144, 24);
-            this.lblUCBAddress.Name = "lblUCBAddress";
-            this.lblUCBAddress.Size = new System.Drawing.Size(80, 16);
-            this.lblUCBAddress.TabIndex = 1;
-            this.lblUCBAddress.Text = "UCB Address";
-            this.toolTip1.SetToolTip(this.lblUCBAddress, "Universal Control Board I2C 8bit address 0x4C");
             // 
             // lblBandButton
             // 
@@ -6294,6 +6310,166 @@ namespace PowerSDR
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void txtButtonText2_MouseHover(object sender, EventArgs e) // .229
+        {
+            float begin1 = GetBegin(2);
+            float end1 = GetEnd(2);
+            double transbegin = TranslateFreq(begin1);
+            double transend = TranslateFreq(end1);
+            this.toolTip1.SetToolTip(this.txtButtonText2, "Translated Low Mhz: " + transbegin.ToString() + "\n" + "Translated High Mhz: " + transend.ToString()  );
+
+        }
+
+        private void txtButtonText3_MouseHover(object sender, EventArgs e)
+        {
+            float begin1 = GetBegin(3);
+            float end1 = GetEnd(3);
+            double transbegin = TranslateFreq(begin1);
+            double transend = TranslateFreq(end1);
+            this.toolTip1.SetToolTip(this.txtButtonText3, "Translated Low Mhz: " + transbegin.ToString() + "\n" + "Translated High Mhz: " + transend.ToString());
+
+        }
+
+        private void txtButtonText4_MouseHover(object sender, EventArgs e)
+        {
+            float begin1 = GetBegin(4);
+            float end1 = GetEnd(4);
+            double transbegin = TranslateFreq(begin1);
+            double transend = TranslateFreq(end1);
+            this.toolTip1.SetToolTip(this.txtButtonText4, "Translated Low Mhz: " + transbegin.ToString() + "\n" + "Translated High Mhz: " + transend.ToString());
+
+        }
+
+        private void txtButtonText0_MouseHover(object sender, EventArgs e)
+        {
+            float begin1 = GetBegin(0);
+            float end1 = GetEnd(0);
+            double transbegin = TranslateFreq(begin1);
+            double transend = TranslateFreq(end1);
+            this.toolTip1.SetToolTip(this.txtButtonText0, "Translated Low Mhz: " + transbegin.ToString() + "\n" + "Translated High Mhz: " + transend.ToString());
+
+        }
+
+        private void txtButtonText1_MouseHover(object sender, EventArgs e)
+        {
+            float begin1 = GetBegin(1);
+            float end1 = GetEnd(1);
+            double transbegin = TranslateFreq(begin1);
+            double transend = TranslateFreq(end1);
+            this.toolTip1.SetToolTip(this.txtButtonText1, "Translated Low Mhz: " + transbegin.ToString() + "\n" + "Translated High Mhz: " + transend.ToString());
+
+        }
+
+        private void txtButtonText5_MouseHover(object sender, EventArgs e)
+        {
+            float begin1 = GetBegin(5);
+            float end1 = GetEnd(5);
+            double transbegin = TranslateFreq(begin1);
+            double transend = TranslateFreq(end1);
+            this.toolTip1.SetToolTip(this.txtButtonText5, "Translated Low Mhz: " + transbegin.ToString() + "\n" + "Translated High Mhz: " + transend.ToString());
+
+        }
+
+        private void txtButtonText6_MouseHover(object sender, EventArgs e)
+        {
+            float begin1 = GetBegin(6);
+            float end1 = GetEnd(6);
+            double transbegin = TranslateFreq(begin1);
+            double transend = TranslateFreq(end1);
+            this.toolTip1.SetToolTip(this.txtButtonText6, "Translated Low Mhz: " + transbegin.ToString() + "\n" + "Translated High Mhz: " + transend.ToString());
+
+        }
+
+        private void txtButtonText7_MouseHover(object sender, EventArgs e)
+        {
+            float begin1 = GetBegin(7);
+            float end1 = GetEnd(7);
+            double transbegin = TranslateFreq(begin1);
+            double transend = TranslateFreq(end1);
+            this.toolTip1.SetToolTip(this.txtButtonText1, "Translated Low Mhz: " + transbegin.ToString() + "\n" + "Translated High Mhz: " + transend.ToString());
+
+        }
+
+        private void txtButtonText8_MouseHover(object sender, EventArgs e)
+        {
+            float begin1 = GetBegin(8);
+            float end1 = GetEnd(8);
+            double transbegin = TranslateFreq(begin1);
+            double transend = TranslateFreq(end1);
+            this.toolTip1.SetToolTip(this.txtButtonText8, "Translated Low Mhz: " + transbegin.ToString() + "\n" + "Translated High Mhz: " + transend.ToString());
+
+        }
+
+        private void txtButtonText9_MouseHover(object sender, EventArgs e)
+        {
+            float begin1 = GetBegin(9);
+            float end1 = GetEnd(9);
+            double transbegin = TranslateFreq(begin1);
+            double transend = TranslateFreq(end1);
+            this.toolTip1.SetToolTip(this.txtButtonText9, "Translated Low Mhz: " + transbegin.ToString() + "\n" + "Translated High Mhz: " + transend.ToString());
+
+        }
+
+        private void txtButtonText10_MouseHover(object sender, EventArgs e)
+        {
+            float begin1 = GetBegin(10);
+            float end1 = GetEnd(10);
+            double transbegin = TranslateFreq(begin1);
+            double transend = TranslateFreq(end1);
+            this.toolTip1.SetToolTip(this.txtButtonText10, "Translated Low Mhz: " + transbegin.ToString() + "\n" + "Translated High Mhz: " + transend.ToString());
+
+        }
+
+        private void txtButtonText11_MouseHover(object sender, EventArgs e)
+        {
+            float begin1 = GetBegin(11);
+            float end1 = GetEnd(11);
+            double transbegin = TranslateFreq(begin1);
+            double transend = TranslateFreq(end1);
+            this.toolTip1.SetToolTip(this.txtButtonText11, "Translated Low Mhz: " + transbegin.ToString() + "\n" + "Translated High Mhz: " + transend.ToString());
+
+        }
+
+        private void txtButtonText12_MouseHover(object sender, EventArgs e)
+        {
+            float begin1 = GetBegin(12);
+            float end1 = GetEnd(12);
+            double transbegin = TranslateFreq(begin1);
+            double transend = TranslateFreq(end1);
+            this.toolTip1.SetToolTip(this.txtButtonText12, "Translated Low Mhz: " + transbegin.ToString() + "\n" + "Translated High Mhz: " + transend.ToString());
+
+        }
+
+        private void txtButtonText13_MouseHover(object sender, EventArgs e)
+        {
+            float begin1 = GetBegin(13);
+            float end1 = GetEnd(13);
+            double transbegin = TranslateFreq(begin1);
+            double transend = TranslateFreq(end1);
+            this.toolTip1.SetToolTip(this.txtButtonText13, "Translated Low Mhz: " + transbegin.ToString() + "\n" + "Translated High Mhz: " + transend.ToString());
+
+        }
+
+        private void txtButtonText14_MouseHover(object sender, EventArgs e)
+        {
+            float begin1 = GetBegin(14);
+            float end1 = GetEnd(14);
+            double transbegin = TranslateFreq(begin1);
+            double transend = TranslateFreq(end1);
+            this.toolTip1.SetToolTip(this.txtButtonText14, "Translated Low Mhz: " + transbegin.ToString() + "\n" + "Translated High Mhz: " + transend.ToString());
+
+        }
+
+        private void txtButtonText15_MouseHover(object sender, EventArgs e)
+        {
+            float begin1 = GetBegin(15);
+            float end1 = GetEnd(15);
+            double transbegin = TranslateFreq(begin1);
+            double transend = TranslateFreq(end1);
+            this.toolTip1.SetToolTip(this.txtButtonText15, "Translated Low Mhz: " + transbegin.ToString() + "\n" + "Translated High Mhz: " + transend.ToString());
 
         }
     }

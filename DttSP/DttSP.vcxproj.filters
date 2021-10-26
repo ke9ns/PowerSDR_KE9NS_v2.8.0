@@ -292,4 +292,8 @@
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Library Include="pthreadVC.lib" />
+    <Library Include="libfftw3f-3.lib" />
+  </ItemGroup>
 </Project>
