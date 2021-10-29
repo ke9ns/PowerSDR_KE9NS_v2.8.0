@@ -1274,6 +1274,10 @@ namespace PowerSDR
         private CheckBoxTS chkKWAI7;
         public CheckBoxTS checkBoxRX2;
         public CheckBoxTS chkVFOLargeWindow;
+        public CheckBoxTS chkRX2AutoOn;
+        public CheckBoxTS chkRX2AutoVAC2;
+        private RichTextBox richTextBox1;
+        private RichTextBox richTextBox2;
         private System.ComponentModel.IContainer components;
 
         #endregion
@@ -1793,6 +1797,7 @@ namespace PowerSDR
             this.lblOptMaxFilter = new System.Windows.Forms.LabelTS();
             this.chkOptFilterSaveChanges = new System.Windows.Forms.CheckBoxTS();
             this.tpRX2 = new System.Windows.Forms.TabPage();
+            this.chkRX2AutoOn = new System.Windows.Forms.CheckBoxTS();
             this.chkRX2DisconnectOnTX = new System.Windows.Forms.CheckBoxTS();
             this.chkRX2AutoMuteRX1OnVFOBTX = new System.Windows.Forms.CheckBoxTS();
             this.chkRX2AutoMuteRX2OnVFOATX = new System.Windows.Forms.CheckBoxTS();
@@ -2840,6 +2845,9 @@ namespace PowerSDR
             this.textBoxSAVE = new System.Windows.Forms.TextBoxTS();
             this.btnResetDB = new System.Windows.Forms.ButtonTS();
             this.chkAlwaysOnTop1 = new System.Windows.Forms.CheckBoxTS();
+            this.chkRX2AutoVAC2 = new System.Windows.Forms.CheckBoxTS();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tcSetup.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tcGeneral.SuspendLayout();
@@ -5367,6 +5375,10 @@ namespace PowerSDR
             // tpRX2
             // 
             this.tpRX2.BackColor = System.Drawing.SystemColors.Control;
+            this.tpRX2.Controls.Add(this.richTextBox2);
+            this.tpRX2.Controls.Add(this.richTextBox1);
+            this.tpRX2.Controls.Add(this.chkRX2AutoVAC2);
+            this.tpRX2.Controls.Add(this.chkRX2AutoOn);
             this.tpRX2.Controls.Add(this.chkRX2DisconnectOnTX);
             this.tpRX2.Controls.Add(this.chkRX2AutoMuteRX1OnVFOBTX);
             this.tpRX2.Controls.Add(this.chkRX2AutoMuteRX2OnVFOATX);
@@ -5375,6 +5387,15 @@ namespace PowerSDR
             this.tpRX2.Size = new System.Drawing.Size(592, 318);
             this.tpRX2.TabIndex = 4;
             this.tpRX2.Text = "RX2";
+            // 
+            // chkRX2AutoOn
+            // 
+            this.chkRX2AutoOn.Image = null;
+            this.chkRX2AutoOn.Location = new System.Drawing.Point(8, 199);
+            this.chkRX2AutoOn.Name = "chkRX2AutoOn";
+            this.chkRX2AutoOn.Size = new System.Drawing.Size(457, 32);
+            this.chkRX2AutoOn.TabIndex = 3;
+            this.chkRX2AutoOn.Text = "Sending Spotter, Memory, or Scanner Freq to VFOB turns on RX2 automatically";
             // 
             // chkRX2DisconnectOnTX
             // 
@@ -19652,6 +19673,31 @@ namespace PowerSDR
             this.chkAlwaysOnTop1.TabIndex = 59;
             this.chkAlwaysOnTop1.Text = "Always On Top";
             this.chkAlwaysOnTop1.CheckedChanged += new System.EventHandler(this.ChkAlwaysOnTop1_CheckedChanged);
+            // 
+            // chkRX2AutoVAC2
+            // 
+            this.chkRX2AutoVAC2.Image = null;
+            this.chkRX2AutoVAC2.Location = new System.Drawing.Point(44, 222);
+            this.chkRX2AutoVAC2.Name = "chkRX2AutoVAC2";
+            this.chkRX2AutoVAC2.Size = new System.Drawing.Size(233, 32);
+            this.chkRX2AutoVAC2.TabIndex = 4;
+            this.chkRX2AutoVAC2.Text = "Turn ON VAC2 when RX2 turned ON";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(8, 151);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(569, 53);
+            this.richTextBox1.TabIndex = 5;
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Location = new System.Drawing.Point(208, 10);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(369, 98);
+            this.richTextBox2.TabIndex = 6;
+            this.richTextBox2.Text = resources.GetString("richTextBox2.Text");
             // 
             // Setup
             // 

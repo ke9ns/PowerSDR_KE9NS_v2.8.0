@@ -4186,9 +4186,10 @@ namespace PowerSDR
 
 
             } // LEFT CLICK MOUSE VFOA
-            else if (e.Button == MouseButtons.Right) // .222 VFOB RX2
+            else if (e.Button == MouseButtons.Middle) // .222 VFOB RX2
             {
                 Debug.WriteLine("RIGHT CLICK: ");
+               
 
                 scanstop = true;
 
@@ -4238,7 +4239,7 @@ namespace PowerSDR
 
                         }
 
-                        if (comboBoxTS1.Text != "") //.221 add so clicking on memory in the scann screen will pull up all memory parameters
+                        if (comboBoxTS1.Text != "") //.221 add so clicking on memory in the scan screen will pull up all memory parameters
                         {
                             Debug.WriteLine("MEMORY CLICK. restore memory " + xxx);
 
@@ -4246,7 +4247,17 @@ namespace PowerSDR
                             recordToRestore = new MemoryRecord((MemoryRecord)comboMemGroupName.SelectedItem); // ke9ns   you select index in the combo pulldown list
 
                             Debug.WriteLine("CHANGE MEMORY TO " + recordToRestore.RXFreq);
-                            console.RecallMemoryB(recordToRestore);
+                            console.RecallMemoryB(recordToRestore); // vfob
+
+
+                            if (console.setupForm != null && console.setupForm.chkRX2AutoOn.Checked == true && console.chkRX2.Checked == false && console.chkRX2.Visible) // .229
+                            {
+                                console.chkRX2.Checked = true;
+                                if (console.setupForm.chkRX2AutoVAC2.Checked)
+                                {
+                                    console.setupForm.chkVAC2Enable.Checked = true; // .230
+                                }
+                            }
 
 
                             return;
@@ -4273,6 +4284,17 @@ namespace PowerSDR
                                     if (counter == iii)
                                     {
                                         console.SetBand2(mode, filter, freq); // .222 rx2
+
+
+                                        if (console.setupForm != null && console.setupForm.chkRX2AutoOn.Checked == true && console.chkRX2.Checked == false && console.chkRX2.Visible) // .229
+                                        {
+                                            console.chkRX2.Checked = true;
+                                            if (console.setupForm.chkRX2AutoVAC2.Checked)
+                                            {
+                                                console.setupForm.chkVAC2Enable.Checked = true; // .230
+                                            }
+                                        }
+
                                         return;
                                     }
                                     counter++;
@@ -4285,8 +4307,17 @@ namespace PowerSDR
                                 double hh = (double)SpotControl.SWL_Freq[zz] / 1000000.0;
 
                                 console.VFOBFreq = hh;
-                              //  console.tempVFOAFreq = console.VFOAFreq; // ke9ns add  CTUN operation changed freq so update temp value
+                                //  console.tempVFOAFreq = console.VFOAFreq; // ke9ns add  CTUN operation changed freq so update temp value
 
+
+                                if (console.setupForm != null && console.setupForm.chkRX2AutoOn.Checked == true && console.chkRX2.Checked == false && console.chkRX2.Visible) // .229
+                                {
+                                    console.chkRX2.Checked = true;
+                                    if (console.setupForm.chkRX2AutoVAC2.Checked)
+                                    {
+                                        console.setupForm.chkVAC2Enable.Checked = true; // .230
+                                    }
+                                }
 
                                 return;
                             }
@@ -4343,6 +4374,16 @@ namespace PowerSDR
 
                         console.SetBand2(mode, filter, freq); // .222 rX2
 
+
+                        if (console.setupForm != null && console.setupForm.chkRX2AutoOn.Checked == true && console.chkRX2.Checked == false && console.chkRX2.Visible) // .229
+                        {
+                            console.chkRX2.Checked = true;
+                            if (console.setupForm.chkRX2AutoVAC2.Checked)
+                            {
+                                console.setupForm.chkVAC2Enable.Checked = true; // .230
+                            }
+                        }
+
                         console.UpdateWaterfallLevelValues();
                     }
                     catch
@@ -4365,8 +4406,8 @@ namespace PowerSDR
 
 
 
-            } // RIGHT CLICK MOUSE VFOB RX2
-            else if (e.Button == MouseButtons.Middle) // .226 only for memory channel scan toggle ON/OFF
+            } // RIGHT CLICK MOUSE VFOB RX2  .230 VFOB = mouse wheel (so Memory, Scanner, Spotter are all the same)
+            else if (e.Button == MouseButtons.Right) // .226 only for memory channel scan toggle ON/OFF
             {
               
                 if (comboBoxTS1.Text == "") return;

@@ -421,6 +421,14 @@ namespace PowerSDR
 
                 console.changeComboFMMemoryB(index); // ke9ns this will call recallmemory in console 
 
+                if (console.setupForm != null && console.setupForm.chkRX2AutoOn.Checked == true && console.chkRX2.Checked == false && console.chkRX2.Visible) // .229
+                {
+                    console.chkRX2.Checked = true;
+                    if (console.setupForm.chkRX2AutoVAC2.Checked)
+                    {
+                        console.setupForm.chkVAC2Enable.Checked = true; // .230
+                    }
+                }
 
                 if (chkMemoryFormClose.Checked) // ke9ns this saves position of memory form window on your screen when you closed it.
                 {
@@ -1633,6 +1641,15 @@ namespace PowerSDR
                 Debug.WriteLine("MOUSE WHEEL " + index);
      
                 console.changeComboFMMemoryB(index); // ke9ns this will call recallmemory in console 
+
+                if (console.setupForm != null && console.setupForm.chkRX2AutoOn.Checked == true && console.chkRX2.Checked == false && console.chkRX2.Visible) // .229
+                {
+                    console.chkRX2.Checked = true;
+                    if (console.setupForm.chkRX2AutoVAC2.Checked)
+                    {
+                        console.setupForm.chkVAC2Enable.Checked = true; // .230
+                    }
+                }
 
             } // mouse wheel click
 

@@ -121,8 +121,8 @@
     <value>MEMORY Scan, SWL Scan or BandStack Scan or Custom list:  Records Signal Strength -dBm
 Select Memory GROUP, Scan Speed, and Squelch Break Pause options.
 
-Memory scan only: Left click on Memory = send to VFOA, Right click on Memory = send to VFOB, 
-Wheel Click = Toggle memory channel Scan OFF/ON
+Memory scan only: Left click on Memory = send to VFOA, Wheel click on Memory = send to VFOB, 
+Right Click = Toggle memory Channel Scan (ignore) OFF/ON
 
 LOW-HIGH SCAN: Scans from Low to High Frequency within same Band.
 Select Step Size and Speed and Squelch Break option.
@@ -163,8 +163,8 @@ Click the "Pause Scan" button when Yellow to jump past an occupied channel
 
 In the main window (above):
    Left Click to manually select for VFOA 
-   Right Click to manually select for VFOB
-   Wheel Click to toggle Memory scan Channel bypass ON/OFF</value>
+   Wheel Click to manually select for VFOB
+   Right Click to toggle Memory scan Channel Bypass ON/OFF</value>
   </data>
   <data name="btnCustomList.ToolTip" xml:space="preserve">
     <value>Click to open Folder.  This is where you put your text file (any name you want)
