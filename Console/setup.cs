@@ -1797,6 +1797,9 @@ namespace PowerSDR
             this.lblOptMaxFilter = new System.Windows.Forms.LabelTS();
             this.chkOptFilterSaveChanges = new System.Windows.Forms.CheckBoxTS();
             this.tpRX2 = new System.Windows.Forms.TabPage();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.chkRX2AutoVAC2 = new System.Windows.Forms.CheckBoxTS();
             this.chkRX2AutoOn = new System.Windows.Forms.CheckBoxTS();
             this.chkRX2DisconnectOnTX = new System.Windows.Forms.CheckBoxTS();
             this.chkRX2AutoMuteRX1OnVFOBTX = new System.Windows.Forms.CheckBoxTS();
@@ -2845,9 +2848,6 @@ namespace PowerSDR
             this.textBoxSAVE = new System.Windows.Forms.TextBoxTS();
             this.btnResetDB = new System.Windows.Forms.ButtonTS();
             this.chkAlwaysOnTop1 = new System.Windows.Forms.CheckBoxTS();
-            this.chkRX2AutoVAC2 = new System.Windows.Forms.CheckBoxTS();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tcSetup.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tcGeneral.SuspendLayout();
@@ -5388,6 +5388,32 @@ namespace PowerSDR
             this.tpRX2.TabIndex = 4;
             this.tpRX2.Text = "RX2";
             // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Location = new System.Drawing.Point(208, 10);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(369, 98);
+            this.richTextBox2.TabIndex = 6;
+            this.richTextBox2.Text = resources.GetString("richTextBox2.Text");
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(8, 151);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(569, 53);
+            this.richTextBox1.TabIndex = 5;
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            // 
+            // chkRX2AutoVAC2
+            // 
+            this.chkRX2AutoVAC2.Image = null;
+            this.chkRX2AutoVAC2.Location = new System.Drawing.Point(44, 222);
+            this.chkRX2AutoVAC2.Name = "chkRX2AutoVAC2";
+            this.chkRX2AutoVAC2.Size = new System.Drawing.Size(233, 32);
+            this.chkRX2AutoVAC2.TabIndex = 4;
+            this.chkRX2AutoVAC2.Text = "Turn ON VAC2 when RX2 turned ON";
+            this.toolTip1.SetToolTip(this.chkRX2AutoVAC2, "When checked, will turn VAC2 ON/OFF with RX2 ON/OFF");
+            // 
             // chkRX2AutoOn
             // 
             this.chkRX2AutoOn.Image = null;
@@ -5396,6 +5422,7 @@ namespace PowerSDR
             this.chkRX2AutoOn.Size = new System.Drawing.Size(457, 32);
             this.chkRX2AutoOn.TabIndex = 3;
             this.chkRX2AutoOn.Text = "Sending Spotter, Memory, or Scanner Freq to VFOB turns on RX2 automatically";
+            this.toolTip1.SetToolTip(this.chkRX2AutoOn, "When checked, will turn RX2 ON when sending Frequency to VFOB");
             // 
             // chkRX2DisconnectOnTX
             // 
@@ -19674,31 +19701,6 @@ namespace PowerSDR
             this.chkAlwaysOnTop1.Text = "Always On Top";
             this.chkAlwaysOnTop1.CheckedChanged += new System.EventHandler(this.ChkAlwaysOnTop1_CheckedChanged);
             // 
-            // chkRX2AutoVAC2
-            // 
-            this.chkRX2AutoVAC2.Image = null;
-            this.chkRX2AutoVAC2.Location = new System.Drawing.Point(44, 222);
-            this.chkRX2AutoVAC2.Name = "chkRX2AutoVAC2";
-            this.chkRX2AutoVAC2.Size = new System.Drawing.Size(233, 32);
-            this.chkRX2AutoVAC2.TabIndex = 4;
-            this.chkRX2AutoVAC2.Text = "Turn ON VAC2 when RX2 turned ON";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(8, 151);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(569, 53);
-            this.richTextBox1.TabIndex = 5;
-            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
-            // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Location = new System.Drawing.Point(208, 10);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(369, 98);
-            this.richTextBox2.TabIndex = 6;
-            this.richTextBox2.Text = resources.GetString("richTextBox2.Text");
-            // 
             // Setup
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -23225,6 +23227,12 @@ namespace PowerSDR
                             chkRX2AutoMuteRX2OnVFOATX.Visible = false;
                             chkRX2AutoMuteRX1OnVFOBTX.Visible = false;
                             chkRX2DisconnectOnTX.Visible = false;
+
+                            chkRX2AutoOn.Visible = false; // .231
+                            chkRX2AutoVAC2.Visible = false; // .231
+                            richTextBox1.Visible = false; // .231
+                            richTextBox2.Visible = false; // .231
+
                             break;
                     }
                 }
@@ -23596,6 +23604,12 @@ namespace PowerSDR
                     chkRX2AutoMuteRX1OnVFOBTX.Visible = false;
                     chkRX2DisconnectOnTX.Visible = false;
 
+                    chkRX2AutoOn.Visible = false; // .231
+                    chkRX2AutoVAC2.Visible = false; // .231
+                    richTextBox1.Visible = false; // .231
+                    richTextBox2.Visible = false; // .231
+
+
                     //comboAudioSoundCard.Text = "Unsupported Card";
                     comboAudioSampleRate1.Text = "48000";
                     comboAudioSampleRate1.Visible = false;
@@ -23710,6 +23724,11 @@ namespace PowerSDR
 
                 chkRX2AutoMuteRX2OnVFOATX.Visible = !b;
                 chkRX2AutoMuteRX1OnVFOBTX.Visible = !b;
+
+                chkRX2AutoOn.Visible = !b; // .231
+                chkRX2AutoVAC2.Visible = !b; // .231
+                richTextBox1.Visible = !b; // .231
+                richTextBox2.Visible = !b; // .231
 
                 grpAudioLineInGain1.Visible = !b;
                 grpAudioMicInGain1.Visible = !b;

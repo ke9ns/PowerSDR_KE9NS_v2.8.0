@@ -1,4 +1,5 @@
-﻿//=================================================================
+﻿
+//=================================================================
 // console.cs
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio. 
@@ -57832,7 +57833,26 @@ namespace PowerSDR
                     // 208  8  Major Storm
                     // 400  9
 
+/*
+                      
+Radio Blackout Levels:                   Geomagnetic Storm Levels:                       Solar Radiation Levels
+(effects sunlit side- XRays)            (K-index based effects)                              (Radiation Storm flux levels) 
+R1=Minor(Weak degradation)      G1=Minor(Weak effects)                            S1=Minor(polar regions)
+R2=Moderate(limited blackout)   G2=Moderate(HF towards poles faded)  S2=Moderate(polar regions)
+R3=Strong(Wide blackout)            G3=Strong(HF intermittent)                      S3=Strong(degraded polar regions)
+R4=Severe(Blackout)                      G4=Severe(HF prop sporadic)                   S4=Severe(blackout polar regions)
+R5=Extreme(Complete Blackout) G5=Extreme(HF impossible)                     S5=Extreme(Complete blackout polar)
 
+NOAA.com>> WWV Solar Flux Index, A and K index values
+sidc.oma.be>>  Estimated SunSpot#: Official Sun Spot # updated hourly.
+NWRA.com>> Effective SunSpot#  based on ionospheric measurements, updated hourly.
+Effective SSN# is a more accurate SSN# since it takes time for actual SunSpots to effect the ionoshere.
+
+ALSO certain times of year the following are very important:
+Tropospheric Ducting Propagation (see http://www.dxinfocentre.com/tropo.html  )
+and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Frec=MUF&ML=M&HF=N  )
+
+*/
 
                     txtNOAA.ForeColor = CDTP;
                     txtNOAA2.ForeColor = CDTP;
@@ -75752,7 +75772,7 @@ namespace PowerSDR
                     //-----------------------------
 
 
-                    panelTSBandStack.Location = new Point(gr_display_size_basis.Width + h_delta1 - 162, 6); // ke9ns add: move next to band buttons in the panadapter area
+                    panelTSBandStack.Location = new Point(gr_display_size_basis.Width + h_delta1 - 173, 6); // 162.230  ke9ns add: move next to band buttons in the panadapter area
                     panelTSBandStack.Size = new Size(168, picDisplay.Size.Height - 6); // .228 was 158
 
                     textBox1.Size = new Size(161, 200); // ke9ns add .211  .228 was 151
@@ -76384,11 +76404,22 @@ namespace PowerSDR
             if (chkRX2.Checked == true) // .157
             {
               
+                if (setupForm != null) // .231
+                {
+                    if (setupForm.chkRX2AutoVAC2.Checked == true)
+                    {
+                        setupForm.chkVAC2Enable.Checked = true;
+
+                    }
+                }
+
                 CalcDisplayFreq(); //.225 add
 
                 if (SpotForm != null)
                 {
                     SpotForm.hkBoxSpotRX2.Enabled = true;
+
+                    
                 }
 
                 if (ptbRX2Gain.Value < ptbRX2Gain.Maximum) // ke9ns add .200 to get the volume level of RX2 adjusted at startup or RX2
@@ -76400,12 +76431,21 @@ namespace PowerSDR
 
              
             }
-            else
+            else // ke9ns: RX2 now OFF
             {
                 if (SpotForm != null)
                 {
                     SpotForm.hkBoxSpotRX2.Checked = false;
                     SpotForm.hkBoxSpotRX2.Enabled = false;
+                }
+
+                if (setupForm != null) // .231
+                {
+                    if (setupForm.chkRX2AutoVAC2.Checked == true)
+                    {
+                        setupForm.chkVAC2Enable.Checked = false;
+
+                    }
                 }
 
             }
@@ -85546,6 +85586,7 @@ namespace PowerSDR
         public static int Kindex = 0;    // for Space weather
         public static string RadioBlackout = " ";    // R scale
         public static string GeoBlackout = " ";      // G scale
+        public static string RadiationBlackout = " "; // S scale .231
         public static int EISN = 0;                    // Estimated International Sunspot Number
         public static int Last_EISN = 0; // ke9ns: .197
         public static int SSNE = 0;                   // Effecitve sunpot number

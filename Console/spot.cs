@@ -7315,7 +7315,7 @@ namespace PowerSDR
                             ISS_YY[ISSCount] = ISS_Y = (int)(((180 - (ISSLATMap + 90)) / 180.0) * Sun_WidthY1) + Sun_Top1;  //latitude 90N to -90S
                             ISS_XX[ISSCount] = ISS_X = (int)(((ISSLONMap + 180.0) / 360.0) * Sun_Width) + Sun_Left;  // longitude -180W to +180E
 
-                            g.DrawLine(OrgPen, ISS_X, ISS_Y, ISS_X + 1, ISS_Y + 1);
+                          if (g != null)  g.DrawLine(OrgPen, ISS_X, ISS_Y, ISS_X + 1, ISS_Y + 1);
 
 
                         } //get next data point
@@ -8877,7 +8877,7 @@ namespace PowerSDR
                                         ISS_XX[ii] = ISS_XX[ii + 1]; // shift old data down to put new data at top
                                         ISS_YY[ii] = ISS_YY[ii + 1];
 
-                                        g.DrawLine(OrgPen, ISS_XX[ii], ISS_YY[ii], ISS_XX[ii] + 1, ISS_YY[ii] + 1);
+                                      if (g != null)  g.DrawLine(OrgPen, ISS_XX[ii], ISS_YY[ii], ISS_XX[ii] + 1, ISS_YY[ii] + 1);
                                     }
 
                                 }
@@ -8893,7 +8893,7 @@ namespace PowerSDR
                                 for (int ii = 0; ii < ISSCount; ii++) // draw arc  just refresh screen
                                 {
 
-                                    g.DrawLine(OrgPen, ISS_XX[ii], ISS_YY[ii], ISS_XX[ii] + 1, ISS_YY[ii] + 1);
+                                  if (g != null)  g.DrawLine(OrgPen, ISS_XX[ii], ISS_YY[ii], ISS_XX[ii] + 1, ISS_YY[ii] + 1);
                                 }
 
                             }
