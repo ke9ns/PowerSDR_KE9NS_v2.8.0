@@ -86645,10 +86645,11 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
 
                 try
                 {
-                    Debug.WriteLine("DDUTIL ROTOR1:");
+                    Debug.WriteLine("CAT ROTOR1:");
                     siolisten1.SIO1.put(value);   // this is the DDUtil PORT found in setup and SIOListenerIII.cs
                 }
                 catch { }
+               
             }
 
         } // 

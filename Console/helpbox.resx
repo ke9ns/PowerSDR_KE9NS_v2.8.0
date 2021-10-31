@@ -138,20 +138,26 @@ WaterFall: Type your Callsign in the TX WaterID callsign box, found at the top o
   </data>
   <data name="solar_message.Text" xml:space="preserve">
     <value>Click to Activate Space Weather:
-
 1) Solar Flux Index  ,  A Index  , K Index
+2) Estimated SunSpot #  ,   Effective SunSpot#,    Radio Blackout |Geo Storm | Solar Rad(not displayed)
 
-2) Estimated SunSpot #  , Effective SunSpot#, Radio Blackout &amp; Geomagnetic Storm levels
+Radio Blackout Levels:                   Geomagnetic Storm Levels:                       Solar Radiation Levels
+(effects sunlit side- XRays)            (K-index based effects)                              (Radiation Storm flux levels) 
+R1=Minor(Weak degradation)      G1=Minor(Weak effects)                            S1=Minor(polar regions)
+R2=Moderate(limited blackout)   G2=Moderate(HF towards poles faded)  S2=Moderate(polar regions)
+R3=Strong(Wide blackout)            G3=Strong(HF intermittent)                      S3=Strong(degraded polar regions)
+R4=Severe(Blackout)                      G4=Severe(HF prop sporadic)                   S4=Severe(blackout polar regions)
+R5=Extreme(Complete Blackout) G5=Extreme(HF impossible)                     S5=Extreme(Complete blackout polar)
 
 NOAA.com&gt;&gt; WWV Solar Flux Index, A and K index values
 sidc.oma.be&gt;&gt;  Estimated SunSpot#: Official Sun Spot # updated hourly.
-
-NWRA.com&gt;&gt; Effective SunSpot# based on ionospheric measurements, updated hourly.
+NWRA.com&gt;&gt; Effective SunSpot#  based on ionospheric measurements, updated hourly.
 Effective SSN# is a more accurate SSN# since it takes time for actual SunSpots to effect the ionoshere.
 
 ALSO certain times of year the following are very important:
 Tropospheric Ducting Propagation (see http://www.dxinfocentre.com/tropo.html  )
 and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&amp;Frec=MUF&amp;ML=M&amp;HF=N  )
+
  
 </value>
   </data>

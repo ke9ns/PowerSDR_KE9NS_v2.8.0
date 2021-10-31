@@ -412,12 +412,12 @@ namespace PowerSDR
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpotControl));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
             this.SWLbutton = new System.Windows.Forms.Button();
             this.SSBbutton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.RichTextBox();
@@ -447,6 +447,24 @@ namespace PowerSDR
             this.button3 = new System.Windows.Forms.Button();
             this.RotorHead = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.menuItem2 = new System.Windows.Forms.ToolStripTextBox();
+            this.mnuSpotOptions = new System.Windows.Forms.MenuItem();
+            this.chkTimeServer1 = new System.Windows.Forms.MenuItem();
+            this.chkTimeServer2 = new System.Windows.Forms.MenuItem();
+            this.chkTimeServer3 = new System.Windows.Forms.MenuItem();
+            this.chkTimeServer4 = new System.Windows.Forms.MenuItem();
+            this.chkTimeServer5 = new System.Windows.Forms.MenuItem();
+            this.menuTimeServers = new System.Windows.Forms.MenuItem();
+            this.menuItem1 = new System.Windows.Forms.MenuItem();
+            this.menuItem3 = new System.Windows.Forms.MenuItem();
+            this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
+            this.mnuSpotAge = new System.Windows.Forms.MenuItem();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.txtLoTWpass = new System.Windows.Forms.TextBoxTS();
             this.chkBoxBeacon = new System.Windows.Forms.CheckBoxTS();
             this.chkVoacap = new System.Windows.Forms.CheckBoxTS();
@@ -469,6 +487,8 @@ namespace PowerSDR
             this.chkBoxBeam = new System.Windows.Forms.CheckBoxTS();
             this.udDisplayLong = new System.Windows.Forms.NumericUpDownTS();
             this.udDisplayLat = new System.Windows.Forms.NumericUpDownTS();
+            this.chkBoxWrld = new System.Windows.Forms.CheckBoxTS();
+            this.chkBoxNA = new System.Windows.Forms.CheckBoxTS();
             this.chkBoxMem = new System.Windows.Forms.CheckBoxTS();
             this.chkBoxPan = new System.Windows.Forms.CheckBoxTS();
             this.chkBoxSSB = new System.Windows.Forms.CheckBoxTS();
@@ -479,30 +499,10 @@ namespace PowerSDR
             this.chkPanMode = new System.Windows.Forms.CheckBoxTS();
             this.chkGrayLine = new System.Windows.Forms.CheckBoxTS();
             this.chkSUN = new System.Windows.Forms.CheckBoxTS();
-            this.hkBoxSpotRX2 = new System.Windows.Forms.CheckBoxTS();
-            this.hkBoxSpotBand = new System.Windows.Forms.CheckBoxTS();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.menuItem2 = new System.Windows.Forms.ToolStripTextBox();
-            this.mnuSpotOptions = new System.Windows.Forms.MenuItem();
-            this.chkTimeServer1 = new System.Windows.Forms.MenuItem();
-            this.chkTimeServer2 = new System.Windows.Forms.MenuItem();
-            this.chkTimeServer3 = new System.Windows.Forms.MenuItem();
-            this.chkTimeServer4 = new System.Windows.Forms.MenuItem();
-            this.chkTimeServer5 = new System.Windows.Forms.MenuItem();
-            this.menuTimeServers = new System.Windows.Forms.MenuItem();
-            this.menuItem1 = new System.Windows.Forms.MenuItem();
-            this.menuItem3 = new System.Windows.Forms.MenuItem();
-            this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
-            this.mnuSpotAge = new System.Windows.Forms.MenuItem();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.chkBoxWrld = new System.Windows.Forms.CheckBoxTS();
-            this.chkBoxNA = new System.Windows.Forms.CheckBoxTS();
             this.chkAlwaysOnTop = new System.Windows.Forms.CheckBoxTS();
             this.chkDXMode = new System.Windows.Forms.CheckBoxTS();
+            this.hkBoxSpotRX2 = new System.Windows.Forms.CheckBoxTS();
+            this.hkBoxSpotBand = new System.Windows.Forms.CheckBoxTS();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numBeamHeading)).BeginInit();
@@ -517,7 +517,7 @@ namespace PowerSDR
             // 
             this.SWLbutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SWLbutton.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.SWLbutton.Location = new System.Drawing.Point(615, 371);
+            this.SWLbutton.Location = new System.Drawing.Point(615, 374);
             this.SWLbutton.Name = "SWLbutton";
             this.SWLbutton.Size = new System.Drawing.Size(75, 23);
             this.SWLbutton.TabIndex = 2;
@@ -530,7 +530,7 @@ namespace PowerSDR
             // 
             this.SSBbutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SSBbutton.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.SSBbutton.Location = new System.Drawing.Point(12, 470);
+            this.SSBbutton.Location = new System.Drawing.Point(12, 473);
             this.SSBbutton.Name = "SSBbutton";
             this.SSBbutton.Size = new System.Drawing.Size(75, 23);
             this.SSBbutton.TabIndex = 1;
@@ -555,11 +555,11 @@ namespace PowerSDR
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.textBox1.ShortcutsEnabled = false;
-            this.textBox1.Size = new System.Drawing.Size(759, 171);
+            this.textBox1.Size = new System.Drawing.Size(759, 174);
             this.textBox1.TabIndex = 6;
             this.textBox1.TabStop = false;
             this.textBox1.Text = "";
-            this.toolTip1.SetToolTip(this.textBox1, resources.GetString("textBox1.ToolTip"));
+            this.toolTip1.SetToolTip(this.textBox1, "\r\n");
             this.textBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.textBox1_MouseDown);
             this.textBox1.MouseEnter += new System.EventHandler(this.SpotControl_MouseEnter);
             this.textBox1.MouseLeave += new System.EventHandler(this.textBox1_MouseLeave);
@@ -571,7 +571,7 @@ namespace PowerSDR
             // 
             this.nodeBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.nodeBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nodeBox1.Location = new System.Drawing.Point(658, 369);
+            this.nodeBox1.Location = new System.Drawing.Point(658, 372);
             this.nodeBox1.MaxLength = 50;
             this.nodeBox1.Name = "nodeBox1";
             this.nodeBox1.Size = new System.Drawing.Size(84, 22);
@@ -600,7 +600,7 @@ namespace PowerSDR
             // 
             this.callBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.callBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.callBox.Location = new System.Drawing.Point(682, 473);
+            this.callBox.Location = new System.Drawing.Point(682, 476);
             this.callBox.MaxLength = 20;
             this.callBox.Name = "callBox";
             this.callBox.ShortcutsEnabled = false;
@@ -608,6 +608,7 @@ namespace PowerSDR
             this.callBox.TabIndex = 5;
             this.callBox.Text = "Callsign";
             this.toolTip1.SetToolTip(this.callBox, resources.GetString("callBox.ToolTip"));
+            this.callBox.Click += new System.EventHandler(this.callBox_Click);
             this.callBox.TextChanged += new System.EventHandler(this.callBox_TextChanged);
             this.callBox.Leave += new System.EventHandler(this.callBox_Leave);
             this.callBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.callBox_MouseDown);
@@ -617,7 +618,7 @@ namespace PowerSDR
             // 
             this.portBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.portBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.portBox2.Location = new System.Drawing.Point(696, 371);
+            this.portBox2.Location = new System.Drawing.Point(696, 374);
             this.portBox2.MaxLength = 7;
             this.portBox2.Name = "portBox2";
             this.portBox2.Size = new System.Drawing.Size(56, 22);
@@ -633,7 +634,7 @@ namespace PowerSDR
             // 
             this.statusBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.statusBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusBox.Location = new System.Drawing.Point(13, 341);
+            this.statusBox.Location = new System.Drawing.Point(13, 344);
             this.statusBox.Name = "statusBox";
             this.statusBox.Size = new System.Drawing.Size(156, 22);
             this.statusBox.TabIndex = 11;
@@ -646,21 +647,22 @@ namespace PowerSDR
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button1.Location = new System.Drawing.Point(101, 470);
+            this.button1.Location = new System.Drawing.Point(101, 473);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(68, 23);
             this.button1.TabIndex = 3;
             this.button1.Text = "Pause";
-            this.toolTip1.SetToolTip(this.button1, "Click to Pause the DX Text window (if spots are coming through too fast)\r\nUpdates" +
-        " to the Panadapter will still occur");
+            this.toolTip1.SetToolTip(this.button1, "Click to toggle Pause updates to this Spotter screen\r\n\r\nAlso mouse over the Spott" +
+        "er screen will also Pause updates to screen\r\n\r\n");
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.TextChanged += new System.EventHandler(this.button1_TextChanged);
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // statusBoxSWL
             // 
             this.statusBoxSWL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.statusBoxSWL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusBoxSWL.Location = new System.Drawing.Point(614, 343);
+            this.statusBoxSWL.Location = new System.Drawing.Point(614, 346);
             this.statusBoxSWL.Name = "statusBoxSWL";
             this.statusBoxSWL.Size = new System.Drawing.Size(156, 22);
             this.statusBoxSWL.TabIndex = 16;
@@ -673,7 +675,7 @@ namespace PowerSDR
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.label1.Location = new System.Drawing.Point(13, 324);
+            this.label1.Location = new System.Drawing.Point(13, 327);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 13);
             this.label1.TabIndex = 17;
@@ -684,7 +686,7 @@ namespace PowerSDR
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.label2.Location = new System.Drawing.Point(612, 327);
+            this.label2.Location = new System.Drawing.Point(612, 330);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(159, 13);
             this.label2.TabIndex = 18;
@@ -705,7 +707,7 @@ namespace PowerSDR
             this.btnTrack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnTrack.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnTrack.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrack.Location = new System.Drawing.Point(273, 421);
+            this.btnTrack.Location = new System.Drawing.Point(273, 424);
             this.btnTrack.Name = "btnTrack";
             this.btnTrack.Size = new System.Drawing.Size(60, 23);
             this.btnTrack.TabIndex = 62;
@@ -720,7 +722,7 @@ namespace PowerSDR
             // 
             this.nameBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.nameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameBox.Location = new System.Drawing.Point(687, 371);
+            this.nameBox.Location = new System.Drawing.Point(687, 374);
             this.nameBox.MaxLength = 20;
             this.nameBox.Name = "nameBox";
             this.nameBox.Size = new System.Drawing.Size(46, 22);
@@ -737,34 +739,34 @@ namespace PowerSDR
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle19;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.OliveDrab;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle20.SelectionBackColor = System.Drawing.Color.OliveDrab;
+            dataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle20;
             this.dataGridView1.Location = new System.Drawing.Point(12, 44);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle21.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle21.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle21.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle21.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle21.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle21;
             this.dataGridView1.Size = new System.Drawing.Size(280, 93);
             this.dataGridView1.TabIndex = 72;
             this.toolTip1.SetToolTip(this.dataGridView1, "Enter DX address : port#\r\nExample:  wb8zrl.no-ip.org:7300\r\n");
@@ -780,34 +782,34 @@ namespace PowerSDR
             this.dataGridView2.AllowUserToResizeColumns = false;
             this.dataGridView2.AllowUserToResizeRows = false;
             this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.OliveDrab;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.Color.OliveDrab;
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle23;
             this.dataGridView2.Location = new System.Drawing.Point(498, 143);
             this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
             this.dataGridView2.Size = new System.Drawing.Size(254, 94);
             this.dataGridView2.TabIndex = 75;
             this.toolTip1.SetToolTip(this.dataGridView2, "memories");
@@ -817,7 +819,7 @@ namespace PowerSDR
             // 
             this.SWLbutton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SWLbutton2.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.SWLbutton2.Location = new System.Drawing.Point(696, 371);
+            this.SWLbutton2.Location = new System.Drawing.Point(696, 374);
             this.SWLbutton2.Name = "SWLbutton2";
             this.SWLbutton2.Size = new System.Drawing.Size(75, 23);
             this.SWLbutton2.TabIndex = 76;
@@ -831,7 +833,7 @@ namespace PowerSDR
             this.btnBeacon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnBeacon.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnBeacon.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBeacon.Location = new System.Drawing.Point(182, 470);
+            this.btnBeacon.Location = new System.Drawing.Point(182, 473);
             this.btnBeacon.Name = "btnBeacon";
             this.btnBeacon.Size = new System.Drawing.Size(85, 23);
             this.btnBeacon.TabIndex = 85;
@@ -844,7 +846,7 @@ namespace PowerSDR
             // 
             this.btnTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnTime.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnTime.Location = new System.Drawing.Point(511, 329);
+            this.btnTime.Location = new System.Drawing.Point(511, 332);
             this.btnTime.Name = "btnTime";
             this.btnTime.Size = new System.Drawing.Size(75, 23);
             this.btnTime.TabIndex = 89;
@@ -858,7 +860,7 @@ namespace PowerSDR
             this.checkBoxTone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBoxTone.AutoSize = true;
             this.checkBoxTone.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.checkBoxTone.Location = new System.Drawing.Point(559, 382);
+            this.checkBoxTone.Location = new System.Drawing.Point(559, 385);
             this.checkBoxTone.Name = "checkBoxTone";
             this.checkBoxTone.Size = new System.Drawing.Size(46, 17);
             this.checkBoxTone.TabIndex = 93;
@@ -873,7 +875,7 @@ namespace PowerSDR
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox2.Enabled = false;
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(575, 304);
+            this.textBox2.Location = new System.Drawing.Point(575, 307);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(46, 20);
             this.textBox2.TabIndex = 94;
@@ -885,7 +887,7 @@ namespace PowerSDR
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button2.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button2.Location = new System.Drawing.Point(297, 166);
+            this.button2.Location = new System.Drawing.Point(297, 169);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(68, 23);
             this.button2.TabIndex = 99;
@@ -900,7 +902,7 @@ namespace PowerSDR
             this.DXPost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DXPost.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.DXPost.Enabled = false;
-            this.DXPost.Location = new System.Drawing.Point(13, 372);
+            this.DXPost.Location = new System.Drawing.Point(13, 375);
             this.DXPost.Name = "DXPost";
             this.DXPost.Size = new System.Drawing.Size(64, 23);
             this.DXPost.TabIndex = 100;
@@ -914,7 +916,7 @@ namespace PowerSDR
             this.textBoxDXCall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBoxDXCall.Enabled = false;
             this.textBoxDXCall.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxDXCall.Location = new System.Drawing.Point(82, 373);
+            this.textBoxDXCall.Location = new System.Drawing.Point(82, 376);
             this.textBoxDXCall.Name = "textBoxDXCall";
             this.textBoxDXCall.Size = new System.Drawing.Size(87, 22);
             this.textBoxDXCall.TabIndex = 101;
@@ -927,7 +929,7 @@ namespace PowerSDR
             this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox4.Enabled = false;
             this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(480, 474);
+            this.textBox4.Location = new System.Drawing.Point(480, 477);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(37, 20);
             this.textBox4.TabIndex = 102;
@@ -939,7 +941,7 @@ namespace PowerSDR
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button3.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button3.Location = new System.Drawing.Point(628, 413);
+            this.button3.Location = new System.Drawing.Point(628, 416);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(48, 19);
             this.button3.TabIndex = 108;
@@ -954,7 +956,7 @@ namespace PowerSDR
             // 
             this.RotorHead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.RotorHead.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RotorHead.Location = new System.Drawing.Point(520, 413);
+            this.RotorHead.Location = new System.Drawing.Point(520, 416);
             this.RotorHead.Name = "RotorHead";
             this.RotorHead.Size = new System.Drawing.Size(37, 20);
             this.RotorHead.TabIndex = 109;
@@ -967,7 +969,7 @@ namespace PowerSDR
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button4.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.button4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button4.Location = new System.Drawing.Point(195, 416);
+            this.button4.Location = new System.Drawing.Point(195, 419);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(57, 23);
             this.button4.TabIndex = 117;
@@ -977,578 +979,12 @@ namespace PowerSDR
             this.button4.Click += new System.EventHandler(this.button4_Click);
             this.button4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button4_MouseDown);
             // 
-            // txtLoTWpass
-            // 
-            this.txtLoTWpass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtLoTWpass.Location = new System.Drawing.Point(682, 447);
-            this.txtLoTWpass.MaxLength = 20;
-            this.txtLoTWpass.Name = "txtLoTWpass";
-            this.txtLoTWpass.PasswordChar = '.';
-            this.txtLoTWpass.ShortcutsEnabled = false;
-            this.txtLoTWpass.Size = new System.Drawing.Size(86, 20);
-            this.txtLoTWpass.TabIndex = 116;
-            this.txtLoTWpass.Text = "password";
-            this.toolTip1.SetToolTip(this.txtLoTWpass, "LoTW password (this is permanently saved)");
-            this.txtLoTWpass.UseSystemPasswordChar = true;
-            this.txtLoTWpass.Visible = false;
-            this.txtLoTWpass.TextChanged += new System.EventHandler(this.txtLoTWpass_TextChanged);
-            // 
-            // chkBoxBeacon
-            // 
-            this.chkBoxBeacon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkBoxBeacon.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkBoxBeacon.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkBoxBeacon.Image = null;
-            this.chkBoxBeacon.Location = new System.Drawing.Point(182, 393);
-            this.chkBoxBeacon.Name = "chkBoxBeacon";
-            this.chkBoxBeacon.Size = new System.Drawing.Size(85, 24);
-            this.chkBoxBeacon.TabIndex = 114;
-            this.chkBoxBeacon.Text = "Spot Beacon";
-            this.toolTip1.SetToolTip(this.chkBoxBeacon, "Check to display Beacon Spots\r\n");
-            // 
-            // chkVoacap
-            // 
-            this.chkVoacap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkVoacap.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkVoacap.Image = null;
-            this.chkVoacap.Location = new System.Drawing.Point(175, 448);
-            this.chkVoacap.Name = "chkVoacap";
-            this.chkVoacap.Size = new System.Drawing.Size(77, 17);
-            this.chkVoacap.TabIndex = 113;
-            this.chkVoacap.Text = "VoaOn";
-            this.toolTip1.SetToolTip(this.chkVoacap, "voacap on");
-            this.chkVoacap.Visible = false;
-            // 
-            // chkDXOn
-            // 
-            this.chkDXOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDXOn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkDXOn.Image = null;
-            this.chkDXOn.Location = new System.Drawing.Point(101, 451);
-            this.chkDXOn.Name = "chkDXOn";
-            this.chkDXOn.Size = new System.Drawing.Size(77, 17);
-            this.chkDXOn.TabIndex = 112;
-            this.chkDXOn.Text = "DxOn";
-            this.toolTip1.SetToolTip(this.chkDXOn, "dx on\r\n");
-            this.chkDXOn.Visible = false;
-            // 
-            // chkMapOn
-            // 
-            this.chkMapOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkMapOn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkMapOn.Image = null;
-            this.chkMapOn.Location = new System.Drawing.Point(258, 450);
-            this.chkMapOn.Name = "chkMapOn";
-            this.chkMapOn.Size = new System.Drawing.Size(77, 17);
-            this.chkMapOn.TabIndex = 111;
-            this.chkMapOn.Text = "MapOn";
-            this.toolTip1.SetToolTip(this.chkMapOn, "map on\r\n");
-            this.chkMapOn.Visible = false;
-            // 
-            // chkBoxBandText
-            // 
-            this.chkBoxBandText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkBoxBandText.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkBoxBandText.Image = null;
-            this.chkBoxBandText.Location = new System.Drawing.Point(417, 428);
-            this.chkBoxBandText.Name = "chkBoxBandText";
-            this.chkBoxBandText.Size = new System.Drawing.Size(113, 20);
-            this.chkBoxBandText.TabIndex = 106;
-            this.chkBoxBandText.Text = "BandText to Pan";
-            this.toolTip1.SetToolTip(this.chkBoxBandText, "Check to Show BandText on Panadapter display\r\n\r\nAlso, can Right Click on VFO Band" +
-        " Text area to Toggle this on/off\r\n");
-            // 
-            // numBeamHeading
-            // 
-            this.numBeamHeading.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.numBeamHeading.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numBeamHeading.Location = new System.Drawing.Point(580, 413);
-            this.numBeamHeading.Maximum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            0});
-            this.numBeamHeading.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.numBeamHeading.Name = "numBeamHeading";
-            this.numBeamHeading.Size = new System.Drawing.Size(42, 20);
-            this.numBeamHeading.TabIndex = 105;
-            this.toolTip1.SetToolTip(this.numBeamHeading, "Enter Angle to Point Antenna.\r\n\r\nRight Click on Angle to MOVE Antenna to new Posi" +
-        "tion.\r\n\r\nChanging the value will stop the Antenna.\r\n\r\nClick Rotor button to Move" +
-        " Antenna to new Position");
-            this.numBeamHeading.Value = new decimal(new int[] {
-            359,
-            0,
-            0,
-            0});
-            this.numBeamHeading.Visible = false;
-            this.numBeamHeading.ValueChanged += new System.EventHandler(this.numBeamHeading_ValueChanged);
-            // 
-            // chkISS
-            // 
-            this.chkISS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkISS.Checked = true;
-            this.chkISS.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkISS.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkISS.Image = null;
-            this.chkISS.Location = new System.Drawing.Point(367, 328);
-            this.chkISS.Name = "chkISS";
-            this.chkISS.Size = new System.Drawing.Size(46, 20);
-            this.chkISS.TabIndex = 104;
-            this.chkISS.Text = "ISS";
-            this.toolTip1.SetToolTip(this.chkISS, resources.GetString("chkISS.ToolTip"));
-            this.chkISS.CheckedChanged += new System.EventHandler(this.chkISS_CheckedChanged);
-            // 
-            // chkMoon
-            // 
-            this.chkMoon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkMoon.Checked = true;
-            this.chkMoon.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMoon.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkMoon.Image = null;
-            this.chkMoon.Location = new System.Drawing.Point(320, 328);
-            this.chkMoon.Name = "chkMoon";
-            this.chkMoon.Size = new System.Drawing.Size(58, 20);
-            this.chkMoon.TabIndex = 103;
-            this.chkMoon.Text = "Moon";
-            this.toolTip1.SetToolTip(this.chkMoon, resources.GetString("chkMoon.ToolTip"));
-            this.chkMoon.CheckedChanged += new System.EventHandler(this.chkMoon_CheckedChanged);
-            // 
-            // chkBoxContour
-            // 
-            this.chkBoxContour.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkBoxContour.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkBoxContour.Image = null;
-            this.chkBoxContour.Location = new System.Drawing.Point(343, 398);
-            this.chkBoxContour.Name = "chkBoxContour";
-            this.chkBoxContour.Size = new System.Drawing.Size(70, 20);
-            this.chkBoxContour.TabIndex = 98;
-            this.chkBoxContour.Text = "Contour";
-            this.toolTip1.SetToolTip(this.chkBoxContour, resources.GetString("chkBoxContour.ToolTip"));
-            this.chkBoxContour.CheckedChanged += new System.EventHandler(this.chkBoxContour_CheckedChanged);
-            // 
-            // tbPanPower
-            // 
-            this.tbPanPower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbPanPower.AutoSize = false;
-            this.tbPanPower.Location = new System.Drawing.Point(339, 446);
-            this.tbPanPower.Maximum = 1500;
-            this.tbPanPower.Minimum = 1;
-            this.tbPanPower.Name = "tbPanPower";
-            this.tbPanPower.Size = new System.Drawing.Size(66, 18);
-            this.tbPanPower.TabIndex = 97;
-            this.tbPanPower.TickFrequency = 90;
-            this.toolTip1.SetToolTip(this.tbPanPower, "HIT F2 to watch video showing how to use VOACAP\r\n\r\nVOACAP: 400 Watts");
-            this.tbPanPower.Value = 400;
-            this.tbPanPower.Scroll += new System.EventHandler(this.tbPanPower_Scroll);
-            this.tbPanPower.MouseEnter += new System.EventHandler(this.tbPanPower_MouseEnter);
-            this.tbPanPower.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tbPanPower_MouseUp);
-            // 
-            // chkBoxAnt
-            // 
-            this.chkBoxAnt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkBoxAnt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkBoxAnt.Image = null;
-            this.chkBoxAnt.Location = new System.Drawing.Point(343, 420);
-            this.chkBoxAnt.Name = "chkBoxAnt";
-            this.chkBoxAnt.Size = new System.Drawing.Size(55, 24);
-            this.chkBoxAnt.TabIndex = 96;
-            this.chkBoxAnt.Text = "Beam";
-            this.toolTip1.SetToolTip(this.chkBoxAnt, resources.GetString("chkBoxAnt.ToolTip"));
-            this.chkBoxAnt.CheckedChanged += new System.EventHandler(this.chkBoxAnt_CheckedChanged);
-            // 
-            // chkBoxDIG
-            // 
-            this.chkBoxDIG.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkBoxDIG.Checked = true;
-            this.chkBoxDIG.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBoxDIG.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkBoxDIG.Image = null;
-            this.chkBoxDIG.Location = new System.Drawing.Point(182, 370);
-            this.chkBoxDIG.Name = "chkBoxDIG";
-            this.chkBoxDIG.Size = new System.Drawing.Size(85, 24);
-            this.chkBoxDIG.TabIndex = 70;
-            this.chkBoxDIG.Text = "Spot Digital";
-            this.toolTip1.SetToolTip(this.chkBoxDIG, "Show Digital spots when checked (like RTTY, PSK, FT8, etc)\r\n");
-            // 
-            // checkBoxMUF
-            // 
-            this.checkBoxMUF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkBoxMUF.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.checkBoxMUF.Image = null;
-            this.checkBoxMUF.Location = new System.Drawing.Point(273, 395);
-            this.checkBoxMUF.Name = "checkBoxMUF";
-            this.checkBoxMUF.Size = new System.Drawing.Size(75, 20);
-            this.checkBoxMUF.TabIndex = 95;
-            this.checkBoxMUF.Text = "VOACAP";
-            this.toolTip1.SetToolTip(this.checkBoxMUF, resources.GetString("checkBoxMUF.ToolTip"));
-            this.checkBoxMUF.CheckedChanged += new System.EventHandler(this.checkBoxMUF_CheckedChanged);
-            this.checkBoxMUF.MouseDown += new System.Windows.Forms.MouseEventHandler(this.checkBoxMUF_MouseDown);
-            // 
-            // udDisplayWWV
-            // 
-            this.udDisplayWWV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.udDisplayWWV.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDisplayWWV.Location = new System.Drawing.Point(511, 379);
-            this.udDisplayWWV.Maximum = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            this.udDisplayWWV.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDisplayWWV.Name = "udDisplayWWV";
-            this.udDisplayWWV.Size = new System.Drawing.Size(39, 20);
-            this.udDisplayWWV.TabIndex = 91;
-            this.toolTip1.SetToolTip(this.udDisplayWWV, resources.GetString("udDisplayWWV.ToolTip"));
-            this.udDisplayWWV.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            // 
-            // checkBoxWWV
-            // 
-            this.checkBoxWWV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkBoxWWV.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.checkBoxWWV.Image = null;
-            this.checkBoxWWV.Location = new System.Drawing.Point(511, 353);
-            this.checkBoxWWV.Name = "checkBoxWWV";
-            this.checkBoxWWV.Size = new System.Drawing.Size(98, 24);
-            this.checkBoxWWV.TabIndex = 90;
-            this.checkBoxWWV.Text = "Use WWV HF";
-            this.toolTip1.SetToolTip(this.checkBoxWWV, resources.GetString("checkBoxWWV.ToolTip"));
-            this.checkBoxWWV.CheckedChanged += new System.EventHandler(this.checkBoxWWV_CheckedChanged);
-            // 
-            // numericUpDownTS1
-            // 
-            this.numericUpDownTS1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.numericUpDownTS1.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownTS1.Location = new System.Drawing.Point(417, 473);
-            this.numericUpDownTS1.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDownTS1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownTS1.Name = "numericUpDownTS1";
-            this.numericUpDownTS1.Size = new System.Drawing.Size(39, 20);
-            this.numericUpDownTS1.TabIndex = 88;
-            this.toolTip1.SetToolTip(this.numericUpDownTS1, "Which Band to Start Slow Beacaon Scan on:\r\n1=14.1mhz\r\n2=18.11mhz\r\n3=21.15mhz\r\n4=2" +
-        "4.93mhz\r\n5=28.2mhz\r\n");
-            this.numericUpDownTS1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownTS1.ValueChanged += new System.EventHandler(this.numericUpDownTS1_ValueChanged);
-            // 
-            // BoxBFScan
-            // 
-            this.BoxBFScan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.BoxBFScan.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BoxBFScan.Image = null;
-            this.BoxBFScan.Location = new System.Drawing.Point(343, 470);
-            this.BoxBFScan.Name = "BoxBFScan";
-            this.BoxBFScan.Size = new System.Drawing.Size(87, 24);
-            this.BoxBFScan.TabIndex = 87;
-            this.BoxBFScan.Text = "Slow Scan";
-            this.toolTip1.SetToolTip(this.BoxBFScan, resources.GetString("BoxBFScan.ToolTip"));
-            this.BoxBFScan.CheckedChanged += new System.EventHandler(this.BoxBFScan_CheckedChanged);
-            // 
-            // BoxBScan
-            // 
-            this.BoxBScan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.BoxBScan.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.BoxBScan.Image = null;
-            this.BoxBScan.Location = new System.Drawing.Point(273, 471);
-            this.BoxBScan.Name = "BoxBScan";
-            this.BoxBScan.Size = new System.Drawing.Size(81, 24);
-            this.BoxBScan.TabIndex = 86;
-            this.BoxBScan.Text = "Fast Scan";
-            this.toolTip1.SetToolTip(this.BoxBScan, "Check to Scan all 18 Beacon Stations 5 Frequecies at each 10 second Interval\r\nPow" +
-        "erSDR will move across all 5 Beacon Frequencies in 1 sec intervals \r\n\r\nTotal bea" +
-        "con map is compled in 3 minutes.\r\n\r\n");
-            this.BoxBScan.CheckedChanged += new System.EventHandler(this.BoxBScan_CheckedChanged);
-            // 
-            // chkBoxBeam
-            // 
-            this.chkBoxBeam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkBoxBeam.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkBoxBeam.Image = null;
-            this.chkBoxBeam.Location = new System.Drawing.Point(417, 405);
-            this.chkBoxBeam.Name = "chkBoxBeam";
-            this.chkBoxBeam.Size = new System.Drawing.Size(88, 20);
-            this.chkBoxBeam.TabIndex = 83;
-            this.chkBoxBeam.Text = "Map Beam°";
-            this.toolTip1.SetToolTip(this.chkBoxBeam, "Check To Show Beam heading on map in (deg)\r\n");
-            this.chkBoxBeam.CheckedChanged += new System.EventHandler(this.chkBoxBeam_CheckedChanged);
-            // 
-            // udDisplayLong
-            // 
-            this.udDisplayLong.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.udDisplayLong.DecimalPlaces = 2;
-            this.udDisplayLong.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDisplayLong.Location = new System.Drawing.Point(614, 474);
-            this.udDisplayLong.Maximum = new decimal(new int[] {
-            180,
-            0,
-            0,
-            0});
-            this.udDisplayLong.Minimum = new decimal(new int[] {
-            180,
-            0,
-            0,
-            -2147483648});
-            this.udDisplayLong.Name = "udDisplayLong";
-            this.udDisplayLong.Size = new System.Drawing.Size(62, 20);
-            this.udDisplayLong.TabIndex = 80;
-            this.toolTip1.SetToolTip(this.udDisplayLong, "Enter Longitude in deg (-180 to 180) for Beam Heading\r\n- for West of 0 GMT line\r\n" +
-        "+ for East of 0 GMT line\r\n\r\nLeft Click on PowerSDR Display and Hit SHIFT key to " +
-        "\r\ntoggle Lat/Long map");
-            this.udDisplayLong.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDisplayLong.ValueChanged += new System.EventHandler(this.udDisplayLong_ValueChanged);
-            // 
-            // udDisplayLat
-            // 
-            this.udDisplayLat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.udDisplayLat.DecimalPlaces = 2;
-            this.udDisplayLat.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDisplayLat.Location = new System.Drawing.Point(538, 474);
-            this.udDisplayLat.Maximum = new decimal(new int[] {
-            90,
-            0,
-            0,
-            0});
-            this.udDisplayLat.Minimum = new decimal(new int[] {
-            90,
-            0,
-            0,
-            -2147483648});
-            this.udDisplayLat.Name = "udDisplayLat";
-            this.udDisplayLat.Size = new System.Drawing.Size(58, 20);
-            this.udDisplayLat.TabIndex = 79;
-            this.toolTip1.SetToolTip(this.udDisplayLat, "Enter Latitude in deg (90 to -90) for Beam Heading\r\n+ for Northern Hemisphere\r\n- " +
-        "for Southern Hemisphere\r\n\r\nLeft Click on PowerSDR Display and Hit SHIFT key to \r" +
-        "\ntoggle Lat/Long map");
-            this.udDisplayLat.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDisplayLat.ValueChanged += new System.EventHandler(this.udDisplayLat_ValueChanged);
-            // 
-            // chkBoxMem
-            // 
-            this.chkBoxMem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkBoxMem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkBoxMem.Image = null;
-            this.chkBoxMem.Location = new System.Drawing.Point(417, 448);
-            this.chkBoxMem.Name = "chkBoxMem";
-            this.chkBoxMem.Size = new System.Drawing.Size(123, 20);
-            this.chkBoxMem.TabIndex = 74;
-            this.chkBoxMem.Text = "MEMORIES to Pan";
-            this.toolTip1.SetToolTip(this.chkBoxMem, resources.GetString("chkBoxMem.ToolTip"));
-            this.chkBoxMem.CheckedChanged += new System.EventHandler(this.chkBoxMem_CheckedChanged);
-            // 
-            // chkBoxPan
-            // 
-            this.chkBoxPan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkBoxPan.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkBoxPan.Image = null;
-            this.chkBoxPan.Location = new System.Drawing.Point(417, 387);
-            this.chkBoxPan.Name = "chkBoxPan";
-            this.chkBoxPan.Size = new System.Drawing.Size(100, 20);
-            this.chkBoxPan.TabIndex = 71;
-            this.chkBoxPan.Text = "Map just Pan";
-            this.toolTip1.SetToolTip(this.chkBoxPan, "Show Country or Calls on Map for just the Panadapter freq you are viewing.\r\n");
-            this.chkBoxPan.CheckedChanged += new System.EventHandler(this.chkBoxPan_CheckedChanged);
-            // 
-            // chkBoxSSB
-            // 
-            this.chkBoxSSB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkBoxSSB.Checked = true;
-            this.chkBoxSSB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBoxSSB.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkBoxSSB.Image = null;
-            this.chkBoxSSB.Location = new System.Drawing.Point(182, 349);
-            this.chkBoxSSB.Name = "chkBoxSSB";
-            this.chkBoxSSB.Size = new System.Drawing.Size(85, 24);
-            this.chkBoxSSB.TabIndex = 69;
-            this.chkBoxSSB.Text = "Spot Phone";
-            this.toolTip1.SetToolTip(this.chkBoxSSB, "Show SSB,FM,AM spots when checked\r\n");
-            // 
-            // chkBoxCW
-            // 
-            this.chkBoxCW.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkBoxCW.Checked = true;
-            this.chkBoxCW.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBoxCW.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkBoxCW.Image = null;
-            this.chkBoxCW.Location = new System.Drawing.Point(182, 326);
-            this.chkBoxCW.Name = "chkBoxCW";
-            this.chkBoxCW.Size = new System.Drawing.Size(85, 24);
-            this.chkBoxCW.TabIndex = 68;
-            this.chkBoxCW.Text = "Spot CW";
-            this.toolTip1.SetToolTip(this.chkBoxCW, "Show CW spots when checked\r\n");
-            // 
-            // chkMapBand
-            // 
-            this.chkMapBand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkMapBand.Checked = true;
-            this.chkMapBand.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMapBand.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkMapBand.Image = null;
-            this.chkMapBand.Location = new System.Drawing.Point(417, 370);
-            this.chkMapBand.Name = "chkMapBand";
-            this.chkMapBand.Size = new System.Drawing.Size(113, 20);
-            this.chkMapBand.TabIndex = 67;
-            this.chkMapBand.Text = "Map just Band";
-            this.toolTip1.SetToolTip(this.chkMapBand, "Show Country or Calls on Map for the Band you are on.\r\n");
-            this.chkMapBand.CheckedChanged += new System.EventHandler(this.chkMapBand_CheckedChanged);
-            // 
-            // chkMapCountry
-            // 
-            this.chkMapCountry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkMapCountry.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkMapCountry.Image = null;
-            this.chkMapCountry.Location = new System.Drawing.Point(417, 330);
-            this.chkMapCountry.Name = "chkMapCountry";
-            this.chkMapCountry.Size = new System.Drawing.Size(88, 20);
-            this.chkMapCountry.TabIndex = 66;
-            this.chkMapCountry.Text = "Map Country";
-            this.toolTip1.SetToolTip(this.chkMapCountry, "Show Dx spot Countries on Map\r\n");
-            this.chkMapCountry.CheckedChanged += new System.EventHandler(this.chkMapCountry_CheckedChanged);
-            // 
-            // chkMapCall
-            // 
-            this.chkMapCall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkMapCall.Checked = true;
-            this.chkMapCall.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkMapCall.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkMapCall.Image = null;
-            this.chkMapCall.Location = new System.Drawing.Point(417, 347);
-            this.chkMapCall.Name = "chkMapCall";
-            this.chkMapCall.Size = new System.Drawing.Size(88, 20);
-            this.chkMapCall.TabIndex = 65;
-            this.chkMapCall.Text = "Map Calls";
-            this.toolTip1.SetToolTip(this.chkMapCall, "Show DX Spot Call signs on Map");
-            this.chkMapCall.CheckedChanged += new System.EventHandler(this.chkMapCall_CheckedChanged);
-            // 
-            // chkPanMode
-            // 
-            this.chkPanMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkPanMode.Checked = true;
-            this.chkPanMode.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkPanMode.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkPanMode.Image = null;
-            this.chkPanMode.Location = new System.Drawing.Point(273, 372);
-            this.chkPanMode.Name = "chkPanMode";
-            this.chkPanMode.Size = new System.Drawing.Size(148, 20);
-            this.chkPanMode.TabIndex = 63;
-            this.chkPanMode.Text = "Special PanaFall Mode\r\n";
-            this.toolTip1.SetToolTip(this.chkPanMode, "When Checked, will Display RX1 in Panafall mode, with a small waterfall for bette" +
-        "r viewing of the map\r\nThis is equivalent to 80/20 Panafall");
-            this.chkPanMode.CheckedChanged += new System.EventHandler(this.chkPanMode_CheckedChanged);
-            // 
-            // chkGrayLine
-            // 
-            this.chkGrayLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkGrayLine.Checked = true;
-            this.chkGrayLine.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkGrayLine.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkGrayLine.Image = null;
-            this.chkGrayLine.Location = new System.Drawing.Point(273, 353);
-            this.chkGrayLine.Name = "chkGrayLine";
-            this.chkGrayLine.Size = new System.Drawing.Size(105, 17);
-            this.chkGrayLine.TabIndex = 61;
-            this.chkGrayLine.Text = "GrayLine Track";
-            this.toolTip1.SetToolTip(this.chkGrayLine, "GrayLine will show on Panadapter Display\r\nBut only when you run the Tracking Worl" +
-        "d Map (click on the Track/Map button)");
-            this.chkGrayLine.CheckedChanged += new System.EventHandler(this.chkGrayLine_CheckedChanged);
-            // 
-            // chkSUN
-            // 
-            this.chkSUN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkSUN.Checked = true;
-            this.chkSUN.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkSUN.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkSUN.Image = null;
-            this.chkSUN.Location = new System.Drawing.Point(273, 328);
-            this.chkSUN.Name = "chkSUN";
-            this.chkSUN.Size = new System.Drawing.Size(46, 20);
-            this.chkSUN.TabIndex = 60;
-            this.chkSUN.Text = "Sun";
-            this.toolTip1.SetToolTip(this.chkSUN, "True (Zenith) position of the Sun will show on Panadapter screen (including space" +
-        " weather)\r\nWhen you Click on the TRACK/Map button to activate the World Map\r\n");
-            this.chkSUN.CheckedChanged += new System.EventHandler(this.chkSUN_CheckedChanged);
-            // 
-            // hkBoxSpotRX2
-            // 
-            this.hkBoxSpotRX2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.hkBoxSpotRX2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.hkBoxSpotRX2.Image = null;
-            this.hkBoxSpotRX2.Location = new System.Drawing.Point(111, 405);
-            this.hkBoxSpotRX2.Name = "hkBoxSpotRX2";
-            this.hkBoxSpotRX2.Size = new System.Drawing.Size(78, 19);
-            this.hkBoxSpotRX2.TabIndex = 119;
-            this.hkBoxSpotRX2.Text = "RX2 Band ";
-            this.toolTip1.SetToolTip(this.hkBoxSpotRX2, "Only Show DX Spots on RX2 Band");
-            this.hkBoxSpotRX2.CheckedChanged += new System.EventHandler(this.hkBoxSpotRX2_CheckedChanged);
-            // 
-            // hkBoxSpotBand
-            // 
-            this.hkBoxSpotBand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.hkBoxSpotBand.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.hkBoxSpotBand.Image = null;
-            this.hkBoxSpotBand.Location = new System.Drawing.Point(12, 405);
-            this.hkBoxSpotBand.Name = "hkBoxSpotBand";
-            this.hkBoxSpotBand.Size = new System.Drawing.Size(103, 19);
-            this.hkBoxSpotBand.TabIndex = 118;
-            this.hkBoxSpotBand.Text = "RX1 Band Only\r\n";
-            this.toolTip1.SetToolTip(this.hkBoxSpotBand, "Only Show DX Spots on RX1 Band");
-            this.hkBoxSpotBand.CheckedChanged += new System.EventHandler(this.hkBoxSpotBand_CheckedChanged);
-            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label3.Location = new System.Drawing.Point(537, 452);
+            this.label3.Location = new System.Drawing.Point(537, 455);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(139, 13);
             this.label3.TabIndex = 81;
@@ -1559,7 +995,7 @@ namespace PowerSDR
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label4.Location = new System.Drawing.Point(693, 452);
+            this.label4.Location = new System.Drawing.Point(693, 455);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 13);
             this.label4.TabIndex = 82;
@@ -1570,7 +1006,7 @@ namespace PowerSDR
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.label5.Location = new System.Drawing.Point(541, 437);
+            this.label5.Location = new System.Drawing.Point(541, 440);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(227, 13);
             this.label5.TabIndex = 84;
@@ -1661,7 +1097,7 @@ namespace PowerSDR
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label6.Location = new System.Drawing.Point(587, 416);
+            this.label6.Location = new System.Drawing.Point(587, 419);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(0, 13);
             this.label6.TabIndex = 107;
@@ -1671,7 +1107,7 @@ namespace PowerSDR
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label7.Location = new System.Drawing.Point(559, 416);
+            this.label7.Location = new System.Drawing.Point(559, 419);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(19, 13);
             this.label7.TabIndex = 110;
@@ -1688,12 +1124,407 @@ namespace PowerSDR
             this.richTextBox1.TabStop = false;
             this.richTextBox1.Text = "Additional DX telnet addresses: http://www.dxcluster.info/telnet/index.php.\n";
             // 
+            // txtLoTWpass
+            // 
+            this.txtLoTWpass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtLoTWpass.Location = new System.Drawing.Point(682, 450);
+            this.txtLoTWpass.MaxLength = 20;
+            this.txtLoTWpass.Name = "txtLoTWpass";
+            this.txtLoTWpass.PasswordChar = '.';
+            this.txtLoTWpass.ShortcutsEnabled = false;
+            this.txtLoTWpass.Size = new System.Drawing.Size(86, 20);
+            this.txtLoTWpass.TabIndex = 116;
+            this.txtLoTWpass.Text = "password LoTW";
+            this.toolTip1.SetToolTip(this.txtLoTWpass, "LoTW password (this is permanently saved)");
+            this.txtLoTWpass.UseSystemPasswordChar = true;
+            this.txtLoTWpass.Visible = false;
+            this.txtLoTWpass.TextChanged += new System.EventHandler(this.txtLoTWpass_TextChanged);
+            // 
+            // chkBoxBeacon
+            // 
+            this.chkBoxBeacon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkBoxBeacon.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkBoxBeacon.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkBoxBeacon.Image = null;
+            this.chkBoxBeacon.Location = new System.Drawing.Point(182, 396);
+            this.chkBoxBeacon.Name = "chkBoxBeacon";
+            this.chkBoxBeacon.Size = new System.Drawing.Size(85, 24);
+            this.chkBoxBeacon.TabIndex = 114;
+            this.chkBoxBeacon.Text = "Spot Beacon";
+            this.toolTip1.SetToolTip(this.chkBoxBeacon, "Check to display Beacon Spots\r\n");
+            // 
+            // chkVoacap
+            // 
+            this.chkVoacap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkVoacap.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkVoacap.Image = null;
+            this.chkVoacap.Location = new System.Drawing.Point(175, 451);
+            this.chkVoacap.Name = "chkVoacap";
+            this.chkVoacap.Size = new System.Drawing.Size(77, 17);
+            this.chkVoacap.TabIndex = 113;
+            this.chkVoacap.Text = "VoaOn";
+            this.toolTip1.SetToolTip(this.chkVoacap, "voacap on");
+            this.chkVoacap.Visible = false;
+            // 
+            // chkDXOn
+            // 
+            this.chkDXOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDXOn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkDXOn.Image = null;
+            this.chkDXOn.Location = new System.Drawing.Point(101, 454);
+            this.chkDXOn.Name = "chkDXOn";
+            this.chkDXOn.Size = new System.Drawing.Size(77, 17);
+            this.chkDXOn.TabIndex = 112;
+            this.chkDXOn.Text = "DxOn";
+            this.toolTip1.SetToolTip(this.chkDXOn, "dx on\r\n");
+            this.chkDXOn.Visible = false;
+            // 
+            // chkMapOn
+            // 
+            this.chkMapOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkMapOn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkMapOn.Image = null;
+            this.chkMapOn.Location = new System.Drawing.Point(258, 453);
+            this.chkMapOn.Name = "chkMapOn";
+            this.chkMapOn.Size = new System.Drawing.Size(77, 17);
+            this.chkMapOn.TabIndex = 111;
+            this.chkMapOn.Text = "MapOn";
+            this.toolTip1.SetToolTip(this.chkMapOn, "map on\r\n");
+            this.chkMapOn.Visible = false;
+            // 
+            // chkBoxBandText
+            // 
+            this.chkBoxBandText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkBoxBandText.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkBoxBandText.Image = null;
+            this.chkBoxBandText.Location = new System.Drawing.Point(417, 431);
+            this.chkBoxBandText.Name = "chkBoxBandText";
+            this.chkBoxBandText.Size = new System.Drawing.Size(113, 20);
+            this.chkBoxBandText.TabIndex = 106;
+            this.chkBoxBandText.Text = "BandText to Pan";
+            this.toolTip1.SetToolTip(this.chkBoxBandText, "Check to Show BandText on Panadapter display\r\n\r\nAlso, can Right Click on VFO Band" +
+        " Text area to Toggle this on/off\r\n");
+            // 
+            // numBeamHeading
+            // 
+            this.numBeamHeading.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.numBeamHeading.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numBeamHeading.Location = new System.Drawing.Point(580, 416);
+            this.numBeamHeading.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.numBeamHeading.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.numBeamHeading.Name = "numBeamHeading";
+            this.numBeamHeading.Size = new System.Drawing.Size(42, 20);
+            this.numBeamHeading.TabIndex = 105;
+            this.toolTip1.SetToolTip(this.numBeamHeading, "Enter Angle to Point Antenna.\r\n\r\nRight Click on Angle to MOVE Antenna to new Posi" +
+        "tion.\r\n\r\nChanging the value will stop the Antenna.\r\n\r\nClick Rotor button to Move" +
+        " Antenna to new Position");
+            this.numBeamHeading.Value = new decimal(new int[] {
+            359,
+            0,
+            0,
+            0});
+            this.numBeamHeading.Visible = false;
+            this.numBeamHeading.ValueChanged += new System.EventHandler(this.numBeamHeading_ValueChanged);
+            // 
+            // chkISS
+            // 
+            this.chkISS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkISS.Checked = true;
+            this.chkISS.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkISS.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkISS.Image = null;
+            this.chkISS.Location = new System.Drawing.Point(367, 331);
+            this.chkISS.Name = "chkISS";
+            this.chkISS.Size = new System.Drawing.Size(46, 20);
+            this.chkISS.TabIndex = 104;
+            this.chkISS.Text = "ISS";
+            this.toolTip1.SetToolTip(this.chkISS, resources.GetString("chkISS.ToolTip"));
+            this.chkISS.CheckedChanged += new System.EventHandler(this.chkISS_CheckedChanged);
+            // 
+            // chkMoon
+            // 
+            this.chkMoon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkMoon.Checked = true;
+            this.chkMoon.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMoon.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkMoon.Image = null;
+            this.chkMoon.Location = new System.Drawing.Point(320, 331);
+            this.chkMoon.Name = "chkMoon";
+            this.chkMoon.Size = new System.Drawing.Size(58, 20);
+            this.chkMoon.TabIndex = 103;
+            this.chkMoon.Text = "Moon";
+            this.toolTip1.SetToolTip(this.chkMoon, resources.GetString("chkMoon.ToolTip"));
+            this.chkMoon.CheckedChanged += new System.EventHandler(this.chkMoon_CheckedChanged);
+            // 
+            // chkBoxContour
+            // 
+            this.chkBoxContour.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkBoxContour.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkBoxContour.Image = null;
+            this.chkBoxContour.Location = new System.Drawing.Point(343, 401);
+            this.chkBoxContour.Name = "chkBoxContour";
+            this.chkBoxContour.Size = new System.Drawing.Size(70, 20);
+            this.chkBoxContour.TabIndex = 98;
+            this.chkBoxContour.Text = "Contour";
+            this.toolTip1.SetToolTip(this.chkBoxContour, resources.GetString("chkBoxContour.ToolTip"));
+            this.chkBoxContour.CheckedChanged += new System.EventHandler(this.chkBoxContour_CheckedChanged);
+            // 
+            // tbPanPower
+            // 
+            this.tbPanPower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbPanPower.AutoSize = false;
+            this.tbPanPower.Location = new System.Drawing.Point(339, 449);
+            this.tbPanPower.Maximum = 1500;
+            this.tbPanPower.Minimum = 1;
+            this.tbPanPower.Name = "tbPanPower";
+            this.tbPanPower.Size = new System.Drawing.Size(66, 18);
+            this.tbPanPower.TabIndex = 97;
+            this.tbPanPower.TickFrequency = 90;
+            this.toolTip1.SetToolTip(this.tbPanPower, "HIT F2 to watch video showing how to use VOACAP\r\n\r\nVOACAP: 400 Watts");
+            this.tbPanPower.Value = 400;
+            this.tbPanPower.Scroll += new System.EventHandler(this.tbPanPower_Scroll);
+            this.tbPanPower.MouseEnter += new System.EventHandler(this.tbPanPower_MouseEnter);
+            this.tbPanPower.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tbPanPower_MouseUp);
+            // 
+            // chkBoxAnt
+            // 
+            this.chkBoxAnt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkBoxAnt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkBoxAnt.Image = null;
+            this.chkBoxAnt.Location = new System.Drawing.Point(343, 423);
+            this.chkBoxAnt.Name = "chkBoxAnt";
+            this.chkBoxAnt.Size = new System.Drawing.Size(55, 24);
+            this.chkBoxAnt.TabIndex = 96;
+            this.chkBoxAnt.Text = "Beam";
+            this.toolTip1.SetToolTip(this.chkBoxAnt, resources.GetString("chkBoxAnt.ToolTip"));
+            this.chkBoxAnt.CheckedChanged += new System.EventHandler(this.chkBoxAnt_CheckedChanged);
+            // 
+            // chkBoxDIG
+            // 
+            this.chkBoxDIG.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkBoxDIG.Checked = true;
+            this.chkBoxDIG.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoxDIG.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkBoxDIG.Image = null;
+            this.chkBoxDIG.Location = new System.Drawing.Point(182, 373);
+            this.chkBoxDIG.Name = "chkBoxDIG";
+            this.chkBoxDIG.Size = new System.Drawing.Size(85, 24);
+            this.chkBoxDIG.TabIndex = 70;
+            this.chkBoxDIG.Text = "Spot Digital";
+            this.toolTip1.SetToolTip(this.chkBoxDIG, "Show Digital spots when checked (like RTTY, PSK, FT8, etc)\r\n");
+            // 
+            // checkBoxMUF
+            // 
+            this.checkBoxMUF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxMUF.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.checkBoxMUF.Image = null;
+            this.checkBoxMUF.Location = new System.Drawing.Point(273, 398);
+            this.checkBoxMUF.Name = "checkBoxMUF";
+            this.checkBoxMUF.Size = new System.Drawing.Size(75, 20);
+            this.checkBoxMUF.TabIndex = 95;
+            this.checkBoxMUF.Text = "VOACAP";
+            this.toolTip1.SetToolTip(this.checkBoxMUF, resources.GetString("checkBoxMUF.ToolTip"));
+            this.checkBoxMUF.CheckedChanged += new System.EventHandler(this.checkBoxMUF_CheckedChanged);
+            this.checkBoxMUF.MouseDown += new System.Windows.Forms.MouseEventHandler(this.checkBoxMUF_MouseDown);
+            // 
+            // udDisplayWWV
+            // 
+            this.udDisplayWWV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.udDisplayWWV.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDisplayWWV.Location = new System.Drawing.Point(511, 382);
+            this.udDisplayWWV.Maximum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.udDisplayWWV.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDisplayWWV.Name = "udDisplayWWV";
+            this.udDisplayWWV.Size = new System.Drawing.Size(39, 20);
+            this.udDisplayWWV.TabIndex = 91;
+            this.toolTip1.SetToolTip(this.udDisplayWWV, resources.GetString("udDisplayWWV.ToolTip"));
+            this.udDisplayWWV.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
+            // checkBoxWWV
+            // 
+            this.checkBoxWWV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxWWV.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.checkBoxWWV.Image = null;
+            this.checkBoxWWV.Location = new System.Drawing.Point(511, 356);
+            this.checkBoxWWV.Name = "checkBoxWWV";
+            this.checkBoxWWV.Size = new System.Drawing.Size(98, 24);
+            this.checkBoxWWV.TabIndex = 90;
+            this.checkBoxWWV.Text = "Use WWV HF";
+            this.toolTip1.SetToolTip(this.checkBoxWWV, resources.GetString("checkBoxWWV.ToolTip"));
+            this.checkBoxWWV.CheckedChanged += new System.EventHandler(this.checkBoxWWV_CheckedChanged);
+            // 
+            // numericUpDownTS1
+            // 
+            this.numericUpDownTS1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.numericUpDownTS1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownTS1.Location = new System.Drawing.Point(417, 476);
+            this.numericUpDownTS1.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericUpDownTS1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownTS1.Name = "numericUpDownTS1";
+            this.numericUpDownTS1.Size = new System.Drawing.Size(39, 20);
+            this.numericUpDownTS1.TabIndex = 88;
+            this.toolTip1.SetToolTip(this.numericUpDownTS1, "Which Band to Start Slow Beacaon Scan on:\r\n1=14.1mhz\r\n2=18.11mhz\r\n3=21.15mhz\r\n4=2" +
+        "4.93mhz\r\n5=28.2mhz\r\n");
+            this.numericUpDownTS1.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownTS1.ValueChanged += new System.EventHandler(this.numericUpDownTS1_ValueChanged);
+            // 
+            // BoxBFScan
+            // 
+            this.BoxBFScan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.BoxBFScan.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BoxBFScan.Image = null;
+            this.BoxBFScan.Location = new System.Drawing.Point(343, 473);
+            this.BoxBFScan.Name = "BoxBFScan";
+            this.BoxBFScan.Size = new System.Drawing.Size(87, 24);
+            this.BoxBFScan.TabIndex = 87;
+            this.BoxBFScan.Text = "Slow Scan";
+            this.toolTip1.SetToolTip(this.BoxBFScan, resources.GetString("BoxBFScan.ToolTip"));
+            this.BoxBFScan.CheckedChanged += new System.EventHandler(this.BoxBFScan_CheckedChanged);
+            // 
+            // BoxBScan
+            // 
+            this.BoxBScan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.BoxBScan.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.BoxBScan.Image = null;
+            this.BoxBScan.Location = new System.Drawing.Point(273, 474);
+            this.BoxBScan.Name = "BoxBScan";
+            this.BoxBScan.Size = new System.Drawing.Size(81, 24);
+            this.BoxBScan.TabIndex = 86;
+            this.BoxBScan.Text = "Fast Scan";
+            this.toolTip1.SetToolTip(this.BoxBScan, "Check to Scan all 18 Beacon Stations 5 Frequecies at each 10 second Interval\r\nPow" +
+        "erSDR will move across all 5 Beacon Frequencies in 1 sec intervals \r\n\r\nTotal bea" +
+        "con map is compled in 3 minutes.\r\n\r\n");
+            this.BoxBScan.CheckedChanged += new System.EventHandler(this.BoxBScan_CheckedChanged);
+            // 
+            // chkBoxBeam
+            // 
+            this.chkBoxBeam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkBoxBeam.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkBoxBeam.Image = null;
+            this.chkBoxBeam.Location = new System.Drawing.Point(417, 408);
+            this.chkBoxBeam.Name = "chkBoxBeam";
+            this.chkBoxBeam.Size = new System.Drawing.Size(88, 20);
+            this.chkBoxBeam.TabIndex = 83;
+            this.chkBoxBeam.Text = "Map Beam°";
+            this.toolTip1.SetToolTip(this.chkBoxBeam, "Check To Show Beam heading on map in (deg)\r\n");
+            this.chkBoxBeam.CheckedChanged += new System.EventHandler(this.chkBoxBeam_CheckedChanged);
+            // 
+            // udDisplayLong
+            // 
+            this.udDisplayLong.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.udDisplayLong.DecimalPlaces = 2;
+            this.udDisplayLong.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDisplayLong.Location = new System.Drawing.Point(614, 477);
+            this.udDisplayLong.Maximum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            0});
+            this.udDisplayLong.Minimum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            -2147483648});
+            this.udDisplayLong.Name = "udDisplayLong";
+            this.udDisplayLong.Size = new System.Drawing.Size(62, 20);
+            this.udDisplayLong.TabIndex = 80;
+            this.toolTip1.SetToolTip(this.udDisplayLong, "Enter Longitude in deg (-180 to 180) for Beam Heading\r\n- for West of 0 GMT line\r\n" +
+        "+ for East of 0 GMT line\r\n\r\nLeft Click on PowerSDR Display and Hit SHIFT key to " +
+        "\r\ntoggle Lat/Long map");
+            this.udDisplayLong.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udDisplayLong.ValueChanged += new System.EventHandler(this.udDisplayLong_ValueChanged);
+            // 
+            // udDisplayLat
+            // 
+            this.udDisplayLat.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.udDisplayLat.DecimalPlaces = 2;
+            this.udDisplayLat.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDisplayLat.Location = new System.Drawing.Point(538, 477);
+            this.udDisplayLat.Maximum = new decimal(new int[] {
+            90,
+            0,
+            0,
+            0});
+            this.udDisplayLat.Minimum = new decimal(new int[] {
+            90,
+            0,
+            0,
+            -2147483648});
+            this.udDisplayLat.Name = "udDisplayLat";
+            this.udDisplayLat.Size = new System.Drawing.Size(58, 20);
+            this.udDisplayLat.TabIndex = 79;
+            this.toolTip1.SetToolTip(this.udDisplayLat, "Enter Latitude in deg (90 to -90) for Beam Heading\r\n+ for Northern Hemisphere\r\n- " +
+        "for Southern Hemisphere\r\n\r\nLeft Click on PowerSDR Display and Hit SHIFT key to \r" +
+        "\ntoggle Lat/Long map");
+            this.udDisplayLat.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udDisplayLat.ValueChanged += new System.EventHandler(this.udDisplayLat_ValueChanged);
+            // 
             // chkBoxWrld
             // 
             this.chkBoxWrld.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkBoxWrld.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkBoxWrld.Image = null;
-            this.chkBoxWrld.Location = new System.Drawing.Point(12, 444);
+            this.chkBoxWrld.Location = new System.Drawing.Point(12, 447);
             this.chkBoxWrld.Name = "chkBoxWrld";
             this.chkBoxWrld.Size = new System.Drawing.Size(215, 20);
             this.chkBoxWrld.TabIndex = 78;
@@ -1705,19 +1536,164 @@ namespace PowerSDR
             this.chkBoxNA.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkBoxNA.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkBoxNA.Image = null;
-            this.chkBoxNA.Location = new System.Drawing.Point(12, 427);
+            this.chkBoxNA.Location = new System.Drawing.Point(12, 430);
             this.chkBoxNA.Name = "chkBoxNA";
             this.chkBoxNA.Size = new System.Drawing.Size(177, 19);
             this.chkBoxNA.TabIndex = 77;
             this.chkBoxNA.Text = "North American Spotters only";
             this.chkBoxNA.CheckedChanged += new System.EventHandler(this.chkBoxNA_CheckedChanged);
             // 
+            // chkBoxMem
+            // 
+            this.chkBoxMem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkBoxMem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkBoxMem.Image = null;
+            this.chkBoxMem.Location = new System.Drawing.Point(417, 451);
+            this.chkBoxMem.Name = "chkBoxMem";
+            this.chkBoxMem.Size = new System.Drawing.Size(123, 20);
+            this.chkBoxMem.TabIndex = 74;
+            this.chkBoxMem.Text = "MEMORIES to Pan";
+            this.toolTip1.SetToolTip(this.chkBoxMem, resources.GetString("chkBoxMem.ToolTip"));
+            this.chkBoxMem.CheckedChanged += new System.EventHandler(this.chkBoxMem_CheckedChanged);
+            // 
+            // chkBoxPan
+            // 
+            this.chkBoxPan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkBoxPan.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkBoxPan.Image = null;
+            this.chkBoxPan.Location = new System.Drawing.Point(417, 390);
+            this.chkBoxPan.Name = "chkBoxPan";
+            this.chkBoxPan.Size = new System.Drawing.Size(100, 20);
+            this.chkBoxPan.TabIndex = 71;
+            this.chkBoxPan.Text = "Map just Pan";
+            this.toolTip1.SetToolTip(this.chkBoxPan, "Show Country or Calls on Map for just the Panadapter freq you are viewing.\r\n");
+            this.chkBoxPan.CheckedChanged += new System.EventHandler(this.chkBoxPan_CheckedChanged);
+            // 
+            // chkBoxSSB
+            // 
+            this.chkBoxSSB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkBoxSSB.Checked = true;
+            this.chkBoxSSB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoxSSB.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkBoxSSB.Image = null;
+            this.chkBoxSSB.Location = new System.Drawing.Point(182, 352);
+            this.chkBoxSSB.Name = "chkBoxSSB";
+            this.chkBoxSSB.Size = new System.Drawing.Size(85, 24);
+            this.chkBoxSSB.TabIndex = 69;
+            this.chkBoxSSB.Text = "Spot Phone";
+            this.toolTip1.SetToolTip(this.chkBoxSSB, "Show SSB,FM,AM spots when checked\r\n");
+            // 
+            // chkBoxCW
+            // 
+            this.chkBoxCW.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkBoxCW.Checked = true;
+            this.chkBoxCW.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBoxCW.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkBoxCW.Image = null;
+            this.chkBoxCW.Location = new System.Drawing.Point(182, 329);
+            this.chkBoxCW.Name = "chkBoxCW";
+            this.chkBoxCW.Size = new System.Drawing.Size(85, 24);
+            this.chkBoxCW.TabIndex = 68;
+            this.chkBoxCW.Text = "Spot CW";
+            this.toolTip1.SetToolTip(this.chkBoxCW, "Show CW spots when checked\r\n");
+            // 
+            // chkMapBand
+            // 
+            this.chkMapBand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkMapBand.Checked = true;
+            this.chkMapBand.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMapBand.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkMapBand.Image = null;
+            this.chkMapBand.Location = new System.Drawing.Point(417, 373);
+            this.chkMapBand.Name = "chkMapBand";
+            this.chkMapBand.Size = new System.Drawing.Size(113, 20);
+            this.chkMapBand.TabIndex = 67;
+            this.chkMapBand.Text = "Map just Band";
+            this.toolTip1.SetToolTip(this.chkMapBand, "Show Country or Calls on Map for the Band you are on.\r\n");
+            this.chkMapBand.CheckedChanged += new System.EventHandler(this.chkMapBand_CheckedChanged);
+            // 
+            // chkMapCountry
+            // 
+            this.chkMapCountry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkMapCountry.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkMapCountry.Image = null;
+            this.chkMapCountry.Location = new System.Drawing.Point(417, 333);
+            this.chkMapCountry.Name = "chkMapCountry";
+            this.chkMapCountry.Size = new System.Drawing.Size(88, 20);
+            this.chkMapCountry.TabIndex = 66;
+            this.chkMapCountry.Text = "Map Country";
+            this.toolTip1.SetToolTip(this.chkMapCountry, "Show Dx spot Countries on Map\r\n");
+            this.chkMapCountry.CheckedChanged += new System.EventHandler(this.chkMapCountry_CheckedChanged);
+            // 
+            // chkMapCall
+            // 
+            this.chkMapCall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkMapCall.Checked = true;
+            this.chkMapCall.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkMapCall.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkMapCall.Image = null;
+            this.chkMapCall.Location = new System.Drawing.Point(417, 350);
+            this.chkMapCall.Name = "chkMapCall";
+            this.chkMapCall.Size = new System.Drawing.Size(88, 20);
+            this.chkMapCall.TabIndex = 65;
+            this.chkMapCall.Text = "Map Calls";
+            this.toolTip1.SetToolTip(this.chkMapCall, "Show DX Spot Call signs on Map");
+            this.chkMapCall.CheckedChanged += new System.EventHandler(this.chkMapCall_CheckedChanged);
+            // 
+            // chkPanMode
+            // 
+            this.chkPanMode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkPanMode.Checked = true;
+            this.chkPanMode.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkPanMode.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkPanMode.Image = null;
+            this.chkPanMode.Location = new System.Drawing.Point(273, 375);
+            this.chkPanMode.Name = "chkPanMode";
+            this.chkPanMode.Size = new System.Drawing.Size(148, 20);
+            this.chkPanMode.TabIndex = 63;
+            this.chkPanMode.Text = "Special PanaFall Mode\r\n";
+            this.toolTip1.SetToolTip(this.chkPanMode, "When Checked, will Display RX1 in Panafall mode, with a small waterfall for bette" +
+        "r viewing of the map\r\nThis is equivalent to 80/20 Panafall");
+            this.chkPanMode.CheckedChanged += new System.EventHandler(this.chkPanMode_CheckedChanged);
+            // 
+            // chkGrayLine
+            // 
+            this.chkGrayLine.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkGrayLine.Checked = true;
+            this.chkGrayLine.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkGrayLine.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkGrayLine.Image = null;
+            this.chkGrayLine.Location = new System.Drawing.Point(273, 356);
+            this.chkGrayLine.Name = "chkGrayLine";
+            this.chkGrayLine.Size = new System.Drawing.Size(105, 17);
+            this.chkGrayLine.TabIndex = 61;
+            this.chkGrayLine.Text = "GrayLine Track";
+            this.toolTip1.SetToolTip(this.chkGrayLine, "GrayLine will show on Panadapter Display\r\nBut only when you run the Tracking Worl" +
+        "d Map (click on the Track/Map button)");
+            this.chkGrayLine.CheckedChanged += new System.EventHandler(this.chkGrayLine_CheckedChanged);
+            // 
+            // chkSUN
+            // 
+            this.chkSUN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkSUN.Checked = true;
+            this.chkSUN.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSUN.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkSUN.Image = null;
+            this.chkSUN.Location = new System.Drawing.Point(273, 331);
+            this.chkSUN.Name = "chkSUN";
+            this.chkSUN.Size = new System.Drawing.Size(46, 20);
+            this.chkSUN.TabIndex = 60;
+            this.chkSUN.Text = "Sun";
+            this.toolTip1.SetToolTip(this.chkSUN, "True (Zenith) position of the Sun will show on Panadapter screen (including space" +
+        " weather)\r\nWhen you Click on the TRACK/Map button to activate the World Map\r\n");
+            this.chkSUN.CheckedChanged += new System.EventHandler(this.chkSUN_CheckedChanged);
+            // 
             // chkAlwaysOnTop
             // 
             this.chkAlwaysOnTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkAlwaysOnTop.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.chkAlwaysOnTop.Image = null;
-            this.chkAlwaysOnTop.Location = new System.Drawing.Point(682, 400);
+            this.chkAlwaysOnTop.Location = new System.Drawing.Point(682, 403);
             this.chkAlwaysOnTop.Name = "chkAlwaysOnTop";
             this.chkAlwaysOnTop.Size = new System.Drawing.Size(103, 24);
             this.chkAlwaysOnTop.TabIndex = 58;
@@ -1730,7 +1706,7 @@ namespace PowerSDR
             this.chkDXMode.Checked = true;
             this.chkDXMode.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkDXMode.Image = null;
-            this.chkDXMode.Location = new System.Drawing.Point(682, 473);
+            this.chkDXMode.Location = new System.Drawing.Point(682, 476);
             this.chkDXMode.Name = "chkDXMode";
             this.chkDXMode.Size = new System.Drawing.Size(91, 24);
             this.chkDXMode.TabIndex = 59;
@@ -1738,13 +1714,40 @@ namespace PowerSDR
             this.chkDXMode.UseVisualStyleBackColor = true;
             this.chkDXMode.Visible = false;
             // 
+            // hkBoxSpotRX2
+            // 
+            this.hkBoxSpotRX2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.hkBoxSpotRX2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.hkBoxSpotRX2.Image = null;
+            this.hkBoxSpotRX2.Location = new System.Drawing.Point(111, 408);
+            this.hkBoxSpotRX2.Name = "hkBoxSpotRX2";
+            this.hkBoxSpotRX2.Size = new System.Drawing.Size(78, 19);
+            this.hkBoxSpotRX2.TabIndex = 119;
+            this.hkBoxSpotRX2.Text = "RX2 Band ";
+            this.toolTip1.SetToolTip(this.hkBoxSpotRX2, "Only Show DX Spots on RX2 Band");
+            this.hkBoxSpotRX2.CheckedChanged += new System.EventHandler(this.hkBoxSpotRX2_CheckedChanged);
+            // 
+            // hkBoxSpotBand
+            // 
+            this.hkBoxSpotBand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.hkBoxSpotBand.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.hkBoxSpotBand.Image = null;
+            this.hkBoxSpotBand.Location = new System.Drawing.Point(12, 408);
+            this.hkBoxSpotBand.Name = "hkBoxSpotBand";
+            this.hkBoxSpotBand.Size = new System.Drawing.Size(103, 19);
+            this.hkBoxSpotBand.TabIndex = 118;
+            this.hkBoxSpotBand.Text = "RX1 Band Only\r\n";
+            this.toolTip1.SetToolTip(this.hkBoxSpotBand, "Only Show DX Spots on RX1 Band");
+            this.hkBoxSpotBand.CheckedChanged += new System.EventHandler(this.hkBoxSpotBand_CheckedChanged);
+            // 
             // SpotControl
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(784, 505);
+            this.ClientSize = new System.Drawing.Size(784, 508);
+            this.Controls.Add(this.txtLoTWpass);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.txtLoTWpass);
             this.Controls.Add(this.chkBoxBeacon);
             this.Controls.Add(this.chkVoacap);
             this.Controls.Add(this.chkDXOn);
@@ -1778,7 +1781,6 @@ namespace PowerSDR
             this.Controls.Add(this.label5);
             this.Controls.Add(this.chkBoxBeam);
             this.Controls.Add(this.SWLbutton);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.udDisplayLong);
             this.Controls.Add(this.udDisplayLat);
@@ -1956,7 +1958,8 @@ namespace PowerSDR
                 numBeamHeading.Visible = true;
 
                 string answer = console.spotDDUtil_Rotor1; // get rotor angle current position
-                RotorHead.Text = answer + "°";
+
+                            RotorHead.Text = answer + "°";
 
                 int temp1 = 0;
 
@@ -1973,7 +1976,7 @@ namespace PowerSDR
 
                 RotorUpdate(); // start thread to update position of rotor on Spot screen
 
-
+                
             }
             else
             {
@@ -1982,15 +1985,16 @@ namespace PowerSDR
                 numBeamHeading.Visible = false;
             }
 
-            for (int x = 0; x < 1000; x++)
+            for (int x = 0; x < 500; x++)
             {
                 DX_LoTW_RTF[x] = new RTFBuilder(RTFFont.CourierNew, 18f);
                 DX_LoTW_Status[x] = 0; // .201
 
+                DXt_LoTW_RTF[x] = new RTFBuilder(RTFFont.CourierNew, 18f); // .232
+                DXt_LoTW_Status[x] = 0; // .232
             }
 
-            Debug.WriteLine("SpotControl_Load here DONE");
-
+           
 
 
         } // SpotControl_Load
@@ -2995,35 +2999,74 @@ namespace PowerSDR
         public static string message3; // login messages
 
 
-        public static string[] DX_FULLSTRING = new string[1000];    // full undecoded message
+        //-------------------------------------------------------------------------------------
+        // DXt_ is for spotter screen only
+        // DX_ is incoming messages and Panadater screen info
+        
+        public static string[] DXt_FULLSTRING = new string[500];    // full undecoded message
 
-        public static string[] DX_Station = new string[1000];       // Extracted: dx call sign
-        public static int[] DX_Freq = new int[1000];                // Extracted: Freq in hz
-        public static string[] DX_Spotter = new string[1000];       // Extracted: spotter call sign
-        public static string[] DX_Message = new string[1000];       // Extracted: message
-        public static int[] DX_Mode = new int[1000];                // Parse: Mode from message string 0=ssb,1=cw,2=rtty,3=psk,4=olivia,5=jt65,6=contesa,7=fsk,8=mt63,9=domi,10=packtor, 11=fm, 12=drm, 13=sstv, 14=am, 15=ft8, 16=mfsk, 17=feld, 18=ft4,
-        public static int[] DX_Mode2 = new int[1000];               // Parse: split parse from message string 0=normal , +up in hz or -dn in hz
-        public static int[] DX_Time = new int[1000];                // Extracted: GMT (Unreliable because its the time submitted by the spotter)
+        public static string[] DXt_Station = new string[500];       // Extracted: dx call sign
+        public static int[] DXt_Freq = new int[500];                // Extracted: Freq in hz
+        public static string[] DXt_Spotter = new string[500];       // Extracted: spotter call sign
+        public static string[] DXt_Message = new string[500];       // Extracted: message
+        public static int[] DXt_Mode = new int[500];                // Parse: Mode from message string 0=ssb,1=cw,2=rtty,3=psk,4=olivia,5=jt65,6=contesa,7=fsk,8=mt63,9=domi,10=packtor, 11=fm, 12=drm, 13=sstv, 14=am, 15=ft8, 16=mfsk, 17=feld, 18=ft4,
+        public static int[] DXt_Mode2 = new int[500];               // Parse: split parse from message string 0=normal , +up in hz or -dn in hz
+        public static int[] DXt_Time = new int[500];                // Extracted: GMT (Unreliable because its the time submitted by the spotter)
 
-        public static string[] DX_Age = new string[1000];           // Calculated: how old is the spot
+        public static string[] DXt_Age = new string[500];           // Calculated: how old is the spot
 
-        public static int[] DX_Beam = new int[1000];                // Calculated: beam heading from your lat/long
+        public static int[] DXt_Beam = new int[500];                // Calculated: beam heading from your lat/long
 
-        public static int[] DX_X = new int[1000];                   // Calculated: x pixel location on map (before any scaling) Longitude
-        public static int[] DX_Y = new int[1000];                   // Calculated: y pixel location on map (before any scaling) Latitude
-        public static string[] DX_country = new string[1000];       // Calculated: country  by matching the callsign pulled from DXLOC.txt file
+        public static int[] DXt_X = new int[500];                   // Calculated: x pixel location on map (before any scaling) Longitude
+        public static int[] DXt_Y = new int[500];                   // Calculated: y pixel location on map (before any scaling) Latitude
+        public static string[] DXt_country = new string[500];       // Calculated: country  by matching the callsign pulled from DXLOC.txt file
 
-        public static string[] DX_modegroup = new string[1000];     // LoTW based on decoded mode
-        public static string[] DX_band = new string[1000];          // LoTW based on freq of DX station
-        public static int[] DX_LoTW = new int[1000];                // LoTW bit0=worked call (light green)(light purple=0), bit1=worked call on this band (Green)(light purple=0),  bit2=need DXCC (purple), bit3=need State (yellow), bit4=need Grid (orange)
+        public static string[] DXt_modegroup = new string[500];     // LoTW based on decoded mode
+        public static string[] DXt_band = new string[500];          // LoTW based on freq of DX station
+        public static int[] DXt_LoTW = new int[500];                // LoTW bit0=worked call (light green)(light purple=0), bit1=worked call on this band (Green)(light purple=0),  bit2=need DXCC (purple), bit3=need State (yellow), bit4=need Grid (orange)
 
-        RTFBuilderbase[] DX_LoTW_RTF = new RTFBuilder[1000];        // LoTW contains the RTF string of DX Callsign with color codes
-        public static int[] DX_LoTW_Status = new int[1000];         // ke9ns add .201 LoTW Status (Number format in place of color)
+        RTFBuilderbase[] DXt_LoTW_RTF = new RTFBuilder[500];        // LoTW contains the RTF string of DX Callsign with color codes
+        public static int[] DXt_LoTW_Status = new int[500];         // ke9ns add .201 LoTW Status (Number format in place of color)
 
 
-        public static string[] DX_dxcc = new string[1000];          // determined from dxloc.txt dxcc entity vs prefix
-        public static string[] DX_state = new string[1000];         // determined from fcc callsign database file vx dx station callsign 
-        public static string[] DX_Grid = new string[1000];          // Extracted and Parsed: grid square 
+        public static string[] DXt_dxcc = new string[500];          // determined from dxloc.txt dxcc entity vs prefix
+        public static string[] DXt_state = new string[500];         // determined from fcc callsign database file vx dx station callsign 
+        public static string[] DXt_Grid = new string[500];          // Extracted and Parsed: grid square 
+
+
+
+        //---------------------------------------------------------------------------------
+        // incoming messages go into DX_
+
+        public static string[] DX_FULLSTRING = new string[500];    // full undecoded message
+
+        public static string[] DX_Station = new string[500];       // Extracted: dx call sign
+        public static int[] DX_Freq = new int[500];                // Extracted: Freq in hz
+        public static string[] DX_Spotter = new string[500];       // Extracted: spotter call sign
+        public static string[] DX_Message = new string[500];       // Extracted: message
+        public static int[] DX_Mode = new int[500];                // Parse: Mode from message string 0=ssb,1=cw,2=rtty,3=psk,4=olivia,5=jt65,6=contesa,7=fsk,8=mt63,9=domi,10=packtor, 11=fm, 12=drm, 13=sstv, 14=am, 15=ft8, 16=mfsk, 17=feld, 18=ft4,
+        public static int[] DX_Mode2 = new int[500];               // Parse: split parse from message string 0=normal , +up in hz or -dn in hz
+        public static int[] DX_Time = new int[500];                // Extracted: GMT (Unreliable because its the time submitted by the spotter)
+
+        public static string[] DX_Age = new string[500];           // Calculated: how old is the spot
+
+        public static int[] DX_Beam = new int[500];                // Calculated: beam heading from your lat/long
+
+        public static int[] DX_X = new int[500];                   // Calculated: x pixel location on map (before any scaling) Longitude
+        public static int[] DX_Y = new int[500];                   // Calculated: y pixel location on map (before any scaling) Latitude
+        public static string[] DX_country = new string[500];       // Calculated: country  by matching the callsign pulled from DXLOC.txt file
+
+        public static string[] DX_modegroup = new string[500];     // LoTW based on decoded mode
+        public static string[] DX_band = new string[500];          // LoTW based on freq of DX station
+        public static int[] DX_LoTW = new int[500];                // LoTW bit0=worked call (light green)(light purple=0), bit1=worked call on this band (Green)(light purple=0),  bit2=need DXCC (purple), bit3=need State (yellow), bit4=need Grid (orange)
+
+        RTFBuilderbase[] DX_LoTW_RTF = new RTFBuilder[500];        // LoTW contains the RTF string of DX Callsign with color codes
+        public static int[] DX_LoTW_Status = new int[500];         // ke9ns add .201 LoTW Status (Number format in place of color)
+
+
+        public static string[] DX_dxcc = new string[500];          // determined from dxloc.txt dxcc entity vs prefix
+        public static string[] DX_state = new string[500];         // determined from fcc callsign database file vx dx station callsign 
+        public static string[] DX_Grid = new string[500];          // Extracted and Parsed: grid square 
 
 
         //  0  1- Did I work this CALL before? (yes = light Green = worked call) (no = light purple = new call)
@@ -3077,11 +3120,18 @@ namespace PowerSDR
         public bool BX_Load = false;   // true = BX_ values above all loaded 1 time, so no need to do it again. this way you can flip beacon on/off and see your last scan data
 
         //-------------------------------------------------------------------------------------
+        // DXt_ for processTCPMessage() display only
 
+        public static int DXt_Index = 0;                             //  max number of spots in memory currently
+        public static int DXt_Index1 = 0;                            //  static temp index holder....always 250
+        public static int DXt_Last = 0;                              //  last # in DX_Index (used for DXLOC_Mapper)spotter(
 
         public static int DX_Index = 0;                             //  max number of spots in memory currently
         public static int DX_Index1 = 0;                            //  static temp index holder....always 250
         public static int DX_Last = 0;                              //  last # in DX_Index (used for DXLOC_Mapper)spotter(
+     
+        
+        
         public static int Map_Last = 0;                             //  last map checkbox change (used for DXLOC_Mapper) 1=update grayline 2=update spots on map only
         public static int DXK_Last = 0;                             //  last # in console.DXK (used for DXLOC_Mapper)
 
@@ -5546,6 +5596,9 @@ namespace PowerSDR
         // ke9ns add: convert all the DX spots in the array to text messages for the DX spotter window
         public void processTCPMessage()
         {
+            if (pause == true || beacon == true || WTime == true) return;
+
+
             bool ListHide = false;
 
             Debug.WriteLine("SpotControl processTCPMessage() here");
@@ -5553,7 +5606,7 @@ namespace PowerSDR
             string bigmessage = null;
             RTFBuilderbase BIGM = new RTFBuilder(RTFFont.CourierNew, 18f);
 
-
+           
             if (console.RX2Band.ToString() == "GEN") // .157
             {
                 hkBoxSpotRX2.Checked = false;
@@ -5573,8 +5626,17 @@ namespace PowerSDR
             BIGM.Clear();
             BIGM.Reset();
 
+            DXt_Index = DX_Index; //.232
+
+
             for (int ii = 0; ii < DX_Index; ii++)
             {
+                // update DXt is Spotter display can update
+
+              
+
+                //--------------------------------------------
+
 
                 if (DX_Age[ii] == null) DX_Age[ii] = "00";
                 else if (DX_Age[ii] == "  ") DX_Age[ii] = "00";
@@ -5650,19 +5712,41 @@ namespace PowerSDR
                     }
                 }
 
+                //-----------------------------------------
+                // update for spotter screen when unpaused
+
+                DXt_Station[ii] = DX_Station[ii]; //.232
+                DXt_Freq[ii] = DX_Freq[ii]; //.232
+                DXt_Spotter[ii] = DX_Spotter[ii]; //.232
+                DXt_Message[ii] = DX_Message[ii]; //.232
+                DXt_Mode[ii] = DX_Mode[ii]; //.232
+                DXt_Mode2[ii] = DX_Mode2[ii]; //.232
+                DXt_Time[ii] = DX_Time[ii]; //.232
+                DXt_Age[ii] = DX_Age[ii]; //.232
+                DXt_Beam[ii] = DX_Beam[ii]; //.232
+                DXt_country[ii] = DX_country[ii]; //.232
+                DXt_modegroup[ii] = DX_modegroup[ii]; //.232
+                DXt_band[ii] = DX_band[ii]; //.232
+                DXt_LoTW[ii] = DX_LoTW[ii]; //.232
+                DXt_LoTW_Status[ii] = DX_LoTW_Status[ii];
+                DXt_LoTW_RTF[ii] = DX_LoTW_RTF[ii]; //.232
+                DXt_dxcc[ii] = DX_dxcc[ii]; //.232
+                DXt_state[ii] = DX_state[ii]; //.232
+                DXt_Grid[ii] = DX_Grid[ii]; //.232
+
 
             } // for loop to update dx spot window
 
 
             //---------------------------------------------------------------------------------------------------------
             //---------------------------------------------------------------------------------------------------------
-            if ((pause == false) && (beacon == false) && (WTime == false))
-            {
-                //  textBox1.Text = bigmessage; // update screen
-                //  textBox1.Select((ii * LineLength) + 26, 11); // select each line in turn on the entire Spotter listing
+            //  if ((pause == false) && (beacon == false) && (WTime == false))
+            //  {
+            //  textBox1.Text = bigmessage; // update screen
+            //  textBox1.Select((ii * LineLength) + 26, 11); // select each line in turn on the entire Spotter listing
 
 
-                textBox1.Rtf = BIGM.ToString(); // use RichTextFormat to allow for highlighting with color
+            textBox1.Rtf = BIGM.ToString(); // use RichTextFormat to allow for highlighting with color
 
 
                 //---------------------------------------------------------------------------------------------------------
@@ -5697,7 +5781,7 @@ namespace PowerSDR
 
 
 
-            } // pause
+        //    } // pause
 
 
 
@@ -6116,9 +6200,9 @@ namespace PowerSDR
                 else beam_selected = false;
 
 
-                if ((DX_Index > iii) && (beacon1 == false))
+                if ((DXt_Index > iii) && (beacon1 == false))
                 {
-                    int freq1 = DX_Freq[iii]; // in hz
+                    int freq1 = DXt_Freq[iii]; // in hz
 
                     if ((freq1 < 5000000) || ((freq1 > 6000000) && (freq1 < 8000000))) // check for bands using LSB
                     {
@@ -6126,25 +6210,25 @@ namespace PowerSDR
                         {
 
                             // console has one of these as well
-                            if (DX_Mode[iii] == 0) console.RX1DSPMode = DSPMode.LSB;
-                            else if (DX_Mode[iii] == 1) console.RX1DSPMode = DSPMode.CWU; // was CWL, but making everything CWU now
-                            else if (DX_Mode[iii] == 2) console.RX1DSPMode = DSPMode.DIGL; // rtty
-                            else if (DX_Mode[iii] == 3) console.RX1DSPMode = DSPMode.DIGL; // psk
-                            else if (DX_Mode[iii] == 4) console.RX1DSPMode = DSPMode.DIGL;
-                            else if (DX_Mode[iii] == 5) console.RX1DSPMode = DSPMode.DIGU; // jt65
-                            else if (DX_Mode[iii] == 6) console.RX1DSPMode = DSPMode.DIGL;
-                            else if (DX_Mode[iii] == 7) console.RX1DSPMode = DSPMode.DIGL;
-                            else if (DX_Mode[iii] == 8) console.RX1DSPMode = DSPMode.DIGL;
-                            else if (DX_Mode[iii] == 9) console.RX1DSPMode = DSPMode.DIGL;
-                            else if (DX_Mode[iii] == 10) console.RX1DSPMode = DSPMode.DIGL;
-                            else if (DX_Mode[iii] == 11) console.RX1DSPMode = DSPMode.FM;
-                            else if (DX_Mode[iii] == 12) console.RX1DSPMode = DSPMode.LSB;
-                            else if (DX_Mode[iii] == 13) console.RX1DSPMode = DSPMode.DIGL;
-                            else if (DX_Mode[iii] == 14) console.RX1DSPMode = DSPMode.SAM;
-                            else if (DX_Mode[iii] == 15) console.RX1DSPMode = DSPMode.DIGU; // FT8
-                            else if (DX_Mode[iii] == 16) console.RX1DSPMode = DSPMode.DIGL;
-                            else if (DX_Mode[iii] == 17) console.RX1DSPMode = DSPMode.DIGL;
-                            else if (DX_Mode[iii] == 18) console.RX1DSPMode = DSPMode.DIGU; // FT4
+                            if (DXt_Mode[iii] == 0) console.RX1DSPMode = DSPMode.LSB;
+                            else if (DXt_Mode[iii] == 1) console.RX1DSPMode = DSPMode.CWU; // was CWL, but making everything CWU now
+                            else if (DXt_Mode[iii] == 2) console.RX1DSPMode = DSPMode.DIGL; // rtty
+                            else if (DXt_Mode[iii] == 3) console.RX1DSPMode = DSPMode.DIGL; // psk
+                            else if (DXt_Mode[iii] == 4) console.RX1DSPMode = DSPMode.DIGL;
+                            else if (DXt_Mode[iii] == 5) console.RX1DSPMode = DSPMode.DIGU; // jt65
+                            else if (DXt_Mode[iii] == 6) console.RX1DSPMode = DSPMode.DIGL;
+                            else if (DXt_Mode[iii] == 7) console.RX1DSPMode = DSPMode.DIGL;
+                            else if (DXt_Mode[iii] == 8) console.RX1DSPMode = DSPMode.DIGL;
+                            else if (DXt_Mode[iii] == 9) console.RX1DSPMode = DSPMode.DIGL;
+                            else if (DXt_Mode[iii] == 10) console.RX1DSPMode = DSPMode.DIGL;
+                            else if (DXt_Mode[iii] == 11) console.RX1DSPMode = DSPMode.FM;
+                            else if (DXt_Mode[iii] == 12) console.RX1DSPMode = DSPMode.LSB;
+                            else if (DXt_Mode[iii] == 13) console.RX1DSPMode = DSPMode.DIGL;
+                            else if (DXt_Mode[iii] == 14) console.RX1DSPMode = DSPMode.SAM;
+                            else if (DXt_Mode[iii] == 15) console.RX1DSPMode = DSPMode.DIGU; // FT8
+                            else if (DXt_Mode[iii] == 16) console.RX1DSPMode = DSPMode.DIGL;
+                            else if (DXt_Mode[iii] == 17) console.RX1DSPMode = DSPMode.DIGL;
+                            else if (DXt_Mode[iii] == 18) console.RX1DSPMode = DSPMode.DIGU; // FT4
                             else console.RX1DSPMode = DSPMode.LSB;
 
                         }
@@ -6158,25 +6242,25 @@ namespace PowerSDR
                         if (chkDXMode.Checked == true)
                         {
 
-                            if (DX_Mode[iii] == 0) console.RX1DSPMode = DSPMode.USB;
-                            else if (DX_Mode[iii] == 1) console.RX1DSPMode = DSPMode.CWU;
-                            else if (DX_Mode[iii] == 2) console.RX1DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 3) console.RX1DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 4) console.RX1DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 5) console.RX1DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 6) console.RX1DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 7) console.RX1DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 8) console.RX1DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 9) console.RX1DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 10) console.RX1DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 11) console.RX1DSPMode = DSPMode.FM;
-                            else if (DX_Mode[iii] == 12) console.RX1DSPMode = DSPMode.USB;
-                            else if (DX_Mode[iii] == 13) console.RX1DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 14) console.RX1DSPMode = DSPMode.SAM;
-                            else if (DX_Mode[iii] == 15) console.RX1DSPMode = DSPMode.DIGU; // FT8
-                            else if (DX_Mode[iii] == 16) console.RX1DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 17) console.RX1DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 18) console.RX1DSPMode = DSPMode.DIGU; // FT4
+                            if (DXt_Mode[iii] == 0) console.RX1DSPMode = DSPMode.USB;
+                            else if (DXt_Mode[iii] == 1) console.RX1DSPMode = DSPMode.CWU;
+                            else if (DXt_Mode[iii] == 2) console.RX1DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 3) console.RX1DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 4) console.RX1DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 5) console.RX1DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 6) console.RX1DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 7) console.RX1DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 8) console.RX1DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 9) console.RX1DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 10) console.RX1DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 11) console.RX1DSPMode = DSPMode.FM;
+                            else if (DXt_Mode[iii] == 12) console.RX1DSPMode = DSPMode.USB;
+                            else if (DXt_Mode[iii] == 13) console.RX1DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 14) console.RX1DSPMode = DSPMode.SAM;
+                            else if (DXt_Mode[iii] == 15) console.RX1DSPMode = DSPMode.DIGU; // FT8
+                            else if (DXt_Mode[iii] == 16) console.RX1DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 17) console.RX1DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 18) console.RX1DSPMode = DSPMode.DIGU; // FT4
                             else console.RX1DSPMode = DSPMode.USB;
 
                         }
@@ -6187,104 +6271,104 @@ namespace PowerSDR
                     } // USB
 
 
-                    if (DX_Mode[iii] == 15) // FT8
+                    if (DXt_Mode[iii] == 15) // FT8
                     {
 
-                        if ((DX_Freq[iii] >= 1840000) && (DX_Freq[iii] <= 1865000))
+                        if ((DXt_Freq[iii] >= 1840000) && (DXt_Freq[iii] <= 1865000))
                         {
                             freq1 = 1840000; // because FT8 does the freq moving with the 2.5khz slice, just put 0hz on the start of the slice
                         }
-                        else if ((DX_Freq[iii] >= 3573000) && (DX_Freq[iii] <= 3575500))
+                        else if ((DXt_Freq[iii] >= 3573000) && (DXt_Freq[iii] <= 3575500))
                         {
                             freq1 = 3573000;
                         }
-                        else if ((DX_Freq[iii] >= 7074000) && (DX_Freq[iii] <= 7076500))
+                        else if ((DXt_Freq[iii] >= 7074000) && (DXt_Freq[iii] <= 7076500))
                         {
                             freq1 = 7074000;
                         }
-                        else if ((DX_Freq[iii] >= 10136000) && (DX_Freq[iii] <= 10138500))
+                        else if ((DXt_Freq[iii] >= 10136000) && (DXt_Freq[iii] <= 10138500))
                         {
                             freq1 = 10136000;
                         }
-                        else if ((DX_Freq[iii] >= 14074000) && (DX_Freq[iii] <= 14076500))
+                        else if ((DXt_Freq[iii] >= 14074000) && (DXt_Freq[iii] <= 14076500))
                         {
                             freq1 = 14074000;
                         }
-                        else if ((DX_Freq[iii] >= 18100000) && (DX_Freq[iii] <= 18102500))
+                        else if ((DXt_Freq[iii] >= 18100000) && (DXt_Freq[iii] <= 18102500))
                         {
                             freq1 = 18100000;
                         }
-                        else if ((DX_Freq[iii] >= 21074000) && (DX_Freq[iii] <= 21076500))
+                        else if ((DXt_Freq[iii] >= 21074000) && (DXt_Freq[iii] <= 21076500))
                         {
                             freq1 = 21074000;
                         }
-                        else if ((DX_Freq[iii] >= 24915000) && (DX_Freq[iii] <= 24917500))
+                        else if ((DXt_Freq[iii] >= 24915000) && (DXt_Freq[iii] <= 24917500))
                         {
                             freq1 = 24915000;
                         }
-                        else if ((DX_Freq[iii] >= 28074000) && (DX_Freq[iii] <= 28076500))
+                        else if ((DXt_Freq[iii] >= 28074000) && (DXt_Freq[iii] <= 28076500))
                         {
                             freq1 = 28074000;
                         }
-                        else if ((DX_Freq[iii] >= 50313000) && (DX_Freq[iii] <= 50315500))
+                        else if ((DXt_Freq[iii] >= 50313000) && (DXt_Freq[iii] <= 50315500))
                         {
                             freq1 = 50313000;
                         }
-                        else if ((DX_Freq[iii] >= 50323000) && (DX_Freq[iii] <= 50325500)) // FT8 DX freq
+                        else if ((DXt_Freq[iii] >= 50323000) && (DXt_Freq[iii] <= 50325500)) // FT8 DXt freq
                         {
                             freq1 = 50323000;
                         }
 
 
 
-                        DX_Mode2[iii] = 0; // no split in FT8
+                        DXt_Mode2[iii] = 0; // no split in FT8
                     } // FT8
-                    else if (DX_Mode[iii] == 18) // FT4
+                    else if (DXt_Mode[iii] == 18) // FT4
                     {
 
-                        if ((DX_Freq[iii] >= 3568000) && (DX_Freq[iii] <= 3570500))
+                        if ((DXt_Freq[iii] >= 3568000) && (DXt_Freq[iii] <= 3570500))
                         {
                             freq1 = 3568000;
                         }
-                        else if ((DX_Freq[iii] >= 3575000) && (DX_Freq[iii] <= 3577500))
+                        else if ((DXt_Freq[iii] >= 3575000) && (DXt_Freq[iii] <= 3577500))
                         {
                             freq1 = 3575000;
                         }
-                        else if ((DX_Freq[iii] >= 7047000) && (DX_Freq[iii] <= 7049500))
+                        else if ((DXt_Freq[iii] >= 7047000) && (DXt_Freq[iii] <= 7049500))
                         {
                             freq1 = 7047000;
                         }
-                        else if ((DX_Freq[iii] >= 10140000) && (DX_Freq[iii] <= 10142500))
+                        else if ((DXt_Freq[iii] >= 10140000) && (DXt_Freq[iii] <= 10142500))
                         {
                             freq1 = 10140000;
                         }
-                        else if ((DX_Freq[iii] >= 14080000) && (DX_Freq[iii] <= 14082500))
+                        else if ((DXt_Freq[iii] >= 14080000) && (DXt_Freq[iii] <= 14082500))
                         {
                             freq1 = 14080000;
                         }
-                        else if ((DX_Freq[iii] >= 18104000) && (DX_Freq[iii] <= 18106500))
+                        else if ((DXt_Freq[iii] >= 18104000) && (DXt_Freq[iii] <= 18106500))
                         {
                             freq1 = 18104000;
                         }
-                        else if ((DX_Freq[iii] >= 21140000) && (DX_Freq[iii] <= 21142500))
+                        else if ((DXt_Freq[iii] >= 21140000) && (DXt_Freq[iii] <= 21142500))
                         {
                             freq1 = 21140000;
                         }
-                        else if ((DX_Freq[iii] >= 24919000) && (DX_Freq[iii] <= 24921500))
+                        else if ((DXt_Freq[iii] >= 24919000) && (DXt_Freq[iii] <= 24921500))
                         {
                             freq1 = 24919000;
                         }
-                        else if ((DX_Freq[iii] >= 28180000) && (DX_Freq[iii] <= 28182500))
+                        else if ((DXt_Freq[iii] >= 28180000) && (DXt_Freq[iii] <= 28182500))
                         {
                             freq1 = 28180000;
                         }
-                        else if ((DX_Freq[iii] >= 50318000) && (DX_Freq[iii] <= 50320500))
+                        else if ((DXt_Freq[iii] >= 50318000) && (DXt_Freq[iii] <= 50320500))
                         {
                             freq1 = 50318000;
                         }
                         
 
-                        DX_Mode2[iii] = 0; // no split in FT8
+                        DXt_Mode2[iii] = 0; // no split in FT8
                     } // FT4
 
 
@@ -6293,13 +6377,13 @@ namespace PowerSDR
                     if (chkDXMode.Checked == true)
                     {
 
-                        if (DX_Mode2[iii] != 0)
+                        if (DXt_Mode2[iii] != 0)
                         {
 
-                            console.VFOBFreq = (double)(freq1 + DX_Mode2[iii]) / 1000000; // convert to MHZ
+                            console.VFOBFreq = (double)(freq1 + DXt_Mode2[iii]) / 1000000; // convert to MHZ
                             console.chkVFOSplit.Checked = true; // turn on  split
 
-                            Debug.WriteLine("split here" + (freq1 + DX_Mode2[iii]));
+                            Debug.WriteLine("split here" + (freq1 + DXt_Mode2[iii]));
 
                         }
                         else
@@ -6309,13 +6393,13 @@ namespace PowerSDR
                         }
 
 
-                    } // dxmode checked
+                    } // DXtmode checked
 
                     if (beam_selected == true)    // ke9ns add send hygain rotor command to DDUtil via the CAT port setup in PowerSDR
                     {
                         Debug.WriteLine("BEAM HEADING TRANSMIT");
 
-                        console.spotDDUtil_Rotor = "AP1" + DX_Beam[iii].ToString().PadLeft(3, '0') + ";";
+                        console.spotDDUtil_Rotor = "AP1" + DXt_Beam[iii].ToString().PadLeft(3, '0') + ";";
                         console.spotDDUtil_Rotor = "AM1;";
 
                     } //  if (chkBoxRotor.Checked == true)
@@ -6449,7 +6533,7 @@ namespace PowerSDR
 
                     byte iii = (byte)(ii / LineLength);  // get line  /82  or /86 if AGE turned on or 91 if mode is also on /99 if country added
 
-                    if (DX_Index > iii)
+                    if (DXt_Index > iii)
                     {
                         string DXName = DX_Station[iii];
 
@@ -6512,7 +6596,7 @@ namespace PowerSDR
 
                //   Debug.WriteLine("testM " + DX_Index + " , "+iii);
 
-                if (iii >= DX_Index) return; // dont allow to click on blank area
+                if (iii >= DXt_Index) return; // dont allow to click on blank area
 
                 DX_SELECTED = (int)iii;  // store the last line you clicked on to keep highlighted
 
@@ -6543,9 +6627,9 @@ namespace PowerSDR
                 else beam_selected = false;
 
 
-                if ((DX_Index > iii) && (beacon1 == false))
+                if ((DXt_Index > iii) && (beacon1 == false))
                 {
-                    int freq1 = DX_Freq[iii]; // in hz
+                    int freq1 = DXt_Freq[iii]; // in hz
 
                     if ((freq1 < 5000000) || ((freq1 > 6000000) && (freq1 < 8000000))) // check for bands using LSB
                     {
@@ -6553,25 +6637,25 @@ namespace PowerSDR
                         {
 
                             // console has one of these as well
-                            if (DX_Mode[iii] == 0) console.RX2DSPMode = DSPMode.LSB;
-                            else if (DX_Mode[iii] == 1) console.RX2DSPMode = DSPMode.CWU; // was CWL, but making everything CWU now
-                            else if (DX_Mode[iii] == 2) console.RX2DSPMode = DSPMode.DIGL; // rtty
-                            else if (DX_Mode[iii] == 3) console.RX2DSPMode = DSPMode.DIGL; // psk
-                            else if (DX_Mode[iii] == 4) console.RX2DSPMode = DSPMode.DIGL;
-                            else if (DX_Mode[iii] == 5) console.RX2DSPMode = DSPMode.DIGU; // jt65
-                            else if (DX_Mode[iii] == 6) console.RX2DSPMode = DSPMode.DIGL;
-                            else if (DX_Mode[iii] == 7) console.RX2DSPMode = DSPMode.DIGL;
-                            else if (DX_Mode[iii] == 8) console.RX2DSPMode = DSPMode.DIGL;
-                            else if (DX_Mode[iii] == 9) console.RX2DSPMode = DSPMode.DIGL;
-                            else if (DX_Mode[iii] == 10) console.RX2DSPMode = DSPMode.DIGL;
-                            else if (DX_Mode[iii] == 11) console.RX2DSPMode = DSPMode.FM;
-                            else if (DX_Mode[iii] == 12) console.RX2DSPMode = DSPMode.LSB;
-                            else if (DX_Mode[iii] == 13) console.RX2DSPMode = DSPMode.DIGL;
-                            else if (DX_Mode[iii] == 14) console.RX2DSPMode = DSPMode.SAM;
-                            else if (DX_Mode[iii] == 15) console.RX2DSPMode = DSPMode.DIGU; // FT8
-                            else if (DX_Mode[iii] == 16) console.RX2DSPMode = DSPMode.DIGL;
-                            else if (DX_Mode[iii] == 17) console.RX2DSPMode = DSPMode.DIGL;
-                            else if (DX_Mode[iii] == 18) console.RX2DSPMode = DSPMode.DIGU; // FT4
+                            if (DXt_Mode[iii] == 0) console.RX2DSPMode = DSPMode.LSB;
+                            else if (DXt_Mode[iii] == 1) console.RX2DSPMode = DSPMode.CWU; // was CWL, but making everything CWU now
+                            else if (DXt_Mode[iii] == 2) console.RX2DSPMode = DSPMode.DIGL; // rtty
+                            else if (DXt_Mode[iii] == 3) console.RX2DSPMode = DSPMode.DIGL; // psk
+                            else if (DXt_Mode[iii] == 4) console.RX2DSPMode = DSPMode.DIGL;
+                            else if (DXt_Mode[iii] == 5) console.RX2DSPMode = DSPMode.DIGU; // jt65
+                            else if (DXt_Mode[iii] == 6) console.RX2DSPMode = DSPMode.DIGL;
+                            else if (DXt_Mode[iii] == 7) console.RX2DSPMode = DSPMode.DIGL;
+                            else if (DXt_Mode[iii] == 8) console.RX2DSPMode = DSPMode.DIGL;
+                            else if (DXt_Mode[iii] == 9) console.RX2DSPMode = DSPMode.DIGL;
+                            else if (DXt_Mode[iii] == 10) console.RX2DSPMode = DSPMode.DIGL;
+                            else if (DXt_Mode[iii] == 11) console.RX2DSPMode = DSPMode.FM;
+                            else if (DXt_Mode[iii] == 12) console.RX2DSPMode = DSPMode.LSB;
+                            else if (DXt_Mode[iii] == 13) console.RX2DSPMode = DSPMode.DIGL;
+                            else if (DXt_Mode[iii] == 14) console.RX2DSPMode = DSPMode.SAM;
+                            else if (DXt_Mode[iii] == 15) console.RX2DSPMode = DSPMode.DIGU; // FT8
+                            else if (DXt_Mode[iii] == 16) console.RX2DSPMode = DSPMode.DIGL;
+                            else if (DXt_Mode[iii] == 17) console.RX2DSPMode = DSPMode.DIGL;
+                            else if (DXt_Mode[iii] == 18) console.RX2DSPMode = DSPMode.DIGU; // FT4
                             else console.RX2DSPMode = DSPMode.LSB;
 
                         }
@@ -6585,25 +6669,25 @@ namespace PowerSDR
                         if (chkDXMode.Checked == true)
                         {
 
-                            if (DX_Mode[iii] == 0) console.RX2DSPMode = DSPMode.USB;
-                            else if (DX_Mode[iii] == 1) console.RX2DSPMode = DSPMode.CWU;
-                            else if (DX_Mode[iii] == 2) console.RX2DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 3) console.RX2DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 4) console.RX2DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 5) console.RX2DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 6) console.RX2DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 7) console.RX2DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 8) console.RX2DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 9) console.RX2DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 10) console.RX2DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 11) console.RX2DSPMode = DSPMode.FM;
-                            else if (DX_Mode[iii] == 12) console.RX2DSPMode = DSPMode.USB;
-                            else if (DX_Mode[iii] == 13) console.RX2DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 14) console.RX2DSPMode = DSPMode.SAM;
-                            else if (DX_Mode[iii] == 15) console.RX2DSPMode = DSPMode.DIGU; // FT8
-                            else if (DX_Mode[iii] == 16) console.RX2DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 17) console.RX2DSPMode = DSPMode.DIGU;
-                            else if (DX_Mode[iii] == 18) console.RX2DSPMode = DSPMode.DIGU; // FT4
+                            if (DXt_Mode[iii] == 0) console.RX2DSPMode = DSPMode.USB;
+                            else if (DXt_Mode[iii] == 1) console.RX2DSPMode = DSPMode.CWU;
+                            else if (DXt_Mode[iii] == 2) console.RX2DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 3) console.RX2DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 4) console.RX2DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 5) console.RX2DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 6) console.RX2DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 7) console.RX2DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 8) console.RX2DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 9) console.RX2DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 10) console.RX2DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 11) console.RX2DSPMode = DSPMode.FM;
+                            else if (DXt_Mode[iii] == 12) console.RX2DSPMode = DSPMode.USB;
+                            else if (DXt_Mode[iii] == 13) console.RX2DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 14) console.RX2DSPMode = DSPMode.SAM;
+                            else if (DXt_Mode[iii] == 15) console.RX2DSPMode = DSPMode.DIGU; // FT8
+                            else if (DXt_Mode[iii] == 16) console.RX2DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 17) console.RX2DSPMode = DSPMode.DIGU;
+                            else if (DXt_Mode[iii] == 18) console.RX2DSPMode = DSPMode.DIGU; // FT4
                             else console.RX2DSPMode = DSPMode.USB;
 
                         }
@@ -6614,103 +6698,103 @@ namespace PowerSDR
                     } // USB
 
 
-                    if (DX_Mode[iii] == 15) // FT8
+                    if (DXt_Mode[iii] == 15) // FT8
                     {
 
-                        if ((DX_Freq[iii] >= 1840000) && (DX_Freq[iii] <= 1865000))
+                        if ((DXt_Freq[iii] >= 1840000) && (DXt_Freq[iii] <= 1865000))
                         {
                             freq1 = 1840000; // because FT8 does the freq moving with the 2.5khz slice, just put 0hz on the start of the slice
                         }
-                        else if ((DX_Freq[iii] >= 3573000) && (DX_Freq[iii] <= 3575500))
+                        else if ((DXt_Freq[iii] >= 3573000) && (DXt_Freq[iii] <= 3575500))
                         {
                             freq1 = 3573000;
                         }
-                        else if ((DX_Freq[iii] >= 7074000) && (DX_Freq[iii] <= 7076500))
+                        else if ((DXt_Freq[iii] >= 7074000) && (DXt_Freq[iii] <= 7076500))
                         {
                             freq1 = 7074000;
                         }
-                        else if ((DX_Freq[iii] >= 10136000) && (DX_Freq[iii] <= 10138500))
+                        else if ((DXt_Freq[iii] >= 10136000) && (DXt_Freq[iii] <= 10138500))
                         {
                             freq1 = 10136000;
                         }
-                        else if ((DX_Freq[iii] >= 14074000) && (DX_Freq[iii] <= 14076500))
+                        else if ((DXt_Freq[iii] >= 14074000) && (DXt_Freq[iii] <= 14076500))
                         {
                             freq1 = 14074000;
                         }
-                        else if ((DX_Freq[iii] >= 18100000) && (DX_Freq[iii] <= 18102500))
+                        else if ((DXt_Freq[iii] >= 18100000) && (DXt_Freq[iii] <= 18102500))
                         {
                             freq1 = 18100000;
                         }
-                        else if ((DX_Freq[iii] >= 21074000) && (DX_Freq[iii] <= 21076500))
+                        else if ((DXt_Freq[iii] >= 21074000) && (DXt_Freq[iii] <= 21076500))
                         {
                             freq1 = 21074000;
                         }
-                        else if ((DX_Freq[iii] >= 24915000) && (DX_Freq[iii] <= 24917500))
+                        else if ((DXt_Freq[iii] >= 24915000) && (DXt_Freq[iii] <= 24917500))
                         {
                             freq1 = 24915000;
                         }
-                        else if ((DX_Freq[iii] >= 28074000) && (DX_Freq[iii] <= 28076500))
+                        else if ((DXt_Freq[iii] >= 28074000) && (DXt_Freq[iii] <= 28076500))
                         {
                             freq1 = 28074000;
                         }
-                        else if ((DX_Freq[iii] >= 50313000) && (DX_Freq[iii] <= 50315500))
+                        else if ((DXt_Freq[iii] >= 50313000) && (DXt_Freq[iii] <= 50315500))
                         {
                             freq1 = 50313000;
                         }
-                        else if ((DX_Freq[iii] >= 50323000) && (DX_Freq[iii] <= 50325500)) // FT8 DX freq
+                        else if ((DXt_Freq[iii] >= 50323000) && (DXt_Freq[iii] <= 50325500)) // FT8 DXt freq
                         {
                             freq1 = 50323000;
                         }
 
 
-                        DX_Mode2[iii] = 0; // no split in FT8
+                        DXt_Mode2[iii] = 0; // no split in FT8
                     } // FT8
-                    else if (DX_Mode[iii] == 18) // FT4
+                    else if (DXt_Mode[iii] == 18) // FT4
                     {
 
-                        if ((DX_Freq[iii] >= 3568000) && (DX_Freq[iii] <= 3570500))
+                        if ((DXt_Freq[iii] >= 3568000) && (DXt_Freq[iii] <= 3570500))
                         {
                             freq1 = 3568000;
                         }
-                        else if ((DX_Freq[iii] >= 3575000) && (DX_Freq[iii] <= 3577500))
+                        else if ((DXt_Freq[iii] >= 3575000) && (DXt_Freq[iii] <= 3577500))
                         {
                             freq1 = 3575000;
                         }
-                        else if ((DX_Freq[iii] >= 7047000) && (DX_Freq[iii] <= 7049500))
+                        else if ((DXt_Freq[iii] >= 7047000) && (DXt_Freq[iii] <= 7049500))
                         {
                             freq1 = 7047000;
                         }
-                        else if ((DX_Freq[iii] >= 10140000) && (DX_Freq[iii] <= 10142500))
+                        else if ((DXt_Freq[iii] >= 10140000) && (DXt_Freq[iii] <= 10142500))
                         {
                             freq1 = 10140000;
                         }
-                        else if ((DX_Freq[iii] >= 14080000) && (DX_Freq[iii] <= 14082500))
+                        else if ((DXt_Freq[iii] >= 14080000) && (DXt_Freq[iii] <= 14082500))
                         {
                             freq1 = 14080000;
                         }
-                        else if ((DX_Freq[iii] >= 18104000) && (DX_Freq[iii] <= 18106500))
+                        else if ((DXt_Freq[iii] >= 18104000) && (DXt_Freq[iii] <= 18106500))
                         {
                             freq1 = 18104000;
                         }
-                        else if ((DX_Freq[iii] >= 21140000) && (DX_Freq[iii] <= 21142500))
+                        else if ((DXt_Freq[iii] >= 21140000) && (DXt_Freq[iii] <= 21142500))
                         {
                             freq1 = 21140000;
                         }
-                        else if ((DX_Freq[iii] >= 24919000) && (DX_Freq[iii] <= 24921500))
+                        else if ((DXt_Freq[iii] >= 24919000) && (DXt_Freq[iii] <= 24921500))
                         {
                             freq1 = 24919000;
                         }
-                        else if ((DX_Freq[iii] >= 28180000) && (DX_Freq[iii] <= 28182500))
+                        else if ((DXt_Freq[iii] >= 28180000) && (DXt_Freq[iii] <= 28182500))
                         {
                             freq1 = 28180000;
                         }
-                        else if ((DX_Freq[iii] >= 50318000) && (DX_Freq[iii] <= 50320500))
+                        else if ((DXt_Freq[iii] >= 50318000) && (DXt_Freq[iii] <= 50320500))
                         {
                             freq1 = 50318000;
                         }
 
 
-                        DX_Mode2[iii] = 0; // no split in FT8
+                        DXt_Mode2[iii] = 0; // no split in FT8
                     } // FT4
 
 
@@ -6728,13 +6812,13 @@ namespace PowerSDR
                     if (chkDXMode.Checked == true)
                     {
 
-                        if (DX_Mode2[iii] != 0)
+                        if (DXt_Mode2[iii] != 0)
                         {
 
                          //   console.VFOBFreq = (double)(freq1 + DX_Mode2[iii]) / 1000000; // convert to MHZ
                          //   console.chkVFOSplit.Checked = true; // turn on  split
 
-                            Debug.WriteLine("split here" + (freq1 + DX_Mode2[iii]));
+                            Debug.WriteLine("split here" + (freq1 + DXt_Mode2[iii]));
 
                         }
                         else
@@ -6901,6 +6985,7 @@ namespace PowerSDR
         //=========================================================================================
         private void button1_Click(object sender, EventArgs e)
         {
+         
             if (pause == true)
             {
                 pause = false;
@@ -10052,7 +10137,8 @@ namespace PowerSDR
         private void textBox1_MouseDown(object sender, MouseEventArgs e)
         {
             MouseEventArgs me = (MouseEventArgs)e;  // .202
-
+            pause = true;
+            button1.Text = "Paused";
 
             textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
 
@@ -14811,6 +14897,9 @@ namespace PowerSDR
         {
             Console.HELPMAP = true;
             if (console.setupForm.chkBoxAutoFocus.Checked == true && chkAlwaysOnTop.Checked == true) this.Activate();
+            
+            pause = false;
+            button1.Text = "Pause";
         }
 
         private void btnTrack_MouseLeave(object sender, EventArgs e)
@@ -15560,6 +15649,7 @@ namespace PowerSDR
                 Debug.WriteLine("Contacting LoTW server");
 
                 pause = true; // halt display
+                button1.Text = "Paused";
 
                 LoTW_timer = true;
 
@@ -15577,6 +15667,7 @@ namespace PowerSDR
 
                 LoTW_timer = false;
                 pause = false; // turn display back on
+                button1.Text = "Pause";
 
                 Debug.WriteLine("Finished talking to LoTW server");
 
@@ -16031,6 +16122,8 @@ namespace PowerSDR
 
 
             }
+           
+
         } // callBox_MouseDown
 
         private void txtLoTWpass_TextChanged(object sender, EventArgs e)
@@ -16152,7 +16245,11 @@ namespace PowerSDR
         // ke9ns add .201
         string LoTW_DXCall = "";
         int LoTW_DXCallIndex = 0;
-        
+
+        int ToolTipNumber = 0; //.232
+
+        int LastLocation = 0; //.232
+
         private void textBox1_MouseMove(object sender, MouseEventArgs e)
         {
           //   Debug.WriteLine("HOVER ");
@@ -16167,9 +16264,16 @@ namespace PowerSDR
 
                 byte iii = (byte)(ii / LineLength);  // get line  /82  or /86 if AGE turned on or 91 if mode is also on /99 if country added
 
-                if (DX_Index > iii)
+                if (LastLocation != iii) // .232 if you move cursor to new line, new tooltip
                 {
-                    string DXName = DX_Station[iii];
+                    LastLocation = iii;
+
+                    if (ToolTipNumber != 499) ToolTipNumber = 0;
+                }
+
+                if (DXt_Index > iii)
+                {
+                    string DXName = DXt_Station[iii];
 
                  //  Debug.WriteLine("Line " + iii + " Name " + DXName + " ,X= " + e.X + " ,Y= " + e.Y + " , ");
 
@@ -16178,40 +16282,51 @@ namespace PowerSDR
 
                  //   Debug.WriteLine("LoTW HOVER " + LoTW_DXCallIndex + " , " + DX_LoTW_Status[LoTW_DXCallIndex]);
 
-                    if (e.X > 175 && e.X < 260)
+                    if (e.X > 175 && e.X < 260) // the callsign of the DX station (width)
                     {
-                       
-                            switch (DX_LoTW_Status[LoTW_DXCallIndex])
+                        if (ToolTipNumber != DXt_LoTW_Status[LoTW_DXCallIndex])
+                        {
+
+                            ToolTipNumber = DXt_LoTW_Status[LoTW_DXCallIndex]; // .232 to remove flicker
+
+                            switch (DXt_LoTW_Status[LoTW_DXCallIndex])
                             {
-                               
+
                                 case 0:
-                                  // //  this.toolTip1.SetToolTip(this.textBox1, "Hit F1 (mouse over LoTW button) for more HELP.\r\n" +
-                                  //   "LoTW Feature DUP, DXCC, and US States check(see LoTW button for setup):\r\n"  );
+                                    // //  this.toolTip1.SetToolTip(this.textBox1, "Hit F1 (mouse over LoTW button) for more HELP.\r\n" +
+                                    //   "LoTW Feature DUP, DXCC, and US States check(see LoTW button for setup):\r\n"  );
+
+
                                     break;
 
                                 case 1: // 1 Green: You have this DX Station confirmed on this Band (dont need this Dx Station)
                                     this.toolTip1.SetToolTip(this.textBox1, "DX Call: " + LoTW_DXCall + ": You have this DX Call Sign confirmed on this Band.\r\n" + "" +
                                         "Right Click to lookup up on QRZ.com");
+
                                     break;
 
                                 case 2: // 2 LightGreen: You have this DX Station confirmed on some other Band 
                                     this.toolTip1.SetToolTip(this.textBox1, "DX Call: " + LoTW_DXCall + ": You have this DX Call Sign confirmed on some other Band.\r\n" + "" +
                                         "Right Click to lookup up on QRZ.com");
+
                                     break;
 
                                 case 3: // 3 Yellow: You have this DX station confirmed on some other band, and some other station already confirmed on this band (dont need this DX Station)
                                     this.toolTip1.SetToolTip(this.textBox1, "DX Call: " + LoTW_DXCall + ": You have this DX Call Sign confirmed on some other band, and the same DX Entity confirmed on this band.\r\n" + "" +
                                         "Right Click to lookup up on QRZ.com");
+
                                     break;
 
                                 case 4: //4 Orange: You have this DXCC country confirmed on this Band (you dont need this DX Station
                                     this.toolTip1.SetToolTip(this.textBox1, "DX Call: " + LoTW_DXCall + ": You have this DXCC Entity or State confirmed on this Band.\r\n" + "" +
                                         "Right Click to lookup up on QRZ.com");
+
                                     break;
 
                                 case 5: //5 LightPurple: You have this DXCC country CONFIRMED on some other Band (you WANT this DX Station)
                                     this.toolTip1.SetToolTip(this.textBox1, "DX Call: " + LoTW_DXCall + ": You have this DXCC Entity confirmed on some other Band but not this Band.\r\n" + "" +
                                         "Right Click to lookup up on QRZ.com");
+
                                     break;
 
                                 case 6: //6 Purple: You WANT this DXCC country (you WANT this DX Station)
@@ -16242,18 +16357,25 @@ namespace PowerSDR
                                         "Right Click to lookup up on QRZ.com");
                                     break;
                                 default:
-                                 
-                                break;
+
+                                    break;
 
                             } // Switch
-                       
+                        } // dont repeat a tooltip if you already are showing it.
 
                     } //  if (e.X > 165 && e.X < 250)
-                    else
+                    else // outside the width of the DX station callsign
                     {
-                         this.toolTip1.SetToolTip(this.textBox1, "Hit F1 or F2 for more HELP.\r\n" +
-                                                  "LoTW Feature DUP, DXCC, and US States check(see LoTW button for setup):\r\n" +
-                                                   "LEFT Click= VFOA, WHEEL Click= VFOB, RIGHT Click= QRZ lookup,\r\n");
+                      //  if (!string.IsNullOrEmpty(this.toolTip1.GetToolTip(textBox1)))
+                      //  {
+                            if (ToolTipNumber != 499)
+                            {
+                                this.toolTip1.SetToolTip(this.textBox1, "Hit F1 or F2 for more HELP.\r\n" +
+                                                         "LoTW Feature DUP, DXCC, and US States check(see LoTW button for setup):\r\n" +
+                                                          "LEFT Click= VFOA, WHEEL Click= VFOB, RIGHT Click= QRZ lookup,\r\n");
+                                ToolTipNumber = 499;
+                            }
+                      //  }
                     }
 
                 } //  if (DX_Index > iii)
@@ -16271,20 +16393,46 @@ namespace PowerSDR
 
         private void textBox1_MouseLeave(object sender, EventArgs e)
         {
+            pause = false;
+            button1.Text = "Pause";
+            ToolTipNumber = 0;
+
             //  this.toolTip1.SetToolTip(this.textBox1, "Hit F1 (mouse over LoTW button) for more HELP.\r\n" +
             //  "LoTW Feature DUP, DXCC, and US States check(see LoTW button for setup):\r\n");
             textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
-
+            processTCPMessage();
         }
 
         private void textBox1_MouseHover(object sender, EventArgs e)
         {
             textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
-
+            pause = true;
+            button1.Text = "Paused";
 
         } // textBox1_MouseHover
 
-       
+        private void button1_TextChanged(object sender, EventArgs e) //.232
+        {
+            if (button1.Text == "Pause")
+            {
+                button1.BackColor = SystemColors.ButtonFace;
+            }
+            else
+            {
+                button1.BackColor = Color.Yellow;
+
+            }
+        }
+
+        private void callBox_Click(object sender, EventArgs e) //.232
+        {
+            if (txtLoTWpass.Visible )
+            {
+                txtLoTWpass.Visible = false;
+              
+
+            }
+        }
     } //SPOTCONTROL
 
 

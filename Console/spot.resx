@@ -125,33 +125,9 @@
 This list includes Short Wave AM Broadcast, Maritime, Military, Beacons
 and Digital signals: ALE, HFDL, Digital Audio (DRM), Stanag, Fax, DSC, Navtex</value>
   </data>
-  <data name="textBox1.ToolTip" xml:space="preserve">
-    <value>Hit F1 (mouse over LoTW button) for more HELP.
-
-LoTW Feature DUP,DXCC, and US States check (see LoTW button for setup):
----------------------------------------------------------------------------------------------------------------------------------------------------
-
-Green: You have this DX Station confirmed on this Band (dont need this Dx Station)
-LightGreen: You have this DX Station confirmed on some other Band 
-Yellow: You have this DX station confirmed on some other band, and some other station already confirmed on this band (dont need this DX Station)
-
-Orange: You have this DXCC country confirmed on this Band (you dont need this DX Station
-LightPurple: You have this DXCC country CONFIRMED on some other Band (you WANT this DX Station)
-Purple: You WANT this DXCC country (you WANT this DX Station)
-
-DeepPink: You have worked this DX Station on this Band (But they have not  confirmed)
-Pink: You have worked DX Station on some other Band (But they have not confirmed)
-
-LightBlue: You have this US State confirmed on some other band (you WANT this DX Station)
-Blue: You WANT this US State (You Want this DX Station).
-
-Gray: Beacon Station
-
-</value>
-  </data>
   <data name="textBox3.Text" xml:space="preserve">
     <value>Left Click = VFOA (Freq and Mode), Wheel Click=VFOB, Right Click = QRZ lookup
-Left Click on Spot BEAM HEADING to Freq &amp; Mode and Move Antenna using DDUtil
+Left Click on Spot BEAM HEADING to Freq &amp; Mode and Move Antenna (Setup-&gt;CAT Control-&gt;Antenna)
 
 Panadapter: Focus + CTRL on Red Dots, DX, Memory, or SWL to set Freq, Mode, Split
 Panadapter: Focus + CTRL on last letter of DX Spot to Move Antenna using DDUtil
@@ -235,17 +211,14 @@ DDUtil may not be running, or configured correctly.
     <value>HIT F1 for HELPBOX
 HIT F2 to watch video showing how to use LoTW
 
-LoTW (ARRL Log Book of The World)
-
+ARRL LOG BOOK OF THE WORLD -&gt; LoTW
 If you do NOT have an LoTW account, SIGN UP AT: &lt;http://www.arrl.org/quick-start&gt;
 Yes its overly complicated, but you only need to do it one time!
-
 ---------------------------------------------------------------------------------------
 DX Spotter Screen:
 1) You must have your Callsign entered in the box in the bottom Right corner
 2) Right click on the Callsign box and enter in your LoTW password.
 This is the password that you use to login to: &lt;https://lotw.arrl.org/lotw/login&gt;
-
 ---------------------------------------------------------------------------------------
 [Left Click] LoTW Button = (On/Off):
 PowerSDR will check to see if you have a “LoTW_LOG.adi” file, and “FCCDATA.dat” file in your database folder.
@@ -254,7 +227,6 @@ Files YES= Open/Read “LoTW_LOG.adi” and “FCCDATA.dat” files, and start c
 
 Files NO= PowerSDR will go to ARRL and download your FULL LoTW Log file. (This may take a few minutes to download) 
 If you don’t have a “FCCDATA.dat” file, PowerSDR will attempt to find EN.dat and convert it to “FCCDATA.dat”
-
 -----------------------------------------------------------------------------------------------------
 [Right Click]   LoTW Button = incremental Log file update:
 PowerSDR will go to ARRL and download incremental QSO/QSL updates to your LoTW Log file (based on the Date of the Last Update). 
@@ -266,6 +238,9 @@ RED LoTW  when a fault occured.
 
 To download a new fcc database: ftp://wirelessftp.fcc.gov/pub/uls/complete/l_amat.zip</value>
   </data>
+  <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>264, 17</value>
+  </metadata>
   <data name="chkISS.ToolTip" xml:space="preserve">
     <value>True (Zenith) position of the ISS will show on Panadapter screen (includes Elevation to you)
 When you Click on the TRACK/Map button to activate the World Map
@@ -375,9 +350,6 @@ Right Click on memory in Pan to open up Memory Comments URL internet address
 LEFT CLICK on PAN + ALT + M keys to save New Memory
 </value>
   </data>
-  <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>264, 17</value>
-  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>47</value>
   </metadata>
