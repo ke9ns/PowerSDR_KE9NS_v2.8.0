@@ -45,7 +45,7 @@ namespace PowerSDR
     /// <summary>
     /// Summary description for WaveOptions.
     /// </summary>
-    public class helpbox1 : System.Windows.Forms.Form
+    public partial class helpbox1 : System.Windows.Forms.Form
     {
 
         public static Console console;   // ke9ns mod  to allow console to pass back values to setup screen
@@ -54,12 +54,7 @@ namespace PowerSDR
         //  public static Stream Map_image2 = myAssembly2.GetManifestResourceStream("PowerSDR.Resources.Wmap1.jpg");     // MAP with lat / long on it
 
         #region Variable Declaration
-        private System.ComponentModel.IContainer components;
-        private CheckBoxTS chkAlwaysOnTop;
-        private TrackBar zoomSlider;
-        private Panel panel1;
-        private PictureBox pictureBox1;
-        private ToolTip toolTip1;
+       
 
         // public static helpbox1 helpbox1Form;                       // ke9ns add 
 
@@ -145,100 +140,7 @@ namespace PowerSDR
         }
 
         #endregion
-
-        #region Windows Form Designer generated code
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(helpbox1));
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.zoomSlider = new System.Windows.Forms.TrackBar();
-            this.chkAlwaysOnTop = new System.Windows.Forms.CheckBoxTS();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.zoomSlider)).BeginInit();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // zoomSlider
-            // 
-            this.zoomSlider.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.zoomSlider.LargeChange = 1;
-            this.zoomSlider.Location = new System.Drawing.Point(2, 444);
-            this.zoomSlider.Minimum = 1;
-            this.zoomSlider.Name = "zoomSlider";
-            this.zoomSlider.Size = new System.Drawing.Size(136, 45);
-            this.zoomSlider.TabIndex = 112;
-            this.toolTip1.SetToolTip(this.zoomSlider, "Zoom Level");
-            this.zoomSlider.Value = 1;
-            this.zoomSlider.Scroll += new System.EventHandler(this.zoomSlider_Scroll);
-            // 
-            // chkAlwaysOnTop
-            // 
-            this.chkAlwaysOnTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.chkAlwaysOnTop.BackColor = System.Drawing.Color.Transparent;
-            this.chkAlwaysOnTop.ForeColor = System.Drawing.Color.White;
-            this.chkAlwaysOnTop.Image = null;
-            this.chkAlwaysOnTop.Location = new System.Drawing.Point(537, 439);
-            this.chkAlwaysOnTop.MaximumSize = new System.Drawing.Size(103, 31);
-            this.chkAlwaysOnTop.MinimumSize = new System.Drawing.Size(103, 31);
-            this.chkAlwaysOnTop.Name = "chkAlwaysOnTop";
-            this.chkAlwaysOnTop.Size = new System.Drawing.Size(103, 31);
-            this.chkAlwaysOnTop.TabIndex = 100;
-            this.chkAlwaysOnTop.Text = "Always On Top";
-            this.chkAlwaysOnTop.UseVisualStyleBackColor = false;
-            this.chkAlwaysOnTop.CheckedChanged += new System.EventHandler(this.chkAlwaysOnTop_CheckedChanged);
-            // 
-            // panel1
-            // 
-            this.panel1.AutoScroll = true;
-            this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(640, 470);
-            this.panel1.TabIndex = 115;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(616, 433);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // helpbox1
-            // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(21)))), ((int)(((byte)(30)))), ((int)(((byte)(63)))));
-            this.ClientSize = new System.Drawing.Size(640, 470);
-            this.Controls.Add(this.zoomSlider);
-            this.Controls.Add(this.chkAlwaysOnTop);
-            this.Controls.Add(this.panel1);
-            this.ForeColor = System.Drawing.Color.Black;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(656, 509);
-            this.Name = "helpbox1";
-            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.Text = "PowerSDR World Map (Use slider to ZOOM), (Pull Corner to make larger)";
-            this.toolTip1.SetToolTip(this, "World Map");
-            this.Closing += new System.ComponentModel.CancelEventHandler(this.helpbox1_Closing);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.helpbox1_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this.zoomSlider)).EndInit();
-            this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
-        }
-        #endregion
+      
 
         #region Properties
 

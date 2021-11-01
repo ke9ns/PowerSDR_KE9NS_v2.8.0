@@ -351,6 +351,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="conrec.cs" />
+    <Compile Include="console.Designer.cs">
+      <DependentUpon>console.cs</DependentUpon>
+    </Compile>
+    <Compile Include="cwx.Designer.cs">
+      <DependentUpon>cwx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="eqform.Designer.cs">
+      <DependentUpon>eqform.cs</DependentUpon>
+    </Compile>
     <Compile Include="GDF\GDFBuilder.cs" />
     <Compile Include="GDF\GDFBuilder.UnWrapped.cs" />
     <Compile Include="GDF\GDFCell.cs" />
@@ -365,8 +374,14 @@
     <Compile Include="GDF\GDFRow.cs" />
     <Compile Include="GDF\Tokenizer\RTFBuilderParser.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="helpbox.Designer.cs">
+      <DependentUpon>helpbox.cs</DependentUpon>
+    </Compile>
     <Compile Include="helpbox1.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="helpbox1.Designer.cs">
+      <DependentUpon>helpbox1.cs</DependentUpon>
     </Compile>
     <Compile Include="Http.cs" />
     <Compile Include="ColorButton.cs">
@@ -594,11 +609,23 @@
     <Compile Include="RTF\RTFRow.cs" />
     <Compile Include="RTF\RTFRowDefinition.cs" />
     <Compile Include="RTF\RTFUtil.cs" />
+    <Compile Include="scan.Designer.cs">
+      <DependentUpon>scan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="setup.Designer.cs">
+      <DependentUpon>setup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="spot.Designer.cs">
+      <DependentUpon>spot.cs</DependentUpon>
+    </Compile>
     <Compile Include="spot_decoder.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="spot_age.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="stack.Designer.cs">
+      <DependentUpon>stack.cs</DependentUpon>
     </Compile>
     <Compile Include="TOTBOX.cs">
       <SubType>Form</SubType>
@@ -762,6 +789,9 @@
     <Compile Include="spot_options.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="wave.Designer.cs">
+      <DependentUpon>wave.cs</DependentUpon>
+    </Compile>
     <Compile Include="wave_options.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -773,6 +803,9 @@
     </Compile>
     <Compile Include="xvtr.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="xvtr.Designer.cs">
+      <DependentUpon>xvtr.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="DJConsoleUI\DJConsoleSelect.resx">
       <DependentUpon>DJConsoleSelect.cs</DependentUpon>
