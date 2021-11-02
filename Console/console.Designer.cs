@@ -6588,6 +6588,9 @@ namespace PowerSDR
 
         #endregion
 
+
+
+
         #region Windows Form Generated Code
 
         private System.Windows.Forms.ButtonTS btnHidden;
@@ -6992,6 +6995,148 @@ namespace PowerSDR
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBoxTS comboMeterTX1Mode;
         private System.Windows.Forms.CheckBoxTS chkFullDuplex;
+
+
+        public System.Windows.Forms.CheckBoxTS chkRX1MUTE;  // ke9ns add allow RX1 mute of flex radio audio but not vac stream audio
+
+
+        private System.Windows.Forms.RichTextBox txtNOAA2;    // ke9ns add for space weather on main console screen
+        private System.Windows.Forms.RichTextBox txtNOAA;    // ke9ns add for space weather on main console screen
+
+
+        private System.Windows.Forms.LabelTS labelTS2;
+        private System.Windows.Forms.LabelTS labelTS1;
+        public System.Windows.Forms.NumericUpDownTS udTXFilterLow;
+        public System.Windows.Forms.NumericUpDownTS udTXFilterHigh;
+        public System.Windows.Forms.CheckBoxTS chkBoxMuteSpk;
+        public System.Windows.Forms.CheckBoxTS chkBoxDrive;
+        private System.Windows.Forms.LabelTS labelTS5;
+        public System.Windows.Forms.PanelTS panelTSBandStack;
+        private System.Windows.Forms.Button buttonDel;
+        private System.Windows.Forms.Button buttonAdd;
+        private System.Windows.Forms.Button buttonSort;
+        public System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.RichTextBox txtTimer;
+        private System.Windows.Forms.ToolStripMenuItem MapMenuItem;
+        public PrettyTrackBar ptbTune;
+        public System.Windows.Forms.LabelTS lblTUNE;
+        private System.Windows.Forms.LabelTS lblMON;
+        public PrettyTrackBar ptbMON;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ImageList imageList1;
+        public System.Windows.Forms.PictureBox VFODialA;
+        public System.Windows.Forms.PictureBox VFODialB;
+        public System.Windows.Forms.PictureBox VFODialAA;
+        public System.Windows.Forms.PictureBox VFODialBB;
+        private System.Windows.Forms.LabelTS labelTS6;
+        private System.Windows.Forms.ComboBoxTS comboCWTXProfile;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.PictureBox picRX3Meter;
+        public System.Windows.Forms.PanelTS panelTS1;
+        public System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.RichTextBox richTextBox3;
+        private System.Windows.Forms.RichTextBox richTextBox5;
+        private System.Windows.Forms.RichTextBox richTextBox6;
+        private System.Windows.Forms.RichTextBox richTextBox7;
+        private System.Windows.Forms.RichTextBox richTextBox8;
+        private System.Windows.Forms.ToolStripMenuItem SWLMenuItem;
+        private System.Windows.Forms.PictureBox ScreenCap;
+        private System.Windows.Forms.PictureBox ScreenCap1;
+        public System.Windows.Forms.CheckBoxTS checkBoxIICPTT;
+        public System.Windows.Forms.CheckBoxTS checkBoxIICON;
+        private PrettyTrackBar prettyTrackBarVOX;
+        private System.Windows.Forms.LabelTS labelVOXVal;
+        private System.Windows.Forms.CheckBoxTS checkVOX;
+        private System.Windows.Forms.PictureBox pictureBoxVOX;
+        private System.Windows.Forms.NumericUpDownTS udCQCQRepeat;
+        private System.Windows.Forms.Label label7;
+        public System.Windows.Forms.CheckBoxTS chkBoxBS;
+        public System.Windows.Forms.Label labelPowerSDR;
+        public System.Windows.Forms.Label labelSize;
+        public System.Windows.Forms.Label labelMove;
+        public System.Windows.Forms.Label labelMax;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.PictureBox buttonCQ1;
+        public System.Windows.Forms.PictureBox buttonCall1;
+
+        public System.Windows.Forms.PictureBox lblDisplayPan1;
+        public System.Windows.Forms.PictureBox lblDisplayZoom1;
+        public System.Windows.Forms.CheckBoxTS chkFM1750;
+        public System.Windows.Forms.PictureBox buttonVK1;
+        public System.Windows.Forms.PictureBox buttonVK2;
+        private System.Windows.Forms.NumericUpDownTS udFM1750Timer;
+
+        private System.Windows.Forms.RadioButtonTS radBandGENRX2;
+        private System.Windows.Forms.RadioButtonTS radBandWWVRX2;
+        private System.Windows.Forms.RadioButtonTS radBand2RX2;
+        private System.Windows.Forms.RadioButtonTS radBand6RX2;
+        private System.Windows.Forms.RadioButtonTS radBand10RX2;
+        private System.Windows.Forms.RadioButtonTS radBand12RX2;
+        private System.Windows.Forms.RadioButtonTS radBand15RX2;
+        private System.Windows.Forms.RadioButtonTS radBand17RX2;
+        private System.Windows.Forms.RadioButtonTS radBand20RX2;
+        private System.Windows.Forms.RadioButtonTS radBand30RX2;
+        private System.Windows.Forms.RadioButtonTS radBand40RX2;
+        private System.Windows.Forms.RadioButtonTS radBand60RX2;
+        private System.Windows.Forms.RadioButtonTS radBand160RX2;
+        private System.Windows.Forms.RadioButtonTS radBand80RX2;
+        private System.Windows.Forms.ButtonTS btnBandVHFRX2;
+
+        private System.Windows.Forms.RadioButtonTS radBandGN13RX2;
+        private System.Windows.Forms.RadioButtonTS radBandGN12RX2;
+        private System.Windows.Forms.RadioButtonTS radBandGN11RX2;
+        private System.Windows.Forms.RadioButtonTS radBandGN10RX2;
+        private System.Windows.Forms.RadioButtonTS radBandGN9RX2;
+        private System.Windows.Forms.RadioButtonTS radBandGN8RX2;
+        private System.Windows.Forms.RadioButtonTS radBandGN7RX2;
+        private System.Windows.Forms.RadioButtonTS radBandGN6RX2;
+        private System.Windows.Forms.RadioButtonTS radBandGN5RX2;
+        private System.Windows.Forms.RadioButtonTS radBandGN4RX2;
+        private System.Windows.Forms.RadioButtonTS radBandGN3RX2;
+        private System.Windows.Forms.RadioButtonTS radBandGN2RX2;
+        private System.Windows.Forms.RadioButtonTS radBandGN1RX2;
+        private System.Windows.Forms.RadioButtonTS radBandGN0RX2;
+        private System.Windows.Forms.ButtonTS btnBandHF1RX2;
+
+        private System.Windows.Forms.RadioButtonTS radBandVHF13RX2;
+        private System.Windows.Forms.RadioButtonTS radBandVHF12RX2;
+        private System.Windows.Forms.RadioButtonTS radBandVHF11RX2;
+        private System.Windows.Forms.RadioButtonTS radBandVHF10RX2;
+        private System.Windows.Forms.RadioButtonTS radBandVHF9RX2;
+        private System.Windows.Forms.RadioButtonTS radBandVHF8RX2;
+        private System.Windows.Forms.RadioButtonTS radBandVHF7RX2;
+        private System.Windows.Forms.RadioButtonTS radBandVHF6RX2;
+        private System.Windows.Forms.RadioButtonTS radBandVHF5RX2;
+        private System.Windows.Forms.RadioButtonTS radBandVHF4RX2;
+        private System.Windows.Forms.RadioButtonTS radBandVHF3RX2;
+        private System.Windows.Forms.RadioButtonTS radBandVHF2RX2;
+        private System.Windows.Forms.RadioButtonTS radBandVHF1RX2;
+        private System.Windows.Forms.RadioButtonTS radBandVHF0RX2;
+        private System.Windows.Forms.ButtonTS btnBandHFRX2;
+        public System.Windows.Forms.TextBox textBox2;
+        public System.Windows.Forms.ButtonTS buttonbs;
+        public System.Windows.Forms.TextBox pwrMstWatts;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        public System.Windows.Forms.TextBox pwrMstSWR;
+        private System.Windows.Forms.LabelTS lblAntTX2;
+        private System.Windows.Forms.LabelTS lblAntTX2a;
+        private System.Windows.Forms.LabelTS lblAntRX2a;
+        public System.Windows.Forms.LabelTS lblAntTXa;
+        public System.Windows.Forms.LabelTS lblAntRX1a;
+        private System.Windows.Forms.CheckBoxTS chkTXEQ1;
+        private System.Windows.Forms.CheckBoxTS chkRXEQ1;
+        public PrettyTrackBar ptbDisplayZoom2;
+        private PrettyTrackBar ptbDisplayPan2;
+
+
+        private System.Windows.Forms.RadioButtonTS[] vhf_text;
+        private System.Windows.Forms.RadioButtonTS[] vhf_text2; // .212
+
+
 
         #endregion
 

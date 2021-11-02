@@ -750,8 +750,6 @@ namespace PowerSDR
 
         //  public static event Microsoft.Win32.SessionEndingEventHandler SessionEnding; // ke9ns add
 
-       
-
 
         //==================================================================================
         //==================================================================================
@@ -823,147 +821,7 @@ namespace PowerSDR
 
 
 
-
-        HidDevice.PowerMate powerMate = new HidDevice.PowerMate();  // ke9ns add link back to PowerMate.cpp and PowerMate.h
-        public int KBON = 0; // ke9ns add 1=knob present 0=knob not present
-        public int speed = 0; // ke9ns add speed of knob freq change
-        public int lastvalue = 0; // ke9ns add knob
-
-        public CheckBoxTS chkRX1MUTE;  // ke9ns add allow RX1 mute of flex radio audio but not vac stream audio
-
-
-        private RichTextBox txtNOAA2;    // ke9ns add for space weather on main console screen
-        private RichTextBox txtNOAA;    // ke9ns add for space weather on main console screen
-
-
-        private LabelTS labelTS2;
-        private LabelTS labelTS1;
-        public NumericUpDownTS udTXFilterLow;
-        public NumericUpDownTS udTXFilterHigh;
-        public CheckBoxTS chkBoxMuteSpk;
-        public CheckBoxTS chkBoxDrive;
-        private LabelTS labelTS5;
-        public PanelTS panelTSBandStack;
-        private Button buttonDel;
-        private Button buttonAdd;
-        private Button buttonSort;
-        public TextBox textBox1;
-        public RichTextBox txtTimer;
-        private ToolStripMenuItem MapMenuItem;
-        public PrettyTrackBar ptbTune;
-        public LabelTS lblTUNE;
-        private LabelTS lblMON;
-        public PrettyTrackBar ptbMON;
-        private Label label5;
-        private Label label3;
-        private Label label4;
-        private Label label2;
-        private ImageList imageList1;
-        public PictureBox VFODialA;
-        public PictureBox VFODialB;
-        public PictureBox VFODialAA;
-        public PictureBox VFODialBB;
-        private LabelTS labelTS6;
-        private ComboBoxTS comboCWTXProfile;
-        private Label label6;
-        private PictureBox picRX3Meter;
-        public PanelTS panelTS1;
-        public RichTextBox richTextBox1;
-        private RichTextBox richTextBox2;
-        private RichTextBox richTextBox3;
-        private RichTextBox richTextBox5;
-        private RichTextBox richTextBox6;
-        private RichTextBox richTextBox7;
-        private RichTextBox richTextBox8;
-        private ToolStripMenuItem SWLMenuItem;
-        private PictureBox ScreenCap;
-        private PictureBox ScreenCap1;
-        public CheckBoxTS checkBoxIICPTT;
-        public CheckBoxTS checkBoxIICON;
-        private PrettyTrackBar prettyTrackBarVOX;
-        private LabelTS labelVOXVal;
-        private CheckBoxTS checkVOX;
-        private PictureBox pictureBoxVOX;
-        private NumericUpDownTS udCQCQRepeat;
-        private Label label7;
-        public CheckBoxTS chkBoxBS;
-        public Label labelPowerSDR;
-        public Label labelSize;
-        public Label labelMove;
-        public Label labelMax;
-        private PictureBox pictureBox1;
-        public PictureBox buttonCQ1;
-        public PictureBox buttonCall1;
-       
-        public PictureBox lblDisplayPan1;
-        public PictureBox lblDisplayZoom1;
-        public CheckBoxTS chkFM1750;
-        public PictureBox buttonVK1;
-        public PictureBox buttonVK2;
-        private NumericUpDownTS udFM1750Timer;
-        
-        private RadioButtonTS radBandGENRX2;
-        private RadioButtonTS radBandWWVRX2;
-        private RadioButtonTS radBand2RX2;
-        private RadioButtonTS radBand6RX2;
-        private RadioButtonTS radBand10RX2;
-        private RadioButtonTS radBand12RX2;
-        private RadioButtonTS radBand15RX2;
-        private RadioButtonTS radBand17RX2;
-        private RadioButtonTS radBand20RX2;
-        private RadioButtonTS radBand30RX2;
-        private RadioButtonTS radBand40RX2;
-        private RadioButtonTS radBand60RX2;
-        private RadioButtonTS radBand160RX2;
-        private RadioButtonTS radBand80RX2;
-        private ButtonTS btnBandVHFRX2;
-       
-        private RadioButtonTS radBandGN13RX2;
-        private RadioButtonTS radBandGN12RX2;
-        private RadioButtonTS radBandGN11RX2;
-        private RadioButtonTS radBandGN10RX2;
-        private RadioButtonTS radBandGN9RX2;
-        private RadioButtonTS radBandGN8RX2;
-        private RadioButtonTS radBandGN7RX2;
-        private RadioButtonTS radBandGN6RX2;
-        private RadioButtonTS radBandGN5RX2;
-        private RadioButtonTS radBandGN4RX2;
-        private RadioButtonTS radBandGN3RX2;
-        private RadioButtonTS radBandGN2RX2;
-        private RadioButtonTS radBandGN1RX2;
-        private RadioButtonTS radBandGN0RX2;
-        private ButtonTS btnBandHF1RX2;
-
-        private RadioButtonTS radBandVHF13RX2;
-        private RadioButtonTS radBandVHF12RX2;
-        private RadioButtonTS radBandVHF11RX2;
-        private RadioButtonTS radBandVHF10RX2;
-        private RadioButtonTS radBandVHF9RX2;
-        private RadioButtonTS radBandVHF8RX2;
-        private RadioButtonTS radBandVHF7RX2;
-        private RadioButtonTS radBandVHF6RX2;
-        private RadioButtonTS radBandVHF5RX2;
-        private RadioButtonTS radBandVHF4RX2;
-        private RadioButtonTS radBandVHF3RX2;
-        private RadioButtonTS radBandVHF2RX2;
-        private RadioButtonTS radBandVHF1RX2;
-        private RadioButtonTS radBandVHF0RX2;
-        private ButtonTS btnBandHFRX2;
-        public TextBox textBox2;
-        public ButtonTS buttonbs;
-        public TextBox pwrMstWatts;
-        private ContextMenuStrip contextMenuStrip1;
-        public TextBox pwrMstSWR;
-        private LabelTS lblAntTX2;
-        private LabelTS lblAntTX2a;
-        private LabelTS lblAntRX2a;
-        public LabelTS lblAntTXa;
-        public LabelTS lblAntRX1a;
-        private CheckBoxTS chkTXEQ1;
-        private CheckBoxTS chkRXEQ1;
-        public PrettyTrackBar ptbDisplayZoom2;
-        private PrettyTrackBar ptbDisplayPan2;
-        SpeechSynthesizer speaker = new SpeechSynthesizer(); // ke9ns add 
+     
 
         //============================================================================ ke9ns add
         //============================================================================ ke9ns add
@@ -1035,61 +893,26 @@ namespace PowerSDR
         int white = 0;
         int black = 2;
 
-        Bitmap yell1 = new Bitmap(Yellow_image);   // pre can the images into bitmaps so they can be rotated later
+        Bitmap yell1 = new Bitmap(Yellow_image);   // pre-can the images into bitmaps so they can be rotated later
         Bitmap white1 = new Bitmap(White_image);
         Bitmap black1 = new Bitmap(Black_image);
         Bitmap red1 = new Bitmap(Red_image);
 
         //==================================================================================================
 
-
-
-        #region Variable Declarations
         // ======================================================
         // Variable Declarations 
         // ======================================================
 
+        #region Variable Declarations
 
-        public DSP dsp;
-        private SIOListenerII siolisten = null;              // original CAT port
 
-        private SIOListenerII2 siolisten2 = null;              // ke9ns.180  CAT port2
-        private SIOListenerII3 siolisten3 = null;              // ke9ns CAT port3
-        private SIOListenerII4 siolisten4 = null;              // ke9ns CAT port4
-        private SIOListenerII5 siolisten5 = null;              // ke9ns CAT port5
-        private SIOListenerII6 siolisten6 = null;              // ke9ns CAT port6 .200 spoof VFOA to B
-
-        private Thread[] audio_process_thread;              // threads to run DttSP functions
-        private Thread draw_display_thread;                 // draws the main display 
-        private Thread multimeter_thread;                   // updates the rx1/tx meter data
-        private Thread rx2_meter_thread;                    // updates the rx2 meter data
-        private Thread poll_ptt_thread;                     // polls the PTT line on the parallel port
-        private Thread poll_RXOnly_thread;  // ke9ns add
-        private Thread poll_pa_pwr_thread;                  // polls the FWD and REV power if the PA is installed
-        private Thread sql_update_thread;                   // polls the RX signal strength
-        private Thread rx2_sql_update_thread;               // polls the RX2 signal strength
-        private Thread vox_update_thread;                   // polls the mic input
-        private Thread noise_gate_update_thread;			// polls the mic input during TX
-        private Thread f3k_temp_thread;				        // polls the temp on the FLEX-3000 to turn fan on/off
-        private Thread f3k_mic_function_thread;				// handles the FLEX-3000 mic inputs (Up, Down, Fast)
-        //private Thread wbir_thread;
-        //private Thread wbir_rx2_thread;
-        private Thread update_rx1_dds_thread;
-        private Thread update_rx2_dds_thread;
-        private Thread update_tx_dds_thread;
-        private Thread audio_watchdog_thread;
-        //private HiPerfTimer polltimer;
-
-        private bool calibration_running = false;
-        private bool displaydidit = false;
-        //private bool calibrationdidit = false;
-        public Mutex calibration_mutex = new Mutex();
+        // ======================================================
+        // Form Declarations 
+        // ======================================================
 
         public FlexControlBasicForm flexControlBasicForm;
         public FlexControlAdvancedForm flexControlAdvancedForm;
-
-        private SIOListenerIII siolisten1 = null;          // ke9ns add for ant rotor control
-
         public Http httpFile;                           // ke9ns add
         public HttpServer httpServer = null;           // rn3kk add
 
@@ -1149,6 +972,75 @@ namespace PowerSDR
 
         public HIDAntForm hidAntForm;
 
+        public MemoryForm memoryForm;
+
+        public WaveControl WaveForm;                       // ke9ns    communication with the waveform (i.e. allows audio to be played from console.cs)
+
+
+        public PAQualify PAQualForm;
+        public ProductionTest ProdTestForm;
+
+
+        HidDevice.PowerMate powerMate = new HidDevice.PowerMate();  // ke9ns add link back to PowerMate.cpp and PowerMate.h
+
+        // ======================================================
+        // thread Declarations 
+        // ======================================================
+
+      
+        private Thread[] audio_process_thread;              // threads to run DttSP functions
+        private Thread draw_display_thread;                 // draws the main display 
+        private Thread multimeter_thread;                   // updates the rx1/tx meter data
+        private Thread rx2_meter_thread;                    // updates the rx2 meter data
+        private Thread poll_ptt_thread;                     // polls the PTT line on the parallel port
+        private Thread poll_RXOnly_thread;  // ke9ns add
+        private Thread poll_pa_pwr_thread;                  // polls the FWD and REV power if the PA is installed
+        private Thread sql_update_thread;                   // polls the RX signal strength
+        private Thread rx2_sql_update_thread;               // polls the RX2 signal strength
+        private Thread vox_update_thread;                   // polls the mic input
+        private Thread noise_gate_update_thread;			// polls the mic input during TX
+        private Thread f3k_temp_thread;				        // polls the temp on the FLEX-3000 to turn fan on/off
+        private Thread f3k_mic_function_thread;				// handles the FLEX-3000 mic inputs (Up, Down, Fast)
+        //private Thread wbir_thread;
+        //private Thread wbir_rx2_thread;
+        private Thread update_rx1_dds_thread;
+        private Thread update_rx2_dds_thread;
+        private Thread update_tx_dds_thread;
+        private Thread audio_watchdog_thread;
+        //private HiPerfTimer polltimer;
+        public Mutex calibration_mutex = new Mutex();
+
+        private Mutex psdr2_mutex;                                  // Mutex for INNO installer
+        private string psdr2_mutex_name = "PowerSDRv2.x_Mutex";     // Mutex name
+        private bool psdr2_mutex_exists = false;                    // is true when Mutex has been created
+        private bool dax_audio_enum = false;
+
+        // ======================================================
+        // variables Declarations 
+        // ======================================================
+
+
+        public int KBON = 0; // ke9ns add 1=knob present 0=knob not present
+        public int speed = 0; // ke9ns add speed of knob freq change
+        public int lastvalue = 0; // ke9ns add knob
+
+        SpeechSynthesizer speaker = new SpeechSynthesizer(); // ke9ns add 
+
+        public DSP dsp;
+        private SIOListenerII siolisten = null;              // original CAT port
+
+        private SIOListenerII2 siolisten2 = null;              // ke9ns.180  CAT port2
+        private SIOListenerII3 siolisten3 = null;              // ke9ns CAT port3
+        private SIOListenerII4 siolisten4 = null;              // ke9ns CAT port4
+        private SIOListenerII5 siolisten5 = null;              // ke9ns CAT port5
+        private SIOListenerII6 siolisten6 = null;              // ke9ns CAT port6 .200 spoof VFOA to B
+
+        private bool calibration_running = false;
+        private bool displaydidit = false;
+        //private bool calibrationdidit = false;
+      
+        private SIOListenerIII siolisten1 = null;          // ke9ns add for ant rotor control
+
         public bool fwc_init = false;
         public int fwc_index = -1;
         private long fwc_last_cal_date_time = 0;
@@ -1172,8 +1064,7 @@ namespace PowerSDR
         private uint hid_serial_num = 0;
         private uint hid_trx_serial_num = 0;
 
-        public MemoryForm memoryForm;
-
+     
         private MemoryList memoryList;
 
         public MemoryList MemoryList
@@ -1198,12 +1089,7 @@ namespace PowerSDR
         private HW hw;                                      // will eventually be an array of rigs to support multiple radios
 
 
-        public WaveControl WaveForm;                       // ke9ns    communication with the waveform (i.e. allows audio to be played from console.cs)
-
-
-        public PAQualify PAQualForm;
-        public ProductionTest ProdTestForm;
-
+      
         private bool run_setup_wizard;						// Used to run the wizard the first time the software comes up
         private bool show_alpha_warning = false;
         private bool show_beta_warning = true;
@@ -1318,9 +1204,6 @@ namespace PowerSDR
         public int band_vhf13_register;
 
 
-
-        private RadioButtonTS[] vhf_text;
-        private RadioButtonTS[] vhf_text2; // .212
 
         //   private RadioButtonTS[] gen_text; // ke9ns add
 
@@ -1477,7 +1360,7 @@ namespace PowerSDR
         public double avg_vox_pwr = 0.0;
 
         // BT 11/05/2007
-        public PowerSDR.RemoteProfiles ProfileForm;
+        public PowerSDR.RemoteProfiles ProfileForm; // CAT
 
         //EHR 25Mar08
         private TDxInput.Device TDxDevice;
@@ -1603,10 +1486,8 @@ namespace PowerSDR
 
         public bool swapping = false;   //used to supress V/U on both RX1/RX2 error while swapping
 
-        private Mutex psdr2_mutex;                                  // Mutex for INNO installer
-        private string psdr2_mutex_name = "PowerSDRv2.x_Mutex";     // Mutex name
-        private bool psdr2_mutex_exists = false;                    // is true when Mutex has been created
-        private bool dax_audio_enum = false;
+        public int AGCTAdj = 55; // ke9ns add: default AGCT gain adjustment for green line
+
 
 #if (NO_DJ)
         //mod DH1TW
@@ -1618,7 +1499,7 @@ namespace PowerSDR
 
 
 
-        #endregion
+        #endregion 
 
       
         #region Constructor and Destructor
@@ -2841,9 +2722,6 @@ namespace PowerSDR
 
         
 
-
-
-
             Debug.WriteLine("((((((((TERMINATE PROGRM .......EXIT HERE.....))))))))))))))))");
 
             writer.Close(); // 2
@@ -3172,16 +3050,15 @@ namespace PowerSDR
 
         #endregion
 
+
         #region Misc Routines
         // ======================================================
         // Misc Routines
         // ======================================================
 
-        public int AGCTAdj = 55; // ke9ns add: default AGCT gain adjustment for green line
         private void InitConsole()
         {
 
-           
 
             commands = new CATCommands(this, parser); // ke9ns add
 
@@ -5411,10 +5288,12 @@ namespace PowerSDR
         }  // SaveState()    
 
 
+
+
         public static byte moninit = 1;               // ke9ns used for chkMON startup
 
-        public double[,,,] SWR_READ = new double[7, 11, 45, 3000]; //ScanControl Test# 1-5, Ant=1,2,3, band=1-30,freq slot = swr on band
-        public int swr_testrun = 1;
+        public double[,,,] SWR_READ = new double[7, 11, 45, 3000]; //ke9ns: ScanControl Test# 1-5, Ant=1,2,3, band=1-30,freq slot = swr on band
+        public int swr_testrun = 1; // ke9ns
 
         public int SWR_TESTRUN  // ke9ns: SWR scanner
         {
