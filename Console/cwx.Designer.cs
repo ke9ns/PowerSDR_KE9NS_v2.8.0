@@ -41,60 +41,6 @@ namespace PowerSDR
     {
         
 
-        #region Variable Declarations
-        private System.ComponentModel.IContainer components;
-
-     
-        private System.Windows.Forms.LabelTS label4;
-        private System.Windows.Forms.ButtonTS stopButton;
-        private System.Windows.Forms.LabelTS label5;
-        private System.Windows.Forms.LabelTS label6;                                // pulling queue pointer
-        private System.Windows.Forms.ButtonTS s1;
-        private System.Windows.Forms.TextBoxTS txt1;
-        private System.Windows.Forms.ButtonTS s2;
-        private System.Windows.Forms.TextBoxTS txt2;
-        private System.Windows.Forms.ButtonTS s3;
-        private System.Windows.Forms.TextBoxTS txt3;
-        private System.Windows.Forms.ButtonTS s4;
-        private System.Windows.Forms.TextBoxTS txt4;
-        private System.Windows.Forms.ButtonTS s5;
-        private System.Windows.Forms.TextBoxTS txt5;
-        private System.Windows.Forms.ButtonTS s6;
-        private System.Windows.Forms.TextBoxTS txt6;
-        private System.Windows.Forms.LabelTS speedLabel;
-        private System.Windows.Forms.ButtonTS notesButton;
-        private System.Windows.Forms.ComboBoxTS cbMorse;
-        private System.Windows.Forms.NumericUpDownTS udDelay;
-        private System.Windows.Forms.LabelTS repeatdelayLabel;
-        private System.Windows.Forms.TextBoxTS txt7;
-        private System.Windows.Forms.ButtonTS s7;
-        private System.Windows.Forms.ButtonTS s8;
-        private System.Windows.Forms.TextBoxTS txt8;
-        private System.Windows.Forms.ButtonTS s9;
-        private System.Windows.Forms.TextBoxTS txt9;
-        private System.Windows.Forms.LabelTS dropdelaylabel;
-        private System.Windows.Forms.NumericUpDownTS udDrop;
-        private System.Windows.Forms.ButtonTS keyButton;
-        private System.Windows.Forms.LabelTS label7;
-        private System.Windows.Forms.TextBoxTS txtdummy1;
-        private System.Windows.Forms.CheckBoxTS chkPause;
-        private System.Windows.Forms.ButtonTS clearButton;
-        private System.Windows.Forms.ButtonTS keyboardButton;
-        private System.Windows.Forms.Panel pttLed;
-        private System.Windows.Forms.Panel keyLed;
-        private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Panel keyboardLed;
-        private System.Windows.Forms.ButtonTS expandButton;
-        private System.Windows.Forms.NumericUpDownTS udPtt;
-        private System.Windows.Forms.LabelTS pttdelaylabel;
-        public System.Windows.Forms.CheckBoxTS chkAlwaysOnTop;
-        public System.Windows.Forms.NumericUpDownTS udWPM;
-        private System.Windows.Forms.CheckBoxTS chkKeyPoll;
-        public System.Windows.Forms.CheckBoxTS checkBoxCWD;
-       
-        #endregion
- 
-
         #region Windows Form Designer generated code
         /// <summary>
         /// Required method for Designer support - do not modify
@@ -777,7 +723,58 @@ namespace PowerSDR
 
 
         #endregion
+      
+        
+        private System.ComponentModel.IContainer components;
+
+        private System.Windows.Forms.LabelTS label4;
+        private System.Windows.Forms.ButtonTS stopButton;
+        private System.Windows.Forms.LabelTS label5;
+        private System.Windows.Forms.LabelTS label6;                                // pulling queue pointer
+        private System.Windows.Forms.ButtonTS s1;
+        private System.Windows.Forms.TextBoxTS txt1;
+        private System.Windows.Forms.ButtonTS s2;
+        private System.Windows.Forms.TextBoxTS txt2;
+        private System.Windows.Forms.ButtonTS s3;
+        private System.Windows.Forms.TextBoxTS txt3;
+        private System.Windows.Forms.ButtonTS s4;
+        private System.Windows.Forms.TextBoxTS txt4;
+        private System.Windows.Forms.ButtonTS s5;
+        private System.Windows.Forms.TextBoxTS txt5;
+        private System.Windows.Forms.ButtonTS s6;
+        private System.Windows.Forms.TextBoxTS txt6;
+        private System.Windows.Forms.LabelTS speedLabel;
+        private System.Windows.Forms.ButtonTS notesButton;
+        private System.Windows.Forms.ComboBoxTS cbMorse;
+        private System.Windows.Forms.NumericUpDownTS udDelay;
+        private System.Windows.Forms.LabelTS repeatdelayLabel;
+        private System.Windows.Forms.TextBoxTS txt7;
+        private System.Windows.Forms.ButtonTS s7;
+        private System.Windows.Forms.ButtonTS s8;
+        private System.Windows.Forms.TextBoxTS txt8;
+        private System.Windows.Forms.ButtonTS s9;
+        private System.Windows.Forms.TextBoxTS txt9;
+        private System.Windows.Forms.LabelTS dropdelaylabel;
+        private System.Windows.Forms.NumericUpDownTS udDrop;
+        private System.Windows.Forms.ButtonTS keyButton;
+        private System.Windows.Forms.LabelTS label7;
+        private System.Windows.Forms.TextBoxTS txtdummy1;
+        private System.Windows.Forms.CheckBoxTS chkPause;
+        private System.Windows.Forms.ButtonTS clearButton;
+        private System.Windows.Forms.ButtonTS keyboardButton;
+        private System.Windows.Forms.Panel pttLed;
+        private System.Windows.Forms.Panel keyLed;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Panel keyboardLed;
+        private System.Windows.Forms.ButtonTS expandButton;
+        private System.Windows.Forms.NumericUpDownTS udPtt;
+        private System.Windows.Forms.LabelTS pttdelaylabel;
+        public System.Windows.Forms.CheckBoxTS chkAlwaysOnTop;
+        public System.Windows.Forms.NumericUpDownTS udWPM;
+        private System.Windows.Forms.CheckBoxTS chkKeyPoll;
+        public System.Windows.Forms.CheckBoxTS checkBoxCWD;
 
        
+
     } // end class
 } // end namespace

@@ -14893,14 +14893,8 @@ namespace PowerSDR
 
         private void textBox1_MouseLeave(object sender, EventArgs e)
         {
-         //   pause = false;
-         //   button1.Text = "Pause";
-            ToolTipNumber = 0;
-
-            //  this.toolTip1.SetToolTip(this.textBox1, "Hit F1 (mouse over LoTW button) for more HELP.\r\n" +
-            //  "LoTW Feature DUP, DXCC, and US States check(see LoTW button for setup):\r\n");
-            textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
-            processTCPMessage();
+          //   textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
+         
         }
 
         private void textBox1_MouseHover(object sender, EventArgs e)
@@ -14936,8 +14930,20 @@ namespace PowerSDR
 
         private void SpotControl_MouseLeave(object sender, EventArgs e)
         {
-              pause = false;
-              button1.Text = "Pause";
+            ToolTipNumber = 0;
+            pause = false;
+            button1.Text = "Pause";
+            processTCPMessage();
+
+        }
+
+        private void SpotControl_Deactivate(object sender, EventArgs e)
+        {
+            Debug.WriteLine("Spot screen visible changed");
+            ToolTipNumber = 0;
+            pause = false;
+            button1.Text = "Pause";
+            processTCPMessage();
         }
     } //SPOTCONTROL
 

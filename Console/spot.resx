@@ -238,6 +238,9 @@ RED LoTW  when a fault occured.
 
 To download a new fcc database: ftp://wirelessftp.fcc.gov/pub/uls/complete/l_amat.zip</value>
   </data>
+  <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>264, 17</value>
+  </metadata>
   <data name="chkISS.ToolTip" xml:space="preserve">
     <value>True (Zenith) position of the ISS will show on Panadapter screen (includes Elevation to you)
 When you Click on the TRACK/Map button to activate the World Map
@@ -347,9 +350,6 @@ Right Click on memory in Pan to open up Memory Comments URL internet address
 LEFT CLICK on PAN + ALT + M keys to save New Memory
 </value>
   </data>
-  <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>264, 17</value>
-  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>47</value>
   </metadata>

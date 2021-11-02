@@ -31,52 +31,7 @@ namespace PowerSDR
 {
     sealed public partial class WaveControl : System.Windows.Forms.Form
     {
-        #region Variable Declaration
-
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.CheckBoxTS checkBoxPlay;
-        private System.Windows.Forms.GroupBoxTS groupBox2;
-        public System.Windows.Forms.CheckBoxTS checkBoxRecord;
-        private System.Windows.Forms.GroupBoxTS grpPlayback;
-        private System.Windows.Forms.ButtonTS btnStop;
-        private System.Windows.Forms.CheckBoxTS checkBoxPause;
-        private System.Windows.Forms.ButtonTS btnPrevious;
-        private System.Windows.Forms.ButtonTS btnNext;
-        public System.Windows.Forms.ListBox lstPlaylist;
-        private System.Windows.Forms.ButtonTS btnAdd;
-        private System.Windows.Forms.ButtonTS btnRemove;
-        private System.Windows.Forms.CheckBoxTS checkBoxRandom;
-        private System.Windows.Forms.GroupBox grpPlaylist;
-        private System.Windows.Forms.TextBoxTS txtCurrentFile;
-        private System.Windows.Forms.LabelTS lblCurrentlyPlaying;
-        private System.Windows.Forms.CheckBoxTS checkBoxLoop;
-        private System.Windows.Forms.MainMenu mainMenu1;
-        private System.Windows.Forms.MenuItem mnuWaveOptions;
-        public System.Windows.Forms.NumericUpDownTS udPreamp;
-        private System.Windows.Forms.GroupBoxTS groupBoxTS1;
-        private System.Windows.Forms.CheckBoxTS chkQuickRec;
-        private System.Windows.Forms.CheckBoxTS chkQuickPlay;
-
-        public System.Windows.Forms.TrackBar tbPreamp;
-        public System.Windows.Forms.CheckBoxTS TXIDBoxTS; // ke9ns add
-        public System.Windows.Forms.CheckBoxTS createBoxTS; // ke9ns add
-        public System.Windows.Forms.CheckBoxTS chkQuickAudioFolder; // ke9ns add
-        private System.Windows.Forms.TextBox textBox1;
-        public System.Windows.Forms.CheckBoxTS chkBoxMP3;
-        public System.Windows.Forms.CheckBoxTS checkBoxVoice;
-        public System.Windows.Forms.CheckBoxTS checkBoxCW;
-        public System.Windows.Forms.CheckBoxTS checkBoxCQ;
-        private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.GroupBoxTS groupBoxTS2;
-        public System.Windows.Forms.CheckBoxTS checkBoxTS1;
-        public System.Windows.Forms.CheckBoxTS checkBoxTS2;
-        public System.Windows.Forms.CheckBoxTS chkAlwaysOnTop;
-        public System.Windows.Forms.CheckBoxTS checkBoxVK2;
-        public System.Windows.Forms.CheckBoxTS checkBoxVK1;
-
-        private System.ComponentModel.IContainer components;
-
-        #endregion
+       
 
         #region Windows Form Designer generated code
         /// <summary>
@@ -647,6 +602,52 @@ namespace PowerSDR
 
         }
         #endregion
+
+       
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.CheckBoxTS checkBoxPlay;
+        private System.Windows.Forms.GroupBoxTS groupBox2;
+        public System.Windows.Forms.CheckBoxTS checkBoxRecord;
+        private System.Windows.Forms.GroupBoxTS grpPlayback;
+        private System.Windows.Forms.ButtonTS btnStop;
+        private System.Windows.Forms.CheckBoxTS checkBoxPause;
+        private System.Windows.Forms.ButtonTS btnPrevious;
+        private System.Windows.Forms.ButtonTS btnNext;
+        public System.Windows.Forms.ListBox lstPlaylist;
+        private System.Windows.Forms.ButtonTS btnAdd;
+        private System.Windows.Forms.ButtonTS btnRemove;
+        private System.Windows.Forms.CheckBoxTS checkBoxRandom;
+        private System.Windows.Forms.GroupBox grpPlaylist;
+        private System.Windows.Forms.TextBoxTS txtCurrentFile;
+        private System.Windows.Forms.LabelTS lblCurrentlyPlaying;
+        private System.Windows.Forms.CheckBoxTS checkBoxLoop;
+        private System.Windows.Forms.MainMenu mainMenu1;
+        private System.Windows.Forms.MenuItem mnuWaveOptions;
+        public System.Windows.Forms.NumericUpDownTS udPreamp;
+        private System.Windows.Forms.GroupBoxTS groupBoxTS1;
+        private System.Windows.Forms.CheckBoxTS chkQuickRec;
+        private System.Windows.Forms.CheckBoxTS chkQuickPlay;
+
+        public System.Windows.Forms.TrackBar tbPreamp;
+        public System.Windows.Forms.CheckBoxTS TXIDBoxTS; // ke9ns add
+        public System.Windows.Forms.CheckBoxTS createBoxTS; // ke9ns add
+        public System.Windows.Forms.CheckBoxTS chkQuickAudioFolder; // ke9ns add
+        private System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.CheckBoxTS chkBoxMP3;
+        public System.Windows.Forms.CheckBoxTS checkBoxVoice;
+        public System.Windows.Forms.CheckBoxTS checkBoxCW;
+        public System.Windows.Forms.CheckBoxTS checkBoxCQ;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.GroupBoxTS groupBoxTS2;
+        public System.Windows.Forms.CheckBoxTS checkBoxTS1;
+        public System.Windows.Forms.CheckBoxTS checkBoxTS2;
+        public System.Windows.Forms.CheckBoxTS chkAlwaysOnTop;
+        public System.Windows.Forms.CheckBoxTS checkBoxVK2;
+        public System.Windows.Forms.CheckBoxTS checkBoxVK1;
+
+        private System.ComponentModel.IContainer components;
+
+       
 
     }
 

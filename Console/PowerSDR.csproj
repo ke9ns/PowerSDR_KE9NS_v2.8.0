@@ -319,8 +319,14 @@
     <Compile Include="CAT\CATTester.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="CAT\CATTester.Designer.cs">
+      <DependentUpon>CATTester.cs</DependentUpon>
+    </Compile>
     <Compile Include="CAT\RemoteProfiles.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CAT\RemoteProfiles.Designer.cs">
+      <DependentUpon>RemoteProfiles.cs</DependentUpon>
     </Compile>
     <Compile Include="CAT\SDRSerialPortII2.cs" />
     <Compile Include="CAT\SDRSerialPortII3.cs" />
@@ -354,11 +360,68 @@
     <Compile Include="console.Designer.cs">
       <DependentUpon>console.cs</DependentUpon>
     </Compile>
+    <Compile Include="cwedit.Designer.cs">
+      <DependentUpon>cwedit.cs</DependentUpon>
+    </Compile>
     <Compile Include="cwx.Designer.cs">
       <DependentUpon>cwx.cs</DependentUpon>
     </Compile>
+    <Compile Include="DiversityForm.Designer.cs">
+      <DependentUpon>DiversityForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DSPTestForm.Designer.cs">
+      <DependentUpon>DSPTestForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="eqform.Designer.cs">
       <DependentUpon>eqform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FilterForm.Designer.cs">
+      <DependentUpon>FilterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FLEX3000ATUForm.Designer.cs">
+      <DependentUpon>FLEX3000ATUForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FWC\FLEX3000MixerForm.Designer.cs">
+      <DependentUpon>FLEX3000MixerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FWC\FLEX3000TestForm.Designer.cs">
+      <DependentUpon>FLEX3000TestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FWC\FLEX5000DebugForm.Designer.cs">
+      <DependentUpon>FLEX5000DebugForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FWC\FLEX5000FinalTestForm.Designer.cs">
+      <DependentUpon>FLEX5000FinalTestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FWC\FLEX5000LLHWForm.Designer.cs">
+      <DependentUpon>FLEX5000LLHWForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FWC\FLEX5000LPFForm.Designer.cs">
+      <DependentUpon>FLEX5000LPFForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FWC\FLEX5000ProdTestForm.Designer.cs">
+      <DependentUpon>FLEX5000ProdTestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FWC\FLEX5000RelayForm.Designer.cs">
+      <DependentUpon>FLEX5000RelayForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FWC\FLEX5000RX2CalForm.Designer.cs">
+      <DependentUpon>FLEX5000RX2CalForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FWC\fwcAntForm.Designer.cs">
+      <DependentUpon>fwcAntForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FWC\fwcatuform.Designer.cs">
+      <DependentUpon>fwcatuform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FWC\fwcCalForm.Designer.cs">
+      <DependentUpon>fwcCalForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FWC\fwcmixform.Designer.cs">
+      <DependentUpon>fwcmixform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FWC\fwcTestForm.Designer.cs">
+      <DependentUpon>fwcTestForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GDF\GDFBuilder.cs" />
     <Compile Include="GDF\GDFBuilder.UnWrapped.cs" />
@@ -382,6 +445,12 @@
     </Compile>
     <Compile Include="helpbox1.Designer.cs">
       <DependentUpon>helpbox1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="hid\FLEX1500MixerForm.Designer.cs">
+      <DependentUpon>FLEX1500MixerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="hid\hidAntForm.Designer.cs">
+      <DependentUpon>hidAntForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Http.cs" />
     <Compile Include="ColorButton.cs">
@@ -590,6 +659,15 @@
     <Compile Include="helpbox.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="IDBOX.Designer.cs">
+      <DependentUpon>IDBOX.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InputBox.Designer.cs">
+      <DependentUpon>InputBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="logon.Designer.cs">
+      <DependentUpon>logon.cs</DependentUpon>
+    </Compile>
     <Compile Include="RTF\IRTFCell.cs" />
     <Compile Include="RTF\IRtfProcessor.cs" />
     <Compile Include="RTF\IRTFRow.cs" />
@@ -626,6 +704,9 @@
     </Compile>
     <Compile Include="stack.Designer.cs">
       <DependentUpon>stack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="swl.Designer.cs">
+      <DependentUpon>swl.cs</DependentUpon>
     </Compile>
     <Compile Include="TOTBOX.cs">
       <SubType>Form</SubType>
@@ -764,6 +845,9 @@
     <Compile Include="tdxstub.cs" />
     <Compile Include="ThreadedBindingList.cs" />
     <Compile Include="titlebar.cs" />
+    <Compile Include="TOTBOX.Designer.cs">
+      <DependentUpon>TOTBOX.cs</DependentUpon>
+    </Compile>
     <Compile Include="TuneStep.cs" />
     <Compile Include="ucb.cs">
       <SubType>Code</SubType>
@@ -776,6 +860,9 @@
     </Compile>
     <Compile Include="LegacyForm.Designer.cs">
       <DependentUpon>LegacyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucbform.Designer.cs">
+      <DependentUpon>ucbform.cs</DependentUpon>
     </Compile>
     <Compile Include="usb.cs">
       <SubType>Code</SubType>
@@ -794,6 +881,9 @@
     </Compile>
     <Compile Include="wave_options.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="wave_options.Designer.cs">
+      <DependentUpon>wave_options.cs</DependentUpon>
     </Compile>
     <Compile Include="win32.cs">
       <SubType>Code</SubType>

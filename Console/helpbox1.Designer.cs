@@ -33,17 +33,6 @@ namespace PowerSDR
     public partial class helpbox1 : System.Windows.Forms.Form
     {
       
-        #region Variable Declaration
-        private System.ComponentModel.IContainer components;
-        private System.Windows.Forms.CheckBoxTS chkAlwaysOnTop;
-        private System.Windows.Forms.TrackBar zoomSlider;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ToolTip toolTip1;
-
-       
-        #endregion
-
    
         #region Windows Form Designer generated code
         /// <summary>
@@ -139,8 +128,17 @@ namespace PowerSDR
         }
         #endregion
 
-   
-      
+       
+        private System.ComponentModel.IContainer components;
+        private System.Windows.Forms.CheckBoxTS chkAlwaysOnTop;
+        private System.Windows.Forms.TrackBar zoomSlider;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolTip toolTip1;
+
+
+       
+
     } // helpbox1
 
 } // PowerSDR

@@ -18628,9 +18628,9 @@ namespace PowerSDR
 
                 PWM1A = (int)Math.Floor(((PWM1 / (float)W) * (float)num_samples)); // this is supposed to be the # of points in the data stream array to move
 
-                Debug.WriteLine("228: " + PWM1A + " W:" + W + " N:"+num_samples + " P:"+ PWM1 + " P4:" + PWM4 + " S:" + slope + " P2:"+ PWM2A_DIFF);
+              //  Debug.WriteLine("228: " + PWM1A + " W:" + W + " N:"+num_samples + " P:"+ PWM1 + " P4:" + PWM4 + " S:" + slope + " P2:"+ PWM2A_DIFF);
 
-                Debug.WriteLine("228: " + Math.Abs(PWM1A));
+             //   Debug.WriteLine("228: " + Math.Abs(PWM1A));
 
 
                 if ((Math.Abs(PWM1A) < num_samples) && PWM1A != 0) // check for valid number

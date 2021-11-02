@@ -25,19 +25,7 @@ namespace PowerSDR
 {
     public partial class StackControl: System.Windows.Forms.Form
     {
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.GroupBoxTS grpPlayback;
-        private System.Windows.Forms.GroupBox grpPlaylist;
-        private System.Windows.Forms.MainMenu mainMenu1;
-        public System.Windows.Forms.CheckBoxTS chkAlwaysOnTop;
-        public System.Windows.Forms.TextBox textBox1;
-        public System.Windows.Forms.Button buttonSort;
-        public System.Windows.Forms.Button buttonAdd;
-        public System.Windows.Forms.Button buttonDel;
-        private System.Windows.Forms.TextBox textBox3;
-        public System.Windows.Forms.TextBox textBox2;
-        private System.ComponentModel.IContainer components;
-
+      
 
         #region Windows Form Designer generated code
         /// <summary>
@@ -185,7 +173,20 @@ namespace PowerSDR
 
         #endregion
 
-    
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.GroupBoxTS grpPlayback;
+        private System.Windows.Forms.GroupBox grpPlaylist;
+        private System.Windows.Forms.MainMenu mainMenu1;
+        public System.Windows.Forms.CheckBoxTS chkAlwaysOnTop;
+        public System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.Button buttonSort;
+        public System.Windows.Forms.Button buttonAdd;
+        public System.Windows.Forms.Button buttonDel;
+        private System.Windows.Forms.TextBox textBox3;
+        public System.Windows.Forms.TextBox textBox2;
+        private System.ComponentModel.IContainer components;
+
+
     } // stackcontrol
 
 } // powersdr

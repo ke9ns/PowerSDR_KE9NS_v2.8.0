@@ -35,33 +35,6 @@ namespace PowerSDR
     public partial class helpbox : System.Windows.Forms.Form
     {
 
-        
-        #region Variable Declaration
-
-        private System.ComponentModel.IContainer components;
-        private  System.Windows.Forms.CheckBoxTS chkAlwaysOnTop;
-        public  System.Windows.Forms.RichTextBox txttimer_message;
-        public  System.Windows.Forms.RichTextBox helpbox_message;
-        public  System.Windows.Forms.RichTextBox solar_message;
-        public  System.Windows.Forms.RichTextBox recplay_message;
-        public  System.Windows.Forms.RichTextBox PropagationTextBox;
-        public  System.Windows.Forms.RichTextBox TRACKMap;
-        public  System.Windows.Forms.RichTextBox SWRScanner;
-        public  System.Windows.Forms.RichTextBox AntennaDelay;
-        public  System.Windows.Forms.RichTextBox HTTPSERVER;
-        public  System.Windows.Forms.GroupBox groupBox1;
-        public  System.Windows.Forms.Button button2;
-        public  System.Windows.Forms.Button button1;
-        public  System.Windows.Forms.Button button3;
-        public  System.Windows.Forms.RichTextBox LoTW_help;
-        public  System.Windows.Forms.WebBrowser webBrowser1;
-        private  System.Windows.Forms.ToolTip toolTip1;
-
-        // public static helpbox helpboxForm;                       // ke9ns add 
-
-        #endregion
-
-     
 
         #region Windows Form Designer generated code
         /// <summary>
@@ -293,6 +266,25 @@ namespace PowerSDR
 
         }
         #endregion
+
+        private System.ComponentModel.IContainer components;
+        private System.Windows.Forms.CheckBoxTS chkAlwaysOnTop;
+        public System.Windows.Forms.RichTextBox txttimer_message;
+        public System.Windows.Forms.RichTextBox helpbox_message;
+        public System.Windows.Forms.RichTextBox solar_message;
+        public System.Windows.Forms.RichTextBox recplay_message;
+        public System.Windows.Forms.RichTextBox PropagationTextBox;
+        public System.Windows.Forms.RichTextBox TRACKMap;
+        public System.Windows.Forms.RichTextBox SWRScanner;
+        public System.Windows.Forms.RichTextBox AntennaDelay;
+        public System.Windows.Forms.RichTextBox HTTPSERVER;
+        public System.Windows.Forms.GroupBox groupBox1;
+        public System.Windows.Forms.Button button2;
+        public System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Button button3;
+        public System.Windows.Forms.RichTextBox LoTW_help;
+        public System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.ToolTip toolTip1;
 
        
 
