@@ -112,17 +112,17 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="rtxtWarning.Text" xml:space="preserve">
     <value>Warning: PowerSDR has detected that your PC has less than or equal to 1 GB of RAM installed.  
 
-Although PowerSDR does not require 1 GB of RAM to operate, Windows may not operate efficiently with insufficient physical RAM installed which can adversly effect the how PowerSDR performs.  For 32-bit operating systems 2 to 4 GB of RAM is recommended.  For 64-bit operating systems 4 or more GB or RAM is recommended. </value>
+Although PowerSDR does not require 1GB of RAM to operate, Windows may not operate efficiently with insufficient physical RAM installed which can adversly effect the how PowerSDR performs.  For 32-bit operating systems 8 to 16 GB of RAM is recommended.  For 64-bit operating systems 16 or more GB or RAM is recommended. </value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAMAEBAAAAAAIABoBAAANgAAACAgAAAAACAAqBAAAJ4EAAAwMAAAAAAgAKglAABGFQAAKAAAABAA

@@ -37,7 +37,7 @@ using System.Windows.Forms;
 
 namespace PowerSDR
 {
-    public class Splash : System.Windows.Forms.Form
+    public partial class Splash : System.Windows.Forms.Form
     {
         #region Variable Declarations
 
@@ -46,9 +46,9 @@ namespace PowerSDR
         static Thread ms_oThread = null;
 
         // Fade in and out.
-        private double m_dblOpacityIncrement = .07;
-        private double m_dblOpacityDecrement = .035;
-        private const int TIMER_INTERVAL = 50;
+        private double m_dblOpacityIncrement = .07;  // .07
+        private double m_dblOpacityDecrement = .035;  // .035
+        private const int TIMER_INTERVAL = 20;  // was 50 ke9ns
 
         // Status and progress bar
         private string m_sStatus;
@@ -57,7 +57,7 @@ namespace PowerSDR
 
         // Progress smoothing
         private double m_dblLastCompletionFraction = 0.0;
-        private double m_dblPBIncrementPerTimerInterval = .015;
+        private double m_dblPBIncrementPerTimerInterval = .015;   //.015
 
         // Self-calibration support
         private bool m_bFirstLaunch = false;
@@ -70,12 +70,7 @@ namespace PowerSDR
         private const string REG_KEY_INITIALIZATION = "Initialization";
         private const string REGVALUE_PB_MILISECOND_INCREMENT = "Increment";
         private const string REGVALUE_PB_PERCENTS = "Percents";
-        private System.Windows.Forms.LabelTS lblTimeRemaining;
-        private System.Windows.Forms.LabelTS lblStatus;
-        private System.Windows.Forms.Panel pnlStatus;
-        private System.Windows.Forms.Timer timer1;
-        public TextBox textBox1;
-        private System.ComponentModel.IContainer components = null;
+       
 
         #endregion
 
@@ -112,92 +107,7 @@ namespace PowerSDR
 
         #endregion
 
-        #region Windows Form Designer generated code
-
-        private void InitializeComponent()
-        {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Splash));
-            this.pnlStatus = new System.Windows.Forms.Panel();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.lblTimeRemaining = new System.Windows.Forms.LabelTS();
-            this.lblStatus = new System.Windows.Forms.LabelTS();
-            this.SuspendLayout();
-            // 
-            // pnlStatus
-            // 
-            this.pnlStatus.BackColor = System.Drawing.Color.Transparent;
-            this.pnlStatus.Location = new System.Drawing.Point(50, 247);
-            this.pnlStatus.Name = "pnlStatus";
-            this.pnlStatus.Size = new System.Drawing.Size(475, 24);
-            this.pnlStatus.TabIndex = 2;
-            this.pnlStatus.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlStatus_Paint);
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 50;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.Color.Yellow;
-            this.textBox1.Location = new System.Drawing.Point(130, 152);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(115, 24);
-            this.textBox1.TabIndex = 3;
-            this.textBox1.TabStop = false;
-            this.textBox1.Text = "v2.8.0.0";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            this.textBox1.VisibleChanged += new System.EventHandler(this.textBox1_VisibleChanged);
-            // 
-            // lblTimeRemaining
-            // 
-            this.lblTimeRemaining.BackColor = System.Drawing.Color.Transparent;
-            this.lblTimeRemaining.ForeColor = System.Drawing.Color.White;
-            this.lblTimeRemaining.Image = null;
-            this.lblTimeRemaining.Location = new System.Drawing.Point(296, 289);
-            this.lblTimeRemaining.Name = "lblTimeRemaining";
-            this.lblTimeRemaining.Size = new System.Drawing.Size(100, 16);
-            this.lblTimeRemaining.TabIndex = 1;
-            this.lblTimeRemaining.Text = "Time";
-            // 
-            // lblStatus
-            // 
-            this.lblStatus.BackColor = System.Drawing.Color.Transparent;
-            this.lblStatus.ForeColor = System.Drawing.Color.White;
-            this.lblStatus.Image = null;
-            this.lblStatus.Location = new System.Drawing.Point(0, 287);
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(400, 16);
-            this.lblStatus.TabIndex = 0;
-            this.lblStatus.Text = "Status";
-            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Splash
-            // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(600, 384);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.pnlStatus);
-            this.Controls.Add(this.lblTimeRemaining);
-            this.Controls.Add(this.lblStatus);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximizeBox = false;
-            this.Name = "Splash";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Splash";
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
-        }
-        #endregion
+     
 
         #region Static Methods
         // ************* Static Methods *************** //
@@ -300,10 +210,8 @@ namespace PowerSDR
             double dblMilliseconds = ElapsedMilliSeconds();
             m_alActualTimes.Add(dblMilliseconds);
             m_dblLastCompletionFraction = m_dblCompletionFraction;
-            if (m_alPreviousCompletionFraction != null
-                && m_iIndex < m_alPreviousCompletionFraction.Count)
-                m_dblCompletionFraction =
-                    (double)m_alPreviousCompletionFraction[m_iIndex++];
+            if (m_alPreviousCompletionFraction != null  && m_iIndex < m_alPreviousCompletionFraction.Count)
+                m_dblCompletionFraction = (double)m_alPreviousCompletionFraction[m_iIndex++];
             else
                 m_dblCompletionFraction = (m_iIndex > 0) ? 1 : 0;
         }
@@ -321,9 +229,7 @@ namespace PowerSDR
         // splashscreen from the registry.
         private void ReadIncrements()
         {
-            string sPBIncrementPerTimerInterval =
-                RegistryAccess.GetStringRegistryValue(
-                REGVALUE_PB_MILISECOND_INCREMENT, "0.0015");
+            string sPBIncrementPerTimerInterval =RegistryAccess.GetStringRegistryValue( REGVALUE_PB_MILISECOND_INCREMENT, "0.0015");
             double dblResult;
 
             if (Double.TryParse(sPBIncrementPerTimerInterval,
@@ -345,10 +251,7 @@ namespace PowerSDR
                 for (int i = 0; i < aTimes.Length; i++)
                 {
                     double dblVal;
-                    if (Double.TryParse(aTimes[i],
-                        System.Globalization.NumberStyles.Float,
-                        System.Globalization.NumberFormatInfo.InvariantInfo,
-                        out dblVal))
+                    if (Double.TryParse(aTimes[i], System.Globalization.NumberStyles.Float,System.Globalization.NumberFormatInfo.InvariantInfo, out dblVal))
                         m_alPreviousCompletionFraction.Add(dblVal);
                     else
                         m_alPreviousCompletionFraction.Add(1.0);
@@ -399,25 +302,21 @@ namespace PowerSDR
             if (m_dblOpacityIncrement > 0)
             {
                 m_iActualTicks++;
-                if (this.Opacity < 1)
-                    this.Opacity += m_dblOpacityIncrement;
+                if (this.Opacity < 1)  this.Opacity += m_dblOpacityIncrement;
             }
             else
             {
-                if (this.Opacity > 0)
-                    this.Opacity += m_dblOpacityIncrement;
+                if (this.Opacity > 0)  this.Opacity += m_dblOpacityIncrement;
                 else
                 {
                     StoreIncrements();
                     this.Close();
                 }
             }
-            if (m_bFirstLaunch == false && m_dblLastCompletionFraction
-                < m_dblCompletionFraction)
+            if (m_bFirstLaunch == false && m_dblLastCompletionFraction < m_dblCompletionFraction)
             {
                 m_dblLastCompletionFraction += m_dblPBIncrementPerTimerInterval;
-                int width = (int)Math.Floor(
-                    pnlStatus.ClientRectangle.Width * m_dblLastCompletionFraction);
+                int width = (int)Math.Floor(pnlStatus.ClientRectangle.Width * m_dblLastCompletionFraction);
                 int height = pnlStatus.ClientRectangle.Height;
                 int x = pnlStatus.ClientRectangle.X;
                 int y = pnlStatus.ClientRectangle.Y;
@@ -425,14 +324,10 @@ namespace PowerSDR
                 {
                     m_rProgress = new Rectangle(x, y, width, height);
                     pnlStatus.Invalidate(m_rProgress);
-                    int iSecondsLeft = 1 + (int)(TIMER_INTERVAL *
-                        ((1.0 - m_dblLastCompletionFraction) /
-                        m_dblPBIncrementPerTimerInterval)) / 1000;
-                    if (iSecondsLeft == 1)
-                        lblTimeRemaining.Text = string.Format("1 second");
+                    int iSecondsLeft = 1 + (int)(TIMER_INTERVAL * ((1.0 - m_dblLastCompletionFraction) / m_dblPBIncrementPerTimerInterval)) / 1000;
+                    if (iSecondsLeft == 1) lblTimeRemaining.Text = string.Format("1 second");
                     else
-                        lblTimeRemaining.Text = string.Format("{0} seconds",
-                            iSecondsLeft);
+                        lblTimeRemaining.Text = string.Format("{0} seconds", iSecondsLeft);
 
                 }
             }
@@ -465,17 +360,6 @@ namespace PowerSDR
 
 
         #endregion
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_VisibleChanged(object sender, EventArgs e)
-        {
-
-
-        }
 
 
     } // class Splash 

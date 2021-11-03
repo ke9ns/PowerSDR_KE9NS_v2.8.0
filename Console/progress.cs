@@ -35,15 +35,11 @@ using System.Windows.Forms;
 
 namespace PowerSDR
 {
-    public class Progress : System.Windows.Forms.Form
+    public  partial class Progress : System.Windows.Forms.Form
     {
         #region Variable Declaration
 
         private float percent_done;
-
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ButtonTS btnAbort;
-        private System.ComponentModel.Container components = null;
 
         #endregion
 
@@ -72,51 +68,7 @@ namespace PowerSDR
         }
 
         #endregion
-
-        #region Windows Form Designer generated code
-
-        private void InitializeComponent()
-        {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Progress));
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnAbort = new System.Windows.Forms.ButtonTS();
-            this.SuspendLayout();
-            // 
-            // panel1
-            // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Location = new System.Drawing.Point(16, 16);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(208, 24);
-            this.panel1.TabIndex = 0;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // btnAbort
-            // 
-            this.btnAbort.Image = null;
-            this.btnAbort.Location = new System.Drawing.Point(240, 16);
-            this.btnAbort.Name = "btnAbort";
-            this.btnAbort.Size = new System.Drawing.Size(75, 23);
-            this.btnAbort.TabIndex = 1;
-            this.btnAbort.Text = "Abort";
-            this.btnAbort.Click += new System.EventHandler(this.btnAbort_Click);
-            // 
-            // Progress
-            // 
-            this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.ClientSize = new System.Drawing.Size(330, 56);
-            this.Controls.Add(this.btnAbort);
-            this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Progress";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "progress";
-            this.Closing += new System.ComponentModel.CancelEventHandler(this.Progress_Closing);
-            this.ResumeLayout(false);
-
-        }
-        #endregion
+        
 
         #region Misc Routines
 

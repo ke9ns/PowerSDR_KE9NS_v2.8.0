@@ -668,6 +668,21 @@
     <Compile Include="logon.Designer.cs">
       <DependentUpon>logon.cs</DependentUpon>
     </Compile>
+    <Compile Include="paqualify.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="paqualify.Designer.cs">
+      <DependentUpon>paqualify.cs</DependentUpon>
+    </Compile>
+    <Compile Include="production_debug.Designer.cs">
+      <DependentUpon>production_debug.cs</DependentUpon>
+    </Compile>
+    <Compile Include="production_test.Designer.cs">
+      <DependentUpon>production_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="progress.Designer.cs">
+      <DependentUpon>progress.cs</DependentUpon>
+    </Compile>
     <Compile Include="RTF\IRTFCell.cs" />
     <Compile Include="RTF\IRtfProcessor.cs" />
     <Compile Include="RTF\IRTFRow.cs" />
@@ -692,6 +707,9 @@
     </Compile>
     <Compile Include="setup.Designer.cs">
       <DependentUpon>setup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="splash.Designer.cs">
+      <DependentUpon>splash.cs</DependentUpon>
     </Compile>
     <Compile Include="spot.Designer.cs">
       <DependentUpon>spot.cs</DependentUpon>
@@ -770,9 +788,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="mobilewarnform.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="paqualify.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="parallel.cs" />
@@ -932,6 +947,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="helpbox.resx">
       <DependentUpon>helpbox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="paqualify.resx">
+      <DependentUpon>paqualify.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="spot_decoder.resx">
@@ -1151,10 +1170,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="mobilewarnform.resx">
       <DependentUpon>mobilewarnform.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="paqualify.resx">
-      <DependentUpon>paqualify.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="production_debug.resx">
