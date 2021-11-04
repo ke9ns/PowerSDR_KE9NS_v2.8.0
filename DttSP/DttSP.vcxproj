@@ -168,7 +168,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>winMM.lib;libfftw3f-3.lib;pthreadVC.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>../../bin/Debug/DttSP.dll</OutputFile>
+      <OutputFile>../bin/Debug/DttSP.dll</OutputFile>
       <Version>
       </Version>
       <ModuleDefinitionFile>./DttSP.def</ModuleDefinitionFile>
