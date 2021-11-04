@@ -1563,6 +1563,9 @@ namespace PowerSDR
             ST3.Stop();
 
             btnGroupMemory.BackColor = SystemColors.ControlLight;
+
+            ScanStop = 1;
+            ScanRun = false;
             //   scantype = 0;
 
         } // SCAN1()

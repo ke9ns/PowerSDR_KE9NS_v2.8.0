@@ -2777,7 +2777,11 @@ namespace PowerSDR
         public bool VAC2Enable
         {
             get { return chkVAC2Enable.Checked; }
-            set { chkVAC2Enable.Checked = value; }
+            set
+            {
+               
+                chkVAC2Enable.Checked = value; 
+            }
         }
 
         public int SoundCardIndex
@@ -5007,6 +5011,7 @@ namespace PowerSDR
 
             if (power && val != old_val)
             {
+
                 console.PowerOn = false;
                 Thread.Sleep(500);
             }

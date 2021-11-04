@@ -37470,8 +37470,15 @@ namespace PowerSDR
 
         public bool PowerOn
         {
-            get { return chkPower.Checked; }
-            set { chkPower.Checked = value; }
+            get 
+            {
+                return chkPower.Checked;
+            }
+            set
+            {
+             
+                chkPower.Checked = value;
+            }
         }
 
         public bool PowerEnabled
@@ -54321,7 +54328,7 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
 
                 UpdateVFOASub();
 
-                if (rx2_enabled) chkRX2_CheckedChanged(this, EventArgs.Empty);
+                if (rx2_enabled && PowerRX2Pause == false) chkRX2_CheckedChanged(this, EventArgs.Empty); //.233 mod add PowerRX2Pause
                 if (chkEnableMultiRX.Checked) chEnableMultiRX_CheckedChanged(this, EventArgs.Empty);
                 if (chkVFOSplit.Checked) chkVFOSplit_CheckedChanged(this, EventArgs.Empty);
 
@@ -59101,6 +59108,9 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
         //================================================================================================
         private void chkVAC2_CheckedChanged(object sender, EventArgs e)
         {
+            PowerRX2Pause = true; //.233
+
+           
             if (setupForm != null) setupForm.VAC2Enable = chkVAC2.Checked;  // ke9ns if you check vac2 from setup form then update here as well
 
             //  if (!fwc_init || current_model != Model.FLEX5000 || !FWCEEPROM.RX2OK || !chkRX2.Checked)
@@ -59115,6 +59125,7 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
                     chkVOX.BackColor = SystemColors.Control;
                 }
 
+                PowerRX2Pause = false; //.233
                 return;
             }
 
@@ -59161,6 +59172,8 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
 
             }
             else chkVAC2.BackColor = SystemColors.Control;
+
+            PowerRX2Pause = false; //.233
 
         } // chkVAC2
 
@@ -69314,12 +69327,13 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
         } // RX2Enabled
 
 
+        public bool PowerRX2Pause = false; // .233 ke9ns add true: VAC toggling or buffer size change, will pause (Power OFF/ON) to prevent a crash of Win10
 
         //=========================================================================================
         private void chkRX2_CheckedChanged(object sender, System.EventArgs e)
         {
 
-          
+           
             RX2Enabled = chkRX2.Checked;
 
             if (chkRX2.Checked == true) // .157
@@ -69327,10 +69341,11 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
               
                 if (setupForm != null) // .231
                 {
-                    if (setupForm.chkRX2AutoVAC2.Checked == true)
+                    if (setupForm.chkRX2AutoVAC2.Checked == true && PowerRX2Pause == false)
                     {
-                        setupForm.chkVAC2Enable.Checked = true;
-
+                       
+                           setupForm.chkVAC2Enable.Checked = true;
+                      
                     }
                 }
 
@@ -69362,11 +69377,13 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
 
                 if (setupForm != null) // .231
                 {
-                    if (setupForm.chkRX2AutoVAC2.Checked == true)
+                    if (setupForm.chkRX2AutoVAC2.Checked == true && PowerRX2Pause == false)
                     {
+                       
                         setupForm.chkVAC2Enable.Checked = false;
-
+                     
                     }
+                   
                 }
 
             }
