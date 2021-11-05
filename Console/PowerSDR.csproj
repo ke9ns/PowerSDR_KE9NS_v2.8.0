@@ -1000,6 +1000,7 @@
     <None Include="Resources\VFOred.png" />
     <None Include="Resources\newvfo.png" />
     <Content Include="Resources\blue1.png" />
+    <None Include="Resources\DRAP.bmp" />
     <Content Include="Resources\panGray.png" />
     <Content Include="Resources\PanRed.png" />
     <Content Include="Resources\red1.png" />

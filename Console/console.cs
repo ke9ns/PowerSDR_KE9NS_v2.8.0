@@ -51507,7 +51507,52 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
 
         private void Console_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
         {
-
+/*
+            if (e.KeyChar == (char)Keys.D1)
+            {
+                SpotForm.D1--;
+                return;
+            }
+            if (e.KeyChar == (char)Keys.D2)
+            {
+                SpotForm.D1++;
+                return;
+            }
+            if (e.KeyChar == (char)Keys.D3)
+            {
+                SpotForm.D2--;
+                return;
+            }
+            if (e.KeyChar == (char)Keys.D4)
+            {
+                SpotForm.D2++;
+                return;
+            }
+            if (e.KeyChar == (char)Keys.D5)
+            {
+                SpotForm.D3 = SpotForm.D3 - 10;
+                return;
+            }
+            if (e.KeyChar == (char)Keys.D6)
+            {
+                SpotForm.D3 = SpotForm.D3 + 10;
+               
+                return;
+            }
+            if (e.KeyChar == (char)Keys.D7)
+            {
+                SpotForm.D4 = SpotForm.D4 - 10;
+              
+                return;
+            }
+            if (e.KeyChar == (char)Keys.D8)
+            {
+                SpotForm.D4 = SpotForm.D4 + 10;
+               
+                return;
+            }
+*/
+           
             //   Debug.WriteLine("console_keypress");
 
             if (setupForm != null && setupForm.chkBoxPTT.Checked == true) // ke9ns add: for spacebar PTT function
@@ -78443,14 +78488,25 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
 
 
 
-
+        public bool DRAPON = false; // .234 true = display DRAP overlay
 
         //=====================================================================
         // ke9ns add
         private void txtNOAA_MouseDown(object sender, MouseEventArgs e)
         {
 
-            if (noaaON == 0)
+            MouseEventArgs me = (MouseEventArgs)e;
+            if ((me.Button == System.Windows.Forms.MouseButtons.Middle)) // .234
+            {
+
+                if (DRAPON == false) DRAPON = true;
+                else DRAPON = false;
+
+            }
+
+
+
+                if (noaaON == 0)
             {
                 LOCALWEATHER = false;
                 noaaON = 1; // turn on space weather
@@ -78559,6 +78615,22 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
             }
 
             OpenWeather = false;
+
+           
+                Debug.WriteLine("NOAA DRAP image capture");
+            try
+            {
+                using (WebClient client = new WebClient()) //.234
+                {
+                    //   client.DownloadFileAsync(new Uri("https://services.swpc.noaa.gov/images/drap_global.png"), @"c:\temp\DRAP.png");
+                    client.DownloadFileAsync(new Uri("https://services.swpc.noaa.gov/images/drap_global.png"), AppDataPath + "DRAP.png");
+                   
+                }
+            }
+            catch (Exception g)
+            {
+                Debug.WriteLine("Unable to get DRAP image from noaa: " + g);
+            }
 
             string currweth1 = httpFile.Weather(); // get local weather data if in USA
             var xdoc = new XDocument();

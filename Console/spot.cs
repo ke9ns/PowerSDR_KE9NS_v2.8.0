@@ -220,6 +220,7 @@ namespace PowerSDR
 
         public static Stream Map_image2 = myAssembly2.GetManifestResourceStream("PowerSDR.Resources.picD2.png");     // MAP with lat / long on it
 
+       
         private static System.Reflection.Assembly myAssembly1 = System.Reflection.Assembly.GetExecutingAssembly();
         public static Stream sun_image = myAssembly1.GetManifestResourceStream("PowerSDR.Resources.sun.png");       // SUN
 
@@ -231,6 +232,8 @@ namespace PowerSDR
 
         private static System.Reflection.Assembly myAssembly3 = System.Reflection.Assembly.GetExecutingAssembly();
         public static Stream star_image = myAssembly3.GetManifestResourceStream("PowerSDR.Resources.star.png");      // star to indicate your transmitter based on your lat and long
+
+
 
         public static Console console;   // ke9ns mod  to allow console to pass back values to setup screen
 
@@ -13720,22 +13723,58 @@ namespace PowerSDR
         //==========================================================================
         // ke9ns add  (to allow you to lighten or darken the DX spotter world map)
 
+        public int D1 = 0;
+        public int D2 = 0;
+        public int D3 = 0;
+        public int D4 = 0;
         public void Darken()
         {
 
             MB = console.MB2; // map brightness
             MBG = console.MB3; // grayline brightness
 
-           
 
-            if ((Console.DXR == 0))
+            if (chkDLayerON.Checked) //.234
             {
-                MAP = Lighten(new Bitmap(Map_image), MBG, MB);
+                try
+                {
 
+                    // Image imag = Image.FromFile(@"C:\temp\DRAP.png");
+                    Image imag = Image.FromFile(console.AppDataPath + "DRAP.png");
+
+                    Bitmap img7 = new Bitmap(new Bitmap(imag)); // .234 to avoid indexed pixel format PNG issues
+
+                    Rectangle r = new Rectangle(-34, -13, 650, 300);
+
+                    Bitmap img8 = new Bitmap(770, 390); // map found within the DRAP.png image
+
+                    using (Graphics g = Graphics.FromImage(img8))
+                    {
+                        g.DrawImage(img7, -r.X, -r.Y);
+                    }
+
+                    MAP = Lighten(img8, MBG, MB);
+
+                }
+
+                catch (Exception ex)
+                {
+
+                   // MessageBox.Show(ex.Message);
+                    MAP = Lighten(new Bitmap(Map_image), MBG, MB);
+
+                }
             }
             else
             {
-                MAP = Lighten(new Bitmap(Map_image2), MBG, MB);
+                if ((Console.DXR == 0))
+                {
+                    MAP = Lighten(new Bitmap(Map_image), MBG, MB);
+                }
+                else
+                {
+                    MAP = Lighten(new Bitmap(Map_image2), MBG, MB);
+                }
             }
 
         } // Darken()
@@ -14944,6 +14983,11 @@ namespace PowerSDR
             pause = false;
             button1.Text = "Pause";
             processTCPMessage();
+        }
+
+        private void chkDLayerON_CheckedChanged(object sender, EventArgs e) //.234
+        {
+            Darken();
         }
     } //SPOTCONTROL
 
