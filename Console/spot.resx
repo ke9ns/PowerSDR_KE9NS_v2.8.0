@@ -238,9 +238,6 @@ RED LoTW  when a fault occured.
 
 To download a new fcc database: ftp://wirelessftp.fcc.gov/pub/uls/complete/l_amat.zip</value>
   </data>
-  <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>264, 17</value>
-  </metadata>
   <data name="chkFLayerON.ToolTip" xml:space="preserve">
     <value>Australian gov space weather service critical foF2-Layer world map. (Updated every 30min)
 Colors denoting the highest frequency the f2 ionosphere will reflect vertical signals back towards earth (NVIS)
@@ -388,6 +385,9 @@ Right Click on memory in Pan to open up Memory Comments URL internet address
 LEFT CLICK on PAN + ALT + M keys to save New Memory
 </value>
   </data>
+  <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>264, 17</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>47</value>
   </metadata>

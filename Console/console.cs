@@ -59127,11 +59127,12 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
         //=====================================================================================  
         private void chkVAC1_CheckedChanged(object sender, System.EventArgs e)
         {
+            PowerRX2Pause = true; //.235
+
             if (setupForm != null) setupForm.VACEnable = chkVAC1.Checked;
 
             if (chkVAC1.Checked)
             {
-
                 chkVAC1.BackColor = button_selected_color;
 
                 if (chkVOX.Checked)
@@ -59144,6 +59145,8 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
                 }
             }
             else chkVAC1.BackColor = SystemColors.Control;
+
+            PowerRX2Pause = false; //.235
 
         } // VAC1 clicked
 
@@ -69392,6 +69395,9 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
                            setupForm.chkVAC2Enable.Checked = true;
                       
                     }
+
+
+
                 }
 
                 CalcDisplayFreq(); //.225 add

@@ -13764,7 +13764,13 @@ namespace PowerSDR
                           g.DrawImage(img8, r1);  // this results in a d layer map with a empty boarder around all 4 edges.
                           g.DrawString("SWS foF2 Layer reflection: (min)RED->YELL->OLV->GRN->LGRN->LBLU->BGRY->BLU->DBLU->MARN->PUR->VIO->GRY(max)", font2, new SolidBrush(Color.Black), 55,20); // use Pandapdater holder[] data
                     }
-               
+
+                   // g.DrawString("VOACAP Propagation map", font7, grid_text_brush, Sun_Left, Sun_Top1);
+                   // g.DrawString("Max+", font7, bluebrush, Sun_Left, Sun_Top1 + 10);
+                  //  g.DrawString("Strong", font7, greenbrush, Sun_Left + 26, Sun_Top1 + 10);
+                  //  g.DrawString("Fair", font7, yellowbrush, Sun_Left + 59, Sun_Top1 + 10);
+                  //  g.DrawString("Weak", font7, orangebrush, Sun_Left + 80, Sun_Top1 + 10);
+                  //  g.DrawString("Min-", font7, graybrush, Sun_Left + 108, Sun_Top1 + 10);
 
                     MAP = Lighten(result, MBG, MB);
                 }
