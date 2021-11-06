@@ -51530,24 +51530,24 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
             }
             if (e.KeyChar == (char)Keys.D5)
             {
-                SpotForm.D3 = SpotForm.D3 - 10;
+                SpotForm.D3 = SpotForm.D3 - 1;
                 return;
             }
             if (e.KeyChar == (char)Keys.D6)
             {
-                SpotForm.D3 = SpotForm.D3 + 10;
+                SpotForm.D3 = SpotForm.D3 + 1;
                
                 return;
             }
             if (e.KeyChar == (char)Keys.D7)
             {
-                SpotForm.D4 = SpotForm.D4 - 10;
+                SpotForm.D4 = SpotForm.D4 - 1;
               
                 return;
             }
             if (e.KeyChar == (char)Keys.D8)
             {
-                SpotForm.D4 = SpotForm.D4 + 10;
+                SpotForm.D4 = SpotForm.D4 + 1;
                
                 return;
             }
@@ -78617,13 +78617,12 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
             OpenWeather = false;
 
            
-                Debug.WriteLine("NOAA DRAP image capture");
+                Debug.WriteLine("NOAA DRAP D-Layer absorption image capture");
             try
             {
                 using (WebClient client = new WebClient()) //.234
                 {
-                    //   client.DownloadFileAsync(new Uri("https://services.swpc.noaa.gov/images/drap_global.png"), @"c:\temp\DRAP.png");
-                    client.DownloadFileAsync(new Uri("https://services.swpc.noaa.gov/images/drap_global.png"), AppDataPath + "DRAP.png");
+                      client.DownloadFileAsync(new Uri("https://services.swpc.noaa.gov/images/drap_global.png"), AppDataPath + "DRAP.png");
                    
                 }
             }
@@ -78631,6 +78630,22 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
             {
                 Debug.WriteLine("Unable to get DRAP image from noaa: " + g);
             }
+
+            Debug.WriteLine("SWS F-Layer reflection image capture");
+            try
+            {
+                using (WebClient client = new WebClient()) //.234
+                {
+                     client.DownloadFileAsync(new Uri("https://www.sws.bom.gov.au/Images/HF%20Systems/Global%20HF/Ionospheric%20Map/WorldIMap0.gif"), AppDataPath + "FRAP.gif");
+
+                }
+            }
+            catch (Exception g)
+            {
+                Debug.WriteLine("Unable to get DRAP image from noaa: " + g);
+            }
+
+
 
             string currweth1 = httpFile.Weather(); // get local weather data if in USA
             var xdoc = new XDocument();

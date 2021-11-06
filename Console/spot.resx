@@ -238,6 +238,47 @@ RED LoTW  when a fault occured.
 
 To download a new fcc database: ftp://wirelessftp.fcc.gov/pub/uls/complete/l_amat.zip</value>
   </data>
+  <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>264, 17</value>
+  </metadata>
+  <data name="chkFLayerON.ToolTip" xml:space="preserve">
+    <value>Australian gov space weather service critical foF2-Layer world map. (Updated every 30min)
+Colors denoting the highest frequency the f2 ionosphere will reflect vertical signals back towards earth (NVIS)
+Determined using ionosonde radar. The higher the reflect frequecies, the more open propogation will be in those areas.
+
+Red =      Reflect up to 1mhz
+Yellow = Reflect up to 2mhz
+Olive = Reflect up to 3mhz
+Green= Reflect up to 4mhz
+Lt GRN= Reflect up to 5mhz
+Lt BLU = Reflect up to 6mhz
+BL GRY= Reflect up to 7mhz
+Blue= Reflect up to 8mhz
+D Blue=Reflect up to 9mhz
+Maroon = Refect up to 10mhz
+Purple = Reflect up to 11mhz
+Violet = Reflect up to 12 mhz
+Gray = Reflect up to 13mhz
+
+
+</value>
+  </data>
+  <data name="chkDLayerON.ToolTip" xml:space="preserve">
+    <value>NOAA D-Layer Absorption level world map.
+(D-Layer Daylight typically absorbs low freq during daylight hours)
+Higher frequencies can pass through the D-Layer up to the F-Layer
+unless show on this map.
+
+Purple        (absorption to 5mhz)
+Blue            (absorption to 10mhz)
+Cyan          (absorption to 15mhz)
+Green         (absorption to 20mhz)
+Yellow        (absorption to 25 mhz)
+Orange      (absorption to  30 mhz)
+Red             (absorption to 35 mhz)
+
+</value>
+  </data>
   <data name="chkISS.ToolTip" xml:space="preserve">
     <value>True (Zenith) position of the ISS will show on Panadapter screen (includes Elevation to you)
 When you Click on the TRACK/Map button to activate the World Map
@@ -347,22 +388,6 @@ Right Click on memory in Pan to open up Memory Comments URL internet address
 LEFT CLICK on PAN + ALT + M keys to save New Memory
 </value>
   </data>
-  <data name="chkDLayerON.ToolTip" xml:space="preserve">
-    <value>Show World Map with NOAA D-Layer Absorption levels
-Black          (no D Layer absorption)
-Purple        (absorption to 5mhz)
-Blue            (absorption to 10mhz)
-Cyan          (absorption to 15mhz)
-Green         (absorption to 20mhz)
-Yellow        (absorption to 25 mhz)
-Orange      (absorption to  30 mhz)
-Red             (absorption to 35 mhz)
-
-</value>
-  </data>
-  <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>264, 17</value>
-  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>47</value>
   </metadata>

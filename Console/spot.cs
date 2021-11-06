@@ -60,6 +60,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
+
 //using Syncfusion.Windows.Forms.Tools;
 
 
@@ -5510,7 +5511,7 @@ namespace PowerSDR
         //=========================================================================================
         private void chkSUN_CheckedChanged(object sender, EventArgs e)
         {
-
+           
             if ((chkSUN.Checked == false) && (chkGrayLine.Checked == false))
             {
                 if (Skin1 != null) console.picDisplay.BackgroundImage = Skin1; // put back original image
@@ -13729,40 +13730,79 @@ namespace PowerSDR
         public int D4 = 0;
         public void Darken()
         {
-
+         //   Debug.WriteLine("DRAP " + D1 + "," + D2 + "," + D3 + "," + D4);
+          
             MB = console.MB2; // map brightness
             MBG = console.MB3; // grayline brightness
 
+            // ke9ns world map = 1000,507 total image size (56,22 to 939,465  just the map inside the image) (map size = 883,443)
+            // F layer map = 562,576 total image size (45,95 to 514,529 just the map inside the image) (map size = 469,434)
+            // D layer map = 850,475 total image size,  (0,0 to 700,350  just the map inside the image) (map size = 700,350)
+            // need to adjust F and D maps to fit within the 1000,507 rectangle image with the map of 883,443 inside it
 
-            if (chkDLayerON.Checked) //.234
+            if (chkFLayerON.Checked) //.234
             {
+                chkDLayerON.Checked = false;
+
                 try
                 {
+                    Image imag = Image.FromFile(console.AppDataPath + "FRAP.gif"); // .235
 
-                    // Image imag = Image.FromFile(@"C:\temp\DRAP.png");
-                    Image imag = Image.FromFile(console.AppDataPath + "DRAP.png");
+                    Bitmap img7 = new Bitmap(imag);                 // ke9ns: To avoid indexed pixel format PNG issues
+                    Rectangle r = new Rectangle(45, 95, 469, 434);    // this is the portion of the full F layer image that has the world map
+                    Bitmap img8 = img7.Clone(r, img7.PixelFormat);  // make a new bitmap of just the F layer world map
+                    Bitmap result = new Bitmap(1000, 507);          // this is the size we really want so it matches the built in world map
+                    Rectangle r1 = new Rectangle(55, 20, 882, 449); // this is where to place the smaller F laywer world map into the big result bitmap
 
-                    Bitmap img7 = new Bitmap(new Bitmap(imag)); // .234 to avoid indexed pixel format PNG issues
-
-                    Rectangle r = new Rectangle(-34, -13, 650, 300);
-
-                    Bitmap img8 = new Bitmap(770, 390); // map found within the DRAP.png image
-
-                    using (Graphics g = Graphics.FromImage(img8))
+                    
+                    using (Graphics g = Graphics.FromImage(result))
                     {
-                        g.DrawImage(img7, -r.X, -r.Y);
+                        
+                          g.CompositingQuality = CompositingQuality.HighQuality;
+                          g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                          g.SmoothingMode = SmoothingMode.HighQuality;
+                          g.DrawImage(img8, r1);  // this results in a d layer map with a empty boarder around all 4 edges.
+                          g.DrawString("SWS foF2 Layer reflection: (min)RED->YELL->OLV->GRN->LGRN->LBLU->BGRY->BLU->DBLU->MARN->PUR->VIO->GRY(max)", font2, new SolidBrush(Color.Black), 55,20); // use Pandapdater holder[] data
+                    }
+               
+
+                    MAP = Lighten(result, MBG, MB);
+                }
+                catch (Exception ex)
+                {
+                    // MessageBox.Show(ex.Message);
+                    MAP = Lighten(new Bitmap(Map_image), MBG, MB);
+                }
+            }
+            else if (chkDLayerON.Checked) //.234
+            {
+                chkFLayerON.Checked = false;
+                try
+                {
+                    Image imag = Image.FromFile(console.AppDataPath + "DRAP.png"); // bring in D layer full image
+                    Bitmap img7 = new Bitmap(imag);                 // ke9ns: To avoid indexed pixel format PNG issues
+                    Rectangle r = new Rectangle(0, 0, 700, 350);    // this is the portion of the full D layer image that has the world map
+                    Bitmap img8 = img7.Clone(r, img7.PixelFormat);  // make a new bitmap of just the D layer world map
+                    Bitmap result = new Bitmap(1000, 507);          // this is the size we really want so it matches the built in world map
+                    Rectangle r1 = new Rectangle(42, 16, 912, 456); // this is where to place the smaller d laywer world map into the big result bitmap
+                                        
+                    using (Graphics g = Graphics.FromImage(result)) 
+                    {
+                        g.CompositingQuality = CompositingQuality.HighQuality;
+                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        g.SmoothingMode = SmoothingMode.HighQuality;
+                        g.DrawImage(img8, r1);  // this results in a d layer map with a empty boarder around all 4 edges.
+                        g.DrawString("NOAA D Layer absorption: (min) BLK->PUR->BLU->CYN->GRN->YEL->ORG->RED (max)", font2, grid_text_brush,55,20); // use Pandapdater holder[] data 
                     }
 
-                    MAP = Lighten(img8, MBG, MB);
-
+                    MAP = Lighten(result, MBG, MB);
+                  
                 }
 
                 catch (Exception ex)
                 {
-
-                   // MessageBox.Show(ex.Message);
+                 //   MessageBox.Show(ex.Message);
                     MAP = Lighten(new Bitmap(Map_image), MBG, MB);
-
                 }
             }
             else
@@ -14988,6 +15028,18 @@ namespace PowerSDR
         private void chkDLayerON_CheckedChanged(object sender, EventArgs e) //.234
         {
             Darken();
+        }
+
+        private void chkFLayerON_CheckedChanged(object sender, EventArgs e) //.235
+        {
+            if (chkFLayerON.Checked && chkDLayerON.Checked) chkDLayerON.Checked = false;
+            chkSUN_CheckedChanged(this, EventArgs.Empty);
+        }
+
+        private void chkDLayerON_CheckedChanged_1(object sender, EventArgs e)
+        {
+            if (chkFLayerON.Checked && chkDLayerON.Checked) chkFLayerON.Checked = false;
+            chkSUN_CheckedChanged(this, EventArgs.Empty);
         }
     } //SPOTCONTROL
 
