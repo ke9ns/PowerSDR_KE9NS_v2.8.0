@@ -32,141 +32,143 @@
 // FWCEEPROM.RX2OK
 // if (FWCEEPROM.VUOK)
 
-    //  if ((Display.CurrentDisplayModeBottom != DisplayMode.OFF) && (rx2_enabled) && (e.Y > H7)) to check if your clicked inside RX2 pan area
+// Invoke(new MethodInvoker(radRX2ModeCWU.Select)); // switch RX2 to CWU mode  
 
-    // skin is in
+//  if ((Display.CurrentDisplayModeBottom != DisplayMode.OFF) && (rx2_enabled) && (e.Y > H7)) to check if your clicked inside RX2 pan area
 
-    // this.txtMultiText.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-    // CONDITIONALS   NO_WIDETX;NO_MCL_PM;NO_KE9NS;NO_DJ
-    // btnhidden.focus  for items that steal focus away from the display.
+// skin is in
 
-    // AutoClosingMessageBox.Show("Database Updated\nPowerSDR now Closed.", "PowerSDR Closed.", 2000);   this allows for a messagebox that automatically closes after a specified amount of 
-    // Messagebox(new Form { TopMost = true },"message");
-    // g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
-    // g.CompositingMode = CompositingMode.SourceOver;
-    // g.CompositingQuality = CompositingQuality.HighQuality;
-    // g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-    // g.SmoothingMode = SmoothingMode.HighQuality;
-    // g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+// this.txtMultiText.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+// CONDITIONALS   NO_WIDETX;NO_MCL_PM;NO_KE9NS;NO_DJ
+// btnhidden.focus  for items that steal focus away from the display.
 
-    // System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
-    //  t.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
-    //  t.CurrentUICulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
-    //  CultureInfo.InvariantCulture
-    //
-    // example of how to disable and EVENT
-    //setupForm.gridBoxTS.CheckedChanged -= setupForm.gridBoxTS_CheckedChanged;  // ke9ns turn off checkchanged temporarily   
-    // 
-    // setupForm.gridBoxTS.CheckedChanged += setupForm.gridBoxTS_CheckedChanged;
+// AutoClosingMessageBox.Show("Database Updated\nPowerSDR now Closed.", "PowerSDR Closed.", 2000);   this allows for a messagebox that automatically closes after a specified amount of 
+// Messagebox(new Form { TopMost = true },"message");
+// g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
+// g.CompositingMode = CompositingMode.SourceOver;
+// g.CompositingQuality = CompositingQuality.HighQuality;
+// g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+// g.SmoothingMode = SmoothingMode.HighQuality;
+// g.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
-    //  txtVFOAFreq_LostFocus(this, EventArgs.Empty);    (ke9ns this is how to generate an event programatically)
-    //
-    // ke9ns console_closing(), then Dispose(), then ExitConsole(), then back to Displose() to finish
-    //
-    // console.Console_Resize(this, e);
-    // Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)  ==   %userprofile%\AppData\Roaming
-    //
-    // string master_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\FlexRadio Systems\\";  // %userprofile%\AppData\Roaming\FlexRadio Systems\
-    //
-    // File.Exists(app_data_path + "wisdom"))  // look for %userprofile%\AppData\Roaming\FlexRadio Systems\PowerSDR v2.8.0\wisdom
-    // File.Exists(master_path + "production")    production = true;   // this allows PA calibration
-    // File.Exists(master_path + "test_equip")    test_equip = true;   // this allows ?
-    // File.Exists(master_path + "master.xml");                        // this is list of your PowerSDR radios
-    //
-    // path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\FlexRadio Systems\\PowerSDR";  // ke9ns this is the ProgramData folder
-    // Application.StartupPath  = \Program Files (x86)\FlexRadio Systems\PowerSDR v2.8.0
+// System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+//  t.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
+//  t.CurrentUICulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
+//  CultureInfo.InvariantCulture
+//
+// example of how to disable and EVENT
+//setupForm.gridBoxTS.CheckedChanged -= setupForm.gridBoxTS_CheckedChanged;  // ke9ns turn off checkchanged temporarily   
+// 
+// setupForm.gridBoxTS.CheckedChanged += setupForm.gridBoxTS_CheckedChanged;
 
-    //  current_region = FWCEEPROM.Region; or //  current_region = HIDEEPROM.Region;
-    //
-    //  extended = FWC.GetStatus(); or  extended = USBHID.GetStatus(); or (File.Exists("extended.edf")		// Check for extended capabilities file
-    //
-    //  a.Add("Version/"+this.Text);		    // save the current title bar string
-    //  a.Add("VersionNumber/" + ver_num);      // PowerSDR version number in a.b.c format
-    //  a.Add("RadioType/" + CurrentModel);     // radio model string (ex. FLEX1500)
-    //  a.Add("BandTextID/" + current_region);  // TURF Region
-    //  a.Add("Opened/" + extended);            // has the radio been opened?
+//  txtVFOAFreq_LostFocus(this, EventArgs.Empty);    (ke9ns this is how to generate an event programatically)
+//
+// ke9ns console_closing(), then Dispose(), then ExitConsole(), then back to Displose() to finish
+//
+// console.Console_Resize(this, e);
+// Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)  ==   %userprofile%\AppData\Roaming
+//
+// string master_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\FlexRadio Systems\\";  // %userprofile%\AppData\Roaming\FlexRadio Systems\
+//
+// File.Exists(app_data_path + "wisdom"))  // look for %userprofile%\AppData\Roaming\FlexRadio Systems\PowerSDR v2.8.0\wisdom
+// File.Exists(master_path + "production")    production = true;   // this allows PA calibration
+// File.Exists(master_path + "test_equip")    test_equip = true;   // this allows ?
+// File.Exists(master_path + "master.xml");                        // this is list of your PowerSDR radios
+//
+// path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\FlexRadio Systems\\PowerSDR";  // ke9ns this is the ProgramData folder
+// Application.StartupPath  = \Program Files (x86)\FlexRadio Systems\PowerSDR v2.8.0
 
-    /*
-             if (!this.InvokeRequired)
-             {
-                txtVFOAFreq.Text = value.ToString("f6");
-                txtVFOAFreq_LostFocus(this, EventArgs.Empty);
-             }
-             else
-             {
-                VFOUpdateDel del = new VFOUpdateDel(VFOAUpdate);
-                Invoke(del, new object[] { value });
-             }
+//  current_region = FWCEEPROM.Region; or //  current_region = HIDEEPROM.Region;
+//
+//  extended = FWC.GetStatus(); or  extended = USBHID.GetStatus(); or (File.Exists("extended.edf")		// Check for extended capabilities file
+//
+//  a.Add("Version/"+this.Text);		    // save the current title bar string
+//  a.Add("VersionNumber/" + ver_num);      // PowerSDR version number in a.b.c format
+//  a.Add("RadioType/" + CurrentModel);     // radio model string (ex. FLEX1500)
+//  a.Add("BandTextID/" + current_region);  // TURF Region
+//  a.Add("Opened/" + extended);            // has the radio been opened?
 
-    */
-    /*
-    Class Console
-    {
-       import gdi32.dll here
+/*
+         if (!this.InvokeRequired)
+         {
+            txtVFOAFreq.Text = value.ToString("f6");
+            txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+         }
+         else
+         {
+            VFOUpdateDel del = new VFOUpdateDel(VFOAUpdate);
+            Invoke(del, new object[] { value });
+         }
 
-       public Console
-       {
-           InitializeComponents();
-           InitConsole();
+*/
+/*
+Class Console
+{
+   import gdi32.dll here
 
-       } // public console
+   public Console
+   {
+       InitializeComponents();
+       InitConsole();
 
-       Dispose()
-       {
-       }
-       InitializeComponents
-       {
-          select property info for console items here
-       }
-       Main
-       {
-          embed fonts here
-       }
-       InitConsole
-       {
+   } // public console
 
-       } 
-       Flexcontrolscan
-       {
-       }
-       Flexcontrolscan_threadfunction
-       {
-       }
-       SyncDsp
-       {
-       }
-       Exitconsole
-       {
-       }
-       SaveState
-       {
-       }
-       Getstate
-       {
-       } 
+   Dispose()
+   {
+   }
+   InitializeComponents
+   {
+      select property info for console items here
+   }
+   Main
+   {
+      embed fonts here
+   }
+   InitConsole
+   {
 
-
-
-
-
-
-    } // class console
+   } 
+   Flexcontrolscan
+   {
+   }
+   Flexcontrolscan_threadfunction
+   {
+   }
+   SyncDsp
+   {
+   }
+   Exitconsole
+   {
+   }
+   SaveState
+   {
+   }
+   Getstate
+   {
+   } 
 
 
 
-    */
 
-    //
-    // SoftRock Modifications Copyright (C) 2005, 2006, 2007 Bill Tracey (kd5tfd)
-    //
 
-    //#define INTERLEAVED
-    //#define SPLIT_INTERLEAVED
-    //#define SDRX
+
+} // class console
+
+
+
+*/
+
+//
+// SoftRock Modifications Copyright (C) 2005, 2006, 2007 Bill Tracey (kd5tfd)
+//
+
+//#define INTERLEAVED
+//#define SPLIT_INTERLEAVED
+//#define SDRX
 #define FLEX1500_BUFFER_MUTE                             // Enables muting audio as buffers switch in RX/TX transitions
-    //#define WRITE_FFT_TEST
+//#define WRITE_FFT_TEST
 
-    using System;
+using System;
 
 using System.Collections;
 using System.Collections.Generic;
@@ -18575,6 +18577,8 @@ namespace PowerSDR
                         high = 4000;
                     }
                     break;
+
+                
             }
 
             if (current_model == Model.FLEX1500) // .217
@@ -56671,6 +56675,7 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
         private void ptbMic_Scroll(object sender, System.EventArgs e)
         {
             lblMicVal.Text = ptbMic.Value.ToString();
+
             if (dsp.GetDSPTX(0).CurrentDSPMode != DSPMode.FM)
             {
                 double gain_db = (double)ptbMic.Value;
@@ -57531,8 +57536,7 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
                 count1++;*/
                 //-------------------------------------------------------------
                 //FM Offsets
-                if (dsp.GetDSPTX(0).CurrentDSPMode == DSPMode.FM && current_fm_tx_mode != FMTXMode.Simplex
-                    && !chkVFOSplit.Checked)
+                if (dsp.GetDSPTX(0).CurrentDSPMode == DSPMode.FM && current_fm_tx_mode != FMTXMode.Simplex && !chkVFOSplit.Checked)
                 {
                     switch (current_fm_tx_mode)
                     {
@@ -57669,8 +57673,7 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
                 }*/
 
                 //Undo FM Offsets
-                if (dsp.GetDSPTX(0).CurrentDSPMode == DSPMode.FM && current_fm_tx_mode != FMTXMode.Simplex
-                    && !chkVFOSplit.Checked)
+                if (dsp.GetDSPTX(0).CurrentDSPMode == DSPMode.FM && current_fm_tx_mode != FMTXMode.Simplex && !chkVFOSplit.Checked)
                 {
                     switch (current_fm_tx_mode)
                     {
@@ -64467,9 +64470,7 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
 
             string current_txprofile = comboTXProfile.Text;
 
-            dsp.GetDSPRX(0, 0).DSPMode = new_mode;              // set new DSP mode
-
-
+            dsp.GetDSPRX(0, 0).DSPMode = new_mode;  // set new DSP mode
             dsp.GetDSPRX(0, 1).DSPMode = new_mode; // ke9ns  ( 0,1) sets the multiRX receiver to the same DSP mode
 
 
@@ -64728,6 +64729,8 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
 
             } // SetRX1mode
 
+
+            //----------------------------------------ke9ns NEW MODE
             switch (new_mode) //ke9ns  load up new TX profile 
             {
                 case DSPMode.LSB:
@@ -64893,7 +64896,7 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
                     panelModeSpecificCW.BringToFront();
                     break;
 
-                case DSPMode.FM:
+                case DSPMode.FM: // new mode
                     radModeFMN.BackColor = button_selected_color;
 
                     if ((current_txprofile != fm_txprofile) & (TXProfileByMode) & !initializing) comboTXProfile.Text = fm_txprofile;
@@ -64948,6 +64951,7 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
 
                     //grpMode.Text = "Mode - AM";
                     if (!rx_only && chkPower.Checked) chkMOX.Enabled = true;
+
                     if (chkVFOATX.Checked || chkVFOBTX.Checked || !rx2_enabled)
                     {
 
@@ -65148,7 +65152,7 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
             }
             else
             {
-                if (rx1_dsp_mode == DSPMode.FM)
+                if (rx1_dsp_mode == DSPMode.FM) //checkfm
                 {
                     if (dsp.GetDSPTX(0).TXFMDeviation == FMDataDeviation) // ke9ns add WFM
                     {
@@ -65407,7 +65411,7 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
             //dsp.GetDSP(0, 0).SetRXFilter(-50000, 50000);
         }
 
-
+        public int FMSEQ = 0; //.236
         public bool FMRESET = false; // ke9ns add true=FM button pushed
         public bool FMData = false; // ke9ns add true=FM data mode
         public double lastdeviation = 0; // ke9ns add false = 2k, true = 5k
@@ -65418,59 +65422,9 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
         // ke9ns add  (to allow a digital version of FM just like DIGU or DIGL)
         private void radModeFMN_MouseUp(object sender, MouseEventArgs e)
         {
-            if ((radModeFMN.Checked) && (FMRESET == true)) // WFM
-            {
-                if (FMData == false)
-                {
-                    FMData = true;
-                    radModeFMN.Text = "WFM"; // ke9ns: digital FM (wider) 17k deviation and no pre-emphasis or de-emphasis and an +/- 20khz bandwidth = .81 mod index
+          
 
-                    FMDeviation_Hz = FMDataDeviation;
-
-                    lastdeviation = dsp.GetDSPTX(0).TXFMDeviation; // store deviation used last
-
-                    FMDeviation10khz(); // ke9ns make it 10khz deviation (change to 17khz .218)
-
-                    dsp.GetDSPTX(0).TXFMDataMode = true; // set bool value to let TX FM know your in 10khz data mode
-
-                    if (FWCEEPROM.RX2OK) // ke9ns add: if you have a 2nd RX, then set it up the same way.
-                    {
-                        radRX2ModeFMN.Text = "WFM"; // digital FM (wider)
-                                                     // dsp.GetDSPTX(1).TXFMDataMode = true; // set bool value to let TX FM know your in 10khz data mode
-                    }
-                    //  if (!chkVFOBTX.Checked) SetTXFilters(DSPMode.FM, tx_filter_low, tx_filter_high); //W0DHB TX (will set FM wider)
-                }
-                else
-                {
-                    FMData = false;
-                    radModeFMN.Text = "FM";
-
-                    dsp.GetDSPTX(0).TXFMDataMode = false;
-                    if (FWCEEPROM.RX2OK) // ke9ns add: if you have a 2nd RX, then set it up the same way.
-                    {
-                        radRX2ModeFMN.Text = "FM"; // 
-                                                   //  dsp.GetDSPTX(1).TXFMDataMode = false; //
-                    }
-
-                    Debug.WriteLine("DEVIATION " + lastdeviation);
-
-                    if (lastdeviation == 2500) // return deviation back to normal FM
-                    {
-                        FMDeviation_Hz = 2500;
-                    }
-                    else
-                    {
-                        FMDeviation_Hz = 5000;
-                    }
-                }
-            }
-            else
-            {
-                FMRESET = true;
-            }
-
-
-        } // radModeFMN_MouseUp (RX1 FM button)
+        } 
 
 
 
@@ -69653,12 +69607,15 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
 
             RX2DSPMODE = new_mode; // .196
 
-            if (!fwc_init || current_model != Model.FLEX5000 || !FWCEEPROM.RX2OK) return;
+            if ( current_model != Model.FLEX5000 || !FWCEEPROM.RX2OK) return; //.236
+
+            // if (!fwc_init || current_model != Model.FLEX5000 || !FWCEEPROM.RX2OK) return;
             if (new_mode == DSPMode.FIRST || new_mode == DSPMode.LAST) return;
+
             DSPMode old_mode = rx2_dsp_mode;
 
-            if (rx2_enabled)
-            {
+          //  if (rx2_enabled)
+          //  {
                 dsp.GetDSPRX(1, 0).DSPMode = new_mode;              // set new DSP mode
                 dsp.GetDSPRX(1, 1).DSPMode = new_mode;
 
@@ -69669,7 +69626,8 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
 
                     if (fwc_init && (current_model == Model.FLEX5000)) FWC.SetTXDSPMode(new_mode);
                 }
-            }
+           // }
+
             Display.RX2DSPMode = new_mode;
             //if(fwc_init && current_model == Model.FLEX5000)
             //FWC.SetRX2DSPMode(new_mode);
@@ -69741,11 +69699,9 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
                             ptbMic_Scroll(this, EventArgs.Empty);
                     }
 
-                    if (new_mode != DSPMode.DRM)
-                        EnableAllRX2Filters();
+                    if (new_mode != DSPMode.DRM)  EnableAllRX2Filters();
 
-                    if (!initializing)
-                        rx2_fm_squelch_threshold_scroll = ptbRX2Squelch.Value;
+                    if (!initializing) rx2_fm_squelch_threshold_scroll = ptbRX2Squelch.Value;
 
                     ptbRX2Squelch.Minimum = -160;
                     ptbRX2Squelch.Maximum = 0;
@@ -69830,6 +69786,8 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
                     break;
             } // old mode
 
+
+            //---------------------------------ke9ns NEW MODE
             switch (new_mode)
             {
                 case DSPMode.LSB:
@@ -69838,17 +69796,15 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
                     if (chkVFOBTX.Checked && rx2_enabled)
                     {
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-                      
                         dsp.GetDSPTX(0).TXOsc = 0.0;
                     }
                     break;
                 case DSPMode.USB:
                     radRX2ModeUSB.BackColor = button_selected_color;
-                    //panelRX2Mode.Text = "RX2 Mode - USB";
+                   // panelRX2Mode.Text = "RX2 Mode - USB";
                     if (chkVFOBTX.Checked && rx2_enabled)
                     {
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-                      
                         dsp.GetDSPTX(0).TXOsc = 0.0;
                     }
                     break;
@@ -69858,7 +69814,6 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
                     if (chkVFOBTX.Checked && rx2_enabled)
                     {
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-                       
                         dsp.GetDSPTX(0).TXOsc = 0.0;
                     }
                     break;
@@ -69918,12 +69873,19 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
                         txtVFOBFreq.Text = rx2_freq.ToString("f6");
                     }
                     break;
-                case DSPMode.FM:
+                case DSPMode.FM: // new mode
                     radRX2ModeFMN.BackColor = button_selected_color;
+
+                   
+                    radFMDeviation2kHz_CheckedChanged(this, EventArgs.Empty); // .236check which width
+                    radFMDeviation5kHz_CheckedChanged(this, EventArgs.Empty); //.236
+
+                    if (radFMDeviation2kHz.Checked == false && radFMDeviation5kHz.Checked == false) FMDeviation10khz(); //.236
+
+
                     DisableAllRX2Filters();    //this needs to be for RX2 only
 
-                    if (!initializing)
-                        rx2_squelch_threshold_scroll = ptbRX2Squelch.Value;
+                    if (!initializing) rx2_squelch_threshold_scroll = ptbRX2Squelch.Value;
 
                     ptbRX2Squelch.Minimum = 0;
                     ptbRX2Squelch.Maximum = 100;
@@ -69942,13 +69904,16 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
                         {
                             if (!rx_only && chkPower.Checked) chkMOX.Enabled = true;
 
-                            chkMON.Checked = false;
-                            chkMON.Enabled = false;
+
+#if NO_MON // ke9ns off to allow mon function in FM mode
+                        chkMON.Checked = false; // ke9ns test
+                        chkMON.Enabled = false;
+#endif
+                           
 
                             SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-                          
-
-                            dsp.GetDSPTX(0).TXOsc = 11025.0;
+                  
+                            dsp.GetDSPTX(0).TXOsc = 11025.0;  // was 0
 
                             ptbFMMic_Scroll(this, EventArgs.Empty);
                         }
@@ -69962,12 +69927,12 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
                     //grpRX2Mode.Text = "RX2 Mode - AM";
                     if (chkVFOBTX.Checked)
                     {
-                        if (!rx_only && chkPower.Checked)
-                            chkMOX.Enabled = true;
+                        if (!rx_only && chkPower.Checked)  chkMOX.Enabled = true;
 
-                        chkMON.Checked = false;
-                        chkMON.Enabled = false;
-
+#if NO_MON  // ke9ns off to allow mon function in FM mode
+                        chkMON.Checked = false; // ke9ns test
+					    chkMON.Enabled = false;
+#endif
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
                       
                         dsp.GetDSPTX(0).TXOsc = 11025.0;
@@ -69984,12 +69949,12 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
 
                     if (chkVFOBTX.Checked)
                     {
-                        if (!rx_only && chkPower.Checked)
-                            chkMOX.Enabled = true;
+                        if (!rx_only && chkPower.Checked)  chkMOX.Enabled = true;
 
-                        chkMON.Checked = false;
-                        chkMON.Enabled = false;
-
+#if NO_MON  // ke9ns off to allow mon function in FM mode
+                        chkMON.Checked = false; // ke9ns test
+					    chkMON.Enabled = false;
+#endif
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
                       
                         dsp.GetDSPTX(0).TXOsc = 11025.0;
@@ -70088,8 +70053,9 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
             }
             else
             {
-                if (rx2_dsp_mode == DSPMode.FM)
+                if (rx2_dsp_mode == DSPMode.FM) //checkfm
                 {
+                    /* was this until .236
                     if (dsp.GetDSPRX(1, 0).RXFMDeviation == FMDataDeviation) // ke9ns add
                     {
                         UpdateRX2Filters(-FMDataLowHigh, FMDataLowHigh); // update 2nd receiver
@@ -70102,6 +70068,23 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
                     {
                         UpdateRX2Filters(-4000, 4000); // mod index of .5
                     }
+*/
+                    //.236 now like rx1
+                    if (dsp.GetDSPTX(0).TXFMDeviation == FMDataDeviation) // ke9ns add WFM
+                    {
+                        UpdateRX2Filters(-FMDataLowHigh, FMDataLowHigh); // +/- 10000 (change to 20k .218)
+                    }
+                    else if (dsp.GetDSPTX(0).TXFMDeviation == 5000)
+                    {
+                        UpdateRX2Filters(-8000, 8000);
+                    }
+                    else // 2.5k
+                    {
+                        UpdateRX2Filters(-4000, 4000);
+                    }
+
+
+
                 }
                 RX2Filter = Filter.NONE;
             }
@@ -70122,8 +70105,7 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
             if (rx2_enabled)
             {
                 UpdateDSPBufRX2();
-                if (chkVFOBTX.Checked)
-                    UpdateDSPBufTX();
+                if (chkVFOBTX.Checked)   UpdateDSPBufTX();
             }
 
             txtVFOBFreq_LostFocus(this, EventArgs.Empty);
@@ -70132,10 +70114,10 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
             if (fwc_init && current_model == Model.FLEX5000)
             {
                 bool tx1, tx2, tx3;
-                if (flex5000RelayForm != null)
-                    flex5000RelayForm.UpdateRelayState(out tx1, out tx2, out tx3);
+                if (flex5000RelayForm != null) flex5000RelayForm.UpdateRelayState(out tx1, out tx2, out tx3);
             }
-        }
+
+        } // SetRX2Mode
 
         private void radRX2ModeLSB_CheckedChanged(object sender, System.EventArgs e)
         {
@@ -70712,7 +70694,6 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
         private void ptbRX2Gain_Scroll(object sender, System.EventArgs e)
         {
             if (chkRX2Mute.Checked) return;
-
             
             dsp.GetDSPRX(1, 0).RXOutputGain = (double)ptbRX2Gain.Value / ptbRX2Gain.Maximum * 0.5;  // max 0.5 to allow for headroom (value = 1 to 100)
 
@@ -73005,8 +72986,15 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
         {
             if (radFMDeviation2kHz.Checked)
             {
+
+                radRX2ModeFMN.Text = "2FM"; //.236
+                radModeFMN.Text = "2FM";
+
                 dsp.GetDSPTX(0).TXFMDeviation = 2500;
                 dsp.GetDSPRX(0, 0).RXFMDeviation = 2500;
+
+                dsp.GetDSPRX(1, 0).RXFMDeviation = 2500; //.236 add this for rx2
+
 
                 if (RX1DSPMode == DSPMode.FM)
                 {
@@ -73029,8 +73017,13 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
         {
             if (radFMDeviation5kHz.Checked)
             {
+                radRX2ModeFMN.Text = "5FM"; //.236
+                radModeFMN.Text = "5FM";
+
                 dsp.GetDSPTX(0).TXFMDeviation = 5000;
                 dsp.GetDSPRX(0, 0).RXFMDeviation = 5000;
+
+                dsp.GetDSPRX(1, 0).RXFMDeviation = 5000; //.236 add this
 
                 if (RX1DSPMode == DSPMode.FM)
                 {
@@ -73048,16 +73041,16 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
                 }
             }
         }
-
-        //==================================================
-        // ke9ns add (change to 17khz .218)
-        public void FMDeviation10khz()
+        
+//==================================================
+// ke9ns add (change to 17khz .218)
+public void FMDeviation10khz() // WFM
         {
             dsp.GetDSPTX(0).TXFMDeviation = FMDataDeviation;
             dsp.GetDSPRX(0, 0).RXFMDeviation = FMDataDeviation;
-
-            dsp.GetDSPRX(0, 1).RXFMDeviation = FMDataDeviation; // WFM for rx2
-
+           
+            dsp.GetDSPRX(1, 0).RXFMDeviation = FMDataDeviation; //.236 add this for rx2
+           
             if (RX1DSPMode == DSPMode.FM)
             {
                 UpdateRX1Filters(-FMDataLowHigh, FMDataLowHigh); // +/- 20khz
@@ -80996,8 +80989,6 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
                     }
                 }
 
-
-
                 chkMOX.Checked = true;
 
                 current_ptt_mode = PTTMode.MANUAL;
@@ -81012,7 +81003,6 @@ and/or Sporadic E propagation (see http://www.dxmaps.com/spots/mapg.php?Lan=E&Fr
                         break;
 
                 }
-
 
 
                 if (chkMUT.Checked == false) // ke9ns add prevent MUT from malfunctioning
@@ -84469,6 +84459,190 @@ LMF  27
         private void ptbDisplayZoom2_MouseUp(object sender, MouseEventArgs e)
         {
 
+        }
+
+       
+    // ke9ns: .236 right click now cycles through 2khz, 5khz and wide FM dev modes
+        private void radRX2ModeFMN_MouseUp(object sender, MouseEventArgs e) //.236
+        {
+            MouseEventArgs me = (MouseEventArgs)e;
+            if ((me.Button == System.Windows.Forms.MouseButtons.Left)) // set to whatever the PANELFM FM deviation buttons are set to
+            {
+
+                if (radFMDeviation2kHz.Checked)
+                {
+                    lastdeviation = 2500;
+                    FMSEQ = 0;
+                    FMDeviation_Hz = 2500;
+                    radRX2ModeFMN.Text = "2FM";
+                    radModeFMN.Text = "2FM";
+                    dsp.GetDSPTX(0).TXFMDataMode = false;
+                    FMData = false;
+                }
+                else if (radFMDeviation5kHz.Checked)
+                {
+                    lastdeviation = 5000;
+                    FMSEQ = 1;
+                    FMDeviation_Hz = 5000;
+                    radRX2ModeFMN.Text = "5FM";
+                    radModeFMN.Text = "5FM";
+                    dsp.GetDSPTX(0).TXFMDataMode = false;
+                    FMData = false;
+                }
+                else
+                {
+                    lastdeviation = FMDataDeviation;
+                    FMSEQ = 2;
+                    radRX2ModeFMN.Text = "WFM";
+                    radModeFMN.Text = "WFM";
+                    FMDeviation_Hz = FMDataDeviation;
+                    FMData = true;
+                    FMDeviation10khz(); //.236
+                    dsp.GetDSPTX(0).TXFMDataMode = true;
+                }
+
+                dsp.GetDSPTX(0).TXFMDeviation = lastdeviation;
+   
+            }
+            else if ((me.Button == System.Windows.Forms.MouseButtons.Right))
+            {
+                if (FMSEQ == 0) // switch to 5khz dev
+                {
+                    radFMDeviation2kHz.Checked = false;
+                    radFMDeviation5kHz.Checked = true;
+
+                    lastdeviation = 5000;
+                    FMSEQ = 1;
+                    FMDeviation_Hz = 5000;
+                    radRX2ModeFMN.Text = "5FM";
+                    radModeFMN.Text = "5FM";
+                    dsp.GetDSPTX(0).TXFMDataMode = false;
+                    FMData = false;
+                   
+                }
+                else if (FMSEQ == 1) // switch to WFM
+                {
+                    radFMDeviation2kHz.Checked = false;
+                    radFMDeviation5kHz.Checked = false;
+
+                    lastdeviation = FMDataDeviation;
+                    FMSEQ = 2;
+                    radRX2ModeFMN.Text = "WFM";
+                    radModeFMN.Text = "WFM";
+                    FMDeviation_Hz = FMDataDeviation;
+                    FMData = true;
+                    FMDeviation10khz(); //.236
+                    dsp.GetDSPTX(0).TXFMDataMode = true;
+
+                    
+                }
+                else // switch back to 2khz dev
+                {
+                    radFMDeviation2kHz.Checked = true;
+                    radFMDeviation5kHz.Checked = false;
+
+                    lastdeviation = 2500;
+                   
+                    FMDeviation_Hz = 2500;
+                    radRX2ModeFMN.Text = "2FM";
+                    radModeFMN.Text = "2FM";
+                    dsp.GetDSPTX(0).TXFMDataMode = false;
+                    FMData = false;
+                    FMSEQ = 0;
+                }
+            } // right click 
+
+           
+        } // radRX2ModeFMN_MouseUp
+
+        private void radModeFMN_MouseDown(object sender, MouseEventArgs e) //.236
+        {
+            MouseEventArgs me = (MouseEventArgs)e;
+            if ((me.Button == System.Windows.Forms.MouseButtons.Left)) // set to whatever the PANELFM FM deviation buttons are set to
+            {
+
+                if (radFMDeviation2kHz.Checked)
+                {
+                    lastdeviation = 2500;
+                    FMSEQ = 0;
+                    FMDeviation_Hz = 2500;
+                    radRX2ModeFMN.Text = "2FM";
+                    radModeFMN.Text = "2FM";
+                    dsp.GetDSPTX(0).TXFMDataMode = false;
+                    FMData = false;
+                }
+                else if (radFMDeviation5kHz.Checked)
+                {
+                    lastdeviation = 5000;
+                    FMSEQ = 1;
+                    FMDeviation_Hz = 5000;
+                    radRX2ModeFMN.Text = "5FM";
+                    radModeFMN.Text = "5FM";
+                    dsp.GetDSPTX(0).TXFMDataMode = false;
+                    FMData = false;
+                }
+                else
+                {
+                    lastdeviation = FMDataDeviation;
+                    FMSEQ = 2;
+                    radRX2ModeFMN.Text = "WFM";
+                    radModeFMN.Text = "WFM";
+                    FMDeviation_Hz = FMDataDeviation;
+                    FMData = true;
+                    FMDeviation10khz(); //.236
+                    dsp.GetDSPTX(0).TXFMDataMode = true;
+                }
+
+                dsp.GetDSPTX(0).TXFMDeviation = lastdeviation;
+
+            }
+            else if ((me.Button == System.Windows.Forms.MouseButtons.Right))
+            {
+                if (FMSEQ == 0) // switch to 5khz dev
+                {
+                    radFMDeviation2kHz.Checked = false;
+                    radFMDeviation5kHz.Checked = true;
+
+                    lastdeviation = 5000;
+                    FMSEQ = 1;
+                    FMDeviation_Hz = 5000;
+                    radRX2ModeFMN.Text = "5FM";
+                    radModeFMN.Text = "5FM";
+                    dsp.GetDSPTX(0).TXFMDataMode = false;
+                    FMData = false;
+
+                }
+                else if (FMSEQ == 1) // switch to WFM
+                {
+                    radFMDeviation2kHz.Checked = false;
+                    radFMDeviation5kHz.Checked = false;
+
+                    lastdeviation = FMDataDeviation;
+                    FMSEQ = 2;
+                    radRX2ModeFMN.Text = "WFM";
+                    radModeFMN.Text = "WFM";
+                    FMDeviation_Hz = FMDataDeviation;
+                    FMData = true;
+                    FMDeviation10khz(); //.236
+                    dsp.GetDSPTX(0).TXFMDataMode = true;
+
+
+                }
+                else // switch back to 2khz dev
+                {
+                    radFMDeviation2kHz.Checked = true;
+                    radFMDeviation5kHz.Checked = false;
+
+                    lastdeviation = 2500;
+
+                    FMDeviation_Hz = 2500;
+                    radRX2ModeFMN.Text = "2FM";
+                    radModeFMN.Text = "2FM";
+                    dsp.GetDSPTX(0).TXFMDataMode = false;
+                    FMData = false;
+                    FMSEQ = 0;
+                }
+            } // right click 
         }
 
         public void CONT_Logger_Write()
