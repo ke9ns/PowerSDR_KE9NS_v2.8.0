@@ -985,6 +985,7 @@
     <None Include="Resources\VFOred.png" />
     <None Include="Resources\newvfo.png" />
     <EmbeddedResource Include="Resources\bar1.png" />
+    <EmbeddedResource Include="Resources\bar2.png" />
     <Content Include="Resources\blue1.png" />
     <None Include="Resources\DRAP.bmp" />
     <Content Include="Resources\panGray.png" />

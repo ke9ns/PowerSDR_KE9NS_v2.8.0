@@ -180,6 +180,15 @@ Sync up your PC clock time to NIST.
 Use this feature before running a Beacon Scan,
 or before running WJST (JT65) or WSPR digital modes</value>
   </data>
+  <data name="checkBoxTone.ToolTip" xml:space="preserve">
+    <value>This should pulse ON/OFF with th WWV seconds "Tick"
+If this is not pulsing along with the WWV Tick, then the signal is too low.
+
+Sub-Carrier Seconds "Tick" data:
+Long Tick = 1
+Short Tick = 0
+Long Pause = Start of Data Frame</value>
+  </data>
   <data name="DXPost.ToolTip" xml:space="preserve">
     <value>Posts your Contact to the DX Cluster
 

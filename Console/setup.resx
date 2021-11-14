@@ -330,6 +330,21 @@ You can place code into a web page to allow visitors to view your Panadapter.
  &lt;iframe id="frame" src="https://your_no-ip_URL:8081"&gt;&lt;/iframe&gt;
 </value>
   </data>
+  <data name="tpVAC.ToolTip" xml:space="preserve">
+    <value>VAC1: AF Volume Slider &amp; "Mute 1&gt;" box do NOT function in PowerSDR. (VAC2: AF slider &amp; Mute functions DO)
+NOTE: PowerSDR will not get INPUT audio from VAC1 unless you select VFOA as TX
+NOTE: VAC1 will ignore VFOB and Flex-5000 RX2
+
+This allows PowerSDR to send or receive audio to your PC 
+(As though PowerSDR was seperate from your PC and you were using RCA audio cables)
+
+MME:              Multimedia Extensions. Oldest standard with the highest latency (120mSec), but the most compatible drivers.
+DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 90mSec)
+WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec) 
+
+ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR
+</value>
+  </data>
   <data name="radVAC1SelectB.ToolTip" xml:space="preserve">
     <value>Select the Virtual Cable B setup
 
@@ -369,19 +384,20 @@ WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer La
 
 ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR</value>
   </data>
-  <data name="tpVAC.ToolTip" xml:space="preserve">
-    <value>VAC1: AF Volume Slider &amp; "Mute 1&gt;" box do NOT function in PowerSDR. (VAC2: AF slider &amp; Mute functions DO)
-NOTE: PowerSDR will not get INPUT audio from VAC1 unless you select VFOA as TX
-NOTE: VAC1 will ignore VFOB and Flex-5000 RX2
+  <data name="tpVAC2.ToolTip" xml:space="preserve">
+    <value>VAC2: AF Volume Slider &amp; "Mute 1&gt;" box function in PowerSDR and will adjust this volume of RX1 (VAC1 will not). 
+NOTE: PowerSDR will not get VAC MIC INPUT audio from VAC2 unless you select VFOB as TX
+NOTE: If you have a Flex-5000 (with 2nd rec) VAC2 provides audio for RX2 when you enable RX2 &amp; "&lt;2 MUTE" box will function
 
 This allows PowerSDR to send or receive audio to your PC 
 (As though PowerSDR was seperate from your PC and you were using RCA audio cables)
 
 MME:              Multimedia Extensions. Oldest standard with the highest latency (120mSec), but the most compatible drivers.
 DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 90mSec)
-WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec) 
+WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec).
 
 ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR
+
 </value>
   </data>
   <data name="grpAudioDetails3.ToolTip" xml:space="preserve">
@@ -397,22 +413,6 @@ DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 
 WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec).
 
 ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR
-</value>
-  </data>
-  <data name="tpVAC2.ToolTip" xml:space="preserve">
-    <value>VAC2: AF Volume Slider &amp; "Mute 1&gt;" box function in PowerSDR and will adjust this volume of RX1 (VAC1 will not). 
-NOTE: PowerSDR will not get VAC MIC INPUT audio from VAC2 unless you select VFOB as TX
-NOTE: If you have a Flex-5000 (with 2nd rec) VAC2 provides audio for RX2 when you enable RX2 &amp; "&lt;2 MUTE" box will function
-
-This allows PowerSDR to send or receive audio to your PC 
-(As though PowerSDR was seperate from your PC and you were using RCA audio cables)
-
-MME:              Multimedia Extensions. Oldest standard with the highest latency (120mSec), but the most compatible drivers.
-DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 90mSec)
-WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec).
-
-ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR
-
 </value>
   </data>
   <data name="labelTS38.ToolTip" xml:space="preserve">
@@ -463,6 +463,16 @@ when "auto wtr/pan" checkbox is checked, the slider moves the signal as the slid
 If unchecked, you must click on the Auto Water/Pan text (just below the Panadater screen). 
 </value>
   </data>
+  <data name="grpDisplaySpectrumGrid.ToolTip" xml:space="preserve">
+    <value>Spectrum Grid is mainly for RX mode
+
+In order to see a correct scale on the right side matched to the left side,
+Set Spectrum Grid-&gt;Max = -19, Min = -135, Step = 6 (S signals are 6 dBm apart).
+
+"Auto wtr/pan" box will automatically adjust "Max" for RX mode only, but "Min" works for both RX &amp; TX modes.
+TX mode is set permanently to 10 dBm for its virtual "Max" (since you should not exceed 0 dBm)
+</value>
+  </data>
   <data name="comboDisplayLabelAlign.ToolTip" xml:space="preserve">
     <value>Sets the alignment of the grid callouts on the display.
 
@@ -497,16 +507,6 @@ Set Spectrum Grid-&gt;Max = -19, Min = -135, Step = 6 (S signals are 6 dBm apart
 TX mode is set permanently to 10 dBm for its virtual "Max" (since you should not exceed 0 dBm)
 </value>
   </data>
-  <data name="grpDisplaySpectrumGrid.ToolTip" xml:space="preserve">
-    <value>Spectrum Grid is mainly for RX mode
-
-In order to see a correct scale on the right side matched to the left side,
-Set Spectrum Grid-&gt;Max = -19, Min = -135, Step = 6 (S signals are 6 dBm apart).
-
-"Auto wtr/pan" box will automatically adjust "Max" for RX mode only, but "Min" works for both RX &amp; TX modes.
-TX mode is set permanently to 10 dBm for its virtual "Max" (since you should not exceed 0 dBm)
-</value>
-  </data>
   <data name="chkBoxAutoWtrPan.ToolTip" xml:space="preserve">
     <value>Check to Automatically update the waterfall (brightness), and Panadapter Noise Floor levels (height)
 based on the Sliders.
@@ -523,12 +523,12 @@ High values may not capture noise.
 Strong adjacent signals that invade the passband may 
 prevent the NB from catching noise.</value>
   </data>
-  <data name="chkDSPLevelerEnabled.ToolTip" xml:space="preserve">
+  <data name="grpDSPLeveler.ToolTip" xml:space="preserve">
     <value>The Leveler is intended to even out the sound level variations through your microphone caused by
 varying distance from or angle to it. It is an attempt to level the amplitude presented to the rest of the
 DSP audio processing. The leveler is disabled in DIGU and DIGL modes.</value>
   </data>
-  <data name="grpDSPLeveler.ToolTip" xml:space="preserve">
+  <data name="chkDSPLevelerEnabled.ToolTip" xml:space="preserve">
     <value>The Leveler is intended to even out the sound level variations through your microphone caused by
 varying distance from or angle to it. It is an attempt to level the amplitude presented to the rest of the
 DSP audio processing. The leveler is disabled in DIGU and DIGL modes.</value>
@@ -540,6 +540,11 @@ algorithm we use (similar to the AGC), this ALC will allow very high average pow
 peaks at a controlled level. The Compander (DX and CPDR on the Front Console - see Mode Specific
 Controls – Phone on page 82) work very well together with the ALC to increase average power without
 overdrive.</value>
+  </data>
+  <data name="grpDSPAGC.ToolTip" xml:space="preserve">
+    <value>The AGC is a state of the art, dual track AGC with anticipatory response on both fast and slower tracks.
+Or, stated differently, the AGC is in essence the combination of two AGCs, one with a very fast time
+constant, the other with a much slower time constant</value>
   </data>
   <data name="udDSPAGCMaxGaindB.ToolTip" xml:space="preserve">
     <value>AGC Max Gain T=Threshold - Operates similarly to traditional RF Gain (but this way the Panadapter signal does not change when you change the gain)
@@ -558,11 +563,6 @@ AGC-T = 90 (means the AGC will not add more than 90dBm of gain to any signal you
 
 RIGHT CLICK (on top of AGC-T text): Toggle Panadapter Control (Grab Green line with your Mouse and pull up/down)
 </value>
-  </data>
-  <data name="grpDSPAGC.ToolTip" xml:space="preserve">
-    <value>The AGC is a state of the art, dual track AGC with anticipatory response on both fast and slower tracks.
-Or, stated differently, the AGC is in essence the combination of two AGCs, one with a very fast time
-constant, the other with a much slower time constant</value>
   </data>
   <data name="chkBandModeSave.ToolTip" xml:space="preserve">
     <value>When Checked, will save Transmit DRIVE Slider setpoint, and Drive Max setpoint per Band and per Mode

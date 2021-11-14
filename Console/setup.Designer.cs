@@ -12476,7 +12476,7 @@ namespace PowerSDR
             this.tbPan3DAlpha.TabIndex = 101;
             this.tbPan3DAlpha.TickFrequency = 64;
             this.toolTip1.SetToolTip(this.tbPan3DAlpha, "Transparency of 3D Panadapter area for RX1 and RX2\r\n");
-            this.tbPan3DAlpha.Value = 97;
+            this.tbPan3DAlpha.Value = 150;
             this.tbPan3DAlpha.Scroll += new System.EventHandler(this.tbPan3DAlpha_Scroll);
             // 
             // labelTS41
@@ -12518,6 +12518,8 @@ namespace PowerSDR
             this.labelTS32.Size = new System.Drawing.Size(50, 26);
             this.labelTS32.TabIndex = 96;
             this.labelTS32.Text = "Fill Alpha:";
+            this.toolTip1.SetToolTip(this.labelTS32, "Related to BandText\r\n\r\nRight Click on VFOA Band Text to Toggle ON/OFF Band Text a" +
+        "t top\r\nof Panadapter screen.\r\n");
             // 
             // tbPanGrid
             // 
@@ -12528,7 +12530,8 @@ namespace PowerSDR
             this.tbPanGrid.Size = new System.Drawing.Size(66, 18);
             this.tbPanGrid.TabIndex = 96;
             this.tbPanGrid.TickFrequency = 50;
-            this.toolTip1.SetToolTip(this.tbPanGrid, "Transparency of BandText fill area ");
+            this.toolTip1.SetToolTip(this.tbPanGrid, "Transparency of BandText fill area \r\n\r\nRight Click on VFOA Band Text to Toggle ON" +
+        "/OFF Band Text at top\r\nof Panadapter screen.\r\n");
             this.tbPanGrid.Value = 130;
             this.tbPanGrid.Scroll += new System.EventHandler(this.tbPanGrid_Scroll);
             // 
@@ -12632,7 +12635,8 @@ namespace PowerSDR
             this.clrbtnGrid.Name = "clrbtnGrid";
             this.clrbtnGrid.Size = new System.Drawing.Size(40, 23);
             this.clrbtnGrid.TabIndex = 69;
-            this.toolTip1.SetToolTip(this.clrbtnGrid, "Display area Grid Color and BandText color");
+            this.toolTip1.SetToolTip(this.clrbtnGrid, "Display area Grid Color and BandText color\r\n\r\nRight Click on VFOA Band Text to To" +
+        "ggle ON/OFF Band Text at top\r\nof Panadapter screen.\r\n");
             this.clrbtnGrid.Changed += new System.EventHandler(this.clrbtnGrid_Changed);
             // 
             // lblDisplayZeroLineColor
@@ -12663,8 +12667,9 @@ namespace PowerSDR
             this.lblDisplayGridColor.Name = "lblDisplayGridColor";
             this.lblDisplayGridColor.Size = new System.Drawing.Size(72, 28);
             this.lblDisplayGridColor.TabIndex = 35;
-            this.lblDisplayGridColor.Text = "Grid and BandText";
-            this.toolTip1.SetToolTip(this.lblDisplayGridColor, "Display area Grid Color and BandText color");
+            this.lblDisplayGridColor.Text = "Panadapter BandText ";
+            this.toolTip1.SetToolTip(this.lblDisplayGridColor, "Display area Grid Color and BandText color\r\n\r\nRight Click on VFOA Band Text to To" +
+        "ggle ON/OFF Band Text at top\r\nof Panadapter screen.");
             // 
             // clrbtnDataLine
             // 
@@ -12737,9 +12742,9 @@ namespace PowerSDR
             this.chkBoxChannels.Image = null;
             this.chkBoxChannels.Location = new System.Drawing.Point(27, 147);
             this.chkBoxChannels.Name = "chkBoxChannels";
-            this.chkBoxChannels.Size = new System.Drawing.Size(154, 32);
+            this.chkBoxChannels.Size = new System.Drawing.Size(213, 32);
             this.chkBoxChannels.TabIndex = 100;
-            this.chkBoxChannels.Text = "Channel Display ON";
+            this.chkBoxChannels.Text = "Channel Display ON for 60m and 11m";
             this.toolTip1.SetToolTip(this.chkBoxChannels, "Check to show Channels (in Blue. Dark Blue when inside Channel).\r\n60m Channels 1-" +
         "5 (for USA only)\r\n11m Channels 1-40");
             // 

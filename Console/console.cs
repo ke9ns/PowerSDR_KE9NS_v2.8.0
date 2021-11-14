@@ -78523,25 +78523,25 @@ public void FMDeviation10khz() // WFM
 
 
 
-        public bool DRAPON = false; // .234 true = display DRAP overlay
+      //  public bool DRAPON = false; // .234 true = display DRAP overlay
 
         //=====================================================================
         // ke9ns add
         private void txtNOAA_MouseDown(object sender, MouseEventArgs e)
         {
 
-            MouseEventArgs me = (MouseEventArgs)e;
-            if ((me.Button == System.Windows.Forms.MouseButtons.Middle)) // .234
-            {
+          //  MouseEventArgs me = (MouseEventArgs)e;
+          //  if ((me.Button == System.Windows.Forms.MouseButtons.Middle)) // .234
+          //  {
 
-                if (DRAPON == false) DRAPON = true;
-                else DRAPON = false;
+            //    if (DRAPON == false) DRAPON = true;
+            //    else DRAPON = false;
 
-            }
+         //   }
 
 
 
-                if (noaaON == 0)
+            if (noaaON == 0)
             {
                 LOCALWEATHER = false;
                 noaaON = 1; // turn on space weather
@@ -78653,6 +78653,7 @@ public void FMDeviation10khz() // WFM
 
            
                 Debug.WriteLine("NOAA DRAP D-Layer absorption image capture");
+
             try
             {
                 using (WebClient client = new WebClient()) //.234
@@ -78660,10 +78661,19 @@ public void FMDeviation10khz() // WFM
                       client.DownloadFileAsync(new Uri("https://services.swpc.noaa.gov/images/drap_global.png"), AppDataPath + "DRAP.png");
                    
                 }
+
+                if (SpotForm != null) //.239
+                {
+                    SpotForm.chkDLayerON.Enabled = true;
+                }
             }
             catch (Exception g)
             {
                 Debug.WriteLine("Unable to get DRAP image from noaa: " + g);
+                if (SpotForm != null) //.239
+                {
+                    SpotForm.chkDLayerON.Enabled = false;
+                }
             }
 
             Debug.WriteLine("SWS F-Layer reflection image capture");
@@ -78674,10 +78684,19 @@ public void FMDeviation10khz() // WFM
                      client.DownloadFileAsync(new Uri("https://www.sws.bom.gov.au/Images/HF%20Systems/Global%20HF/Ionospheric%20Map/WorldIMap0.gif"), AppDataPath + "FRAP.gif");
 
                 }
+
+                if (SpotForm != null) //.239
+                {
+                    SpotForm.chkFLayerON.Enabled = true;
+                }
             }
             catch (Exception g)
             {
                 Debug.WriteLine("Unable to get DRAP image from noaa: " + g);
+                if (SpotForm != null) //.239
+                {
+                    SpotForm.chkFLayerON.Enabled = false;
+                }
             }
 
 

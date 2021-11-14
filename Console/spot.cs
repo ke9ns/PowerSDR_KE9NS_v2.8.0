@@ -189,6 +189,7 @@ namespace PowerSDR
 
         public static Stream Map_D_Bar = myAssembly2.GetManifestResourceStream("PowerSDR.Resources.bar1.png");     // .237
 
+        public static Stream Map_F_Bar = myAssembly2.GetManifestResourceStream("PowerSDR.Resources.bar2.png");     // .239
 
         private static System.Reflection.Assembly myAssembly1 = System.Reflection.Assembly.GetExecutingAssembly();
         public static Stream sun_image = myAssembly1.GetManifestResourceStream("PowerSDR.Resources.sun.png");       // SUN
@@ -5511,6 +5512,8 @@ namespace PowerSDR
         //=========================================================================================
         private void chkGrayLine_CheckedChanged(object sender, EventArgs e)
         {
+          
+
             if ((chkSUN.Checked == false) && (chkGrayLine.Checked == false))
             {
                 if (Skin1 != null) console.picDisplay.BackgroundImage = Skin1; // put back original image held in skin1 if the SUN and grayline are both turned OFF
@@ -5561,6 +5564,7 @@ namespace PowerSDR
                 mapon = true;
                 chkMapOn.Checked = true;
 
+               
                 if (chkPanMode.Checked == true) Display.map = 1; // special panafall mode (80 - 20)
                 else
                 {
@@ -5652,6 +5656,7 @@ namespace PowerSDR
 
                 if (Skin1 != null) console.picDisplay.BackgroundImage = Skin1; // put back original image
 
+               
             } // turn Tracking  off
 
             Debug.WriteLine("BTNTRK " + chkMapOn.Checked);
@@ -12211,6 +12216,7 @@ namespace PowerSDR
         //================================================================================
         public void checkBoxMUF_CheckedChanged(object sender, EventArgs e)
         {
+           
             if (checkBoxMUF.Checked == false)
             {
                 chkVoacap.Checked = false;
@@ -13703,6 +13709,7 @@ namespace PowerSDR
             MB = console.MB2; // map brightness
             MBG = console.MB3; // grayline brightness
 
+            //.234
             // ke9ns world map = 1000,507 total image size (56,22 to 939,465  just the map inside the image) (map size = 883,443)
             // F layer map = 562,576 total image size (45,95 to 514,529 just the map inside the image) (map size = 469,434)
             // D layer map = 850,475 total image size,  (0,0 to 700,350  just the map inside the image) (map size = 700,350)
@@ -13715,67 +13722,46 @@ namespace PowerSDR
                 try
                 {
                     Image imag = Image.FromFile(console.AppDataPath + "FRAP.gif"); // .235
-
                     Bitmap img7 = new Bitmap(imag);                 // ke9ns: To avoid indexed pixel format PNG issues
                     Rectangle r = new Rectangle(45, 95, 469, 434);    // this is the portion of the full F layer image that has the world map
+
                     Bitmap img8 = img7.Clone(r, img7.PixelFormat);  // make a new bitmap of just the F layer world map
                     Bitmap result = new Bitmap(1000, 507);          // this is the size we really want so it matches the built in world map
                     Rectangle r1 = new Rectangle(55, 20, 882, 449); // this is where to place the smaller F laywer world map into the big result bitmap
 
+                    Bitmap Bar = new Bitmap(Map_F_Bar);              // .239 color bar legend for F-Layer
+                    Rectangle r2 = new Rectangle(20, 50, 8, 300);    // .239 size of color legend bar
+
                     int x = 17;
-                    int y = 10;
-                   
+                    int x1 = 27;
+
                     using (Graphics g = Graphics.FromImage(result))
                     {
                         
-                        g.CompositingQuality = CompositingQuality.HighQuality;
-                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                        g.SmoothingMode = SmoothingMode.HighQuality;
+                     //   g.CompositingQuality = CompositingQuality.HighQuality;
+                     //   g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                     //   g.SmoothingMode = SmoothingMode.HighQuality;
                         g.DrawImage(img8, r1);  // this results in a d layer map with a empty boarder around all 4 edges.
                         
-                        g.DrawString("foF2", font2, new SolidBrush(Color.White), x, y);
-                        g.DrawString("NVIS", font2, new SolidBrush(Color.White), x, y + 10);
-                        g.DrawString("Refl:", font2, new SolidBrush(Color.White), x, y + 20);
-                        
-                        g.DrawString("Gray", font2, new SolidBrush(Color.Gray), x, y + 40);
-                        g.DrawString("13mhz", font2, new SolidBrush(Color.Gray), x, y + 50);
-                        
-                        g.DrawString("Violet", font2, new SolidBrush(Color.Violet), x, y + 70);
-                        g.DrawString("12mhz", font2, new SolidBrush(Color.Violet), x, y + 80);
-                       
-                        g.DrawString("Purple", font2, new SolidBrush(Color.Purple), x, y + 100);
-                        g.DrawString("11mhz", font2, new SolidBrush(Color.Purple), x, y + 110);
-                       
-                        g.DrawString("Maroon", font2, new SolidBrush(Color.Maroon), x, y + 130);
-                        g.DrawString("10mhz", font2, new SolidBrush(Color.Maroon), x, y + 140);
-                        
-                        g.DrawString("DK BLU", font2, new SolidBrush(Color.DarkBlue), x, y + 160);
-                        g.DrawString(" 9mhz", font2, new SolidBrush(Color.DarkBlue), x, y + 170);
-                        
-                        g.DrawString("Blue", font2, new SolidBrush(Color.Blue), x, y + 190);
-                        g.DrawString(" 8mhz", font2, new SolidBrush(Color.Blue), x, y + 200);
-                        
-                        g.DrawString("BLU GRY", font2, new SolidBrush(Color.DarkSlateBlue), x, y + 220);
-                        g.DrawString(" 7mhz", font2, new SolidBrush(Color.DarkSlateBlue), x, y + 230);
-                        
-                        g.DrawString("LT BLU", font2, new SolidBrush(Color.LightBlue), x, y + 250);
-                        g.DrawString(" 6mhz", font2, new SolidBrush(Color.LightBlue), x, y + 260);
-                        
-                        g.DrawString("LT GRN", font2, new SolidBrush(Color.LightGreen), x, y + 280);
-                        g.DrawString(" 5mhz", font2, new SolidBrush(Color.LightGreen), x, y + 290);
-                       
-                        g.DrawString("Green", font2, new SolidBrush(Color.Green), x, y + 310);
-                        g.DrawString(" 4mhz", font2, new SolidBrush(Color.Green), x, y + 320);
-                        
-                        g.DrawString("Olive", font2, new SolidBrush(Color.Olive), x, y + 340);
-                        g.DrawString(" 3mhz", font2, new SolidBrush(Color.Olive), x, y + 350);
-                        
-                        g.DrawString("Yellow", font2, new SolidBrush(Color.Yellow), x, y + 370);
-                        g.DrawString(" 2mhz", font2, new SolidBrush(Color.Yellow), x, y + 380);
-                        
-                        g.DrawString("Red", font2, new SolidBrush(Color.Red), x, y + 400);
-                        g.DrawString(" 1mhz", font2, new SolidBrush(Color.Red), x, y + 410);
+                        g.DrawString("SWS_AU", font2, new SolidBrush(Color.White), x, 10);
+                        g.DrawString("foF2 NVIS", font2, new SolidBrush(Color.White), x, 20);
+                        g.DrawString("Reflect:", font2, new SolidBrush(Color.White), x, 30);
 
+                        g.DrawImage(Bar, r2); // .239draw legend color bar
+
+                        g.DrawString("13mhz", font2, new SolidBrush(Color.Gray), x1, 55);
+                        g.DrawString("12mhz", font2, new SolidBrush(Color.Violet), x1,  80);
+                        g.DrawString("11mhz", font2, new SolidBrush(Color.Purple), x1,  105);
+                        g.DrawString("10mhz", font2, new SolidBrush(Color.Maroon), x1, 125);
+                        g.DrawString(" 9mhz", font2, new SolidBrush(Color.DarkBlue), x1, 150);
+                        g.DrawString(" 8mhz", font2, new SolidBrush(Color.Blue), x1,  170);
+                        g.DrawString(" 7mhz", font2, new SolidBrush(Color.DarkSlateBlue), x1,  195);
+                        g.DrawString(" 6mhz", font2, new SolidBrush(Color.LightBlue), x1,  215);
+                        g.DrawString(" 5mhz", font2, new SolidBrush(Color.LightGreen), x1,  240);
+                        g.DrawString(" 4mhz", font2, new SolidBrush(Color.Green), x1,  265);
+                        g.DrawString(" 3mhz", font2, new SolidBrush(Color.Olive), x1,  285);
+                        g.DrawString(" 2mhz", font2, new SolidBrush(Color.Yellow), x1,  310);
+                        g.DrawString(" 1mhz", font2, new SolidBrush(Color.Red), x1,  330);
 
 
                     }
@@ -13794,30 +13780,29 @@ namespace PowerSDR
                 chkFLayerON.Checked = false;
 
                 int x = 17;
-                int x1 = 30;
-                int y = 10;
+                int x1 = 27;
+               
 
                 try
                 {
                     Image imag = Image.FromFile(console.AppDataPath + "DRAP.png"); // bring in D-layer full image
                     Bitmap img7 = new Bitmap(imag);                 // ke9ns: To avoid indexed pixel format PNG issues
-                    Bitmap Bar = new Bitmap(Map_D_Bar);              // .237 color bar legend for D-Layer
                     Rectangle r = new Rectangle(0, 0, 700, 350);    // this is the portion of the full D layer image that has the world map
                     Bitmap img8 = img7.Clone(r, img7.PixelFormat);  // make a new bitmap of just the D layer world map
                     Bitmap result = new Bitmap(1000, 507);          // this is the size we really want so it matches the built in world map
                     Rectangle r1 = new Rectangle(42, 16, 912, 456); // this is where to place the smaller d laywer world map into the big result bitmap
-                 
-                    Rectangle r2 = new Rectangle(20, 50, 8, 300); // .237 size of color legend bar
+
+                    Bitmap Bar = new Bitmap(Map_D_Bar);              // .237 color bar legend for D-Layer
+                    Rectangle r2 = new Rectangle(20, 50, 8, 300);    // .237 size of color legend bar
 
                     using (Graphics g = Graphics.FromImage(result)) 
                     {
-                        g.CompositingQuality = CompositingQuality.HighQuality;
-                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                        g.SmoothingMode = SmoothingMode.HighQuality;
+
+                    //    g.CompositingQuality = CompositingQuality.HighQuality;
+                    //    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                     //   g.SmoothingMode = SmoothingMode.HighQuality;
                         g.DrawImage(img8, r1);  // this results in a d layer map with a empty boarder around all 4 edges.
                        
-                     
-                        
                         g.DrawString("NOAA", font2, new SolidBrush(Color.White), x, 10);
                         g.DrawString("D-Layer", font2, new SolidBrush(Color.White), x, 20);
                         g.DrawString("Aborp:", font2, new SolidBrush(Color.White), x, 30);
@@ -15056,17 +15041,276 @@ namespace PowerSDR
             Darken();
         }
 
+        // turn off these when display F or D layer maps .239
+        bool GrayLineLast = false; 
+
+        bool MapJustBandLast = false; 
+        bool MapJustPanLast = false;
+        bool MapBeamLast = false;
+
+        bool MemoriesPanLast = false; 
+        bool VOACAPLast = false; 
+        bool BandTextLast = false; 
+        bool MapCallLast = false;
+        bool MapCountryLast = false;
+
+        bool GridBoxLast = false; // setup.gridboxTS (grid lines ON=false)
+      
+
+
         private void chkFLayerON_CheckedChanged(object sender, EventArgs e) //.235
         {
-            if (chkFLayerON.Checked && chkDLayerON.Checked) chkDLayerON.Checked = false;
+
+            if (SP5_Active == 0)  // .239 if map was off when you turned on f-layer
+                btnTrack_Click(this, EventArgs.Empty); // turn on Map first
+
+
+             if (chkFLayerON.Checked && chkDLayerON.Checked) chkDLayerON.Checked = false;
             chkSUN_CheckedChanged(this, EventArgs.Empty);
-        }
+
+            if (chkFLayerON.Checked == true) //.239
+            {
+                GrayLineLast = chkGrayLine.Checked;   // turn off Grayline on the F-layer
+                chkGrayLine.Checked = false;
+
+                MapJustBandLast = chkMapBand.Checked;  // turn off spots on F-layer
+                chkMapBand.Checked = false;
+
+                MapJustPanLast = chkBoxPan.Checked;
+                chkBoxPan.Checked = false;
+
+                MapBeamLast = chkBoxBeam.Checked;
+                chkBoxBeam.Checked = false;
+
+                MemoriesPanLast = chkBoxMem.Checked; // Turn off memories on F-layer
+                chkBoxMem.Checked = false; 
+
+                VOACAPLast = checkBoxMUF.Checked;  // turn off VOACAP on F-Layer
+                checkBoxMUF.Checked = false;
+              
+                BandTextLast = chkBoxBandText.Checked; 
+                chkBoxBandText.Checked = false;
+
+                MapCallLast = chkMapCall.Checked;
+                chkMapCall.Checked = false;
+
+                MapCountryLast = chkMapCountry.Checked;
+                chkMapCountry.Checked = false;
+
+                if (console.setupForm != null)
+                {
+                    if (Display.GridOff == 0)
+                    {
+                        GridBoxLast = !console.setupForm.gridBoxTS.Checked; // if GRID ON then = false so set GridBoxLast = true
+                        console.setupForm.gridBoxTS.Checked = true; // true = Grid OFF
+                    }
+
+                }
+
+
+            }
+            else  // turn them back on if they were on before the F-layer map was turned on
+            {
+                if (GrayLineLast)
+                {
+                    GrayLineLast = false;
+                    chkGrayLine.Checked = true;
+                }
+               
+                if (MapJustBandLast)
+                {
+                    MapJustBandLast = false;
+                    chkMapBand.Checked = true;
+                }
+
+                if (MapJustPanLast)
+                {
+                    MapJustPanLast = false;
+                    chkBoxPan.Checked = true;
+                }
+
+                if (MapBeamLast)
+                {
+                    MapBeamLast = false;
+                    chkBoxBeam.Checked = true;
+                }
+
+                if (MemoriesPanLast)
+                {
+                    MemoriesPanLast = false;
+                    chkBoxMem.Checked = true;
+                }
+
+                if (VOACAPLast)
+                {
+                    VOACAPLast = false;
+                    checkBoxMUF.Checked = true;
+                }
+
+                if (BandTextLast)
+                {
+                    BandTextLast = false;
+                    chkBoxBandText.Checked = true;
+                }
+
+                if (MapCallLast)
+                {
+                    MapCallLast = false;
+                    chkMapCall.Checked = true;
+                }
+
+                if (MapCountryLast)
+                {
+                    MapCountryLast = false;
+                    chkMapCountry.Checked = true;
+                }
+
+                if (console.setupForm != null)
+                {
+                    if (Display.GridOff == 0)
+                    {
+                        if (GridBoxLast) // grid was on before
+                        {
+                            GridBoxLast = false;
+                            console.setupForm.gridBoxTS.Checked = false; // true = Grid OFF
+                        }
+                    }
+
+                }
+
+            } //  if (chkFLayerON.Checked == true) //.239
+
+
+        } // chkFLayerON_CheckedChanged
 
         private void chkDLayerON_CheckedChanged_1(object sender, EventArgs e)
         {
+
+            if (SP5_Active == 0)  // .239 if map was off when you turned on d-layer
+                btnTrack_Click(this, EventArgs.Empty); // turn on Map first
+
+
             if (chkFLayerON.Checked && chkDLayerON.Checked) chkFLayerON.Checked = false;
             chkSUN_CheckedChanged(this, EventArgs.Empty);
-        }
+
+
+            if (chkDLayerON.Checked == true) //.239
+            {
+                GrayLineLast = chkGrayLine.Checked;   // turn off Grayline on the d-layer
+                chkGrayLine.Checked = false;
+
+                MapJustBandLast = chkMapBand.Checked;  // turn off spots on d-layer
+                chkMapBand.Checked = false;
+              
+                MapJustPanLast = chkBoxPan.Checked;
+                chkBoxPan.Checked = false;
+
+                MapBeamLast = chkBoxBeam.Checked;
+                chkBoxBeam.Checked = false;
+
+                MemoriesPanLast = chkBoxMem.Checked; // Turn off memories on d-layer
+                chkBoxMem.Checked = false;
+
+                VOACAPLast = checkBoxMUF.Checked;  // turn off VOACAP on d
+                                                   // -Layer
+                checkBoxMUF.Checked = false;
+              
+                BandTextLast = chkBoxBandText.Checked;
+                chkBoxBandText.Checked = false;
+
+                MapCallLast = chkMapCall.Checked;
+                chkMapCall.Checked = false;
+
+                MapCountryLast = chkMapCountry.Checked;
+                chkMapCountry.Checked = false;
+
+                if (console.setupForm != null)
+                {
+                    if (Display.GridOff == 0)
+                    {
+                        GridBoxLast = !console.setupForm.gridBoxTS.Checked; // if GRID ON then = false so set GridBoxLast = true
+                        console.setupForm.gridBoxTS.Checked = true; // true = Grid OFF
+                    }
+
+                }
+
+
+            }
+            else  // turn them back on if they were on before the F-layer map was turned on
+            {
+                if (GrayLineLast)
+                {
+                    GrayLineLast = false;
+                    chkGrayLine.Checked = true;
+                }
+
+                if (MapJustBandLast)
+                {
+                    MapJustBandLast = false;
+                    chkMapBand.Checked = true;
+                }
+
+                if (MapJustPanLast)
+                {
+                    MapJustPanLast = false;
+                    chkBoxPan.Checked = true;
+                }
+
+                if (MapBeamLast)
+                {
+                    MapBeamLast = false;
+                    chkBoxBeam.Checked = true;
+                }
+
+                if (MemoriesPanLast)
+                {
+                    MemoriesPanLast = false;
+                    chkBoxMem.Checked = true;
+                }
+
+                if (VOACAPLast)
+                {
+                    VOACAPLast = false;
+                    checkBoxMUF.Checked = true;
+                }
+
+                if (BandTextLast)
+                {
+                    BandTextLast = false;
+                    chkBoxBandText.Checked = true;
+                }
+
+                if (MapCallLast)
+                {
+                    MapCallLast = false;
+                    chkMapCall.Checked = true;
+                }
+
+                if (MapCountryLast)
+                {
+                    MapCountryLast = false;
+                    chkMapCountry.Checked = true;
+                }
+
+
+                if (console.setupForm != null)
+                {
+                    if (Display.GridOff == 0)
+                    {
+                        if (GridBoxLast) // grid was on before
+                        {
+                            GridBoxLast = false;
+                            console.setupForm.gridBoxTS.Checked = false; // true = Grid OFF
+                        }
+                    }
+
+                }
+
+            } //  if (chkFLayerON.Checked == true) //.239
+
+        } // chkDLayerON_CheckedChanged_1(object sender, EventArgs e)
+
+
     } //SPOTCONTROL
 
 

@@ -34,12 +34,12 @@ namespace PowerSDR
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpotControl));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
             this.SWLbutton = new System.Windows.Forms.Button();
             this.SSBbutton = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.RichTextBox();
@@ -154,7 +154,7 @@ namespace PowerSDR
             // 
             this.SSBbutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SSBbutton.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.SSBbutton.Location = new System.Drawing.Point(12, 467);
+            this.SSBbutton.Location = new System.Drawing.Point(12, 470);
             this.SSBbutton.Name = "SSBbutton";
             this.SSBbutton.Size = new System.Drawing.Size(75, 23);
             this.SSBbutton.TabIndex = 1;
@@ -270,7 +270,7 @@ namespace PowerSDR
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button1.Location = new System.Drawing.Point(101, 467);
+            this.button1.Location = new System.Drawing.Point(101, 470);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(68, 23);
             this.button1.TabIndex = 3;
@@ -330,7 +330,7 @@ namespace PowerSDR
             this.btnTrack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnTrack.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnTrack.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrack.Location = new System.Drawing.Point(273, 413);
+            this.btnTrack.Location = new System.Drawing.Point(273, 394);
             this.btnTrack.Name = "btnTrack";
             this.btnTrack.Size = new System.Drawing.Size(60, 23);
             this.btnTrack.TabIndex = 62;
@@ -362,34 +362,34 @@ namespace PowerSDR
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle31;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.OliveDrab;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle32.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle32.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.Color.OliveDrab;
+            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle32;
             this.dataGridView1.Location = new System.Drawing.Point(12, 44);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle33.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle33.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle33.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle33;
             this.dataGridView1.Size = new System.Drawing.Size(280, 93);
             this.dataGridView1.TabIndex = 72;
             this.toolTip1.SetToolTip(this.dataGridView1, "Enter DX address : port#\r\nExample:  wb8zrl.no-ip.org:7300\r\n");
@@ -405,34 +405,34 @@ namespace PowerSDR
             this.dataGridView2.AllowUserToResizeColumns = false;
             this.dataGridView2.AllowUserToResizeRows = false;
             this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle34.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle34.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle34.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle34.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle34;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.OliveDrab;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle35.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle35.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle35.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle35.SelectionBackColor = System.Drawing.Color.OliveDrab;
+            dataGridViewCellStyle35.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle35;
             this.dataGridView2.Location = new System.Drawing.Point(498, 143);
             this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle36.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle36.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle36.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle36.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle36.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle36;
             this.dataGridView2.Size = new System.Drawing.Size(254, 94);
             this.dataGridView2.TabIndex = 75;
             this.toolTip1.SetToolTip(this.dataGridView2, "memories");
@@ -456,7 +456,7 @@ namespace PowerSDR
             this.btnBeacon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnBeacon.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnBeacon.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBeacon.Location = new System.Drawing.Point(182, 467);
+            this.btnBeacon.Location = new System.Drawing.Point(182, 470);
             this.btnBeacon.Name = "btnBeacon";
             this.btnBeacon.Size = new System.Drawing.Size(85, 23);
             this.btnBeacon.TabIndex = 85;
@@ -469,7 +469,7 @@ namespace PowerSDR
             // 
             this.btnTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnTime.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnTime.Location = new System.Drawing.Point(511, 326);
+            this.btnTime.Location = new System.Drawing.Point(513, 324);
             this.btnTime.Name = "btnTime";
             this.btnTime.Size = new System.Drawing.Size(75, 23);
             this.btnTime.TabIndex = 89;
@@ -483,13 +483,13 @@ namespace PowerSDR
             this.checkBoxTone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBoxTone.AutoSize = true;
             this.checkBoxTone.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.checkBoxTone.Location = new System.Drawing.Point(559, 379);
+            this.checkBoxTone.Location = new System.Drawing.Point(561, 377);
             this.checkBoxTone.Name = "checkBoxTone";
             this.checkBoxTone.Size = new System.Drawing.Size(46, 17);
             this.checkBoxTone.TabIndex = 93;
             this.checkBoxTone.TabStop = true;
             this.checkBoxTone.Text = "Tick";
-            this.toolTip1.SetToolTip(this.checkBoxTone, "ON = BCD sub-Carrier Tick\r\nOFF = no Tick");
+            this.toolTip1.SetToolTip(this.checkBoxTone, resources.GetString("checkBoxTone.ToolTip"));
             this.checkBoxTone.UseVisualStyleBackColor = true;
             this.checkBoxTone.CheckedChanged += new System.EventHandler(this.checkBoxTone_CheckedChanged);
             // 
@@ -498,7 +498,7 @@ namespace PowerSDR
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox2.Enabled = false;
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(575, 301);
+            this.textBox2.Location = new System.Drawing.Point(532, 201);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(46, 20);
             this.textBox2.TabIndex = 94;
@@ -592,7 +592,7 @@ namespace PowerSDR
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button4.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.button4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button4.Location = new System.Drawing.Point(195, 413);
+            this.button4.Location = new System.Drawing.Point(190, 413);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(57, 23);
             this.button4.TabIndex = 117;
@@ -605,9 +605,10 @@ namespace PowerSDR
             // chkFLayerON
             // 
             this.chkFLayerON.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkFLayerON.Enabled = false;
             this.chkFLayerON.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkFLayerON.Image = null;
-            this.chkFLayerON.Location = new System.Drawing.Point(262, 440);
+            this.chkFLayerON.Location = new System.Drawing.Point(270, 420);
             this.chkFLayerON.Name = "chkFLayerON";
             this.chkFLayerON.Size = new System.Drawing.Size(84, 20);
             this.chkFLayerON.TabIndex = 122;
@@ -618,9 +619,10 @@ namespace PowerSDR
             // chkDLayerON
             // 
             this.chkDLayerON.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkDLayerON.Enabled = false;
             this.chkDLayerON.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkDLayerON.Image = null;
-            this.chkDLayerON.Location = new System.Drawing.Point(273, 459);
+            this.chkDLayerON.Location = new System.Drawing.Point(270, 437);
             this.chkDLayerON.Name = "chkDLayerON";
             this.chkDLayerON.Size = new System.Drawing.Size(75, 20);
             this.chkDLayerON.TabIndex = 121;
@@ -662,7 +664,7 @@ namespace PowerSDR
             this.chkVoacap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkVoacap.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkVoacap.Image = null;
-            this.chkVoacap.Location = new System.Drawing.Point(175, 445);
+            this.chkVoacap.Location = new System.Drawing.Point(615, 169);
             this.chkVoacap.Name = "chkVoacap";
             this.chkVoacap.Size = new System.Drawing.Size(77, 17);
             this.chkVoacap.TabIndex = 113;
@@ -675,7 +677,7 @@ namespace PowerSDR
             this.chkDXOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkDXOn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkDXOn.Image = null;
-            this.chkDXOn.Location = new System.Drawing.Point(101, 448);
+            this.chkDXOn.Location = new System.Drawing.Point(615, 192);
             this.chkDXOn.Name = "chkDXOn";
             this.chkDXOn.Size = new System.Drawing.Size(77, 17);
             this.chkDXOn.TabIndex = 112;
@@ -688,7 +690,7 @@ namespace PowerSDR
             this.chkMapOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkMapOn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkMapOn.Image = null;
-            this.chkMapOn.Location = new System.Drawing.Point(150, 430);
+            this.chkMapOn.Location = new System.Drawing.Point(520, 169);
             this.chkMapOn.Name = "chkMapOn";
             this.chkMapOn.Size = new System.Drawing.Size(77, 17);
             this.chkMapOn.TabIndex = 111;
@@ -777,7 +779,7 @@ namespace PowerSDR
             this.chkBoxContour.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkBoxContour.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkBoxContour.Image = null;
-            this.chkBoxContour.Location = new System.Drawing.Point(343, 395);
+            this.chkBoxContour.Location = new System.Drawing.Point(349, 416);
             this.chkBoxContour.Name = "chkBoxContour";
             this.chkBoxContour.Size = new System.Drawing.Size(70, 20);
             this.chkBoxContour.TabIndex = 98;
@@ -789,7 +791,7 @@ namespace PowerSDR
             // 
             this.tbPanPower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbPanPower.AutoSize = false;
-            this.tbPanPower.Location = new System.Drawing.Point(339, 443);
+            this.tbPanPower.Location = new System.Drawing.Point(343, 457);
             this.tbPanPower.Maximum = 1500;
             this.tbPanPower.Minimum = 1;
             this.tbPanPower.Name = "tbPanPower";
@@ -807,7 +809,7 @@ namespace PowerSDR
             this.chkBoxAnt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkBoxAnt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkBoxAnt.Image = null;
-            this.chkBoxAnt.Location = new System.Drawing.Point(343, 417);
+            this.chkBoxAnt.Location = new System.Drawing.Point(349, 432);
             this.chkBoxAnt.Name = "chkBoxAnt";
             this.chkBoxAnt.Size = new System.Drawing.Size(55, 24);
             this.chkBoxAnt.TabIndex = 96;
@@ -834,7 +836,7 @@ namespace PowerSDR
             this.checkBoxMUF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBoxMUF.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.checkBoxMUF.Image = null;
-            this.checkBoxMUF.Location = new System.Drawing.Point(273, 392);
+            this.checkBoxMUF.Location = new System.Drawing.Point(343, 394);
             this.checkBoxMUF.Name = "checkBoxMUF";
             this.checkBoxMUF.Size = new System.Drawing.Size(75, 20);
             this.checkBoxMUF.TabIndex = 95;
@@ -851,7 +853,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udDisplayWWV.Location = new System.Drawing.Point(511, 376);
+            this.udDisplayWWV.Location = new System.Drawing.Point(513, 376);
             this.udDisplayWWV.Maximum = new decimal(new int[] {
             4,
             0,
@@ -877,7 +879,7 @@ namespace PowerSDR
             this.checkBoxWWV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBoxWWV.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.checkBoxWWV.Image = null;
-            this.checkBoxWWV.Location = new System.Drawing.Point(511, 350);
+            this.checkBoxWWV.Location = new System.Drawing.Point(513, 350);
             this.checkBoxWWV.Name = "checkBoxWWV";
             this.checkBoxWWV.Size = new System.Drawing.Size(98, 24);
             this.checkBoxWWV.TabIndex = 90;
@@ -1393,7 +1395,6 @@ namespace PowerSDR
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(784, 502);
-            this.Controls.Add(this.chkFLayerON);
             this.Controls.Add(this.chkDLayerON);
             this.Controls.Add(this.txtLoTWpass);
             this.Controls.Add(this.label4);
@@ -1414,7 +1415,6 @@ namespace PowerSDR
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.textBoxDXCall);
             this.Controls.Add(this.DXPost);
-            this.Controls.Add(this.chkBoxContour);
             this.Controls.Add(this.btnTrack);
             this.Controls.Add(this.tbPanPower);
             this.Controls.Add(this.chkBoxAnt);
@@ -1423,7 +1423,6 @@ namespace PowerSDR
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.checkBoxTone);
             this.Controls.Add(this.udDisplayWWV);
-            this.Controls.Add(this.checkBoxWWV);
             this.Controls.Add(this.btnTime);
             this.Controls.Add(this.numericUpDownTS1);
             this.Controls.Add(this.BoxBFScan);
@@ -1467,6 +1466,9 @@ namespace PowerSDR
             this.Controls.Add(this.button2);
             this.Controls.Add(this.hkBoxSpotRX2);
             this.Controls.Add(this.hkBoxSpotBand);
+            this.Controls.Add(this.chkBoxContour);
+            this.Controls.Add(this.chkFLayerON);
+            this.Controls.Add(this.checkBoxWWV);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximumSize = new System.Drawing.Size(800, 1000);
