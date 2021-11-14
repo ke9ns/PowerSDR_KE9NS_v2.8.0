@@ -240,8 +240,9 @@ To download a new fcc database: ftp://wirelessftp.fcc.gov/pub/uls/complete/l_ama
   </data>
   <data name="chkFLayerON.ToolTip" xml:space="preserve">
     <value>Australian gov space weather service critical foF2-Layer world map. (Updated every 30min)
-Colors denoting the highest frequency the f2 ionosphere will reflect vertical signals back towards earth (NVIS)
+Colors denoting the highest frequency the f2 ionosphere will reflect vertical signals directly back towards earth (NVIS)
 Determined using ionosonde radar. The higher the reflect frequecies, the more open propogation will be in those areas.
+Dark Blue (or better) may result in 10m skip
 
 Red =      Reflect up to 1mhz
 Yellow = Reflect up to 2mhz

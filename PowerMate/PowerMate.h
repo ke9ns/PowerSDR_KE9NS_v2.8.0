@@ -21,11 +21,14 @@ using namespace System::Collections::Generic;
 using namespace System::Diagnostics;
 using namespace System::Threading;
 
+
 #include "EventsHelper.h"
 
 namespace HidDevice
 { 
     int KBON = 0;										// 1=detect knob, 0=dont
+
+
 
 	public ref class PowerMate
 	{

@@ -44,6 +44,10 @@ using System.Windows.Forms;
 using System.Xml;
 using Microsoft.VisualBasic;
 
+
+using System.Runtime.InteropServices;
+
+
 namespace PowerSDR
 {
     public partial class Setup : System.Windows.Forms.Form

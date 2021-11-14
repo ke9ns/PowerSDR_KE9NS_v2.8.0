@@ -51,7 +51,7 @@ namespace PowerSDR
             console = c;
 
             Common.RestoreForm(this, "SwlForm", true);
-
+           
 
             //   bandSwlupdate();
 
@@ -306,14 +306,14 @@ namespace PowerSDR
                                 bigmessage += (String.Format("{0:00.000000}", (double)(SpotControl.SWL_Freq[ii]) / 1000000.0) +
                                     " " + SpotControl.SWL_Station[ii].PadRight(25, ' ') + " " + SpotControl.SWL_Loc[ii].PadRight(3, ' ') +
                                     " " + SpotControl.SWL_TimeN[ii].ToString().PadLeft(4, '0') + ":" + SpotControl.SWL_TimeF[ii].ToString().PadLeft(4, '0') +
-                                    " " + "\r\n");
+                                 "_" +   "\r\n");
                             }
                             else
                             {
                                 bigmessage += (String.Format("{0:00.000000}", (double)(SpotControl.SWL_Freq[ii]) / 1000000.0) +
-                                                               "  " + SpotControl.SWL_Station[ii].PadRight(25, ' ') + " " + SpotControl.SWL_Loc[ii].PadRight(3, ' ') +
-                                                               " " + SpotControl.SWL_TimeN[ii].ToString().PadLeft(4, '0') + ":" + SpotControl.SWL_TimeF[ii].ToString().PadLeft(4, '0') +
-                                                               " " + "\r\n");
+                                 "  " + SpotControl.SWL_Station[ii].PadRight(25, ' ') + " " + SpotControl.SWL_Loc[ii].PadRight(3, ' ') +
+                                   " " + SpotControl.SWL_TimeN[ii].ToString().PadLeft(4, '0') + ":" + SpotControl.SWL_TimeF[ii].ToString().PadLeft(4, '0') +
+                                "_" +  "\r\n");
                             }
 
                         } // check time
@@ -333,8 +333,7 @@ namespace PowerSDR
 
             richTextBox2.Text = bigmessage; // update screen
 
-
-
+          
 
         } // bandSwlupdate
 
@@ -380,16 +379,19 @@ namespace PowerSDR
 
         private void richTextBox2_MouseDown(object sender, MouseEventArgs e)
         {
+
             richTextBox2.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up
+
 
         }
 
 
         int xxx = 0;
 
-
+        int WidthOfText = 52; // was 52 .236
         public void richTextBox2_MouseUp(object sender, MouseEventArgs e)
         {
+
             richTextBox2.ShortcutsEnabled = false;
 
 
@@ -399,19 +401,19 @@ namespace PowerSDR
                 {
                     int ii = richTextBox2.GetCharIndexFromPosition(e.Location);
 
-                    xxx = (ii / 52); //find row 52
+                    xxx = (ii / WidthOfText); //find row 52
 
-                    Debug.WriteLine("ii " + ii);
-                    Debug.WriteLine("xxx " + xxx);
+                    //   Debug.WriteLine("ii " + ii);
+                    //  Debug.WriteLine("xxx " + xxx);
 
-                    richTextBox2.SelectionStart = (xxx * 52);
-                    richTextBox2.SelectionLength = 52;
+                    richTextBox2.SelectionStart = (xxx * WidthOfText);
+                    richTextBox2.SelectionLength = WidthOfText-1;
 
                     //   console.SaveBand(); // put away last freq you were on before moving
-                //    Debug.WriteLine("INDEX YOU CLICKED ON " + ii);
-                 //   Debug.WriteLine("INDEX YOU CLICKED ON2 " + xxx + " , " + swl_index[xxx]);
+                    Debug.WriteLine("INDEX YOU CLICKED ON " + ii);
+                    Debug.WriteLine("INDEX YOU CLICKED ON2 " + xxx + " , " + swl_index[xxx]);
 
-                 //   Debug.WriteLine("freq " + SpotControl.SWL_Freq[swl_index[xxx]]);
+                    Debug.WriteLine("freq " + SpotControl.SWL_Freq[swl_index[xxx]]);
 
                     console.VFOAFreq = ((double)SpotControl.SWL_Freq[swl_index[xxx]]) / 1000000.0; // convert to MHZ
 
@@ -427,7 +429,6 @@ namespace PowerSDR
                     else if (SpotControl.SWL_Mode[swl_index[xxx]] == "FM") console.RX1DSPMode = DSPMode.FM;  // .219
 
 
-
                     richTextBox2.Focus();
                     richTextBox2.Show();
 
@@ -439,23 +440,31 @@ namespace PowerSDR
 
                 }
             }
-            else if (e.Button == MouseButtons.Right) // .222 RX2
+            else if (e.Button == MouseButtons.Right || e.Button == MouseButtons.Middle) // .222 RX2
             {
+
+                //  const int WM_VSCROLL = 0x115;
+                //  const int SB_ENDSCROLL = 8;
+                Console.SendMessageW(this.Handle, 0x115, (IntPtr)0x08, this.Handle); // to prevent a silly windows scroll feature that normally comes from a mouse wheel click
+
+                richTextBox2.Cursor = Cursors.Hand;
+
                 try
                 {
                     int ii = richTextBox2.GetCharIndexFromPosition(e.Location);
+                  
+                    xxx = (ii / WidthOfText); //find row 52
 
-                    xxx = (ii / 52); //find row 52
+                    //   Debug.WriteLine("ii " + ii);
+                    //   Debug.WriteLine("xxx " + xxx);
 
-                    Debug.WriteLine("ii " + ii);
-                    Debug.WriteLine("xxx " + xxx);
 
-                    richTextBox2.SelectionStart = (xxx * 52);
-                    richTextBox2.SelectionLength = 52;
+                    richTextBox2.SelectionStart = (xxx * WidthOfText);
+                    richTextBox2.SelectionLength = WidthOfText-1;
 
                     //   console.SaveBand(); // put away last freq you were on before moving
-                    //    Debug.WriteLine("INDEX YOU CLICKED ON " + ii);
-                    //   Debug.WriteLine("INDEX YOU CLICKED ON2 " + xxx + " , " + swl_index[xxx]);
+                        Debug.WriteLine("2INDEX YOU CLICKED ON " + ii);
+                       Debug.WriteLine("2INDEX YOU CLICKED ON2 " + xxx + " , " + swl_index[xxx]);
 
                     //   Debug.WriteLine("freq " + SpotControl.SWL_Freq[swl_index[xxx]]);
 
@@ -486,7 +495,7 @@ namespace PowerSDR
                 }
             }
 
-
+           // button3.Focus();
 
             //  button1.Focus();
         }
@@ -515,7 +524,18 @@ namespace PowerSDR
 
         private void SwlControl_MouseEnter(object sender, EventArgs e)
         {
+          
             if (console.setupForm.chkBoxAutoFocus.Checked == true && chkAlwaysOnTop.Checked == true) this.Activate();
+        }
+
+        private void richTextBox2_MouseMove(object sender, MouseEventArgs e)
+        {
+            richTextBox2.Cursor = Cursors.Hand;
+        }
+
+        private void richTextBox2_MouseHover(object sender, EventArgs e)
+        {
+            richTextBox2.Cursor = Cursors.Hand;
         }
     } // Swlcontrol
 

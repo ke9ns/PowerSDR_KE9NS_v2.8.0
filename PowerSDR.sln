@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30413.136
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerSDR", "Console\PowerSDR.csproj", "{831AEB2F-CA78-4057-85D7-32B4816ED6AE}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -63,7 +63,8 @@ Global
 		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|ARM.Build.0 = Release|Any CPU
 		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|Win32.ActiveCfg = Release|Any CPU
+		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|Win32.ActiveCfg = Release|x86
+		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|Win32.Build.0 = Release|x86
 		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|x64.ActiveCfg = Release|Any CPU
 		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|x86.ActiveCfg = Release|Any CPU
 		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release|x86.Build.0 = Release|Any CPU

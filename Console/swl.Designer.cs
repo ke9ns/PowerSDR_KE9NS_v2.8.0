@@ -38,10 +38,11 @@ namespace PowerSDR
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.chkAlwaysOnTop = new System.Windows.Forms.CheckBoxTS();
             this.label5 = new System.Windows.Forms.Label();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.chkAlwaysOnTop = new System.Windows.Forms.CheckBoxTS();
             this.SuspendLayout();
             // 
             // textBox3
@@ -97,28 +98,24 @@ namespace PowerSDR
             // 
             this.richTextBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.richTextBox2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.richTextBox2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.richTextBox2.DetectUrls = false;
             this.richTextBox2.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox2.HideSelection = false;
+            this.richTextBox2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.richTextBox2.Location = new System.Drawing.Point(12, 163);
             this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.ReadOnly = true;
             this.richTextBox2.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBox2.Size = new System.Drawing.Size(394, 331);
+            this.richTextBox2.ShortcutsEnabled = false;
+            this.richTextBox2.Size = new System.Drawing.Size(394, 337);
             this.richTextBox2.TabIndex = 64;
             this.richTextBox2.Text = "";
             this.richTextBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.richTextBox2_MouseDown);
             this.richTextBox2.MouseEnter += new System.EventHandler(this.SwlControl_MouseEnter);
+            this.richTextBox2.MouseHover += new System.EventHandler(this.richTextBox2_MouseHover);
+            this.richTextBox2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.richTextBox2_MouseMove);
             this.richTextBox2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.richTextBox2_MouseUp);
-            // 
-            // chkAlwaysOnTop
-            // 
-            this.chkAlwaysOnTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkAlwaysOnTop.Image = null;
-            this.chkAlwaysOnTop.Location = new System.Drawing.Point(385, 506);
-            this.chkAlwaysOnTop.Name = "chkAlwaysOnTop";
-            this.chkAlwaysOnTop.Size = new System.Drawing.Size(104, 24);
-            this.chkAlwaysOnTop.TabIndex = 59;
-            this.chkAlwaysOnTop.Text = "Always On Top";
-            this.chkAlwaysOnTop.CheckedChanged += new System.EventHandler(this.chkAlwaysOnTop_CheckedChanged);
             // 
             // label5
             // 
@@ -133,7 +130,7 @@ namespace PowerSDR
             // 
             // richTextBox3
             // 
-            this.richTextBox3.Location = new System.Drawing.Point(413, 12);
+            this.richTextBox3.Location = new System.Drawing.Point(421, 12);
             this.richTextBox3.Name = "richTextBox3";
             this.richTextBox3.Size = new System.Drawing.Size(76, 327);
             this.richTextBox3.TabIndex = 86;
@@ -146,7 +143,7 @@ namespace PowerSDR
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(412, 345);
+            this.textBox1.Location = new System.Drawing.Point(421, 345);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(76, 149);
@@ -156,10 +153,31 @@ namespace PowerSDR
     "ct-artemis/";
             this.textBox1.MouseEnter += new System.EventHandler(this.SwlControl_MouseEnter);
             // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.button3.Location = new System.Drawing.Point(213, 260);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 88;
+            this.button3.Text = "focus";
+            this.button3.UseVisualStyleBackColor = false;
+            // 
+            // chkAlwaysOnTop
+            // 
+            this.chkAlwaysOnTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkAlwaysOnTop.Image = null;
+            this.chkAlwaysOnTop.Location = new System.Drawing.Point(385, 506);
+            this.chkAlwaysOnTop.Name = "chkAlwaysOnTop";
+            this.chkAlwaysOnTop.Size = new System.Drawing.Size(104, 24);
+            this.chkAlwaysOnTop.TabIndex = 59;
+            this.chkAlwaysOnTop.Text = "Always On Top";
+            this.chkAlwaysOnTop.CheckedChanged += new System.EventHandler(this.chkAlwaysOnTop_CheckedChanged);
+            // 
             // SwlControl
             // 
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(500, 542);
+            this.ClientSize = new System.Drawing.Size(509, 542);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.richTextBox3);
             this.Controls.Add(this.label5);
@@ -169,6 +187,7 @@ namespace PowerSDR
             this.Controls.Add(this.button1);
             this.Controls.Add(this.chkAlwaysOnTop);
             this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.button3);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(516, 200);
             this.Name = "SwlControl";
@@ -200,8 +219,7 @@ namespace PowerSDR
         private System.Windows.Forms.RichTextBox richTextBox3;
         private System.Windows.Forms.TextBox textBox1;
         private System.ComponentModel.IContainer components;
-
-       
+        private System.Windows.Forms.Button button3;
     } // Swlcontrol
 
 

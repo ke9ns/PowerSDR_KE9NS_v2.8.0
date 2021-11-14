@@ -210,6 +210,8 @@ using System.Speech.Synthesis; // ke9ns add
 
 
 
+
+
 using PortTalk;
 //using System.Object;
 //using System.Windows.Threading.DispatcherObject;
@@ -234,7 +236,6 @@ using Flex.Control;
 
 //using Syncfusion.Windows.Forms.Tools; // ke9ns add
 //using Syncfusion.Windows.Forms.HTMLUI; // ke9ns add
-
 
 
 namespace PowerSDR
@@ -923,8 +924,7 @@ namespace PowerSDR
 
         public Skin skin1; // ke9ns add
 
-        public HidDevice.PowerMate PowerMate;              // ke9ns add communicate with powermate HID
-
+      
         public IDBOX IDBOXForm;                          // ke9ns add ID Timer function function (idtimer)
         public TOTBOX TOTBOXForm;                          // ke9ns add Timeout Timer function function (tottimer)
 
@@ -982,6 +982,8 @@ namespace PowerSDR
         public PAQualify PAQualForm;
         public ProductionTest ProdTestForm;
 
+      
+        public HidDevice.PowerMate PowerMate;              // ke9ns add communicate with powermate HID
 
         HidDevice.PowerMate powerMate = new HidDevice.PowerMate();  // ke9ns add link back to PowerMate.cpp and PowerMate.h
 
@@ -2602,7 +2604,41 @@ namespace PowerSDR
                 comboRX2Band_SelectedIndexChanged(this, EventArgs.Empty); //.210
             }
 
-                Debug.WriteLine("===END=== Console here");
+            if (radFMDeviation2kHz.Checked) //.236
+            {
+                lastdeviation = 2500;
+                FMSEQ = 0;
+                FMDeviation_Hz = 2500;
+                radRX2ModeFMN.Text = "2FM";
+                radModeFMN.Text = "2FM";
+                dsp.GetDSPTX(0).TXFMDataMode = false;
+                FMData = false;
+            }
+            else if (radFMDeviation5kHz.Checked)
+            {
+                lastdeviation = 5000;
+                FMSEQ = 1;
+                FMDeviation_Hz = 5000;
+                radRX2ModeFMN.Text = "5FM";
+                radModeFMN.Text = "5FM";
+                dsp.GetDSPTX(0).TXFMDataMode = false;
+                FMData = false;
+            }
+            else
+            {
+                lastdeviation = FMDataDeviation;
+                FMSEQ = 2;
+                radRX2ModeFMN.Text = "WFM";
+                radModeFMN.Text = "WFM";
+                FMDeviation_Hz = FMDataDeviation;
+                FMData = true;
+                FMDeviation10khz(); //.236
+                dsp.GetDSPTX(0).TXFMDataMode = true;
+            }
+
+            dsp.GetDSPTX(0).TXFMDeviation = lastdeviation;
+
+            Debug.WriteLine("===END=== Console here");
 
         } // public console
 

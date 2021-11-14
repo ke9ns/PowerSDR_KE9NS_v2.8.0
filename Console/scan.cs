@@ -910,6 +910,7 @@ namespace PowerSDR
         int memcount = 0; // total memories found
         string[] memsignal = new string[1000]; // db signal and sql brk
 
+        bool ScanVFOB = false; // .236
 
         //=======================================================================================================================
         // Group memory scanner. Scanning only frequencies in 1 group name
@@ -949,7 +950,6 @@ namespace PowerSDR
             else
             {
                 ScanRun = false; // turn off scanner
-
             }
 
         } // button6_Click
@@ -3679,7 +3679,6 @@ namespace PowerSDR
 
             MouseEventArgs me = (MouseEventArgs)e;
 
-
             if (me.Button == System.Windows.Forms.MouseButtons.Right) // right mouse click
             {
 
@@ -3725,6 +3724,22 @@ namespace PowerSDR
             comboBoxTS1.Text = "";
 
         }
+
+        private void btnGroupMemory_MouseDown(object sender, MouseEventArgs e) //.236
+        {
+
+            MouseEventArgs me = (MouseEventArgs)e;
+
+            if (me.Button == System.Windows.Forms.MouseButtons.Middle) // 
+            {
+                ScanVFOB = true;
+            }
+            else
+            {
+                ScanVFOB = false;
+            }
+
+        } // btnGroupMemory_MouseDown
     } // scancontrol
 
 

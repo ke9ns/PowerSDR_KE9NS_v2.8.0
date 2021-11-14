@@ -155,42 +155,8 @@ namespace PowerSDR
 
         // Timer identifier.
         private int timerID;
-        public CheckBoxTS chkBoxContour;
-        private Button button2;
-        public Button DXPost;
-        private TextBox textBoxDXCall;
-        private TextBox textBox4;
-        public CheckBoxTS chkMoon;
-        public CheckBoxTS chkISS;
-        public NumericUpDownTS numBeamHeading;
-        public CheckBoxTS chkBoxBandText;
-        private ToolStripTextBox menuItem2;
-        public MenuItem mnuSpotOptions;
-        private MenuItem chkTimeServer1;
-        private MenuItem chkTimeServer2;
-        private MenuItem chkTimeServer3;
-        private MenuItem chkTimeServer4;
-        private MenuItem chkTimeServer5;
-        private MenuItem menuTimeServers;
-        private MenuItem menuItem1;
-        private MenuItem menuItem3;
-        private MainMenu mainMenu1;
-        private Label label6;
-        public Button button3;
-        public TextBox RotorHead;
-        private Label label7;
-        public CheckBoxTS chkMapOn;
-        public CheckBoxTS chkDXOn;
-        public CheckBoxTS chkVoacap;
-        public CheckBoxTS chkBoxBeacon;
-        public TextBoxTS txtLoTWpass;
-        public Button button4;
-        private MenuItem mnuSpotAge;
-        public CheckBoxTS hkBoxSpotBand;
-        public CheckBoxTS hkBoxSpotRX2;
-        private RichTextBox richTextBox1;
-        private TimeProc timeProcPeriodic;
-
+       
+      
         // ke9ns run this to kill the prior timer and start a new timer 
         private void setup_timer(int cwxwpm)
         {
@@ -221,7 +187,9 @@ namespace PowerSDR
 
         public static Stream Map_image2 = myAssembly2.GetManifestResourceStream("PowerSDR.Resources.picD2.png");     // MAP with lat / long on it
 
-       
+        public static Stream Map_D_Bar = myAssembly2.GetManifestResourceStream("PowerSDR.Resources.bar1.png");     // .237
+
+
         private static System.Reflection.Assembly myAssembly1 = System.Reflection.Assembly.GetExecutingAssembly();
         public static Stream sun_image = myAssembly1.GetManifestResourceStream("PowerSDR.Resources.sun.png");       // SUN
 
@@ -233,6 +201,7 @@ namespace PowerSDR
 
         private static System.Reflection.Assembly myAssembly3 = System.Reflection.Assembly.GetExecutingAssembly();
         public static Stream star_image = myAssembly3.GetManifestResourceStream("PowerSDR.Resources.star.png");      // star to indicate your transmitter based on your lat and long
+
 
 
 
@@ -4659,8 +4628,7 @@ namespace PowerSDR
 
         public void textBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
-
+           
           
             chkDXMode.Checked = true;  // the callsign box
           
@@ -8640,11 +8608,11 @@ namespace PowerSDR
 
         private void textBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            MouseEventArgs me = (MouseEventArgs)e;  // .202
+          //  MouseEventArgs me = (MouseEventArgs)e;  // .202
             pause = true;
             button1.Text = "Paused";
 
-            textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
+          //  textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
 
           
         } // textBox1_MouseDown
@@ -13399,11 +13367,11 @@ namespace PowerSDR
 
         private void SpotControl_MouseEnter(object sender, EventArgs e)
         {
+            textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
+
             Console.HELPMAP = true;
             if (console.setupForm.chkBoxAutoFocus.Checked == true && chkAlwaysOnTop.Checked == true) this.Activate();
             
-           // pause = false;
-          //  button1.Text = "Pause";
         }
 
         private void btnTrack_MouseLeave(object sender, EventArgs e)
@@ -13754,23 +13722,64 @@ namespace PowerSDR
                     Bitmap result = new Bitmap(1000, 507);          // this is the size we really want so it matches the built in world map
                     Rectangle r1 = new Rectangle(55, 20, 882, 449); // this is where to place the smaller F laywer world map into the big result bitmap
 
-                    
+                    int x = 17;
+                    int y = 10;
+                   
                     using (Graphics g = Graphics.FromImage(result))
                     {
                         
-                          g.CompositingQuality = CompositingQuality.HighQuality;
-                          g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                          g.SmoothingMode = SmoothingMode.HighQuality;
-                          g.DrawImage(img8, r1);  // this results in a d layer map with a empty boarder around all 4 edges.
-                          g.DrawString("SWS foF2 Layer reflection: (min)RED->YELL->OLV->GRN->LGRN->LBLU->BGRY->BLU->DBLU->MARN->PUR->VIO->GRY(max)", font2, new SolidBrush(Color.Black), 55,20); // use Pandapdater holder[] data
+                        g.CompositingQuality = CompositingQuality.HighQuality;
+                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        g.SmoothingMode = SmoothingMode.HighQuality;
+                        g.DrawImage(img8, r1);  // this results in a d layer map with a empty boarder around all 4 edges.
+                        
+                        g.DrawString("foF2", font2, new SolidBrush(Color.White), x, y);
+                        g.DrawString("NVIS", font2, new SolidBrush(Color.White), x, y + 10);
+                        g.DrawString("Refl:", font2, new SolidBrush(Color.White), x, y + 20);
+                        
+                        g.DrawString("Gray", font2, new SolidBrush(Color.Gray), x, y + 40);
+                        g.DrawString("13mhz", font2, new SolidBrush(Color.Gray), x, y + 50);
+                        
+                        g.DrawString("Violet", font2, new SolidBrush(Color.Violet), x, y + 70);
+                        g.DrawString("12mhz", font2, new SolidBrush(Color.Violet), x, y + 80);
+                       
+                        g.DrawString("Purple", font2, new SolidBrush(Color.Purple), x, y + 100);
+                        g.DrawString("11mhz", font2, new SolidBrush(Color.Purple), x, y + 110);
+                       
+                        g.DrawString("Maroon", font2, new SolidBrush(Color.Maroon), x, y + 130);
+                        g.DrawString("10mhz", font2, new SolidBrush(Color.Maroon), x, y + 140);
+                        
+                        g.DrawString("DK BLU", font2, new SolidBrush(Color.DarkBlue), x, y + 160);
+                        g.DrawString(" 9mhz", font2, new SolidBrush(Color.DarkBlue), x, y + 170);
+                        
+                        g.DrawString("Blue", font2, new SolidBrush(Color.Blue), x, y + 190);
+                        g.DrawString(" 8mhz", font2, new SolidBrush(Color.Blue), x, y + 200);
+                        
+                        g.DrawString("BLU GRY", font2, new SolidBrush(Color.DarkSlateBlue), x, y + 220);
+                        g.DrawString(" 7mhz", font2, new SolidBrush(Color.DarkSlateBlue), x, y + 230);
+                        
+                        g.DrawString("LT BLU", font2, new SolidBrush(Color.LightBlue), x, y + 250);
+                        g.DrawString(" 6mhz", font2, new SolidBrush(Color.LightBlue), x, y + 260);
+                        
+                        g.DrawString("LT GRN", font2, new SolidBrush(Color.LightGreen), x, y + 280);
+                        g.DrawString(" 5mhz", font2, new SolidBrush(Color.LightGreen), x, y + 290);
+                       
+                        g.DrawString("Green", font2, new SolidBrush(Color.Green), x, y + 310);
+                        g.DrawString(" 4mhz", font2, new SolidBrush(Color.Green), x, y + 320);
+                        
+                        g.DrawString("Olive", font2, new SolidBrush(Color.Olive), x, y + 340);
+                        g.DrawString(" 3mhz", font2, new SolidBrush(Color.Olive), x, y + 350);
+                        
+                        g.DrawString("Yellow", font2, new SolidBrush(Color.Yellow), x, y + 370);
+                        g.DrawString(" 2mhz", font2, new SolidBrush(Color.Yellow), x, y + 380);
+                        
+                        g.DrawString("Red", font2, new SolidBrush(Color.Red), x, y + 400);
+                        g.DrawString(" 1mhz", font2, new SolidBrush(Color.Red), x, y + 410);
+
+
+
                     }
 
-                   // g.DrawString("VOACAP Propagation map", font7, grid_text_brush, Sun_Left, Sun_Top1);
-                   // g.DrawString("Max+", font7, bluebrush, Sun_Left, Sun_Top1 + 10);
-                  //  g.DrawString("Strong", font7, greenbrush, Sun_Left + 26, Sun_Top1 + 10);
-                  //  g.DrawString("Fair", font7, yellowbrush, Sun_Left + 59, Sun_Top1 + 10);
-                  //  g.DrawString("Weak", font7, orangebrush, Sun_Left + 80, Sun_Top1 + 10);
-                  //  g.DrawString("Min-", font7, graybrush, Sun_Left + 108, Sun_Top1 + 10);
 
                     MAP = Lighten(result, MBG, MB);
                 }
@@ -13783,28 +13792,53 @@ namespace PowerSDR
             else if (chkDLayerON.Checked) //.234
             {
                 chkFLayerON.Checked = false;
+
+                int x = 17;
+                int x1 = 30;
+                int y = 10;
+
                 try
                 {
-                    Image imag = Image.FromFile(console.AppDataPath + "DRAP.png"); // bring in D layer full image
+                    Image imag = Image.FromFile(console.AppDataPath + "DRAP.png"); // bring in D-layer full image
                     Bitmap img7 = new Bitmap(imag);                 // ke9ns: To avoid indexed pixel format PNG issues
+                    Bitmap Bar = new Bitmap(Map_D_Bar);              // .237 color bar legend for D-Layer
                     Rectangle r = new Rectangle(0, 0, 700, 350);    // this is the portion of the full D layer image that has the world map
                     Bitmap img8 = img7.Clone(r, img7.PixelFormat);  // make a new bitmap of just the D layer world map
                     Bitmap result = new Bitmap(1000, 507);          // this is the size we really want so it matches the built in world map
                     Rectangle r1 = new Rectangle(42, 16, 912, 456); // this is where to place the smaller d laywer world map into the big result bitmap
-                                        
+                 
+                    Rectangle r2 = new Rectangle(20, 50, 8, 300); // .237 size of color legend bar
+
                     using (Graphics g = Graphics.FromImage(result)) 
                     {
                         g.CompositingQuality = CompositingQuality.HighQuality;
                         g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                         g.SmoothingMode = SmoothingMode.HighQuality;
                         g.DrawImage(img8, r1);  // this results in a d layer map with a empty boarder around all 4 edges.
-                        g.DrawString("NOAA D Layer absorption: (min) BLK->PUR->BLU->CYN->GRN->YEL->ORG->RED (max)", font2, grid_text_brush,55,20); // use Pandapdater holder[] data 
+                       
+                     
+                        
+                        g.DrawString("NOAA", font2, new SolidBrush(Color.White), x, 10);
+                        g.DrawString("D-Layer", font2, new SolidBrush(Color.White), x, 20);
+                        g.DrawString("Aborp:", font2, new SolidBrush(Color.White), x, 30);
+
+                        g.DrawImage(Bar,r2); // .237 draw legend color bar
+                     
+                        g.DrawString("35mhz", font2, new SolidBrush(Color.Red), x1,  45);
+                        g.DrawString("30mhz", font2, new SolidBrush(Color.Orange), x1, 90);
+                        g.DrawString("25mhz", font2, new SolidBrush(Color.Yellow), x1,  130);
+                        g.DrawString("20mhz", font2, new SolidBrush(Color.Green), x1,  170);
+                        g.DrawString("15mhz", font2, new SolidBrush(Color.Cyan), x1,  220);
+                        g.DrawString("10mhz", font2, new SolidBrush(Color.Blue), x1,  260);
+                        g.DrawString(" 5mhz", font2, new SolidBrush(Color.Purple), x1,  300);
+                        g.DrawString(" 0mhz", font2, new SolidBrush(Color.Gray), x1,  340);
+                   
+
                     }
 
                     MAP = Lighten(result, MBG, MB);
                   
                 }
-
                 catch (Exception ex)
                 {
                  //   MessageBox.Show(ex.Message);
@@ -14837,10 +14871,7 @@ namespace PowerSDR
 
         private void textBox1_MouseMove(object sender, MouseEventArgs e)
         {
-          //   Debug.WriteLine("HOVER ");
-            // Debug.WriteLine("HOVER " + LoTW_DXCallIndex);
-            //     Debug.WriteLine("LoTW HOVER " + LoTW_DXCallIndex + " , " + DX_LoTW_Status[LoTW_DXCallIndex]);
-            textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
+          //  textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
 
 
             if ((SP4_Active == 0) && (beacon1 == false))// only process lookup if not processing a new spot which might cause issue
@@ -14951,8 +14982,6 @@ namespace PowerSDR
                     } //  if (e.X > 165 && e.X < 250)
                     else // outside the width of the DX station callsign
                     {
-                      //  if (!string.IsNullOrEmpty(this.toolTip1.GetToolTip(textBox1)))
-                      //  {
                             if (ToolTipNumber != 499)
                             {
                                 this.toolTip1.SetToolTip(this.textBox1, "Hit F1 or F2 for more HELP.\r\n" +
@@ -14960,15 +14989,11 @@ namespace PowerSDR
                                                           "LEFT Click= VFOA, WHEEL Click= VFOB, RIGHT Click= QRZ lookup,\r\n");
                                 ToolTipNumber = 499;
                             }
-                      //  }
+                     
                     }
 
                 } //  if (DX_Index > iii)
-                else
-                {
-               //     this.toolTip1.SetToolTip(this.textBox1, "Hit F1 (mouse over LoTW button) for more HELP.\r\n" +
-                //                              "LoTW Feature DUP, DXCC, and US States check(see LoTW button for setup):\r\n");
-                }
+               
 
             } // not actively processing a new spot
 
@@ -14976,15 +15001,11 @@ namespace PowerSDR
 
         } // textBox1_MouseMove
 
-        private void textBox1_MouseLeave(object sender, EventArgs e)
-        {
-          //   textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
-         
-        }
+       
 
         private void textBox1_MouseHover(object sender, EventArgs e)
         {
-            textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
+         //   textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
             pause = true;
             button1.Text = "Paused";
 
@@ -15008,8 +15029,7 @@ namespace PowerSDR
             if (txtLoTWpass.Visible )
             {
                 txtLoTWpass.Visible = false;
-              
-
+         
             }
         }
 

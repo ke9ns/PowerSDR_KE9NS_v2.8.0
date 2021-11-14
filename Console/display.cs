@@ -12777,7 +12777,7 @@ namespace PowerSDR
 
                             Debug.WriteLine("SWL CHange Freq");
                             
-                                                        SpotControl.VFOHLast = VFOHigh;
+                            SpotControl.VFOHLast = VFOHigh;
                           //  SpotControl.Lindex = 0; // bottom of index to display spots
                           //  SpotControl.Hindex = 0; // top of index to display spots
                           
