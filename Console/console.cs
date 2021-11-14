@@ -76364,6 +76364,18 @@ public void FMDeviation10khz() // WFM
                 Debug.WriteLine("SpotControl instance created by Map button");
                 SpotForm = new SpotControl(this);
             }
+
+            if (SpotForm.chkFLayerON.Checked)
+            {
+                SpotForm.chkFLayerON.Checked = false;
+                // SpotForm.chkFLayerON_CheckedChanged(this, EventArgs.Empty);
+            }
+            else if (SpotForm.chkDLayerON.Checked )
+            {
+                SpotForm.chkDLayerON.Checked = false;
+                //  SpotForm.chkDLayerON_CheckedChanged_1(this, EventArgs.Empty);
+            }
+            else
             SpotForm.btnTrack_Click(this, EventArgs.Empty); // virtually clicking the track button on the spotter screen
 
 
@@ -76375,7 +76387,31 @@ public void FMDeviation10khz() // WFM
         {
             MouseEventArgs me = (MouseEventArgs)e;
 
-            if ((me.Button == System.Windows.Forms.MouseButtons.Right)) // 
+            if ((me.Button == System.Windows.Forms.MouseButtons.Right)) //.239
+            {
+
+                if (SpotForm == null || SpotForm.IsDisposed)
+                {
+                    Debug.WriteLine("SpotControl instance created by Map button");
+                    SpotForm = new SpotControl(this);
+                }
+                // this is the left click
+                //  SpotForm.btnTrack_Click(this, EventArgs.Empty); // virtually clicking the track button on the spotter screen
+
+                if (SpotForm.chkFLayerON.Checked == false)
+                {
+                    SpotForm.chkFLayerON.Checked = true;
+                   // SpotForm.chkFLayerON_CheckedChanged(this, EventArgs.Empty);
+                }
+                else if (SpotForm.chkDLayerON.Checked == false)
+                {
+                    SpotForm.chkDLayerON.Checked = true;
+                    //  SpotForm.chkDLayerON_CheckedChanged_1(this, EventArgs.Empty);
+                }
+
+
+            } //  if ((me.Button == System.Windows.Forms.MouseButtons.Right))
+            else if ((me.Button == System.Windows.Forms.MouseButtons.Middle)) // .239
             {
 
                 if (helpbox1Form == null || helpbox1Form.IsDisposed) helpbox1Form = new helpbox1(this);
@@ -76385,6 +76421,8 @@ public void FMDeviation10khz() // WFM
                 helpbox1Form.WindowState = FormWindowState.Normal; // ke9ns add
 
             } // right click
+
+
 
         } // MapMenuItem_MouseDown(
 

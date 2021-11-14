@@ -15058,7 +15058,7 @@ namespace PowerSDR
       
 
 
-        private void chkFLayerON_CheckedChanged(object sender, EventArgs e) //.235
+        public void chkFLayerON_CheckedChanged(object sender, EventArgs e) //.235
         {
 
             if (SP5_Active == 0)  // .239 if map was off when you turned on f-layer
@@ -15183,7 +15183,7 @@ namespace PowerSDR
 
         } // chkFLayerON_CheckedChanged
 
-        private void chkDLayerON_CheckedChanged_1(object sender, EventArgs e)
+        public void chkDLayerON_CheckedChanged_1(object sender, EventArgs e)
         {
 
             if (SP5_Active == 0)  // .239 if map was off when you turned on d-layer
