@@ -27,9 +27,8 @@
 //=================================================================
 
 using System;
-using System.Drawing;
 using System.Collections;
-using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace PowerSDR
@@ -39,7 +38,7 @@ namespace PowerSDR
         #region Variable Declaration
 
         private Console console;
-       
+
         #endregion
 
         #region Constructor and Destructor
@@ -61,19 +60,19 @@ namespace PowerSDR
                     comboTXAnt2.Visible = false; // ke9ns add .205
                     labelTS1.Visible = false;
                     chkTX2Active.Visible = false;
-                  
+
 
                     chkRX2TX1.Visible = false;
                     chkRX2TX2.Visible = false;
                     chkRX2TX3.Visible = false;
-                   
+
 
                 }
                 if (chkTX2Active.Checked == false)
                 {
                     comboTXAnt2.Visible = false; // ke9ns add .205
                     labelTS1.Visible = false;
-                   
+
 
                     chkRX2TX1.Visible = false;
                     chkRX2TX2.Visible = false;
@@ -93,7 +92,7 @@ namespace PowerSDR
                 comboTXAnt2.Visible = false; // ke9ns add .205
                 labelTS1.Visible = false;
                 chkTX2Active.Visible = false;
-              
+
 
                 chkRX2TX1.Visible = false;
                 chkRX2TX2.Visible = false;
@@ -134,7 +133,7 @@ namespace PowerSDR
 
         #endregion
 
-        
+
 
         #region Properties
 
@@ -584,8 +583,8 @@ namespace PowerSDR
 
         private void comboRX1Ant_SelectedIndexChanged(object sender, System.EventArgs e)
         {
+            AntennaTextUpdate(); //.243
 
-            
             if ((comboRX1Ant.Focused || comboTXAnt.Focused) && rx2_ok && comboRX1Ant.Text == "ANT 1" && comboRX2Ant.Text == "ANT 1")
             {
                 MessageBox.Show("Antenna 1 is currently in use by RX2.  Please change that " +
@@ -624,6 +623,8 @@ namespace PowerSDR
 
         private void comboRX2Ant_SelectedIndexChanged(object sender, System.EventArgs e)
         {
+            AntennaTextUpdate(); //.243
+
             if ((comboRX2Ant.Focused || comboTXAnt.Focused) && rx2_ok && comboRX1Ant.Text == "ANT 1" && comboRX2Ant.Text == "ANT 1")
             {
                 MessageBox.Show("Antenna 1 is currently in use by RX1.  Please change that " +
@@ -660,6 +661,8 @@ namespace PowerSDR
         //==========================================================================================
         private void comboTXAnt_SelectedIndexChanged(object sender, System.EventArgs e)
         {
+            AntennaTextUpdate(); //.243
+
             if ((byte)(FWCEEPROM.RFIORev) < 34)
             {
                 switch (StringToBand(comboBand.Text))
@@ -683,9 +686,207 @@ namespace PowerSDR
 
         } // comboTXAnt_SelectedIndexChanged(
 
+
+        private void AntennaTextUpdate() //.243
+        {
+
+            //----------------------------------------------RX1
+
+            if (comboRX1Ant.Text == "ANT 1") //.243
+            {
+                textBoxRX1Ant.Text = txtAnt1;
+            }
+            else if (comboRX1Ant.Text == "ANT 2")
+            {
+                textBoxRX1Ant.Text = txtAnt2;
+            }
+            else if (comboRX1Ant.Text == "ANT 3")
+            {
+                textBoxRX1Ant.Text = txtAnt3;
+            }
+            else if (comboRX1Ant.Text == "VHF")
+            {
+                textBoxRX1Ant.Text = txtVHF;
+            }
+            else if (comboRX1Ant.Text == "UHF")
+            {
+                textBoxRX1Ant.Text = txtUHF;
+            }
+            else if (comboRX1Ant.Text == "RX1 IN")
+            {
+                textBoxRX1Ant.Text = txtRX1In;
+            }
+            else if (comboRX1Ant.Text == "RX2 IN")
+            {
+                textBoxRX1Ant.Text = txtRX2In;
+            }
+            else if (comboRX1Ant.Text == "RX1 Tap")
+            {
+                textBoxRX1Ant.Text = txtRX1Tap;
+            }
+            else if (comboRX1Ant.Text == "XVRX")
+            {
+                textBoxRX1Ant.Text = txtXVRX;
+            }
+            else if (comboRX1Ant.Text == "XVTX/C")
+            {
+                textBoxRX1Ant.Text = txtXVTXC;
+            }
+            else if (comboRX1Ant.Text == "PA")
+            {
+                textBoxRX1Ant.Text = txtPA;
+            }
+
+
+            //----------------------------------------------RX2
+            if (comboRX2Ant.Text == "ANT 1") //.243
+            {
+                textBoxRX2Ant.Text = txtAnt1;
+            }
+            else if (comboRX2Ant.Text == "ANT 2")
+            {
+                textBoxRX2Ant.Text = txtAnt2;
+            }
+            else if (comboRX2Ant.Text == "ANT 3")
+            {
+                textBoxRX2Ant.Text = txtAnt3;
+            }
+            else if (comboRX2Ant.Text == "VHF")
+            {
+                textBoxRX2Ant.Text = txtVHF;
+            }
+            else if (comboRX2Ant.Text == "UHF")
+            {
+                textBoxRX2Ant.Text = txtUHF;
+            }
+            else if (comboRX2Ant.Text == "RX1 IN")
+            {
+                textBoxRX2Ant.Text = txtRX1In;
+            }
+            else if (comboRX2Ant.Text == "RX2 IN")
+            {
+                textBoxRX2Ant.Text = txtRX2In;
+            }
+            else if (comboRX2Ant.Text == "RX1 Tap")
+            {
+                textBoxRX2Ant.Text = txtRX1Tap;
+            }
+            else if (comboRX2Ant.Text == "XVRX")
+            {
+                textBoxRX2Ant.Text = txtXVRX;
+            }
+            else if (comboRX2Ant.Text == "XVTX/C")
+            {
+                textBoxRX2Ant.Text = txtXVTXC;
+            }
+            else if (comboRX2Ant.Text == "PA")
+            {
+                textBoxRX2Ant.Text = txtPA;
+            }
+
+
+            //----------------------------------------------TX1
+            if (comboTXAnt.Text == "ANT 1") //.243
+            {
+                textBoxTX1Ant.Text = txtAnt1;
+            }
+            else if (comboTXAnt.Text == "ANT 2")
+            {
+                textBoxTX1Ant.Text = txtAnt2;
+            }
+            else if (comboTXAnt.Text == "ANT 3")
+            {
+                textBoxTX1Ant.Text = txtAnt3;
+            }
+            else if (comboTXAnt.Text == "VHF")
+            {
+                textBoxTX1Ant.Text = txtVHF;
+            }
+            else if (comboTXAnt.Text == "UHF")
+            {
+                textBoxTX1Ant.Text = txtUHF;
+            }
+            else if (comboTXAnt.Text == "RX1 IN")
+            {
+                textBoxTX1Ant.Text = txtRX1In;
+            }
+            else if (comboTXAnt.Text == "RX2 IN")
+            {
+                textBoxTX1Ant.Text = txtRX2In;
+            }
+            else if (comboTXAnt.Text == "RX1 Tap")
+            {
+                textBoxTX1Ant.Text = txtRX1Tap;
+            }
+            else if (comboTXAnt.Text == "XVRX")
+            {
+                textBoxTX1Ant.Text = txtXVRX;
+            }
+            else if (comboTXAnt.Text == "XVTX/C")
+            {
+                textBoxTX1Ant.Text = txtXVTXC;
+            }
+            else if (comboTXAnt.Text == "PA")
+            {
+                textBoxTX1Ant.Text = txtPA;
+            }
+
+            //----------------------------------------------TX2
+            if (comboTXAnt2.Text == "ANT 1") //.243
+            {
+                textBoxTX2Ant.Text = txtAnt1;
+            }
+            else if (comboTXAnt2.Text == "ANT 2")
+            {
+                textBoxTX2Ant.Text = txtAnt2;
+            }
+            else if (comboTXAnt2.Text == "ANT 3")
+            {
+                textBoxTX2Ant.Text = txtAnt3;
+            }
+            else if (comboTXAnt2.Text == "VHF")
+            {
+                textBoxTX2Ant.Text = txtVHF;
+            }
+            else if (comboTXAnt2.Text == "UHF")
+            {
+                textBoxTX2Ant.Text = txtUHF;
+            }
+            else if (comboTXAnt2.Text == "RX1 IN")
+            {
+                textBoxTX2Ant.Text = txtRX1In;
+            }
+            else if (comboTXAnt2.Text == "RX2 IN")
+            {
+                textBoxTX2Ant.Text = txtRX2In;
+            }
+            else if (comboTXAnt2.Text == "RX1 Tap")
+            {
+                textBoxTX2Ant.Text = txtRX1Tap;
+            }
+            else if (comboTXAnt2.Text == "XVRX")
+            {
+                textBoxTX2Ant.Text = txtXVRX;
+            }
+            else if (comboTXAnt2.Text == "XVTX/C")
+            {
+                textBoxTX2Ant.Text = txtXVTXC;
+            }
+            else if (comboTXAnt2.Text == "PA")
+            {
+                textBoxTX2Ant.Text = txtPA;
+            }
+
+
+
+        }// AntennaTextUpdate
+
         // ke9ns add .205
         private void comboTXAnt2_SelectedIndexChanged(object sender, System.EventArgs e)
         {
+            AntennaTextUpdate(); //.243
+
+
             if ((byte)(FWCEEPROM.RFIORev) < 34)
             {
                 switch (StringToBand(comboBand.Text))
@@ -699,15 +900,15 @@ namespace PowerSDR
             }
             else
             {
-                
+
                 console.SetTXAnt2(StringToBand(comboBand2.Text), StringToAnt(comboTXAnt2.Text));
             }
 
-         //   if (chkLock.Checked)
-          //  {
+            //   if (chkLock.Checked)
+            //  {
 
-           //     comboRX2Ant.Text = comboTXAnt2.Text;
-           // }
+            //     comboRX2Ant.Text = comboTXAnt2.Text;
+            // }
 
             if (radModeExpert.Checked) console.CurrentAntMode = AntMode.Expert; // ke9ns add: update console Ant display .119
             else console.CurrentAntMode = AntMode.Simple;
@@ -739,7 +940,7 @@ namespace PowerSDR
         private void chkRX1TX1_CheckedChanged(object sender, System.EventArgs e)
         {
             console.SetRX2TX1(StringToBand(comboBand.Text), chkRX2TX1.Checked, chkRCATX1.Checked);
-           
+
         }
 
         private void chkRX1TX2_CheckedChanged(object sender, System.EventArgs e)
@@ -909,7 +1110,7 @@ namespace PowerSDR
                 FWC.GetRFIORev(out temp);
                 if ((temp & 0xFF) < 34)
                 {
-                   
+
                     comboTXAnt2.Visible = false; // ke9ns add .205
                     labelTS1.Visible = false;
                     console.panelAntenna.Size = new Size(115, 58);
@@ -929,19 +1130,19 @@ namespace PowerSDR
                 {
                     comboTXAnt2.Visible = false; // ke9ns add .205
                     labelTS1.Visible = false;
-                   
+
 
                     chkRX2TX1.Visible = false;
                     chkRX2TX2.Visible = false;
                     chkRX2TX3.Visible = false;
 
                     console.panelAntenna.Size = new Size(115, 58);
-                   
+
 
 
                 }
 
-                
+
             }
             else
             {
@@ -961,5 +1162,225 @@ namespace PowerSDR
             console.panelAntenna.Invalidate();
 
         } // chkTX2Active_CheckedChanged
+
+        public string txtAnt1 = ""; // 5000 only
+        public string txtAnt2 = ""; //
+        public string txtAnt3 = ""; //
+        public string txtRX1In = ""; //
+
+        public string txtVHF = ""; //
+        public string txtUHF = ""; //
+        public string txtRX2In = ""; //
+        public string txtRX1Tap = ""; //
+
+        public string txtXVTXC = ""; // 5000 and 1500
+        public string txtXVRX = ""; // 5000 and 1500
+        public string txtPA = ""; // 1500 only
+
+
+
+        private void textBoxRX1Ant_TextChanged(object sender, EventArgs e) //.243 allow nameing of antennas
+        {
+            if (comboRX1Ant.Text == "ANT 1")
+            {
+                txtAnt1 = textBoxRX1Ant.Text;
+            }
+            else if (comboRX1Ant.Text == "ANT 2")
+            {
+                txtAnt2 = textBoxRX1Ant.Text;
+            }
+            else if (comboRX1Ant.Text == "ANT 3")
+            {
+                txtAnt3 = textBoxRX1Ant.Text;
+            }
+            else if (comboRX1Ant.Text == "VHF")
+            {
+                txtVHF = textBoxRX1Ant.Text;
+            }
+            else if (comboRX1Ant.Text == "UHF")
+            {
+                txtUHF = textBoxRX1Ant.Text;
+            }
+            else if (comboRX1Ant.Text == "RX1 IN")
+            {
+                txtRX1In = textBoxRX1Ant.Text;
+            }
+            else if (comboRX1Ant.Text == "RX2 IN")
+            {
+                txtRX2In = textBoxRX1Ant.Text;
+            }
+            else if (comboRX1Ant.Text == "RX1 Tap")
+            {
+                txtRX1Tap = textBoxRX1Ant.Text;
+            }
+            else if (comboRX1Ant.Text == "XVRX")
+            {
+                txtXVRX = textBoxRX1Ant.Text;
+            }
+            else if (comboRX1Ant.Text == "XVTX/C")
+            {
+                txtXVTXC = textBoxRX1Ant.Text;
+            }
+            else if (comboRX1Ant.Text == "PA")
+            {
+                txtPA = textBoxRX1Ant.Text;
+            }
+
+            AntennaTextUpdate(); //.243
+
+        } // textBoxRX1Ant
+
+        private void textBoxTX1Ant_TextChanged(object sender, EventArgs e) //.243
+        {
+            if (comboTXAnt.Text == "ANT 1")
+            {
+                txtAnt1 = textBoxTX1Ant.Text;
+            }
+            else if (comboTXAnt.Text == "ANT 2")
+            {
+                txtAnt2 = textBoxTX1Ant.Text;
+            }
+            else if (comboTXAnt.Text == "ANT 3")
+            {
+                txtAnt3 = textBoxTX1Ant.Text;
+            }
+            else if (comboTXAnt.Text == "VHF")
+            {
+                txtVHF = textBoxTX1Ant.Text;
+            }
+            else if (comboTXAnt.Text == "UHF")
+            {
+                txtUHF = textBoxTX1Ant.Text;
+            }
+            else if (comboTXAnt.Text == "RX1 IN")
+            {
+                txtRX1In = textBoxTX1Ant.Text;
+            }
+            else if (comboTXAnt.Text == "RX2 IN")
+            {
+                txtRX2In = textBoxTX1Ant.Text;
+            }
+            else if (comboTXAnt.Text == "RX1 Tap")
+            {
+                txtRX1Tap = textBoxTX1Ant.Text;
+            }
+            else if (comboRX1Ant.Text == "XVRX")
+            {
+                txtXVRX = textBoxTX1Ant.Text;
+            }
+            else if (comboTXAnt.Text == "XVTX/C")
+            {
+                txtXVTXC = textBoxTX1Ant.Text;
+            }
+            else if (comboTXAnt.Text == "PA")
+            {
+                txtPA = textBoxTX1Ant.Text;
+            }
+
+            AntennaTextUpdate(); //.243
+        } // textBoxTX1Ant
+
+        private void textBoxRX2Ant_TextChanged(object sender, EventArgs e)
+        {
+            if (comboRX2Ant.Text == "ANT 1")
+            {
+                txtAnt1 = textBoxRX2Ant.Text;
+            }
+            else if (comboRX2Ant.Text == "ANT 2")
+            {
+                txtAnt2 = textBoxRX2Ant.Text;
+            }
+            else if (comboRX2Ant.Text == "ANT 3")
+            {
+                txtAnt3 = textBoxRX2Ant.Text;
+            }
+            else if (comboRX2Ant.Text == "VHF")
+            {
+                txtVHF = textBoxRX2Ant.Text;
+            }
+            else if (comboRX2Ant.Text == "UHF")
+            {
+                txtUHF = textBoxRX2Ant.Text;
+            }
+            else if (comboRX2Ant.Text == "RX1 IN")
+            {
+                txtRX1In = textBoxRX2Ant.Text;
+            }
+            else if (comboRX2Ant.Text == "RX2 IN")
+            {
+                txtRX2In = textBoxRX2Ant.Text;
+            }
+            else if (comboRX2Ant.Text == "RX1 Tap")
+            {
+                txtRX1Tap = textBoxRX2Ant.Text;
+            }
+            else if (comboRX2Ant.Text == "XVRX")
+            {
+                txtXVRX = textBoxRX2Ant.Text;
+            }
+            else if (comboRX2Ant.Text == "XVTX/C")
+            {
+                txtXVTXC = textBoxRX2Ant.Text;
+            }
+            else if (comboRX2Ant.Text == "PA")
+            {
+                txtPA = textBoxRX2Ant.Text;
+            }
+
+            AntennaTextUpdate(); //.243
+
+
+        } // textBoxRX2Ant
+
+        private void textBoxTX2Ant_TextChanged(object sender, EventArgs e)
+        {
+            if (comboTXAnt2.Text == "ANT 1")
+            {
+                txtAnt1 = textBoxTX2Ant.Text;
+            }
+            else if (comboTXAnt2.Text == "ANT 2")
+            {
+                txtAnt2 = textBoxTX2Ant.Text;
+            }
+            else if (comboTXAnt2.Text == "ANT 3")
+            {
+                txtAnt3 = textBoxTX2Ant.Text;
+            }
+            else if (comboTXAnt2.Text == "VHF")
+            {
+                txtVHF = textBoxTX2Ant.Text;
+            }
+            else if (comboTXAnt2.Text == "UHF")
+            {
+                txtUHF = textBoxTX2Ant.Text;
+            }
+            else if (comboTXAnt2.Text == "RX1 IN")
+            {
+                txtRX1In = textBoxTX2Ant.Text;
+            }
+            else if (comboTXAnt2.Text == "RX2 IN")
+            {
+                txtRX2In = textBoxTX2Ant.Text;
+            }
+            else if (comboTXAnt2.Text == "RX1 Tap")
+            {
+                txtRX1Tap = textBoxTX2Ant.Text;
+            }
+            else if (comboTXAnt2.Text == "XVRX")
+            {
+                txtXVRX = textBoxTX2Ant.Text;
+            }
+            else if (comboTXAnt2.Text == "XVTX/C")
+            {
+                txtXVTXC = textBoxTX2Ant.Text;
+            }
+            else if (comboTXAnt2.Text == "PA")
+            {
+                txtPA = textBoxTX2Ant.Text;
+            }
+
+            AntennaTextUpdate(); //.243
+
+        } // textBoxTX2
     }
 }

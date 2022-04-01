@@ -27,12 +27,8 @@
 //=================================================================
 
 using System;
-using System.Drawing;
 using System.Collections;
-using System.ComponentModel;
 using System.IO;
-using System.Resources;
-using System.Windows.Forms;
 
 namespace PowerSDR
 {

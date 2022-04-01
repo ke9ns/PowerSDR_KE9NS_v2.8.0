@@ -27,12 +27,7 @@
 //=================================================================
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Text;
@@ -45,13 +40,13 @@ namespace PowerSDR
     {
         public AboutForm()
         {
-          
+
             InitializeComponent();
-            this.Text = String.Format( "About FlexRadio Systems™ {0}™", AssemblyTitle);
-            this.labelProductName.Text = String.Format( "Application: FlexRadio Systems™ {0}™", AssemblyProduct);
-            this.labelVersion.Text = String.Format( "Version: {0}", AssemblyVersion);
-            this.labelCopyright.Text = String.Format( "{0}", AssemblyCopyright);
-            this.labelCompanyName.Text = String.Format( "{0} is a registered trademark of Bronze Bear Communications, Inc.", AssemblyCompany);
+            this.Text = String.Format("About FlexRadio Systems™ {0}™", AssemblyTitle);
+            this.labelProductName.Text = String.Format("Application: FlexRadio Systems™ {0}™", AssemblyProduct);
+            this.labelVersion.Text = String.Format("Version: {0}", AssemblyVersion);
+            this.labelCopyright.Text = String.Format("{0}", AssemblyCopyright);
+            this.labelCompanyName.Text = String.Format("{0} is a registered trademark of Bronze Bear Communications, Inc.", AssemblyCompany);
             //this.textBoxDescription.Text = AssemblyDescription;
         }
 

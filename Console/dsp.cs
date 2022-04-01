@@ -30,22 +30,9 @@
 
 
 using System;
-using System.Collections;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Drawing.Text;
-using System.Globalization;
-using System.IO;
-using System.IO.Ports;
-using System.Net;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Threading;
-using System.Text;
-using System.Windows.Forms;
 
 namespace PowerSDR
 {
@@ -693,7 +680,7 @@ namespace PowerSDR
                     {
                         nb_threshold_dsp = value;
                         DttSP.SetNBvals(thread, subrx, nb_threshold_dsp, nbht_dsp, nbdly_dsp);
-                       
+
                     }
                 }
             }
@@ -704,7 +691,7 @@ namespace PowerSDR
 
         public int NBHT
         {
-            get 
+            get
             {
                 return nbht;
 
@@ -716,11 +703,11 @@ namespace PowerSDR
                 {
                     if (value != nbht_dsp || force)
                     {
-                       // Debug.WriteLine("NBHT : " + value);
+                        // Debug.WriteLine("NBHT : " + value);
 
                         nbht_dsp = value;
                         DttSP.SetNBvals(thread, subrx, nb_threshold_dsp, nbht_dsp, nbdly_dsp);
-                       
+
                     }
                 }
             }

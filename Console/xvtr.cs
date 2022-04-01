@@ -27,7 +27,6 @@
 //=================================================================
 
 using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -39,8 +38,8 @@ namespace PowerSDR
 
         private Console console;
         //private VUForm VUForm;
-        
-       
+
+
 
         //bool init = true;
 
@@ -218,7 +217,7 @@ namespace PowerSDR
 
         #endregion
 
-    
+
 
         #region Properties
 
@@ -286,7 +285,7 @@ namespace PowerSDR
                 }
             }
 
-            
+
             return freq;
         }
 
@@ -1074,7 +1073,7 @@ namespace PowerSDR
             float end1 = GetEnd(2);
             double transbegin = TranslateFreq(begin1);
             double transend = TranslateFreq(end1);
-            this.toolTip1.SetToolTip(this.txtButtonText2, "Translated Low Mhz: " + transbegin.ToString() + "\n" + "Translated High Mhz: " + transend.ToString()  );
+            this.toolTip1.SetToolTip(this.txtButtonText2, "Translated Low Mhz: " + transbegin.ToString() + "\n" + "Translated High Mhz: " + transend.ToString());
 
         }
 

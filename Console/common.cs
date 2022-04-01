@@ -27,11 +27,11 @@
 //=================================================================
 
 using System;
+using System.Collections;
 using System.Diagnostics;
 using System.Drawing;
-using System.Collections;
-using System.Windows.Forms;
 using System.IO.Ports;
+using System.Windows.Forms;
 
 namespace PowerSDR
 {

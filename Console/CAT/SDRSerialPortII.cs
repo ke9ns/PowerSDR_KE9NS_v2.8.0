@@ -120,7 +120,7 @@ namespace PowerSDR
         {
             if (bitBangOnly) return 0;  // fixme -- throw exception?			
             commPort.Write(s);
-  
+
             return (uint)s.Length; // wjt fixme -- hack -- we don't know if we actually wrote things 			
         }
 

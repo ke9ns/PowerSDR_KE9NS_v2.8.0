@@ -990,6 +990,7 @@
     <None Include="Resources\DRAP.bmp" />
     <Content Include="Resources\panGray.png" />
     <Content Include="Resources\PanRed.png" />
+    <EmbeddedResource Include="Resources\radar.png" />
     <Content Include="Resources\red1.png" />
     <Content Include="Resources\VK1.png" />
     <Content Include="Resources\VK1Red.png" />

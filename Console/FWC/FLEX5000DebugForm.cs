@@ -27,7 +27,6 @@
 //=================================================================
 
 using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
@@ -45,9 +44,9 @@ namespace PowerSDR
         bool rfio_ok = true;
         //bool rx2_ok = true;
 
-       
+
         #endregion
-      
+
         #region Constructor and Destructor
 
         public FLEX5000DebugForm(Console c)
@@ -138,7 +137,7 @@ namespace PowerSDR
 
         #endregion
 
-        
+
 
         #region Misc Routines
 

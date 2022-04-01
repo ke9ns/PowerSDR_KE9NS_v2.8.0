@@ -27,7 +27,6 @@
 //=================================================================
 
 using System;
-using System.Windows.Forms;
 
 namespace PowerSDR
 {
@@ -81,7 +80,7 @@ namespace PowerSDR
 
         #endregion
 
-        
+
 
         #region Properties
 

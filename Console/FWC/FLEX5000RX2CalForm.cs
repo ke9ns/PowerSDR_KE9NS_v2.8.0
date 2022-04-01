@@ -41,7 +41,7 @@ namespace PowerSDR
 
         private Progress p;
         private Console console;
-       
+
 
         #endregion
 
@@ -97,7 +97,7 @@ namespace PowerSDR
 
         #endregion
 
-        
+
 
         #region Misc Routines
 

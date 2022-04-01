@@ -142,7 +142,7 @@ namespace PowerSDR
             if (this.model != r.model)
                 return this.model.CompareTo(r.model);
 
-            if(this.nickname != r.nickname)
+            if (this.nickname != r.nickname)
                 return this.nickname.CompareTo(r.nickname);
 
             return this.serial_number.CompareTo(r.serial_number);

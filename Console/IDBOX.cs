@@ -28,10 +28,6 @@
 
 using System;
 using System.Diagnostics;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
-using System.Windows.Forms;
 using System.Threading;
 
 namespace PowerSDR
@@ -80,7 +76,7 @@ namespace PowerSDR
 
         #endregion
 
-       
+
         #region Properties
 
 

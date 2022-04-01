@@ -29,20 +29,15 @@
 using System;
 //using System.Collections;
 //using System.Diagnostics;
-using System.Collections;
-using System.Text;
-using System.Security;
 using System.Runtime.InteropServices;
+using PaDeviceIndex = System.Int32;
 //using System.Threading;
-using System.Windows.Forms;
-
 using PaError = System.Int32;
-using PaDeviceIndex = System.Int32; 
 using PaHostApiIndex = System.Int32;
+using PaSampleFormat = System.UInt32;
+using PaStreamCallbackFlags = System.UInt32;
+using PaStreamFlags = System.UInt32;
 using PaTime = System.Double;
-using PaSampleFormat = System.UInt32; 
-using PaStreamFlags = System.UInt32; 
-using PaStreamCallbackFlags = System.UInt32; 
 
 namespace PowerSDR
 {

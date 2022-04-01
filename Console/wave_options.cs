@@ -27,7 +27,6 @@
 //=================================================================
 
 using System.Diagnostics;
-using System.Windows.Forms;
 
 namespace PowerSDR
 {
@@ -36,7 +35,7 @@ namespace PowerSDR
     /// </summary>
     public partial class WaveOptions : System.Windows.Forms.Form
     {
-       
+
 
         #region Constructor and Destructor
 
@@ -67,7 +66,7 @@ namespace PowerSDR
 
         #endregion
 
-        
+
 
         #region Properties
 

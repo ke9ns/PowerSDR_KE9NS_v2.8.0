@@ -195,6 +195,7 @@ namespace PowerSDR
             this.lblOptMaxFilter = new System.Windows.Forms.LabelTS();
             this.chkOptFilterSaveChanges = new System.Windows.Forms.CheckBoxTS();
             this.tpRX2 = new System.Windows.Forms.TabPage();
+            this.chkBoxESC = new System.Windows.Forms.CheckBoxTS();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.chkRX2AutoVAC2 = new System.Windows.Forms.CheckBoxTS();
@@ -235,6 +236,7 @@ namespace PowerSDR
             this.btnConfigure = new System.Windows.Forms.Button();
             this.cbConsoleSelect = new System.Windows.Forms.ComboBox();
             this.groupBoxTS1 = new System.Windows.Forms.GroupBoxTS();
+            this.udSpeedPM = new System.Windows.Forms.NumericUpDownTS();
             this.txtWheelTune9 = new System.Windows.Forms.TextBoxTS();
             this.txtWheelTune8 = new System.Windows.Forms.TextBoxTS();
             this.txtWheelTune7 = new System.Windows.Forms.TextBoxTS();
@@ -253,8 +255,9 @@ namespace PowerSDR
             this.txtWheelTune2 = new System.Windows.Forms.TextBoxTS();
             this.chkBoxIND = new System.Windows.Forms.CheckBoxTS();
             this.labelTS15 = new System.Windows.Forms.LabelTS();
+            this.chkKnobVFOB = new System.Windows.Forms.CheckBoxTS();
             this.chkBoxPM = new System.Windows.Forms.CheckBoxTS();
-            this.udSpeedPM = new System.Windows.Forms.NumericUpDownTS();
+            this.chkKnobVFO = new System.Windows.Forms.CheckBoxTS();
             this.tpAudio = new System.Windows.Forms.TabPage();
             this.tcAudio = new System.Windows.Forms.TabControl();
             this.tpAudioCard1 = new System.Windows.Forms.TabPage();
@@ -319,6 +322,10 @@ namespace PowerSDR
             this.grpAudio2Stereo = new System.Windows.Forms.GroupBoxTS();
             this.chkAudio2Stereo = new System.Windows.Forms.CheckBoxTS();
             this.grpAudioLatency2 = new System.Windows.Forms.GroupBoxTS();
+            this.labelTS66 = new System.Windows.Forms.LabelTS();
+            this.labelTS65 = new System.Windows.Forms.LabelTS();
+            this.udAudioLatencyB = new System.Windows.Forms.NumericUpDownTS();
+            this.udAudioLatencyA = new System.Windows.Forms.NumericUpDownTS();
             this.chkAudioLatencyManual2 = new System.Windows.Forms.CheckBoxTS();
             this.udAudioLatency2 = new System.Windows.Forms.NumericUpDownTS();
             this.grpAudioSampleRate2 = new System.Windows.Forms.GroupBoxTS();
@@ -715,6 +722,8 @@ namespace PowerSDR
             this.tpAppearance = new System.Windows.Forms.TabPage();
             this.tcAppearance = new System.Windows.Forms.TabControl();
             this.tpAppearanceGeneral = new System.Windows.Forms.TabPage();
+            this.number3DZ = new System.Windows.Forms.NumericUpDownTS();
+            this.labelTS64 = new System.Windows.Forms.LabelTS();
             this.labelTS46 = new System.Windows.Forms.LabelTS();
             this.labelTS45 = new System.Windows.Forms.LabelTS();
             this.number3DY = new System.Windows.Forms.NumericUpDownTS();
@@ -1330,6 +1339,8 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udAudioVACGainRX)).BeginInit();
             this.grpAudio2Stereo.SuspendLayout();
             this.grpAudioLatency2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udAudioLatencyB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udAudioLatencyA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAudioLatency2)).BeginInit();
             this.grpAudioSampleRate2.SuspendLayout();
             this.grpAudioBuffer2.SuspendLayout();
@@ -1495,6 +1506,7 @@ namespace PowerSDR
             this.tpAppearance.SuspendLayout();
             this.tcAppearance.SuspendLayout();
             this.tpAppearanceGeneral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.number3DZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.number3DY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.number3DX)).BeginInit();
             this.groupBoxTS3.SuspendLayout();
@@ -3773,6 +3785,7 @@ namespace PowerSDR
             // tpRX2
             // 
             this.tpRX2.BackColor = System.Drawing.SystemColors.Control;
+            this.tpRX2.Controls.Add(this.chkBoxESC);
             this.tpRX2.Controls.Add(this.richTextBox2);
             this.tpRX2.Controls.Add(this.richTextBox1);
             this.tpRX2.Controls.Add(this.chkRX2AutoVAC2);
@@ -3785,6 +3798,18 @@ namespace PowerSDR
             this.tpRX2.Size = new System.Drawing.Size(592, 318);
             this.tpRX2.TabIndex = 4;
             this.tpRX2.Text = "RX2";
+            // 
+            // chkBoxESC
+            // 
+            this.chkBoxESC.Image = null;
+            this.chkBoxESC.Location = new System.Drawing.Point(330, 267);
+            this.chkBoxESC.Name = "chkBoxESC";
+            this.chkBoxESC.Size = new System.Drawing.Size(233, 32);
+            this.chkBoxESC.TabIndex = 7;
+            this.chkBoxESC.Text = "ESC integrated into Console screen";
+            this.toolTip1.SetToolTip(this.chkBoxESC, "When checked, puts the ESC in the available space of the main console screen (low" +
+        "er right corner).\r\nRather than an external window.");
+            this.chkBoxESC.CheckedChanged += new System.EventHandler(this.chkBoxESC_CheckedChanged);
             // 
             // richTextBox2
             // 
@@ -3811,6 +3836,7 @@ namespace PowerSDR
             this.chkRX2AutoVAC2.TabIndex = 4;
             this.chkRX2AutoVAC2.Text = "Turn ON VAC2 when RX2 turned ON";
             this.toolTip1.SetToolTip(this.chkRX2AutoVAC2, "When checked, will turn VAC2 ON/OFF with RX2 ON/OFF");
+            this.chkRX2AutoVAC2.CheckedChanged += new System.EventHandler(this.chkRX2AutoVAC2_CheckedChanged);
             // 
             // chkRX2AutoOn
             // 
@@ -3821,6 +3847,7 @@ namespace PowerSDR
             this.chkRX2AutoOn.TabIndex = 3;
             this.chkRX2AutoOn.Text = "Sending Spotter, Memory, or Scanner Freq to VFOB turns on RX2 automatically";
             this.toolTip1.SetToolTip(this.chkRX2AutoOn, "When checked, will turn RX2 ON when sending Frequency to VFOB");
+            this.chkRX2AutoOn.CheckedChanged += new System.EventHandler(this.chkRX2AutoOn_CheckedChanged);
             // 
             // chkRX2DisconnectOnTX
             // 
@@ -4316,6 +4343,7 @@ namespace PowerSDR
             // 
             // groupBoxTS1
             // 
+            this.groupBoxTS1.Controls.Add(this.udSpeedPM);
             this.groupBoxTS1.Controls.Add(this.txtWheelTune9);
             this.groupBoxTS1.Controls.Add(this.txtWheelTune8);
             this.groupBoxTS1.Controls.Add(this.txtWheelTune7);
@@ -4334,14 +4362,46 @@ namespace PowerSDR
             this.groupBoxTS1.Controls.Add(this.txtWheelTune2);
             this.groupBoxTS1.Controls.Add(this.chkBoxIND);
             this.groupBoxTS1.Controls.Add(this.labelTS15);
+            this.groupBoxTS1.Controls.Add(this.chkKnobVFOB);
             this.groupBoxTS1.Controls.Add(this.chkBoxPM);
-            this.groupBoxTS1.Controls.Add(this.udSpeedPM);
+            this.groupBoxTS1.Controls.Add(this.chkKnobVFO);
             this.groupBoxTS1.Location = new System.Drawing.Point(362, 11);
             this.groupBoxTS1.Name = "groupBoxTS1";
             this.groupBoxTS1.Size = new System.Drawing.Size(192, 187);
             this.groupBoxTS1.TabIndex = 53;
             this.groupBoxTS1.TabStop = false;
             this.groupBoxTS1.Text = "PowerMate and FlexControl";
+            // 
+            // udSpeedPM
+            // 
+            this.udSpeedPM.DecimalPlaces = 1;
+            this.udSpeedPM.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.udSpeedPM.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            65536});
+            this.udSpeedPM.Location = new System.Drawing.Point(119, 35);
+            this.udSpeedPM.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.udSpeedPM.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udSpeedPM.Name = "udSpeedPM";
+            this.udSpeedPM.Size = new System.Drawing.Size(49, 18);
+            this.udSpeedPM.TabIndex = 4;
+            this.toolTip1.SetToolTip(this.udSpeedPM, "Speed of Freq Change");
+            this.udSpeedPM.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udSpeedPM.ValueChanged += new System.EventHandler(this.udSpeedPM_ValueChanged);
             // 
             // txtWheelTune9
             // 
@@ -4350,7 +4410,7 @@ namespace PowerSDR
             this.txtWheelTune9.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtWheelTune9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.txtWheelTune9.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtWheelTune9.Location = new System.Drawing.Point(84, 161);
+            this.txtWheelTune9.Location = new System.Drawing.Point(84, 113);
             this.txtWheelTune9.Name = "txtWheelTune9";
             this.txtWheelTune9.ReadOnly = true;
             this.txtWheelTune9.Size = new System.Drawing.Size(48, 20);
@@ -4434,7 +4494,7 @@ namespace PowerSDR
             this.txtWheelTune4.Cursor = System.Windows.Forms.Cursors.Default;
             this.txtWheelTune4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.txtWheelTune4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.txtWheelTune4.Location = new System.Drawing.Point(138, 71);
+            this.txtWheelTune4.Location = new System.Drawing.Point(135, 81);
             this.txtWheelTune4.Name = "txtWheelTune4";
             this.txtWheelTune4.ReadOnly = true;
             this.txtWheelTune4.Size = new System.Drawing.Size(48, 20);
@@ -4523,7 +4583,7 @@ namespace PowerSDR
             // labelTS26
             // 
             this.labelTS26.Image = null;
-            this.labelTS26.Location = new System.Drawing.Point(8, 71);
+            this.labelTS26.Location = new System.Drawing.Point(8, 73);
             this.labelTS26.Name = "labelTS26";
             this.labelTS26.Size = new System.Drawing.Size(149, 16);
             this.labelTS26.TabIndex = 80;
@@ -4592,11 +4652,21 @@ namespace PowerSDR
             // labelTS15
             // 
             this.labelTS15.Image = null;
-            this.labelTS15.Location = new System.Drawing.Point(6, 42);
+            this.labelTS15.Location = new System.Drawing.Point(6, 35);
             this.labelTS15.Name = "labelTS15";
             this.labelTS15.Size = new System.Drawing.Size(108, 16);
             this.labelTS15.TabIndex = 5;
             this.labelTS15.Text = "PowerMate Speed:";
+            // 
+            // chkKnobVFOB
+            // 
+            this.chkKnobVFOB.Image = null;
+            this.chkKnobVFOB.Location = new System.Drawing.Point(127, 55);
+            this.chkKnobVFOB.Name = "chkKnobVFOB";
+            this.chkKnobVFOB.Size = new System.Drawing.Size(59, 27);
+            this.chkKnobVFOB.TabIndex = 93;
+            this.chkKnobVFOB.Text = "VFOB";
+            this.toolTip1.SetToolTip(this.chkKnobVFOB, "Knob will control VFOB");
             // 
             // chkBoxPM
             // 
@@ -4608,35 +4678,15 @@ namespace PowerSDR
             this.chkBoxPM.Text = "PowerMate Knob Active";
             this.chkBoxPM.CheckedChanged += new System.EventHandler(this.chkBoxPM_CheckedChanged);
             // 
-            // udSpeedPM
+            // chkKnobVFO
             // 
-            this.udSpeedPM.DecimalPlaces = 1;
-            this.udSpeedPM.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            65536});
-            this.udSpeedPM.Location = new System.Drawing.Point(119, 40);
-            this.udSpeedPM.Maximum = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.udSpeedPM.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udSpeedPM.Name = "udSpeedPM";
-            this.udSpeedPM.Size = new System.Drawing.Size(49, 20);
-            this.udSpeedPM.TabIndex = 4;
-            this.toolTip1.SetToolTip(this.udSpeedPM, "Speed of Freq Change");
-            this.udSpeedPM.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udSpeedPM.ValueChanged += new System.EventHandler(this.udSpeedPM_ValueChanged);
+            this.chkKnobVFO.Image = null;
+            this.chkKnobVFO.Location = new System.Drawing.Point(11, 45);
+            this.chkKnobVFO.Name = "chkKnobVFO";
+            this.chkKnobVFO.Size = new System.Drawing.Size(110, 27);
+            this.chkKnobVFO.TabIndex = 94;
+            this.chkKnobVFO.Text = "Push VFO select";
+            this.toolTip1.SetToolTip(this.chkKnobVFO, "Push Knob to switch between VFOA and VFOB (instead of an alternate tune-step)");
             // 
             // tpAudio
             // 
@@ -5393,7 +5443,7 @@ namespace PowerSDR
             this.grpAudioVACAutoEnable.Controls.Add(this.chkAudioVACAutoEnable);
             this.grpAudioVACAutoEnable.Location = new System.Drawing.Point(240, 248);
             this.grpAudioVACAutoEnable.Name = "grpAudioVACAutoEnable";
-            this.grpAudioVACAutoEnable.Size = new System.Drawing.Size(224, 66);
+            this.grpAudioVACAutoEnable.Size = new System.Drawing.Size(202, 66);
             this.grpAudioVACAutoEnable.TabIndex = 74;
             this.grpAudioVACAutoEnable.TabStop = false;
             this.grpAudioVACAutoEnable.Text = "Auto Enable";
@@ -5401,7 +5451,7 @@ namespace PowerSDR
             // chkAudioVACAutoEnable
             // 
             this.chkAudioVACAutoEnable.Image = null;
-            this.chkAudioVACAutoEnable.Location = new System.Drawing.Point(16, 24);
+            this.chkAudioVACAutoEnable.Location = new System.Drawing.Point(2, 23);
             this.chkAudioVACAutoEnable.Name = "chkAudioVACAutoEnable";
             this.chkAudioVACAutoEnable.Size = new System.Drawing.Size(200, 32);
             this.chkAudioVACAutoEnable.TabIndex = 0;
@@ -5526,21 +5576,105 @@ namespace PowerSDR
             // 
             // grpAudioLatency2
             // 
+            this.grpAudioLatency2.Controls.Add(this.labelTS66);
+            this.grpAudioLatency2.Controls.Add(this.labelTS65);
+            this.grpAudioLatency2.Controls.Add(this.udAudioLatencyB);
+            this.grpAudioLatency2.Controls.Add(this.udAudioLatencyA);
             this.grpAudioLatency2.Controls.Add(this.chkAudioLatencyManual2);
             this.grpAudioLatency2.Controls.Add(this.udAudioLatency2);
             this.grpAudioLatency2.Location = new System.Drawing.Point(448, 160);
             this.grpAudioLatency2.Name = "grpAudioLatency2";
-            this.grpAudioLatency2.Size = new System.Drawing.Size(120, 64);
+            this.grpAudioLatency2.Size = new System.Drawing.Size(120, 98);
             this.grpAudioLatency2.TabIndex = 67;
             this.grpAudioLatency2.TabStop = false;
             this.grpAudioLatency2.Text = "Buffer Latency (ms)";
+            // 
+            // labelTS66
+            // 
+            this.labelTS66.AutoSize = true;
+            this.labelTS66.Image = null;
+            this.labelTS66.Location = new System.Drawing.Point(6, 52);
+            this.labelTS66.Name = "labelTS66";
+            this.labelTS66.Size = new System.Drawing.Size(14, 13);
+            this.labelTS66.TabIndex = 40;
+            this.labelTS66.Text = "B";
+            // 
+            // labelTS65
+            // 
+            this.labelTS65.AutoSize = true;
+            this.labelTS65.Image = null;
+            this.labelTS65.Location = new System.Drawing.Point(6, 21);
+            this.labelTS65.Name = "labelTS65";
+            this.labelTS65.Size = new System.Drawing.Size(14, 13);
+            this.labelTS65.TabIndex = 39;
+            this.labelTS65.Text = "A";
+            // 
+            // udAudioLatencyB
+            // 
+            this.udAudioLatencyB.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udAudioLatencyB.Location = new System.Drawing.Point(35, 50);
+            this.udAudioLatencyB.Maximum = new decimal(new int[] {
+            240,
+            0,
+            0,
+            0});
+            this.udAudioLatencyB.Minimum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.udAudioLatencyB.Name = "udAudioLatencyB";
+            this.udAudioLatencyB.Size = new System.Drawing.Size(48, 20);
+            this.udAudioLatencyB.TabIndex = 38;
+            this.toolTip1.SetToolTip(this.udAudioLatencyB, "Buffer latency for VAC1 audio stream.  Set to 0 for lowest latency.  \r\nIncrease t" +
+        "his value if audio quality becomes unreliable or glitches");
+            this.udAudioLatencyB.Value = new decimal(new int[] {
+            120,
+            0,
+            0,
+            0});
+            this.udAudioLatencyB.ValueChanged += new System.EventHandler(this.udAudioLatencyB_ValueChanged);
+            // 
+            // udAudioLatencyA
+            // 
+            this.udAudioLatencyA.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udAudioLatencyA.Location = new System.Drawing.Point(35, 19);
+            this.udAudioLatencyA.Maximum = new decimal(new int[] {
+            240,
+            0,
+            0,
+            0});
+            this.udAudioLatencyA.Minimum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
+            this.udAudioLatencyA.Name = "udAudioLatencyA";
+            this.udAudioLatencyA.Size = new System.Drawing.Size(48, 20);
+            this.udAudioLatencyA.TabIndex = 37;
+            this.toolTip1.SetToolTip(this.udAudioLatencyA, "Buffer latency for VAC1 audio stream.  Set to 0 for lowest latency.  \r\nIncrease t" +
+        "his value if audio quality becomes unreliable or glitches");
+            this.udAudioLatencyA.Value = new decimal(new int[] {
+            120,
+            0,
+            0,
+            0});
+            this.udAudioLatencyA.ValueChanged += new System.EventHandler(this.udAudioLatencyA_ValueChanged);
             // 
             // chkAudioLatencyManual2
             // 
             this.chkAudioLatencyManual2.Checked = true;
             this.chkAudioLatencyManual2.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkAudioLatencyManual2.Image = null;
-            this.chkAudioLatencyManual2.Location = new System.Drawing.Point(19, 50);
+            this.chkAudioLatencyManual2.Location = new System.Drawing.Point(19, 76);
             this.chkAudioLatencyManual2.Name = "chkAudioLatencyManual2";
             this.chkAudioLatencyManual2.Size = new System.Drawing.Size(64, 16);
             this.chkAudioLatencyManual2.TabIndex = 5;
@@ -5555,7 +5689,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udAudioLatency2.Location = new System.Drawing.Point(35, 24);
+            this.udAudioLatency2.Location = new System.Drawing.Point(56, 46);
             this.udAudioLatency2.Maximum = new decimal(new int[] {
             240,
             0,
@@ -5576,6 +5710,7 @@ namespace PowerSDR
             0,
             0,
             0});
+            this.udAudioLatency2.Visible = false;
             this.udAudioLatency2.ValueChanged += new System.EventHandler(this.udAudioLatency2_ValueChanged);
             this.udAudioLatency2.LostFocus += new System.EventHandler(this.udAudioLatency2_LostFocus);
             // 
@@ -11928,6 +12063,8 @@ namespace PowerSDR
             // tpAppearanceGeneral
             // 
             this.tpAppearanceGeneral.BackColor = System.Drawing.SystemColors.Control;
+            this.tpAppearanceGeneral.Controls.Add(this.number3DZ);
+            this.tpAppearanceGeneral.Controls.Add(this.labelTS64);
             this.tpAppearanceGeneral.Controls.Add(this.labelTS46);
             this.tpAppearanceGeneral.Controls.Add(this.labelTS45);
             this.tpAppearanceGeneral.Controls.Add(this.number3DY);
@@ -11946,6 +12083,44 @@ namespace PowerSDR
             this.tpAppearanceGeneral.Size = new System.Drawing.Size(592, 318);
             this.tpAppearanceGeneral.TabIndex = 0;
             this.tpAppearanceGeneral.Text = "General";
+            // 
+            // number3DZ
+            // 
+            this.number3DZ.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.number3DZ.Location = new System.Drawing.Point(77, 270);
+            this.number3DZ.Maximum = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
+            this.number3DZ.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.number3DZ.Name = "number3DZ";
+            this.number3DZ.Size = new System.Drawing.Size(40, 20);
+            this.number3DZ.TabIndex = 91;
+            this.toolTip1.SetToolTip(this.number3DZ, "3D z offset (depth):\r\n\r\n16 = Panafall mode\r\n21 - 40 = Panadapter only mode ");
+            this.number3DZ.Value = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.number3DZ.ValueChanged += new System.EventHandler(this.number3DZ_ValueChanged);
+            // 
+            // labelTS64
+            // 
+            this.labelTS64.Image = null;
+            this.labelTS64.Location = new System.Drawing.Point(7, 275);
+            this.labelTS64.Name = "labelTS64";
+            this.labelTS64.Size = new System.Drawing.Size(64, 24);
+            this.labelTS64.TabIndex = 90;
+            this.labelTS64.Text = "3D z offset:";
             // 
             // labelTS46
             // 
@@ -18223,6 +18398,9 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udAudioVACGainRX)).EndInit();
             this.grpAudio2Stereo.ResumeLayout(false);
             this.grpAudioLatency2.ResumeLayout(false);
+            this.grpAudioLatency2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udAudioLatencyB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udAudioLatencyA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAudioLatency2)).EndInit();
             this.grpAudioSampleRate2.ResumeLayout(false);
             this.grpAudioBuffer2.ResumeLayout(false);
@@ -18390,6 +18568,7 @@ namespace PowerSDR
             this.tpAppearance.ResumeLayout(false);
             this.tcAppearance.ResumeLayout(false);
             this.tpAppearanceGeneral.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.number3DZ)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.number3DY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.number3DX)).EndInit();
             this.groupBoxTS3.ResumeLayout(false);
@@ -19672,8 +19851,15 @@ namespace PowerSDR
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.ComponentModel.IContainer components;
-
-        
+        public System.Windows.Forms.NumericUpDownTS number3DZ;
+        private System.Windows.Forms.LabelTS labelTS64;
+        private System.Windows.Forms.NumericUpDownTS udAudioLatencyB;
+        private System.Windows.Forms.NumericUpDownTS udAudioLatencyA;
+        private System.Windows.Forms.LabelTS labelTS66;
+        private System.Windows.Forms.LabelTS labelTS65;
+        public System.Windows.Forms.CheckBoxTS chkBoxESC;
+        public System.Windows.Forms.CheckBoxTS chkKnobVFOB;
+        public System.Windows.Forms.CheckBoxTS chkKnobVFO;
     } // class setup
 
 

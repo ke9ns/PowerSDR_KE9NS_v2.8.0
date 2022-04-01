@@ -62,6 +62,7 @@ namespace PowerSDR
             this.button3 = new System.Windows.Forms.Button();
             this.LoTW_help = new System.Windows.Forms.RichTextBox();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.maps_message = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // chkAlwaysOnTop
@@ -231,10 +232,23 @@ namespace PowerSDR
             this.webBrowser1.TabIndex = 115;
             this.webBrowser1.Visible = false;
             // 
+            // maps_message
+            // 
+            this.maps_message.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.maps_message.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.maps_message.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.maps_message.Location = new System.Drawing.Point(14, 12);
+            this.maps_message.Name = "maps_message";
+            this.maps_message.Size = new System.Drawing.Size(634, 389);
+            this.maps_message.TabIndex = 116;
+            this.maps_message.Text = resources.GetString("maps_message.Text");
+            // 
             // helpbox
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.BackColor = System.Drawing.Color.LightSlateGray;
             this.ClientSize = new System.Drawing.Size(660, 413);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
@@ -251,6 +265,7 @@ namespace PowerSDR
             this.Controls.Add(this.AntennaDelay);
             this.Controls.Add(this.HTTPSERVER);
             this.Controls.Add(this.LoTW_help);
+            this.Controls.Add(this.maps_message);
             this.Controls.Add(this.webBrowser1);
             this.ForeColor = System.Drawing.Color.Black;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -285,9 +300,7 @@ namespace PowerSDR
         public System.Windows.Forms.RichTextBox LoTW_help;
         public System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.ToolTip toolTip1;
-
-       
-
+        public System.Windows.Forms.RichTextBox maps_message;
     } // helpbox
 
 } // PowerSDR

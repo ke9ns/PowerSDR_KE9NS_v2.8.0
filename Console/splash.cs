@@ -70,7 +70,7 @@ namespace PowerSDR
         private const string REG_KEY_INITIALIZATION = "Initialization";
         private const string REGVALUE_PB_MILISECOND_INCREMENT = "Increment";
         private const string REGVALUE_PB_PERCENTS = "Percents";
-       
+
 
         #endregion
 
@@ -107,7 +107,7 @@ namespace PowerSDR
 
         #endregion
 
-     
+
 
         #region Static Methods
         // ************* Static Methods *************** //
@@ -210,7 +210,7 @@ namespace PowerSDR
             double dblMilliseconds = ElapsedMilliSeconds();
             m_alActualTimes.Add(dblMilliseconds);
             m_dblLastCompletionFraction = m_dblCompletionFraction;
-            if (m_alPreviousCompletionFraction != null  && m_iIndex < m_alPreviousCompletionFraction.Count)
+            if (m_alPreviousCompletionFraction != null && m_iIndex < m_alPreviousCompletionFraction.Count)
                 m_dblCompletionFraction = (double)m_alPreviousCompletionFraction[m_iIndex++];
             else
                 m_dblCompletionFraction = (m_iIndex > 0) ? 1 : 0;
@@ -229,7 +229,7 @@ namespace PowerSDR
         // splashscreen from the registry.
         private void ReadIncrements()
         {
-            string sPBIncrementPerTimerInterval =RegistryAccess.GetStringRegistryValue( REGVALUE_PB_MILISECOND_INCREMENT, "0.0015");
+            string sPBIncrementPerTimerInterval = RegistryAccess.GetStringRegistryValue(REGVALUE_PB_MILISECOND_INCREMENT, "0.0015");
             double dblResult;
 
             if (Double.TryParse(sPBIncrementPerTimerInterval,
@@ -251,7 +251,7 @@ namespace PowerSDR
                 for (int i = 0; i < aTimes.Length; i++)
                 {
                     double dblVal;
-                    if (Double.TryParse(aTimes[i], System.Globalization.NumberStyles.Float,System.Globalization.NumberFormatInfo.InvariantInfo, out dblVal))
+                    if (Double.TryParse(aTimes[i], System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out dblVal))
                         m_alPreviousCompletionFraction.Add(dblVal);
                     else
                         m_alPreviousCompletionFraction.Add(1.0);
@@ -302,11 +302,11 @@ namespace PowerSDR
             if (m_dblOpacityIncrement > 0)
             {
                 m_iActualTicks++;
-                if (this.Opacity < 1)  this.Opacity += m_dblOpacityIncrement;
+                if (this.Opacity < 1) this.Opacity += m_dblOpacityIncrement;
             }
             else
             {
-                if (this.Opacity > 0)  this.Opacity += m_dblOpacityIncrement;
+                if (this.Opacity > 0) this.Opacity += m_dblOpacityIncrement;
                 else
                 {
                     StoreIncrements();

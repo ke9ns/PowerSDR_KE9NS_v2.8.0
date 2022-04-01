@@ -42,7 +42,7 @@ namespace PowerSDR
         #region Variable Declaration
 
         private Console console;
-      
+
         private string common_data_path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\FlexRadio Systems\\PowerSDR\\";
 
         #endregion
@@ -550,7 +550,7 @@ namespace PowerSDR
             PowerMaster pm;
             try
             {
-                pm = new PowerMaster(comboCOMPort.Text,ckPM2.Checked); // ke9ns add .212
+                pm = new PowerMaster(comboCOMPort.Text, ckPM2.Checked); // ke9ns add .212
             }
             catch (Exception)
             {
@@ -590,19 +590,19 @@ namespace PowerSDR
                 StreamReader reader = new StreamReader(pm_file_path);
                 // Ke9ns: this is what is inside the powermaster.txt file in the folder: C:\ProgramData\FlexRadio Systems\PowerSDR\
                 // correction values are finalized at 1 + (correction * .01)
-            //S/N: 1497
-            //160m: -3
-            //80m: -3
-            //60m: -3
-            //40m: -3
-            //30m: -3
-            //20m: -2
-            //17m: -2
-            //15m: -1
-            //12m: 3
-            //10m: -3
-            //6m:-7
-            //COM1
+                //S/N: 1497
+                //160m: -3
+                //80m: -3
+                //60m: -3
+                //40m: -3
+                //30m: -3
+                //20m: -2
+                //17m: -2
+                //15m: -1
+                //12m: 3
+                //10m: -3
+                //6m:-7
+                //COM1
 
                 string temp = reader.ReadLine();
 

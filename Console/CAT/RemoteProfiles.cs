@@ -10,18 +10,18 @@ namespace PowerSDR
     /// </summary>
     public partial class RemoteProfiles : System.Windows.Forms.Form
     {
-       
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
-      
+
         private XmlDocument pdoc;
-       
+
         private Console console;
         private CATParser parser;
         private string model;
         private string profile;
-       
+
         private bool started = false;
         private bool updating = false;
 
@@ -115,7 +115,7 @@ namespace PowerSDR
             }
         }
 
-     
+
 
         private void btnClose_Click(object sender, System.EventArgs e)
         {

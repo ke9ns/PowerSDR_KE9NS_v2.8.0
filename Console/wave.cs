@@ -32,13 +32,11 @@ using NAudio.Wave;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Security.Permissions;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -57,9 +55,9 @@ namespace PowerSDR
         private ArrayList file_list;
         private string wave_folder = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) + "\\PowerSDR";
 
-      
+
         #endregion
-      
+
 
         #region Constructor and Destructor
 
@@ -98,7 +96,7 @@ namespace PowerSDR
 
         #endregion
 
-      
+
 
         #region Properties
 
@@ -848,25 +846,25 @@ namespace PowerSDR
                 else if (console.VK1CALL == true) // ke9ns add
                 {
                     console.VK1CALL = false; // reset ID 
-                                              //  console.checkBoxID.Checked = false;
+                                             //  console.checkBoxID.Checked = false;
                     file_name = console.AppDataPath + "QuickAudio" + "\\VK1.wav";            // ke9ns 
                 }
                 else if (console.VK2CALL == true) // ke9ns add
                 {
                     console.VK2CALL = false; // reset ID 
-                                              //  console.checkBoxID.Checked = false;
+                                             //  console.checkBoxID.Checked = false;
                     file_name = console.AppDataPath + "QuickAudio" + "\\VK2.wav";            // ke9ns 
                 }
                 else if (console.QuindarStart == true) // ke9ns add
                 {
-                   
+
                     file_name = console.AppDataPath + "QuickAudio" + "\\Quindar_tone_start.wav";            // ke9ns 
                 }
                 else if (console.QuindarEnd == true) // ke9ns add
                 {
-                    
-                     file_name = console.AppDataPath + "QuickAudio" + "\\Quindar_tone_end.wav";            // ke9ns 
-                  
+
+                    file_name = console.AppDataPath + "QuickAudio" + "\\Quindar_tone_end.wav";            // ke9ns 
+
                 }
 
 
@@ -1103,7 +1101,7 @@ namespace PowerSDR
 
             Audio.wave_playback = chkQuickPlay.Checked;  // PLAY AUDIO FILE HERE
             console.WavePlayback = chkQuickPlay.Checked;
-           
+
             console.QuindarStart = false;
             console.QuindarEnd = false;
 
@@ -1477,7 +1475,7 @@ namespace PowerSDR
             const float rw = .2989F;
 
             byte[,] ap = new byte[xm + 10, ym + 10];  // get bitmap data
-           
+
 
             //=========================================================================================
             //=========================================================================================
@@ -1512,7 +1510,7 @@ namespace PowerSDR
                 {
                     temp1A = "";
                     for (int z = 0; z < temp2; z++)
-                    { 
+                    {
                         temp1A = temp1A + console.Callsign.Substring(z, 1);
 
                         if (z != (temp2 - 1)) temp1A = temp1A + " ";
@@ -1527,12 +1525,12 @@ namespace PowerSDR
                 {
                     cl = g1.MeasureString(temp1A, new Font("Arial", fontS, FontStyle.Regular)); //  temp used to determine the size of the string when in LSB and you need to reserve a certain space
                     fontS--;
-                } while (((cl.Width > 150)|| (cl.Height > 40)) && (fontS > 9));  // 100 9 ke9ns reduce size of font until the string fits into bandpass
-// while ((cl.Width > 100) && (fontS > 9));
+                } while (((cl.Width > 150) || (cl.Height > 40)) && (fontS > 9));  // 100 9 ke9ns reduce size of font until the string fits into bandpass
+                                                                                  // while ((cl.Width > 100) && (fontS > 9));
 
-             
+
                 Debug.WriteLine("MEASUREMENT LENGTH " + cl + " , " + fontS + " , " + xm + " , " + ym + " , " + cl.Height + " , " + fontS);
-                    
+
                 // ke9ns cl = 89 is max width in pixels
 
                 // cl = g1.MeasureString(console.Callsign, new Font("Arial", fontS,FontStyle.Regular)); //  temp used to determine the size of the string when in LSB and you need to reserve a certain space
@@ -1839,10 +1837,10 @@ namespace PowerSDR
             short frameSize = 2;                              // blockalign = NumChannels * BitsPerSample/8   
             const short bitsPerSample = 16;                   // 16
             int data = 0x61746164;                            // (0x64617461 big-endian form). Spell out "data"
-         
-            
+
+
             const int headerSize = 8;                         // 8 bytes (
-        
+
             int waveSize = ym; // how tall is the images
 
             const int lowtx = 150; // lowest frequency to display
@@ -1870,14 +1868,14 @@ namespace PowerSDR
                 if (t2 > 20) t2 = 20;
             }
 
-      
+
             int samples = (samplesPerSecond * 2) * waveSize / t2;            // file size 48000*2 * 40 / 2 = 1920000              //88200 * 4 = 352800
 
-          int dataChunkSize = samples * frameSize / 2;                     //  = NumSamples * NumChannels * BitsPerSample/8
-         //   int dataChunkSize = samples * 2;                     //  = NumSamples * NumChannels * BitsPerSample/8
+            int dataChunkSize = samples * frameSize / 2;                     //  = NumSamples * NumChannels * BitsPerSample/8
+                                                                             //   int dataChunkSize = samples * 2;                     //  = NumSamples * NumChannels * BitsPerSample/8
 
             int fileSize = (waveSize) + (8 + formatChunkSize) + (8 + dataChunkSize);
-         //   int fileSize = 4 + (8 + formatChunkSize) + (8 + dataChunkSize);
+            //   int fileSize = 4 + (8 + formatChunkSize) + (8 + dataChunkSize);
 
             // write header to file
 
@@ -1902,7 +1900,7 @@ namespace PowerSDR
             //   int tottx = hightx - lowtx; // band width
 
             // xm = 100 pixels wide // was 80
-            int hzperpixel = (int)(((double)bandpass / (double)xm ) + 0.5);    //  2khz wide =  25hz/pix  6000 = 75 hz per pixel
+            int hzperpixel = (int)(((double)bandpass / (double)xm) + 0.5);    //  2khz wide =  25hz/pix  6000 = 75 hz per pixel
 
 
             //  Debug.WriteLine("hzperpixel " + hzperpixel);
@@ -1911,7 +1909,7 @@ namespace PowerSDR
             int sample3 = (int)(sample2 / 2f);
 
             // ap[,] = vales between 0 and 1 (0=dark, 255=white)
-          
+
             bright = bright / ((double)xm); // correct brightness level of PCM audio by how many freq points go into each pass
 
             //=========================================================================================
@@ -1931,10 +1929,10 @@ namespace PowerSDR
             int lastzero = 0;
             List<short> s1 = new List<short>();   // (ym*sample2);
 
-          
+
 
             Debug.WriteLine("PCM CREATION================");
-            Debug.WriteLine("ym="+ym);
+            Debug.WriteLine("ym=" + ym);
             Debug.WriteLine("xm=" + xm);
             Debug.WriteLine("sample2=" + sample2);
             Debug.WriteLine("lowtx=" + lowtx);
@@ -1946,66 +1944,66 @@ namespace PowerSDR
             Debug.WriteLine("PCM END================");
             double temp7 = 0.0;
             double temp8 = 0.0;
-           
+
             int i = 0;
-         
-                for (int y1 = 0; y1 < ym; y1++)   // each scan line (bottom of bitmap is first line out) height = y1
+
+            for (int y1 = 0; y1 < ym; y1++)   // each scan line (bottom of bitmap is first line out) height = y1
+            {
+
+                for (double n = -sample3; n < sample3; n++)           //  (generate tone)  sample3 = samplespersecond / 2         
                 {
-               
-                    for (double n = -sample3; n < sample3 ; n++)           //  (generate tone)  sample3 = samplespersecond / 2         
-                    {
 
                     temp7 = 0.0;
 
                     i = 0;
 
-                        //===========================================================
-                        // depending on width of bitmap, display within 150 hz to 2550hz
-                       
-                            for (double freq = (double)lowtx; freq < (double)(bandpass + lowtx); freq = freq + (double)hzperpixel, i++)             // add up all the frequencies from each line(row) of the bitmap into 1 signal
-                            {
+                    //===========================================================
+                    // depending on width of bitmap, display within 150 hz to 2550hz
 
-                                if (ap[i, y1] > 1)
-                                {
-                                    // i=xm, y1= ym
-                                    // temp7 = add up all 100 sine waves in the bandpass for 1 hor line of 26 possible lines 
-                                    // There are 48000 temp7 values per hor line (and temp7 16bits are captured)
+                    for (double freq = (double)lowtx; freq < (double)(bandpass + lowtx); freq = freq + (double)hzperpixel, i++)             // add up all the frequencies from each line(row) of the bitmap into 1 signal
+                    {
 
-                                    temp7 = temp7 + ((double)ap[i, y1] * (Math.Cos(n * freq * Math.PI / (double)samplesPerSecond)));  // generate individual tone 
-                                   
-                                }
-                            }// freq loop
-
-                       
-
-                       //   if (temp7 > 0) Debug.WriteLine("ODD " +  temp7.ToString()  + " n=" +n);
-                        //============================================================
-
-                       
-                        short s = (short)(temp7 * bright);
-
-                       //  writer.Write(s);  // left 16bits
-
-                        if ((firstdata == false))
+                        if (ap[i, y1] > 1)
                         {
-                             if (s != 0) firstdata = true;  // ke9ns: .139 remove the starting dead space from the transmission
-                            else firstzero++;           // count how many 16bit words until the first real data (non-zero)
+                            // i=xm, y1= ym
+                            // temp7 = add up all 100 sine waves in the bandpass for 1 hor line of 26 possible lines 
+                            // There are 48000 temp7 values per hor line (and temp7 16bits are captured)
+
+                            temp7 = temp7 + ((double)ap[i, y1] * (Math.Cos(n * freq * Math.PI / (double)samplesPerSecond)));  // generate individual tone 
+
                         }
+                    }// freq loop
 
 
-                        s1.Add(s); // ke9ns: store wav in array so you can drop the dead space and the start and end of the file
 
-                        if ((firstdata == true))
-                        {
-                           if (s == 0) lastzero++; // counts how many zeros before the end of the file
-                        }
-                       else
-                       {
-                           lastzero = 0;
-                        }
+                    //   if (temp7 > 0) Debug.WriteLine("ODD " +  temp7.ToString()  + " n=" +n);
+                    //============================================================
 
 
-                    } // n  X  1 line at a time
+                    short s = (short)(temp7 * bright);
+
+                    //  writer.Write(s);  // left 16bits
+
+                    if ((firstdata == false))
+                    {
+                        if (s != 0) firstdata = true;  // ke9ns: .139 remove the starting dead space from the transmission
+                        else firstzero++;           // count how many 16bit words until the first real data (non-zero)
+                    }
+
+
+                    s1.Add(s); // ke9ns: store wav in array so you can drop the dead space and the start and end of the file
+
+                    if ((firstdata == true))
+                    {
+                        if (s == 0) lastzero++; // counts how many zeros before the end of the file
+                    }
+                    else
+                    {
+                        lastzero = 0;
+                    }
+
+
+                } // n  X  1 line at a time
 
             } // Y
 

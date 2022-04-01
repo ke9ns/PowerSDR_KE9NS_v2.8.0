@@ -26,11 +26,7 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Drawing;
 using System.Diagnostics;
-using System.Collections;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace PowerSDR

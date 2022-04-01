@@ -28,13 +28,9 @@
 
 //#define TIMING
 
+using FlexCW;
 using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
-using System.Threading;
-
-using FlexCW;
 
 namespace PowerSDR
 {
@@ -370,7 +366,7 @@ namespace PowerSDR
 
         public static int I2C_HFIO(out uint val)
         {
-            return Pal.ReadOp((Opcode) 1021, 0x07, 0, out val); // 1021
+            return Pal.ReadOp((Opcode)1021, 0x07, 0, out val); // 1021
         }
         public static int GetSerialNum(out uint num)
         {
@@ -686,11 +682,11 @@ namespace PowerSDR
             return rtn;
         }
 
-
-        public static int SetRX1Freq(float freq)
-        {
-            return Pal.WriteOp(Opcode.RDAL_OP_SET_RX1_FREQ, freq, 0);
-        }
+        // ke9ns is this used?
+        //   public static int SetRX1Freq(float freq)
+        //   {
+        //      return Pal.WriteOp(Opcode.RDAL_OP_SET_RX1_FREQ, freq, 0);
+        //  }
 
         public static int SetRX1FreqTW(uint tw, float freq)
         {

@@ -27,13 +27,11 @@
 //=================================================================
 
 using System;
-using System.Data;
-using System.Windows.Forms;
 using System.Collections;
+using System.Data;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
-using System.Threading;
+using System.Windows.Forms;
 
 namespace PowerSDR
 {
@@ -2620,7 +2618,7 @@ namespace PowerSDR
                                 24.919000, 24.919000, "12M FT4 DIGU",           true, // ke9ns add 
                                 24.919001, 24.921999, "12M FT4 DIGU",           true, // ke9ns add
 
-                                24.920000, 24.924999, "12M RTTY",                true,
+                                24.922000, 24.924999, "12M RTTY",                true,
                                 24.925000, 24.929999, "12M Packet",             true,
                                 24.930000, 24.930000, "12M NCDXF Beacons",      true,
 
@@ -5561,7 +5559,7 @@ namespace PowerSDR
         {
             DataTable t = ds.Tables["TXProfile"];
 
-          
+
             try
             {
                 t.Columns.Add("TXEQPreamp", typeof(int));
@@ -5747,7 +5745,7 @@ namespace PowerSDR
 
             DataTable t = ds.Tables["TXProfileDef"];
 
-          
+
             try
             {
                 t.Columns.Add("TXEQPreamp", typeof(int));
@@ -11251,7 +11249,7 @@ namespace PowerSDR
 
             if (rows.Length == 0)
             {
-              
+
                 MessageBox.Show("No Entries found for Band: " + band + " Adding this Freq to new list", "No Entry Found",
                                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
 

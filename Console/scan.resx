@@ -137,9 +137,6 @@ Right click on SWR button to open up recording folder.</value>
   <metadata name="openFileDialog2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>157, 17</value>
-  </metadata>
   <data name="chkBoxSQLBRK.ToolTip" xml:space="preserve">
     <value>Pause, when Squelch is broken, for the "Pause Length" time, then continue scanning, no matter if the channel remains busy.
 

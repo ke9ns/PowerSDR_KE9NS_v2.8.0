@@ -128,7 +128,7 @@ namespace PowerSDR
             f.Name = f.Name.Replace("btnBandHF1", "btnBandHF"); // ke9ns add: HF1 is HAM button on the panelBandGN (SWL panel), HF is HF the button on panelBandVHF
             f.Name = f.Name.Replace("GN", "VHF"); // ke9ns add: GN are the radBandGN0-13 buttons,  VHF are the radBandVHF0-13 buttons on the panelBandVHF 
 
-           
+
             f.Name = f.Name.Replace("ptbDisplayZoom2", "ptbDisplayZoom"); // ke9ns .219
             f.Name = f.Name.Replace("ptbDisplayPan2", "ptbDisplayPan"); // ke9ns
 
@@ -136,7 +136,7 @@ namespace PowerSDR
             f.Name = f.Name.Replace("checkVOX", "chkVOX"); // ke9ns add
             f.Name = f.Name.Replace("prettyTrackBarVOX", "ptbVOX"); // ke9ns add
 
-          //  Debug.WriteLine("SKIN RESTORE AFTER>" + f.Name + "<");
+            //  Debug.WriteLine("SKIN RESTORE AFTER>" + f.Name + "<");
 
 
             if (File.Exists(path + "\\" + f.Name + "\\" + f.Name + pic_file_ext)) // pic_file_ext = .png
@@ -716,11 +716,11 @@ namespace PowerSDR
             // load images into image list property
             string s = path + "\\" + ctrl.TopLevelControl.Name + "\\" + ctrl.Name + "-";
 
-  
-            if (s.Contains("RX2") && (s.Contains("radBand") || s.Contains("btnBand")) )
-            s = s.Replace("RX2", ""); // ke9ns add .203
 
-          
+            if (s.Contains("RX2") && (s.Contains("radBand") || s.Contains("btnBand")))
+                s = s.Replace("RX2", ""); // ke9ns add .203
+
+
             s = s.Replace("ptbDisplayZoom2", "ptbDisplayZoom"); // ke9ns add .219
             s = s.Replace("ptbDisplayPan2", "ptbDisplayPan"); // ke9ns add
 
@@ -731,7 +731,7 @@ namespace PowerSDR
             s = s.Replace("checkVOX", "chkVOX"); // ke9ns add
             s = s.Replace("prettyTrackBarVOX", "ptbVOX"); // ke9ns add
 
-          
+
 
             for (int i = 0; i < 8; i++)
             {
@@ -931,14 +931,14 @@ namespace PowerSDR
             if (s.Contains("RX2") && (s.Contains("radBand") || s.Contains("btnBand")))
                 s = s.Replace("RX2", ""); // ke9ns add .203
 
-          
+
             s = s.Replace("ptbDisplayZoom2", "ptbDisplayZoom"); // ke9ns add .219
             s = s.Replace("ptbDisplayPan2", "ptbDisplayPan"); // ke9ns add
 
             s = s.Replace("btnBandHF1", "btnBandHF"); // ke9ns add
             s = s.Replace("GN", "VHF"); // ke9ns add
 
-           
+
             s = s.Replace("checkVOX", "chkVOX"); // ke9ns add
             s = s.Replace("prettyTrackBarVOX", "ptbVOX"); // ke9ns add
 
@@ -1353,13 +1353,13 @@ namespace PowerSDR
             if (s.Contains("RX2") && (s.Contains("radBand") || s.Contains("btnBand")))
                 s = s.Replace("RX2", ""); // ke9ns add .203
 
-          
+
             s = s.Replace("ptbDisplayZoom2", "ptbDisplayZoom"); // ke9ns add .219
             s = s.Replace("ptbDisplayPan2", "ptbDisplayPan"); // ke9ns add
 
             s = s.Replace("btnBandHF1", "btnBandHF"); // ke9ns add
             s = s.Replace("GN", "VHF"); // ke9ns add
-           
+
 
             s = s.Replace("checkVOX", "chkVOX"); // ke9ns add
             s = s.Replace("prettyTrackBarVOX", "ptbVOX"); // ke9ns add
@@ -1587,13 +1587,13 @@ namespace PowerSDR
 
             if (s.Contains("RX2") && (s.Contains("radBand") || s.Contains("btnBand")))
                 s = s.Replace("RX2", ""); // ke9ns add .203
-                      
+
             s = s.Replace("ptbDisplayZoom2", "ptbDisplayZoom"); // ke9ns add .219
             s = s.Replace("ptbDisplayPan2", "ptbDisplayPan"); // ke9ns add
 
             s = s.Replace("btnBandHF1", "btnBandHF"); // ke9ns add to allow HF1 to use the skin of HF buttons
             s = s.Replace("GN", "VHF"); // ke9ns add  to allow GN to use the skin of VHF buttons
-          
+
 
             s = s.Replace("ptbTune", "ptbPWR");  // ke9ns add to allow ptbTune to use the skin of ptbPWR slider (back and head)
             s = s.Replace("ptbMON", "ptbAF");  // ke9ns add to allow ptbTune to use the skin of ptbAF slider (back and head)
@@ -1756,9 +1756,9 @@ namespace PowerSDR
             if (c.Name == "panelBandHF") return; // ke9ns add
             if (c.Name == "panelBandGN") return; // ke9ns add
             if (c.Name == "panelBandVHF") return; // ke9ns add
-           
+
             if (c.Name == "panelBandHFRX2") return; // ke9ns add .203
-           if (c.Name == "panelBandGNRX2") return; // ke9ns add
+            if (c.Name == "panelBandGNRX2") return; // ke9ns add
             if (c.Name == "panelBandVHFRX2") return; // ke9ns add 
 
             if (c.Name == "panelMode") return; // ke9ns add
@@ -1769,7 +1769,7 @@ namespace PowerSDR
             if (c.Name.Contains("RX2") && (c.Name.Contains("radBand") || c.Name.Contains("btnBand")))
                 c.Name = c.Name.Replace("RX2", ""); // ke9ns add .203
 
-           
+
             c.Name = c.Name.Replace("ptbDisplayZoom2", "ptbDisplayZoom"); //.219
             c.Name = c.Name.Replace("ptbDisplayPan2", "ptbDisplayPan");
 
@@ -1780,7 +1780,7 @@ namespace PowerSDR
             c.Name = c.Name.Replace("checkVOX", "chkVOX"); // ke9ns add
             c.Name = c.Name.Replace("prettyTrackBarVOX", "ptbVOX"); // ke9ns add
 
-           
+
 
             if (File.Exists(path + "\\" + c.TopLevelControl.Name + "\\" + c.Name + pic_file_ext)) // pic_file_ext = .png
             {

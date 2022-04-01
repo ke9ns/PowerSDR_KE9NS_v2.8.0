@@ -1053,8 +1053,7 @@ DttSP_EXP void GetFMSquelchBreak(int thread, int subrx, boolean *fmsquelchbreak)
 
 //===============================================================================
 
-DttSP_EXP void
-SetCorrectIQ (unsigned int thread, unsigned int subrx, double phase, double gain)
+DttSP_EXP void SetCorrectIQ (unsigned int thread, unsigned int subrx, double phase, double gain)
 {
 	sem_wait(&top[thread].sync.upd.sem);
 	rx[thread][subrx].iqfix->phase = (REAL) (0.001 * phase);
@@ -2497,8 +2496,7 @@ SetRXPan(unsigned int thread, unsigned int subrx, float pos)
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void
-SetDiversity (int setit)
+DttSP_EXP void SetDiversity (int setit)
 {
 	extern BOOLEAN reset_em;
 	//fprintf(stderr, "SetDiversity: %u\n", setit), fflush(stderr);
@@ -2512,8 +2510,7 @@ SetDiversity (int setit)
 	sem_post(&top[2].sync.upd.sem);
 }
 
-DttSP_EXP void
-SetDiversityScalar(REAL re, REAL im)
+DttSP_EXP void SetDiversityScalar(REAL re, REAL im) //  ke9ns  DttSP.SetDiversityScalar((float)((r * 1.5) * Math.Cos(angle1)), (float)((r * 1.5) * Math.Sin(angle1)));
 {
 	//fprintf(stderr, "SetDiversityScalar: %f, %f\n", re, im), fflush(stderr);
 	sem_wait(&top[2].sync.upd.sem);
@@ -2521,8 +2518,7 @@ SetDiversityScalar(REAL re, REAL im)
 	sem_post(&top[2].sync.upd.sem);
 }
 
-DttSP_EXP void
-SetDiversityGain(REAL gain)
+DttSP_EXP void SetDiversityGain(REAL gain) // ke9ns gain set to 1.0
 {
 	//fprintf(stderr, "SetDiversityGain: %f\n", gain), fflush(stderr);
 	sem_wait(&top[2].sync.upd.sem);

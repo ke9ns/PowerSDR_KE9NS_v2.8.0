@@ -22,7 +22,6 @@
 //=================================================================
 
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
@@ -41,7 +40,7 @@ namespace PowerSDR
         //   private ArrayList file_list;
         private string wave_folder = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) + "\\PowerSDR";
 
-       
+
 
         #region Constructor and Destructor
 
@@ -51,7 +50,7 @@ namespace PowerSDR
             console = c;
 
             Common.RestoreForm(this, "SwlForm", true);
-           
+
 
             //   bandSwlupdate();
 
@@ -73,7 +72,7 @@ namespace PowerSDR
 
         #endregion
 
-        
+
 
         #region Properties
 
@@ -166,7 +165,7 @@ namespace PowerSDR
 
                             if (SpotControl.SWL_Station[ii].Length > 25) SpotControl.SWL_Station[ii] = SpotControl.SWL_Station[ii].Substring(0, 25);
 
-                          //  Debug.WriteLine("station mode " + SpotControl.SWL_Mode[ii] + " , " + SpotControl.SWL_Station[ii]);
+                            //  Debug.WriteLine("station mode " + SpotControl.SWL_Mode[ii] + " , " + SpotControl.SWL_Station[ii]);
 
                             if ((SpotControl.SWL_Station[ii].IndexOf("volmet", StringComparison.OrdinalIgnoreCase) >= 0))
                             {
@@ -288,17 +287,17 @@ namespace PowerSDR
                             {
                                 SpotControl.SWL_Mode[ii] = "DIGU";
                             }
-                            
+
                             else if ((SpotControl.SWL_Freq[ii] / 1000000) >= 29)
                             {
-                              //  SpotControl.SWL_Mode[ii] = "USB";
+                                //  SpotControl.SWL_Mode[ii] = "USB";
                             }
                             else
                             {
                                 SpotControl.SWL_Mode[ii] = "SAM";
                             }
 
-                          //  Debug.WriteLine("station mode " + SpotControl.SWL_Mode[ii] + " , " + SpotControl.SWL_Station[ii]);
+                            //  Debug.WriteLine("station mode " + SpotControl.SWL_Mode[ii] + " , " + SpotControl.SWL_Station[ii]);
 
 
                             if (SpotControl.SWL_Band[ii] > 99)
@@ -306,14 +305,14 @@ namespace PowerSDR
                                 bigmessage += (String.Format("{0:00.000000}", (double)(SpotControl.SWL_Freq[ii]) / 1000000.0) +
                                     " " + SpotControl.SWL_Station[ii].PadRight(25, ' ') + " " + SpotControl.SWL_Loc[ii].PadRight(3, ' ') +
                                     " " + SpotControl.SWL_TimeN[ii].ToString().PadLeft(4, '0') + ":" + SpotControl.SWL_TimeF[ii].ToString().PadLeft(4, '0') +
-                                 "_" +   "\r\n");
+                                 "_" + "\r\n");
                             }
                             else
                             {
                                 bigmessage += (String.Format("{0:00.000000}", (double)(SpotControl.SWL_Freq[ii]) / 1000000.0) +
                                  "  " + SpotControl.SWL_Station[ii].PadRight(25, ' ') + " " + SpotControl.SWL_Loc[ii].PadRight(3, ' ') +
                                    " " + SpotControl.SWL_TimeN[ii].ToString().PadLeft(4, '0') + ":" + SpotControl.SWL_TimeF[ii].ToString().PadLeft(4, '0') +
-                                "_" +  "\r\n");
+                                "_" + "\r\n");
                             }
 
                         } // check time
@@ -333,7 +332,7 @@ namespace PowerSDR
 
             richTextBox2.Text = bigmessage; // update screen
 
-          
+
 
         } // bandSwlupdate
 
@@ -407,7 +406,7 @@ namespace PowerSDR
                     //  Debug.WriteLine("xxx " + xxx);
 
                     richTextBox2.SelectionStart = (xxx * WidthOfText);
-                    richTextBox2.SelectionLength = WidthOfText-1;
+                    richTextBox2.SelectionLength = WidthOfText - 1;
 
                     //   console.SaveBand(); // put away last freq you were on before moving
                     Debug.WriteLine("INDEX YOU CLICKED ON " + ii);
@@ -418,9 +417,9 @@ namespace PowerSDR
                     console.VFOAFreq = ((double)SpotControl.SWL_Freq[swl_index[xxx]]) / 1000000.0; // convert to MHZ
 
                     //   Display.VFOA = ((long)SpotControl.SWL_Freq[swl_index[xxx]]) ; // keep as hz
-                 //   Debug.WriteLine("INDEX YOU CLICKED Station " + SpotControl.SWL_Station[swl_index[xxx]]);
+                    //   Debug.WriteLine("INDEX YOU CLICKED Station " + SpotControl.SWL_Station[swl_index[xxx]]);
 
-                  //  Debug.WriteLine("INDEX YOU CLICKED MODE " + SpotControl.SWL_Mode[swl_index[xxx]]);
+                    //  Debug.WriteLine("INDEX YOU CLICKED MODE " + SpotControl.SWL_Mode[swl_index[xxx]]);
 
                     if (SpotControl.SWL_Mode[swl_index[xxx]] == "AM") console.RX1DSPMode = DSPMode.SAM;
                     else if (SpotControl.SWL_Mode[swl_index[xxx]] == "SAM") console.RX1DSPMode = DSPMode.SAM;
@@ -452,7 +451,7 @@ namespace PowerSDR
                 try
                 {
                     int ii = richTextBox2.GetCharIndexFromPosition(e.Location);
-                  
+
                     xxx = (ii / WidthOfText); //find row 52
 
                     //   Debug.WriteLine("ii " + ii);
@@ -460,11 +459,11 @@ namespace PowerSDR
 
 
                     richTextBox2.SelectionStart = (xxx * WidthOfText);
-                    richTextBox2.SelectionLength = WidthOfText-1;
+                    richTextBox2.SelectionLength = WidthOfText - 1;
 
                     //   console.SaveBand(); // put away last freq you were on before moving
-                        Debug.WriteLine("2INDEX YOU CLICKED ON " + ii);
-                       Debug.WriteLine("2INDEX YOU CLICKED ON2 " + xxx + " , " + swl_index[xxx]);
+                    Debug.WriteLine("2INDEX YOU CLICKED ON " + ii);
+                    Debug.WriteLine("2INDEX YOU CLICKED ON2 " + xxx + " , " + swl_index[xxx]);
 
                     //   Debug.WriteLine("freq " + SpotControl.SWL_Freq[swl_index[xxx]]);
 
@@ -495,7 +494,7 @@ namespace PowerSDR
                 }
             }
 
-           // button3.Focus();
+            // button3.Focus();
 
             //  button1.Focus();
         }
@@ -524,7 +523,7 @@ namespace PowerSDR
 
         private void SwlControl_MouseEnter(object sender, EventArgs e)
         {
-          
+
             if (console.setupForm.chkBoxAutoFocus.Checked == true && chkAlwaysOnTop.Checked == true) this.Activate();
         }
 

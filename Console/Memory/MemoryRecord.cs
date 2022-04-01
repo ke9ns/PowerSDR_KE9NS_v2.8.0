@@ -108,7 +108,7 @@ namespace PowerSDR
             repeatingm = _Repeatingm;// ke9ns add  for scheduled freq change and optional recording
             extra = _Extra;// ke9ns add  for scheduled freq change and optional recording
 
-           
+
 
 
         } // memoryrecord

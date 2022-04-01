@@ -27,11 +27,7 @@
 //=================================================================
 
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Flex.Control;
+using Flex.Control; // .250
 using System.Diagnostics;
 
 namespace PowerSDR
@@ -62,6 +58,8 @@ namespace PowerSDR
     class FlexControlInterface1
     {
         private Console console;
+        //  public FlexControl FlexControl; //.250
+        //  public FlexControlManager FlexControlManager; //.250
 
         public FlexControlInterface1(Console c)
         {
@@ -367,7 +365,7 @@ namespace PowerSDR
                             {
                                 if ((Display.CurrentDisplayMode == DisplayMode.PANADAPTER) || (Display.CurrentDisplayMode == DisplayMode.PANAFALL) || (Display.CurrentDisplayMode == DisplayMode.PANASCOPE) || (Display.CurrentDisplayMode == DisplayMode.WATERFALL))
                                 {
-                                    Console.UPDATEOFF = 2; // ke9ns add let system know not to update screen for a little while pan
+                                    Console.UPDATEOFF = 2; // ke9ns add: let system know not to update screen for a little while pan
                                 }
 
                                 double temp1 = console.SnapTune(0.0, step, num_steps); // in mhz

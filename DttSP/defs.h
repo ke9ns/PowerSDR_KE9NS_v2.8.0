@@ -40,7 +40,7 @@ Bridgewater, NJ 08807
 #define DEFRATE (48000.0)
 #define DEFSIZE (4096)
 #define DEFMODE (USB)
-#define DEFSPEC (4096) // ke9ns: 4096 point across the pan (no matter what). hires mode updates this to 16384, loc[thread].def.spec = hires  uni[thread].spec.size = hires; 
+#define DEFSPEC (4096) // ke9ns: 4096 point across the pan (no matter what). hi-res mode updates this to 16384, loc[thread].def.spec = hires  uni[thread].spec.size = hires; 
 #define DEFCOMP (512)
 
 #define MAXRX (2)

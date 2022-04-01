@@ -1,20 +1,16 @@
+using Flex.Control;  // .250
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-
-using Flex.Control;
 
 namespace PowerSDR
 {
     public partial class FlexControlBasicForm : Form
     {
         private Console console;
+        //  public FlexControl FlexControl; //.250
+        //   public FlexControlManager FlexControlManager; //.250
+
+
         private FlexControlInterface2 fc_interface = null;
 
         //   public Setup setupForm;                             // ke9ns communications with setupform  (i.e. allow combometertype.text update from inside console.cs) 

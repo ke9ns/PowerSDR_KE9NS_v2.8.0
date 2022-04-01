@@ -27,13 +27,12 @@
 //=================================================================
 
 using System;
-using System.Drawing;
 using System.Collections;
-using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
-using System.IO;
 
 namespace PowerSDR
 {
@@ -57,7 +56,7 @@ namespace PowerSDR
         #region Variable Declaration
 
         private Console console;
-       
+
 
         #endregion
 
@@ -95,7 +94,7 @@ namespace PowerSDR
 
         #endregion
 
-    
+
         #region Properties
 
         private FWCATUMode current_tune_mode = FWCATUMode.Bypass;

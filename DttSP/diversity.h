@@ -40,7 +40,7 @@ Bridgewater, NJ 08807
 typedef struct _diversity_block
 {
 	BOOLEAN flag;
-	COMPLEX scalar;
+	COMPLEX scalar;//   DttSP.SetDiversityScalar((float)((r * 1.5) * Math.Cos(angle1)), (float)((r * 1.5) * Math.Sin(angle1)));
 	REAL gain;
 	pthread_mutex_t diversity_osc_mutex,diversity_sum_mutex, diversity_out_mutex, diversity_trx_mutex;
 	pthread_cond_t dv_osc_cond,dv_sum_cond,dv_out_cond, dv_trx_cond;

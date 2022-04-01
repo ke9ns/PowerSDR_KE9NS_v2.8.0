@@ -52,6 +52,17 @@ namespace PowerSDR
             this.labelMax = new System.Windows.Forms.Label();
             this.pwrMstWatts = new System.Windows.Forms.TextBox();
             this.pwrMstSWR = new System.Windows.Forms.TextBox();
+            this.panelTSRadar = new System.Windows.Forms.PanelTS();
+            this.btnBump180 = new System.Windows.Forms.ButtonTS();
+            this.btnReset = new System.Windows.Forms.RadioButtonTS();
+            this.btnEnable = new System.Windows.Forms.RadioButtonTS();
+            this.btnSync = new System.Windows.Forms.RadioButtonTS();
+            this.chkLockAngle = new System.Windows.Forms.CheckBox();
+            this.chkLockR = new System.Windows.Forms.CheckBox();
+            this.udR = new System.Windows.Forms.NumericUpDownTS();
+            this.udAngle = new System.Windows.Forms.NumericUpDownTS();
+            this.checkBoxRadar = new System.Windows.Forms.CheckBoxTS();
+            this.picRadar = new System.Windows.Forms.PictureBox();
             this.btnBandVHFRX2 = new System.Windows.Forms.ButtonTS();
             this.radBandGENRX2 = new System.Windows.Forms.RadioButtonTS();
             this.radBandWWVRX2 = new System.Windows.Forms.RadioButtonTS();
@@ -564,6 +575,10 @@ namespace PowerSDR
             this.lblRX2Band = new System.Windows.Forms.LabelTS();
             this.panelRX2DSP = new System.Windows.Forms.PanelTS();
             this.ptbSquelch = new PowerSDR.PrettyTrackBar();
+            this.panelTSRadar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udR)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udAngle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picRadar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picRX3Meter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picRX2Meter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMultiMeterDigital)).BeginInit();
@@ -746,6 +761,156 @@ namespace PowerSDR
             this.pwrMstSWR.Name = "pwrMstSWR";
             this.pwrMstSWR.TabStop = false;
             this.toolTip1.SetToolTip(this.pwrMstSWR, resources.GetString("pwrMstSWR.ToolTip"));
+            // 
+            // panelTSRadar
+            // 
+            resources.ApplyResources(this.panelTSRadar, "panelTSRadar");
+            this.panelTSRadar.BackColor = System.Drawing.Color.Transparent;
+            this.panelTSRadar.Controls.Add(this.btnBump180);
+            this.panelTSRadar.Controls.Add(this.btnReset);
+            this.panelTSRadar.Controls.Add(this.btnEnable);
+            this.panelTSRadar.Controls.Add(this.btnSync);
+            this.panelTSRadar.Controls.Add(this.chkLockAngle);
+            this.panelTSRadar.Controls.Add(this.chkLockR);
+            this.panelTSRadar.Controls.Add(this.udR);
+            this.panelTSRadar.Controls.Add(this.udAngle);
+            this.panelTSRadar.Controls.Add(this.checkBoxRadar);
+            this.panelTSRadar.Controls.Add(this.picRadar);
+            this.panelTSRadar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panelTSRadar.Name = "panelTSRadar";
+            this.toolTip1.SetToolTip(this.panelTSRadar, resources.GetString("panelTSRadar.ToolTip"));
+            this.panelTSRadar.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTSRadar_Paint);
+            // 
+            // btnBump180
+            // 
+            resources.ApplyResources(this.btnBump180, "btnBump180");
+            this.btnBump180.FlatAppearance.BorderSize = 0;
+            this.btnBump180.ForeColor = System.Drawing.Color.White;
+            this.btnBump180.Name = "btnBump180";
+            this.toolTip1.SetToolTip(this.btnBump180, resources.GetString("btnBump180.ToolTip"));
+            this.btnBump180.UseVisualStyleBackColor = true;
+            this.btnBump180.Click += new System.EventHandler(this.btnBump180_Click);
+            // 
+            // btnReset
+            // 
+            resources.ApplyResources(this.btnReset, "btnReset");
+            this.btnReset.FlatAppearance.BorderSize = 0;
+            this.btnReset.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnReset.Name = "btnReset";
+            this.toolTip1.SetToolTip(this.btnReset, resources.GetString("btnReset.ToolTip"));
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
+            // btnEnable
+            // 
+            resources.ApplyResources(this.btnEnable, "btnEnable");
+            this.btnEnable.FlatAppearance.BorderSize = 0;
+            this.btnEnable.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnEnable.Name = "btnEnable";
+            this.toolTip1.SetToolTip(this.btnEnable, resources.GetString("btnEnable.ToolTip"));
+            this.btnEnable.Click += new System.EventHandler(this.btnEnable_Click);
+            // 
+            // btnSync
+            // 
+            resources.ApplyResources(this.btnSync, "btnSync");
+            this.btnSync.FlatAppearance.BorderSize = 0;
+            this.btnSync.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnSync.Name = "btnSync";
+            this.toolTip1.SetToolTip(this.btnSync, resources.GetString("btnSync.ToolTip"));
+            this.btnSync.Click += new System.EventHandler(this.btnSync_Click);
+            // 
+            // chkLockAngle
+            // 
+            resources.ApplyResources(this.chkLockAngle, "chkLockAngle");
+            this.chkLockAngle.ForeColor = System.Drawing.Color.White;
+            this.chkLockAngle.Name = "chkLockAngle";
+            this.toolTip1.SetToolTip(this.chkLockAngle, resources.GetString("chkLockAngle.ToolTip"));
+            this.chkLockAngle.CheckedChanged += new System.EventHandler(this.chkLockAngle_CheckedChanged);
+            // 
+            // chkLockR
+            // 
+            resources.ApplyResources(this.chkLockR, "chkLockR");
+            this.chkLockR.ForeColor = System.Drawing.Color.White;
+            this.chkLockR.Name = "chkLockR";
+            this.toolTip1.SetToolTip(this.chkLockR, resources.GetString("chkLockR.ToolTip"));
+            this.chkLockR.CheckedChanged += new System.EventHandler(this.chkLockR_CheckedChanged);
+            // 
+            // udR
+            // 
+            resources.ApplyResources(this.udR, "udR");
+            this.udR.BackColor = System.Drawing.Color.Black;
+            this.udR.DecimalPlaces = 3;
+            this.udR.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.udR.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            196608});
+            this.udR.Maximum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.udR.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            -2147483648});
+            this.udR.Name = "udR";
+            this.toolTip1.SetToolTip(this.udR, resources.GetString("udR.ToolTip"));
+            this.udR.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udR.ValueChanged += new System.EventHandler(this.udR_ValueChanged);
+            // 
+            // udAngle
+            // 
+            resources.ApplyResources(this.udAngle, "udAngle");
+            this.udAngle.BackColor = System.Drawing.Color.Black;
+            this.udAngle.DecimalPlaces = 3;
+            this.udAngle.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.udAngle.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            196608});
+            this.udAngle.Maximum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.udAngle.Minimum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            -2147483648});
+            this.udAngle.Name = "udAngle";
+            this.toolTip1.SetToolTip(this.udAngle, resources.GetString("udAngle.ToolTip"));
+            this.udAngle.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udAngle.ValueChanged += new System.EventHandler(this.udTheta_ValueChanged);
+            // 
+            // checkBoxRadar
+            // 
+            resources.ApplyResources(this.checkBoxRadar, "checkBoxRadar");
+            this.checkBoxRadar.Name = "checkBoxRadar";
+            this.toolTip1.SetToolTip(this.checkBoxRadar, resources.GetString("checkBoxRadar.ToolTip"));
+            this.checkBoxRadar.CheckedChanged += new System.EventHandler(this.chkBoxRadar_CheckedChanged);
+            // 
+            // picRadar
+            // 
+            resources.ApplyResources(this.picRadar, "picRadar");
+            this.picRadar.BackColor = System.Drawing.Color.Transparent;
+            this.picRadar.Name = "picRadar";
+            this.picRadar.TabStop = false;
+            this.picRadar.Paint += new System.Windows.Forms.PaintEventHandler(this.picRadar_Paint);
+            this.picRadar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picRadar_MouseDown);
+            this.picRadar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picRadar_MouseMove);
+            this.picRadar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picRadar_MouseUp);
             // 
             // btnBandVHFRX2
             // 
@@ -1865,6 +2030,7 @@ namespace PowerSDR
             this.chkVFOSync.Name = "chkVFOSync";
             this.toolTip1.SetToolTip(this.chkVFOSync, resources.GetString("chkVFOSync.ToolTip"));
             this.chkVFOSync.CheckedChanged += new System.EventHandler(this.chkVFOSync_CheckedChanged);
+            this.chkVFOSync.MouseDown += new System.Windows.Forms.MouseEventHandler(this.chkVFOSync_MouseDown);
             // 
             // chkFullDuplex
             // 
@@ -2991,6 +3157,7 @@ namespace PowerSDR
             this.comboRX2Band.Name = "comboRX2Band";
             this.toolTip1.SetToolTip(this.comboRX2Band, resources.GetString("comboRX2Band.ToolTip"));
             this.comboRX2Band.SelectedIndexChanged += new System.EventHandler(this.comboRX2Band_SelectedIndexChanged);
+            this.comboRX2Band.MouseDown += new System.Windows.Forms.MouseEventHandler(this.comboRX2Band_MouseDown);
             // 
             // chkPower
             // 
@@ -4117,7 +4284,9 @@ namespace PowerSDR
             // 
             // udCQCQRepeat
             // 
+            this.udCQCQRepeat.BackColor = System.Drawing.Color.Black;
             this.udCQCQRepeat.DecimalPlaces = 1;
+            this.udCQCQRepeat.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.udCQCQRepeat.Increment = new decimal(new int[] {
             5,
             0,
@@ -4242,6 +4411,7 @@ namespace PowerSDR
             // 
             // buttonVK1
             // 
+            this.buttonVK1.Image = global::PowerSDR.Properties.Resources.VK1;
             resources.ApplyResources(this.buttonVK1, "buttonVK1");
             this.buttonVK1.Name = "buttonVK1";
             this.buttonVK1.TabStop = false;
@@ -4251,6 +4421,7 @@ namespace PowerSDR
             // 
             // buttonVK2
             // 
+            this.buttonVK2.Image = global::PowerSDR.Properties.Resources.VK2;
             resources.ApplyResources(this.buttonVK2, "buttonVK2");
             this.buttonVK2.Name = "buttonVK2";
             this.buttonVK2.TabStop = false;
@@ -4545,6 +4716,7 @@ namespace PowerSDR
             this.eSCToolStripMenuItem.Click += new System.EventHandler(this.eSCToolStripMenuItem_Click);
             this.eSCToolStripMenuItem.MouseLeave += new System.EventHandler(this.ESCToolStripMenuItem_MouseLeave);
             this.eSCToolStripMenuItem.MouseHover += new System.EventHandler(this.ESCToolStripMenuItem_MouseHover);
+            this.eSCToolStripMenuItem.MouseUp += new System.Windows.Forms.MouseEventHandler(this.eSCToolStripMenuItem_MouseUp);
             // 
             // antennaToolStripMenuItem
             // 
@@ -4576,9 +4748,10 @@ namespace PowerSDR
             // 
             // GrayMenuItem
             // 
+            this.GrayMenuItem.BackColor = System.Drawing.Color.Navy;
+            resources.ApplyResources(this.GrayMenuItem, "GrayMenuItem");
             this.GrayMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.GrayMenuItem.Name = "GrayMenuItem";
-            resources.ApplyResources(this.GrayMenuItem, "GrayMenuItem");
             this.GrayMenuItem.Click += new System.EventHandler(this.GrayMenuItem_Click);
             this.GrayMenuItem.MouseDown += new System.Windows.Forms.MouseEventHandler(this.GrayMenuItem_MouseDown);
             // 
@@ -4621,6 +4794,7 @@ namespace PowerSDR
             // 
             // MapMenuItem
             // 
+            this.MapMenuItem.AutoToolTip = true;
             resources.ApplyResources(this.MapMenuItem, "MapMenuItem");
             this.MapMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.MapMenuItem.Name = "MapMenuItem";
@@ -5880,6 +6054,7 @@ namespace PowerSDR
             this.panelRX2Filter.Controls.Add(this.radRX2Filter6);
             this.panelRX2Filter.Name = "panelRX2Filter";
             this.panelRX2Filter.Paint += new System.Windows.Forms.PaintEventHandler(this.panelRing_Paint);
+            this.panelRX2Filter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelRX2Filter_MouseDown);
             // 
             // lblRX2FilterHigh
             // 
@@ -5959,6 +6134,7 @@ namespace PowerSDR
             this.panelRX2Mode.Controls.Add(this.radRX2ModeSPEC);
             this.panelRX2Mode.Name = "panelRX2Mode";
             this.panelRX2Mode.Paint += new System.Windows.Forms.PaintEventHandler(this.panelRing_Paint);
+            this.panelRX2Mode.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panelRX2Mode_MouseClick);
             // 
             // panelRX2Display
             // 
@@ -6208,6 +6384,7 @@ namespace PowerSDR
             this.panelFilter.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.panelFilter.Name = "panelFilter";
             this.panelFilter.Paint += new System.Windows.Forms.PaintEventHandler(this.panelRing_Paint);
+            this.panelFilter.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelFilter_MouseDown);
             // 
             // lblFilterHigh
             // 
@@ -6324,6 +6501,7 @@ namespace PowerSDR
             this.panelMode.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.panelMode.Name = "panelMode";
             this.panelMode.Paint += new System.Windows.Forms.PaintEventHandler(this.panelRing_Paint);
+            this.panelMode.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelMode_MouseDown);
             // 
             // lblDisplayModeTop
             // 
@@ -6393,6 +6571,7 @@ namespace PowerSDR
             // 
             resources.ApplyResources(this, "$this");
             this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.Controls.Add(this.panelTSRadar);
             this.Controls.Add(this.panelBandVHFRX2);
             this.Controls.Add(this.panelBandHFRX2);
             this.Controls.Add(this.panelBandVHF);
@@ -6469,6 +6648,10 @@ namespace PowerSDR
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Console_MouseUp);
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.Console_MouseWheel);
             this.Resize += new System.EventHandler(this.Console_Resize);
+            this.panelTSRadar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.udR)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udAngle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picRadar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picRX3Meter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picRX2Meter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picMultiMeterDigital)).EndInit();
@@ -7019,7 +7202,6 @@ namespace PowerSDR
         private System.Windows.Forms.Button buttonSort;
         public System.Windows.Forms.TextBox textBox1;
         public System.Windows.Forms.RichTextBox txtTimer;
-        private System.Windows.Forms.ToolStripMenuItem MapMenuItem;
         public PrettyTrackBar ptbTune;
         public System.Windows.Forms.LabelTS lblTUNE;
         private System.Windows.Forms.LabelTS lblMON;
@@ -7142,6 +7324,18 @@ namespace PowerSDR
 
         #endregion
 
+        public System.Windows.Forms.ToolStripMenuItem MapMenuItem;
+        public System.Windows.Forms.PanelTS panelTSRadar;
+        private System.Windows.Forms.PictureBox picRadar;
+        public System.Windows.Forms.CheckBoxTS checkBoxRadar;
+        private System.Windows.Forms.NumericUpDownTS udAngle;
+        private System.Windows.Forms.NumericUpDownTS udR;
+        private System.Windows.Forms.CheckBox chkLockAngle;
+        private System.Windows.Forms.CheckBox chkLockR;
+        public System.Windows.Forms.RadioButtonTS btnReset;
+        public System.Windows.Forms.RadioButtonTS btnEnable;
+        public System.Windows.Forms.RadioButtonTS btnSync;
+        private System.Windows.Forms.ButtonTS btnBump180;
     } // class console
 
 

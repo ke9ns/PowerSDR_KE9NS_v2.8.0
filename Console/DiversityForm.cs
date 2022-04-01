@@ -31,10 +31,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
-using System.Collections;
-using System.ComponentModel;
-using System.Windows.Forms;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace PowerSDR
 {
@@ -52,7 +50,7 @@ namespace PowerSDR
         //private Image crosshair = new Bitmap("C:\\crosshair.png");
         private Console console;
 
-      
+
         public bool CATEnable
         {
             get { return chkEnable.Checked; }
@@ -227,11 +225,14 @@ namespace PowerSDR
 
         private void udR_ValueChanged(object sender, System.EventArgs e)
         {
+            r = (double)udR.Value;
             UpdateDiversity();
         }
 
         private void udTheta_ValueChanged(object sender, System.EventArgs e)
         {
+            angle = (double)udAngle.Value;
+
             UpdateDiversity();
         }
 
@@ -244,10 +245,14 @@ namespace PowerSDR
 
             int L = (int)Math.Min(picRadar.Width, picRadar.Height);
             p = new Point((int)(r * L / 2 * Math.Cos(angle)) + L / 2, -(int)(r * L / 2 * Math.Sin(angle)) + L / 2);
+
+            //  Debug.WriteLine("0ESC " + L + " , " + picRadar.Width + " , " + picRadar.Height + " , " + p);
+
+
             picRadar.Invalidate();
         }
 
-        private void btnSync_Click(object sender, System.EventArgs e)
+        public void btnSync_Click(object sender, System.EventArgs e)
         {
             console.RX2SpurReduction = console.SpurReduction;
             console.RX2DSPMode = console.RX1DSPMode;
@@ -274,7 +279,7 @@ namespace PowerSDR
 
         }
 
-        private void chkEnable_CheckedChanged(object sender, System.EventArgs e)
+        public void chkEnable_CheckedChanged(object sender, System.EventArgs e)
         {
             //if(chkEnable.Checked) chkEnable.BackColor = console.ButtonSelectedColor;
             //else chkEnable.BackColor = SystemColors.Control;
@@ -413,7 +418,7 @@ namespace PowerSDR
                 locked_r = r;
         }
 
-        private void btnReset_Click(object sender, EventArgs e)
+        public void btnReset_Click(object sender, EventArgs e)
         {
             angle = 0;
             r = 0;

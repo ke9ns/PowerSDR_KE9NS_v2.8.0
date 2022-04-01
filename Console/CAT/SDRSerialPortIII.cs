@@ -105,7 +105,7 @@ namespace PowerSDR
         public void setCommParms(int baudrate, Parity p, int databits, StopBits stop, Handshake handshake)
         {
             if (commPort.IsOpen) return; // bail out if it's already open 
-           
+
             commPort.BaudRate = baudrate;
             commPort.Parity = p;
             commPort.StopBits = stop;

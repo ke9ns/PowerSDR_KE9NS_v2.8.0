@@ -36,19 +36,15 @@
 #define SAVERESTORE
 //#define CWX_DEBUG (Note: Please do not put all Debug.Writeline()under this. Leave them commented off.)
 
+using FlexCW;
 using System;
-using System.IO;
-using System.Drawing;
 using System.Diagnostics;
-using System.Collections;
-using System.Threading;
-using System.ComponentModel;
-using System.Windows.Forms;
+using System.Drawing;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Text.RegularExpressions;
-
-using FlexCW;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace PowerSDR
 {
@@ -72,7 +68,7 @@ namespace PowerSDR
         #endregion
 
         #region Variable Declarations
-       
+
         private Console console;
 
         public static Mutex keydisplay = new Mutex();   // around the key display
@@ -914,7 +910,7 @@ namespace PowerSDR
         }
         #endregion
 
-       
+
         #region event handlers and callbacks
 
         private void expandButton_Click(object sender, System.EventArgs e)

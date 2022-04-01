@@ -29,13 +29,11 @@
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Collections;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace PowerSDR
 {
-    public  partial class Progress : System.Windows.Forms.Form
+    public partial class Progress : System.Windows.Forms.Form
     {
         #region Variable Declaration
 
@@ -68,7 +66,7 @@ namespace PowerSDR
         }
 
         #endregion
-        
+
 
         #region Misc Routines
 

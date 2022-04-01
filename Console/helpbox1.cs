@@ -29,12 +29,8 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
-using System.Windows.Forms;
-using System.Threading;
-using System.IO;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 //using CefSharp;            // ke9ns add to allow embedded chrome browser (for help videos)
 //using CefSharp.WinForms;
@@ -54,7 +50,7 @@ namespace PowerSDR
         //  public static Stream Map_image2 = myAssembly2.GetManifestResourceStream("PowerSDR.Resources.Wmap1.jpg");     // MAP with lat / long on it
 
         #region Variable Declaration
-       
+
 
         // public static helpbox1 helpbox1Form;                       // ke9ns add 
 
@@ -140,7 +136,7 @@ namespace PowerSDR
         }
 
         #endregion
-      
+
 
         #region Properties
 

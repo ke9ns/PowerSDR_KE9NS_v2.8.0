@@ -155,8 +155,8 @@ namespace PowerSDR
 
         // Timer identifier.
         private int timerID;
-       
-      
+
+
         // ke9ns run this to kill the prior timer and start a new timer 
         private void setup_timer(int cwxwpm)
         {
@@ -433,7 +433,7 @@ namespace PowerSDR
 
                 string answer = console.spotDDUtil_Rotor1; // get rotor angle current position
 
-                            RotorHead.Text = answer + "°";
+                RotorHead.Text = answer + "°";
 
                 int temp1 = 0;
 
@@ -450,7 +450,7 @@ namespace PowerSDR
 
                 RotorUpdate(); // start thread to update position of rotor on Spot screen
 
-                
+
             }
             else
             {
@@ -468,7 +468,7 @@ namespace PowerSDR
                 DXt_LoTW_Status[x] = 0; // .232
             }
 
-           
+
 
 
         } // SpotControl_Load
@@ -663,7 +663,7 @@ namespace PowerSDR
 
                 if (SP_Active == 0)
                 {
-                    console.spotterMenu.ForeColor = Color.Yellow;
+                    console.spotterMenu.BackColor = Color.Yellow;
                     console.spotterMenu.Text = "SWL Spot";
                 }
 
@@ -679,7 +679,7 @@ namespace PowerSDR
 
                 if (SP_Active == 0)
                 {
-                    console.spotterMenu.ForeColor = Color.Red;
+                    console.spotterMenu.BackColor = Color.Red;
                     console.spotterMenu.Text = "Spotter";
                 }
 
@@ -693,41 +693,41 @@ namespace PowerSDR
 
 
         // these are pulled from SWL2.csv file
-        public static string[] SWL2_Station = new string[2000];       // Station name
-        public static int[] SWL2_Freq = new int[2000];              // in hz
-        public static byte[] SWL2_Band = new byte[2000];              // in Mhz
+        public static string[] SWL2_Station = new string[4000];       // Station name
+        public static int[] SWL2_Freq = new int[4000];              // in hz
+        public static byte[] SWL2_Band = new byte[4000];              // in Mhz
 
-        public static string[] SWL2_Lang = new string[2000];          // language of transmitter
-        public static int[] SWL2_TimeN = new int[2000];                // UTC time of operation ON air
-        public static int[] SWL2_TimeF = new int[2000];                // UTC time of operation OFF air
-        public static string[] SWL2_Mode = new string[2000];          // operating mode
-        public static string[] SWL2_Day = new string[2000];          // days of operation
-        public static byte[] SWL2_Day1 = new byte[2000];          // days of operation mo,tu,we,th,fr,sa,su = 1,2,4,8,16,32,64
+        public static string[] SWL2_Lang = new string[4000];          // language of transmitter
+        public static int[] SWL2_TimeN = new int[4000];                // UTC time of operation ON air
+        public static int[] SWL2_TimeF = new int[4000];                // UTC time of operation OFF air
+        public static string[] SWL2_Mode = new string[4000];          // operating mode
+        public static string[] SWL2_Day = new string[4000];          // days of operation
+        public static byte[] SWL2_Day1 = new byte[4000];          // days of operation mo,tu,we,th,fr,sa,su = 1,2,4,8,16,32,64
 
 
-        public static string[] SWL2_Loc = new string[2000];          // location of transmitter
-        public static string[] SWL2_Target = new string[2000];          // target area of station
+        public static string[] SWL2_Loc = new string[4000];          // location of transmitter
+        public static string[] SWL2_Target = new string[4000];          // target area of station
         public static int SWL2_Index1;  // local index that reset back to 0 after reaching max
         public static byte Flag21 = 0; // flag to skip header line in SWL.csv file
 
 
         // these are pulled from SWL.csv file
-        public static string[] SWL_Station = new string[16000];       // Station name
-        public static int[] SWL_Freq = new int[16000];              // in hz
-        public static byte[] SWL_Band = new byte[16000];              // in Mhz
-        public static int[] SWL_BandL = new int[16000];              // index for each start of mhz listed in swl.csv 
+        public static string[] SWL_Station = new string[17000];       // Station name
+        public static int[] SWL_Freq = new int[17000];              // in hz
+        public static byte[] SWL_Band = new byte[17000];              // in Mhz
+        public static int[] SWL_BandL = new int[17000];              // index for each start of mhz listed in swl.csv 
 
-        public static string[] SWL_Lang = new string[16000];          // language of transmitter
-        public static int[] SWL_TimeN = new int[16000];                // UTC time of operation ON air
-        public static int[] SWL_TimeF = new int[16000];                // UTC time of operation OFF air
-        public static string[] SWL_Mode = new string[16000];          // operating mode
-        public static string[] SWL_Day = new string[16000];          // days of operation
-        public static byte[] SWL_Day1 = new byte[16000];          // days of operation mo,tu,we,th,fr,sa,su = 1,2,4,8,16,32,64
+        public static string[] SWL_Lang = new string[17000];          // language of transmitter
+        public static int[] SWL_TimeN = new int[17000];                // UTC time of operation ON air
+        public static int[] SWL_TimeF = new int[17000];                // UTC time of operation OFF air
+        public static string[] SWL_Mode = new string[17000];          // operating mode
+        public static string[] SWL_Day = new string[17000];          // days of operation
+        public static byte[] SWL_Day1 = new byte[17000];          // days of operation mo,tu,we,th,fr,sa,su = 1,2,4,8,16,32,64
 
-        public static string[] SWL_Loc = new string[16000];          // location of transmitter
-        public static string[] SWL_Target = new string[16000];          // target area of station
+        public static string[] SWL_Loc = new string[17000];          // location of transmitter
+        public static string[] SWL_Target = new string[17000];          // target area of station
 
-        public static int[] SWL_Pos = new int[16000];                // related to W on the panadapter screen
+        public static int[] SWL_Pos = new int[17000];                // related to W on the panadapter screen
 
         public static int SWL_Index;  //  max number of spots in memory currently
         public static int SWL_Index1;  // local index that reset back to 0 after reaching max
@@ -976,7 +976,7 @@ namespace PowerSDR
                         {
                             newChar = (char)reader2a.ReadChar(); // read \n char to finishline
 
-                             //  Debug.WriteLine("SWL LINE: " + result);
+                            //  Debug.WriteLine("SWL LINE: " + result);
 
                             if (Flag1 == 1)
                             {
@@ -988,7 +988,7 @@ namespace PowerSDR
                                 SWL_Freq[SWL_Index1] = (int)(Convert.ToDouble(values[0]) * 1000); // get freq and convert to hz
                                 SWL_Band[SWL_Index1] = (byte)(SWL_Freq[SWL_Index1] / 1000000); // get freq and convert to mhz
 
-                              //    Debug.WriteLine("SWL INDEX , FREQ "+ SWL_Index1 + " , " + SWL_Freq[SWL_Index1]);
+                                //    Debug.WriteLine("SWL INDEX , FREQ "+ SWL_Index1 + " , " + SWL_Freq[SWL_Index1]);
 
                                 /*
                                                                     if (SWL_Band[SWL_Index1] > SWL_Index)
@@ -1094,8 +1094,8 @@ namespace PowerSDR
                                 SWL_Lang[SWL_Index1] = values[5]; // get language
                                 SWL_Target[SWL_Index1] = values[6]; // get station target area
 
-                             //   if (SWL_Index1 > 13000)
-                             //   Debug.WriteLine("SWL MODE " + SWL_Mode[SWL_Index1] + " , " + SWL_Station[SWL_Index1] + " , " + SWL_Index1);
+                                //   if (SWL_Index1 > 13000)
+                                //   Debug.WriteLine("SWL MODE " + SWL_Mode[SWL_Index1] + " , " + SWL_Station[SWL_Index1] + " , " + SWL_Index1);
 
                                 //  Debug.WriteLine("SWL INDEX: " + SWL_Index1 + "," + SWL_Freq[SWL_Index1] + "," + SWL_Day1[SWL_Index1].ToString() + "," + SWL_TimeN[SWL_Index1]+ "-" + SWL_TimeF[SWL_Index1]);
                                 //  Debug.WriteLine("  ");
@@ -1152,7 +1152,7 @@ namespace PowerSDR
                                                 SWL_Loc[SWL_Index1] = SWL2_Loc[q];
                                                 SWL_Mode[SWL_Index1] = SWL2_Mode[q];
                                                 SWL_Station[SWL_Index1] = SWL2_Station[q];
-                                               
+
                                                 SWL_Lang[SWL_Index1] = SWL2_Lang[q];
                                                 SWL_Target[SWL_Index1] = SWL2_Target[q];
 
@@ -1280,7 +1280,7 @@ namespace PowerSDR
                     {
                         SWL_Index1--;
 
-                        Debug.WriteLine("SWL ERROR ERROR: "+ f);
+                        Debug.WriteLine("SWL ERROR ERROR: " + f);
                         break; // done with file
                     }
                     catch (Exception g)
@@ -1406,8 +1406,7 @@ namespace PowerSDR
                 SP_Active = 0; // turn off DX Spotter
 
                 statusBox.ForeColor = Color.Red;
-                console.spotterMenu.ForeColor = Color.Red;
-
+                console.spotterMenu.BackColor = Color.Red;
                 console.spotterMenu.Text = "Closing";
                 statusBox.Text = "Closing";
 
@@ -1476,71 +1475,71 @@ namespace PowerSDR
         //-------------------------------------------------------------------------------------
         // DXt_ is for spotter screen only
         // DX_ is incoming messages and Panadater screen info
-        
-        public static string[] DXt_FULLSTRING = new string[500];    // full undecoded message
 
-        public static string[] DXt_Station = new string[500];       // Extracted: dx call sign
-        public static int[] DXt_Freq = new int[500];                // Extracted: Freq in hz
-        public static string[] DXt_Spotter = new string[500];       // Extracted: spotter call sign
-        public static string[] DXt_Message = new string[500];       // Extracted: message
-        public static int[] DXt_Mode = new int[500];                // Parse: Mode from message string 0=ssb,1=cw,2=rtty,3=psk,4=olivia,5=jt65,6=contesa,7=fsk,8=mt63,9=domi,10=packtor, 11=fm, 12=drm, 13=sstv, 14=am, 15=ft8, 16=mfsk, 17=feld, 18=ft4,
-        public static int[] DXt_Mode2 = new int[500];               // Parse: split parse from message string 0=normal , +up in hz or -dn in hz
-        public static int[] DXt_Time = new int[500];                // Extracted: GMT (Unreliable because its the time submitted by the spotter)
+        public static string[] DXt_FULLSTRING = new string[1500];    // full undecoded message
 
-        public static string[] DXt_Age = new string[500];           // Calculated: how old is the spot
+        public static string[] DXt_Station = new string[1500];       // Extracted: dx call sign
+        public static int[] DXt_Freq = new int[1500];                // Extracted: Freq in hz
+        public static string[] DXt_Spotter = new string[1500];       // Extracted: spotter call sign
+        public static string[] DXt_Message = new string[1500];       // Extracted: message
+        public static int[] DXt_Mode = new int[1500];                // Parse: Mode from message string 0=ssb,1=cw,2=rtty,3=psk,4=olivia,5=jt65,6=contesa,7=fsk,8=mt63,9=domi,10=packtor, 11=fm, 12=drm, 13=sstv, 14=am, 15=ft8, 16=mfsk, 17=feld, 18=ft4,
+        public static int[] DXt_Mode2 = new int[1500];               // Parse: split parse from message string 0=normal , +up in hz or -dn in hz
+        public static int[] DXt_Time = new int[1500];                // Extracted: GMT (Unreliable because its the time submitted by the spotter)
 
-        public static int[] DXt_Beam = new int[500];                // Calculated: beam heading from your lat/long
+        public static string[] DXt_Age = new string[1500];           // Calculated: how old is the spot
 
-        public static int[] DXt_X = new int[500];                   // Calculated: x pixel location on map (before any scaling) Longitude
-        public static int[] DXt_Y = new int[500];                   // Calculated: y pixel location on map (before any scaling) Latitude
-        public static string[] DXt_country = new string[500];       // Calculated: country  by matching the callsign pulled from DXLOC.txt file
+        public static int[] DXt_Beam = new int[1500];                // Calculated: beam heading from your lat/long
 
-        public static string[] DXt_modegroup = new string[500];     // LoTW based on decoded mode
-        public static string[] DXt_band = new string[500];          // LoTW based on freq of DX station
-        public static int[] DXt_LoTW = new int[500];                // LoTW bit0=worked call (light green)(light purple=0), bit1=worked call on this band (Green)(light purple=0),  bit2=need DXCC (purple), bit3=need State (yellow), bit4=need Grid (orange)
+        public static int[] DXt_X = new int[1500];                   // Calculated: x pixel location on map (before any scaling) Longitude
+        public static int[] DXt_Y = new int[1500];                   // Calculated: y pixel location on map (before any scaling) Latitude
+        public static string[] DXt_country = new string[1500];       // Calculated: country  by matching the callsign pulled from DXLOC.txt file
 
-        RTFBuilderbase[] DXt_LoTW_RTF = new RTFBuilder[500];        // LoTW contains the RTF string of DX Callsign with color codes
-        public static int[] DXt_LoTW_Status = new int[500];         // ke9ns add .201 LoTW Status (Number format in place of color)
+        public static string[] DXt_modegroup = new string[1500];     // LoTW based on decoded mode
+        public static string[] DXt_band = new string[1500];          // LoTW based on freq of DX station
+        public static int[] DXt_LoTW = new int[1500];                // LoTW bit0=worked call (light green)(light purple=0), bit1=worked call on this band (Green)(light purple=0),  bit2=need DXCC (purple), bit3=need State (yellow), bit4=need Grid (orange)
+
+        RTFBuilderbase[] DXt_LoTW_RTF = new RTFBuilder[1500];        // LoTW contains the RTF string of DX Callsign with color codes
+        public static int[] DXt_LoTW_Status = new int[1500];         // ke9ns add .201 LoTW Status (Number format in place of color)
 
 
-        public static string[] DXt_dxcc = new string[500];          // determined from dxloc.txt dxcc entity vs prefix
-        public static string[] DXt_state = new string[500];         // determined from fcc callsign database file vx dx station callsign 
-        public static string[] DXt_Grid = new string[500];          // Extracted and Parsed: grid square 
+        public static string[] DXt_dxcc = new string[1500];          // determined from dxloc.txt dxcc entity vs prefix
+        public static string[] DXt_state = new string[1500];         // determined from fcc callsign database file vx dx station callsign 
+        public static string[] DXt_Grid = new string[1500];          // Extracted and Parsed: grid square 
 
 
 
         //---------------------------------------------------------------------------------
         // incoming messages go into DX_
 
-        public static string[] DX_FULLSTRING = new string[500];    // full undecoded message
+        public static string[] DX_FULLSTRING = new string[1500];    // full undecoded message
 
-        public static string[] DX_Station = new string[500];       // Extracted: dx call sign
-        public static int[] DX_Freq = new int[500];                // Extracted: Freq in hz
-        public static string[] DX_Spotter = new string[500];       // Extracted: spotter call sign
-        public static string[] DX_Message = new string[500];       // Extracted: message
-        public static int[] DX_Mode = new int[500];                // Parse: Mode from message string 0=ssb,1=cw,2=rtty,3=psk,4=olivia,5=jt65,6=contesa,7=fsk,8=mt63,9=domi,10=packtor, 11=fm, 12=drm, 13=sstv, 14=am, 15=ft8, 16=mfsk, 17=feld, 18=ft4,
-        public static int[] DX_Mode2 = new int[500];               // Parse: split parse from message string 0=normal , +up in hz or -dn in hz
-        public static int[] DX_Time = new int[500];                // Extracted: GMT (Unreliable because its the time submitted by the spotter)
+        public static string[] DX_Station = new string[1500];       // Extracted: dx call sign
+        public static int[] DX_Freq = new int[1500];                // Extracted: Freq in hz
+        public static string[] DX_Spotter = new string[1500];       // Extracted: spotter call sign
+        public static string[] DX_Message = new string[1500];       // Extracted: message
+        public static int[] DX_Mode = new int[1500];                // Parse: Mode from message string 0=ssb,1=cw,2=rtty,3=psk,4=olivia,5=jt65,6=contesa,7=fsk,8=mt63,9=domi,10=packtor, 11=fm, 12=drm, 13=sstv, 14=am, 15=ft8, 16=mfsk, 17=feld, 18=ft4,
+        public static int[] DX_Mode2 = new int[1500];               // Parse: split parse from message string 0=normal , +up in hz or -dn in hz
+        public static int[] DX_Time = new int[1500];                // Extracted: GMT (Unreliable because its the time submitted by the spotter)
 
-        public static string[] DX_Age = new string[500];           // Calculated: how old is the spot
+        public static string[] DX_Age = new string[1500];           // Calculated: how old is the spot
 
-        public static int[] DX_Beam = new int[500];                // Calculated: beam heading from your lat/long
+        public static int[] DX_Beam = new int[1500];                // Calculated: beam heading from your lat/long
 
-        public static int[] DX_X = new int[500];                   // Calculated: x pixel location on map (before any scaling) Longitude
-        public static int[] DX_Y = new int[500];                   // Calculated: y pixel location on map (before any scaling) Latitude
-        public static string[] DX_country = new string[500];       // Calculated: country  by matching the callsign pulled from DXLOC.txt file
+        public static int[] DX_X = new int[1500];                   // Calculated: x pixel location on map (before any scaling) Longitude
+        public static int[] DX_Y = new int[1500];                   // Calculated: y pixel location on map (before any scaling) Latitude
+        public static string[] DX_country = new string[1500];       // Calculated: country  by matching the callsign pulled from DXLOC.txt file
 
-        public static string[] DX_modegroup = new string[500];     // LoTW based on decoded mode
-        public static string[] DX_band = new string[500];          // LoTW based on freq of DX station
-        public static int[] DX_LoTW = new int[500];                // LoTW bit0=worked call (light green)(light purple=0), bit1=worked call on this band (Green)(light purple=0),  bit2=need DXCC (purple), bit3=need State (yellow), bit4=need Grid (orange)
+        public static string[] DX_modegroup = new string[1500];     // LoTW based on decoded mode
+        public static string[] DX_band = new string[1500];          // LoTW based on freq of DX station
+        public static int[] DX_LoTW = new int[1500];                // LoTW bit0=worked call (light green)(light purple=0), bit1=worked call on this band (Green)(light purple=0),  bit2=need DXCC (purple), bit3=need State (yellow), bit4=need Grid (orange)
 
-        RTFBuilderbase[] DX_LoTW_RTF = new RTFBuilder[500];        // LoTW contains the RTF string of DX Callsign with color codes
-        public static int[] DX_LoTW_Status = new int[500];         // ke9ns add .201 LoTW Status (Number format in place of color)
+        RTFBuilderbase[] DX_LoTW_RTF = new RTFBuilder[1500];        // LoTW contains the RTF string of DX Callsign with color codes
+        public static int[] DX_LoTW_Status = new int[1500];         // ke9ns add .201 LoTW Status (Number format in place of color)
 
 
-        public static string[] DX_dxcc = new string[500];          // determined from dxloc.txt dxcc entity vs prefix
-        public static string[] DX_state = new string[500];         // determined from fcc callsign database file vx dx station callsign 
-        public static string[] DX_Grid = new string[500];          // Extracted and Parsed: grid square 
+        public static string[] DX_dxcc = new string[1500];          // determined from dxloc.txt dxcc entity vs prefix
+        public static string[] DX_state = new string[1500];         // determined from fcc callsign database file vx dx station callsign 
+        public static string[] DX_Grid = new string[1500];          // Extracted and Parsed: grid square 
 
 
         //  0  1- Did I work this CALL before? (yes = light Green = worked call) (no = light purple = new call)
@@ -1603,9 +1602,9 @@ namespace PowerSDR
         public static int DX_Index = 0;                             //  max number of spots in memory currently
         public static int DX_Index1 = 0;                            //  static temp index holder....always 250
         public static int DX_Last = 0;                              //  last # in DX_Index (used for DXLOC_Mapper)spotter(
-     
-        
-        
+
+
+
         public static int Map_Last = 0;                             //  last map checkbox change (used for DXLOC_Mapper) 1=update grayline 2=update spots on map only
         public static int DXK_Last = 0;                             //  last # in console.DXK (used for DXLOC_Mapper)
 
@@ -1679,9 +1678,8 @@ namespace PowerSDR
 
                 var sb = new StringBuilder(message2);
                 statusBox.ForeColor = Color.Red;
-                console.spotterMenu.ForeColor = Color.Red;
-
                 statusBox.Text = "Socket";
+                console.spotterMenu.BackColor = Color.Red;
                 console.spotterMenu.Text = "Socket";
 
                 textBox1.Text += "Got Socket \r\n";
@@ -1716,9 +1714,8 @@ namespace PowerSDR
                             SP_writer.Write((char)10);
 
                             statusBox.ForeColor = Color.Red;
-                            console.spotterMenu.ForeColor = Color.Red;
-
                             statusBox.Text = "Login";
+                            console.spotterMenu.BackColor = Color.Red;
                             console.spotterMenu.Text = "Login";
 
                             SP_Active = 2; // logging in
@@ -1731,9 +1728,8 @@ namespace PowerSDR
                         SP_Active = 3; // logging in
 
                         statusBox.ForeColor = Color.Green;
-                        console.spotterMenu.ForeColor = Color.Blue;
-
                         statusBox.Text = "Spotting";
+                        console.spotterMenu.BackColor = Color.Green;
                         console.spotterMenu.Text = "Spotting";
 
                         textBox1.Text += "Waiting for DX Spots \r\n";
@@ -2255,14 +2251,14 @@ namespace PowerSDR
                                   || ((DX_Freq[DX_Index1] >= 24919000) && (DX_Freq[DX_Index1] <= 24921500))
                                   || ((DX_Freq[DX_Index1] >= 28180000) && (DX_Freq[DX_Index1] <= 28182500))
                                   || ((DX_Freq[DX_Index1] >= 50313000) && (DX_Freq[DX_Index1] <= 50315500))
-                                 
+
                                   )  // FT8 1.84, 3.573, 5.357, 7.074, 10.136, 14.074, 18.1, 21.074, 24.915, 28.074, 50.313
 
                                 {
                                     if (chkBoxDIG.Checked != true) continue; // check for a Digital mode spot
                                     DX_Mode[DX_Index1] = 16; // ft8 mode
 
-                                  
+
                                 } // FT4
                                 else if (DX_Message[DX_Index1].Contains("mfsk"))
                                 {
@@ -3537,12 +3533,12 @@ namespace PowerSDR
                                             if (LoTW_callsign[x1] == DX_Station[0])  // check if confirmed LoTW QSL is this DX stations Call sign
                                             {
                                                 DX_LoTW[0] = DX_LoTW[0] | 1;     // Light Green = confirmed contact with this DX Station
- 
+
                                                 if (LoTW_band[x1] == DX_band[0]) // if it was on this very band, then Dark green
                                                 {
                                                     DX_LoTW[0] = DX_LoTW[0] | 2; // Dark Green = confirmed contact on this very Band
                                                                                  //  Debug.WriteLine("DX_LoTW: 1+2 " + x1);
- 
+
                                                     Debug.WriteLine("Break");
                                                     break; // dont need this contact
                                                 }
@@ -3811,10 +3807,9 @@ namespace PowerSDR
                             textBox1.Text += "Your Socket was disconnected \r\n";
 
                             statusBox.ForeColor = Color.Red;
-                            console.spotterMenu.ForeColor = Color.Red;
-
-                            console.spotterMenu.Text = "Closed12345";
                             statusBox.Text = "Closed";
+                            console.spotterMenu.BackColor = Color.Red;
+                            console.spotterMenu.Text = "Closed12345";
 
 
                             SP_writer.Close();                  // close down now
@@ -3825,11 +3820,12 @@ namespace PowerSDR
                             //   Debug.WriteLine("END DX SPOT thread");
 
                             statusBox.ForeColor = Color.Black;
-                            console.spotterMenu.ForeColor = Color.White;
-
-                            console.spotterMenu.Text = "Spotter";
                             statusBox.Text = "Off";
                             textBox1.Text += "All closed \r\n";
+
+                            console.spotterMenu.BackColor = Color.Gray;
+                            console.spotterMenu.Text = "Spotter";
+
                             SP_Active = 0;
                             SP2_Active = 0;
 
@@ -3852,10 +3848,9 @@ namespace PowerSDR
 
 
                 statusBox.ForeColor = Color.Red;
-                console.spotterMenu.ForeColor = Color.Red;
-
-                console.spotterMenu.Text = "Closing";
                 statusBox.Text = "Closing";
+                console.spotterMenu.BackColor = Color.Red;
+                console.spotterMenu.Text = "Closing";
 
                 textBox1.Text += "Asked to Close \r\n";
 
@@ -3869,7 +3864,7 @@ namespace PowerSDR
                 //   Debug.WriteLine("END DX SPOT thread");
 
                 statusBox.ForeColor = Color.Black;
-                console.spotterMenu.ForeColor = Color.White;
+                console.spotterMenu.BackColor = Color.Gray;
 
                 console.spotterMenu.Text = "Spotter";
                 statusBox.Text = "Off";
@@ -3890,7 +3885,7 @@ namespace PowerSDR
 
                 Debug.WriteLine("cannot open socket or socket closed on me" + SE);
                 statusBox.ForeColor = Color.Red;
-                console.spotterMenu.ForeColor = Color.Red;
+                console.spotterMenu.BackColor = Color.Red;
 
                 statusBox.Text = "Socket";
                 console.spotterMenu.Text = "Socket";
@@ -3939,7 +3934,7 @@ namespace PowerSDR
                 Debug.WriteLine("socket exception issue" + e1);
 
                 statusBox.ForeColor = Color.Red;
-                console.spotterMenu.ForeColor = Color.Red;
+                console.spotterMenu.BackColor = Color.Red;
 
                 statusBox.Text = "Socket";
                 console.spotterMenu.Text = "Socket";
@@ -4080,7 +4075,7 @@ namespace PowerSDR
             string bigmessage = null;
             RTFBuilderbase BIGM = new RTFBuilder(RTFFont.CourierNew, 18f);
 
-           
+
             if (console.RX2Band.ToString() == "GEN") // .157
             {
                 hkBoxSpotRX2.Checked = false;
@@ -4107,7 +4102,7 @@ namespace PowerSDR
             {
                 // update DXt is Spotter display can update
 
-              
+
 
                 //--------------------------------------------
 
@@ -4223,39 +4218,39 @@ namespace PowerSDR
             textBox1.Rtf = BIGM.ToString(); // use RichTextFormat to allow for highlighting with color
 
 
-                //---------------------------------------------------------------------------------------------------------
-                //---------------------------------------------------------------------------------------------------------
+            //---------------------------------------------------------------------------------------------------------
+            //---------------------------------------------------------------------------------------------------------
 
-                Debug.WriteLine("DX_TEXT " + DX_TEXT + " , " + DX_SELECTED);
+            Debug.WriteLine("DX_TEXT " + DX_TEXT + " , " + DX_SELECTED);
 
-                // highlighted line on spotter screen based on mouse selection of line, or CTRL click on red dot or spot on panadapter console 53903
-                for (int ii = 0; ii < DX_Index; ii++)
+            // highlighted line on spotter screen based on mouse selection of line, or CTRL click on red dot or spot on panadapter console 53903
+            for (int ii = 0; ii < DX_Index; ii++)
+            {
+                if (DX_TEXT == textBox1.Text.Substring((ii * LineLength) + 16, 40))// just check freq and dx call sign for match
                 {
-                    if (DX_TEXT == textBox1.Text.Substring((ii * LineLength) + 16, 40))// just check freq and dx call sign for match
+                    Debug.WriteLine("GOT DX_TEXT " + ii);
+
+                    if (DX_TEXT.Length > 3)
                     {
-                        Debug.WriteLine("GOT DX_TEXT " + ii);
+                        DX_SELECTED = ii;
+                        Debug.WriteLine("DX_TEXT SELECTED NOW " + ii);
 
-                        if (DX_TEXT.Length > 3)
+                        if (lastselectedON == true)
                         {
-                            DX_SELECTED = ii;
-                            Debug.WriteLine("DX_TEXT SELECTED NOW " + ii);
-
-                            if (lastselectedON == true)
-                            {
-                                textBox1.SelectionStart = DX_SELECTED * LineLength;      // start of each dx spot line
-                                textBox1.SelectionLength = LineLength;                    // length of each dx spot  line
-                            }
-                            // textBox1.ScrollToCaret();
-
-                            break; //get out of for loop ii
+                            textBox1.SelectionStart = DX_SELECTED * LineLength;      // start of each dx spot line
+                            textBox1.SelectionLength = LineLength;                    // length of each dx spot  line
                         }
+                        // textBox1.ScrollToCaret();
+
+                        break; //get out of for loop ii
                     }
+                }
 
-                } // for loop ii
+            } // for loop ii
 
 
 
-        //    } // pause
+            //    } // pause
 
 
 
@@ -4629,16 +4624,16 @@ namespace PowerSDR
 
         public void textBox1_MouseUp(object sender, MouseEventArgs e)
         {
-           
-          
+
+
             chkDXMode.Checked = true;  // the callsign box
-          
+
 
             if (e.Button == MouseButtons.Left)
             {
                 int ii = textBox1.GetCharIndexFromPosition(e.Location);
 
-              //  int ii = textBox1.SelectionStart; // character position in the text you clicked on 
+                //  int ii = textBox1.SelectionStart; // character position in the text you clicked on 
 
                 byte iii = (byte)(ii / LineLength); // get line  /82  or /86 if AGE turned on or 91 if mode is also on /99 if country added but now /105 with DX_Beam heading
 
@@ -4839,7 +4834,7 @@ namespace PowerSDR
                         {
                             freq1 = 50318000;
                         }
-                        
+
 
                         DXt_Mode2[iii] = 0; // no split in FT8
                     } // FT4
@@ -5054,11 +5049,11 @@ namespace PowerSDR
               //  else if (me.Button == System.Windows.Forms.MouseButtons.Middle) 
             else if (e.Button == MouseButtons.Middle) // // ke9ns add .202 sends spot to VFOB instead of VFOA
             {
-                  lastselected = 10000;
+                lastselected = 10000;
 
-               
-               //  const int WM_VSCROLL = 0x115;
-              //  const int SB_ENDSCROLL = 8;
+
+                //  const int WM_VSCROLL = 0x115;
+                //  const int SB_ENDSCROLL = 8;
                 Console.SendMessageW(this.Handle, 0x115, (IntPtr)0x08, this.Handle); // to prevent a silly windows scroll feature that normally comes from a mouse wheel click
 
 
@@ -5067,7 +5062,7 @@ namespace PowerSDR
 
                 byte iii = (byte)(ii / LineLength); // get line  /82  or /86 if AGE turned on or 91 if mode is also on /99 if country added but now /105 with DX_Beam heading
 
-               //   Debug.WriteLine("testM " + DX_Index + " , "+iii);
+                //   Debug.WriteLine("testM " + DX_Index + " , "+iii);
 
                 if (iii >= DXt_Index) return; // dont allow to click on blank area
 
@@ -5077,14 +5072,14 @@ namespace PowerSDR
                 {
                     textBox1.DeselectAll();
                     lastselectedON = false;
-                  
+
                 }
                 else
                 {
                     lastselected = textBox1.SelectionStart = DX_SELECTED * LineLength;      // start of each dx spot line
                     textBox1.SelectionLength = LineLength;                    // length of each dx spot  line
                     lastselectedON = true;
-                  
+
 
                 }
 
@@ -5288,8 +5283,8 @@ namespace PowerSDR
                         if (DXt_Mode2[iii] != 0)
                         {
 
-                         //   console.VFOBFreq = (double)(freq1 + DX_Mode2[iii]) / 1000000; // convert to MHZ
-                         //   console.chkVFOSplit.Checked = true; // turn on  split
+                            //   console.VFOBFreq = (double)(freq1 + DX_Mode2[iii]) / 1000000; // convert to MHZ
+                            //   console.chkVFOSplit.Checked = true; // turn on  split
 
                             Debug.WriteLine("split here" + (freq1 + DXt_Mode2[iii]));
 
@@ -5405,8 +5400,8 @@ namespace PowerSDR
                         if (BX_Mode2[iii] != 0)
                         {
 
-                         //   console.VFOBFreq = (double)(freq1 + BX_Mode2[iii]) / 1000000; // convert to MHZ
-                         //   console.chkVFOSplit.Checked = true; // turn on  split
+                            //   console.VFOBFreq = (double)(freq1 + BX_Mode2[iii]) / 1000000; // convert to MHZ
+                            //   console.chkVFOSplit.Checked = true; // turn on  split
 
                             Debug.WriteLine("split here" + (freq1 + BX_Mode2[iii]));
 
@@ -5458,7 +5453,7 @@ namespace PowerSDR
         //=========================================================================================
         private void button1_Click(object sender, EventArgs e)
         {
-         
+
             if (pause == true)
             {
                 pause = false;
@@ -5480,7 +5475,7 @@ namespace PowerSDR
         //=========================================================================================
         private void chkSUN_CheckedChanged(object sender, EventArgs e)
         {
-           
+
             if ((chkSUN.Checked == false) && (chkGrayLine.Checked == false))
             {
                 if (Skin1 != null) console.picDisplay.BackgroundImage = Skin1; // put back original image
@@ -5512,7 +5507,7 @@ namespace PowerSDR
         //=========================================================================================
         private void chkGrayLine_CheckedChanged(object sender, EventArgs e)
         {
-          
+
 
             if ((chkSUN.Checked == false) && (chkGrayLine.Checked == false))
             {
@@ -5564,7 +5559,10 @@ namespace PowerSDR
                 mapon = true;
                 chkMapOn.Checked = true;
 
-               
+
+                console.MapMenuItem.Text = "Spotter Map"; //.243
+                console.MapMenuItem.BackColor = Color.DarkBlue;
+
                 if (chkPanMode.Checked == true) Display.map = 1; // special panafall mode (80 - 20)
                 else
                 {
@@ -5638,6 +5636,9 @@ namespace PowerSDR
 
                 chkMapOn.Checked = false;
 
+                console.MapMenuItem.Text = "Maps"; //.243
+                console.MapMenuItem.BackColor = Color.Transparent;
+
                 SP5_Active = 0;                     // turn off tracking
 
                 if (console.comboDisplayMode.Text != "Panafall8020")
@@ -5656,7 +5657,7 @@ namespace PowerSDR
 
                 if (Skin1 != null) console.picDisplay.BackgroundImage = Skin1; // put back original image
 
-               
+
             } // turn Tracking  off
 
             Debug.WriteLine("BTNTRK " + chkMapOn.Checked);
@@ -5685,7 +5686,7 @@ namespace PowerSDR
         // Darken calls Lighten routines to draw data directly onto bitmap
         public static int[,] GrayLine_Pos = new int[1000, 3];                      // DARK [zz,ww] = is lat 180 to 0 to -180 (top to bottom) (left to right)
         public static int[] GrayLine_Pos2 = new int[1000];                         // data for DARK areas on map 0=center dark, 1=left, 2=right
-      
+
         public static int[,] GrayLine_Pos1 = new int[1000, 3];                     // DUSK [zz,ww]  =is lat 180 to 0 to -180 (top to bottom) (left to right)
         public static int[] GrayLine_Pos3 = new int[1000];                         // data for Dusk areas on map 0=center dark, 1=left, 2=right
 
@@ -5877,7 +5878,7 @@ namespace PowerSDR
                             ISS_YY[ISSCount] = ISS_Y = (int)(((180 - (ISSLATMap + 90)) / 180.0) * Sun_WidthY1) + Sun_Top1;  //latitude 90N to -90S
                             ISS_XX[ISSCount] = ISS_X = (int)(((ISSLONMap + 180.0) / 360.0) * Sun_Width) + Sun_Left;  // longitude -180W to +180E
 
-                          if (g != null)  g.DrawLine(OrgPen, ISS_X, ISS_Y, ISS_X + 1, ISS_Y + 1);
+                            if (g != null) g.DrawLine(OrgPen, ISS_X, ISS_Y, ISS_X + 1, ISS_Y + 1);
 
 
                         } //get next data point
@@ -5967,7 +5968,7 @@ namespace PowerSDR
         private void TrackSun()  // ke9ns Thread opeation (runs in en-us culture) To create and draw Sun and/or Grayline Track
         {
 
-            TrackOFF = false; 
+            TrackOFF = false;
 
             textBox1.Text += "Map turning ON \r\n";
 
@@ -6014,7 +6015,7 @@ namespace PowerSDR
             {
                 textBox1.Text += "Attempt login to:  NOAA Space Weather Prediction Center \r\n";
 
-                NOAA(); // get noaa space data
+                if (console.initializing == false) NOAA(); //.242 update maps
 
             }
 
@@ -6036,7 +6037,7 @@ namespace PowerSDR
                 }
 
 
-                // ke9ns add Check if you need a VOACAP update, but only if your not in the middle of doing a VOACAP update and the VOACAP is turned ON
+                // ke9ns add: Check if you need a VOACAP update, but only if your not in the middle of doing a VOACAP update and the VOACAP is turned ON
                 if ((checkBoxMUF.Checked == true) && (VOARUN == false) && (VOATHREAD1 == false))  // 
                 {
 
@@ -6044,7 +6045,7 @@ namespace PowerSDR
 
                     if ((int)double.Parse(console.txtVFOAFreq.Text.Replace(",", ".")) != console.last_MHZ)
                     {
-                        
+
 
                         if (((int)double.Parse(console.txtVFOAFreq.Text.Replace(",", ".")) > 0) && ((int)double.Parse(console.txtVFOAFreq.Text.Replace(",", ".")) < 30))
                         {
@@ -6133,6 +6134,13 @@ namespace PowerSDR
                     // Check for Transmitting (dont update if transmitting)
                     // check if changed modes
 
+                    if (console.MapNOAA == true)
+                    {
+                        if (console.initializing == false) NOAA(); //.242 update maps
+                        console.MapNOAA = false;
+
+                    }
+
 
                     if (
                         (!console.MOX) && ((UTCNEW != UTCLAST2) || (Map_Last > 0) ||
@@ -6142,6 +6150,11 @@ namespace PowerSDR
 
                     )  // 
                     {
+                        //.243 upate NOAA here so its in a thread
+
+
+
+
                         lastholdY = console.mouseholdY; //ke9ns  .193
 
                         LastDisplayMap = Display.map;
@@ -6227,7 +6240,7 @@ namespace PowerSDR
                             if ((GRAYLINE == true)) // compute grayline below to display in the LIGHTEN() routine
                             {
 
-                            
+
                                 int tt = 0;
                                 bool check_for_light = true; // true = in the dark, so looking for light, false = in the light, so looking for the dark
                                 int tempsun_ang = 0; // temp holder for sun angle
@@ -6705,10 +6718,10 @@ namespace PowerSDR
 
                         int temp = console.picDisplay.Height; // current height of the display area (no matter if pan or panafall or 8020)
 
-                     
+
 
                         Debug.WriteLine("HPOS " + hpos + " , " + console.mouseholdY + " , " + temp);
-                            
+
                         int hpos1 = (int)((double)hpos * (507.0 / temp)); // .100 hpos1 is the actual bottom of the picDisplay area after it has been resized (i.e. waterfall, 2nd receiver) 507=height of map before resizing
 
                         g.DrawLine(p44, minpos1, hpos1 - 15, minpos1, hpos1);   // draw vertical line
@@ -7439,7 +7452,7 @@ namespace PowerSDR
                                         ISS_XX[ii] = ISS_XX[ii + 1]; // shift old data down to put new data at top
                                         ISS_YY[ii] = ISS_YY[ii + 1];
 
-                                      if (g != null)  g.DrawLine(OrgPen, ISS_XX[ii], ISS_YY[ii], ISS_XX[ii] + 1, ISS_YY[ii] + 1);
+                                        if (g != null) g.DrawLine(OrgPen, ISS_XX[ii], ISS_YY[ii], ISS_XX[ii] + 1, ISS_YY[ii] + 1);
                                     }
 
                                 }
@@ -7455,7 +7468,7 @@ namespace PowerSDR
                                 for (int ii = 0; ii < ISSCount; ii++) // draw arc  just refresh screen
                                 {
 
-                                  if (g != null)  g.DrawLine(OrgPen, ISS_XX[ii], ISS_YY[ii], ISS_XX[ii] + 1, ISS_YY[ii] + 1);
+                                    if (g != null) g.DrawLine(OrgPen, ISS_XX[ii], ISS_YY[ii], ISS_XX[ii] + 1, ISS_YY[ii] + 1);
                                 }
 
                             }
@@ -7500,11 +7513,11 @@ namespace PowerSDR
                             g.DrawString("Min-", font7, graybrush, Sun_Left + 108, Sun_Top1 + 10);
 
 
-                        // Blue Strongest Signal(AM)
-                        // Green Strong Signal(AM / SSB)
-                        // Yellow Fair Signal(SSB, CW)
-                        // Orange Weak Signal(CW, FT8)
-                        // Gray Weakest Signal(CW, FT8)
+                            // Blue Strongest Signal(AM)
+                            // Green Strong Signal(AM / SSB)
+                            // Yellow Fair Signal(SSB, CW)
+                            // Orange Weak Signal(CW, FT8)
+                            // Gray Weakest Signal(CW, FT8)
 
 
                             Debug.WriteLine("SSS");
@@ -7750,7 +7763,7 @@ namespace PowerSDR
 
                             } // if beacon scan turned on show list of staations and which ones are on right now
 
-                            if (beacon1 == false)
+                            if (beacon1 == false && chkLightningMap.Checked == false && chkCloudOn.Checked == false) //.240 mod
                             {
                                 for (int ii = 0; ii < DX_Index; ii++) // red dot always all bands
                                 {
@@ -7799,7 +7812,7 @@ namespace PowerSDR
                                             g.FillRectangle(graybrush, BX_X[ii], BX_Y[ii], 3, 3);  // place blue dot on map (all bands)
 
                                         }
-                                        else if ((beacon1 == false)) // Standard DX Spotter RED DOT
+                                        else if ((beacon1 == false)) // Standard DX Spotter RED DOT .240
                                         {
                                             g.FillRectangle(redbrush, BX_X[ii], BX_Y[ii], 3, 3);  // place red dot on map (all bands)
                                         }
@@ -8613,13 +8626,13 @@ namespace PowerSDR
 
         private void textBox1_MouseDown(object sender, MouseEventArgs e)
         {
-          //  MouseEventArgs me = (MouseEventArgs)e;  // .202
+            //  MouseEventArgs me = (MouseEventArgs)e;  // .202
             pause = true;
             button1.Text = "Paused";
 
-          //  textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
+            //  textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
 
-          
+
         } // textBox1_MouseDown
 
 
@@ -8697,7 +8710,7 @@ namespace PowerSDR
             console.SWLFORM = true; // open up SWL search window
             if (SP_Active == 0)
             {
-                console.spotterMenu.ForeColor = Color.Yellow;
+                console.spotterMenu.BackColor = Color.Yellow;
                 console.spotterMenu.Text = "SWL Spot";
                 SP1_Active = 1;
             }
@@ -8737,6 +8750,7 @@ namespace PowerSDR
 
         public void NOAA()
         {
+            if (console.initializing == true) return;
 
             console.NOAA(); // ke9ns .197 to get the SSN 
 
@@ -10215,7 +10229,7 @@ namespace PowerSDR
 
                 if (c.Connected) c.Close(); // close the socket
 
-                MessageBox.Show( "Time server connection failed! 2 error: " + EX1, " the system prompts", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show("Time server connection failed! 2 error: " + EX1, " the system prompts", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                 WTime = false;   // turn dx spotting back on
 
                 return;
@@ -10237,7 +10251,7 @@ namespace PowerSDR
                 Debug.WriteLine("Exception " + strHost);
                 if (c.Connected) c.Close(); // close the socket
 
-                MessageBox.Show( "Time server connection failed! /r error: " + EX1, " the system prompts", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+                MessageBox.Show("Time server connection failed! /r error: " + EX1, " the system prompts", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                 WTime = false;   // turn dx spotting back on
 
                 return;
@@ -10269,8 +10283,8 @@ namespace PowerSDR
 
 
                 string temp2 = sb.ToString(32, 3);
-                   Debug.WriteLine("TRY>" + temp2 + "<");
-                  string temp1 = sb.ToString(7,17) + ".000";
+                Debug.WriteLine("TRY>" + temp2 + "<");
+                string temp1 = sb.ToString(7, 17) + ".000";
                 Debug.WriteLine("TRY>" + temp1 + "<");
 
 
@@ -10304,7 +10318,7 @@ namespace PowerSDR
 
                 Debug.WriteLine("Exception2 " + sb.ToString());
 
-             
+
 
 
                 MessageBox.Show("Time server busy! Try Again.", " the system prompts", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
@@ -11482,7 +11496,7 @@ namespace PowerSDR
 
         VOACHECK_TOP:
 
-          
+
             int MHZ1 = console.last_MHZ;    // int MHZ1 = (int)double.Parse(console.txtVFOAFreq.Text.Replace(",", ".")); // get current freq value in hz, so convert to mhz
 
 
@@ -11567,9 +11581,9 @@ namespace PowerSDR
 
             SSN = SSNf.ToString("##0").PadLeft(3);   // "{0,2}"
 
-            
+
             //need  CultureInfo.InvariantCulture.NumberFormat
-            WATTS = wattage.ToString("0.0000",NI).PadLeft(6); // 0.0000
+            WATTS = wattage.ToString("0.0000", NI).PadLeft(6); // 0.0000
 
             Debug.WriteLine("SSN and watts " + Console.SSNE + " , " + WATTS);
 
@@ -12216,7 +12230,7 @@ namespace PowerSDR
         //================================================================================
         public void checkBoxMUF_CheckedChanged(object sender, EventArgs e)
         {
-           
+
             if (checkBoxMUF.Checked == false)
             {
                 chkVoacap.Checked = false;
@@ -12441,7 +12455,7 @@ namespace PowerSDR
 
                     remarks = console.RX2DSPMode.ToString() + "p";  // send DSP MODE with - to indicate PowerSDR was sending it.
 
-                   
+
 
                 } // VFOB
                 else
@@ -12530,7 +12544,7 @@ namespace PowerSDR
 
         } // DXPost_Click
 
-        
+
         private void DXPost_MouseUp(object sender, MouseEventArgs e) // .211
         {
             Debug.WriteLine("CLICK DXPOST");
@@ -12551,7 +12565,7 @@ namespace PowerSDR
             // ke9ns: do below if you highlighted a DX SPot on the Spotter screen (your just respotting)
             if ((textBoxDXCall.Text == "DX Callsign") || (textBoxDXCall.Text == "TRY AGAIN") || (textBoxDXCall.Text == "") || (textBoxDXCall.Text.Length < 3)) // then try to use last dx spot if your on that freq still
             {
-                Debug.WriteLine("DXPOST DX Callsign " + DX_Freq[DX_SELECTED] + " , " +  Display.VFOA + " , " + Display.VFOB);
+                Debug.WriteLine("DXPOST DX Callsign " + DX_Freq[DX_SELECTED] + " , " + Display.VFOA + " , " + Display.VFOB);
 
                 call = DX_Station[DX_SELECTED]; // use current selected call
 
@@ -12676,7 +12690,7 @@ namespace PowerSDR
 
 
             } // use prior DX spot
-            else if(e.Button == MouseButtons.Left) // otherwise use the current VFOA freq
+            else if (e.Button == MouseButtons.Left) // otherwise use the current VFOA freq
             {
                 call = textBoxDXCall.Text;
 
@@ -12733,7 +12747,7 @@ namespace PowerSDR
 
                 remarks = console.RX2DSPMode.ToString() + "p";
 
-              
+
 
             } // just use current VFOB freq (not a prior DX SPOT)
 
@@ -12756,7 +12770,7 @@ namespace PowerSDR
             Debug.WriteLine("CREATE DX SPOT: " + "DX " + freq1 + " " + call + " " + remarks);
 
 
-          
+
             for (int i = 0; i < messageDXSPOT.Length; i++)    // do it this way because telnet server wants slow typing
             {
                 SP_writer.Write((char)messageDXSPOT[i]);
@@ -13377,7 +13391,7 @@ namespace PowerSDR
 
             Console.HELPMAP = true;
             if (console.setupForm.chkBoxAutoFocus.Checked == true && chkAlwaysOnTop.Checked == true) this.Activate();
-            
+
         }
 
         private void btnTrack_MouseLeave(object sender, EventArgs e)
@@ -13704,8 +13718,8 @@ namespace PowerSDR
         public int D4 = 0;
         public void Darken()
         {
-         //   Debug.WriteLine("DRAP " + D1 + "," + D2 + "," + D3 + "," + D4);
-          
+            Debug.WriteLine("DRAP " + D1 + "," + D2 + "," + D3 + "," + D4);
+
             MB = console.MB2; // map brightness
             MBG = console.MB3; // grayline brightness
 
@@ -13715,12 +13729,33 @@ namespace PowerSDR
             // D layer map = 850,475 total image size,  (0,0 to 700,350  just the map inside the image) (map size = 700,350)
             // need to adjust F and D maps to fit within the 1000,507 rectangle image with the map of 883,443 inside it
 
+            // .240
+            // lightning maps from Blitzortung   https://www.blitzortung.org/en/canvas.png
+            // 925 x 678
+            // need to re-scale to fit 1000 x 507
+
+            // .241
+            // IR Cloud map of mid-latitudes   University of Wisconsin-Madison  http://tropic.ssec.wisc.edu/tropic.php
+
+            // 1200 x 592 total size (but map is missing top,bottom,left,right edges of a standard world Equirectangular map)
+            // http://tropic.ssec.wisc.edu/real-time/mosaic/images/moseir.jpg midlat East
+            // http://tropic.ssec.wisc.edu/real-time/mosaic/images/mossir.jpg southern lat East (austrailia) use only 0,155 to 821,155 0N, 30E down to normal lower right corner 90S, 180w
+            // http://tropic.ssec.wisc.edu/real-time/mosaic/images/moswir.jpg midlat west use only 571,0 to 933,592 (keep and place to the upper left of moseir) ( 0,0 to 571,592 keep and place on right side of moseir)
+            // they dont have a norther east/west, or southern west
+
             if (chkFLayerON.Checked) //.234
             {
                 chkDLayerON.Checked = false;
+                chkLightningMap.Checked = false; //.240
+                chkCloudOn.Checked = false; //.241
+
+                var CSR = System.Windows.Forms.Cursor.Current; //.242
 
                 try
                 {
+
+                    System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor; // .242 change cursor when to wait cursor when loading new image
+
                     Image imag = Image.FromFile(console.AppDataPath + "FRAP.gif"); // .235
                     Bitmap img7 = new Bitmap(imag);                 // ke9ns: To avoid indexed pixel format PNG issues
                     Rectangle r = new Rectangle(45, 95, 469, 434);    // this is the portion of the full F layer image that has the world map
@@ -13737,12 +13772,12 @@ namespace PowerSDR
 
                     using (Graphics g = Graphics.FromImage(result))
                     {
-                        
-                     //   g.CompositingQuality = CompositingQuality.HighQuality;
-                     //   g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                     //   g.SmoothingMode = SmoothingMode.HighQuality;
-                        g.DrawImage(img8, r1);  // this results in a d layer map with a empty boarder around all 4 edges.
-                        
+
+                        g.CompositingQuality = CompositingQuality.HighQuality;
+                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        g.SmoothingMode = SmoothingMode.HighQuality;
+                        g.DrawImage(img8, r1);  // draw F layer
+
                         g.DrawString("SWS_AU", font2, new SolidBrush(Color.White), x, 10);
                         g.DrawString("foF2 NVIS", font2, new SolidBrush(Color.White), x, 20);
                         g.DrawString("Reflect:", font2, new SolidBrush(Color.White), x, 30);
@@ -13750,41 +13785,57 @@ namespace PowerSDR
                         g.DrawImage(Bar, r2); // .239draw legend color bar
 
                         g.DrawString("13mhz", font2, new SolidBrush(Color.Gray), x1, 55);
-                        g.DrawString("12mhz", font2, new SolidBrush(Color.Violet), x1,  80);
-                        g.DrawString("11mhz", font2, new SolidBrush(Color.Purple), x1,  105);
+                        g.DrawString("12mhz", font2, new SolidBrush(Color.Violet), x1, 80);
+                        g.DrawString("11mhz", font2, new SolidBrush(Color.Purple), x1, 105);
                         g.DrawString("10mhz", font2, new SolidBrush(Color.Maroon), x1, 125);
                         g.DrawString(" 9mhz", font2, new SolidBrush(Color.DarkBlue), x1, 150);
-                        g.DrawString(" 8mhz", font2, new SolidBrush(Color.Blue), x1,  170);
-                        g.DrawString(" 7mhz", font2, new SolidBrush(Color.DarkSlateBlue), x1,  195);
-                        g.DrawString(" 6mhz", font2, new SolidBrush(Color.LightBlue), x1,  215);
-                        g.DrawString(" 5mhz", font2, new SolidBrush(Color.LightGreen), x1,  240);
-                        g.DrawString(" 4mhz", font2, new SolidBrush(Color.Green), x1,  265);
-                        g.DrawString(" 3mhz", font2, new SolidBrush(Color.Olive), x1,  285);
-                        g.DrawString(" 2mhz", font2, new SolidBrush(Color.Yellow), x1,  310);
-                        g.DrawString(" 1mhz", font2, new SolidBrush(Color.Red), x1,  330);
+                        g.DrawString(" 8mhz", font2, new SolidBrush(Color.Blue), x1, 170);
+                        g.DrawString(" 7mhz", font2, new SolidBrush(Color.DarkSlateBlue), x1, 195);
+                        g.DrawString(" 6mhz", font2, new SolidBrush(Color.LightBlue), x1, 215);
+                        g.DrawString(" 5mhz", font2, new SolidBrush(Color.LightGreen), x1, 240);
+                        g.DrawString(" 4mhz", font2, new SolidBrush(Color.Green), x1, 265);
+                        g.DrawString(" 3mhz", font2, new SolidBrush(Color.Olive), x1, 285);
+                        g.DrawString(" 2mhz", font2, new SolidBrush(Color.Yellow), x1, 310);
+                        g.DrawString(" 1mhz", font2, new SolidBrush(Color.Red), x1, 330);
 
 
-                    }
-
+                    } // using
 
                     MAP = Lighten(result, MBG, MB);
+                    System.Windows.Forms.Cursor.Current = CSR; // .242 change cursor back to normal
+
                 }
                 catch (Exception ex)
                 {
+                    console.MapNOAA = true; //.243 update map
+
                     // MessageBox.Show(ex.Message);
                     MAP = Lighten(new Bitmap(Map_image), MBG, MB);
+
+                    System.Windows.Forms.Cursor.Current = CSR; // .242 change cursor back to normal       
+
                 }
-            }
+
+                Map_Last = 0; // .242 force map update
+
+            } // checkFlayerOn
             else if (chkDLayerON.Checked) //.234
             {
                 chkFLayerON.Checked = false;
+                chkLightningMap.Checked = false;
+                chkCloudOn.Checked = false; //.241
 
                 int x = 17;
                 int x1 = 27;
-               
+
+                var CSR = System.Windows.Forms.Cursor.Current; //.242
 
                 try
                 {
+
+                    System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor; // .242 change cursor when to wait cursor when loading new image
+
+
                     Image imag = Image.FromFile(console.AppDataPath + "DRAP.png"); // bring in D-layer full image
                     Bitmap img7 = new Bitmap(imag);                 // ke9ns: To avoid indexed pixel format PNG issues
                     Rectangle r = new Rectangle(0, 0, 700, 350);    // this is the portion of the full D layer image that has the world map
@@ -13795,41 +13846,393 @@ namespace PowerSDR
                     Bitmap Bar = new Bitmap(Map_D_Bar);              // .237 color bar legend for D-Layer
                     Rectangle r2 = new Rectangle(20, 50, 8, 300);    // .237 size of color legend bar
 
-                    using (Graphics g = Graphics.FromImage(result)) 
+                    using (Graphics g = Graphics.FromImage(result))
                     {
+                        g.CompositingQuality = CompositingQuality.HighQuality;
+                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        g.SmoothingMode = SmoothingMode.HighQuality;
 
-                    //    g.CompositingQuality = CompositingQuality.HighQuality;
-                    //    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                     //   g.SmoothingMode = SmoothingMode.HighQuality;
-                        g.DrawImage(img8, r1);  // this results in a d layer map with a empty boarder around all 4 edges.
-                       
+                        g.DrawImage(img8, r1);  // draw D layer
+
                         g.DrawString("NOAA", font2, new SolidBrush(Color.White), x, 10);
                         g.DrawString("D-Layer", font2, new SolidBrush(Color.White), x, 20);
                         g.DrawString("Aborp:", font2, new SolidBrush(Color.White), x, 30);
 
-                        g.DrawImage(Bar,r2); // .237 draw legend color bar
-                     
-                        g.DrawString("35mhz", font2, new SolidBrush(Color.Red), x1,  45);
+                        g.DrawImage(Bar, r2); // .237 draw legend color bar
+
+                        g.DrawString("35mhz", font2, new SolidBrush(Color.Red), x1, 45);
                         g.DrawString("30mhz", font2, new SolidBrush(Color.Orange), x1, 90);
-                        g.DrawString("25mhz", font2, new SolidBrush(Color.Yellow), x1,  130);
-                        g.DrawString("20mhz", font2, new SolidBrush(Color.Green), x1,  170);
-                        g.DrawString("15mhz", font2, new SolidBrush(Color.Cyan), x1,  220);
-                        g.DrawString("10mhz", font2, new SolidBrush(Color.Blue), x1,  260);
-                        g.DrawString(" 5mhz", font2, new SolidBrush(Color.Purple), x1,  300);
-                        g.DrawString(" 0mhz", font2, new SolidBrush(Color.Gray), x1,  340);
-                   
+                        g.DrawString("25mhz", font2, new SolidBrush(Color.Yellow), x1, 130);
+                        g.DrawString("20mhz", font2, new SolidBrush(Color.Green), x1, 170);
+                        g.DrawString("15mhz", font2, new SolidBrush(Color.Cyan), x1, 220);
+                        g.DrawString("10mhz", font2, new SolidBrush(Color.Blue), x1, 260);
+                        g.DrawString(" 5mhz", font2, new SolidBrush(Color.Purple), x1, 300);
+                        g.DrawString(" 0mhz", font2, new SolidBrush(Color.Gray), x1, 340);
+
 
                     }
 
+                    System.Windows.Forms.Cursor.Current = CSR; //.242
                     MAP = Lighten(result, MBG, MB);
-                  
+
                 }
                 catch (Exception ex)
                 {
-                 //   MessageBox.Show(ex.Message);
+                    console.MapNOAA = true; //.243 update map
+
+                    //   MessageBox.Show(ex.Message);
+                    System.Windows.Forms.Cursor.Current = CSR; //.242
                     MAP = Lighten(new Bitmap(Map_image), MBG, MB);
+
+
                 }
-            }
+                Map_Last = 0; // .242 force map update
+
+            } // chkDlayerOn
+            else if (chkLightningMap.Checked) //.240
+            {
+                chkDLayerON.Checked = false;
+                chkFLayerON.Checked = false; //.240
+                chkCloudOn.Checked = false; //.241
+
+                Bitmap result = new Bitmap(1000, 507);          // this is the size we really want so it matches the built in world map
+                int x = 55;
+
+                var CSR = System.Windows.Forms.Cursor.Current; //.242
+
+                if (console.ZoomOn) //.242 
+                {
+
+
+                    try
+                    {
+                        System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor; // .242 change cursor when to wait cursor when loading new image
+
+                        Image imag = Image.FromFile(console.AppDataPath + "canvas.png"); //.240
+                        Bitmap img7 = new Bitmap(imag);                 // ke9ns: To avoid indexed pixel format PNG issues
+
+                        Rectangle r = new Rectangle(0, 23, 925, 591);    // this is the portion of the lightning map that matches the standard equirectangular map
+                        Bitmap img8 = img7.Clone(r, img7.PixelFormat);  // make a new bitmap of just the lightning world map
+                        Rectangle r1 = new Rectangle(55, 0, 887, 457); // this is where to place the smaller lightning world map into the big result bitmap
+
+                        int xZ = console.ZoomX;    // =  mouse X location on a 1000 wide bitmap
+                        int yZ = console.ZoomY;     //= mouse Y location on a 507 tall bitmap
+                        float fZ = console.ZoomFactor; //= 2.0
+
+
+                        int xF = (int)((925.0 * .2)); // Upper left start of zoomed area
+                        int yF = (int)((591.0 * .2)); // 
+
+                        int xF1 = (int)(xF * 0.7); // zoom factor (1.3  small number bigger zoom)
+                        int yF1 = (int)(yF * 0.7);
+
+
+                        Rectangle SZoom = new Rectangle(xZ, yZ, xF1, yF1); // zoomed area of lightning map
+
+                        Rectangle DZoom = new Rectangle(xZ, yZ, 300, 230); // zoomed image goes in here
+
+                        if (xZ > 700)
+                        {
+                            if (yZ > 300)
+                            {
+                                DZoom = new Rectangle(xZ - 150, yZ - 110, 300, 230); // zoomed image goes in here
+                            }
+                            else DZoom = new Rectangle(xZ - 150, yZ, 300, 230); // zoomed image goes in here
+                        }
+                        else if (yZ > 300)
+                        {
+                            DZoom = new Rectangle(xZ, yZ - 110, 300, 230); // zoomed image goes in here
+                        }
+
+                        using (Graphics g = Graphics.FromImage(result))
+                        {
+
+                            g.CompositingQuality = CompositingQuality.HighQuality;
+                            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                            g.SmoothingMode = SmoothingMode.HighQuality;
+
+                            g.DrawImage(img8, r1);  // draw lightning map
+
+                            g.DrawString("blitzortung.org", font2, new SolidBrush(Color.White), x, 300);
+                            g.DrawString("Current", font2, new SolidBrush(Color.White), x, 310);
+                            g.DrawString("Lightning", font2, new SolidBrush(Color.White), x, 320);
+
+                            g.DrawImage(img8, DZoom, SZoom, GraphicsUnit.Pixel);  // draw lightning map zoom closeup
+
+                            g.DrawRectangle(new Pen(Color.Red, 5.0f), DZoom); //   Pen p44 = new Pen(Color.White, 1.0f);                  // ke9ns add color for vert line for TIME UTC pos
+
+                        } // using
+                        System.Windows.Forms.Cursor.Current = CSR; //.242
+                        MAP = Lighten(result, MBG, MB);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        console.MapNOAA = true; //.243 update map
+
+                        // MessageBox.Show(ex.Message);
+                        MAP = Lighten(new Bitmap(Map_image), MBG, MB);
+                        System.Windows.Forms.Cursor.Current = CSR; //.242
+                    }
+
+
+                } // ZoomOn == true
+                else // ZoomOn == false
+                {
+                    try
+                    {
+                        System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor; // .242 change cursor when to wait cursor when loading new image
+
+                        Image imag = Image.FromFile(console.AppDataPath + "canvas.png"); //.240
+                        Bitmap img7 = new Bitmap(imag);                 // ke9ns: To avoid indexed pixel format PNG issues
+
+                        Rectangle r = new Rectangle(0, 23, 925, 591);    // this is the portion of the lightning map that matches the standard equirectangular map
+                        Bitmap img8 = img7.Clone(r, img7.PixelFormat);  // make a new bitmap of just the lightning world map
+                        Rectangle r1 = new Rectangle(55, 0, 887, 457); // this is where to place the smaller lightning world map into the big result bitmap
+
+                        using (Graphics g = Graphics.FromImage(result))
+                        {
+
+                            g.CompositingQuality = CompositingQuality.HighQuality;
+                            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                            g.SmoothingMode = SmoothingMode.HighQuality;
+
+                            g.DrawImage(img8, r1);  // draw lightning map
+
+                            g.DrawString("blitzortung.org", font2, new SolidBrush(Color.White), x, 300);
+                            g.DrawString("Current", font2, new SolidBrush(Color.White), x, 310);
+                            g.DrawString("Lightning", font2, new SolidBrush(Color.White), x, 320);
+
+                        } // using
+
+
+                        MAP = Lighten(result, MBG, MB);
+                        System.Windows.Forms.Cursor.Current = CSR; //.242
+                    }
+                    catch (Exception ex)
+                    {
+                        console.MapNOAA = true; //.243 update map
+
+                        // MessageBox.Show(ex.Message);
+                        MAP = Lighten(new Bitmap(Map_image), MBG, MB);
+                        System.Windows.Forms.Cursor.Current = CSR; //.242
+                    }
+                }
+            } // chkLightingMap
+            else if (chkCloudOn.Checked)
+            {
+                chkDLayerON.Checked = false;
+                chkFLayerON.Checked = false; //.240
+                chkLightningMap.Checked = false; //.241
+
+                Debug.WriteLine("IR Cloud map DRAW");
+
+                var CSR = System.Windows.Forms.Cursor.Current; //.242
+
+
+                if (console.ZoomOn)
+                {
+
+
+                    try
+                    {
+                        System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor; // .242 change cursor when to wait cursor when loading new image
+
+                        Image imag = Image.FromFile(console.AppDataPath + "IRCloudE.jpg"); //.241
+                        Image imag3 = Image.FromFile(console.AppDataPath + "IRCloudW.jpg"); //.241
+                        Image imag2 = Image.FromFile(console.AppDataPath + "IRCloudS.jpg"); //.241
+
+                        Bitmap img11 = new Bitmap(imag3);
+                        Rectangle r11 = new Rectangle(571, 0, 382, 592);    //  upper right side
+                        Bitmap img111 = img11.Clone(r11, img11.PixelFormat);  // make a new bitmap of just the Cloud map
+
+                        Bitmap img22 = new Bitmap(imag);
+                        Rectangle r22 = new Rectangle(0, 0, 1200, 592); // upper middle
+                        Bitmap img222 = img22.Clone(r22, img22.PixelFormat);  // make a new bitmap of just the Cloud map
+
+                        Bitmap img33 = new Bitmap(imag3);
+                        Rectangle r33 = new Rectangle(0, 0, 571, 592);    //  upper right side
+                        Bitmap img333 = img33.Clone(r33, img33.PixelFormat);  // make a new bitmap of just the Cloud map
+
+                        Bitmap img44 = new Bitmap(imag2);
+                        Rectangle r44 = new Rectangle(821, 155, 379, 437);    //  lower left side
+                        Bitmap img444 = img44.Clone(r44, img44.PixelFormat);  // make a new bitmap of just the Cloud map
+
+                        Bitmap img66 = new Bitmap(imag2);
+                        Rectangle r66 = new Rectangle(0, 155, 821, 437);    //  lower right side
+                        Bitmap img666 = img66.Clone(r66, img66.PixelFormat);  // make a new bitmap of just the Cloud map
+
+
+                        Bitmap result = new Bitmap(1000, 507);          // this is the size we really want so it matches the built in world map
+                                                                        //  Rectangle r1 = new Rectangle(210, 56, 557, 261); // this is where to place the smaller lightning world map into the big result bitmap
+                        Bitmap result2 = new Bitmap(1000, 507);
+                        Bitmap result3 = new Bitmap(1000, 507);
+
+                        Rectangle r1 = new Rectangle(57, 56, 155, 261); // upper left 
+                        Rectangle r2 = new Rectangle(210, 56, 557, 261); // upper middle 
+                        Rectangle r3 = new Rectangle(700, 56, 246, 261); // upper right
+                        Rectangle r4 = new Rectangle(57, 248, 154, 194); // lower left
+                        Rectangle r6 = new Rectangle(586, 246, 361, 194); // lower right
+
+
+                        int xZ = console.ZoomX;    // =  mouse X location on a 1000 wide bitmap
+                        int yZ = console.ZoomY;     //= mouse Y location on a 507 tall bitmap
+                        float fZ = console.ZoomFactor; //= 2.0
+
+
+                        int xF = (int)((1200.0 * .2)); // Upper left start of zoomed area
+                        int yF = (int)((592.0 * .2)); // 
+
+                        int xF1 = (int)(xF * 0.7); // zoom factor (1.3  small number bigger zoom)
+                        int yF1 = (int)(yF * 0.7);
+
+
+                        Rectangle SZoom = new Rectangle(xZ, yZ, xF1, yF1); // zoomed area of lightning map
+
+                        Rectangle DZoom = new Rectangle(xZ, yZ, 300, 230); // zoomed image goes in here
+
+                        if (xZ > 700)
+                        {
+                            if (yZ > 300)
+                            {
+                                DZoom = new Rectangle(xZ - 150, yZ - 110, 300, 230); // zoomed image goes in here
+                            }
+                            else DZoom = new Rectangle(xZ - 150, yZ, 300, 230); // zoomed image goes in here
+                        }
+                        else if (yZ > 300)
+                        {
+                            DZoom = new Rectangle(xZ, yZ - 110, 300, 230); // zoomed image goes in here
+                        }
+
+                        using (Graphics g = Graphics.FromImage(result))
+                        {
+
+                            g.CompositingQuality = CompositingQuality.HighQuality;
+                            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                            g.SmoothingMode = SmoothingMode.HighQuality;
+
+                            g.DrawImage(img111, r1);  // this results in a 
+                            g.DrawImage(img222, r2);  // this results in a
+                            g.DrawImage(img333, r3);  // this results in a .
+                            g.DrawImage(img444, r4);  // this results in a 
+                            g.DrawImage(img666, r6);  // this results in a 
+
+
+                        } //using
+
+
+                        using (Graphics g = Graphics.FromImage(result3)) // .242 redraw the mosiac as 1 image now
+                        {
+
+                            g.CompositingQuality = CompositingQuality.HighQuality;
+                            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                            g.SmoothingMode = SmoothingMode.HighQuality;
+
+
+                            g.DrawImage(result, 0, 0);
+                            g.DrawImage(result, DZoom, SZoom, GraphicsUnit.Pixel);  // draw lightning map zoom closeup
+                            g.DrawRectangle(new Pen(Color.Red, 5.0f), DZoom); //   Pen p44 = new Pen(Color.White, 1.0f);                  // ke9ns add color for vert line for TIME UTC pos
+
+
+                        } // using
+
+                        System.Windows.Forms.Cursor.Current = CSR; //.242
+                        MAP = Lighten(result3, MBG, MB);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        console.MapNOAA = true; //.243 update map
+
+                        //  MessageBox.Show(ex.Message);
+                        MAP = Lighten(new Bitmap(Map_image), MBG, MB);
+                        System.Windows.Forms.Cursor.Current = CSR; //.242
+                    }
+
+                    Map_Last = 0; // .242 force map update
+
+                }
+                else
+                {
+                    try
+                    {
+
+                        System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor; // .242 change cursor when to wait cursor when loading new image
+
+
+                        Image imag = Image.FromFile(console.AppDataPath + "IRCloudE.jpg"); //.241
+                        Image imag3 = Image.FromFile(console.AppDataPath + "IRCloudW.jpg"); //.241
+                        Image imag2 = Image.FromFile(console.AppDataPath + "IRCloudS.jpg"); //.241
+
+                        Bitmap img11 = new Bitmap(imag3);
+                        Rectangle r11 = new Rectangle(571, 0, 382, 592);    //  upper right side
+                        Bitmap img111 = img11.Clone(r11, img11.PixelFormat);  // make a new bitmap of just the Cloud map
+
+                        Bitmap img22 = new Bitmap(imag);
+                        Rectangle r22 = new Rectangle(0, 0, 1200, 592); // upper middle
+                        Bitmap img222 = img22.Clone(r22, img22.PixelFormat);  // make a new bitmap of just the Cloud map
+
+                        Bitmap img33 = new Bitmap(imag3);
+                        Rectangle r33 = new Rectangle(0, 0, 571, 592);    //  upper right side
+                        Bitmap img333 = img33.Clone(r33, img33.PixelFormat);  // make a new bitmap of just the Cloud map
+
+                        Bitmap img44 = new Bitmap(imag2);
+                        Rectangle r44 = new Rectangle(821, 155, 379, 437);    //  lower left side
+                        Bitmap img444 = img44.Clone(r44, img44.PixelFormat);  // make a new bitmap of just the Cloud map
+
+                        Bitmap img66 = new Bitmap(imag2);
+                        Rectangle r66 = new Rectangle(0, 155, 821, 437);    //  lower right side
+                        Bitmap img666 = img66.Clone(r66, img66.PixelFormat);  // make a new bitmap of just the Cloud map
+
+
+
+                        Bitmap result = new Bitmap(1000, 507);          // this is the size we really want so it matches the built in world map
+                                                                        //  Rectangle r1 = new Rectangle(210, 56, 557, 261); // this is where to place the smaller lightning world map into the big result bitmap
+
+                        Rectangle r1 = new Rectangle(57, 56, 155, 261); // upper left 
+
+                        Rectangle r2 = new Rectangle(210, 56, 557, 261); // upper middle 
+
+                        Rectangle r3 = new Rectangle(700, 56, 246, 261); // upper right
+
+                        Rectangle r4 = new Rectangle(57, 248, 154, 194); // lower left
+
+                        Rectangle r6 = new Rectangle(586, 246, 361, 194); // lower right
+
+                        using (Graphics g = Graphics.FromImage(result))
+                        {
+
+                            g.CompositingQuality = CompositingQuality.HighQuality;
+                            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                            g.SmoothingMode = SmoothingMode.HighQuality;
+
+
+                            g.DrawImage(img111, r1);  // this results in a 
+                            g.DrawImage(img222, r2);  // this results in a
+                            g.DrawImage(img333, r3);  // this results in a .
+                            g.DrawImage(img444, r4);  // this results in a 
+                            g.DrawImage(img666, r6);  // this results in a 
+
+
+                        }
+                        System.Windows.Forms.Cursor.Current = CSR; //.242
+
+                        MAP = Lighten(result, MBG, MB);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        console.MapNOAA = true; //.243 update map
+
+                        //  MessageBox.Show(ex.Message);
+                        MAP = Lighten(new Bitmap(Map_image), MBG, MB);
+                        System.Windows.Forms.Cursor.Current = CSR; //.242
+                    }
+                    Map_Last = 0; // .242 force map update
+
+                } // zoomon
+
+            } //chkCloudOn
             else
             {
                 if ((Console.DXR == 0))
@@ -13852,7 +14255,7 @@ namespace PowerSDR
         {
             if (amount < -255 || amount > 255) return bitmap;
             if (gray < -255 || gray > 255) return bitmap;
-           
+
 
             BitmapData bmData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
 
@@ -14099,7 +14502,7 @@ namespace PowerSDR
 
                         }
 
-                           
+
                         ++p;                          // get next byte (remember 3 bytes per pixel)
 
                     } //  for (int x = 0; x < nWidth; ++x) each horizontal line from left to right
@@ -14270,8 +14673,8 @@ namespace PowerSDR
                 string currlotw = console.httpFile.Lotw1(); // contact ARRL LoTW and download LOG files from them here (see HTTP.cs)
 
                 LoTW_timer = false;
-              //  pause = false; // turn display back on
-              //  button1.Text = "Pause";
+                //  pause = false; // turn display back on
+                //  button1.Text = "Pause";
 
                 Debug.WriteLine("Finished talking to LoTW server");
 
@@ -14321,7 +14724,7 @@ namespace PowerSDR
             {
 
                 Debug.WriteLine("DONE WITH HTTP.cs LoTW, back to spot.cs");
-              
+
                 button4.BackColor = Color.Yellow;
 
                 //   Debug.WriteLine("LoTW OUTPUT: " + currlotw.Substring(0,1000));
@@ -14380,8 +14783,8 @@ namespace PowerSDR
 
 
                 string lotw_log = File.ReadAllText(file_name2);
-            
-               
+
+
 
                 if (lotw_log.Contains("You must have been issued a"))
                 {
@@ -14436,13 +14839,13 @@ namespace PowerSDR
                         if (z < 1)
                         {
                             LoTW_callsign.Add("---");
-                          
+
                         }
                         else
                         {
                             LoTW_callsign.Add(lotwsubstring.Substring(z + 8, Convert.ToInt32(lotwsubstring.Substring(z + 6, 1)))); // call callsign
                         }
-                                                
+
                         int z2 = lotwsubstring.IndexOf("<APP_LoTW_MODEGROUP:");
                         if (z2 < 1)
                         {
@@ -14450,9 +14853,9 @@ namespace PowerSDR
                         }
                         else
                         {
-                             LoTW_mode.Add(lotwsubstring.Substring(z2 + 22, Convert.ToInt32(lotwsubstring.Substring(z2 + 20, 1)))); // call mode group (data, phone)
+                            LoTW_mode.Add(lotwsubstring.Substring(z2 + 22, Convert.ToInt32(lotwsubstring.Substring(z2 + 20, 1)))); // call mode group (data, phone)
                         }
-                     
+
                         int z4 = lotwsubstring.IndexOf("<BAND:");
                         if (z4 < 1)
                         {
@@ -14460,9 +14863,9 @@ namespace PowerSDR
                         }
                         else
                         {
-                             LoTW_band.Add(lotwsubstring.Substring(z4 + 8, Convert.ToInt32(lotwsubstring.Substring(z4 + 6, 1)))); // call band
+                            LoTW_band.Add(lotwsubstring.Substring(z4 + 8, Convert.ToInt32(lotwsubstring.Substring(z4 + 6, 1)))); // call band
                         }
-                                            
+
                         int z6 = lotwsubstring.IndexOf("<DXCC:");
                         if (z6 < 1)
                         {
@@ -14473,14 +14876,14 @@ namespace PowerSDR
                             LoTW_dxcc.Add(lotwsubstring.Substring(z6 + 8, Convert.ToInt32(lotwsubstring.Substring(z6 + 6, 1)))); // call dxcc entity #
                             lotw_records1++;
                         }
-                      
+
                         int z8 = lotwsubstring.IndexOf("2xQSL:");
                         if (z8 < 1)
                         {
                             LoTW_qsl.Add("----");
                         }
                         else
-                        { 
+                        {
                             LoTW_qsl.Add(lotwsubstring.Substring(z8 + 8, Convert.ToInt32(lotwsubstring.Substring(z8 + 6, 1)))); // call 2 way QSL confirmed Y / N
                             lotw_records3++;
                         }
@@ -14490,23 +14893,23 @@ namespace PowerSDR
                         {
                             LoTW_state.Add("----");
                         }
-                        else 
+                        else
                         {
                             LoTW_state.Add(lotwsubstring.Substring(z10 + 8, Convert.ToInt32(lotwsubstring.Substring(z10 + 6, 1)))); // call dxcc entity #
                         }
-                      
-                        
+
+
                         int z12 = lotwsubstring.IndexOf("QUARE:");
-                        if( z12 < 1)
+                        if (z12 < 1)
                         {
                             LoTW_grid.Add("----");
                         }
-                        else 
+                        else
                         {
                             LoTW_grid.Add(lotwsubstring.Substring(z12 + 8, Convert.ToInt32(lotwsubstring.Substring(z12 + 6, 1)))); // grid
                             lotw_records2++;
                         }
-                    
+
 
                     } // for x1 loop
 
@@ -14522,7 +14925,7 @@ namespace PowerSDR
                     lotw_records = 0; // keep feature OFF 
                 }
 
-                
+
                 lotw_log = null;
 
                 //..........................................................
@@ -14686,7 +15089,7 @@ namespace PowerSDR
                             writer2.Close();    // close  file
                             stream2.Close();   // close stream
 
-                           
+
 
                         }
                         catch (Exception)
@@ -14726,7 +15129,7 @@ namespace PowerSDR
 
 
             }
-           
+
 
         } // callBox_MouseDown
 
@@ -14787,13 +15190,13 @@ namespace PowerSDR
                     LoTW_state.Clear();
                     LoTW_grid.Clear();
                     LoTW_qsl.Clear();
-                  
+
                     lotw_records = 0;
                     lotw_records1 = 0;
                     lotw_records2 = 0;
                     lotw_records3 = 0;
 
-                 //   textBox1.Text = "LoTW checker OFF.\r\n";
+                    //   textBox1.Text = "LoTW checker OFF.\r\n";
 
                 }
 
@@ -14856,7 +15259,7 @@ namespace PowerSDR
 
         private void textBox1_MouseMove(object sender, MouseEventArgs e)
         {
-          //  textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
+            //  textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
 
 
             if ((SP4_Active == 0) && (beacon1 == false))// only process lookup if not processing a new spot which might cause issue
@@ -14876,12 +15279,12 @@ namespace PowerSDR
                 {
                     string DXName = DXt_Station[iii];
 
-                 //  Debug.WriteLine("Line " + iii + " Name " + DXName + " ,X= " + e.X + " ,Y= " + e.Y + " , ");
+                    //  Debug.WriteLine("Line " + iii + " Name " + DXName + " ,X= " + e.X + " ,Y= " + e.Y + " , ");
 
                     LoTW_DXCall = DXName;
                     LoTW_DXCallIndex = iii;
 
-                 //   Debug.WriteLine("LoTW HOVER " + LoTW_DXCallIndex + " , " + DX_LoTW_Status[LoTW_DXCallIndex]);
+                    //   Debug.WriteLine("LoTW HOVER " + LoTW_DXCallIndex + " , " + DX_LoTW_Status[LoTW_DXCallIndex]);
 
                     if (e.X > 175 && e.X < 260) // the callsign of the DX station (width)
                     {
@@ -14967,18 +15370,18 @@ namespace PowerSDR
                     } //  if (e.X > 165 && e.X < 250)
                     else // outside the width of the DX station callsign
                     {
-                            if (ToolTipNumber != 499)
-                            {
-                                this.toolTip1.SetToolTip(this.textBox1, "Hit F1 or F2 for more HELP.\r\n" +
-                                                         "LoTW Feature DUP, DXCC, and US States check(see LoTW button for setup):\r\n" +
-                                                          "LEFT Click= VFOA, WHEEL Click= VFOB, RIGHT Click= QRZ lookup,\r\n");
-                                ToolTipNumber = 499;
-                            }
-                     
+                        if (ToolTipNumber != 499)
+                        {
+                            this.toolTip1.SetToolTip(this.textBox1, "Hit F1 or F2 for more HELP.\r\n" +
+                                                     "LoTW Feature DUP, DXCC, and US States check(see LoTW button for setup):\r\n" +
+                                                      "LEFT Click= VFOA, WHEEL Click= VFOB, RIGHT Click= QRZ lookup,\r\n");
+                            ToolTipNumber = 499;
+                        }
+
                     }
 
                 } //  if (DX_Index > iii)
-               
+
 
             } // not actively processing a new spot
 
@@ -14986,11 +15389,11 @@ namespace PowerSDR
 
         } // textBox1_MouseMove
 
-       
+
 
         private void textBox1_MouseHover(object sender, EventArgs e)
         {
-         //   textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
+            //   textBox1.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up on a right click
             pause = true;
             button1.Text = "Paused";
 
@@ -15011,10 +15414,10 @@ namespace PowerSDR
 
         private void callBox_Click(object sender, EventArgs e) //.232
         {
-            if (txtLoTWpass.Visible )
+            if (txtLoTWpass.Visible)
             {
                 txtLoTWpass.Visible = false;
-         
+
             }
         }
 
@@ -15042,21 +15445,24 @@ namespace PowerSDR
         }
 
         // turn off these when display F or D layer maps .239
-        bool GrayLineLast = false; 
+        bool GrayLineLast = false;
 
-        bool MapJustBandLast = false; 
+        bool MapJustBandLast = false;
         bool MapJustPanLast = false;
         bool MapBeamLast = false;
 
-        bool MemoriesPanLast = false; 
-        bool VOACAPLast = false; 
-        bool BandTextLast = false; 
+        bool MemoriesPanLast = false;
+        bool VOACAPLast = false;
+        bool BandTextLast = false;
         bool MapCallLast = false;
         bool MapCountryLast = false;
+        bool MoonLast = false; //.240
+        bool SunLast = false;
+        bool ISSLast = false; // .242
 
         bool GridBoxLast = false; // setup.gridboxTS (grid lines ON=false)
-      
 
+        bool SWLLast = false; //.240
 
         public void chkFLayerON_CheckedChanged(object sender, EventArgs e) //.235
         {
@@ -15065,11 +15471,33 @@ namespace PowerSDR
                 btnTrack_Click(this, EventArgs.Empty); // turn on Map first
 
 
-             if (chkFLayerON.Checked && chkDLayerON.Checked) chkDLayerON.Checked = false;
+            if (chkFLayerON.Checked && (chkDLayerON.Checked || chkLightningMap.Checked || chkCloudOn.Checked))
+            {
+
+                chkDLayerON.Checked = false;
+                chkLightningMap.Checked = false;
+                chkCloudOn.Checked = false;
+
+            }
             chkSUN_CheckedChanged(this, EventArgs.Empty);
 
             if (chkFLayerON.Checked == true) //.239
             {
+                console.MapNOAA = true; //.243 update map
+
+
+
+                /*
+                MoonLast = chkMoon.Checked;   // turn off Moon
+                chkMoon.Checked = false;
+
+                SunLast = chkSUN.Checked;   // turn off Sun
+                chkSUN.Checked = false;
+
+                 ISSLast = chkISS.Checked;   // turn off ISS
+                chkISS.Checked = false;
+               */
+
                 GrayLineLast = chkGrayLine.Checked;   // turn off Grayline on the F-layer
                 chkGrayLine.Checked = false;
 
@@ -15083,138 +15511,11 @@ namespace PowerSDR
                 chkBoxBeam.Checked = false;
 
                 MemoriesPanLast = chkBoxMem.Checked; // Turn off memories on F-layer
-                chkBoxMem.Checked = false; 
+                chkBoxMem.Checked = false;
 
                 VOACAPLast = checkBoxMUF.Checked;  // turn off VOACAP on F-Layer
                 checkBoxMUF.Checked = false;
-              
-                BandTextLast = chkBoxBandText.Checked; 
-                chkBoxBandText.Checked = false;
 
-                MapCallLast = chkMapCall.Checked;
-                chkMapCall.Checked = false;
-
-                MapCountryLast = chkMapCountry.Checked;
-                chkMapCountry.Checked = false;
-
-                if (console.setupForm != null)
-                {
-                    if (Display.GridOff == 0)
-                    {
-                        GridBoxLast = !console.setupForm.gridBoxTS.Checked; // if GRID ON then = false so set GridBoxLast = true
-                        console.setupForm.gridBoxTS.Checked = true; // true = Grid OFF
-                    }
-
-                }
-
-
-            }
-            else  // turn them back on if they were on before the F-layer map was turned on
-            {
-                if (GrayLineLast)
-                {
-                    GrayLineLast = false;
-                    chkGrayLine.Checked = true;
-                }
-               
-                if (MapJustBandLast)
-                {
-                    MapJustBandLast = false;
-                    chkMapBand.Checked = true;
-                }
-
-                if (MapJustPanLast)
-                {
-                    MapJustPanLast = false;
-                    chkBoxPan.Checked = true;
-                }
-
-                if (MapBeamLast)
-                {
-                    MapBeamLast = false;
-                    chkBoxBeam.Checked = true;
-                }
-
-                if (MemoriesPanLast)
-                {
-                    MemoriesPanLast = false;
-                    chkBoxMem.Checked = true;
-                }
-
-                if (VOACAPLast)
-                {
-                    VOACAPLast = false;
-                    checkBoxMUF.Checked = true;
-                }
-
-                if (BandTextLast)
-                {
-                    BandTextLast = false;
-                    chkBoxBandText.Checked = true;
-                }
-
-                if (MapCallLast)
-                {
-                    MapCallLast = false;
-                    chkMapCall.Checked = true;
-                }
-
-                if (MapCountryLast)
-                {
-                    MapCountryLast = false;
-                    chkMapCountry.Checked = true;
-                }
-
-                if (console.setupForm != null)
-                {
-                    if (Display.GridOff == 0)
-                    {
-                        if (GridBoxLast) // grid was on before
-                        {
-                            GridBoxLast = false;
-                            console.setupForm.gridBoxTS.Checked = false; // true = Grid OFF
-                        }
-                    }
-
-                }
-
-            } //  if (chkFLayerON.Checked == true) //.239
-
-
-        } // chkFLayerON_CheckedChanged
-
-        public void chkDLayerON_CheckedChanged_1(object sender, EventArgs e)
-        {
-
-            if (SP5_Active == 0)  // .239 if map was off when you turned on d-layer
-                btnTrack_Click(this, EventArgs.Empty); // turn on Map first
-
-
-            if (chkFLayerON.Checked && chkDLayerON.Checked) chkFLayerON.Checked = false;
-            chkSUN_CheckedChanged(this, EventArgs.Empty);
-
-
-            if (chkDLayerON.Checked == true) //.239
-            {
-                GrayLineLast = chkGrayLine.Checked;   // turn off Grayline on the d-layer
-                chkGrayLine.Checked = false;
-
-                MapJustBandLast = chkMapBand.Checked;  // turn off spots on d-layer
-                chkMapBand.Checked = false;
-              
-                MapJustPanLast = chkBoxPan.Checked;
-                chkBoxPan.Checked = false;
-
-                MapBeamLast = chkBoxBeam.Checked;
-                chkBoxBeam.Checked = false;
-
-                MemoriesPanLast = chkBoxMem.Checked; // Turn off memories on d-layer
-                chkBoxMem.Checked = false;
-
-                VOACAPLast = checkBoxMUF.Checked;  // turn off VOACAP on d
-                                                   // -Layer
-                checkBoxMUF.Checked = false;
-              
                 BandTextLast = chkBoxBandText.Checked;
                 chkBoxBandText.Checked = false;
 
@@ -15234,10 +15535,227 @@ namespace PowerSDR
 
                 }
 
+                if (SP1_Active == 1) //.240 check if SWL ON/OFF?
+                {
+                    SWLLast = true;
+                    SWLbutton_Click(this, EventArgs.Empty); // was on so turn off
+
+                }
+                else
+                {
+                    SWLLast = false;
+                }
+
+
 
             }
             else  // turn them back on if they were on before the F-layer map was turned on
             {
+                /*
+
+                                if (MoonLast)
+                                {
+                                   MoonLast = false;
+                                    chkMoon.Checked = true;
+                                }
+
+                                if (SunLast)
+                                {
+                                    SunLast = false;
+                                    chkSUN.Checked = true;
+                                }
+
+                                if (ISSLast)
+                                {
+                                    ISSLast = false;
+                                    chkISS.Checked = true;
+                                }
+
+                */
+
+                if (GrayLineLast)
+                {
+                    GrayLineLast = false;
+                    chkGrayLine.Checked = true;
+                }
+
+                if (MapJustBandLast)
+                {
+                    MapJustBandLast = false;
+                    chkMapBand.Checked = true;
+                }
+
+                if (MapJustPanLast)
+                {
+                    MapJustPanLast = false;
+                    chkBoxPan.Checked = true;
+                }
+
+                if (MapBeamLast)
+                {
+                    MapBeamLast = false;
+                    chkBoxBeam.Checked = true;
+                }
+
+                if (MemoriesPanLast)
+                {
+                    MemoriesPanLast = false;
+                    chkBoxMem.Checked = true;
+                }
+
+                if (VOACAPLast)
+                {
+                    VOACAPLast = false;
+                    checkBoxMUF.Checked = true;
+                }
+
+                if (BandTextLast)
+                {
+                    BandTextLast = false;
+                    chkBoxBandText.Checked = true;
+                }
+
+                if (MapCallLast)
+                {
+                    MapCallLast = false;
+                    chkMapCall.Checked = true;
+                }
+
+                if (MapCountryLast)
+                {
+                    MapCountryLast = false;
+                    chkMapCountry.Checked = true;
+                }
+
+                if (console.setupForm != null)
+                {
+                    if (Display.GridOff == 0)
+                    {
+                        if (GridBoxLast) // grid was on before
+                        {
+                            GridBoxLast = false;
+                            console.setupForm.gridBoxTS.Checked = false; // true = Grid OFF
+                        }
+                    }
+
+                }
+
+                if (SWLLast) //.240
+                {
+
+                    SWLLast = false;
+                    SWLbutton_Click(this, EventArgs.Empty); // was on so turn back on again
+                }
+
+
+            } //  if (chkFLayerON.Checked == true) //.239
+
+
+        } // chkFLayerON_CheckedChanged
+
+        public void chkDLayerON_CheckedChanged_1(object sender, EventArgs e)
+        {
+
+            if (SP5_Active == 0)  // .239 if map was off when you turned on d-layer
+                btnTrack_Click(this, EventArgs.Empty); // turn on Map first
+
+
+            if (chkDLayerON.Checked && (chkFLayerON.Checked || chkLightningMap.Checked || chkCloudOn.Checked))
+            {
+                chkFLayerON.Checked = false;
+                chkLightningMap.Checked = false;
+                chkCloudOn.Checked = false;
+            }
+            chkSUN_CheckedChanged(this, EventArgs.Empty);
+
+
+            if (chkDLayerON.Checked == true) //.239
+            {
+                console.MapNOAA = true; //.243 update map
+
+
+                /*
+               MoonLast = chkMoon.Checked;   // turn off Moon
+               chkMoon.Checked = false;
+
+               SunLast = chkSUN.Checked;   // turn off Sun
+               chkSUN.Checked = false;
+
+                  ISSLast = chkISS.Checked;   // turn off ISS
+                chkISS.Checked = false;
+*/
+
+                GrayLineLast = chkGrayLine.Checked;   // turn off Grayline on the d-layer
+                chkGrayLine.Checked = false;
+
+                MapJustBandLast = chkMapBand.Checked;  // turn off spots on d-layer
+                chkMapBand.Checked = false;
+
+                MapJustPanLast = chkBoxPan.Checked;
+                chkBoxPan.Checked = false;
+
+                MapBeamLast = chkBoxBeam.Checked;
+                chkBoxBeam.Checked = false;
+
+                MemoriesPanLast = chkBoxMem.Checked; // Turn off memories on d-layer
+                chkBoxMem.Checked = false;
+
+                VOACAPLast = checkBoxMUF.Checked;  // turn off VOACAP on d
+                                                   // -Layer
+                checkBoxMUF.Checked = false;
+
+                BandTextLast = chkBoxBandText.Checked;
+                chkBoxBandText.Checked = false;
+
+                MapCallLast = chkMapCall.Checked;
+                chkMapCall.Checked = false;
+
+                MapCountryLast = chkMapCountry.Checked;
+                chkMapCountry.Checked = false;
+
+                if (console.setupForm != null)
+                {
+                    if (Display.GridOff == 0)
+                    {
+                        GridBoxLast = !console.setupForm.gridBoxTS.Checked; // if GRID ON then = false so set GridBoxLast = true
+                        console.setupForm.gridBoxTS.Checked = true; // true = Grid OFF
+                    }
+
+                }
+
+                if (SP1_Active == 1) //.240
+                {
+                    SWLLast = true;
+                    SWLbutton_Click(this, EventArgs.Empty); // was on so turn off
+
+                }
+                else
+                {
+                    SWLLast = false;
+                }
+
+            }
+            else  // turn them back on if they were on before the F-layer map was turned on
+            {
+                /*
+                    if (MoonLast)
+                    {
+                        MoonLast = false;
+                        chkMoon.Checked = true;
+                    }
+
+                    if (SunLast)
+                    {
+                        MoonLast = false;
+                        chkMoon.Checked = true;
+                    }
+
+                     if (ISSLast)
+                    {
+                        ISSLast = false;
+                        chkISS.Checked = true;
+                    }
+                */
                 if (GrayLineLast)
                 {
                     GrayLineLast = false;
@@ -15306,9 +15824,386 @@ namespace PowerSDR
 
                 }
 
+                if (SWLLast) //.240
+                {
+
+                    SWLLast = false;
+                    SWLbutton_Click(this, EventArgs.Empty); // was on so turn back on again
+                }
+
             } //  if (chkFLayerON.Checked == true) //.239
 
         } // chkDLayerON_CheckedChanged_1(object sender, EventArgs e)
+
+        private void chkLightningMap_CheckedChanged(object sender, EventArgs e) //.240
+        {
+            if (SP5_Active == 0)  // .239 if map was off when you turned on d-layer
+                btnTrack_Click(this, EventArgs.Empty); // turn on Map first
+
+
+            if (chkLightningMap.Checked && (chkFLayerON.Checked || chkDLayerON.Checked || chkCloudOn.Checked))
+            {
+                chkFLayerON.Checked = false;
+                chkDLayerON.Checked = false;
+                chkCloudOn.Checked = false;
+            }
+
+            chkSUN_CheckedChanged(this, EventArgs.Empty);
+
+
+            if (chkLightningMap.Checked == true) //.239
+            {
+                console.MapNOAA = true; //.243 update map
+
+
+
+                MoonLast = chkMoon.Checked;   // turn off Moon
+                chkMoon.Checked = false;
+
+                SunLast = chkSUN.Checked;   // turn off Sun
+                chkSUN.Checked = false;
+
+                ISSLast = chkISS.Checked;   // turn off ISS
+                chkISS.Checked = false;
+
+                //   GrayLineLast = chkGrayLine.Checked;   // turn off Grayline on the d-layer
+                //   chkGrayLine.Checked = false;
+
+                MapJustBandLast = chkMapBand.Checked;  // turn off spots on d-layer
+                chkMapBand.Checked = false;
+
+                MapJustPanLast = chkBoxPan.Checked;
+                chkBoxPan.Checked = false;
+
+                MapBeamLast = chkBoxBeam.Checked;
+                chkBoxBeam.Checked = false;
+
+                MemoriesPanLast = chkBoxMem.Checked; // Turn off memories on d-layer
+                chkBoxMem.Checked = false;
+
+                VOACAPLast = checkBoxMUF.Checked;  // turn off VOACAP on d
+                                                   // -Layer
+                checkBoxMUF.Checked = false;
+
+                BandTextLast = chkBoxBandText.Checked;
+                chkBoxBandText.Checked = false;
+
+                MapCallLast = chkMapCall.Checked;
+                chkMapCall.Checked = false;
+
+                MapCountryLast = chkMapCountry.Checked;
+                chkMapCountry.Checked = false;
+
+                if (console.setupForm != null)
+                {
+                    if (Display.GridOff == 0)
+                    {
+                        GridBoxLast = !console.setupForm.gridBoxTS.Checked; // if GRID ON then = false so set GridBoxLast = true
+                        console.setupForm.gridBoxTS.Checked = true; // true = Grid OFF
+                    }
+
+                }
+
+                if (SP1_Active == 1) //.240
+                {
+                    SWLLast = true;
+                    SWLbutton_Click(this, EventArgs.Empty); // was on so turn off
+
+                }
+                else
+                {
+                    SWLLast = false;
+                }
+
+            }
+            else  // turn them back on if they were on before the F-layer map was turned on
+            {
+
+                if (MoonLast)
+                {
+                    MoonLast = false;
+                    chkMoon.Checked = true;
+                }
+
+                if (SunLast)
+                {
+                    SunLast = false;
+                    chkSUN.Checked = true;
+                }
+
+                if (ISSLast)
+                {
+                    ISSLast = false;
+                    chkISS.Checked = true;
+                }
+
+                //   if (GrayLineLast)
+                //   {
+                //     GrayLineLast = false;
+                //     chkGrayLine.Checked = true;
+                //  }
+
+                if (MapJustBandLast)
+                {
+                    MapJustBandLast = false;
+                    chkMapBand.Checked = true;
+                }
+
+                if (MapJustPanLast)
+                {
+                    MapJustPanLast = false;
+                    chkBoxPan.Checked = true;
+                }
+
+                if (MapBeamLast)
+                {
+                    MapBeamLast = false;
+                    chkBoxBeam.Checked = true;
+                }
+
+                if (MemoriesPanLast)
+                {
+                    MemoriesPanLast = false;
+                    chkBoxMem.Checked = true;
+                }
+
+                if (VOACAPLast)
+                {
+                    VOACAPLast = false;
+                    checkBoxMUF.Checked = true;
+                }
+
+                if (BandTextLast)
+                {
+                    BandTextLast = false;
+                    chkBoxBandText.Checked = true;
+                }
+
+                if (MapCallLast)
+                {
+                    MapCallLast = false;
+                    chkMapCall.Checked = true;
+                }
+
+                if (MapCountryLast)
+                {
+                    MapCountryLast = false;
+                    chkMapCountry.Checked = true;
+                }
+
+
+                if (console.setupForm != null)
+                {
+                    if (Display.GridOff == 0)
+                    {
+                        if (GridBoxLast) // grid was on before
+                        {
+                            GridBoxLast = false;
+                            console.setupForm.gridBoxTS.Checked = false; // true = Grid OFF
+                        }
+                    }
+
+                }
+
+                if (SWLLast) //.240
+                {
+
+                    SWLLast = false;
+                    SWLbutton_Click(this, EventArgs.Empty); // was on so turn back on again
+                }
+
+            } //  if (chkFLayerON.Checked == true) //.239
+        } //chkLightningMap
+
+        private void chkCloudOn_CheckedChanged(object sender, EventArgs e)
+        {
+
+            if (SP5_Active == 0)  // .239 if map was off when you turned on d-layer
+                btnTrack_Click(this, EventArgs.Empty); // turn on Map first
+
+
+            if (chkCloudOn.Checked && (chkFLayerON.Checked || chkDLayerON.Checked || chkLightningMap.Checked))
+            {
+                chkFLayerON.Checked = false;
+                chkDLayerON.Checked = false;
+                chkLightningMap.Checked = false;
+            }
+
+            chkSUN_CheckedChanged(this, EventArgs.Empty);
+
+
+            if (chkCloudOn.Checked == true) //.241
+            {
+
+                console.MapNOAA = true; //.243 update map
+
+
+
+                MoonLast = chkMoon.Checked;   // turn off Moon
+                chkMoon.Checked = false;
+
+                //    SunLast = chkSUN.Checked;   // turn off Sun
+                //    chkSUN.Checked = false;
+
+                ISSLast = chkISS.Checked;   // turn off ISS
+                chkISS.Checked = false;
+
+                //   GrayLineLast = chkGrayLine.Checked;   // turn off Grayline on the d-layer
+                //   chkGrayLine.Checked = false;
+
+
+
+                MapJustBandLast = chkMapBand.Checked;  // turn off spots on d-layer
+                chkMapBand.Checked = false;
+
+                MapJustPanLast = chkBoxPan.Checked;
+                chkBoxPan.Checked = false;
+
+                MapBeamLast = chkBoxBeam.Checked;
+                chkBoxBeam.Checked = false;
+
+                MemoriesPanLast = chkBoxMem.Checked; // Turn off memories on d-layer
+                chkBoxMem.Checked = false;
+
+                VOACAPLast = checkBoxMUF.Checked;  // turn off VOACAP on d
+                                                   // -Layer
+                checkBoxMUF.Checked = false;
+
+                BandTextLast = chkBoxBandText.Checked;
+                chkBoxBandText.Checked = false;
+
+                MapCallLast = chkMapCall.Checked;
+                chkMapCall.Checked = false;
+
+                MapCountryLast = chkMapCountry.Checked;
+                chkMapCountry.Checked = false;
+
+                if (console.setupForm != null)
+                {
+                    if (Display.GridOff == 0)
+                    {
+                        GridBoxLast = !console.setupForm.gridBoxTS.Checked; // if GRID ON then = false so set GridBoxLast = true
+                        console.setupForm.gridBoxTS.Checked = true; // true = Grid OFF
+                    }
+
+                }
+
+                if (SP1_Active == 1) //.240
+                {
+                    SWLLast = true;
+                    SWLbutton_Click(this, EventArgs.Empty); // was on so turn off
+
+                }
+                else
+                {
+                    SWLLast = false;
+                }
+
+            }
+            else  // turn them back on if they were on before the F-layer map was turned on
+            {
+
+                if (MoonLast)
+                {
+                    MoonLast = false;
+                    chkMoon.Checked = true;
+                }
+
+                //   if (SunLast)
+                //   {
+                //      SunLast = false;
+                //     chkSUN.Checked = true;
+                //  }
+
+                if (ISSLast)
+                {
+                    ISSLast = false;
+                    chkISS.Checked = true;
+                }
+
+
+                //   if (GrayLineLast)
+                //   {
+                //     GrayLineLast = false;
+                //     chkGrayLine.Checked = true;
+                //  }
+
+                if (MapJustBandLast)
+                {
+                    MapJustBandLast = false;
+                    chkMapBand.Checked = true;
+                }
+
+                if (MapJustPanLast)
+                {
+                    MapJustPanLast = false;
+                    chkBoxPan.Checked = true;
+                }
+
+                if (MapBeamLast)
+                {
+                    MapBeamLast = false;
+                    chkBoxBeam.Checked = true;
+                }
+
+                if (MemoriesPanLast)
+                {
+                    MemoriesPanLast = false;
+                    chkBoxMem.Checked = true;
+                }
+
+                if (VOACAPLast)
+                {
+                    VOACAPLast = false;
+                    checkBoxMUF.Checked = true;
+                }
+
+                if (BandTextLast)
+                {
+                    BandTextLast = false;
+                    chkBoxBandText.Checked = true;
+                }
+
+                if (MapCallLast)
+                {
+                    MapCallLast = false;
+                    chkMapCall.Checked = true;
+                }
+
+                if (MapCountryLast)
+                {
+                    MapCountryLast = false;
+                    chkMapCountry.Checked = true;
+                }
+
+
+                if (console.setupForm != null)
+                {
+                    if (Display.GridOff == 0)
+                    {
+                        if (GridBoxLast) // grid was on before
+                        {
+                            GridBoxLast = false;
+                            console.setupForm.gridBoxTS.Checked = false; // true = Grid OFF
+                        }
+                    }
+
+                }
+
+                if (SWLLast) //.240
+                {
+
+                    SWLLast = false;
+                    SWLbutton_Click(this, EventArgs.Empty); // was on so turn back on again
+                }
+
+            } //  if (chkFLayerON.Checked == true) //.239
+
+
+        } // chkCloudOn
+
+
+
 
 
     } //SPOTCONTROL

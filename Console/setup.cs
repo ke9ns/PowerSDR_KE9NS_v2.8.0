@@ -26,10 +26,9 @@
 //    USA
 //=================================================================
 
-using Flex.Control;     // ke9ns add
-using FlexCW;           //
+using Flex.Control;     //.250  ke9ns add
+using FlexCW; // .250          //
 using System;
-using System.Text;
 using System.Collections;
 using System.ComponentModel;
 using System.Data;
@@ -39,13 +38,10 @@ using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using Microsoft.VisualBasic;
-
-
-using System.Runtime.InteropServices;
 
 
 namespace PowerSDR
@@ -58,12 +54,15 @@ namespace PowerSDR
         public static Console console;   // ke9ns mod  to allow console to pass back values to setup screen
         public CATParser parser; // ke9ns add: for CAT URL support
 
+        //   public FlexControl FlexControl; //.250
+        //  public FlexControlManager FlexControlManager; //.250
+
         public static SpotControl SpotForm;                       // ke9ns add DX spotter function
         public static ScanControl ScanForm;                       // ke9ns add freq Scanner function
         public static FlexControlBasicForm FCBasicForm;
 
         //   public static Http httpFile;
-       //   public static VolumeControl volumecontrol;
+        //   public static VolumeControl volumecontrol;
 
         HidDevice.PowerMate powerMate = new HidDevice.PowerMate();  // link back to PowerMate.cpp and PowerMate.h
 
@@ -73,7 +72,7 @@ namespace PowerSDR
         private bool initializing;
         private bool dax_audio_setup_enum = false;
 
-     
+
 
         #endregion
 
@@ -152,7 +151,7 @@ namespace PowerSDR
             comboKeyerConnPrimary.SelectedIndex = 0;
             comboTXTUNMeter.SelectedIndex = 0;
             comboMeterType.Text = "Analog";
-            if (comboCATPort.Items.Count > 0) comboCATPort.SelectedIndex = 0; 
+            if (comboCATPort.Items.Count > 0) comboCATPort.SelectedIndex = 0;
 
             if (comboCATPort2.Items.Count > 0) comboCATPort2.SelectedIndex = 0; // ke9ns add .180
             if (comboCATPort3.Items.Count > 0) comboCATPort3.SelectedIndex = 0;
@@ -187,7 +186,7 @@ namespace PowerSDR
 
             if (comboCATPort.SelectedIndex < 0)
             {
-                if (comboCATPort.Items.Count > 0)  comboCATPort.SelectedIndex = 0;
+                if (comboCATPort.Items.Count > 0) comboCATPort.SelectedIndex = 0;
                 else
                 {
                     chkCATEnable.Checked = false;
@@ -390,11 +389,11 @@ namespace PowerSDR
 
             InitDJConsoles();
 
-            if ( chkCatURLON.Checked  || Restart == true) // ke9ns add
+            if (chkCatURLON.Checked || Restart == true) // ke9ns add
             {
 
                 chkCatURLON.Checked = false;
-                
+
                 chkCatURLON.Checked = true;
             }
             // End MOD
@@ -402,7 +401,7 @@ namespace PowerSDR
 
             if (console.CurrentModel == Model.FLEX5000 && FWCEEPROM.RX2OK) // ke9ns add .200
             {
-                 chkCATEnable6.Enabled = true; // only enable if you have the 2nd RX unit
+                chkCATEnable6.Enabled = true; // only enable if you have the 2nd RX unit
                 Debug.WriteLine("SPOOF OK YOU HAVE 2nd RX");
             }
             else
@@ -430,7 +429,7 @@ namespace PowerSDR
 
         #endregion
 
-     
+
         #region Init Routines
         // ======================================================
         // Init Routines
@@ -444,9 +443,9 @@ namespace PowerSDR
             chkGeneralRXOnly.Checked = console.RXOnly;
 
             chkGeneralUSBPresent.Checked = console.USBPresent;
-            chkGeneralPAPresent.Checked = console.PAPresent;
-            chkGeneralXVTRPresent.Checked = console.XVTRPresent;
-            comboGeneralXVTR.SelectedItem = (int)console.CurrentXVTRTRMode;
+            chkGeneralPAPresent.Checked = console.PAPresent;// ke9ns: this is SDR-1000 stuff
+            chkGeneralXVTRPresent.Checked = console.XVTRPresent; // ke9ns: this is SDR-1000 stuff
+            comboGeneralXVTR.SelectedItem = (int)console.CurrentXVTRTRMode;// ke9ns: this is SDR-1000 stuff
             chkGeneralSpurRed.Checked = true;
             chkGeneralDisablePTT.Checked = console.DisablePTT;
             chkGeneralSoftwareGainCorr.Checked = console.NoHardwareOffset;
@@ -824,7 +823,7 @@ namespace PowerSDR
             foreach (PADeviceInfo p in a)
             {
                 comboAudioInput2.Items.Add(p);
-               
+
                 Debug.WriteLine("vac1 " + p + " in "); // SOUND input: (Microsoft Sound Mapper - Input,CABLE Output (VB-Audio Virtual, Mic in at front panel (Pink) (R
 
             }
@@ -833,7 +832,7 @@ namespace PowerSDR
             foreach (PADeviceInfo p in a)
             {
                 comboAudioOutput2.Items.Add(p);
-                
+
                 Debug.WriteLine("vac1 " + p + " out "); // SOUND output: (Microsoft Sound Mapper - Output,Speakers (Realtek High Definiti,CABLE Input (VB-Audio Virtual C )
 
             }
@@ -2783,8 +2782,8 @@ namespace PowerSDR
             get { return chkVAC2Enable.Checked; }
             set
             {
-               
-                chkVAC2Enable.Checked = value; 
+
+                chkVAC2Enable.Checked = value;
             }
         }
 
@@ -2970,7 +2969,7 @@ namespace PowerSDR
             }
         }
 
-        public float PAGain160
+        public float PAGain160 // 
         {
             get { return (float)udPAGain160.Value; }
             set { udPAGain160.Value = (decimal)value; }
@@ -3371,12 +3370,12 @@ namespace PowerSDR
                 if (value)
                 {
                     console.KWAutoInformation = true;
-                   
+
                 }
                 else
                 {
                     console.KWAutoInformation = false;
-                   
+
                 }
             }
         }
@@ -3560,6 +3559,8 @@ namespace PowerSDR
             {
                 if (!console.fwc_init)
                 {
+                    Debug.WriteLine("RADGEN");
+
                     console.fwc_init = Pal.Init();
                     if (console.fwc_init)
                     {
@@ -3609,6 +3610,8 @@ namespace PowerSDR
                             chkRX2AutoVAC2.Visible = false; // .231
                             richTextBox1.Visible = false; // .231
                             richTextBox2.Visible = false; // .231
+
+                            chkBoxESC.Visible = false; //.246
 
                             break;
                     }
@@ -3986,6 +3989,8 @@ namespace PowerSDR
                     richTextBox1.Visible = false; // .231
                     richTextBox2.Visible = false; // .231
 
+                    chkBoxESC.Visible = false; //.246
+
 
                     //comboAudioSoundCard.Text = "Unsupported Card";
                     comboAudioSampleRate1.Text = "48000";
@@ -4105,7 +4110,9 @@ namespace PowerSDR
                 chkRX2AutoOn.Visible = !b; // .231
                 chkRX2AutoVAC2.Visible = !b; // .231
                 richTextBox1.Visible = !b; // .231
-                richTextBox2.Visible = !b; // .231
+                richTextBox2.Visible = !b; // .23
+
+                chkBoxESC.Visible = !b; //.246
 
                 grpAudioLineInGain1.Visible = !b;
                 grpAudioMicInGain1.Visible = !b;
@@ -4847,25 +4854,25 @@ namespace PowerSDR
         //================================================================================================
         private void chkAudioEnableVAC_CheckedChanged(object sender, System.EventArgs e)
         {
-           if (radVAC1SelectA.Checked == false && radVAC1SelectB.Checked == false)
-           {
-                   radVAC1SelectA.CheckedChanged -= chkVAC1SelectA_CheckedChanged;
-                   radVAC1SelectA.Checked = true;
-                   radVAC1SelectA.CheckedChanged += chkVAC1SelectA_CheckedChanged;
-           }
+            if (radVAC1SelectA.Checked == false && radVAC1SelectB.Checked == false)
+            {
+                radVAC1SelectA.CheckedChanged -= chkVAC1SelectA_CheckedChanged;
+                radVAC1SelectA.Checked = true;
+                radVAC1SelectA.CheckedChanged += chkVAC1SelectA_CheckedChanged;
+            }
 
             bool val = chkAudioEnableVAC.Checked;
             bool old_val = console.VACEnabled;
 
             if (val)
             {
-                
-                   if ((comboAudioDriver2.SelectedIndex < 0) && (comboAudioDriver2.Items.Count > 0)) comboAudioDriver2.SelectedIndex = 0;
-                   if ((comboAudioDriver2B.SelectedIndex < 0) && (comboAudioDriver2B.Items.Count > 0)) comboAudioDriver2B.SelectedIndex = 0;
-                   if ((comboAudioInput2.SelectedIndex < 0) && (comboAudioInput2.Items.Count > 0)) comboAudioInput2.SelectedIndex = 0;
-                   if ((comboAudioInput2B.SelectedIndex < 0) && (comboAudioInput2B.Items.Count > 0)) comboAudioInput2B.SelectedIndex = 0;
-                   if ((comboAudioOutput2.SelectedIndex < 0) && (comboAudioOutput2.Items.Count > 0)) comboAudioOutput2.SelectedIndex = 0;
-                   if ((comboAudioOutput2B.SelectedIndex < 0) && (comboAudioOutput2B.Items.Count > 0)) comboAudioOutput2B.SelectedIndex = 0;
+
+                if ((comboAudioDriver2.SelectedIndex < 0) && (comboAudioDriver2.Items.Count > 0)) comboAudioDriver2.SelectedIndex = 0;
+                if ((comboAudioDriver2B.SelectedIndex < 0) && (comboAudioDriver2B.Items.Count > 0)) comboAudioDriver2B.SelectedIndex = 0;
+                if ((comboAudioInput2.SelectedIndex < 0) && (comboAudioInput2.Items.Count > 0)) comboAudioInput2.SelectedIndex = 0;
+                if ((comboAudioInput2B.SelectedIndex < 0) && (comboAudioInput2B.Items.Count > 0)) comboAudioInput2B.SelectedIndex = 0;
+                if ((comboAudioOutput2.SelectedIndex < 0) && (comboAudioOutput2.Items.Count > 0)) comboAudioOutput2.SelectedIndex = 0;
+                if ((comboAudioOutput2B.SelectedIndex < 0) && (comboAudioOutput2B.Items.Count > 0)) comboAudioOutput2B.SelectedIndex = 0;
 
             }
 
@@ -4876,17 +4883,17 @@ namespace PowerSDR
                 console.PowerOn = false;
                 Thread.Sleep(200);
             }
-                       
+
 
             if (val && radVAC1SelectA.Checked)
             {
-                console.AudioDriverIndex2 =  ((PADeviceInfo)comboAudioDriver2.SelectedItem).Index;
+                console.AudioDriverIndex2 = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Index;
                 Audio.Host2 = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Index;
 
                 console.AudioInputIndex2 = ((PADeviceInfo)comboAudioInput2.SelectedItem).Index;
                 Audio.Input2 = ((PADeviceInfo)comboAudioInput2.SelectedItem).Index;
 
-                console.AudioOutputIndex2 =  ((PADeviceInfo)comboAudioOutput2.SelectedItem).Index;
+                console.AudioOutputIndex2 = ((PADeviceInfo)comboAudioOutput2.SelectedItem).Index;
                 Audio.Output2 = ((PADeviceInfo)comboAudioOutput2.SelectedItem).Index;
 
 
@@ -4902,7 +4909,7 @@ namespace PowerSDR
                 console.AudioOutputIndex2 = ((PADeviceInfo)comboAudioOutput2B.SelectedItem).Index;
                 Audio.Output2 = ((PADeviceInfo)comboAudioOutput2B.SelectedItem).Index;
 
-            } 
+            }
 
             if (chkAudioIQtoVAC.Checked) console.SpurReduction = false;
 
@@ -4913,7 +4920,7 @@ namespace PowerSDR
 
         } // VAC1 chkAudioEnableVAC_CheckedChanged
 
-       
+
         // ke9ns add .204
         public void chkVAC1SelectA_CheckedChanged(object sender, EventArgs e)
         {
@@ -4921,6 +4928,10 @@ namespace PowerSDR
 
             if (radVAC1SelectA.Checked)
             {
+                udAudioLatency2.Value = udAudioLatencyA.Value;
+
+
+
                 if (chkAudioEnableVAC.Checked)
                 {
                     bool val = console.chkPower.Checked;
@@ -4951,6 +4962,8 @@ namespace PowerSDR
 
             if (radVAC1SelectB.Checked)
             {
+                udAudioLatency2.Value = udAudioLatencyB.Value;
+
 
                 if (chkAudioEnableVAC.Checked)
                 {
@@ -5063,6 +5076,7 @@ namespace PowerSDR
         {
             if (comboAudioDriver2.SelectedIndex < 0) return;
 
+
             int old_driver = Audio.Host2;
             int new_driver = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Index;
             bool power = console.PowerOn;
@@ -5075,10 +5089,10 @@ namespace PowerSDR
 
             string new_driver_name = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Name;
 
-            if (((new_driver_name != "Windows WDM-KS") && (new_driver_name != "ASIO")) && udAudioLatency2.Value < 50)
+            if (((new_driver_name != "Windows WDM-KS") && (new_driver_name != "ASIO")) && udAudioLatency2.Value < 70)
             {
-                MessageBox.Show(new Form { TopMost = true }, "The VAC1 Driver type selected does not support a Buffer Latency value less than 120ms.  " +
-                    "Buffer Latency values less than 120ms are only valid when using the WDM-KS VAC audio driver.\n\n" +
+                MessageBox.Show(new Form { TopMost = true }, "The VAC1 Driver type selected does not support a Buffer Latency value less than 70ms.  " +
+                    "Buffer Latency values less than 70ms are only valid when using the WDM-KS VAC audio driver.\n\n" +
                     "The VAC1 Buffer Latency has been reset to the default of 120ms.  " +
                     "Make sure to save your Transmit profile to make the change persistent.",
                     "Invalid VAC1 Buffer Latency Value",
@@ -5122,10 +5136,10 @@ namespace PowerSDR
 
             string new_driver_name = ((PADeviceInfo)comboAudioDriver2B.SelectedItem).Name;
 
-            if (((new_driver_name != "Windows WDM-KS") && (new_driver_name != "ASIO")) && udAudioLatency2.Value < 50)
+            if (((new_driver_name != "Windows WDM-KS") && (new_driver_name != "ASIO")) && udAudioLatency2.Value < 70)
             {
-                MessageBox.Show(new Form { TopMost = true }, "The VAC1 Driver type selected does not support a Buffer Latency value less than 120ms.  " +
-                    "Buffer Latency values less than 120ms are only valid when using the WDM-KS VAC audio driver.\n\n" +
+                MessageBox.Show(new Form { TopMost = true }, "The VAC1 Driver type selected does not support a Buffer Latency value less than 70ms.  " +
+                    "Buffer Latency values less than 70ms are only valid when using the WDM-KS VAC audio driver.\n\n" +
                     "The VAC1 Buffer Latency has been reset to the default of 120ms.  " +
                     "Make sure to save your Transmit profile to make the change persistent.",
                     "Invalid VAC1 Buffer Latency Value",
@@ -5140,7 +5154,7 @@ namespace PowerSDR
                 console.AudioDriverIndex2 = new_driver;
                 Audio.Host2 = new_driver;
             }
-        
+
 
             GetDevices2B();  // vac1
 
@@ -5173,10 +5187,10 @@ namespace PowerSDR
 
             string new_driver_name = ((PADeviceInfo)comboAudioDriver3.SelectedItem).Name;
 
-            if (((new_driver_name != "Windows WDM-KS") && (new_driver_name != "ASIO")) && udVAC2Latency.Value < 50)
+            if (((new_driver_name != "Windows WDM-KS") && (new_driver_name != "ASIO")) && udVAC2Latency.Value < 70)
             {
-                MessageBox.Show(new Form { TopMost = true }, "The VAC2 Driver type selected does not support a Buffer Latency value less than 120ms.  " +
-                    "Buffer Latency values less than 120ms are only valid when using the WDM-KS VAC audio driver.\n\n" +
+                MessageBox.Show(new Form { TopMost = true }, "The VAC2 Driver type selected does not support a Buffer Latency value less than 70ms.  " +
+                    "Buffer Latency values less than 70ms are only valid when using the WDM-KS VAC audio driver.\n\n" +
                     "The VAC2 Buffer Latency has been reset to the default of 120ms.  " +
                     "Make sure to save your Transmit profile to make the change persistent.",
                     "Invalid VAC2 Buffer Latency Value",
@@ -5236,12 +5250,12 @@ namespace PowerSDR
             //  Debug.WriteLine("test1===============");
 
             if (comboAudioInput2B.SelectedIndex < 0) return;
-           
+
 
             int old_input = Audio.Input2;
             int new_input = ((PADeviceInfo)comboAudioInput2B.SelectedItem).Index;
             bool power = console.PowerOn;
-            Debug.WriteLine("VAC1 B INPUT INDEX CHANGED=============== "+ new_input);
+            Debug.WriteLine("VAC1 B INPUT INDEX CHANGED=============== " + new_input);
 
             if (power && chkAudioEnableVAC.Checked && old_input != new_input && radVAC1SelectB.Checked)
             {
@@ -5336,7 +5350,7 @@ namespace PowerSDR
                 console.AudioOutputIndex2 = new_output;
                 Audio.Output2 = new_output;
             }
-           
+
             if (power && chkAudioEnableVAC.Checked && old_output != new_output && radVAC1SelectB.Checked)
                 console.PowerOn = true;
 
@@ -5453,7 +5467,7 @@ namespace PowerSDR
 
                     console.PowerOn = true;
 
-                 
+
                 }
                 else console.PowerOn = true;
 
@@ -5607,14 +5621,24 @@ namespace PowerSDR
 
         private void udAudioLatency2_ValueChanged(object sender, System.EventArgs e)
         {
-            string vac_driver_name = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Name;
+            string vac_driver_name = "";
 
-
-            if (((vac_driver_name != "Windows WDM-KS") && (vac_driver_name != "ASIO")) && udAudioLatency2.Value < 50)
+            if (radVAC1SelectA.Checked)
             {
-                MessageBox.Show(new Form { TopMost = true }, "The VAC1 Buffer Latency value selected is less than 120ms which is too " +
+                vac_driver_name = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Name;
+
+            }
+            else if (radVAC1SelectB.Checked)
+            {
+                vac_driver_name = ((PADeviceInfo)comboAudioDriver2B.SelectedItem).Name;
+
+            }
+
+            if (((vac_driver_name != "Windows WDM-KS") && (vac_driver_name != "ASIO")) && udAudioLatency2.Value < 70)
+            {
+                MessageBox.Show(new Form { TopMost = true }, "The VAC1 Buffer Latency value selected is less than 70ms which is too " +
                     "low for the MME and DirectSound VAC audio drivers.  Buffer Latency values less than " +
-                    "120ms are only valid when using the WDM-KS VAC audio driver.\n\n" +
+                    "70ms are only valid when using the WDM-KS VAC audio driver.\n\n" +
                     "The VAC1 Buffer Latency has been reset to the default of 120ms.  " +
                     "Make sure to save your Transmit profile to make the change persistent.",
                     "Invalid VAC1 Buffer Latency Value",
@@ -5622,11 +5646,31 @@ namespace PowerSDR
                     MessageBoxIcon.Error);
 
                 udAudioLatency2.Value = 120;
+
+                if (radVAC1SelectA.Checked)
+                {
+                    udAudioLatencyA.Value = udAudioLatency2.Value;
+
+                }
+                else if (radVAC1SelectB.Checked)
+                {
+                    udAudioLatencyB.Value = udAudioLatency2.Value;
+                }
+
             }
 
             if (udAudioLatency2.Value <= 15)
             {
                 udAudioLatency2.Value = 15;
+
+                if (radVAC1SelectA.Checked)
+                {
+                    udAudioLatencyA.Value = udAudioLatency2.Value;
+                }
+                else if (radVAC1SelectB.Checked)
+                {
+                    udAudioLatencyB.Value = udAudioLatency2.Value;
+                }
             }
 
             bool power = console.PowerOn;
@@ -5638,9 +5682,10 @@ namespace PowerSDR
 
             Audio.Latency2 = (int)udAudioLatency2.Value;
 
-            if (power && chkAudioEnableVAC.Checked)
-                console.PowerOn = true;
-        }
+            if (power && chkAudioEnableVAC.Checked) console.PowerOn = true;
+
+        } // udAudioLatency2_ValueChanged
+
 
         private void udVAC2Latency_ValueChanged(object sender, System.EventArgs e)
         {
@@ -7284,9 +7329,9 @@ namespace PowerSDR
         // ke9ns add:
         private void udDSPHT_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-           int temp = Convert.ToInt32(udDSPHT.SelectedItem);
+            int temp = Convert.ToInt32(udDSPHT.SelectedItem);
 
-           if (temp != 3 && temp != 7 && temp != 15 && temp != 31 && temp != 63) temp = 7;
+            if (temp != 3 && temp != 7 && temp != 15 && temp != 31 && temp != 63) temp = 7;
 
             console.dsp.GetDSPRX(0, 0).NBHT = temp; // call dsp.cs then dttsp.cs
             console.dsp.GetDSPRX(0, 1).NBHT = temp;
@@ -7301,18 +7346,18 @@ namespace PowerSDR
 
         private void udDSPHT_Click(object sender, EventArgs e)
         {
-          
+
         }
 
         private void udDSPHT_KeyDown(object sender, KeyEventArgs e)
         {
-          
+
         }
 
 
         private void udDSPHT_SelectedIndexChanged(object sender, EventArgs e)
         {
-          
+
 
         } // udDSPHT_SelectedIndexChanged
 
@@ -7328,8 +7373,8 @@ namespace PowerSDR
                 console.dsp.GetDSPRX(1, 1).NBDLY = (int)(udDSPDLY.Value);
             }
 
-       
-    } // udDSPDLY_ValueChanged
+
+        } // udDSPDLY_ValueChanged
 
         private void udDSPNB2_ValueChanged(object sender, System.EventArgs e)
         {
@@ -7561,10 +7606,10 @@ namespace PowerSDR
                     CWInput.SetSecondaryInput("None");
                     console.Siolisten.UseForKeyPTT = true;
 
-                  //  console.Siolisten2.UseForKeyPTT = true; // ke9ns add .180 port2
-                  //  console.Siolisten3.UseForKeyPTT = true; // ke9ns add .180 port3
-                  //  console.Siolisten4.UseForKeyPTT = true; // ke9ns add .180 port4
-                  //  console.Siolisten5.UseForKeyPTT = true; // ke9ns add .180 port5
+                    //  console.Siolisten2.UseForKeyPTT = true; // ke9ns add .180 port2
+                    //  console.Siolisten3.UseForKeyPTT = true; // ke9ns add .180 port3
+                    //  console.Siolisten4.UseForKeyPTT = true; // ke9ns add .180 port4
+                    //  console.Siolisten5.UseForKeyPTT = true; // ke9ns add .180 port5
                 }
             }
             else
@@ -8019,9 +8064,9 @@ namespace PowerSDR
                     eq1[i] = 0;
                 }
             }
-          
+
             console.eqForm.TXEQ28 = eq1; // ke9ns: give EQform updated data
-          
+
 
             //-------------------------------------
 
@@ -8134,7 +8179,7 @@ namespace PowerSDR
 
             console.eqForm.EQLoad(); // ke9ns: update the EQ now (by taking newly restored data and updating DSP.cs buffers immediatly
 
-          
+
 
             //--------------------------------------------------------------------------------------------------
 
@@ -8267,10 +8312,10 @@ namespace PowerSDR
             console.eqForm.tbTXEQ28Preamp.Value = Math.Max(console.eqForm.tbTXEQ28Preamp.Minimum, Math.Min(console.eqForm.tbTXEQ28Preamp.Maximum, console.eqForm.tbTXEQ28Preamp.Value - 1)); //.223 add
             console.eqForm.tbTXEQPreamp.Value = Math.Max(console.eqForm.tbTXEQPreamp.Minimum, Math.Min(console.eqForm.tbTXEQPreamp.Maximum, console.eqForm.tbTXEQPreamp.Value - 1)); //.223 add
             console.eqForm.tbTXEQ9Preamp.Value = Math.Max(console.eqForm.tbTXEQ9Preamp.Minimum, Math.Min(console.eqForm.tbTXEQ9Preamp.Maximum, console.eqForm.tbTXEQ9Preamp.Value - 1)); //.223 add
-       
-          //  console.eqForm.tbPEQ1_Scroll(this, EventArgs.Empty); // ke9ns add .171 to properly load up the eq on profile change
-          //  console.eqForm.tbTX28EQ15_Scroll(this, EventArgs.Empty); // ke9ns add .171
-           // console.eqForm.tbTXEQ_Scroll(this, EventArgs.Empty); // ke9ns add .171
+
+            //  console.eqForm.tbPEQ1_Scroll(this, EventArgs.Empty); // ke9ns add .171 to properly load up the eq on profile change
+            //  console.eqForm.tbTX28EQ15_Scroll(this, EventArgs.Empty); // ke9ns add .171
+            // console.eqForm.tbTXEQ_Scroll(this, EventArgs.Empty); // ke9ns add .171
 
             console.eqForm.tbTXEQ28Preamp.Value = Math.Max(console.eqForm.tbTXEQ28Preamp.Minimum, Math.Min(console.eqForm.tbTXEQ28Preamp.Maximum, console.eqForm.tbTXEQ28Preamp.Value + 1));
             console.eqForm.tbTXEQPreamp.Value = Math.Max(console.eqForm.tbTXEQPreamp.Minimum, Math.Min(console.eqForm.tbTXEQPreamp.Maximum, console.eqForm.tbTXEQPreamp.Value + 1));
@@ -8349,8 +8394,8 @@ namespace PowerSDR
 
             } // chkRememberTXProfileOnModeChange
 
-           
-            
+
+
 
 
 
@@ -9669,7 +9714,7 @@ namespace PowerSDR
             bool enable_sub_fields = !chkCATEnable.Checked;
 
             comboCATPort.Enabled = enable_sub_fields;
-         
+
             enableCAT_HardwareFields(enable_sub_fields);
 
             if (chkCATEnable.Checked)
@@ -9705,7 +9750,7 @@ namespace PowerSDR
 
         private void chkCATEnable2_CheckedChanged(object sender, EventArgs e)
         {
-           
+
             if (initializing) return;
 
             if (comboCATPort2.Text == "" || !comboCATPort2.Text.StartsWith("COM"))
@@ -9723,9 +9768,9 @@ namespace PowerSDR
 
             if (
                  (chkCATEnable2.Checked &&
-                    (temp2 == comboCATPTTPort.Text || temp2 == comboCATPort.Text || 
+                    (temp2 == comboCATPTTPort.Text || temp2 == comboCATPort.Text ||
                     temp2 == comboCATPort3.Text || temp2 == comboCATPort4.Text
-                    || temp2 == comboCATPort5.Text || temp2 == comboCATPort6.Text || temp2 == comboROTORPort.Text) 
+                    || temp2 == comboCATPort5.Text || temp2 == comboCATPort6.Text || temp2 == comboROTORPort.Text)
                  )
 
                )
@@ -9922,7 +9967,7 @@ namespace PowerSDR
 
         private void chkCATEnable5_CheckedChanged(object sender, EventArgs e)
         {
-          
+
             if (initializing) return;
 
             if (comboCATPort5.Text == "" || !comboCATPort5.Text.StartsWith("COM"))
@@ -10180,7 +10225,7 @@ namespace PowerSDR
         // ke9ns add: .180 CATPort2-5
         private void comboCATPort2_SelectedIndexChanged(object sender, EventArgs e)
         {
-          
+
             if (comboCATPort2.Text == "None")
             {
                 if (chkCATEnable2.Checked)
@@ -10195,7 +10240,7 @@ namespace PowerSDR
 
             if (comboCATPort2.Text.StartsWith("COM"))
             {
-                  console.CATPort2 = Int32.Parse(comboCATPort2.Text.Substring(3));
+                console.CATPort2 = Int32.Parse(comboCATPort2.Text.Substring(3));
             }
 
         } // comboCATPort2_SelectedIndexChanged
@@ -10203,7 +10248,7 @@ namespace PowerSDR
 
         private void comboCATPort3_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
             if (comboCATPort3.Text == "None")
             {
                 if (chkCATEnable3.Checked)
@@ -10218,7 +10263,7 @@ namespace PowerSDR
 
             if (comboCATPort3.Text.StartsWith("COM"))
             {
-                  console.CATPort3 = Int32.Parse(comboCATPort3.Text.Substring(3));
+                console.CATPort3 = Int32.Parse(comboCATPort3.Text.Substring(3));
             }
 
         }
@@ -10366,7 +10411,7 @@ namespace PowerSDR
         }
 
         #endregion
-        
+
         #region Test Tab Event Handlers
 
         private void chkTestIMD_CheckedChanged(object sender, System.EventArgs e)
@@ -10822,7 +10867,7 @@ namespace PowerSDR
 
             console.SWR_Logger_Write(); // save SWR file now
 
-           textBoxSAVE.Text = "Saving Changes";
+            textBoxSAVE.Text = "Saving Changes";
 
             SaveOptions(); // save controls
 
@@ -12430,7 +12475,7 @@ namespace PowerSDR
 
                 SpotControl.SP5_Active = 0;                     // turn off tracking
 
-               
+
 
                 Debug.WriteLine("SPOT TURNED OFF- " + SpotForm.checkBoxMUF.Checked + " , " + SpotForm.VOARUN + " , " + SpotForm.VOARUN + " , " + SpotControl.SP5_Active + " , " + SpotForm.mapon);
 
@@ -13785,27 +13830,27 @@ namespace PowerSDR
 
             Debug.WriteLine("chkCATEnable.Checked====" + chkCATEnable.Checked);
 
-          //  if (chkCATEnable.Checked)  // ke9ns .181 removed
-          //  {
+            //  if (chkCATEnable.Checked)  // ke9ns .181 removed
+            //  {
 
-                try
-                {
-                    console.ROTOREnabled = chkROTOREnable.Checked;
-                }
-                catch (Exception ex)
-                {
-                    console.ROTOREnabled = false;
-                    chkROTOREnable.Checked = false;
-                    MessageBox.Show(new Form { TopMost = true }, "Could not initialize ROTOR control.  Exception was:\n\n " + ex.Message +
-                        "\n\nROTOR control has been disabled.", "Error Initializing ROTOR control",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-         //  }
-          //  else
-           // {
+            try
+            {
+                console.ROTOREnabled = chkROTOREnable.Checked;
+            }
+            catch (Exception ex)
+            {
+                console.ROTOREnabled = false;
+                chkROTOREnable.Checked = false;
+                MessageBox.Show(new Form { TopMost = true }, "Could not initialize ROTOR control.  Exception was:\n\n " + ex.Message +
+                    "\n\nROTOR control has been disabled.", "Error Initializing ROTOR control",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            //  }
+            //  else
+            // {
 
             //    console.ROTOREnabled = false;
-          //  }
+            //  }
 
 
         } // chkROTORENable
@@ -14055,7 +14100,7 @@ namespace PowerSDR
             console.TXMeter2 = chkTXMeter2.Checked;
 
         }
-       
+
 
         // ke9ns add to move 2nd meter up under 1st meter
         private void chk2ndMeter_CheckedChanged(object sender, EventArgs e)
@@ -14063,9 +14108,9 @@ namespace PowerSDR
 
             console.Console_Resize(this, e);
             console.TXMeter2 = chkTXMeter2.Checked;
-           
-           
-           
+
+
+
 
         } //  chk2ndMeter_CheckedChanged
 
@@ -14646,7 +14691,7 @@ namespace PowerSDR
         public bool PMON = false; //.212
         private void chkBoxPwrMst_CheckedChanged(object sender, EventArgs e) // .212
         {
-         
+
 
             if ((chkBoxPM1.Checked == true))
             {
@@ -14685,7 +14730,7 @@ namespace PowerSDR
                 } //if (udPwrMstrCOM.Value != 0)
                 else
                 {
-                  //  chkBoxPM1.Checked = false;
+                    //  chkBoxPM1.Checked = false;
 
                     console.pwrMstWatts.Visible = false;
                     console.pwrMstSWR.Visible = false;
@@ -14706,7 +14751,7 @@ namespace PowerSDR
                 PMON = true;
                 if (!console.pm.Present)
                 {
-                    MessageBox.Show("No data received from PowerMaster on COM" + udPwrMstrCOM.Value.ToString()  + ".\n" +
+                    MessageBox.Show("No data received from PowerMaster on COM" + udPwrMstrCOM.Value.ToString() + ".\n" +
                         "Please check COM port and PowerMaster connections and settings.\n\n" +
                         "Make sure the PowerMaster shows \"F\" on the upper left of the display.\n" +
                         "Verify the selected COM port is correct.  Verify port in Device Manager.",
@@ -14719,7 +14764,7 @@ namespace PowerSDR
 
                     return;
                 }
-                
+
             }
             else
             {
@@ -15046,7 +15091,7 @@ namespace PowerSDR
                 console.panelBandHFRX2.Visible = false;
                 console.panelBandVHFRX2.Visible = false;
                 console.panelBandGNRX2.Visible = false;
-                
+
             }
 
 
@@ -15132,12 +15177,12 @@ namespace PowerSDR
             {
                 if (chkBoxMax.Checked == true)
                 {
-                   // Debug.WriteLine("Setup_maximize ");
+                    // Debug.WriteLine("Setup_maximize ");
                     console.WindowState = FormWindowState.Maximized;
                 }
                 else
                 {
-                   // Debug.WriteLine("Setup_normal ");
+                    // Debug.WriteLine("Setup_normal ");
                     console.WindowState = FormWindowState.Normal;
                 }
             }
@@ -15189,20 +15234,20 @@ namespace PowerSDR
                 chkCatURLALT.Checked = false;
             }
 
-           
+
 
             if (chkCatURLON.Checked)
             {
                 if (CONNECTSTREAM == false)
                 {
                     CatURL(); // for receiving from CAT device
-                  
+
                 }
             }
             else
             {
-               
-               
+
+
 
             }
 
@@ -15223,7 +15268,7 @@ namespace PowerSDR
 
             Debug.WriteLine("CAT URL NOW ON");
 
-            if (Restart == false)   console.helpboxForm.helpbox_message.Text = "CAT TCP Server activated. No connection";
+            if (Restart == false) console.helpboxForm.helpbox_message.Text = "CAT TCP Server activated. No connection";
             else
             {
                 Restart = false;
@@ -15246,11 +15291,11 @@ namespace PowerSDR
                 t4.Name = "CAT TCP IP SOCKET THREAD RX";
                 t4.Start();
 
-             //   Thread t5 = new Thread(new ThreadStart(CATURL_TX)); // use: RX3 = parser.Get(RX2); for CAT command requests
-              //  t5.IsBackground = true;
-              //  t5.Priority = ThreadPriority.Normal;
-              //  t5.Name = "CAT TCP IP SOCKET THREAD TX";
-              //  t5.Start();
+                //   Thread t5 = new Thread(new ThreadStart(CATURL_TX)); // use: RX3 = parser.Get(RX2); for CAT command requests
+                //  t5.IsBackground = true;
+                //  t5.Priority = ThreadPriority.Normal;
+                //  t5.Name = "CAT TCP IP SOCKET THREAD TX";
+                //  t5.Start();
 
 
             }
@@ -15271,7 +15316,7 @@ namespace PowerSDR
         public static NetworkStream networkStream1;
         public static String RX2; // ke9ns cat data sent to PowerSDR
         public static String RX3; // ke9ns: cat data sent from PowerSDR
-      
+
         public static byte cnt = 0;
         public static byte[] msg = new byte[50];
 
@@ -15279,8 +15324,8 @@ namespace PowerSDR
 
         void CATURL() // thread
         {
-            PASS:
-            
+        PASS:
+
             Debug.WriteLine("CAT thread start now " + CONNECTSTREAM);
             radioButtonCAT.Checked = false;
             DATACONNECT = false;
@@ -15292,25 +15337,25 @@ namespace PowerSDR
                 Debug.WriteLine("CAT try to open data port");
                 console.helpboxForm.helpbox_message.Text += "\r\n>>Try to Start CAT TCP Server..";
 
-                
+
 
                 try
                 {
-                  
+
                     console.helpboxForm.helpbox_message.Text += "\r\n>>WAIT for Initial connection.";
-                   
+
                     client1 = new TcpListener(IPAddress.Any, Convert.ToInt16(Port1));
-             
+
                     CONNECTSTREAM = true;
                     client1.Start();        // WAITS FOR A CONNECTION HERE
 
 
                     client = client1.AcceptTcpClient();
 
-                  
+
                     networkStream = client.GetStream();
 
-                   
+
                     console.helpboxForm.helpbox_message.Text += "\r\n>>CAT TCP Server STARTED on Port: " + Port1;
 
                     Debug.WriteLine("CAT Data port OPEN: " + Port1);
@@ -15328,7 +15373,7 @@ namespace PowerSDR
 
                     chkCatURLON.Checked = false;
                     Restart = true;
-                    
+
                     client1.Stop();
                     client.Close();
                     DATACONNECT = false;
@@ -15340,17 +15385,17 @@ namespace PowerSDR
             for (; ; )
             {
                 radioButtonCAT.Checked = false;
-                if (client.Connected ) break;
+                if (client.Connected) break;
                 if (chkCatURLON.Checked == false)
                 {
-                  
+
                     radioButtonCAT.Checked = false;
                     client.Close();
                     client1.Stop();
                     Array.Clear(msg, 0, 50);
                     CONNECTSTREAM = false;
                     DATACONNECT = false;
-                   
+
                     break;
                 }
             }
@@ -15372,9 +15417,9 @@ namespace PowerSDR
                 for (; ; )
                 {
                     Thread.Sleep(70);
-                 
-                    Debug.WriteLine("CAT URL WAIT FOR CHARACTER" );
-                   
+
+                    Debug.WriteLine("CAT URL WAIT FOR CHARACTER");
+
                     try
                     {
 
@@ -15383,7 +15428,7 @@ namespace PowerSDR
                             console.helpboxForm.helpbox_message.Text += "\r\n>>You turned OFF CAT TCP Server.";
                             break; // end if you turn it off
                         }
-                       
+
                         if (client.Connected == false)  // end if connection is lost
                         {
                             console.helpboxForm.helpbox_message.Text += "\r\n>>External CAT TCP Connection Dropped.";
@@ -15401,121 +15446,121 @@ namespace PowerSDR
 
                         radioButtonCAT.Checked = true;
 
-                       networkStream.Read(msg, cnt++, 1); // wait for data incoming to TCP URL socket
+                        networkStream.Read(msg, cnt++, 1); // wait for data incoming to TCP URL socket
 
-                  
-                       
 
-                            if (cnt > 48)
+
+
+                        if (cnt > 48)
+                        {
+                            console.helpboxForm.helpbox_message.Text += "\r\n>>Large number of 0 bytes received by PowerSDR.";
+
+                            if (msg[cnt - 1] == 0)  // ke9ns: end this is receiving nulls
                             {
-                                console.helpboxForm.helpbox_message.Text += "\r\n>>Large number of 0 bytes received by PowerSDR.";
+                                console.helpboxForm.helpbox_message.Text += "\r\n>>Shutting Down CAT TCP Server due to 0 bytes.";
 
-                                if (msg[cnt - 1] == 0)  // ke9ns: end this is receiving nulls
-                                {
-                                    console.helpboxForm.helpbox_message.Text += "\r\n>>Shutting Down CAT TCP Server due to 0 bytes.";
+                                radioButtonCAT.Checked = false;
+                                client.Close();
+                                client1.Stop();
 
-                                    radioButtonCAT.Checked = false;
-                                    client.Close();
-                                    client1.Stop();
-
-                                    Array.Clear(msg, 0, 50);
-                                    CONNECTSTREAM = false; // .201
-
-                                    //  Debug.WriteLine("CONNECTSTREAM " + CONNECTSTREAM);
-                                    goto PASS;
-                                }
-                            }
-
-                            //  Debug.WriteLine("CAT got char " + Convert.ToByte(msg[4]));
-
-                            RX2 = Encoding.Default.GetString(msg, 0, cnt); // TCP/IP RECEIVED DATA into RX2 string to send to PowerSDR for CAT decoding
-
-                            // Debug.WriteLine("CAT RX2: " + RX2);
-                            if (RX2.Contains("\n") && cnt < 3)
-                            {
-                                cnt = 0;
-                                Array.Clear(msg, 0, 50); // clear any extra <CR>
-                            }
-                            else if (RX2.Contains("\r\n") && cnt < 3)
-                            {
-                                cnt = 0;
-                                Array.Clear(msg, 0, 50); // clear any extra <CR>
-                            }
-                            else if (RX2.Contains("\r") && (cnt < 3))
-                            {
-                                cnt = 0;
-                                Array.Clear(msg, 0, 50); // clear any extra <CR>
-
-                            }
-                            else if (RX2.Contains("\r") && (cnt > 2))
-                            {
-                                console.helpboxForm.helpbox_message.Text += "\r\n>>Command ReceiveD: " + RX2;
-
-                                Debug.WriteLine("got CR instead of end character " + cnt + " length: " + msg.Length);
-                                if (cnt > 1)
-                                {
-                                    msg[cnt - 1] = 59; // this is a ';'
-                                    msg[cnt] = 0;
-                                    msg[cnt + 1] = 0;
-                                }
-
-                                RX2 = Encoding.Default.GetString(msg, 0, cnt); // TCP/IP RECEIVED DATA into RX2 string (like ZZAU;) to send to PowerSDR for CAT decoding
-                                RX3 = parser.Get(RX2); // PowerSDR CAT parser to string RX3 to send reponse back to TCP/IP CAT device 
-
-                                console.helpboxForm.helpbox_message.Text += "\r\n>>PowerSDR sent: " + RX3;
-
-                                test = Encoding.Default.GetBytes(RX3); // convert CAT answer to byte array in order to send back via TCP/IP
-
-                                networkStream.Write(test, 0, test.Length); // send PowerSDR CAT response back across the TCP URL socket
-
-                                cnt = 0;
                                 Array.Clear(msg, 0, 50);
+                                CONNECTSTREAM = false; // .201
+
+                                //  Debug.WriteLine("CONNECTSTREAM " + CONNECTSTREAM);
+                                goto PASS;
                             }
-                            else if (RX2.Contains(";") == true)
+                        }
+
+                        //  Debug.WriteLine("CAT got char " + Convert.ToByte(msg[4]));
+
+                        RX2 = Encoding.Default.GetString(msg, 0, cnt); // TCP/IP RECEIVED DATA into RX2 string to send to PowerSDR for CAT decoding
+
+                        // Debug.WriteLine("CAT RX2: " + RX2);
+                        if (RX2.Contains("\n") && cnt < 3)
+                        {
+                            cnt = 0;
+                            Array.Clear(msg, 0, 50); // clear any extra <CR>
+                        }
+                        else if (RX2.Contains("\r\n") && cnt < 3)
+                        {
+                            cnt = 0;
+                            Array.Clear(msg, 0, 50); // clear any extra <CR>
+                        }
+                        else if (RX2.Contains("\r") && (cnt < 3))
+                        {
+                            cnt = 0;
+                            Array.Clear(msg, 0, 50); // clear any extra <CR>
+
+                        }
+                        else if (RX2.Contains("\r") && (cnt > 2))
+                        {
+                            console.helpboxForm.helpbox_message.Text += "\r\n>>Command ReceiveD: " + RX2;
+
+                            Debug.WriteLine("got CR instead of end character " + cnt + " length: " + msg.Length);
+                            if (cnt > 1)
                             {
-                                Debug.WriteLine("got end char");
-
-                                console.helpboxForm.helpbox_message.Text += "\r\n>>Command Received: " + RX2;
-
-                                RX3 = parser.Get(RX2); // send TCP Socket CAT COMMAND to parser to get an answer from PowerSDR as RX3
-
-                                console.helpboxForm.helpbox_message.Text += "\r\n>>PowerSDR sent: " + RX3;
-
-                                test = Encoding.Default.GetBytes(RX3);
-
-                                networkStream.Write(test, 0, test.Length); // send PowerSDR CAT response back across the TCP URL socket
-                                cnt = 0;
-                                Array.Clear(msg, 0, 50);
+                                msg[cnt - 1] = 59; // this is a ';'
+                                msg[cnt] = 0;
+                                msg[cnt + 1] = 0;
                             }
 
+                            RX2 = Encoding.Default.GetString(msg, 0, cnt); // TCP/IP RECEIVED DATA into RX2 string (like ZZAU;) to send to PowerSDR for CAT decoding
+                            RX3 = parser.Get(RX2); // PowerSDR CAT parser to string RX3 to send reponse back to TCP/IP CAT device 
+
+                            console.helpboxForm.helpbox_message.Text += "\r\n>>PowerSDR sent: " + RX3;
+
+                            test = Encoding.Default.GetBytes(RX3); // convert CAT answer to byte array in order to send back via TCP/IP
+
+                            networkStream.Write(test, 0, test.Length); // send PowerSDR CAT response back across the TCP URL socket
+
+                            cnt = 0;
+                            Array.Clear(msg, 0, 50);
+                        }
+                        else if (RX2.Contains(";") == true)
+                        {
+                            Debug.WriteLine("got end char");
+
+                            console.helpboxForm.helpbox_message.Text += "\r\n>>Command Received: " + RX2;
+
+                            RX3 = parser.Get(RX2); // send TCP Socket CAT COMMAND to parser to get an answer from PowerSDR as RX3
+
+                            console.helpboxForm.helpbox_message.Text += "\r\n>>PowerSDR sent: " + RX3;
+
+                            test = Encoding.Default.GetBytes(RX3);
+
+                            networkStream.Write(test, 0, test.Length); // send PowerSDR CAT response back across the TCP URL socket
+                            cnt = 0;
+                            Array.Clear(msg, 0, 50);
+                        }
 
 
-                            if (cnt > 48)
-                            {
-                                console.helpboxForm.helpbox_message.Text += "\r\n>>Too long of command";
 
-                                cnt = 0;
-                                Array.Clear(msg, 0, 50);
-                            }
-                        
-                       
-                         //   if (console.KWAI7 && console.setupForm.AllowFreqBroadcast7)
-                          //  {
-                           //     test = Encoding.Default.GetBytes(console.CATURLFREQ);
-                           //     networkStream.Write(test, 0, test.Length); // send PowerSDR CAT response back across the TCP URL socket
-                           //     console.KWAI7 = false;
-                          //  }
-                            
-                        
+                        if (cnt > 48)
+                        {
+                            console.helpboxForm.helpbox_message.Text += "\r\n>>Too long of command";
+
+                            cnt = 0;
+                            Array.Clear(msg, 0, 50);
+                        }
+
+
+                        //   if (console.KWAI7 && console.setupForm.AllowFreqBroadcast7)
+                        //  {
+                        //     test = Encoding.Default.GetBytes(console.CATURLFREQ);
+                        //     networkStream.Write(test, 0, test.Length); // send PowerSDR CAT response back across the TCP URL socket
+                        //     console.KWAI7 = false;
+                        //  }
+
+
 
                     }
                     catch (Exception e)
                     {
                         console.helpboxForm.helpbox_message.Text += "\r\n>>FAILURE: " + e;
                         chkCatURLON.Checked = false;
-                      
+
                         Debug.WriteLine("CAT CONNECTION FAULT: " + e);
-                                            
+
 
                         client.Close();
                         client1.Stop();
@@ -15523,7 +15568,7 @@ namespace PowerSDR
 
                         radioButtonCAT.Checked = false;
                         Restart = true; // someone killed the connection instead of closing it.
-                      
+
                         break;
                     } // catch
 
@@ -15537,7 +15582,7 @@ namespace PowerSDR
                 client.Close();
                 client1.Stop();
                 Array.Clear(msg, 0, 50);
-                 CONNECTSTREAM = false;
+                CONNECTSTREAM = false;
                 DATACONNECT = false;
                 radioButtonCAT.Checked = false;
 
@@ -15546,12 +15591,12 @@ namespace PowerSDR
 
 
             if (Restart == true) chkCatURLON.Checked = true;
-           
+
 
         } // CATURL thread
 
 
-     
+
 
 
 
@@ -15586,7 +15631,7 @@ namespace PowerSDR
             return myIP;
 
 
-           
+
         }
 
         public static string GetLocalIPAddress2()
@@ -15658,7 +15703,7 @@ namespace PowerSDR
             CONNECTSTREAM = false;
             DATACONNECT = false;
 
-           
+
 
         } //txtCatPort_TextChanged
 
@@ -15681,7 +15726,7 @@ namespace PowerSDR
             }
 
 
-            } // chkCatURLON_MouseDown
+        } // chkCatURLON_MouseDown
 
         private void labelTS56_Click(object sender, EventArgs e)
         {
@@ -15699,7 +15744,7 @@ namespace PowerSDR
         // ke9ns add .190
         private void chkQuindarEnd_CheckedChanged(object sender, EventArgs e)
         {
-                console.Quindar_End = chkQuindarEnd.Checked;
+            console.Quindar_End = chkQuindarEnd.Checked;
 
 
 
@@ -15708,15 +15753,15 @@ namespace PowerSDR
         // ke9ns add .190
         private void udQuindarTonesVol_ValueChanged(object sender, EventArgs e)
         {
-           
-         //   Audio.WavePreamp = Math.Pow(10.0, (int)udQuindarTonesVol.Value / 20.0); // convert to scalar
-          //  Audio.WavePreamp = Math.Pow(10.0, (int)udPreamp.Value / 20.0); // convert to scalar
+
+            //   Audio.WavePreamp = Math.Pow(10.0, (int)udQuindarTonesVol.Value / 20.0); // convert to scalar
+            //  Audio.WavePreamp = Math.Pow(10.0, (int)udPreamp.Value / 20.0); // convert to scalar
 
         } // udQuindarTonesVol_ValueChanged
 
         private void checkBoxRX2_CheckedChanged(object sender, EventArgs e) //.219
         {
-           console.N1MM_RX2 = checkBoxRX2.Checked;
+            console.N1MM_RX2 = checkBoxRX2.Checked;
 
         } //checkBoxRX2_CheckedChanged
 
@@ -15729,34 +15774,80 @@ namespace PowerSDR
 
         }
 
+        private void udAudioLatencyA_ValueChanged(object sender, EventArgs e)
+        {
+            if (radVAC1SelectA.Checked)
+            {
+                udAudioLatency2.Value = udAudioLatencyA.Value;
+            }
 
 
 
+        } // udaudiolatencyA
+
+        private void udAudioLatencyB_ValueChanged(object sender, EventArgs e)
+        {
+            if (radVAC1SelectB.Checked)
+            {
+                udAudioLatency2.Value = udAudioLatencyB.Value;
+            }
+
+        } // udaudiolatencyB
+
+        private void number3DZ_ValueChanged(object sender, EventArgs e) //.245
+        {
+            // if (number3DZ.Value < 16) return;
+            //   if (console.initializing) return;
+            //  Debug.WriteLine("3DPAN " + number3DZ.Value);
+
+            Display.Data3DLineAlpha = tbPan3DAlpha.Value;
+            Display.Data3DLineColor = clrbtn3DDataLine.Color;
+
+        } // number3dz
+
+        private void chkRX2AutoVAC2_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkRX2AutoOn_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkBoxESC_CheckedChanged(object sender, EventArgs e) //.246
+        {
+            if (!FWCEEPROM.RX2OK) return;
+
+            if (chkBoxESC.Checked)
+            {
+                if (console.diversityForm != null) console.diversityForm.Close();
+
+                console.btnReset_Click(this, EventArgs.Empty); // simulate clicking the reset button for ESC
+
+                console.panelTSRadar.Enabled = true;
+                console.panelTSRadar.Visible = true;
+            }
+            else
+            {
+                console.panelTSRadar.Enabled = false;
+                console.panelTSRadar.Visible = false;
+            }
+
+            string buttonOffPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+           "\\FlexRadio Systems\\PowerSDR\\Skins\\" + console.CurrentSkin + "\\Console\\chkMON-0.png";
+
+            string buttonOnPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                "\\FlexRadio Systems\\PowerSDR\\Skins\\" + console.CurrentSkin + "\\Console\\chkMON-1.png";
+
+            Bitmap buttonOffImage = new Bitmap(buttonOffPath);
+
+            console.btnEnable.BackgroundImage = buttonOffImage;
+            console.btnSync.BackgroundImage = buttonOffImage;
+            console.btnReset.BackgroundImage = buttonOffImage;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        } //  chkBoxESC_CheckedChanged
 
 
 

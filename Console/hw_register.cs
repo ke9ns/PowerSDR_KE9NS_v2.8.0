@@ -28,8 +28,6 @@
 
 //#define DEBUG_VERBOSE
 
-using System.Diagnostics;
-
 namespace PowerSDR
 {
     /// <summary>

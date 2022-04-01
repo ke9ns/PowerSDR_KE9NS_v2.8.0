@@ -24,20 +24,6 @@
 
 
 using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Text;                    // ke9ns add for stringbuilder
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Drawing.Text;
-using System.Collections;
-using System.ComponentModel;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Threading;
-using System.Windows.Forms;
-using System.Text.RegularExpressions;
-using System.Net;
 
 namespace PowerSDR
 {

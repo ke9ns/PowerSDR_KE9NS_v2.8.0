@@ -247,34 +247,27 @@ RED LoTW  when a fault occured.
 
 To download a new fcc database: ftp://wirelessftp.fcc.gov/pub/uls/complete/l_amat.zip</value>
   </data>
-  <data name="chkFLayerON.ToolTip" xml:space="preserve">
-    <value>Australian gov space weather service critical foF2-Layer world map. (Updated every 30min)
-Colors denoting the highest frequency the f2 ionosphere will reflect vertical signals directly back towards earth (NVIS)
-Determined using ionosonde radar. The higher the reflect frequecies, the more open propogation will be in those areas.
-Dark Blue (or better) may result in 10m skip
-
-Red =      Reflect up to 1mhz
-Yellow = Reflect up to 2mhz
-Olive = Reflect up to 3mhz
-Green= Reflect up to 4mhz
-Lt GRN= Reflect up to 5mhz
-Lt BLU = Reflect up to 6mhz
-BL GRY= Reflect up to 7mhz
-Blue= Reflect up to 8mhz
-D Blue=Reflect up to 9mhz
-Maroon = Refect up to 10mhz
-Purple = Reflect up to 11mhz
-Violet = Reflect up to 12 mhz
-Gray = Reflect up to 13mhz
-
-
-</value>
+  <data name="chkCloudOn.ToolTip" xml:space="preserve">
+    <value>CLOUD COVER Mosaic Map Provided by: University of Wisconsin-Madison
+Real-Time but updated every 30 min
+Mosaic IR Cloud cover for most of the Earth
+Note: No cloud data for lower center section of world map.
+HOLD CTRL+Z to Zoom an area next to the Mouse on the Map.
+CTRL+Z also updates the image (real-time)</value>
+  </data>
+  <data name="chkLightningMap.ToolTip" xml:space="preserve">
+    <value>LIGHTNING Map provided by: Blitzortung 
+Real-Time but updated every 30 min
+White = Recent Lighting strike (within 20 min)
+Yellow =  (within 40min)
+Red = Very Old (within 120min)
+HOLD CTRL+Z to Zoom an area next to the Mouse on the Map.
+CTRL+Z also updates the image (real-time)</value>
   </data>
   <data name="chkDLayerON.ToolTip" xml:space="preserve">
-    <value>NOAA D-Layer Absorption level world map.
-(D-Layer Daylight typically absorbs low freq during daylight hours)
-Higher frequencies can pass through the D-Layer up to the F-Layer
-unless show on this map.
+    <value>D-LAYER Map provided by: NOAA XRAY D-Layer Absorption level world map.
+Absorbs Low Band RF in the D-Layer during daylight hours (and X-Ray events)
+Higher frequencies can pass through the D-Layer up to the E/F-Layers unless shown on this map.
 
 Purple        (absorption to 5mhz)
 Blue            (absorption to 10mhz)
@@ -284,7 +277,7 @@ Yellow        (absorption to 25 mhz)
 Orange      (absorption to  30 mhz)
 Red             (absorption to 35 mhz)
 
-</value>
+CTRL+Z also updates the image (real-time)</value>
   </data>
   <data name="chkISS.ToolTip" xml:space="preserve">
     <value>True (Zenith) position of the ISS will show on Panadapter screen (includes Elevation to you)
@@ -300,19 +293,6 @@ When you Click on the TRACK/Map button to activate the World Map
 
 
 Left Click on the Moon and hit the CTRL key to Rotate your Antenna</value>
-  </data>
-  <data name="chkBoxContour.ToolTip" xml:space="preserve">
-    <value>HIT F2 to watch video showing how to use VOACAP
-
-VOACAP: Check for Contour instead of dots
-
-Blue       Strongest Signal (AM)
-Green    Strong Signal  (AM/SSB)
-Yellow   Fair Signal (SSB, CW)
-Orange  Weak Signal  (CW, FT8)
-Gray       Weakest Signal (CW, FT8)
-
-</value>
   </data>
   <data name="chkBoxAnt.ToolTip" xml:space="preserve">
     <value>HIT F2 to watch video showing how to use VOACAP
@@ -363,20 +343,6 @@ Usually 10mhz and 15mhz are the cleanest signals
 
 </value>
   </data>
-  <data name="checkBoxWWV.ToolTip" xml:space="preserve">
-    <value>Hit F2 to watch video showing how to use Time Sync
-
-Check this box, then Click  on "Time Sync"
-
-Time Sync will listen to Radio WWV BCD time code 
-found on a 100hz sub-carrier.
-
-Will not work well in noisy conditions or low signal,
-Until I can use a PLL to detect weak signals.
-
-Reception will start on the WWV minute 1khz tone.
-</value>
-  </data>
   <data name="BoxBFScan.ToolTip" xml:space="preserve">
     <value>Check to Scan all 18 Beacon Stations 5 Frequecies at each 10 second Interval
 PowerSDR will listen on each Beacon Band for 3 minutes, then move the next 
@@ -393,6 +359,60 @@ Right Click on memory in Pan to open up Memory Comments URL internet address
 (Example: if you place http://ke9ns.com in the Comments field of a Memory)
 
 LEFT CLICK on PAN + ALT + M keys to save New Memory
+</value>
+  </data>
+  <data name="chkBoxContour.ToolTip" xml:space="preserve">
+    <value>HIT F2 to watch video showing how to use VOACAP
+
+VOACAP: Check for Contour instead of dots
+
+Blue       Strongest Signal (AM)
+Green    Strong Signal  (AM/SSB)
+Yellow   Fair Signal (SSB, CW)
+Orange  Weak Signal  (CW, FT8)
+Gray       Weakest Signal (CW, FT8)
+
+</value>
+  </data>
+  <data name="chkFLayerON.ToolTip" xml:space="preserve">
+    <value>Map provided by: Australian gov space weather service critical foF2-Layer world map. (Updated every 30min)
+Colors denoting the highest frequency the f2 ionosphere will reflect vertical directed signals directly back towards earth (NVIS)
+Determined using ionosonde radar. The higher the reflect frequecies, the more open propogation will be in those areas.
+
+If your station is under a Blue (or better) area on the F2 map, 
+you may experience skip conditions on or close to 10m to other Blue (or better) areas of the F2 map.
+
+Red up to Blue usually indicates that the uppers bands are closed. 
+
+Red =      Reflect up to 1mhz
+Yellow = Reflect up to 2mhz
+Olive = Reflect up to 3mhz
+Green= Reflect up to 4mhz
+Lt GRN= Reflect up to 5mhz
+Lt BLU = Reflect up to 6mhz
+BL GRY= Reflect up to 7mhz
+Blue= Reflect up to 8mhz
+D Blue=Reflect up to 9mhz
+Maroon = Refect up to 10mhz
+Purple = Reflect up to 11mhz
+Violet = Reflect up to 12 mhz
+Gray = Reflect up to 13mhz
+
+CTRL+Z also updates the image (real-time)
+</value>
+  </data>
+  <data name="checkBoxWWV.ToolTip" xml:space="preserve">
+    <value>Hit F2 to watch video showing how to use Time Sync
+
+Check this box, then Click  on "Time Sync"
+
+Time Sync will listen to Radio WWV BCD time code 
+found on a 100hz sub-carrier.
+
+Will not work well in noisy conditions or low signal,
+Until I can use a PLL to detect weak signals.
+
+Reception will start on the WWV minute 1khz tone.
 </value>
   </data>
   <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

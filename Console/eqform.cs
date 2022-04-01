@@ -40,10 +40,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Collections;
-using System.ComponentModel;
 using System.Windows.Forms;
-using System.Collections.Generic;
 
 namespace PowerSDR
 {
@@ -55,7 +52,7 @@ namespace PowerSDR
         #region Variable Declaration
 
         private Console console;
-      
+
         #endregion
 
         #region Constructor and Destructor
@@ -200,7 +197,7 @@ namespace PowerSDR
         public void EQLoad()
         {
             console.dsp.GetDSPTX(0).PEQ = PEQ;           // ke9ns add: get PEQ buffer in dsp.cs loaded right away
-          //  console.dsp.GetDSPTX(0).TXEQ10 = TXEQ;
+                                                         //  console.dsp.GetDSPTX(0).TXEQ10 = TXEQ;
             console.dsp.GetDSPTX(0).TXEQ28 = TXEQ28;    // ke9ns add: get TXEQ28 buffer in dsp.cs loaded right away
 
             tbRXEQ_Scroll(this, EventArgs.Empty);
@@ -272,7 +269,7 @@ namespace PowerSDR
             console.dsp.GetDSPTX(0).PEQ = PEQ;
             console.dsp.GetDSPTX(0).TXEQ28 = TXEQ28;
 
-       
+
 
         } // EQLoad
 
@@ -468,7 +465,7 @@ namespace PowerSDR
         {
             get
             {
-              //   Debug.WriteLine("=== 28band TXEQ GET " + tbTXEQ28Preamp.Value + " , " + tbTX28EQ1.Value);
+                //   Debug.WriteLine("=== 28band TXEQ GET " + tbTXEQ28Preamp.Value + " , " + tbTX28EQ1.Value);
 
                 int[] eq9 = new int[29];
                 eq9[0] = tbTXEQ28Preamp.Value;
@@ -509,14 +506,14 @@ namespace PowerSDR
             set
             {
 
-                 //   Debug.WriteLine("PEQ=== 28band TXEQ SET ");
+                //   Debug.WriteLine("PEQ=== 28band TXEQ SET ");
 
                 if (value.Length < 28)
                 {
                     MessageBox.Show(new Form { TopMost = true }, "Error setting TX EQ");
                     return;
                 }
-                tbTXEQ28Preamp.Value = Math.Max(tbTXEQ28Preamp.Minimum, Math.Min(tbTXEQ28Preamp.Maximum, value[0])); 
+                tbTXEQ28Preamp.Value = Math.Max(tbTXEQ28Preamp.Minimum, Math.Min(tbTXEQ28Preamp.Maximum, value[0]));
 
                 tbTX28EQ1.Value = Math.Max(tbTX28EQ1.Minimum, Math.Min(tbTX28EQ1.Maximum, value[1]));
                 tbTX28EQ2.Value = Math.Max(tbTX28EQ2.Minimum, Math.Min(tbTX28EQ2.Maximum, value[2]));
@@ -1993,7 +1990,7 @@ namespace PowerSDR
 
             if (chkBothEQ.Checked == true)
             {
-              
+
                 console.dsp.GetDSPTX(0).BOTH = chkBothEQ.Checked;
             }
             else // ke9ns == false

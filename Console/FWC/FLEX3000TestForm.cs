@@ -38,7 +38,7 @@ namespace PowerSDR
         #region Variable Declaration
 
         private Console console;
-        
+
 
         #endregion
 
@@ -71,7 +71,7 @@ namespace PowerSDR
 
         #endregion
 
-        
+
 
         #region Event Handlers
 

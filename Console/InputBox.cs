@@ -26,12 +26,6 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
-using System.Windows.Forms;
-
 namespace PowerSDR
 {
     /// <summary>
@@ -39,9 +33,9 @@ namespace PowerSDR
     /// </summary>
     public partial class InputBox : System.Windows.Forms.Form
     {
-      
+
         private string retval;
-       
+
 
         #region Misc Routines
 

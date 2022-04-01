@@ -69,7 +69,8 @@ namespace PowerSDR
             this.button3 = new System.Windows.Forms.Button();
             this.RotorHead = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.chkFLayerON = new System.Windows.Forms.CheckBoxTS();
+            this.chkCloudOn = new System.Windows.Forms.CheckBoxTS();
+            this.chkLightningMap = new System.Windows.Forms.CheckBoxTS();
             this.chkDLayerON = new System.Windows.Forms.CheckBoxTS();
             this.txtLoTWpass = new System.Windows.Forms.TextBoxTS();
             this.chkBoxBeacon = new System.Windows.Forms.CheckBoxTS();
@@ -80,13 +81,11 @@ namespace PowerSDR
             this.numBeamHeading = new System.Windows.Forms.NumericUpDownTS();
             this.chkISS = new System.Windows.Forms.CheckBoxTS();
             this.chkMoon = new System.Windows.Forms.CheckBoxTS();
-            this.chkBoxContour = new System.Windows.Forms.CheckBoxTS();
             this.tbPanPower = new System.Windows.Forms.TrackBarTS();
             this.chkBoxAnt = new System.Windows.Forms.CheckBoxTS();
             this.chkBoxDIG = new System.Windows.Forms.CheckBoxTS();
             this.checkBoxMUF = new System.Windows.Forms.CheckBoxTS();
             this.udDisplayWWV = new System.Windows.Forms.NumericUpDownTS();
-            this.checkBoxWWV = new System.Windows.Forms.CheckBoxTS();
             this.numericUpDownTS1 = new System.Windows.Forms.NumericUpDownTS();
             this.BoxBFScan = new System.Windows.Forms.CheckBoxTS();
             this.BoxBScan = new System.Windows.Forms.CheckBoxTS();
@@ -105,6 +104,9 @@ namespace PowerSDR
             this.chkSUN = new System.Windows.Forms.CheckBoxTS();
             this.hkBoxSpotRX2 = new System.Windows.Forms.CheckBoxTS();
             this.hkBoxSpotBand = new System.Windows.Forms.CheckBoxTS();
+            this.chkBoxContour = new System.Windows.Forms.CheckBoxTS();
+            this.chkFLayerON = new System.Windows.Forms.CheckBoxTS();
+            this.checkBoxWWV = new System.Windows.Forms.CheckBoxTS();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -141,7 +143,7 @@ namespace PowerSDR
             // 
             this.SWLbutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SWLbutton.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.SWLbutton.Location = new System.Drawing.Point(615, 368);
+            this.SWLbutton.Location = new System.Drawing.Point(615, 409);
             this.SWLbutton.Name = "SWLbutton";
             this.SWLbutton.Size = new System.Drawing.Size(75, 23);
             this.SWLbutton.TabIndex = 2;
@@ -154,7 +156,7 @@ namespace PowerSDR
             // 
             this.SSBbutton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SSBbutton.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.SSBbutton.Location = new System.Drawing.Point(12, 470);
+            this.SSBbutton.Location = new System.Drawing.Point(12, 511);
             this.SSBbutton.Name = "SSBbutton";
             this.SSBbutton.Size = new System.Drawing.Size(75, 23);
             this.SSBbutton.TabIndex = 1;
@@ -179,7 +181,7 @@ namespace PowerSDR
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.textBox1.ShortcutsEnabled = false;
-            this.textBox1.Size = new System.Drawing.Size(759, 168);
+            this.textBox1.Size = new System.Drawing.Size(759, 209);
             this.textBox1.TabIndex = 6;
             this.textBox1.TabStop = false;
             this.textBox1.Text = "";
@@ -194,7 +196,7 @@ namespace PowerSDR
             // 
             this.nodeBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.nodeBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nodeBox1.Location = new System.Drawing.Point(658, 366);
+            this.nodeBox1.Location = new System.Drawing.Point(658, 407);
             this.nodeBox1.MaxLength = 50;
             this.nodeBox1.Name = "nodeBox1";
             this.nodeBox1.Size = new System.Drawing.Size(84, 22);
@@ -208,7 +210,7 @@ namespace PowerSDR
             // 
             // textBox3
             // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.Font = new System.Drawing.Font("Segoe UI Variable Display", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox3.Location = new System.Drawing.Point(298, 7);
             this.textBox3.Name = "textBox3";
             this.textBox3.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
@@ -223,7 +225,7 @@ namespace PowerSDR
             // 
             this.callBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.callBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.callBox.Location = new System.Drawing.Point(682, 470);
+            this.callBox.Location = new System.Drawing.Point(682, 511);
             this.callBox.MaxLength = 20;
             this.callBox.Name = "callBox";
             this.callBox.ShortcutsEnabled = false;
@@ -241,7 +243,7 @@ namespace PowerSDR
             // 
             this.portBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.portBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.portBox2.Location = new System.Drawing.Point(696, 368);
+            this.portBox2.Location = new System.Drawing.Point(696, 409);
             this.portBox2.MaxLength = 7;
             this.portBox2.Name = "portBox2";
             this.portBox2.Size = new System.Drawing.Size(56, 22);
@@ -257,7 +259,7 @@ namespace PowerSDR
             // 
             this.statusBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.statusBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusBox.Location = new System.Drawing.Point(13, 338);
+            this.statusBox.Location = new System.Drawing.Point(13, 379);
             this.statusBox.Name = "statusBox";
             this.statusBox.Size = new System.Drawing.Size(156, 22);
             this.statusBox.TabIndex = 11;
@@ -270,7 +272,7 @@ namespace PowerSDR
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button1.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button1.Location = new System.Drawing.Point(101, 470);
+            this.button1.Location = new System.Drawing.Point(101, 511);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(68, 23);
             this.button1.TabIndex = 3;
@@ -285,7 +287,7 @@ namespace PowerSDR
             // 
             this.statusBoxSWL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.statusBoxSWL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusBoxSWL.Location = new System.Drawing.Point(614, 340);
+            this.statusBoxSWL.Location = new System.Drawing.Point(614, 381);
             this.statusBoxSWL.Name = "statusBoxSWL";
             this.statusBoxSWL.Size = new System.Drawing.Size(156, 22);
             this.statusBoxSWL.TabIndex = 16;
@@ -298,7 +300,7 @@ namespace PowerSDR
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.label1.Location = new System.Drawing.Point(13, 321);
+            this.label1.Location = new System.Drawing.Point(13, 362);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 13);
             this.label1.TabIndex = 17;
@@ -309,7 +311,7 @@ namespace PowerSDR
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.label2.Location = new System.Drawing.Point(612, 324);
+            this.label2.Location = new System.Drawing.Point(612, 365);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(159, 13);
             this.label2.TabIndex = 18;
@@ -330,7 +332,7 @@ namespace PowerSDR
             this.btnTrack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnTrack.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnTrack.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTrack.Location = new System.Drawing.Point(273, 394);
+            this.btnTrack.Location = new System.Drawing.Point(273, 435);
             this.btnTrack.Name = "btnTrack";
             this.btnTrack.Size = new System.Drawing.Size(60, 23);
             this.btnTrack.TabIndex = 62;
@@ -345,7 +347,7 @@ namespace PowerSDR
             // 
             this.nameBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.nameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameBox.Location = new System.Drawing.Point(687, 368);
+            this.nameBox.Location = new System.Drawing.Point(687, 409);
             this.nameBox.MaxLength = 20;
             this.nameBox.Name = "nameBox";
             this.nameBox.Size = new System.Drawing.Size(46, 22);
@@ -442,7 +444,7 @@ namespace PowerSDR
             // 
             this.SWLbutton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SWLbutton2.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.SWLbutton2.Location = new System.Drawing.Point(696, 368);
+            this.SWLbutton2.Location = new System.Drawing.Point(696, 409);
             this.SWLbutton2.Name = "SWLbutton2";
             this.SWLbutton2.Size = new System.Drawing.Size(75, 23);
             this.SWLbutton2.TabIndex = 76;
@@ -456,7 +458,7 @@ namespace PowerSDR
             this.btnBeacon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnBeacon.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnBeacon.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBeacon.Location = new System.Drawing.Point(182, 470);
+            this.btnBeacon.Location = new System.Drawing.Point(180, 480);
             this.btnBeacon.Name = "btnBeacon";
             this.btnBeacon.Size = new System.Drawing.Size(85, 23);
             this.btnBeacon.TabIndex = 85;
@@ -469,7 +471,7 @@ namespace PowerSDR
             // 
             this.btnTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnTime.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnTime.Location = new System.Drawing.Point(513, 324);
+            this.btnTime.Location = new System.Drawing.Point(513, 365);
             this.btnTime.Name = "btnTime";
             this.btnTime.Size = new System.Drawing.Size(75, 23);
             this.btnTime.TabIndex = 89;
@@ -483,7 +485,7 @@ namespace PowerSDR
             this.checkBoxTone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBoxTone.AutoSize = true;
             this.checkBoxTone.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.checkBoxTone.Location = new System.Drawing.Point(561, 377);
+            this.checkBoxTone.Location = new System.Drawing.Point(561, 418);
             this.checkBoxTone.Name = "checkBoxTone";
             this.checkBoxTone.Size = new System.Drawing.Size(46, 17);
             this.checkBoxTone.TabIndex = 93;
@@ -498,7 +500,7 @@ namespace PowerSDR
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox2.Enabled = false;
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(532, 201);
+            this.textBox2.Location = new System.Drawing.Point(532, 242);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(46, 20);
             this.textBox2.TabIndex = 94;
@@ -510,7 +512,7 @@ namespace PowerSDR
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button2.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button2.Location = new System.Drawing.Point(297, 163);
+            this.button2.Location = new System.Drawing.Point(297, 204);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(68, 23);
             this.button2.TabIndex = 99;
@@ -525,7 +527,7 @@ namespace PowerSDR
             this.DXPost.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.DXPost.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.DXPost.Enabled = false;
-            this.DXPost.Location = new System.Drawing.Point(13, 369);
+            this.DXPost.Location = new System.Drawing.Point(13, 410);
             this.DXPost.Name = "DXPost";
             this.DXPost.Size = new System.Drawing.Size(64, 23);
             this.DXPost.TabIndex = 100;
@@ -539,7 +541,7 @@ namespace PowerSDR
             this.textBoxDXCall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBoxDXCall.Enabled = false;
             this.textBoxDXCall.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxDXCall.Location = new System.Drawing.Point(82, 370);
+            this.textBoxDXCall.Location = new System.Drawing.Point(82, 411);
             this.textBoxDXCall.Name = "textBoxDXCall";
             this.textBoxDXCall.Size = new System.Drawing.Size(87, 22);
             this.textBoxDXCall.TabIndex = 101;
@@ -552,7 +554,7 @@ namespace PowerSDR
             this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBox4.Enabled = false;
             this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox4.Location = new System.Drawing.Point(480, 471);
+            this.textBox4.Location = new System.Drawing.Point(480, 512);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(37, 20);
             this.textBox4.TabIndex = 102;
@@ -564,7 +566,7 @@ namespace PowerSDR
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button3.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.button3.Location = new System.Drawing.Point(628, 410);
+            this.button3.Location = new System.Drawing.Point(628, 451);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(48, 19);
             this.button3.TabIndex = 108;
@@ -579,7 +581,7 @@ namespace PowerSDR
             // 
             this.RotorHead.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.RotorHead.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RotorHead.Location = new System.Drawing.Point(520, 410);
+            this.RotorHead.Location = new System.Drawing.Point(520, 451);
             this.RotorHead.Name = "RotorHead";
             this.RotorHead.Size = new System.Drawing.Size(37, 20);
             this.RotorHead.TabIndex = 109;
@@ -592,7 +594,7 @@ namespace PowerSDR
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button4.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.button4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.button4.Location = new System.Drawing.Point(190, 413);
+            this.button4.Location = new System.Drawing.Point(190, 452);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(57, 23);
             this.button4.TabIndex = 117;
@@ -602,27 +604,38 @@ namespace PowerSDR
             this.button4.Click += new System.EventHandler(this.button4_Click);
             this.button4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button4_MouseDown);
             // 
-            // chkFLayerON
+            // chkCloudOn
             // 
-            this.chkFLayerON.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkFLayerON.Enabled = false;
-            this.chkFLayerON.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkFLayerON.Image = null;
-            this.chkFLayerON.Location = new System.Drawing.Point(270, 420);
-            this.chkFLayerON.Name = "chkFLayerON";
-            this.chkFLayerON.Size = new System.Drawing.Size(84, 20);
-            this.chkFLayerON.TabIndex = 122;
-            this.chkFLayerON.Text = "foF2-Layer";
-            this.toolTip1.SetToolTip(this.chkFLayerON, resources.GetString("chkFLayerON.ToolTip"));
-            this.chkFLayerON.CheckedChanged += new System.EventHandler(this.chkFLayerON_CheckedChanged);
+            this.chkCloudOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkCloudOn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkCloudOn.Image = null;
+            this.chkCloudOn.Location = new System.Drawing.Point(270, 516);
+            this.chkCloudOn.Name = "chkCloudOn";
+            this.chkCloudOn.Size = new System.Drawing.Size(75, 20);
+            this.chkCloudOn.TabIndex = 124;
+            this.chkCloudOn.Text = "IR Clouds";
+            this.toolTip1.SetToolTip(this.chkCloudOn, resources.GetString("chkCloudOn.ToolTip"));
+            this.chkCloudOn.CheckedChanged += new System.EventHandler(this.chkCloudOn_CheckedChanged);
+            // 
+            // chkLightningMap
+            // 
+            this.chkLightningMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkLightningMap.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkLightningMap.Image = null;
+            this.chkLightningMap.Location = new System.Drawing.Point(270, 497);
+            this.chkLightningMap.Name = "chkLightningMap";
+            this.chkLightningMap.Size = new System.Drawing.Size(75, 20);
+            this.chkLightningMap.TabIndex = 123;
+            this.chkLightningMap.Text = "Lightning";
+            this.toolTip1.SetToolTip(this.chkLightningMap, resources.GetString("chkLightningMap.ToolTip"));
+            this.chkLightningMap.CheckedChanged += new System.EventHandler(this.chkLightningMap_CheckedChanged);
             // 
             // chkDLayerON
             // 
             this.chkDLayerON.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkDLayerON.Enabled = false;
             this.chkDLayerON.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkDLayerON.Image = null;
-            this.chkDLayerON.Location = new System.Drawing.Point(270, 437);
+            this.chkDLayerON.Location = new System.Drawing.Point(270, 478);
             this.chkDLayerON.Name = "chkDLayerON";
             this.chkDLayerON.Size = new System.Drawing.Size(75, 20);
             this.chkDLayerON.TabIndex = 121;
@@ -633,7 +646,7 @@ namespace PowerSDR
             // txtLoTWpass
             // 
             this.txtLoTWpass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtLoTWpass.Location = new System.Drawing.Point(682, 441);
+            this.txtLoTWpass.Location = new System.Drawing.Point(682, 482);
             this.txtLoTWpass.MaxLength = 20;
             this.txtLoTWpass.Name = "txtLoTWpass";
             this.txtLoTWpass.PasswordChar = '.';
@@ -652,7 +665,7 @@ namespace PowerSDR
             this.chkBoxBeacon.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkBoxBeacon.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkBoxBeacon.Image = null;
-            this.chkBoxBeacon.Location = new System.Drawing.Point(182, 390);
+            this.chkBoxBeacon.Location = new System.Drawing.Point(182, 428);
             this.chkBoxBeacon.Name = "chkBoxBeacon";
             this.chkBoxBeacon.Size = new System.Drawing.Size(85, 24);
             this.chkBoxBeacon.TabIndex = 114;
@@ -664,7 +677,7 @@ namespace PowerSDR
             this.chkVoacap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkVoacap.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkVoacap.Image = null;
-            this.chkVoacap.Location = new System.Drawing.Point(615, 169);
+            this.chkVoacap.Location = new System.Drawing.Point(615, 210);
             this.chkVoacap.Name = "chkVoacap";
             this.chkVoacap.Size = new System.Drawing.Size(77, 17);
             this.chkVoacap.TabIndex = 113;
@@ -677,7 +690,7 @@ namespace PowerSDR
             this.chkDXOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkDXOn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkDXOn.Image = null;
-            this.chkDXOn.Location = new System.Drawing.Point(615, 192);
+            this.chkDXOn.Location = new System.Drawing.Point(615, 233);
             this.chkDXOn.Name = "chkDXOn";
             this.chkDXOn.Size = new System.Drawing.Size(77, 17);
             this.chkDXOn.TabIndex = 112;
@@ -690,7 +703,7 @@ namespace PowerSDR
             this.chkMapOn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkMapOn.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkMapOn.Image = null;
-            this.chkMapOn.Location = new System.Drawing.Point(520, 169);
+            this.chkMapOn.Location = new System.Drawing.Point(520, 210);
             this.chkMapOn.Name = "chkMapOn";
             this.chkMapOn.Size = new System.Drawing.Size(77, 17);
             this.chkMapOn.TabIndex = 111;
@@ -703,7 +716,7 @@ namespace PowerSDR
             this.chkBoxBandText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkBoxBandText.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkBoxBandText.Image = null;
-            this.chkBoxBandText.Location = new System.Drawing.Point(417, 425);
+            this.chkBoxBandText.Location = new System.Drawing.Point(417, 466);
             this.chkBoxBandText.Name = "chkBoxBandText";
             this.chkBoxBandText.Size = new System.Drawing.Size(113, 20);
             this.chkBoxBandText.TabIndex = 106;
@@ -719,7 +732,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.numBeamHeading.Location = new System.Drawing.Point(580, 410);
+            this.numBeamHeading.Location = new System.Drawing.Point(580, 451);
             this.numBeamHeading.Maximum = new decimal(new int[] {
             360,
             0,
@@ -751,7 +764,7 @@ namespace PowerSDR
             this.chkISS.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkISS.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkISS.Image = null;
-            this.chkISS.Location = new System.Drawing.Point(367, 325);
+            this.chkISS.Location = new System.Drawing.Point(367, 366);
             this.chkISS.Name = "chkISS";
             this.chkISS.Size = new System.Drawing.Size(46, 20);
             this.chkISS.TabIndex = 104;
@@ -766,7 +779,7 @@ namespace PowerSDR
             this.chkMoon.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkMoon.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkMoon.Image = null;
-            this.chkMoon.Location = new System.Drawing.Point(320, 325);
+            this.chkMoon.Location = new System.Drawing.Point(320, 366);
             this.chkMoon.Name = "chkMoon";
             this.chkMoon.Size = new System.Drawing.Size(58, 20);
             this.chkMoon.TabIndex = 103;
@@ -774,24 +787,11 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.chkMoon, resources.GetString("chkMoon.ToolTip"));
             this.chkMoon.CheckedChanged += new System.EventHandler(this.chkMoon_CheckedChanged);
             // 
-            // chkBoxContour
-            // 
-            this.chkBoxContour.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.chkBoxContour.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkBoxContour.Image = null;
-            this.chkBoxContour.Location = new System.Drawing.Point(349, 416);
-            this.chkBoxContour.Name = "chkBoxContour";
-            this.chkBoxContour.Size = new System.Drawing.Size(70, 20);
-            this.chkBoxContour.TabIndex = 98;
-            this.chkBoxContour.Text = "Contour";
-            this.toolTip1.SetToolTip(this.chkBoxContour, resources.GetString("chkBoxContour.ToolTip"));
-            this.chkBoxContour.CheckedChanged += new System.EventHandler(this.chkBoxContour_CheckedChanged);
-            // 
             // tbPanPower
             // 
             this.tbPanPower.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbPanPower.AutoSize = false;
-            this.tbPanPower.Location = new System.Drawing.Point(343, 457);
+            this.tbPanPower.Location = new System.Drawing.Point(343, 498);
             this.tbPanPower.Maximum = 1500;
             this.tbPanPower.Minimum = 1;
             this.tbPanPower.Name = "tbPanPower";
@@ -809,7 +809,7 @@ namespace PowerSDR
             this.chkBoxAnt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkBoxAnt.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkBoxAnt.Image = null;
-            this.chkBoxAnt.Location = new System.Drawing.Point(349, 432);
+            this.chkBoxAnt.Location = new System.Drawing.Point(349, 473);
             this.chkBoxAnt.Name = "chkBoxAnt";
             this.chkBoxAnt.Size = new System.Drawing.Size(55, 24);
             this.chkBoxAnt.TabIndex = 96;
@@ -824,7 +824,7 @@ namespace PowerSDR
             this.chkBoxDIG.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkBoxDIG.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkBoxDIG.Image = null;
-            this.chkBoxDIG.Location = new System.Drawing.Point(182, 367);
+            this.chkBoxDIG.Location = new System.Drawing.Point(182, 406);
             this.chkBoxDIG.Name = "chkBoxDIG";
             this.chkBoxDIG.Size = new System.Drawing.Size(85, 24);
             this.chkBoxDIG.TabIndex = 70;
@@ -836,7 +836,7 @@ namespace PowerSDR
             this.checkBoxMUF.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBoxMUF.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.checkBoxMUF.Image = null;
-            this.checkBoxMUF.Location = new System.Drawing.Point(343, 394);
+            this.checkBoxMUF.Location = new System.Drawing.Point(343, 435);
             this.checkBoxMUF.Name = "checkBoxMUF";
             this.checkBoxMUF.Size = new System.Drawing.Size(75, 20);
             this.checkBoxMUF.TabIndex = 95;
@@ -853,7 +853,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udDisplayWWV.Location = new System.Drawing.Point(513, 376);
+            this.udDisplayWWV.Location = new System.Drawing.Point(513, 417);
             this.udDisplayWWV.Maximum = new decimal(new int[] {
             4,
             0,
@@ -874,19 +874,6 @@ namespace PowerSDR
             0,
             0});
             // 
-            // checkBoxWWV
-            // 
-            this.checkBoxWWV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkBoxWWV.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.checkBoxWWV.Image = null;
-            this.checkBoxWWV.Location = new System.Drawing.Point(513, 350);
-            this.checkBoxWWV.Name = "checkBoxWWV";
-            this.checkBoxWWV.Size = new System.Drawing.Size(98, 24);
-            this.checkBoxWWV.TabIndex = 90;
-            this.checkBoxWWV.Text = "Use WWV HF";
-            this.toolTip1.SetToolTip(this.checkBoxWWV, resources.GetString("checkBoxWWV.ToolTip"));
-            this.checkBoxWWV.CheckedChanged += new System.EventHandler(this.checkBoxWWV_CheckedChanged);
-            // 
             // numericUpDownTS1
             // 
             this.numericUpDownTS1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -895,7 +882,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.numericUpDownTS1.Location = new System.Drawing.Point(417, 470);
+            this.numericUpDownTS1.Location = new System.Drawing.Point(417, 511);
             this.numericUpDownTS1.Maximum = new decimal(new int[] {
             5,
             0,
@@ -923,7 +910,7 @@ namespace PowerSDR
             this.BoxBFScan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.BoxBFScan.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.BoxBFScan.Image = null;
-            this.BoxBFScan.Location = new System.Drawing.Point(343, 477);
+            this.BoxBFScan.Location = new System.Drawing.Point(183, 521);
             this.BoxBFScan.Name = "BoxBFScan";
             this.BoxBFScan.Size = new System.Drawing.Size(87, 24);
             this.BoxBFScan.TabIndex = 87;
@@ -936,7 +923,7 @@ namespace PowerSDR
             this.BoxBScan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.BoxBScan.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.BoxBScan.Image = null;
-            this.BoxBScan.Location = new System.Drawing.Point(273, 477);
+            this.BoxBScan.Location = new System.Drawing.Point(183, 502);
             this.BoxBScan.Name = "BoxBScan";
             this.BoxBScan.Size = new System.Drawing.Size(81, 24);
             this.BoxBScan.TabIndex = 86;
@@ -951,7 +938,7 @@ namespace PowerSDR
             this.chkBoxBeam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkBoxBeam.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkBoxBeam.Image = null;
-            this.chkBoxBeam.Location = new System.Drawing.Point(417, 402);
+            this.chkBoxBeam.Location = new System.Drawing.Point(417, 443);
             this.chkBoxBeam.Name = "chkBoxBeam";
             this.chkBoxBeam.Size = new System.Drawing.Size(88, 20);
             this.chkBoxBeam.TabIndex = 83;
@@ -968,7 +955,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udDisplayLong.Location = new System.Drawing.Point(614, 471);
+            this.udDisplayLong.Location = new System.Drawing.Point(614, 512);
             this.udDisplayLong.Maximum = new decimal(new int[] {
             180,
             0,
@@ -1001,7 +988,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udDisplayLat.Location = new System.Drawing.Point(538, 471);
+            this.udDisplayLat.Location = new System.Drawing.Point(538, 512);
             this.udDisplayLat.Maximum = new decimal(new int[] {
             90,
             0,
@@ -1030,7 +1017,7 @@ namespace PowerSDR
             this.chkBoxMem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkBoxMem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkBoxMem.Image = null;
-            this.chkBoxMem.Location = new System.Drawing.Point(417, 445);
+            this.chkBoxMem.Location = new System.Drawing.Point(417, 486);
             this.chkBoxMem.Name = "chkBoxMem";
             this.chkBoxMem.Size = new System.Drawing.Size(123, 20);
             this.chkBoxMem.TabIndex = 74;
@@ -1043,7 +1030,7 @@ namespace PowerSDR
             this.chkBoxPan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkBoxPan.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkBoxPan.Image = null;
-            this.chkBoxPan.Location = new System.Drawing.Point(417, 384);
+            this.chkBoxPan.Location = new System.Drawing.Point(417, 425);
             this.chkBoxPan.Name = "chkBoxPan";
             this.chkBoxPan.Size = new System.Drawing.Size(100, 20);
             this.chkBoxPan.TabIndex = 71;
@@ -1058,7 +1045,7 @@ namespace PowerSDR
             this.chkBoxSSB.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkBoxSSB.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkBoxSSB.Image = null;
-            this.chkBoxSSB.Location = new System.Drawing.Point(182, 346);
+            this.chkBoxSSB.Location = new System.Drawing.Point(182, 385);
             this.chkBoxSSB.Name = "chkBoxSSB";
             this.chkBoxSSB.Size = new System.Drawing.Size(85, 24);
             this.chkBoxSSB.TabIndex = 69;
@@ -1072,7 +1059,7 @@ namespace PowerSDR
             this.chkBoxCW.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkBoxCW.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkBoxCW.Image = null;
-            this.chkBoxCW.Location = new System.Drawing.Point(182, 323);
+            this.chkBoxCW.Location = new System.Drawing.Point(182, 364);
             this.chkBoxCW.Name = "chkBoxCW";
             this.chkBoxCW.Size = new System.Drawing.Size(85, 24);
             this.chkBoxCW.TabIndex = 68;
@@ -1086,7 +1073,7 @@ namespace PowerSDR
             this.chkMapBand.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkMapBand.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkMapBand.Image = null;
-            this.chkMapBand.Location = new System.Drawing.Point(417, 367);
+            this.chkMapBand.Location = new System.Drawing.Point(417, 408);
             this.chkMapBand.Name = "chkMapBand";
             this.chkMapBand.Size = new System.Drawing.Size(113, 20);
             this.chkMapBand.TabIndex = 67;
@@ -1099,7 +1086,7 @@ namespace PowerSDR
             this.chkMapCountry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkMapCountry.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkMapCountry.Image = null;
-            this.chkMapCountry.Location = new System.Drawing.Point(417, 327);
+            this.chkMapCountry.Location = new System.Drawing.Point(417, 368);
             this.chkMapCountry.Name = "chkMapCountry";
             this.chkMapCountry.Size = new System.Drawing.Size(88, 20);
             this.chkMapCountry.TabIndex = 66;
@@ -1114,7 +1101,7 @@ namespace PowerSDR
             this.chkMapCall.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkMapCall.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkMapCall.Image = null;
-            this.chkMapCall.Location = new System.Drawing.Point(417, 344);
+            this.chkMapCall.Location = new System.Drawing.Point(417, 385);
             this.chkMapCall.Name = "chkMapCall";
             this.chkMapCall.Size = new System.Drawing.Size(88, 20);
             this.chkMapCall.TabIndex = 65;
@@ -1129,7 +1116,7 @@ namespace PowerSDR
             this.chkPanMode.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkPanMode.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkPanMode.Image = null;
-            this.chkPanMode.Location = new System.Drawing.Point(273, 369);
+            this.chkPanMode.Location = new System.Drawing.Point(273, 410);
             this.chkPanMode.Name = "chkPanMode";
             this.chkPanMode.Size = new System.Drawing.Size(148, 20);
             this.chkPanMode.TabIndex = 63;
@@ -1145,7 +1132,7 @@ namespace PowerSDR
             this.chkGrayLine.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkGrayLine.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkGrayLine.Image = null;
-            this.chkGrayLine.Location = new System.Drawing.Point(273, 350);
+            this.chkGrayLine.Location = new System.Drawing.Point(273, 391);
             this.chkGrayLine.Name = "chkGrayLine";
             this.chkGrayLine.Size = new System.Drawing.Size(105, 17);
             this.chkGrayLine.TabIndex = 61;
@@ -1161,7 +1148,7 @@ namespace PowerSDR
             this.chkSUN.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSUN.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkSUN.Image = null;
-            this.chkSUN.Location = new System.Drawing.Point(273, 325);
+            this.chkSUN.Location = new System.Drawing.Point(273, 365);
             this.chkSUN.Name = "chkSUN";
             this.chkSUN.Size = new System.Drawing.Size(46, 20);
             this.chkSUN.TabIndex = 60;
@@ -1175,7 +1162,7 @@ namespace PowerSDR
             this.hkBoxSpotRX2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.hkBoxSpotRX2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.hkBoxSpotRX2.Image = null;
-            this.hkBoxSpotRX2.Location = new System.Drawing.Point(111, 402);
+            this.hkBoxSpotRX2.Location = new System.Drawing.Point(111, 443);
             this.hkBoxSpotRX2.Name = "hkBoxSpotRX2";
             this.hkBoxSpotRX2.Size = new System.Drawing.Size(78, 19);
             this.hkBoxSpotRX2.TabIndex = 119;
@@ -1188,7 +1175,7 @@ namespace PowerSDR
             this.hkBoxSpotBand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.hkBoxSpotBand.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.hkBoxSpotBand.Image = null;
-            this.hkBoxSpotBand.Location = new System.Drawing.Point(12, 402);
+            this.hkBoxSpotBand.Location = new System.Drawing.Point(12, 443);
             this.hkBoxSpotBand.Name = "hkBoxSpotBand";
             this.hkBoxSpotBand.Size = new System.Drawing.Size(103, 19);
             this.hkBoxSpotBand.TabIndex = 118;
@@ -1196,12 +1183,51 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.hkBoxSpotBand, "Only Show DX Spots on RX1 Band");
             this.hkBoxSpotBand.CheckedChanged += new System.EventHandler(this.hkBoxSpotBand_CheckedChanged);
             // 
+            // chkBoxContour
+            // 
+            this.chkBoxContour.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkBoxContour.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkBoxContour.Image = null;
+            this.chkBoxContour.Location = new System.Drawing.Point(349, 457);
+            this.chkBoxContour.Name = "chkBoxContour";
+            this.chkBoxContour.Size = new System.Drawing.Size(70, 20);
+            this.chkBoxContour.TabIndex = 98;
+            this.chkBoxContour.Text = "Contour";
+            this.toolTip1.SetToolTip(this.chkBoxContour, resources.GetString("chkBoxContour.ToolTip"));
+            this.chkBoxContour.CheckedChanged += new System.EventHandler(this.chkBoxContour_CheckedChanged);
+            // 
+            // chkFLayerON
+            // 
+            this.chkFLayerON.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkFLayerON.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkFLayerON.Image = null;
+            this.chkFLayerON.Location = new System.Drawing.Point(270, 461);
+            this.chkFLayerON.Name = "chkFLayerON";
+            this.chkFLayerON.Size = new System.Drawing.Size(84, 20);
+            this.chkFLayerON.TabIndex = 122;
+            this.chkFLayerON.Text = "foF2-Layer";
+            this.toolTip1.SetToolTip(this.chkFLayerON, resources.GetString("chkFLayerON.ToolTip"));
+            this.chkFLayerON.CheckedChanged += new System.EventHandler(this.chkFLayerON_CheckedChanged);
+            // 
+            // checkBoxWWV
+            // 
+            this.checkBoxWWV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxWWV.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.checkBoxWWV.Image = null;
+            this.checkBoxWWV.Location = new System.Drawing.Point(513, 391);
+            this.checkBoxWWV.Name = "checkBoxWWV";
+            this.checkBoxWWV.Size = new System.Drawing.Size(98, 24);
+            this.checkBoxWWV.TabIndex = 90;
+            this.checkBoxWWV.Text = "Use WWV HF";
+            this.toolTip1.SetToolTip(this.checkBoxWWV, resources.GetString("checkBoxWWV.ToolTip"));
+            this.checkBoxWWV.CheckedChanged += new System.EventHandler(this.checkBoxWWV_CheckedChanged);
+            // 
             // label3
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label3.Location = new System.Drawing.Point(537, 449);
+            this.label3.Location = new System.Drawing.Point(537, 490);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(139, 13);
             this.label3.TabIndex = 81;
@@ -1212,7 +1238,7 @@ namespace PowerSDR
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label4.Location = new System.Drawing.Point(693, 449);
+            this.label4.Location = new System.Drawing.Point(693, 490);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 13);
             this.label4.TabIndex = 82;
@@ -1223,7 +1249,7 @@ namespace PowerSDR
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.label5.Location = new System.Drawing.Point(541, 434);
+            this.label5.Location = new System.Drawing.Point(541, 475);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(227, 13);
             this.label5.TabIndex = 84;
@@ -1314,7 +1340,7 @@ namespace PowerSDR
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label6.Location = new System.Drawing.Point(587, 413);
+            this.label6.Location = new System.Drawing.Point(587, 454);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(0, 13);
             this.label6.TabIndex = 107;
@@ -1324,7 +1350,7 @@ namespace PowerSDR
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label7.AutoSize = true;
             this.label7.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.label7.Location = new System.Drawing.Point(559, 413);
+            this.label7.Location = new System.Drawing.Point(559, 454);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(19, 13);
             this.label7.TabIndex = 110;
@@ -1332,7 +1358,7 @@ namespace PowerSDR
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.Location = new System.Drawing.Point(13, 7);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
@@ -1346,11 +1372,11 @@ namespace PowerSDR
             this.chkBoxWrld.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkBoxWrld.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkBoxWrld.Image = null;
-            this.chkBoxWrld.Location = new System.Drawing.Point(12, 441);
+            this.chkBoxWrld.Location = new System.Drawing.Point(12, 482);
             this.chkBoxWrld.Name = "chkBoxWrld";
-            this.chkBoxWrld.Size = new System.Drawing.Size(215, 20);
+            this.chkBoxWrld.Size = new System.Drawing.Size(189, 20);
             this.chkBoxWrld.TabIndex = 78;
-            this.chkBoxWrld.Text = "Exclude North American Spotters";
+            this.chkBoxWrld.Text = "Exclude North Amer. Spotters";
             this.chkBoxWrld.CheckedChanged += new System.EventHandler(this.chkBoxWrld_CheckedChanged);
             // 
             // chkBoxNA
@@ -1358,7 +1384,7 @@ namespace PowerSDR
             this.chkBoxNA.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkBoxNA.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkBoxNA.Image = null;
-            this.chkBoxNA.Location = new System.Drawing.Point(12, 424);
+            this.chkBoxNA.Location = new System.Drawing.Point(12, 465);
             this.chkBoxNA.Name = "chkBoxNA";
             this.chkBoxNA.Size = new System.Drawing.Size(177, 19);
             this.chkBoxNA.TabIndex = 77;
@@ -1370,7 +1396,7 @@ namespace PowerSDR
             this.chkAlwaysOnTop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chkAlwaysOnTop.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.chkAlwaysOnTop.Image = null;
-            this.chkAlwaysOnTop.Location = new System.Drawing.Point(682, 397);
+            this.chkAlwaysOnTop.Location = new System.Drawing.Point(682, 438);
             this.chkAlwaysOnTop.Name = "chkAlwaysOnTop";
             this.chkAlwaysOnTop.Size = new System.Drawing.Size(103, 24);
             this.chkAlwaysOnTop.TabIndex = 58;
@@ -1383,7 +1409,7 @@ namespace PowerSDR
             this.chkDXMode.Checked = true;
             this.chkDXMode.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkDXMode.Image = null;
-            this.chkDXMode.Location = new System.Drawing.Point(682, 470);
+            this.chkDXMode.Location = new System.Drawing.Point(682, 511);
             this.chkDXMode.Name = "chkDXMode";
             this.chkDXMode.Size = new System.Drawing.Size(91, 24);
             this.chkDXMode.TabIndex = 59;
@@ -1394,7 +1420,10 @@ namespace PowerSDR
             // SpotControl
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ClientSize = new System.Drawing.Size(784, 502);
+            this.ClientSize = new System.Drawing.Size(784, 543);
+            this.Controls.Add(this.chkCloudOn);
+            this.Controls.Add(this.btnBeacon);
+            this.Controls.Add(this.chkLightningMap);
             this.Controls.Add(this.chkDLayerON);
             this.Controls.Add(this.txtLoTWpass);
             this.Controls.Add(this.label4);
@@ -1427,7 +1456,6 @@ namespace PowerSDR
             this.Controls.Add(this.numericUpDownTS1);
             this.Controls.Add(this.BoxBFScan);
             this.Controls.Add(this.BoxBScan);
-            this.Controls.Add(this.btnBeacon);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.chkBoxBeam);
             this.Controls.Add(this.SWLbutton);
@@ -1588,9 +1616,8 @@ namespace PowerSDR
         public System.Windows.Forms.CheckBoxTS hkBoxSpotRX2;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private TimeProc timeProcPeriodic;
-
-
-
+        public System.Windows.Forms.CheckBoxTS chkLightningMap;
+        public System.Windows.Forms.CheckBoxTS chkCloudOn;
     } // Spotcontrol
 
 

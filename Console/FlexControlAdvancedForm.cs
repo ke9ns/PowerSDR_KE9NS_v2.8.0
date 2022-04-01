@@ -26,24 +26,20 @@
 //    USA
 //=================================================================
 
+using Flex.Control; // .250
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-
 using System.Threading;
-using Flex.Control;
-using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace PowerSDR
 {
     public partial class FlexControlAdvancedForm : Form
     {
         #region Variable Declaration
+
+        //  public FlexControl FlexControl; //.250
+        //   public FlexControlManager FlexControlManager; //.250
 
         private Console console;
         private FlexControlInterface1 fc_interface = null;

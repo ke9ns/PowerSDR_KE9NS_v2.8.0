@@ -2649,7 +2649,7 @@ namespace PowerSDR
                 case 506:
                     {
                         XITFLIP(msg); // ke9ns add was CW unused mode
-                       // ModeCW(msg);
+                                      // ModeCW(msg);
                         break;
                     }
                 case 507:
@@ -3631,9 +3631,9 @@ namespace PowerSDR
                 if (msg == 127) // neg step
                 {
 
-                   //  commands.ZZAD("01"); // does not work
+                    //  commands.ZZAD("01"); // does not work
 
-                   m_parent.setupForm.parser.Get("ZZAD01;"); //.178
+                    m_parent.setupForm.parser.Get("ZZAD01;"); //.178
                 }
                 else if (msg == 1) // pos step
                 {
@@ -6540,10 +6540,10 @@ namespace PowerSDR
         // ke9ns add: .185
         private void XITFLIP(int msg)
         {
-          //  if (msg == 127)
-           // {
-                m_parent.XITFlip = true;
-           // }
+            //  if (msg == 127)
+            // {
+            m_parent.XITFlip = true;
+            // }
         } // XITFLIP
 
         private void ModeCW(int msg)

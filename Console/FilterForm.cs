@@ -28,8 +28,6 @@
 
 using System;
 using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace PowerSDR
@@ -44,7 +42,7 @@ namespace PowerSDR
         private Console console;
         private FilterPreset[] preset;
         private bool rx2;
-        
+
         #endregion
 
         #region Constructor and Destructor
@@ -86,7 +84,7 @@ namespace PowerSDR
 
         #endregion
 
-        
+
 
         #region Properties
 

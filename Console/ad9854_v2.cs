@@ -30,10 +30,9 @@
 //    USA
 //=================================================================
 
+using PortTalk;
 using System;
 using System.Threading;
-using PortTalk;
-using System.Diagnostics;
 
 namespace PowerSDR
 {

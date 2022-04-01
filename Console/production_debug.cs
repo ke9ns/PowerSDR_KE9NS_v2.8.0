@@ -26,12 +26,7 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.Threading;
-using System.Windows.Forms;
 
 namespace PowerSDR
 {
@@ -43,7 +38,7 @@ namespace PowerSDR
         #region Variable Declaration
 
         private Console console;
-        
+
         #endregion
 
 

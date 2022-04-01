@@ -98,8 +98,8 @@ namespace PowerSDR
             // 
             // picRadar
             // 
-            this.picRadar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.picRadar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.picRadar.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.picRadar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -225,7 +225,7 @@ namespace PowerSDR
             this.btnBump180.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBump180.ForeColor = System.Drawing.Color.White;
             this.btnBump180.Image = null;
-            this.btnBump180.Location = new System.Drawing.Point(246, 319);
+            this.btnBump180.Location = new System.Drawing.Point(246, 322);
             this.btnBump180.Name = "btnBump180";
             this.btnBump180.Size = new System.Drawing.Size(39, 23);
             this.btnBump180.TabIndex = 50;
@@ -261,7 +261,7 @@ namespace PowerSDR
             0,
             0,
             196608});
-            this.udAngle.Location = new System.Drawing.Point(271, 352);
+            this.udAngle.Location = new System.Drawing.Point(246, 263);
             this.udAngle.Maximum = new decimal(new int[] {
             4,
             0,
@@ -284,7 +284,7 @@ namespace PowerSDR
             // 
             // udR
             // 
-            this.udR.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.udR.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.udR.DecimalPlaces = 3;
             this.udR.Increment = new decimal(new int[] {
@@ -292,7 +292,7 @@ namespace PowerSDR
             0,
             0,
             196608});
-            this.udR.Location = new System.Drawing.Point(248, 352);
+            this.udR.Location = new System.Drawing.Point(0, 263);
             this.udR.Maximum = new decimal(new int[] {
             2,
             0,
@@ -304,7 +304,7 @@ namespace PowerSDR
             0,
             -2147483648});
             this.udR.Name = "udR";
-            this.udR.Size = new System.Drawing.Size(0, 20);
+            this.udR.Size = new System.Drawing.Size(45, 20);
             this.udR.TabIndex = 5;
             this.udR.Value = new decimal(new int[] {
             0,

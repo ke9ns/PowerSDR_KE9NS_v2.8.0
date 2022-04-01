@@ -357,6 +357,50 @@ Gray: Beacon Station
 
 </value>
   </data>
+  <data name="maps_message.Text" xml:space="preserve">
+    <value>F1 Help screen:
+Hit F2 (over Maps button) for Video help on this feature
+
+LEFT CLICK:  SPOTTER TRACKING WORLD Map with Grayline, Sun-Moon Tracking, ISS, DX Spots 
+WHEEL CLICK: Opens separate Callsign prefix Map window 
+RIGHT CLICK: Toggles F-Layer, D-Layer, Lightning, Cloud cover Maps ON/OFF (Described below)
+
+----------------------------------------------------------
+SPOTTER MAP provided by NOAA (see SPOTTER screen)
+Shows World map with (SHIFT key) LAT/LONG,  Day indicator, and optional Grayline, Sun, Moon, ISS
+Shows Clickable (RED) spots directly on map (CTRL key goes directly to Spot Frequency)
+Grid lines represent Lat, Long and +/- hours from UTC
+
+----------------------------------------------------------
+F-LAYER MAP provided by: Australian gov space weather service critical foF2-Layer world map. (Updated every 30min)
+Colors denoting the highest frequency the f2 ionosphere will reflect vertical directed signals directly back towards earth (NVIS)
+Determined using ionosonde radar. The higher the reflect frequencies, the more open propagation will be in those areas.
+
+If your station is under a Blue (or better) area on the F2 map, 
+you may experience skip conditions on or close to 10m to other Blue (or better) areas of the F2 map.
+Red up to Blue usually indicates that the uppers bands are closed. 
+
+----------------------------------------------------------
+D-LAYER MAP provided by: NOAA XRAY D-Layer Absorption level world map.
+Absorbs Low Band RF in the D-Layer during daylight hours (and X-Ray events)
+Higher frequencies can pass through the D-Layer up to the E/F-Layers unless shown on this map.
+If you see a Space Weather report of "Radio Blackout", check for D-Layer absorption
+
+----------------------------------------------------------
+LIGHTNING MAP provided by: Blitzortung 
+Real-Time but updated every 30 min
+White = Recent Lighting strike (within 20 min)
+Yellow =  (within 40min)
+Red = Very Old (within 120min)
+HOLD CTRL+Z to Zoom or Magnify an area next to the Mouse on the Map.
+
+----------------------------------------------------------
+CLOUD COVER MAP (Mosaic) Provided by: University of Wisconsin-Madison
+Real-Time but updated every 30 min
+Mosaic IR Cloud cover for most of the Earth
+Note: No cloud data for lower center section of world map.
+HOLD CTRL+Z to Zoom  or Magnify an area next to the Mouse on the Map.</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>41</value>
   </metadata>

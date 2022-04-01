@@ -3,17 +3,17 @@ using System.Windows.Forms;
 
 namespace PowerSDR
 {
-   
+
     public partial class CATTester : System.Windows.Forms.Form
     {
 
-      
+
         private Console console;
         private CATParser parser;
-       
+
         private DataSet ds;
-       
-     
+
+
         public CATTester(Console c)
         {
             //
@@ -48,7 +48,7 @@ namespace PowerSDR
             txtInput.Focus();
         }
 
-    
+
 
 
         private void btnExit_Click(object sender, System.EventArgs e)

@@ -801,7 +801,7 @@ namespace System.Windows.Forms
             if (base.InvokeRequired)
             {
                 this.Invoke(new MethodInvoker(base.PerformClick));
-              
+
             }
             else
             {

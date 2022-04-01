@@ -139,6 +139,7 @@ namespace PowerSDR
 
         private int band_index;
         public static byte ScanStop = 1; // controlled from console 0=run, 1=stop
+        public static byte ScanStop2 = 1; // controlled from console 0=run, 1=stop  .244
 
         public static byte ScanRST = 0; // 1= pick up where you left off, 0=reset back to low_freq
         private string last_band;                           // Used in bandstacking algorithm
@@ -285,6 +286,7 @@ namespace PowerSDR
 
             int lastSIG = 0;
             int lastSQL = 0;
+
 
             Debug.WriteLine("CONSOLE LAST BAND " + console.last_band + " , " + console.RX1Band);
 
@@ -919,6 +921,12 @@ namespace PowerSDR
             ST3.Stop();
             ST3.Reset();
 
+            if (ScanVFOB == true) //.244
+            {
+                ScanRun = false;
+                return;
+            }
+
             ScanPause = false;
 
             if (console.MemoryList.List.Count == 0) return; // nothing in the list, exit
@@ -1233,9 +1241,6 @@ namespace PowerSDR
 
 
 
-
-
-
         int linelength = 84; // length of a line in the currFbox
         //========================================================================================
         //  Lookup MEMORY table and match user input to the MEMORY list and update currFBox text screen
@@ -1274,7 +1279,7 @@ namespace PowerSDR
 
                     //   Debug.WriteLine("UPDATE LIST B " + memsignal[memtotal]);
 
-                  //  bool scan = (bool)dataGridView2["Scan", i].Value; // ke9ns add .155  
+                    //  bool scan = (bool)dataGridView2["Scan", i].Value; // ke9ns add .155  
 
                     string Y;
                     if (scan == true) Y = " "; // .155
@@ -1295,13 +1300,17 @@ namespace PowerSDR
 
 
         public static int SQL = 0;  // updated by console routine picSquelch_Paint
+        public static int SQL2 = 0; //.244 2nd receiver
+
         public static int SIG = 0;
+        public static int SIG2 = 0; // .244
 
         Stopwatch ST2 = new Stopwatch();
         Stopwatch ST3 = new Stopwatch();
 
         int scantype = 0;  // 1=memory, 2=band stack, 3= custom, 4= low-high, 5=SWL
         bool scanstop = false;
+        bool scanstop2 = false; // .244 2nd rx
 
         //==========================================================================================
         // thread scans selected "Memory" Group name frequencies only
@@ -1315,8 +1324,20 @@ namespace PowerSDR
             Debug.WriteLine("SCANSTOP = " + ScanStop);
             btnGroupMemory.BackColor = Color.LightGreen;
 
+            if (ScanVFOB == true)
+            {
+                btnGroupMemory.Text = "Memory Scan (RX2)";
+            }
+            else
+            {
+                btnGroupMemory.Text = "Memory Scan (RX)";
+            }
+
             int lastSIG = 0;
             int lastSQL = 0;
+
+            int lastSQL2 = 0; //.244 2nd rx
+            int lastSIG2 = 0; //.244
 
             ST3.Reset();
 
@@ -1324,12 +1345,25 @@ namespace PowerSDR
 
             do // ScanRun
             {
-                if (scanstop == true)
+                if (ScanVFOB == true) //.244
                 {
-                    scanstop = false;  // reset
-                    goto RT2;
+                    if (scanstop2 == true)
+                    {
+                        scanstop2 = false;  // reset
+                        goto RT2;
 
+                    }
                 }
+                else
+                {
+                    if (scanstop == true)
+                    {
+                        scanstop = false;  // reset
+                        goto RT2;
+
+                    }
+                }
+
                 Debug.WriteLine("START OF LOOP");
 
                 for (x = 0; x < memtotal; x++) // go through list of MEMORIES you found
@@ -1353,7 +1387,15 @@ namespace PowerSDR
                     if (recordToRestore.Scan == false) continue; // ke9ns add .155
 
                     Debug.WriteLine("CHANGE MEMORY TO " + recordToRestore.RXFreq);
-                    console.RecallMemory(recordToRestore);
+
+                    if (ScanVFOB == true) //.244
+                    {
+                        console.RecallMemoryB(recordToRestore); // 2nd RX
+                    }
+                    else
+                    {
+                        console.RecallMemory(recordToRestore);
+                    }
 
 
                     currFBox.SelectionStart = x * linelength; // i * linelength
@@ -1363,21 +1405,39 @@ namespace PowerSDR
                     ST2.Restart(); // restart timer over again
 
                     ScanStop = 0; // reset squelch
+                    ScanStop2 = 0; // reset squelch
 
                     lastSIG = -400;
                     lastSQL = -400;
 
+                    lastSIG2 = -400; //.244
+                    lastSQL2 = -400;
 
                     //-------------------------------------------------------
                     // SPEED TIMER and PAUSE
                     do
                     {
                         Thread.Sleep(50);
-                        if (scanstop == true)
-                        {
-                            scanstop = false;  // reset
-                            goto RT2;
 
+
+
+                        if (ScanVFOB == true) //.244
+                        {
+                            if (scanstop2 == true)
+                            {
+                                scanstop2 = false;  // reset
+                                goto RT2;
+
+                            }
+                        }
+                        else
+                        {
+                            if (scanstop == true)
+                            {
+                                scanstop = false;  // reset
+                                goto RT2;
+
+                            }
                         }
 
                         if (ScanPause == true) pausebtn.BackColor = Color.Yellow;
@@ -1389,20 +1449,43 @@ namespace PowerSDR
                             goto RT2;  // turn off this thread now
                         }
 
-                        if (SIG > lastSIG)  // CHECK SQUELCH and SIGNAL levels
+                        if (ScanVFOB == true) //.244
                         {
-                            lastSIG = SIG;
+
+                            if (SIG2 > lastSIG2)  // CHECK SQUELCH and SIGNAL levels
+                            {
+                                lastSIG2 = SIG2;
+                            }
+
+                            if (SQL2 > lastSQL2)
+                            {
+                                lastSQL2 = SQL2;
+                            }
+                        }
+                        else
+                        {
+                            if (SIG > lastSIG)  // CHECK SQUELCH and SIGNAL levels
+                            {
+                                lastSIG = SIG;
+                            }
+
+                            if (SQL > lastSQL)
+                            {
+                                lastSQL = SQL;
+                            }
+
                         }
 
-                        if (SQL > lastSQL)
+                        if (((ScanStop == 1) && (ScanVFOB == false)) || ((ScanStop2 == 1) && (ScanVFOB == true))) // if console detected squelch open .244 mod
                         {
-                            lastSQL = SQL;
-                        }
-
-
-                        if ((ScanStop == 1)) // if console detected squelch open
-                        {
-                            memsignal[x] = lastSQL.ToString().PadLeft(4) + ", " + lastSIG.ToString().PadLeft(4) + ", SQL BRK";
+                            if (ScanVFOB == true) //.244
+                            {
+                                memsignal[x] = lastSQL2.ToString().PadLeft(4) + ", " + lastSIG2.ToString().PadLeft(4) + ", SQL BRK";
+                            }
+                            else
+                            {
+                                memsignal[x] = lastSQL.ToString().PadLeft(4) + ", " + lastSIG.ToString().PadLeft(4) + ", SQL BRK";
+                            }
 
                             if ((chkBoxSQLBRK.Checked == true) && (ScanPause == false)) // if stop on squelch break, then stop now
                             {
@@ -1456,14 +1539,32 @@ namespace PowerSDR
                         } // ScanStop == 1
                         else
                         {
-                            memsignal[x] = lastSQL.ToString().PadLeft(4) + ", " + lastSIG.ToString().PadLeft(4) + ", ";
+                            if (ScanVFOB == true) //.244
+                            {
+                                memsignal[x] = lastSQL2.ToString().PadLeft(4) + ", " + lastSIG2.ToString().PadLeft(4) + ", ";
+                            }
+                            else
+                            {
+                                memsignal[x] = lastSQL.ToString().PadLeft(4) + ", " + lastSIG.ToString().PadLeft(4) + ", ";
+                            }
                         }
-
-                        if (scanstop == true)
+                        if (ScanVFOB == true) //.244
                         {
-                            scanstop = false;  // reset
-                            goto RT2;
+                            if (scanstop2 == true)
+                            {
+                                scanstop2 = false;  // reset
+                                goto RT2;
 
+                            }
+                        }
+                        else
+                        {
+                            if (scanstop == true)
+                            {
+                                scanstop = false;  // reset
+                                goto RT2;
+
+                            }
                         }
 
                     } while ((ST2.ElapsedMilliseconds < speed) || (ScanPause == true));
@@ -1475,11 +1576,23 @@ namespace PowerSDR
                     currFBox.SelectionStart = x * linelength; // i * linelength
                     currFBox.SelectionLength = linelength;
 
-                    if (scanstop == true)
+                    if (ScanVFOB == true) //.244
                     {
-                        scanstop = false;  // reset
-                        goto RT2;
+                        if (scanstop2 == true)
+                        {
+                            scanstop2 = false;  // reset
+                            goto RT2;
 
+                        }
+                    }
+                    else
+                    {
+                        if (scanstop == true)
+                        {
+                            scanstop = false;  // reset
+                            goto RT2;
+
+                        }
                     }
 
                     if (SP5_Active == 1)
@@ -1497,11 +1610,23 @@ namespace PowerSDR
                     {
                         Thread.Sleep(50);
 
-                        if (scanstop == true)
+                        if (ScanVFOB == true) //.244
                         {
-                            scanstop = false;  // reset
-                            goto RT2;
+                            if (scanstop2 == true)
+                            {
+                                scanstop2 = false;  // reset
+                                goto RT2;
 
+                            }
+                        }
+                        else
+                        {
+                            if (scanstop == true)
+                            {
+                                scanstop = false;  // reset
+                                goto RT2;
+
+                            }
                         }
 
                         if (ScanRun == false)
@@ -1509,16 +1634,19 @@ namespace PowerSDR
                             Debug.WriteLine("SCANSTOP, Group scanner turned back off");
                             ScanPause = false; //.219
                             scanstop = true;
+                            scanstop2 = true;
                             break;
                         }
 
                         if (ST3.ElapsedMilliseconds > ((long)udPauseLength.Value * 1000))
                         {
                             ST3.Stop(); // stop the pause timer
-                            if (chkBoxSQLBRKWait.Checked == true && ScanStop == 1)
+                            if (chkBoxSQLBRKWait.Checked == true && ((ScanStop == 1 && ScanVFOB == false) || (ScanStop2 == 1 && ScanVFOB == true)))
                             {
                                 ScanPause = true;
                                 ScanStop = 0;
+                                ScanStop2 = 0; //.244
+
                                 ST3.Restart();
 
                             }
@@ -1537,11 +1665,23 @@ namespace PowerSDR
 
                     Debug.WriteLine("END OF LOOP " + memtotal + " , " + x);
 
-                    if (scanstop == true)
+                    if (ScanVFOB == true) //.244
                     {
-                        scanstop = false;  // reset
-                        goto RT2;
+                        if (scanstop2 == true)
+                        {
+                            scanstop2 = false;  // reset
+                            goto RT2;
 
+                        }
+                    }
+                    else
+                    {
+                        if (scanstop == true)
+                        {
+                            scanstop = false;  // reset
+                            goto RT2;
+
+                        }
                     }
 
                 } // for (x = 0; x < memtotal; x++)   FOR memtotal loop
@@ -1549,15 +1689,29 @@ namespace PowerSDR
 
 
                 Debug.WriteLine("END OF LOOP1 " + memtotal + " , " + x);
-                if (scanstop == true)
+                if (ScanVFOB == true) //.244
                 {
-                    scanstop = false;  // reset
-                    goto RT2;
+                    if (scanstop2 == true)
+                    {
+                        scanstop2 = false;  // reset
+                        goto RT2;
 
+                    }
+                }
+                else
+                {
+                    if (scanstop == true)
+                    {
+                        scanstop = false;  // reset
+                        goto RT2;
+
+                    }
                 }
             } while (ScanRun == true); // ScanStopped so leave thread
 
         RT2:
+            btnGroupMemory.Text = "Memory Scan (RX)";
+
             Debug.WriteLine("SCANTOP0"); // scanner done
             ST2.Stop();
             ST3.Stop();
@@ -1565,6 +1719,7 @@ namespace PowerSDR
             btnGroupMemory.BackColor = SystemColors.ControlLight;
 
             ScanStop = 1;
+            ScanStop2 = 1; //.244
             ScanRun = false;
             //   scantype = 0;
 
@@ -1774,7 +1929,7 @@ namespace PowerSDR
 
                         }
 
-                        
+
                         if (ScanRun == false)
                         {
                             Debug.WriteLine("SCANSTOP, Group scanner turned back off");
@@ -1842,7 +1997,7 @@ namespace PowerSDR
 
 
         //===========================================================================================
-       
+
         public static byte SP5_Active = 0; // ke9ns: 1= running, 0=off
         double freq1 = 0.0;
         public static double freq_Low = 0.0; // ke9ns low and high get automatically filled by the console.cs routine as the band changes
@@ -2037,7 +2192,7 @@ namespace PowerSDR
             for (int x = 10; x < SWR_SLOT; x++) // fill low end of SWR plot
             {
                 if (console.SWR_READ[TestRun, (int)ANT1, (int)BAND1, x] < 1) console.SWR_READ[TestRun, (int)ANT1, (int)BAND1, x] = 0.5; // this is so the storage file will see the data gap and not ignore data after the gap
-                                                                                                                                      //  Debug.WriteLine("SWR FILL " + x);
+                                                                                                                                        //  Debug.WriteLine("SWR FILL " + x);
 
             }
 
@@ -2582,17 +2737,17 @@ namespace PowerSDR
         {
 
             ScanPause = false;
-           
+
             comboBoxTS1.Text = "";
             textBox1.Text = "";
             Gname = "";
             memcount = 0;
             memtotal = 0;  //.226
-           
+
 
             ST3.Stop();
             ST3.Reset();
-           
+
 
             if (ScanRun == false) // if stopped
             {
@@ -2693,10 +2848,10 @@ namespace PowerSDR
 
 
                 } // for loop 
-              
+
                 reader2.Close();    // close  file
                 stream2.Close();   // close stream
-               
+
                 custSize = x; // new size of custom freq list
 
                 ScanRun = true; // start up the scanner
@@ -2732,10 +2887,10 @@ namespace PowerSDR
 
             string temp1 = "";
 
-           
+
             for (int ii = 0; ii < custSize; ii++)
             {
-               
+
                 string freq3 = customMem[ii].ToString("###0.000000"); // was N6 4 less than having index numbers
                 string name = customString[ii];
                 string mm = "Custom Memory List";
@@ -2744,7 +2899,7 @@ namespace PowerSDR
                 if (memsignal[ii] == null) memsignal[ii] = " ";
 
                 temp1 = temp1 + (ii + 1).ToString().PadLeft(2) + ": " + mm.PadRight(20).Substring(0, 20) + ", " + freq3.PadLeft(12).Substring(0, 12) + ", " + name.PadRight(20).Substring(0, 20) + ", " + memsignal[ii].PadRight(20).Substring(0, 20) + "\r\n"; // 74 char long //.226 fix ii
-              
+
 
             } // for
 
@@ -3018,7 +3173,7 @@ namespace PowerSDR
 
             if (e.Button == MouseButtons.Left) // VFOA
             {
-                Debug.WriteLine("LEFT CLICK: " );
+                Debug.WriteLine("LEFT CLICK: ");
 
                 scanstop = true;
 
@@ -3071,9 +3226,9 @@ namespace PowerSDR
                         {
                             Debug.WriteLine("MEMORY CLICK. restore memory " + xxx);
 
-                           comboMemGroupName.SelectedIndex = memIndex[xxx];
+                            comboMemGroupName.SelectedIndex = memIndex[xxx];
                             recordToRestore = new MemoryRecord((MemoryRecord)comboMemGroupName.SelectedItem); // ke9ns   you select index in the combo pulldown list
-                          
+
                             Debug.WriteLine("CHANGE MEMORY TO " + recordToRestore.RXFreq);
                             console.RecallMemory(recordToRestore);
 
@@ -3087,7 +3242,7 @@ namespace PowerSDR
 
                             if (textBox1.Text == "")  // MEMORY
                             {
-                              
+
                                 if (CultureInfo.InvariantCulture.CompareInfo.IndexOf((dataGridView2[0, i].Value.ToString()), Gname, CompareOptions.IgnoreCase) >= 0) // Gname must be contains in MEMORY (partial or full) and case insensitive)
                                 {
                                     freq = Convert.ToDouble(dataGridView2[1, i].Value);  // MEMORY "RXFREQ"  convert to hz
@@ -3195,7 +3350,7 @@ namespace PowerSDR
             else if (e.Button == MouseButtons.Middle) // .222 VFOB RX2
             {
                 Debug.WriteLine("RIGHT CLICK: ");
-               
+
 
                 scanstop = true;
 
@@ -3415,11 +3570,11 @@ namespace PowerSDR
             } // RIGHT CLICK MOUSE VFOB RX2  .230 VFOB = mouse wheel (so Memory, Scanner, Spotter are all the same)
             else if (e.Button == MouseButtons.Right) // .226 only for memory channel scan toggle ON/OFF
             {
-              
+
                 if (comboBoxTS1.Text == "") return;
                 if (textBox1.Text != "") return; // only for memory channel scan toggle ON/OFF
 
-                    scanstop = true;
+                scanstop = true;
 
                 if (scantype == 1)  // 1=memory, 2=band stack, 3= custom, 4= low-high, 5=SWL
                 {
@@ -3476,12 +3631,12 @@ namespace PowerSDR
                             Debug.WriteLine("CHANGE MEMORY TO " + recordToRestore.RXFreq);
                             console.RecallMemory(recordToRestore);
 
-                         
+
                         }
 
                         int counter = 0;
 
-                       
+
                         for (int i = 0; i < memcount; i++) // find all the memories with the same group name
                         {
 
@@ -3490,7 +3645,7 @@ namespace PowerSDR
 
                                 if (CultureInfo.InvariantCulture.CompareInfo.IndexOf((dataGridView2[0, i].Value.ToString()), Gname, CompareOptions.IgnoreCase) >= 0) // Gname must be contains in MEMORY (partial or full) and case insensitive)
                                 {
-                                   
+
                                     freq = Convert.ToDouble(dataGridView2[1, i].Value);  // MEMORY "RXFREQ"  convert to hz
 
                                     mode = dataGridView2[3, i].Value.ToString();  // DSPMODE of MEMORY
@@ -3501,15 +3656,15 @@ namespace PowerSDR
                                     if (counter == iii)
                                     {
                                         bool scan = (bool)dataGridView2["Scan", i].Value; // ke9ns add .226 
-                                       
+
                                         if (scan == true) dataGridView2["Scan", i].Value = false; // ke9ns add .226 change value here (in memoryForm.cs)
                                         else dataGridView2["Scan", i].Value = true;
-                                        
+
                                         console.SetBand(mode, filter, freq);
 
                                         UpdateText(); // update memory currfbox.text .226
 
-                                        
+
                                         return;
                                     }
                                     counter++;
@@ -3540,7 +3695,7 @@ namespace PowerSDR
                     return;
 
                 } // scantype = 1
-               
+
 
 
             } // Wheel CLICK MOUSE (disable in memory scan)
@@ -3730,9 +3885,47 @@ namespace PowerSDR
 
             MouseEventArgs me = (MouseEventArgs)e;
 
-            if (me.Button == System.Windows.Forms.MouseButtons.Middle) // 
+            if (me.Button == System.Windows.Forms.MouseButtons.Middle) // .244
             {
                 ScanVFOB = true;
+
+                ST3.Stop();
+                ST3.Reset();
+
+                ScanPause = false;
+
+                if (console.MemoryList.List.Count == 0) return; // nothing in the list, exit
+                if (comboMemGroupName.Items.Count == 0) return;
+                memcount = comboMemGroupName.Items.Count; // total number of memories listed
+
+                Debug.WriteLine("memory list7 " + memcount);
+
+                if (ScanRun == false) // if stoppedchange
+                {
+                    currFBox.Text = "";
+
+                    for (int y = 0; y < 100; y++)
+                    {
+                        memsignal[y] = null;
+                    }
+
+                    UpdateText();  // upate currFBox text
+
+                    ScanRun = true; // start up the scanner
+
+                    Thread t = new Thread(new ThreadStart(SCAN1));
+                    t.Name = "Group memory Scanner Thread";
+                    t.IsBackground = true;
+                    t.Priority = ThreadPriority.Normal;
+                    t.Start();
+
+                }
+                else
+                {
+                    ScanRun = false; // turn off scanner
+
+                }
+
             }
             else
             {

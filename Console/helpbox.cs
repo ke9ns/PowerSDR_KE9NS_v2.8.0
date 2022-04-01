@@ -28,11 +28,7 @@
 
 using System;
 using System.Diagnostics;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.Windows.Forms;
-using System.Threading;
 
 //using CefSharp;            // ke9ns add to allow embedded chrome browser (for help videos)
 //using CefSharp.WinForms;
@@ -50,7 +46,7 @@ namespace PowerSDR
 
         #region Variable Declaration
 
-      
+
         // public static helpbox helpboxForm;                       // ke9ns add 
 
         #endregion
@@ -100,7 +96,7 @@ namespace PowerSDR
 
         #endregion
 
-       
+
         #region Properties
 
 

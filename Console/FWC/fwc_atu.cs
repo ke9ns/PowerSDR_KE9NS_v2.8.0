@@ -27,8 +27,8 @@
 //=================================================================
 
 using System;
-using System.Threading;
 using System.Diagnostics;
+using System.Threading;
 
 namespace PowerSDR
 {

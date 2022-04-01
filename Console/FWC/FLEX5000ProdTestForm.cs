@@ -41,7 +41,7 @@ namespace PowerSDR
 
         private Progress p;
         private Console console;
-       
+
         private string common_data_path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\FlexRadio Systems\\PowerSDR\\";
 
         #endregion
@@ -231,7 +231,7 @@ namespace PowerSDR
 
         #endregion
 
-        
+
         #region Misc Routines
 
         private string BandToString(Band b)

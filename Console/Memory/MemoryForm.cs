@@ -374,7 +374,7 @@ namespace PowerSDR
         //ke9ns add USED TO OPEN WEB BROWSER if comment field has URL
         private void dataGridView1_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-         //   Debug.WriteLine("CELLMOUSEDOWN");
+            //   Debug.WriteLine("CELLMOUSEDOWN");
 
             MouseEventArgs me = (MouseEventArgs)e;
 
@@ -461,9 +461,9 @@ namespace PowerSDR
             RIndex = e.RowIndex; // last row you clicked on 
                                  //   CIndex = e.ColumnIndex; // last column you clicked on 
 
-         //  Debug.WriteLine("CELL DATAGRIDVIEW INDEX " + RIndex);
+            //  Debug.WriteLine("CELL DATAGRIDVIEW INDEX " + RIndex);
 
-        
+
             ScheduleUpdate(); // ke9ns add update schedule boxes from selected memory
 
         } // dataGridView1_CellClick
@@ -685,7 +685,7 @@ namespace PowerSDR
         /// <param name="e"></param>
         private void btnSelect_Click(object sender, EventArgs e)
         {
-           
+
 
             if (console.MemoryList.List.Count == 0) return; // nothing in the list, exit
 
@@ -1426,7 +1426,7 @@ namespace PowerSDR
 
                                             if ((bool)dataGridView1["Recording", aa].Value == true)
                                             {
-                                                AutoClosingMessageBox.Show( "A Scheduled Recording has been started.\nYou can end the recording early by Checking OFF both Weekly & Monthly boxes. ", "Scheduled Recording Started", 4000);
+                                                AutoClosingMessageBox.Show("A Scheduled Recording has been started.\nYou can end the recording early by Checking OFF both Weekly & Monthly boxes. ", "Scheduled Recording Started", 4000);
 
                                                 Debug.WriteLine("Start AUDIO RECORDING1 ");
 
@@ -1440,7 +1440,7 @@ namespace PowerSDR
                                             } // Recording ON
                                             else
                                             {
-                                                AutoClosingMessageBox.Show( "Scheduled Frequency Change has occured\n", "Scheduled Frequency change", 4000);
+                                                AutoClosingMessageBox.Show("Scheduled Frequency Change has occured\n", "Scheduled Frequency change", 4000);
 
                                             }
 
@@ -1532,12 +1532,12 @@ namespace PowerSDR
             }
             catch (Exception e)
             {
-                AutoClosingMessageBox.Show( "Failure to create an MP3. " + e, "MP3 Creation failure", 4000);
+                AutoClosingMessageBox.Show("Failure to create an MP3. " + e, "MP3 Creation failure", 4000);
 
             }
             Debug.WriteLine("DONE WITH MP3 CREATION" + WaveControl.scheduleName1);
 
-            AutoClosingMessageBox.Show( "MP3 File created. DONE ", "MP3 file created.", 4000);
+            AutoClosingMessageBox.Show("MP3 File created. DONE ", "MP3 file created.", 4000);
 
             try
             {
@@ -1621,7 +1621,7 @@ namespace PowerSDR
 
         private void MemoryForm_MouseEnter(object sender, EventArgs e)
         {
-           
+
             if (console.setupForm.chkBoxAutoFocus.Checked == true && chkAlwaysOnTop.Checked == true) this.Activate();
         }
 
@@ -1639,7 +1639,7 @@ namespace PowerSDR
             if (e.Button == MouseButtons.Middle) // ke9ns add .206 mouse wheel click for vfob
             {
                 Debug.WriteLine("MOUSE WHEEL " + index);
-     
+
                 console.changeComboFMMemoryB(index); // ke9ns this will call recallmemory in console 
 
                 if (console.setupForm != null && console.setupForm.chkRX2AutoOn.Checked == true && console.chkRX2.Checked == false && console.chkRX2.Visible) // .229

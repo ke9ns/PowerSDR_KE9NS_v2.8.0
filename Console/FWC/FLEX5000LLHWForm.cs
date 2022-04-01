@@ -27,7 +27,6 @@
 //=================================================================
 
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -47,7 +46,7 @@ namespace PowerSDR
         bool rfio_ok = true;
         bool rx2_ok = true;
 
-       
+
         #endregion
 
         #region Constructor and Destructor
@@ -114,7 +113,7 @@ namespace PowerSDR
 
         #endregion
 
-      
+
         #region Main
 
         /// <summary>

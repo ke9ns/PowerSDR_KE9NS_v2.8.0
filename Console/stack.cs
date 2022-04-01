@@ -23,14 +23,13 @@
 //=================================================================
 
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace PowerSDR
 {
-    public partial class StackControl: System.Windows.Forms.Form
+    public partial class StackControl : System.Windows.Forms.Form
     {
 
 
@@ -44,7 +43,7 @@ namespace PowerSDR
         //   private ArrayList file_list;
         private string wave_folder = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic) + "\\PowerSDR";
 
-      
+
         //   public DXMemList dxmemlist;
 
         #region Constructor and Destructor
@@ -78,7 +77,7 @@ namespace PowerSDR
 
         #endregion
 
-     
+
         #region Properties
 
 
@@ -110,7 +109,7 @@ namespace PowerSDR
         private void StackControl_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (console.chkBoxBS.Checked) console.buttonbs.BackColor = Color.Green; // ke9ns ad .211 active
-            else  console.buttonbs.BackColor = Color.Black; // ke9ns ad .211 active
+            else console.buttonbs.BackColor = Color.Black; // ke9ns ad .211 active
 
             this.Hide();
             e.Cancel = true;
@@ -155,7 +154,7 @@ namespace PowerSDR
         // ke9ns: update VFOA and B bandstacks
         public void bandstackupdate()
         {
-           
+
             string bigmessage = null; // full textbox string (combine 1 and 2)
             string bigmessage1 = null; // each freq string
             string bigmessage2 = null; // each memory string
@@ -190,7 +189,7 @@ namespace PowerSDR
                         console.filter2[ii] = "";
 
                     }
-                   //   Debug.WriteLine("BANDSTACK: " + freq);
+                    //   Debug.WriteLine("BANDSTACK: " + freq);
 
 
                     freq1[ii] = freq;
@@ -213,7 +212,7 @@ namespace PowerSDR
 
                             if (freq == Convert.ToDouble(SpotForm.dataGridView2[1, aa].Value))
                             {
-                               // Debug.WriteLine("found memoryA: " + SpotForm.dataGridView2[0, aa]);
+                                // Debug.WriteLine("found memoryA: " + SpotForm.dataGridView2[0, aa]);
                                 bigmessage2 = "mem:";
 
                                 break; // end the aa loop
@@ -301,134 +300,134 @@ namespace PowerSDR
 
             string bigmessage02 = null; // full textbox string (combine 1 and 2)
 
-                string bigmessage12 = null; // each freq string
-                string bigmessage22 = null; // each memory string
-                string bigmessage32 = null; // each lock or unlock
+            string bigmessage12 = null; // each freq string
+            string bigmessage22 = null; // each memory string
+            string bigmessage32 = null; // each lock or unlock
 
-                for (nnn2 = 0; nnn2 < 41; nnn2++) // total number of possible Bands
+            for (nnn2 = 0; nnn2 < 41; nnn2++) // total number of possible Bands
+            {
+                if (band_list[nnn2] == console.last_band2) break; // this is the current band_list index   nnn2 set here
+            }
+
+
+            for (int ii = 0; ii < console.band_stacks[nnn2]; ii++) // VFOB
+            {
+                if (DB.GetBandStack2(band_list[nnn2], ii, out mode, out filter, out freq))
                 {
-                    if (band_list[nnn2] == console.last_band2) break; // this is the current band_list index   nnn2 set here
-                }
+
+                    mode12[ii] = mode;
+
+                    filter12[ii] = filter;
 
 
-                for (int ii = 0; ii < console.band_stacks[nnn2]; ii++) // VFOB
-                {
-                    if (DB.GetBandStack2(band_list[nnn2], ii, out mode, out filter, out freq))
+                    if (filter.Contains("@"))
                     {
-                      
-                        mode12[ii] = mode;
-
-                        filter12[ii] = filter;
-
-
-                        if (filter.Contains("@"))
-                        {
-                            bigmessage32 = "Lock";
-                            console.filter22[ii] = "@";
-                        }
-                        else
-                        {
-                            bigmessage32 = "----";
-                            console.filter22[ii] = "";
-
-                        }
-                        //  Debug.WriteLine("BANDSTACK: " + freq);
-
-
-                        freq12[ii] = freq;
-
-                      
-                        bigmessage12 = freq.ToString("#####.000000").PadLeft(12) + ":"; // was N6 4 less than having index numbers
-
-                        bigmessage22 = "---:";
-                        //----------------------------------------------------------------
-
-
-                        if (SpotForm != null)
-                        {
-                            //  Debug.WriteLine("1Rows Count " + SpotForm.dataGridView2.Rows.Count);
-
-                            for (int aa = 0; aa < SpotForm.dataGridView2.Rows.Count; aa++) // get current # of memories we have available; ii++)     // Index through entire DXspot to find what is on this panadapter (draw vert lines first)
-                            {
-
-                                if (freq == Convert.ToDouble(SpotForm.dataGridView2[1, aa].Value))
-                                {
-                                  //  Debug.WriteLine("found memoryB: " + SpotForm.dataGridView2[0, aa]);
-                                    bigmessage22 = "mem:";
-
-                                    break; // end the aa loop
-                                }
-
-
-                            } // for loop through MEMORIES
-
-                        } // if (SpotForm != null)
-
-                        //----------------------------------------------------------------
-
-                        bigmessage12 = bigmessage12 + bigmessage22 + bigmessage32;
-                       
-                        bigmessage02 += bigmessage12 + "\r\n"; // + 3 more was 31 now 33
-
-
-                        //  Debug.WriteLine("LENGTH===== " + bigmessage.Length);
-
-
-                    } // if bandstack available for band
+                        bigmessage32 = "Lock";
+                        console.filter22[ii] = "@";
+                    }
                     else
                     {
-                        //  Debug.WriteLine("no bandstack for band "+band_list[nnn]);
-                        break;
-                    }
+                        bigmessage32 = "----";
+                        console.filter22[ii] = "";
 
-                } // for
+                    }
+                    //  Debug.WriteLine("BANDSTACK: " + freq);
+
+
+                    freq12[ii] = freq;
+
+
+                    bigmessage12 = freq.ToString("#####.000000").PadLeft(12) + ":"; // was N6 4 less than having index numbers
+
+                    bigmessage22 = "---:";
+                    //----------------------------------------------------------------
+
+
+                    if (SpotForm != null)
+                    {
+                        //  Debug.WriteLine("1Rows Count " + SpotForm.dataGridView2.Rows.Count);
+
+                        for (int aa = 0; aa < SpotForm.dataGridView2.Rows.Count; aa++) // get current # of memories we have available; ii++)     // Index through entire DXspot to find what is on this panadapter (draw vert lines first)
+                        {
+
+                            if (freq == Convert.ToDouble(SpotForm.dataGridView2[1, aa].Value))
+                            {
+                                //  Debug.WriteLine("found memoryB: " + SpotForm.dataGridView2[0, aa]);
+                                bigmessage22 = "mem:";
+
+                                break; // end the aa loop
+                            }
+
+
+                        } // for loop through MEMORIES
+
+                    } // if (SpotForm != null)
+
+                    //----------------------------------------------------------------
+
+                    bigmessage12 = bigmessage12 + bigmessage22 + bigmessage32;
+
+                    bigmessage02 += bigmessage12 + "\r\n"; // + 3 more was 31 now 33
+
+
+                    //  Debug.WriteLine("LENGTH===== " + bigmessage.Length);
+
+
+                } // if bandstack available for band
+                else
+                {
+                    //  Debug.WriteLine("no bandstack for band "+band_list[nnn]);
+                    break;
+                }
+
+            } // for
 
             textBox2.Text = bigmessage02; // update screen
             console.textBox2.Text = bigmessage02; // update screen
 
-                //---------------------------------------------------------
-                textBox1.Focus();
-                textBox1.Show();
+            //---------------------------------------------------------
+            textBox1.Focus();
+            textBox1.Show();
 
 
-                int value2;
+            int value2;
 
-                if (int.TryParse(console.regBox12, out value2))
+            if (int.TryParse(console.regBox12, out value2))
+            {
+
+                if (value2 > 0)
                 {
+                    textBox2.SelectionStart = (value2 - 1) * BSLength;       // start of each bandstack line
+                    textBox2.SelectionLength = BSLength;                    // length of each bandstack line
 
-                    if (value2 > 0)
-                    {
-                       textBox2.SelectionStart = (value2 - 1) * BSLength;       // start of each bandstack line
-                       textBox2.SelectionLength = BSLength;                    // length of each bandstack line
+                    console.textBox2.SelectionStart = (value2 - 1) * BSLength;       // start of each bandstack line
+                    console.textBox2.SelectionLength = BSLength;                    // length of each bandstack line
 
-                        console.textBox2.SelectionStart = (value2 - 1) * BSLength;       // start of each bandstack line
-                        console.textBox2.SelectionLength = BSLength;                    // length of each bandstack line
-
-                        Debug.WriteLine("ValueB " + value2 + " , " + BSLength);
-
-                    }
-                    else
-                    {
-                        textBox2.SelectionStart = 0;
-                        textBox2.SelectionLength = BSLength;
-
-                        console.textBox2.SelectionStart = 0;
-                        console.textBox2.SelectionLength = BSLength;
-                    }
+                    Debug.WriteLine("ValueB " + value2 + " , " + BSLength);
 
                 }
                 else
                 {
-                    Debug.WriteLine("no value");
-
                     textBox2.SelectionStart = 0;
-                     textBox2.SelectionLength = BSLength;
+                    textBox2.SelectionLength = BSLength;
 
-                     console.textBox2.SelectionStart = 0;
+                    console.textBox2.SelectionStart = 0;
                     console.textBox2.SelectionLength = BSLength;
                 }
 
-        
+            }
+            else
+            {
+                Debug.WriteLine("no value");
+
+                textBox2.SelectionStart = 0;
+                textBox2.SelectionLength = BSLength;
+
+                console.textBox2.SelectionStart = 0;
+                console.textBox2.SelectionLength = BSLength;
+            }
+
+
 
         } // bandstackupdate
 
@@ -819,7 +818,7 @@ namespace PowerSDR
             else if (e.Button == MouseButtons.Right) // ke9ns right click = lock or unlock bandstank memory
             {
 
-               
+
                 //-----------------------------------------------------------
                 // This toggles the LOCK / UNLOCK and saves it
                 try
@@ -876,7 +875,7 @@ namespace PowerSDR
                 }
 
             } // RIGHT CLICK MOUSE (LOCK)
-            
+
             buttonSort.Focus();  // put focus back on button
 
         } //textBox1_MouseUp
@@ -948,7 +947,7 @@ namespace PowerSDR
 
             else if (e.Button == MouseButtons.Right) // ke9ns right click = lock or unlock bandstank memory
             {
- 
+
                 //-----------------------------------------------------------
                 // This toggles the LOCK / UNLOCK and saves it
                 try
@@ -1006,7 +1005,7 @@ namespace PowerSDR
                 }
 
             } // RIGHT CLICK MOUSE (LOCK)
-           
+
 
             buttonSort.Focus();  // put focus back on button
 

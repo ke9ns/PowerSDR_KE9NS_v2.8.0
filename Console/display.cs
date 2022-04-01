@@ -27,22 +27,13 @@
 //=================================================================
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Threading;
 using System.Windows.Forms;
-using System.Text;  // ke9ns add for stringbuilder
-using System.Text.RegularExpressions;
 using System.Globalization;
-using System.IO;
-using System.IO.Ports;
-using FlexCW;
-using System.Drawing.Text;
-using System.Windows.Media.Media3D;
 
 #if (!NO_TNF)
 using Flex.TNF;
@@ -777,7 +768,7 @@ namespace PowerSDR
                         break;
                 }
 
-                if (average_on) ResetRX1DisplayAverage();
+                if (average_on) ResetRX1DisplayAverage();      // ke9ns: rx1_average_buffer[0] = -999.999f
                 if (peak_on) ResetRX1DisplayPeak();
 
                 DrawBackground();
@@ -873,7 +864,7 @@ namespace PowerSDR
 
                 // old + new must always equal 1.0
 
-            
+
             }
         }
 
@@ -979,41 +970,54 @@ namespace PowerSDR
         private static Pen data_line_pen = new Pen(new SolidBrush(Color.White), display_line_width);
 
         private static Color temp = Color.Aquamarine;
-        public static int Pan3DSteps = 29;
-        public static int Pan3DAlphaStep = (int)((255f / (float)Pan3DSteps) + .5f);
+        public static float Pan3DSteps = 39f; // .245 was 29
+                                              //  public static int Pan3DAlphaStep = (int)((255f / (float)Pan3DSteps)); //+ .5f);
+        public static float Pan3DAlphaStep = ((255f / (float)Pan3DSteps)); //+ .5f);
+
+        // designed to fade into the background, so alpha gets lower as you go backwards
+
+        private static Pen data_3dline_pen40 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 38f)), temp), display_line_width); //.245
+        private static Pen data_3dline_pen39 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 37f)), temp), display_line_width);
+        private static Pen data_3dline_pen38 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 36f)), temp), display_line_width);
+        private static Pen data_3dline_pen37 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 35f)), temp), display_line_width);
+        private static Pen data_3dline_pen36 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 34f)), temp), display_line_width);
+        private static Pen data_3dline_pen35 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 33f)), temp), display_line_width);
+        private static Pen data_3dline_pen34 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 32f)), temp), display_line_width);
+        private static Pen data_3dline_pen33 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 31f)), temp), display_line_width);
+        private static Pen data_3dline_pen32 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 30f)), temp), display_line_width);
+        private static Pen data_3dline_pen31 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 29f)), temp), display_line_width); //.245
 
 
+        private static Pen data_3dline_pen30 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 28f)), temp), display_line_width);
+        private static Pen data_3dline_pen29 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 27f)), temp), display_line_width);
+        private static Pen data_3dline_pen28 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 26f)), temp), display_line_width);
+        private static Pen data_3dline_pen27 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 25f)), temp), display_line_width);
+        private static Pen data_3dline_pen26 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 24f)), temp), display_line_width);
+        private static Pen data_3dline_pen25 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 23f)), temp), display_line_width);
+        private static Pen data_3dline_pen24 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 22f)), temp), display_line_width);
+        private static Pen data_3dline_pen23 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 21f)), temp), display_line_width);
+        private static Pen data_3dline_pen22 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 20f)), temp), display_line_width);
+        private static Pen data_3dline_pen21 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 19f)), temp), display_line_width);
+        private static Pen data_3dline_pen20 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 18f)), temp), display_line_width);
 
-        private static Pen data_3dline_pen30 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 29), temp), display_line_width);
-        private static Pen data_3dline_pen29 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 28), temp), display_line_width);
-        private static Pen data_3dline_pen28 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 27), temp), display_line_width);
-        private static Pen data_3dline_pen27 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 26), temp), display_line_width);
-        private static Pen data_3dline_pen26 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 25), temp), display_line_width);
-        private static Pen data_3dline_pen25 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 24), temp), display_line_width);
-        private static Pen data_3dline_pen24 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 23), temp), display_line_width);
-        private static Pen data_3dline_pen23 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 22), temp), display_line_width);
-        private static Pen data_3dline_pen22 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 21), temp), display_line_width);
-        private static Pen data_3dline_pen21 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 20), temp), display_line_width);
-        private static Pen data_3dline_pen20 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 19), temp), display_line_width);
-
-        private static Pen data_3dline_pen19 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 18), temp), display_line_width);
-        private static Pen data_3dline_pen18 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 17), temp), display_line_width);
-        private static Pen data_3dline_pen17 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 16), temp), display_line_width);
-        private static Pen data_3dline_pen16 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 15), temp), display_line_width);
-        private static Pen data_3dline_pen15 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 14), temp), display_line_width);
-        private static Pen data_3dline_pen14 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 13), temp), display_line_width);
-        private static Pen data_3dline_pen13 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 12), temp), display_line_width);
-        private static Pen data_3dline_pen12 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 11), temp), display_line_width);
-        private static Pen data_3dline_pen11 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 10), temp), display_line_width);
-        private static Pen data_3dline_pen10 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 9), temp), display_line_width);
-        private static Pen data_3dline_pen9 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 8), temp), display_line_width);
-        private static Pen data_3dline_pen8 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 7), temp), display_line_width);
-        private static Pen data_3dline_pen7 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 6), temp), display_line_width);
-        private static Pen data_3dline_pen6 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 5), temp), display_line_width);
-        private static Pen data_3dline_pen5 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 4), temp), display_line_width);
-        private static Pen data_3dline_pen4 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 3), temp), display_line_width);
-        private static Pen data_3dline_pen3 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 2), temp), display_line_width);
-        private static Pen data_3dline_pen2 = new Pen(Color.FromArgb(Pan3DAlphaStep * (Pan3DSteps - 1), temp), display_line_width);
+        private static Pen data_3dline_pen19 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 17f)), temp), display_line_width);
+        private static Pen data_3dline_pen18 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 16f)), temp), display_line_width);
+        private static Pen data_3dline_pen17 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 15f)), temp), display_line_width);
+        private static Pen data_3dline_pen16 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 14f)), temp), display_line_width);
+        private static Pen data_3dline_pen15 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 13f)), temp), display_line_width);
+        private static Pen data_3dline_pen14 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 12f)), temp), display_line_width);
+        private static Pen data_3dline_pen13 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 11f)), temp), display_line_width);
+        private static Pen data_3dline_pen12 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 10f)), temp), display_line_width);
+        private static Pen data_3dline_pen11 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 9f)), temp), display_line_width);
+        private static Pen data_3dline_pen10 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 8f)), temp), display_line_width);
+        private static Pen data_3dline_pen9 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 7f)), temp), display_line_width);
+        private static Pen data_3dline_pen8 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 6f)), temp), display_line_width);
+        private static Pen data_3dline_pen7 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 5f)), temp), display_line_width);
+        private static Pen data_3dline_pen6 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 4f)), temp), display_line_width);
+        private static Pen data_3dline_pen5 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 3f)), temp), display_line_width);
+        private static Pen data_3dline_pen4 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 2f)), temp), display_line_width);
+        private static Pen data_3dline_pen3 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps - 1f)), temp), display_line_width);
+        private static Pen data_3dline_pen2 = new Pen(Color.FromArgb((int)(Pan3DAlphaStep * (Pan3DSteps)), temp), display_line_width);
 
 
         private static Pen IDENT_pen = new Pen(new SolidBrush(Color.PaleGreen), 1); // ke9ns add
@@ -1036,7 +1040,10 @@ namespace PowerSDR
                 else data_3Dline_Alpha = 100;
 
             }
-        }
+        } // Data3DLineAlpha
+
+        static int[] Alpha3D = new int[50];
+
         public static Color Data3DLineColor
         {
             get { return data_3Dline_color; }
@@ -1044,17 +1051,38 @@ namespace PowerSDR
             {
 
                 data_3Dline_color = value;
-                Pan3DSteps = 23;
-                Pan3DAlphaStep = (int)(((float)data_3Dline_Alpha / (float)Pan3DSteps) + .5f);
 
-                int[] Alpha3D = new int[Pan3DSteps + 10];
+                Pan3DSteps = 21f; //.245 was 30 .242 was 23
 
-                for (int ww = 0; ww < Pan3DSteps; ww++)
+                try
                 {
-                    Alpha3D[ww] = Pan3DAlphaStep * (Pan3DSteps - ww);
+                    if (!console.initializing) Pan3DSteps = (float)console.setupForm.number3DZ.Value + 5f;
+                }
+                catch
+                {
+                    Pan3DSteps = 21f;
+                }
 
+                Pan3DAlphaStep = (((float)data_3Dline_Alpha / (float)Pan3DSteps));
+
+                for (int ww = 0; ww < (int)Pan3DSteps; ww++)
+                {
+
+                    Alpha3D[ww] = (int)(Pan3DAlphaStep * (Pan3DSteps - (float)ww - 1f));
+                    // Debug.WriteLine("3D pan: " + ww + " , " + Alpha3D[ww]);
 
                 }
+
+                data_3dline_pen40 = new Pen(Color.FromArgb(Alpha3D[39], data_3Dline_color), display_line_width); //.245
+                data_3dline_pen39 = new Pen(Color.FromArgb(Alpha3D[38], data_3Dline_color), display_line_width);
+                data_3dline_pen38 = new Pen(Color.FromArgb(Alpha3D[37], data_3Dline_color), display_line_width);
+                data_3dline_pen37 = new Pen(Color.FromArgb(Alpha3D[36], data_3Dline_color), display_line_width);
+                data_3dline_pen36 = new Pen(Color.FromArgb(Alpha3D[35], data_3Dline_color), display_line_width);
+                data_3dline_pen35 = new Pen(Color.FromArgb(Alpha3D[34], data_3Dline_color), display_line_width);
+                data_3dline_pen34 = new Pen(Color.FromArgb(Alpha3D[33], data_3Dline_color), display_line_width);
+                data_3dline_pen33 = new Pen(Color.FromArgb(Alpha3D[32], data_3Dline_color), display_line_width);
+                data_3dline_pen32 = new Pen(Color.FromArgb(Alpha3D[31], data_3Dline_color), display_line_width);
+                data_3dline_pen31 = new Pen(Color.FromArgb(Alpha3D[30], data_3Dline_color), display_line_width); //.245
 
 
                 data_3dline_pen30 = new Pen(Color.FromArgb(Alpha3D[29], data_3Dline_color), display_line_width);
@@ -1090,7 +1118,7 @@ namespace PowerSDR
 
                 DrawBackground();
 
-            }
+            } // set
         } // set 3D color
 
 
@@ -2030,9 +2058,9 @@ namespace PowerSDR
                             K9 = 7;             //special panafall mode for sun/grayline tracking mode
                             K11 = 0;
 
-                          //  float SS1 = .8333f; this was the 8020 default ke9ns mod .193 to allow adustment of display
+                            //  float SS1 = .8333f; this was the 8020 default ke9ns mod .193 to allow adustment of display
 
-                           update = DrawPanadapter(e.Graphics, W, (int)console.setupForm.udSS1H.Value + ( H * 5 / 6), 1, false);    // .197 5/6    in pure panadapter mode: update = DrawPanadapter(e.Graphics, W, H, 1, false);
+                            update = DrawPanadapter(e.Graphics, W, (int)console.setupForm.udSS1H.Value + (H * 5 / 6), 1, false);    // .197 5/6    in pure panadapter mode: update = DrawPanadapter(e.Graphics, W, H, 1, false);
                             update = DrawWaterfall(e.Graphics, W, (int)console.setupForm.udSS1H.Value + (H * 5 / 6), 1, true);        // bottom half RX2 is not on  5 * H / 6
 
                             split_display = false;
@@ -2043,11 +2071,11 @@ namespace PowerSDR
                             K11 = 0;
 
                             split_display = true; // use wide vertgrid because your saying split
-                          //  update = DrawPanadapter(e.Graphics, W, H / 2, 1, false); //top half 
-                         //   update = DrawWaterfall(e.Graphics, W, H / 2, 1, true); // bottom half RX2 is not on
+                                                  //  update = DrawPanadapter(e.Graphics, W, H / 2, 1, false); //top half 
+                                                  //   update = DrawWaterfall(e.Graphics, W, H / 2, 1, true); // bottom half RX2 is not on
 
                             update = DrawPanadapter(e.Graphics, W, (int)console.setupForm.udSS2H.Value + (H / 2), 1, false); // .197 ke9ns mod .193 top half 
-                            update = DrawWaterfall(e.Graphics, W, (int)console.setupForm.udSS2H.Value + (H /2), 1, true); // ke9ns mod bottom half RX2 is not on
+                            update = DrawWaterfall(e.Graphics, W, (int)console.setupForm.udSS2H.Value + (H / 2), 1, true); // ke9ns mod bottom half RX2 is not on
 
                             split_display = false;
                         }
@@ -2287,8 +2315,8 @@ namespace PowerSDR
 
             if (Console.CTUN == true)
             {
-              if (Console.UPDATEOFF > 0) Console.UPDATEOFF--;
-             //  Debug.WriteLine("UPDATEOFF--------------" + Console.UPDATEOFF);
+                if (Console.UPDATEOFF > 0) Console.UPDATEOFF--;
+                //  Debug.WriteLine("UPDATEOFF--------------" + Console.UPDATEOFF);
 
             }
 
@@ -2834,7 +2862,7 @@ namespace PowerSDR
         private static void DrawPanadapterGrid(ref Graphics g, int W, int H, int rx, bool bottom)
         {
 
-         
+
             // ke9ns add for SWR plotting)
             if (console.ScanForm.checkBoxSWR.Checked)
             {
@@ -2879,13 +2907,13 @@ namespace PowerSDR
 
             int Low = rx_display_low;           // ke9ns: low= -96000 at 192k SR and zoom = .5  (this is hz to the left of the VFO freq at the Sr and zoom level)
             int High = rx_display_high;         // ke9ns: high= +96000 at 192k SR and zoom = .5 (this is hz to the right of the VFO freq at the Sr and zoom level)
-          
-           if (rx == 2) //.219
-           {
+
+            if (rx == 2) //.219
+            {
                 Low = rx_display_low2;           // ke9ns: low= -96000 at 192k SR and zoom = .5  (this is hz to the left of the VFO freq at the Sr and zoom level)
                 High = rx_display_high2;         // ke9ns: high= +96000 at 192k SR and zoom = .5 (this is hz to the right of the VFO freq at the Sr and zoom level)
 
-           }
+            }
 
             int mid_w = W / 2;
             int[] step_list = { 10, 20, 25, 50 };
@@ -2896,7 +2924,7 @@ namespace PowerSDR
 
             int grid_step = 0;  // 
 
-          
+
 
             //------------------------------------------------------------------------------
             // ke9ns add   this S-Unit scale is designed to display a Grid based on the the S unit dBm
@@ -12366,7 +12394,7 @@ namespace PowerSDR
 
                     //  Debug.WriteLine("START BANDTEXT: " + bandtext_counter + " , " + freqlast1 + ", " + vfoa_hz);
 
-                    
+
                     //---------------------------------------------------
                     // ke9ns RX2 determine the bandtext to display for the current pan
                     if (freqlast2 != VFOC)
@@ -12414,7 +12442,7 @@ namespace PowerSDR
 
                     for (int zz = 0; zz < bandtext_counter2; zz++) // scan through all the bandtext that appear
                     {
-                      
+
 
 
                         int VFO_bandtext = (int)(((XPOS) * (float)((int)(bandfreq2[zz] * 1000000) - VFOLow)));
@@ -12468,7 +12496,7 @@ namespace PowerSDR
                             SF1.Alignment = StringAlignment.Near;
                             SF1.FormatFlags = StringFormatFlags.DirectionVertical;
 
-                          //  g.DrawString(bandtext[temp9], font1, grid_text_brush, temp10, 20, SF1); // draw bandtext vertically
+                            //  g.DrawString(bandtext[temp9], font1, grid_text_brush, temp10, 20, SF1); // draw bandtext vertically
 
 
                             if (((zz1 - 1) > zz2))
@@ -12753,7 +12781,7 @@ namespace PowerSDR
                         byte VFOLowB = (byte)(VFOLow / 1000000); // freq in mhz
                         byte VFOHighB = (byte)(VFOHigh / 1000000); // freq in mhz
 
-                      //  Debug.WriteLine("VFOLowB "+ VFOLowB + " , " + VFOHighB);
+                        //  Debug.WriteLine("VFOLowB "+ VFOLowB + " , " + VFOHighB);
 
                         int iii = 0; // stairstep the swl stations on the screen
 
@@ -12761,7 +12789,7 @@ namespace PowerSDR
                         if (VFOLowB != 0) L_index = SpotControl.SWL_BandL[VFOLowB - 1]; // Left side  index position corresponding to the Left side Mhz
                         int H_index = SpotControl.SWL_BandL[VFOHighB];                // Right side index position corresponding to the right side Mhz
 
-                       //   Debug.WriteLine("VFOLOW:" + VFOLowB + " , " + VFOHighB + " , " + L_index + " , " + H_index);
+                        //   Debug.WriteLine("VFOLOW:" + VFOLowB + " , " + VFOHighB + " , " + L_index + " , " + H_index);
 
 
                         float XPOS = (float)W / (float)VFODiff;
@@ -12776,11 +12804,11 @@ namespace PowerSDR
                             //  Debug.WriteLine("1VFOLOW:" + VFOLowB + " , " + VFOHighB + " , " + L_index + " , " + H_index);
 
                             Debug.WriteLine("SWL CHange Freq");
-                            
+
                             SpotControl.VFOHLast = VFOHigh;
-                          //  SpotControl.Lindex = 0; // bottom of index to display spots
-                          //  SpotControl.Hindex = 0; // top of index to display spots
-                          
+                            //  SpotControl.Lindex = 0; // bottom of index to display spots
+                            //  SpotControl.Hindex = 0; // top of index to display spots
+
                             SpotControl.Lindex = L_index; // bottom of index to display spots //.219
                             SpotControl.Hindex = L_index; // top of index to display spots
 
@@ -12843,10 +12871,10 @@ namespace PowerSDR
                                         } //  if ((Console.MMK3 > 0) && (SpotControl.SP6_Active != 0))
 
                                         g.DrawString(SpotControl.SWL_Station[ii], font1, grid_text_brush, VFO_SWLPos, 20 + iii);
-                                        
-                                       
 
-                                         //  Debug.WriteLine(" FINDSWL "+ ii );
+
+
+                                        //  Debug.WriteLine(" FINDSWL "+ ii );
 
                                         if (Console.SXK < 99)
                                         {
@@ -12860,19 +12888,19 @@ namespace PowerSDR
                                             Console.SXS[Console.SXK] = SpotControl.SWL_Station[ii];
                                             Console.SXF[Console.SXK] = SpotControl.SWL_Freq[ii];
                                             Console.SXM[Console.SXK] = SpotControl.SWL_Mode[ii];
-                                           
-                                          //  g.DrawString(Console.SXW[Console.SXK].ToString() , font1, grid_text_brush, VFO_SWLPos, 30 + iii); // ke9ns add .224
-                                          //  g.DrawString(Console.SXH[Console.SXK].ToString(), font1, grid_text_brush, VFO_SWLPos + 30, 30 + iii); // ke9ns add .224
-                                           // g.DrawString(Console.SXX[Console.SXK].ToString(), font1, grid_text_brush, VFO_SWLPos + 60, 30 + iii); // ke9ns add .224
-                                           // g.DrawString(Console.SXY[Console.SXK].ToString(), font1, grid_text_brush, VFO_SWLPos + 90, 30 + iii); // ke9ns add .224
 
-                                         //   Debug.WriteLine("-STATION " + Console.SXK + " , " + SpotControl.SWL_Station[ii] + " , " + SpotControl.SWL_Freq[ii]);
+                                            //  g.DrawString(Console.SXW[Console.SXK].ToString() , font1, grid_text_brush, VFO_SWLPos, 30 + iii); // ke9ns add .224
+                                            //  g.DrawString(Console.SXH[Console.SXK].ToString(), font1, grid_text_brush, VFO_SWLPos + 30, 30 + iii); // ke9ns add .224
+                                            // g.DrawString(Console.SXX[Console.SXK].ToString(), font1, grid_text_brush, VFO_SWLPos + 60, 30 + iii); // ke9ns add .224
+                                            // g.DrawString(Console.SXY[Console.SXK].ToString(), font1, grid_text_brush, VFO_SWLPos + 90, 30 + iii); // ke9ns add .224
+
+                                            //   Debug.WriteLine("-STATION " + Console.SXK + " , " + SpotControl.SWL_Station[ii] + " , " + SpotControl.SWL_Freq[ii]);
 
                                             Console.SXK++;
                                         }
                                         else Debug.Write(" -SXK OVERLIMIT ");
 
-                                      
+
                                         iii = iii + 11; // stairstep spots
                                         if (iii > 90) iii = 0;
 
@@ -12882,8 +12910,8 @@ namespace PowerSDR
 
                             } // for loop through SWL_Index
 
-                           //   Debug.WriteLine(" L_index " + SpotControl.Lindex);
-                           //   Debug.WriteLine(" H_index " + SpotControl.Hindex);
+                            //   Debug.WriteLine(" L_index " + SpotControl.Lindex);
+                            //   Debug.WriteLine(" H_index " + SpotControl.Hindex);
 
                             //  Debug.WriteLine(" VFOLow " + VFOLow);
                             //  Debug.WriteLine(" VFOHigh " + VFOHigh);
@@ -12892,8 +12920,8 @@ namespace PowerSDR
                         } //   if ((VFOHigh != SpotControl.VFOHLast))  //if you change vfo freq do above
                         else // if you dont change freq, then do below
                         {
-                        
-                           //  int temp79 = 0;
+
+                            //  int temp79 = 0;
 
                             //  Debug.WriteLine("2VFOLOW:" + VFOLowB + " , " + VFOHighB + " , " + L_index + " , " + H_index + " , " + SpotControl.Lindex + " , " + SpotControl.Hindex);
 
@@ -12901,11 +12929,11 @@ namespace PowerSDR
                             {
                                 //  Debug.Write(" drawSWL " + ii);
 
-                                 if (
-                                 ((SpotControl.SWL_Day1[ii] & SpotControl.UTCDD) > 0) && (((SpotControl.SWL_TimeN[ii] <= SpotControl.UTCNEW1) && (SpotControl.SWL_TimeF[ii] >= SpotControl.UTCNEW1)) ||
-                                 ((SpotControl.SWL_TimeN[ii] >= SpotControl.UTCNEW1) && (SpotControl.SWL_TimeF[ii] >= SpotControl.UTCNEW1) && (SpotControl.SWL_TimeF[ii] < SpotControl.SWL_TimeN[ii])))
-                                  )
-                                    //     if (((SpotControl.SWL_Day1[ii] & SpotControl.UTCDD) > 0) && (SpotControl.SWL_TimeN[ii] <= SpotControl.UTCNEW1) && (SpotControl.SWL_TimeF[ii] >= SpotControl.UTCNEW1))
+                                if (
+                                ((SpotControl.SWL_Day1[ii] & SpotControl.UTCDD) > 0) && (((SpotControl.SWL_TimeN[ii] <= SpotControl.UTCNEW1) && (SpotControl.SWL_TimeF[ii] >= SpotControl.UTCNEW1)) ||
+                                ((SpotControl.SWL_TimeN[ii] >= SpotControl.UTCNEW1) && (SpotControl.SWL_TimeF[ii] >= SpotControl.UTCNEW1) && (SpotControl.SWL_TimeF[ii] < SpotControl.SWL_TimeN[ii])))
+                                 )
+                                //     if (((SpotControl.SWL_Day1[ii] & SpotControl.UTCDD) > 0) && (SpotControl.SWL_TimeN[ii] <= SpotControl.UTCNEW1) && (SpotControl.SWL_TimeF[ii] >= SpotControl.UTCNEW1))
                                 {
                                     int VFO_SWLPos = (int)(((XPOS) * (float)(SpotControl.SWL_Freq[ii] - VFOLow)));
 
@@ -12919,7 +12947,7 @@ namespace PowerSDR
                             } // for loop to display all current swl spots
                             iii = 0;
 
-                           
+
                             for (int ii = SpotControl.Lindex; ii <= SpotControl.Hindex; ii++) // now check only spots that fit exactly on panadapter
                             {
                                 //   Debug.Write(" drawSWL " + ii);
@@ -12958,12 +12986,12 @@ namespace PowerSDR
 
                                     g.DrawString(SpotControl.SWL_Station[ii], font1, grid_text_brush, VFO_SWLPos, 20 + iii); // draw station Name
                                                                                                                              // temp79++;
-                                  //  g.DrawString(Console.SXW[temp79].ToString(), font1, grid_text_brush, VFO_SWLPos, 30 + iii); // ke9ns add .224
-                                  //  g.DrawString(Console.SXH[temp79].ToString(), font1, grid_text_brush, VFO_SWLPos + 30, 30 + iii); // ke9ns add .224
-                                  //  g.DrawString(Console.SXX[temp79].ToString(), font1, grid_text_brush, VFO_SWLPos + 60, 30 + iii); // ke9ns add .224
-                                   // g.DrawString(Console.SXY[temp79].ToString(), font1, grid_text_brush, VFO_SWLPos + 90, 30 + iii); // ke9ns add .224
-                                      //  Debug.WriteLine("STATION " + temp79 + " , " + SpotControl.SWL_Station[ii] + " , " + SpotControl.SWL_Freq[ii]);
-                                  //  temp79++;
+                                                                                                                             //  g.DrawString(Console.SXW[temp79].ToString(), font1, grid_text_brush, VFO_SWLPos, 30 + iii); // ke9ns add .224
+                                                                                                                             //  g.DrawString(Console.SXH[temp79].ToString(), font1, grid_text_brush, VFO_SWLPos + 30, 30 + iii); // ke9ns add .224
+                                                                                                                             //  g.DrawString(Console.SXX[temp79].ToString(), font1, grid_text_brush, VFO_SWLPos + 60, 30 + iii); // ke9ns add .224
+                                                                                                                             // g.DrawString(Console.SXY[temp79].ToString(), font1, grid_text_brush, VFO_SWLPos + 90, 30 + iii); // ke9ns add .224
+                                                                                                                             //  Debug.WriteLine("STATION " + temp79 + " , " + SpotControl.SWL_Station[ii] + " , " + SpotControl.SWL_Freq[ii]);
+                                                                                                                             //  temp79++;
 
                                     iii = iii + 11; // stairstep spots
                                     if (iii > 90) iii = 0;
@@ -13215,12 +13243,12 @@ namespace PowerSDR
                 {
 
                     int CWPitch1 = 0;
-                 
+
                     bool Pitch1 = false;
                     bool Pitch2 = false;
 
 
-                   
+
                     if (bottom)
                     {
                         if (rx2_dsp_mode == DSPMode.CWL)
@@ -13237,8 +13265,8 @@ namespace PowerSDR
                         if (rx1_dsp_mode == DSPMode.CWL)
                         {
                             CWPitch1 = CWPitch;
-                           
-                           
+
+
                         }
                         else if (rx1_dsp_mode == DSPMode.CWU)
                         {
@@ -13308,14 +13336,14 @@ namespace PowerSDR
 
                         if ((SpotControl.DX_Freq[ii] >= VFOLow) && (SpotControl.DX_Freq[ii] <= VFOHigh))
                         {
-                            int VFO_DXPos = (int)((((float)W / (float)VFODiff) * (float)(SpotControl.DX_Freq[ii] -CWPitch1 - VFOLow))); // determine DX spot line pos on current panadapter screen
+                            int VFO_DXPos = (int)((((float)W / (float)VFODiff) * (float)(SpotControl.DX_Freq[ii] - CWPitch1 - VFOLow))); // determine DX spot line pos on current panadapter screen
 
                             holder[kk] = ii;                    // ii is the actual DX_INdex pos the the KK holds
                             holder1[kk] = VFO_DXPos;
 
                             kk++;
 
-                            g.DrawLine(p1, VFO_DXPos , H1b, VFO_DXPos , H1a);   // draw vertical line
+                            g.DrawLine(p1, VFO_DXPos, H1b, VFO_DXPos, H1a);   // draw vertical line
 
                         }
 
@@ -13367,7 +13395,7 @@ namespace PowerSDR
                                     } // for loop to check if DX text will draw over top of Memory text
                                 }
 
-                                g.DrawString(SpotControl.DX_Station[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width , H1b + iii); // DX call sign to panadapter
+                                g.DrawString(SpotControl.DX_Station[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width, H1b + iii); // DX call sign to panadapter
 
                             }
                             else // display SPOTTER on Pan (not the Spotted)
@@ -13394,7 +13422,7 @@ namespace PowerSDR
                                     } // for loop to check if DX text will draw over top of Memory text
                                 }
 
-                                g.DrawString(SpotControl.DX_Spotter[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width , H1b + iii);
+                                g.DrawString(SpotControl.DX_Spotter[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width, H1b + iii);
 
                             }
 
@@ -13441,7 +13469,7 @@ namespace PowerSDR
                                     } // for loop to check if DX text will draw over top of Memory text
                                 }
 
-                                g.DrawString(SpotControl.DX_Station[holder[ii]], font1, grid_text_brush, holder1[ii] , H1b + iii); // DX station name
+                                g.DrawString(SpotControl.DX_Station[holder[ii]], font1, grid_text_brush, holder1[ii], H1b + iii); // DX station name
                             }
                             else // spotter
                             {
@@ -13467,7 +13495,7 @@ namespace PowerSDR
                                     } // for loop to check if DX text will draw over top of Memory text
                                 }
 
-                                g.DrawString(SpotControl.DX_Spotter[holder[ii]], font1, grid_text_brush, holder1[ii] , H1b + iii); // DX station name
+                                g.DrawString(SpotControl.DX_Spotter[holder[ii]], font1, grid_text_brush, holder1[ii], H1b + iii); // DX station name
 
                             }
 
@@ -13534,8 +13562,8 @@ namespace PowerSDR
             // draw background
             // full screen W = 1607, H = 541  (shurnk W=1168, H=303)
 
-          //    Debug.WriteLine("KE9NS DRAWWATERFALLGRID....H................. "+ H);
-          //  Console.H10 = H; // ke9ns .197
+            //    Debug.WriteLine("KE9NS DRAWWATERFALLGRID....H................. "+ H);
+            //  Console.H10 = H; // ke9ns .197
 
             //   Debug.WriteLine("KE9NS DRAWWATERFALLGRID....W................. " + W);
 
@@ -13545,7 +13573,7 @@ namespace PowerSDR
             else g.FillRectangle(new SolidBrush(display_background_color), 0, 0, W, H);  // fill black into entire display
 
 
-          
+
 
             // Low frequency to High frequency ?
             int low = rx_display_low;   // ke9ns  BASED ON SAMPLE RATE (192000, or 96000, etc) -4000 initial  but reads -97370 
@@ -17545,8 +17573,8 @@ namespace PowerSDR
             if (!bottom && data_ready)
             {
                 // get new data
-                fixed (void* rptr = &new_display_data[0])
-                fixed (void* wptr = &current_display_data[0])
+                fixed (void* rptr = &new_display_data[0]) // source
+                fixed (void* wptr = &current_display_data[0]) // dest
                     Win32.memcpy(wptr, rptr, BUFFER_SIZE * sizeof(float));
                 data_ready = false;
             }
@@ -17656,42 +17684,13 @@ namespace PowerSDR
             }
         }
 
-        public static Point[] points;
+        // ke9ns add for 3d effect
+        public static Point[] points, points0, points2, points3, points4, points5, points6, points7, points8, points9, points10, points11, points12, points13, points14, points15, points16;
 
-        public static Point[] points0;// ke9ns add for 3d effect
-        public static Point[] points2;
-        public static Point[] points3;
-        public static Point[] points4;
-        public static Point[] points5;
-        public static Point[] points6;
-        public static Point[] points7;
-        public static Point[] points8;
-        public static Point[] points9;
-        public static Point[] points10;
-        public static Point[] points11;
-        public static Point[] points12;
-        public static Point[] points13;
-        public static Point[] points14;
-        public static Point[] points15;
-        public static Point[] points16;
-
-        public static Point[] points17; // ke9ns when waterfall is turned off
-        public static Point[] points18;
-        public static Point[] points19;
-        public static Point[] points20;
-
-
-        public static Point[] points21; // ke9ns not used at this time
-        public static Point[] points22;
-        public static Point[] points23;
-        public static Point[] points24;
-        public static Point[] points25;
-        public static Point[] points26;
-        public static Point[] points27;
-        public static Point[] points28;
-        public static Point[] points29;
-        public static Point[] points30;
-
+        // ke9ns when waterfall is turned off
+        public static Point[] points17, points18, points19, points20;
+        public static Point[] points21, points22, points23, points24, points25, points26, points27, points28, points29, points30; // ke9ns.242
+        public static Point[] points31, points32, points33, points34, points35, points36, points37, points38, points39, points40; //.245
 
         public static bool PON = false; // ke9ns add  true = 3D pan is active
 
@@ -18079,7 +18078,7 @@ namespace PowerSDR
         public static int lastvalue1 = 0; // DttSP freeze check using SUM value of panadapter
         public static int lastvaluecount1 = 0; // counter for how many times the SUM value was frozen.
 
-      //  public static int restartcount = 0; // total number of times DttSP had to restart now in console
+        //  public static int restartcount = 0; // total number of times DttSP had to restart now in console
 
         public static int AGCT_Y = 0; // ke9ns based on AGCT value and pan size
         public static bool AGCT_Y_BELOW = false; // ke9ns: indicates when the green line is off the screen (because there isnt enough room under the noise floor, so push up the pan noise floor
@@ -18094,6 +18093,7 @@ namespace PowerSDR
         static int X1 = 1; // offset for each sample
         static int Y1 = 1;
 
+        public static int TTT = 0;
         unsafe static private bool DrawPanadapter(Graphics g, int W, int H, int rx, bool bottom)
         {
 
@@ -18185,37 +18185,17 @@ namespace PowerSDR
                         // ke9ns: cannot use an array due to the use of "drawlines" and "points"
 
                         points0 = new Point[W + 2]; // for fill while in 3D mode
-                        points2 = new Point[W];
-                        points3 = new Point[W];
-                        points4 = new Point[W];
-                        points5 = new Point[W];
-                        points6 = new Point[W];
-                        points7 = new Point[W];
-                        points8 = new Point[W];
-                        points9 = new Point[W];
-                        points10 = new Point[W];
-                        points11 = new Point[W];
-                        points12 = new Point[W];
-                        points13 = new Point[W];
-                        points14 = new Point[W];
-                        points15 = new Point[W];
-                        points16 = new Point[W];
 
-                        points17 = new Point[W];// ke9ns: for when waterfall is OFF
-                        points18 = new Point[W];
-                        points19 = new Point[W];
-                        points20 = new Point[W];
+                        points2 = new Point[W]; points3 = new Point[W]; points4 = new Point[W]; points5 = new Point[W]; points6 = new Point[W];
+                        points7 = new Point[W]; points8 = new Point[W]; points9 = new Point[W]; points10 = new Point[W]; points11 = new Point[W];
+                        points12 = new Point[W]; points13 = new Point[W]; points14 = new Point[W]; points15 = new Point[W]; points16 = new Point[W];
 
-                        points21 = new Point[W];  // ke9ns not used at this time
-                        points22 = new Point[W];
-                        points23 = new Point[W];
-                        points24 = new Point[W];
-                        points25 = new Point[W];
-                        points26 = new Point[W];
-                        points27 = new Point[W];
-                        points28 = new Point[W];
-                        points29 = new Point[W];
-                        points30 = new Point[W];
+                        // ke9ns: for when waterfall is OFF
+                        points17 = new Point[W]; points18 = new Point[W]; points19 = new Point[W]; points20 = new Point[W];
+                        points21 = new Point[W]; points22 = new Point[W]; points23 = new Point[W]; points24 = new Point[W]; points25 = new Point[W];
+                        points26 = new Point[W]; points27 = new Point[W]; points28 = new Point[W]; points29 = new Point[W]; points30 = new Point[W];  // ke9ns .242
+                        points31 = new Point[W]; points32 = new Point[W]; points33 = new Point[W]; points34 = new Point[W]; points35 = new Point[W];
+                        points36 = new Point[W]; points37 = new Point[W]; points38 = new Point[W]; points39 = new Point[W]; points40 = new Point[W];  // ke9ns .245
 
 
                         for (int z = 0; z < W; z++) // copy the current panadapter signal (points) into history list (points2...points19) and shift the pan up and to the right by X1 and Y1 offsets (found in setup->Appearance)
@@ -18293,7 +18273,7 @@ namespace PowerSDR
                                 points21[z].Y = (points20[z].Y) - Y1;
 
 
-                                points22[z].X = (points21[z].X) + X1;  // ke9ns: not used at this time
+                                points22[z].X = (points21[z].X) + X1;  // ke9ns: .242 selected using setupform.number3dz
                                 points22[z].Y = (points21[z].Y) - Y1;
 
                                 points23[z].X = (points22[z].X) + X1;
@@ -18318,8 +18298,40 @@ namespace PowerSDR
                                 points29[z].Y = (points28[z].Y) - Y1;
 
                                 points30[z].X = (points29[z].X) + X1;
-                                points30[z].Y = (points29[z].Y) - Y1;
-                            }
+                                points30[z].Y = (points29[z].Y) - Y1; //.242
+
+                                points31[z].X = (points30[z].X) + X1; //.245
+                                points31[z].Y = (points30[z].Y) - Y1;
+
+                                points32[z].X = (points31[z].X) + X1;
+                                points32[z].Y = (points31[z].Y) - Y1;
+
+                                points33[z].X = (points32[z].X) + X1;
+                                points33[z].Y = (points32[z].Y) - Y1;
+
+                                points34[z].X = (points33[z].X) + X1;
+                                points34[z].Y = (points33[z].Y) - Y1;
+
+                                points35[z].X = (points34[z].X) + X1;
+                                points35[z].Y = (points34[z].Y) - Y1;
+
+                                points36[z].X = (points35[z].X) + X1;
+                                points36[z].Y = (points35[z].Y) - Y1;
+
+                                points37[z].X = (points36[z].X) + X1;
+                                points37[z].Y = (points36[z].Y) - Y1;
+
+                                points38[z].X = (points37[z].X) + X1;
+                                points38[z].Y = (points37[z].Y) - Y1;
+
+                                points39[z].X = (points38[z].X) + X1;
+                                points39[z].Y = (points38[z].Y) - Y1; //.245
+
+                                points40[z].X = (points39[z].X) + X1;
+                                points40[z].Y = (points39[z].Y) - Y1; //.245
+
+
+                            } //  if (CurrentDisplayMode == DisplayMode.PANADAPTER)
 
                         } //for loop
 
@@ -18344,7 +18356,7 @@ namespace PowerSDR
             int Low;
             int High;
 
-          
+
             if (Console.UPDATEOFF > 0) // ke9ns add when CTUN active dont allow display to move just the vfoa is allowed to slide
             {
                 Low = LowLast;
@@ -18364,7 +18376,7 @@ namespace PowerSDR
                 {
                     Low = rx_display_low;               // low freqency on display window (left side)
                     High = rx_display_high;             // high freqency on display window (right side)
-                  
+
                 }
 
 
@@ -18372,7 +18384,7 @@ namespace PowerSDR
                 HighLast = High;
 
 
-            }
+            } //
 
             int yRange = spectrum_grid_max - spectrum_grid_min; // find vertical range of panadapter (around 120dbm)
 
@@ -18397,7 +18409,7 @@ namespace PowerSDR
                 {
                     for (int i = 0; i < BUFFER_SIZE; i++)                       //ke9ns: originally this was all there was for display data for CW transmit
                         new_display_data[i] = -160f;
-   
+
                 }
 
                 if (local_mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
@@ -18466,7 +18478,7 @@ namespace PowerSDR
                             Win32.memcpy(wptr, rptr, BUFFER_SIZE * sizeof(float));  // dest,source  # of bytes to copy 4096 float sized bytes
                         }
 
-                        fixed (void* wptr = &current_display_data1[0])              // ke9ns add for RX1 no AVG waterfall option
+                        fixed (void* wptr = &current_display_data1[0])              // ke9ns add: for RX1 no AVG waterfall option
                         {
                             Win32.memcpy(wptr, rptr, BUFFER_SIZE * sizeof(float));  // dest,source  # of bytes to copy 4096 float sized bytes
                         }
@@ -18581,7 +18593,7 @@ namespace PowerSDR
             start_sample_index = (BUFFER_SIZE >> 1) + (int)((Low * BUFFER_SIZE) / sample_rate);  // (size/2)  + ((left side * size) / 192000)
 
             // determine the number of samples you need to cover the zoomed screen based on sample rate and buffer size
-            num_samples = (int)((uint)(High - Low) * BUFFER_SIZE / sample_rate);                      // ((right - left) * size)/192000
+            TTT = num_samples = (int)((uint)(High - Low) * BUFFER_SIZE / sample_rate);                      // ((right - left) * size)/192000
 
 
             if (start_sample_index < 0)// if (start_sample_index < 0)
@@ -18606,11 +18618,13 @@ namespace PowerSDR
             // // ke9ns add
             // if we move frequency, we want to shift the last avg stream  buffer[] and new_data[] to the left or right before we apply the brand new stream data to create a new avg
             // only do this is we are avg the display
+            // console UP1 = true indicates the DSP now has a new VFOA freq, so you must shift pan left<>right
             //=================================================================
             // VFOA
 
             if (average_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) && ((PWM2A_LAST != vfoa_hz) && (Console.CTUN1_HZ == 0)) || (PWM2A_LAST < (vfoa_hz - 200000) || PWM2A_LAST > (vfoa_hz + 200000))) // ke9ns dont move waterfall if in CTUN mode
             {
+
                 PF3A = 1;
 
                 PWM2A_DIFF = vfoa_hz - PWM2A_LAST;
@@ -18621,50 +18635,47 @@ namespace PowerSDR
                     PWM2A_DIFF = 0;
                 }
 
-
                 PWM4 = ((float)(High - Low) / (float)num_samples); // number of hz on screen
 
                 PWM1 = ((float)PWM2A_DIFF / PWM4 / slope); // how many pixels to move the bmp frame  (-=going down in freq +=going up in freq)
 
                 PWM1A = (int)Math.Floor(((PWM1 / (float)W) * (float)num_samples)); // this is supposed to be the # of points in the data stream array to move
 
-              //  Debug.WriteLine("228: " + PWM1A + " W:" + W + " N:"+num_samples + " P:"+ PWM1 + " P4:" + PWM4 + " S:" + slope + " P2:"+ PWM2A_DIFF);
-
-             //   Debug.WriteLine("228: " + Math.Abs(PWM1A));
+                Debug.WriteLine("228: " + PWM1A + " W:" + W + " N:" + num_samples + " P:" + PWM1 + " P4:" + PWM4 + " S:" + slope + " P2:" + PWM2A_DIFF);
+                Debug.WriteLine("228: " + Math.Abs(PWM1A));
 
 
                 if ((Math.Abs(PWM1A) < num_samples) && PWM1A != 0) // check for valid number
                 {
-
-                    int T = BUFFER_SIZE - (Math.Abs(PWM1A)); //(BUFFER_SIZE * sizeof(float))
+                    int TT = Math.Abs(PWM1A);
+                    int T = BUFFER_SIZE - TT; //(BUFFER_SIZE * sizeof(float))
 
                     if (PWM1A > 0) //the Pan moved from Right <---- Left) so the data needs to shift from Left ---> Right, leaving no valid data on the lower end (Left)
                     {
-
-                        //  Array.Copy(current_display_data, 0, rx1_average_buffer, 0, PWM1A); // refill the left side becuase we are going to shift data to the right
-
+                        // copy last AVG stream into the NEW stream, then SHIFT both over
                         Array.Copy(rx1_average_buffer, PWM1A, current_display_data, 0, T); // source array, source indes start point, dest arry, dest indes start point, length
                         Array.Copy(rx1_average_buffer, PWM1A, rx1_average_buffer, 0, T); // source array, source indes start point, dest arry, dest indes start point, length
 
                     }
                     else if (PWM1A < 0) //the Pan moved from Left ---> right) so the data needs to shift from Right <---- Left, leaving no valid data on the Upper end (Right)
                     {
-                        //  Array.Copy(current_display_data, T, rx1_average_buffer, T, Math.Abs(PWM1A)); // refill the right side becuase we are going to shift data to the left
+                        Array.Copy(rx1_average_buffer, 0, current_display_data, TT, T); // source array, source indes start point, dest arry, dest indes start point, length
+                        Array.Copy(rx1_average_buffer, 0, rx1_average_buffer, TT, T); // source array, source indes start point, dest arry, dest indes start point, length
 
-                        Array.Copy(rx1_average_buffer, 0, current_display_data, Math.Abs(PWM1A), T); // source array, source indes start point, dest arry, dest indes start point, length
-                        Array.Copy(rx1_average_buffer, 0, rx1_average_buffer, Math.Abs(PWM1A), T); // source array, source indes start point, dest arry, dest indes start point, length
-                    }
+                    } //  if (PWM1A < 0)
 
 
-                }
+                } //   if ((Math.Abs(PWM1A) < num_samples) && PWM1A != 0)
                 else
                 {
                     PF3A = 0;
                 }
+
+                console.UP1 = false; // .251
             } // freq change
             else if (PF3A == 1 && average_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked))
             {
-                // Array.Copy(rx1_average_buffer, 0, current_display_data,0, BUFFER_SIZE);
+                //  Array.Copy(rx1_average_buffer, 0, current_display_data,0, BUFFER_SIZE);
                 PF3A = 0;
             }
             else
@@ -18677,7 +18688,7 @@ namespace PowerSDR
 
             if (rx2_avg_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) && ((PWM2B_LAST != vfob_hz) && (Console.CTUN1_HZ == 0)) || (PWM2B_LAST < (vfob_hz - 200000) || PWM2B_LAST > (vfob_hz + 200000))) // ke9ns dont move waterfall if in CTUN mode
             {
-                PF3B = 1;
+                PF3B = 1; // flag to prevent normal avg routine from running
 
 
                 PWM2B_DIFF = vfob_hz - PWM2B_LAST;
@@ -18688,8 +18699,6 @@ namespace PowerSDR
                     PWM2B_DIFF = 0;
                 }
 
-
-
                 PWM4 = ((float)(High - Low) / (float)num_samples); // number of hz on screen
 
                 PWM1 = ((float)PWM2B_DIFF / PWM4 / slope); // how many pixels to move the bmp frame -=going down in freq +=going up in freq
@@ -18698,12 +18707,12 @@ namespace PowerSDR
 
                 if ((Math.Abs(PWM1B) < num_samples) && PWM1B != 0) // check for valid number
                 {
+                    int TT = Math.Abs(PWM1B); //.251
 
                     int T = BUFFER_SIZE - (Math.Abs(PWM1B)); //(BUFFER_SIZE * sizeof(float))
 
                     if (PWM1B > 0) //the Pan moved from Right to Left)
                     {
-
                         // copy last AVG stream into the NEW stream, then SHIFT both over
                         Array.Copy(rx2_average_buffer, PWM1B, current_display_data_bottom, 0, T); // source array, source indes start point, dest arry, dest indes start point, length
                         Array.Copy(rx2_average_buffer, PWM1B, rx2_average_buffer, 0, T); // source array, source indes start point, dest arry, dest indes start point, length
@@ -18711,21 +18720,22 @@ namespace PowerSDR
                     }
                     else if (PWM1B < 0) //the Pan moved from Left to right)
                     {
-
-                        Array.Copy(rx2_average_buffer, 0, current_display_data_bottom, Math.Abs(PWM1B), T); // source array, source indes start point, dest arry, dest indes start point, length
-                        Array.Copy(rx2_average_buffer, 0, rx2_average_buffer, Math.Abs(PWM1B), T); // source array, source indes start point, dest arry, dest indes start point, length
+                        Array.Copy(rx2_average_buffer, 0, current_display_data_bottom, TT, T); // source array, source indes start point, dest arry, dest indes start point, length
+                        Array.Copy(rx2_average_buffer, 0, rx2_average_buffer, TT, T); // source array, source indes start point, dest arry, dest indes start point, length
                     }
 
                 }
                 else
                 {
-                    PF3B = 0;
+                    PF3B = 0; // run normal avg routine if nothing moves
                 }
+
+
             } // freq change on RX2 (with AVG turned on)
             else if (rx2_avg_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) && PF3B == 1) // RX2 AVG ON, and was moving last cycle through
             {
 
-                Array.Copy(rx2_average_buffer, 0, current_display_data_bottom, 0, BUFFER_SIZE);
+                //  Array.Copy(rx2_average_buffer, 0, current_display_data_bottom, 0, BUFFER_SIZE); 
                 PF3B = 0;
 
 
@@ -18741,8 +18751,15 @@ namespace PowerSDR
             //=================================================================
 
 
-            if (rx == 1 && average_on && PF3A == 0) console.UpdateRX1DisplayAverage(rx1_average_buffer, current_display_data); // only do an AVG if AVG is ON and your not turning the VFO
-            else if (rx == 2 && rx2_avg_on && PF3B == 0) console.UpdateRX2DisplayAverage(rx2_average_buffer, current_display_data_bottom);
+            if (rx == 1 && average_on && PF3A == 0)
+            {
+                //  Debug.WriteLine("AVERAGE= " );
+                console.UpdateRX1DisplayAverage(rx1_average_buffer, current_display_data); // only do an AVG if AVG is ON and your not turning the VFO
+            }
+            else if (rx == 2 && rx2_avg_on && PF3B == 0)
+            {
+                console.UpdateRX2DisplayAverage(rx2_average_buffer, current_display_data_bottom);
+            }
 
 
 
@@ -18803,7 +18820,7 @@ namespace PowerSDR
                 if (console.N1MM_RX2)
                 {
 
-                  //  Debug.WriteLine("N1MM VFOB RX2");
+                    //  Debug.WriteLine("N1MM VFOB RX2");
 
                     console.Low = Low;
                     console.High = High; // .183
@@ -18840,7 +18857,7 @@ namespace PowerSDR
                 } // RX2 for N1MM above
                 else
                 {
-                 //   Debug.WriteLine("N1MM VFOA RX1");
+                    //   Debug.WriteLine("N1MM VFOA RX1");
 
                     console.Low = Low;
                     console.High = High; // .183
@@ -18896,7 +18913,7 @@ namespace PowerSDR
 
                 //=====================
                 // ke9ns add: grid lines for 3D   data_line_pen  grid_pen_dark
-             
+
                 if (rx == 1)
                 {
                     // n1mm
@@ -18952,7 +18969,7 @@ namespace PowerSDR
                     {
                         if (rx == 2)
                         {
-                          //  Debug.WriteLine("N1MM RX2 data");
+                            //  Debug.WriteLine("N1MM RX2 data");
                             if (i >= console.N1MM_OFFSET) console.N1MM_Data[i - console.N1MM_OFFSET] = (int)max;
 
                             //   Debug.Write(console.N1MM_Data[i] + "` ");
@@ -18964,7 +18981,7 @@ namespace PowerSDR
                     {
                         if (rx == 1)
                         {
-                           // Debug.WriteLine("N1MM RX1 data");
+                            // Debug.WriteLine("N1MM RX1 data");
 
                             if (i >= console.N1MM_OFFSET) console.N1MM_Data[i - console.N1MM_OFFSET] = (int)max;
 
@@ -18984,32 +19001,119 @@ namespace PowerSDR
                     if (CurrentDisplayMode == DisplayMode.PANADAPTER) // make 3d larger if only in Pan mode
                     {
 
-                        //   points30[i].X = points29[i].X + X1; // not used at this time
-                        //    points30[i].Y = points29[i].Y - Y1;
+                        if (console.setupForm.number3DZ.Value > 38) //.245
+                        {
+                            points40[i].X = points39[i].X + X1;
+                            points40[i].Y = points39[i].Y - Y1;
+                        }
 
-                        //    points29[i].X = points28[i].X + X1;
-                        //    points29[i].Y = points28[i].Y - Y1;
+                        if (console.setupForm.number3DZ.Value > 37)
+                        {
+                            points39[i].X = points38[i].X + X1;
+                            points39[i].Y = points38[i].Y - Y1;
+                        }
+                        if (console.setupForm.number3DZ.Value > 36)
+                        {
+                            points38[i].X = points37[i].X + X1;
+                            points38[i].Y = points37[i].Y - Y1;
+                        }
 
-                        //     points28[i].X = points27[i].X + X1;
-                        //     points28[i].Y = points27[i].Y - Y1;
+                        if (console.setupForm.number3DZ.Value > 35)
+                        {
+                            points37[i].X = points36[i].X + X1;
+                            points37[i].Y = points36[i].Y - Y1;
+                        }
+                        if (console.setupForm.number3DZ.Value > 34)
+                        {
+                            points36[i].X = points35[i].X + X1;
+                            points36[i].Y = points35[i].Y - Y1;
+                        }
 
-                        //      points27[i].X = points26[i].X + X1;
-                        //      points27[i].Y = points26[i].Y - Y1;
+                        if (console.setupForm.number3DZ.Value > 33)
+                        {
+                            points35[i].X = points34[i].X + X1;
+                            points35[i].Y = points34[i].Y - Y1;
+                        }
 
-                        //     points26[i].X = points25[i].X + X1;
-                        //    points26[i].Y = points25[i].Y - Y1;
+                        if (console.setupForm.number3DZ.Value > 32)
+                        {
+                            points34[i].X = points33[i].X + X1;
+                            points34[i].Y = points33[i].Y - Y1;
+                        }
 
-                        //    points25[i].X = points24[i].X + X1;
-                        //    points25[i].Y = points24[i].Y - Y1;
+                        if (console.setupForm.number3DZ.Value > 31)
+                        {
+                            points33[i].X = points32[i].X + X1;
+                            points33[i].Y = points32[i].Y - Y1;
+                        }
 
-                        //    points24[i].X = points23[i].X + X1;
-                        //    points24[i].Y = points23[i].Y - Y1;
+                        if (console.setupForm.number3DZ.Value > 30)
+                        {
+                            points32[i].X = points31[i].X + X1;
+                            points32[i].Y = points31[i].Y - Y1;
+                        }
 
-                        //    points23[i].X = points22[i].X + X1;
-                        //     points23[i].Y = points22[i].Y - Y1;
 
-                        //     points22[i].X = points21[i].X + X1;
-                        //    points22[i].Y = points21[i].Y - Y1;
+                        if (console.setupForm.number3DZ.Value > 29)
+                        {
+                            points31[i].X = points30[i].X + X1;
+                            points31[i].Y = points30[i].Y - Y1;
+                        }
+
+
+                        if (console.setupForm.number3DZ.Value > 28) //.242
+                        {
+                            points30[i].X = points29[i].X + X1; // 
+                            points30[i].Y = points29[i].Y - Y1;
+                        }
+
+                        if (console.setupForm.number3DZ.Value > 27)
+                        {
+                            points29[i].X = points28[i].X + X1;
+                            points29[i].Y = points28[i].Y - Y1;
+                        }
+                        if (console.setupForm.number3DZ.Value > 26)
+                        {
+                            points28[i].X = points27[i].X + X1;
+                            points28[i].Y = points27[i].Y - Y1;
+                        }
+
+                        if (console.setupForm.number3DZ.Value > 25)
+                        {
+                            points27[i].X = points26[i].X + X1;
+                            points27[i].Y = points26[i].Y - Y1;
+                        }
+                        if (console.setupForm.number3DZ.Value > 24)
+                        {
+                            points26[i].X = points25[i].X + X1;
+                            points26[i].Y = points25[i].Y - Y1;
+                        }
+
+                        if (console.setupForm.number3DZ.Value > 23)
+                        {
+                            points25[i].X = points24[i].X + X1;
+                            points25[i].Y = points24[i].Y - Y1;
+                        }
+
+                        if (console.setupForm.number3DZ.Value > 22)
+                        {
+                            points24[i].X = points23[i].X + X1;
+                            points24[i].Y = points23[i].Y - Y1;
+                        }
+
+                        if (console.setupForm.number3DZ.Value > 21)
+                        {
+                            points23[i].X = points22[i].X + X1;
+                            points23[i].Y = points22[i].Y - Y1;
+                        }
+
+                        if (console.setupForm.number3DZ.Value > 20)
+                        {
+                            points22[i].X = points21[i].X + X1;
+                            points22[i].Y = points21[i].Y - Y1;
+                        }
+
+                        //------------------------------------------------
 
                         points21[i].X = points20[i].X + X1;
                         points21[i].Y = points20[i].Y - Y1;
@@ -19026,7 +19130,7 @@ namespace PowerSDR
                         points17[i].X = points16[i].X + X1;
                         points17[i].Y = points16[i].Y - Y1;
 
-                    }
+                    } //  if (CurrentDisplayMode == DisplayMode.PANADAPTER) 
 
                     points16[i].X = points15[i].X + X1;
                     points16[i].Y = points15[i].Y - Y1;
@@ -19079,7 +19183,7 @@ namespace PowerSDR
                         points0[i].Y = points[i].Y;
                     }
 
-                } // PON
+                } // if (PON == true)
 
                 //==============================================
                 // ke9ns: get latest (newest) pan data line
@@ -19470,25 +19574,40 @@ namespace PowerSDR
                 g.DrawLines(data_line_pen, points);                             // trace spectrum line to screen (draw lines between datapoints)
 
 
-
             } // pan_fill = true
             else // false
             {
 
-                if (PON == true)
+                if (PON == true) // ke9ns 3D active
                 {
 
                     if (CurrentDisplayMode == DisplayMode.PANADAPTER) // make 3d larger if only in Pan mode
                     {
-                        //   g.DrawLines(data_3dline_pen30, points30); // not used at this time
-                        //   g.DrawLines(data_3dline_pen29, points29);
-                        //    g.DrawLines(data_3dline_pen28, points28);
-                        //    g.DrawLines(data_3dline_pen27, points27);
-                        //    g.DrawLines(data_3dline_pen26, points26);
-                        //    g.DrawLines(data_3dline_pen25, points25);
-                        //    g.DrawLines(data_3dline_pen24, points24);
-                        //   g.DrawLines(data_3dline_pen23, points23);
-                        //    g.DrawLines(data_3dline_pen22, points22);
+                        //  Debug.WriteLine("3DZ: " + console.setupForm.number3DZ.Value);
+                        if (console.setupForm.number3DZ.Value == 16) console.setupForm.number3DZ.Value = 21;
+
+
+
+                        if (console.setupForm.number3DZ.Value > 38) g.DrawLines(data_3dline_pen39, points39); // .245
+                        if (console.setupForm.number3DZ.Value > 37) g.DrawLines(data_3dline_pen38, points38);
+                        if (console.setupForm.number3DZ.Value > 36) g.DrawLines(data_3dline_pen37, points37);
+                        if (console.setupForm.number3DZ.Value > 35) g.DrawLines(data_3dline_pen36, points36);
+                        if (console.setupForm.number3DZ.Value > 34) g.DrawLines(data_3dline_pen35, points35);
+                        if (console.setupForm.number3DZ.Value > 33) g.DrawLines(data_3dline_pen34, points34);
+                        if (console.setupForm.number3DZ.Value > 32) g.DrawLines(data_3dline_pen33, points33);
+                        if (console.setupForm.number3DZ.Value > 30) g.DrawLines(data_3dline_pen32, points32);
+                        if (console.setupForm.number3DZ.Value > 29) g.DrawLines(data_3dline_pen31, points31); // .245
+
+
+                        if (console.setupForm.number3DZ.Value > 28) g.DrawLines(data_3dline_pen30, points30); // .242
+                        if (console.setupForm.number3DZ.Value > 27) g.DrawLines(data_3dline_pen29, points29);
+                        if (console.setupForm.number3DZ.Value > 26) g.DrawLines(data_3dline_pen28, points28);
+                        if (console.setupForm.number3DZ.Value > 25) g.DrawLines(data_3dline_pen27, points27);
+                        if (console.setupForm.number3DZ.Value > 24) g.DrawLines(data_3dline_pen26, points26);
+                        if (console.setupForm.number3DZ.Value > 23) g.DrawLines(data_3dline_pen25, points25);
+                        if (console.setupForm.number3DZ.Value > 22) g.DrawLines(data_3dline_pen24, points24);
+                        if (console.setupForm.number3DZ.Value > 21) g.DrawLines(data_3dline_pen23, points23);
+                        if (console.setupForm.number3DZ.Value > 20) g.DrawLines(data_3dline_pen22, points22); //.242
 
                         g.DrawLines(data_3dline_pen21, points21);
                         g.DrawLines(data_3dline_pen20, points20);
@@ -19496,6 +19615,10 @@ namespace PowerSDR
                         g.DrawLines(data_3dline_pen18, points18);
                         g.DrawLines(data_3dline_pen17, points17);
 
+                    } //  if (CurrentDisplayMode == DisplayMode.PANADAPTER) //
+                    else
+                    {
+                        if (console.setupForm.number3DZ.Value > 16) console.setupForm.number3DZ.Value = 16;
                     }
 
                     g.DrawLines(data_3dline_pen16, points16); // ke9ns: do it like this for speed purposes only
@@ -19513,8 +19636,6 @@ namespace PowerSDR
                     g.DrawLines(data_3dline_pen4, points4);
                     g.DrawLines(data_3dline_pen3, points3);
                     g.DrawLines(data_3dline_pen2, points2);
-
-
 
 
                     if (pan_fill)                               // trace spectrum line and fill under it
@@ -20102,7 +20223,7 @@ namespace PowerSDR
                     p = new Pen(grid_text_color);
                 else p = new Pen(Color.Red);
 
-               
+
                 if (console.mouseinS == false)
                 {
                     if (bottom) // RX1 and RX2
@@ -20163,8 +20284,8 @@ namespace PowerSDR
         private static int WaterMove1 = 1;  //1, or 2 ke9ns ADD how many panels over to center starting point
         private static int WaterMove2 = 0;   // always W * 3 * WaterMove1
 
-        private static int Wtemp = 0;     // ke9ns
-        private static int WMtemp = 0;  // ke9ns
+        public static int Wtemp = 0;     // ke9ns
+        public static int WMtemp = 0;  // ke9ns
 
         private static int W2temp = 0;  // ke9ns
         private static int M2temp = 0;  // ke9ns
@@ -20188,14 +20309,14 @@ namespace PowerSDR
         private static long WM2A_DIFF = 0;// ke9ns rx1
         private static long WM2B_DIFF = 0;// ke9ns rx2 
 
-        private static long WM2A_LAST = 0;// ke9ns rx1
+        public static long WM2A_LAST = 0;// ke9ns rx1
         private static long WM2B_LAST = 0;// ke9ns rx2
 
-        private static float WM4 = 0;// ke9ns rx1 number of hz on screen
+        public static float WM4 = 0;// ke9ns rx1 number of hz on screen
         private static float WM5 = 0;// ke9ns rx2 number of hz on screen
 
         //===============================================
-        // for panadapter MOVE FUNCTION (WITH AVG TURNED ON, PREVENTS THE DISLAY FROM GOING FLAT WHEN YOU MOVE THE VFO LEFT/RIGHT)
+        // for panadapter MOVE FUNCTION (WITH AVG TURNED ON, PREVENTS THE DISPLAY FROM GOING FLAT WHEN YOU MOVE THE VFO LEFT/RIGHT)
 
         private static int PWaterMove = 5;  // 3,or 5 ke9ns ADD How many panels in watermove function, 0=OFF
         private static int PWaterMove1 = 1;  //1, or 2 ke9ns ADD how many panels over to center starting point
@@ -20208,7 +20329,9 @@ namespace PowerSDR
         private static int PM2temp = 0;  // ke9ns
         public static int PWM = W;      // ke9ns ADD WM is the watermove width of the bitmap. = W * WaterMove
         public static float PWM1 = 0;     // ke9ns ADD tracks VFOA the +/- freq movement to shift the waterfall display bitmap on the screen
+        public static float PWM1Z = 0; // ke9ns .251
         public static int PWM1A = 0;    // ke9ns add VFOA(how many data points in the pan data stream to move left or right
+        public static int PWM1AZ = 0; // ke9ns add .251
         public static int PWM1B = 0;  // ke9ns add VFOB
 
         public static int PWM3N = 0; // ke9ns holds the new first point in data stream array on the left side of display
@@ -20222,8 +20345,9 @@ namespace PowerSDR
         private static byte PF2A = 0;   // ke9ns
         private static byte PF2B = 0;  // ke9ns
 
-        private static byte PF3A = 0; // delay updating waterfall for scroll timing issues
-        private static byte PF3B = 0;  // ke9ns
+        public static byte PF3A = 0; // ke9ns: VFO moving so shift panadater
+        public static byte PF3B = 0;  // ke9ns
+
         private static byte PF3BB = 0;  // ke9ns
 
         private static byte PF5A = 0; // to take care of windows resizeing
@@ -20237,7 +20361,7 @@ namespace PowerSDR
         private static long PWM2A_LAST = 0;// ke9ns rx1
         private static long PWM2B_LAST = 0;// ke9ns rx2
 
-        private static float PWM4 = 0;// ke9ns rx1 number of hz on screen
+        public static float PWM4 = 0;// ke9ns rx1 number of hz on screen
         private static float PWM5 = 0;// ke9ns rx2 number of hz on screen
 
         //------------------------------------------------
@@ -20308,7 +20432,7 @@ namespace PowerSDR
             temp_low_threshold = waterfall_low_threshold;  // store original low rx1 threshold
             temp_high_threshold = waterfall_high_threshold; // store original high rx1/rx2 threshold
 
-                      
+
 
             //================================================
             // STEP 1) ke9ns change waterfall bitmap size to mode your in
@@ -20460,7 +20584,7 @@ namespace PowerSDR
             else if ((K9 == 7) && (K14 == 0))// Panafall8020 waterfall on rx1 only
             {
                 waterfall_bmp = new Bitmap(WM, K13 / 2 - 16, WtrColor); // .193 Panafall8020 SS1
-                             
+
                 K15 = 1;
                 K14 = 1;
 
@@ -20490,13 +20614,13 @@ namespace PowerSDR
             int Low;
             int High;
 
-          
+
             if (Console.UPDATEOFF > 0)
             {
                 Low = LowLast;
                 High = HighLast;
 
-               
+
             }
             else
             {
@@ -20515,8 +20639,8 @@ namespace PowerSDR
                 LowLast = Low;
                 HighLast = High;
 
-               
-               
+
+
 
             }
 
@@ -20546,7 +20670,7 @@ namespace PowerSDR
             //==================================================
 
 
-            if (rx == 1 && data_ready && Console.UPDATEOFF == 0 ) // ke9ns mod for CTUN sliding
+            if (rx == 1 && data_ready && Console.UPDATEOFF == 0) // ke9ns mod for CTUN sliding
             {
 
                 if (console.chkRX2.Checked == true && mox && tx_on_vfob && console.setupForm.chkRX2AutoMuteRX1OnVFOBTX.Checked) // ke9ns .210 to keep rx1 clear while transmitting on rx2
@@ -21114,9 +21238,9 @@ namespace PowerSDR
 
                     if (rx == 1)
                     {
-                       
 
-                            if (slope <= 1.0 || lindex == rindex)  // means high zoom level which means zooming into not enough resolution
+
+                        if (slope <= 1.0 || lindex == rindex)  // means high zoom level which means zooming into not enough resolution
                         {
                             // find location in current display buffer to represent location on screen (left to right)
                             // less than 1 sample per pixel
@@ -21603,7 +21727,7 @@ namespace PowerSDR
                 {
                     if ((tx_on_vfob) && (rx == 2))
                     {
- 
+
                         waterfall_low_threshold = waterfall_lowMic_threshold;  // TX low level db
                         waterfall_high_threshold = 0;
 
@@ -21653,13 +21777,13 @@ namespace PowerSDR
                         //  waterfall_low_threshold = -200; // if you dont have a low level use -200
                         //   Debug.WriteLine("never ");
 
-                      
+
                         // ke9ns: .216 add below so 2nd Receiver RX threshold stays OK when in full duplex
                         if (rx == 1)
                         {
                             waterfall_low_threshold = temp_low_threshold;  // rx1 db
                             waterfall_high_threshold = temp_high_threshold;  // rx1 db
-                           
+
                         }
                         else
                         {
@@ -21679,7 +21803,7 @@ namespace PowerSDR
                     }
                     else
                     {
-                      
+
                         waterfall_low_threshold = waterfall_lowRX2_threshold; // rx2
                         waterfall_high_threshold = temp_high_threshold;  // rx1 db
                     }
@@ -21804,7 +21928,7 @@ namespace PowerSDR
 
                             pixel_size = (i * 3) + WM1; // 
 
-                            row[pixel_size + 0] = (byte)B;  //  ke9ns ADD draw new image only in the center portion of the 3 Wide bitmap
+                            row[pixel_size + 0] = (byte)B;  //  ke9ns ADD: draw new image only in the center portion of the 3 Wide bitmap
                             row[pixel_size + 1] = (byte)G; //  WM1 = number of pixels to offset for the part of the 3Wide bitmap that is actually in the display area
                             row[pixel_size + 2] = (byte)R; //  WM1 = (WM1F * 3) + (3 * W); where 3W=start at center of bitmap, 3WM1F=+/- pixel shift in the bitmap
 
@@ -22007,7 +22131,7 @@ namespace PowerSDR
                     p = new Pen(grid_text_color);
                 else p = new Pen(Color.Red);
 
-            
+
                 if (console.mouseinS == false)
                 {
                     if (bottom)

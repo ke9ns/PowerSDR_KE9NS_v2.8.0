@@ -30,7 +30,6 @@
 // ke9ns  must be a way to send data over Firewire connection???
 
 
-using System;
 using System.Runtime.InteropServices;
 
 namespace PowerSDR
@@ -123,7 +122,7 @@ namespace PowerSDR
                 uint model;
                 uint sn;
 
-                if(!Pal.GetDeviceInfo(i, out model, out sn)) return null;
+                if (!Pal.GetDeviceInfo(i, out model, out sn)) return null;
 
                 Model m = Model.FLEX5000;
                 if (model == 3) m = Model.FLEX3000;

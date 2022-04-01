@@ -28,10 +28,8 @@
 
 //#define DEBUG_VERBOSE
 
-using System;
-using System.Diagnostics;
-using System.Threading;
 using PortTalk;
+using System.Threading;
 
 namespace PowerSDR
 {

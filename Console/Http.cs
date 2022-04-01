@@ -29,27 +29,18 @@
 //=================================================================
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Globalization;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
-using System.Windows.Forms;
-using System.Xml;
-using System.Collections;
-using System.Data;
-using System.ComponentModel;
-using System.IO.Ports;
-using TDxInput;
 using System.Text.RegularExpressions;
-using System.Drawing.Imaging;
-using Microsoft.JScript;
-using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
 
 
 
@@ -119,7 +110,7 @@ namespace PowerSDR
             if (console.SpotForm != null)
             {
 
-                if ( (console.OpenWeather == false) && ((int)console.SpotForm.udDisplayLat.Value > 25) && ((int)console.SpotForm.udDisplayLat.Value < 51))
+                if ((console.OpenWeather == false) && ((int)console.SpotForm.udDisplayLat.Value > 25) && ((int)console.SpotForm.udDisplayLat.Value < 51))
                 {
                     if (((int)console.SpotForm.udDisplayLong.Value > -140) && ((int)console.SpotForm.udDisplayLong.Value < -69))
                     {
@@ -346,10 +337,10 @@ namespace PowerSDR
                 file_LoTW = 0;
 
                 var lotw = LotwAAsync(2).Result;         // download Master FULL LoTW Log (only if there is no Master Full LOG file)
-                Debug.WriteLine("lotw2: " + file_LoTW );
-              
+                Debug.WriteLine("lotw2: " + file_LoTW);
+
                 var lotw1 = LotwAAsync(3).Result;        // download partial update of QSO and QSL info (no need to download the full Log file ever again)
-                Debug.WriteLine("lotw3: " + file_LoTW );
+                Debug.WriteLine("lotw3: " + file_LoTW);
 
                 return lotw.ToString(); // return XML data
             }
@@ -382,12 +373,12 @@ namespace PowerSDR
             string content1 = "NOT READY";
 
             List<string> LoTW_master = new List<string>();  // master LOG file
-          
+
             List<string> LoTW_MasterCall = new List<string>(); // .199 to help speed up large LoTW QSO logs
             List<string> LoTW_MasterMode = new List<string>(); // .199
             List<string> LoTW_MasterBand = new List<string>(); // .199
             List<string> LoTW_MasterQSL = new List<string>(); // .199
-         
+
             List<string> LoTW_QSO = new List<string>();
             List<string> LoTW_QSOCall = new List<string>(); // .199
             List<string> LoTW_QSOBand = new List<string>(); // .199
@@ -397,8 +388,8 @@ namespace PowerSDR
             List<string> LoTW_QSLCall = new List<string>(); // .199
             List<string> LoTW_QSLBand = new List<string>(); // .199
             List<string> LoTW_QSLMode = new List<string>(); // .199
-        
-         
+
+
             string file_name1 = console.AppDataPath + "LoTW_LOG.adi";
 
             string file_name2 = console.AppDataPath + "LoTW_LOG.adi";                     // Master Combined QSO & QSL detail file ( your LoTW_LOG file )
@@ -411,14 +402,14 @@ namespace PowerSDR
 
             // http://www.arrl.org/adif  this explains the format to get QSO/QSL data
 
-       
-            if ((!File.Exists(file_name1)) && (File.Exists(file_name5)) && (f_LoTW == 2) ) //.199  if the LoTW_OLOG.adi file is present (full log), and LoTW_QSO_Update.adi file is not present
+
+            if ((!File.Exists(file_name1)) && (File.Exists(file_name5)) && (f_LoTW == 2)) //.199  if the LoTW_OLOG.adi file is present (full log), and LoTW_QSO_Update.adi file is not present
             {
-             
+
                 console.SpotForm.textBox1.Text += "You have the LoTW_OLOG file, but no LoTW_QSO file. Will update and create new master LOG.\r\n";
                 Debug.WriteLine("LoTW you have a LoTW_OLOG file");
                 file_LoTW = 2;
-                 File.Copy(file_name5, file_name1); // copy the OLOG file to the master LOG file
+                File.Copy(file_name5, file_name1); // copy the OLOG file to the master LOG file
                 OLOG = true;
                 return content1;
             }
@@ -431,7 +422,7 @@ namespace PowerSDR
             else // get an update to your file because the master file already exists (and the 2nd time around after Master log downloaded, file_LoTW will still be ==2
             {
                 DateTime modDate;
-                Debug.WriteLine("LoTW OLOG " + file_LoTW +" , " + OLOG);
+                Debug.WriteLine("LoTW OLOG " + file_LoTW + " , " + OLOG);
 
                 if (OLOG == true)
                 {
@@ -443,10 +434,10 @@ namespace PowerSDR
                     modDate = File.GetLastWriteTime(file_name2);
                 }
 
-               
+
 
                 Debug.WriteLine("-LoTW OLOG " + file_LoTW);
-               
+
                 mod1 = modDate.ToString("yyyy-MM-dd");
                 Debug.WriteLine("LoTW you have a LoTW_OLOG file with a MOD date of " + mod1);
 
@@ -482,11 +473,11 @@ namespace PowerSDR
             Uri url4 = new Uri("https://lotw.arrl.org/lotwuser/lotwreport.adi?login=" + console.SpotForm.callBox.Text + "&password=" + console.SpotForm.LoTWPASS +
                                              "&qso_query=1" + "&qso_qsl=yes" + "&qso_qslsince=" + mod1);
 
-         
+
             if (file_LoTW == 2)
             {
                 url = url2;        // download for Master LOG file
-              
+
             }
             else if (f_LoTW == 4) url = url4;     // download for QSL partial update only
             else if (file_LoTW == 3) url = url3;  // download for QSO partial update only
@@ -496,15 +487,15 @@ namespace PowerSDR
 
 
             WebClient wc = new WebClient(); // vehicle to make a connection to ARRL LoTW LOG server
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3  | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
-          
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+
 
             try
             {
                 console.SpotForm.button4.BackColor = Color.Yellow; // let the user know your downloading
-               
+
                 Debug.WriteLine("LoTW START download: " + file_LoTW);
-             
+
                 if (file_LoTW == 3) // if you dont have a Master LOG file == 2, then get your ENTIRE LoTW QSO/QSL file, otherwise get only new data
                 {
                     file_name2 = file_name3; // QSO
@@ -519,12 +510,12 @@ namespace PowerSDR
 
                 wc.DownloadFile(url, file_name2); // GET LOG file from ARRL LoTW site and save file directly
 
-                
+
                 if (file_LoTW == 2 && OLOG == false)
                 {
                     File.Copy(file_name2, file_name5); // make a backup to the OLOG file (mostly for people with very large LOG files)
                 }
-                
+
                 if (OLOG == true)
                 {
                     wc.DownloadFile(url4, file_name3); // GET QSO LOG file from ARRL LoTW site and save file directly
@@ -548,7 +539,7 @@ namespace PowerSDR
                 console.SpotForm.textBox1.Text += "Could not download LoTW LOG file. File will not be saved, Download Exception ERROR: " + g + "\r\n";
 
                 content1 = "Error " + g.ToString();
-              
+
                 console.SpotForm.LoTWResult = 3;
                 console.SpotForm.LoTWDone = true;
                 return content1;
@@ -560,25 +551,25 @@ namespace PowerSDR
             else console.SpotForm.textBox1.Text += "\r\nDone. Saving updated QSL LoTW Log to location:\r\n" + file_name2 + "\r\n\r\n";
 
 
-                //-----------------------------------------------------------------------------------------------
-             
+            //-----------------------------------------------------------------------------------------------
 
-                if (file_LoTW == 4)                                                           // if you just did an update, then merge the QSO and QSL into the Master file
+
+            if (file_LoTW == 4)                                                           // if you just did an update, then merge the QSO and QSL into the Master file
+            {
+
+                console.SpotForm.button4.BackColor = Color.Yellow;
+
+
+                int lotw_records = 0; // master LoTW
+                int lotw_records1 = 0; // QSO
+                int lotw_records2 = 0; // QSL
+
+                //...............................................................................................
+                // extract Master LoTW Log file and place each QSO/QSL into a LoTW_master. List<string> array
+                try
                 {
 
-                    console.SpotForm.button4.BackColor = Color.Yellow;
-                 
-
-                    int lotw_records = 0; // master LoTW
-                    int lotw_records1 = 0; // QSO
-                    int lotw_records2 = 0; // QSL
-
-                    //...............................................................................................
-                    // extract Master LoTW Log file and place each QSO/QSL into a LoTW_master. List<string> array
-                    try
-                    {
-                      
-                        Debug.WriteLine("LoTW reader GET LOG master file " + file_name1);
+                    Debug.WriteLine("LoTW reader GET LOG master file " + file_name1);
 
                     if (File.Exists(file_name1))
                     {
@@ -586,446 +577,446 @@ namespace PowerSDR
 
                     }
 
-                        string lotw_log = File.ReadAllText(file_name1);   // OPEN FILE AND READ INTO A STRING HOLDER (all a single string that will need to be parsed out)
-                    
+                    string lotw_log = File.ReadAllText(file_name1);   // OPEN FILE AND READ INTO A STRING HOLDER (all a single string that will need to be parsed out)
 
-                        int x1 = lotw_log.IndexOf("<APP_LoTW_NUMREC:"); // find header at top of string
-                        Debug.WriteLine("LoTW reader GOT x1 " + x1);
-                       
-                        int x = lotw_log.IndexOf("<eoh>"); // find header at top of string
-                        Debug.WriteLine("LoTW reader GOT x " + x);
-                        var ss = lotw_log.Substring(x1 + 19, x - (x1 + 19)); // start and length   var ss = lotw_log.Substring(x1 + 19, x - (x1 + 19)); /
-                     
-                        Debug.WriteLine("LoTW reader GOT x1 " + x1 + " , " + x + " , " + ss);
 
-                        try
+                    int x1 = lotw_log.IndexOf("<APP_LoTW_NUMREC:"); // find header at top of string
+                    Debug.WriteLine("LoTW reader GOT x1 " + x1);
+
+                    int x = lotw_log.IndexOf("<eoh>"); // find header at top of string
+                    Debug.WriteLine("LoTW reader GOT x " + x);
+                    var ss = lotw_log.Substring(x1 + 19, x - (x1 + 19)); // start and length   var ss = lotw_log.Substring(x1 + 19, x - (x1 + 19)); /
+
+                    Debug.WriteLine("LoTW reader GOT x1 " + x1 + " , " + x + " , " + ss);
+
+                    try
+                    {
+                        lotw_records = System.Convert.ToInt32(ss); // get total number of LoTW QSO records to parse
+
+                        Debug.WriteLine("LoTW master database records count: " + lotw_records);
+
+                        console.SpotForm.textBox1.Text += "Master LoTW log file total contacts: " + lotw_records + "\r\n";
+
+                        x = x + 2; // position in giant lotw_log string
+
+                        for (x1 = 0; x1 < lotw_records; x1++)  // get each QSO/QSL record (all the ASCII text for each contact)
                         {
-                            lotw_records = System.Convert.ToInt32(ss); // get total number of LoTW QSO records to parse
+                            int y = lotw_log.IndexOf("<eor>", x + 5);
+                            LoTW_master.Add(lotw_log.Substring(x + 5, y - (x))); // this is 1 QSO record
+                            x = y; // move pointer to start of next
 
-                            Debug.WriteLine("LoTW master database records count: " + lotw_records);
 
-                            console.SpotForm.textBox1.Text += "Master LoTW log file total contacts: " + lotw_records + "\r\n";
-                          
-                            x = x + 2; // position in giant lotw_log string
-
-                            for (x1 = 0; x1 < lotw_records; x1++)  // get each QSO/QSL record (all the ASCII text for each contact)
+                            int z = LoTW_master[x1].IndexOf("<CALL:");
+                            if (z < 1)
                             {
-                                int y = lotw_log.IndexOf("<eor>", x + 5);
-                                LoTW_master.Add(lotw_log.Substring(x + 5, y - (x))); // this is 1 QSO record
-                                x = y; // move pointer to start of next
-
-                              
-                                int z = LoTW_master[x1].IndexOf("<CALL:");
-                                if (z < 1)
-                                {
-                                    LoTW_MasterCall.Add("-");
-                                    Debug.WriteLine("NO CALL FOUND....BAD " + x1);
-                                }
-                                else
-                                {
-                                    int z1 = System.Convert.ToInt32(LoTW_master[x1].Substring(z + 6, 1));
-                                    LoTW_MasterCall.Add(LoTW_master[x1].Substring(z + 8, z1)); // call callsign
-                                }
-
-                                                           
-                                int z2 = LoTW_master[x1].IndexOf("<APP_LoTW_MODEGROUP:");
-                                if (z2 < 1)
-                                {
-                                    LoTW_MasterMode.Add("-");
-                                    Debug.WriteLine("NO MODE FOUND....BAD " + x1);
-                                }
-                                else
-                                {
-                                    int z3 = System.Convert.ToInt32(LoTW_master[x1].Substring(z2 + 20, 1));
-                                    LoTW_MasterMode.Add(LoTW_master[x1].Substring(z2 + 22, z3)); // call mode group (data, phone)
-                                }
-
-                                int z4 = LoTW_master[x1].IndexOf("<BAND:");
-                                if (z4 < 1)
-                                {
-                                    LoTW_MasterBand.Add("-");
-                                    Debug.WriteLine("NO BAND FOUND....BAD " + x1);
-                                }
-                                else
-                                {
-                                    int z5 = System.Convert.ToInt32(LoTW_master[x1].Substring(z4 + 6, 1));
-                                    LoTW_MasterBand.Add(LoTW_master[x1].Substring(z4 + 8, z5)); // call band
-
-                                }
-                               
-                                int z8 = LoTW_master[x1].IndexOf("2xQSL:");
-                                if (z8 < 1)
-                                {
-                                   LoTW_MasterQSL.Add("N");
-                                }
-                                else
-                                {
-                                    int z9 = System.Convert.ToInt32(LoTW_master[x1].Substring(z8 + 6, 1));
-                                    LoTW_MasterQSL.Add(LoTW_master[x1].Substring(z8 + 8, z9)); // call 2 way QSL confirmed Y / N
-                                }
+                                LoTW_MasterCall.Add("-");
+                                Debug.WriteLine("NO CALL FOUND....BAD " + x1);
+                            }
+                            else
+                            {
+                                int z1 = System.Convert.ToInt32(LoTW_master[x1].Substring(z + 6, 1));
+                                LoTW_MasterCall.Add(LoTW_master[x1].Substring(z + 8, z1)); // call callsign
+                            }
 
 
-                            } // for x1 loop for Master LOG file
+                            int z2 = LoTW_master[x1].IndexOf("<APP_LoTW_MODEGROUP:");
+                            if (z2 < 1)
+                            {
+                                LoTW_MasterMode.Add("-");
+                                Debug.WriteLine("NO MODE FOUND....BAD " + x1);
+                            }
+                            else
+                            {
+                                int z3 = System.Convert.ToInt32(LoTW_master[x1].Substring(z2 + 20, 1));
+                                LoTW_MasterMode.Add(LoTW_master[x1].Substring(z2 + 22, z3)); // call mode group (data, phone)
+                            }
+
+                            int z4 = LoTW_master[x1].IndexOf("<BAND:");
+                            if (z4 < 1)
+                            {
+                                LoTW_MasterBand.Add("-");
+                                Debug.WriteLine("NO BAND FOUND....BAD " + x1);
+                            }
+                            else
+                            {
+                                int z5 = System.Convert.ToInt32(LoTW_master[x1].Substring(z4 + 6, 1));
+                                LoTW_MasterBand.Add(LoTW_master[x1].Substring(z4 + 8, z5)); // call band
+
+                            }
+
+                            int z8 = LoTW_master[x1].IndexOf("2xQSL:");
+                            if (z8 < 1)
+                            {
+                                LoTW_MasterQSL.Add("N");
+                            }
+                            else
+                            {
+                                int z9 = System.Convert.ToInt32(LoTW_master[x1].Substring(z8 + 6, 1));
+                                LoTW_MasterQSL.Add(LoTW_master[x1].Substring(z8 + 8, z9)); // call 2 way QSL confirmed Y / N
+                            }
+
+
+                        } // for x1 loop for Master LOG file
 
                         lotw_log = null;
 
-                        }
-                        catch
-                        {
-                            console.SpotForm.button4.BackColor = Color.Red;
-                            Debug.WriteLine("LoTW Failed reading master file, on record: " + x1 );
-                        }
                     }
-                    catch (Exception e)
+                    catch
                     {
                         console.SpotForm.button4.BackColor = Color.Red;
-                        Debug.WriteLine("LoTW Failed opening lotw1 log from file to read " + file_name1 + " ,    e:" + e);
-                        //  goto LoTW1; // cant open file so end it now.
-
-                    } // Master LOG Catch
-
-              
-
-
-                    //................................................................................................
-                    //................................................................................................
-                    // extract QSO Update LoTW LOG file
-                    try
-                    {
-                        Debug.WriteLine("LoTW reader GET QSO file3 " + file_name3); // LoTW_LOG_QSO_Update.adi
-
-                        string lotw_log_QSO = File.ReadAllText(file_name3);
-
-                      
-                        int x1 = lotw_log_QSO.IndexOf("<APP_LoTW_NUMREC:"); // find header at top of string
-                        int x = lotw_log_QSO.IndexOf("<eoh>"); // find header at top of string int x = lotw_log_QSO.IndexOf("<eoh>"); 
-                        var ss = lotw_log_QSO.Substring(x1 + 19, x - (x1 + 19)); // start and length
-
-                        try
-                        {
-                            lotw_records1 = System.Convert.ToInt32(ss); // get total number of LoTW QSO records to parse
-                            Debug.WriteLine("LoTW QSO database records count: " + lotw_records1);
-                            console.SpotForm.textBox1.Text += "QSO Update LoTW log file total contacts: " + lotw_records1 + "\r\n";
-
-                            x = x + 2;
-                            for (x1 = 0; x1 < lotw_records1; x1++)  // get each QSO record
-                            {
-                                int y = lotw_log_QSO.IndexOf("<eor>", x + 5);
-
-                                LoTW_QSO.Add(lotw_log_QSO.Substring(x + 5, y - (x))); // this is 1 QSO record
-                                                          
-                                x = y; // move pointer to start of next
-
-
-
-                                int z = LoTW_QSO[x1].IndexOf("<CALL:");
-                                if (z == -1)
-                                {
-                                    Debug.WriteLine("NO QSO CALL FOUND....BAD " + x1);
-                                    LoTW_QSOCall.Add("--");
-                                   
-                                }
-                                else
-                                {
-                                    int z1 = System.Convert.ToInt32(LoTW_QSO[x1].Substring(z + 6, 1));
-                                    LoTW_QSOCall.Add(LoTW_QSO[x1].Substring(z + 8, z1)); // call callsign
-                                }
-
-
-                                int z2 = LoTW_QSO[x1].IndexOf("<APP_LoTW_MODEGROUP:");
-                                if (z2 == -1)
-                                {
-                                    LoTW_QSOMode.Add("--");
-                                    Debug.WriteLine("NO QSO MODE FOUND....BAD " + x1);
-                                }
-                                else
-                                {
-                                    int z3 = System.Convert.ToInt32(LoTW_QSO[x1].Substring(z2 + 20, 1));
-                                    LoTW_QSOMode.Add(LoTW_QSO[x1].Substring(z2 + 22, z3)); // call mode group (data, phone)
-                                }
-
-                                int z4 = LoTW_QSO[x1].IndexOf("<BAND:");
-                                if (z4 == -1)
-                                {
-                                    LoTW_QSOBand.Add("--");
-                                    Debug.WriteLine("NO QSO BAND FOUND....BAD " + x1);
-                                }
-                                else
-                                {
-                                    int z5 = System.Convert.ToInt32(LoTW_QSO[x1].Substring(z4 + 6, 1));
-                                    LoTW_QSOBand.Add(LoTW_QSO[x1].Substring(z4 + 8, z5)); // call band
-
-                                }
-
-
-                            } // for x1 loop for QSO LOG file
-
-                        lotw_log_QSO = null;
-                        }
-                        catch
-                        {
-                            lotw_records1 = 0;
-                            console.SpotForm.button4.BackColor = Color.Red;
-                            Debug.WriteLine("LoTW Failed reading QSO file " + x1);
-                        }
-
+                        Debug.WriteLine("LoTW Failed reading master file, on record: " + x1);
                     }
-                    catch (Exception)
-                    {
-                        lotw_records1 = 0;
-                         console.SpotForm.button4.BackColor = Color.Red;
-                        Debug.WriteLine("LoTW Failed opening lotw3 log from file to read");
-                        //  goto LoTW1; // cant open file so end it now.
+                }
+                catch (Exception e)
+                {
+                    console.SpotForm.button4.BackColor = Color.Red;
+                    Debug.WriteLine("LoTW Failed opening lotw1 log from file to read " + file_name1 + " ,    e:" + e);
+                    //  goto LoTW1; // cant open file so end it now.
 
-                    } // QSO Log Catch
+                } // Master LOG Catch
 
 
 
-                    //.................................................................................................
-                    //................................................................................................
-                    // extract QSL Update LotW LOG File
+
+                //................................................................................................
+                //................................................................................................
+                // extract QSO Update LoTW LOG file
+                try
+                {
+                    Debug.WriteLine("LoTW reader GET QSO file3 " + file_name3); // LoTW_LOG_QSO_Update.adi
+
+                    string lotw_log_QSO = File.ReadAllText(file_name3);
+
+
+                    int x1 = lotw_log_QSO.IndexOf("<APP_LoTW_NUMREC:"); // find header at top of string
+                    int x = lotw_log_QSO.IndexOf("<eoh>"); // find header at top of string int x = lotw_log_QSO.IndexOf("<eoh>"); 
+                    var ss = lotw_log_QSO.Substring(x1 + 19, x - (x1 + 19)); // start and length
+
                     try
                     {
-                        Debug.WriteLine("LoTW reader GET QSL file4 " + file_name4);
-
-                        string lotw_log_QSL = File.ReadAllText(file_name4);
-
-
-                        int x1 = lotw_log_QSL.IndexOf("<APP_LoTW_NUMREC:"); // find header at top of string
-                        int x = lotw_log_QSL.IndexOf("<eoh>"); // find header at top of string
-                        var ss = lotw_log_QSL.Substring(x1 + 19, x - (x1 + 19)); // start and length
+                        lotw_records1 = System.Convert.ToInt32(ss); // get total number of LoTW QSO records to parse
+                        Debug.WriteLine("LoTW QSO database records count: " + lotw_records1);
+                        console.SpotForm.textBox1.Text += "QSO Update LoTW log file total contacts: " + lotw_records1 + "\r\n";
 
                         x = x + 2;
-
-                        try
+                        for (x1 = 0; x1 < lotw_records1; x1++)  // get each QSO record
                         {
-                            lotw_records2 = System.Convert.ToInt32(ss); // get total number of LoTW QSL records to parse
+                            int y = lotw_log_QSO.IndexOf("<eor>", x + 5);
 
-                            Debug.WriteLine("LoTW QSL UPDATE records count: " + lotw_records2);
-                            console.SpotForm.textBox1.Text += "QSL Update LoTW log file total contacts: " + lotw_records2 + "\r\n";
+                            LoTW_QSO.Add(lotw_log_QSO.Substring(x + 5, y - (x))); // this is 1 QSO record
 
-                            for (x1 = 0; x1 < lotw_records2; x1++)  // get each QSL record
+                            x = y; // move pointer to start of next
+
+
+
+                            int z = LoTW_QSO[x1].IndexOf("<CALL:");
+                            if (z == -1)
                             {
+                                Debug.WriteLine("NO QSO CALL FOUND....BAD " + x1);
+                                LoTW_QSOCall.Add("--");
 
-                                int y = lotw_log_QSL.IndexOf("<eor>", x + 5);
-                                LoTW_QSL.Add(lotw_log_QSL.Substring(x + 5, y - (x))); // this is 1 QSL record   LoTW_QSL.Add(lotw_log_QSL.Substring(x + 5, y - (x + 5))); 
-
-                                x = y; // move pointer to start of next
-
-
-                                int z = LoTW_QSL[x1].IndexOf("<CALL:");
-                                if (z < 1)
-                                {
-                                    LoTW_QSLCall.Add("---");
-                                    Debug.WriteLine("NO QSL CALL FOUND....BAD " + x1);
-                                }
-                                else
-                                {
-                                    int z1 = System.Convert.ToInt32(LoTW_QSL[x1].Substring(z + 6, 1));
-                                    LoTW_QSLCall.Add(LoTW_QSL[x1].Substring(z + 8, z1)); // call callsign
-                                }
+                            }
+                            else
+                            {
+                                int z1 = System.Convert.ToInt32(LoTW_QSO[x1].Substring(z + 6, 1));
+                                LoTW_QSOCall.Add(LoTW_QSO[x1].Substring(z + 8, z1)); // call callsign
+                            }
 
 
-                                int z2 = LoTW_QSL[x1].IndexOf("<APP_LoTW_MODEGROUP:");
-                                if (z2 < 1)
-                                {
-                                    LoTW_QSLMode.Add("---");
-                                    Debug.WriteLine("NO QSL MODE FOUND....BAD " + x1);
-                                }
-                                else
-                                {
-                                    int z3 = System.Convert.ToInt32(LoTW_QSL[x1].Substring(z2 + 20, 1));
-                                    LoTW_QSLMode.Add(LoTW_QSL[x1].Substring(z2 + 22, z3)); // call mode group (data, phone)
-                                }
+                            int z2 = LoTW_QSO[x1].IndexOf("<APP_LoTW_MODEGROUP:");
+                            if (z2 == -1)
+                            {
+                                LoTW_QSOMode.Add("--");
+                                Debug.WriteLine("NO QSO MODE FOUND....BAD " + x1);
+                            }
+                            else
+                            {
+                                int z3 = System.Convert.ToInt32(LoTW_QSO[x1].Substring(z2 + 20, 1));
+                                LoTW_QSOMode.Add(LoTW_QSO[x1].Substring(z2 + 22, z3)); // call mode group (data, phone)
+                            }
 
-                                int z4 = LoTW_QSL[x1].IndexOf("<BAND:");
-                                if (z4 < 1)
-                                {
-                                    LoTW_QSLBand.Add("---");
-                                    Debug.WriteLine("NO QSL BAND FOUND....BAD " + x1);
-                                }
-                                else
-                                {
-                                    int z5 = System.Convert.ToInt32(LoTW_QSL[x1].Substring(z4 + 6, 1));
-                                    LoTW_QSLBand.Add(LoTW_QSL[x1].Substring(z4 + 8, z5)); // call band
+                            int z4 = LoTW_QSO[x1].IndexOf("<BAND:");
+                            if (z4 == -1)
+                            {
+                                LoTW_QSOBand.Add("--");
+                                Debug.WriteLine("NO QSO BAND FOUND....BAD " + x1);
+                            }
+                            else
+                            {
+                                int z5 = System.Convert.ToInt32(LoTW_QSO[x1].Substring(z4 + 6, 1));
+                                LoTW_QSOBand.Add(LoTW_QSO[x1].Substring(z4 + 8, z5)); // call band
 
-                                }
+                            }
 
-                            } // for x1 loop QSL Log 
+
+                        } // for x1 loop for QSO LOG file
+
+                        lotw_log_QSO = null;
+                    }
+                    catch
+                    {
+                        lotw_records1 = 0;
+                        console.SpotForm.button4.BackColor = Color.Red;
+                        Debug.WriteLine("LoTW Failed reading QSO file " + x1);
+                    }
+
+                }
+                catch (Exception)
+                {
+                    lotw_records1 = 0;
+                    console.SpotForm.button4.BackColor = Color.Red;
+                    Debug.WriteLine("LoTW Failed opening lotw3 log from file to read");
+                    //  goto LoTW1; // cant open file so end it now.
+
+                } // QSO Log Catch
+
+
+
+                //.................................................................................................
+                //................................................................................................
+                // extract QSL Update LotW LOG File
+                try
+                {
+                    Debug.WriteLine("LoTW reader GET QSL file4 " + file_name4);
+
+                    string lotw_log_QSL = File.ReadAllText(file_name4);
+
+
+                    int x1 = lotw_log_QSL.IndexOf("<APP_LoTW_NUMREC:"); // find header at top of string
+                    int x = lotw_log_QSL.IndexOf("<eoh>"); // find header at top of string
+                    var ss = lotw_log_QSL.Substring(x1 + 19, x - (x1 + 19)); // start and length
+
+                    x = x + 2;
+
+                    try
+                    {
+                        lotw_records2 = System.Convert.ToInt32(ss); // get total number of LoTW QSL records to parse
+
+                        Debug.WriteLine("LoTW QSL UPDATE records count: " + lotw_records2);
+                        console.SpotForm.textBox1.Text += "QSL Update LoTW log file total contacts: " + lotw_records2 + "\r\n";
+
+                        for (x1 = 0; x1 < lotw_records2; x1++)  // get each QSL record
+                        {
+
+                            int y = lotw_log_QSL.IndexOf("<eor>", x + 5);
+                            LoTW_QSL.Add(lotw_log_QSL.Substring(x + 5, y - (x))); // this is 1 QSL record   LoTW_QSL.Add(lotw_log_QSL.Substring(x + 5, y - (x + 5))); 
+
+                            x = y; // move pointer to start of next
+
+
+                            int z = LoTW_QSL[x1].IndexOf("<CALL:");
+                            if (z < 1)
+                            {
+                                LoTW_QSLCall.Add("---");
+                                Debug.WriteLine("NO QSL CALL FOUND....BAD " + x1);
+                            }
+                            else
+                            {
+                                int z1 = System.Convert.ToInt32(LoTW_QSL[x1].Substring(z + 6, 1));
+                                LoTW_QSLCall.Add(LoTW_QSL[x1].Substring(z + 8, z1)); // call callsign
+                            }
+
+
+                            int z2 = LoTW_QSL[x1].IndexOf("<APP_LoTW_MODEGROUP:");
+                            if (z2 < 1)
+                            {
+                                LoTW_QSLMode.Add("---");
+                                Debug.WriteLine("NO QSL MODE FOUND....BAD " + x1);
+                            }
+                            else
+                            {
+                                int z3 = System.Convert.ToInt32(LoTW_QSL[x1].Substring(z2 + 20, 1));
+                                LoTW_QSLMode.Add(LoTW_QSL[x1].Substring(z2 + 22, z3)); // call mode group (data, phone)
+                            }
+
+                            int z4 = LoTW_QSL[x1].IndexOf("<BAND:");
+                            if (z4 < 1)
+                            {
+                                LoTW_QSLBand.Add("---");
+                                Debug.WriteLine("NO QSL BAND FOUND....BAD " + x1);
+                            }
+                            else
+                            {
+                                int z5 = System.Convert.ToInt32(LoTW_QSL[x1].Substring(z4 + 6, 1));
+                                LoTW_QSLBand.Add(LoTW_QSL[x1].Substring(z4 + 8, z5)); // call band
+
+                            }
+
+                        } // for x1 loop QSL Log 
 
                         lotw_log_QSL = null;
 
-                        }
-                        catch
-                        {
-                            lotw_records2 = 0;
-                            console.SpotForm.button4.BackColor = Color.Red;
-                            Debug.WriteLine("LoTW Failed reading QSO file");
-                        }
-
-
                     }
-                    catch (Exception)
+                    catch
                     {
                         lotw_records2 = 0;
                         console.SpotForm.button4.BackColor = Color.Red;
-                        Debug.WriteLine("LoTW Failed opening lotw4 log from file to read");
-                        //  goto LoTW1; // cant open file so end it now.
+                        Debug.WriteLine("LoTW Failed reading QSO file");
+                    }
 
-                    } // QSL LOG catch
 
-                    //.......................................................................................
-                    //.......................................................................................
-                    //.......................................................................................
+                }
+                catch (Exception)
+                {
+                    lotw_records2 = 0;
+                    console.SpotForm.button4.BackColor = Color.Red;
+                    Debug.WriteLine("LoTW Failed opening lotw4 log from file to read");
+                    //  goto LoTW1; // cant open file so end it now.
 
-                    // have 3 files at this point.
-                    // Need to parse each file then merge identical call signs (modes and bands) from QSL and QSO files into Master file and resave Master LOG file
+                } // QSL LOG catch
 
-                 
+                //.......................................................................................
+                //.......................................................................................
+                //.......................................................................................
 
-                    bool bypass = false; // if a QSO or QSL fails to match only because the QSL in the master already had a Y, then  dont update master (set to true)
+                // have 3 files at this point.
+                // Need to parse each file then merge identical call signs (modes and bands) from QSL and QSO files into Master file and resave Master LOG file
 
-                    Debug.WriteLine("LoTW Parse QSO records1 " + lotw_records + " , "  + lotw_records1);
-                    Debug.WriteLine("items " + LoTW_master.Count);
 
-                    //  console.SpotForm.textBox1.Text += "Parse Records 1 " + lotw_records + "\r\n";
 
-                 
-                    for (int q = 0; q < lotw_records1; q++) // QSO parse
+                bool bypass = false; // if a QSO or QSL fails to match only because the QSL in the master already had a Y, then  dont update master (set to true)
+
+                Debug.WriteLine("LoTW Parse QSO records1 " + lotw_records + " , " + lotw_records1);
+                Debug.WriteLine("items " + LoTW_master.Count);
+
+                //  console.SpotForm.textBox1.Text += "Parse Records 1 " + lotw_records + "\r\n";
+
+
+                for (int q = 0; q < lotw_records1; q++) // QSO parse
+                {
+                    // get callsign from QSO Update and check to see if an update to the Master
+
+                    int q1 = 0;
+
+                    //  console.SpotForm.textBox1.Text += "Parse Master Records 1a\r\n";
+                    //  Debug.Write("QSO=" + q + " " + lotw_records1 ); // lotw_records1
+
+
+                    for (q1 = 0; q1 < lotw_records; q1++) // master check
                     {
-                        // get callsign from QSO Update and check to see if an update to the Master
-
-                        int q1 = 0;
-
-                        //  console.SpotForm.textBox1.Text += "Parse Master Records 1a\r\n";
-                      //  Debug.Write("QSO=" + q + " " + lotw_records1 ); // lotw_records1
-
-
-                        for ( q1 = 0; q1 < lotw_records; q1++) // master check
+                        if (LoTW_QSOCall[q] == LoTW_MasterCall[q1])    //(foundCallQSO == foundCall) // if QSL matches something in your Master log, then replace it with this new QSL
                         {
-                            if (LoTW_QSOCall[q] == LoTW_MasterCall[q1])    //(foundCallQSO == foundCall) // if QSL matches something in your Master log, then replace it with this new QSL
+                            if (LoTW_QSOBand[q] == LoTW_MasterBand[q1])
                             {
-                                if (LoTW_QSOBand[q] == LoTW_MasterBand[q1])
+                                if (LoTW_QSOMode[q] == LoTW_MasterMode[q1])
                                 {
-                                    if (LoTW_QSOMode[q] == LoTW_MasterMode[q1])
+
+                                    bypass = true;  // since this call,mode, and band are already in your master, dont add a new entry
+
+                                    if (LoTW_MasterQSL[q1] != "Y") // found master had prior entry, but was not a confirmed QSL, so update it
                                     {
-                                      
-                                        bypass = true;  // since this call,mode, and band are already in your master, dont add a new entry
-                                     
-                                        if (LoTW_MasterQSL[q1] != "Y") // found master had prior entry, but was not a confirmed QSL, so update it
-                                        {
-                                            LoTW_master[q1] = "\r\n" + LoTW_QSO[q];
-                                            LoTW_MasterCall[q1] = LoTW_QSOCall[q];
-                                            LoTW_MasterBand[q1] = LoTW_QSOBand[q];
-                                            LoTW_MasterMode[q1] = LoTW_QSOMode[q];
-                                            LoTW_MasterQSL[q1] ="N";
+                                        LoTW_master[q1] = "\r\n" + LoTW_QSO[q];
+                                        LoTW_MasterCall[q1] = LoTW_QSOCall[q];
+                                        LoTW_MasterBand[q1] = LoTW_QSOBand[q];
+                                        LoTW_MasterMode[q1] = LoTW_QSOMode[q];
+                                        LoTW_MasterQSL[q1] = "N";
 
-                                            continue;
-                                        }
-                                        else // found master had prior entry, but it was already a confirmed QSL, no need to update
-                                        {
-                                            continue;
-                                        }
+                                        continue;
+                                    }
+                                    else // found master had prior entry, but it was already a confirmed QSL, no need to update
+                                    {
+                                        continue;
+                                    }
 
-                                    } // mode match
-                                   
-                                } // band match
-                               
-                            } // call sign match
-                          
-                        } // for loop Master LoTW log scan
+                                } // mode match
+
+                            } // band match
+
+                        } // call sign match
+
+                    } // for loop Master LoTW log scan
 
 
 
-                        if ((bypass == false) && (q1 == lotw_records)) // FOR loop ended, this indicates no match was found in the master, so add it .
-                        {
-
-                            LoTW_master.Add("\r\n" + LoTW_QSO[q]);
-                            LoTW_MasterCall.Add(LoTW_QSOCall[q]);
-                            LoTW_MasterBand.Add(LoTW_QSOBand[q]);
-                            LoTW_MasterMode.Add(LoTW_QSOMode[q]);
-                            LoTW_MasterQSL.Add("N");
-
-                            lotw_records++;
-                          
-                        }
-
-                        bypass = false; // reset flag
-
-                    } // for loop QSO to Master LOG updater
-
-
-
-
-                    //......................................................................................................
-                    //......................................................................................................
-                    //......................................................................................................
-                    //......................................................................................................
-
-                    Debug.WriteLine("LoTW Parse QSL records2: " + lotw_records + " , " + lotw_records2);
-
-                    //   console.SpotForm.textBox1.Text += "Parse QSL Records 2" + lotw_records2 + "\r\n";
-
-
-                    for (int q = 0; q < lotw_records2; q++) // QSL parse
+                    if ((bypass == false) && (q1 == lotw_records)) // FOR loop ended, this indicates no match was found in the master, so add it .
                     {
-                        // get callsign from QSL Update and check to see if an update to the Master
 
-                         //   Debug.Write("QSL=" + q); // lotw_records2
+                        LoTW_master.Add("\r\n" + LoTW_QSO[q]);
+                        LoTW_MasterCall.Add(LoTW_QSOCall[q]);
+                        LoTW_MasterBand.Add(LoTW_QSOBand[q]);
+                        LoTW_MasterMode.Add(LoTW_QSOMode[q]);
+                        LoTW_MasterQSL.Add("N");
 
-                         //-------------------------------------------------------------------------------
+                        lotw_records++;
+
+                    }
+
+                    bypass = false; // reset flag
+
+                } // for loop QSO to Master LOG updater
 
 
-                        int q1 = 0;
-                        for (q1 = 0; q1 < lotw_records; q1++) // master check
+
+
+                //......................................................................................................
+                //......................................................................................................
+                //......................................................................................................
+                //......................................................................................................
+
+                Debug.WriteLine("LoTW Parse QSL records2: " + lotw_records + " , " + lotw_records2);
+
+                //   console.SpotForm.textBox1.Text += "Parse QSL Records 2" + lotw_records2 + "\r\n";
+
+
+                for (int q = 0; q < lotw_records2; q++) // QSL parse
+                {
+                    // get callsign from QSL Update and check to see if an update to the Master
+
+                    //   Debug.Write("QSL=" + q); // lotw_records2
+
+                    //-------------------------------------------------------------------------------
+
+
+                    int q1 = 0;
+                    for (q1 = 0; q1 < lotw_records; q1++) // master check
+                    {
+
+                        if (LoTW_QSLCall[q] == LoTW_MasterCall[q1]) // if QSL matches something in your Master log, then replace it with this new QSL
                         {
-
-                            if (LoTW_QSLCall[q] == LoTW_MasterCall[q1]) // if QSL matches something in your Master log, then replace it with this new QSL
+                            if (LoTW_QSLBand[q] == LoTW_MasterBand[q1])
                             {
-                                if (LoTW_QSLBand[q] == LoTW_MasterBand[q1])
+                                if (LoTW_QSLMode[q] == LoTW_MasterMode[q1])
                                 {
-                                    if (LoTW_QSLMode[q] == LoTW_MasterMode[q1])
+                                    bypass = true;  // since this call,mode, and band are already in your master, dont add a new entry
+
+                                    if (LoTW_MasterQSL[q1] != "Y") // if record was here before but not a confirmed QSL, then update the record
                                     {
-                                        bypass = true;  // since this call,mode, and band are already in your master, dont add a new entry
 
-                                        if (LoTW_MasterQSL[q1] != "Y") // if record was here before but not a confirmed QSL, then update the record
-                                        {
+                                        LoTW_master[q1] = "\r\n" + LoTW_QSL[q];
+                                        LoTW_MasterCall[q1] = LoTW_QSLCall[q];
+                                        LoTW_MasterBand[q1] = LoTW_QSLBand[q];
+                                        LoTW_MasterMode[q1] = LoTW_QSLMode[q];
+                                        LoTW_MasterQSL[q1] = "N";
+                                        continue;
+                                    }
+                                    else // if its already a conformed QSL, then leave it alone
+                                    {
+                                        continue;
+                                    }
 
-                                            LoTW_master[q1] = "\r\n" + LoTW_QSL[q];
-                                            LoTW_MasterCall[q1] = LoTW_QSLCall[q];
-                                            LoTW_MasterBand[q1] = LoTW_QSLBand[q];
-                                            LoTW_MasterMode[q1] = LoTW_QSLMode[q];
-                                            LoTW_MasterQSL[q1] = "N";
-                                             continue;
-                                        }
-                                        else // if its already a conformed QSL, then leave it alone
-                                        {
-                                            continue;
-                                        }
+                                } // mode match
 
-                                    } // mode match
+                            } // band match
 
-                                } // band match
+                        } // call sign match
 
-                            } // call sign match
+                    } // for loop Master LoTW log scan
 
-                        } // for loop Master LoTW log scan
+                    if ((bypass == false) && (q1 == lotw_records))// FOR loop reached end, this indicates no match was found in the master, so add it.
+                    {
 
-                        if ((bypass == false) && (q1 == lotw_records))// FOR loop reached end, this indicates no match was found in the master, so add it.
-                        {
-                         
-                            LoTW_master.Add("\r\n" + LoTW_QSL[q]);
-                            LoTW_MasterCall.Add(LoTW_QSLCall[q]);
-                            LoTW_MasterBand.Add(LoTW_QSLBand[q]);
-                            LoTW_MasterMode.Add(LoTW_QSLMode[q]);
-                            LoTW_MasterQSL.Add("Y");
-                            lotw_records++;
+                        LoTW_master.Add("\r\n" + LoTW_QSL[q]);
+                        LoTW_MasterCall.Add(LoTW_QSLCall[q]);
+                        LoTW_MasterBand.Add(LoTW_QSLBand[q]);
+                        LoTW_MasterMode.Add(LoTW_QSLMode[q]);
+                        LoTW_MasterQSL.Add("Y");
+                        lotw_records++;
 
-                        }
+                    }
 
-                        bypass = false;
+                    bypass = false;
 
-                    } // for loop QSL UPdate log
+                } // for loop QSL UPdate log
 
 
 
@@ -1077,20 +1068,20 @@ namespace PowerSDR
                         stream2.Close();   // close stream
                     }
                 }
-             
+
                 LoTW_master.Clear();
 
                 Debug.WriteLine("DONE DONE DONE");
 
-                } //  if (file_LoTW == 4) // if you just did an update, then merge the QSO and QSL into the Master file
+            } //  if (file_LoTW == 4) // if you just did an update, then merge the QSO and QSL into the Master file
 
 
-                console.SpotForm.textBox1.Text += "Finished Saving\r\n";
+            console.SpotForm.textBox1.Text += "Finished Saving\r\n";
 
-                console.SpotForm.LoTWResult = 2; // good
-                console.SpotForm.LoTWDone = true;
+            console.SpotForm.LoTWResult = 2; // good
+            console.SpotForm.LoTWDone = true;
 
-                return content1;
+            return content1;
 
 
 

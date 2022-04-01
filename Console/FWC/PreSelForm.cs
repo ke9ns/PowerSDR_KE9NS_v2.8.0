@@ -27,13 +27,7 @@
 //=================================================================
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace PowerSDR
@@ -73,7 +67,7 @@ namespace PowerSDR
 
         private void radAnt1_CheckedChanged(object sender, EventArgs e)
         {
-            if(radAnt1.Checked)
+            if (radAnt1.Checked)
                 UpdatePreSel();
         }
 
@@ -85,7 +79,7 @@ namespace PowerSDR
 
         private void radAntRXOnly_CheckedChanged(object sender, EventArgs e)
         {
-            if(radAntRXOnly.Checked)
+            if (radAntRXOnly.Checked)
                 UpdatePreSel();
         }
 
@@ -141,7 +135,7 @@ namespace PowerSDR
                     }
                     break;
                 case Model.FLEX1500:
-                    if(console.hid_init)
+                    if (console.hid_init)
                         USBHID.FlexWire_Write2Value(0x40, reg0, reg1);
                     break;
             }

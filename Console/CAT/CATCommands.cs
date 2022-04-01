@@ -237,8 +237,8 @@ namespace PowerSDR
         // another "happiness" command
         public string FT(string s) // ke9ns .200 mod (FT was returning ZZSP. which is wrong. FT is not ZZSP split, its get/set TX VFO)
         {
-            		
-              return ZZSW(s);
+
+            return ZZSW(s);
 
         } //  FT(string s)
 
@@ -881,15 +881,15 @@ namespace PowerSDR
         {
             console.CATPTT = false;
 
-            if (console.SpoofTX == true )
+            if (console.SpoofTX == true)
             {
                 console.SpoofTX = false;
-                if (console.LastVFOBTX == true) 
+                if (console.LastVFOBTX == true)
                 {
                     console.LastVFOBTX = false;
                     // set VFOTX back to VFOA if it was moved to B due to a spoof
-                       console.SwapVFOA_BTX = false; // VFOA is TX
-                   //   console.SwapVFOA_BTX = true; // VFOB is TX
+                    console.SwapVFOA_BTX = false; // VFOA is TX
+                                                  //   console.SwapVFOA_BTX = true; // VFOB is TX
                 }
 
             }
@@ -1046,10 +1046,10 @@ namespace PowerSDR
             {
                 // check which VFO is TX and save it here to return it back when done with TX
                 //   console.SwapVFOA_BTX = false; // VFOA is TX
-                     console.SwapVFOA_BTX = true; // VFOB is TX
+                console.SwapVFOA_BTX = true; // VFOB is TX
                 console.SpoofTX = true;
             }
-        
+
             console.CATPTT = true;
 
             return "";
@@ -1345,8 +1345,8 @@ namespace PowerSDR
 
         } //  public string ZZAI(string s)
 
-    //Sets or reads the AGC RF gain
-    public string ZZAR(string s)
+        //Sets or reads the AGC RF gain
+        public string ZZAR(string s)
         {
             int n = 0;
             int x = 0;
@@ -1425,13 +1425,13 @@ namespace PowerSDR
         //Sets VFO A up nn Tune Steps
         public string ZZAU(string s)
         {
-           
+
             int step = 0;
 
             if (s.Length == parser.nSet)
             {
                 step = Convert.ToInt32(s);
-               
+
                 if (step >= 0 || step <= 14)
                 {
 
@@ -2531,9 +2531,9 @@ namespace PowerSDR
                 }
                 else
                     return parser.Error1;
-            
 
-           
+
+
             } // SpoofAB = true (VFOB above)
             else // get VFOA freq
             {
@@ -2553,8 +2553,8 @@ namespace PowerSDR
                         s = s.Insert(5, separator);
 
 
-                        console.VFOAFreq = double.Parse(s);
-                    
+                    console.VFOAFreq = double.Parse(s);
+
 
                     return "";
                 }
@@ -6117,7 +6117,7 @@ namespace PowerSDR
         // Sets or reads the VFO Split status
         public string ZZSP(string s)
         {
-          
+
 
             if (s.Length == parser.nSet && (s == "0" || s == "1"))
             {
@@ -6273,11 +6273,11 @@ namespace PowerSDR
         //Swaps VFO A/B TX buttons
         public string ZZSW(string s)
         {
-          //  if (console.SpoofAB == true) // ke9ns add .200
-          //  {
-          //      s = "1";
-          //  }
-           
+            //  if (console.SpoofAB == true) // ke9ns add .200
+            //  {
+            //      s = "1";
+            //  }
+
 
             if (s.Length == parser.nSet && (s == "0" || s == "1"))
             {
@@ -6292,14 +6292,14 @@ namespace PowerSDR
             {
                 bool retval = console.SwapVFOA_BTX;
                 if (retval)
-                  //  if (console.SpoofAB == true) // ke9ns add .200
-                  //  {
-                  //      return "0";
-                 //   }
-                  //  else
-                  //  {
-                        return "1";
-                  //  }
+                    //  if (console.SpoofAB == true) // ke9ns add .200
+                    //  {
+                    //      return "0";
+                    //   }
+                    //  else
+                    //  {
+                    return "1";
+                //  }
                 else
                     return "0";
             }
@@ -6750,7 +6750,7 @@ namespace PowerSDR
             }
             else if (s.Length == parser.nGet)
             {
-               
+
                 if (console.CATPTT || console.MOX)
                     return "1";
                 else

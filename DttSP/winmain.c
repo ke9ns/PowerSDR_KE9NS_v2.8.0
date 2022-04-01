@@ -454,10 +454,10 @@ DttSP_EXP void Audio_Callback2 (float **input, float **output, unsigned int nfra
 
 					for (i=0;i < nframes;i++) 
 					{
-						COMPLEX A = Cmplx(l0[i],r0[i]);
-						COMPLEX B = Cmplx(l2[i],r2[i]);
+						COMPLEX A = Cmplx(l0[i],r0[i]); // ke9ns RX1
+						COMPLEX B = Cmplx(l2[i],r2[i]); // ke9ns RX2
 
-						A = Cscl(Cadd(A,Cmul(B,diversity.scalar)),diversity.gain);
+						A = Cscl(Cadd(A,Cmul(B,diversity.scalar)),diversity.gain); // ke9ns: new A = scale signal with diversity.gain = A + (B * diversity.scaler)
 
 						ringb_float_write (top[0].jack.ring.i.l, &A.re, 1);
 						ringb_float_write (top[0].jack.ring.i.r, &A.im, 1);

@@ -28,8 +28,6 @@
 
 using System;
 using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -41,10 +39,10 @@ namespace PowerSDR
 
         private Progress progress;
         private Console console;
-       
+
         #endregion
 
-        
+
 
         #region Misc Routines
 

@@ -33,14 +33,12 @@
 //#define SPLIT_INTERLEAVED
 
 
+using FlexCW;
 using System;
 using System.Collections;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Windows.Forms;
-
-using FlexCW;
 
 namespace PowerSDR
 {
@@ -1165,9 +1163,9 @@ namespace PowerSDR
                         ClearBuffer(in_l, frameCount);
                         ClearBuffer(in_r, frameCount);
                         break;
-                       
-           
-          
+
+
+
                     default:
 
                         break;
@@ -1349,7 +1347,7 @@ namespace PowerSDR
 
             if (!localmox)
             {
-            
+
 
                 switch (rx1_output_signal)  // ke9ns selected from setup->test->receiver screen
 
@@ -1989,7 +1987,7 @@ namespace PowerSDR
                     switch (rx1_input_signal)
                     {
                         case SignalSource.RADIO:
-                       
+
                             break;
                         case SignalSource.SINE:
                             SineWave(in_l, frameCount, phase_accumulator1, sine_freq1);

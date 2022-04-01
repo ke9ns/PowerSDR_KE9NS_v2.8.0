@@ -66,11 +66,11 @@ namespace PowerSDR
                 }
             }
 
-           
+
 
         }
 
-        
+
 
         public void enableCAT3()
         {
@@ -179,7 +179,7 @@ namespace PowerSDR
         ASCIIEncoding AE = new ASCIIEncoding();
         private bool Fpass = true;
         private bool cat_enabled3 = false;  // is cat currently enabled by user? 
-                                           //		private System.Timers.Timer SIOMonitor;
+                                            //		private System.Timers.Timer SIOMonitor;
         CATParser parser;
         //		private int SIOMonitorCount = 0;
 
@@ -307,7 +307,7 @@ namespace PowerSDR
 
                         console.SpoofAB = false;
                         //testTimer1.Start();
-                       
+
                         console.KWAI3 = true; // .214
                         answer = parser.Get(m.Value);                                   //send the match to the parser
                         console.KWAI3 = false; // .214
@@ -317,8 +317,8 @@ namespace PowerSDR
                         //testTimer2.Start();
                         if (answer.Length > 0)
                             result = SIO3.put(answer);                                   //send the answer to the serial port
-                                                                                        //testTimer2.Stop();
-                                                                                        //T1 = testTimer2.DurationMsec;
+                                                                                         //testTimer2.Stop();
+                                                                                         //T1 = testTimer2.DurationMsec;
                         CommBuffer = CommBuffer.Replace(m.Value, "", 0, m.Length);                   //remove the match from the buffer
                                                                                                      //Debug.WriteLine("Parser decode time for "+m.Value.ToString()+":  "+T0.ToString()+ "ms");
                                                                                                      //Debug.WriteLine("SIO send answer time:  " + T1.ToString() + "ms");

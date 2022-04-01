@@ -30,7 +30,7 @@ namespace PowerSDR
 {
     public partial class FLEX5000LPFForm : System.Windows.Forms.Form
     {
-        
+
 
         #region Constructor and Destructor
 
@@ -61,7 +61,7 @@ namespace PowerSDR
 
         #endregion
 
-        
+
 
         #region RX1
 

@@ -27,12 +27,9 @@
 //=================================================================
 
 using System;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
-using System.Threading;
-using System.Windows.Forms;
 using System.Diagnostics;
+using System.Drawing;
+using System.Threading;
 
 namespace PowerSDR
 {
@@ -44,7 +41,7 @@ namespace PowerSDR
         #region Variable Declaration
 
         private Console console;
-       
+
 
         #endregion
 
@@ -87,7 +84,7 @@ namespace PowerSDR
 
         #endregion
 
-        
+
 
         #region Properties
 

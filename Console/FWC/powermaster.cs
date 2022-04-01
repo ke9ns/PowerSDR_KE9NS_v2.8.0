@@ -93,7 +93,7 @@ namespace PowerSDR
             InitComPort(port, p);
         }
 
-        public PowerMaster(int port , bool p)
+        public PowerMaster(int port, bool p)
         {
             InitComPort(port, p);
         }
@@ -148,7 +148,7 @@ namespace PowerSDR
 
 
             com_port.Write(out_buffer, 0, 7); // ke9ns: 02 44 33 03 CRC CRC 0D (in hex)
-   
+
 
             t1.Start();
 
@@ -165,7 +165,7 @@ namespace PowerSDR
 
             Encoding.ASCII.GetBytes("D0", 0, 2, out_buffer, 1); // ke9ns: D = Data out 3 =140 msec per reading automatically output (4=280msec per)
             out_buffer[3] = 0x03;
-          
+
             out_buffer[4] = 0x37; // ByteToAscii((byte)(crc >> 4)); // ke9ns 13 >> 4 = 1 which in ascii = 49dec  
             out_buffer[5] = 0x31; //  ByteToAscii((byte)(crc & 0x0F)); // ke9ns 1 & F = 3 in ascii = 51dec
             out_buffer[6] = 0x0D;
@@ -270,7 +270,7 @@ namespace PowerSDR
             get { return watts; }
         }
 
-        private int watts1 =0;
+        private int watts1 = 0;
         public int Watts1 // .212 add
         {
             get { return watts1; }

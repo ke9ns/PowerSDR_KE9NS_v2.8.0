@@ -28,16 +28,13 @@
 
 using System;
 using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
-using System.Windows.Forms;
 
 namespace PowerSDR
 {
     unsafe public partial class DSPTestForm : System.Windows.Forms.Form
     {
         private Console console;
-       
+
 
         private void chkMu_CheckedChanged(object sender, System.EventArgs e)
         {

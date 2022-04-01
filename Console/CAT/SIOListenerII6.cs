@@ -66,11 +66,11 @@ namespace PowerSDR
                 }
             }
 
-           
+
 
         }
 
-        
+
 
         public void enableCAT6()
         {
@@ -179,7 +179,7 @@ namespace PowerSDR
         ASCIIEncoding AE = new ASCIIEncoding();
         private bool Fpass = true;
         private bool cat_enabled6 = false;  // is cat currently enabled by user? 
-                                           //		private System.Timers.Timer SIOMonitor;
+                                            //		private System.Timers.Timer SIOMonitor;
         CATParser parser;
         //		private int SIOMonitorCount = 0;
 
@@ -345,7 +345,7 @@ namespace PowerSDR
                         // ZZFI > ZZFS LOW RX FILTER CUT
                         // ZZOA > ZZOB GET/SET ANT CONNECTED TO RX1 SPOOF RX2
 
-                   
+
                         Debug.WriteLine("S SIO6----->" + m.Value);
 
                         console.SpoofAB = true; // ke9ns add: .200 used by IF command in CATCommands.cs
