@@ -1123,8 +1123,7 @@ namespace PowerSDR
                 temp_record = Audio.RecordRXPreProcessed;
                 quickmp3SR = WaveOptions.comboSampleRate.Text;
 
-                if (chkBoxMP3.Checked == true)
-                    WaveOptions.comboSampleRate.Text = "48000"; // reduce file size
+                if (chkBoxMP3.Checked == true)    WaveOptions.comboSampleRate.Text = "48000"; // reduce file size
 
                 Audio.RecordRXPreProcessed = false;                            //ke9ns add  set this FALSE temporarily
 
@@ -1140,8 +1139,17 @@ namespace PowerSDR
                     System.IO.Directory.CreateDirectory(console.AppDataPath + "QuickAudio"); // ke9ns add create sub directory
                     System.IO.Directory.CreateDirectory(console.AppDataPath + "QuickAudioMP3"); // ke9ns add create sub directory
 
-                    file_name = console.AppDataPath + "QuickAudio" + "\\SDRQuickAudio" + QAC.ToString() + QAName() + ".wav";
-                    quickmp3 = console.AppDataPath + "QuickAudioMP3" + "\\SDRQuickAudio" + QAC.ToString() + QAName() + ".mp3"; // ke9ns add mp3
+                    if (console.QuickRec2 == false)
+                    {
+                        file_name = console.AppDataPath + "QuickAudio" + "\\SDRQuickAudio" + QAC.ToString() + QAName() + ".wav";
+                        quickmp3 = console.AppDataPath + "QuickAudioMP3" + "\\SDRQuickAudio" + QAC.ToString() + QAName() + ".mp3"; // ke9ns add mp3
+                    }
+                    else
+                    {
+                        file_name = console.AppDataPath + "QuickAudio" + "\\SDRQuickAudio" + QAC.ToString() + "_RX2_" + QAName2() + ".wav";
+                        quickmp3 = console.AppDataPath + "QuickAudioMP3" + "\\SDRQuickAudio" + QAC.ToString() + "_RX2_" + QAName2() + ".mp3"; // ke9ns add mp3
+
+                    }
 
 
                     //   Debug.WriteLine("qac" + QAC);
@@ -2296,6 +2304,19 @@ namespace PowerSDR
         {
             string temp = "__" + console.RX1DSPMode.ToString() + "_";   // DSP mode
             temp += console.VFOAFreq.ToString("f6") + "MHz_";    // Freq
+            temp += DateTime.Now.ToString();                     // Date and time
+            temp = temp.Replace("/", "-");
+            temp = temp.Replace(":", "_");
+
+            return temp;
+
+
+        } // QAName()
+
+        public string QAName2()
+        {
+            string temp = "__" + console.RX2DSPMode.ToString() + "_";   // DSP mode
+            temp += console.VFOBFreq.ToString("f6") + "MHz_";    // Freq
             temp += DateTime.Now.ToString();                     // Date and time
             temp = temp.Replace("/", "-");
             temp = temp.Replace(":", "_");

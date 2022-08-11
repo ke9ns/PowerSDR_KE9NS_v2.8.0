@@ -908,6 +908,16 @@ namespace PowerSDR
 
             saving = true;
 
+            if (console.chkPower.Checked) //.254
+            {
+                textBoxSAVE.Text = "Radio Paused";
+
+                PON = true;
+                console.chkPower.Checked = false;
+                Thread.Sleep(800);
+
+            }
+
             ArrayList a = new ArrayList();
             ArrayList temp = new ArrayList();
 
@@ -940,6 +950,14 @@ namespace PowerSDR
 
             DB.SaveVars("Options", ref a);      // save the values to the DB
             saving = false;
+
+            if (PON) //.254
+            {
+                PON = false;
+                console.chkPower.Checked = true;
+                Thread.Sleep(800);
+                textBoxSAVE.Text = "Radio Started";
+            }
 
         } // SaveOptions()
 
@@ -8174,12 +8192,15 @@ namespace PowerSDR
                 console.eqForm.chkBothEQ.Checked = false;
             }
 
+           
+
             //----------------------------------
             // ke9ns: done with retrieving database data and puting into EQ registers, not update buffers
 
             console.eqForm.EQLoad(); // ke9ns: update the EQ now (by taking newly restored data and updating DSP.cs buffers immediatly
 
 
+           
 
             //--------------------------------------------------------------------------------------------------
 
@@ -8308,19 +8329,9 @@ namespace PowerSDR
 
             current_profile = comboTXProfileName.Text;
 
-            // ke9ns .223 below to force TXEQ to activate upon a profile change
-            console.eqForm.tbTXEQ28Preamp.Value = Math.Max(console.eqForm.tbTXEQ28Preamp.Minimum, Math.Min(console.eqForm.tbTXEQ28Preamp.Maximum, console.eqForm.tbTXEQ28Preamp.Value - 1)); //.223 add
-            console.eqForm.tbTXEQPreamp.Value = Math.Max(console.eqForm.tbTXEQPreamp.Minimum, Math.Min(console.eqForm.tbTXEQPreamp.Maximum, console.eqForm.tbTXEQPreamp.Value - 1)); //.223 add
-            console.eqForm.tbTXEQ9Preamp.Value = Math.Max(console.eqForm.tbTXEQ9Preamp.Minimum, Math.Min(console.eqForm.tbTXEQ9Preamp.Maximum, console.eqForm.tbTXEQ9Preamp.Value - 1)); //.223 add
-
-            //  console.eqForm.tbPEQ1_Scroll(this, EventArgs.Empty); // ke9ns add .171 to properly load up the eq on profile change
-            //  console.eqForm.tbTX28EQ15_Scroll(this, EventArgs.Empty); // ke9ns add .171
-            // console.eqForm.tbTXEQ_Scroll(this, EventArgs.Empty); // ke9ns add .171
-
-            console.eqForm.tbTXEQ28Preamp.Value = Math.Max(console.eqForm.tbTXEQ28Preamp.Minimum, Math.Min(console.eqForm.tbTXEQ28Preamp.Maximum, console.eqForm.tbTXEQ28Preamp.Value + 1));
-            console.eqForm.tbTXEQPreamp.Value = Math.Max(console.eqForm.tbTXEQPreamp.Minimum, Math.Min(console.eqForm.tbTXEQPreamp.Maximum, console.eqForm.tbTXEQPreamp.Value + 1));
-            console.eqForm.tbTXEQ9Preamp.Value = Math.Max(console.eqForm.tbTXEQ9Preamp.Minimum, Math.Min(console.eqForm.tbTXEQ9Preamp.Maximum, console.eqForm.tbTXEQ9Preamp.Value + 1));
-
+        
+           
+          
             //--------------------------------------------------------------------------------------------------
             // ke9ns: .196 save DSP MODE for both RX1 and RX2
 
@@ -10859,11 +10870,22 @@ namespace PowerSDR
             t.Start();
         }
 
+        bool PON = false; //.254
+
         public void ApplyOptions()
         {
             Thread.Sleep(100);
 
             if (saving) return;
+
+            if (console.chkPower.Checked) //.254
+            {
+                textBoxSAVE.Text = "Radio Paused";
+                PON = true;
+                console.chkPower.Checked = false;
+                Thread.Sleep(800);
+
+            }
 
             console.SWR_Logger_Write(); // save SWR file now
 
@@ -10877,7 +10899,16 @@ namespace PowerSDR
 
             textBoxSAVE.Text = "Save Done.";
 
-        }
+            if (PON) //.254
+            {
+                Thread.Sleep(700);
+                PON = false;
+                console.chkPower.Checked = true;
+                textBoxSAVE.Text = "Radio Started";
+
+            }
+
+        } // ApplyOptions()
 
         private void udGeneralLPTDelay_ValueChanged(object sender, System.EventArgs e)
         {
@@ -15848,6 +15879,11 @@ namespace PowerSDR
 
 
         } //  chkBoxESC_CheckedChanged
+
+        private void chkAvgMove_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
 
 
 

@@ -19,10 +19,10 @@
     <ROW Property="ARPURLUPDATEINFO" Value="ke9ns.com/flexpage.html"/>
     <ROW Property="CTRLS" Value="1"/>
     <ROW Property="Manufacturer" Value="ke9ns"/>
-    <ROW Property="ProductCode" Value="1033:{D80501B7-B3C8-481D-A813-0788ECE56695} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{CF46C56D-E1CA-438C-8ECE-70C55AF91417} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
-    <ROW Property="ProductName" Value="PowerSDR v2.8.0.251"/>
-    <ROW Property="ProductVersion" Value="21.435.1.0" Type="32"/>
+    <ROW Property="ProductName" Value="PowerSDR v2.8.0.253"/>
+    <ROW Property="ProductVersion" Value="21.445.1.0" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{A5226811-E4EA-414C-8491-CEFB1FC47B7C}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="AnyCPU_Release:Windows 9x/ME" ValueLocId="-"/>
@@ -78,9 +78,9 @@
     <ROW Component="LicenseAgreement.txt" ComponentId="{D78B6562-19CB-47E3-99C2-38E387A426DA}" Directory_="KE9NS3_Spot_Dir" Attributes="0" KeyPath="LicenseAgreement.txt" Type="0"/>
     <ROW Component="LicenseAgreement.txt_1" ComponentId="{25F74E13-016D-49F6-96E8-91E42A3D281F}" Directory_="KE9NS4_Plain_Dir" Attributes="0" KeyPath="LicenseAgreement.txt_1" Type="0"/>
     <ROW Component="LicenseAgreement.txt_2" ComponentId="{3DC0DC29-8896-43F6-885E-FD10E0666071}" Directory_="KE9NS6_World_Dir" Attributes="0" KeyPath="LicenseAgreement.txt_2" Type="0"/>
-    <ROW Component="PowerMate.dll" ComponentId="{91B7932E-7AE5-44DA-B5EB-BF7FB705DF3C}" Directory_="APPDIR" Attributes="0" KeyPath="PowerMate.dll"/>
+    <ROW Component="PowerMate.dll" ComponentId="{D16FD3B4-F721-4F4C-B293-24171467BDBE}" Directory_="APPDIR" Attributes="0" KeyPath="PowerMate.dll"/>
     <ROW Component="PowerSDR.exe" ComponentId="{E779925D-7478-41F2-8853-DE4D372E2DBE}" Directory_="APPDIR" Attributes="0" KeyPath="PowerSDR.exe"/>
-    <ROW Component="PowerSDR_T9.exe.config" ComponentId="{A8309C92-B9C2-451D-82AF-895666E459B7}" Directory_="APPDIR" Attributes="0" KeyPath="PowerSDR.exe.config" Type="0"/>
+    <ROW Component="PowerSDR_T9.exe.config" ComponentId="{A8309C92-B9C2-451D-82AF-895666E459B7}" Directory_="APPDIR" Attributes="0" KeyPath="CATStructs.xml" Type="0"/>
     <ROW Component="ProductInformation" ComponentId="{3933C988-6CCF-4FE8-BB8B-EC864D0348C2}" Directory_="APPDIR" Attributes="4" KeyPath="Version"/>
     <ROW Component="X20bttn0.png" ComponentId="{B5E7871E-9491-4829-A64C-5D8C2C8B4E97}" Directory_="Base_Dir" Attributes="0" KeyPath="X20bttn0.png" Type="0"/>
     <ROW Component="X20bttn0.png_1" ComponentId="{1020E4CA-357C-4D75-A93B-815D41CF5910}" Directory_="Base_1_Dir" Attributes="0" KeyPath="X20bttn0.png_3" Type="0"/>
@@ -104,7 +104,7 @@
     <ROW File="AutoItX3.Assembly.xml" Component_="PowerSDR_T9.exe.config" FileName="AUTOIT~1.XML|AutoItX3.Assembly.xml" Version="65535.65535.65535.65535" Attributes="0" SourcePath="bin\Release\AutoItX3.Assembly.xml" SelfReg="false" NextFile="apimswincrtheapl110.dll"/>
     <ROW File="AutoItX3.dll" Component_="AutoItX3.dll" FileName="AutoItX3.dll" Attributes="0" SourcePath="bin\Release\AutoItX3.dll" SelfReg="false" NextFile="AutoItX3.Assembly.xml"/>
     <ROW File="AutoItX3_x64.dll" Component_="AutoItX3_x64.dll" FileName="AUTOIT~2.DLL|AutoItX3_x64.dll" Attributes="0" SourcePath="bin\Release\AutoItX3_x64.dll" SelfReg="false" NextFile="AutoItX3.dll"/>
-    <ROW File="CATStructs.xml" Component_="PowerSDR_T9.exe.config" FileName="CATSTR~1.XML|CATStructs.xml" Attributes="0" SourcePath="bin\Release\CATStructs.xml" SelfReg="false"/>
+    <ROW File="CATStructs.xml" Component_="PowerSDR_T9.exe.config" FileName="CATSTR~1.XML|CATStructs.xml" Attributes="0" SourcePath="bin\Release\CATStructs.xml" SelfReg="false" NextFile="PowerSDR.application"/>
     <ROW File="CUSTOM_MEM_SCANNER_EXAMPLE.txt" Component_="CUSTOM_MEM_SCANNER_EXAMPLE.txt" FileName="CUSTOM~1.TXT|CUSTOM_MEM_SCANNER_EXAMPLE.txt" Attributes="0" SourcePath="..\..\..\AppData\Roaming\FlexRadio Systems\PowerSDR v2.8.0\CustomScannerList\CUSTOM_MEM_SCANNER_EXAMPLE.txt" SelfReg="false" NextFile="DttSP.dll"/>
     <ROW File="Console.png" Component_="X20bttn0.png" FileName="Console.png" Attributes="0" SourcePath="..\..\..\..\..\ProgramData\FlexRadio Systems\PowerSDR\Skins\KE9NS3_Spot\Console\Base\Console.png" SelfReg="false" NextFile="longledbttn0.png"/>
     <ROW File="Console.png_1" Component_="btnBandHF0.png" FileName="Console.png" Attributes="0" SourcePath="..\..\..\..\..\ProgramData\FlexRadio Systems\PowerSDR\Skins\KE9NS3_Spot\Console\Console.png" SelfReg="false" NextFile="panelBandHF.png"/>
@@ -113,7 +113,7 @@
     <ROW File="Console.png_4" Component_="X20bttn0.png_2" FileName="Console.png" Attributes="0" SourcePath="..\..\..\..\..\ProgramData\FlexRadio Systems\PowerSDR\Skins\KE9NS6_World\Console\Base\Console.png" SelfReg="false" NextFile="longledbttn0.png_2"/>
     <ROW File="Console.png_5" Component_="btnBandHF0.png_2" FileName="Console.png" Attributes="0" SourcePath="..\..\..\..\..\ProgramData\FlexRadio Systems\PowerSDR\Skins\KE9NS6_World\Console\Console.png" SelfReg="false" NextFile="panelBandHF.png_2"/>
     <ROW File="DXLOC.txt" Component_="DXLOC.txt" FileName="DXLOC.txt" Attributes="0" SourcePath="..\..\..\Documents\My Webs\ke9ns2\DXLOC.txt" SelfReg="false" NextFile="SWL.csv"/>
-    <ROW File="DttSP.dll" Component_="DttSP.dll" FileName="DttSP.dll" Attributes="0" SourcePath="bin\Release\DttSP.dll" SelfReg="false" NextFile="PowerMate.dll"/>
+    <ROW File="DttSP.dll" Component_="DttSP.dll" FileName="DttSP.dll" Attributes="0" SourcePath="bin\Release\DttSP.dll" SelfReg="false" NextFile="ADODB.dll"/>
     <ROW File="FCCDATA.dat" Component_="DXLOC.txt" FileName="FCCDATA.dat" Attributes="0" SourcePath="..\..\..\Documents\My Webs\ke9ns2\FCCDATA.dat" SelfReg="false" NextFile="PowerSDRke9nsv2.8features_white.pdf"/>
     <ROW File="FLEX1500_Firmware_ReadMe.txt" Component_="FLEX1500_Firmware_ReadMe.txt" FileName="FLEX-1~1.TXT|FLEX-1500_Firmware_ReadMe.txt" Attributes="0" SourcePath="..\..\..\..\..\ProgramData\FlexRadio Systems\FLEX Firmware\FLEX-1500\FLEX-1500_Firmware_ReadMe.txt" SelfReg="false" NextFile="FLEX3000_Firmware_ReadMe.txt"/>
     <ROW File="FLEX1500_Firmware_v0.5.3.24.bin" Component_="FLEX1500_Firmware_ReadMe.txt" FileName="FLEX-1~2.BIN|FLEX-1500_Firmware_v0.5.3.24.bin" Attributes="0" SourcePath="..\..\..\..\..\ProgramData\FlexRadio Systems\FLEX Firmware\FLEX-1500\FLEX-1500_Firmware_v0.5.3.24.bin" SelfReg="false" NextFile="FLEX3000_Firmware_v2.1.4.12.bin"/>
@@ -126,9 +126,11 @@
     <ROW File="LicenseAgreement.txt_2" Component_="LicenseAgreement.txt_2" FileName="LICENS~1.TXT|License Agreement.txt" Attributes="0" SourcePath="..\..\..\..\..\ProgramData\FlexRadio Systems\PowerSDR\Skins\KE9NS6_World\License Agreement.txt" SelfReg="false" NextFile="mic.bmp"/>
     <ROW File="LoTW_help.rtf" Component_="PowerSDR_T9.exe.config" FileName="LOTW_H~1.RTF|LoTW_help.rtf" Attributes="0" SourcePath="..\..\..\..\..\Program Files (x86)\FlexRadio Systems\PowerSDR v2.8.0\LoTW_help.rtf" SelfReg="false" NextFile="CATStructs.xml"/>
     <ROW File="OP.bmp" Component_="DXLOC.txt" FileName="OP.bmp" Attributes="0" SourcePath="..\..\..\AppData\Roaming\FlexRadio Systems\PowerSDR v2.8.0\OP.bmp" SelfReg="false" NextFile="CUSTOM_MEM_SCANNER_EXAMPLE.txt"/>
-    <ROW File="PowerMate.dll" Component_="PowerMate.dll" FileName="POWERM~1.DLL|PowerMate.dll" Attributes="0" SourcePath="bin\Release\PowerMate.dll" SelfReg="false" NextFile="ADODB.dll"/>
-    <ROW File="PowerSDR.exe" Component_="PowerSDR.exe" FileName="PowerSDR.exe" Attributes="0" SourcePath="bin\Release\PowerSDR.exe" SelfReg="false" NextFile="PowerSDR.exe.config" DigSign="true"/>
-    <ROW File="PowerSDR.exe.config" Component_="PowerSDR_T9.exe.config" FileName="POWERS~2.CON|PowerSDR.exe.config" Attributes="0" SourcePath="..\PowerSDR.exe.config" SelfReg="false" NextFile="X20bttn0.png"/>
+    <ROW File="PowerMate.dll" Component_="PowerMate.dll" FileName="POWERM~1.DLL|PowerMate.dll" Attributes="0" SourcePath="bin\Release\PowerMate.dll" SelfReg="false"/>
+    <ROW File="PowerSDR.application" Component_="PowerSDR_T9.exe.config" FileName="POWERS~1.APP|PowerSDR.application" Attributes="0" SourcePath="bin\Release\PowerSDR.application" SelfReg="false" NextFile="PowerSDR.exe.manifest"/>
+    <ROW File="PowerSDR.exe" Component_="PowerSDR.exe" FileName="PowerSDR.exe" Attributes="0" SourcePath="bin\Release\PowerSDR.exe" SelfReg="false" NextFile="X20bttn0.png" DigSign="true"/>
+    <ROW File="PowerSDR.exe.config" Component_="PowerSDR_T9.exe.config" FileName="POWERS~1.CON|PowerSDR.exe.config" Attributes="0" SourcePath="bin\Release\PowerSDR.exe.config" SelfReg="false" NextFile="PowerMate.dll"/>
+    <ROW File="PowerSDR.exe.manifest" Component_="PowerSDR_T9.exe.config" FileName="POWERS~1.MAN|PowerSDR.exe.manifest" Attributes="0" SourcePath="bin\Release\PowerSDR.exe.manifest" SelfReg="false" NextFile="PowerSDR.exe.config"/>
     <ROW File="PowerSDRTXWaterfallID.pdf" Component_="DXLOC.txt" FileName="POWERS~2.PDF|PowerSDR TX Waterfall ID.pdf" Attributes="0" SourcePath="..\..\..\Documents\My Webs\ke9ns2\PowerSDR TX Waterfall ID.pdf" SelfReg="false" NextFile="PowerSDR.exe"/>
     <ROW File="PowerSDRke9nskeyboardshortcuts.pdf" Component_="DXLOC.txt" FileName="POWERS~3.PDF|PowerSDR ke9ns keyboard shortcuts.pdf" Attributes="0" SourcePath="..\..\..\Documents\My Webs\ke9ns2\PowerSDR ke9ns keyboard shortcuts.pdf" SelfReg="false" NextFile="FLEX1500_Firmware_v0.5.3.24.bin"/>
     <ROW File="PowerSDRke9nsv2.8features_white.pdf" Component_="DXLOC.txt" FileName="POWERS~1.PDF|PowerSDR ke9ns v2.8 features_white.pdf" Attributes="0" SourcePath="..\..\..\Documents\My Webs\ke9ns2\PowerSDR ke9ns v2.8 features_white.pdf" SelfReg="false" NextFile="FLEX1500_Firmware_ReadMe.txt"/>
@@ -1369,7 +1371,7 @@
     <ROW Action="AI_DetectSoftware" Sequence="101"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
-    <ROW BuildKey="AnyCPU_Release" BuildName="AnyCPU_Release" BuildOrder="1" BuildType="0" PackageFolder="..\..\..\Documents\Advanced Installer\Projects\PowerSDR ke9ns 2.8.0\Setup Files" PackageFileName="PowerSDR_KE9NS_V2.8.0.251_Incremental_Installer" Languages="en" InstallationType="4" UseLargeSchema="true"/>
+    <ROW BuildKey="AnyCPU_Release" BuildName="AnyCPU_Release" BuildOrder="1" BuildType="0" PackageFolder="..\..\..\Documents\Advanced Installer\Projects\PowerSDR ke9ns 2.8.0\Setup Files" PackageFileName="PowerSDR_KE9NS_V2.8.0.253_Incremental_Installer" Languages="en" InstallationType="4" UseLargeSchema="true"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
     <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>

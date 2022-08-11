@@ -2493,6 +2493,9 @@ namespace PowerSDR
         //Sets or reads VFO A frequency
         public string ZZFA(string s)
         {
+
+            if (console.setupForm == null) return "";
+           
             if (console.SpoofAB == true) // get VFOB freq instead
             {
                 if (s.Length == parser.nSet)

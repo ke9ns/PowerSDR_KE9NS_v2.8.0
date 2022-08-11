@@ -6401,6 +6401,7 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.chkAvgMove, "When Checked, will attempt to correctly move the Panadapter display left/right wh" +
         "en AVG enabled\r\nto prevent loss of signals on display while scrolling left/right" +
         "");
+            this.chkAvgMove.CheckedChanged += new System.EventHandler(this.chkAvgMove_CheckedChanged);
             // 
             // chkBoxSplitListen
             // 

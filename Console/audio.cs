@@ -1763,7 +1763,9 @@ namespace PowerSDR
 
                 if ((wave_record && !mox && record_rx_preprocessed) || (wave_record && mox && record_tx_preprocessed))
                 {
+
                     wave_file_writer.AddWriteBuffer(in_l_ptr1, in_r_ptr1); // ke9ns this is preprocessed audio
+
                 }
 
 
@@ -3569,13 +3571,13 @@ namespace PowerSDR
 
             int* array_ptr_output = (int*)output;
 
-            float* out_l_ptr1 = (float*)array_ptr_output[0];
+            float* out_l_ptr1 = (float*)array_ptr_output[0]; // RX1
             float* out_r_ptr1 = (float*)array_ptr_output[1];
 
-            float* out_l_ptr2 = (float*)array_ptr_output[2];
+            float* out_l_ptr2 = (float*)array_ptr_output[2]; // TX
             float* out_r_ptr2 = (float*)array_ptr_output[3];
 
-            float* out_l_ptr3 = (float*)array_ptr_output[4];
+            float* out_l_ptr3 = (float*)array_ptr_output[4]; // RX2
             float* out_r_ptr3 = (float*)array_ptr_output[5];
 
             float* out_l_ptr4 = (float*)array_ptr_output[6];
@@ -3839,12 +3841,20 @@ namespace PowerSDR
 
             if (wave_record)   // ke9ns true=you are currently recording                       
             {
-                if (!localmox)   // ke9ns record receiving audio 
+                if (!localmox)   // ke9ns: record receiving audio 
                 {
-                    if (record_rx_preprocessed) // ke9ns for IQ recordings here
+                  
+                    if (record_rx_preprocessed) // ke9ns: for IQ recordings here (not quickrec)
                     {
-
-                        wave_file_writer.AddWriteBuffer(rx1_in_l, rx1_in_r);
+                      
+                        if (console.QuickRec2 == false)
+                        {
+                            wave_file_writer.AddWriteBuffer(rx1_in_l, rx1_in_r);
+                        }
+                        else
+                        {
+                            wave_file_writer.AddWriteBuffer(rx2_in_l, rx2_in_r); //.252
+                        }
 
                         if (wave_file_writer2 != null) wave_file_writer2.AddWriteBuffer(rx2_in_l, rx2_in_r);
                     }
@@ -4847,13 +4857,22 @@ namespace PowerSDR
             {
                 if (!localmox) // receiving while recording, so record the samplerate (entire panadapter)
                 {
-                    if (!record_rx_preprocessed)
+                  
+                    if (!record_rx_preprocessed) // ke9ns: quickrecording comes here for Flex-5000
                     {
-                        wave_file_writer.AddWriteBuffer(out_l_ptr1, out_r_ptr1);    // record RX1:  rx1_out_l & rx1_out_r,   out_l1 & out_r1
+                      
+                        if (console.QuickRec2 == false)
+                        {
+                            wave_file_writer.AddWriteBuffer(out_l_ptr1, out_r_ptr1);    // record RX1:  rx1_out_l & rx1_out_r,   out_l1 & out_r1
+                        }
+                        else
+                        {
+                            wave_file_writer.AddWriteBuffer(out_l_ptr3, out_r_ptr3); //.252
+                        }
 
                         //   Debug.WriteLine("2===========testing"); // ke9ns testdsp
 
-                        if (wave_file_writer2 != null) wave_file_writer2.AddWriteBuffer(rx2_out_l, rx2_out_r);  // record RX2
+                          if (wave_file_writer2 != null) wave_file_writer2.AddWriteBuffer(out_l_ptr3, out_r_ptr3);  // record RX2
                     }
                 }
                 else // transmitting while recording (so record my MIC or whatever is going to the transmitter)

@@ -41,6 +41,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace PowerSDR
 {
@@ -52,6 +53,8 @@ namespace PowerSDR
         #region Variable Declaration
 
         private Console console;
+
+        private Thread EQS;
 
         #endregion
 
@@ -266,12 +269,108 @@ namespace PowerSDR
             picRXEQ.Invalidate();
             picTXEQ.Invalidate();
 
-            console.dsp.GetDSPTX(0).PEQ = PEQ;
-            console.dsp.GetDSPTX(0).TXEQ28 = TXEQ28;
+         //   console.dsp.GetDSPTX(0).PEQ = PEQ;
+         //   console.dsp.GetDSPTX(0).TXEQ28 = TXEQ28;
 
 
+         
+            // ke9ns add .252 to force an EQ update on a profile change 
+            if (radPEQ.Checked == true)
+            {
+               
+              //  tbTXEQ9Preamp.Value = amp2 - 1;
+                tbPEQ1_Scroll(this, EventArgs.Empty);
+          
+            }
+            else if (rad28Band.Checked == true)
+            {
+              
+              //  tbTXEQ28Preamp.Value = amp3 - 1;
+                tbTX28EQ15_Scroll(this, EventArgs.Empty);
+               
+            }
+            else if (rad10Band.Checked == true)
+            {
+             
+              //  tbTXEQPreamp.Value = amp1 - 1;
+                tbTXEQ_Scroll(this, EventArgs.Empty);
+             
+            }
+            else
+            {
+                
+              //  tbTXEQPreamp.Value = amp1 - 1;
+                tbTXEQ_Scroll(this, EventArgs.Empty);
+              
+            }
+
+
+
+            Debug.WriteLine("252  thread start");
+
+        //    EQS = new Thread(new ThreadStart(EQS1));
+          //  EQS.Name = "to load eq";
+          //  EQS.Priority = ThreadPriority.Normal;
+          //  EQS.IsBackground = true;
+         //   EQS.Start();
 
         } // EQLoad
+
+        public void EQS1()
+        {
+            Stopwatch EQTimer = new Stopwatch();
+
+            Thread.Sleep(100);
+            EQTimer.Restart();
+            EQTimer.Start();
+
+            do
+            { 
+               
+            
+            } while (EQTimer.ElapsedMilliseconds < 1000);
+
+            Debug.WriteLine("252 thread end");
+
+            EQTimer.Stop();
+            
+            var amp1 = tbTXEQPreamp.Value;
+            var amp2 = tbTXEQ9Preamp.Value;
+            var amp3 = tbTXEQ28Preamp.Value;
+
+
+            // ke9ns add .252 to force an EQ update on a profile change 
+            if (radPEQ.Checked == true)
+            {
+                Debug.WriteLine("252 T");
+
+               
+                  tbTXEQ9Preamp.Value = amp2;
+                 tbPEQ1_Scroll(this, EventArgs.Empty);
+
+                
+            }
+            else if (rad28Band.Checked == true)
+            {
+                Debug.WriteLine("252 TA");
+                tbTXEQ28Preamp.Value = amp3;
+                   tbTX28EQ15_Scroll(this, EventArgs.Empty);
+            }
+
+            else if (rad10Band.Checked == true)
+            {
+                Debug.WriteLine("252 TB");
+                tbTXEQPreamp.Value = amp1;
+                tbTXEQ_Scroll(this, EventArgs.Empty);
+            }
+            else
+            {
+                Debug.WriteLine("252 TC");
+                tbTXEQPreamp.Value = amp1;
+                tbTXEQ_Scroll(this, EventArgs.Empty);
+            }
+
+        } // EQS1
 
         //==========================================================================
         public int NumBands
@@ -1869,6 +1968,8 @@ namespace PowerSDR
 
             if (radPEQ.Checked == true)
             {
+                Debug.WriteLine("252 update " + tbTXEQ9Preamp.Value +  " , " + peq[0]);
+
                 console.dsp.GetDSPTX(0).PEQ = peq; // ke9ns refers to update SetGrphTXEQ10  txeq[0] is the preamp slider;
             }
 

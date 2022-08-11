@@ -18621,13 +18621,15 @@ namespace PowerSDR
             // console UP1 = true indicates the DSP now has a new VFOA freq, so you must shift pan left<>right
             //=================================================================
             // VFOA
+            //  if (average_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) && ((PWM2A_LAST != vfoa_hz) && (Console.CTUN1_HZ == 0)) || (PWM2A_LAST < (vfoa_hz - 200000) || PWM2A_LAST > (vfoa_hz + 200000))) // ke9ns dont move waterfall if in CTUN mode
 
-            if (average_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) && ((PWM2A_LAST != vfoa_hz) && (Console.CTUN1_HZ == 0)) || (PWM2A_LAST < (vfoa_hz - 200000) || PWM2A_LAST > (vfoa_hz + 200000))) // ke9ns dont move waterfall if in CTUN mode
+            if (average_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) && ((PWM2A_LAST != vfoa_hz) ) || (PWM2A_LAST < (vfoa_hz - 200000) || PWM2A_LAST > (vfoa_hz + 200000))) // ke9ns dont move waterfall if in CTUN mode
             {
 
-                PF3A = 1;
+                PF3A = 1; // was 1
 
                 PWM2A_DIFF = vfoa_hz - PWM2A_LAST;
+
                 PWM2A_LAST = vfoa_hz;               // new last value
 
                 if (Math.Abs(PWM2A_DIFF) >= 10000000) // .228 to prevent a math.abs crash
@@ -18641,8 +18643,8 @@ namespace PowerSDR
 
                 PWM1A = (int)Math.Floor(((PWM1 / (float)W) * (float)num_samples)); // this is supposed to be the # of points in the data stream array to move
 
-                Debug.WriteLine("228: " + PWM1A + " W:" + W + " N:" + num_samples + " P:" + PWM1 + " P4:" + PWM4 + " S:" + slope + " P2:" + PWM2A_DIFF);
-                Debug.WriteLine("228: " + Math.Abs(PWM1A));
+              //  Debug.WriteLine("228: " + PWM1A + " W:" + W + " N:" + num_samples + " P:" + PWM1 + " P4:" + PWM4 + " S:" + slope + " P2:" + PWM2A_DIFF);
+             //   Debug.WriteLine("228: " + Math.Abs(PWM1A));
 
 
                 if ((Math.Abs(PWM1A) < num_samples) && PWM1A != 0) // check for valid number
@@ -18673,10 +18675,12 @@ namespace PowerSDR
 
                 console.UP1 = false; // .251
             } // freq change
-            else if (PF3A == 1 && average_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked))
+            else if (PF3A != 0 && average_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked))
             {
                 //  Array.Copy(rx1_average_buffer, 0, current_display_data,0, BUFFER_SIZE);
-                PF3A = 0;
+                //   PF3A = 0;
+
+                PF3A--;
             }
             else
             {
@@ -18685,8 +18689,9 @@ namespace PowerSDR
 
             //=======================================================================================================
             // VFOB
+          //  if (rx2_avg_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) && ((PWM2B_LAST != vfob_hz) && (Console.CTUN1_HZ == 0)) || (PWM2B_LAST < (vfob_hz - 200000) || PWM2B_LAST > (vfob_hz + 200000))) // ke9ns dont move waterfall if in CTUN mode
 
-            if (rx2_avg_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) && ((PWM2B_LAST != vfob_hz) && (Console.CTUN1_HZ == 0)) || (PWM2B_LAST < (vfob_hz - 200000) || PWM2B_LAST > (vfob_hz + 200000))) // ke9ns dont move waterfall if in CTUN mode
+                if (rx2_avg_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) && ((PWM2B_LAST != vfob_hz)) || (PWM2B_LAST < (vfob_hz - 200000) || PWM2B_LAST > (vfob_hz + 200000))) // ke9ns dont move waterfall if in CTUN mode
             {
                 PF3B = 1; // flag to prevent normal avg routine from running
 
@@ -20960,6 +20965,8 @@ namespace PowerSDR
                 {
                     if (F2A == 2)  // wait for freq to be set and 1 extra cycle because of the timing between freq set and getting here first.
                     {
+                        // if (((WM2A_LAST != vfoa_hz) && (Console.CTUN1_HZ == 0)) || (WM2A_LAST < (vfoa_hz - 200000) || WM2A_LAST > (vfoa_hz + 200000))) // ke9ns dont move waterfall if in CTUN mode
+
                         if (((WM2A_LAST != vfoa_hz) && (Console.CTUN1_HZ == 0)) || (WM2A_LAST < (vfoa_hz - 200000) || WM2A_LAST > (vfoa_hz + 200000))) // ke9ns dont move waterfall if in CTUN mode
                         {
 

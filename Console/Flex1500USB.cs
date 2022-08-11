@@ -4,8 +4,8 @@
 #endregion
 
 using Jungo.flex1500_lib;
-using Jungo.wdapi_dotnet;
-using LockFreeLib;
+// using Jungo.wdapi_dotnet;
+// using LockFreeLib;
 using System;
 using System.Collections;
 using System.Collections.Generic;

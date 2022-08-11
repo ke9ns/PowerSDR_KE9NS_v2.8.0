@@ -137,6 +137,9 @@ namespace PowerSDR
         public static void RefreshTables(FRSRegion temp)
         {
 
+            // CultureInfo.CurrentCulture.NumberFormat
+
+
             Debug.WriteLine("RefreshTables= " + bandtextrefresh + " , " + bandstackrefresh);
 
             if (temp == FRSRegion.US)
