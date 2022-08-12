@@ -15153,13 +15153,14 @@ namespace PowerSDR
         //ke9ns add
         private void buttonExit_Click(object sender, EventArgs e)
         {
-            console.TurnOffVOA();
+            console.chkPower.Checked = false; //.254
+            Thread.Sleep(800);
 
+            console.TurnOffVOA();
 
             textBoxSAVE.Text = " ";
 
             ApplyOptions(); // ke9ns add .193a (wait until save is updated before closing everything
-
 
             console.Close();
 
