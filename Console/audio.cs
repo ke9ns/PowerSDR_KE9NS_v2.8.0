@@ -1512,12 +1512,12 @@ namespace PowerSDR
                     ScaleBuffer(out_r, in_r, frameCount, 0.0f);
                 }
 
-                if (sample_rate2 == sample_rate1) // no resample necessary  ke9ns (if primary audio and vac1 match then do below)
+                if (sample_rate2 == sample_rate1) // no resample necessary  ke9ns: (if primary audio and vac1 match then do below)
                 {
                     if ((rb_vacOUT_l.WriteSpace() >= frameCount) && (rb_vacOUT_r.WriteSpace() >= frameCount))
                     {
 
-                        Win32.EnterCriticalSection(cs_vac);        // ke9ns Waits for ownership of the specified critical section object
+                        Win32.EnterCriticalSection(cs_vac);        // ke9ns: Waits for ownership of the specified critical section object
                         rb_vacOUT_l.WritePtr(in_l, frameCount);  // 
                         rb_vacOUT_r.WritePtr(in_r, frameCount);
                         Win32.LeaveCriticalSection(cs_vac);
@@ -1540,6 +1540,7 @@ namespace PowerSDR
                             int outsamps;
                             DttSP.DoResamplerF(in_l, res_outl_ptr, frameCount, &outsamps, resampPtrOut_l);
                             DttSP.DoResamplerF(in_r, res_outr_ptr, frameCount, &outsamps, resampPtrOut_r);
+
                             if ((rb_vacOUT_l.WriteSpace() >= outsamps) && (rb_vacOUT_r.WriteSpace() >= outsamps))
                             {
                                 Win32.EnterCriticalSection(cs_vac);
@@ -1802,7 +1803,7 @@ namespace PowerSDR
                         if (rb_vacIN_l.ReadSpace() >= frameCount)
                         {
 
-                            if (console.setupForm.checkBoxMixAudio.Checked == true) // ke9ns add
+                            if (console.setupForm.chkBoxMixAudio.Checked == true) // ke9ns add
                             {
                                 Win32.EnterCriticalSection(cs_vac);
                                 rb_vacIN_l.ReadPtr(in_tl_ptr1, frameCount);
@@ -1823,7 +1824,7 @@ namespace PowerSDR
                                 if (vac_combine_input) AddBuffer(in_l_ptr1, in_r_ptr1, frameCount);
                             }
 
-                            if (console.setupForm.checkBoxMixAudio.Checked == false) // ke9ns add
+                            if (console.setupForm.chkBoxMixAudio.Checked == false) // ke9ns add
                             {
                                 ScaleBuffer(in_l_ptr1, in_l_ptr1, frameCount, (float)vac_preamp);
                                 ScaleBuffer(in_r_ptr1, in_r_ptr1, frameCount, (float)vac_preamp);
@@ -1918,7 +1919,7 @@ namespace PowerSDR
                 ||
 
 
-                (console.setupForm.checkBoxMixAudio.Checked == true &&
+                (console.setupForm.chkBoxMixAudio.Checked == true &&
                 (tx_dsp_mode == DSPMode.DIGL ||
                 tx_dsp_mode == DSPMode.DIGU ||
                 tx_dsp_mode == DSPMode.LSB ||
@@ -1971,7 +1972,7 @@ namespace PowerSDR
 
                             }
 
-                            if (console.setupForm.checkBoxMixAudio.Checked == true) // ke9ns add  .151 MIX HERE
+                            if (console.setupForm.chkBoxMixAudio.Checked == true) // ke9ns add  .151 MIX HERE
                             {
                                 AddBuffer(in_l, in_tl_ptr1, frameCount);
                                 AddBuffer(in_r, in_tr_ptr1, frameCount);
@@ -3935,7 +3936,7 @@ namespace PowerSDR
 
                     if (rb_vacIN_l.ReadSpace() >= frameCount)  // ke9ns: should come here every cycle through this code on TX (as long as its not bypassed)
                     {
-                        if (console.setupForm.checkBoxMixAudio.Checked == true) // ke9ns add
+                        if (console.setupForm.chkBoxMixAudio.Checked == true) // ke9ns add
                         {
                             // ke9ns at this point tx_in_l and r have MIC audio, unless you copy the VAC1 IN stream into tx_in_l and r
 
@@ -3965,7 +3966,7 @@ namespace PowerSDR
                         VACDebug("rb_vacIN underflow 4inTX");
                     }
 
-                    if (console.setupForm.checkBoxMixAudio.Checked == false) // ke9ns add
+                    if (console.setupForm.chkBoxMixAudio.Checked == false) // ke9ns add
                     {
                         ScaleBuffer(tx_in_l, tx_in_l, frameCount, (float)vac_preamp); // ke9ns: PC MIC VAC1 audio stream here (but want option to allow MIX of VAC and radio MIC audio together)
                         ScaleBuffer(tx_in_r, tx_in_r, frameCount, (float)vac_preamp);
@@ -4127,7 +4128,7 @@ namespace PowerSDR
                 tx_dsp_mode == DSPMode.DIGU))
                 ||
 
-                (console.setupForm.checkBoxMixAudio.Checked == true &&
+                (console.setupForm.chkBoxMixAudio.Checked == true &&
                 (tx_dsp_mode == DSPMode.DIGL ||
                 tx_dsp_mode == DSPMode.DIGU ||
                 tx_dsp_mode == DSPMode.LSB ||
@@ -4182,7 +4183,7 @@ namespace PowerSDR
                         }
 
 
-                        if (console.setupForm.checkBoxMixAudio.Checked == true) // ke9ns add  .151 MIX HERE
+                        if (console.setupForm.chkBoxMixAudio.Checked == true) // ke9ns add  .151 MIX HERE
                         {
                             AddBuffer(tx_in_l, tx_in1_l, frameCount);
                             AddBuffer(tx_in_r, tx_in1_r, frameCount);

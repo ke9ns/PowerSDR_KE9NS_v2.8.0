@@ -907,15 +907,18 @@ namespace PowerSDR
             // NumericUpDown, RadioButton, TextBox, and TrackBar (slider)
 
             saving = true;
-
-            if (console.chkPower.Checked) //.254
+             
+            if (chkBoxPFN.Checked)  //.255
             {
-                textBoxSAVE.Text = "Radio Paused";
+                if (console.chkPower.Checked) //.254
+                {
+                    textBoxSAVE.Text = "Radio Paused";
 
-                PON = true;
-                console.chkPower.Checked = false;
-                Thread.Sleep(800);
+                    PON = true;
+                    console.chkPower.Checked = false;
+                    Thread.Sleep(800);
 
+                }
             }
 
             ArrayList a = new ArrayList();
@@ -1822,6 +1825,10 @@ namespace PowerSDR
                 }
 
             }
+
+            //===============================================================
+         //   dr["VACMix"] = chkBoxMixAudio.Checked; //.255
+
 
             //------------------------------------------------------------------
 
@@ -8207,6 +8214,8 @@ namespace PowerSDR
             udTXFilterLow.Value = Math.Min(Math.Max((int)dr["FilterLow"], udTXFilterLow.Minimum), udTXFilterLow.Maximum);
             udTXFilterHigh.Value = Math.Min(Math.Max((int)dr["FilterHigh"], udTXFilterHigh.Minimum), udTXFilterHigh.Maximum);
 
+         //   chkBoxMixAudio.Checked = (bool)dr["VACMix"]; // .255
+
             console.DX = (bool)dr["DXOn"];
             console.DXLevel = (int)dr["DXLevel"];
 
@@ -8472,6 +8481,10 @@ namespace PowerSDR
 
 
                             }
+                         //   if ((bool)d["VACMix"] == false) //.255
+                          //  {
+
+                          //  }
 
                             //   Debug.WriteLine("YES TXEQ12");
                             dr = d; // ke9ns when you match the name, copy over all the rows into the DataRow dr
@@ -8627,6 +8640,10 @@ namespace PowerSDR
                 }
 
             }
+
+            //===============================================================
+         //   dr["VACMix"] = chkBoxMixAudio.Checked; //.255
+
 
             //===============================================================
 
@@ -10878,15 +10895,17 @@ namespace PowerSDR
 
             if (saving) return;
 
-            if (console.chkPower.Checked) //.254
+            if (chkBoxPFN.Checked) //.255
             {
-                textBoxSAVE.Text = "Radio Paused";
-                PON = true;
-                console.chkPower.Checked = false;
-                Thread.Sleep(800);
+                if (console.chkPower.Checked) //.254
+                {
+                    textBoxSAVE.Text = "Radio Paused";
+                    PON = true;
+                    console.chkPower.Checked = false;
+                    Thread.Sleep(800);
 
+                }
             }
-
             console.SWR_Logger_Write(); // save SWR file now
 
             textBoxSAVE.Text = "Saving Changes";
@@ -15882,6 +15901,11 @@ namespace PowerSDR
         } //  chkBoxESC_CheckedChanged
 
         private void chkAvgMove_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkBoxPFN_CheckedChanged(object sender, EventArgs e)
         {
 
         }

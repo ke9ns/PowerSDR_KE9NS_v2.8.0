@@ -67961,11 +67961,176 @@ namespace PowerSDR
             udRIT.Value = 0;
         }
 
-        public void ZeroBeat()
+        public void ZeroBeat() // ke9ns: called by FlexControlinterace1.cs
         {
             if (btnZeroBeat.Enabled)
                 btnZeroBeat_Click(this, EventArgs.Empty);
         }
+
+
+        private void btnZeroBeat_MouseDown(object sender, MouseEventArgs e) //.256 0 beat for 2nd receiver
+        {
+             MouseEventArgs me = (MouseEventArgs)e;
+
+             if ((me.Button == System.Windows.Forms.MouseButtons.Right) || (me.Button == System.Windows.Forms.MouseButtons.Middle))
+             {
+
+                int peak_hz = FindPeakFreqInPassbandBottom();
+
+                if (peak_hz == -1)
+                {
+                    return; // find peak croaked - bail
+                }
+                // Debug.WriteLine("peak: " + peak_hz);
+                int delta_hz = 0;
+
+                // if we're in CW mode, zero beat to CWPitch, provided it is in the passband
+                switch (rx2_dsp_mode)
+                {
+                    case DSPMode.CWL:
+                    case DSPMode.CWU:
+                    case DSPMode.USB:
+                    case DSPMode.LSB:
+                        int local_pitch = CWPitch;
+                        if (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.LSB)
+                        {
+                            local_pitch = -local_pitch;
+                        }
+                        // is cwoffset in passband?
+                        if (local_pitch >= udRX2FilterLow.Value && local_pitch <= udRX2FilterHigh.Value)
+                        {
+                            delta_hz = peak_hz - local_pitch;
+                            // Debug.WriteLine("delta(cw): " + delta_hz);
+                        }
+                        else
+                        {
+                            // if we get here and delta_hz is still 0, the current
+                            // CW pitch is not within the passband.
+                            // Put strongest peak @ center of passband
+                            int center_hz = ((int)udRX2FilterHigh.Value + (int)udRX2FilterLow.Value) / 2;
+                            delta_hz = peak_hz - center_hz;
+                        }
+                        break;
+                    case DSPMode.DIGL:
+                        local_pitch = -digl_click_tune_offset;
+                        if (local_pitch >= udRX2FilterLow.Value && local_pitch <= udRX2FilterHigh.Value)
+                        {
+                            delta_hz = peak_hz - local_pitch;
+                        }
+                        else
+                        {
+                            // if we get here and delta_hz is still 0, the current
+                            // pitch is not within the passband.
+                            // Put strongest peak @ center of passband
+                            int center_hz = ((int)udRX2FilterHigh.Value + (int)udRX2FilterLow.Value) / 2;
+                            delta_hz = peak_hz - center_hz;
+                        }
+                        break;
+                    case DSPMode.DIGU:
+                        local_pitch = digu_click_tune_offset;
+                        if (local_pitch >= udRX2FilterLow.Value &&  local_pitch <= udRX2FilterHigh.Value)
+                        {
+                            delta_hz = peak_hz - local_pitch;
+                        }
+                        else
+                        {
+                            // if we get here and delta_hz is still 0, the current
+                            // pitch is not within the passband.
+                            // Put strongest peak @ center of passband
+                            int center_hz = ((int)udRX2FilterHigh.Value + (int)udRX2FilterLow.Value) / 2;
+                            delta_hz = peak_hz - center_hz;
+                        }
+                        break;
+                    case DSPMode.AM:
+                    case DSPMode.SAM:
+                    case DSPMode.FM:
+                        delta_hz = peak_hz;
+                        break;
+                }
+
+                //          Debug.WriteLine("peak: " + peak_hz);
+                //          Debug.WriteLine("center: " + center_hz);
+                //          Debug.WriteLine("delta: " + delta_hz + "\n");
+
+            //    if (zero_beat_rit)  //.256 there is no RIT for RX2
+             //   {
+               //     udRIT.Value += delta_hz;
+             //       chkRIT.Checked = true;
+            //    }
+              //  else
+              //  {
+                    VFOBFreq += delta_hz * 1e-6;
+             //   }
+
+
+            } // mouse right click
+
+
+        } // btnZeroBeat_Mousedown  (rx2 0 beat)
+
+
+        unsafe private int FindPeakFreqInPassbandBottom() //.256 RX2 peak
+        {
+            // convert hz to buckets in the averaging data
+            int lo_cut_hz = (int)udRX2FilterLow.Value;
+            int hi_cut_hz = (int)udRX2FilterHigh.Value;
+            double hz_per_bucket = sample_rate1 / (double)Display.BUFFER_SIZE;
+            int zero_hz_bucket = Display.BUFFER_SIZE / 2;
+            int lo_bucket = (int)(lo_cut_hz / hz_per_bucket) + zero_hz_bucket;
+            int hi_bucket = (int)(hi_cut_hz / hz_per_bucket) + zero_hz_bucket;
+
+            //~~~~ 
+            float max_val = float.MinValue;
+            int max_bucket = 0;
+
+            float[] spectrum_data;
+
+            // reuse the existing display data if there is any
+            switch (Display.CurrentDisplayModeBottom) // RX2
+            {
+                case DisplayMode.PANADAPTER:
+                case DisplayMode.HISTOGRAM:
+                case DisplayMode.SPECTRUM:
+                case DisplayMode.WATERFALL:
+                case DisplayMode.PANAFALL:
+                case DisplayMode.PANASCOPE:
+                    if (chkDisplayAVG.Checked)
+                    {
+                        spectrum_data = Display.rx2_average_buffer; // force avg data into spectrum
+                    }
+                    else
+                    {
+                        spectrum_data = Display.current_display_data_bottom; // RX2
+                    }
+                    break;
+
+                // no specturm data - go get some 
+                default:
+                    spectrum_data = new float[Display.BUFFER_SIZE];
+
+                    if (spectrum_data == null)
+                    {
+                        return -1; // bail out - not buffer 
+                    }
+                    fixed (float* ptr = &(spectrum_data[0]))
+                        DttSP.GetSpectrum(1, ptr); // RX2 now
+                    break;
+            }
+
+            for (int i = lo_bucket; i <= hi_bucket; i++)
+            {
+                if (spectrum_data[i] > max_val)
+                {
+                    max_bucket = i;
+                    max_val = spectrum_data[i];
+                }
+            }
+            int peak_hz = (int)((max_bucket - zero_hz_bucket) * hz_per_bucket);
+
+            return peak_hz;
+        } // FindPeakFreqinRX2
+
+
 
         private void btnZeroBeat_Click(object sender, System.EventArgs e)
         {
@@ -68057,7 +68222,9 @@ namespace PowerSDR
             {
                 VFOAFreq += delta_hz * 1e-6;
             }
-        }
+        } // btnZeroBeat_Click
+
+
 
         unsafe private int FindPeakFreqInPassband()
         {
@@ -68116,7 +68283,8 @@ namespace PowerSDR
             }
             int peak_hz = (int)((max_bucket - zero_hz_bucket) * hz_per_bucket);
             return peak_hz;
-        }
+
+        } //FindPeakFreqinPassband
 
         private void btnIFtoVFO_Click(object sender, System.EventArgs e)
         {
@@ -86487,6 +86655,8 @@ namespace PowerSDR
             UpdateDiversity();
             picRadar.Invalidate();
         }
+
+       
 
         private void chkLockR_CheckedChanged(object sender, EventArgs e)
         {

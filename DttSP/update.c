@@ -2385,7 +2385,7 @@ DelPolyPhaseFIR (ResSt resst)
 	delPolyPhaseFIR (resst);
 }
 
-DttSP_EXP void * NewResamplerF (int samplerate_in, int samplerate_out)
+DttSP_EXP void * NewResamplerF (int samplerate_in, int samplerate_out) // in = sample_rate2(vac1), out = sample_rate1(primary audio) from audio.cs
 {
 	ResStF tmp;
 	int lcm = 28224000, interpFactor, deciFactor;
@@ -2393,7 +2393,8 @@ DttSP_EXP void * NewResamplerF (int samplerate_in, int samplerate_out)
 	deciFactor = lcm / samplerate_out;
 	tmp = newPolyPhaseFIRF (4096, 0, interpFactor, 0, deciFactor);
 	return (void *) tmp;
-}
+
+} // NewResamplerF
 
 DttSP_EXP void DoResamplerF (float *input, float *output, int numsamps, int *outsamps, ResStF ptr)
 {
@@ -2404,12 +2405,12 @@ DttSP_EXP void DoResamplerF (float *input, float *output, int numsamps, int *out
 	*outsamps = ptr->numOutputSamples;
 }
 
-DttSP_EXP void
-DelPolyPhaseFIRF (ResSt resst)
+DttSP_EXP void DelPolyPhaseFIRF (ResSt resst)
 {
 	extern void delPolyPhaseFIRF (ResSt resst);
 	delPolyPhaseFIRF (resst);
-}
+
+} // DelPolyPhaseFIRF
 
 DttSP_EXP int
 SetSubRXSt(unsigned int thread, unsigned int subrx, BOOLEAN setit)

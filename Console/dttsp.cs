@@ -419,7 +419,7 @@ namespace PowerSDR
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "DelPolyPhaseFIR")]
         unsafe public static extern void DelResampler(void* ptr);
 
-        [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "NewResamplerF")]
+        [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "NewResamplerF")] // update.c ke9ns: used to resample VAC1 from the SR of the primary audio (like 192k)
         unsafe public static extern void* NewResamplerF(int sampin, int sampout);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "DoResamplerF")]

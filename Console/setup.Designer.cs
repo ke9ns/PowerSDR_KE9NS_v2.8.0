@@ -43,6 +43,7 @@ namespace PowerSDR
             this.tpGeneral = new System.Windows.Forms.TabPage();
             this.tcGeneral = new System.Windows.Forms.TabControl();
             this.tpGeneralHardware = new System.Windows.Forms.TabPage();
+            this.chkBoxPFN = new System.Windows.Forms.CheckBoxTS();
             this.chkBoxShutdown = new System.Windows.Forms.CheckBoxTS();
             this.chkBox30min = new System.Windows.Forms.CheckBoxTS();
             this.chkBoxPTTLatch = new System.Windows.Forms.CheckBoxTS();
@@ -305,7 +306,7 @@ namespace PowerSDR
             this.comboAudioInput2B = new System.Windows.Forms.ComboBoxTS();
             this.comboAudioDriver2B = new System.Windows.Forms.ComboBoxTS();
             this.chkVACReset = new System.Windows.Forms.CheckBoxTS();
-            this.checkBoxMixAudio = new System.Windows.Forms.CheckBoxTS();
+            this.chkBoxMixAudio = new System.Windows.Forms.CheckBoxTS();
             this.grpDirectIQOutput = new System.Windows.Forms.GroupBoxTS();
             this.chkAudioRX2toVAC = new System.Windows.Forms.CheckBoxTS();
             this.chkAudioCorrectIQ = new System.Windows.Forms.CheckBoxTS();
@@ -1617,6 +1618,7 @@ namespace PowerSDR
             // tpGeneralHardware
             // 
             this.tpGeneralHardware.BackColor = System.Drawing.SystemColors.Control;
+            this.tpGeneralHardware.Controls.Add(this.chkBoxPFN);
             this.tpGeneralHardware.Controls.Add(this.chkBoxShutdown);
             this.tpGeneralHardware.Controls.Add(this.chkBox30min);
             this.tpGeneralHardware.Controls.Add(this.chkBoxPTTLatch);
@@ -1647,6 +1649,18 @@ namespace PowerSDR
             this.tpGeneralHardware.Text = "Hardware Config";
             this.tpGeneralHardware.MouseEnter += new System.EventHandler(this.Setup_MouseEnter);
             // 
+            // chkBoxPFN
+            // 
+            this.chkBoxPFN.Image = null;
+            this.chkBoxPFN.Location = new System.Drawing.Point(481, 267);
+            this.chkBoxPFN.Name = "chkBoxPFN";
+            this.chkBoxPFN.Size = new System.Drawing.Size(86, 16);
+            this.chkBoxPFN.TabIndex = 41;
+            this.chkBoxPFN.Text = "PFN issue";
+            this.toolTip1.SetToolTip(this.chkBoxPFN, "Check if you are having a PFN Crash issues whenever you Click the Setup OK or App" +
+        "ly buttons.");
+            this.chkBoxPFN.CheckedChanged += new System.EventHandler(this.chkBoxPFN_CheckedChanged);
+            // 
             // chkBoxShutdown
             // 
             this.chkBoxShutdown.Image = null;
@@ -1662,7 +1676,7 @@ namespace PowerSDR
             this.chkBox30min.Image = null;
             this.chkBox30min.Location = new System.Drawing.Point(336, 267);
             this.chkBox30min.Name = "chkBox30min";
-            this.chkBox30min.Size = new System.Drawing.Size(140, 16);
+            this.chkBox30min.Size = new System.Drawing.Size(93, 16);
             this.chkBox30min.TabIndex = 39;
             this.chkBox30min.Text = "30min ID timer";
             this.toolTip1.SetToolTip(this.chkBox30min, "ID Timer will run 30min (instead of the standard 10min)");
@@ -5191,7 +5205,8 @@ namespace PowerSDR
             this.comboAudioSampleRate1.Size = new System.Drawing.Size(64, 21);
             this.comboAudioSampleRate1.TabIndex = 4;
             this.toolTip1.SetToolTip(this.comboAudioSampleRate1, "Sample Rate -- Higher sampling rates yield a wider panadapter and less latency at" +
-        " a cost of CPU% and filter sharpness");
+        " a cost of CPU% and filter sharpness\r\nMax 192khz Flex-5000 \r\nMax 96khz Flex-3000" +
+        "\r\nMax 48khz Flex-1500");
             this.comboAudioSampleRate1.SelectedIndexChanged += new System.EventHandler(this.comboAudioSampleRate1_SelectedIndexChanged);
             // 
             // tpVAC
@@ -5200,7 +5215,7 @@ namespace PowerSDR
             this.tpVAC.Controls.Add(this.radVAC1SelectA);
             this.tpVAC.Controls.Add(this.groupBoxTS6);
             this.tpVAC.Controls.Add(this.chkVACReset);
-            this.tpVAC.Controls.Add(this.checkBoxMixAudio);
+            this.tpVAC.Controls.Add(this.chkBoxMixAudio);
             this.tpVAC.Controls.Add(this.grpDirectIQOutput);
             this.tpVAC.Controls.Add(this.chkVACCombine);
             this.tpVAC.Controls.Add(this.chkVACAllowBypass);
@@ -5349,17 +5364,17 @@ namespace PowerSDR
         " Audio stream.");
             this.chkVACReset.CheckedChanged += new System.EventHandler(this.checkBoxTS1_CheckedChanged_1);
             // 
-            // checkBoxMixAudio
+            // chkBoxMixAudio
             // 
-            this.checkBoxMixAudio.Image = null;
-            this.checkBoxMixAudio.Location = new System.Drawing.Point(242, 184);
-            this.checkBoxMixAudio.Name = "checkBoxMixAudio";
-            this.checkBoxMixAudio.Size = new System.Drawing.Size(184, 32);
-            this.checkBoxMixAudio.TabIndex = 79;
-            this.checkBoxMixAudio.Text = "Mix VAC1 and MIC audio ";
-            this.toolTip1.SetToolTip(this.checkBoxMixAudio, "Will mix audio streams from your PC (VAC1) and MIC (Flex radio input) together.\r\n" +
+            this.chkBoxMixAudio.Image = null;
+            this.chkBoxMixAudio.Location = new System.Drawing.Point(242, 184);
+            this.chkBoxMixAudio.Name = "chkBoxMixAudio";
+            this.chkBoxMixAudio.Size = new System.Drawing.Size(184, 32);
+            this.chkBoxMixAudio.TabIndex = 79;
+            this.chkBoxMixAudio.Text = "Mix VAC1 and MIC audio ";
+            this.toolTip1.SetToolTip(this.chkBoxMixAudio, "Will mix audio streams from your PC (VAC1) and MIC (Flex radio input) together.\r\n" +
         "Allows you to inject PC Audio into your transmit Mic audio");
-            this.checkBoxMixAudio.CheckedChanged += new System.EventHandler(this.checkBoxMixAudio_CheckedChanged);
+            this.chkBoxMixAudio.CheckedChanged += new System.EventHandler(this.checkBoxMixAudio_CheckedChanged);
             // 
             // grpDirectIQOutput
             // 
@@ -5742,6 +5757,7 @@ namespace PowerSDR
             this.comboAudioSampleRate2.Name = "comboAudioSampleRate2";
             this.comboAudioSampleRate2.Size = new System.Drawing.Size(64, 21);
             this.comboAudioSampleRate2.TabIndex = 60;
+            this.toolTip1.SetToolTip(this.comboAudioSampleRate2, resources.GetString("comboAudioSampleRate2.ToolTip"));
             this.comboAudioSampleRate2.SelectedIndexChanged += new System.EventHandler(this.comboAudioSampleRate2_SelectedIndexChanged);
             // 
             // grpAudioBuffer2
@@ -19761,7 +19777,7 @@ namespace PowerSDR
         public PowerSDR.ColorButton clrbtn3DDataLine;
         public System.Windows.Forms.TrackBarTS tbPan3DAlpha;
         private System.Windows.Forms.LabelTS labelTS41;
-        public System.Windows.Forms.CheckBoxTS checkBoxMixAudio;
+        public System.Windows.Forms.CheckBoxTS chkBoxMixAudio;
         public System.Windows.Forms.CheckBoxTS chkBoxMeterTop;
         public System.Windows.Forms.CheckBoxTS chkBoxMeterMenus;
         public System.Windows.Forms.ButtonTS buttonExit;
@@ -19861,6 +19877,7 @@ namespace PowerSDR
         public System.Windows.Forms.CheckBoxTS chkBoxESC;
         public System.Windows.Forms.CheckBoxTS chkKnobVFOB;
         public System.Windows.Forms.CheckBoxTS chkKnobVFO;
+        public System.Windows.Forms.CheckBoxTS chkBoxPFN;
     } // class setup
 
 

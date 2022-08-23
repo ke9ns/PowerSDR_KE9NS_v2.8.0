@@ -35,10 +35,7 @@ Bridgewater, NJ 08807
 
 #include <common.h>
 
-DttSP_EXP ResStF
-newPolyPhaseFIRF (int filterMemoryBuffLength,
-		  int indexfiltMemBuf,
-		  int interpFactor, int filterPhaseNum, int deciFactor)
+DttSP_EXP ResStF newPolyPhaseFIRF (int filterMemoryBuffLength, int indexfiltMemBuf, int interpFactor, int filterPhaseNum, int deciFactor)
 {
   ResStF tmp;
   tmp = (ResStF) safealloc (1, sizeof (resamplerF), "PF Resampler");
@@ -47,14 +44,10 @@ newPolyPhaseFIRF (int filterMemoryBuffLength,
   tmp->filterPhaseNum = filterPhaseNum;
   tmp->deciFactor = deciFactor;
   tmp->numFiltTaps = 19839;
-  tmp->filterMemoryBuffLength =
-    nblock2 (max (filterMemoryBuffLength, tmp->numFiltTaps));
+  tmp->filterMemoryBuffLength = nblock2 (max (filterMemoryBuffLength, tmp->numFiltTaps));
   tmp->MASK = tmp->filterMemoryBuffLength - 1;
-  tmp->filterMemoryBuff =
-    (float *) safealloc (tmp->filterMemoryBuffLength, sizeof (REAL),
-			 "Filter buff: resampler");
-  tmp->filter =
-    newFIR_Lowpass_REAL (0.45f, (REAL) interpFactor, tmp->numFiltTaps);
+  tmp->filterMemoryBuff = (float *) safealloc (tmp->filterMemoryBuffLength, sizeof (REAL), "Filter buff: resampler");
+  tmp->filter =  newFIR_Lowpass_REAL (0.45f, (REAL) interpFactor, tmp->numFiltTaps);
 
   return tmp;
 }
