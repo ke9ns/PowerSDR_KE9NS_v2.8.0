@@ -28,6 +28,7 @@ using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace PowerSDR
 {
@@ -1642,7 +1643,11 @@ namespace PowerSDR
         //Shuts down the console
         public string ZZBY()
         {
-            this.console.Close();
+            
+            Environment.Exit(0); // .257
+          
+         //   this.console.Close();
+                       
             return "";
         }
 

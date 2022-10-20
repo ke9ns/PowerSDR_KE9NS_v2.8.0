@@ -9092,6 +9092,7 @@ namespace PowerSDR
         public DSPMode beacon7;       // to store prior operating mode before running beacon scan
         public int beacon8 = 0;       // to store prior high filter before running beacon scan
         public int beacon9 = 0;        //to store prior low filter before running beacon scan
+        public AGCMode beacon9a = 0; // .257
         public Filter beacon89;       // to store filter name before running beacon scan
         public Filter beacon89a;       // to store filter name before running beacon scan
 
@@ -9099,7 +9100,7 @@ namespace PowerSDR
         public double beacon88 = 0;   // to store vfoa
         public int beacon66 = 0;      //  to store blocksize
         public int beacon33 = 0;      // to store rx buffer size
-        public PreampMode beacon55;
+        public PreampMode beacon55;   // store preamp mode
 
 
         public bool beacon10 = false; //true indicates op mode has changed (ie scan was run)
@@ -10451,12 +10452,16 @@ namespace PowerSDR
             //   timeProcPeriodic = new TimeProc(TimerPeriodicEventCallback);
             //   setup_timer(1000);
 
+            console.PowerOn = false; // pause radio while changing settings .257
+
             beacon44 = console.RX1PreampMode;       // get preamp mode so you can restore it when you turn off wwvtime
 
             beacon7 = console.RX1DSPMode;           // get mode so you can restore it when you turn off wwvtime
             beacon8 = console.RX1FilterHigh;        // get high filter so you can restore it when you turn off wwvtime
             beacon9 = console.RX1FilterLow;         // get low filter so you can restore it when you turn off wwvtime
-
+          
+            beacon9a = console.RX1AGCMode;          // get AGC mode so you can resetor it when you turn off wwvtime .257
+          
             beacon89 = console.RX1Filter;           // get filter name so you can restore
 
             beacon88 = console.VFOAFreq;            // get freq you were on before 
@@ -10545,7 +10550,7 @@ namespace PowerSDR
 
             }
 
-
+            console.RX1AGCMode = AGCMode.LONG; //.257
 
             console.UpdateDisplay();
 
@@ -10611,6 +10616,7 @@ namespace PowerSDR
 
             Debug.WriteLine("WWV>>1");
 
+            console.PowerOn = true; //.257
 
             ST.Restart();
 
@@ -10747,7 +10753,7 @@ namespace PowerSDR
 
                     if ((uint)(BCDSignalON - BCDSignalOFF) < 6) // if you loose the carrier, then NO GOOD
                     {
-                        if (WWVCF > 1000) // FAIL if carrier stays LOW for too long
+                        if (WWVCF > 1200) // FAIL if carrier stays LOW for too long
                         {
                             textBox1.Text += "\r\n";
                             textBox1.Text += "Radio Station WWV: Carrier signal too low, choose different Frequency\r\n";
@@ -11032,9 +11038,9 @@ namespace PowerSDR
 
                                 textBox1.Text += "Elapsed time since WWV Sync Pulse> " + WWVNewTime.Elapsed + "\r\n";
 
-                                k1 = TimeSpan.FromMilliseconds(Convert.ToInt32(230)); // convert o k1 timespan
+                                k1 = TimeSpan.FromMilliseconds(Convert.ToInt32(100)); // convert o k1 timespan was 230 now 100 confirmed with https://www.time.gov/ //.257 
 
-                                WWVUTC = WWVUTC.Subtract(k1); // subtract the 230 millseconds from the HOLE
+                                WWVUTC = WWVUTC.Subtract(k1); // subtract the 100 millseconds from the HOLE
                                 WWVUTC = WWVUTC + WWVNewTime.Elapsed;                                            // WWVNewTime actually started at the end of the P0 pulse which is actually 230msec before 0
 
                                 textBox1.Text += "New UTC Time updated > " + WWVUTC + "\r\n";
@@ -11333,6 +11339,7 @@ namespace PowerSDR
 
             Debug.WriteLine("WWV Time Thread Ended ");
 
+            console.PowerOn = false; // .257 pause temporarily to put back settings
 
             checkBoxWWV.Checked = false; // turn off WWV checking
 
@@ -11354,6 +11361,8 @@ namespace PowerSDR
 
             console.UpdateRX1Filters(beacon9, beacon8); // restore filter
 
+            console.RX1AGCMode = beacon9a; //.257
+
             console.RX1DSPMode = beacon7;           //  restore  mode  when you turn off the beacon check
             console.RX1Filter = beacon89;           // restore filter name
 
@@ -11374,7 +11383,13 @@ namespace PowerSDR
 
             WWVNewTime.Stop();
 
+            console.PowerOn = true; // .257 pause temporarily to put back settings
+
+
         } // WWVTime()
+
+
+
 
         private void checkBoxWWV_CheckedChanged(object sender, EventArgs e)
         {

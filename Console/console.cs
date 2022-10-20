@@ -88,7 +88,7 @@
 // .net 4.6 and above require this (below) in the app.config file to force 4.5.2 behavior for currentculture
 //< configuration >
 //    < runtime >
- //       < AppContextSwitchOverrides value = "Switch.System.Globalization.NoAsyncCurrentCulture=true" />
+//       < AppContextSwitchOverrides value = "Switch.System.Globalization.NoAsyncCurrentCulture=true" />
 //    </ runtime >
 //</ configuration >
 
@@ -114,7 +114,9 @@
 //
 // path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\FlexRadio Systems\\PowerSDR";  // ke9ns this is the ProgramData folder
 // Application.StartupPath  = \Program Files (x86)\FlexRadio Systems\PowerSDR v2.8.0
+
 //   string pm_file_path = Path.Combine(common_data_path, "powermaster.txt");  // programData\flexradio systems\powersdr folder
+//   For windows XP:  common_data_path =  C:\Documents and Settings\FlexRadio Systems\PowerSDR\
 
 //  current_region = FWCEEPROM.Region; or //  current_region = HIDEEPROM.Region;
 //
@@ -51630,23 +51632,26 @@ namespace PowerSDR
 
                     int startRadio = startSSNE + lenSSNE + 5; //  int startRadio = startEISN + lenEISN + 7;
 
+                    Color c1 = Color.Red;
+
+                    Color lightRed = Color.FromArgb(0xef2a0b);
 
                     if ((Kindex >= 4) || (RadioBlackout != " "))
                     {
                         txtNOAA.Select(startSFI, lenSFI);
-                        txtNOAA.SelectionColor = Color.Red;
+                        txtNOAA.SelectionColor = lightRed;
 
                         txtNOAA.Select(startA, lenA);
-                        txtNOAA.SelectionColor = Color.Red;
+                        txtNOAA.SelectionColor = lightRed;
 
                         txtNOAA.Select(startK, lenK);
-                        txtNOAA.SelectionColor = Color.Red;
+                        txtNOAA.SelectionColor = lightRed;
 
                         txtNOAA2.Select(startEISN, lenEISN);
-                        txtNOAA2.SelectionColor = Color.Red;
+                        txtNOAA2.SelectionColor = lightRed;
 
                         txtNOAA2.Select(startSSNE, lenSSNE);
-                        txtNOAA2.SelectionColor = Color.Red;
+                        txtNOAA2.SelectionColor = lightRed;
 
                         if (RadioBlackout.Length < 4)
                         {
@@ -51657,7 +51662,7 @@ namespace PowerSDR
                             txtNOAA2.Select(startRadio-1, lenRadio);
                         }
 
-                        txtNOAA2.SelectionColor = Color.Red;
+                        txtNOAA2.SelectionColor = lightRed;
 
 
                     }

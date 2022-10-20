@@ -35,6 +35,7 @@ using System.Threading;
 using System.Windows.Forms;
 #if(!NO_MCL_PM)
 using mcl_pm;
+using TDxInput;
 #endif
 
 namespace PowerSDR
@@ -374,8 +375,26 @@ namespace PowerSDR
             lstDebug.Items.Insert(0, "PA Gain Cal Begin...");
             barPercent = 0f;
 #if(!NO_MCL_PM)
-            USB_PM Sensor = new USB_PM();
-            short val = Sensor.Open_AnySensor();
+
+            short val = 0;
+            try
+            {
+                USB_PM Sensor2 = new USB_PM();
+                val = Sensor2.Open_AnySensor();
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Fail during USB_PM read, this is the Fault message: " + e, "Problme with mcl_pm.dll",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+
+            USB_PM Sensor1 = new USB_PM();
+            val = Sensor1.Open_AnySensor();
+            lstDebug.Items.Insert(0, "Communicate with USB PM Sensor1: " + val);
+
+
 #else
             short val = 0;
 #endif
@@ -389,11 +408,12 @@ namespace PowerSDR
             {
                 p.Text = "";
                 p.Hide();
-                lstDebug.Items.Insert(0, "PA Gain Cal Failed: No power sensor found");
-                MessageBox.Show("Error: Unable to find Power Sensor.\n" +
-                    "Please ensure the power sensor is connected to the PC and try again.\n" +
-                    "Make sure all Mini-Circuits Power Sensor application windows are closed.",
-                    "Error: Sensor Not Found",
+                lstDebug.Items.Insert(0, "PA Gain Cal Failed: No power Sensor1 found");
+
+                MessageBox.Show("Error: Unable to find Power Sensor1.\n" +
+                    "Please ensure the power Sensor1 is connected to the PC and try again.\n" +
+                    "Make sure all Mini-Circuits Power Sensor1 application windows are closed.",
+                    "Error: Sensor1 Not Found",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 btnLevel.Enabled = true;
@@ -503,7 +523,7 @@ namespace PowerSDR
                     {
                         count_progressBar++;
 #if(!NO_MCL_PM)
-                        Sensor.Freq = freqs[j];
+                        Sensor1.Freq = freqs[j];
 #endif
                         console.VFOAFreq = freqs[j];
                         DSPMode dsp_mode = console.RX1DSPMode;
@@ -523,7 +543,7 @@ namespace PowerSDR
 
                         #region CALCULATE AND SAVE
 #if (!NO_MCL_PM)
-                        float read_db = Sensor.ReadPower();
+                        float read_db = Sensor1.ReadPower();
 #else
                         float read_db = 0.0f;
 #endif
@@ -540,7 +560,7 @@ namespace PowerSDR
                                 Thread.Sleep(50);
                             }
 #if (!NO_MCL_PM)
-                            read_db = Sensor.ReadPower();
+                            read_db = Sensor1.ReadPower();
 #endif
 
                             //Calculate, correct and save Audio.RadioVolume (udAttempts.Value number of tries)
@@ -576,7 +596,7 @@ namespace PowerSDR
                                         Thread.Sleep(50);
                                     }
 #if(!NO_MCL_PM)
-                                    read_db = Sensor.ReadPower();
+                                    read_db = Sensor1.ReadPower();
 #endif
                                     powerDifference_dB = target - read_db;
                                     vMultiplier = (float)Math.Pow(10, powerDifference_dB / 20);
@@ -590,7 +610,7 @@ namespace PowerSDR
                                             Thread.Sleep(50);
                                         }
 #if(!NO_MCL_PM)
-                                        read_db = Sensor.ReadPower();
+                                        read_db = Sensor1.ReadPower();
 #endif
                                     }
 
@@ -762,7 +782,7 @@ namespace PowerSDR
                             p.SetPercent(barPercent);
                         }
 
-                        //volume too high at very beginning, power sensor probably not connected
+                        //volume too high at very beginning, power Sensor1 probably not connected
                         else
                         {
                             if (chkHighPowerCal.Checked)
@@ -790,7 +810,7 @@ namespace PowerSDR
                                 else
                                     powerString = " Power: " + (read_db - pad - loss).ToString("f2") + " dBm";
 
-                                Debug.WriteLine("Cal ERROR:  Audio.RadioVolume too high.  Is the Power Sensor connected to the correct port?");
+                                Debug.WriteLine("Cal ERROR:  Audio.RadioVolume too high.  Is the Power Sensor1 connected to the correct port?");
                                 if (bands[i] == Band.VHF0)
                                 {
                                     lstDebug.Items.Insert(0, "*PA " + console.freqs_2m[j].ToString("f1") + ": Error, Check Connections " + powerString + " (" + (Audio.RadioVolume * vMultiplier).ToString("f4") + ")");
@@ -850,7 +870,7 @@ namespace PowerSDR
             btnTXCarrier.Enabled = true;
 
 #if(!NO_MCL_PM)
-            Sensor.Close_Sensor();
+            Sensor1.Close_Sensor();
 #endif
             FWC.SetRCATX1(false);
             FWC.SetRCATX2(false);
@@ -869,7 +889,7 @@ namespace PowerSDR
                 console.SyncCalDateTime();
                 lstDebug.Items[0] = "Saving Power data to EEPROM...done";
             }
-        }
+            }
         #endregion
 
         private void FLEX5000VUCalForm_KeyDown(object sender, KeyEventArgs e)
@@ -921,7 +941,7 @@ namespace PowerSDR
             {
 
                 DialogResult dr = MessageBox.Show("Warning: Enabling High Power Cal.\n" +
-                                "Power Sensor may get damaged if not properly connected.\n",
+                                "Power Sensor1 may get damaged if not properly connected.\n",
                                 "Warning: High Power Cal",
                                 MessageBoxButtons.YesNo,
                                 MessageBoxIcon.Warning);

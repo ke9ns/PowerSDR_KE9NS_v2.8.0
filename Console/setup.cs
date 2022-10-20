@@ -15170,7 +15170,7 @@ namespace PowerSDR
         } //  chkBoxMeterMenus_CheckedChanged
 
         //ke9ns add
-        private void buttonExit_Click(object sender, EventArgs e)
+        public void buttonExit_Click(object sender, EventArgs e)
         {
             console.chkPower.Checked = false; //.254
             Thread.Sleep(800);

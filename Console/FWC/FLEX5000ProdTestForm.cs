@@ -26,12 +26,14 @@
 //    USA
 //=================================================================
 
+using EnvDTE;
 using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using Thread = System.Threading.Thread;
 
 namespace PowerSDR
 {
@@ -44,6 +46,7 @@ namespace PowerSDR
 
         private string common_data_path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + "\\FlexRadio Systems\\PowerSDR\\";
 
+     //   For windows XP:   C:\Documents and Settings\FlexRadio Systems\PowerSDR\
         #endregion
 
         #region Constructor and Destructor

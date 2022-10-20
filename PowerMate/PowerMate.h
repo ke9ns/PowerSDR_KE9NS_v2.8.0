@@ -44,6 +44,13 @@ namespace HidDevice
 			VersionNumber	= 0x0311
 		};
 
+	private: enum class HidAttributes1			// SPE USB port
+	{
+		VendorID = 0x0403,
+		ProductID = 0x6001,
+		VersionNumber = 0x0311
+	};
+
 		public: enum class RotationalDirection
 		{
 			Left,
@@ -193,6 +200,8 @@ namespace HidDevice
 
 
 			GUID hidClass;
+			
+
 			HidD_GetHidGuid(&hidClass);									// returns the device interface GUID for HIDClass devices.
 			
 																		// retrieves a device information set that contains all the
@@ -264,9 +273,12 @@ namespace HidDevice
 									// VersionNumber	= 0x0311
 									// grab the first matching device we find and return
 
+							
+
 							if( (int)HidAttributes::ProductID == hidAttr.ProductID && (int)HidAttributes::VendorID  == hidAttr.VendorID )
 							{
-								//Trace::WriteLine("FOUND GRIFFIN KNOB");
+								//Trace::WriteLine("FOUND GRIFFIN KNOB " );
+
 								handleToDevice = hDevice;
 
 								KBON = 1;
