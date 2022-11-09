@@ -300,7 +300,9 @@ namespace PowerSDR
             this.dropdelaylabel.Size = new System.Drawing.Size(64, 16);
             this.dropdelaylabel.TabIndex = 36;
             this.dropdelaylabel.Text = "Drop Delay";
-            this.toolTip1.SetToolTip(this.dropdelaylabel, " Set break in drop out in milliseconds. Minimum allowed is PTT Delay * 1.5 .");
+            this.toolTip1.SetToolTip(this.dropdelaylabel, "Set \"Break In\" PTT drop out  time (mSec). Minimum allowed is PTT Delay * 1.5 \r\nTh" +
+        "is only works when the CW main console panel \"Break In\" or \r\nSetup->DSP->Keyer->" +
+        "Break In is NOT Enabled");
             // 
             // s9
             // 
@@ -346,7 +348,8 @@ namespace PowerSDR
             this.stopButton.Size = new System.Drawing.Size(72, 24);
             this.stopButton.TabIndex = 26;
             this.stopButton.Text = "Stop (Esc)";
-            this.toolTip1.SetToolTip(this.stopButton, "Stop all keying.");
+            this.toolTip1.SetToolTip(this.stopButton, "Stop all keying. \r\nAnd also Cancel any Repeat messages (text strings with a \" on " +
+        "the end)");
             this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
             // repeatdelayLabel
@@ -357,7 +360,8 @@ namespace PowerSDR
             this.repeatdelayLabel.Size = new System.Drawing.Size(80, 16);
             this.repeatdelayLabel.TabIndex = 48;
             this.repeatdelayLabel.Text = "Repeat Delay";
-            this.toolTip1.SetToolTip(this.repeatdelayLabel, " Set repeat message delay in seconds.");
+            this.toolTip1.SetToolTip(this.repeatdelayLabel, "Set repeat message delay in seconds.\r\nBy adding a \" (quotation mark) to the end o" +
+        "f a text string\r\nHit STOP to End");
             // 
             // cbMorse
             // 
@@ -508,6 +512,7 @@ namespace PowerSDR
             this.udWPM.Name = "udWPM";
             this.udWPM.Size = new System.Drawing.Size(56, 20);
             this.udWPM.TabIndex = 56;
+            this.toolTip1.SetToolTip(this.udWPM, "Set memory keyer (not paddle) speed in words per minute. (PARIS method)");
             this.udWPM.Value = new decimal(new int[] {
             22,
             0,
@@ -537,6 +542,7 @@ namespace PowerSDR
             this.udPtt.Name = "udPtt";
             this.udPtt.Size = new System.Drawing.Size(56, 20);
             this.udPtt.TabIndex = 54;
+            this.toolTip1.SetToolTip(this.udPtt, "Set delay from PTT to key down in milliseconds.");
             this.udPtt.Value = new decimal(new int[] {
             50,
             0,
@@ -584,6 +590,9 @@ namespace PowerSDR
             this.udDrop.Name = "udDrop";
             this.udDrop.Size = new System.Drawing.Size(56, 20);
             this.udDrop.TabIndex = 35;
+            this.toolTip1.SetToolTip(this.udDrop, "Set \"Break In\" PTT drop out  time (mSec). Minimum allowed is PTT Delay * 1.5 \r\nTh" +
+        "is only works when the CW main console panel \"Break In\" or \r\nSetup->DSP->Keyer->" +
+        "Break In is NOT Enabled\r\n");
             this.udDrop.Value = new decimal(new int[] {
             300,
             0,
@@ -640,6 +649,8 @@ namespace PowerSDR
             this.udDelay.Name = "udDelay";
             this.udDelay.Size = new System.Drawing.Size(56, 20);
             this.udDelay.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.udDelay, "Set repeat message delay in seconds.\r\nBy adding a \" (quotation mark) to the end o" +
+        "f a text string\r\nHit STOP to End\r\n");
             this.udDelay.Value = new decimal(new int[] {
             3,
             0,

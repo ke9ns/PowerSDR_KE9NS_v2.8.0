@@ -95,7 +95,7 @@ namespace PowerSDR
 
         private int tel;            // time of one element in ms
         private int ttx;            // # cycles left 'til ptt drops
-        private int ttdel;          // tx timeout; keep ptt up this long after key up
+        private int ttdel;          // tx timeout; keep ptt up this long after key up ke9ns: unless regualar CW Break In enabled, in which case its Delay overrides this delay
         private int tpause;         // pause time in ms
         private string tqq;         // string currently being sent
         private bool altkey;        // true if alt key is pressed
@@ -1585,6 +1585,8 @@ namespace PowerSDR
                 {
                     setptt(true);
                     ttx = ttdel / tel;
+
+                   
                 }
                 if ((data == EL_KEYDOWN) || (data == EL_KEYUP))     // key command
                 {
@@ -1602,7 +1604,7 @@ namespace PowerSDR
 
                         if (newptt > 0) return;     // the key will get pressed after newptt
 
-                        setkey(true); // ke9ns generate TX output, tones, and signal on Panadapter
+                        setkey(true); // ke9ns: generate TX output, tones, and signal on Panadapter
                     }
                     else
                     {

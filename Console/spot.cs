@@ -10453,6 +10453,12 @@ namespace PowerSDR
             //   setup_timer(1000);
 
             console.PowerOn = false; // pause radio while changing settings .257
+          
+            textBox1.Text += "Setting up Radio for WWV reception. \r\n";
+
+          //  Thread.Sleep(200);
+
+           
 
             beacon44 = console.RX1PreampMode;       // get preamp mode so you can restore it when you turn off wwvtime
 
@@ -10543,7 +10549,7 @@ namespace PowerSDR
 
                 console.UpdateRX1Filters(80, 140);
 
-                textBox1.Text += "Tone detection. Waiting for Start of Minute!\r\n";
+                textBox1.Text += "Using Tone detection.\r\n";
 
                 console.VFOAFreq = WWV_Freq1[(int)udDisplayWWV.Value - 1];         // main receiver: WWV in DIGU mode on  sub-Carrier
 
@@ -10616,12 +10622,16 @@ namespace PowerSDR
 
             Debug.WriteLine("WWV>>1");
 
+            textBox1.Text += "Wait for PowerSDR DttSP to come back up...\r\n";
+
+         
+
             console.PowerOn = true; //.257
 
             ST.Restart();
 
 
-            while (ST.ElapsedMilliseconds < 2000)    // wait for things to calm down after you make changes to the mode
+            while (ST.ElapsedMilliseconds < 6000)    // wait for things to calm down after you make changes to the mode
             {
                 CarrierSignalINIT = 0;
                 BCDSignalOFF = 0;
@@ -10650,6 +10660,10 @@ namespace PowerSDR
                 BCDSignalOFF1 = 0;
                 BCDSignalON1 = -150;
             }
+
+            textBox1.Text += "Now Detecting noise floor..\r\n";
+
+            Thread.Sleep(200);
 
 
             while (ST.ElapsedMilliseconds < 1300)                          // get floor for bcd stream
