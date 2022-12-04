@@ -2028,22 +2028,68 @@ namespace PowerSDR
 
             while (!stopThreads)
             {
-                Thread.Sleep(10);
+                Thread.Sleep(20);
 
                 if ((stopPoll == true) && (chkKeyPoll.Checked == true))
                 {
-                    if (FWC.ReadPTT(out dot, out dash, out rca_ptt, out mic_ptt) != 0)   // ke9ns read Flex radio TRS plug and PTT circuits
+                    bool dot1 = false, dash1 = false;
+
+                    if (console.CurrentModel == Model.FLEX1500) //.259
                     {
 
-                        if ((dot == true) || (dash == true))
+                        //  Flex1500USB.D_STATE_CHANGE_CALLBACK Dash_Callback = dash; // from flex1500.cs
+                        //  Flex1500USB.D_STATE_CHANGE_CALLBACK Dot_Callback = dot;
+
+                        //  Flex1500.Dash = dash1;
+                        //  Flex1500.Dot = dot1;
+
+                        // dash1 = USBHID.GetDash;
+                        //  dot1 = USBHID.GetDot;
+
+                        //  uint data = 0;
+                        //  Flex1500.ReadOp(USBHID.Opcode.USB_OP_READ_PTT, 0, 0, out data);
+                        //  dot1 = ((data & 0x01) == 1);
+                        //  dash1 = ((data & 0x02) == 2);
+
+                        uint val;
+                        USBHID.ReadPTT(out val);
+                        dot1 = ((val & 0x20) == 0);
+                        dash1 = ((val & 0x10) == 0);
+
+                        if ((dot1 == true) || (dash1 == true))
                         {
                             clear_show();
                             quit = true;
                             kquit = true;
 
                         }
+                        //  Flex1500.IgnoreDash = chkCWKeyerMonoCable.Checked;
+
                     }
-                    else break;
+                    else if (console.CurrentModel == Model.FLEX5000 || console.CurrentModel == Model.FLEX3000)  //.259
+                    {
+
+                      //  int rtn = Pal.ReadOp(Opcode.RDAL_OP_READ_PTT, 0, 0, out data);
+                      //  dot = ((data & 0x01) == 1);
+                      //  dash = ((data & 0x02) == 2);
+                      //  rca_ptt = ((data & 0x04) == 4);
+                      //  mic_ptt = ((data & 0x08) == 8);
+                       
+
+                        if (FWC.ReadPTT(out dot, out dash, out rca_ptt, out mic_ptt) != 0)   // ke9ns: read Flex radio TRS plug and PTT circuits
+                        {
+
+                            if ((dot == true) || (dash == true))
+                            {
+                                clear_show();
+                                quit = true;
+                                kquit = true;
+
+                            }
+                        }
+                        else break;
+
+                    }
 
                     //  chkRCAPTT.Checked = rca_ptt;
                     //  chkMicPTT.Checked = mic_ptt;

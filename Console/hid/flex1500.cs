@@ -73,7 +73,7 @@ namespace PowerSDR
             }
 
             return true;
-        }
+        } // init
 
         /*// cleanup previous active radio
         if (r != IntPtr.Zero)
@@ -190,8 +190,7 @@ namespace PowerSDR
         }
 
         static double Iacc, Qacc;
-        private static int AudioSine(float[] AudioInBufI, float[] AudioInBufQ,
-            float[] AudioOutBufI, float[] AudioOutBufQ, uint paFlags)
+        private static int AudioSine(float[] AudioInBufI, float[] AudioInBufQ,float[] AudioOutBufI, float[] AudioOutBufQ, uint paFlags)
         {
             double phaseStep = 1.0 / 48000.0 * 2 * Math.PI;
             for (int i = 0; i < AudioOutBufI.Length; i++)
@@ -255,7 +254,7 @@ namespace PowerSDR
             set { reverse_paddles = value; }
         }
 
-        private static void Dash(bool state)
+        private static void Dash(bool state) 
         {
             if (ignore_dash) return;
 
@@ -266,7 +265,7 @@ namespace PowerSDR
             CWKeyer.SensorEnqueue(item);
         }
 
-        private static void Dot(bool state)
+       private static void Dot(bool state) 
         {
             CWSensorItem.InputType type = CWSensorItem.InputType.Dot;
             if (reverse_paddles) type = CWSensorItem.InputType.Dash;

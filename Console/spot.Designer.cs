@@ -118,6 +118,8 @@ namespace PowerSDR
             this.chkTimeServer4 = new System.Windows.Forms.MenuItem();
             this.chkTimeServer5 = new System.Windows.Forms.MenuItem();
             this.menuTimeServers = new System.Windows.Forms.MenuItem();
+            this.chkTimeServer6 = new System.Windows.Forms.MenuItem();
+            this.chkTimeServer7 = new System.Windows.Forms.MenuItem();
             this.menuItem1 = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
@@ -1305,8 +1307,22 @@ namespace PowerSDR
             this.chkTimeServer2,
             this.chkTimeServer3,
             this.chkTimeServer4,
-            this.chkTimeServer5});
+            this.chkTimeServer5,
+            this.chkTimeServer6,
+            this.chkTimeServer7});
             this.menuTimeServers.Text = "Time Servers List";
+            // 
+            // chkTimeServer6
+            // 
+            this.chkTimeServer6.Index = 5;
+            this.chkTimeServer6.Text = "time-e-g.nist.gov";
+            this.chkTimeServer6.Click += new System.EventHandler(this.menuItem4_Click_1);
+            // 
+            // chkTimeServer7
+            // 
+            this.chkTimeServer7.Index = 6;
+            this.chkTimeServer7.Text = "time-b-wwv.nist.gov";
+            this.chkTimeServer7.Click += new System.EventHandler(this.chkTimeServer7_Click);
             // 
             // menuItem1
             // 
@@ -1618,6 +1634,8 @@ namespace PowerSDR
         private TimeProc timeProcPeriodic;
         public System.Windows.Forms.CheckBoxTS chkLightningMap;
         public System.Windows.Forms.CheckBoxTS chkCloudOn;
+        private System.Windows.Forms.MenuItem chkTimeServer6;
+        private System.Windows.Forms.MenuItem chkTimeServer7;
     } // Spotcontrol
 
 

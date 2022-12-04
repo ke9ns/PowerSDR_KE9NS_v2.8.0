@@ -245,6 +245,8 @@ using FlexCW; // .250
 using System.Linq; // ke9ns add
 using NAudio.Wave; // ke9ns add
 using NAudio.Lame; // ke9ns add
+using NAudio.Gui;
+using System.Security.Policy;
 
 //using MahApps.Metro.Controls; // ke9ns add
 
@@ -82544,13 +82546,43 @@ namespace PowerSDR
 
             if ((cwxForm != null) && (cwxForm.stopPoll == true))
             {
-                FWC.ReadPTT(out dot, out dash, out rca_ptt, out mic_ptt);
+                if (CurrentModel == Model.FLEX1500) //.259
+                {
+                    //  Flex1500USB.D_STATE_CHANGE_CALLBACK Dash_Callback = dash; // from flex1500.cs
+                    //  Flex1500USB.D_STATE_CHANGE_CALLBACK Dot_Callback = dot;
 
-                if ((dot == true) || (dash == true)) return true;
+                    // Flex1500.Dash = dash;
+                    // Flex1500.Dot = dot;
+
+                    //  dash = USBHID.GetDash;
+                    //  dot = USBHID.GetDot;
+
+                    uint data = 0;
+
+                    Flex1500.ReadOp(USBHID.Opcode.USB_OP_READ_PTT, 0, 0, out data);
+                     dot = ((data & 0x01) == 1);
+                     dash = ((data & 0x02) == 2);
+
+
+
+                    if ((dot == true) || (dash == true)) return true;
+                   
+                    //  Flex1500.IgnoreDash = chkCWKeyerMonoCable.Checked;
+
+                    return false;
+                }
+                else if (CurrentModel == Model.FLEX5000 || CurrentModel == Model.FLEX3000) //.259
+                {
+                        FWC.ReadPTT(out dot, out dash, out rca_ptt, out mic_ptt);
+
+                        if ((dot == true) || (dash == true)) return true;
+                    
+                    return false;
+                }
+                return false;
             }
-
             return false;
-        }
+        } // if cwx panel is running //.259
 
 
         public bool keydot = false;  // ke9ns add

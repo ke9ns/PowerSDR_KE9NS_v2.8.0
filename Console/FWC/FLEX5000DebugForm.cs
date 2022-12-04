@@ -355,7 +355,7 @@ namespace PowerSDR
 
 
         //====================================================================
-        // ke9ns THREAD to check CW KEY
+        // ke9ns: THREAD to check CW KEY
         private void PollKey()
         {
             bool dot, dash, rca_ptt, mic_ptt;

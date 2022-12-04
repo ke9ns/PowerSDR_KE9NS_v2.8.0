@@ -10128,7 +10128,7 @@ namespace PowerSDR
 
             //Create a IPAddress object and port, create an IPEndPoint node:  
             int port = 13;
-            string[] whost = { "utcnist.colorado.edu", "utcnist2.colorado.edu", "time-c.nist.gov", "time-b.nist.gov", "time-a.nist.gov" };  //  
+            string[] whost = { "utcnist.colorado.edu", "utcnist2.colorado.edu", "time-c.nist.gov", "time-b.nist.gov", "time-a.nist.gov", "time-e-g.nist.gov", "time-b-wwv.nist.gov" };  //  
             string strHost;
 
             IPHostEntry iphostinfo;
@@ -10166,6 +10166,8 @@ namespace PowerSDR
             else if (chkTimeServer3.Checked == true) strHost = whost[2];
             else if (chkTimeServer4.Checked == true) strHost = whost[3];
             else if (chkTimeServer5.Checked == true) strHost = whost[4];
+            else if (chkTimeServer6.Checked == true) strHost = whost[5];
+            else if (chkTimeServer7.Checked == true) strHost = whost[6];
             else strHost = "utcnist.colorado.edu";
 
             try
@@ -12829,6 +12831,8 @@ namespace PowerSDR
             chkTimeServer3.Checked = false;
             chkTimeServer4.Checked = false;
             chkTimeServer5.Checked = false;
+            chkTimeServer6.Checked = false;
+            chkTimeServer7.Checked = false;
 
 
         } //chkTimeServer1_Click
@@ -12840,6 +12844,8 @@ namespace PowerSDR
             chkTimeServer3.Checked = false;
             chkTimeServer4.Checked = false;
             chkTimeServer5.Checked = false;
+            chkTimeServer6.Checked = false;
+            chkTimeServer7.Checked = false;
         }
 
         private void chkTimeServer3_Click(object sender, EventArgs e)
@@ -12849,6 +12855,8 @@ namespace PowerSDR
             chkTimeServer1.Checked = false;
             chkTimeServer4.Checked = false;
             chkTimeServer5.Checked = false;
+            chkTimeServer6.Checked = false;
+            chkTimeServer7.Checked = false;
         }
 
         private void chkTimeServer4_Click(object sender, EventArgs e)
@@ -12858,6 +12866,8 @@ namespace PowerSDR
             chkTimeServer3.Checked = false;
             chkTimeServer1.Checked = false;
             chkTimeServer5.Checked = false;
+            chkTimeServer6.Checked = false;
+            chkTimeServer7.Checked = false;
         }
 
         private void chkTimeServer5_Click(object sender, EventArgs e)
@@ -12867,7 +12877,33 @@ namespace PowerSDR
             chkTimeServer3.Checked = false;
             chkTimeServer4.Checked = false;
             chkTimeServer1.Checked = false;
+            chkTimeServer6.Checked = false;
+            chkTimeServer7.Checked = false;
         }
+
+        private void menuItem4_Click_1(object sender, EventArgs e) //.260
+        {
+            chkTimeServer6.Checked = true;
+            chkTimeServer2.Checked = false;
+            chkTimeServer3.Checked = false;
+            chkTimeServer4.Checked = false;
+            chkTimeServer1.Checked = false;
+            chkTimeServer5.Checked = false;
+            chkTimeServer7.Checked = false;
+        }
+
+        private void chkTimeServer7_Click(object sender, EventArgs e) //.260
+        {
+            chkTimeServer7.Checked = true;
+            chkTimeServer2.Checked = false;
+            chkTimeServer3.Checked = false;
+            chkTimeServer4.Checked = false;
+            chkTimeServer1.Checked = false;
+            chkTimeServer5.Checked = false;
+            chkTimeServer6.Checked = false;
+        }
+
+
 
         private void chkMoon_CheckedChanged(object sender, EventArgs e)
         {
@@ -16231,10 +16267,7 @@ namespace PowerSDR
 
         } // chkCloudOn
 
-
-
-
-
+        
     } //SPOTCONTROL
 
 

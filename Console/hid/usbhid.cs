@@ -38,7 +38,9 @@
 // 0x181a-0x181f    All FF
 //
 // 0x3000-0x310f    Calibration data (RX and TX)
+using NAudio.Gui;
 using System;
+using System.Security.Policy;
 
 namespace PowerSDR
 {
@@ -333,8 +335,31 @@ namespace PowerSDR
         }
 
 
+        public static bool GetDash(out uint data) //.259
+        {
+          //  Flex1500.ReadOp(Opcode.USB_OP_READ_GPIO, 0, 0, out gpio);
 
+            Flex1500.ReadOp(Opcode.USB_OP_READ_PTT, 0, 0, out data);
+            bool dot = ((data & 0x01) == 1);
+            bool dash = ((data & 0x02) == 2);
 
+            if (dash) return true;
+            else return false;
+       
+        }
+
+        public static bool GetDot(out uint data) //.259
+        {
+            //  Flex1500.ReadOp(Opcode.USB_OP_READ_GPIO, 0, 0, out gpio);
+
+            Flex1500.ReadOp(Opcode.USB_OP_READ_PTT, 0, 0, out data);
+            bool dot = ((data & 0x01) == 1);
+            bool dash = ((data & 0x02) == 2);
+
+            if (dot) return true;
+            else return false;
+
+        }
 
 
 
@@ -624,14 +649,14 @@ namespace PowerSDR
         }
 
         // ===================================================================
-        //ke9ns this is the phones jack on the flex 1500
+        //ke9ns: this is the phones jack on the flex 1500
         public static int SetSpkOn(bool b)
         {
             return Flex1500.WriteOp(Opcode.USB_OP_SET_SPK_ON, Convert.ToUInt32(b), 0);
         }
 
         // ===================================================================
-        //ke9ns this is the phones jack on the flex 1500
+        //ke9ns: this is the phones jack on the flex 1500
         public static int SetSpkGain(int val)
         {
             return Flex1500.WriteOp(Opcode.USB_OP_SET_SPK_GAIN, (uint)val, 0);
@@ -650,7 +675,7 @@ namespace PowerSDR
 
 
         //================================================================
-        // ke9ns  MON turned on here, 
+        // ke9ns:  MON turned on here, 
         public static int SetMon(bool b)
         {
             return Flex1500.WriteOp(Opcode.USB_OP_SET_MON, Convert.ToUInt32(b), 0);
