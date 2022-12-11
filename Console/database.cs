@@ -6109,7 +6109,7 @@ namespace PowerSDR
             DataRow dr = t.NewRow();
 
             dr["Name"] = "Default";
-            dr["FilterLow"] = 200;
+            dr["FilterLow"] = 70;  // .261
             dr["FilterHigh"] = 3100;
             dr["TXEQNumBands"] = 3;
             dr["TXEQEnabled"] = false;
@@ -6505,7 +6505,7 @@ namespace PowerSDR
 
             dr = t.NewRow();
             dr["Name"] = "FHM-1";
-            dr["FilterLow"] = 150;
+            dr["FilterLow"] = 70; // .261 was 150
             dr["FilterHigh"] = 3050;
             dr["TXEQNumBands"] = 10;
             dr["TXEQEnabled"] = true;
@@ -6705,7 +6705,7 @@ namespace PowerSDR
 
             dr = t.NewRow();
             dr["Name"] = "FHM-1 DX";
-            dr["FilterLow"] = 300;
+            dr["FilterLow"] = 200; // ke9ns .261 was 350
             dr["FilterHigh"] = 2400;
             dr["TXEQNumBands"] = 10;
             dr["TXEQEnabled"] = true;
@@ -7085,7 +7085,7 @@ namespace PowerSDR
 
             DataRow dr = t.NewRow();
             dr["Name"] = "Default";
-            dr["FilterLow"] = 200;
+            dr["FilterLow"] = 70; // .261  200
             dr["FilterHigh"] = 3100;
             dr["TXEQNumBands"] = 3;
             dr["TXEQEnabled"] = false;
@@ -7486,7 +7486,7 @@ namespace PowerSDR
 
             dr = t.NewRow();
             dr["Name"] = "FHM-1";
-            dr["FilterLow"] = 150;
+            dr["FilterLow"] = 70; //150
             dr["FilterHigh"] = 3050;
             dr["TXEQNumBands"] = 10;
             dr["TXEQEnabled"] = true;
@@ -7685,7 +7685,7 @@ namespace PowerSDR
 
             dr = t.NewRow();
             dr["Name"] = "FHM-1 DX";
-            dr["FilterLow"] = 300;
+            dr["FilterLow"] = 200; //300
             dr["FilterHigh"] = 2400;
             dr["TXEQNumBands"] = 10;
             dr["TXEQEnabled"] = true;
@@ -8489,7 +8489,7 @@ namespace PowerSDR
 
             dr = t.NewRow();
             dr["Name"] = "Conventional";
-            dr["FilterLow"] = 100;
+            dr["FilterLow"] = 70; //100
             dr["FilterHigh"] = 3100;
             dr["TXEQNumBands"] = 3;
             dr["TXEQEnabled"] = false;
@@ -8690,7 +8690,7 @@ namespace PowerSDR
 
             dr = t.NewRow();
             dr["Name"] = "D-104";
-            dr["FilterLow"] = 100;
+            dr["FilterLow"] = 70; // 100
             dr["FilterHigh"] = 3500;
             dr["TXEQNumBands"] = 3;
             dr["TXEQEnabled"] = false;
@@ -8890,7 +8890,7 @@ namespace PowerSDR
 
             dr = t.NewRow();
             dr["Name"] = "D-104+CPDR";
-            dr["FilterLow"] = 100;
+            dr["FilterLow"] = 70; // 100
             dr["FilterHigh"] = 3500;
             dr["TXEQNumBands"] = 3;
             dr["TXEQEnabled"] = false;
@@ -9091,7 +9091,7 @@ namespace PowerSDR
 
             dr = t.NewRow();
             dr["Name"] = "D-104+EQ";
-            dr["FilterLow"] = 100;
+            dr["FilterLow"] = 70; //100
             dr["FilterHigh"] = 3500;
             dr["TXEQNumBands"] = 3;
             dr["TXEQEnabled"] = true;
@@ -9494,8 +9494,8 @@ namespace PowerSDR
 
             dr = t.NewRow();
             dr["Name"] = "ESSB";
-            dr["FilterLow"] = 50;
-            dr["FilterHigh"] = 3650;
+            dr["FilterLow"] = 70;
+            dr["FilterHigh"] = 4000;
             dr["TXEQNumBands"] = 10;
             dr["TXEQEnabled"] = false;
             dr["TXEQPreamp"] = 0;
@@ -9694,7 +9694,7 @@ namespace PowerSDR
 
             dr = t.NewRow();
             dr["Name"] = "HC4-5";
-            dr["FilterLow"] = 100;
+            dr["FilterLow"] = 70; //100
             dr["FilterHigh"] = 3100;
             dr["TXEQNumBands"] = 3;
             dr["TXEQEnabled"] = false;
@@ -9894,7 +9894,7 @@ namespace PowerSDR
 
             dr = t.NewRow();
             dr["Name"] = "HC4-5+CPDR";
-            dr["FilterLow"] = 100;
+            dr["FilterLow"] = 70; //100
             dr["FilterHigh"] = 3100;
             dr["TXEQNumBands"] = 3;
             dr["TXEQEnabled"] = false;

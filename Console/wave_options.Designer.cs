@@ -123,7 +123,7 @@ namespace PowerSDR
             this.radRXPreProcessed.TabIndex = 0;
             this.radRXPreProcessed.TabStop = true;
             this.radRXPreProcessed.Text = "Pre-Processed Audio";
-            this.toolTip1.SetToolTip(this.radRXPreProcessed, "The raw audio coming out of the radio (11kHz IF)");
+            this.toolTip1.SetToolTip(this.radRXPreProcessed, resources.GetString("radRXPreProcessed.ToolTip"));
             this.radRXPreProcessed.CheckedChanged += new System.EventHandler(this.radRXPreProcessed_CheckedChanged);
             // 
             // txtWaveOptionsForm

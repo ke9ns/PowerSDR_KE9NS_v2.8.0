@@ -199,6 +199,22 @@ Playback level is based on the "TX Gain" value (up above)
 
 </value>
   </data>
+  <data name="checkBoxRecord.ToolTip" xml:space="preserve">
+    <value>If you set the Options-&gt;Receiver-&gt;Pre-Processed Audio (which is the raw IQ audio coming out of the radio at the current Sample Rate.)
+Set the Setup-&gt;General-&gt;Hardware Config-&gt;DDS-&gt;IF  = 0hz to properly record and playback this recording.
+Use only the SubReceiver to move around the Panadapter screen (do not change the VFOA frequency on playback)
+
+Otherwise Options-&gt;Receiver-&gt;Post-Processed Audio is just standard audio from within the receiver bandpass. (i.e. Typcially 3khz wide)
+</value>
+  </data>
+  <data name="checkBoxPlay.ToolTip" xml:space="preserve">
+    <value>If you set the Options-&gt;Receiver-&gt;Pre-Processed Audio (which is the raw IQ audio coming out of the radio at the current Sample Rate.)
+Set the Setup-&gt;General-&gt;Hardware Config-&gt;DDS-&gt;IF  = 0hz to properly record and playback this recording.
+Use only the SubReceiver to move around the Panadapter screen (do not change the VFOA frequency on playback)
+
+Otherwise Options-&gt;Receiver-&gt;Post-Processed Audio is just standard audio from within the receiver bandpass. (i.e. Typcially 3khz wide)
+</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

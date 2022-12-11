@@ -120,6 +120,11 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="radRXPreProcessed.ToolTip" xml:space="preserve">
+    <value>The raw IQ audio coming out of the radio at the current Sample Rate.
+Set the Setup-&gt;General-&gt;Hardware Config-&gt;DDS-&gt;IF  = 0hz to properly record and playback this recording.
+Use only the SubReceiver to move around the Panadapter screen (do not change the VFOA frequency on playback)</value>
+  </data>
   <data name="txtWaveOptionsForm.Text" xml:space="preserve">
     <value>Wave File Recordings:
 

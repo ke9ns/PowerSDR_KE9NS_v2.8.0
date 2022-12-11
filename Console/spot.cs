@@ -1616,7 +1616,7 @@ namespace PowerSDR
 
         private bool detectEncodingFromByteOrderMarks = true;
 
-        private bool pause = false; // true = pause dx spot window update.
+        public bool pause = false; // true = pause dx spot window update.
 
 
         //====================================================================================================
@@ -1876,8 +1876,15 @@ namespace PowerSDR
                             // grab DX_Freq ========================================================================================
                             try
                             {
+                                int start = message1.IndexOf(':'); // .261 location of : (which is the start of the freq)
+                               
+                                
+                             //    DX_Freq[DX_Index1] = (int)((double)Convert.ToDouble(message1.Substring(15, 9)) * (double)1000.0); //  get dx freq 7016.0  in khz 
 
-                                DX_Freq[DX_Index1] = (int)((double)Convert.ToDouble(message1.Substring(15, 9)) * (double)1000.0); //  get dx freq 7016.0  in khz 
+                                DX_Freq[DX_Index1] = (int)((double)Convert.ToDouble(message1.Substring(start + 1, (23 - start))) * (double)1000.0); // .262   get dx freq 7016.0  in khz 
+
+
+
 
                                 if ((DX_Freq[DX_Index1] >= 1800000) && (DX_Freq[DX_Index1] <= 2000000))
                                 {
@@ -4041,7 +4048,7 @@ namespace PowerSDR
                     DX_country[0] = " -- "; // dont have a match so need to add to list
 
                     DX_Beam[0] = 0;
-                    Debug.WriteLine("MAPPER NO MACH FOR Station" + DX_Station[0]);
+                    Debug.WriteLine("MAPPER NO MATCH FOR Station" + DX_Station[0]);
 
                 }
 
@@ -4313,6 +4320,8 @@ namespace PowerSDR
         // this is called as telnet data from the cluster is received
 
         int UTCAGE_MAX = 25; // overridden by spotage.udspotage
+        public bool SpotBackground = false; //.261
+
 
         private void processDXAGE()
         {
@@ -4628,14 +4637,26 @@ namespace PowerSDR
 
             chkDXMode.Checked = true;  // the callsign box
 
-
+         
             if (e.Button == MouseButtons.Left)
             {
-                int ii = textBox1.GetCharIndexFromPosition(e.Location);
+                int ii = 0;
+                byte iii = 0;
 
-                //  int ii = textBox1.SelectionStart; // character position in the text you clicked on 
+                if (e.Location.X == 0 && e.Location.Y == 0)
+                {
+                    // come here is if click on pandisplay either red dot or CTRL
+                    iii = console.CtrlSpotIndex;  
+                  //  Debug.WriteLine("+ CTRLSPOTINDEX " + ii);
 
-                byte iii = (byte)(ii / LineLength); // get line  /82  or /86 if AGE turned on or 91 if mode is also on /99 if country added but now /105 with DX_Beam heading
+                }
+                else
+                { // come here if click on SPOT textbox1 screen
+                    ii = textBox1.GetCharIndexFromPosition(e.Location);
+                    iii = (byte)(ii / LineLength); // get line  /82  or /86 if AGE turned on or 91 if mode is also on /99 if country added but now /105 with DX_Beam heading
+                   
+                }
+
 
                 //  Debug.WriteLine("testL " + DX_Index + " , "+iii);
 
@@ -4658,7 +4679,7 @@ namespace PowerSDR
 
                 DX_TEXT = textBox1.Text.Substring((DX_SELECTED * LineLength) + 16, 40); // just check freq and callsign of dx station
 
-                //   Debug.WriteLine("1DX_SELECTED " + DX_SELECTED + " , "+ DX_TEXT);
+                  Debug.WriteLine("+DX_SELECTED " + DX_SELECTED + " , "+ DX_TEXT + " , " + e.Location);
 
                 int gg = ii % LineLength;  // get remainder for checking beam heading
 
@@ -12446,7 +12467,16 @@ namespace PowerSDR
                         return;
                     }
 
-                    remarks = console.RX1DSPMode.ToString() + "p";  // send DSP MODE with - to indicate PowerSDR was sending it.
+                   // remarks = console.RX1DSPMode.ToString() + "p";  // send DSP MODE with - to indicate PowerSDR was sending it.
+                    if (console.RX1DSPMode.ToString() == "CWU" || console.RX1DSPMode.ToString() == "CWL") //.261
+                    {
+                        remarks = "CW";  
+                    }
+                    else
+                    {
+                        remarks = console.RX1DSPMode.ToString();
+                    }
+
 
                     if (console.chkVFOSplit.Checked == true)
                     {
@@ -12484,9 +12514,15 @@ namespace PowerSDR
                         return;
                     }
 
-                    remarks = console.RX2DSPMode.ToString() + "p";  // send DSP MODE with - to indicate PowerSDR was sending it.
-
-
+                  //  remarks = console.RX2DSPMode.ToString() + "p";  // send DSP MODE with - to indicate PowerSDR was sending it.
+                    if (console.RX2DSPMode.ToString() == "CWU" || console.RX2DSPMode.ToString() == "CWL") //.261
+                    {
+                        remarks = "CW";  
+                    }
+                    else
+                    {
+                        remarks = console.RX1DSPMode.ToString();
+                    }
 
                 } // VFOB
                 else
@@ -12514,9 +12550,16 @@ namespace PowerSDR
                     Debug.WriteLine("cannot parse VFOA");
                     return;
                 }
-
-                remarks = console.RX1DSPMode.ToString() + "p";
-
+               
+                if (console.RX1DSPMode.ToString() == "CWU" || console.RX1DSPMode.ToString() == "CWL") //.261
+                {
+                    remarks = "CW"; 
+                }
+                else
+                {
+                    remarks = console.RX1DSPMode.ToString();
+                }
+               
                 if (console.chkVFOSplit.Checked == true)
                 {
 
@@ -12668,7 +12711,16 @@ namespace PowerSDR
                         return;
                     }
 
-                    remarks = console.RX1DSPMode.ToString() + "p";  // send DSP MODE with - to indicate PowerSDR was sending it.
+                    //  remarks = console.RX1DSPMode.ToString() + "p";  // send DSP MODE with - to indicate PowerSDR was sending it.
+                    if (console.RX1DSPMode.ToString() == "CWU" || console.RX1DSPMode.ToString() == "CWL") //.261
+                    {
+                        remarks = "CW"; 
+                    }
+                    else
+                    {
+                        remarks = console.RX1DSPMode.ToString();
+                    }
+
 
                     if (console.chkVFOSplit.Checked == true)
                     {
@@ -12706,9 +12758,15 @@ namespace PowerSDR
                         return;
                     }
 
-                    remarks = console.RX2DSPMode.ToString() + "p";  // send DSP MODE with - to indicate PowerSDR was sending it.
-
-
+                    //  remarks = console.RX2DSPMode.ToString() + "p";  // send DSP MODE with - to indicate PowerSDR was sending it.
+                    if (console.RX2DSPMode.ToString() == "CWU" || console.RX2DSPMode.ToString() == "CWL") //.261
+                    {
+                        remarks = "CW";  
+                    }
+                    else
+                    {
+                        remarks = console.RX1DSPMode.ToString();
+                    }
 
                 } // VFOB
                 else
@@ -12737,7 +12795,15 @@ namespace PowerSDR
                     return;
                 }
 
-                remarks = console.RX1DSPMode.ToString() + "p";
+                // remarks = console.RX1DSPMode.ToString() + "p";
+                if (console.RX1DSPMode.ToString() == "CWU" || console.RX1DSPMode.ToString() == "CWL") //.261
+                {
+                    remarks = "CW";  
+                }
+                else
+                {
+                    remarks = console.RX1DSPMode.ToString();
+                }
 
                 if (console.chkVFOSplit.Checked == true)
                 {
@@ -12776,8 +12842,15 @@ namespace PowerSDR
                     return;
                 }
 
-                remarks = console.RX2DSPMode.ToString() + "p";
-
+               // remarks = console.RX2DSPMode.ToString() + "p";
+                if (console.RX2DSPMode.ToString() == "CWU" || console.RX2DSPMode.ToString() == "CWL") //.261
+                {
+                    remarks = "CW"; 
+                }
+                else
+                {
+                    remarks = console.RX1DSPMode.ToString();
+                }
 
 
             } // just use current VFOB freq (not a prior DX SPOT)
@@ -13819,6 +13892,9 @@ namespace PowerSDR
                 try
                 {
 
+                    // KE9NS: NOTE width of the picdisplay at this point is not the real screen size but the starting window size around 1000 width
+                    //             it will become scaled after its drawn to the bitmap (bitmap will be scalled to fit the screen opening)
+
                     System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor; // .242 change cursor when to wait cursor when loading new image
 
                     Image imag = Image.FromFile(console.AppDataPath + "FRAP.gif"); // .235
@@ -13832,8 +13908,19 @@ namespace PowerSDR
                     Bitmap Bar = new Bitmap(Map_F_Bar);              // .239 color bar legend for F-Layer
                     Rectangle r2 = new Rectangle(20, 50, 8, 300);    // .239 size of color legend bar
 
-                    int x = 17;
+                    Rectangle r3 = new Rectangle(940, 50, 8, 300);    // .262
+
+
+                    int x = 17; // left side of screen
                     int x1 = 27;
+
+
+                    int x2 = 937; // right side of screen (W = 1591 in FHD full screen)
+                    int x3 = 947; 
+
+
+                  //  Debug.WriteLine("WIDTH = " + Display.Target.Width);
+
 
                     using (Graphics g = Graphics.FromImage(result))
                     {
@@ -13841,6 +13928,7 @@ namespace PowerSDR
                         g.CompositingQuality = CompositingQuality.HighQuality;
                         g.InterpolationMode = InterpolationMode.HighQualityBicubic;
                         g.SmoothingMode = SmoothingMode.HighQuality;
+                     
                         g.DrawImage(img8, r1);  // draw F layer
 
                         g.DrawString("SWS_AU", font2, new SolidBrush(Color.White), x, 10);
@@ -13863,6 +13951,27 @@ namespace PowerSDR
                         g.DrawString(" 2mhz", font2, new SolidBrush(Color.Yellow), x1, 310);
                         g.DrawString(" 1mhz", font2, new SolidBrush(Color.Red), x1, 330);
 
+
+                        // .262 below 
+                        g.DrawString("Approx", font2, new SolidBrush(Color.White), x2, 10);
+                        g.DrawString("low ang", font2, new SolidBrush(Color.White), x2, 20);
+                        g.DrawString("Skip:", font2, new SolidBrush(Color.White), x2, 30);
+
+                        g.DrawImage(Bar, r3); // 
+
+                        g.DrawString("70cm", font2, new SolidBrush(Color.Gray), x3, 55);
+                        g.DrawString("2m", font2, new SolidBrush(Color.Violet), x3, 80);
+                        g.DrawString("4m", font2, new SolidBrush(Color.Purple), x3, 105);
+                        g.DrawString("6m", font2, new SolidBrush(Color.Maroon), x3, 125);
+                        g.DrawString("6m", font2, new SolidBrush(Color.DarkBlue), x3, 150);
+                        g.DrawString("10m", font2, new SolidBrush(Color.Blue), x3, 170);
+                        g.DrawString("10m", font2, new SolidBrush(Color.DarkSlateBlue), x3, 195);
+                        g.DrawString("11m", font2, new SolidBrush(Color.LightBlue), x3, 215);
+                        g.DrawString("12m", font2, new SolidBrush(Color.LightGreen), x3, 240);
+                        g.DrawString("20m", font2, new SolidBrush(Color.Green), x3, 265);
+                        g.DrawString("40m", font2, new SolidBrush(Color.Olive), x3, 285);
+                        g.DrawString("80m", font2, new SolidBrush(Color.Yellow), x3, 310);
+                        g.DrawString("160m", font2, new SolidBrush(Color.Red), x3, 330);
 
                     } // using
 
@@ -16267,7 +16376,10 @@ namespace PowerSDR
 
         } // chkCloudOn
 
-        
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     } //SPOTCONTROL
 
 

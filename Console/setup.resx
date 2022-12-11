@@ -117,86 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="radVAC1SelectB.ToolTip" xml:space="preserve">
-    <value>Select the Virtual Cable B setup
-
-Example setup B:
-Driver:   DirectSound
-Input:    Microphone (plugged into your PC)
-Output: Speakers (Plugged into your PC)
-
-Use for PC Speaker and PC Mic connection with PowerSDR
-</value>
-  </data>
-  <data name="groupBoxTS6.ToolTip" xml:space="preserve">
-    <value>VAC1: AF Volume Slider &amp; "Mute 1&gt;" box do NOT function in PowerSDR. (VAC2: AF slider &amp; Mute functions DO)
-NOTE: PowerSDR will not get INPUT audio from VAC1 unless you select VFOA as TX
-NOTE: VAC1 will ignore VFOB and Flex-5000 RX2
-
-This allows PowerSDR to send or receive audio to your PC 
-(As though PowerSDR was seperate from your PC and you were using RCA audio cables)
-
-MME:              Multimedia Extensions. Oldest standard with the highest latency (120mSec), but the most compatible drivers.
-DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 90mSec)
-WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec) 
-
-ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR</value>
-  </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>157, 17</value>
   </metadata>
-  <data name="comboAudioSampleRate2.ToolTip" xml:space="preserve">
-    <value>Use only a multiple of your Primary Sample Rate, 
-So the best would be to stick to 48khz
-Make sure your VAC cable program also uses 48khz and matches VAC1
-
-This is because the Audio must be scaled to match the Primary SR</value>
-  </data>
-  <data name="grpAudioDetails2.ToolTip" xml:space="preserve">
-    <value>VAC1: AF Volume Slider &amp; "Mute 1&gt;" box do NOT function in PowerSDR. (VAC2: AF slider &amp; Mute functions DO)
-NOTE: PowerSDR will not get INPUT audio from VAC1 unless you select VFOA as TX
-NOTE: VAC1 will ignore VFOB and Flex-5000 RX2
-
-This allows PowerSDR to send or receive audio to your PC 
-(As though PowerSDR was seperate from your PC and you were using RCA audio cables)
-
-MME:              Multimedia Extensions. Oldest standard with the highest latency (120mSec), but the most compatible drivers.
-DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 90mSec)
-WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec) 
-
-ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR</value>
-  </data>
-  <data name="tpVAC.ToolTip" xml:space="preserve">
-    <value>VAC1: AF Volume Slider &amp; "Mute 1&gt;" box do NOT function in PowerSDR. (VAC2: AF slider &amp; Mute functions DO)
-NOTE: PowerSDR will not get INPUT audio from VAC1 unless you select VFOA as TX
-NOTE: VAC1 will ignore VFOB and Flex-5000 RX2
-
-This allows PowerSDR to send or receive audio to your PC 
-(As though PowerSDR was seperate from your PC and you were using RCA audio cables)
-
-MME:              Multimedia Extensions. Oldest standard with the highest latency (120mSec), but the most compatible drivers.
-DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 90mSec)
-WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec) 
-
-ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR
-</value>
-  </data>
-  <data name="tpVAC2.ToolTip" xml:space="preserve">
-    <value>VAC2: AF Volume Slider &amp; "Mute 1&gt;" box function in PowerSDR and will adjust this volume of RX1 (VAC1 will not). 
-NOTE: PowerSDR will not get VAC MIC INPUT audio from VAC2 unless you select VFOB as TX
-NOTE: If you have a Flex-5000 (with 2nd rec) VAC2 provides audio for RX2 when you enable RX2 &amp; "&lt;2 MUTE" box will function
-
-This allows PowerSDR to send or receive audio to your PC 
-(As though PowerSDR was seperate from your PC and you were using RCA audio cables)
-
-MME:              Multimedia Extensions. Oldest standard with the highest latency (120mSec), but the most compatible drivers.
-DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 90mSec)
-WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec).
-
-ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR
-
-</value>
-  </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>157, 17</value>
   </metadata>
@@ -245,6 +168,18 @@ It will never be stationary due to band conditions, but close
 
 INC values cause CW rotation
 DEC values cause CCW rotation
+</value>
+  </data>
+  <data name="udDDSIFFreq.ToolTip" xml:space="preserve">
+    <value>Intermediate Frequency
+Default Values:
+Flex-5000: 9000hz
+Flex-3000: 9000hz
+Flex-1500: 3800hz
+
+This prevents a noise spike from occuring at 0hz every time you unkey the radio.
+
+Set to 0hz if you wish to make and playback a IQ Receiver Pre-Processed recording from the Wave screen
 </value>
   </data>
   <data name="chkBoxPM1.ToolTip" xml:space="preserve">
@@ -408,6 +343,83 @@ Now if you type in your no-ip.com URL:port#  from a web browser you will see you
 
 You can place code into a web page to allow visitors to view your Panadapter.
  &lt;iframe id="frame" src="https://your_no-ip_URL:8081"&gt;&lt;/iframe&gt;
+</value>
+  </data>
+  <data name="tpVAC.ToolTip" xml:space="preserve">
+    <value>VAC1: AF Volume Slider &amp; "Mute 1&gt;" box do NOT function in PowerSDR. (VAC2: AF slider &amp; Mute functions DO)
+NOTE: PowerSDR will not get INPUT audio from VAC1 unless you select VFOA as TX
+NOTE: VAC1 will ignore VFOB and Flex-5000 RX2
+
+This allows PowerSDR to send or receive audio to your PC 
+(As though PowerSDR was seperate from your PC and you were using RCA audio cables)
+
+MME:              Multimedia Extensions. Oldest standard with the highest latency (120mSec), but the most compatible drivers.
+DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 90mSec)
+WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec) 
+
+ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR
+</value>
+  </data>
+  <data name="radVAC1SelectB.ToolTip" xml:space="preserve">
+    <value>Select the Virtual Cable B setup
+
+Example setup B:
+Driver:   DirectSound
+Input:    Microphone (plugged into your PC)
+Output: Speakers (Plugged into your PC)
+
+Use for PC Speaker and PC Mic connection with PowerSDR
+</value>
+  </data>
+  <data name="groupBoxTS6.ToolTip" xml:space="preserve">
+    <value>VAC1: AF Volume Slider &amp; "Mute 1&gt;" box do NOT function in PowerSDR. (VAC2: AF slider &amp; Mute functions DO)
+NOTE: PowerSDR will not get INPUT audio from VAC1 unless you select VFOA as TX
+NOTE: VAC1 will ignore VFOB and Flex-5000 RX2
+
+This allows PowerSDR to send or receive audio to your PC 
+(As though PowerSDR was seperate from your PC and you were using RCA audio cables)
+
+MME:              Multimedia Extensions. Oldest standard with the highest latency (120mSec), but the most compatible drivers.
+DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 90mSec)
+WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec) 
+
+ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR</value>
+  </data>
+  <data name="comboAudioSampleRate2.ToolTip" xml:space="preserve">
+    <value>Use only a multiple of your Primary Sample Rate, 
+So the best would be to stick to 48khz
+Make sure your VAC cable program also uses 48khz and matches VAC1
+
+This is because the Audio must be scaled to match the Primary SR</value>
+  </data>
+  <data name="grpAudioDetails2.ToolTip" xml:space="preserve">
+    <value>VAC1: AF Volume Slider &amp; "Mute 1&gt;" box do NOT function in PowerSDR. (VAC2: AF slider &amp; Mute functions DO)
+NOTE: PowerSDR will not get INPUT audio from VAC1 unless you select VFOA as TX
+NOTE: VAC1 will ignore VFOB and Flex-5000 RX2
+
+This allows PowerSDR to send or receive audio to your PC 
+(As though PowerSDR was seperate from your PC and you were using RCA audio cables)
+
+MME:              Multimedia Extensions. Oldest standard with the highest latency (120mSec), but the most compatible drivers.
+DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 90mSec)
+WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec) 
+
+ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR</value>
+  </data>
+  <data name="tpVAC2.ToolTip" xml:space="preserve">
+    <value>VAC2: AF Volume Slider &amp; "Mute 1&gt;" box function in PowerSDR and will adjust this volume of RX1 (VAC1 will not). 
+NOTE: PowerSDR will not get VAC MIC INPUT audio from VAC2 unless you select VFOB as TX
+NOTE: If you have a Flex-5000 (with 2nd rec) VAC2 provides audio for RX2 when you enable RX2 &amp; "&lt;2 MUTE" box will function
+
+This allows PowerSDR to send or receive audio to your PC 
+(As though PowerSDR was seperate from your PC and you were using RCA audio cables)
+
+MME:              Multimedia Extensions. Oldest standard with the highest latency (120mSec), but the most compatible drivers.
+DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 90mSec)
+WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec).
+
+ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR
+
 </value>
   </data>
   <data name="grpAudioDetails3.ToolTip" xml:space="preserve">

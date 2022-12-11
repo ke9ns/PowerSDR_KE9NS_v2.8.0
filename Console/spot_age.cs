@@ -42,7 +42,7 @@ namespace PowerSDR
         public NumericUpDownTS udSpotAge;
         private Label label5;
         private System.ComponentModel.IContainer components;
-
+        private CheckBoxTS chkPanSpotBlank;
         public static SpotControl SpotForm;                       // ke9ns add DX spotter function
 
         #endregion
@@ -58,7 +58,7 @@ namespace PowerSDR
 
             Common.RestoreForm(this, "SpotAge", false);
 
-
+            this.TopMost = true; //.262
         }
 
         /// <summary>
@@ -90,6 +90,7 @@ namespace PowerSDR
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.udSpotAge = new System.Windows.Forms.NumericUpDownTS();
             this.label5 = new System.Windows.Forms.Label();
+            this.chkPanSpotBlank = new System.Windows.Forms.CheckBoxTS();
             ((System.ComponentModel.ISupportInitialize)(this.udSpotAge)).BeginInit();
             this.SuspendLayout();
             // 
@@ -133,10 +134,25 @@ namespace PowerSDR
             this.label5.TabIndex = 85;
             this.label5.Text = "Maximum Spot Age (Minutes)";
             // 
+            // chkPanSpotBlank
+            // 
+            this.chkPanSpotBlank.AutoSize = true;
+            this.chkPanSpotBlank.Image = null;
+            this.chkPanSpotBlank.Location = new System.Drawing.Point(15, 46);
+            this.chkPanSpotBlank.Name = "chkPanSpotBlank";
+            this.chkPanSpotBlank.Size = new System.Drawing.Size(256, 17);
+            this.chkPanSpotBlank.TabIndex = 87;
+            this.chkPanSpotBlank.Text = "Panadapter spot callsigns with Dark Background";
+            this.toolTip1.SetToolTip(this.chkPanSpotBlank, "Check to put DX Callsign spot on the Panadater in front of a Dark background to m" +
+        "ake them easier to see on a crowded band.");
+            this.chkPanSpotBlank.UseVisualStyleBackColor = true;
+            this.chkPanSpotBlank.CheckedChanged += new System.EventHandler(this.chkPanSpotBlank_CheckedChanged_1);
+            // 
             // SpotAge
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(367, 246);
+            this.Controls.Add(this.chkPanSpotBlank);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.udSpotAge);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -230,6 +246,13 @@ namespace PowerSDR
         private void TextBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+       
+
+        private void chkPanSpotBlank_CheckedChanged_1(object sender, EventArgs e) //.261
+        {
+            if (chkPanSpotBlank.Checked) SpotForm.SpotBackground = true;
+            else SpotForm.SpotBackground = false;
         }
     } // SpotAge
 

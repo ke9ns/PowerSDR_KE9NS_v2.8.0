@@ -460,6 +460,7 @@ namespace PowerSDR
             this.checkBoxRecord.TabIndex = 0;
             this.checkBoxRecord.Text = "Record";
             this.checkBoxRecord.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.checkBoxRecord, resources.GetString("checkBoxRecord.ToolTip"));
             this.checkBoxRecord.CheckedChanged += new System.EventHandler(this.checkBoxRecord_CheckedChanged);
             // 
             // grpPlayback
@@ -552,6 +553,7 @@ namespace PowerSDR
             this.checkBoxPlay.TabIndex = 3;
             this.checkBoxPlay.Text = "Play";
             this.checkBoxPlay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.checkBoxPlay, resources.GetString("checkBoxPlay.ToolTip"));
             this.checkBoxPlay.CheckedChanged += new System.EventHandler(this.checkBoxPlay_CheckedChanged);
             // 
             // chkAlwaysOnTop

@@ -33,6 +33,7 @@
 // 160m LPF = 4uH/220pf (1200pf) 3 pole filter design
 // ke9ns 630m LPF (external) 16uH (5600pf) 3 pole
 
+// btnFilterShiftReset.PerformClick(); to simulate a real mouse click
 
 //  0 through 41 and 13 values per key
 // ORIGINAL KEY: FIRST=-1,
@@ -9195,40 +9196,40 @@ namespace PowerSDR
                             switch (f)
                             {
                                 case Filter.F1:
-                                    preset[m].SetFilter(f, -5150, -150, "5.0k");
+                                    preset[m].SetFilter(f, -5000, 0, "5.0k"); // -5150  .262 change from -150 to 0 for better audio quality
                                     break;
                                 case Filter.F2:
-                                    preset[m].SetFilter(f, -4550, -150, "4.4k");
+                                    preset[m].SetFilter(f, -4400, 0, "4.4k");
                                     break;
                                 case Filter.F3:
-                                    preset[m].SetFilter(f, -3950, -150, "3.8k");
+                                    preset[m].SetFilter(f, -3800, 0, "3.8k");
                                     break;
                                 case Filter.F4:
-                                    preset[m].SetFilter(f, -3450, -150, "3.3k");
+                                    preset[m].SetFilter(f, -3300, 0, "3.3k");
                                     break;
                                 case Filter.F5:
-                                    preset[m].SetFilter(f, -3050, -150, "2.9k");
+                                    preset[m].SetFilter(f, -2900, 0, "2.9k");
                                     break;
                                 case Filter.F6:
-                                    preset[m].SetFilter(f, -2850, -150, "2.7k");
+                                    preset[m].SetFilter(f, -2700, 0, "2.7k");
                                     break;
                                 case Filter.F7:
-                                    preset[m].SetFilter(f, -2550, -150, "2.4k");
+                                    preset[m].SetFilter(f, -2400, 0, "2.4k");
                                     break;
                                 case Filter.F8:
-                                    preset[m].SetFilter(f, -2250, -150, "2.1k");
+                                    preset[m].SetFilter(f, -2100, 0, "2.1k");
                                     break;
                                 case Filter.F9:
-                                    preset[m].SetFilter(f, -1950, -150, "1.8k");
+                                    preset[m].SetFilter(f, -1800, 0, "1.8k");
                                     break;
                                 case Filter.F10:
-                                    preset[m].SetFilter(f, -1150, -150, "1.0k");
+                                    preset[m].SetFilter(f, -1000, 0, "1.0k");
                                     break;
                                 case Filter.VAR1:
-                                    preset[m].SetFilter(f, -2850, -150, "Var 1");
+                                    preset[m].SetFilter(f, -2850, 0, "Var 1");
                                     break;
                                 case Filter.VAR2:
-                                    preset[m].SetFilter(f, -2850, -150, "Var 2");
+                                    preset[m].SetFilter(f, -2850, 0, "Var 2");
                                     break;
                             }
                             preset[m].LastFilter = Filter.F6;
@@ -9237,40 +9238,40 @@ namespace PowerSDR
                             switch (f)
                             {
                                 case Filter.F1:
-                                    preset[m].SetFilter(f, 150, 5150, "5.0k");
+                                    preset[m].SetFilter(f,0, 5000, "5.0k"); // .262 was 150, now 0 for better audio quality
                                     break;
                                 case Filter.F2:
-                                    preset[m].SetFilter(f, 150, 4550, "4.4k");
+                                    preset[m].SetFilter(f,0, 4400, "4.4k");
                                     break;
                                 case Filter.F3:
-                                    preset[m].SetFilter(f, 150, 3950, "3.8k");
+                                    preset[m].SetFilter(f,0, 3800, "3.8k");
                                     break;
                                 case Filter.F4:
-                                    preset[m].SetFilter(f, 150, 3450, "3.3k");
+                                    preset[m].SetFilter(f,0, 3300, "3.3k");
                                     break;
                                 case Filter.F5:
-                                    preset[m].SetFilter(f, 150, 3050, "2.9k");
+                                    preset[m].SetFilter(f,0, 2900, "2.9k");
                                     break;
                                 case Filter.F6:
-                                    preset[m].SetFilter(f, 150, 2850, "2.7k");
+                                    preset[m].SetFilter(f,0, 2700, "2.7k");
                                     break;
                                 case Filter.F7:
-                                    preset[m].SetFilter(f, 150, 2550, "2.4k");
+                                    preset[m].SetFilter(f,0, 2400, "2.4k");
                                     break;
                                 case Filter.F8:
-                                    preset[m].SetFilter(f, 150, 2250, "2.1k");
+                                    preset[m].SetFilter(f,0, 2100, "2.1k");
                                     break;
                                 case Filter.F9:
-                                    preset[m].SetFilter(f, 150, 1950, "1.8k");
+                                    preset[m].SetFilter(f,0, 1800, "1.8k");
                                     break;
                                 case Filter.F10:
-                                    preset[m].SetFilter(f, 150, 1150, "1.0k");
+                                    preset[m].SetFilter(f,0, 1000, "1.0k");
                                     break;
                                 case Filter.VAR1:
-                                    preset[m].SetFilter(f, 150, 2850, "Var 1");
+                                    preset[m].SetFilter(f,0, 2850, "Var 1");
                                     break;
                                 case Filter.VAR2:
-                                    preset[m].SetFilter(f, 150, 2850, "Var 2");
+                                    preset[m].SetFilter(f,0, 2850, "Var 2");
                                     break;
                             }
                             preset[m].LastFilter = Filter.F6;
@@ -9279,40 +9280,40 @@ namespace PowerSDR
                             switch (f)
                             {
                                 case Filter.F1:
-                                    preset[m].SetFilter(f, -digl_click_tune_offset - 1500, -digl_click_tune_offset + 1500, "3.0k");
+                                    preset[m].SetFilter(f, -digl_click_tune_offset - 3000, -digl_click_tune_offset + 0, "3.0k"); //.262  1500
                                     break;
                                 case Filter.F2:
-                                    preset[m].SetFilter(f, -digl_click_tune_offset - 1250, -digl_click_tune_offset + 1250, "2.5k");
+                                    preset[m].SetFilter(f, -digl_click_tune_offset - 2500, -digl_click_tune_offset + 0, "2.5k");
                                     break;
                                 case Filter.F3:
-                                    preset[m].SetFilter(f, -digl_click_tune_offset - 1000, -digl_click_tune_offset + 1000, "2.0k");
+                                    preset[m].SetFilter(f, -digl_click_tune_offset - 2000, -digl_click_tune_offset + 0, "2.0k");
                                     break;
                                 case Filter.F4:
-                                    preset[m].SetFilter(f, -digl_click_tune_offset - 750, -digl_click_tune_offset + 750, "1.5k");
+                                    preset[m].SetFilter(f, -digl_click_tune_offset - 1500, -digl_click_tune_offset + 0, "1.5k");
                                     break;
                                 case Filter.F5:
-                                    preset[m].SetFilter(f, -digl_click_tune_offset - 500, -digl_click_tune_offset + 500, "1.0k");
+                                    preset[m].SetFilter(f, -digl_click_tune_offset - 1000, -digl_click_tune_offset + 0, "1.0k");
                                     break;
                                 case Filter.F6:
-                                    preset[m].SetFilter(f, -digl_click_tune_offset - 400, -digl_click_tune_offset + 400, "800");
+                                    preset[m].SetFilter(f, -digl_click_tune_offset - 800, -digl_click_tune_offset + 0, "800");
                                     break;
                                 case Filter.F7:
-                                    preset[m].SetFilter(f, -digl_click_tune_offset - 300, -digl_click_tune_offset + 300, "600");
+                                    preset[m].SetFilter(f, -digl_click_tune_offset - 600, -digl_click_tune_offset + 0, "600");
                                     break;
                                 case Filter.F8:
-                                    preset[m].SetFilter(f, -digl_click_tune_offset - 150, -digl_click_tune_offset + 150, "300");
+                                    preset[m].SetFilter(f, -digl_click_tune_offset - 300, -digl_click_tune_offset + 0, "300");
                                     break;
                                 case Filter.F9:
-                                    preset[m].SetFilter(f, -digl_click_tune_offset - 75, -digl_click_tune_offset + 75, "150");
+                                    preset[m].SetFilter(f, -digl_click_tune_offset - 150, -digl_click_tune_offset + 0, "150");
                                     break;
                                 case Filter.F10:
-                                    preset[m].SetFilter(f, -digl_click_tune_offset - 38, -digl_click_tune_offset + 38, "75");
+                                    preset[m].SetFilter(f, -digl_click_tune_offset - 75, -digl_click_tune_offset + 0, "75");
                                     break;
                                 case Filter.VAR1:
-                                    preset[m].SetFilter(f, -digl_click_tune_offset - 400, -digl_click_tune_offset + 400, "Var 1");
+                                    preset[m].SetFilter(f, -digl_click_tune_offset - 800, -digl_click_tune_offset + 0, "Var 1");
                                     break;
                                 case Filter.VAR2:
-                                    preset[m].SetFilter(f, -digl_click_tune_offset - 400, -digl_click_tune_offset + 400, "Var 2");
+                                    preset[m].SetFilter(f, -digl_click_tune_offset - 800, -digl_click_tune_offset + 0, "Var 2");
                                     break;
                             }
                             preset[m].LastFilter = Filter.F5;
@@ -9321,40 +9322,40 @@ namespace PowerSDR
                             switch (f)
                             {
                                 case Filter.F1:
-                                    preset[m].SetFilter(f, digu_click_tune_offset - 1500, digu_click_tune_offset + 1500, "3.0k");
+                                    preset[m].SetFilter(f, digu_click_tune_offset - 0, digu_click_tune_offset + 3000, "3.0k"); //.262 low set to 0
                                     break;
                                 case Filter.F2:
-                                    preset[m].SetFilter(f, digu_click_tune_offset - 1250, digu_click_tune_offset + 1250, "2.5k");
+                                    preset[m].SetFilter(f, digu_click_tune_offset - 0, digu_click_tune_offset + 3500, "2.5k");
                                     break;
                                 case Filter.F3:
-                                    preset[m].SetFilter(f, digu_click_tune_offset - 1000, digu_click_tune_offset + 1000, "2.0k");
+                                    preset[m].SetFilter(f, digu_click_tune_offset -0, digu_click_tune_offset + 2000, "2.0k");
                                     break;
                                 case Filter.F4:
-                                    preset[m].SetFilter(f, digu_click_tune_offset - 750, digu_click_tune_offset + 750, "1.5k");
+                                    preset[m].SetFilter(f, digu_click_tune_offset - 0, digu_click_tune_offset + 1500, "1.5k");
                                     break;
                                 case Filter.F5:
-                                    preset[m].SetFilter(f, digu_click_tune_offset - 500, digu_click_tune_offset + 500, "1.0k");
+                                    preset[m].SetFilter(f, digu_click_tune_offset - 0, digu_click_tune_offset + 1000, "1.0k");
                                     break;
                                 case Filter.F6:
-                                    preset[m].SetFilter(f, digu_click_tune_offset - 400, digu_click_tune_offset + 400, "800");
+                                    preset[m].SetFilter(f, digu_click_tune_offset - 0, digu_click_tune_offset + 800, "800");
                                     break;
                                 case Filter.F7:
-                                    preset[m].SetFilter(f, digu_click_tune_offset - 300, digu_click_tune_offset + 300, "600");
+                                    preset[m].SetFilter(f, digu_click_tune_offset - 0, digu_click_tune_offset + 600, "600");
                                     break;
                                 case Filter.F8:
-                                    preset[m].SetFilter(f, digu_click_tune_offset - 150, digu_click_tune_offset + 150, "300");
+                                    preset[m].SetFilter(f, digu_click_tune_offset - 0, digu_click_tune_offset + 300, "300");
                                     break;
                                 case Filter.F9:
-                                    preset[m].SetFilter(f, digu_click_tune_offset - 75, digu_click_tune_offset + 75, "150");
+                                    preset[m].SetFilter(f, digu_click_tune_offset - 0, digu_click_tune_offset + 150, "150");
                                     break;
                                 case Filter.F10:
-                                    preset[m].SetFilter(f, digu_click_tune_offset - 38, digu_click_tune_offset + 38, "75");
+                                    preset[m].SetFilter(f, digu_click_tune_offset - 0, digu_click_tune_offset + 75, "75");
                                     break;
                                 case Filter.VAR1:
-                                    preset[m].SetFilter(f, digu_click_tune_offset - 400, digu_click_tune_offset + 400, "Var 1");
+                                    preset[m].SetFilter(f, digu_click_tune_offset - 0, digu_click_tune_offset + 800, "Var 1");
                                     break;
                                 case Filter.VAR2:
-                                    preset[m].SetFilter(f, digu_click_tune_offset - 400, digu_click_tune_offset + 400, "Var 2");
+                                    preset[m].SetFilter(f, digu_click_tune_offset -0, digu_click_tune_offset + 800, "Var 2");
                                     break;
                             }
                             preset[m].LastFilter = Filter.F5;
@@ -29675,7 +29676,8 @@ namespace PowerSDR
         } //RingVFOColor
 
 
-        private int default_low_cut = 150;
+        private int default_low_cut = 50; // .261    50 was 150
+
         public int DefaultLowCut
         {
             get { return default_low_cut; }
@@ -52544,6 +52546,7 @@ namespace PowerSDR
 
 
 
+        public byte CtrlSpotIndex = 0; //.263
 
         //===============================================================================================================
         //===============================================================================================================
@@ -52836,8 +52839,6 @@ namespace PowerSDR
                 switch (e.KeyCode)
                 {
 
-
-
                     case Keys.Z:
 
                         FWC.FlexWire_WriteValue(0x4C, zcode); // ke9ns: UCB XVTR (single byte transmission instead of 2 byte)
@@ -53111,14 +53112,11 @@ namespace PowerSDR
                         break;
 
 
-
-
-
                 } // switch
 
 
 
-            } // alt key + M
+            } // alt key  (Z, or 0-9DTM, or M)
 
             ALTM = false;
 
@@ -53127,10 +53125,10 @@ namespace PowerSDR
 
 
             // CTRL key press DOWN
-            if (e.Control == true) // ke9ns add (check for CTRL key press to do a QRZ lookup OR Focus on Red DOT on world MAP) 
+            if (e.Control == true) // ke9ns: add check for CTRL key press to see if you have your mouse over a red dot or over a call sign spot or memory or swl
             {
 
-                regBand = 1; // ke9ns add (used for an extra right click + CTRL function: add bandstacking and hyperlinking)
+                regBand = 1; // ke9ns: add (used for an extra right click + CTRL function: add bandstacking and hyperlinking)
 
 
                 int x = DX_X; // get cursor position at time of CTRL key hit
@@ -53168,8 +53166,170 @@ namespace PowerSDR
                 //   ZoomY = YY; // .241
                 //   ZoomP = p;
 
+           
+                if ((SpotControl.SP4_Active == 0) && (SpotControl.SP_Active > 2) && (SpotControl.DX_Index > 0))  // Do below if not in the middle of processing a DX spot, but DX spotting is Active
+                {
+                   
+                    //  int x = DX_X; // cursor position
+                    //  int y = DX_Y;
+
+                  
+                    //======================================================================================================
+                    // this is a CTRL key press
+                    for (byte ii = 0; ii < DXK; ii++) // check all spot on Panadapter (not red dots)
+                    {
+                       
+                        // .262 fix below so CTRL click works during a context with many contacts coming in quickly
+
+                        if ((x >= DXX[ii]) && (x <= (DXX[ii] + (DXW[ii]) * 3 / 4)) && (y >= DXY[ii]) && (y <= (DXY[ii] + DXH[ii])))
+                        {
+                          
+                            try
+                            {
+                                SpotForm.DX_RX2 = false;
+                                 
+                                CtrlSpotIndex = (byte)Display.holder[ii];
+
+                             //   Debug.WriteLine("+DX SELECTED " + ii + " , " + CtrlSpotIndex + " ,Call: " + DXS[ii] + " x " + x + " ,  " + y);
+                              //  Debug.WriteLine("+ " + SpotForm.textBox1.GetLineFromCharIndex(SpotForm.textBox1.Find(DXS[ii]) ) );
+                             //   Debug.WriteLine("+ " + SpotControl.DX_Freq[CtrlSpotIndex] + " , " + SpotControl.DX_Station[CtrlSpotIndex] + " , " + SpotControl.DX_Mode[CtrlSpotIndex]);
+
+
+                                SpotForm.DX_SELECTED = Display.holder[ii]; //ke9ns add
+                                SpotForm.textBox1.SelectionStart = SpotForm.DX_SELECTED * SpotForm.LineLength;      // start of each dx spot line
+                               SpotForm.textBox1.SelectionLength = SpotForm.LineLength;                    // length of each dx spot  line
+                               SpotForm.textBox1_MouseUp(this, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0)); // process as though you clicked on the dx spot in the spotter window
+
+
+                            }
+                            catch
+                            {
+                                Debug.WriteLine("bad station");
+                            }
+                          
+                            return;
+
+                        } // index
+                        else if ((x >= DXX[ii] + (DXW[ii] * 3 / 4)) && (x <= (DXX[ii] + DXW[ii])) && (y >= DXY[ii]) && (y <= (DXY[ii] + DXH[ii]))) // check for rotor Beam heading 
+                        {
+                            SpotForm.DX_RX2 = false;
+                            Debug.WriteLine("BEAM HEADING TRANSMIT FROM Display");
+
+                            spotDDUtil_Rotor = "AP1" + SpotControl.DX_Beam[ii].ToString().PadLeft(3, '0') + ";";
+                            spotDDUtil_Rotor = "AM1;";
+
+                            //  Debug.WriteLine(">>>>>>> DX SELECTED " + ii);
+
+                            CtrlSpotIndex = (byte)Display.holder[ii];
+
+                            SpotForm.DX_SELECTED = Display.holder[ii]; //ke9ns add
+                            SpotForm.textBox1.SelectionStart = SpotForm.DX_SELECTED * SpotForm.LineLength;      // start of each dx spot line
+                            SpotForm.textBox1.SelectionLength = SpotForm.LineLength;                    // length of each dx spot  line
+                            SpotForm.textBox1_MouseUp(this, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0));
+                           
+                            
+                            return;
+                        } // check if you clicked on the last half of the call sign
+
+
+
+                    } // for loop
+
+                    if (chkRX2.Checked == true)  // check RX2 click
+                    {
+                        for (byte ii = 0; ii < DXK2; ii++)
+                        {
+
+                            if ((x >= DXX[ii + 50]) && (x <= (DXX[ii + 50] + DXW[ii + 50] * 3 / 4)) && (y >= DXY[ii + 50]) && (y <= (DXY[ii + 50] + DXH[ii + 50])))
+                            {
+                               
+                                try
+                                {
+                                    SpotForm.DX_RX2 = true;
+                                    CtrlSpotIndex = (byte)Display.holder[ii];
+
+                                    SpotForm.DX_SELECTED = Display.holder[ii]; //ke9ns add
+                                    SpotForm.textBox1.SelectionStart = SpotForm.DX_SELECTED * SpotForm.LineLength;      // start of each dx spot line
+                                    SpotForm.textBox1.SelectionLength = SpotForm.LineLength;                    // length of each dx spot  line
+                                    SpotForm.textBox1_MouseUp(this, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0));
+
+
+                                }
+                                catch
+                                {
+                                    Debug.WriteLine("bad station");
+                                }
+
+                                return;
+
+                            } // index
+                            else if ((x <= (DXX[ii + 50] + DXW[ii + 50] * 3 / 4)) && (y >= DXY[ii + 50]) && (y <= (DXY[ii + 50] + DXH[ii + 50])))
+                            {
+                                SpotForm.DX_RX2 = true;
+                                Debug.WriteLine("BEAM HEADING TRANSMIT FROM Display RX2");
+
+                                spotDDUtil_Rotor = "AP1" + SpotControl.DX_Beam[ii].ToString().PadLeft(3, '0') + ";";
+                                spotDDUtil_Rotor = ";";
+                                spotDDUtil_Rotor = "AM1;";
+
+                                CtrlSpotIndex = (byte)Display.holder[ii];
+
+                                SpotForm.DX_SELECTED = Display.holder[ii]; //ke9ns add
+                                SpotForm.textBox1.SelectionStart = SpotForm.DX_SELECTED * SpotForm.LineLength;      // start of each dx spot line
+                                SpotForm.textBox1.SelectionLength = SpotForm.LineLength;                    // length of each dx spot  line
+                                SpotForm.textBox1_MouseUp(this, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0));
+
+                                return;
+                            } // check if you clicked on the last half of the call sign
+
+
+                        } // for loop
+
+                    } // rx2 checked on 
+
+
+                   
+                    //======================================================================================================    
+                    //======================================================================================================    
+
+                    //.262 fix Red dot routine to be similar to CTRL click above
+
+                    for (int ii = 0; ii < SpotControl.DX_Index; ii++) // check all red dots on Panadapter
+                    {
+
+                        if ((SpotControl.DX_X[ii] > 5) && (SpotControl.DX_Y[ii] > 5) && (XX <= (SpotControl.DX_X[ii] + 5)) && (XX >= (SpotControl.DX_X[ii] - 5))
+                            && (YY <= (SpotControl.DX_Y[ii] + 5)) && (YY >= (SpotControl.DX_Y[ii] - 5)))
+                        {
+                          //  Debug.WriteLine("Good trace ii " + ii);
+
+
+                            CtrlSpotIndex = (byte)ii;
+                          
+                            SpotForm.textBox1.SelectionStart = SpotForm.DX_SELECTED * SpotForm.LineLength;      // start of each dx spot line
+                            SpotForm.textBox1.SelectionLength = SpotForm.LineLength;                    // length of each dx spot  line
+                            SpotForm.textBox1_MouseUp(this, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0)); // process as though you clicked on the dx spot in the spotter window
+
+                            return;
+
+
+                        }
+                        else
+                        {
+                            Debug.WriteLine("trace X " + SpotControl.DX_X[ii] + " Y " + SpotControl.DX_Y[ii]);
+                        }
+
+                    } // for loop
+
+
+                
+
+                } //   if ((SpotControl.SP4_Active == 0) && (SpotControl.SP_Active > 2))
+
+
+
+
                 //----------------------------------------------------------------------------------------
-                // ke9ns add Beam heading for the MOON
+                // ke9ns: add Beam heading for the MOON
                 if ((SpotControl.SP5_Active == 1) && (SpotForm.chkMoon.Checked == true))
                 {
                     Debug.WriteLine("MOON X " + x + " , " + SpotControl.Moon_X);
@@ -53198,268 +53358,6 @@ namespace PowerSDR
                         spotDDUtil_Rotor = "AM1;";
                     }
                 } // ISS Rotor move
-
-                if ((SpotControl.SP4_Active == 0) && (SpotControl.SP_Active > 2) && (SpotControl.DX_Index > 0))  // Do below if not in the middle of processing a DX spot, but DX spotting is Active
-                {
-
-                    //  int x = DX_X; // cursor position
-                    //  int y = DX_Y;
-
-                    //======================================================================================================    
-
-
-
-                    int iii = 500;
-
-                    for (int ii = 0; ii < SpotControl.DX_Index; ii++) // check all red dots on Panadapter
-                    {
-
-                        if ((SpotControl.DX_X[ii] > 5) && (SpotControl.DX_Y[ii] > 5) && (XX <= (SpotControl.DX_X[ii] + 5)) && (XX >= (SpotControl.DX_X[ii] - 5))
-                            && (YY <= (SpotControl.DX_Y[ii] + 5)) && (YY >= (SpotControl.DX_Y[ii] - 5)))
-                        {
-                            Debug.WriteLine("Good trace ii " + ii);
-
-                            SpotForm.DX_SELECTED = ii;    // ke9ns add to keep the dx spotter window always highlighted
-                            SpotForm.DX_TEXT = SpotForm.textBox1.Text.Substring((SpotForm.DX_SELECTED * SpotForm.LineLength) + 16, 40);  // ke9ns add
-                            SpotControl.Map_Last = 2;
-                            SpotForm.processTCPMessage();
-                            iii = ii;
-                            break;
-                        }
-                        else
-                        {
-                            Debug.WriteLine("trace X " + SpotControl.DX_X[ii] + " Y " + SpotControl.DX_Y[ii]);
-                        }
-
-                    }
-
-                    if (iii != 500) // only go to the DX spot freq if you found it directly up above in the for loop
-                    {
-
-                        int freq1 = SpotControl.DX_Freq[iii];
-
-                        Debug.WriteLine("freq ii " + freq1);
-
-                        if ((freq1 < 5000000) || ((freq1 > 6000000) && (freq1 < 8000000))) // check for bands using LSB
-                        {
-                            if (SpotForm.chkDXMode.Checked == true)
-                            {
-                                if (SpotControl.DX_Mode[iii] == 0) RX1DSPMode = DSPMode.LSB;
-                                else if (SpotControl.DX_Mode[iii] == 1) RX1DSPMode = DSPMode.CWU; // ke9ns mod was CWL
-                                else if (SpotControl.DX_Mode[iii] == 2) RX1DSPMode = DSPMode.DIGL;
-                                else if (SpotControl.DX_Mode[iii] == 3) RX1DSPMode = DSPMode.DIGL;
-                                else if (SpotControl.DX_Mode[iii] == 4) RX1DSPMode = DSPMode.DIGL;
-                                else if (SpotControl.DX_Mode[iii] == 5) RX1DSPMode = DSPMode.DIGL;
-                                else if (SpotControl.DX_Mode[iii] == 6) RX1DSPMode = DSPMode.DIGL;
-                                else if (SpotControl.DX_Mode[iii] == 7) RX1DSPMode = DSPMode.DIGL;
-                                else if (SpotControl.DX_Mode[iii] == 8) RX1DSPMode = DSPMode.DIGL;
-                                else if (SpotControl.DX_Mode[iii] == 9) RX1DSPMode = DSPMode.DIGL;
-                                else if (SpotControl.DX_Mode[iii] == 10) RX1DSPMode = DSPMode.DIGL;
-                                else if (SpotControl.DX_Mode[iii] == 11) RX1DSPMode = DSPMode.FM;
-                                else if (SpotControl.DX_Mode[iii] == 12) RX1DSPMode = DSPMode.LSB;
-                                else if (SpotControl.DX_Mode[iii] == 13) RX1DSPMode = DSPMode.DIGL;
-                                else if (SpotControl.DX_Mode[iii] == 14) RX1DSPMode = DSPMode.SAM;
-                                else if (SpotControl.DX_Mode[iii] == 15) RX1DSPMode = DSPMode.DIGU; // FT8
-                                else if (SpotControl.DX_Mode[iii] == 16) RX1DSPMode = DSPMode.DIGL;
-                                else if (SpotControl.DX_Mode[iii] == 17) RX1DSPMode = DSPMode.DIGL;
-                                else RX1DSPMode = DSPMode.LSB;
-
-                            }
-                            else
-                            {
-                                RX1DSPMode = DSPMode.LSB;
-                            }
-
-                        } // LSB
-                        else
-                        {
-                            if (SpotForm.chkDXMode.Checked == true)
-                            {
-
-                                if (SpotControl.DX_Mode[iii] == 0) RX1DSPMode = DSPMode.USB;
-                                else if (SpotControl.DX_Mode[iii] == 1) RX1DSPMode = DSPMode.CWU;
-                                else if (SpotControl.DX_Mode[iii] == 2) RX1DSPMode = DSPMode.DIGU;
-                                else if (SpotControl.DX_Mode[iii] == 3) RX1DSPMode = DSPMode.DIGU;
-                                else if (SpotControl.DX_Mode[iii] == 4) RX1DSPMode = DSPMode.DIGU;
-                                else if (SpotControl.DX_Mode[iii] == 5) RX1DSPMode = DSPMode.DIGU;
-                                else if (SpotControl.DX_Mode[iii] == 6) RX1DSPMode = DSPMode.DIGU;
-                                else if (SpotControl.DX_Mode[iii] == 7) RX1DSPMode = DSPMode.DIGU;
-                                else if (SpotControl.DX_Mode[iii] == 8) RX1DSPMode = DSPMode.DIGU;
-                                else if (SpotControl.DX_Mode[iii] == 9) RX1DSPMode = DSPMode.DIGU;
-                                else if (SpotControl.DX_Mode[iii] == 10) RX1DSPMode = DSPMode.DIGU;
-                                else if (SpotControl.DX_Mode[iii] == 11) RX1DSPMode = DSPMode.FM;
-                                else if (SpotControl.DX_Mode[iii] == 12) RX1DSPMode = DSPMode.USB;
-                                else if (SpotControl.DX_Mode[iii] == 13) RX1DSPMode = DSPMode.DIGU;
-                                else if (SpotControl.DX_Mode[iii] == 14) RX1DSPMode = DSPMode.SAM;
-                                else if (SpotControl.DX_Mode[iii] == 15) RX1DSPMode = DSPMode.DIGU; // FT8
-                                else if (SpotControl.DX_Mode[iii] == 16) RX1DSPMode = DSPMode.DIGU;
-                                else if (SpotControl.DX_Mode[iii] == 17) RX1DSPMode = DSPMode.DIGU;
-                                else RX1DSPMode = DSPMode.USB;
-
-                            }
-                            else
-                            {
-                                RX1DSPMode = DSPMode.USB;
-                            }
-
-                        } // USB
-                        VFOAFreq = (double)freq1 / 1000000; // convert to MHZ
-
-                        //   Debug.WriteLine("freq " + VFOAFreq);
-
-                        if (SpotForm.chkDXMode.Checked == true)
-                        {
-
-                            if (SpotControl.DX_Mode2[iii] != 0)
-                            {
-
-                                VFOBFreq = (double)(freq1 + SpotControl.DX_Mode2[iii]) / 1000000; // convert to MHZ
-                                chkVFOSplit.Checked = true; // turn on  split
-
-                                Debug.WriteLine("split here" + (freq1 + SpotControl.DX_Mode2[iii]));
-
-                            }
-                            else
-                            {
-                                chkVFOSplit.Checked = false; // turn off split
-
-                            }
-
-
-                        } // chkdxmode checked
-
-                        /*   decided not to do it here, since you dont always want to be moving your antenna on everything you click on.
-                                                if (setupForm.ROTOREnabled == true)   // ke9ns add send hygain rotor command to DDUtil via the CAT port setup in PowerSDR
-                                                {
-                                                    Debug.WriteLine("Red DOT BEAM HEADING TRANSMIT");
-
-                                                    spotDDUtil_Rotor = "AP1" + SpotControl.DX_Beam[iii].ToString().PadLeft(3, '0') + ";";
-                                                   // spotDDUtil_Rotor = ";";
-                                                    spotDDUtil_Rotor = "AM1;";
-
-                                                } //  
-                        */
-
-                        SpotControl.Map_Last = 2; // UPDATE SPOTS ON MAP
-
-
-                        return;
-
-                    } // if you found a red dot matching your dx spot list
-
-
-
-                    //======================================================================================================
-                    // this is a CTRL key press
-                    for (byte ii = 0; ii < DXK; ii++) // check all spot on Panadapter (not red dots)
-                    {
-
-                        if ((x >= DXX[ii]) && (x <= (DXX[ii] + (DXW[ii]) * 3 / 4)) && (y >= DXY[ii]) && (y <= (DXY[ii] + DXH[ii])))
-                        {
-
-                            var DXtemp = new StringBuilder("https://www.qrz.com/db/");
-                            DXtemp.Append(DXS[ii]);
-
-                            try
-                            {
-                                SpotForm.DX_RX2 = false;
-                                //   System.Diagnostics.Process.Start(DXtemp.ToString()); // change so now only a Right click on the panadapter callsign will open QRZ page
-
-                                //  Debug.WriteLine("DX SELECTED " + ii + " , " + Display.holder[ii] + " , " + DXS[ii]);
-
-                                // a simple Right click on a DX SPot will do a QRZ lookup (mousedown routine)
-
-                                SpotForm.DX_SELECTED = Display.holder[ii]; //ke9ns add
-                                SpotForm.textBox1.SelectionStart = SpotForm.DX_SELECTED * SpotForm.LineLength;      // start of each dx spot line
-                                SpotForm.textBox1.SelectionLength = SpotForm.LineLength;                    // length of each dx spot  line
-                                SpotForm.textBox1_MouseUp(this, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0)); // process as though you clicked on the dx spot in the spotter window
-
-                            }
-                            catch
-                            {
-                                Debug.WriteLine("bad station");
-                            }
-
-                            return;
-
-                        } // index
-                        else if ((x >= DXX[ii] + (DXW[ii] * 3 / 4)) && (x <= (DXX[ii] + DXW[ii])) && (y >= DXY[ii]) && (y <= (DXY[ii] + DXH[ii]))) // check for rotor Beam heading 
-                        {
-                            SpotForm.DX_RX2 = false;
-                            Debug.WriteLine("BEAM HEADING TRANSMIT FROM Display");
-
-                            spotDDUtil_Rotor = "AP1" + SpotControl.DX_Beam[ii].ToString().PadLeft(3, '0') + ";";
-                            spotDDUtil_Rotor = "AM1;";
-
-                            //  Debug.WriteLine(">>>>>>> DX SELECTED " + ii);
-
-                            SpotForm.DX_SELECTED = Display.holder[ii]; //ke9ns add
-                            SpotForm.textBox1.SelectionStart = SpotForm.DX_SELECTED * SpotForm.LineLength;      // start of each dx spot line
-                            SpotForm.textBox1.SelectionLength = SpotForm.LineLength;                    // length of each dx spot  line
-                            SpotForm.textBox1_MouseUp(this, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0));
-
-
-                        } // check if you clicked on the last half of the call sign
-
-
-
-                    } // for loop
-
-                    if (chkRX2.Checked == true)  // check RX2 click
-                    {
-                        for (byte ii = 0; ii < DXK2; ii++)
-                        {
-
-                            if ((x >= DXX[ii + 50]) && (x <= (DXX[ii + 50] + DXW[ii + 50] * 3 / 4)) && (y >= DXY[ii + 50]) && (y <= (DXY[ii + 50] + DXH[ii + 50])))
-                            {
-                                var DXtemp = new StringBuilder("https://www.qrz.com/db/");
-                                DXtemp.Append(DXS[ii + 50]);
-
-                                try
-                                {
-                                    SpotForm.DX_RX2 = true;
-                                    //      System.Diagnostics.Process.Start(DXtemp.ToString());
-
-                                    SpotForm.DX_SELECTED = Display.holder[ii]; //ke9ns add
-                                    SpotForm.textBox1.SelectionStart = SpotForm.DX_SELECTED * SpotForm.LineLength;      // start of each dx spot line
-                                    SpotForm.textBox1.SelectionLength = SpotForm.LineLength;                    // length of each dx spot  line
-                                    SpotForm.textBox1_MouseUp(this, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0));
-
-
-                                }
-                                catch
-                                {
-                                    Debug.WriteLine("bad station");
-                                }
-
-                                break;
-
-                            } // index
-                            else if ((x <= (DXX[ii + 50] + DXW[ii + 50] * 3 / 4)) && (y >= DXY[ii + 50]) && (y <= (DXY[ii + 50] + DXH[ii + 50])))
-                            {
-                                SpotForm.DX_RX2 = true;
-                                Debug.WriteLine("BEAM HEADING TRANSMIT FROM Display RX2");
-
-                                spotDDUtil_Rotor = "AP1" + SpotControl.DX_Beam[ii].ToString().PadLeft(3, '0') + ";";
-                                spotDDUtil_Rotor = ";";
-                                spotDDUtil_Rotor = "AM1;";
-
-                                SpotForm.DX_SELECTED = Display.holder[ii]; //ke9ns add
-                                SpotForm.textBox1.SelectionStart = SpotForm.DX_SELECTED * SpotForm.LineLength;      // start of each dx spot line
-                                SpotForm.textBox1.SelectionLength = SpotForm.LineLength;                    // length of each dx spot  line
-                                SpotForm.textBox1_MouseUp(this, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0));
-
-
-                            } // check if you clicked on the last half of the call sign
-
-
-                        } // for loop
-
-                    } // rx2 checked on 
-
-
-                } //   if ((SpotControl.SP4_Active == 0) && (SpotControl.SP_Active > 2))
-
 
 
                 //---------------------------------------------------------------------------------
@@ -53882,8 +53780,7 @@ namespace PowerSDR
                         e.Handled = true;
                         break;
                     case Keys.A:
-                        if (RX1AGCMode == AGCMode.FAST)
-                            RX1AGCMode = AGCMode.FIXD;
+                        if (RX1AGCMode == AGCMode.FAST) RX1AGCMode = AGCMode.FIXD;
                         else RX1AGCMode++;
                         break;
                     case Keys.B:
@@ -60967,16 +60864,16 @@ namespace PowerSDR
                 txtVFOABand.Text = bandInfo; // ke9ns  display bandtext into the vfo text area here
             }
 
-            Debug.WriteLine("VFOALostFocus ");
+          //  Debug.WriteLine("VFOALostFocus ");
             Band b = BandByFreq(freq, rx1_xvtr_index, false, current_region);
-            Debug.WriteLine("1VFOALostFocus ");
+         //   Debug.WriteLine("1VFOALostFocus ");
 
             if (b != rx1_band)
             {
                 SetRX1Band(b);
             }
 
-            Debug.WriteLine("1VFOALostFocus ");
+         //   Debug.WriteLine("1VFOALostFocus ");
 
 
             // Set preamp options based on frequency - used to be in SetRX1Band()
@@ -64280,6 +64177,8 @@ namespace PowerSDR
                                     var DXtemp = new StringBuilder("https://www.qrz.com/db/");
                                     DXtemp.Append(DXS[ii]);
 
+                               //     Debug.WriteLine("-DX SELECTED " + ii + " , " + Display.holder[ii] + " , " + DXS[ii] + " x " + x + " ,  " + y);
+
                                     try
                                     {
 
@@ -64564,11 +64463,11 @@ namespace PowerSDR
         public static int SX_Y = 0;               //y  cursor pos inside picdisplay
 
 
-        public static int[] DXX = new int[200]; // ke9ns add used for qrz hyperlinking(these are the dx spot callsign locations on the screen)
-        public static int[] DXY = new int[200]; // 
-        public static int[] DXW = new int[200]; //
-        public static int[] DXH = new int[200]; //  
-        public static string[] DXS = new string[200]; // ties it back to the real DX_Index
+        public static int[] DXX = new int[200]; // ke9ns: X location add used for qrz hyperlinking(these are the dx spot callsign locations on the screen)
+        public static int[] DXY = new int[200]; // Y location
+        public static int[] DXW = new int[200]; // W width of callsign
+        public static int[] DXH = new int[200]; // H heightof callsign 
+        public static string[] DXS = new string[200]; // Callsign  ties it back to the real DX_Index
         public static int DXK = 0;               // number of spots on picdisplay RX1
         public static int DXK2 = 0;               // number of spots on picdisplay RX2
         public static int DXR = 0;               // 1=display SPOTTER call on screen instead of DX spot call, 0=DX Spot only
@@ -67168,7 +67067,7 @@ namespace PowerSDR
                     ptbFilterShift_Scroll(this, EventArgs.Empty);
                     break;
                 case DSPMode.USB:
-                    low = default_low_cut;
+                    low = default_low_cut; // .261 was 150 now 70
                     high = low + bw;
                     UpdateRX1Filters(low, high);
                     break;
@@ -67267,7 +67166,8 @@ namespace PowerSDR
                     break;
             }
             btnFilterShiftReset.BackColor = SystemColors.Control;   // make button grey
-        }
+
+        } //  btnFilterShiftReset_Click
 
         private FilterWidthMode current_filter_width_mode = FilterWidthMode.Linear;
         public FilterWidthMode CurrentFilterWidthMode
@@ -73399,8 +73299,7 @@ namespace PowerSDR
         {
             if (rx1_dsp_mode == DSPMode.DRM || rx1_dsp_mode == DSPMode.SPEC || rx1_dsp_mode == DSPMode.FM) return;
 
-            if (filterRX1Form == null || filterRX1Form.IsDisposed)
-                filterRX1Form = new FilterForm(this, rx1_filters, false);
+            if (filterRX1Form == null || filterRX1Form.IsDisposed)  filterRX1Form = new FilterForm(this, rx1_filters, false);
 
             filterRX1Form.DSPMode = rx1_dsp_mode;
             filterRX1Form.CurrentFilter = rx1_filter;

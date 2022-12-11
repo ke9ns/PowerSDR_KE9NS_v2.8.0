@@ -2359,9 +2359,7 @@ namespace PowerSDR
             this.udDDSIFFreq.Name = "udDDSIFFreq";
             this.udDDSIFFreq.Size = new System.Drawing.Size(64, 20);
             this.udDDSIFFreq.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.udDDSIFFreq, "Intermediate Frequency\r\nDefault Values:\r\nFlex-5000: 9000hz\r\nFlex-3000: 9000hz\r\nFl" +
-        "ex-1500: 3800hz\r\n\r\nThis prevents a noise spike from occuring at 0hz every time y" +
-        "ou unkey the radio\r\n");
+            this.toolTip1.SetToolTip(this.udDDSIFFreq, resources.GetString("udDDSIFFreq.ToolTip"));
             this.udDDSIFFreq.Value = new decimal(new int[] {
             9000,
             0,

@@ -2206,7 +2206,7 @@ namespace PowerSDR
                         {
                             if (console.setupForm.chkCWDisplay.Checked)
                             {
-                                float sum1 = SumBuffer(out_l, frameCount); // ke9ns sum up the entire sample to see if anything in it
+                                float sum1 = SumBuffer(out_l, frameCount); // ke9ns: sum up the entire sample to see if anything in it
 
                                 if (sum1 != 0) console.CW_STATE = true;
                                 else console.CW_STATE = false;

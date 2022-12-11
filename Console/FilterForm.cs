@@ -382,18 +382,13 @@ namespace PowerSDR
         private void picDisplay_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
             // draw background
-            e.Graphics.FillRectangle(
-                new SolidBrush(Display.DisplayBackgroundColor),
-                0, 0, picDisplay.Width, picDisplay.Height);
+            e.Graphics.FillRectangle(new SolidBrush(Display.DisplayBackgroundColor),0, 0, picDisplay.Width, picDisplay.Height);
 
-            e.Graphics.FillRectangle(
-                new SolidBrush(Display.DisplayFilterColor),
-                HzToPixel((int)udLow.Value), 0,
+            e.Graphics.FillRectangle(new SolidBrush(Display.DisplayFilterColor),HzToPixel((int)udLow.Value), 0,
                 Math.Max(1, HzToPixel((int)udHigh.Value) - HzToPixel((int)udLow.Value)), picDisplay.Height);
 
             // draw center line
-            e.Graphics.DrawLine(new Pen(Display.GridZeroColor, 1.0f),
-                picDisplay.Width / 2, 0, picDisplay.Width / 2, picDisplay.Height);
+            e.Graphics.DrawLine(new Pen(Display.GridZeroColor, 1.0f),picDisplay.Width / 2, 0, picDisplay.Width / 2, picDisplay.Height);
         }
 
         private void picDisplay_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)

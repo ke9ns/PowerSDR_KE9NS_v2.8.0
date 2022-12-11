@@ -506,7 +506,7 @@ namespace PowerSDR
         //========================================================
 
         private static Control target = null;
-        public static Control Target                 // ke9ns come here when picdisplay is resized (ie. console is resized)
+        public static Control Target                 // ke9ns: come here when picdisplay is resized (ie. console is resized)
         {
             get { return target; }
             set
@@ -1235,7 +1235,7 @@ namespace PowerSDR
         }
 
         private static bool draw_tx_cw_freq = false;
-        public static bool DrawTXCWFreq
+        public static bool DrawTXCWFreq // ke9ns: console cw panel select to draw line where CW tx line should be
         {
             get { return draw_tx_cw_freq; }
             set
@@ -3294,7 +3294,7 @@ namespace PowerSDR
 
 
                 //============================================================================================
-                // ke9ns  RX1 draw tx line for cw
+                // ke9ns:  RX1 draw tx line for cw
                 //============================================================================================
                 //   if ((!local_mox) && (draw_tx_cw_freq || console.setupForm.chkCWDisplay.Checked) && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)) // ke9ns mod
                 if ((draw_tx_cw_freq || console.setupForm.chkCWDisplay.Checked) && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)) // ke9ns mod
@@ -3345,8 +3345,10 @@ namespace PowerSDR
             else // rx == 2
             {
                 //============================================================================================
-                // ke9ns RX2 draw main filter bandpass display
+                // ke9ns: RX2 draw main filter bandpass display
                 //============================================================================================
+
+
                 if (!(local_mox && (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU)))  // draw bandpass for RX or bandpass for TX (but not in cW mode)) 
                 {
                     // get filter screen coordinates
@@ -12137,7 +12139,9 @@ namespace PowerSDR
 
                             size = g.MeasureString(SS, font);
 
-                            x = (int)(W - size.Width - 3); //draw on right side
+                          //  Debug.WriteLine("++WIDTH =" + W); //1591
+
+                            x = (int)(W - size.Width - 3); //draw on right side .262
 
                             if (bottom) g.DrawString(SS, font, grid_text_brush, x, H + y); // draw S meter readings on Right side of screen only
                             else g.DrawString(SS, font, grid_text_brush, x, y);
@@ -13234,7 +13238,7 @@ namespace PowerSDR
                 //===============================================================================================================================================================
                 //=====================================================================
                 //=====================================================================
-                // ke9ns add draw DX SPOTS on pandapter
+                // ke9ns: add draw DX SPOTS on pandapter
                 //=====================================================================
                 //=====================================================================
 
@@ -13338,7 +13342,7 @@ namespace PowerSDR
                         {
                             int VFO_DXPos = (int)((((float)W / (float)VFODiff) * (float)(SpotControl.DX_Freq[ii] - CWPitch1 - VFOLow))); // determine DX spot line pos on current panadapter screen
 
-                            holder[kk] = ii;                    // ii is the actual DX_INdex pos the the KK holds
+                            holder[kk] = ii;                    // ii is the actual DX_Index pos that the KK holds
                             holder1[kk] = VFO_DXPos;
 
                             kk++;
@@ -13387,15 +13391,20 @@ namespace PowerSDR
                                         {
                                             if (((y2 + length.Height) >= Console.MMY[jj]) && (y2 < (Console.MMY[jj] + Console.MMH[jj])))
                                             {
-                                                iii = iii + 33;
+                                                iii = iii + 33;//  33
                                                 break;
                                             }
                                         }
 
                                     } // for loop to check if DX text will draw over top of Memory text
                                 }
+                                
+                                if (SpotForm.SpotBackground == true) //.261
+                                {
+                                    g.FillRectangle(new SolidBrush(Color.Black), holder1[ii] - (int)length.Width- 2, H1b + iii+2, (int)length.Width + 4, (int)length.Height -2); //.261
+                                }
 
-                                g.DrawString(SpotControl.DX_Station[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width, H1b + iii); // DX call sign to panadapter
+                               g.DrawString(SpotControl.DX_Station[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width, H1b + iii); // DX call sign to panadapter
 
                             }
                             else // display SPOTTER on Pan (not the Spotted)
@@ -13422,6 +13431,10 @@ namespace PowerSDR
                                     } // for loop to check if DX text will draw over top of Memory text
                                 }
 
+                                if (SpotForm.SpotBackground == true) //.261
+                                {
+                                    g.FillRectangle(new SolidBrush(Color.Black), holder1[ii] - (int)length.Width - 2, H1b + iii + 2, (int)length.Width + 4, (int)length.Height - 2); //.261
+                                }
                                 g.DrawString(SpotControl.DX_Spotter[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width, H1b + iii);
 
                             }
@@ -13468,7 +13481,10 @@ namespace PowerSDR
 
                                     } // for loop to check if DX text will draw over top of Memory text
                                 }
-
+                                if (SpotForm.SpotBackground == true) //.261
+                                {
+                                    g.FillRectangle(new SolidBrush(Color.Black), holder1[ii] - 2, H1b + iii + 2, (int)length.Width + 4, (int)length.Height - 2); //.261
+                                }
                                 g.DrawString(SpotControl.DX_Station[holder[ii]], font1, grid_text_brush, holder1[ii], H1b + iii); // DX station name
                             }
                             else // spotter
@@ -13495,6 +13511,10 @@ namespace PowerSDR
                                     } // for loop to check if DX text will draw over top of Memory text
                                 }
 
+                                if (SpotForm.SpotBackground == true) //.261
+                                {
+                                    g.FillRectangle(new SolidBrush(Color.Black), holder1[ii] - 2, H1b + iii + 2, (int)length.Width + 4, (int)length.Height - 2); //.261
+                                }
                                 g.DrawString(SpotControl.DX_Spotter[holder[ii]], font1, grid_text_brush, holder1[ii], H1b + iii); // DX station name
 
                             }
@@ -13772,7 +13792,7 @@ namespace PowerSDR
                     } // 
 
                     //===========================================================================================
-                    // ke9ns RX1 draw tx cw line (waterfall grid)
+                    // ke9ns: RX1 draw tx cw line (waterfall grid)
                     //===========================================================================================
                     if ((draw_tx_cw_freq || console.setupForm.chkCWDisplay.Checked) && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)) // ke9ns mod
                     {
@@ -13780,7 +13800,7 @@ namespace PowerSDR
                         if (rx1_dsp_mode == DSPMode.CWL) pitch = -cw_pitch;
 
 
-                        //  int cw_line_x;
+                        //  int cw_line_xcw_line_x;
                         if (!split_enabled)
                         {
                             cw_line_x = (int)((float)(pitch - low + xit_hz) / (high - low) * W);
@@ -17875,7 +17895,7 @@ namespace PowerSDR
 
 
         //==============================================================
-        // ke9ns for gradient color fill (updates the gradient pattern when you change the screen size)
+        // ke9ns: for gradient color fill (updates the gradient pattern when you change the screen size)
 
         static LinearGradientBrush pan_Brush; // ke9ns: fillpolygon that contains a gradient color brush
         static LinearGradientBrush pan_BrushB; // ke9ns  bottom vesion
@@ -18357,7 +18377,7 @@ namespace PowerSDR
             int High;
 
 
-            if (Console.UPDATEOFF > 0) // ke9ns add when CTUN active dont allow display to move just the vfoa is allowed to slide
+            if (Console.UPDATEOFF > 0) // ke9ns: add when CTUN active dont allow display to move just the vfoa is allowed to slide
             {
                 Low = LowLast;
                 High = HighLast;
@@ -18371,15 +18391,17 @@ namespace PowerSDR
                     Low = rx_display_low2;               // low freqency on display window (left side)
                     High = rx_display_high2;             // high freqency on display window (right side)
 
+                  //  Debug.WriteLine("4444 RX2 " + High + " , " + Low); //.260
                 }
                 else
                 {
                     Low = rx_display_low;               // low freqency on display window (left side)
                     High = rx_display_high;             // high freqency on display window (right side)
 
+                  //  Debug.WriteLine("5555 RX1 " + High + " , " + Low); //.260
                 }
 
-
+                // ke9ns: High max value = 79371, low max = -97370
                 LowLast = Low;
                 HighLast = High;
 
@@ -18419,15 +18441,13 @@ namespace PowerSDR
                     {
 
                         start_sample_index = (BUFFER_SIZE >> 1) + (int)((Low * BUFFER_SIZE) / sample_rate);
-                        num_samples = (int)((High - Low) * BUFFER_SIZE / sample_rate);  // same as in panadapter draw
+                        num_samples = (int)((long)(High - Low) * (long)BUFFER_SIZE / (long)sample_rate);  // same as in panadapter draw //.260 change to long to handle hi-res panafall buffer size increase
 
-                        //   if (start_sample_index < 0) start_sample_index += DATA_BUFFER_SIZE;
-                        //  if ((num_samples - start_sample_index) > (BUFFER_SIZE + 1)) num_samples = BUFFER_SIZE - start_sample_index;
 
 
                         int pos1 = (int)(((float)cw_line_x / (float)W) * (float)num_samples) + start_sample_index;
 
-                        //   Debug.WriteLine("pos1 " + pos1 +  " , " + tx_on_vfob);
+                         //  Debug.WriteLine("6666 pos1 " + pos1 +  " , " + tx_on_vfob);
 
                         if ((pos1 > 500) && (pos1 < BUFFER_SIZE - 500))
                         {
@@ -18435,16 +18455,17 @@ namespace PowerSDR
                                 new_display_data[i] = -160f;
 
 
-                            if ((bottom) && tx_on_vfob && (console.CW_STATE)) // KE9NS ADD  add dash into display data if CW is ON                       if ((bottom) && tx_on_vfob && (console.cwxForm.CW_STATE || dot || dash)) // KE9NS ADD  fix mistake made by flex
+                            if ((bottom) && tx_on_vfob && (console.CW_STATE)) // KE9NS:  add dash into display data if CW is ON                       if ((bottom) && tx_on_vfob && (console.cwxForm.CW_STATE || dot || dash)) // KE9NS ADD  fix mistake made by flex
                             {
                                 new_display_data[pos1] = 60;            // ke9ns the display ranges from -130db to 0 db  
                                 new_display_data[pos1 + 1] = 60;
-
+                              
                             }
                             else if ((!tx_on_vfob) && (!bottom) && (console.CW_STATE)) //else if ((!tx_on_vfob) && (!bottom) && (console.cwxForm.CW_STATE || dot || dash))
                             {
                                 new_display_data[pos1] = 60;
                                 new_display_data[pos1 + 1] = 60;
+                              
                             }
                         }
 
@@ -18502,31 +18523,29 @@ namespace PowerSDR
                     if (local_mox && (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU))
                     {
 
-                        if (console.setupForm.chkCWDisplay.Checked)  // ke9ns add DISPLAY CW SIGNAL IN PANADAPTER AREA
+                        if (console.setupForm.chkCWDisplay.Checked)  // ke9ns: add DISPLAY CW SIGNAL IN PANADAPTER AREA
                         {
 
                             start_sample_index = (BUFFER_SIZE >> 1) + (int)((Low * BUFFER_SIZE) / sample_rate);
-                            num_samples = (int)((High - Low) * BUFFER_SIZE / sample_rate);  // same as in panadapter draw
+                            num_samples = (int)((long)(High - Low) * (long)BUFFER_SIZE / (long)sample_rate);  // same as in panadapter draw //.260 change to long to handle hi-res panafall buffer size increase
 
-                            //    if (start_sample_index < 0) start_sample_index += DATA_BUFFER_SIZE;
-                            //   if ((num_samples - start_sample_index) > (BUFFER_SIZE + 1)) num_samples = BUFFER_SIZE - start_sample_index;
-
-
+                           
                             int pos1 = (int)(((float)cw_line_x / (float)W) * (float)num_samples) + start_sample_index;
 
-                            Debug.WriteLine("pos1 " + pos1);
+                          //  Debug.WriteLine("3333 pos1 " + pos1 + " , " + cw_line_x + " , " + High + " , " + Low);
 
                             if ((pos1 > 500) && (pos1 < BUFFER_SIZE - 500))
                             {
                                 for (int i = (pos1 - 500); i < (pos1 + 500); i++) //ke9ns originally this was it for display data for CW transmit
                                     new_display_data_bottom[i] = -160f;
-                            }
 
-                            if ((console.CW_STATE)) // KE9NS ADD  add dash into display data if CW is ON                       if ((bottom) && tx_on_vfob && (console.cwxForm.CW_STATE || dot || dash)) // KE9NS ADD  fix mistake made by flex
-                            {
-                                new_display_data_bottom[pos1] = 60; // ke9ns the display ranges from -130db to 0 db  
-                                new_display_data_bottom[pos1 + 1] = 60;
 
+                                if ((console.CW_STATE)) // KE9NS ADD  add dash into display data if CW is ON                       if ((bottom) && tx_on_vfob && (console.cwxForm.CW_STATE || dot || dash)) // KE9NS ADD  fix mistake made by flex
+                                {
+                                    new_display_data_bottom[pos1] = 60; // ke9ns: the display ranges from -130db to 0 db  
+                                    new_display_data_bottom[pos1 + 1] = 60;
+
+                                }
                             }
 
                             fixed (void* rptr = &new_display_data_bottom[0]) //  panadapter
@@ -20696,6 +20715,7 @@ namespace PowerSDR
 
                         //   if (start_sample_index < 0) start_sample_index += DATA_BUFFER_SIZE;
                         //    if ((num_samples - start_sample_index) > (BUFFER_SIZE + 1)) num_samples = BUFFER_SIZE - start_sample_index;
+                     
                         int pos1 = (int)(((float)cw_line_x / (float)W) * (float)num_samples) + start_sample_index;
 
                         //   Debug.WriteLine("CWWATER: " + cw_line_x + " , " + pos1 + " , " + W + " , " + slope1 +  " , " + num_samples1 + " , " + num_samples + " , " + start_sample_index);
