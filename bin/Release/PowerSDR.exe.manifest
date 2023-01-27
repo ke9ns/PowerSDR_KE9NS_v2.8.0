@@ -4,7 +4,7 @@
   <description asmv2:iconFile="PowerSDR.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="PowerSDR" version="2.8.0.262" language="neutral" processorArchitecture="x86" />
+    <assemblyIdentity name="PowerSDR" version="2.8.0.264" language="neutral" processorArchitecture="x86" />
     <commandLine file="PowerSDR.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -175,14 +175,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerSDR.exe" size="16792840">
-      <assemblyIdentity name="PowerSDR" version="2.8.0.262" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerSDR.exe" size="16821512">
+      <assemblyIdentity name="PowerSDR" version="2.8.0.264" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>d69dae9NU+9AVDS2QiH3IeL9xFoQlIRX6ng14A2607Y=</dsig:DigestValue>
+        <dsig:DigestValue>5yvNNrmXh5V/4/eYck7BHR132Wuv0tAsJUAQKtrExTE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -342,13 +342,31 @@
       <dsig:DigestValue>mt6WgMJrQLV19zumS1WwiYtHPp2BYXHBpnO9sFn2D9E=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Resources\VK1.png" size="4126">
+  <file name="Resources\VK1_5.png" size="1508">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>icrhnNvWqHFppbRaZ9xCB0BIVNIJTYsxeH98VpCMfYo=</dsig:DigestValue>
+      <dsig:DigestValue>48NbwiGb/Tn/tN+bsa31vZNq63/2k0/HnRMnL/mg7qk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\VK1_6.png" size="1548">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>y7aoCEYh44UBWeZ58Mp4HkkAbkKRw315x3KFeKyRjsw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\VK1_B.png" size="1513">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>3dE8jh1XUb/tQuz6utr5IPJyfDWO/KAR7dmu2UQgJlQ=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\VK1Red.png" size="4272">
@@ -369,22 +387,22 @@
       <dsig:DigestValue>7RYxLbNnPsqjrAl70fWKh9XJCEmB+HbUD0sZv8y8ZYU=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Resources\VK2Red.png" size="4295">
+  <file name="Resources\VK2Red_5.png" size="1621">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Jlq6XuS3iA9fvd/Xu4lBGnXcXR2Xu1BLfqI1Qs+20gg=</dsig:DigestValue>
+      <dsig:DigestValue>/VjSF8XyEcd5E0umCHnrQM2N9tz0mhfja3wElhtCF9s=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Resources\wideblue3.png" size="4840">
+  <file name="Resources\wideblue3B.png" size="2286">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>c3hyLY5T5RR+iDxq09FmdP38tcDvqOhwrBR4Panxldo=</dsig:DigestValue>
+      <dsig:DigestValue>w32m8kMLOPJZP0K+KfvoQ/iVP9GXzg7BTrEFTc7+gU4=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\wideblue4.png" size="4625">
@@ -405,13 +423,13 @@
       <dsig:DigestValue>481qAMORQkZPJJCVwA26pLsM0ad7+YFbais5IbXEONY=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Resources\widered3.png" size="4858">
+  <file name="Resources\widered_3.png" size="2389">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>3f3LtmZpwzbhjo/70u8qhju9WI7puEk/4EztQyf2zd4=</dsig:DigestValue>
+      <dsig:DigestValue>hRANbeCtM2Mix1nBdZu51is3A3g8lJh1zl6X/QS1aDg=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\widered4.png" size="5231">

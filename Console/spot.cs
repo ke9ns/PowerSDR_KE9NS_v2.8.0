@@ -3298,10 +3298,10 @@ namespace PowerSDR
                             DX_Index++; // jump to PASS2 if it passed the valid call spotter test
 
 
-                            if (DX_Index > 90)
+                            if (DX_Index > 150)
                             {
                                 Debug.WriteLine("DX SPOT REACH 90 ");
-                                DX_Index = 90; // you have reached max spots
+                                DX_Index = 150; // you have reached max spots
                             }
 
                             //   Debug.WriteLine("index "+ DX_Index);
@@ -4321,7 +4321,7 @@ namespace PowerSDR
 
         int UTCAGE_MAX = 25; // overridden by spotage.udspotage
         public bool SpotBackground = false; //.261
-
+        public bool SpotLoTWColor = false; //.262
 
         private void processDXAGE()
         {
@@ -5562,6 +5562,8 @@ namespace PowerSDR
         public bool mapon = false; // use to turn on world map when PowerSDR launched
         public bool dxon = false; // use to turn DX spotting on when PowerSDR launched
         public bool voaon = false; // use to turn voacap back on when PowerSDR launched
+        public bool lotwon = false; // .263 use to turn LoTW back on when PowerSDR launched
+
 
         private static DisplayMode LastDisplayMode = 0;
         private static int LastDisplayMap = 0;
@@ -10137,7 +10139,7 @@ namespace PowerSDR
         //====================================================================================================================
         //====================================================================================================================
         //====================================================================================================================
-        // ke9ns Grab NIST Internet Time
+        // ke9ns: Grab NIST Internet Time
         //====================================================================================================================
         //====================================================================================================================
         //====================================================================================================================
@@ -15316,11 +15318,15 @@ namespace PowerSDR
 
         //==========================================================
         // download your LoTW QSO file
-        private void button4_Click(object sender, EventArgs e)
+        public void button4_Click(object sender, EventArgs e)
         {
 
             if ((lotw_records == 0) && (runLoTW == false) && (LoTWPASS != "password") && (callBox.Text != "callsign"))
             {
+                lotwon = true; //.263
+                chkLoTWOn.Checked = true; //.263
+
+
                 Debug.WriteLine("LoTW1 THREAD START ");
                 Thread t = new Thread(new ThreadStart(UpdateLoTW));
 
@@ -15339,6 +15345,10 @@ namespace PowerSDR
             }
             else // missing password, missing callsign, lotw_records > 0,
             {
+                lotwon = false; //.263
+                chkLoTWOn.Checked = false; //.263
+
+
                 if (((button4.BackColor != Color.MediumSpringGreen) && (lotw_records > 0)) || (LoTWPASS == "password") || (callBox.Text == "callsign") || (button4.BackColor == Color.Red)) // only show this text if you clicked on LoTW button and it was not Yellow
                 {
                     textBox1.Text = "Could not Start LoTW checker.\r\n" +
@@ -15382,7 +15392,7 @@ namespace PowerSDR
 
         } // button4_Click
 
-        private void button4_MouseDown(object sender, MouseEventArgs e)
+        public void button4_MouseDown(object sender, MouseEventArgs e)
         {
             MouseEventArgs me = (MouseEventArgs)e;
 

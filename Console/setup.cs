@@ -4879,14 +4879,14 @@ namespace PowerSDR
         //================================================================================================
         private void chkAudioEnableVAC_CheckedChanged(object sender, System.EventArgs e)
         {
-            if (radVAC1SelectA.Checked == false && radVAC1SelectB.Checked == false)
+            if (radVAC1SelectA.Checked == false && radVAC1SelectB.Checked == false) // ke9ns: if both A and B false, select A, but turn off checkchanged while doing it
             {
                 radVAC1SelectA.CheckedChanged -= chkVAC1SelectA_CheckedChanged;
                 radVAC1SelectA.Checked = true;
                 radVAC1SelectA.CheckedChanged += chkVAC1SelectA_CheckedChanged;
             }
 
-            bool val = chkAudioEnableVAC.Checked;
+            bool val = chkAudioEnableVAC.Checked; 
             bool old_val = console.VACEnabled;
 
             if (val)
@@ -4894,8 +4894,10 @@ namespace PowerSDR
 
                 if ((comboAudioDriver2.SelectedIndex < 0) && (comboAudioDriver2.Items.Count > 0)) comboAudioDriver2.SelectedIndex = 0;
                 if ((comboAudioDriver2B.SelectedIndex < 0) && (comboAudioDriver2B.Items.Count > 0)) comboAudioDriver2B.SelectedIndex = 0;
+
                 if ((comboAudioInput2.SelectedIndex < 0) && (comboAudioInput2.Items.Count > 0)) comboAudioInput2.SelectedIndex = 0;
                 if ((comboAudioInput2B.SelectedIndex < 0) && (comboAudioInput2B.Items.Count > 0)) comboAudioInput2B.SelectedIndex = 0;
+
                 if ((comboAudioOutput2.SelectedIndex < 0) && (comboAudioOutput2.Items.Count > 0)) comboAudioOutput2.SelectedIndex = 0;
                 if ((comboAudioOutput2B.SelectedIndex < 0) && (comboAudioOutput2B.Items.Count > 0)) comboAudioOutput2B.SelectedIndex = 0;
 
@@ -4922,7 +4924,7 @@ namespace PowerSDR
                 Audio.Output2 = ((PADeviceInfo)comboAudioOutput2.SelectedItem).Index;
 
 
-            } // if driver, inpput, and output devices selected then update PowerSDR .204
+            } // if driver, input, and output devices selected then update PowerSDR .204
             else if (val && radVAC1SelectB.Checked)
             {
                 console.AudioDriverIndex2 = ((PADeviceInfo)comboAudioDriver2B.SelectedItem).Index;
@@ -8886,7 +8888,7 @@ namespace PowerSDR
 
         private void udTXAMCarrierLevel_ValueChanged(object sender, System.EventArgs e)
         {
-            console.dsp.GetDSPTX(0).TXAMCarrierLevel = Math.Sqrt((0.01 * (double)udTXAMCarrierLevel.Value) / 2); // max of 0.5 for half carrier, half mod
+            console.dsp.GetDSPTX(0).TXAMCarrierLevel = Math.Sqrt((0.01 * (double)udTXAMCarrierLevel.Value) / 2); // 50 = max of 0.5 for half carrier, half mod
         }
 
         private void chkSaveTXProfileOnExit_CheckedChanged(object sender, EventArgs e)
@@ -15908,6 +15910,15 @@ namespace PowerSDR
         private void chkBoxPFN_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void chkCWXOverRide_CheckedChanged(object sender, EventArgs e)
+        {
+            if (console.cwxForm != null)
+            {
+                console.cwxForm.checkBoxTS1.Checked = chkCWXOverRide.Checked; //.264
+
+            }
         }
 
 

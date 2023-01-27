@@ -1455,9 +1455,9 @@ namespace PowerSDR
 
             #endregion
 
-            DoScope(out_l_ptr1, frameCount);   // ke9ns   show in scope mode ?
+            DoScope(out_l_ptr1, frameCount);   // ke9ns:   show in scope mode ?
 
-            if (wave_record)  // ke9ns using audio recorder
+            if (wave_record)  // ke9ns: using audio recorder
             {
                 if (!localmox)
                 {
@@ -3543,7 +3543,7 @@ namespace PowerSDR
 
 
         //==============================================================================================================         
-        // ke9ns  (callback8) called to setup RX and TX streams (to and from the flex radio)
+        // ke9ns:  (callback8) called to setup RX and TX streams (to and from the flex radio)
         //        input here input_dev1 from setup.cs
         //        output here output_dev1 from setup.cs
         //==============================================================================================================         
@@ -4752,20 +4752,21 @@ namespace PowerSDR
             {
                 if (!localmox)
                 {
-                    // ke9ns this produces scope screen data in Receive out_l_ptr1 = rx1_out_l  = OUT_L1
+                    // ke9ns: this produces scope screen data in Receive out_l_ptr1 = rx1_out_l  = OUT_L1
                     DoScope(out_l_ptr1, frameCount); // why on separate channels for RX/TX?
                 }
                 else
                 {
-                    // ke9ns this produces scope screan data in Transmit, and yet MON audio in AM mode the audio has an envelope
-                    DoScope(out_l_ptr2, frameCount);  // ke9ns out_L_ptr2 = tx_out_L = OUT_L2 (this shows AM signal just fine, but audio out is bad)
+                    // ke9ns: this produces scope screan data in Transmit, and yet MON audio in AM mode the audio has an envelope
+                    DoScope(out_l_ptr2, frameCount);  // ke9n: out_L_ptr2 = tx_out_L = OUT_L2 (this shows AM signal just fine, but audio out is bad)
+
                 }
 
             } // do only if needing scope
 
 
             //--------------------------------------------------------------
-            // ke9ns add  comes here every 10msec @ 192kSR, 21msec @ 96kSR, 42msec @ 48kSR with 2048 Buffer size
+            // ke9ns: add  comes here every 10msec @ 192kSR, 21msec @ 96kSR, 42msec @ 48kSR with 2048 Buffer size
             // GoertzelCoefffreq = 600 for Beacon and 100 for wwv
 
 
@@ -4880,7 +4881,7 @@ namespace PowerSDR
                 {
                     if (!record_tx_preprocessed)               // ke9ns either do here or up above
                     {
-                        wave_file_writer.AddWriteBuffer(out_l_ptr2, out_r_ptr2); // ke9ns post process audio and so AM mode is modulated here (above wave_record section is pre process so its not modulated)
+                        wave_file_writer.AddWriteBuffer(out_l_ptr2, out_r_ptr2); // ke9ns: post process audio and so AM mode is modulated here (above wave_record section is pre process so its not modulated)
 
                         //  Debug.WriteLine("test9===============");
 
@@ -4897,7 +4898,7 @@ namespace PowerSDR
             out_l1 = rx1_out_l;   // ke9ns RX1 receive signal (from radio unless setup->test->receiver is changed) out_l_ptr1
             out_r1 = rx1_out_r;   // out_r_ptr1
 
-            out_l2 = out_l_ptr2;  // ke9ns transmit signal (from mic) tx_out_l (also sent out to headphones in MON mode)
+            out_l2 = out_l_ptr2;  // ke9ns: transmit signal (from mic) tx_out_l (also sent out to headphones in MON mode)
             out_r2 = out_r_ptr2;  // tx_out_R (also sent out to headphones in MON mode)
 
             out_l3 = out_l_ptr3;  // ke9ns RX2 receive signal (also sent out to ext speaker in MON mode)as in out_l2 copied to out_l3
@@ -7189,9 +7190,13 @@ namespace PowerSDR
             set { scope_max = value; }
         }
 
+        public static float AMMOD_POS = 0f; // ke9ns: .264
+        public static float AMMOD_POS1 = 0f;
+        public static float AMMOD_NEG = 0f;
+        public static float AMMOD_NEG1 = 0f;
 
         //======================================================================================
-        // ke9ns this is for scope and Panascope only (framecount on a flex5000 = 2048)
+        // ke9ns: this is for scope and Panascope only (framecount on a flex5000 = 2048)
         //======================================================================================
         unsafe private static void DoScope(float* buf, int frameCount)
         {
@@ -7199,7 +7204,7 @@ namespace PowerSDR
             //  if (Display.CurrentDisplayMode != DisplayMode.SCOPE && Display.CurrentDisplayMode != DisplayMode.PANASCOPE) return; // ke9ns add  no need to do scope if your not using it.
             //   Debug.WriteLine("DOSCOPE HERE" + frameCount);
 
-            if (scope_min == null || scope_min.Length < scope_display_width) // ke9ns check for screen size change
+            if (scope_min == null || scope_min.Length < scope_display_width) // ke9ns: check for screen size change
             {
 
                 if (Display.ScopeMin == null || Display.ScopeMin.Length < scope_display_width)
@@ -7222,11 +7227,27 @@ namespace PowerSDR
 
             //------------------------------------------------------------------------------
 
+            AMMOD_POS = 0f;
+            AMMOD_POS1 = 0f;
+
+            AMMOD_NEG = 2.0f;
+            AMMOD_NEG1 = 2.0f;
+
             for (int i = 0; i < frameCount; i++) // ke9ns 0 to 2048
             {
-                if (buf[i] < scope_pixel_min) scope_pixel_min = buf[i]; // ke9ns fill the array as long as its a valid value (buffer value < valid biggest pos value)
 
-                if (buf[i] > scope_pixel_max) scope_pixel_max = buf[i]; // ke9ns fill the array as long as its a valid value (buffer value > valid biggest neg value)
+                // Debug.WriteLine("S: " + i + " ,V: " + buf[i]); //S: 289 ,V: 0.004785764S: 236 ,V: -0.05042852
+
+
+                if (buf[i] < scope_pixel_min) scope_pixel_min = buf[i]; // NEG VALUE ke9ns: fill the array as long as its a valid value (buffer value < valid biggest pos value)
+
+                if (buf[i] > scope_pixel_max) scope_pixel_max = buf[i]; // POS VALUE ke9ns: fill the array as long as its a valid value (buffer value > valid biggest neg value)
+
+
+                float temp = Math.Abs(buf[i]); //.264
+                if (temp > AMMOD_POS) AMMOD_POS = Math.Abs(buf[i]); //.264 ke9ns: find highest TX signal level during AM transmit
+                if (temp < AMMOD_NEG) AMMOD_NEG = Math.Abs(buf[i]); //.264 ke9ns: find lowest TX signal level during AM transmit
+
 
                 scope_sample_index++;
 
@@ -7234,9 +7255,9 @@ namespace PowerSDR
                 {
                     scope_sample_index = 0;
 
-                    scope_min[scope_pixel_index] = scope_pixel_min;  // ke9ns fill array with scope min max fa
+                    scope_min[scope_pixel_index] = scope_pixel_min;  // ke9ns: fill array with scope min max fa
 
-                    scope_max[scope_pixel_index] = scope_pixel_max;
+                    scope_max[scope_pixel_index] = scope_pixel_max; // KE9NS: 
 
                     scope_pixel_min = float.MaxValue;  // huge pos value
                     scope_pixel_max = float.MinValue;  // huge neg value
@@ -7247,6 +7268,11 @@ namespace PowerSDR
                 }
 
             } // for(int i=0; i < frameCount; i++) //
+
+            AMMOD_POS1 = AMMOD_POS;  // .264 dont update until the end of the frame
+            AMMOD_NEG1 = AMMOD_NEG;  // .264 dont update until the end of the frame
+
+
 
         } // doscope
 

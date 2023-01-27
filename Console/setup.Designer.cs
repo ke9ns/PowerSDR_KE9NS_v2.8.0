@@ -521,6 +521,7 @@ namespace PowerSDR
             this.lblDSPImagePhaseTX = new System.Windows.Forms.LabelTS();
             this.tbDSPImageGainTX = new System.Windows.Forms.TrackBarTS();
             this.tpDSPKeyer = new System.Windows.Forms.TabPage();
+            this.chkCWXOverRide = new System.Windows.Forms.CheckBoxTS();
             this.labelTS25 = new System.Windows.Forms.LabelTS();
             this.chkKeyPoll = new System.Windows.Forms.CheckBoxTS();
             this.chkCWDisableUI = new System.Windows.Forms.CheckBoxTS();
@@ -8780,6 +8781,7 @@ namespace PowerSDR
             // 
             // tpDSPKeyer
             // 
+            this.tpDSPKeyer.Controls.Add(this.chkCWXOverRide);
             this.tpDSPKeyer.Controls.Add(this.labelTS25);
             this.tpDSPKeyer.Controls.Add(this.chkKeyPoll);
             this.tpDSPKeyer.Controls.Add(this.chkCWDisableUI);
@@ -8793,6 +8795,20 @@ namespace PowerSDR
             this.tpDSPKeyer.Size = new System.Drawing.Size(600, 318);
             this.tpDSPKeyer.TabIndex = 0;
             this.tpDSPKeyer.Text = "Keyer";
+            // 
+            // chkCWXOverRide
+            // 
+            this.chkCWXOverRide.Checked = true;
+            this.chkCWXOverRide.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCWXOverRide.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkCWXOverRide.Image = null;
+            this.chkCWXOverRide.Location = new System.Drawing.Point(19, 264);
+            this.chkCWXOverRide.Name = "chkCWXOverRide";
+            this.chkCWXOverRide.Size = new System.Drawing.Size(197, 32);
+            this.chkCWXOverRide.TabIndex = 118;
+            this.chkCWXOverRide.Text = "Override console Voice Keyer buttons with CWX macro F3-F6";
+            this.toolTip1.SetToolTip(this.chkCWXOverRide, resources.GetString("chkCWXOverRide.ToolTip"));
+            this.chkCWXOverRide.CheckedChanged += new System.EventHandler(this.chkCWXOverRide_CheckedChanged);
             // 
             // labelTS25
             // 
@@ -19330,7 +19346,6 @@ namespace PowerSDR
         private System.Windows.Forms.CheckBoxTS chkAudio2Stereo;
         private System.Windows.Forms.GroupBoxTS grpTXAM;
         private System.Windows.Forms.LabelTS lblTXAMCarrierLevel;
-        private System.Windows.Forms.NumericUpDownTS udTXAMCarrierLevel;
         private System.Windows.Forms.GroupBoxTS grpOptQuickQSY;
         private System.Windows.Forms.CheckBoxTS chkOptQuickQSY;
         private System.Windows.Forms.CheckBoxTS chkOptAlwaysOnTop;
@@ -19876,6 +19891,8 @@ namespace PowerSDR
         public System.Windows.Forms.CheckBoxTS chkKnobVFOB;
         public System.Windows.Forms.CheckBoxTS chkKnobVFO;
         public System.Windows.Forms.CheckBoxTS chkBoxPFN;
+        public System.Windows.Forms.NumericUpDownTS udTXAMCarrierLevel;
+        public System.Windows.Forms.CheckBoxTS chkCWXOverRide;
     } // class setup
 
 

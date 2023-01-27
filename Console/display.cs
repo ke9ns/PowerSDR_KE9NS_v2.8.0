@@ -34,6 +34,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 using System.Globalization;
+using System.Diagnostics.Eventing.Reader;
 
 #if (!NO_TNF)
 using Flex.TNF;
@@ -2770,11 +2771,11 @@ namespace PowerSDR
         // ke9ns draw panadapter grid
         //==========================================================================================================================================================
 
-        public static int[] holder2 = new int[100];                           // ke9ns add MEMORY Spot used to allow the vertical lines to all be drawn first so the call sign text can draw over the top of it.
-        public static int[] holder3 = new int[100];                          // ke9ns add
+        public static int[] holder2 = new int[160];                           // ke9ns add MEMORY Spot used to allow the vertical lines to all be drawn first so the call sign text can draw over the top of it.
+        public static int[] holder3 = new int[160];                          // ke9ns add
 
-        public static int[] holder = new int[100];                           // ke9ns add DX Spot used to allow the vertical lines to all be drawn first so the call sign text can draw over the top of it.
-        public static int[] holder1 = new int[100];                          // ke9ns add
+        public static int[] holder = new int[160];                           // ke9ns add DX Spot used to allow the vertical lines to all be drawn first so the call sign text can draw over the top of it.
+        public static int[] holder1 = new int[160];                          // ke9ns add
         private static Font font1 = new Font("Ariel", 9, FontStyle.Regular);  // ke9ns add dx spot call sign font style
 
         private static Pen p1 = new Pen(Color.YellowGreen, 2.0f);             // ke9ns add vert line color and thickness  DXSPOTTER
@@ -13398,12 +13399,89 @@ namespace PowerSDR
 
                                     } // for loop to check if DX text will draw over top of Memory text
                                 }
-                                
-                                if (SpotForm.SpotBackground == true) //.261
-                                {
-                                    g.FillRectangle(new SolidBrush(Color.Black), holder1[ii] - (int)length.Width- 2, H1b + iii+2, (int)length.Width + 4, (int)length.Height -2); //.261
-                                }
 
+                                if (SpotForm.SpotLoTWColor== true) //.262
+                                {
+                                    int SpotColor = SpotControl.DX_LoTW_Status[holder[ii]];
+
+                                    Color DXColor;
+                                    Color DXColor1;
+
+
+                                    DXColor1 = Color.Black;
+
+                                    if (SpotColor == 6)
+                                    {
+                                        DXColor = Color.MediumOrchid;
+
+                                    }
+                                    else if (SpotColor == 11)
+                                    {
+                                        DXColor = Color.SlateGray;
+                                    }
+                                    else if (SpotColor == 1)
+                                    {
+                                        DXColor = Color.Green;
+                                    }
+                                    else if (SpotColor == 4)
+                                    {
+                                        DXColor = Color.Orange;
+                                    }
+                                    else if (SpotColor == 9)
+                                    {
+                                        DXColor = Color.SkyBlue;
+                                    }
+                                    else if (SpotColor == 10)
+                                    {
+                                        DXColor = Color.RoyalBlue;
+                                    }
+                                    else if (SpotColor == 3)
+                                    {
+                                        DXColor = Color.Yellow;
+                                    }
+                                    else if (SpotColor == 8)
+                                    {
+                                        DXColor = Color.HotPink;
+                                    }
+                                    else if (SpotColor == 7)
+                                    {
+                                        DXColor = Color.DeepPink;
+                                    }
+                                    else if (SpotColor == 9)
+                                    {
+                                        DXColor = Color.SkyBlue;
+                                    }
+                                    else if (SpotColor == 2)
+                                    {
+                                        DXColor = Color.LightGreen;
+                                    }
+                                    else if (SpotColor == 5)
+                                    {
+                                        DXColor = Color.Violet;
+                                    }
+                                    else
+                                    {
+                                        DXColor = Color.Black;
+                                        DXColor1 = Color.White;
+                                    }
+
+
+                                    if (SpotForm.SpotBackground == true) //.261
+                                    {
+                                        g.FillRectangle(new SolidBrush(DXColor), holder1[ii] - (int)length.Width - 2, H1b + iii + 2, (int)length.Width + 4, (int)length.Height - 2); //.261
+                                    }
+                                    g.DrawString(SpotControl.DX_Station[holder[ii]], font1, new SolidBrush(DXColor1), holder1[ii] - (int)length.Width, H1b + iii); // DX call sign to panadapter
+
+
+                                } //  if (SpotForm.SpotLoTWColor== true) //.262
+                                else  if (SpotForm.SpotBackground == true) //.261
+                                {
+                                
+                                   g.FillRectangle(new SolidBrush(Color.Black), holder1[ii] - (int)length.Width - 2, H1b + iii + 2, (int)length.Width + 4, (int)length.Height - 2); //.261
+                                   g.DrawString(SpotControl.DX_Station[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width, H1b + iii); // DX call sign to panadapter
+
+                                }
+                                else
                                g.DrawString(SpotControl.DX_Station[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width, H1b + iii); // DX call sign to panadapter
 
                             }
@@ -13431,11 +13509,89 @@ namespace PowerSDR
                                     } // for loop to check if DX text will draw over top of Memory text
                                 }
 
-                                if (SpotForm.SpotBackground == true) //.261
+                              
+
+                                if (SpotForm.SpotLoTWColor == true) //.262
+                                {
+                                    int SpotColor = SpotControl.DX_LoTW_Status[holder[ii]];
+
+                                   
+                                    Color DXColor;
+                                    Color DXColor1;
+
+                                    DXColor1 = Color.Black;
+
+                                    if (SpotColor == 6)
+                                    {
+                                        DXColor = Color.MediumOrchid;
+
+                                    }
+                                    else if (SpotColor == 11)
+                                    {
+                                        DXColor = Color.SlateGray;
+                                    }
+                                    else if (SpotColor == 1)
+                                    {
+                                        DXColor = Color.Green;
+                                    }
+                                    else if (SpotColor == 4)
+                                    {
+                                        DXColor = Color.Orange;
+                                    }
+                                    else if (SpotColor == 9)
+                                    {
+                                        DXColor = Color.SkyBlue;
+                                    }
+                                    else if (SpotColor == 10)
+                                    {
+                                        DXColor = Color.RoyalBlue;
+                                    }
+                                    else if (SpotColor == 3)
+                                    {
+                                        DXColor = Color.Yellow;
+                                    }
+                                    else if (SpotColor == 8)
+                                    {
+                                        DXColor = Color.HotPink;
+                                    }
+                                    else if (SpotColor == 7)
+                                    {
+                                        DXColor = Color.DeepPink;
+                                    }
+                                    else if (SpotColor == 9)
+                                    {
+                                        DXColor = Color.SkyBlue;
+                                    }
+                                    else if (SpotColor == 2)
+                                    {
+                                        DXColor = Color.LightGreen;
+                                    }
+                                    else if (SpotColor == 5)
+                                    {
+                                        DXColor = Color.Violet;
+                                    }
+                                    else
+                                    {
+                                        DXColor = Color.Black;
+                                        DXColor1 = Color.White;
+                                    }
+
+                                    if (SpotForm.SpotBackground == true) //.261
+                                    {
+                                        g.FillRectangle(new SolidBrush(DXColor), holder1[ii] - (int)length.Width - 2, H1b + iii + 2, (int)length.Width + 4, (int)length.Height - 2); //.261
+                                    }
+                                    g.DrawString(SpotControl.DX_Spotter[holder[ii]], font1, new SolidBrush(DXColor1), holder1[ii] - (int)length.Width, H1b + iii); // .262  grid_text_brush
+
+
+                                } //  if (SpotForm.SpotLoTWColor== true) //.262
+                                else  if (SpotForm.SpotBackground == true) //.261
                                 {
                                     g.FillRectangle(new SolidBrush(Color.Black), holder1[ii] - (int)length.Width - 2, H1b + iii + 2, (int)length.Width + 4, (int)length.Height - 2); //.261
+                                    g.DrawString(SpotControl.DX_Spotter[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width, H1b + iii); // .262  grid_text_brush
+
                                 }
-                                g.DrawString(SpotControl.DX_Spotter[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width, H1b + iii);
+                                else
+                                g.DrawString(SpotControl.DX_Spotter[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width, H1b + iii); // .262  grid_text_brush
 
                             }
 
@@ -13481,11 +13637,89 @@ namespace PowerSDR
 
                                     } // for loop to check if DX text will draw over top of Memory text
                                 }
-                                if (SpotForm.SpotBackground == true) //.261
+
+                                if (SpotForm.SpotLoTWColor == true) //.262
+                                {
+                                    int SpotColor = SpotControl.DX_LoTW_Status[holder[ii]];
+
+                                    Color DXColor;
+                                    Color DXColor1;
+
+                                    DXColor1 = Color.Black;
+
+                                    if (SpotColor == 6)
+                                    {
+                                        DXColor = Color.MediumOrchid;
+
+                                    }
+                                    else if (SpotColor == 11)
+                                    {
+                                        DXColor = Color.SlateGray;
+                                    }
+                                    else if (SpotColor == 1)
+                                    {
+                                        DXColor = Color.Green;
+                                    }
+                                    else if (SpotColor == 4)
+                                    {
+                                        DXColor = Color.Orange;
+                                    }
+                                    else if (SpotColor == 9)
+                                    {
+                                        DXColor = Color.SkyBlue;
+                                    }
+                                    else if (SpotColor == 10)
+                                    {
+                                        DXColor = Color.RoyalBlue;
+                                    }
+                                    else if (SpotColor == 3)
+                                    {
+                                        DXColor = Color.Yellow;
+                                    }
+                                    else if (SpotColor == 8)
+                                    {
+                                        DXColor = Color.HotPink;
+                                    }
+                                    else if (SpotColor == 7)
+                                    {
+                                        DXColor = Color.DeepPink;
+                                    }
+                                    else if (SpotColor == 9)
+                                    {
+                                        DXColor = Color.SkyBlue;
+                                    }
+                                    else if (SpotColor == 2)
+                                    {
+                                        DXColor = Color.LightGreen;
+                                    }
+                                    else if (SpotColor == 5)
+                                    {
+                                        DXColor = Color.Violet;
+                                    }
+                                    else
+                                    {
+                                        DXColor = Color.Black;
+                                        DXColor1 = Color.White;
+                                    }
+
+
+                                    if (SpotForm.SpotBackground == true) //.261
+                                    {
+                                        g.FillRectangle(new SolidBrush(DXColor), holder1[ii] - 2, H1b + iii + 2, (int)length.Width + 4, (int)length.Height - 2); //.261
+                                    }
+                                    g.DrawString(SpotControl.DX_Station[holder[ii]], font1, new SolidBrush(DXColor1), holder1[ii], H1b + iii); // DX station name
+
+                                } //  if (SpotForm.SpotLoTWColor== true) //.262
+                                else if (SpotForm.SpotBackground == true) //.261
                                 {
                                     g.FillRectangle(new SolidBrush(Color.Black), holder1[ii] - 2, H1b + iii + 2, (int)length.Width + 4, (int)length.Height - 2); //.261
+                                    g.DrawString(SpotControl.DX_Station[holder[ii]], font1, grid_text_brush, holder1[ii], H1b + iii); // DX station name
+
                                 }
+                                else
                                 g.DrawString(SpotControl.DX_Station[holder[ii]], font1, grid_text_brush, holder1[ii], H1b + iii); // DX station name
+
+
                             }
                             else // spotter
                             {
@@ -13511,10 +13745,86 @@ namespace PowerSDR
                                     } // for loop to check if DX text will draw over top of Memory text
                                 }
 
-                                if (SpotForm.SpotBackground == true) //.261
+                                if (SpotForm.SpotLoTWColor == true) //.262
+                                {
+                                    int SpotColor = SpotControl.DX_LoTW_Status[holder[ii]];
+
+                                    Color DXColor;
+                                    Color DXColor1;
+
+                                    DXColor1 = Color.Black;
+
+                                    if (SpotColor == 6)
+                                    {
+                                        DXColor = Color.MediumOrchid;
+
+                                    }
+                                    else if (SpotColor == 11)
+                                    {
+                                        DXColor = Color.SlateGray;
+                                    }
+                                    else if (SpotColor == 1)
+                                    {
+                                        DXColor = Color.Green;
+                                    }
+                                    else if (SpotColor == 4)
+                                    {
+                                        DXColor = Color.Orange;
+                                    }
+                                    else if (SpotColor == 9)
+                                    {
+                                        DXColor = Color.SkyBlue;
+                                    }
+                                    else if (SpotColor == 10)
+                                    {
+                                        DXColor = Color.RoyalBlue;
+                                    }
+                                    else if (SpotColor == 3)
+                                    {
+                                        DXColor = Color.Yellow;
+                                    }
+                                    else if (SpotColor == 8)
+                                    {
+                                        DXColor = Color.HotPink;
+                                    }
+                                    else if (SpotColor == 7)
+                                    {
+                                        DXColor = Color.DeepPink;
+                                    }
+                                    else if (SpotColor == 9)
+                                    {
+                                        DXColor = Color.SkyBlue;
+                                    }
+                                    else if (SpotColor == 2)
+                                    {
+                                        DXColor = Color.LightGreen;
+                                    }
+                                    else if (SpotColor == 5)
+                                    {
+                                        DXColor = Color.Violet;
+                                    }
+                                    else
+                                    {
+                                        DXColor = Color.Black;
+                                        DXColor1 = Color.White;
+                                    }
+
+
+                                    if (SpotForm.SpotBackground == true) //.261
+                                    {
+                                        g.FillRectangle(new SolidBrush(DXColor), holder1[ii] - 2, H1b + iii + 2, (int)length.Width + 4, (int)length.Height - 2); //.261
+                                    }
+                                    g.DrawString(SpotControl.DX_Spotter[holder[ii]], font1, new SolidBrush(DXColor1), holder1[ii], H1b + iii); // DX station name
+
+
+                                } //  if (SpotForm.SpotLoTWColor== true) //.262
+                                else if (SpotForm.SpotBackground == true) //.261
                                 {
                                     g.FillRectangle(new SolidBrush(Color.Black), holder1[ii] - 2, H1b + iii + 2, (int)length.Width + 4, (int)length.Height - 2); //.261
+                                    g.DrawString(SpotControl.DX_Spotter[holder[ii]], font1, grid_text_brush, holder1[ii], H1b + iii); // DX station name
+
                                 }
+                                else
                                 g.DrawString(SpotControl.DX_Spotter[holder[ii]], font1, grid_text_brush, holder1[ii], H1b + iii); // DX station name
 
                             }
@@ -17501,9 +17811,17 @@ namespace PowerSDR
             set { INDEXS = value; }
         }
         //================================================================================================
-        // ke9ns time vs amplitude using audio.doscope() routine
+        // ke9ns: time vs amplitude using audio.doscope() routine
+
+        private static int ammod = 0;
+        public static int AMMOD
+        {
+            get { return AMMOD; }
+            set { ammod = value; }
+        }
         unsafe private static bool DrawScope(Graphics g, int W, int H, bool bottom)
         {
+               
 
             //    g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
             //   g.CompositingMode = CompositingMode.SourceOver;
@@ -17515,7 +17833,7 @@ namespace PowerSDR
             if (scope_min.Length < W)  // call the routine if it hasnt been called yet
             {
                 scope_min = new float[W];
-                Audio.ScopeMin = scope_min;  // ke9ns get array of Float data (from DoScope() routine)
+                Audio.ScopeMin = scope_min;  // ke9ns: get array of Float data (from DoScope() routine)
                                              //  Debug.WriteLine("SCOPE MIN");
 
             }
@@ -17537,25 +17855,38 @@ namespace PowerSDR
             {
                 int pixel = 0;
 
+
+                //-----------------------------------------------------
+                // ke9ns: draw line (left to right)
                 if (bottom) pixel = (int)(H / 2 * scope_max[i]);
-                else pixel = (int)(H / 2 * scope_max[i]);          // ke9ns scope data scaled to fit display area available
+                else pixel = (int)(H / 2 * scope_max[i]);          // ke9ns: scope data scaled to fit display area available
 
-                int y = H / 2 - pixel;  // ke9ns this is the actual data moved to the part of the display being used
+              
+                int y = H / 2 - pixel;  // ke9ns: this is the actual data moved to the part of the display being used
 
-                points[i].X = i;
-                points[i].Y = y; // max value
+                points[i].X = i; // index
+                points[i].Y = y; // max value  y=H/2 - H/2*max
 
-                if (bottom) points[i].Y += H;
+               
+                if (bottom) points[i].Y += H; // shift down toward bottom by adding H    point[50].Y = H + (H/2 - H/2*max)
+  
+                //------------------------------------------------------
+                //ke9ns: a second set of points
+                
+                 if (bottom) pixel = (int)(H / 2 * scope_min[i]);
+                 else pixel = (int)(H / 2 * scope_min[i]);
 
-                if (bottom) pixel = (int)(H / 2 * scope_min[i]);
-                else pixel = (int)(H / 2 * scope_min[i]);
 
-                y = H / 2 - pixel;
-                points[W * 2 - 1 - i].X = i; // for loop is X
+                 int y1 = H / 2 - pixel;
+                 points[W * 2 - 1 - i].X = i; // for loop is X
 
-                points[W * 2 - 1 - i].Y = y; // min value
+                 points[W * 2 - 1 - i].Y = y1; // y min value  y = h/2 - h/2*min
 
-                if (bottom) points[W * 2 - 1 - i].Y += H;
+                 if (bottom) points[W * 2 - 1 - i].Y += H;  // point[149].Y = H + (H/2 - H/2*min)
+               
+                //---------------------------------------------------------------
+
+           //   Debug.WriteLine("X=" + i + " Ymax=" + y + " Ymin=" + y1 + " point=" + (W*2-1-i) + "float: " + pixel + "M " + scope_min[i] + "M " + scope_max[i]);
 
                 //if(points[W*2-1-i].Y == points[i].Y)	points[W*2-1-i].Y += 1;
             }

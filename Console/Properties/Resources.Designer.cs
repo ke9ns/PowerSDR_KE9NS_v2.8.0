@@ -456,6 +456,46 @@ namespace PowerSDR.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap VK1_5 {
+            get {
+                object obj = ResourceManager.GetObject("VK1_5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap VK1_6 {
+            get {
+                object obj = ResourceManager.GetObject("VK1_6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap VK1_A {
+            get {
+                object obj = ResourceManager.GetObject("VK1_A", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap VK1_B {
+            get {
+                object obj = ResourceManager.GetObject("VK1_B", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap VK1Red {
             get {
                 object obj = ResourceManager.GetObject("VK1Red", resourceCulture);
@@ -486,9 +526,49 @@ namespace PowerSDR.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap VK2Red_5 {
+            get {
+                object obj = ResourceManager.GetObject("VK2Red_5", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap VK2Red_6 {
+            get {
+                object obj = ResourceManager.GetObject("VK2Red_6", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap white2 {
             get {
                 object obj = ResourceManager.GetObject("white2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap wideblue_3 {
+            get {
+                object obj = ResourceManager.GetObject("wideblue_3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap wideblue_4 {
+            get {
+                object obj = ResourceManager.GetObject("wideblue_4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -519,6 +599,26 @@ namespace PowerSDR.Properties {
         public static System.Drawing.Bitmap wideorg4 {
             get {
                 object obj = ResourceManager.GetObject("wideorg4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap widered_3 {
+            get {
+                object obj = ResourceManager.GetObject("widered_3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap widered_4 {
+            get {
+                object obj = ResourceManager.GetObject("widered_4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

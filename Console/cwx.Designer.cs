@@ -54,12 +54,18 @@ namespace PowerSDR
             this.keyLed = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.keyboardLed = new System.Windows.Forms.Panel();
+            this.checkBoxTS1 = new System.Windows.Forms.CheckBoxTS();
+            this.checkBoxCWD = new System.Windows.Forms.CheckBoxTS();
+            this.chkAlwaysOnTop = new System.Windows.Forms.CheckBoxTS();
             this.chkKeyPoll = new System.Windows.Forms.CheckBoxTS();
+            this.udWPM = new System.Windows.Forms.NumericUpDownTS();
             this.pttdelaylabel = new System.Windows.Forms.LabelTS();
+            this.udPtt = new System.Windows.Forms.NumericUpDownTS();
             this.expandButton = new System.Windows.Forms.ButtonTS();
             this.keyboardButton = new System.Windows.Forms.ButtonTS();
             this.clearButton = new System.Windows.Forms.ButtonTS();
             this.chkPause = new System.Windows.Forms.CheckBoxTS();
+            this.txtdummy1 = new System.Windows.Forms.TextBoxTS();
             this.txt9 = new System.Windows.Forms.TextBoxTS();
             this.txt8 = new System.Windows.Forms.TextBoxTS();
             this.txt7 = new System.Windows.Forms.TextBoxTS();
@@ -69,13 +75,19 @@ namespace PowerSDR
             this.txt3 = new System.Windows.Forms.TextBoxTS();
             this.txt2 = new System.Windows.Forms.TextBoxTS();
             this.txt1 = new System.Windows.Forms.TextBoxTS();
+            this.label7 = new System.Windows.Forms.LabelTS();
             this.keyButton = new System.Windows.Forms.ButtonTS();
             this.dropdelaylabel = new System.Windows.Forms.LabelTS();
+            this.udDrop = new System.Windows.Forms.NumericUpDownTS();
             this.s9 = new System.Windows.Forms.ButtonTS();
             this.s8 = new System.Windows.Forms.ButtonTS();
             this.s7 = new System.Windows.Forms.ButtonTS();
+            this.label6 = new System.Windows.Forms.LabelTS();
+            this.label5 = new System.Windows.Forms.LabelTS();
             this.stopButton = new System.Windows.Forms.ButtonTS();
+            this.label4 = new System.Windows.Forms.LabelTS();
             this.repeatdelayLabel = new System.Windows.Forms.LabelTS();
+            this.udDelay = new System.Windows.Forms.NumericUpDownTS();
             this.cbMorse = new System.Windows.Forms.ComboBoxTS();
             this.notesButton = new System.Windows.Forms.ButtonTS();
             this.speedLabel = new System.Windows.Forms.LabelTS();
@@ -85,17 +97,6 @@ namespace PowerSDR
             this.s3 = new System.Windows.Forms.ButtonTS();
             this.s2 = new System.Windows.Forms.ButtonTS();
             this.s1 = new System.Windows.Forms.ButtonTS();
-            this.checkBoxCWD = new System.Windows.Forms.CheckBoxTS();
-            this.udWPM = new System.Windows.Forms.NumericUpDownTS();
-            this.udPtt = new System.Windows.Forms.NumericUpDownTS();
-            this.udDrop = new System.Windows.Forms.NumericUpDownTS();
-            this.udDelay = new System.Windows.Forms.NumericUpDownTS();
-            this.chkAlwaysOnTop = new System.Windows.Forms.CheckBoxTS();
-            this.txtdummy1 = new System.Windows.Forms.TextBoxTS();
-            this.label7 = new System.Windows.Forms.LabelTS();
-            this.label6 = new System.Windows.Forms.LabelTS();
-            this.label5 = new System.Windows.Forms.LabelTS();
-            this.label4 = new System.Windows.Forms.LabelTS();
             ((System.ComponentModel.ISupportInitialize)(this.udWPM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPtt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDrop)).BeginInit();
@@ -129,6 +130,38 @@ namespace PowerSDR
             this.keyboardLed.TabIndex = 52;
             this.toolTip1.SetToolTip(this.keyboardLed, " Keyboard active indicator.");
             // 
+            // checkBoxTS1
+            // 
+            this.checkBoxTS1.Image = null;
+            this.checkBoxTS1.Location = new System.Drawing.Point(218, 273);
+            this.checkBoxTS1.Name = "checkBoxTS1";
+            this.checkBoxTS1.Size = new System.Drawing.Size(294, 24);
+            this.checkBoxTS1.TabIndex = 59;
+            this.checkBoxTS1.Text = "Override Voice Keyer buttons with CWX macro F3-F6\r\n";
+            this.toolTip1.SetToolTip(this.checkBoxTS1, resources.GetString("checkBoxTS1.ToolTip"));
+            this.checkBoxTS1.CheckedChanged += new System.EventHandler(this.checkBoxTS1_CheckedChanged);
+            // 
+            // checkBoxCWD
+            // 
+            this.checkBoxCWD.Image = null;
+            this.checkBoxCWD.Location = new System.Drawing.Point(565, 26);
+            this.checkBoxCWD.Name = "checkBoxCWD";
+            this.checkBoxCWD.Size = new System.Drawing.Size(99, 24);
+            this.checkBoxCWD.TabIndex = 58;
+            this.checkBoxCWD.Text = "Visual CW\r\n";
+            this.toolTip1.SetToolTip(this.checkBoxCWD, "Check Box to Visually display CW in Panadapter and Waterfall\r\n");
+            this.checkBoxCWD.CheckedChanged += new System.EventHandler(this.checkBoxCWD_CheckedChanged);
+            // 
+            // chkAlwaysOnTop
+            // 
+            this.chkAlwaysOnTop.Image = null;
+            this.chkAlwaysOnTop.Location = new System.Drawing.Point(565, 278);
+            this.chkAlwaysOnTop.Name = "chkAlwaysOnTop";
+            this.chkAlwaysOnTop.Size = new System.Drawing.Size(123, 19);
+            this.chkAlwaysOnTop.TabIndex = 57;
+            this.chkAlwaysOnTop.Text = "Always On Top";
+            this.chkAlwaysOnTop.CheckedChanged += new System.EventHandler(this.chkAlwaysOnTop_CheckedChanged);
+            // 
             // chkKeyPoll
             // 
             this.chkKeyPoll.Image = null;
@@ -140,6 +173,37 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.chkKeyPoll, resources.GetString("chkKeyPoll.ToolTip"));
             this.chkKeyPoll.CheckedChanged += new System.EventHandler(this.ckKeyPoll_CheckedChanged);
             // 
+            // udWPM
+            // 
+            this.udWPM.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.udWPM.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udWPM.Location = new System.Drawing.Point(240, 8);
+            this.udWPM.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.udWPM.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udWPM.Name = "udWPM";
+            this.udWPM.Size = new System.Drawing.Size(56, 20);
+            this.udWPM.TabIndex = 56;
+            this.toolTip1.SetToolTip(this.udWPM, "Set memory keyer (not paddle) speed in words per minute. (PARIS method)");
+            this.udWPM.Value = new decimal(new int[] {
+            22,
+            0,
+            0,
+            0});
+            this.udWPM.ValueChanged += new System.EventHandler(this.udWPM_ValueChanged);
+            this.udWPM.LostFocus += new System.EventHandler(this.udWPM_LostFocus);
+            // 
             // pttdelaylabel
             // 
             this.pttdelaylabel.Image = null;
@@ -149,6 +213,36 @@ namespace PowerSDR
             this.pttdelaylabel.TabIndex = 55;
             this.pttdelaylabel.Text = "PTT Delay";
             this.toolTip1.SetToolTip(this.pttdelaylabel, "Set delay from PTT to key down in milliseconds.");
+            // 
+            // udPtt
+            // 
+            this.udPtt.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udPtt.Location = new System.Drawing.Point(456, 8);
+            this.udPtt.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.udPtt.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.udPtt.Name = "udPtt";
+            this.udPtt.Size = new System.Drawing.Size(56, 20);
+            this.udPtt.TabIndex = 54;
+            this.toolTip1.SetToolTip(this.udPtt, "Set delay from PTT to key down in milliseconds.");
+            this.udPtt.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.udPtt.ValueChanged += new System.EventHandler(this.udPtt_ValueChanged);
+            this.udPtt.LostFocus += new System.EventHandler(this.udPtt_LostFocus);
             // 
             // expandButton
             // 
@@ -198,6 +292,15 @@ namespace PowerSDR
             this.chkPause.Text = "Pause (F11)";
             this.toolTip1.SetToolTip(this.chkPause, " Pause keyboard transmission.");
             this.chkPause.CheckedChanged += new System.EventHandler(this.chkPause_CheckedChanged);
+            // 
+            // txtdummy1
+            // 
+            this.txtdummy1.Location = new System.Drawing.Point(16, 181);
+            this.txtdummy1.Multiline = true;
+            this.txtdummy1.Name = "txtdummy1";
+            this.txtdummy1.Size = new System.Drawing.Size(672, 82);
+            this.txtdummy1.TabIndex = 42;
+            this.txtdummy1.Text = "the actual text box will be a graphic here and this one disabled";
             // 
             // txt9
             // 
@@ -281,6 +384,15 @@ namespace PowerSDR
             this.txt1.Text = "cq cq test w5sxd test";
             this.toolTip1.SetToolTip(this.txt1, "Message edit box.");
             // 
+            // label7
+            // 
+            this.label7.Image = null;
+            this.label7.Location = new System.Drawing.Point(376, 352);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(256, 32);
+            this.label7.TabIndex = 47;
+            this.label7.Text = "label7";
+            // 
             // keyButton
             // 
             this.keyButton.Image = null;
@@ -303,6 +415,38 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.dropdelaylabel, "Set \"Break In\" PTT drop out  time (mSec). Minimum allowed is PTT Delay * 1.5 \r\nTh" +
         "is only works when the CW main console panel \"Break In\" or \r\nSetup->DSP->Keyer->" +
         "Break In is NOT Enabled");
+            // 
+            // udDrop
+            // 
+            this.udDrop.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDrop.Location = new System.Drawing.Point(384, 8);
+            this.udDrop.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
+            this.udDrop.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udDrop.Name = "udDrop";
+            this.udDrop.Size = new System.Drawing.Size(56, 20);
+            this.udDrop.TabIndex = 35;
+            this.toolTip1.SetToolTip(this.udDrop, "Set \"Break In\" PTT drop out  time (mSec). Minimum allowed is PTT Delay * 1.5 \r\nTh" +
+        "is only works when the CW main console panel \"Break In\" or \r\nSetup->DSP->Keyer->" +
+        "Break In is NOT Enabled\r\n");
+            this.udDrop.Value = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.udDrop.ValueChanged += new System.EventHandler(this.udDrop_ValueChanged);
+            this.udDrop.LostFocus += new System.EventHandler(this.udDrop_LostFocus);
             // 
             // s9
             // 
@@ -340,6 +484,24 @@ namespace PowerSDR
             this.s7.Click += new System.EventHandler(this.s7_Click);
             this.s7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.s7_MouseDown);
             // 
+            // label6
+            // 
+            this.label6.Image = null;
+            this.label6.Location = new System.Drawing.Point(56, 352);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(256, 32);
+            this.label6.TabIndex = 28;
+            this.label6.Text = "label6";
+            // 
+            // label5
+            // 
+            this.label5.Image = null;
+            this.label5.Location = new System.Drawing.Point(376, 304);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(256, 32);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "label5";
+            // 
             // stopButton
             // 
             this.stopButton.Image = null;
@@ -352,6 +514,15 @@ namespace PowerSDR
         "the end)");
             this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
+            // label4
+            // 
+            this.label4.Image = null;
+            this.label4.Location = new System.Drawing.Point(56, 304);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(256, 32);
+            this.label4.TabIndex = 25;
+            this.label4.Text = "label4";
+            // 
             // repeatdelayLabel
             // 
             this.repeatdelayLabel.Image = null;
@@ -362,6 +533,37 @@ namespace PowerSDR
             this.repeatdelayLabel.Text = "Repeat Delay";
             this.toolTip1.SetToolTip(this.repeatdelayLabel, "Set repeat message delay in seconds.\r\nBy adding a \" (quotation mark) to the end o" +
         "f a text string\r\nHit STOP to End");
+            // 
+            // udDelay
+            // 
+            this.udDelay.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDelay.Location = new System.Drawing.Point(312, 8);
+            this.udDelay.Maximum = new decimal(new int[] {
+            3600,
+            0,
+            0,
+            0});
+            this.udDelay.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udDelay.Name = "udDelay";
+            this.udDelay.Size = new System.Drawing.Size(56, 20);
+            this.udDelay.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.udDelay, "Set repeat message delay in seconds.\r\nBy adding a \" (quotation mark) to the end o" +
+        "f a text string\r\nHit STOP to End\r\n");
+            this.udDelay.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.udDelay.ValueChanged += new System.EventHandler(this.udDelay_ValueChanged);
+            this.udDelay.LostFocus += new System.EventHandler(this.udDelay_LostFocus);
             // 
             // cbMorse
             // 
@@ -399,6 +601,8 @@ namespace PowerSDR
             // 
             // s6
             // 
+            this.s6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.s6.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.s6.Image = null;
             this.s6.Location = new System.Drawing.Point(240, 120);
             this.s6.Name = "s6";
@@ -411,6 +615,8 @@ namespace PowerSDR
             // 
             // s5
             // 
+            this.s5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.s5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.s5.Image = null;
             this.s5.Location = new System.Drawing.Point(240, 88);
             this.s5.Name = "s5";
@@ -423,6 +629,8 @@ namespace PowerSDR
             // 
             // s4
             // 
+            this.s4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.s4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.s4.Image = null;
             this.s4.Location = new System.Drawing.Point(240, 56);
             this.s4.Name = "s4";
@@ -435,6 +643,8 @@ namespace PowerSDR
             // 
             // s3
             // 
+            this.s3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.s3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.s3.Image = null;
             this.s3.Location = new System.Drawing.Point(5, 120);
             this.s3.Name = "s3";
@@ -469,200 +679,11 @@ namespace PowerSDR
             this.s1.Click += new System.EventHandler(this.s1_Click);
             this.s1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.s1_MouseDown);
             // 
-            // checkBoxCWD
-            // 
-            this.checkBoxCWD.Image = null;
-            this.checkBoxCWD.Location = new System.Drawing.Point(565, 26);
-            this.checkBoxCWD.Name = "checkBoxCWD";
-            this.checkBoxCWD.Size = new System.Drawing.Size(99, 24);
-            this.checkBoxCWD.TabIndex = 58;
-            this.checkBoxCWD.Text = "Visual CW\r\n";
-            this.toolTip1.SetToolTip(this.checkBoxCWD, "Check Box to Visually display CW in Panadapter and Waterfall\r\n");
-            this.checkBoxCWD.CheckedChanged += new System.EventHandler(this.checkBoxCWD_CheckedChanged);
-            // 
-            // udWPM
-            // 
-            this.udWPM.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.udWPM.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udWPM.Location = new System.Drawing.Point(240, 8);
-            this.udWPM.Maximum = new decimal(new int[] {
-            99,
-            0,
-            0,
-            0});
-            this.udWPM.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udWPM.Name = "udWPM";
-            this.udWPM.Size = new System.Drawing.Size(56, 20);
-            this.udWPM.TabIndex = 56;
-            this.toolTip1.SetToolTip(this.udWPM, "Set memory keyer (not paddle) speed in words per minute. (PARIS method)");
-            this.udWPM.Value = new decimal(new int[] {
-            22,
-            0,
-            0,
-            0});
-            this.udWPM.ValueChanged += new System.EventHandler(this.udWPM_ValueChanged);
-            this.udWPM.LostFocus += new System.EventHandler(this.udWPM_LostFocus);
-            // 
-            // udPtt
-            // 
-            this.udPtt.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udPtt.Location = new System.Drawing.Point(456, 8);
-            this.udPtt.Maximum = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            0});
-            this.udPtt.Minimum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.udPtt.Name = "udPtt";
-            this.udPtt.Size = new System.Drawing.Size(56, 20);
-            this.udPtt.TabIndex = 54;
-            this.toolTip1.SetToolTip(this.udPtt, "Set delay from PTT to key down in milliseconds.");
-            this.udPtt.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.udPtt.ValueChanged += new System.EventHandler(this.udPtt_ValueChanged);
-            this.udPtt.LostFocus += new System.EventHandler(this.udPtt_LostFocus);
-            // 
-            // udDrop
-            // 
-            this.udDrop.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDrop.Location = new System.Drawing.Point(384, 8);
-            this.udDrop.Maximum = new decimal(new int[] {
-            5000,
-            0,
-            0,
-            0});
-            this.udDrop.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDrop.Name = "udDrop";
-            this.udDrop.Size = new System.Drawing.Size(56, 20);
-            this.udDrop.TabIndex = 35;
-            this.toolTip1.SetToolTip(this.udDrop, "Set \"Break In\" PTT drop out  time (mSec). Minimum allowed is PTT Delay * 1.5 \r\nTh" +
-        "is only works when the CW main console panel \"Break In\" or \r\nSetup->DSP->Keyer->" +
-        "Break In is NOT Enabled\r\n");
-            this.udDrop.Value = new decimal(new int[] {
-            300,
-            0,
-            0,
-            0});
-            this.udDrop.ValueChanged += new System.EventHandler(this.udDrop_ValueChanged);
-            this.udDrop.LostFocus += new System.EventHandler(this.udDrop_LostFocus);
-            // 
-            // udDelay
-            // 
-            this.udDelay.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDelay.Location = new System.Drawing.Point(312, 8);
-            this.udDelay.Maximum = new decimal(new int[] {
-            3600,
-            0,
-            0,
-            0});
-            this.udDelay.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDelay.Name = "udDelay";
-            this.udDelay.Size = new System.Drawing.Size(56, 20);
-            this.udDelay.TabIndex = 20;
-            this.toolTip1.SetToolTip(this.udDelay, "Set repeat message delay in seconds.\r\nBy adding a \" (quotation mark) to the end o" +
-        "f a text string\r\nHit STOP to End\r\n");
-            this.udDelay.Value = new decimal(new int[] {
-            3,
-            0,
-            0,
-            0});
-            this.udDelay.ValueChanged += new System.EventHandler(this.udDelay_ValueChanged);
-            this.udDelay.LostFocus += new System.EventHandler(this.udDelay_LostFocus);
-            // 
-            // chkAlwaysOnTop
-            // 
-            this.chkAlwaysOnTop.Image = null;
-            this.chkAlwaysOnTop.Location = new System.Drawing.Point(565, 278);
-            this.chkAlwaysOnTop.Name = "chkAlwaysOnTop";
-            this.chkAlwaysOnTop.Size = new System.Drawing.Size(123, 19);
-            this.chkAlwaysOnTop.TabIndex = 57;
-            this.chkAlwaysOnTop.Text = "Always On Top";
-            this.chkAlwaysOnTop.CheckedChanged += new System.EventHandler(this.chkAlwaysOnTop_CheckedChanged);
-            // 
-            // txtdummy1
-            // 
-            this.txtdummy1.Location = new System.Drawing.Point(16, 181);
-            this.txtdummy1.Multiline = true;
-            this.txtdummy1.Name = "txtdummy1";
-            this.txtdummy1.Size = new System.Drawing.Size(672, 82);
-            this.txtdummy1.TabIndex = 42;
-            this.txtdummy1.Text = "the actual text box will be a graphic here and this one disabled";
-            // 
-            // label7
-            // 
-            this.label7.Image = null;
-            this.label7.Location = new System.Drawing.Point(376, 352);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(256, 32);
-            this.label7.TabIndex = 47;
-            this.label7.Text = "label7";
-            // 
-            // label6
-            // 
-            this.label6.Image = null;
-            this.label6.Location = new System.Drawing.Point(56, 352);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(256, 32);
-            this.label6.TabIndex = 28;
-            this.label6.Text = "label6";
-            // 
-            // label5
-            // 
-            this.label5.Image = null;
-            this.label5.Location = new System.Drawing.Point(376, 304);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(256, 32);
-            this.label5.TabIndex = 27;
-            this.label5.Text = "label5";
-            // 
-            // label4
-            // 
-            this.label4.Image = null;
-            this.label4.Location = new System.Drawing.Point(56, 304);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(256, 32);
-            this.label4.TabIndex = 25;
-            this.label4.Text = "label4";
-            // 
             // CWX
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(725, 298);
+            this.Controls.Add(this.checkBoxTS1);
             this.Controls.Add(this.checkBoxCWD);
             this.Controls.Add(this.chkAlwaysOnTop);
             this.Controls.Add(this.chkKeyPoll);
@@ -708,11 +729,11 @@ namespace PowerSDR
             this.Controls.Add(this.s3);
             this.Controls.Add(this.s2);
             this.Controls.Add(this.s1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximumSize = new System.Drawing.Size(745, 341);
-            this.MinimumSize = new System.Drawing.Size(280, 230);
+            this.MinimumSize = new System.Drawing.Size(745, 341);
             this.Name = "CWX";
             this.Text = "   CW Memories and Keyboard ...";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.CWX_Closing);
@@ -739,7 +760,6 @@ namespace PowerSDR
         private System.ComponentModel.IContainer components;
 
         private System.Windows.Forms.LabelTS label4;
-        private System.Windows.Forms.ButtonTS stopButton;
         private System.Windows.Forms.LabelTS label5;
         private System.Windows.Forms.LabelTS label6;                                // pulling queue pointer
         private System.Windows.Forms.ButtonTS s1;
@@ -784,8 +804,7 @@ namespace PowerSDR
         public System.Windows.Forms.NumericUpDownTS udWPM;
         private System.Windows.Forms.CheckBoxTS chkKeyPoll;
         public System.Windows.Forms.CheckBoxTS checkBoxCWD;
-
-       
-
+        public System.Windows.Forms.CheckBoxTS checkBoxTS1;
+        public System.Windows.Forms.ButtonTS stopButton;
     } // end class
 } // end namespace

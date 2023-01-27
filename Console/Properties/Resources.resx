@@ -268,4 +268,34 @@
   <data name="radar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\radar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="VK1_A" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\vk1_a.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VK1_B" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\vk1_b.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VK1_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\VK1_5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VK1_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\vk1_6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VK2Red_5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\vk2red_5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VK2Red_6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\VK2Red_6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wideblue_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\wideblue_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="wideblue_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\wideblue_4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="widered_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\widered_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="widered_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\widered_4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

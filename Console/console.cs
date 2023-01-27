@@ -4034,12 +4034,20 @@ namespace PowerSDR
                 SpotForm.btnTrack_Click(this, EventArgs.Empty); // if box is checked and world map was OFF, Go turn ON
             }
 
-
             if ((SpotForm.chkDXOn.Checked == true) && (SpotForm.dxon == false))
             {
                 SpotForm.SpotControl_Load(this, EventArgs.Empty);
                 SpotForm.spotSSB_Click(this, EventArgs.Empty); // if box is checked and DX spotting OFF, Go turn ON
             }
+
+            if ((SpotForm.chkLoTWOn.Checked == true) && (SpotForm.lotwon == false))  //.263
+            {
+                //  SpotForm.button4_Click(this, EventArgs.Empty); 
+                SpotForm.button4_MouseDown(this, new MouseEventArgs(MouseButtons.Right, 0, 0, 0, 0));
+
+            }
+
+
 
             SpotForm.SWLLoad(); // ke9ns add preload up the SWL listing
 
@@ -39717,10 +39725,69 @@ namespace PowerSDR
 
 
         PaintEventArgs PD;
+        float AMCAR_POS_CNT = 0.0f; // .264
+        float AMCAR_NEG_CNT = 0.0f; // .264
+
+        float AMCAR_AVG_POS = 0.0f;
+        float AMCAR_AVG_NEG = 0.0f;
+
+        int AMCAR_HOLDER = 0;
+       
+        float AMCAR_POS_OFF = 0f;
+        float AMCAR_NEG_OFF = 0f;
+
+        int AMCAR_POS_PER = 0;
+        int AMCAR_NEG_PER = 0;
 
         private void picDisplay_Paint(object sender, PaintEventArgs e) //System.Windows.Forms.PaintEventArgs
         {
             PD = e;
+/*
+            if (mox && (RX1DSPMode == DSPMode.AM || RX1DSPMode == DSPMode.SAM)) //.264         
+            {
+
+                decimal AMCAR = setupForm.udTXAMCarrierLevel.Value;    // 1 to 50 carrier level (kinda like watts out)
+                double AMCAR_LEV = Math.Sqrt((0.01 * (double)AMCAR) / 2); // 6 = .17, 50 = .50
+
+
+                float AMCAR_POS = Audio.AMMOD_POS1; // +/-peak value during a TX AM frame (max 125%)
+                float AMCAR_NEG = Audio.AMMOD_NEG1; // lowest value (closest to 0) during a TX AM frame) (you want max 100% level, you do not want to see 0v)
+
+                AMCAR_POS_CNT = AMCAR_POS_CNT + AMCAR_POS;
+                AMCAR_NEG_CNT = AMCAR_NEG_CNT + AMCAR_NEG;
+
+                AMCAR_HOLDER++;
+
+                if (AMCAR_HOLDER == 15)
+                { 
+                    AMCAR_HOLDER = 0;
+
+                    AMCAR_AVG_POS = AMCAR_POS_CNT / 15;
+                    AMCAR_AVG_NEG = AMCAR_NEG; // AMCAR_NEG_CNT / 15;
+
+                    Debug.WriteLine("NEG== " + AMCAR_NEG);
+
+                    AMCAR_POS_CNT = 0f;
+                    AMCAR_NEG_CNT = 2f;
+
+                    AMCAR_POS_OFF = (float)(Math.Abs(AMCAR_AVG_POS) - (float)AMCAR_LEV); //0 = 100% of carrier
+                    AMCAR_NEG_OFF = (float)(Math.Abs(AMCAR_AVG_NEG) - (float)AMCAR_LEV); //
+
+                    AMCAR_POS_PER =  (int)(100 * (AMCAR_POS_OFF * AMCAR_LEV));
+                    AMCAR_NEG_PER = (int)(100 * (AMCAR_NEG_OFF * AMCAR_LEV));
+
+
+                    AmMod.Text = "Mod:" + AMCAR_AVG_POS.ToString("f3") + "   " + AMCAR_AVG_NEG.ToString("f3") +  "  ,OFF:" + AMCAR_POS_OFF.ToString("f3") + "   " + AMCAR_NEG_OFF.ToString("f3") + "  " + AMCAR_POS_PER + "  " + AMCAR_NEG_PER;
+
+
+
+                }
+
+
+
+            }
+
+            */
 
             //   if (FirstDown == true) return;
 
@@ -39957,9 +40024,42 @@ namespace PowerSDR
         const int CirY = 37; // ke9ns add: shift meter circle down by this amoun (normal line pos)
         const int CirYS = 43; // ke9na add: lower line pos
 
+        public bool CWXON = false; // .264
         //=================================================================================================
         private void picMultiMeterDigital_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
+
+          if (setupForm != null && setupForm.chkCWXOverRide.Checked && (RX1DSPMode == DSPMode.CWL || RX1DSPMode == DSPMode.CWU)) //.264
+          {
+                if (cwxForm == null || cwxForm.IsDisposed)
+                {
+
+                    cwxForm = new CWX(this);
+                    cwxForm.Show();
+                    cwxForm.Hide();
+                }
+
+                if (CWXON == false) //264
+                {
+                    udCQCQRepeat.Visible = false;
+
+                    buttonCall1.Image = global::PowerSDR.Properties.Resources.wideblue_3;
+                    buttonCQ1.Image = global::PowerSDR.Properties.Resources.wideblue_4;
+                    buttonVK1.Image = global::PowerSDR.Properties.Resources.VK1_5;
+                    buttonVK2.Image = global::PowerSDR.Properties.Resources.VK1_6;
+                }
+
+          }
+          else 
+          {
+                buttonCall1.Image = global::PowerSDR.Properties.Resources.wideblue3; // original buttons
+                buttonCQ1.Image = global::PowerSDR.Properties.Resources.wideblue4;
+                buttonVK1.Image = global::PowerSDR.Properties.Resources.VK1;
+                buttonVK2.Image = global::PowerSDR.Properties.Resources.VK2;
+
+                udCQCQRepeat.Visible = true;
+            }
+      
 
 
             if (setupForm != null && setupForm.chkBoxPM1.Checked) //ke9ns .212
@@ -51963,6 +52063,7 @@ namespace PowerSDR
             txtTime.Select(0, 0);
             txtDate.Select(0, 0);
 
+       
 
         } //timer_clock_tick
 
@@ -52789,6 +52890,7 @@ namespace PowerSDR
             }
             else if (e.KeyCode == Keys.F10) // move waterfall up
             {
+                
                 if (comboDisplayMode.Text == "Panafall8020")
                 {
                     if (setupForm.udSS1H.Value > -((decimal)(H10 * 5 / 6) * .2M)) // .197
@@ -52809,15 +52911,15 @@ namespace PowerSDR
                     }
 
                 }
-
+                
             }
             else if (e.KeyCode == Keys.F11)
             {
-
+               
             }
             else if (e.KeyCode == Keys.F12)
             {
-
+               
             }
 
             if ((e.Shift == true) && (callsignfocus == 0))// ke9ns add (check for CTRL key but not while callsign text box is in focus)
@@ -66242,6 +66344,8 @@ namespace PowerSDR
                 saveNR = false;
                 saveNB = false;
                 saveNB2 = false;
+
+              
             }
 
 
@@ -66273,6 +66377,10 @@ namespace PowerSDR
                 saveNR = false;
                 saveNB = false;
                 saveNB2 = false;
+
+               
+
+
             }
 
 
@@ -82121,91 +82229,117 @@ namespace PowerSDR
 
             string filePath = AppDataPath + "QuickAudio\\";
 
-            if (WaveForm.chkQuickAudioFolder.Checked == false) WaveForm.chkQuickAudioFolder.Checked = true;
 
-            if (WaveForm.chkQuickAudioFolder.Checked == true)  // ke9ns add
+            if (setupForm != null && setupForm.chkCWXOverRide.Checked && (RX1DSPMode == DSPMode.CWL || RX1DSPMode == DSPMode.CWU))
             {
-                if (Directory.Exists(filePath))    // need to see the quickaudio folder
+
+                if (cwxForm != null)
                 {
-                    if (File.Exists(filePath + "CQCQ.wav"))
+                    if (CWXON == true)
                     {
-                        if ((chkPower.Checked))     // ke9ns add allow tx on play directly so you dont need to mox and play
-                        {
-
-                            if ((WaveForm.QuickPlay == false) && (CQCQReplayON == false)) // starts to play CQCQ audio now
-                            {
-
-                                if (chkVAC1.Checked) // turn OFF VAC while transmitting (override it)
-                                {
-                                    vac1 = 1;
-                                    chkVAC1.Checked = false;
-                                }
-
-                                CQCQCALL = true;                // let wave: chkQuickPlay_CheckedChanged know you want to play CQCQ.WAV file only
-                                checkBoxID.Checked = true;     // REC/PLAY ID box
-                                ckQuickPlay.Checked = true;     //  PLAY button (which keys the radio because checkboxID = true
-
-                                if (udCQCQRepeat.Value > 0) // if you entered a repeater timer value, the start thread
-                                {
-                                    if (CQCQReplayON == false) // ke9ns make sure thread is not already running
-                                    {
-                                        CQCQReplayON = true;
-                                        Thread t9 = new Thread(new ThreadStart(CQCQReplayThread));
-                                        t9.Name = "CQCQ Replay Thread";
-                                        t9.IsBackground = true;
-                                        t9.Priority = ThreadPriority.BelowNormal;
-                                        t9.Start();
-                                    }
-
-                                }
-
-
-                                buttonCQ1.Image = global::PowerSDR.Properties.Resources.widered4;  //  buttonCQ.BackColor = Color.Red;
-
-
-
-                            }
-                            else // if you click the CQCQ button before the audio is finished playing, stop the recording now.
-                            {
-
-                                buttonCQ1.Image = global::PowerSDR.Properties.Resources.wideblue4; //   buttonCQ.BackColor = Color.Blue;
-
-
-                                checkBoxID.Checked = false;     // REC/PLAY ID box
-
-                                CQCQReplayON = false;
-
-                                WaveForm.QuickPlay = false;
-                                chkMOX.Checked = false;     // unkey radio
-                                ckQuickPlay.BackColor = SystemColors.Control;//k6jca 1/13/08
-                                CQCQCALL = false;
-
-                                if (vac1 == 1)
-                                {
-                                    vac1 = 0;
-                                    Thread.Sleep(100);
-                                    //   chkVAC1.Checked = true;
-                                }
-
-                                checkBoxID.Checked = false;     // REC/PLAY ID box
-
-                            }
-
-                        } // chkpower
-
-                    } //  if (File.Exists(filePath + "\\CQCQ.wav"))
+                        cwxForm.stopButton_Click(this, EventArgs.Empty); // stop transmitting CW
+                        // CWXON = false;
+                    }
                     else
                     {
-                        MessageBox.Show(new Form() { TopMost = true }, "Console: Could not Find file CQCQ.wav in QuickAudio folder");
+                        CWXON = true;
+                        buttonCQ1.Image = global::PowerSDR.Properties.Resources.widered_4;
+                        cwxForm.queue_start(4);
                     }
-
-                } // if (!Directory.Exists(filePath)) 
-                else
-                {
-                    MessageBox.Show(new Form() { TopMost = true }, "Console: Could not find QuickAudio Folder");
+                   
                 }
 
-            } //  if (WaveForm.chkQuickAudioFolder.Checked == true) 
+            }
+            else
+            {
+
+                if (WaveForm.chkQuickAudioFolder.Checked == false) WaveForm.chkQuickAudioFolder.Checked = true;
+
+                if (WaveForm.chkQuickAudioFolder.Checked == true)  // ke9ns add
+                {
+                    if (Directory.Exists(filePath))    // need to see the quickaudio folder
+                    {
+                        if (File.Exists(filePath + "CQCQ.wav"))
+                        {
+                            if ((chkPower.Checked))     // ke9ns add allow tx on play directly so you dont need to mox and play
+                            {
+
+                                if ((WaveForm.QuickPlay == false) && (CQCQReplayON == false)) // starts to play CQCQ audio now
+                                {
+
+                                    if (chkVAC1.Checked) // turn OFF VAC while transmitting (override it)
+                                    {
+                                        vac1 = 1;
+                                        chkVAC1.Checked = false;
+                                    }
+
+                                    CQCQCALL = true;                // let wave: chkQuickPlay_CheckedChanged know you want to play CQCQ.WAV file only
+                                    checkBoxID.Checked = true;     // REC/PLAY ID box
+                                    ckQuickPlay.Checked = true;     //  PLAY button (which keys the radio because checkboxID = true
+
+                                    if (udCQCQRepeat.Value > 0) // if you entered a repeater timer value, the start thread
+                                    {
+                                        if (CQCQReplayON == false) // ke9ns make sure thread is not already running
+                                        {
+                                            CQCQReplayON = true;
+                                            Thread t9 = new Thread(new ThreadStart(CQCQReplayThread));
+                                            t9.Name = "CQCQ Replay Thread";
+                                            t9.IsBackground = true;
+                                            t9.Priority = ThreadPriority.BelowNormal;
+                                            t9.Start();
+                                        }
+
+                                    }
+
+
+                                    buttonCQ1.Image = global::PowerSDR.Properties.Resources.widered4;  //  buttonCQ.BackColor = Color.Red;
+
+
+
+                                }
+                                else // if you click the CQCQ button before the audio is finished playing, stop the recording now.
+                                {
+
+                                    buttonCQ1.Image = global::PowerSDR.Properties.Resources.wideblue4; //   buttonCQ.BackColor = Color.Blue;
+
+
+                                    checkBoxID.Checked = false;     // REC/PLAY ID box
+
+                                    CQCQReplayON = false;
+
+                                    WaveForm.QuickPlay = false;
+                                    chkMOX.Checked = false;     // unkey radio
+                                    ckQuickPlay.BackColor = SystemColors.Control;//k6jca 1/13/08
+                                    CQCQCALL = false;
+
+                                    if (vac1 == 1)
+                                    {
+                                        vac1 = 0;
+                                        Thread.Sleep(100);
+                                        //   chkVAC1.Checked = true;
+                                    }
+
+                                    checkBoxID.Checked = false;     // REC/PLAY ID box
+
+                                }
+
+                            } // chkpower
+
+                        } //  if (File.Exists(filePath + "\\CQCQ.wav"))
+                        else
+                        {
+                            MessageBox.Show(new Form() { TopMost = true }, "Console: Could not Find file CQCQ.wav in QuickAudio folder");
+                        }
+
+                    } // if (!Directory.Exists(filePath)) 
+                    else
+                    {
+                        MessageBox.Show(new Form() { TopMost = true }, "Console: Could not find QuickAudio Folder");
+                    }
+
+                } //  if (WaveForm.chkQuickAudioFolder.Checked == true) 
+
+            } // cwx override
 
             //  btnHidden.Focus();
 
@@ -82348,68 +82482,94 @@ namespace PowerSDR
         {
             string filePath = AppDataPath + "QuickAudio\\";
 
-            if (WaveForm.chkQuickAudioFolder.Checked == false) WaveForm.chkQuickAudioFolder.Checked = true;
-
-            if (WaveForm.chkQuickAudioFolder.Checked == true)  // ke9ns add
+            if (setupForm != null && setupForm.chkCWXOverRide.Checked && (RX1DSPMode == DSPMode.CWL || RX1DSPMode == DSPMode.CWU)) //.264
             {
-                if (Directory.Exists(filePath)) // need to see the quickaudio folder
+
+                if (cwxForm != null)
                 {
-                    if (File.Exists(filePath + "CALL.wav"))
+
+
+                    if (CWXON == true)
                     {
-                        if ((chkPower.Checked)) // ke9ns add: allow tx on play directly so you dont need to mox and play
-                        {
-                            if (WaveForm.QuickPlay == false)
-                            {
-                                if (chkVAC1.Checked)
-                                {
-                                    vac1 = 1;
-                                    chkVAC1.Checked = false;
-                                }
-
-                                CALLCALL = true;      // let wave: chkQuickPlay_CheckedChanged know you want to play CALL.WAV file only
-                                checkBoxID.Checked = true;
-                                ckQuickPlay.Checked = true;
-
-
-
-                                buttonCall1.Image = global::PowerSDR.Properties.Resources.widered3;   //  buttonCall.BackColor = Color.Red;
-
-                            }
-                            else // turn off
-                            {
-                                //  buttonCall.BackColor = Color.Blue;
-
-                                WaveForm.QuickPlay = false;
-                                chkMOX.Checked = false;     // unkey radio
-                                ckQuickPlay.BackColor = SystemColors.Control;//k6jca 1/13/08
-                                CALLCALL = false;
-
-                                if (vac1 == 1)
-                                {
-                                    vac1 = 0;
-                                    Thread.Sleep(100);
-                                    chkVAC1.Checked = true;
-                                }
-                                checkBoxID.Checked = false;
-                            }
-
-                        } // chkpower
-
-                    } //  if (File.Exists(filePath + "\\CALL.wav"))
+                        cwxForm.stopButton_Click(this, EventArgs.Empty); // stop transmitting CW
+                      //  CWXON = false;
+                    }
                     else
                     {
-                        MessageBox.Show(new Form() { TopMost = true }, "Console: Could not Find file CALL.wav in QuickAudio folder");
-
+                        CWXON = true;
+                        buttonCall1.Image = global::PowerSDR.Properties.Resources.widered_3;
+                        cwxForm.queue_start(3);
                     }
 
-                } // if (!Directory.Exists(filePath)) 
-                else
-                {
-                    MessageBox.Show(new Form() { TopMost = true }, "Console: Could not find QuickAudio Folder");
                 }
 
-            } //  if (WaveForm.chkQuickAudioFolder.Checked == true) 
+            }
+            else
+            {
 
+                if (WaveForm.chkQuickAudioFolder.Checked == false) WaveForm.chkQuickAudioFolder.Checked = true;
+
+                if (WaveForm.chkQuickAudioFolder.Checked == true)  // ke9ns add
+                {
+                    if (Directory.Exists(filePath)) // need to see the quickaudio folder
+                    {
+                        if (File.Exists(filePath + "CALL.wav"))
+                        {
+                            if ((chkPower.Checked)) // ke9ns add: allow tx on play directly so you dont need to mox and play
+                            {
+                                if (WaveForm.QuickPlay == false)
+                                {
+                                    if (chkVAC1.Checked)
+                                    {
+                                        vac1 = 1;
+                                        chkVAC1.Checked = false;
+                                    }
+
+                                    CALLCALL = true;      // let wave: chkQuickPlay_CheckedChanged know you want to play CALL.WAV file only
+                                    checkBoxID.Checked = true;
+                                    ckQuickPlay.Checked = true;
+
+
+
+                                    buttonCall1.Image = global::PowerSDR.Properties.Resources.widered3;   //  buttonCall.BackColor = Color.Red;
+
+                                }
+                                else // turn off
+                                {
+                                    //  buttonCall.BackColor = Color.Blue;
+
+                                    WaveForm.QuickPlay = false;
+                                    chkMOX.Checked = false;     // unkey radio
+                                    ckQuickPlay.BackColor = SystemColors.Control;//k6jca 1/13/08
+                                    CALLCALL = false;
+
+                                    if (vac1 == 1)
+                                    {
+                                        vac1 = 0;
+                                        Thread.Sleep(100);
+                                        chkVAC1.Checked = true;
+                                    }
+                                    checkBoxID.Checked = false;
+                                }
+
+                            } // chkpower
+
+                        } //  if (File.Exists(filePath + "\\CALL.wav"))
+                        else
+                        {
+                            MessageBox.Show(new Form() { TopMost = true }, "Console: Could not Find file CALL.wav in QuickAudio folder");
+
+                        }
+
+                    } // if (!Directory.Exists(filePath)) 
+                    else
+                    {
+                        MessageBox.Show(new Form() { TopMost = true }, "Console: Could not find QuickAudio Folder");
+                    }
+
+                } //  if (WaveForm.chkQuickAudioFolder.Checked == true) 
+
+            } // check for CWX override
 
         } // CALL REPLY buttonCall_Click
 
@@ -85234,71 +85394,96 @@ namespace PowerSDR
 
         public bool VK1CALL = false; // ke9ns add true = wave plays VK1.wav file
 
+        public bool CWXEND = false; // .264 
         private void buttonVK1_Click(object sender, EventArgs e)
         {
             string filePath = AppDataPath + "QuickAudio\\";
 
-            if (WaveForm.chkQuickAudioFolder.Checked == false) WaveForm.chkQuickAudioFolder.Checked = true;
-
-            if (WaveForm.chkQuickAudioFolder.Checked == true)  // ke9ns add
+            if (setupForm != null && setupForm.chkCWXOverRide.Checked && (RX1DSPMode == DSPMode.CWL || RX1DSPMode == DSPMode.CWU))
             {
-                if (Directory.Exists(filePath)) // need to see the quickaudio folder
+
+                if (cwxForm != null)
                 {
-                    if (File.Exists(filePath + "VK1.wav"))
+
+                    if (CWXON == true)
                     {
-                        if ((chkPower.Checked)) // ke9ns add allow tx on play directly so you dont need to mox and play
-                        {
-                            if (WaveForm.QuickPlay == false)
-                            {
-                                if (chkVAC1.Checked)
-                                {
-                                    vac1 = 1;
-                                    chkVAC1.Checked = false;
-                                }
-
-                                VK1CALL = true;      // let wave: chkQuickPlay_CheckedChanged know you want to play CALL.WAV file only
-                                checkBoxID.Checked = true;
-                                ckQuickPlay.Checked = true;
-
-
-                                buttonVK1.Image = global::PowerSDR.Properties.Resources.VK1Red;   //  buttonCall.BackColor = Color.Red;
-
-                            }
-                            else // turn off
-                            {
-                                //  buttonCall.BackColor = Color.Blue;
-
-                                WaveForm.QuickPlay = false;
-                                chkMOX.Checked = false;     // unkey radio
-                                ckQuickPlay.BackColor = SystemColors.Control;//k6jca 1/13/08
-                                VK1CALL = false;
-
-                                if (vac1 == 1)
-                                {
-                                    vac1 = 0;
-                                    Thread.Sleep(100);
-                                    chkVAC1.Checked = true;
-                                }
-                                checkBoxID.Checked = false;
-                            }
-
-                        } // chkpower
-
-                    } //  if (File.Exists(filePath + "\\CALL.wav"))
+                        cwxForm.stopButton_Click(this, EventArgs.Empty); // stop transmitting CW
+                        // CWXON = false;
+                    }
                     else
                     {
-                        MessageBox.Show(new Form() { TopMost = true }, "Console: Could not Find file VK1.wav in QuickAudio folder");
-
+                        CWXON = true;
+                        buttonVK1.Image = global::PowerSDR.Properties.Resources.VK2Red_5;
+                        cwxForm.queue_start(5);
                     }
-
-                } // if (!Directory.Exists(filePath)) 
-                else
-                {
-                    MessageBox.Show(new Form() { TopMost = true }, "Console: Could not find QuickAudio Folder");
                 }
 
-            } //  if (WaveForm.chkQuickAudioFolder.Checked == true) 
+            }
+            else
+            {
 
+                if (WaveForm.chkQuickAudioFolder.Checked == false) WaveForm.chkQuickAudioFolder.Checked = true;
+
+                if (WaveForm.chkQuickAudioFolder.Checked == true)  // ke9ns add
+                {
+                    if (Directory.Exists(filePath)) // need to see the quickaudio folder
+                    {
+                        if (File.Exists(filePath + "VK1.wav"))
+                        {
+                            if ((chkPower.Checked)) // ke9ns add allow tx on play directly so you dont need to mox and play
+                            {
+                                if (WaveForm.QuickPlay == false)
+                                {
+                                    if (chkVAC1.Checked)
+                                    {
+                                        vac1 = 1;
+                                        chkVAC1.Checked = false;
+                                    }
+
+                                    VK1CALL = true;      // let wave: chkQuickPlay_CheckedChanged know you want to play CALL.WAV file only
+                                    checkBoxID.Checked = true;
+                                    ckQuickPlay.Checked = true;
+
+
+                                    buttonVK1.Image = global::PowerSDR.Properties.Resources.VK1Red;   //  buttonCall.BackColor = Color.Red;
+
+                                }
+                                else // turn off
+                                {
+                                    //  buttonCall.BackColor = Color.Blue;
+
+                                    WaveForm.QuickPlay = false;
+                                    chkMOX.Checked = false;     // unkey radio
+                                    ckQuickPlay.BackColor = SystemColors.Control;//k6jca 1/13/08
+                                    VK1CALL = false;
+
+                                    if (vac1 == 1)
+                                    {
+                                        vac1 = 0;
+                                        Thread.Sleep(100);
+                                        chkVAC1.Checked = true;
+                                    }
+                                    checkBoxID.Checked = false;
+                                }
+
+                            } // chkpower
+
+                        } //  if (File.Exists(filePath + "\\CALL.wav"))
+                        else
+                        {
+                            MessageBox.Show(new Form() { TopMost = true }, "Console: Could not Find file VK1.wav in QuickAudio folder");
+
+                        }
+
+                    } // if (!Directory.Exists(filePath)) 
+                    else
+                    {
+                        MessageBox.Show(new Form() { TopMost = true }, "Console: Could not find QuickAudio Folder");
+                    }
+
+                } //  if (WaveForm.chkQuickAudioFolder.Checked == true) 
+
+            }// cwx override
 
         } // buttonVK1
 
@@ -85309,68 +85494,92 @@ namespace PowerSDR
 
             string filePath = AppDataPath + "QuickAudio\\";
 
-            if (WaveForm.chkQuickAudioFolder.Checked == false) WaveForm.chkQuickAudioFolder.Checked = true;
-
-            if (WaveForm.chkQuickAudioFolder.Checked == true)  // ke9ns add
+            if (setupForm != null && setupForm.chkCWXOverRide.Checked && (RX1DSPMode == DSPMode.CWL || RX1DSPMode == DSPMode.CWU))
             {
-                if (Directory.Exists(filePath)) // need to see the quickaudio folder
+
+                if (cwxForm != null)
                 {
-                    if (File.Exists(filePath + "VK2.wav"))
+
+
+                    if (CWXON == true)
                     {
-                        if ((chkPower.Checked)) // ke9ns add: allow tx on play directly so you dont need to mox and play
-                        {
-                            if (WaveForm.QuickPlay == false)
-                            {
-                                if (chkVAC1.Checked)
-                                {
-                                    vac1 = 1;
-                                    chkVAC1.Checked = false;
-                                }
-
-                                VK2CALL = true;      // let wave: chkQuickPlay_CheckedChanged know you want to play VK2.WAV file only
-                                checkBoxID.Checked = true;
-                                ckQuickPlay.Checked = true;
-
-
-                                buttonVK2.Image = global::PowerSDR.Properties.Resources.VK2Red;   //  buttonCall.BackColor = Color.Red;
-
-                            }
-                            else // turn off
-                            {
-                                //  buttonCall.BackColor = Color.Blue;
-
-                                WaveForm.QuickPlay = false;
-                                chkMOX.Checked = false;     // unkey radio
-                                ckQuickPlay.BackColor = SystemColors.Control;//k6jca 1/13/08
-                                VK2CALL = false;
-
-                                if (vac1 == 1)
-                                {
-                                    vac1 = 0;
-                                    Thread.Sleep(100);
-                                    chkVAC1.Checked = true;
-                                }
-                                checkBoxID.Checked = false;
-                            }
-
-                        } // chkpower
-
-                    } //  if (File.Exists(filePath + "\\CALL.wav"))
+                        cwxForm.stopButton_Click(this, EventArgs.Empty); // stop transmitting CW
+                        // CWXON = false;
+                    }
                     else
                     {
-                        MessageBox.Show(new Form() { TopMost = true }, "Console: Could not Find file VK2.wav in QuickAudio folder");
-
+                        CWXON = true;
+                        buttonVK2.Image = global::PowerSDR.Properties.Resources.VK2Red_6;
+                        cwxForm.queue_start(6);
                     }
-
-                } // if (!Directory.Exists(filePath)) 
-                else
-                {
-                    MessageBox.Show(new Form() { TopMost = true }, "Console: Could not find QuickAudio Folder");
                 }
 
-            } //  if (WaveForm.chkQuickAudioFolder.Checked == true) 
+            }
+            else
+            {
+
+                if (WaveForm.chkQuickAudioFolder.Checked == false) WaveForm.chkQuickAudioFolder.Checked = true;
+
+                if (WaveForm.chkQuickAudioFolder.Checked == true)  // ke9ns add
+                {
+                    if (Directory.Exists(filePath)) // need to see the quickaudio folder
+                    {
+                        if (File.Exists(filePath + "VK2.wav"))
+                        {
+                            if ((chkPower.Checked)) // ke9ns add: allow tx on play directly so you dont need to mox and play
+                            {
+                                if (WaveForm.QuickPlay == false)
+                                {
+                                    if (chkVAC1.Checked)
+                                    {
+                                        vac1 = 1;
+                                        chkVAC1.Checked = false;
+                                    }
+
+                                    VK2CALL = true;      // let wave: chkQuickPlay_CheckedChanged know you want to play VK2.WAV file only
+                                    checkBoxID.Checked = true;
+                                    ckQuickPlay.Checked = true;
 
 
+                                    buttonVK2.Image = global::PowerSDR.Properties.Resources.VK2Red;   //  buttonCall.BackColor = Color.Red;
+
+                                }
+                                else // turn off
+                                {
+                                    //  buttonCall.BackColor = Color.Blue;
+
+                                    WaveForm.QuickPlay = false;
+                                    chkMOX.Checked = false;     // unkey radio
+                                    ckQuickPlay.BackColor = SystemColors.Control;//k6jca 1/13/08
+                                    VK2CALL = false;
+
+                                    if (vac1 == 1)
+                                    {
+                                        vac1 = 0;
+                                        Thread.Sleep(100);
+                                        chkVAC1.Checked = true;
+                                    }
+                                    checkBoxID.Checked = false;
+                                }
+
+                            } // chkpower
+
+                        } //  if (File.Exists(filePath + "\\CALL.wav"))
+                        else
+                        {
+                            MessageBox.Show(new Form() { TopMost = true }, "Console: Could not Find file VK2.wav in QuickAudio folder");
+
+                        }
+
+                    } // if (!Directory.Exists(filePath)) 
+                    else
+                    {
+                        MessageBox.Show(new Form() { TopMost = true }, "Console: Could not find QuickAudio Folder");
+                    }
+
+                } //  if (WaveForm.chkQuickAudioFolder.Checked == true) 
+
+            } //cwx override
 
 
         } // buttonvk2
@@ -86593,7 +86802,8 @@ namespace PowerSDR
         }
 
        
-
+               
+      
         private void chkLockR_CheckedChanged(object sender, EventArgs e)
         {
             if (chkLockR.Checked)
@@ -86727,8 +86937,8 @@ namespace PowerSDR
 
        */
 
-            // ke9ns store SWR PLOTS
-            string file_nameSWR = AppDataPath + "ke9ns_SWR1.dat"; // save data for my mods
+        // ke9ns store SWR PLOTS
+        string file_nameSWR = AppDataPath + "ke9ns_SWR1.dat"; // save data for my mods
                                                                   //  string file_nameSWRcsv = AppDataPath + "ke9ns_SWR2.csv"; // save data for my mods .166
 
 

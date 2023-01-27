@@ -1095,7 +1095,10 @@ namespace PowerSDR
             if (console.setupForm != null)
             {
                 checkBoxCWD.Checked = console.setupForm.chkCWDisplay.Checked;
+                checkBoxTS1.Checked = console.setupForm.chkCWXOverRide.Checked; // .264
             }
+
+
         }
 
 
@@ -1239,11 +1242,22 @@ namespace PowerSDR
         }
 
         // stop button clicked
-        private void stopButton_Click(object sender, System.EventArgs e)
+        public void stopButton_Click(object sender, System.EventArgs e)
         {
             clear_show();
             quit = true;
             kquit = true;
+
+            console.CWXEND = true; // .264
+
+            if (checkBoxTS1.Checked) //.264
+            {
+                console.buttonVK1.Image = global::PowerSDR.Properties.Resources.VK1_5;
+                console.buttonVK2.Image = global::PowerSDR.Properties.Resources.VK1_6;
+                console.buttonCQ1.Image = global::PowerSDR.Properties.Resources.wideblue_4;
+                console.buttonCall1.Image = global::PowerSDR.Properties.Resources.wideblue_3;
+                console.CWXON = false;
+            }
 
         }
 
@@ -1570,6 +1584,18 @@ namespace PowerSDR
                 {
                     Debug.WriteLine("Quit2");
                     quitshut();
+
+                    console.CWXEND = true; // .264
+
+                    if (checkBoxTS1.Checked) //.264
+                    {
+                        console.buttonVK1.Image = global::PowerSDR.Properties.Resources.VK1_5;
+                        console.buttonVK2.Image = global::PowerSDR.Properties.Resources.VK1_6;
+                        console.buttonCQ1.Image = global::PowerSDR.Properties.Resources.wideblue_4;
+                        console.buttonCall1.Image = global::PowerSDR.Properties.Resources.wideblue_3;
+                        console.CWXON = false;
+                    }
+
                     return;
                 }
 
@@ -1714,7 +1740,7 @@ namespace PowerSDR
 
 
         //===============================================================================================
-        private void queue_start(int qmsg)          // queue message n for start
+        public void queue_start(int qmsg)          // queue message n for start
         {
             Debug.WriteLine("start of queue===================");
 
@@ -1955,13 +1981,21 @@ namespace PowerSDR
         {
             if (console.setupForm != null)
             {
-                console.setupForm.chkCWDisplay.Checked = checkBoxCWD.Checked;
+                console.setupForm.chkCWDisplay.Checked = checkBoxCWD.Checked; // .264
             }
         }
 
         private void CWX_MouseEnter(object sender, EventArgs e)
         {
             if (console.setupForm.chkBoxAutoFocus.Checked == true && chkAlwaysOnTop.Checked == true) this.Activate();
+        }
+
+        private void checkBoxTS1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (console.setupForm != null)
+            {
+                console.setupForm.chkCWXOverRide.Checked = checkBoxTS1.Checked;
+            }
         }
 
         //================================================================================================
@@ -1982,7 +2016,7 @@ namespace PowerSDR
         }
 
 
-        private void msg2keys(int nmsg)
+        public void msg2keys(int nmsg)
         {
             int i, nc;
             string qq, s;

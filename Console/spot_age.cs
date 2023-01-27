@@ -43,6 +43,7 @@ namespace PowerSDR
         private Label label5;
         private System.ComponentModel.IContainer components;
         private CheckBoxTS chkPanSpotBlank;
+        private CheckBoxTS chkPanLoTWColor;
         public static SpotControl SpotForm;                       // ke9ns add DX spotter function
 
         #endregion
@@ -89,8 +90,9 @@ namespace PowerSDR
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpotAge));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.udSpotAge = new System.Windows.Forms.NumericUpDownTS();
-            this.label5 = new System.Windows.Forms.Label();
             this.chkPanSpotBlank = new System.Windows.Forms.CheckBoxTS();
+            this.label5 = new System.Windows.Forms.Label();
+            this.chkPanLoTWColor = new System.Windows.Forms.CheckBoxTS();
             ((System.ComponentModel.ISupportInitialize)(this.udSpotAge)).BeginInit();
             this.SuspendLayout();
             // 
@@ -124,16 +126,6 @@ namespace PowerSDR
             0});
             this.udSpotAge.ValueChanged += new System.EventHandler(this.udMethod_ValueChanged);
             // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 13);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(144, 13);
-            this.label5.TabIndex = 85;
-            this.label5.Text = "Maximum Spot Age (Minutes)";
-            // 
             // chkPanSpotBlank
             // 
             this.chkPanSpotBlank.AutoSize = true;
@@ -148,10 +140,35 @@ namespace PowerSDR
             this.chkPanSpotBlank.UseVisualStyleBackColor = true;
             this.chkPanSpotBlank.CheckedChanged += new System.EventHandler(this.chkPanSpotBlank_CheckedChanged_1);
             // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 13);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(144, 13);
+            this.label5.TabIndex = 85;
+            this.label5.Text = "Maximum Spot Age (Minutes)";
+            // 
+            // chkPanLoTWColor
+            // 
+            this.chkPanLoTWColor.AutoSize = true;
+            this.chkPanLoTWColor.Image = null;
+            this.chkPanLoTWColor.Location = new System.Drawing.Point(15, 78);
+            this.chkPanLoTWColor.Name = "chkPanLoTWColor";
+            this.chkPanLoTWColor.Size = new System.Drawing.Size(229, 17);
+            this.chkPanLoTWColor.TabIndex = 88;
+            this.chkPanLoTWColor.Text = "Panadapter spot callsigns with LoTW Color\r\n";
+            this.toolTip1.SetToolTip(this.chkPanLoTWColor, "Check to put DX Callsign spot on the Panadater in front of a Dark background to m" +
+        "ake them easier to see on a crowded band.");
+            this.chkPanLoTWColor.UseVisualStyleBackColor = true;
+            this.chkPanLoTWColor.CheckedChanged += new System.EventHandler(this.chkPanLoTWColor_CheckedChanged);
+            // 
             // SpotAge
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(367, 246);
+            this.Controls.Add(this.chkPanLoTWColor);
             this.Controls.Add(this.chkPanSpotBlank);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.udSpotAge);
@@ -253,6 +270,12 @@ namespace PowerSDR
         {
             if (chkPanSpotBlank.Checked) SpotForm.SpotBackground = true;
             else SpotForm.SpotBackground = false;
+        }
+
+        private void chkPanLoTWColor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkPanLoTWColor.Checked) SpotForm.SpotLoTWColor = true;
+            else SpotForm.SpotLoTWColor = false;
         }
     } // SpotAge
 

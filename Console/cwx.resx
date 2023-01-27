@@ -120,6 +120,18 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="checkBoxTS1.ToolTip" xml:space="preserve">
+    <value>When checked ON you can "Minimize" the CWX panel 
+And use the 4 Voice keyer buttons on the main PowerSDR console screen
+For the CWX macros F3,F4,F5,F6 
+
+Reply  becomes CWX F3
+CQCQ becomes CWX F4
+VK1  becomes CWX F5
+VK2  becomes CWX F6
+
+You can now use the Function keys F3,F4,F5,F6 without having the CWX panel open.</value>
+  </data>
   <data name="chkKeyPoll.ToolTip" xml:space="preserve">
     <value>Check to Poll the CW Key, and Stop a CWX transmission if you use your "Key".
 
