@@ -7190,10 +7190,13 @@ namespace PowerSDR
             set { scope_max = value; }
         }
 
-        public static float AMMOD_POS = 0f; // ke9ns: .264
+        public static float AMMOD_POS = 0f; // ke9ns: .265
         public static float AMMOD_POS1 = 0f;
         public static float AMMOD_NEG = 0f;
         public static float AMMOD_NEG1 = 0f;
+        public static int AMMOD_NEG_COUNT = 0;
+        public static int AMMOD_NEG_FLAG = 0;
+        public static int AMMOD_SIZE = 0;
 
         //======================================================================================
         // ke9ns: this is for scope and Panascope only (framecount on a flex5000 = 2048)
@@ -7227,27 +7230,44 @@ namespace PowerSDR
 
             //------------------------------------------------------------------------------
 
-            AMMOD_POS = 0f;
+            AMMOD_POS = 0f; //. 265
             AMMOD_POS1 = 0f;
 
             AMMOD_NEG = 2.0f;
             AMMOD_NEG1 = 2.0f;
+            AMMOD_NEG_COUNT = 0; // reset at start of frame
+
 
             for (int i = 0; i < frameCount; i++) // ke9ns 0 to 2048
             {
 
                 // Debug.WriteLine("S: " + i + " ,V: " + buf[i]); //S: 289 ,V: 0.004785764S: 236 ,V: -0.05042852
 
-
                 if (buf[i] < scope_pixel_min) scope_pixel_min = buf[i]; // NEG VALUE ke9ns: fill the array as long as its a valid value (buffer value < valid biggest pos value)
-
                 if (buf[i] > scope_pixel_max) scope_pixel_max = buf[i]; // POS VALUE ke9ns: fill the array as long as its a valid value (buffer value > valid biggest neg value)
 
 
-                float temp = Math.Abs(buf[i]); //.264
-                if (temp > AMMOD_POS) AMMOD_POS = Math.Abs(buf[i]); //.264 ke9ns: find highest TX signal level during AM transmit
-                if (temp < AMMOD_NEG) AMMOD_NEG = Math.Abs(buf[i]); //.264 ke9ns: find lowest TX signal level during AM transmit
+                float temp = Math.Abs(buf[i]); //.265
+                if (temp > AMMOD_POS) AMMOD_POS = Math.Abs(buf[i]); //.265 ke9ns: find highest TX signal level during AM transmit
+              
+                
+              
+                if (temp < 0.0015f )
+                {
+                    AMMOD_NEG_COUNT++;
 
+                    if (AMMOD_NEG_COUNT > 5)
+                    {
+                        AMMOD_NEG_FLAG++;
+                       
+                    }
+                }
+                else
+                {
+                    AMMOD_NEG_COUNT = 0; // reset counter
+                    AMMOD_SIZE = frameCount;
+
+                }
 
                 scope_sample_index++;
 
@@ -7269,8 +7289,8 @@ namespace PowerSDR
 
             } // for(int i=0; i < frameCount; i++) //
 
-            AMMOD_POS1 = AMMOD_POS;  // .264 dont update until the end of the frame
-            AMMOD_NEG1 = AMMOD_NEG;  // .264 dont update until the end of the frame
+            AMMOD_POS1 = AMMOD_POS;  // .265 dont update until the end of the frame
+            AMMOD_NEG1 = AMMOD_NEG;  // .265 dont update until the end of the frame
 
 
 

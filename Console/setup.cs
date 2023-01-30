@@ -11818,6 +11818,24 @@ namespace PowerSDR
                     {
                         console.lblRX2Meter.Visible = true;
                     }
+
+                //    Debug.WriteLine("MODE==== " + console.comboMeterRXMode.Text + " , " +console.comboMeterRXMode.SelectedIndex + " , " + console.comboMeterRXMode.SelectedItem);
+
+
+                   if (console.comboMeterRXMode.SelectedIndex == 2) // .265 "Sig Pk"
+                   {
+                       console.comboMeterRXMode.SelectedIndex = 0; // set to "Signal" since Bar already has a PK function
+                       console.comboMeterRXMode_SelectedIndexChanged(this, EventArgs.Empty); //
+
+                   }
+
+                    if (console.comboRX2MeterMode.SelectedIndex == 2) // .265
+                    {
+                        console.comboRX2MeterMode.SelectedIndex = 0; // set to "Signal" since Bar already has a PK function
+                        console.comboRX2MeterMode_SelectedIndexChanged(this, EventArgs.Empty); // ke9ns add to update lblrx2meter text
+
+                    }
+
                     break;
             }
 

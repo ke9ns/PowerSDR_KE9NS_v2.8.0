@@ -596,6 +596,16 @@ namespace PowerSDR.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap wideorg_4 {
+            get {
+                object obj = ResourceManager.GetObject("wideorg_4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap wideorg4 {
             get {
                 object obj = ResourceManager.GetObject("wideorg4", resourceCulture);

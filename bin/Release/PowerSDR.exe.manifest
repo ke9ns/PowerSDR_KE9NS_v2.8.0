@@ -4,7 +4,7 @@
   <description asmv2:iconFile="PowerSDR.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="PowerSDR" version="2.8.0.264" language="neutral" processorArchitecture="x86" />
+    <assemblyIdentity name="PowerSDR" version="2.8.0.265" language="neutral" processorArchitecture="x86" />
     <commandLine file="PowerSDR.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -175,14 +175,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerSDR.exe" size="16821512">
-      <assemblyIdentity name="PowerSDR" version="2.8.0.264" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerSDR.exe" size="16825608">
+      <assemblyIdentity name="PowerSDR" version="2.8.0.265" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>5yvNNrmXh5V/4/eYck7BHR132Wuv0tAsJUAQKtrExTE=</dsig:DigestValue>
+        <dsig:DigestValue>O8MTTGUQS4wgHQBzC65TiVIVxqRdhx9WyBJZSxOAR00=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -414,13 +414,13 @@
       <dsig:DigestValue>3ciDUdUH9PVmezQ7yDftNQ8ydkpuz4RsxvkJLkKJHkQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Resources\wideorg4.png" size="4584">
+  <file name="Resources\wideorg_4.png" size="2304">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>481qAMORQkZPJJCVwA26pLsM0ad7+YFbais5IbXEONY=</dsig:DigestValue>
+      <dsig:DigestValue>Dv9dQzr4eFyx/AtssuXX7KV1xVUEb0N4NKsp4/HUxMM=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\widered_3.png" size="2389">

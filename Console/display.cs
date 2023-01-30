@@ -2383,9 +2383,18 @@ namespace PowerSDR
                 g.DrawLine(new Pen(grid_color), W / 2, 0, W / 2, H);    // draw vertical line
             }
 
-            if (high_swr && !bottom)
-                g.DrawString("High SWR", new System.Drawing.Font("Arial", 14, FontStyle.Bold), new SolidBrush(Color.Red), 245, 20);
-        }
+            if (high_swr && !bottom)  g.DrawString("High SWR", new System.Drawing.Font("Arial", 14, FontStyle.Bold), new SolidBrush(Color.Red), 245, 20);
+
+            if (mox && (console.RX1DSPMode == DSPMode.AM || console.RX1DSPMode == DSPMode.SAM) ) //.265        
+            {
+                if (console.AMCAR_NEG_FLAG > 0)
+                   
+                    g.DrawString("AM NEG Modulation >100%: " + console.AMCAR_NEG_FLAG, new System.Drawing.Font("Arial", 14, FontStyle.Bold), new SolidBrush(Color.Red), 100, 20);
+
+            }
+
+
+        } // DrawScopeGrid
 
         //================================================
         // ke9ns spectrum

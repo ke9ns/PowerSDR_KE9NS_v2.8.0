@@ -6916,9 +6916,9 @@ namespace PowerSDR
             this.udDisplayScopeTime.Name = "udDisplayScopeTime";
             this.udDisplayScopeTime.Size = new System.Drawing.Size(64, 20);
             this.udDisplayScopeTime.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.udDisplayScopeTime, "Amount of time to display across the width of the scope display window.");
+            this.toolTip1.SetToolTip(this.udDisplayScopeTime, resources.GetString("udDisplayScopeTime.ToolTip"));
             this.udDisplayScopeTime.Value = new decimal(new int[] {
-            5000,
+            100,
             0,
             0,
             0});

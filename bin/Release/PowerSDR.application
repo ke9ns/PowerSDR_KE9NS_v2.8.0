@@ -14,14 +14,14 @@
     <framework targetVersion="4.8" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="PowerSDR.exe.manifest" size="25133">
+    <dependentAssembly dependencyType="install" codebase="PowerSDR.exe.manifest" size="25134">
       <assemblyIdentity name="PowerSDR.exe" version="2.8.0.27" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Vf3vKcimYDUOrOnOde6lTEBhVkI+c3XWJf0gaR4Bmjs=</dsig:DigestValue>
+        <dsig:DigestValue>KYWy4i9gPvcPFNoHS1c89Ug3N/UqOlh1xrpePi1RH6E=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

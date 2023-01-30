@@ -409,7 +409,7 @@ namespace PowerSDR
             this.ScanMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spotterMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.MapMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.SWLMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.keyShortCut = new System.Windows.Forms.ToolStripMenuItem();
             this.herosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.remoteProfilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -424,7 +424,6 @@ namespace PowerSDR
             this.VFODialBB = new System.Windows.Forms.PictureBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panelModeSpecificPhone = new System.Windows.Forms.PanelTS();
-            this.AmMod = new System.Windows.Forms.TextBox();
             this.labelTS2 = new System.Windows.Forms.LabelTS();
             this.labelTS1 = new System.Windows.Forms.LabelTS();
             this.picNoiseGate = new System.Windows.Forms.PictureBox();
@@ -4646,13 +4645,14 @@ namespace PowerSDR
             this.ScanMenuItem,
             this.spotterMenu,
             this.MapMenuItem,
-            this.SWLMenuItem,
+            this.keyShortCut,
             this.herosToolStripMenuItem,
             this.aboutToolStripMenuItem,
             this.remoteProfilesToolStripMenuItem,
             this.reportBugToolStripMenuItem});
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.ShowItemToolTips = true;
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // setupToolStripMenuItem
             // 
@@ -4805,12 +4805,12 @@ namespace PowerSDR
             this.MapMenuItem.MouseEnter += new System.EventHandler(this.trackMenuItem1_MouseEnter);
             this.MapMenuItem.MouseLeave += new System.EventHandler(this.trackMenuItem1_MouseLeave);
             // 
-            // SWLMenuItem
+            // keyShortCut
             // 
-            resources.ApplyResources(this.SWLMenuItem, "SWLMenuItem");
-            this.SWLMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.SWLMenuItem.Name = "SWLMenuItem";
-            this.SWLMenuItem.Click += new System.EventHandler(this.SWLMenuItem_Click);
+            this.keyShortCut.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.keyShortCut.Name = "keyShortCut";
+            resources.ApplyResources(this.keyShortCut, "keyShortCut");
+            this.keyShortCut.Click += new System.EventHandler(this.keyboardShortCut_Click);
             // 
             // herosToolStripMenuItem
             // 
@@ -4908,7 +4908,6 @@ namespace PowerSDR
             // 
             resources.ApplyResources(this.panelModeSpecificPhone, "panelModeSpecificPhone");
             this.panelModeSpecificPhone.BackColor = System.Drawing.Color.Transparent;
-            this.panelModeSpecificPhone.Controls.Add(this.AmMod);
             this.panelModeSpecificPhone.Controls.Add(this.labelTS2);
             this.panelModeSpecificPhone.Controls.Add(this.labelTS1);
             this.panelModeSpecificPhone.Controls.Add(this.udTXFilterLow);
@@ -4937,11 +4936,6 @@ namespace PowerSDR
             this.panelModeSpecificPhone.Controls.Add(this.chkNoiseGate);
             this.panelModeSpecificPhone.Name = "panelModeSpecificPhone";
             this.panelModeSpecificPhone.Paint += new System.Windows.Forms.PaintEventHandler(this.panelRing_Paint);
-            // 
-            // AmMod
-            // 
-            resources.ApplyResources(this.AmMod, "AmMod");
-            this.AmMod.Name = "AmMod";
             // 
             // labelTS2
             // 
@@ -6723,7 +6717,6 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.VFODialAA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.VFODialBB)).EndInit();
             this.panelModeSpecificPhone.ResumeLayout(false);
-            this.panelModeSpecificPhone.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picNoiseGate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picVOX)).EndInit();
             this.panelBandVHFRX2.ResumeLayout(false);
@@ -6854,7 +6847,6 @@ namespace PowerSDR
         private System.Windows.Forms.RichTextBox txtDate;   // ke9ns mod (was texboxts)
         private System.Windows.Forms.Panel panelVFOAHover;
         private System.Windows.Forms.Panel panelVFOBHover;
-        private System.Windows.Forms.ComboBoxTS comboMeterRXMode;
         private System.Windows.Forms.ComboBoxTS comboMeterTXMode;
         private System.Windows.Forms.ButtonTS btnXITReset;
         private System.Windows.Forms.ButtonTS btnRITReset;
@@ -6971,7 +6963,6 @@ namespace PowerSDR
         private System.Windows.Forms.RadioButtonTS radRX2FilterVar1;
         private System.Windows.Forms.RadioButtonTS radRX2FilterVar2;
         private System.Windows.Forms.PanelTS grpRX2Meter;
-        private System.Windows.Forms.ComboBoxTS comboRX2MeterMode;
         private System.Windows.Forms.NumericUpDownTS udRX2FilterLow;
         private System.Windows.Forms.NumericUpDownTS udRX2FilterHigh;
         private System.Windows.Forms.LabelTS lblRX2FilterLow;
@@ -7236,7 +7227,6 @@ namespace PowerSDR
         private System.Windows.Forms.RichTextBox richTextBox6;
         private System.Windows.Forms.RichTextBox richTextBox7;
         private System.Windows.Forms.RichTextBox richTextBox8;
-        private System.Windows.Forms.ToolStripMenuItem SWLMenuItem;
         private System.Windows.Forms.PictureBox ScreenCap;
         private System.Windows.Forms.PictureBox ScreenCap1;
         public System.Windows.Forms.CheckBoxTS checkBoxIICPTT;
@@ -7345,7 +7335,9 @@ namespace PowerSDR
         public System.Windows.Forms.RadioButtonTS btnEnable;
         public System.Windows.Forms.RadioButtonTS btnSync;
         private System.Windows.Forms.ButtonTS btnBump180;
-        public System.Windows.Forms.TextBox AmMod;
+        public System.Windows.Forms.ComboBoxTS comboMeterRXMode;
+        public System.Windows.Forms.ComboBoxTS comboRX2MeterMode;
+        private System.Windows.Forms.ToolStripMenuItem keyShortCut;
     } // class console
 
 

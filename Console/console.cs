@@ -39725,25 +39725,24 @@ namespace PowerSDR
 
 
         PaintEventArgs PD;
-        float AMCAR_POS_CNT = 0.0f; // .264
-        float AMCAR_NEG_CNT = 0.0f; // .264
+        float AMCAR_POS_CNT = 0.0f; // .265
+        float AMCAR_NEG_CNT = 0.0f; // .265
 
         float AMCAR_AVG_POS = 0.0f;
-        float AMCAR_AVG_NEG = 0.0f;
-
+        
         int AMCAR_HOLDER = 0;
        
         float AMCAR_POS_OFF = 0f;
-        float AMCAR_NEG_OFF = 0f;
-
-        int AMCAR_POS_PER = 0;
-        int AMCAR_NEG_PER = 0;
+        
+        public int AMCAR_POS_PER = 0;
+       
+        public int AMCAR_NEG_FLAG = 0;
 
         private void picDisplay_Paint(object sender, PaintEventArgs e) //System.Windows.Forms.PaintEventArgs
         {
             PD = e;
-/*
-            if (mox && (RX1DSPMode == DSPMode.AM || RX1DSPMode == DSPMode.SAM)) //.264         
+
+            if (mox && (RX1DSPMode == DSPMode.AM || RX1DSPMode == DSPMode.SAM)) //.265        
             {
 
                 decimal AMCAR = setupForm.udTXAMCarrierLevel.Value;    // 1 to 50 carrier level (kinda like watts out)
@@ -39751,11 +39750,11 @@ namespace PowerSDR
 
 
                 float AMCAR_POS = Audio.AMMOD_POS1; // +/-peak value during a TX AM frame (max 125%)
-                float AMCAR_NEG = Audio.AMMOD_NEG1; // lowest value (closest to 0) during a TX AM frame) (you want max 100% level, you do not want to see 0v)
-
+            
+              
+                
                 AMCAR_POS_CNT = AMCAR_POS_CNT + AMCAR_POS;
-                AMCAR_NEG_CNT = AMCAR_NEG_CNT + AMCAR_NEG;
-
+             
                 AMCAR_HOLDER++;
 
                 if (AMCAR_HOLDER == 15)
@@ -39763,21 +39762,22 @@ namespace PowerSDR
                     AMCAR_HOLDER = 0;
 
                     AMCAR_AVG_POS = AMCAR_POS_CNT / 15;
-                    AMCAR_AVG_NEG = AMCAR_NEG; // AMCAR_NEG_CNT / 15;
+                
+                    Debug.WriteLine("NEG: " + AMCAR_NEG_FLAG);
+                    //   AMCAR_NEG_FLAG = Audio.AMMOD_NEG_FLAG / 15; // AMMOD_SIZE
 
-                    Debug.WriteLine("NEG== " + AMCAR_NEG);
+                    AMCAR_NEG_FLAG = (int)((float)(Audio.AMMOD_NEG_FLAG / 15) / (float)(Audio.AMMOD_SIZE / 6f) * 100);
 
+                    Audio.AMMOD_NEG_FLAG = 0;
+
+                    
                     AMCAR_POS_CNT = 0f;
-                    AMCAR_NEG_CNT = 2f;
-
+                 
                     AMCAR_POS_OFF = (float)(Math.Abs(AMCAR_AVG_POS) - (float)AMCAR_LEV); //0 = 100% of carrier
-                    AMCAR_NEG_OFF = (float)(Math.Abs(AMCAR_AVG_NEG) - (float)AMCAR_LEV); //
-
                     AMCAR_POS_PER =  (int)(100 * (AMCAR_POS_OFF * AMCAR_LEV));
-                    AMCAR_NEG_PER = (int)(100 * (AMCAR_NEG_OFF * AMCAR_LEV));
+                   
 
-
-                    AmMod.Text = "Mod:" + AMCAR_AVG_POS.ToString("f3") + "   " + AMCAR_AVG_NEG.ToString("f3") +  "  ,OFF:" + AMCAR_POS_OFF.ToString("f3") + "   " + AMCAR_NEG_OFF.ToString("f3") + "  " + AMCAR_POS_PER + "  " + AMCAR_NEG_PER;
+                 //   AmMod.Text = "ModPOS: " + AMCAR_AVG_POS.ToString("f3") + "  ,OFF:" + AMCAR_POS_OFF.ToString("f3") + "  " + AMCAR_POS_PER + "ModNEG: " + AMCAR_NEG_FLAG;
 
 
 
@@ -39787,7 +39787,7 @@ namespace PowerSDR
 
             }
 
-            */
+           
 
             //   if (FirstDown == true) return;
 
@@ -40024,7 +40024,8 @@ namespace PowerSDR
         const int CirY = 37; // ke9ns add: shift meter circle down by this amoun (normal line pos)
         const int CirYS = 43; // ke9na add: lower line pos
 
-        public bool CWXON = false; // .264
+        public bool CWXON = false; // .264 true = playing CW marco
+
         //=================================================================================================
         private void picMultiMeterDigital_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
@@ -40039,12 +40040,12 @@ namespace PowerSDR
                     cwxForm.Hide();
                 }
 
-                if (CWXON == false) //264
+                if (CWXON == false) // .264
                 {
-                    udCQCQRepeat.Visible = false;
+                  //  udCQCQRepeat.Visible = false;
 
                     buttonCall1.Image = global::PowerSDR.Properties.Resources.wideblue_3;
-                    buttonCQ1.Image = global::PowerSDR.Properties.Resources.wideblue_4;
+                  if (CWXF4ReplayON == false) buttonCQ1.Image = global::PowerSDR.Properties.Resources.wideblue_4; // .264
                     buttonVK1.Image = global::PowerSDR.Properties.Resources.VK1_5;
                     buttonVK2.Image = global::PowerSDR.Properties.Resources.VK1_6;
                 }
@@ -40057,7 +40058,7 @@ namespace PowerSDR
                 buttonVK1.Image = global::PowerSDR.Properties.Resources.VK1;
                 buttonVK2.Image = global::PowerSDR.Properties.Resources.VK2;
 
-                udCQCQRepeat.Visible = true;
+              // udCQCQRepeat.Visible = true;
             }
       
 
@@ -40430,21 +40431,21 @@ namespace PowerSDR
                             break;
                     }
 
-                    if ((!mox && current_meter_rx_mode != MeterRXMode.OFF) ||
-                        (mox && current_meter_tx_mode != MeterTXMode.OFF))
+                    // .265  change 0 to 25 for start of bars in meter
+                    if ((!mox && current_meter_rx_mode != MeterRXMode.OFF) || (mox && current_meter_tx_mode != MeterTXMode.OFF))
                     {
                         if (pixel_x <= 0) pixel_x = 1;
 
-                        LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, pixel_x, H),
+                        LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 25, pixel_x, H),
                             meter_left_color, meter_right_color, LinearGradientMode.Horizontal);
 
-                        g.FillRectangle(brush, 0, 0, pixel_x, H);
+                        g.FillRectangle(brush, 0, 25, pixel_x, H);
 
                         for (int i = 0; i < 21; i++)
                             g.DrawLine(new Pen(meter_background_color), 6 + i * 8, 0, 6 + i * 8, H);
 
-                        g.DrawLine(new Pen(Color.Red), pixel_x, 0, pixel_x, H);
-                        g.FillRectangle(new SolidBrush(meter_background_color), pixel_x + 1, 0, W - pixel_x, H);
+                        g.DrawLine(new Pen(Color.Red), pixel_x, 25, pixel_x, H); //.265
+                        g.FillRectangle(new SolidBrush(meter_background_color), pixel_x + 1, 25, W - pixel_x, H);
 
                         if (pixel_x >= meter_peak_value)
                         {
@@ -40460,8 +40461,8 @@ namespace PowerSDR
                             }
                             else
                             {
-                                g.DrawLine(new Pen(Color.Red), meter_peak_value, 0, meter_peak_value, H);
-                                g.DrawLine(new Pen(Color.Red), meter_peak_value - 1, 0, meter_peak_value - 1, H);
+                                g.DrawLine(new Pen(Color.Red), meter_peak_value, 25, meter_peak_value, H);
+                                g.DrawLine(new Pen(Color.Red), meter_peak_value - 1, 25, meter_peak_value - 1, H);
                             }
                         }
                     }
@@ -41633,7 +41634,11 @@ namespace PowerSDR
                                     output = num.ToString(format) + " dBm ";
                                     break;
                                 case MeterRXMode.SIGNAL_PEAK: // ke9ns ADD 
+                                   
+                                    if (current_meter_display_mode == MultiMeterDisplayMode.Bar) output = num.ToString(format) + " dBm "; //.265
+                                    else
                                     output = meter_peak_value.ToString(format) + " dBm ";
+
                                     break;
                                 case MeterRXMode.ADC_L:
                                 case MeterRXMode.ADC_R:
@@ -42149,8 +42154,7 @@ namespace PowerSDR
 
                     //=============edge meter movement RX1
 
-                    if ((!mox && current_meter_rx_mode != MeterRXMode.OFF) ||
-                        (mox && current_meter_tx_mode != MeterTXMode.OFF))
+                    if ((!mox && current_meter_rx_mode != MeterRXMode.OFF) || (mox && current_meter_tx_mode != MeterTXMode.OFF))
                     {
                         pixel_x = Math.Max(0, pixel_x);
                         pixel_x = Math.Min(W - 3, pixel_x);
@@ -42203,7 +42207,9 @@ namespace PowerSDR
                                     output = num.ToString(format) + " dBm ";
                                     break;
                                 case MeterRXMode.SIGNAL_PEAK: // ke9ns2 ADD 
-                                    output = meter_peak_value.ToString(format) + " dBm ";
+                                    if (current_meter_display_mode == MultiMeterDisplayMode.Bar) output = num.ToString(format) + " dBm "; //.265
+                                    else
+                                        output = meter_peak_value.ToString(format) + " dBm ";
                                     break;
                                 case MeterRXMode.ADC_L:
                                 case MeterRXMode.ADC_R:
@@ -43768,7 +43774,9 @@ namespace PowerSDR
                                     output = num.ToString(format) + " dBm ";
                                     break;
                                 case MeterRXMode.SIGNAL_PEAK: // ke9ns2 ADD 
-                                    output = meter_peak_value.ToString(format) + " dBm ";
+                                    if (current_meter_display_mode == MultiMeterDisplayMode.Bar) output = num.ToString(format) + " dBm "; //.265
+                                    else
+                                        output = meter_peak_value.ToString(format) + " dBm ";
                                     break;
                                 case MeterRXMode.ADC_L:
                                 case MeterRXMode.ADC_R:
@@ -43917,6 +43925,8 @@ namespace PowerSDR
         // ke9ns add (for combo meter of 2nd meter only)
         private void picRX3Meter_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
+           
+            
 
             int H = picRX3Meter.ClientSize.Height;
             int W = picRX3Meter.ClientSize.Width;
@@ -43954,6 +43964,9 @@ namespace PowerSDR
 
                 MeterTXMode mode = current_meter_tx1_mode;
 
+                lblRX2Meter.Visible = false; //.265 if bar mode is enabled, combo meter is currently showing so turn off dbm strip
+
+              
                 if (rx2_meter_data_ready)
                 {
                     // rx2_meter_current_data = rx2_meter_new_data;
@@ -44394,6 +44407,8 @@ namespace PowerSDR
                     {
                         num = rx2_meter_current_data;
 
+                        lblRX2Meter.Visible = true; //.265
+
                         switch (rx2_meter_mode)
                         {
                             case MeterRXMode.SIGNAL_STRENGTH:
@@ -44701,13 +44716,14 @@ namespace PowerSDR
                         LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, pixel_x, H),
                             meter_left_color, meter_right_color, LinearGradientMode.Horizontal);
 
-                        g.FillRectangle(brush, 0, 0, pixel_x, H);
+                        g.FillRectangle(brush, 0, 25, pixel_x, H);
 
                         for (int i = 0; i < 21; i++)
-                            g.DrawLine(new Pen(meter_background_color), 6 + i * 8, 0, 6 + i * 8, H);
+                            g.DrawLine(new Pen(meter_background_color), 6 + i * 8, 25, 6 + i * 8, H);
 
-                        g.DrawLine(new Pen(Color.Red), pixel_x, 0, pixel_x, H);
-                        g.FillRectangle(new SolidBrush(meter_background_color), pixel_x + 1, 0, W - pixel_x, H);
+                        // .265 change 0 to 25
+                        g.DrawLine(new Pen(Color.Red), pixel_x, 25, pixel_x, H);
+                        g.FillRectangle(new SolidBrush(meter_background_color), pixel_x + 1, 25, W - pixel_x, H);
 
                         if (pixel_x >= rx2_meter_peak_value)
                         {
@@ -44723,8 +44739,8 @@ namespace PowerSDR
                             }
                             else
                             {
-                                g.DrawLine(new Pen(Color.Red), rx2_meter_peak_value, 0, rx2_meter_peak_value, H);
-                                g.DrawLine(new Pen(Color.Red), rx2_meter_peak_value - 1, 0, rx2_meter_peak_value - 1, H);
+                                g.DrawLine(new Pen(Color.Red), rx2_meter_peak_value, 25, rx2_meter_peak_value, H);
+                                g.DrawLine(new Pen(Color.Red), rx2_meter_peak_value - 1, 25, rx2_meter_peak_value - 1, H);
                             }
                         }
                     } //  if (rx2_meter_mode != MeterRXMode.OFF)
@@ -46014,7 +46030,9 @@ namespace PowerSDR
                                     output = num.ToString(format) + " dBm ";
                                     break;
                                 case MeterRXMode.SIGNAL_PEAK: // ke9ns2 ADD 
-                                    output = rx2_meter_peak_value.ToString(format) + " dBm ";
+                                    if (current_meter_display_mode == MultiMeterDisplayMode.Bar) output = num.ToString(format) + " dBm ";//.265
+                                    else
+                                        output = rx2_meter_peak_value.ToString(format) + " dBm ";
                                     break;
                                 case MeterRXMode.ADC_L:
                                 case MeterRXMode.ADC_R:
@@ -46589,7 +46607,9 @@ namespace PowerSDR
                                     output = num.ToString(format) + " dBm ";
                                     break;
                                 case MeterRXMode.SIGNAL_PEAK: // ke9ns2 ADD 
-                                    output = rx2_meter_peak_value.ToString(format) + " dBm ";
+                                    if (current_meter_display_mode == MultiMeterDisplayMode.Bar) output = num.ToString(format) + " dBm ";//.265
+                                    else
+                                        output = rx2_meter_peak_value.ToString(format) + " dBm ";
                                     break;
                                 case MeterRXMode.ADC_L:
                                 case MeterRXMode.ADC_R:
@@ -48140,7 +48160,9 @@ namespace PowerSDR
                                     output = num.ToString(format) + " dBm ";
                                     break;
                                 case MeterRXMode.SIGNAL_PEAK: // ke9ns2 ADD 
-                                    output = rx2_meter_peak_value.ToString(format) + " dBm ";
+                                    if (current_meter_display_mode == MultiMeterDisplayMode.Bar) output = num.ToString(format) + " dBm ";//.265
+                                    else
+                                        output = rx2_meter_peak_value.ToString(format) + " dBm ";
                                     break;
                                 case MeterRXMode.ADC_L:
                                 case MeterRXMode.ADC_R:
@@ -52822,26 +52844,26 @@ namespace PowerSDR
                 } //    if (MouseIsOverControl(chkTNF) == true)
 
             } //  else if (e.KeyCode == Keys.F2)
-            else if (e.KeyCode == Keys.F3) // ke9ns add: Voice keyer Reply button
+            else if (e.KeyCode == Keys.F3) // ke9ns: Voice keyer "Reply" button or CWX F3 in CW mode
             {
 
                 buttonCall_Click(this, EventArgs.Empty); // ke9ns add: .187 simulate button press
 
             } // else if (e.KeyCode == Keys.F3) 
-            else if (e.KeyCode == Keys.F4) // ke9ns add: Voice keyer CQCQ button
+            else if (e.KeyCode == Keys.F4) // ke9ns: Voice keyer CQCQ button or CWX F4 in CW mode
             {
 
-                btnTrack_Click(this, EventArgs.Empty);// ke9ns add: .187 simulate button press
+                btnTrack_Click(this, EventArgs.Empty);// ke9ns: .187 simulate button press
 
             } // else if (e.KeyCode == Keys.F4) 
             else if (e.KeyCode == Keys.F5)
             {
-                buttonVK1_Click(this, EventArgs.Empty); // ke9ns add: .189 simulate button press Voice keyer VK1
+                buttonVK1_Click(this, EventArgs.Empty); // ke9ns: .189 simulate button press Voice keyer "VK1" or CWX F5 in cw mode
 
             }
             else if (e.KeyCode == Keys.F6)
             {
-                buttonVK2_Click(this, EventArgs.Empty); // ke9ns add: .189 simulate button press Voice keyer VK2
+                buttonVK2_Click(this, EventArgs.Empty); // ke9ns: .189 simulate button press Voice keyer "VK2" or CWX F6 in cw mode
 
             }
             else if (e.KeyCode == Keys.F7) // ke9ns add .188 1750hz repeater button
@@ -58831,7 +58853,7 @@ namespace PowerSDR
 
         } // chkMox Clicked
           //====================================================================
-        private void comboMeterRXMode_SelectedIndexChanged(object sender, System.EventArgs e)
+        public void comboMeterRXMode_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (comboMeterRXMode.Items.Count == 0 || comboMeterRXMode.SelectedIndex < 0)
             {
@@ -58851,7 +58873,10 @@ namespace PowerSDR
                         break;
                     case "Sig Pk":      // ke9ns ADD
                         multimeter_peak = Display.CLEAR_FLAG;
-                        mode = MeterRXMode.SIGNAL_PEAK;
+
+                        if (setupForm != null && setupForm.comboMeterType.Text == "Bar") mode = MeterRXMode.SIGNAL_STRENGTH; //.265
+                        else mode = MeterRXMode.SIGNAL_PEAK;// but not when in Bar mode since its already a peak meter. MultiMeterDisplayMode.Bar
+
                         break;
                     case "ADC L":
                         mode = MeterRXMode.ADC_L;
@@ -58878,7 +58903,7 @@ namespace PowerSDR
                         case MeterRXMode.SIGNAL_STRENGTH:
                         case MeterRXMode.SIGNAL_PEAK:  // ke9ns
                         case MeterRXMode.SIGNAL_AVERAGE:
-                            lblMultiSMeter.Text = "  1   3   5   7   9  +20 +40 +60";
+                            lblMultiSMeter.Text = "  1   3   5   7   9  +20 +40 +60db"; //.265
                             break;
 
                         case MeterRXMode.ADC_L:
@@ -71677,7 +71702,7 @@ namespace PowerSDR
 
 
         //============================================================
-        private void comboRX2MeterMode_SelectedIndexChanged(object sender, System.EventArgs e)
+        public void comboRX2MeterMode_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             if (!FWCEEPROM.RX2OK) return;
 
@@ -71699,7 +71724,9 @@ namespace PowerSDR
                         break;
                     case "Sig Pk":      // ke9ns ADD
                         rx2_meter_peak = Display.CLEAR_FLAG;
-                        mode = MeterRXMode.SIGNAL_PEAK;
+                        if (setupForm != null && setupForm.comboMeterType.Text == "Bar") mode = MeterRXMode.SIGNAL_STRENGTH; // .265
+                        else mode = MeterRXMode.SIGNAL_PEAK;
+                        
                         break;
                     case "ADC L":
                         mode = MeterRXMode.ADC_L;
@@ -71741,7 +71768,7 @@ namespace PowerSDR
                         case MeterRXMode.SIGNAL_STRENGTH:
                         case MeterRXMode.SIGNAL_PEAK:  // ke9ns ADD
                         case MeterRXMode.SIGNAL_AVERAGE:
-                            lblRX2Meter.Text = "  1   3   5   7   9  +20 +40 +60";
+                            lblRX2Meter.Text = "  1   3   5   7   9  +20 +40 +60db"; //.265
                             break;
 
                         case MeterRXMode.ADC_L:
@@ -75207,6 +75234,7 @@ namespace PowerSDR
 
                         lblMultiSMeter.Visible = false; // turn off labels since we are switching off Bar meter
                         lblRX2Meter.Visible = false;
+                        lblRX2Meter.Invalidate(); //.265
 
                         if (setupForm != null)
                         {
@@ -82230,27 +82258,52 @@ namespace PowerSDR
             string filePath = AppDataPath + "QuickAudio\\";
 
 
-            if (setupForm != null && setupForm.chkCWXOverRide.Checked && (RX1DSPMode == DSPMode.CWL || RX1DSPMode == DSPMode.CWU))
+            if (setupForm != null && setupForm.chkCWXOverRide.Checked && (RX1DSPMode == DSPMode.CWL || RX1DSPMode == DSPMode.CWU)) //.264
             {
 
                 if (cwxForm != null)
                 {
                     if (CWXON == true)
-                    {
+                    { 
+                        //CWXON = false;
                         cwxForm.stopButton_Click(this, EventArgs.Empty); // stop transmitting CW
-                        // CWXON = false;
+                        CWXF4ReplayON = false; // shut down any repeat timer
+                       
                     }
                     else
                     {
-                        CWXON = true;
-                        buttonCQ1.Image = global::PowerSDR.Properties.Resources.widered_4;
-                        cwxForm.queue_start(4);
+                        if (CWXF4ReplayON == false)
+                        {
+                            CWXON = true;
+                            buttonCQ1.Image = global::PowerSDR.Properties.Resources.widered_4; // RED button face
+                            cwxForm.queue_start(4); // call CWX program to start sending CW
+                                                    // when its done Quit2 will print or you can send a stop command ahead of time
+
+
+                            if (udCQCQRepeat.Value > 0) // if you entered a repeater timer value, the start thread
+                            {
+                                if (CWXF4ReplayON == false) // ke9ns make sure thread is not already running
+                                {
+                                    CWXF4ReplayON = true;
+                                    Thread t9 = new Thread(new ThreadStart(CWXF4ReplayThread));
+                                    t9.Name = "CWX F4 Replay Thread";
+                                    t9.IsBackground = true;
+                                    t9.Priority = ThreadPriority.BelowNormal;
+                                    t9.Start();
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            CWXF4ReplayON = false; // shut down any repeat timer
+                        }
                     }
                    
                 }
 
             }
-            else
+            else // below is for everything but CW mode
             {
 
                 if (WaveForm.chkQuickAudioFolder.Checked == false) WaveForm.chkQuickAudioFolder.Checked = true;
@@ -82344,6 +82397,137 @@ namespace PowerSDR
             //  btnHidden.Focus();
 
         } // CQCQ btnTrack_Click
+
+
+
+        //=======================================================================
+        // ke9ns add: CWX F4 Replay thread .264
+
+        public bool CWXF4ReplayON = false;
+        public bool CWXF4ReplayPTT = false;
+
+        public void CWXF4ReplayThread()
+        {
+            int replayCount = 0;
+
+            Stopwatch CWXF4Replay = new Stopwatch();
+            CWXF4Replay.Reset();
+
+            Debug.WriteLine("===========Start CWXF4 timer thread");
+            for (; ; )
+            {
+                Thread.Sleep(50);
+
+                if (CWXF4ReplayON == false) break;
+
+                if (udCQCQRepeat.Value == 0) break;
+
+                if ( CWXON == true )    // if (WaveForm.QuickPlay == true) // playing
+                {
+
+                    buttonCQ1.Image = global::PowerSDR.Properties.Resources.widered_4;  // buttonCQ.BackColor = Color.Red;
+
+                    if (CWXF4Replay.ElapsedMilliseconds > 0) CWXF4Replay.Reset();
+
+                    if ((CWXF4ReplayPTT == false && chkMOX.Checked == false) || (CWXF4ReplayPTT == true)) // ke9ns check pollPTT
+                    {
+                        Debug.WriteLine("CWXF4 Playing.. BREAK BREAK");
+
+                        break; // ke9ns: if you hit the PTT while play audio, then break
+                    }
+
+                }
+                else // if (CWXON == false)  if (WaveForm.QuickPlay == false)  CWXF4 playback done so start timer
+                {
+
+                    buttonCQ1.Image = global::PowerSDR.Properties.Resources.wideorg_4;  //  CWXF4 buttonCQ.BackColor = Color.Orange;
+
+
+                    if ((CWXF4ReplayPTT == true)) // ke9ns check pollPTT
+                    {
+                        Debug.WriteLine("WAITING..PTT... BREAK BREAK BREAK");
+                        break; // ke9ns if you hit the PTT while play audio, then break
+                    }
+                    if ((CWXF4Replay.ElapsedMilliseconds > 350) && (chkMOX.Checked == true)) // ke9ns check pollPTT
+                    {
+                        Debug.WriteLine("WAITING..MOX TRUE.. BREAK BREAK BREAK");
+                        break; // ke9ns if you hit the PTT while play audio, then break
+                    }
+
+                    if ((CWXF4Replay.ElapsedMilliseconds > 550) && chkPower.Checked == false)
+                    {
+                        Debug.WriteLine("CHKPOWER BREAK BREAK BREAK=====");
+                        break;
+                    }
+
+                    if (CWXF4Replay.ElapsedMilliseconds == 0) CWXF4Replay.Start(); // do 1 time per playback
+
+                    if (CWXF4Replay.ElapsedMilliseconds >= ((long)udCQCQRepeat.Value * 1000))
+                    {
+                        if (CWXF4ReplayON == true)
+                        {
+                            if (++replayCount < 8) // max count
+                            {
+                                // REPEAT PLAY NOW
+                              //  if (chkVAC1.Checked) // turn OFF VAC while transmitting (override it)
+                              //  {
+                              //      vac1 = 1;
+                             //       chkVAC1.Checked = false;
+                             //   }
+
+                               
+                                CWXON = true;
+                                buttonCQ1.Image = global::PowerSDR.Properties.Resources.widered_4; // RED button face
+                                cwxForm.queue_start(4); // call CWX program to start sending CW
+                                                        // when its done Quit2 will print or you can send a stop command ahead of time
+
+                            }
+                            else
+                            {
+                                Debug.WriteLine("8 times... BREAK BREAK BREAK=====");
+                                break; // end after 8 times
+                            }
+                        }
+
+                    } //  if (CWXF4Replay.ElapsedMilliseconds >= ((long)udCQCQRepeat.Value * 1000))
+
+                }
+
+
+            } // for loop forever
+
+
+            //...........................................................
+            // breaks come here and turn off audio playback
+          //  checkBoxID.Checked = false;     // REC/PLAY ID box
+
+            buttonCQ1.Image = global::PowerSDR.Properties.Resources.wideblue_4;  //   buttonCQ.BackColor = Color.Blue;
+
+            Debug.WriteLine("DONE BREAK BREAK BREAK=====");
+
+            CWXF4Replay.Stop();
+
+            //  WaveForm.QuickPlay = false; // kill any audio playback
+
+            // pollPTT will check for PTT release to end this timer
+
+            //   ckQuickPlay.BackColor = SystemColors.Control;//k6jca 1/13/08
+            //   CQCQCALL = false;
+
+            //  if (vac1 == 1)
+            //  {
+            //      vac1 = 0;
+            //     Thread.Sleep(100);
+            //     chkVAC1.Checked = true;
+            //  }
+
+            //   checkBoxID.Checked = false;     // REC/PLAY ID box
+
+            CWXF4ReplayON = false;
+
+        } // CWXF4ReplayThread()
+
+
 
 
         //=======================================================================
@@ -86801,9 +86985,30 @@ namespace PowerSDR
             picRadar.Invalidate();
         }
 
-       
-               
-      
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void keyboardShortCut_Click(object sender, EventArgs e) //.265 opens PDF of keyboard shortcuts
+        {
+            // string strNamedDestination = "MyNamedDestination"; // Must be defined in PDF file.
+            // string strFilePath = "MyFilePath.pdf";
+            // string strParams = " /n /A \"pagemode=bookmarks&nameddest=" + strNamedDestination + "\" \"" + strFilePath + "\"";
+            // Process.Start("AcroRd32.exe", strParams);
+
+            try
+            {
+                System.Diagnostics.Process.Start(@"C:\Program Files (x86)\FlexRadio Systems\PowerSDR v2.8.0\PowerSDR ke9ns keyboard shortcuts.pdf");
+            }
+            catch(Exception f)
+            {
+                Debug.WriteLine("keyboard shortcut fault " + f);
+            }
+
+
+        }
+
         private void chkLockR_CheckedChanged(object sender, EventArgs e)
         {
             if (chkLockR.Checked)

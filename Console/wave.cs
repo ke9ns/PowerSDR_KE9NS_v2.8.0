@@ -810,7 +810,7 @@ namespace PowerSDR
 
         public decimal preampvalue = 0; // ke9na add
         //==================================================================================
-        // ke9ns  mod needed since MON now toggle pre and post audio. quickplay should always be post 
+        // ke9ns:  mod needed since MON now toggle pre and post audio. quickplay should always be post 
         private void chkQuickPlay_CheckedChanged(object sender, System.EventArgs e)
         {
             Debug.WriteLine("WAVE: chkQuickPlay checkchanged");
