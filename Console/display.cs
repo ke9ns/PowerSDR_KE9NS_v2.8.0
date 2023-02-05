@@ -2781,9 +2781,13 @@ namespace PowerSDR
         //==========================================================================================================================================================
 
         public static int[] holder2 = new int[160];                           // ke9ns add MEMORY Spot used to allow the vertical lines to all be drawn first so the call sign text can draw over the top of it.
+        public static int[] holder2RX1 = new int[160];                          // .268 because Display with (Bottom) RX2 on destroys the index for RX1
+       
         public static int[] holder3 = new int[160];                          // ke9ns add
 
         public static int[] holder = new int[160];                           // ke9ns add DX Spot used to allow the vertical lines to all be drawn first so the call sign text can draw over the top of it.
+        public static int[] holderRX1 = new int[160];                         // .268 for rx2 holder because Display with (Bottom) RX2 on destroys the index for RX1
+       
         public static int[] holder1 = new int[160];                          // ke9ns add
         private static Font font1 = new Font("Ariel", 9, FontStyle.Regular);  // ke9ns add dx spot call sign font style
 
@@ -12620,6 +12624,8 @@ namespace PowerSDR
                             int VFO_DXPos = (int)((((float)W / (float)VFODiff) * (float)(hh - VFOLow))); // determine MEMORY spot line pos on current panadapter screen
 
                             holder2[kk] = ii;                    // ii is the actual MEMORY INDEX pos the the KK holds
+                            if (bottom == false) holder2RX1[kk] = ii; //.268 because Display with (Bottom) RX2 on destroys the index for RX1
+
                             holder3[kk] = VFO_DXPos;
 
                             kk++;
@@ -13353,6 +13359,10 @@ namespace PowerSDR
                             int VFO_DXPos = (int)((((float)W / (float)VFODiff) * (float)(SpotControl.DX_Freq[ii] - CWPitch1 - VFOLow))); // determine DX spot line pos on current panadapter screen
 
                             holder[kk] = ii;                    // ii is the actual DX_Index pos that the KK holds
+                          
+                            if (bottom == false) holderRX1[kk] = ii; //.268
+                           
+                          
                             holder1[kk] = VFO_DXPos;
 
                             kk++;
@@ -13387,8 +13397,9 @@ namespace PowerSDR
 
                             if (Console.DXR == 0) // display Spotted on Pan
                             {
+                               
                                 length = g.MeasureString(SpotControl.DX_Station[holder[ii]], font1); //  temp used to determine the size of the string when in LSB and you need to reserve a certain space//  (cl.Width);
-
+                               
                                 if ((bb > 0) && (SpotControl.SP6_Active != 0))
                                 {
                                     int x2 = holder1[ii] - (int)length.Width;
@@ -13409,10 +13420,10 @@ namespace PowerSDR
                                     } // for loop to check if DX text will draw over top of Memory text
                                 }
 
-                                if (SpotForm.SpotLoTWColor== true) //.262
+                                if (SpotForm.SpotLoTWColor == true) //.262
                                 {
                                     int SpotColor = SpotControl.DX_LoTW_Status[holder[ii]];
-
+                                   
                                     Color DXColor;
                                     Color DXColor1;
 
@@ -13479,25 +13490,30 @@ namespace PowerSDR
                                     {
                                         g.FillRectangle(new SolidBrush(DXColor), holder1[ii] - (int)length.Width - 2, H1b + iii + 2, (int)length.Width + 4, (int)length.Height - 2); //.261
                                     }
-                                    g.DrawString(SpotControl.DX_Station[holder[ii]], font1, new SolidBrush(DXColor1), holder1[ii] - (int)length.Width, H1b + iii); // DX call sign to panadapter
+
+                                   
+                                     g.DrawString(SpotControl.DX_Station[holder[ii]], font1, new SolidBrush(DXColor1), holder1[ii] - (int)length.Width, H1b + iii); // DX call sign to panadapter
 
 
                                 } //  if (SpotForm.SpotLoTWColor== true) //.262
-                                else  if (SpotForm.SpotBackground == true) //.261
+                                else if (SpotForm.SpotBackground == true) //.261
                                 {
-                                
-                                   g.FillRectangle(new SolidBrush(Color.Black), holder1[ii] - (int)length.Width - 2, H1b + iii + 2, (int)length.Width + 4, (int)length.Height - 2); //.261
-                                   g.DrawString(SpotControl.DX_Station[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width, H1b + iii); // DX call sign to panadapter
+
+                                    g.FillRectangle(new SolidBrush(Color.Black), holder1[ii] - (int)length.Width - 2, H1b + iii + 2, (int)length.Width + 4, (int)length.Height - 2); //.261
+    
+                                    g.DrawString(SpotControl.DX_Station[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width, H1b + iii); // DX call sign to panadapter
 
                                 }
                                 else
-                               g.DrawString(SpotControl.DX_Station[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width, H1b + iii); // DX call sign to panadapter
+                                {
+                                    g.DrawString(SpotControl.DX_Station[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width, H1b + iii); // DX call sign to panadapter
+                                }
 
                             }
                             else // display SPOTTER on Pan (not the Spotted)
                             {
                                 length = g.MeasureString(SpotControl.DX_Spotter[holder[ii]], font1); //  temp used to determine the size of the string when in LSB and you need to reserve a certain space//  (cl.Width);
-
+                               
                                 if ((bb > 0) && (SpotControl.SP6_Active != 0))
                                 {
                                     int x2 = holder1[ii] - (int)length.Width;
@@ -13523,7 +13539,6 @@ namespace PowerSDR
                                 if (SpotForm.SpotLoTWColor == true) //.262
                                 {
                                     int SpotColor = SpotControl.DX_LoTW_Status[holder[ii]];
-
                                    
                                     Color DXColor;
                                     Color DXColor1;

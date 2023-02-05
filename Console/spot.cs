@@ -4624,7 +4624,7 @@ namespace PowerSDR
         public int LineLength = 105; // was 105
         public string DX_TEXT;
         public bool DX_RX2 = false; // .170 add to allow a CTRL click on a spot to keep it in RX2 VFOB
-
+       
         //===============================================================================
         public bool beam_selected = false; // ke9ns if you clicked on the beam angle
 
@@ -4643,39 +4643,46 @@ namespace PowerSDR
                 int ii = 0;
                 byte iii = 0;
 
-                if (e.Location.X == 0 && e.Location.Y == 0)
-                {
-                    // come here is if click on pandisplay either red dot or CTRL
-                    iii = console.CtrlSpotIndex;  
-                  //  Debug.WriteLine("+ CTRLSPOTINDEX " + ii);
+                Debug.WriteLine("LEFT CLICK");
 
-                }
-                else
-                { // come here if click on SPOT textbox1 screen
-                    ii = textBox1.GetCharIndexFromPosition(e.Location);
-                    iii = (byte)(ii / LineLength); // get line  /82  or /86 if AGE turned on or 91 if mode is also on /99 if country added but now /105 with DX_Beam heading
-                   
-                }
-
-
-                //  Debug.WriteLine("testL " + DX_Index + " , "+iii);
-
-
-                if (iii >= DX_Index) return; // dont allow to click on blank area
-
-                DX_SELECTED = (int)iii;  // store the last line you clicked on to keep highlighted
-
-                if (lastselected == DX_SELECTED * LineLength)
-                {
-                    textBox1.DeselectAll();
-                    lastselectedON = false;
-                }
-                else
-                {
+             
+                    if (e.Location.X == 0 && e.Location.Y == 0)
+                    {
+                        // come here is if click on pandisplay either red dot or CTRL
+                        iii = console.CtrlSpotIndex;
+                        Debug.WriteLine("+ CTRLSPOTINDEX RX1 " + iii);
+                  
                     lastselected = textBox1.SelectionStart = DX_SELECTED * LineLength;      // start of each dx spot line
                     textBox1.SelectionLength = LineLength;                    // length of each dx spot  line
                     lastselectedON = true;
+
                 }
+                else
+                    { // come here if click on SPOT textbox1 screen
+                        ii = textBox1.GetCharIndexFromPosition(e.Location);
+                        iii = (byte)(ii / LineLength); // get line  /82  or /86 if AGE turned on or 91 if mode is also on /99 if country added but now /105 with DX_Beam heading
+
+
+                    //  Debug.WriteLine("testL " + DX_Index + " , "+iii);
+
+                    if (iii >= DX_Index) return; // dont allow to click on blank area
+
+                    DX_SELECTED = (int)iii;  // store the last line you clicked on to keep highlighted
+
+                    if (lastselected == DX_SELECTED * LineLength)
+                    {
+                        textBox1.DeselectAll();
+                        lastselectedON = false;
+                    }
+                    else
+                    {
+                        lastselected = textBox1.SelectionStart = DX_SELECTED * LineLength;      // start of each dx spot line
+                        textBox1.SelectionLength = LineLength;                    // length of each dx spot  line
+                        lastselectedON = true;
+                    }
+
+                }
+
 
                 DX_TEXT = textBox1.Text.Substring((DX_SELECTED * LineLength) + 16, 40); // just check freq and callsign of dx station
 
@@ -5071,50 +5078,63 @@ namespace PowerSDR
             else if (e.Button == MouseButtons.Middle) // // ke9ns add .202 sends spot to VFOB instead of VFOA
             {
                 lastselected = 10000;
+                Debug.WriteLine("MOUSEWHEEL");
 
-
+              
                 //  const int WM_VSCROLL = 0x115;
                 //  const int SB_ENDSCROLL = 8;
                 Console.SendMessageW(this.Handle, 0x115, (IntPtr)0x08, this.Handle); // to prevent a silly windows scroll feature that normally comes from a mouse wheel click
 
+                int ii = 0;
+                byte iii = 0; //.268 move
 
 
-                int ii = textBox1.GetCharIndexFromPosition(e.Location);// character position in the text you clicked on 
-
-                byte iii = (byte)(ii / LineLength); // get line  /82  or /86 if AGE turned on or 91 if mode is also on /99 if country added but now /105 with DX_Beam heading
-
-                //   Debug.WriteLine("testM " + DX_Index + " , "+iii);
-
-                if (iii >= DXt_Index) return; // dont allow to click on blank area
-
-                DX_SELECTED = (int)iii;  // store the last line you clicked on to keep highlighted
-
-                if (lastselected == DX_SELECTED * LineLength)
+                if (e.Location.X == 0 && e.Location.Y == 0) // .268
                 {
-                    textBox1.DeselectAll();
-                    lastselectedON = false;
+                    // come here is if click on pandisplay either red dot or CTRL
+                    iii = console.CtrlSpotIndex;
+                      Debug.WriteLine("+ CTRLSPOTINDEX RX2" + iii);
 
                 }
                 else
-                {
-                    lastselected = textBox1.SelectionStart = DX_SELECTED * LineLength;      // start of each dx spot line
-                    textBox1.SelectionLength = LineLength;                    // length of each dx spot  line
-                    lastselectedON = true;
+                { // come here if click on SPOT textbox1 screen
+                    ii = textBox1.GetCharIndexFromPosition(e.Location);
+                    iii = (byte)(ii / LineLength); // get line  /82  or /86 if AGE turned on or 91 if mode is also on /99 if country added but now /105 with DX_Beam heading
 
+                    //   Debug.WriteLine("testM " + DX_Index + " , "+iii);
+
+                    if (iii >= DXt_Index) return; // dont allow to click on blank area
+
+                    DX_SELECTED = (int)iii;  // store the last line you clicked on to keep highlighted
+
+                    if (lastselected == DX_SELECTED * LineLength)
+                    {
+                        textBox1.DeselectAll();
+                        lastselectedON = false;
+                    }
+                    else
+                    {
+                        lastselected = textBox1.SelectionStart = DX_SELECTED * LineLength;      // start of each dx spot line
+                        textBox1.SelectionLength = LineLength;                    // length of each dx spot  line
+                        lastselectedON = true;
+                    }
 
                 }
 
-                DX_TEXT = textBox1.Text.Substring((DX_SELECTED * LineLength) + 16, 40); // just check freq and callsign of dx station
+               
 
-                //   Debug.WriteLine("1DX_SELECTED " + DX_SELECTED + " , "+ DX_TEXT);
+                    DX_TEXT = textBox1.Text.Substring((DX_SELECTED * LineLength) + 16, 40); // just check freq and callsign of dx station
 
-                int gg = ii % LineLength;  // get remainder for checking beam heading
+                      Debug.WriteLine("1DX_SELECTED " + DX_SELECTED + " , "+ DX_TEXT);
 
-                //   Debug.WriteLine("position in line" + gg);
+                    int gg = ii % LineLength;  // get remainder for checking beam heading
 
-                if (gg > (LineLength - 10)) beam_selected = true; // did user Left click over the beam heading on the dx spot list ?
-                else beam_selected = false;
+                    //   Debug.WriteLine("position in line" + gg);
 
+                    if (gg > (LineLength - 10)) beam_selected = true; // did user Left click over the beam heading on the dx spot list ?
+                    else beam_selected = false;
+
+               
 
                 if ((DXt_Index > iii) && (beacon1 == false))
                 {

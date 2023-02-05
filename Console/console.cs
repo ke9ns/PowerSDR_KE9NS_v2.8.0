@@ -52753,7 +52753,7 @@ namespace PowerSDR
         //===============================================================================================================
         //===============================================================================================================
         public bool MapNOAA = false; // .243 true = get an NOAA map update now
-
+       
         private void Console_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
             //   Debug.WriteLine("KEY CODE: " + e.KeyCode);
@@ -53345,8 +53345,8 @@ namespace PowerSDR
                 int xxx = 1000; // actual unscaled size of map in picdisplay
                 int yyy = 507;
 
-                Debug.WriteLine(" width " + xx);
-                Debug.WriteLine(" Height " + yy);
+             //   Debug.WriteLine(" width " + xx);
+             //   Debug.WriteLine(" Height " + yy);
 
                 Point p = picDisplay.PointToClient(Cursor.Position); // mouse cursor when you hit the ctrl key
 
@@ -53359,10 +53359,10 @@ namespace PowerSDR
                 float scaley = ((float)yyy / (float)yy);
                 YY = (int)((float)p.Y * scaley);
 
-                Debug.WriteLine(" unscalledX " + XX);
-                Debug.WriteLine(" unscalledY " + YY);
+             //   Debug.WriteLine(" unscalledX " + XX);
+              //  Debug.WriteLine(" unscalledY " + YY);
 
-                Debug.WriteLine(" cursor " + p);
+             //   Debug.WriteLine(" cursor " + p);
 
                 //   ZoomX = XX; //.241
                 //   ZoomY = YY; // .241
@@ -53380,29 +53380,34 @@ namespace PowerSDR
                     // this is a CTRL key press
                     for (byte ii = 0; ii < DXK; ii++) // check all spot on Panadapter (not red dots)
                     {
-                       
+
                         // .262 fix below so CTRL click works during a context with many contacts coming in quickly
+
+                      //  Debug.WriteLine("+ " + ii + " , " + SpotControl.DX_Station[Display.holderRX1[ii]] ); // spots that are visable on RX1
 
                         if ((x >= DXX[ii]) && (x <= (DXX[ii] + (DXW[ii]) * 3 / 4)) && (y >= DXY[ii]) && (y <= (DXY[ii] + DXH[ii])))
                         {
                           
                             try
                             {
-                                SpotForm.DX_RX2 = false;
-                                 
-                                CtrlSpotIndex = (byte)Display.holder[ii];
+                              //  SpotForm.pause = true;
+                              //  SpotForm.button1.Text = "Paused";
 
-                             //   Debug.WriteLine("+DX SELECTED " + ii + " , " + CtrlSpotIndex + " ,Call: " + DXS[ii] + " x " + x + " ,  " + y);
-                              //  Debug.WriteLine("+ " + SpotForm.textBox1.GetLineFromCharIndex(SpotForm.textBox1.Find(DXS[ii]) ) );
-                             //   Debug.WriteLine("+ " + SpotControl.DX_Freq[CtrlSpotIndex] + " , " + SpotControl.DX_Station[CtrlSpotIndex] + " , " + SpotControl.DX_Mode[CtrlSpotIndex]);
+                                CtrlSpotIndex = (byte)Display.holderRX1[ii]; //.268 mod because Display with (Bottom) RX2 on destroys the index for RX1
 
+                                //   Debug.WriteLine("+DX SELECTED " + ii + " , " + CtrlSpotIndex + " ,Call: " + DXS[ii] + " x " + x + " ,  " + y);
+                                //  Debug.WriteLine("+ " + SpotForm.textBox1.GetLineFromCharIndex(SpotForm.textBox1.Find(DXS[ii]) ) );
+                                //   Debug.WriteLine("+ " + SpotControl.DX_Freq[CtrlSpotIndex] + " , " + SpotControl.DX_Station[CtrlSpotIndex] + " , " + SpotControl.DX_Mode[CtrlSpotIndex]);
 
-                                SpotForm.DX_SELECTED = Display.holder[ii]; //ke9ns add
-                                SpotForm.textBox1.SelectionStart = SpotForm.DX_SELECTED * SpotForm.LineLength;      // start of each dx spot line
+                            
+                                SpotForm.DX_SELECTED = Display.holderRX1[ii]; //ke9ns add .268 mod
+                               SpotForm.textBox1.SelectionStart = SpotForm.DX_SELECTED * SpotForm.LineLength;      // start of each dx spot line
                                SpotForm.textBox1.SelectionLength = SpotForm.LineLength;                    // length of each dx spot  line
-                               SpotForm.textBox1_MouseUp(this, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0)); // process as though you clicked on the dx spot in the spotter window
 
+                              //  Debug.WriteLine("CTRLRX1 " + ii + " , " + CtrlSpotIndex);
 
+                                SpotForm.textBox1_MouseUp(this, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0)); // process as though you clicked on the dx spot in the spotter window
+                              
                             }
                             catch
                             {
@@ -53414,7 +53419,7 @@ namespace PowerSDR
                         } // index
                         else if ((x >= DXX[ii] + (DXW[ii] * 3 / 4)) && (x <= (DXX[ii] + DXW[ii])) && (y >= DXY[ii]) && (y <= (DXY[ii] + DXH[ii]))) // check for rotor Beam heading 
                         {
-                            SpotForm.DX_RX2 = false;
+                          
                             Debug.WriteLine("BEAM HEADING TRANSMIT FROM Display");
 
                             spotDDUtil_Rotor = "AP1" + SpotControl.DX_Beam[ii].ToString().PadLeft(3, '0') + ";";
@@ -53422,9 +53427,9 @@ namespace PowerSDR
 
                             //  Debug.WriteLine(">>>>>>> DX SELECTED " + ii);
 
-                            CtrlSpotIndex = (byte)Display.holder[ii];
+                            CtrlSpotIndex = (byte)Display.holderRX1[ii]; //.268
 
-                            SpotForm.DX_SELECTED = Display.holder[ii]; //ke9ns add
+                            SpotForm.DX_SELECTED = Display.holderRX1[ii]; //ke9ns add .268
                             SpotForm.textBox1.SelectionStart = SpotForm.DX_SELECTED * SpotForm.LineLength;      // start of each dx spot line
                             SpotForm.textBox1.SelectionLength = SpotForm.LineLength;                    // length of each dx spot  line
                             SpotForm.textBox1_MouseUp(this, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0));
@@ -53442,20 +53447,26 @@ namespace PowerSDR
                         for (byte ii = 0; ii < DXK2; ii++)
                         {
 
+                            Debug.WriteLine("- " + ii + " , " + SpotControl.DX_Station[Display.holder[ii]]); // spots that are visable on RX2
+
                             if ((x >= DXX[ii + 50]) && (x <= (DXX[ii + 50] + DXW[ii + 50] * 3 / 4)) && (y >= DXY[ii + 50]) && (y <= (DXY[ii + 50] + DXH[ii + 50])))
                             {
                                
                                 try
                                 {
-                                    SpotForm.DX_RX2 = true;
+                                    SpotForm.DX_RX2 = true;// send this spot to RX2
                                     CtrlSpotIndex = (byte)Display.holder[ii];
 
+                                 
                                     SpotForm.DX_SELECTED = Display.holder[ii]; //ke9ns add
                                     SpotForm.textBox1.SelectionStart = SpotForm.DX_SELECTED * SpotForm.LineLength;      // start of each dx spot line
                                     SpotForm.textBox1.SelectionLength = SpotForm.LineLength;                    // length of each dx spot  line
-                                    SpotForm.textBox1_MouseUp(this, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0));
 
+                                   
+                                    Debug.WriteLine("CTRLRX2");
+                                    SpotForm.textBox1_MouseUp(this, new MouseEventArgs(MouseButtons.Middle, 0, 0, 0, 0)); //.268 send RX2 spots to VFOB
 
+                                   
                                 }
                                 catch
                                 {
@@ -53468,6 +53479,7 @@ namespace PowerSDR
                             else if ((x <= (DXX[ii + 50] + DXW[ii + 50] * 3 / 4)) && (y >= DXY[ii + 50]) && (y <= (DXY[ii + 50] + DXH[ii + 50])))
                             {
                                 SpotForm.DX_RX2 = true;
+                               
                                 Debug.WriteLine("BEAM HEADING TRANSMIT FROM Display RX2");
 
                                 spotDDUtil_Rotor = "AP1" + SpotControl.DX_Beam[ii].ToString().PadLeft(3, '0') + ";";
@@ -53476,10 +53488,12 @@ namespace PowerSDR
 
                                 CtrlSpotIndex = (byte)Display.holder[ii];
 
+                             
                                 SpotForm.DX_SELECTED = Display.holder[ii]; //ke9ns add
                                 SpotForm.textBox1.SelectionStart = SpotForm.DX_SELECTED * SpotForm.LineLength;      // start of each dx spot line
                                 SpotForm.textBox1.SelectionLength = SpotForm.LineLength;                    // length of each dx spot  line
-                                SpotForm.textBox1_MouseUp(this, new MouseEventArgs(MouseButtons.Left, 0, 0, 0, 0));
+                              
+                                SpotForm.textBox1_MouseUp(this, new MouseEventArgs(MouseButtons.Middle, 0, 0, 0, 0)); //.268
 
                                 return;
                             } // check if you clicked on the last half of the call sign
