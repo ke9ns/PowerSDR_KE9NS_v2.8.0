@@ -409,6 +409,7 @@ namespace PowerSDR
             this.ScanMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spotterMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.MapMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SWLMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.keyShortCut = new System.Windows.Forms.ToolStripMenuItem();
             this.herosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -4645,6 +4646,7 @@ namespace PowerSDR
             this.ScanMenuItem,
             this.spotterMenu,
             this.MapMenuItem,
+            this.SWLMenuItem,
             this.keyShortCut,
             this.herosToolStripMenuItem,
             this.aboutToolStripMenuItem,
@@ -4805,12 +4807,20 @@ namespace PowerSDR
             this.MapMenuItem.MouseEnter += new System.EventHandler(this.trackMenuItem1_MouseEnter);
             this.MapMenuItem.MouseLeave += new System.EventHandler(this.trackMenuItem1_MouseLeave);
             // 
+            // SWLMenuItem
+            // 
+            resources.ApplyResources(this.SWLMenuItem, "SWLMenuItem");
+            this.SWLMenuItem.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.SWLMenuItem.Name = "SWLMenuItem";
+            this.SWLMenuItem.Click += new System.EventHandler(this.SWLMenuItem_Click);
+            // 
             // keyShortCut
             // 
             this.keyShortCut.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.keyShortCut.Name = "keyShortCut";
             resources.ApplyResources(this.keyShortCut, "keyShortCut");
             this.keyShortCut.Click += new System.EventHandler(this.keyboardShortCut_Click);
+            this.keyShortCut.MouseDown += new System.Windows.Forms.MouseEventHandler(this.keyShortCut_MouseDown);
             // 
             // herosToolStripMenuItem
             // 
@@ -7338,6 +7348,7 @@ namespace PowerSDR
         public System.Windows.Forms.ComboBoxTS comboMeterRXMode;
         public System.Windows.Forms.ComboBoxTS comboRX2MeterMode;
         private System.Windows.Forms.ToolStripMenuItem keyShortCut;
+        private System.Windows.Forms.ToolStripMenuItem SWLMenuItem;
     } // class console
 
 

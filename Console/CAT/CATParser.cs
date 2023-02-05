@@ -826,6 +826,9 @@ namespace PowerSDR
                 case "ZZKM":
                     rtncmd = cmdlist.ZZKM(suffix);
                     break;
+                case "ZZKV":
+                    rtncmd = cmdlist.ZZKV(suffix); // .267 Voice keyer F3 through F6
+                    break;
                 case "ZZKS":
                     rtncmd = cmdlist.ZZKS(suffix);
                     break;

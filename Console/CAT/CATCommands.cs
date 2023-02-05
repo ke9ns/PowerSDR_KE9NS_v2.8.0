@@ -3392,6 +3392,135 @@ namespace PowerSDR
                 return parser.Error1;
         }
 
+        public string ZZKV(string s) // .267
+        {
+            int qn = 0;
+            if (s != "0" && s.Length > 0)
+            {
+                qn = Convert.ToInt32(s);
+
+              
+
+                if (qn == 1)
+                {
+                    return "";
+
+                }
+                else if (qn == 2)
+                {
+                    return "";
+                }
+                else if (qn == 3)
+                {
+                    console.buttonCall_Click(this, EventArgs.Empty); // Reply F3 button 
+                    return "";
+                }
+                else if (qn == 4)
+                {
+                    console.btnTrack_Click(this, EventArgs.Empty);// CQCQ button F4
+                    return "";
+                }
+                else if (qn == 5)
+                {
+                    console.buttonVK1_Click(this, EventArgs.Empty); // VK1 F5
+                    return "";
+
+                }
+                else if (qn == 6)
+                {
+                    console.buttonVK2_Click(this, EventArgs.Empty); // VK2 F6
+                    return "";
+
+                }
+                else if (qn == 7)
+                {
+
+                    if (console.RX1DSPMode == DSPMode.FM)
+                    {
+                        if (console.chkFM1750.Checked == false) console.chkFM1750.Checked = true;
+                        else console.chkFM1750.Checked = false;
+                        console.chkFM1750_Click(this, EventArgs.Empty); // ke9ns add: .188
+                    }
+                    return "";
+                }
+                else if (qn == 8)
+                {
+
+                    if (console.setupForm.checkQuindarToneON.Checked == true) console.setupForm.checkQuindarToneON.Checked = false;
+                    else console.setupForm.checkQuindarToneON.Checked = true;
+                    return "";
+
+                }// F8
+
+                else if (qn == 9)
+                {
+                    if (console.comboDisplayMode.Text == "Panafall8020")
+                    {
+
+                        if (console.setupForm.udSS1H.Value < ((decimal)(Console.H10 * 5 / 6) * .1M)) // .197
+                        {
+                            console.mouseholdY = console.mouseholdY + 5;
+                            console.setupForm.udSS1H.Value = console.mouseholdY;
+                        }
+
+
+
+                    } //panafall8020
+                    else if (console.comboDisplayMode.Text == "Panafall")
+                    {
+
+
+                        if (console.setupForm.udSS2H.Value < ((decimal)(Console.H10 / 2) * .8M)) // .197
+                        {
+                            console.mouseholdYY = console.mouseholdYY + 5;
+                            console.setupForm.udSS2H.Value = console.mouseholdYY;
+                        }
+
+
+                    } // panafall
+                    return "";
+                } // F9
+                else if (qn == 10)
+                {
+
+                    if (console.comboDisplayMode.Text == "Panafall8020")
+                    {
+                        if (console.setupForm.udSS1H.Value > -((decimal)(Console.H10 * 5 / 6) * .2M)) // .197
+                        {
+                            console.mouseholdY = console.mouseholdY - 5;
+                            console.setupForm.udSS1H.Value = console.mouseholdY;
+                        }
+
+                    }
+                    else if (console.comboDisplayMode.Text == "Panafall")
+                    {
+
+
+                        if (console.setupForm.udSS2H.Value > -((decimal)(Console.H10 / 2) * .7M)) // .197
+                        {
+                            console.mouseholdYY = console.mouseholdYY - 5;
+                            console.setupForm.udSS2H.Value = console.mouseholdYY;
+                        }
+
+                    }
+                    return "";
+                } // F10
+                else if (qn == 11)
+                {
+                    return "";
+                }
+                else if (qn == 12)
+                {
+                    return "";
+                }
+                return parser.Error1;
+            }
+            else
+                return parser.Error1;
+
+        } // .267 ZZKV
+
+
         //Sets or reads the CWX CW speed
         public string ZZKS(string s)
         {
@@ -3979,7 +4108,7 @@ namespace PowerSDR
                     //	console.MON = true;
                     console.chkMON.Checked = true;
                     console.chkMON.Text = "MONps";
-                    Audio.MON_PRE = 0;            // turn ON MON_PRE
+                    Audio.MON_PRE = 0;            // turn OFF MON_PRE
                 }
 
                 console.chkMON.CheckedChanged += console.chkMON_CheckedChanged; //ke9ns mod turn eventoff

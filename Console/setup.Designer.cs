@@ -823,6 +823,7 @@ namespace PowerSDR
             this.clrbtnPeakText = new PowerSDR.ColorButton();
             this.lblPeakText = new System.Windows.Forms.LabelTS();
             this.tpAppearanceMeter = new System.Windows.Forms.TabPage();
+            this.labelTS67 = new System.Windows.Forms.LabelTS();
             this.chkDock = new System.Windows.Forms.CheckBoxTS();
             this.labelTS2 = new System.Windows.Forms.LabelTS();
             this.clrbtnMeterDigBackground = new PowerSDR.ColorButton();
@@ -13351,6 +13352,7 @@ namespace PowerSDR
             // tpAppearanceMeter
             // 
             this.tpAppearanceMeter.BackColor = System.Drawing.SystemColors.Control;
+            this.tpAppearanceMeter.Controls.Add(this.labelTS67);
             this.tpAppearanceMeter.Controls.Add(this.chkDock);
             this.tpAppearanceMeter.Controls.Add(this.labelTS2);
             this.tpAppearanceMeter.Controls.Add(this.clrbtnMeterDigBackground);
@@ -13367,6 +13369,15 @@ namespace PowerSDR
             this.tpAppearanceMeter.Size = new System.Drawing.Size(592, 318);
             this.tpAppearanceMeter.TabIndex = 2;
             this.tpAppearanceMeter.Text = "Meter";
+            // 
+            // labelTS67
+            // 
+            this.labelTS67.Image = null;
+            this.labelTS67.Location = new System.Drawing.Point(314, 203);
+            this.labelTS67.Name = "labelTS67";
+            this.labelTS67.Size = new System.Drawing.Size(72, 24);
+            this.labelTS67.TabIndex = 92;
+            this.labelTS67.Text = "Bar Meter:";
             // 
             // chkDock
             // 
@@ -13406,7 +13417,7 @@ namespace PowerSDR
             this.clrbtnMeterRight.Automatic = "Automatic";
             this.clrbtnMeterRight.Color = System.Drawing.Color.Red;
             this.clrbtnMeterRight.Image = null;
-            this.clrbtnMeterRight.Location = new System.Drawing.Point(461, 209);
+            this.clrbtnMeterRight.Location = new System.Drawing.Point(457, 198);
             this.clrbtnMeterRight.MoreColors = "More Colors...";
             this.clrbtnMeterRight.Name = "clrbtnMeterRight";
             this.clrbtnMeterRight.Size = new System.Drawing.Size(40, 23);
@@ -13541,14 +13552,14 @@ namespace PowerSDR
             // clrbtnMeterLeft
             // 
             this.clrbtnMeterLeft.Automatic = "Automatic";
-            this.clrbtnMeterLeft.Color = System.Drawing.Color.White;
+            this.clrbtnMeterLeft.Color = System.Drawing.Color.Lime;
             this.clrbtnMeterLeft.Image = null;
-            this.clrbtnMeterLeft.Location = new System.Drawing.Point(507, 209);
+            this.clrbtnMeterLeft.Location = new System.Drawing.Point(392, 198);
             this.clrbtnMeterLeft.MoreColors = "More Colors...";
             this.clrbtnMeterLeft.Name = "clrbtnMeterLeft";
             this.clrbtnMeterLeft.Size = new System.Drawing.Size(40, 23);
             this.clrbtnMeterLeft.TabIndex = 74;
-            this.clrbtnMeterLeft.Visible = false;
+            this.toolTip1.SetToolTip(this.clrbtnMeterLeft, "Gradient Bar Color. Choose a bright color.");
             this.clrbtnMeterLeft.Changed += new System.EventHandler(this.clrbtnMeterLeft_Changed);
             // 
             // grpAppearanceMeter
@@ -19893,6 +19904,7 @@ namespace PowerSDR
         public System.Windows.Forms.CheckBoxTS chkBoxPFN;
         public System.Windows.Forms.NumericUpDownTS udTXAMCarrierLevel;
         public System.Windows.Forms.CheckBoxTS chkCWXOverRide;
+        private System.Windows.Forms.LabelTS labelTS67;
     } // class setup
 
 

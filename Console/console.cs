@@ -38891,6 +38891,7 @@ namespace PowerSDR
         // ke9ns old ORIGINAL meter colors
 
         private static Color meter_left_color = Color.Green;
+
         public Color MeterLeftColor
         {
             get { return meter_left_color; }
@@ -40121,6 +40122,8 @@ namespace PowerSDR
                 case MultiMeterDisplayMode.Bar:  // lblRX2Meter is the text for RX2 bar graph (lblMultiSMeter is for RX1)
                     #region Bar
 
+                    int pixel_x2 = 0; //.266
+                    int rxred_x = 80; //.266
 
                     if (meter_data_ready)
                     {
@@ -40175,6 +40178,15 @@ namespace PowerSDR
                                             }
 
                                         } // VHF
+
+                                    
+                                        if (pixel_x > rxred_x) //.266  139 is max x
+                                        {
+                                            pixel_x2 = pixel_x;
+                                            pixel_x = rxred_x;
+
+                                        }
+                                        else pixel_x2 = 0;
 
 
                                         break;
@@ -40425,27 +40437,53 @@ namespace PowerSDR
                     {
                         case 96:
                             if (pixel_x > 139) pixel_x = 139;
+                            if (pixel_x2 > 139) pixel_x2 = 139; //.266
                             break;
                         case 120:
                             if (pixel_x > 167) pixel_x = 167;
                             break;
                     }
 
+                    
+
                     // .265  change 0 to 25 for start of bars in meter
                     if ((!mox && current_meter_rx_mode != MeterRXMode.OFF) || (mox && current_meter_tx_mode != MeterTXMode.OFF))
                     {
                         if (pixel_x <= 0) pixel_x = 1;
+                       
+                        // bar left and right side gradient colors
+                      
+                        LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 25, W, H),
+                            Color.FromArgb(255, meter_left_color.R, meter_left_color.G, meter_left_color.B),
+                            Color.FromArgb(30, meter_left_color.R, meter_left_color.G, meter_left_color.B), LinearGradientMode.Horizontal); //.266
 
-                        LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 25, pixel_x, H),
-                            meter_left_color, meter_right_color, LinearGradientMode.Horizontal);
 
                         g.FillRectangle(brush, 0, 25, pixel_x, H);
 
-                        for (int i = 0; i < 21; i++)
-                            g.DrawLine(new Pen(meter_background_color), 6 + i * 8, 0, 6 + i * 8, H);
+                        if (pixel_x2 > 0) //.266
+                        {
+                              LinearGradientBrush brush2 = new LinearGradientBrush(new Rectangle(rxred_x, 25, pixel_x2, H), Color.Red, Color.DarkRed, LinearGradientMode.Horizontal);
+                            g.FillRectangle(brush2, rxred_x, 25, pixel_x2, H);
 
-                        g.DrawLine(new Pen(Color.Red), pixel_x, 25, pixel_x, H); //.265
+                        }
+
+
+                        for (int i = 0; i < 21; i++)
+                        {
+                            g.DrawLine(new Pen(meter_background_color), 6 + i * 6, 25, 6 + i * 6, H); // this becomes the black lines in the green bar
+                        }
+
+                     //  g.DrawLine(new Pen(Color.Red), pixel_x, 25, pixel_x, H); //.265
+
+                        if (pixel_x2 > 0)
+                        {
+                            g.FillRectangle(new SolidBrush(meter_background_color), pixel_x2 + 1, 25, W - pixel_x2, H);
+
+                        }
+                        else
                         g.FillRectangle(new SolidBrush(meter_background_color), pixel_x + 1, 25, W - pixel_x, H);
+                      
+                        
 
                         if (pixel_x >= meter_peak_value)
                         {
@@ -42162,7 +42200,7 @@ namespace PowerSDR
                         pixel_x1 = Math.Max(0, pixel_x1);
                         pixel_x1 = Math.Min(W - 3, pixel_x1);
 
-                        line_pen = new Pen(edge_avg_color);
+                        line_pen = new Pen(edge_avg_color); // indicator needle color
 
                         //  line_dark_pen = new Pen(
                         //	Color.FromArgb((edge_avg_color.R+edge_meter_background_color.R)/2,
@@ -42174,15 +42212,15 @@ namespace PowerSDR
                         {
                             line_pen = new Pen(Color.Red);
                             line_pen.Width = 3.0F;
-                            g.DrawLine(line_pen, pixel_x1, 0, pixel_x1, H);
+                            g.DrawLine(line_pen, pixel_x1, 25, pixel_x1, H); // .266 change 0 to 25 to shorten line
 
                         } // peak
 
                         line_pen = new Pen(edge_avg_color);
 
-                        g.DrawLine(line_dark_pen, pixel_x - 1, 0, pixel_x - 1, H); // rx1 edge needle
-                        g.DrawLine(line_pen, pixel_x, 0, pixel_x, H);
-                        g.DrawLine(line_dark_pen, pixel_x + 1, 0, pixel_x + 1, H);
+                        g.DrawLine(line_dark_pen, pixel_x - 1, 25, pixel_x - 1, H); // rx1 edge needle
+                        g.DrawLine(line_pen, pixel_x, 25, pixel_x, H);
+                        g.DrawLine(line_dark_pen, pixel_x + 1, 25, pixel_x + 1, H);
 
 
                     }
@@ -44395,6 +44433,10 @@ namespace PowerSDR
                 case MultiMeterDisplayMode.Bar:   // lblRX2Meter is the text for RX2 bar graph (lblMultiSMeter is for RX1)
                     #region Bar
 
+
+                    int pixel_x2 = 0; //.266
+                    int rxred_x = 80; //.266
+
                     if (rx2_meter_data_ready)
                     {
 
@@ -44447,6 +44489,16 @@ namespace PowerSDR
 
                                             }
                                         } // vhf
+
+
+                                        if (pixel_x > rxred_x) //.266  139 is max x
+                                        {
+                                            pixel_x2 = pixel_x;
+                                            pixel_x = rxred_x;
+
+                                        }
+                                        else pixel_x2 = 0;
+
                                         break;
                                     case 120:
                                         if (FREQA < 30)
@@ -44525,6 +44577,7 @@ namespace PowerSDR
 
                         num = rx2_meter_current_data;
 
+                      
                         MeterTXMode mode = current_meter_tx1_mode;
 
                         //   if (chkTUN.Checked) mode = tune_meter_tx_mode; // .191 remove
@@ -44702,6 +44755,7 @@ namespace PowerSDR
                     {
                         case 96:
                             if (pixel_x > 139) pixel_x = 139;
+                            if (pixel_x2 > 139) pixel_x2 = 139; //.266
                             break;
                         case 120:
                             if (pixel_x > 167) pixel_x = 167;
@@ -44713,17 +44767,41 @@ namespace PowerSDR
                     {
                         if (pixel_x <= 0) pixel_x = 1;
 
-                        LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, pixel_x, H),
-                            meter_left_color, meter_right_color, LinearGradientMode.Horizontal);
+
+                        // bar left and right side gradient colors
+
+                        LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 25, W, H),
+                            Color.FromArgb(255, meter_left_color.R, meter_left_color.G, meter_left_color.B),
+                            Color.FromArgb(30, meter_left_color.R, meter_left_color.G, meter_left_color.B), LinearGradientMode.Horizontal); //.266
+
 
                         g.FillRectangle(brush, 0, 25, pixel_x, H);
 
-                        for (int i = 0; i < 21; i++)
-                            g.DrawLine(new Pen(meter_background_color), 6 + i * 8, 25, 6 + i * 8, H);
+                        if (pixel_x2 > 0) //.266
+                        {
+                            LinearGradientBrush brush2 = new LinearGradientBrush(new Rectangle(rxred_x, 25, pixel_x2, H), Color.Red, Color.DarkRed, LinearGradientMode.Horizontal);
+                            g.FillRectangle(brush2, rxred_x, 25, pixel_x2, H);
 
+                        }
+
+
+
+                        for (int i = 0; i < 21; i++)
+                        {
+                            g.DrawLine(new Pen(meter_background_color), 6 + i * 6, 25, 6 + i * 6, H); //.266 was * 8
+                        }
                         // .265 change 0 to 25
-                        g.DrawLine(new Pen(Color.Red), pixel_x, 25, pixel_x, H);
-                        g.FillRectangle(new SolidBrush(meter_background_color), pixel_x + 1, 25, W - pixel_x, H);
+                        //    g.DrawLine(new Pen(Color.Red), pixel_x, 25, pixel_x, H);
+
+                        if (pixel_x2 > 0)
+                        {
+                            g.FillRectangle(new SolidBrush(meter_background_color), pixel_x2 + 1, 25, W - pixel_x2, H);
+
+                        }
+                        else
+                            g.FillRectangle(new SolidBrush(meter_background_color), pixel_x + 1, 25, W - pixel_x, H);
+
+                     
 
                         if (pixel_x >= rx2_meter_peak_value)
                         {
@@ -46575,14 +46653,14 @@ namespace PowerSDR
                         {
                             line_pen = new Pen(Color.Red);
                             line_pen.Width = 3.0F;
-                            g.DrawLine(line_pen, pixel_x1, 0, pixel_x1, H);
+                            g.DrawLine(line_pen, pixel_x1, 25, pixel_x1, H); // .266 change 0 to 25
 
                         } // peak
 
                         line_pen = new Pen(edge_avg_color);
-                        g.DrawLine(line_dark_pen, pixel_x - 1, 0, pixel_x - 1, H); // rx2 edge
-                        g.DrawLine(line_pen, pixel_x, 0, pixel_x, H);
-                        g.DrawLine(line_dark_pen, pixel_x + 1, 0, pixel_x + 1, H);
+                        g.DrawLine(line_dark_pen, pixel_x - 1, 25, pixel_x - 1, H); // rx2 edge
+                        g.DrawLine(line_pen, pixel_x, 25, pixel_x, H);
+                        g.DrawLine(line_dark_pen, pixel_x + 1, 25, pixel_x + 1, H);
 
 
 
@@ -82252,7 +82330,7 @@ namespace PowerSDR
 
         public bool CQCQCALL = false; // ke9ns add true = wave plays CQCQ.wav file
 
-        private void btnTrack_Click(object sender, EventArgs e)
+        public void btnTrack_Click(object sender, EventArgs e)
         {
 
             string filePath = AppDataPath + "QuickAudio\\";
@@ -82661,8 +82739,8 @@ namespace PowerSDR
         public bool CALLCALL = false; // ke9ns add true = wave plays CALL.wav file
 
         //=======================================================================
-        // ke9ns add  REPLY button This button is used when trying to make a contact with a station
-        private void buttonCall_Click(object sender, EventArgs e)
+        // ke9ns: add  REPLY button This button is used when trying to make a contact with a station
+        public void buttonCall_Click(object sender, EventArgs e)
         {
             string filePath = AppDataPath + "QuickAudio\\";
 
@@ -85431,7 +85509,7 @@ namespace PowerSDR
         //=======================================================================================
         // ke9ns add .189 FM mode 1750hz tone repeater key option
         //=======================================================================================
-        private void chkFM1750_Click(object sender, EventArgs e)
+        public void chkFM1750_Click(object sender, EventArgs e)
         {
             //  Debug.WriteLine("1750click===== " + chkFM1750.Checked);
 
@@ -85579,7 +85657,7 @@ namespace PowerSDR
         public bool VK1CALL = false; // ke9ns add true = wave plays VK1.wav file
 
         public bool CWXEND = false; // .264 
-        private void buttonVK1_Click(object sender, EventArgs e)
+        public void buttonVK1_Click(object sender, EventArgs e)
         {
             string filePath = AppDataPath + "QuickAudio\\";
 
@@ -85673,7 +85751,7 @@ namespace PowerSDR
 
         public bool VK2CALL = false; // ke9ns add true = wave plays VK2.wav file
 
-        private void buttonVK2_Click(object sender, EventArgs e)
+        public void buttonVK2_Click(object sender, EventArgs e)
         {
 
             string filePath = AppDataPath + "QuickAudio\\";
@@ -87009,7 +87087,29 @@ namespace PowerSDR
 
         }
 
-        private void chkLockR_CheckedChanged(object sender, EventArgs e)
+        private void keyShortCut_MouseDown(object sender, MouseEventArgs e) // .267
+        {
+            MouseEventArgs me = (MouseEventArgs)e;
+
+            if ((me.Button == System.Windows.Forms.MouseButtons.Right)) 
+            {
+
+                try
+                {
+                    System.Diagnostics.Process.Start(@"C:\Program Files (x86)\FlexRadio Systems\PowerSDR v2.8.0\PowerSDR_ke9ns_CAT_Commands.pdf");
+                }
+                catch (Exception f)
+                {
+                    Debug.WriteLine("CAT command file missing " + f);
+                }
+
+
+            }
+
+
+        } // keyshortcut .267
+
+            private void chkLockR_CheckedChanged(object sender, EventArgs e)
         {
             if (chkLockR.Checked)
             {

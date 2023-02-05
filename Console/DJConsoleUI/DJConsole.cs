@@ -2408,22 +2408,70 @@ namespace PowerSDR
 
                 case 59:
                     {
-                        CWXMacro3(msg);
+                        // .266
+                        if (m_parent.setupForm != null && m_parent.setupForm.chkCWXOverRide.Checked && (m_parent.RX1DSPMode == DSPMode.CWL || m_parent.RX1DSPMode == DSPMode.CWU)) //
+                        {
+                            VKMacro3(msg);
+                        }
+                        else if ((m_parent.RX1DSPMode != DSPMode.CWL && m_parent.RX1DSPMode != DSPMode.CWU))
+                        {
+                            VKMacro3(msg);
+                        }
+                        else 
+                        {
+                            CWXMacro3(msg);
+                        }
                         break;
                     }
                 case 60:
                     {
-                        CWXMacro4(msg);
+                        // .266
+                        if (m_parent.setupForm != null && m_parent.setupForm.chkCWXOverRide.Checked && (m_parent.RX1DSPMode == DSPMode.CWL || m_parent.RX1DSPMode == DSPMode.CWU)) //
+                        {
+                            VKMacro4(msg);
+                        }
+                        else if ( (m_parent.RX1DSPMode != DSPMode.CWL && m_parent.RX1DSPMode != DSPMode.CWU))
+                        {
+                            VKMacro4(msg);
+                        }
+                        else
+                        {
+                            CWXMacro4(msg);
+                        }
                         break;
                     }
                 case 61:
                     {
-                        CWXMacro5(msg);
+                        // .266
+                        if (m_parent.setupForm != null && m_parent.setupForm.chkCWXOverRide.Checked && (m_parent.RX1DSPMode == DSPMode.CWL || m_parent.RX1DSPMode == DSPMode.CWU)) //
+                        {
+                            VKMacro5(msg);
+                        }
+                        else if ( (m_parent.RX1DSPMode != DSPMode.CWL && m_parent.RX1DSPMode != DSPMode.CWU))
+                        {
+                            VKMacro5(msg);
+                        }
+                        else
+                        {
+                            CWXMacro5(msg);
+                        }
                         break;
                     }
                 case 62:
                     {
-                        CWXMacro6(msg);
+                        // .266
+                        if (m_parent.setupForm != null && m_parent.setupForm.chkCWXOverRide.Checked && (m_parent.RX1DSPMode == DSPMode.CWL || m_parent.RX1DSPMode == DSPMode.CWU)) //
+                        {
+                            VKMacro6(msg);
+                        }
+                        else if ((m_parent.RX1DSPMode != DSPMode.CWL && m_parent.RX1DSPMode != DSPMode.CWU))
+                        {
+                            VKMacro6(msg);
+                        }
+                        else
+                        {
+                            CWXMacro6(msg);
+                        }
                         break;
                     }
                 case 63:
@@ -5461,6 +5509,89 @@ namespace PowerSDR
                 }
             }
         }
+
+        //----------------------------
+        // .267 add VK F3-F6 macros to DJConsole
+        private void VKMacro3(int msg)
+        {
+            if (msg == 127)
+            {
+                parser.nGet = 0;
+                parser.nSet = 1;
+
+                try
+                {
+                    commands.ZZKV("3");
+                    return;
+                }
+                catch
+                {
+                    return;
+                }
+            }
+        }
+
+        private void VKMacro4(int msg)
+        {
+            if (msg == 127)
+            {
+                parser.nGet = 0;
+                parser.nSet = 1;
+
+                try
+                {
+                    commands.ZZKV("4");
+                    return;
+                }
+                catch
+                {
+                    return;
+                }
+            }
+        }
+
+        private void VKMacro5(int msg)
+        {
+            if (msg == 127)
+            {
+                parser.nGet = 0;
+                parser.nSet = 1;
+
+                try
+                {
+                    commands.ZZKV("5");
+                    return;
+                }
+                catch
+                {
+                    return;
+                }
+            }
+        }
+
+        private void VKMacro6(int msg)
+        {
+            if (msg == 127)
+            {
+                parser.nGet = 0;
+                parser.nSet = 1;
+
+                try
+                {
+                    commands.ZZKV("6");
+                    return;
+                }
+                catch
+                {
+                    return;
+                }
+            }
+        }
+
+        // .267 end
+
+
+        //----------------------------------
 
         private void CWXMacro7(int msg)
         {
