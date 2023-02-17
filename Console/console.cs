@@ -961,6 +961,8 @@ namespace PowerSDR
 
         public IDBOX IDBOXForm;                          // ke9ns add ID Timer function function (idtimer)
         public TOTBOX TOTBOXForm;                          // ke9ns add Timeout Timer function function (tottimer)
+        public SpotWatchBox SpotWatchBoxForm;           // .269 pop box when your dx spot watch comes up
+
 
         private CATParser parser;                       // ke9ns: add to allow serial port (but currently only used in setup for CATURL
         private CATCommands commands;                   // ke9ns: add
@@ -3202,8 +3204,8 @@ namespace PowerSDR
 
             Setup.console = this;                 // ke9ns add  setup.cs to this console so setup can talk to console
             IDBOX.console = this;                 // ke9ns add IDBOX to this console
-            TOTBOX.console = this;                 // ke9ns add TOTBOX to this console
-
+            TOTBOX.console = this;                // ke9ns add TOTBOX to this console
+            SpotWatchBox.console = this;          //.269
 
             SpotControl.console = this;           // ke9ns add  spot.cs to this console so spot can talk to console
 
@@ -3764,6 +3766,12 @@ namespace PowerSDR
 
             TOTBOXForm.Show();
             TOTBOXForm.Close();
+
+
+            SpotWatchBoxForm = new SpotWatchBox(this); //.269
+            
+            SpotWatchBoxForm.Show();
+            SpotWatchBoxForm.Close();
 
 
             setupForm.StartPosition = FormStartPosition.Manual;
@@ -4357,6 +4365,19 @@ namespace PowerSDR
                 Debug.WriteLine("Dispose failure " + e);
             }
 
+
+            try
+            {
+                writer.WriteLine("12) Dispose spotwatchbox"); //.269
+                if (SpotWatchBoxForm != null) SpotWatchBoxForm.Dispose(); // ke9ns add time out timer
+                writer.WriteLine("12) Done");
+            }
+            catch (Exception e)
+            {
+                writer.WriteLine("12) failure " + e);
+                Debug.WriteLine("Dispose failure " + e);
+            }
+
             try
             {
                 writer.WriteLine("13) Dispose eq");
@@ -4416,6 +4437,7 @@ namespace PowerSDR
                 writer.WriteLine("17) failure " + e);
                 Debug.WriteLine("Dispose failure7 " + e);
             }
+
             Debug.WriteLine("(((((((DISPOSING FORMS15))))))))))))))))");
 
             try
@@ -19671,7 +19693,7 @@ namespace PowerSDR
                 Display.CurrentDisplayMode != DisplayMode.WATERFALL &&
                 Display.CurrentDisplayMode != DisplayMode.PANAFALL &&
                 Display.CurrentDisplayMode != DisplayMode.PANASCOPE)
-                return;
+                return; // go back if your not displaying a pan
 
 
             //double edge_alias = 7200.0;
@@ -19813,7 +19835,7 @@ namespace PowerSDR
 
             UpdateDisplay(); // force a redraw of the picDisplay since you have new freq edges based on new zoom level
 
-
+          
             //  CTUN3 = 0;
 
         } //CalcDisplayFreq()
@@ -56453,7 +56475,7 @@ namespace PowerSDR
             if (helpboxForm != null) helpboxForm.Hide(); // ke9ns add help screen
             if (StackForm != null) StackForm.Hide(); // ke9ns add bandstack
             if (TOTBOXForm != null) TOTBOXForm.Hide(); // ke9ns add time out timer
-
+            if (SpotWatchBoxForm != null) SpotWatchBoxForm.Hide(); // .269
 
             if (fwcAtuForm != null)
             {
@@ -56563,6 +56585,9 @@ namespace PowerSDR
             if (StackForm != null && !StackForm.IsDisposed) StackForm.Close(); // ke9ns add bandstack
                                                                                //  Thread.Sleep(100);
             if (TOTBOXForm != null && !TOTBOXForm.IsDisposed) TOTBOXForm.Close(); // ke9ns add time out timer
+
+            if (SpotWatchBoxForm != null && !SpotWatchBoxForm.IsDisposed) SpotWatchBoxForm.Close(); // ke9ns .269
+
 
             Thread.Sleep(100);
 
@@ -64906,44 +64931,49 @@ namespace PowerSDR
 
         } // picDisplay_Resize
 
+       
         private void ptbDisplayPan_Scroll(object sender, System.EventArgs e)
         {
             //  CTUN1_HZ = 0; // ke9ns add
-
+          
             CalcDisplayFreq();
+         
             if (ptbDisplayPan.Focused) btnHidden.Focus();
-
-
+           
         }
 
-        private void ptbDisplayPan2_Scroll(object sender, System.EventArgs e) //.219 add
+        private void ptbDisplayPan2_Scroll(object sender, System.EventArgs e) //.219 add RX2 VFOB pan
         {
             CalcDisplayFreq();
+
             if (ptbDisplayPan2.Focused) btnHidden.Focus();
 
         } // ptbDisplayPan2_Scroll
 
-        private void btnDisplayPanCenter_Click(object sender, System.EventArgs e)
+        private void btnDisplayPanCenter_Click(object sender, System.EventArgs e) // ke9ns: centers VFOA RX1
         {
+          
             //double edge_alias = 7200.0;
             //double if_freq = 11025.0;
 
+           
             CTUN1_HZ = 0; // reset CTUN to center
 
             double spur_tune_width = 200e6 / Math.Pow(2, 16);
-            if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-                spur_tune_width = 500e6 / Math.Pow(2, 16);
-
+            if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))  spur_tune_width = 500e6 / Math.Pow(2, 16);
+          
             int width = Display.RXDisplayHigh - Display.RXDisplayLow;
-
+         
             int max_pan_width = (int)(sample_rate1 - 2 * spur_tune_width - width);
             if (max_pan_width == 0)
             {
                 ptbDisplayPan.Value = (ptbDisplayPan.Maximum - ptbDisplayPan.Minimum) / 2;
-                ptbDisplayPan_Scroll(btnDisplayPanCenter, EventArgs.Empty);
+
+                ptbDisplayPan_Scroll(btnDisplayPanCenter, EventArgs.Empty); 
+
                 return;
             }
-
+          
             int low = -width / 2; // target -- if width is centered at 0, low will be half the width below 0
             int abs_low = (int)(-(double)sample_rate1 * 0.5 - if_freq * 1e6 + spur_tune_width);
             int offset = low - abs_low;
@@ -64951,9 +64981,19 @@ namespace PowerSDR
             int new_val = (int)((double)offset * (double)ptbDisplayPan.Maximum / (double)max_pan_width);
             ptbDisplayPan.Value = Math.Min(Math.Max(ptbDisplayPan.Minimum, new_val), ptbDisplayPan.Maximum);
             ptbDisplayPan_Scroll(btnDisplayPanCenter, EventArgs.Empty);
+            
 
         } // btnDisplayPanCenter_Click
 
+        bool ZoomRX2 = false; // .270 true = zoom change on rx2
+
+        private void ptbDisplayZoom2_Scroll(object sender, EventArgs e)  //. 270 for RX2 zoom scroll
+        {
+            ZoomRX2 = true;
+            ptbDisplayZoom_Scroll(this, EventArgs.Empty);
+
+
+        } //  ptbDisplayZoom2_Scroll
 
         private void ptbDisplayZoom_Scroll(object sender, System.EventArgs e) // 10 to 240  
         {
@@ -64978,10 +65018,33 @@ namespace PowerSDR
 
             CalcDisplayFreq();
 
-            if (ptbDisplayZoom.Focused) btnHidden.Focus();
-            if (ptbDisplayZoom2.Focused) btnHidden.Focus();
+            if (!initializing && ZoomRX2 == false) btnDisplayPanCenter_Click(this, EventArgs.Empty); // normal left click VFOA .270
+            if (!initializing && ZoomRX2 == true)
+            {
+                btnDisplayPanCenter_MouseDown(this, new MouseEventArgs(MouseButtons.Middle, 0, 0, 0, 0)); // normal left click VFOB .270
+                ZoomRX2 = false; // reset
+            }
+
+
+        
+            if (ptbDisplayZoom.Focused)
+            {
+               
+              
+                btnHidden.Focus();
+               
+            }
+            else if (ptbDisplayZoom2.Focused)
+            {
+               
+             
+                btnHidden.Focus();
+            }
+            
             Debug.WriteLine("====1zoom factor");
-        }
+
+
+        } //  ptbDisplayZoom_Scroll
 
 
         private void radDisplayZoom05_CheckedChanged(object sender, System.EventArgs e)
@@ -64990,7 +65053,7 @@ namespace PowerSDR
             {
                 ptbDisplayZoom.Value = ptbDisplayZoom.Maximum + ptbDisplayZoom.Minimum - (int)(100.0 / 0.5);
                 ptbDisplayZoom_Scroll(this, EventArgs.Empty);
-                btnDisplayPanCenter_Click(this, EventArgs.Empty);
+              if(!initializing)  btnDisplayPanCenter_Click(this, EventArgs.Empty);
             }
         }
 
@@ -65000,7 +65063,7 @@ namespace PowerSDR
             {
                 ptbDisplayZoom.Value = ptbDisplayZoom.Maximum + ptbDisplayZoom.Minimum - (int)(100.0 / 1.0);
                 ptbDisplayZoom_Scroll(this, EventArgs.Empty);
-                btnDisplayPanCenter_Click(this, EventArgs.Empty);
+                if (!initializing) btnDisplayPanCenter_Click(this, EventArgs.Empty);
             }
         }
 
@@ -65010,7 +65073,7 @@ namespace PowerSDR
             {
                 ptbDisplayZoom.Value = ptbDisplayZoom.Maximum + ptbDisplayZoom.Minimum - (int)(100.0 / 2.0);
                 ptbDisplayZoom_Scroll(this, EventArgs.Empty);
-                btnDisplayPanCenter_Click(this, EventArgs.Empty);
+                if (!initializing) btnDisplayPanCenter_Click(this, EventArgs.Empty);
             }
         }
 
@@ -65020,7 +65083,7 @@ namespace PowerSDR
             {
                 ptbDisplayZoom.Value = ptbDisplayZoom.Maximum + ptbDisplayZoom.Minimum - (int)(100.0 / 4.0); //
                 ptbDisplayZoom_Scroll(this, EventArgs.Empty);
-                btnDisplayPanCenter_Click(this, EventArgs.Empty);
+                if (!initializing) btnDisplayPanCenter_Click(this, EventArgs.Empty);
             }
 
 
@@ -78492,7 +78555,7 @@ namespace PowerSDR
         {
             MouseEventArgs me = (MouseEventArgs)e;
 
-            if ((me.Button == System.Windows.Forms.MouseButtons.Middle))
+            if ((me.Button == System.Windows.Forms.MouseButtons.Middle)) // centers RX2 VFOB
             {
 
                 if (current_model == Model.FLEX5000 && FWCEEPROM.RX2OK && chkRX2.Checked)  //.220 corrected
@@ -78674,7 +78737,7 @@ namespace PowerSDR
         private void lblDisplayZoom_MouseDown(object sender, MouseEventArgs e)
         {
             MouseEventArgs me = (MouseEventArgs)e;
-            if ((me.Button == System.Windows.Forms.MouseButtons.Right))
+            if ((me.Button == System.Windows.Forms.MouseButtons.Right)) // ke9ns: toggle ZOOM in function
             {
 
                 if (ZZOOM == false)
@@ -78704,7 +78767,7 @@ namespace PowerSDR
                  */
 
             } // right click
-            else // ke9ns left click to adjust pan scale 
+            else // ke9ns: left click to adjust pan scale 
             {
                 if (Display.continuum == 0)
                 {
@@ -79175,6 +79238,36 @@ namespace PowerSDR
             */
 
         } // txtTimer_KeyDown
+
+        public bool SpotLive = false; // .270
+        public string SpotWatchNow //.269
+        {
+            get
+            {
+                return " ";
+            }
+            set
+            {
+                if (SpotWatchBoxForm == null)
+                {
+                    SpotWatchBoxForm = new SpotWatchBox(this);
+                    Debug.WriteLine("WATCH CONSOLE ");
+                }
+
+                Debug.WriteLine("WATCH CONSOLE1 " + value);
+
+                SpotWatchBoxForm.btnTrack.Text = value;
+
+                SpotWatchBoxForm.Show();
+                SpotWatchBoxForm.Focus();
+                SpotWatchBoxForm.WindowState = FormWindowState.Normal; // ke9ns POP UP Window for SpotWatchbox
+
+              
+
+            }
+
+
+        } // SpotWatchNow
 
 
         //===============================================================================
@@ -84312,6 +84405,9 @@ namespace PowerSDR
                     }
                     if (IDBOXForm != null) if (IDBOXForm.ContainsFocus) PSDRFocusNow = true;
                     if (TOTBOXForm != null) if (TOTBOXForm.ContainsFocus) PSDRFocusNow = true;
+
+                    if (SpotWatchBoxForm != null) if (SpotWatchBoxForm.ContainsFocus) PSDRFocusNow = true; //.269
+
                     if (SpotForm != null)
                     {
                         if (SpotForm.chkAlwaysOnTop.Checked == false) // 
@@ -84464,7 +84560,7 @@ namespace PowerSDR
                 //ktest
                 ptbDisplayZoom.Value = ptbDisplayZoom.Maximum + ptbDisplayZoom.Minimum - (int)(100.0 / 40.0); // ke9ns add: 40x super zoom (slider goes up to x100)
                 ptbDisplayZoom_Scroll(this, EventArgs.Empty);
-                btnDisplayPanCenter_Click(this, EventArgs.Empty);
+                if (!initializing) btnDisplayPanCenter_Click(this, EventArgs.Empty);
 
             }
             else if ((me.Button == System.Windows.Forms.MouseButtons.Middle)) //.219
@@ -84472,17 +84568,12 @@ namespace PowerSDR
 
                 ptbDisplayZoom2.Value = ptbDisplayZoom2.Maximum + ptbDisplayZoom2.Minimum - (int)(100.0 / 4.0);
                 ptbDisplayZoom_Scroll(this, EventArgs.Empty);
-                btnDisplayPanCenter_Click(this, EventArgs.Empty);
+                if (!initializing) btnDisplayPanCenter_Click(this, EventArgs.Empty);
 
             }
 
 
         } // radDisplayZoom4x_MouseDown
-
-        private void lblDisplayZoom_Click(object sender, EventArgs e)
-        {
-
-        }
         // ke9ns add
         private void lblDisplayZoom_MouseHover(object sender, EventArgs e)
         {
@@ -84524,7 +84615,7 @@ namespace PowerSDR
                 //ktest
                 ptbDisplayZoom.Value = ptbDisplayZoom.Maximum + ptbDisplayZoom.Minimum - (int)(100.0 / 20.0); // ke9ns add: 20x super zoom (slider goes up to x100)
                 ptbDisplayZoom_Scroll(this, EventArgs.Empty);
-                btnDisplayPanCenter_Click(this, EventArgs.Empty);
+                if (!initializing) btnDisplayPanCenter_Click(this, EventArgs.Empty);
 
             }
             else if ((me.Button == System.Windows.Forms.MouseButtons.Middle)) //.219
@@ -84532,7 +84623,7 @@ namespace PowerSDR
 
                 ptbDisplayZoom2.Value = ptbDisplayZoom2.Maximum + ptbDisplayZoom2.Minimum - (int)(100.0 / 2.0);
                 ptbDisplayZoom_Scroll(this, EventArgs.Empty);
-                btnDisplayPanCenter_Click(this, EventArgs.Empty);
+                if (!initializing) btnDisplayPanCenter_Click(this, EventArgs.Empty);
 
             }
         }
@@ -84545,7 +84636,8 @@ namespace PowerSDR
 
                 ptbDisplayZoom.Value = ptbDisplayZoom.Maximum + ptbDisplayZoom.Minimum; // ke9ns add: 100x super zoom (slider goes up to x100)
                 ptbDisplayZoom_Scroll(this, EventArgs.Empty);
-                btnDisplayPanCenter_Click(this, EventArgs.Empty);
+                if (!initializing) btnDisplayPanCenter_Click(this, EventArgs.Empty);
+
 
             }
             else if ((me.Button == System.Windows.Forms.MouseButtons.Middle)) //.219
@@ -84553,7 +84645,7 @@ namespace PowerSDR
 
                 ptbDisplayZoom2.Value = ptbDisplayZoom2.Maximum + ptbDisplayZoom2.Minimum - (int)(100.0 / 0.5);
                 ptbDisplayZoom_Scroll(this, EventArgs.Empty);
-                btnDisplayPanCenter_Click(this, EventArgs.Empty);
+                if (!initializing) btnDisplayPanCenter_Click(this, EventArgs.Empty);
 
             }
         }
@@ -84566,7 +84658,7 @@ namespace PowerSDR
 
                 ptbDisplayZoom.Value = ptbDisplayZoom.Maximum + ptbDisplayZoom.Minimum - (int)(100.0 / 10.0); // ke9ns add: 10x super zoom (slider goes up to x100)
                 ptbDisplayZoom_Scroll(this, EventArgs.Empty);
-                btnDisplayPanCenter_Click(this, EventArgs.Empty);
+                if (!initializing) btnDisplayPanCenter_Click(this, EventArgs.Empty);
 
             }
             else if ((me.Button == System.Windows.Forms.MouseButtons.Middle)) //.219
@@ -84574,7 +84666,7 @@ namespace PowerSDR
 
                 ptbDisplayZoom2.Value = ptbDisplayZoom2.Maximum + ptbDisplayZoom2.Minimum - (int)(100.0 / 1.0);
                 ptbDisplayZoom_Scroll(this, EventArgs.Empty);
-                btnDisplayPanCenter_Click(this, EventArgs.Empty);
+                if (!initializing) btnDisplayPanCenter_Click(this, EventArgs.Empty);
 
             }
 
@@ -87123,7 +87215,9 @@ namespace PowerSDR
 
         } // keyshortcut .267
 
-            private void chkLockR_CheckedChanged(object sender, EventArgs e)
+       
+
+        private void chkLockR_CheckedChanged(object sender, EventArgs e)
         {
             if (chkLockR.Checked)
             {

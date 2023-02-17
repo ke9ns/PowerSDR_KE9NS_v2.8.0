@@ -44,6 +44,9 @@ namespace PowerSDR
         private System.ComponentModel.IContainer components;
         private CheckBoxTS chkPanSpotBlank;
         private CheckBoxTS chkPanLoTWColor;
+        public CheckBoxTS chkPanNoVert;
+        public TextBox watchBox;
+        private Label label1;
         public static SpotControl SpotForm;                       // ke9ns add DX spotter function
 
         #endregion
@@ -91,8 +94,11 @@ namespace PowerSDR
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.udSpotAge = new System.Windows.Forms.NumericUpDownTS();
             this.chkPanSpotBlank = new System.Windows.Forms.CheckBoxTS();
-            this.label5 = new System.Windows.Forms.Label();
             this.chkPanLoTWColor = new System.Windows.Forms.CheckBoxTS();
+            this.chkPanNoVert = new System.Windows.Forms.CheckBoxTS();
+            this.watchBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.udSpotAge)).BeginInit();
             this.SuspendLayout();
             // 
@@ -140,16 +146,6 @@ namespace PowerSDR
             this.chkPanSpotBlank.UseVisualStyleBackColor = true;
             this.chkPanSpotBlank.CheckedChanged += new System.EventHandler(this.chkPanSpotBlank_CheckedChanged_1);
             // 
-            // label5
-            // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 13);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(144, 13);
-            this.label5.TabIndex = 85;
-            this.label5.Text = "Maximum Spot Age (Minutes)";
-            // 
             // chkPanLoTWColor
             // 
             this.chkPanLoTWColor.AutoSize = true;
@@ -164,10 +160,62 @@ namespace PowerSDR
             this.chkPanLoTWColor.UseVisualStyleBackColor = true;
             this.chkPanLoTWColor.CheckedChanged += new System.EventHandler(this.chkPanLoTWColor_CheckedChanged);
             // 
+            // chkPanNoVert
+            // 
+            this.chkPanNoVert.AutoSize = true;
+            this.chkPanNoVert.Image = null;
+            this.chkPanNoVert.Location = new System.Drawing.Point(15, 119);
+            this.chkPanNoVert.Name = "chkPanNoVert";
+            this.chkPanNoVert.Size = new System.Drawing.Size(268, 17);
+            this.chkPanNoVert.TabIndex = 89;
+            this.chkPanNoVert.Text = "Panadapter spot callsigns with NO vertical indicator\r\n";
+            this.toolTip1.SetToolTip(this.chkPanNoVert, "Check to remove all vertical lines indicating the VFO frequency location.");
+            this.chkPanNoVert.UseVisualStyleBackColor = true;
+            this.chkPanNoVert.CheckedChanged += new System.EventHandler(this.chkPanNoVert_CheckedChanged);
+            // 
+            // watchBox
+            // 
+            this.watchBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.watchBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.watchBox.Location = new System.Drawing.Point(15, 186);
+            this.watchBox.MaxLength = 20;
+            this.watchBox.Name = "watchBox";
+            this.watchBox.Size = new System.Drawing.Size(156, 22);
+            this.watchBox.TabIndex = 90;
+            this.watchBox.Text = "call sign";
+            this.toolTip1.SetToolTip(this.watchBox, "Type anything you want to Watch for from a DX Spot.\r\n\r\nType a DX Spot call sign, " +
+        "a Spotter call sign\r\nType a partial call sign to watch for a Country\r\nType a par" +
+        "tial message to watch for a message");
+            this.watchBox.TextChanged += new System.EventHandler(this.watchBox_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 13);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(144, 13);
+            this.label5.TabIndex = 85;
+            this.label5.Text = "Maximum Spot Age (Minutes)";
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label1.Location = new System.Drawing.Point(12, 170);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 13);
+            this.label1.TabIndex = 91;
+            this.label1.Text = "Watch for DX Spot:";
+            // 
             // SpotAge
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
             this.ClientSize = new System.Drawing.Size(367, 246);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.watchBox);
+            this.Controls.Add(this.chkPanNoVert);
             this.Controls.Add(this.chkPanLoTWColor);
             this.Controls.Add(this.chkPanSpotBlank);
             this.Controls.Add(this.label5);
@@ -277,6 +325,22 @@ namespace PowerSDR
             if (chkPanLoTWColor.Checked) SpotForm.SpotLoTWColor = true;
             else SpotForm.SpotLoTWColor = false;
         }
+
+        private void chkPanNoVert_CheckedChanged(object sender, EventArgs e) //.269
+        {
+            if (chkPanNoVert.Checked) SpotForm.SpotNoVert = true;
+            else SpotForm.SpotNoVert = false;
+        }
+
+        private void watchBox_TextChanged(object sender, EventArgs e)
+        {
+            if (watchBox.TextLength >= 2 || watchBox.Text != " ")
+            {
+                SpotForm.SpotWatchCall = watchBox.Text; //.269
+            }
+        }
+
+
     } // SpotAge
 
 } // PowerSDR

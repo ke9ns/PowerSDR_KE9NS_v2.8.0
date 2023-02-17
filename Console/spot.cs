@@ -1832,13 +1832,18 @@ namespace PowerSDR
 
                             DX_Index1 = 250; // use 250 as a temp holding spot. always fill from the top
 
-
+                            SpotWatchFound = false;
+                            SpotWatchFoundDX = false;
+                            SpotWatchFoundMess = false;
+                            SpotWatchOK = false;
 
                             // grab DX_Spotter callsign=======================================================================================
                             try
                             {
                                 DX_Spotter[DX_Index1] = message1.Substring(6, 10); // get dx call with : at the end
-                                Debug.WriteLine("DX_Call " + DX_Station[DX_Index1]);
+                                Debug.WriteLine("DX_spotter " + DX_Spotter[DX_Index1] );
+                                
+
 
                                 int pos = 10;
                                 if (DX_Spotter[DX_Index1].Contains(":"))
@@ -1852,6 +1857,15 @@ namespace PowerSDR
 
 
                                 DX_Spotter[DX_Index1] = DX_Spotter[DX_Index1].Substring(0, pos); // reduce the call without the :
+
+                             //   Debug.WriteLine("DX_Spotter " + DX_Station[DX_Index1] + " >" + SpotWatchCall + "<");
+
+                              
+                                if (DX_Spotter[DX_Index1].IndexOf(SpotWatchCall, StringComparison.OrdinalIgnoreCase) != -1) //.269 ignore case
+                                {
+                                   
+                                    SpotWatchFound = true;
+                                }
 
                                 sb = new StringBuilder(DX_Spotter[DX_Index1]); // clear sb string over again
                                 sb.Append('>');
@@ -1871,7 +1885,8 @@ namespace PowerSDR
 
                                 //    textBox1.Text = e.ToString();
                             }
-                            //    Debug.WriteLine("DX_Call " + DX_Station[DX_Index1]);
+                              
+
 
                             // grab DX_Freq ========================================================================================
                             try
@@ -2065,6 +2080,7 @@ namespace PowerSDR
                             Debug.WriteLine("DX_Freq " + DX_Freq[DX_Index1]);
 
 
+
                             // grab DX_Station Call sign =========================================================================================
 
                             try
@@ -2073,17 +2089,27 @@ namespace PowerSDR
                                 int pos = DX_Station[DX_Index1].IndexOf(' '); // find the
                                 DX_Station[DX_Index1] = DX_Station[DX_Index1].Substring(0, pos); // reduce the call without the
 
+                              //  Debug.WriteLine("DX_Station " + DX_Station[DX_Index1] + " >" + SpotWatchCall +"<" );
+                             
+
+                                if (DX_Station[DX_Index1].IndexOf(SpotWatchCall,StringComparison.OrdinalIgnoreCase) != -1) //.269 ignore case
+                                {
+                                    SpotWatchFoundDX = true;
+                                 
+                                }
 
                             }
                             catch (FormatException)
                             {
-                                DX_Spotter[DX_Index1] = "NA";
+                                DX_Station[DX_Index1] = "NA";
                             }
                             catch (ArgumentOutOfRangeException)
                             {
-                                DX_Spotter[DX_Index1] = "NA";
+                                DX_Station[DX_Index1] = "NA";
                             }
-                            Debug.WriteLine("DX_Spotter " + DX_Spotter[DX_Index1]);
+                          
+
+
 
                             // grab comments
                             try
@@ -2092,6 +2118,12 @@ namespace PowerSDR
 
                                 DX_Message[DX_Index1] = message1.Substring(39, 29).ToLower(); // get dx call with : at the end
 
+                                
+                                if (DX_Message[DX_Index1].IndexOf(SpotWatchCall, StringComparison.OrdinalIgnoreCase) != -1) //.269 ignore case
+                                {
+                                    SpotWatchFoundMess = true;
+                                 
+                                }
 
                                 if (DX_Message[DX_Index1].Contains("cw"))
                                 {
@@ -2285,7 +2317,7 @@ namespace PowerSDR
 
                                     if (chkBoxSSB.Checked != true)
                                     {
-                                        Debug.WriteLine("bypass ssb because not looking for ssb");
+                                     //   Debug.WriteLine("bypass ssb because not looking for ssb");
                                         continue; // check for a SSB mode spot
                                     }
 
@@ -2296,7 +2328,7 @@ namespace PowerSDR
 
                                     if (chkBoxCW.Checked != true)
                                     {
-                                        Debug.WriteLine("bypass CW because not looking for CW");
+                                      //  Debug.WriteLine("bypass CW because not looking for CW");
                                         continue; // check for a CW mode spot
                                     }
 
@@ -2307,7 +2339,7 @@ namespace PowerSDR
 
                                     if (chkBoxBeacon.Checked != true)
                                     {
-                                        Debug.WriteLine("bypass Beacon because not looking for Beacons");
+                                     //   Debug.WriteLine("bypass Beacon because not looking for Beacons");
                                         continue; // check for a Beacon spot
                                     }
 
@@ -3187,6 +3219,24 @@ namespace PowerSDR
 
                         PASS2: int xx = 0;
 
+                            if(SpotWatchFound || SpotWatchFoundDX || SpotWatchFoundMess) //.269 270
+                            {
+                                SpotWatchOK = true;
+
+                                SpotWatchGoVfoA = false;
+                                SpotWatchGoVfoB = false;
+
+                                Debug.WriteLine("WATCH FOUND " + message1);
+
+                                console.SpotWatchNow = message1; // ke9ns: open WATCH BOX now check if user wants to go to VFOA/B with watch spot
+
+                                SpotWatchFound = false; // reset for next
+                                SpotWatchFoundDX = false;
+                                SpotWatchFoundMess = false;
+                                SpotWatchOK = false;
+                          
+                            }
+
 
                             for (int ii = 0; ii <= DX_Index; ii++)
                             {
@@ -3298,9 +3348,10 @@ namespace PowerSDR
                             DX_Index++; // jump to PASS2 if it passed the valid call spotter test
 
 
+
                             if (DX_Index > 150)
                             {
-                                Debug.WriteLine("DX SPOT REACH 90 ");
+                                Debug.WriteLine("DX SPOT REACH 150 ");
                                 DX_Index = 150; // you have reached max spots
                             }
 
@@ -3380,8 +3431,10 @@ namespace PowerSDR
                             // Crosscheck Station Call sign Prefix with data from DXLOC.txt (lat and lon) 
                             // and create a list of Country, Callsign, X, Y on unscaled map
 
+                            //.269 270
 
-                            updatemapspots();
+
+                            updatemapspots(); // Updater map
 
 
                             /*
@@ -4322,6 +4375,17 @@ namespace PowerSDR
         int UTCAGE_MAX = 25; // overridden by spotage.udspotage
         public bool SpotBackground = false; //.261
         public bool SpotLoTWColor = false; //.262
+        public bool SpotNoVert = false; //.269 true = no vert lines for dx spots on pan
+
+        public string SpotWatchCall = "call sign"; // .269 call sign of DX spot your watching out for.
+        public bool SpotWatchFoundDX = false; //.269 true = match for Spotwatchcall DX spot
+        public bool SpotWatchFound = false; //.269 true = match for Spotwatchcall spotter
+        public bool SpotWatchFoundMess = false; //.269
+        public bool SpotWatchOK = false; // .269 true = its a spot that appears on your spotter list, false=its blocked becuase your settings prevent it (like NA spotters only)
+        public bool SpotWatchGoVfoA = false; //  .269 true = go to this Watch spot now (vfoa)
+        public bool SpotWatchGoVfoB = false; //  .269 true = go to this Watch spot now (vfoa)
+        public int SpotWatchIndex = 0; // .269 index to go to
+
 
         private void processDXAGE()
         {
@@ -4646,21 +4710,29 @@ namespace PowerSDR
                 Debug.WriteLine("LEFT CLICK");
 
              
-                    if (e.Location.X == 0 && e.Location.Y == 0)
+                if (e.Location.X == 0 && e.Location.Y == 0) // come here is if click on pandisplay either red dot, or CTRL over a spot on pan in console. OR Watch
+                {
+                    if (SpotWatchGoVfoA == true) //.269
                     {
-                        // come here is if click on pandisplay either red dot or CTRL
+                        SpotWatchGoVfoA = false;
+                        iii = (byte)SpotWatchIndex;
+
+                    }
+                    else
+                    {
                         iii = console.CtrlSpotIndex;
                         Debug.WriteLine("+ CTRLSPOTINDEX RX1 " + iii);
-                  
-                    lastselected = textBox1.SelectionStart = DX_SELECTED * LineLength;      // start of each dx spot line
-                    textBox1.SelectionLength = LineLength;                    // length of each dx spot  line
-                    lastselectedON = true;
+
+                        lastselected = textBox1.SelectionStart = DX_SELECTED * LineLength;      // start of each dx spot line
+                        textBox1.SelectionLength = LineLength;                    // length of each dx spot  line
+                        lastselectedON = true;
+                    }
 
                 }
-                else
-                    { // come here if click on SPOT textbox1 screen
-                        ii = textBox1.GetCharIndexFromPosition(e.Location);
-                        iii = (byte)(ii / LineLength); // get line  /82  or /86 if AGE turned on or 91 if mode is also on /99 if country added but now /105 with DX_Beam heading
+                else// come here if click on SPOT textbox1 screen
+                { 
+                    ii = textBox1.GetCharIndexFromPosition(e.Location);
+                    iii = (byte)(ii / LineLength); // get line  /82  or /86 if AGE turned on or 91 if mode is also on /99 if country added but now /105 with DX_Beam heading
 
 
                     //  Debug.WriteLine("testL " + DX_Index + " , "+iii);
@@ -4684,9 +4756,9 @@ namespace PowerSDR
                 }
 
 
-                DX_TEXT = textBox1.Text.Substring((DX_SELECTED * LineLength) + 16, 40); // just check freq and callsign of dx station
+                 DX_TEXT = textBox1.Text.Substring((DX_SELECTED * LineLength) + 16, 40); // just check freq and callsign of dx station
 
-                  Debug.WriteLine("+DX_SELECTED " + DX_SELECTED + " , "+ DX_TEXT + " , " + e.Location);
+                 Debug.WriteLine("+DX_SELECTED " + DX_SELECTED + " , "+ DX_TEXT + " , " + e.Location);
 
                 int gg = ii % LineLength;  // get remainder for checking beam heading
 
@@ -5089,11 +5161,22 @@ namespace PowerSDR
                 byte iii = 0; //.268 move
 
 
-                if (e.Location.X == 0 && e.Location.Y == 0) // .268
+                if (e.Location.X == 0 && e.Location.Y == 0) // .268 // come here is if click on pandisplay either red dot or CTRL, OR from WATCH
                 {
-                    // come here is if click on pandisplay either red dot or CTRL
-                    iii = console.CtrlSpotIndex;
-                      Debug.WriteLine("+ CTRLSPOTINDEX RX2" + iii);
+                    
+                    if (SpotWatchGoVfoB == true) //.269
+                    {
+                        SpotWatchGoVfoB = false;
+                        iii = (byte)SpotWatchIndex;
+
+                    }
+                    else
+                    {
+
+                        iii = console.CtrlSpotIndex;
+                        Debug.WriteLine("+ CTRLSPOTINDEX RX2" + iii);
+
+                    }
 
                 }
                 else

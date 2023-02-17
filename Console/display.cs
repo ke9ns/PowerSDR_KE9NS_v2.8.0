@@ -12598,6 +12598,7 @@ namespace PowerSDR
                     else
                     {
                         VFOLow = vfo_hz + RXDisplayLow;    // low freq (left side) in hz
+                        VFOLow = vfo_hz + RXDisplayLow;    // low freq (left side) in hz
                         VFOHigh = vfo_hz + RXDisplayHigh; // high freq (right side) in hz
                     }
 
@@ -12630,7 +12631,7 @@ namespace PowerSDR
 
                             kk++;
 
-                            g.DrawLine(p3, VFO_DXPos, H1b, VFO_DXPos, H1a);   // draw vertical line
+                          if (SpotForm != null && SpotForm.SpotNoVert == false)  g.DrawLine(p3, VFO_DXPos, H1b, VFO_DXPos, H1a);   // draw vertical line .269
 
                         }
 
@@ -12865,7 +12866,7 @@ namespace PowerSDR
 
                                         int VFO_SWLPos = (int)(((XPOS) * (float)(SpotControl.SWL_Freq[ii] - VFOLow)));
 
-                                        g.DrawLine(p2, VFO_SWLPos, 20, VFO_SWLPos, H1a);   // draw vertical line
+                                        if (SpotForm != null && SpotForm.SpotNoVert == false) g.DrawLine(p2, VFO_SWLPos, 20, VFO_SWLPos, H1a);   // draw vertical line .269
 
                                         if ((Console.MMK3 > 0) && (SpotControl.SP6_Active != 0))
                                         {
@@ -12957,7 +12958,7 @@ namespace PowerSDR
                                 {
                                     int VFO_SWLPos = (int)(((XPOS) * (float)(SpotControl.SWL_Freq[ii] - VFOLow)));
 
-                                    g.DrawLine(p2, VFO_SWLPos, 20, VFO_SWLPos, H1a);   // draw vertical line
+                                    if (SpotForm != null && SpotForm.SpotNoVert == false) g.DrawLine(p2, VFO_SWLPos, 20, VFO_SWLPos, H1a);   // draw vertical line .269
 
                                     iii = iii + 11; // stairstep spots
                                     if (iii > 90) iii = 0;
@@ -13105,7 +13106,7 @@ namespace PowerSDR
 
                                         int VFO_SWLPos = (int)(((XPOS) * (float)(SpotControl.SWL_Freq[ii] - VFOLow)));
 
-                                        g.DrawLine(p2, VFO_SWLPos, H1b, VFO_SWLPos, H1a);   // draw RX2 vertical line
+                                        if (SpotForm != null && SpotForm.SpotNoVert == false) g.DrawLine(p2, VFO_SWLPos, H1b, VFO_SWLPos, H1a);   // draw RX2 vertical line .269
 
 
                                         if ((Console.MMK4 > 0) && (SpotControl.SP6_Active != 0))
@@ -13185,7 +13186,7 @@ namespace PowerSDR
                                 {
                                     int VFO_SWLPos = (int)(((XPOS) * (float)(SpotControl.SWL_Freq[ii] - VFOLow)));
 
-                                    g.DrawLine(p2, VFO_SWLPos, H1b, VFO_SWLPos, H1a);   // draw RX2 vertical line
+                                    if (SpotForm != null && SpotForm.SpotNoVert == false) g.DrawLine(p2, VFO_SWLPos, H1b, VFO_SWLPos, H1a);   // draw RX2 vertical line .269
 
                                     iii = iii + 11; // stairstep spots
                                     if (iii > 90) iii = 0;
@@ -13367,7 +13368,7 @@ namespace PowerSDR
 
                             kk++;
 
-                            g.DrawLine(p1, VFO_DXPos, H1b, VFO_DXPos, H1a);   // draw vertical line
+                            if (SpotForm != null && SpotForm.SpotNoVert == false) g.DrawLine(p1, VFO_DXPos, H1b, VFO_DXPos, H1a);   // draw vertical line .269
 
                         }
 
