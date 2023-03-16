@@ -181,7 +181,7 @@ namespace PowerSDR
             }
         }
         private static bool split_display = false;
-        public static bool SplitDisplay
+        public static bool SplitDisplay // // ke9ns: true = RX2 enabled (you must split the display between VFOA and B)
         {
             get { return split_display; }
             set
@@ -324,7 +324,7 @@ namespace PowerSDR
         }
 
         private static bool split_enabled = false;
-        public static bool SplitEnabled
+        public static bool SplitEnabled // ke9ns: VFOA in SPLIT mode
         {
             get { return split_enabled; }
             set
@@ -333,7 +333,16 @@ namespace PowerSDR
                 if (current_display_mode == DisplayMode.PANADAPTER && draw_tx_filter) DrawBackground();
             }
         }
-
+        private static bool splitb_enabled = false;
+        public static bool SplitBEnabled //.271
+        {
+            get { return splitb_enabled; }
+            set
+            {
+                splitb_enabled = value;
+               if (current_display_mode == DisplayMode.PANADAPTER && draw_tx_filter) DrawBackground();
+            }
+        }
         private static bool show_freq_offset = false;
         public static bool ShowFreqOffset
         {
@@ -392,13 +401,9 @@ namespace PowerSDR
             set
             {
                 vfoa_hz = value;
-
-                //if(current_display_mode == DisplayMode.PANADAPTER)
-                //	DrawBackground();
+               
             }
         }
-
-
 
 
         private static long vfoa_sub_hz;
@@ -409,9 +414,7 @@ namespace PowerSDR
             {
                 vfoa_sub_hz = value; // value is in hz (full vfob value)
                                      //   Debug.WriteLine("vfoa_sub_hz" + vfoa_sub_hz);
-
-                //if(current_display_mode == DisplayMode.PANADAPTER)
-                //	DrawBackground();
+              
             }
         }
 
@@ -422,9 +425,7 @@ namespace PowerSDR
             set
             {
                 vfob_hz = value;
-                //if((current_display_mode == DisplayMode.PANADAPTER && split_enabled && draw_tx_filter) ||
-                //	(current_display_mode == DisplayMode.PANADAPTER && sub_rx1_enabled))
-                //	DrawBackground();
+               
             }
         }
 
@@ -435,8 +436,7 @@ namespace PowerSDR
             set
             {
                 vfob_sub_hz = value;
-                //if(current_display_mode == DisplayMode.PANADAPTER)
-                //	DrawBackground();
+               
             }
         }
 
@@ -3216,7 +3216,7 @@ namespace PowerSDR
 
                     // }
                 } // main RX1 filter
-                else if ((local_mox) && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU) && (!split_enabled)) // draw CW rx box when you tx.
+                else if ((local_mox) && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU) && (!split_enabled)) // RX1 draw CW rx box when you tx.
                 {
 
                     int filter_left_x;
@@ -3238,7 +3238,7 @@ namespace PowerSDR
                 }
 
                 //============================================================================================
-                // ke9ns  RX1 draw tx line for everything but cw
+                // ke9ns  RX1 draw TX lines for everything but CW modes (while in RX mode)
                 //============================================================================================
                 if (!local_mox && draw_tx_filter && (rx1_dsp_mode != DSPMode.CWL && rx1_dsp_mode != DSPMode.CWU))
                 {
@@ -3246,22 +3246,30 @@ namespace PowerSDR
                     int filter_left_x;
                     int filter_right_x;
 
-                    if (tx_on_vfob)
+                    if (tx_on_vfob) //ke9ns: VFOB = TX
                     {
-                        if (!split_enabled)
+                        if (split_enabled == false) // ke9ns: SPLIT VFOA OFF, VFOB = TX, draw TX lines on VFOA
                         {
                             filter_left_x = (int)((float)(tx_filter_low - Low + xit_hz - rit_hz) / (High - Low) * W); //original
                             filter_right_x = (int)((float)(tx_filter_high - Low + xit_hz - rit_hz) / (High - Low) * W); // 
                         }
-                        else
+                        else // VFOA SPLIT ON
                         {
-                            filter_left_x = (int)((float)(tx_filter_low - Low + xit_hz - rit_hz + (vfob_sub_hz - vfoa_hz)) / (High - Low) * W);
-                            filter_right_x = (int)((float)(tx_filter_high - Low + xit_hz - rit_hz + (vfob_sub_hz - vfoa_hz)) / (High - Low) * W);
+                            if (splitb_enabled == true || console.chkRX2.Checked) // SPLIT VFOA ON, SPLIT VFOB ON, VFOB = TX, but drawing lines for VFOA SPLIT at this point in the code
+                            {
+                                filter_left_x = (int)((float)(tx_filter_low - Low + xit_hz - rit_hz + (vfoa_sub_hz - vfoa_hz)) / (High - Low) * W);
+                                filter_right_x = (int)((float)(tx_filter_high - Low + xit_hz - rit_hz + (vfoa_sub_hz - vfoa_hz)) / (High - Low) * W);
+                            }
+                            else // SPLIT VFOA ON (SPLIT VFOB OFF), VFOB = TX, draw TX lines on VFOA using VFOB freq
+                            {
+                                filter_left_x = (int)((float)(tx_filter_low - Low + xit_hz - rit_hz + (vfob_sub_hz - vfoa_hz)) / (High - Low) * W);
+                                filter_right_x = (int)((float)(tx_filter_high - Low + xit_hz - rit_hz + (vfob_sub_hz - vfoa_hz)) / (High - Low) * W);
+                            }
                         }
                     }
-                    else // TX on VFOA
+                    else // ke9ns: VFOA = TX
                     {
-                        if (!split_enabled)
+                        if (split_enabled == false) //ke9ns: VFOA SPLIT OFF (doesnt matter if VFOB SPLIT is ON, since VFOA = TX 
                         {
                             //Transmit profile high=4000, low = 70  results in:
                             // tx_filter_low = -4000 lsb or +70 usb hz
@@ -3282,24 +3290,24 @@ namespace PowerSDR
                             //   Debug.Write(" Low" + Low);
                             //  Debug.Write(" W" + W);
                         }
-                        else // split on vfoa
+                        else // ke9ns: SPLIT VFOA ON, so VFOA SUB = TX (doesnt matter about VFOB SPLIT)
                         {
                             filter_left_x = (int)((float)(tx_filter_low - Low + xit_hz - rit_hz + (vfoa_sub_hz - vfoa_hz)) / (High - Low) * W);
                             filter_right_x = (int)((float)(tx_filter_high - Low + xit_hz - rit_hz + (vfoa_sub_hz - vfoa_hz)) / (High - Low) * W);
 
                         }
-                    }
+                    } // VFOA = TX (RX1)
 
-                    if (bottom) // && tx_on_vfob)  // if transmitting on RX2 then draw lines on bottom
+                    if (bottom) // draw TX on RX2?                              
                     {
                         // draw tx filter overlay
                         g.DrawLine(tx_filter_pen, filter_left_x, H + top, filter_left_x, H + H);
                         g.DrawLine(tx_filter_pen, filter_right_x, H + top, filter_right_x, H + H);  // draw tx filter overlay
 
                     }
-                    else if ((!tx_on_vfob) && (!bottom)) // ke9ns if transmitting on normal RX1 draw lines // KE9NS ADD  fix mistake made by flex  makes the line thicker
+                    else //.271 if ((tx_on_vfob == false) && (bottom == false)) // ke9ns: if TX on normal RX1 draw lines // KE9NS ADD  fix mistake made by flex  makes the line thicker
                     {
-                        // ke9ns pgrid ORANGE LEFT and RIGHT TX WIDTH LINES for TRANSMITTER ONLY
+                        // ke9ns pgrid  LEFT and RIGHT TX WIDTH LINES for TRANSMITTER ONLY
                         g.DrawLine(tx_filter_pen, filter_left_x, top, filter_left_x, H);        // LEFT draw tx filter overlay
                         g.DrawLine(tx_filter_pen, filter_right_x, top, filter_right_x, H);      // RIGHT draw tx filter ovelay
                     }
@@ -3308,44 +3316,47 @@ namespace PowerSDR
 
 
                 //============================================================================================
-                // ke9ns:  RX1 draw tx line for cw
+                // ke9ns:  RX1 draw TX line for CW
                 //============================================================================================
                 //   if ((!local_mox) && (draw_tx_cw_freq || console.setupForm.chkCWDisplay.Checked) && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)) // ke9ns mod
                 if ((draw_tx_cw_freq || console.setupForm.chkCWDisplay.Checked) && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)) // ke9ns mod
                 {
+                  
                     int pitch = cw_pitch;
                     if ((rx1_dsp_mode == DSPMode.CWL)) pitch = -cw_pitch;
 
                     //   int cw_line_x; // ke9ns used to move the 0hz line over by the pitch mount of hz
 
-                    if (!split_enabled)
+                    if (split_enabled == false) // SPLIT VFOA OFF
                     {
-                        cw_line_x = (int)((float)(pitch - Low + xit_hz - rit_hz) / (High - Low) * W);
+                        cw_line_x = (int)((float)(pitch - Low + xit_hz - rit_hz) / (High - Low) * W); // normal CW TX line for VFOA
                     }
-                    else
+                    else // SPLIT VFOA ON
                     {
                         if ((!local_mox)) // rx
                         {
+                             
                             cw_line_x = (int)((float)(pitch - Low + xit_hz - rit_hz + (vfoa_sub_hz - vfoa_hz)) / (High - Low) * W); // in RX show the TX line
+                        
                         }
                         else // tx
                         {
-                            cw_line_x = (int)((float)(pitch - Low + xit_hz - rit_hz) / (High - Low) * W);
+                            cw_line_x = (int)((float)(pitch - Low + xit_hz - rit_hz) / (High - Low) * W); // 
 
                         }
 
                     }
 
                     //  if (draw_tx_cw_freq) // ke9ns add
-                    if ((!local_mox) && (draw_tx_cw_freq))
+                    if ((!local_mox) && (draw_tx_cw_freq)) //RX
                     {
-                        if ((bottom) && tx_on_vfob) // KE9NS ADD  fix mistake made by flex
+                        if ((bottom)) // && tx_on_vfob) // KE9NS ADD  fix mistake made by flex (draw TX line on bottom for VFOB)
                         {
                             g.DrawLine(tx_filter_pen, cw_line_x, H + top, cw_line_x, H + H);
                             g.DrawLine(tx_filter_pen, cw_line_x + 1, H + top, cw_line_x + 1, H + H);
 
                         }
-                        else if ((!tx_on_vfob) && (!bottom))
+                        else // if ((!tx_on_vfob) && (!bottom)) // draw TX line on top section for VFOA
                         {
                             g.DrawLine(tx_filter_pen, cw_line_x, top, cw_line_x, H);
                             g.DrawLine(tx_filter_pen, cw_line_x + 1, top, cw_line_x + 1, H);
@@ -3362,8 +3373,7 @@ namespace PowerSDR
                 // ke9ns: RX2 draw main filter bandpass display
                 //============================================================================================
 
-
-                if (!(local_mox && (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU)))  // draw bandpass for RX or bandpass for TX (but not in cW mode)) 
+                if (!(local_mox && (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU)))  // draw RX bandpass for all modes but CW
                 {
                     // get filter screen coordinates
 
@@ -3376,13 +3386,12 @@ namespace PowerSDR
                     // make the filter display at least one pixel wide.
                     if (filter_left_x == filter_right_x) filter_right_x = filter_left_x + 1;
 
-
                     // rx2 always on the bottom
                     g.FillRectangle(new SolidBrush(display_filter_color),   // draw filter overlay
                         filter_left_x, H + top, filter_right_x - filter_left_x, H + H - top);
 
                 } // filter
-                else if ((local_mox) && (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU)) // draw CW rx box
+                else if ((local_mox) && (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU) && (!splitb_enabled)) // draw RX bandpass for CW mode .271 mod
                 {
 
                     int filter_left_x;
@@ -3392,10 +3401,8 @@ namespace PowerSDR
                     filter_left_x = (int)((float)(rx2_filter_low - Low) / (High - Low) * W); // original
                     filter_right_x = (int)((float)(rx2_filter_high - Low) / (High - Low) * W);
 
-
                     // make the filter display at least one pixel wide.
                     if (filter_left_x == filter_right_x) filter_right_x = filter_left_x + 1;
-
 
 
                     g.FillRectangle(new SolidBrush(display_filter_color),   // draw filter overlay
@@ -3404,28 +3411,30 @@ namespace PowerSDR
                 }
 
                 //============================================================================================
-                // ke9ns  RX2 draw tx line for everything but cw
+                // ke9ns  RX2 draw TX lines for everything but CW
                 //============================================================================================
-                if (!local_mox && draw_tx_filter && (rx2_dsp_mode != DSPMode.CWL && rx2_dsp_mode != DSPMode.CWU) && (tx_on_vfob))
+                if (!local_mox && draw_tx_filter && (rx2_dsp_mode != DSPMode.CWL && rx2_dsp_mode != DSPMode.CWU) && (tx_on_vfob)) // TX on VFOB
                 {
                     // get tx filter limits
                     int filter_left_x;
                     int filter_right_x;
 
 
-                    if (!split_enabled)
-                    {
-                        filter_left_x = (int)((float)(tx_filter_low - Low + xit_hz - rit_hz) / (High - Low) * W); //original
-                        filter_right_x = (int)((float)(tx_filter_high - Low + xit_hz - rit_hz) / (High - Low) * W); // 
-                    }
-                    else
-                    {
-                        filter_left_x = (int)((float)(tx_filter_low - Low + xit_hz - rit_hz + (vfob_sub_hz - vfoa_hz)) / (High - Low) * W);
-                        filter_right_x = (int)((float)(tx_filter_high - Low + xit_hz - rit_hz + (vfob_sub_hz - vfoa_hz)) / (High - Low) * W);
-                    }
+              
+                        if (splitb_enabled == false) // just VFOA is in SPLIT mode but TXONVFOB = true
+                        {
+                            filter_left_x = (int)((float)(tx_filter_low - Low + xit_hz - rit_hz + (vfob_sub_hz - vfoa_hz)) / (High - Low) * W); //.271 if RX2 ON, then VFOA slit is sub VFOA
+                            filter_right_x = (int)((float)(tx_filter_high - Low + xit_hz - rit_hz + (vfob_sub_hz - vfoa_hz)) / (High - Low) * W);
+                           
+                        }
+                        else
+                        {
+                            filter_left_x = (int)((float)(tx_filter_low - Low + xit_hz - rit_hz + (vfob_sub_hz - vfob_hz)) / (High - Low) * W); //.271 if RX2 ON, then VFOA slit is sub VFOA
+                            filter_right_x = (int)((float)(tx_filter_high - Low + xit_hz - rit_hz + (vfob_sub_hz - vfob_hz)) / (High - Low) * W);
 
+                        }
 
-                    // draw tx filter overlay
+                    // draw tx filter overlay for RX2 
                     g.DrawLine(tx_filter_pen, filter_left_x, H + top, filter_left_x, H + H);
                     g.DrawLine(tx_filter_pen, filter_right_x, H + top, filter_right_x, H + H);  // draw tx filter overlay
 
@@ -3434,27 +3443,32 @@ namespace PowerSDR
 
 
                 //============================================================================================
-                // ke9ns  RX2 draw tx line for cw
+                // ke9ns  RX2 draw TX line for CW
                 //============================================================================================
-                if (!local_mox && (draw_tx_cw_freq || console.setupForm.chkCWDisplay.Checked) && (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU) && (tx_on_vfob)) // ke9ns mod
+                if (!local_mox && (draw_tx_cw_freq || console.setupForm.chkCWDisplay.Checked) && (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU)) // && (tx_on_vfob)) // ke9ns mod
                 {
                     int pitch = cw_pitch;
                     if (rx2_dsp_mode == DSPMode.CWL) pitch = -cw_pitch;
 
                     int cw_line_x;
 
-                    if (!split_enabled)
-
-                        cw_line_x = (int)((float)(pitch - Low + xit_hz - rit_hz) / (High - Low) * W);
-
-                    else
-                        cw_line_x = (int)((float)(pitch - Low + xit_hz - rit_hz + (vfoa_sub_hz - vfoa_hz)) / (High - Low) * W);
-
-                    if (draw_tx_cw_freq) // ke9ns add
+                    if (draw_tx_cw_freq)
                     {
+                        if (splitb_enabled == true)
+                        {
+                            cw_line_x = (int)((float)(pitch - Low + xit_hz - rit_hz + (vfob_sub_hz - vfob_hz)) / (High - Low) * W);
+
+                        }
+                        else
+                        {
+                            cw_line_x = (int)((float)(pitch - Low + xit_hz - rit_hz) / (High - Low) * W);
+                        }
+
+
                         g.DrawLine(tx_filter_pen, cw_line_x, H + top, cw_line_x, H + H);
                         g.DrawLine(tx_filter_pen, cw_line_x + 1, H + top, cw_line_x + 1, H + H);
-                    }
+
+                    } // draw_tx_cw_freq
 
                 } // cw filter line
 
@@ -3787,13 +3801,21 @@ namespace PowerSDR
                 else
                 {
                     vfo = vfoa_hz + rit_hz;
-
                 }
             }
             else //if(rx==2)
             {
-                if (local_mox && tx_on_vfob) vfo = vfob_hz + xit_hz;
-                else vfo = vfob_hz + rit_hz;
+                if (local_mox && tx_on_vfob)
+                {
+                    if (splitb_enabled) vfo = vfob_sub_hz; //.271
+                    else vfo = vfob_hz;
+
+                    vfo += xit_hz;
+                }
+                else
+                {
+                    vfo = vfob_hz + rit_hz;
+                }
             }
 
             if (!bottom)
@@ -14262,9 +14284,9 @@ namespace PowerSDR
 
             //===========================================================================================
             // 
-            if (mox) // ke9ns mod everythingin the MOX section 
+            if (mox) // ke9ns mod everything in the MOX section 
             {
-                if (split_enabled) // means just RX1
+                if (split_enabled) // VFOA SPLIT ON
                 {
                     vfo = vfoa_sub_hz + xit_hz;
 
@@ -14280,7 +14302,7 @@ namespace PowerSDR
                             break;
                     }
                 }
-                else
+                else // no VFOA SPLIT below
                 {
 
                     if (console.chkVFOATX.Checked == true)
@@ -14341,7 +14363,11 @@ namespace PowerSDR
                         }
                         else // rx==2
                         {
-                            vfo = vfob_hz + xit_hz;
+                          
+                           if (splitb_enabled) vfo = vfob_sub_hz; //.271
+                           else vfo = vfob_hz;
+  
+                            vfo += xit_hz;
 
                             switch (rx2_dsp_mode)
                             {
@@ -14366,6 +14392,8 @@ namespace PowerSDR
             } // TX above
             else if (rx == 1) // rx mode
             {
+
+
                 vfo = vfoa_hz + rit_hz;
 
                 switch (rx1_dsp_mode)

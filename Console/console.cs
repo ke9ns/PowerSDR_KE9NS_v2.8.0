@@ -248,6 +248,7 @@ using NAudio.Wave; // ke9ns add
 using NAudio.Lame; // ke9ns add
 using NAudio.Gui;
 using System.Security.Policy;
+using System.Web.UI.Design;
 
 //using MahApps.Metro.Controls; // ke9ns add
 
@@ -1365,6 +1366,31 @@ namespace PowerSDR
         private int vfoa_sub_hover_digit;                   // Digit for VFOA sub hover display
         private int vfob_hover_digit;                       // Digit for hover display
 
+        //--------------
+        // .271
+
+        // txtVFOAFreq.Font (Standard VFO font size)
+        private int vfob_char_width;                         // "0"                 (pixel width of large characters)                  Used to calibrate mousewheel tuning
+        private int vfob_char_space;                         // "00" - 2*"0"        (pixel space in between 2 large characters)          Used to calibrate mousewheel tuning
+        private int vfob_decimal_space;                      // "0.0"- 2*"0"        (pixel width of seperator char)                    Used to calibrate mousewheel tuning		
+        private int vfob_pixel_offset;                       // "1234.678901"       (pixel width of this string)                       Used to calibrate mousewheel tuning
+
+        // txtVFOALSD.Font (small VFO font size)
+        private int vfob_small_char_width;                   // "0"                 (pixel width of small characters)                  Used to calibrate mousewheel tuning
+        private int vfob_small_char_space;                   // "00" - 2*"0"        (pixel space in between small characters)          Used to calibrate mousewheel tuning
+
+        // txtVFOBBand.Font (veru small bandtext font size)
+        private int vfob_sub_char_width;                     // "0"                 (pixel width of large char)                        Used to calibrate mousewheel tuning
+        private int vfob_sub_char_space;                     // "00" - 2*"0"        (pixel space in between 2 large characters)         Used to calibrate mousewheel tuning
+        private int vfob_sub_decimal_space;                  // "0.0" - 2*"0"       (pixel width of seperator char)   Used to calibrate mousewheel tuning	
+        private int vfob_sub_pixel_offset;                   // "1234.678901"       (pixel width of this string)
+
+       
+        private int vfob_sub_hover_digit;                   // Digit for VFOB sub hover display
+        
+        //.271
+//--------------
+
         public string last_band;							// Used in bandstacking algorithm
         public int last_band_index;                         // ke9ns add for display of bandstack frequencies
         public int last_band_index_size;                    // ke9ns add
@@ -1377,8 +1403,12 @@ namespace PowerSDR
         private DSPMode quick_save_mode;                    // Quick Save Mode
         private Filter quick_save_filter;                   // Quick Save Filter
 
-        private int vfo_sub_decimal_width;                  // NOT USED  
-        private int vfo_decimal_width;                      // NOT USED
+        private int vfo_sub_decimal_width;                  // used for split freq that appears under the vfo in the bandtext area 
+        private int vfo_decimal_width;                      // 
+
+        private int vfob_sub_decimal_width;                  //  .271
+        private int vfob_decimal_width;                      // 
+
 
         public NumberFormatInfo NI;                        // .240 to allow .NET 4.6 and higher used in  .ToString( ,NI); and double.Parse(  ,NI); and float.Parse(  ,NI);
         public string separator;                           // contains the locations specific decimal separator
@@ -4091,6 +4121,8 @@ namespace PowerSDR
 
             }
 
+            chkVFOBSplit.Checked = false; // .271 start with VFOB split off all the time
+            chkVFOSplit.Checked = false;
 
             Debug.WriteLine("===END=== INITCONSOLE routine");
 
@@ -10008,6 +10040,35 @@ namespace PowerSDR
             g.Dispose();
         }  // GetVFOsubcharwidth()
 
+
+        private void GetVFOBSubCharWidth() //.271
+        {
+            // This function calculates the pixel width of the VFO display.
+            // This information is used for mouse wheel hover tuning.
+
+            Graphics g = txtVFOBBand.CreateGraphics();
+
+            SizeF size = g.MeasureString("0", txtVFOBBand.Font, 1000, StringFormat.GenericTypographic);
+            vfob_sub_char_width = (int)Math.Round(size.Width - 2.0f, 0); // subtract 2 since measure string includes 1 pixel border on each side
+            float float_char_width = size.Width - 2.0f;
+
+            size = g.MeasureString("00", txtVFOBBand.Font, 1000, StringFormat.GenericTypographic);
+            vfob_sub_char_space = (int)Math.Round(size.Width - 2.0f - 2 * float_char_width, 0);
+
+            size = g.MeasureString(separator, txtVFOBBand.Font, 1000, StringFormat.GenericTypographic);
+            vfob_sub_decimal_width = (int)(size.Width - 2.0f);
+
+            size = g.MeasureString("0" + separator + "0", txtVFOBBand.Font, 1000, StringFormat.GenericTypographic);
+            vfob_sub_decimal_space = (int)Math.Round(size.Width - 2.0f - 2 * float_char_width, 0);
+
+
+            size = g.MeasureString("1234.678901", txtVFOBBand.Font, 1000, StringFormat.GenericTypographic);
+            vfob_sub_pixel_offset = (int)Math.Round(size.Width - 2.0f, 0);
+                      
+
+            g.Dispose();
+        }  // GetVFOBsubcharwidth()
+
         public string[] filter2 = new string[20]; // ke9ns add for bandstack locking (= "@" if locked)
         public string[] filter22 = new string[20]; // ke9ns add for bandstack locking .209 vfoB
         public int iii = 0;
@@ -12039,22 +12100,22 @@ namespace PowerSDR
 
             if (freq == VFOAFreq)
             {
-                Debug.WriteLine("VFO.....A " + freq + " , " + xvtr_index);
+              //  Debug.WriteLine("VFO.....A " + freq + " , " + xvtr_index);
                 A = true; // 
             }
             else if (freq == VFOBFreq)
             {
-                Debug.WriteLine("VFO.....B " + freq + " , " + xvtr_index);
+             //   Debug.WriteLine("VFO.....B " + freq + " , " + xvtr_index);
                 A = false;
             }
             else if (freq == xvtrForm.TranslateFreq(VFOAFreq)) // .217
             {
-                Debug.WriteLine("VFO..xvtr....A " + freq + " , " + xvtr_index + " , " + xvtrForm.TranslateFreq(VFOAFreq));
+              //  Debug.WriteLine("VFO..xvtr....A " + freq + " , " + xvtr_index + " , " + xvtrForm.TranslateFreq(VFOAFreq));
                 A = true; // 
             }
             else if (freq == xvtrForm.TranslateFreq(VFOBFreq))
             {
-                Debug.WriteLine("VFO..xvtr....B " + freq + " , " + xvtr_index + " , " + xvtrForm.TranslateFreq(VFOBFreq));
+              //  Debug.WriteLine("VFO..xvtr....B " + freq + " , " + xvtr_index + " , " + xvtrForm.TranslateFreq(VFOBFreq));
                 A = false; // 
             }
 
@@ -12082,7 +12143,7 @@ namespace PowerSDR
                 }
 
 
-                Debug.WriteLine("VHF HERE======>" + (Band)(Band.VHF0 + xvtr_index));
+              //  Debug.WriteLine("VHF HERE======>" + (Band)(Band.VHF0 + xvtr_index));
 
                 return (Band)(Band.VHF0 + xvtr_index); // 14 t0 27
             }
@@ -17583,8 +17644,8 @@ namespace PowerSDR
             {
                 if (RX1Band != b && !tuning)
                 {
-                    if (chkVFOSplit.Checked)
-                        chkVFOSplit.Checked = false;
+                    // if (chkVFOSplit.Checked )  chkVFOSplit.Checked = false;
+                    if (chkVFOSplit.Checked && chkVFOBSplit.Checked == false) chkVFOSplit.Checked = false; // .271
                 }
             }
 
@@ -17703,7 +17764,8 @@ namespace PowerSDR
             {
                 if (TXBand != b && !tuning)
                 {
-                    if (chkVFOSplit.Checked) chkVFOSplit.Checked = false;
+                   // if (chkVFOSplit.Checked) chkVFOSplit.Checked = false;
+                    if (chkVFOSplit.Checked && chkVFOBSplit.Checked == false) chkVFOSplit.Checked = false; //.271
                 }
             }
 
@@ -19486,12 +19548,11 @@ namespace PowerSDR
         public void UpdateVFOAFreq(string freq)
         {   // only do this routine if there are six digits after the decimal point. or decimal comma
 
-            Debug.WriteLine("VFOA=============" + freq);
+            Debug.WriteLine("UpdateVFOAFreq=============" + freq);
 
           //  freq = freq.ToString(CultureInfo.CurrentCulture.NumberFormat); // .253
           
-         //   Debug.WriteLine("VFOA=============" + freq);
-
+        
             dialcheckA = true;  // update DIAL if active
 
             //   if (VFOAFreq > 9999.999999)
@@ -19640,6 +19701,8 @@ namespace PowerSDR
         {   // only do this routine if there are six digits after the decimal point.
 
 
+            Debug.WriteLine("UpdateVFOBFreq=============" + freq);
+
             dialcheckB = true; // there was a update to the VFOB freq, so notify DIALB
 
             //   if (VFOBFreq > 9999.999999)
@@ -19679,10 +19742,8 @@ namespace PowerSDR
           
             if (KWAutoInformation7) BroadcastFreqChange7("B", freq); // TCP/IP CAT
 
+        } //   UpdateVFOBFreq
 
-
-
-        }
 
         //===============================================================================
         //ke9ns: comes here when you change zoom levels or anything that would change your viewing left/right frequency limits
@@ -24411,6 +24472,7 @@ namespace PowerSDR
 
             bool split = chkVFOSplit.Checked;
             chkVFOSplit.Checked = false;
+            chkVFOBSplit.Checked = false; //.271
 
             bool polyphase = setupForm.Polyphase;			// save current polyphase setting
             setupForm.Polyphase = false;					// disable polyphase
@@ -24729,6 +24791,7 @@ namespace PowerSDR
 
             bool split = chkVFOSplit.Checked;
             chkVFOSplit.Checked = false;
+            chkVFOBSplit.Checked = false; //.271
 
             bool polyphase = setupForm.Polyphase;			// save current polyphase setting
             setupForm.Polyphase = false;					// disable polyphase
@@ -26099,6 +26162,8 @@ namespace PowerSDR
 
             double vfoa = VFOAFreq;         // save VFO A frequency
             chkVFOSplit.Checked = false;
+            chkVFOBSplit.Checked = false; //.271
+
             comboMeterTXMode.Text = "Fwd Pwr";
 
             bool tx_eq = chkTXEQ.Checked;
@@ -27592,7 +27657,12 @@ namespace PowerSDR
             set { tx_xvtr_index = value; }
         }
 
-
+        private int txb_xvtr_index = -1;                 // index of current xvtr in use
+        public int TXBXVTRIndex //.271
+        {
+            get { return txb_xvtr_index; }
+            set { txb_xvtr_index = value; }
+        }
         private int last_tx_xvtr_index = -1;		    // index of last xvtr in use
         public int LastTXXVTRIndex
         {
@@ -28054,8 +28124,9 @@ namespace PowerSDR
             return ret; // return which antenna to use for TX
         }
 
-        // ke9ns add .205
 
+
+        // ke9ns add .205
         public void SetTXAnt2(Band b, FWCAnt ant)   // Called only by fwcAntForm.cs    b = comboband text from expertmode, ant is the TX ant
         {
             AA.Restart(); // ke9ns
@@ -31854,6 +31925,8 @@ namespace PowerSDR
 		*/
 
         private double saved_vfoa_sub_freq = 7.0;
+
+        private double saved_vfob_sub_freq = 7.0; // .271
 
         private double saved_vfob_freq = 7.0;
         /*		public float SavedVFOBFreq
@@ -35830,6 +35903,12 @@ namespace PowerSDR
 
                 old_band = tx_band; // ke9ns mod: .192 moved creation up so it doesnt get clobbered every time it runs.
 
+                if (old_band != value) //.271
+                {
+                    Bandchange = true;
+
+                }
+
                 tx_band = value;
 
                 Band lo_band = Band.FIRST;
@@ -35841,19 +35920,15 @@ namespace PowerSDR
                     Debug.WriteLine("5XVTR NOW");
                 }
 
-
                 if (tx_band != old_band || initializing || ((rx1_dsp_mode != rx1_dsp_mode_last) && (setupForm != null) && (setupForm.chkBandModeSave.Checked == true))) // ke9ns mod
                 {
                     WBIRRX1Holdoff();
-
 
                     rx1_dsp_mode_last = rx1_dsp_mode; // ke9ns
 
                     //  save values for old band
                     int old_pwr = ptbPWR.Value;
                     int old_mode = (int)rx1_dsp_mode;
-
-
 
                     int old_limit = 100; // ke9ns add
                     if (setupForm != null) old_limit = (int)setupForm.udTXDriveMax.Value; // ke9ns add
@@ -37487,6 +37562,7 @@ namespace PowerSDR
             get
             {
                 if (!rx2_enabled || (!chkEnableMultiRX.Checked && !chkVFOSplit.Checked)) return -999.999;
+
                 try
                 {
                     return double.Parse(txtVFOABand.Text);
@@ -37499,11 +37575,46 @@ namespace PowerSDR
 
             set
             {
-                if (vfo_lock || setupForm == null) return;
-                txtVFOABand.Text = value.ToString("f6" );
+
+                if (setupForm == null || setupForm.IsDisposed) setupForm = new Setup(this); //.271 copy
+               
+                if (vfo_lock) return; //.271 || setupForm == null) return;
+
+                txtVFOABand.Text = value.ToString("f6" ); // ke9ns: sub window for VFOA
+
                 txtVFOABand_LostFocus(this, EventArgs.Empty);
             }
         }
+
+
+        public double VFOBSubFreq //.271
+        {
+            get
+            {
+                if (!rx2_enabled || (!chkVFOBSplit.Checked)) return -999.999;
+
+                try
+                {
+                    return double.Parse(txtVFOBBand.Text);
+                }
+                catch (Exception)
+                {
+                    return -999.999;
+                }
+            }
+
+            set
+            {
+
+                if (setupForm == null || setupForm.IsDisposed) setupForm = new Setup(this); //.271 copy
+
+                if (vfo_lock) return; //.271 || setupForm == null) return;
+
+                txtVFOBBand.Text = value.ToString("f6"); // ke9ns: sub window for VFOA
+
+                txtVFOBBand_LostFocus(this, EventArgs.Empty);
+            }
+        } // VFOBSub
 
         public double VFOBFreq
         {
@@ -58632,10 +58743,13 @@ namespace PowerSDR
 
                 //-------------------------------------------------------------
 
-                if (chkVFOBTX.Checked || (!chkRX2.Checked && chkVFOSplit.Checked)) freq = double.Parse(txtVFOBFreq.Text);
-                else if (chkRX2.Checked && chkVFOSplit.Checked) freq = double.Parse(txtVFOABand.Text);
+                if (chkRX2.Checked && chkVFOBSplit.Checked && chkVFOBTX.Checked) freq = double.Parse(txtVFOBBand.Text); //.271 use VFOBbandtext for split if RX2 ON, and TX is VFOB
+                else if (chkRX2.Checked && chkVFOSplit.Checked && chkVFOATX.Checked) freq = double.Parse(txtVFOABand.Text); //ke9ns: use VFOAbandtext if RX2 is ON
+                else if (chkVFOBTX.Checked || (!chkRX2.Checked && chkVFOSplit.Checked)) freq = double.Parse(txtVFOBFreq.Text); //ke9ns: use vfob for split if RX2 OFF
                 else freq = double.Parse(txtVFOAFreq.Text);
                 //-------------------------------------------------------------
+
+            //    Debug.WriteLine("=========SPLITVFOB " + freq);
 
 
                 if (tx_xvtr_index >= 0) freq = xvtrForm.TranslateFreq(freq);
@@ -60365,6 +60479,7 @@ namespace PowerSDR
             VFOASub,
             DisplayBottom,
             Other,
+            VFOBSub,
         }
 
 
@@ -60426,6 +60541,12 @@ namespace PowerSDR
             top = grpVFOA.Top + txtVFOABand.Top;
             bottom = top + txtVFOABand.Height;
             if (x > left && x < right && y > top && y < bottom) return TuneLocation.VFOASub;
+
+            left = grpVFOB.Left + txtVFOBBand.Left; //.271
+            right = left + txtVFOBBand.Width;
+            top = grpVFOB.Top + txtVFOBBand.Top;
+            bottom = top + txtVFOBBand.Height;
+            if (x > left && x < right && y > top && y < bottom) return TuneLocation.VFOBSub;
 
             left = panelDisplay.Left + picDisplay.Left;
             right = left + picDisplay.Width;
@@ -60610,8 +60731,7 @@ namespace PowerSDR
                             {
                                 mult /= 10;
                                 x += vfo_sub_char_width;
-                                if (mult == 1.0)
-                                    x += vfo_sub_decimal_space;
+                                if (mult == 1.0) x += vfo_sub_decimal_space;
                                 else x += vfo_sub_char_space;
                             }
                         }
@@ -60631,6 +60751,41 @@ namespace PowerSDR
                         VFOAFreq = SnapTune(VFOAFreq, step, num_steps);
                     }
                     break;
+
+                  case TuneLocation.VFOBSub:  // .271
+                    if (rx2_enabled && (chkVFOBSplit.Checked))
+                    {
+                        freq = VFOBSubFreq;
+                        mult = 1000.0;
+                        right = grpVFOB.Left + txtVFOBBand.Left + txtVFOBBand.Width;
+                        if (vfob_sub_hover_digit < 0)
+                        {
+                            int x = right + 2 - (vfob_sub_pixel_offset - 5);
+                            while (x < e.X && mult > 0.0000011)
+                            {
+                                mult /= 10;
+                                x += vfob_sub_char_width;
+                                if (mult == 1.0) x += vfob_sub_decimal_space;
+                                else x += vfob_sub_char_space;
+                            }
+                        }
+                        else
+                        {
+                            mult = Math.Pow(10, -vfob_sub_hover_digit) * 1000.0;
+                        }
+
+                        if (mult <= 1.0)
+                        {
+                            freq += mult * num_steps;
+                            VFOBSubFreq = freq;
+                        }
+                    }
+                    else
+                    {
+                        VFOBFreq = SnapTune(VFOBFreq, step, num_steps);
+                    }
+                    break;
+
 
                 case TuneLocation.DisplayBottom:
                     if (rx2_enabled && chkVFOSplit.Checked && current_click_tune_mode == ClickTuneMode.VFOB && wheel_tunes_vfob)
@@ -60807,7 +60962,7 @@ namespace PowerSDR
 
             double freq2;
 
-            try  // ke9ns add  the try to prevent a crash
+            try  // ke9ns add   try to prevent a crash
             {
                 freq2 = double.Parse(txtVFOBFreq.Text);  // ke9ns original
             }
@@ -61105,7 +61260,7 @@ namespace PowerSDR
             {
                 //  Debug.WriteLine("Band text "+ db_freq);
 
-                txtVFOABand.Text = bandInfo; // ke9ns  display bandtext into the vfo text area here
+                txtVFOABand.Text = bandInfo; // ke9ns:  display bandtext into the vfo text area here
             }
 
           //  Debug.WriteLine("VFOALostFocus ");
@@ -61941,6 +62096,186 @@ namespace PowerSDR
         } // txtvfoaband_lostfocus
 
 
+        private void txtVFOBBand_LostFocus(object sender, System.EventArgs e) //.271
+        {
+
+            if (!rx2_enabled || (!chkVFOBSplit.Checked)) return;
+
+            if (txtVFOBBand.Text == separator || txtVFOBBand.Text == "") // "."
+            {
+                VFOBSubFreq = VFOBFreq;
+                return;
+            }
+
+            double freq = VFOBSubFreq;
+            double vfoa = VFOBFreq;
+
+            txtVFOBBand.Text = freq.ToString("f6");
+
+            Display.VFOBSub = (long)(freq * 1e6); // ke9ns: convert 14.123456 mhz to 14123456 hz
+
+            if (chkTUN.Checked && chkVFOBTX.Checked && chkVFOBSplit.Checked)
+            {
+                switch (dsp.GetDSPTX(0).CurrentDSPMode) //.271 
+                {
+                    case DSPMode.CWL:
+                    case DSPMode.LSB:
+                    case DSPMode.DIGL:
+                        Display.VFOBSub += cw_pitch;
+                        break;
+                    case DSPMode.CWU:
+                    case DSPMode.USB:
+                    case DSPMode.DIGU:
+                    case DSPMode.AM:
+                    case DSPMode.SAM:
+                    case DSPMode.FM:
+                    case DSPMode.DSB:
+                        Display.VFOBSub -= cw_pitch;
+                        break;
+                }
+            }
+            saved_vfob_sub_freq = freq;
+
+            string bandInfo;
+            bool transmit_allowed = DB.BandText(freq, out bandInfo);
+            if (!CheckValidTXFreq(current_region, freq, dsp.GetDSPTX(0).CurrentDSPMode))
+            {
+                if (chkVFOBSplit.Checked && mox && !extended) chkMOX.Checked = false;
+            }
+
+           
+            if (chkVFOBSplit.Checked)
+            {
+                txb_xvtr_index = xvtrForm.XVTRFreq(freq);
+
+                Band old_tx_band = tx_band;
+
+                Band b = BandByFreq(freq, txb_xvtr_index, true, current_region);
+
+                Band b1 = b; // ke9ns add
+                if ((extended) || (current_region == FRSRegion.Russia)) // ke9ns add if you have extended capabilities then SWL bands are really ham bands
+                {
+                    //.248 160m :0-2.099, 80M:2.1-4.099, 60-40M 4.1-7.399, 30-20m 7.4- 14.449, 17-15M 14.450-21.549,12-10m 21.550-29.799, 6m 29.8- ? mhz
+
+                    if (Band.BLMF == b) b1 = Band.B160M; // .47 mhz  (160m LPF ends at 2.1mhz)
+
+                    else if (Band.B120M == b) b1 = Band.B80M; // 2-3 mhz    (80m LPF ends at 4.1mhz)
+                    else if (Band.B90M == b) b1 = Band.B80M; // 3-3.5 mhz
+
+                    else if (Band.B61M == b) b1 = Band.B60M; // 4-5.25 mhz  (60m-40m LPF ends at 7.4mhz)
+                    else if (Band.B49M == b) b1 = Band.B40M; // 5.45 - 7 mhz
+
+                    else if (Band.B41M == b) b1 = Band.B30M; // 7.3-9 mhz   (30m-20m LPF ends at 14.45mhz)
+                    else if (Band.B31M == b) b1 = Band.B30M; // 9-10.1 mhz
+                    else if (Band.B25M == b) b1 = Band.B30M; // 10.15-13.75 mhz
+                    else if (Band.B22M == b) b1 = Band.B20M; // 13.75-14 mhz
+
+                    else if (Band.B19M == b) b1 = Band.B17M; // 14.35-17 mhz  (17m-15m LPF ends at 21.55mhz)
+                    else if (Band.B16M == b) b1 = Band.B17M; // 17-18 mhz
+                    else if (Band.B14M == b) b1 = Band.B15M; // 18-21.5 mhz
+
+                    else if (Band.B13M == b) b1 = Band.B12M; // 21-25 mhz   (12-10m LPF ends at 29.8mhz)
+                    else if (Band.B11M == b) b1 = Band.B10M; // 25-28 mhz
+                }
+
+                if (chkVFOBSplit.Checked && old_tx_band != b1)
+                {
+                    SetTXBand(b1); // ke9ns mod b1
+
+                }
+
+                if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.VUOK && (tx_xvtr_index == 0 || tx_xvtr_index == 1)) ptbPWR_Scroll(this, EventArgs.Empty);
+
+                //tx
+                if (last_tx_xvtr_index != tx_xvtr_index)
+                {
+                    if (tx_xvtr_index >= 2)
+                    {
+                        switch (current_model)
+                        {
+                            case Model.FLEX5000:
+                                FWC.SetXVTRTXOn(true);
+                                break;
+                            case Model.SDR1000:
+                                break;
+                            default:
+                                break;
+                        }
+                        setupForm.RXOnly = xvtrForm.GetRXOnly(tx_xvtr_index);
+                    }
+                    else if (tx_xvtr_index < 0)    //exclude VU case
+                    {
+                        switch (current_model)
+                        {
+                            case Model.FLEX5000:
+                                FWC.SetXVTRTXOn(false);
+                                break;
+                            case Model.SDR1000:
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                }
+
+                if (tx_xvtr_index >= 0) freq = xvtrForm.TranslateFreq(freq);
+
+                if (old_tx_band != tx_band)
+                {
+                    if (tx_band == Band.B60M && RX1IsOn60mChannel())
+                    {
+                        chkXIT.Enabled = false;
+                        chkXIT.Checked = false;
+                    }
+                    else
+                        chkXIT.Enabled = true;
+                }
+
+                if (chkXIT.Checked)  freq += (int)udXIT.Value * 0.000001;
+
+                if (freq < min_freq) freq = min_freq;
+                else if (freq > max_freq) freq = max_freq;
+
+                switch (dsp.GetDSPTX(0).CurrentDSPMode)
+                {
+                    case DSPMode.AM:
+                    case DSPMode.SAM:
+                    case DSPMode.FM:
+                        freq -= 0.011025;
+                        if (chkTUN.Checked) freq -= (double)cw_pitch * 1e-6;
+                        break;
+                    case DSPMode.USB:
+                    case DSPMode.DIGU:
+                    case DSPMode.DSB:
+                        if (chkTUN.Checked) freq -= (double)cw_pitch * 1e-6;
+                        break;
+                    case DSPMode.LSB:
+                    case DSPMode.DIGL:
+                        if (chkTUN.Checked) freq += (double)cw_pitch * 1e-6;
+                        break;
+                    case DSPMode.CWL:
+                        freq += (double)cw_pitch * 0.0000010;
+                        break;
+                    case DSPMode.CWU:
+                        freq -= (double)cw_pitch * 0.0000010;
+                        break;
+                }
+
+                //Debug.WriteLine("freq: "+freq.ToString("f6" ));
+                if (!rx1_sub_drag)
+                {
+                    uint tw = (uint)Freq2TW(freq);
+                    //FWC.SetTXFreqTW(tw, (float)freq);
+                    tx_dds_freq_tw = tw;
+                    tx_dds_freq_mhz = (float)freq;
+                    tx_dds_freq_updated = true;
+                }
+                last_tx_xvtr_index = tx_xvtr_index;
+            } // split
+
+        } // txtvfoBband_lostfocus
+
 
         //=======================================================================================================
         private void txtVFOABand_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
@@ -61984,6 +62319,52 @@ namespace PowerSDR
 
 
         } // txtVFOABand_KeyPress
+
+
+
+        //=======================================================================================================
+        private void txtVFOBBand_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e) //.271
+        {
+            if (!rx2_enabled || (!chkVFOBSplit.Checked))
+            {
+                e.Handled = true;
+                return;              // return if you dont need the subVFOb 
+            }
+
+            string separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator;
+
+            int KeyCode = (int)e.KeyChar;
+
+            if ((KeyCode < 48 || KeyCode > 57) &&           // numeric keys
+                KeyCode != 8 &&                             // backspace
+                !e.KeyChar.ToString().Equals(separator) &&  // decimal
+                KeyCode != 27)                              // escape
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                if (e.KeyChar.ToString().Equals(separator))
+                {
+                    e.Handled = (((TextBoxTS)sender).Text.IndexOf(separator) >= 0);
+                }
+                else if (KeyCode == 27) // esc key
+                {
+                    VFOBSubFreq = saved_vfob_sub_freq; // used previously saved value
+                    btnHidden.Focus();
+                }
+            }
+
+
+            if (e.KeyChar == (char)Keys.Enter) // check for enter key
+            {
+                txtVFOBBand_LostFocus(txtVFOBBand, new System.EventArgs());
+                btnHidden.Focus();
+            }
+
+
+        } // txtVFOBBand_KeyPress
+
 
         //================================================================================ 
         //================================================================================ 
@@ -62169,39 +62550,37 @@ namespace PowerSDR
                     }
                 }
             }
+            
+            
             // update Band Info
             string bandInfo;
             double db_freq = freq;
-            if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.RX2OK && RX1IsOn60mChannel())
-                db_freq -= ModeFreqOffset(rx2_dsp_mode);
-            else if (RX1IsOn60mChannel())
-                db_freq -= ModeFreqOffset(rx1_dsp_mode);
+           
+            if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.RX2OK && RX1IsOn60mChannel())  db_freq -= ModeFreqOffset(rx2_dsp_mode);
+            else if (RX1IsOn60mChannel())  db_freq -= ModeFreqOffset(rx1_dsp_mode);
 
             bool transmit = DB.BandText(db_freq, out bandInfo);
 
             if (transmit == false)
             {
-                txtVFOBBand.BackColor = Color.DimGray;
-                //if(chkVFOSplit.Checked && mox)
-                //	chkMOX.Checked = false;
+                txtVFOBBand.BackColor = out_of_band_color; // .271 was Color.DimGray;
+               
             }
             else txtVFOBBand.BackColor = band_background_color;
 
-            txtVFOBBand.Text = bandInfo;
+           
+           if (chkVFOBSplit.Checked == false)  txtVFOBBand.Text = bandInfo; // .271 mod
 
             saved_vfob_freq = freq;
 
-            if ((fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) ||
-                (hid_init && current_model == Model.FLEX1500))
+            if ((fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) || (hid_init && current_model == Model.FLEX1500))
             {
                 if (chkVFOBTX.Checked) goto set_tx_freq;
                 if (FWCEEPROM.RX2OK && rx2_enabled) goto set_rx2_freq;
-                else if (chkVFOSplit.Checked || full_duplex)
-                    goto set_tx_freq;
+                else if (chkVFOSplit.Checked || full_duplex) goto set_tx_freq;
                 else goto end;
             }
-            else if (mox && chkVFOSplit.Checked)
-                goto set_tx_freq;
+            else if (mox && chkVFOSplit.Checked) goto set_tx_freq;
             else goto end;
 
             set_tx_freq:
@@ -66419,7 +66798,9 @@ namespace PowerSDR
 
             if (disable_split_on_modechange & !initializing) //.227 moved to here
             {
-                if (chkVFOSplit.Checked) chkVFOSplit.Checked = false;
+               // if (chkVFOSplit.Checked) chkVFOSplit.Checked = false;
+                if (chkVFOSplit.Checked && chkVFOBSplit.Checked == false) chkVFOSplit.Checked = false;
+
             }
 
         } // SetRX1Mode()
@@ -67840,28 +68221,109 @@ namespace PowerSDR
             }
         } // A <> B
 
+
+        private void UpdateVFOBSub() //.271
+        {
+            if (rx2_enabled)
+            {
+                if (chkVFOBSplit.Checked)
+                {
+
+                    Debug.WriteLine("UPDATEVFOBSUB");
+
+                    if (saved_vfob_sub_freq == 7.0)
+                    {
+                        saved_vfob_sub_freq = VFOBFreq; // saved_vfob_freq;
+                        Debug.WriteLine("VFOSYNCB2");
+                    }
+
+
+
+                    txtVFOBBand.Font = ff3; // new Font("Swis721 BT", 14.0f,  FontStyle.Italic | FontStyle.Bold); //Microsoft Sans Sarif FontStyle.Regular
+
+                    if (saved_vfob_sub_freq == Display.CLEAR_FLAG) saved_vfob_sub_freq = saved_vfob_freq;
+
+                    txtVFOBBand.Text = saved_vfob_sub_freq.ToString("f6");
+                    txb_xvtr_index = xvtrForm.XVTRFreq(VFOBSubFreq);
+
+                    Debug.WriteLine("9BVFOALostFocus ");
+
+
+                  //  if (fwcAntForm != null && fwcAntForm.chkTX2Active.Checked) // ke9ns: SO2R=chkTX2Active ON VFOB TX active = PTT AMP for RX2 transmit 2
+                    
+                     TXBand = BandByFreq(VFOBSubFreq, txb_xvtr_index, true, current_region); //.272
+
+                    if (chkPower.Checked) txtVFOBBand.ForeColor = Color.Red;
+                    else txtVFOBBand.ForeColor = Color.DarkRed;
+
+                    txtVFOBBand.TextAlign = HorizontalAlignment.Right;
+                    txtVFOBBand.ReadOnly = false;
+
+                  //  txtVFOBBand_LostFocus(this, EventArgs.Empty);
+                    panelVFOBSubHover.Visible = true;
+
+                    return;
+                }
+               
+
+            } // if (rx2_enabled)
+
+            if (chkPower.Checked)
+            {
+                txtVFOBFreq_LostFocus(this, EventArgs.Empty); //.211
+
+                txtVFOBBand.Font = ff4; // new Font("Swis721 BT", 12.0f,  FontStyle.Italic | FontStyle.Bold);
+                txtVFOBBand.ForeColor = band_text_light_color;
+                txtVFOBBand.TextAlign = HorizontalAlignment.Center;
+                txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+                panelVFOBSubHover.Visible = false;
+            }
+            else
+            {
+                txtVFOBFreq_LostFocus(this, EventArgs.Empty); //.211
+                txtVFOBBand.Font = ff4; // new Font("Swis721 BT", 12.0f, FontStyle.Italic | FontStyle.Bold);
+                txtVFOBBand.ForeColor = band_text_dark_color;
+                txtVFOBBand.TextAlign = HorizontalAlignment.Center;
+                txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+                panelVFOBSubHover.Visible = false;
+            }
+
+        } // UpdateVFOBSub()
+
+
+
+        // ke9ns: split freq display into the txtVFOABand text windows of VFOA
+
+        public bool Bandchange = false; //.271
+
         private void UpdateVFOASub()
         {
+
+
             if (rx2_enabled)
             {
                 if (chkVFOSplit.Checked)
                 {
+                  //  Debug.WriteLine("SPLIT " + saved_vfoa_sub_freq +  " , "+ saved_vfoa_freq + " , " + VFOASubFreq + " , " + VFOAFreq);
 
-                    if (saved_vfoa_sub_freq == 7.0)
-                    {
+                  if (Bandchange == true) // .271 was if (saved_vfoa_sub_freq == 7.0)
+                  {
+                        Bandchange = false;
                         saved_vfoa_sub_freq = VFOAFreq; // saved_vfoa_freq;
-                        Debug.WriteLine("VFOSYNC1");
+                     //  Debug.WriteLine("SPLIT_VFOSYNC1");
+                  }
 
-                    }
 
                     txtVFOABand.Font = ff3; // new Font("Swis721 BT", 14.0f,  FontStyle.Italic | FontStyle.Bold); //Microsoft Sans Sarif FontStyle.Regular
 
                     if (saved_vfoa_sub_freq == Display.CLEAR_FLAG) saved_vfoa_sub_freq = saved_vfoa_freq;
 
+                  //  Debug.WriteLine("SPLIT2 " + saved_vfoa_sub_freq + " , " + saved_vfoa_freq + " , " + VFOASubFreq + " , " + VFOAFreq);
+
                     txtVFOABand.Text = saved_vfoa_sub_freq.ToString("f6" );
                     tx_xvtr_index = xvtrForm.XVTRFreq(VFOASubFreq);
 
-                    Debug.WriteLine("9VFOALostFocus ");
+                   // Debug.WriteLine("9VFOALostFocus ");
                     TXBand = BandByFreq(VFOASubFreq, tx_xvtr_index, true, current_region);
 
                     if (chkPower.Checked) txtVFOABand.ForeColor = Color.Red;
@@ -67913,9 +68375,58 @@ namespace PowerSDR
 
         } // UpdateVFOASub()
 
+
+        // ke9ns: RX2 VFOB SPLIT using VFOBSUB = TX (add feature in .271)
+        private void chkVFOBSplit_CheckedChanged(object sender, EventArgs e) //.271
+        {
+            Display.SplitBEnabled = chkVFOBSplit.Checked; // let display know to handle VFOB SUB freq on display and TX lines for SUB during split
+        //    Debug.WriteLine("SPLIT VFOB OFF" + chkVFOBSplit.Checked);
+
+            if (rx2_enabled)
+            {
+                if (chkVFOBSplit.Checked) // ke9ns: RX2 ON, VFOB SPLIT ON, so VFOB SUB = TX
+                {
+                    if (chkVFOSync.Checked == true) chkVFOSync.Checked = false;
+
+                  //  if (chkVFOATX.Checked == true)  chkVFOATX.Checked = false;
+
+                  //  if (chkVFOBTX.Checked == false) chkVFOBTX.Checked = true; //.271 will not go into VFOB split unless the TX is for VFOB
+
+                    UpdateVFOBSub();
+                    if (chkVFOBSplit.Checked) // ke9ns: add .200  (fix.. resync SubVFOA and VFOA without using MultiRX)
+                    {
+                        VFOBSubFreq = VFOBFreq;
+                        saved_vfob_sub_freq = VFOBFreq; //.271
+
+                        UpdateVFOBSub();
+                    }
+
+                 //   if (chkVFOBTX.Checked == false) chkVFOBTX.Checked = true; //.271 will not go into VFOB split unless the TX is for VFOB
+
+                }
+                else // ke9ns: RX2 ON, VFOB SPLIT OFF, update
+                {
+                  //  txtVFOAFreq_LostFocus(this, EventArgs.Empty); //.211
+
+                    UpdateVFOBSub();
+
+                    txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+                }
+            }
+            else // VFOB SPLIT button should only be visible when RX2 is ON
+            {
+                // chkVFOBSplit.Checked = false;
+               
+            }
+        } // VFOB split .271
+
+
+        // ke9ns: RX1 VFOA SPLIT (can use either VFOB or VFOASUB for TX)
         private void chkVFOSplit_CheckedChanged(object sender, System.EventArgs e)
         {
             Display.SplitEnabled = chkVFOSplit.Checked;
+
+            // ke9ns: if RX2ON then split uses txtVFOABand window instead of VFOB
 
             if (chkVFOSplit.Checked)
             {
@@ -67947,7 +68458,7 @@ namespace PowerSDR
                 udFMOffset.Enabled = true;
                 //fm_tx_offset_mhz = 0;
 
-                if (setupForm != null) // ke9ns add (turn off split TX listen if it was on
+                if (setupForm != null) // ke9ns: add turn off split TX listen if it was on
                 {
                     if (setupForm.chkBoxSplitListen.Checked == true)
                     {
@@ -67957,18 +68468,25 @@ namespace PowerSDR
 
             }
 
-            if (rx2_enabled)
+            if (rx2_enabled) // ke9ns: now VFOA SPLIT VFOASUB = TX (instead of VFOB)
             {
                 if (chkVFOSplit.Checked)
                 {
+                    if (chkVFOSync.Checked == true)  chkVFOSync.Checked = false; // turn off 
+                   
+                 //   if (chkVFOBTX.Checked == true) chkVFOBTX.Checked = false;
+
                     UpdateVFOASub();
-                    if (chkVFOSplit.Checked) // ke9ns add .200  (fix.. resync SubVFOA and VFOA without using MultiRX)
+
+                    if (chkVFOSplit.Checked) // ke9ns: add .200  (fix.. resync SubVFOA and VFOA without using MultiRX)
                     {
                         VFOASubFreq = VFOAFreq;
+                        saved_vfoa_sub_freq = VFOAFreq; //.271
+
                         UpdateVFOASub();
                     }
 
-                    if (chkVFOBTX.Checked) chkVFOATX.Checked = true; // ke9ns: but the sub VFOA is TX
+                  //  if (chkVFOATX.Checked == false) chkVFOATX.Checked = true; // .271 mod
                 }
                 else
                 {
@@ -67981,7 +68499,7 @@ namespace PowerSDR
             }
             else // RX2 OFF (or NO RX2)
             {
-                if (chkVFOSplit.Checked)
+                if (chkVFOSplit.Checked) // ke9ns: use VFOB = TX (SPLIT turned ON with RX2 OFF)
                 {
                     if (chkVFOSync.Checked) chkVFOSync.Checked = false;
 
@@ -67997,11 +68515,10 @@ namespace PowerSDR
                         txtVFOBLSD.ForeColor = small_vfo_color;
                         txtVFOBBand.ForeColor = band_text_light_color;
 
-                        if (current_model == Model.FLEX5000 && fwc_init)
-                            txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+                        if (current_model == Model.FLEX5000 && fwc_init)  txtVFOBFreq_LostFocus(this, EventArgs.Empty);
                     }
                 }
-                else
+                else // ke9ns: VFOA = TX (SPLIT turned OFF)
                 {
 
                     grpVFOB.Font = ff5; //new Font("Swis721 BT", 8.25F, FontStyle.Italic | FontStyle.Regular);
@@ -69468,7 +69985,7 @@ namespace PowerSDR
             }
         }
 
-        private void chkSplitDisplay_CheckedChanged(object sender, System.EventArgs e)
+        private void chkSplitDisplay_CheckedChanged(object sender, System.EventArgs e) // ke9ns: true = RX2 enabled (you must split the display between VFOA and B)
         {
             if (chkSplitDisplay.Checked)
                 chkSplitDisplay.BackColor = button_selected_color;
@@ -70580,6 +71097,8 @@ namespace PowerSDR
 
                 if (rx2_enabled)
                 {
+                    chkVFOBSplit.Visible = true; //.271
+
                     ptbDisplayPan2.Visible = true; //.219
                     ptbDisplayZoom2.Visible = true; //.219
 
@@ -70647,6 +71166,10 @@ namespace PowerSDR
                 } // if rx2 enabled
                 else
                 {
+
+                    chkVFOBSplit.Visible = false; //.271
+                    if (chkVFOBSplit.Checked == true) chkVFOBSplit.Checked = false; // .271
+
                     ptbDisplayPan2.Visible = false; //.219
                     ptbDisplayZoom2.Visible = false; //.219
 
@@ -70903,11 +71426,31 @@ namespace PowerSDR
             }
 
             e.Graphics.DrawLine(new Pen(txtVFOABand.ForeColor, 2.0f), x, 1, width, 1);
-        }
+        } // panelVFOASubHover_Paint
+
+        private void panelVFOBSubHover_Paint(object sender, System.Windows.Forms.PaintEventArgs e) //.271
+        {
+            if (!rx2_enabled || (!chkVFOBSplit.Checked)) return;
+            if (vfob_sub_hover_digit < 0) return;
+
+            int x = 0;
+            int width = 0;
+                
+                x += (vfob_sub_char_width + vfob_sub_char_space) * vfob_sub_hover_digit;
+
+                if (vfob_sub_hover_digit > 3) x += (vfob_sub_decimal_space - vfob_sub_char_space);
+
+                width = x + vfob_sub_char_width;
+            
+            e.Graphics.DrawLine(new Pen(txtVFOBBand.ForeColor, 2.0f), x, 1, width, 1);
+
+        } // panelVFOBSubHover_Paint
+
 
         private void panelVFOASubHover_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (!rx2_enabled || (!chkEnableMultiRX.Checked && !chkVFOSplit.Checked)) return;
+
             Control c1 = (Control)sender;
             Control c2 = txtVFOABand;
             int client_width = (c1.Size.Width - c1.ClientSize.Width) + (c2.Size.Width - c2.ClientSize.Width);
@@ -70915,7 +71458,60 @@ namespace PowerSDR
             int x_offset = c1.Left - c2.Left - client_width / 2;
             int y_offset = c1.Top - c2.Top - client_height / 2;
             txtVFOABand_MouseMove(sender, new MouseEventArgs(e.Button, e.Clicks, e.X + x_offset, e.Y + y_offset, e.Delta));
-        }
+        } // panelVFOASubHover_MouseMove
+
+
+        private void panelVFOBSubHover_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e) //.271
+        {
+            if (!rx2_enabled || (!chkVFOBSplit.Checked)) return;
+
+            Control c1 = (Control)sender;
+            Control c2 = txtVFOBBand;
+            int client_width = (c1.Size.Width - c1.ClientSize.Width) + (c2.Size.Width - c2.ClientSize.Width);
+            int client_height = (c1.Size.Height - c1.ClientSize.Height) + (c2.Size.Height - c2.ClientSize.Height);
+            int x_offset = c1.Left - c2.Left - client_width / 2;
+            int y_offset = c1.Top - c2.Top - client_height / 2;
+            txtVFOBBand_MouseMove(sender, new MouseEventArgs(e.Button, e.Clicks, e.X + x_offset, e.Y + y_offset, e.Delta));
+
+        } // panelVFOBSubHover_MouseMove
+
+
+
+        private void txtVFOBBand_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e) //.271
+        {
+            if (!rx2_enabled || (!chkVFOBSplit.Checked) || !chkPower.Checked) return;
+
+            panelVFOBSubHover.Visible = true;
+
+            if (this.ContainsFocus)
+            {
+                int old_digit = vfob_sub_hover_digit;
+                int digit_index = 0;
+                if (vfob_sub_char_width == 0) GetVFOBSubCharWidth();
+
+                int x = txtVFOBBand.Width - (vfob_sub_pixel_offset - 5);
+
+                while (x < e.X)
+                {
+                    digit_index++;
+                   
+                    x += vfob_sub_char_width;
+                    if (digit_index == 3) x += vfob_sub_decimal_space;
+                    else x += vfob_sub_char_space;
+                   
+                }
+
+                if (digit_index < 3) digit_index = -1;
+
+                if (digit_index > 9) digit_index = 9;
+
+                vfob_sub_hover_digit = digit_index;
+
+                if (vfob_sub_hover_digit != old_digit) panelVFOBSubHover.Invalidate();
+                //Debug.WriteLine("vfoa_sub_hover_digit:"+vfoa_sub_hover_digit);
+            }
+
+        } // txtVFOBBand_MouseMove
 
         private void txtVFOABand_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
@@ -70965,12 +71561,18 @@ namespace PowerSDR
                 //Debug.WriteLine("vfoa_sub_hover_digit:"+vfoa_sub_hover_digit);
             }
 
-        } // txtVFOABand_MouseMove(
+        } // txtVFOABand_MouseMove
 
         private void txtVFOABand_MouseLeave(object sender, System.EventArgs e)
         {
             vfoa_sub_hover_digit = -1;
             panelVFOASubHover.Invalidate();
+        }
+
+        private void txtVFOBBand_MouseLeave(object sender, System.EventArgs e) //.271
+        {
+            vfob_sub_hover_digit = -1;
+            panelVFOBSubHover.Invalidate();
         }
 
         private void SetRX2Mode(DSPMode new_mode)
@@ -73235,7 +73837,7 @@ namespace PowerSDR
 
         private void chkVFOATX_CheckedChanged(object sender, System.EventArgs e)
         {
-            if (chkVFOATX.Focused && !chkVFOATX.Checked) chkVFOATX.Checked = true;
+            if (chkVFOATX.Focused && chkVFOATX.Checked == false) chkVFOATX.Checked = true;
 
             if (chkVFOATX.Checked)
             {
@@ -73261,7 +73863,7 @@ namespace PowerSDR
                 if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.RX2OK && chkRX2.Checked) // ke9ns add .206
                 {
 
-                    if (fwcAntForm != null && fwcAntForm.chkTX2Active.Checked) // SO2R with VFOA TX so set AMP TX PTT line for VFOA RX1 and dont use RX2 PTT lines
+                    if (fwcAntForm != null && fwcAntForm.chkTX2Active.Checked) // SO2R=chkTX2Active with VFOA TX = set AMP TX PTT line for VFOA RX1 and dont use RX2 PTT lines
                     {
                         if (FWCAmpRX2TX1 == false && FWCAmpTX1) FWC.SetAmpTX1(true);
                         else FWC.SetAmpTX1(false);
@@ -73274,6 +73876,7 @@ namespace PowerSDR
 
                         TXBand = rx1_band;      // ke9ns add .205
 
+                        SetTXAnt2(StringToBand(fwcAntForm.comboBand2.Text), fwcAntForm.StringToAnt(fwcAntForm.comboTXAnt2.Text)); //.212
 
                         Debug.WriteLine("RX1 VFOATX and RX2 on SO2R " + FWCAmpRX2TX3 + " , " + FWCAmpTX3);
                     }
@@ -73292,8 +73895,7 @@ namespace PowerSDR
                         TXBand = rx1_band;      // ke9ns add .205
                     }
 
-                    SetTXAnt2(StringToBand(fwcAntForm.comboBand2.Text), fwcAntForm.StringToAnt(fwcAntForm.comboTXAnt2.Text)); //.212
-
+                   
                 }
                 else if (fwc_init && current_model == Model.FLEX5000) // SO2R OFF or no RX2 (below)
                 {
@@ -73305,6 +73907,7 @@ namespace PowerSDR
 
                     if (FWCAmpTX3) FWC.SetAmpTX3(true);
                     else FWC.SetAmpTX3(false);
+
                     TXBand = rx1_band;      // ke9ns add .205
 
                     Debug.WriteLine("RX1 VFOATX and RX2 oFF Normal ");
@@ -73336,7 +73939,11 @@ namespace PowerSDR
                 chkVFOATX.BackColor = SystemColors.Control;
             }
             btnHidden.Focus();
-        }
+
+        } // chkVFOATX_CheckedChanged
+
+
+
 
         //ke9ns:  Sets or reads the VFO A TX/VFO B TX Buttons
         //  0 set VFO A to TX, 1 sets VFO B to TX.
@@ -73437,15 +74044,15 @@ namespace PowerSDR
 
         private void chkVFOBTX_CheckedChanged(object sender, System.EventArgs e)
         {
-            if (chkVFOBTX.Focused && !chkVFOBTX.Checked) chkVFOBTX.Checked = true;
+            if (chkVFOBTX.Focused && chkVFOBTX.Checked == false) chkVFOBTX.Checked = true;
 
             if (chkVFOBTX.Checked)
             {
                 lblAntTX2.ForeColor = Color.Red;
                 lblAntTX.ForeColor = Color.White; // .213
 
-
                 if (chkVFOATX.Checked) chkVFOATX.Checked = false;
+
                 chkVFOBTX.BackColor = Color.Red;//button_selected_color;
                 swap_vfo_ab_tx = true;
                 if (KWAutoInformation) BroadcastVFOChange("1"); // broadcast on CAT
@@ -73457,13 +74064,11 @@ namespace PowerSDR
 
                 if (KWAutoInformation7) BroadcastVFOChange7("1"); // broadcast on TCP/IP CAT
 
-
-
                 txtVFOBFreq_LostFocus(this, EventArgs.Empty);
 
                 if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.RX2OK && chkRX2.Checked)
                 {
-                    if (fwcAntForm != null && fwcAntForm.chkTX2Active.Checked) // ke9ns: SO2R ON VFOB TX active so PTT AMP for RX2 transmit 2
+                    if (fwcAntForm != null && fwcAntForm.chkTX2Active.Checked) // ke9ns: SO2R=chkTX2Active ON VFOB TX active = PTT AMP for RX2 transmit 2
                     {
 
                         if (FWCAmpRX2TX1 == true && FWCAmpTX1) FWC.SetAmpTX1(true);
@@ -73474,7 +74079,6 @@ namespace PowerSDR
 
                         if (FWCAmpRX2TX3 == true && FWCAmpTX3) FWC.SetAmpTX3(true);
                         else FWC.SetAmpTX3(false);
-
 
                         TXBand2 = rx2_band;      // ke9ns add .205
 
@@ -73499,19 +74103,31 @@ namespace PowerSDR
 
                     }
 
+                    //ke9ns: 
+                    if (chkVFOBSplit.Checked == false) //.271
+                    {
+                        Audio.RX2AutoMuteTX = true;
+                        FWC.SetFullDuplex(!mute_rx1_on_vfob_tx);
+                        Audio.FullDuplex = !mute_rx1_on_vfob_tx;
+                        if (!mute_rx1_on_vfob_tx && !mox) FWC.SetQSE(false);
+                    }
+                    else
+                    {
+                        Audio.RX2AutoMuteTX = mute_rx2_on_vfoa_tx;
+                        FWC.SetFullDuplex(false);
+                        Audio.FullDuplex = false;
 
-                    Audio.RX2AutoMuteTX = true;
-                    FWC.SetFullDuplex(!mute_rx1_on_vfob_tx);
-                    Audio.FullDuplex = !mute_rx1_on_vfob_tx;
-                    if (!mute_rx1_on_vfob_tx && !mox) FWC.SetQSE(false);
+                    }
 
+
+                    //ke9ns: RX2 ON and TX on VFOB so use RX2 modes
                     Audio.TXDSPMode = rx2_dsp_mode;
                     dsp.GetDSPTX(0).CurrentDSPMode = rx2_dsp_mode;
                     if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) FWC.SetTXDSPMode(rx2_dsp_mode);
                     SetRX2Mode(rx2_dsp_mode);
                     Display.TXOnVFOB = true;
-                    if (chkVFOSplit.Checked) chkVFOSplit.Checked = false;
 
+               
                     if (chkVAC2.Checked && chkRX2.Checked)
                     {
                         ptbVACRXGain.Value = vac2_rx_gain;
@@ -73542,22 +74158,30 @@ namespace PowerSDR
                     Debug.WriteLine("RX2 VFOBTX and RX2 OFF");
                 }
 
-                if (chkRX2.Checked == false && chkVFOBTX.Checked)    //in case of VU/XVTR-split error
-                    chkVFOSplit.Checked = true;
+                if (chkRX2.Checked == false && chkVFOBTX.Checked) chkVFOSplit.Checked = true;  //in case of VU/XVTR-split error
+
             }
-            else // button is unchecked
+            else //  if (chkVFOBTX.Checked) button is unchecked
             {
                 lblAntTX.ForeColor = Color.Red;
                 lblAntTX2.ForeColor = Color.White; // .213
 
                 chkVFOBTX.BackColor = SystemColors.Control;
                 Display.TXOnVFOB = false;
+
                 if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.RX2OK && chkRX2.Checked)
                 {
-
+                    //ke9ns: RX2 ON but TX is ON VFOA
                     Audio.RX2AutoMuteTX = mute_rx2_on_vfoa_tx;
                     FWC.SetFullDuplex(false);
                     Audio.FullDuplex = false;
+
+                    //ke9ns .271 add below when changing back to VFOA TX with RX2 ON
+                    Audio.TXDSPMode = rx1_dsp_mode;
+                    dsp.GetDSPTX(0).CurrentDSPMode = rx1_dsp_mode;
+                    if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) FWC.SetTXDSPMode(rx1_dsp_mode);
+                    SetRX1Mode(rx1_dsp_mode);
+                    Display.TXOnVFOB = false;
 
                     if (chkVAC2.Checked && chkRX2.Checked)
                     {
@@ -73573,17 +74197,21 @@ namespace PowerSDR
                     }
                 }
 
-                if (chkRX2.Checked == false)
-                    chkVFOSplit.Checked = false;
+              //  if (chkRX2.Checked == false) chkVFOSplit.Checked = false; //.271 disable this line of code
+
                 Audio.TXDSPMode = rx1_dsp_mode;
                 dsp.GetDSPTX(0).CurrentDSPMode = rx1_dsp_mode;
-                if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-                    FWC.SetTXDSPMode(rx2_dsp_mode);
+                if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) FWC.SetTXDSPMode(rx2_dsp_mode);
                 SetRX1Mode(rx1_dsp_mode);
-            }
+
+            } // VFOBTX button OFF
+
             Audio.VFOBTX = chkVFOBTX.Checked;
             btnHidden.Focus();
-        }
+
+        } //  chkVFOBTX_CheckedChanged
+
+
 
         private void toolStripMenuItemRX1FilterConfigure_Click(object sender, EventArgs e)
         {
@@ -83927,46 +84555,212 @@ namespace PowerSDR
 
             if ((me.Button == System.Windows.Forms.MouseButtons.Right))
             {
-                if (RX2Enabled == true) return; // dont allow if 2nd RX is ON
+                if (setupForm == null || setupForm.IsDisposed) setupForm = new Setup(this); //.271 move
 
-                if (setupForm == null || setupForm.IsDisposed) setupForm = new Setup(this);
-
-                if (chkVFOSync.Checked == true)
+                        
+                if (RX2Enabled == true) // SPLIT ON, RX2 ON, so VFOA SUB = TX, and VFOB TX will use RX2 mode
                 {
-                    chkVFOSync.Checked = false; // turn off 
-                }
+                    //.271
 
-                if (SplitUp == false)
-                {
-                    SplitUp = true;
-                    if ((RX1DSPMode == DSPMode.CWL) || (RX1DSPMode == DSPMode.CWU))
-                        VFOBFreq = VFOAFreq + .001; // in mhz
+                    if (chkVFOSync.Checked == true) chkVFOSync.Checked = false; // turn off 
+                   
+                 //   if (chkVFOBTX.Checked == true) chkVFOBTX.Checked = false;
+
+                   if (chkVFOSplit.Checked == false)  chkVFOSplit.Checked = true; // activate split (TX on vfoB)
+
+
+                    if (SplitUp == false)
+                    {
+                        SplitUp = true;
+                        if ((RX1DSPMode == DSPMode.CWL) || (RX1DSPMode == DSPMode.CWU))
+                        {
+                            saved_vfoa_sub_freq = VFOAFreq + .001; //.271
+                            VFOASubFreq = saved_vfoa_sub_freq; // in mhz   (ke9ns: VFOASubFreq placed freq into txtVFOABand text window)
+                          
+                        }
+                        else
+                        {
+                            saved_vfoa_sub_freq = VFOAFreq + .005; // in mhz
+                            VFOASubFreq = saved_vfoa_sub_freq; // in mhz
+                           
+                        }
+                    }
                     else
-                        VFOBFreq = VFOAFreq + .005; // in mhz
-                }
-                else
-                {
-                    SplitUp = false;
-                    if ((RX1DSPMode == DSPMode.CWL) || (RX1DSPMode == DSPMode.CWU))
-                        VFOBFreq = VFOAFreq - .001; // in mhz
-                    else
-                        VFOBFreq = VFOAFreq - .005; // in mhz
-                }
-
-                txtVFOAFreq_LostFocus(this, EventArgs.Empty);
-
-                chkVFOSplit.Checked = true; // activate split (TX on vfoB)
-
-                if (setupForm.chkBoxSplitListen.Checked == true)
-                {
-                    VFOASubFreq = VFOAFreq; // ke9ns add start with sub on top of vfoA
+                    {
+                        SplitUp = false;
+                        if ((RX1DSPMode == DSPMode.CWL) || (RX1DSPMode == DSPMode.CWU))
+                        {
+                            saved_vfoa_sub_freq = VFOAFreq - .001;
+                            VFOASubFreq = saved_vfoa_sub_freq; // in mhz
+                            
+                        }
+                        else
+                        {
+                            saved_vfoa_sub_freq = VFOAFreq - .005;
+                            VFOASubFreq = saved_vfoa_sub_freq; // in mhz
+                           
+                        }
+                    }
+                 
+                  
                     UpdateVFOASub();
+                    txtVFOAFreq_LostFocus(this, EventArgs.Empty);
 
-                    chkEnableMultiRX.Checked = true; // activate the multiRX (sub receiver to listen in on the TX freq)
+                  
+                    if (setupForm.chkBoxSplitListen.Checked == true)
+                    {
+                        UpdateVFOASub();
+                        chkEnableMultiRX.Checked = true; // activate the multiRX (sub receiver to listen in on the TX freq)
+                    }
+
+                }               //return; // dont allow if 2nd RX is ON
+                else // SPLIT ON, RX2 OFF, so VFOB = TX and RX1 MODE
+                {
+                    
+                    if (chkVFOSync.Checked == true) chkVFOSync.Checked = false; // turn off 
+                    if (chkVFOBTX.Checked == false) chkVFOBTX.Checked = true;
+
+
+                    if (SplitUp == false)
+                    {
+                        SplitUp = true;
+                        if ((RX1DSPMode == DSPMode.CWL) || (RX1DSPMode == DSPMode.CWU))
+                            VFOBFreq = VFOAFreq + .001; // in mhz
+                        else
+                            VFOBFreq = VFOAFreq + .005; // in mhz
+                    }
+                    else
+                    {
+                        SplitUp = false;
+                        if ((RX1DSPMode == DSPMode.CWL) || (RX1DSPMode == DSPMode.CWU))
+                            VFOBFreq = VFOAFreq - .001; // in mhz
+                        else
+                            VFOBFreq = VFOAFreq - .005; // in mhz
+                    }
+
+                    txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+
+                    if (chkVFOSplit.Checked == false) chkVFOSplit.Checked = true; // activate split (TX on vfoB)
+                  //  was  chkVFOSplit.Checked = true; // activate split (TX on vfoB)
+
+                    if (setupForm.chkBoxSplitListen.Checked == true)
+                    {
+                        VFOASubFreq = VFOAFreq; // ke9ns: start with sub on top of vfoA
+                        UpdateVFOASub();
+
+                        chkEnableMultiRX.Checked = true; // activate the multiRX (sub receiver to listen in on the TX freq)
+                    }
+
                 }
 
             } // right click
         } //chkVFOSplit_MouseDown
+
+
+        private bool SplitUpB = false;
+        //===============================================================================
+        // ke9ns add to allow a 5khz split (1khz on cw)
+        private void chkVFOBSplit_MouseDown(object sender, MouseEventArgs e)
+        {
+
+            MouseEventArgs me = (MouseEventArgs)e;
+
+            if ((me.Button == System.Windows.Forms.MouseButtons.Right))
+            {
+                if (setupForm == null || setupForm.IsDisposed) setupForm = new Setup(this); //.271 move
+
+
+                if (RX2Enabled == true)
+                {
+                    //.271
+
+                    if (chkVFOSync.Checked == true) chkVFOSync.Checked = false; // turn off 
+
+                 //   if (chkVFOATX.Checked == true) chkVFOATX.Checked = false;
+
+                    if (chkVFOBSplit.Checked == false) chkVFOBSplit.Checked = true; // activate split (TX on vfoB)
+
+
+                    if (SplitUpB == false)
+                    {
+                        SplitUpB = true;
+                        if ((RX2DSPMode == DSPMode.CWL) || (RX2DSPMode == DSPMode.CWU))
+                        {
+                            saved_vfob_sub_freq = VFOBFreq + .001; //.271
+                            VFOBSubFreq = saved_vfob_sub_freq; // in mhz   (ke9ns: VFOASubFreq placed freq into txtVFOABand text window)
+
+                        }
+                        else
+                        {
+                            saved_vfob_sub_freq = VFOBFreq + .005; // in mhz
+                            VFOBSubFreq = saved_vfob_sub_freq; // in mhz
+
+                        }
+                    }
+                    else
+                    {
+                        SplitUpB = false;
+                        if ((RX2DSPMode == DSPMode.CWL) || (RX2DSPMode == DSPMode.CWU))
+                        {
+                            saved_vfob_sub_freq = VFOBFreq - .001;
+                            VFOBSubFreq = saved_vfob_sub_freq; // in mhz
+
+                        }
+                        else
+                        {
+                            saved_vfob_sub_freq = VFOBFreq - .005;
+                            VFOBSubFreq = saved_vfob_sub_freq; // in mhz
+
+                        }
+                    }
+
+
+                    UpdateVFOBSub();
+                    txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+
+
+                   
+
+                }               //return; // dont allow if 2nd RX is ON
+                else
+                {
+
+                    if (chkVFOSync.Checked == true)  chkVFOSync.Checked = false; // turn off 
+                   
+
+                    if (SplitUpB == false)
+                    {
+                        SplitUpB = true;
+                        if ((RX2DSPMode == DSPMode.CWL) || (RX2DSPMode == DSPMode.CWU))
+                            VFOBFreq = VFOBFreq + .001; // in mhz
+                        else
+                            VFOBFreq = VFOBFreq + .005; // in mhz
+                    }
+                    else
+                    {
+                        SplitUp = false;
+                        if ((RX1DSPMode == DSPMode.CWL) || (RX1DSPMode == DSPMode.CWU))
+                            VFOBFreq = VFOBFreq - .001; // in mhz
+                        else
+                            VFOBFreq = VFOBFreq - .005; // in mhz
+                    }
+
+                    txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+
+                    chkVFOBSplit.Checked = true; // activate split (TX on vfoB)
+                    
+
+                }
+
+            } // right click
+        } //chkVFOBSplit_MouseDown
+
+
+
+
+
+
+
 
 
         bool n1mm_rx2 = false;
@@ -87211,11 +88005,21 @@ namespace PowerSDR
 
 
             }
+            else if ((me.Button == System.Windows.Forms.MouseButtons.Middle)) //.271
+            {
+                try
+                {
+                    System.Diagnostics.Process.Start(@"C:\Program Files (x86)\FlexRadio Systems\PowerSDR v2.8.0\FLEX-5000_Owners_Manual_v2.8.pdf");
+                }
+                catch (Exception f)
+                {
+                    Debug.WriteLine("Manual file missing " + f);
+                }
+
+            }
 
 
         } // keyshortcut .267
-
-       
 
         private void chkLockR_CheckedChanged(object sender, EventArgs e)
         {
