@@ -107,13 +107,13 @@
     <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>B707B328ACA2D0D0FDAD2C178003DC19A6D6E77C</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>05C39CFC4AB40ACCF4018F6E4D34CE30FF2D0BE6</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestTimestampUrl>http://timestamp.digicert.com</ManifestTimestampUrl>
@@ -136,7 +136,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>..\bin\Release\</OutputPath>
-    <DefineConstants>NO_WIDETX;NO_MCL_PM;NO_KE9NS;NO_DJ</DefineConstants>
+    <DefineConstants>NO_WIDETX;NO_KE9NS;NO_DJ</DefineConstants>
     <BaseAddress>285212672</BaseAddress>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>true</Optimize>
@@ -332,6 +332,7 @@
     <Compile Include="CAT\SDRSerialPortII.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CAT\SDRSerialPortIV.cs" />
     <Compile Include="CAT\SerialPortPTT.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -347,6 +348,7 @@
     <Compile Include="CAT\SIOListenerII.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CAT\SIOListenerIV.cs" />
     <Compile Include="Channel.cs" />
     <Compile Include="checksum.cs">
       <SubType>Code</SubType>

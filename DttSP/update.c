@@ -293,12 +293,14 @@ DttSP_EXP void SetTXFMDeviation(unsigned int thread, double deviation)
 
 DttSP_EXP void SetTXFMDataMode(unsigned int thread, BOOLEAN fmdata)
 {
-	//if (fmdata == TRUE) fprintf(stderr, "FMDATA ON\n"), fflush(stderr);
-	//else fprintf(stderr, "FMDATA OFF\n"), fflush(stderr);
 
 	sem_wait(&top[thread].sync.upd.sem);
 
 	tx[thread].fm.fmdata = fmdata; // ke9ns true = in FM data mode, false = standard FM
+
+	// if (fmdata == TRUE) fprintf(stderr, "FMDATA ON\n");
+	// else fprintf(stderr, "FMDATA OFF\n");
+	//	fflush(stderr);
 
 	sem_post(&top[thread].sync.upd.sem);
 

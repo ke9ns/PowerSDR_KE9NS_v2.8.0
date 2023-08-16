@@ -1900,6 +1900,7 @@ namespace PowerSDR
                         DttSP.SetTXFMDataMode(thread, value); //  dttsp.cs     update.c place value into tx[thread].fm.fmdata struct     sdr.c will then use it
                         fm_data_mode_dsp = value;
 
+                        Debug.WriteLine("FMDATA== " + value);
                     }
                 }
             }

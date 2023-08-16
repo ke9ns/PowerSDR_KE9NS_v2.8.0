@@ -1082,6 +1082,8 @@ namespace PowerSDR
 
         private SIOListenerIII siolisten1 = null;          // ke9ns add for ant rotor control
 
+        private SIOListenerIV siolisten7 = null;          // ke9ns add for CXAuto ant control
+
         public bool fwc_init = false;        // ke9ns:  true = Flex-5000 or Flex-3000 and stays TRUE forever (not used by SDR-1000 or Flex-1500)
         public int fwc_index = -1;
         private long fwc_last_cal_date_time = 0;
@@ -2678,31 +2680,65 @@ namespace PowerSDR
                 lastdeviation = 2500;
                 FMSEQ = 0;
                 FMDeviation_Hz = 2500;
-                radRX2ModeFMN.Text = "2FM";
-                radModeFMN.Text = "2FM";
-                dsp.GetDSPTX(0).TXFMDataMode = false;
-                FMData = false;
+             
+               if (setupForm != null && setupForm.chkFMDataMode.Checked == true) //.276 add
+                {
+                    dsp.GetDSPTX(0).TXFMDataMode = true;
+                    FMData = true;
+                    radRX2ModeFMN.Text = "2FMD";
+                    radModeFMN.Text = "2FMD";
+                }
+                else
+                {
+                    dsp.GetDSPTX(0).TXFMDataMode = false;
+                    FMData = false;
+                    radRX2ModeFMN.Text = "2FM";
+                    radModeFMN.Text = "2FM";
+                }
             }
             else if (radFMDeviation5kHz.Checked)
             {
                 lastdeviation = 5000;
                 FMSEQ = 1;
                 FMDeviation_Hz = 5000;
-                radRX2ModeFMN.Text = "5FM";
-                radModeFMN.Text = "5FM";
-                dsp.GetDSPTX(0).TXFMDataMode = false;
-                FMData = false;
+              
+               if (setupForm != null && setupForm.chkFMDataMode.Checked == true) //.276 add
+                {
+                    dsp.GetDSPTX(0).TXFMDataMode = true;
+                    FMData = true;
+                    radRX2ModeFMN.Text = "5FMD";
+                    radModeFMN.Text = "5FMD";
+                }
+                else
+                {
+                    dsp.GetDSPTX(0).TXFMDataMode = false;
+                    FMData = false;
+                    radRX2ModeFMN.Text = "5FM";
+                    radModeFMN.Text = "5FM";
+                }
             }
             else
             {
                 lastdeviation = FMDataDeviation;
                 FMSEQ = 2;
-                radRX2ModeFMN.Text = "WFM";
-                radModeFMN.Text = "WFM";
+               
                 FMDeviation_Hz = FMDataDeviation;
-                FMData = true;
+                
                 FMDeviation10khz(); //.236
-                dsp.GetDSPTX(0).TXFMDataMode = true;
+                if (setupForm != null && setupForm.chkFMDataMode.Checked == true) //.276 add
+                {
+                    dsp.GetDSPTX(0).TXFMDataMode = true;
+                    FMData = true;
+                    radRX2ModeFMN.Text = "WFM";
+                    radModeFMN.Text = "WFM";
+                }
+                else
+                {
+                    dsp.GetDSPTX(0).TXFMDataMode = false;
+                    FMData = false;
+                    radRX2ModeFMN.Text = "WFM";
+                    radModeFMN.Text = "WFM";
+                }
             }
 
             dsp.GetDSPTX(0).TXFMDeviation = lastdeviation;
@@ -3757,6 +3793,7 @@ namespace PowerSDR
 
             siolisten1 = new SIOListenerIII(this); // ke9ns add for rotor control
 
+            siolisten7 = new SIOListenerIV(this); // ke9ns .275 CXAuto ant control
 
             CWSensorItem.Init();
             CWPTT.Init();
@@ -12087,6 +12124,8 @@ namespace PowerSDR
 			}*/
         }
 
+      
+
         //=====================================================================================
         private Band BandByFreq(double freq, int xvtr_index, bool tx, FRSRegion region)
         {
@@ -17764,10 +17803,13 @@ namespace PowerSDR
             {
                 if (TXBand != b && !tuning)
                 {
-                   // if (chkVFOSplit.Checked) chkVFOSplit.Checked = false;
+                    // if (chkVFOSplit.Checked) chkVFOSplit.Checked = false;
+                   
                     if (chkVFOSplit.Checked && chkVFOBSplit.Checked == false) chkVFOSplit.Checked = false; //.271
+                  
                 }
             }
+
 
             Band old_band = tx_band;
 
@@ -17777,6 +17819,7 @@ namespace PowerSDR
 
             if (old_band != b) UpdateBandButtonColors();
 
+        
             if (!(fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)))
             {
                 if (atu_present && xvtr_present)
@@ -17817,7 +17860,7 @@ namespace PowerSDR
                     }
                 }
             }
-        } //settxband
+        } //SetTXBand(Band b)
 
         private float GainByBand(Band b) // 
         {
@@ -25801,6 +25844,7 @@ namespace PowerSDR
                     ptbAF_Scroll(this, EventArgs.Empty);
 
                     USBHID.SetTXOut(false);
+
                     break;
             }
 
@@ -27278,8 +27322,12 @@ namespace PowerSDR
             {
                 bool old = hid_amp_tx1;
                 hid_amp_tx1 = value;
-                if (old != value || initializing)
-                    USBHID.EnableTXOutSeq(value);
+                if (initializing || old != value)
+                {
+                    if (setupForm != null && ((setupForm.chkBoxIIC.Checked && checkBoxIICPTT.Checked) || setupForm.chkBoxIIC.Checked == false))// .272 if IICPTT feature is ON, then AmpPTT must be active to use radio amp PTT
+                        USBHID.EnableTXOutSeq(value);
+                    else USBHID.EnableTXOutSeq(false); // .272
+                }
             }
         }
 
@@ -27295,25 +27343,33 @@ namespace PowerSDR
                 fwc_amp_tx1 = value;
                 //  if ( initializing) // if (old != value || initializing)
                 // {
-                if (fwcAntForm == null) FWC.SetAmpTX1(value);
-                else if (fwcAntForm.chkTX2Active.Checked == false) FWC.SetAmpTX1(value); // normal
-                else // SO2R
-                {
-                    if (chkVFOATX.Checked) //VFOA TX
-                    {
-                        if (FWCAmpRX2TX1 == false && fwc_amp_tx1) FWC.SetAmpTX1(true);
-                        else FWC.SetAmpTX1(false);
-                    }
-                    else // VFOB TX
-                    {
-                        if (FWCAmpRX2TX1 == true && fwc_amp_tx1) FWC.SetAmpTX1(true);
-                        else FWC.SetAmpTX1(false);
 
+                if (setupForm != null && ((setupForm.chkBoxIIC.Checked && checkBoxIICPTT.Checked) || setupForm.chkBoxIIC.Checked == false))// .272 if IICPTT feature is ON, then AmpPTT must be active to use radio amp PTT
+                {
+                    Debug.WriteLine("SETTX3 " + value);
+
+                    if (fwcAntForm == null) FWC.SetAmpTX1(value);
+                    else if (fwcAntForm.chkTX2Active.Checked == false) FWC.SetAmpTX1(value); // normal
+                    else // SO2R
+                    {
+                        if (chkVFOATX.Checked) //VFOA TX
+                        {
+                            if (FWCAmpRX2TX1 == false && fwc_amp_tx1) FWC.SetAmpTX1(true);
+                            else FWC.SetAmpTX1(false);
+                        }
+                        else // VFOB TX
+                        {
+                            if (FWCAmpRX2TX1 == true && fwc_amp_tx1) FWC.SetAmpTX1(true);
+                            else FWC.SetAmpTX1(false);
+
+                        }
                     }
-                }
+                } // .272
+                else FWC.SetAmpTX1(false); //.272
+
                 //  }
             }
-        }
+        } // FWCAmpTX1
 
         private bool fwc_amp_tx2 = true;
         public bool FWCAmpTX2
@@ -27325,22 +27381,31 @@ namespace PowerSDR
                 fwc_amp_tx2 = value;
                 //  if (initializing) // if (old != value || initializing)
                 // {
-                if (fwcAntForm == null) FWC.SetAmpTX2(value);
-                else if (fwcAntForm.chkTX2Active.Checked == false) FWC.SetAmpTX2(value);
-                else
+
+
+                if (setupForm != null && ((setupForm.chkBoxIIC.Checked && checkBoxIICPTT.Checked) || setupForm.chkBoxIIC.Checked == false))// .272 if IICPTT feature is ON, then AmpPTT must be active to use radio amp PTT
                 {
-                    if (chkVFOATX.Checked)
-                    {
-                        if (FWCAmpRX2TX2 == false && fwc_amp_tx2) FWC.SetAmpTX2(true);
-                        else FWC.SetAmpTX2(false);
-                    }
+
+                    if (fwcAntForm == null) FWC.SetAmpTX2(value);
+                    else if (fwcAntForm.chkTX2Active.Checked == false) FWC.SetAmpTX2(value);
                     else
                     {
-                        if (FWCAmpRX2TX2 == true && fwc_amp_tx2) FWC.SetAmpTX2(true);
-                        else FWC.SetAmpTX2(false);
+                        if (chkVFOATX.Checked)
+                        {
+                            if (FWCAmpRX2TX2 == false && fwc_amp_tx2) FWC.SetAmpTX2(true);
+                            else FWC.SetAmpTX2(false);
+                        }
+                        else
+                        {
+                            if (FWCAmpRX2TX2 == true && fwc_amp_tx2) FWC.SetAmpTX2(true);
+                            else FWC.SetAmpTX2(false);
 
+                        }
                     }
-                }
+                    
+                } //.272
+                else FWC.SetAmpTX2(false); //.272
+
                 // }
             }
         }
@@ -27356,24 +27421,30 @@ namespace PowerSDR
 
                 //  if (old != value || initializing)
                 //{
-                if (fwcAntForm == null) FWC.SetAmpTX1(value);
-                else if (fwcAntForm.chkTX2Active.Checked == false) FWC.SetAmpTX3(value);
-                else
+
+
+                if (setupForm != null && ((setupForm.chkBoxIIC.Checked && checkBoxIICPTT.Checked) || setupForm.chkBoxIIC.Checked == false))// .272 if IICPTT feature is ON, then AmpPTT must be active to use radio amp PTT
                 {
-                    if (chkVFOATX.Checked)
-                    {
-                        if (FWCAmpRX2TX3 == false && fwc_amp_tx3) FWC.SetAmpTX3(true);
-                        else FWC.SetAmpTX3(false);
-                    }
+                    if (fwcAntForm == null) FWC.SetAmpTX1(value);
+                    else if (fwcAntForm.chkTX2Active.Checked == false) FWC.SetAmpTX3(value);
                     else
                     {
-                        if (FWCAmpRX2TX3 == true && fwc_amp_tx3) FWC.SetAmpTX3(true);
-                        else FWC.SetAmpTX3(false);
+                        if (chkVFOATX.Checked)
+                        {
+                            if (FWCAmpRX2TX3 == false && fwc_amp_tx3) FWC.SetAmpTX3(true);
+                            else FWC.SetAmpTX3(false);
+                        }
+                        else
+                        {
+                            if (FWCAmpRX2TX3 == true && fwc_amp_tx3) FWC.SetAmpTX3(true);
+                            else FWC.SetAmpTX3(false);
 
+                        }
                     }
-                }
 
-                Debug.WriteLine("RX2TX3 " + FWCAmpRX2TX3 + " ,ampTX3" + fwc_amp_tx3);
+                    Debug.WriteLine("RX2TX3 " + FWCAmpRX2TX3 + " ,ampTX3" + fwc_amp_tx3);
+                } //.272
+                else FWC.SetAmpTX3(false); //.272
 
                 //  }
             }
@@ -27425,8 +27496,10 @@ namespace PowerSDR
             {
                 bool old = hid_ptt_out;
                 hid_ptt_out = value;
-                if (old != value || initializing)
-                    USBHID.SetTXOut(value);
+                if (initializing || old != value)
+                {
+                        USBHID.SetTXOut(value);
+                }
             }
         }
 
@@ -28512,6 +28585,8 @@ namespace PowerSDR
 
         } // XVTR_READ
 
+
+
         //=============================================================================
         private bool vu_ant = false;
         private FWCAnt rx1_ant = FWCAnt.ANT1;
@@ -28522,6 +28597,9 @@ namespace PowerSDR
             {
                 if (!fwc_init || current_model != Model.FLEX5000) return;
 
+
+              
+
                 FWCAnt old = rx1_ant;
                 rx1_ant = value;
 
@@ -28531,9 +28609,10 @@ namespace PowerSDR
                 {
                     if (rx1_xvtr_index == 0)
                     {
-                        lblAntRX1a.Text = "VHF";
-                        lblAntTXa.Text = "VHF";
+                       lblAntRX1a.Text = "VHF";
+                       lblAntTXa.Text = "VHF";
 
+                  
                         rx1_path_offset = 0.0f;
                         return;
                     }
@@ -28541,13 +28620,15 @@ namespace PowerSDR
                     {
                         lblAntRX1a.Text = "UHF";
                         lblAntTXa.Text = "UHF";
+
                         rx1_path_offset = 0.0f;
                         return;
                     }
 
                 }
 
-                if (value != old || initializing || vu_ant)
+             
+            //   if (value != old || initializing || vu_ant)// .274 remove
                 {
                     switch (rx1_ant)
                     {
@@ -28556,22 +28637,31 @@ namespace PowerSDR
                             FWC.SetRX1Ant(0);
                             break;
                         case FWCAnt.ANT1:
-                            lblAntRX1a.Text = "ANT1";
+                            //.274
+                            if (fwcAntForm != null) lblAntRX1a.Text =  fwcAntForm.txtBoxAnt1.Text; //.274
+                            else lblAntRX1a.Text = "ANT1";
+
                             FWC.SetRX1Ant(1);
                             rx1_path_offset = 0.5f;
                             break;
                         case FWCAnt.ANT2:
-                            lblAntRX1a.Text = "ANT2";
+                            if (fwcAntForm != null) lblAntRX1a.Text = fwcAntForm.txtBoxAnt2.Text;
+                            else lblAntRX1a.Text = "ANT2";
+
                             FWC.SetRX1Ant(2);
                             rx1_path_offset = 0.5f;
                             break;
                         case FWCAnt.ANT3:
-                            lblAntRX1a.Text = "ANT3";
+                            if (fwcAntForm != null) lblAntRX1a.Text = fwcAntForm.txtBoxAnt3.Text;
+                            else lblAntRX1a.Text = "ANT3";
+
                             FWC.SetRX1Ant(3);
                             rx1_path_offset = 0.5f;
                             break;
                         case FWCAnt.RX1IN:
-                            lblAntRX1a.Text = "RX1 IN";
+                            if (fwcAntForm != null) lblAntRX1a.Text = fwcAntForm.txtBoxAnt4.Text;
+                            else lblAntRX1a.Text = "RX1 IN";
+
                             FWC.SetRX1Ant(4);
                             rx1_path_offset = 0.0f;
                             break;
@@ -28580,13 +28670,15 @@ namespace PowerSDR
                             rx1_path_offset = 0.0f;
                             break;
                         case FWCAnt.VHF:
-                            lblAntRX1a.Text = "VHF";
+                         lblAntRX1a.Text = "VHF";
                             lblAntTXa.Text = "VHF";
+                           
                             rx1_path_offset = 0.0f;
                             break;
                         case FWCAnt.UHF:
-                            lblAntRX1a.Text = "UHF";
-                            lblAntTXa.Text = "UHF";
+                             lblAntRX1a.Text = "UHF";
+                              lblAntTXa.Text = "UHF";
+                          
                             rx1_path_offset = 0.0f;
                             break;
                     } // switch (rx1_ant)
@@ -28597,8 +28689,6 @@ namespace PowerSDR
                         RX2Ant = rx2_ant;
                     }
                 }
-
-
 
 
             } // set
@@ -28612,6 +28702,7 @@ namespace PowerSDR
             {
                 if (!fwc_init || current_model != Model.FLEX5000) return;
 
+              
                 FWCAnt old = rx2_ant;
                 rx2_ant = value;
 
@@ -28619,40 +28710,50 @@ namespace PowerSDR
                 {
                     if (rx2_xvtr_index == 0)
                     {
-                        lblAntRX2a.Text = "VHF";
-                        lblAntTX2a.Text = "VHF";
+                       lblAntRX2a.Text = "VHF";
+                       lblAntTX2a.Text = "VHF";
+                   
                         rx2_path_offset = 0.0f;
                         FWC.SetRX2Ant(5); // RX2 In
                         return;
                     }
                     else if (rx2_xvtr_index == 1)
                     {
-                        lblAntRX2a.Text = "UHF";
-                        lblAntTX2a.Text = "UHF";
+                          lblAntRX2a.Text = "UHF";
+                          lblAntTX2a.Text = "UHF";
+                    
                         rx2_path_offset = 0.0f;
                         FWC.SetRX2Ant(5); // RX2 In
                         return;
                     }
                 }
 
-                if (old != value || initializing || vu_ant)
+            //   if (old != value || initializing || vu_ant) //. 274 remove
                 {
                     switch (rx2_ant)
                     {
                         case FWCAnt.ANT1:
-                            lblAntRX2a.Text = "ANT1";
+
+                            if (fwcAntForm != null) lblAntRX2a.Text = fwcAntForm.txtBoxAnt1.Text;
+                            else lblAntRX2a.Text = "ANT1";
+
                             FWC.SetRX2Ant(1);
                             rx2_path_offset = -rx2_res_offset - 2.9f;
                             rx2_loop_offset = 0.0f;
                             break;
                         case FWCAnt.RX2IN:
-                            lblAntRX2a.Text = "RX2 IN";
+                            if (fwcAntForm != null) lblAntRX2a.Text = fwcAntForm.txtBoxAnt5.Text;
+                            else lblAntRX2a.Text = "RX2 IN";
+
                             FWC.SetRX2Ant(5);
                             rx2_path_offset = -rx2_res_offset - 2.8f;
                             rx2_loop_offset = 0.0f;
                             break;
                         case FWCAnt.RX1TAP:
-                            lblAntRX2a.Text = "RX1 Tap";
+                            if (fwcAntForm != null) lblAntRX2a.Text = fwcAntForm.txtBoxAnt6.Text;
+                            else lblAntRX2a.Text = "RX1 Tap";
+
+                            
                             FWC.SetRX2Ant(6);
                             switch (rx1_ant)
                             {
@@ -28675,18 +28776,21 @@ namespace PowerSDR
                             rx2_loop_offset = 0.0f;
                             break;
                         case FWCAnt.VHF:
-                            lblAntRX2a.Text = "VHF";
-                            lblAntTX2a.Text = "VHF";
+                             lblAntRX2a.Text = "VHF";
+                             lblAntTX2a.Text = "VHF";
+                        
                             rx2_path_offset = 0.0f;
                             break;
                         case FWCAnt.UHF:
-                            lblAntRX2a.Text = "UHF";
-                            lblAntTX2a.Text = "UHF";
+                             lblAntRX2a.Text = "UHF";
+                              lblAntTX2a.Text = "UHF";
+                      
                             rx2_path_offset = 0.0f;
                             break;
                         default:
-                            FWC.SetRX2Ant(5);
-                            lblAntRX2a.Text = "RX2 IN";
+                            if (fwcAntForm != null) lblAntRX2a.Text = fwcAntForm.txtBoxAnt5.Text;
+                            else lblAntRX2a.Text = "RX2 IN";
+
                             rx2_path_offset = -2.0f;
                             rx2_loop_offset = 0.0f;
                             break;
@@ -28747,6 +28851,7 @@ namespace PowerSDR
                 if (!fwc_init || current_model != Model.FLEX5000) return;
                 Debug.WriteLine("SET TXAnt: " + tx_ant + " , " + value);
 
+               
                 FWCAnt old = 0;
                 tx_ant = value;
 
@@ -28759,56 +28864,70 @@ namespace PowerSDR
 
                 if (fwcAntForm != null && fwcAntForm.chkTX2Active.Checked) // so2r checked
                 {
+
                     if (lblAntRX2a.Text == "VHF")
                     {
                         lblAntTX2a.Text = "VHF";
+                   
+
                     }
                     else if (lblAntRX2a.Text == "UHF")
                     {
-                        lblAntTX2a.Text = "UHF";
+                       lblAntTX2a.Text = "UHF";
+                     
                     }
                     else
                     {
                         switch (tx_ant2) // .212
                         {
                             case FWCAnt.ANT1:
-                                lblAntTX2a.Text = "ANT1"; // ke9ns mod (add 2 spaces)
+                                if (fwcAntForm != null) lblAntTX2a.Text = fwcAntForm.txtBoxAnt1.Text;
+                                else lblAntTX2a.Text = "ANT1";
+
                                 if (chkVFOBTX.Checked) FWC.SetTXAnt(1);
                                 break;
                             case FWCAnt.ANT2:
-                                lblAntTX2a.Text = "ANT2";
+                                if (fwcAntForm != null) lblAntTX2a.Text = fwcAntForm.txtBoxAnt2.Text;
+                                else lblAntTX2a.Text = "ANT2";
+
                                 if (chkVFOBTX.Checked) FWC.SetTXAnt(2);
                                 break;
                             case FWCAnt.ANT3:
-                                lblAntTX2a.Text = "ANT3";
+                                if (fwcAntForm != null) lblAntTX2a.Text = fwcAntForm.txtBoxAnt3.Text;
+                                else lblAntTX2a.Text = "ANT3";
+
                                 if (chkVFOBTX.Checked) FWC.SetTXAnt(3);
                                 break;
                         }
                     }
 
                     lblAntTX.Text = "TX1:";
+
+
                     if (lblAntRX1a.Text == "VHF")
                     {
-                        lblAntTXa.Text = "VHF";
-
+                       lblAntTXa.Text = "VHF";
+                    
                     }
                     else if (lblAntRX1a.Text == "UHF")
                     {
-                        lblAntTXa.Text = "UHF";
-
+                       lblAntTXa.Text = "UHF";
+                    
                     }
                     else if ((rx1_xvtr_index > 1) && current_model == Model.FLEX5000) // .213
                     {
                         if (xvtrForm.GetXVTRRF(rx1_xvtr_index) == true)
                         {
 
-                            lblAntRX1a.Text = "XVRX";
+                           lblAntRX1a.Text = "XVRX";
                             lblAntTXa.Text = "XVTX";
+
                         }
                         else
                         {
-                            lblAntRX1a.Text = "XVTX/C";
-                            lblAntTXa.Text = "XVTX/C";
+                              lblAntRX1a.Text = "XVTX/C";
+                              lblAntTXa.Text = "XVTX/C";
+
                         }
 
                     }
@@ -28818,15 +28937,21 @@ namespace PowerSDR
                         {
 
                             case FWCAnt.ANT1:
-                                lblAntTXa.Text = "ANT1"; // ke9ns mod (add 2 spaces)
+                                if (fwcAntForm != null) lblAntTXa.Text = fwcAntForm.txtBoxAnt1.Text; //.274
+                                else lblAntTXa.Text = "ANT1";
+
                                 if (!chkVFOBTX.Checked) FWC.SetTXAnt(1);
                                 break;
                             case FWCAnt.ANT2:
-                                lblAntTXa.Text = "ANT2";
+                                if (fwcAntForm != null) lblAntTXa.Text = fwcAntForm.txtBoxAnt2.Text; //.274
+                                else lblAntTXa.Text = "ANT2";
+
                                 if (!chkVFOBTX.Checked) FWC.SetTXAnt(2);
                                 break;
                             case FWCAnt.ANT3:
-                                lblAntTXa.Text = "ANT3";
+                                if (fwcAntForm != null) lblAntTXa.Text = fwcAntForm.txtBoxAnt3.Text; //.274
+                                else lblAntTXa.Text = "ANT3";
+
                                 if (!chkVFOBTX.Checked) FWC.SetTXAnt(3);
                                 break;
                         }
@@ -28841,7 +28966,7 @@ namespace PowerSDR
                         lblAntTXa.Text = "VHF";
 
                     }
-                    else if (lblAntRX1a.Text == "UHF")
+                    else if (lblAntRX1a.Text ==  "UHF")
                     {
                         lblAntTXa.Text = "UHF";
 
@@ -28853,11 +28978,13 @@ namespace PowerSDR
 
                             lblAntRX1a.Text = "XVRX";
                             lblAntTXa.Text = "XVTX";
+
                         }
                         else
                         {
-                            lblAntRX1a.Text = "XVTX/C";
-                            lblAntTXa.Text = "XVTX/C";
+                             lblAntRX1a.Text = "XVTX/C";
+                             lblAntTXa.Text = "XVTX/C";
+                    
                         }
 
                     }
@@ -28867,15 +28994,22 @@ namespace PowerSDR
                         switch (tx_ant)
                         {
                             case FWCAnt.ANT1:
-                                lblAntTXa.Text = "ANT1"; // ke9ns mod (add 2 spaces)
+                                if (fwcAntForm != null) lblAntTXa.Text = fwcAntForm.txtBoxAnt1.Text; //.274
+                                else lblAntTXa.Text = "ANT1";
+
                                 FWC.SetTXAnt(1);
                                 break;
                             case FWCAnt.ANT2:
-                                lblAntTXa.Text = "ANT2";
+                                if (fwcAntForm != null) lblAntTXa.Text = fwcAntForm.txtBoxAnt2.Text; //.274
+                                else lblAntTXa.Text = "ANT2";
+
                                 FWC.SetTXAnt(2);
                                 break;
                             case FWCAnt.ANT3:
-                                lblAntTXa.Text = "ANT3";
+                                if (fwcAntForm != null) lblAntTXa.Text = fwcAntForm.txtBoxAnt3.Text; //.274
+                                else lblAntTXa.Text = "ANT3";
+
+
                                 FWC.SetTXAnt(3);
                                 break;
                         }
@@ -28883,28 +29017,31 @@ namespace PowerSDR
 
                     if (lblAntRX2a.Text == "VHF")
                     {
-                        lblAntTX2a.Text = "VHF";
-
+                       lblAntTX2a.Text = "VHF";
+                   
                     }
                     else if (lblAntRX2a.Text == "UHF")
                     {
-                        lblAntTX2a.Text = "UHF";
-
+                         lblAntTX2a.Text = "UHF";
+                    
                     }
                     else
                     {
                         switch (tx_ant2) // .212
                         {
                             case FWCAnt.ANT1:
-                                lblAntTX2a.Text = "ANT1"; // ke9ns mod (add 2 spaces)
+                                if (fwcAntForm != null) lblAntTX2a.Text = fwcAntForm.txtBoxAnt1.Text; //.274
+                                else lblAntTX2a.Text = "ANT1";
 
                                 break;
                             case FWCAnt.ANT2:
-                                lblAntTX2a.Text = "ANT2";
+                                if (fwcAntForm != null) lblAntTX2a.Text = fwcAntForm.txtBoxAnt2.Text; //.274
+                                else lblAntTX2a.Text = "ANT2";
 
                                 break;
                             case FWCAnt.ANT3:
-                                lblAntTX2a.Text = "ANT3";
+                                if (fwcAntForm != null) lblAntTX2a.Text = fwcAntForm.txtBoxAnt3.Text; //.274
+                                else lblAntTX2a.Text = "ANT3";
 
                                 break;
                         }
@@ -28932,6 +29069,7 @@ namespace PowerSDR
                 if (!fwc_init || current_model != Model.FLEX5000) return;
                 Debug.WriteLine("SET TXAnt2: " + value + " 2: " + tx_ant2 + " , " + lblAntRX2a.Text + " , " + lblAntTX2a.Text);
 
+               
                 FWCAnt old = 0;
                 tx_ant2 = value;
 
@@ -28942,28 +29080,36 @@ namespace PowerSDR
 
                 if (lblAntRX2a.Text == "VHF")
                 {
-                    lblAntTX2a.Text = "VHF";
-
+                   lblAntTX2a.Text = "VHF";
+                
                 }
                 else if (lblAntRX2a.Text == "UHF")
                 {
                     lblAntTX2a.Text = "UHF";
-
+                
                 }
                 else
                 {
                     switch (tx_ant2)
                     {
                         case FWCAnt.ANT1:
-                            lblAntTX2a.Text = "ANT1"; // ke9ns mod (add 2 spaces)
+                            if (fwcAntForm != null) lblAntTX2a.Text = fwcAntForm.txtBoxAnt1.Text; //.274
+                            else lblAntTX2a.Text = "ANT1";
+
                             if (chkVFOBTX.Checked) FWC.SetTXAnt(1);
                             break;
                         case FWCAnt.ANT2:
-                            lblAntTX2a.Text = "ANT2";
+                            if (fwcAntForm != null) lblAntTX2a.Text = fwcAntForm.txtBoxAnt2.Text; //.274
+                            else lblAntTX2a.Text = "ANT2";
+
+
                             if (chkVFOBTX.Checked) FWC.SetTXAnt(2);
                             break;
                         case FWCAnt.ANT3:
-                            lblAntTX2a.Text = "ANT3";
+                            if (fwcAntForm != null) lblAntTX2a.Text = fwcAntForm.txtBoxAnt3.Text; //.274
+                            else lblAntTX2a.Text = "ANT3";
+
+
                             if (chkVFOBTX.Checked) FWC.SetTXAnt(3);
                             break;
                     }
@@ -28972,13 +29118,13 @@ namespace PowerSDR
 
                     if (lblAntRX1a.Text == "VHF")
                     {
-                        lblAntTXa.Text = "VHF";
-
+                         lblAntTXa.Text = "VHF";
+                    
                     }
                     else if (lblAntRX1a.Text == "UHF")
                     {
-                        lblAntTXa.Text = "UHF";
-
+                         lblAntTXa.Text = "UHF";
+                    
                     }
                     else
                     {
@@ -28986,15 +29132,23 @@ namespace PowerSDR
                         switch (tx_ant)
                         {
                             case FWCAnt.ANT1:
-                                lblAntTXa.Text = "ANT1"; // ke9ns mod (add 2 spaces)
+                                if (fwcAntForm != null) lblAntTXa.Text = fwcAntForm.txtBoxAnt1.Text; //.274
+                                else lblAntTXa.Text = "ANT1";
+
                                 if (!chkVFOBTX.Checked) FWC.SetTXAnt(1);
                                 break;
                             case FWCAnt.ANT2:
-                                lblAntTXa.Text = "ANT2";
+                                if (fwcAntForm != null) lblAntTXa.Text = fwcAntForm.txtBoxAnt2.Text; //.274
+                                else lblAntTXa.Text = "ANT2";
+
+
                                 if (!chkVFOBTX.Checked) FWC.SetTXAnt(2);
                                 break;
                             case FWCAnt.ANT3:
-                                lblAntTXa.Text = "ANT3";
+                                if (fwcAntForm != null) lblAntTXa.Text = fwcAntForm.txtBoxAnt3.Text; //.274
+                                else lblAntTXa.Text = "ANT3";
+
+
                                 if (!chkVFOBTX.Checked) FWC.SetTXAnt(3);
                                 break;
                         }
@@ -30430,6 +30584,12 @@ namespace PowerSDR
             set { siolisten1 = value; }
         }
 
+        // ke9ns add: CXAuto ant switch
+        public SIOListenerIV Siolisten7 //.275
+        {
+            get { return siolisten7; }
+            set { siolisten7 = value; }
+        }
         public bool HideTuneStep
         {
             get { return txtWheelTune.Visible; }
@@ -31748,8 +31908,7 @@ namespace PowerSDR
                         if (!hid_init)
                         {
                             hid_init = Flex1500.Init();
-                            if (hid_init)
-                                HIDEEPROM.Init();
+                            if (hid_init) HIDEEPROM.Init();
                         }
                         if (hid_init)
                         {
@@ -34339,11 +34498,80 @@ namespace PowerSDR
         }
 
 
+        //========================================================================================
+        //========================================================================================
+        // ke9ns CXAuto ant switch
+        private bool CXAuto_Enabled;
+        public string CXAuto_Rec = ""; // received string from CXAuto device. FAIL = 0xFE, 0xFE, 0x3A, 0xB0, 0xFB, 0xFD, Ant pos found in = 0xFE, 0xFE, 0x3A, 0xB0, 0xZZ, 0xFD (ZZ = ant 0-7 8-=off)
+        public bool CXAuto_Ready = false;
+
+        public bool CXAutoEnabled //.275
+        {
+            get
+            {
+                return CXAuto_Enabled;
+            }
+            set
+            {
+                try
+                {
+                    Debug.WriteLine("CXAutoEnabled " + value);
+                    CXAuto_Enabled = value;
+
+                    if (siolisten7 != null)  // if we've got a listener tell them about state change 
+                    {
+                        if (CXAuto_Enabled)
+                        {
+                            Siolisten7.enableCXAuto(); // turn on Serial port COM
+
+                          
+                          //  string answer = getCXAutoAnt; // get CXAuto ant position
+
+                         //   if (setupForm != null) setupForm.txtCXAuto.Text = answer;
+
+
+                        }
+                        else
+                        {
+                            Siolisten7.disableCXAuto();
+
+                            
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    if (CXAutoPort != 0)
+                    {
+                        MessageBox.Show(new Form { TopMost = true }, "Error enabling CXAuto on COM" + CXAuto_port + ".\n" +
+                            "Please check CXAUTO settings and try again.",
+                            "CXAuto Initialization Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show(new Form { TopMost = true }, "Error enabling CXAuto comm port.\n" +
+                            "Previously defined CXAUto comm port not enumerated.\n" +
+                            "Please check CXAUto settings and try again.",
+                            "CXAuto Initialization Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                    }
+
+                    if (setupForm != null) setupForm.CXAuto = false;
+                } // catch
+
+
+            } // set
+
+
+        } // CXAutoEnabled
 
 
         //========================================================================================
         //========================================================================================
-        // ke9ns antennar rotor control via DDUtil VSP rotor port using Hygain protocol
+        // ke9ns antenna rotor control  port using Hygain protocol
         private bool rotor_enabled;
         public bool ROTOREnabled
         {
@@ -34362,7 +34590,7 @@ namespace PowerSDR
                     {
                         if (rotor_enabled)
                         {
-                            Siolisten1.enableROTOR();
+                            Siolisten1.enableROTOR(); // init COM port for Rotor
 
                             if (SpotForm != null)
                             {
@@ -34371,6 +34599,7 @@ namespace PowerSDR
                                 SpotForm.numBeamHeading.Visible = true;
 
                                 string answer = spotDDUtil_Rotor1; // get rotor angle current position
+
                                 SpotForm.RotorHead.Text = answer + "°";
 
                                 int temp1 = 0;
@@ -34440,6 +34669,14 @@ namespace PowerSDR
         {
             get { return rotor_port; }
             set { rotor_port = value; }
+        }
+
+
+        private int CXAuto_port;
+        public int CXAutoPort //.275
+        {
+            get { return CXAuto_port; }
+            set { CXAuto_port = value; }
         }
 
 
@@ -35092,11 +35329,16 @@ namespace PowerSDR
                         {
 
                             lblAntRX1a.Text = "XVRX";
+                          //  lblAntRX1a.Text = fwcAntForm.txtBoxAnt10.Text;
+
                             // lblAntTXa.Text = "XVTX/C";
                         }
                         else
                         {
-                            lblAntRX1a.Text = "XVTX/C";
+                              lblAntRX1a.Text = "XVTX/C";
+                          //  lblAntRX1a.Text = fwcAntForm.txtBoxAnt11.Text;
+
+
                             //  lblAntTXa.Text = "XVTX/C";
                         }
 
@@ -44534,10 +44776,15 @@ namespace PowerSDR
 
             //---------------------------
             // ke9ns add
-            if ((setupForm != null) && (setupForm.chkRX2AutoMuteRX2OnVFOATX.Checked == false) || (TXMeter2 == false) || ((TXMeter2 == true) && (!MOX))) // ke9ns do RX2 if in duplex mode and not in special 2nd TX meter mode
+
+        //.273  if ((setupForm != null) && (setupForm.chkRX2AutoMuteRX2OnVFOATX.Checked == false) || (TXMeter2 == false) || ((TXMeter2 == true) && (!MOX))) // ke9ns do RX2 if in duplex mode and not in special 2nd TX meter mode
+
+            if ((setupForm != null) && ((setupForm.chkRX2AutoMuteRX2OnVFOATX.Checked == false) && (chkRX2.Checked == true) ) || (TXMeter2 == false) || ((TXMeter2 == true) && (!MOX))) // ke9ns do RX2 if in duplex mode and not in special 2nd TX meter mode
             {
-                if ((!FWCEEPROM.RX2OK) || (FWCEEPROM.RX2OK && chkRX2.Checked == false)) mox2 = true; // ke9ns keep meter set for the TX type you wanted all the time
-                else mox2 = false; // receiving on RX2 or dont want 2nd tX meter
+                if ((!FWCEEPROM.RX2OK) || (FWCEEPROM.RX2OK && chkRX2.Checked == false)) 
+                    mox2 = true; // ke9ns keep meter set for the TX type you wanted all the time
+                else 
+                    mox2 = false; // receiving on RX2 or dont want 2nd tX meter
 
                 if ((mox2 == true) && (current_meter_tx1_mode == MeterTXMode.MIC))
                 {
@@ -49540,11 +49787,10 @@ namespace PowerSDR
 
                             //-----------------------------------------------
                             // MIC
+                          // .273 if ((setupForm.chkRX2AutoMuteRX2OnVFOATX.Checked == false) || (TXMeter2 == false) || RX2Enabled == true) // ke9ns: allow TX 2nd meter if option selected and not in duplex mode
 
-                            if ((setupForm.chkRX2AutoMuteRX2OnVFOATX.Checked == false) || (TXMeter2 == false) || RX2Enabled == true) // ke9ns allow TX 2nd meter if option selected and not in duplex mode
+                            if ( (TXMeter2 == false) || RX2Enabled == true) // ke9ns: allow TX 2nd meter if option selected and not in duplex mode
                             {
-
-
 
                                 tx2_meter_new_data_mic = num = -60;
 
@@ -49895,8 +50141,11 @@ namespace PowerSDR
 
 
                         //-------------------------------------------------------------------------
-                        // ke9ns add when in RX, but using 2nd TX meter, return meter back
-                        if ((setupForm.chkRX2AutoMuteRX2OnVFOATX.Checked == true) && (TXMeter2 == true) && RX2Enabled == false) // ke9ns allow TX 2nd meter if option selected and not in duplex mode
+                        // ke9ns: add when in RX, but using 2nd TX meter, return meter back
+                      
+                     // .273  if ((setupForm.chkRX2AutoMuteRX2OnVFOATX.Checked == true) && (TXMeter2 == true) && RX2Enabled == false) // ke9ns: allow TX 2nd meter if option selected and not in duplex mode
+
+                        if (  (TXMeter2 == true) && RX2Enabled == false ) // ke9ns: allow TX 2nd meter if option selected and not in duplex mode
                         {
                             if (new_meter_data2 != -200.0)
                             {
@@ -50237,9 +50486,9 @@ namespace PowerSDR
                         num = 0f;
                         power = 0.0;
 
-                        // ke9ns: only here on TX
+                        //.273 if ((setupForm.chkRX2AutoMuteRX2OnVFOATX.Checked == true) && (TXMeter2 == true)) // ke9ns allow TX 2nd meter if option selected and not in duplex mode
 
-                        if ((setupForm.chkRX2AutoMuteRX2OnVFOATX.Checked == true) && (TXMeter2 == true)) // ke9ns allow TX 2nd meter if option selected and not in duplex mode
+                        if ( (TXMeter2 == true)) // ke9ns allow TX 2nd meter if option selected and not in duplex mode
                         {
                             switch (mode1)
                             {
@@ -50608,8 +50857,9 @@ namespace PowerSDR
             while (chkPower.Checked && fwc_init && (current_model == Model.FLEX5000 && rx2_enabled))
             {
 
+               // .273 if ((setupForm.chkRX2AutoMuteRX2OnVFOATX.Checked == false) || (TXMeter2 == false) || ((TXMeter2 == true) && (!MOX))) // ke9ns do RX2 if in duplex mode and not in special 2nd TX meter mode
 
-                if ((setupForm.chkRX2AutoMuteRX2OnVFOATX.Checked == false) || (TXMeter2 == false) || ((TXMeter2 == true) && (!MOX))) // ke9ns do RX2 if in duplex mode and not in special 2nd TX meter mode
+                if ( ((setupForm.chkRX2AutoMuteRX2OnVFOATX.Checked == false) && (chkRX2.Checked == true) ) || (TXMeter2 == false) || ((TXMeter2 == true) && (!MOX))) // ke9ns do RX2 if in duplex mode and not in special 2nd TX meter mode
                 {
 
                     if (!rx2_meter_data_ready)
@@ -56526,7 +56776,7 @@ namespace PowerSDR
 
             writer.WriteLine("This is a PowerSDR powering downlog: 1-8");
 
-            writer.WriteLine("1) Disable Audio, CAT, Rotor, VFODIAL, N1MM, QuicRec, Powermate, CWX Polling, timers, VOARUN, MUF");
+            writer.WriteLine("1) Disable Audio, CAT, CXAuto, Rotor, VFODIAL, N1MM, QuicRec, Powermate, CWX Polling, timers, VOARUN, MUF");
 
             Debug.WriteLine("CONSOLE_CLOSING");
 
@@ -56537,6 +56787,7 @@ namespace PowerSDR
             Audio.callback_return = 2;
             CATEnabled = false;
             ROTOREnabled = false; // ke9ns add
+            CXAutoEnabled = false; // .275
 
             vfodial = false; // ke9ns add to terminal the dial routine
             N1MM_ON = false; // ke9ns add to shut off N1MM
@@ -62377,6 +62628,7 @@ namespace PowerSDR
         {
             //  double freq = double.Parse(txtVFOAFreq.Text.Replace(",",".")); // ke9ns mod
 
+           
             if (txtVFOBFreq.Text == "" || txtVFOBFreq.Text == separator) // "."
             {
                 VFOBFreq = saved_vfob_freq;
@@ -62470,6 +62722,8 @@ namespace PowerSDR
 
             //=================================================================
             //txtVFOBFreq.Text = freq.ToString("f6" ); 
+
+         
             UpdateVFOBFreq(freq.ToString("f6"));
 
             FREQB = freq; // ke9ns: used in S9 determining routine (in meters)
@@ -62583,7 +62837,8 @@ namespace PowerSDR
             else if (mox && chkVFOSplit.Checked) goto set_tx_freq;
             else goto end;
 
-            set_tx_freq:
+         
+        set_tx_freq:
             //int old_tx_xvtr_index = tx_xvtr_index;
             tx_xvtr_index = xvtr_index;
 
@@ -62600,7 +62855,7 @@ namespace PowerSDR
             Debug.WriteLine("6VFOALostFocus ");
             Band b = BandByFreq(tx_freq, tx_xvtr_index, true, current_region);
 
-
+           
             Band b1 = b; // ke9ns add
             if (extended) // ke9ns add if you have extended capabilities then SWL bands are really ham bands
             {
@@ -62626,15 +62881,17 @@ namespace PowerSDR
                 else if (Band.B13M == b) b1 = Band.B12M; // 21-25 mhz   (12-10m LPF ends at 29.8mhz)
                 else if (Band.B11M == b) b1 = Band.B10M; // 25-28 mhz
             }
+          
             if (old_tx_band != b1)
             {
+            
                 SetTXBand(b1); // ke9ns mod b1
-
-
+         
             }
-
+          
             if (xvtrForm != null)
             {
+              
                 if (tx_xvtr_index >= 0)
                     tx_freq = xvtrForm.TranslateFreq(tx_freq);
 
@@ -62653,8 +62910,7 @@ namespace PowerSDR
                                 break;
                         }
 
-                        if (last_tx_xvtr_index == -1)
-                            saved_rx_only = rx_only;
+                        if (last_tx_xvtr_index == -1) saved_rx_only = rx_only;
 
                         RXOnly = xvtrForm.GetRXOnly(tx_xvtr_index);
                     }
@@ -62706,6 +62962,8 @@ namespace PowerSDR
                 }
 
             } // xvtrFrom null
+
+           
 
             if (old_tx_band != tx_band)
             {
@@ -66986,13 +67244,6 @@ namespace PowerSDR
         public const int FMDataDeviation = 17000; // ke9ns was 9000 deviation amount for FM Data mode (change to 17k .218)
         public const int FMDataLowHigh = 20000; // ke9ns +10000 or -10000 (change to 20k .218)
 
-        // ke9ns add  (to allow a digital version of FM just like DIGU or DIGL)
-        private void radModeFMN_MouseUp(object sender, MouseEventArgs e)
-        {
-
-
-        }
-
 
 
 
@@ -68445,6 +68696,7 @@ namespace PowerSDR
                 current_fm_tx_mode = FMTXMode.Simplex;
                 //fm_tx_offset_mhz = 0;
 
+               
             }
             else
             {
@@ -68503,7 +68755,7 @@ namespace PowerSDR
                 {
                     if (chkVFOSync.Checked) chkVFOSync.Checked = false;
 
-                    TXBand = BandByFreq(VFOBFreq, tx_xvtr_index, true, current_region);
+                     TXBand = BandByFreq(VFOBFreq, tx_xvtr_index, true, current_region);
                     grpVFOB.Font = ff5; // new Font("Swis721 BT", 8.25F, FontStyle.Regular | FontStyle.Italic);
                     grpVFOB.ForeColor = Color.Red;
                     chkVFOBTX.Checked = true;
@@ -68515,8 +68767,13 @@ namespace PowerSDR
                         txtVFOBLSD.ForeColor = small_vfo_color;
                         txtVFOBBand.ForeColor = band_text_light_color;
 
+                     
                         if (current_model == Model.FLEX5000 && fwc_init)  txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+                      
                     }
+
+                  
+
                 }
                 else // ke9ns: VFOA = TX (SPLIT turned OFF)
                 {
@@ -72503,19 +72760,24 @@ namespace PowerSDR
                 }
                 rx2_meter_mode = mode;
 
-                bool mox2 = false; // ke9ns add  false = rx    true = 2nd tx meter active
+                bool mox2 = false; // ke9ns: add  false = rx    true = 2nd tx meter active
 
                 //---------------------------
                 // ke9ns add
-                if ((setupForm != null) && (setupForm.chkRX2AutoMuteRX2OnVFOATX.Checked == false) || (TXMeter2 == false) || ((TXMeter2 == true) && (!MOX))) // ke9ns do RX2 if in duplex mode and not in special 2nd TX meter mode
+
+                // .273 if ((setupForm != null) && (setupForm.chkRX2AutoMuteRX2OnVFOATX.Checked == false) || (TXMeter2 == false) || ((TXMeter2 == true) && (!MOX))) // ke9ns: do RX2 if in duplex mode and not in special 2nd TX meter mode
+
+                if ((setupForm != null) && ((setupForm.chkRX2AutoMuteRX2OnVFOATX.Checked == false) && (chkRX2.Checked == true) )|| (TXMeter2 == false) || ((TXMeter2 == true) && (!MOX))) // ke9ns: do RX2 if in duplex mode and not in special 2nd TX meter mode
                 {
-                    if ((!FWCEEPROM.RX2OK) || (FWCEEPROM.RX2OK && chkRX2.Checked == false)) mox2 = true; // ke9ns keep meter set for the TX type you wanted all the time
-                    else mox2 = false; // receiving on RX2 or dont want 2nd tX meter
+                    if ((!FWCEEPROM.RX2OK) || (FWCEEPROM.RX2OK && chkRX2.Checked == false))
+                        mox2 = true; // ke9ns: keep meter set for the TX type you wanted all the time
+                    else
+                        mox2 = false; // receiving on RX2 or dont want 2nd tX meter
 
                 }
                 else
                 {
-                    mox2 = true; // transmitting and want 2nd tx meter to function
+                    mox2 = true; // transmitting or 2nd tx meter active
                 }
 
                 if (!mox2)
@@ -73835,13 +74097,14 @@ namespace PowerSDR
             }
         }
 
-        private void chkVFOATX_CheckedChanged(object sender, System.EventArgs e)
+        public void chkVFOATX_CheckedChanged(object sender, System.EventArgs e)
         {
             if (chkVFOATX.Focused && chkVFOATX.Checked == false) chkVFOATX.Checked = true;
 
             if (chkVFOATX.Checked)
             {
-
+              
+              
                 lblAntTX.ForeColor = Color.Red;
                 lblAntTX2.ForeColor = Color.White; // .213
 
@@ -73860,19 +74123,60 @@ namespace PowerSDR
 
                 chkVFOATX.BackColor = Color.Red;//button_selected_color;
 
+                if (CurrentModel == Model.FLEX3000) //.272
+                {
+                    if (setupForm != null && ((setupForm.chkBoxIIC.Checked && checkBoxIICPTT.Checked) || setupForm.chkBoxIIC.Checked == false))// .272 if IICPTT feature is ON, then AmpPTT must be active to use radio amp PTT
+                    {
+                        FWC.SetAmpTX1(true);
+                    }
+                    else
+                    {
+                        FWC.SetAmpTX1(false);
+                    }
+                } // .272
+                else if (CurrentModel == Model.FLEX1500) //.272
+                {
+
+                    if (setupForm != null && ((setupForm.chkBoxIIC.Checked && checkBoxIICPTT.Checked) || setupForm.chkBoxIIC.Checked == false))// .272 if IICPTT feature is ON, then AmpPTT must be active to use radio amp PTT
+                    {
+                        USBHID.SetAmpTX(true);
+                       
+                    }
+                    else
+                    {
+                        USBHID.SetAmpTX(false);
+                       
+                    }
+
+
+                } // FLex-1500 .272
+
+
+
                 if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.RX2OK && chkRX2.Checked) // ke9ns add .206
                 {
 
                     if (fwcAntForm != null && fwcAntForm.chkTX2Active.Checked) // SO2R=chkTX2Active with VFOA TX = set AMP TX PTT line for VFOA RX1 and dont use RX2 PTT lines
                     {
-                        if (FWCAmpRX2TX1 == false && FWCAmpTX1) FWC.SetAmpTX1(true);
-                        else FWC.SetAmpTX1(false);
+                        if (setupForm != null && ((setupForm.chkBoxIIC.Checked && checkBoxIICPTT.Checked) || setupForm.chkBoxIIC.Checked == false))// .272 if IICPTT feature is ON, then AmpPTT must be active to use radio amp PTT
+                        {
+                           
+                            if (FWCAmpRX2TX1 == false && FWCAmpTX1) FWC.SetAmpTX1(true);
+                            else FWC.SetAmpTX1(false);
 
-                        if (FWCAmpRX2TX2 == false && FWCAmpTX2) FWC.SetAmpTX2(true);
-                        else FWC.SetAmpTX2(false);
+                            if (FWCAmpRX2TX2 == false && FWCAmpTX2) FWC.SetAmpTX2(true);
+                            else FWC.SetAmpTX2(false);
 
-                        if (FWCAmpRX2TX3 == false && FWCAmpTX3) FWC.SetAmpTX3(true);
-                        else FWC.SetAmpTX3(false);
+                            if (FWCAmpRX2TX3 == false && FWCAmpTX3) FWC.SetAmpTX3(true);
+                            else FWC.SetAmpTX3(false);
+
+                        }
+                        else //.272
+                        {
+                            FWC.SetAmpTX1(false);
+                            FWC.SetAmpTX2(false);
+                            FWC.SetAmpTX3(false);
+                        }
 
                         TXBand = rx1_band;      // ke9ns add .205
 
@@ -73882,15 +74186,24 @@ namespace PowerSDR
                     }
                     else // ke9ns: VFOA TX and no SO2R (normal op)
                     {
-                        if (FWCAmpTX1) FWC.SetAmpTX1(true);
-                        else FWC.SetAmpTX1(false);
+                        if (setupForm != null && ((setupForm.chkBoxIIC.Checked && checkBoxIICPTT.Checked) || setupForm.chkBoxIIC.Checked == false))// .272 if IICPTT feature is ON, then AmpPTT must be active to use radio amp PTT
+                        {
+                           
+                            if (FWCAmpTX1) FWC.SetAmpTX1(true);
+                            else FWC.SetAmpTX1(false);
 
-                        if (FWCAmpTX2) FWC.SetAmpTX2(true);
-                        else FWC.SetAmpTX2(false);
+                            if (FWCAmpTX2) FWC.SetAmpTX2(true);
+                            else FWC.SetAmpTX2(false);
 
-                        if (FWCAmpTX3) FWC.SetAmpTX3(true);
-                        else FWC.SetAmpTX3(false);
-
+                            if (FWCAmpTX3) FWC.SetAmpTX3(true);
+                            else FWC.SetAmpTX3(false);
+                        }
+                        else //.272
+                        {
+                            FWC.SetAmpTX1(false);
+                            FWC.SetAmpTX2(false);
+                            FWC.SetAmpTX3(false);
+                        }
                         Debug.WriteLine("RX1 VFOATX and RX2 ON , NO SO2R, Normal ");
                         TXBand = rx1_band;      // ke9ns add .205
                     }
@@ -73899,14 +74212,24 @@ namespace PowerSDR
                 }
                 else if (fwc_init && current_model == Model.FLEX5000) // SO2R OFF or no RX2 (below)
                 {
-                    if (FWCAmpTX1) FWC.SetAmpTX1(true);
-                    else FWC.SetAmpTX1(false);
+                    if (setupForm != null && ((setupForm.chkBoxIIC.Checked && checkBoxIICPTT.Checked) || setupForm.chkBoxIIC.Checked == false))// .272 if IICPTT feature is ON, then AmpPTT must be active to use radio amp PTT
+                    {
+                       
+                        if (FWCAmpTX1) FWC.SetAmpTX1(true);
+                        else FWC.SetAmpTX1(false);
 
-                    if (FWCAmpTX2) FWC.SetAmpTX2(true);
-                    else FWC.SetAmpTX2(false);
+                        if (FWCAmpTX2) FWC.SetAmpTX2(true);
+                        else FWC.SetAmpTX2(false);
 
-                    if (FWCAmpTX3) FWC.SetAmpTX3(true);
-                    else FWC.SetAmpTX3(false);
+                        if (FWCAmpTX3) FWC.SetAmpTX3(true);
+                        else FWC.SetAmpTX3(false);
+                    } // .272
+                    else //.272
+                    {
+                        FWC.SetAmpTX1(false);
+                        FWC.SetAmpTX2(false);
+                        FWC.SetAmpTX3(false);
+                    }
 
                     TXBand = rx1_band;      // ke9ns add .205
 
@@ -74044,10 +74367,12 @@ namespace PowerSDR
 
         private void chkVFOBTX_CheckedChanged(object sender, System.EventArgs e)
         {
+          
             if (chkVFOBTX.Focused && chkVFOBTX.Checked == false) chkVFOBTX.Checked = true;
 
             if (chkVFOBTX.Checked)
             {
+              
                 lblAntTX2.ForeColor = Color.Red;
                 lblAntTX.ForeColor = Color.White; // .213
 
@@ -74064,10 +74389,12 @@ namespace PowerSDR
 
                 if (KWAutoInformation7) BroadcastVFOChange7("1"); // broadcast on TCP/IP CAT
 
+              
                 txtVFOBFreq_LostFocus(this, EventArgs.Empty);
-
+              
                 if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.RX2OK && chkRX2.Checked)
                 {
+                   
                     if (fwcAntForm != null && fwcAntForm.chkTX2Active.Checked) // ke9ns: SO2R=chkTX2Active ON VFOB TX active = PTT AMP for RX2 transmit 2
                     {
 
@@ -74106,10 +74433,14 @@ namespace PowerSDR
                     //ke9ns: 
                     if (chkVFOBSplit.Checked == false) //.271
                     {
+                        Debug.WriteLine("SPLITON05 " + chkVFOSplit.Checked);
+
                         Audio.RX2AutoMuteTX = true;
                         FWC.SetFullDuplex(!mute_rx1_on_vfob_tx);
                         Audio.FullDuplex = !mute_rx1_on_vfob_tx;
                         if (!mute_rx1_on_vfob_tx && !mox) FWC.SetQSE(false);
+                        Debug.WriteLine("SPLITON06 " + chkVFOSplit.Checked);
+
                     }
                     else
                     {
@@ -74160,9 +74491,11 @@ namespace PowerSDR
 
                 if (chkRX2.Checked == false && chkVFOBTX.Checked) chkVFOSplit.Checked = true;  //in case of VU/XVTR-split error
 
+               
             }
             else //  if (chkVFOBTX.Checked) button is unchecked
             {
+             
                 lblAntTX.ForeColor = Color.Red;
                 lblAntTX2.ForeColor = Color.White; // .213
 
@@ -74208,7 +74541,7 @@ namespace PowerSDR
 
             Audio.VFOBTX = chkVFOBTX.Checked;
             btnHidden.Focus();
-
+           
         } //  chkVFOBTX_CheckedChanged
 
 
@@ -75012,8 +75345,25 @@ namespace PowerSDR
             if (radFMDeviation2kHz.Checked)
             {
 
-                radRX2ModeFMN.Text = "2FM"; //.236
-                radModeFMN.Text = "2FM";
+              //  radRX2ModeFMN.Text = "2FM"; //.236
+              //  radModeFMN.Text = "2FM";
+
+                if (setupForm != null && setupForm.chkFMDataMode.Checked == true) //.276 add
+                {
+                    dsp.GetDSPTX(0).TXFMDataMode = true;
+                    FMData = true;
+                    radRX2ModeFMN.Text = "2FMD";
+                    radModeFMN.Text = "2FMD";
+                    chkFMCTCSS.Checked = false;
+                }
+                else
+                {
+                    dsp.GetDSPTX(0).TXFMDataMode = false;
+                    FMData = false;
+                    radRX2ModeFMN.Text = "2FM";
+                    radModeFMN.Text = "2FM";
+                }
+
 
                 dsp.GetDSPTX(0).TXFMDeviation = 2500;
                 dsp.GetDSPRX(0, 0).RXFMDeviation = 2500;
@@ -75042,8 +75392,24 @@ namespace PowerSDR
         {
             if (radFMDeviation5kHz.Checked)
             {
-                radRX2ModeFMN.Text = "5FM"; //.236
-                radModeFMN.Text = "5FM";
+              //  radRX2ModeFMN.Text = "5FM"; //.236
+              //  radModeFMN.Text = "5FM";
+
+                if (setupForm != null && setupForm.chkFMDataMode.Checked == true) //.276 add
+                {
+                    dsp.GetDSPTX(0).TXFMDataMode = true;
+                    FMData = true;
+                    radRX2ModeFMN.Text = "5FMD";
+                    radModeFMN.Text = "5FMD";
+                    chkFMCTCSS.Checked = false;
+                }
+                else
+                {
+                    dsp.GetDSPTX(0).TXFMDataMode = false;
+                    FMData = false;
+                    radRX2ModeFMN.Text = "5FM";
+                    radModeFMN.Text = "5FM";
+                }
 
                 dsp.GetDSPTX(0).TXFMDeviation = 5000;
                 dsp.GetDSPRX(0, 0).RXFMDeviation = 5000;
@@ -75075,6 +75441,22 @@ namespace PowerSDR
             dsp.GetDSPRX(0, 0).RXFMDeviation = FMDataDeviation;
 
             dsp.GetDSPRX(1, 0).RXFMDeviation = FMDataDeviation; //.236 add this for rx2
+
+            if (setupForm != null && setupForm.chkFMDataMode.Checked == true) //.276 add
+            {
+                dsp.GetDSPTX(0).TXFMDataMode = true;
+                FMData = true;
+                radRX2ModeFMN.Text = "WFMD";
+                radModeFMN.Text = "WFMD";
+                chkFMCTCSS.Checked = false;
+            }
+            else
+            {
+                dsp.GetDSPTX(0).TXFMDataMode = false;
+                FMData = false;
+                radRX2ModeFMN.Text = "WFM";
+                radModeFMN.Text = "WFM";
+            }
 
             if (RX1DSPMode == DSPMode.FM)
             {
@@ -79515,8 +79897,10 @@ namespace PowerSDR
             //---------------------------
             // ke9ns add
             bool mox2 = false; // ke9ns add  false = rx    true = 2nd tx meter active
+          
+            //  if ((setupForm != null) && (setupForm.chkRX2AutoMuteRX2OnVFOATX.Checked == false) || (TXMeter2 == false) || ((TXMeter2 == true) && (!MOX))) // ke9ns do RX2 if in duplex mode and not in special 2nd TX meter mode
 
-            if ((setupForm != null) && (setupForm.chkRX2AutoMuteRX2OnVFOATX.Checked == false) || (TXMeter2 == false) || ((TXMeter2 == true) && (!MOX))) // ke9ns do RX2 if in duplex mode and not in special 2nd TX meter mode
+            if ((setupForm != null) && ((setupForm.chkRX2AutoMuteRX2OnVFOATX.Checked == false) && (chkRX2.Checked == true) ) || (TXMeter2 == false) || ((TXMeter2 == true) && (!MOX))) // ke9ns do RX2 if in duplex mode and not in special 2nd TX meter mode
             {
                 if ((!FWCEEPROM.RX2OK) || (FWCEEPROM.RX2OK && chkRX2.Checked == false)) mox2 = true; // ke9ns keep meter set for the TX type you wanted all the time
                 else mox2 = false; // receiving on RX2 or dont want 2nd tX meter
@@ -82176,7 +82560,7 @@ namespace PowerSDR
 
                 try
                 {
-                    siolisten1.SIO1.put1("AI1;");  // parser.Get1("AI1;");
+                    siolisten1.SIO1.put1("AI1;");  // get rotor angle
                     Stopwatch rotor = new Stopwatch();
 
                     rotor.Restart();
@@ -82200,7 +82584,75 @@ namespace PowerSDR
                 return answer;
             }
 
-        } // 
+        } // spotDDUtil_Rotor1
+
+
+
+        //=========================================================================================
+        //=========================================================================================
+        // ke9ns send ant port to CXAtuo
+        public string setCXAutoAnt
+            // called from SPOT.cs routine when clicking on DX SPOT
+        {
+
+            set
+            {
+                if (CXAutoEnabled == false) return; // if CXAuto is not connected then dont check
+
+                try
+                {
+                    Debug.WriteLine("CAT CXAUTO:");
+                    siolisten7.SIO7.put0(value);   // this is the DDUtil PORT found in setup and SIOListenerIII.cs
+                }
+                catch { }
+
+            }
+
+        } // setCXAutoAnt
+
+
+
+        public string CXAutoAnt = "0"; //.275
+        public bool CXAutoAntRdy = false; // .275 ke9ns add
+
+        public string getCXAutoAnt // .275 0-7 or 8=all off 9=not connected to CXauto ant switch
+        {
+
+            get
+            {
+                
+                string answer = "9";
+
+                if (CXAutoEnabled == false) return answer; // if CXAuto is not connected then dont check
+
+                try
+                {
+                    siolisten7.SIO7.put1("-");  // get ant pos 
+                    Stopwatch cxautotimer = new Stopwatch();
+
+                    cxautotimer.Restart();
+
+                    for (; ; )
+                    {
+                        if ((cxautotimer.ElapsedMilliseconds > 700) || (CXAutoAntRdy == true)) break;
+                    }
+
+
+                    cxautotimer.Stop();
+
+                    //  Debug.WriteLine("ROTORANGLE :" + RotorAngle + ", "+ RotorAngleRdy);
+                    CXAutoAntRdy = false;
+                }
+                catch { }
+
+                answer = CXAutoAnt;
+
+                return answer;
+            }
+
+        } // getCXAutoAnt
+
+
 
         double sPrev = 0.0;
         double sPrev2 = 0.0;
@@ -85046,10 +85498,12 @@ namespace PowerSDR
             }
             else
             {
-                checkBoxIICPTT.Text = "Amp  ̶P̶T̶T̶"; // strike through characters
+                checkBoxIICPTT.Text = "Amp  ̶P̶T̶T̶"; // strike through characters disables all PTT and sends command to disable PTT via IIC
             }
 
             IIC_AMPCONTROL(AMPBAND, AMPBAND1); //  call routine to update the IIC bus
+
+            chkVFOATX_CheckedChanged(this, EventArgs.Empty);// .272
 
 
         } // checkBoxIICPTT_CheckedChanged
@@ -85557,6 +86011,8 @@ namespace PowerSDR
             else
             {
 
+                lblDisplayZoom1.Enabled = true; //.277
+
                 if (setupForm == null || setupForm.IsDisposed) setupForm = new Setup(this);
 
                 if (setupForm.check3DPan.Checked == true) // if 3D was ON, turn off and turn fill back on if was on prior
@@ -85573,30 +86029,35 @@ namespace PowerSDR
                 }
                 else // if 3D was OFF,turn ON
                 {
-                    this.pictureBox1.Image = global::PowerSDR.Properties.Resources.red1;
-
-                    Display.Data3DLineAlpha = setupForm.tbPan3DAlpha.Value;
-                    Display.Data3DLineColor = setupForm.clrbtn3DDataLine.Color;
-
-                    setupForm.check3DPan.Checked = true;
-
-                    FPS3D = 0;
-
-
-                    if (SpotForm == null || SpotForm.IsDisposed)
+                    if (ZZOOM == false)  //.277 make sure  TNF zoom is OFF otherwise 3D will crash
                     {
-                        Debug.WriteLine("SpotControl instance created by Map button");
-                        SpotForm = new SpotControl(this);
+                        lblDisplayZoom1.Enabled = false; //.277
+
+                        this.pictureBox1.Image = global::PowerSDR.Properties.Resources.red1;
+
+                        Display.Data3DLineAlpha = setupForm.tbPan3DAlpha.Value;
+                        Display.Data3DLineColor = setupForm.clrbtn3DDataLine.Color;
+
+                        setupForm.check3DPan.Checked = true;
+
+                        FPS3D = 0;
+
+
+                        if (SpotForm == null || SpotForm.IsDisposed)
+                        {
+                            Debug.WriteLine("SpotControl instance created by Map button");
+                            SpotForm = new SpotControl(this);
+                        }
+
+
+                        if (DisplayFPS > 20)
+                        {
+                            FPS3D = DisplayFPS;
+                            setupForm.udDisplayFPS.Value = 20;
+
+                        }
+
                     }
-
-
-                    if (DisplayFPS > 20)
-                    {
-                        FPS3D = DisplayFPS;
-                        setupForm.udDisplayFPS.Value = 20;
-
-                    }
-
 
                 } // 3D was off, turn ON
 
@@ -87414,31 +87875,71 @@ namespace PowerSDR
                     lastdeviation = 2500;
                     FMSEQ = 0;
                     FMDeviation_Hz = 2500;
-                    radRX2ModeFMN.Text = "2FM";
-                    radModeFMN.Text = "2FM";
-                    dsp.GetDSPTX(0).TXFMDataMode = false;
-                    FMData = false;
+                   
+
+                   if (setupForm != null && setupForm.chkFMDataMode.Checked == true) //.276 add
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = true;
+                        FMData = true;
+                        radRX2ModeFMN.Text = "2FMD";
+                        radModeFMN.Text = "2FMD";
+                    }
+                    else
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = false;
+                        FMData = false;
+                        radRX2ModeFMN.Text = "2FM";
+                        radModeFMN.Text = "2FM";
+                    }
+
                 }
                 else if (radFMDeviation5kHz.Checked)
                 {
                     lastdeviation = 5000;
                     FMSEQ = 1;
                     FMDeviation_Hz = 5000;
-                    radRX2ModeFMN.Text = "5FM";
-                    radModeFMN.Text = "5FM";
-                    dsp.GetDSPTX(0).TXFMDataMode = false;
-                    FMData = false;
+                 
+                    if (setupForm != null && setupForm.chkFMDataMode.Checked == true) //.276 add
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = true; 
+                        FMData = true;
+                        radRX2ModeFMN.Text = "5FMD";
+                        radModeFMN.Text = "5FMD";
+                    }
+                    else
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = false;
+                        FMData = false;
+                        radRX2ModeFMN.Text = "5FM";
+                        radModeFMN.Text = "5FM";
+                    }
+
+                    
                 }
                 else
                 {
                     lastdeviation = FMDataDeviation;
                     FMSEQ = 2;
-                    radRX2ModeFMN.Text = "WFM";
-                    radModeFMN.Text = "WFM";
+                  
                     FMDeviation_Hz = FMDataDeviation;
-                    FMData = true;
+                  
                     FMDeviation10khz(); //.236
-                    dsp.GetDSPTX(0).TXFMDataMode = true;
+
+                   if (setupForm != null && setupForm.chkFMDataMode.Checked == true) //.276 add
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = true;
+                        FMData = true;
+                        radRX2ModeFMN.Text = "WFMD";
+                        radModeFMN.Text = "WFMD";
+                    }
+                    else
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = false;
+                        FMData = false;
+                        radRX2ModeFMN.Text = "WFM";
+                        radModeFMN.Text = "WFM";
+                    }
+                   
                 }
 
                 dsp.GetDSPTX(0).TXFMDeviation = lastdeviation;
@@ -87454,11 +87955,22 @@ namespace PowerSDR
                     lastdeviation = 5000;
                     FMSEQ = 1;
                     FMDeviation_Hz = 5000;
-                    radRX2ModeFMN.Text = "5FM";
-                    radModeFMN.Text = "5FM";
-                    dsp.GetDSPTX(0).TXFMDataMode = false;
-                    FMData = false;
+                   
 
+                   if (setupForm != null && setupForm.chkFMDataMode.Checked == true) //.276 add
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = true;
+                        FMData = true;
+                        radRX2ModeFMN.Text = "5FMD";
+                        radModeFMN.Text = "5FMD";
+                    }
+                    else
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = false;
+                        FMData = false;
+                        radRX2ModeFMN.Text = "5FM";
+                        radModeFMN.Text = "5FM";
+                    }
                 }
                 else if (FMSEQ == 1) // switch to WFM
                 {
@@ -87467,12 +87979,25 @@ namespace PowerSDR
 
                     lastdeviation = FMDataDeviation;
                     FMSEQ = 2;
-                    radRX2ModeFMN.Text = "WFM";
-                    radModeFMN.Text = "WFM";
+                   
                     FMDeviation_Hz = FMDataDeviation;
                     FMData = true;
                     FMDeviation10khz(); //.236
-                    dsp.GetDSPTX(0).TXFMDataMode = true;
+
+                   if (setupForm != null && setupForm.chkFMDataMode.Checked == true) //.276 add
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = true;
+                        FMData = true;
+                        radRX2ModeFMN.Text = "WFMD";
+                        radModeFMN.Text = "WFMD";
+                    }
+                    else
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = false;
+                        FMData = false;
+                        radRX2ModeFMN.Text = "WFM";
+                        radModeFMN.Text = "WFM";
+                    }
 
 
                 }
@@ -87484,10 +88009,24 @@ namespace PowerSDR
                     lastdeviation = 2500;
 
                     FMDeviation_Hz = 2500;
-                    radRX2ModeFMN.Text = "2FM";
-                    radModeFMN.Text = "2FM";
-                    dsp.GetDSPTX(0).TXFMDataMode = false;
-                    FMData = false;
+                   
+
+                   if (setupForm != null && setupForm.chkFMDataMode.Checked == true) //.276 add
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = true;
+                        FMData = true;
+                        radRX2ModeFMN.Text = "2FMD";
+                        radModeFMN.Text = "2FMD";
+
+                    }
+                    else
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = false;
+                        FMData = false;
+                        radRX2ModeFMN.Text = "2FM";
+                        radModeFMN.Text = "2FM";
+                    }
+
                     FMSEQ = 0;
                 }
             } // right click 
@@ -87506,31 +88045,70 @@ namespace PowerSDR
                     lastdeviation = 2500;
                     FMSEQ = 0;
                     FMDeviation_Hz = 2500;
-                    radRX2ModeFMN.Text = "2FM";
-                    radModeFMN.Text = "2FM";
-                    dsp.GetDSPTX(0).TXFMDataMode = false;
-                    FMData = false;
+                   
+                   if (setupForm != null && setupForm.chkFMDataMode.Checked == true) //.276 add
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = true;
+                        FMData = true;
+                        radRX2ModeFMN.Text = "2FMD";
+                        radModeFMN.Text = "2FMD";
+                        chkFMCTCSS.Checked = false;
+                    }
+                    else
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = false;
+                        FMData = false;
+                        radRX2ModeFMN.Text = "2FM";
+                        radModeFMN.Text = "2FM";
+                    }
                 }
                 else if (radFMDeviation5kHz.Checked)
                 {
                     lastdeviation = 5000;
                     FMSEQ = 1;
                     FMDeviation_Hz = 5000;
-                    radRX2ModeFMN.Text = "5FM";
-                    radModeFMN.Text = "5FM";
-                    dsp.GetDSPTX(0).TXFMDataMode = false;
-                    FMData = false;
+                   
+
+                   if (setupForm != null && setupForm.chkFMDataMode.Checked == true) //.276 add
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = true;
+                        FMData = true;
+                        radRX2ModeFMN.Text = "5FMD";
+                        radModeFMN.Text = "5FMD";
+                        chkFMCTCSS.Checked = false;
+                    }
+                    else
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = false;
+                        FMData = false;
+                        radRX2ModeFMN.Text = "5FM";
+                        radModeFMN.Text = "5FM";
+                    }
+                    
                 }
                 else
                 {
                     lastdeviation = FMDataDeviation;
                     FMSEQ = 2;
-                    radRX2ModeFMN.Text = "WFM";
-                    radModeFMN.Text = "WFM";
+                    
                     FMDeviation_Hz = FMDataDeviation;
-                    FMData = true;
+                    
                     FMDeviation10khz(); //.236
-                    dsp.GetDSPTX(0).TXFMDataMode = true;
+                   if (setupForm != null && setupForm.chkFMDataMode.Checked == true) //.276 add
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = true;
+                        FMData = true;
+                        radRX2ModeFMN.Text = "WFMD";
+                        radModeFMN.Text = "WFMD";
+                        chkFMCTCSS.Checked = false;
+                    }
+                    else
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = false;
+                        FMData = false;
+                        radRX2ModeFMN.Text = "WFM";
+                        radModeFMN.Text = "WFM";
+                    }
                 }
 
                 dsp.GetDSPTX(0).TXFMDeviation = lastdeviation;
@@ -87546,10 +88124,22 @@ namespace PowerSDR
                     lastdeviation = 5000;
                     FMSEQ = 1;
                     FMDeviation_Hz = 5000;
-                    radRX2ModeFMN.Text = "5FM";
-                    radModeFMN.Text = "5FM";
-                    dsp.GetDSPTX(0).TXFMDataMode = false;
-                    FMData = false;
+                   
+                    if (setupForm != null && setupForm.chkFMDataMode.Checked == true) //.276 add
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = true;
+                        FMData = true;
+                        radRX2ModeFMN.Text = "5FMD";
+                        radModeFMN.Text = "5FMD";
+                        chkFMCTCSS.Checked = false;
+                    }
+                    else
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = false;
+                        FMData = false;
+                        radRX2ModeFMN.Text = "5FM";
+                        radModeFMN.Text = "5FM";
+                    }
 
                 }
                 else if (FMSEQ == 1) // switch to WFM
@@ -87559,12 +88149,25 @@ namespace PowerSDR
 
                     lastdeviation = FMDataDeviation;
                     FMSEQ = 2;
-                    radRX2ModeFMN.Text = "WFM";
-                    radModeFMN.Text = "WFM";
+                   
                     FMDeviation_Hz = FMDataDeviation;
-                    FMData = true;
+                   
                     FMDeviation10khz(); //.236
-                    dsp.GetDSPTX(0).TXFMDataMode = true;
+                   if (setupForm != null && setupForm.chkFMDataMode.Checked == true) //.276 add
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = true;
+                        FMData = true;
+                        radRX2ModeFMN.Text = "WFMD";
+                        radModeFMN.Text = "WFMD";
+                        chkFMCTCSS.Checked = false;
+                    }
+                    else
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = false;
+                        FMData = false;
+                        radRX2ModeFMN.Text = "WFM";
+                        radModeFMN.Text = "WFM";
+                    }
 
 
                 }
@@ -87576,10 +88179,22 @@ namespace PowerSDR
                     lastdeviation = 2500;
 
                     FMDeviation_Hz = 2500;
-                    radRX2ModeFMN.Text = "2FM";
-                    radModeFMN.Text = "2FM";
-                    dsp.GetDSPTX(0).TXFMDataMode = false;
-                    FMData = false;
+                  
+                   if (setupForm != null && setupForm.chkFMDataMode.Checked == true) //.276 add
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = true;
+                        FMData = true;
+                        radRX2ModeFMN.Text = "2FMD";
+                        radModeFMN.Text = "2FMD";
+                        chkFMCTCSS.Checked = false;
+                    }
+                    else
+                    {
+                        dsp.GetDSPTX(0).TXFMDataMode = false;
+                        FMData = false;
+                        radRX2ModeFMN.Text = "2FM";
+                        radModeFMN.Text = "2FM";
+                    }
                     FMSEQ = 0;
                 }
             } // right click 
@@ -88020,6 +88635,24 @@ namespace PowerSDR
 
 
         } // keyshortcut .267
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (setupForm != null)
+            {
+                if (checkBox1.Checked)
+                {
+                    setupForm.chkFMDataMode.Checked = true;
+                    chkFMCTCSS.Checked = false;
+                }
+                else
+                {
+                    setupForm.chkFMDataMode.Checked = false;
+                }
+            }
+
+
+        }
 
         private void chkLockR_CheckedChanged(object sender, EventArgs e)
         {

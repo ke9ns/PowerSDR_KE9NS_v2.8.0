@@ -19,10 +19,10 @@
     <ROW Property="ARPURLUPDATEINFO" Value="ke9ns.com/flexpage.html"/>
     <ROW Property="CTRLS" Value="1"/>
     <ROW Property="Manufacturer" Value="ke9ns"/>
-    <ROW Property="ProductCode" Value="1033:{68A3E5F6-EC01-4195-ADE2-6EDF8D9AE3F9} " Type="16"/>
+    <ROW Property="ProductCode" Value="1033:{20749F5D-E2C0-4884-9548-F8946F42F1EF} " Type="16"/>
     <ROW Property="ProductLanguage" Value="1033"/>
-    <ROW Property="ProductName" Value="PowerSDR v2.8.0.271"/>
-    <ROW Property="ProductVersion" Value="22.271.2.0" Type="32"/>
+    <ROW Property="ProductName" Value="PowerSDR v2.8.0.276"/>
+    <ROW Property="ProductVersion" Value="22.277.4.0" Type="32"/>
     <ROW Property="SecureCustomProperties" Value="OLDPRODUCTS;AI_NEWERPRODUCTFOUND"/>
     <ROW Property="UpgradeCode" Value="{A5226811-E4EA-414C-8491-CEFB1FC47B7C}"/>
     <ROW Property="WindowsType9X" MultiBuildValue="AnyCPU_Release:Windows 9x/ME" ValueLocId="-"/>
@@ -122,7 +122,7 @@
     <ROW File="FLEX3000_Firmware_v2.1.4.12.bin" Component_="FLEX3000_Firmware_ReadMe.txt" FileName="FLEX-3~2.BIN|FLEX-3000_Firmware_v2.1.4.12.bin" Attributes="0" SourcePath="..\..\..\..\..\ProgramData\FlexRadio Systems\FLEX Firmware\FLEX-3000\FLEX-3000_Firmware_v2.1.4.12.bin" SelfReg="false" NextFile="FLEX5000_Firmware_v2.1.4.12.bin"/>
     <ROW File="FLEX5000_Firmware_ReadMe.txt" Component_="FLEX5000_Firmware_ReadMe.txt" FileName="FLEX-5~1.TXT|FLEX-5000_Firmware_ReadMe.txt" Attributes="0" SourcePath="..\..\..\..\..\ProgramData\FlexRadio Systems\FLEX Firmware\FLEX-5000\FLEX-5000_Firmware_ReadMe.txt" SelfReg="false" NextFile="PowerSDRke9nsv2.8features_white.pdf_1"/>
     <ROW File="FLEX5000_Firmware_v2.1.4.12.bin" Component_="FLEX5000_Firmware_ReadMe.txt" FileName="FLEX-5~2.BIN|FLEX-5000_Firmware_v2.1.4.12.bin" Attributes="0" SourcePath="..\..\..\..\..\ProgramData\FlexRadio Systems\FLEX Firmware\FLEX-5000\FLEX-5000_Firmware_v2.1.4.12.bin" SelfReg="false" NextFile="AutoItX3.Assembly.dll"/>
-    <ROW File="FLEX5000_Owners_Manual_v3.0.docx" Component_="PowerSDR_T9.exe.config" FileName="FLEX-5~1.DOC|FLEX-5000_Owners_Manual_v3.0.docx" Attributes="0" SourcePath="..\..\..\..\..\Program Files (x86)\FlexRadio Systems\PowerSDR v2.8.0\FLEX-5000_Owners_Manual_v3.0.docx" SelfReg="false"/>
+    <ROW File="FLEX5000_Owners_Manual_v2.8.pdf" Component_="PowerSDR_T9.exe.config" FileName="FLEX-5~1.PDF|FLEX-5000_Owners_Manual_v2.8.pdf" Attributes="0" SourcePath="..\..\..\..\..\Program Files (x86)\FlexRadio Systems\PowerSDR v2.8.0\FLEX-5000_Owners_Manual_v2.8.pdf" SelfReg="false"/>
     <ROW File="LicenseAgreement.txt" Component_="LicenseAgreement.txt" FileName="LICENS~1.TXT|License Agreement.txt" Attributes="0" SourcePath="..\..\..\..\..\ProgramData\FlexRadio Systems\PowerSDR\Skins\KE9NS3_Spot\License Agreement.txt" SelfReg="false" NextFile="X20bttn0.png_3"/>
     <ROW File="LicenseAgreement.txt_1" Component_="LicenseAgreement.txt_1" FileName="LICENS~1.TXT|License Agreement.txt" Attributes="0" SourcePath="..\..\..\..\..\ProgramData\FlexRadio Systems\PowerSDR\Skins\KE9NS4_Plain\License Agreement.txt" SelfReg="false" NextFile="X20bttn0.png_6"/>
     <ROW File="LicenseAgreement.txt_2" Component_="LicenseAgreement.txt_2" FileName="LICENS~1.TXT|License Agreement.txt" Attributes="0" SourcePath="..\..\..\..\..\ProgramData\FlexRadio Systems\PowerSDR\Skins\KE9NS6_World\License Agreement.txt" SelfReg="false" NextFile="mic.bmp"/>
@@ -134,7 +134,7 @@
     <ROW File="PowerSDR.exe.config" Component_="PowerSDR_T9.exe.config" FileName="POWERS~1.CON|PowerSDR.exe.config" Attributes="0" SourcePath="bin\Release\PowerSDR.exe.config" SelfReg="false" NextFile="PowerMate.dll"/>
     <ROW File="PowerSDR.exe.manifest" Component_="PowerSDR_T9.exe.config" FileName="POWERS~1.MAN|PowerSDR.exe.manifest" Attributes="0" SourcePath="bin\Release\PowerSDR.exe.manifest" SelfReg="false" NextFile="PowerSDR.exe.config"/>
     <ROW File="PowerSDRTXWaterfallID.pdf" Component_="DXLOC.txt" FileName="POWERS~2.PDF|PowerSDR TX Waterfall ID.pdf" Attributes="0" SourcePath="..\..\..\Documents\My Webs\ke9ns2\PowerSDR TX Waterfall ID.pdf" SelfReg="false" NextFile="PowerSDR.exe"/>
-    <ROW File="PowerSDR_ke9ns_CAT_Commands.pdf" Component_="PowerSDR_T9.exe.config" FileName="POWERS~3.PDF|PowerSDR_ke9ns_CAT_Commands.pdf" Attributes="0" SourcePath="PowerSDR_ke9ns_CAT_Commands.pdf" SelfReg="false" NextFile="FLEX5000_Owners_Manual_v3.0.docx"/>
+    <ROW File="PowerSDR_ke9ns_CAT_Commands.pdf" Component_="PowerSDR_T9.exe.config" FileName="POWERS~3.PDF|PowerSDR_ke9ns_CAT_Commands.pdf" Attributes="0" SourcePath="PowerSDR_ke9ns_CAT_Commands.pdf" SelfReg="false" NextFile="FLEX5000_Owners_Manual_v2.8.pdf"/>
     <ROW File="PowerSDRke9nskeyboardshortcuts.pdf" Component_="DXLOC.txt" FileName="POWERS~3.PDF|PowerSDR ke9ns keyboard shortcuts.pdf" Attributes="0" SourcePath="..\..\..\Documents\My Webs\ke9ns2\PowerSDR ke9ns keyboard shortcuts.pdf" SelfReg="false" NextFile="FLEX1500_Firmware_v0.5.3.24.bin"/>
     <ROW File="PowerSDRke9nskeyboardshortcuts.pdf_1" Component_="PowerSDR_T9.exe.config" FileName="POWERS~2.PDF|PowerSDR ke9ns keyboard shortcuts.pdf" Attributes="0" SourcePath="PowerSDR ke9ns keyboard shortcuts.pdf" SelfReg="false" NextFile="PowerSDR_ke9ns_CAT_Commands.pdf"/>
     <ROW File="PowerSDRke9nsv2.8features_white.pdf" Component_="DXLOC.txt" FileName="POWERS~1.PDF|PowerSDR ke9ns v2.8 features_white.pdf" Attributes="0" SourcePath="..\..\..\Documents\My Webs\ke9ns2\PowerSDR ke9ns v2.8 features_white.pdf" SelfReg="false" NextFile="FLEX1500_Firmware_ReadMe.txt"/>
@@ -1376,7 +1376,7 @@
     <ROW Action="AI_DetectSoftware" Sequence="101"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.BuildComponent">
-    <ROW BuildKey="AnyCPU_Release" BuildName="AnyCPU_Release" BuildOrder="1" BuildType="0" PackageFolder="..\..\..\Documents\Advanced Installer\Projects\PowerSDR ke9ns 2.8.0\Setup Files" PackageFileName="PowerSDR_KE9NS_V2.8.0.271_Incremental_Installer" Languages="en" InstallationType="4" UseLargeSchema="true"/>
+    <ROW BuildKey="AnyCPU_Release" BuildName="AnyCPU_Release" BuildOrder="1" BuildType="0" PackageFolder="..\..\..\Documents\Advanced Installer\Projects\PowerSDR ke9ns 2.8.0\Setup Files" PackageFileName="PowerSDR_KE9NS_V2.8.0.277_Incremental_Installer" Languages="en" InstallationType="4" UseLargeSchema="true"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
     <ROW Path="&lt;AI_DICTS&gt;ui.ail"/>

@@ -12814,15 +12814,15 @@ namespace PowerSDR
                                         //   Debug.WriteLine("day: " + W + " , "+ console.picDisplay.Width + " , " + minpos);
                     */
 
-                    if ((!bottom) && (vfoa_hz < 170000000))// do SWL spot if active and not transmitting (was 54000000  .219)
+                    if ((!bottom) && (vfoa_hz < 470000000))// do SWL spot if active and not transmitting (was 54000000  .219) 170 000 000 .275
                     {
 
                         VFOLow = (int)vfoa_hz + RXDisplayLow; // low freq (left side) in hz
                         VFOHigh = (int)vfoa_hz + RXDisplayHigh; // high freq (right side) in hz
                         VFODiff = VFOHigh - VFOLow; // diff in hz
 
-                        byte VFOLowB = (byte)(VFOLow / 1000000); // freq in mhz
-                        byte VFOHighB = (byte)(VFOHigh / 1000000); // freq in mhz
+                        int VFOLowB =(int)(VFOLow / 1000000); // freq in mhz (was byte .275)
+                        int VFOHighB = (int)(VFOHigh / 1000000); // freq in mhz (was byte .275)
 
                         //  Debug.WriteLine("VFOLowB "+ VFOLowB + " , " + VFOHighB);
 
@@ -13054,15 +13054,15 @@ namespace PowerSDR
                     //======================================================
                     //ke9ns add SWL spots to RX2
 
-                    if ((bottom) && (vfob_hz < 170000000))// do SWL spot if active and not transmitting (was 60000000 .219)
+                    if ((bottom) && (vfob_hz < 470000000))// do SWL spot if active and not transmitting (was 60000000 .219) 170 000 000 .275
                     {
 
                         VFOLow = (int)vfob_hz + RXDisplayLow2; // low freq (left side) in hz //.219 mod 2
                         VFOHigh = (int)vfob_hz + RXDisplayHigh2; // high freq (right side) in hz
                         VFODiff = VFOHigh - VFOLow; // diff in hz
 
-                        byte VFOLowB = (byte)(VFOLow / 1000000); // freq in mhz
-                        byte VFOHighB = (byte)(VFOHigh / 1000000); // freq in mhz
+                        int VFOLowB = (int)(VFOLow / 1000000); // freq in mhz (was byte .275)
+                        int VFOHighB = (int)(VFOHigh / 1000000); // freq in mhz (was byte .275)
 
                         int iii = 0; // stairstep the swl stations on the screen
 

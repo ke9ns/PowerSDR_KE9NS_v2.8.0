@@ -373,6 +373,7 @@ namespace PowerSDR
             this.ptbDisplayZoom2 = new PowerSDR.PrettyTrackBar();
             this.ptbDisplayPan2 = new PowerSDR.PrettyTrackBar();
             this.chkVFOBSplit = new System.Windows.Forms.CheckBoxTS();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStripFilterRX1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemRX1FilterConfigure = new System.Windows.Forms.ToolStripMenuItem();
@@ -3216,7 +3217,6 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.radModeFMN, resources.GetString("radModeFMN.ToolTip"));
             this.radModeFMN.CheckedChanged += new System.EventHandler(this.radModeFMN_CheckedChanged);
             this.radModeFMN.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radModeFMN_MouseDown);
-            this.radModeFMN.MouseUp += new System.Windows.Forms.MouseEventHandler(this.radModeFMN_MouseUp);
             // 
             // radModeDIGU
             // 
@@ -4525,6 +4525,14 @@ namespace PowerSDR
             this.chkVFOBSplit.CheckedChanged += new System.EventHandler(this.chkVFOBSplit_CheckedChanged);
             this.chkVFOBSplit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.chkVFOBSplit_MouseDown);
             // 
+            // checkBox1
+            // 
+            resources.ApplyResources(this.checkBox1, "checkBox1");
+            this.checkBox1.ForeColor = System.Drawing.Color.White;
+            this.checkBox1.Name = "checkBox1";
+            this.toolTip1.SetToolTip(this.checkBox1, resources.GetString("checkBox1.ToolTip"));
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // timer_clock
             // 
             this.timer_clock.Enabled = true;
@@ -5513,6 +5521,7 @@ namespace PowerSDR
             // 
             resources.ApplyResources(this.panelModeSpecificFM, "panelModeSpecificFM");
             this.panelModeSpecificFM.BackColor = System.Drawing.Color.Transparent;
+            this.panelModeSpecificFM.Controls.Add(this.chkFMTXRev);
             this.panelModeSpecificFM.Controls.Add(this.chkTXEQ1);
             this.panelModeSpecificFM.Controls.Add(this.chkRXEQ1);
             this.panelModeSpecificFM.Controls.Add(this.udFM1750Timer);
@@ -5526,7 +5535,6 @@ namespace PowerSDR
             this.panelModeSpecificFM.Controls.Add(this.radFMDeviation2kHz);
             this.panelModeSpecificFM.Controls.Add(this.lblFMOffset);
             this.panelModeSpecificFM.Controls.Add(this.udFMOffset);
-            this.panelModeSpecificFM.Controls.Add(this.chkFMTXRev);
             this.panelModeSpecificFM.Controls.Add(this.lblFMDeviation);
             this.panelModeSpecificFM.Controls.Add(this.radFMDeviation5kHz);
             this.panelModeSpecificFM.Controls.Add(this.comboFMCTCSS);
@@ -5538,6 +5546,7 @@ namespace PowerSDR
             this.panelModeSpecificFM.Controls.Add(this.lblFMMic);
             this.panelModeSpecificFM.Controls.Add(this.labelTS7);
             this.panelModeSpecificFM.Controls.Add(this.comboFMTXProfile);
+            this.panelModeSpecificFM.Controls.Add(this.checkBox1);
             this.panelModeSpecificFM.Name = "panelModeSpecificFM";
             this.panelModeSpecificFM.Paint += new System.Windows.Forms.PaintEventHandler(this.panelRing_Paint);
             // 
@@ -6608,7 +6617,7 @@ namespace PowerSDR
             // 
             resources.ApplyResources(this, "$this");
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.Controls.Add(this.panelModeSpecificPhone);
+            this.Controls.Add(this.panelModeSpecificFM);
             this.Controls.Add(this.panelTSRadar);
             this.Controls.Add(this.panelBandVHFRX2);
             this.Controls.Add(this.panelBandHFRX2);
@@ -6621,7 +6630,6 @@ namespace PowerSDR
             this.Controls.Add(this.panelBandHF);
             this.Controls.Add(this.labelSize);
             this.Controls.Add(this.labelMove);
-            this.Controls.Add(this.panelModeSpecificFM);
             this.Controls.Add(this.checkBoxIICPTT);
             this.Controls.Add(this.checkBoxIICON);
             this.Controls.Add(this.labelPowerSDR);
@@ -6669,6 +6677,7 @@ namespace PowerSDR
             this.Controls.Add(this.VFODialB);
             this.Controls.Add(this.labelMax);
             this.Controls.Add(this.panelBandGN);
+            this.Controls.Add(this.panelModeSpecificPhone);
             this.DoubleBuffered = true;
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
@@ -6838,7 +6847,7 @@ namespace PowerSDR
         private System.Windows.Forms.RadioButtonTS radModeAM;
         private System.Windows.Forms.RadioButtonTS radModeCWL;
         public System.Windows.Forms.RadioButtonTS radModeUSB;
-        private System.Windows.Forms.RadioButtonTS radModeFMN;
+        public System.Windows.Forms.RadioButtonTS radModeFMN;
         private System.Windows.Forms.RadioButtonTS radModeDRM;
         private System.Windows.Forms.LabelTS lblAGC;
         private System.Windows.Forms.ComboBoxTS comboAGC;
@@ -6984,7 +6993,7 @@ namespace PowerSDR
         public System.Windows.Forms.RadioButtonTS radRX2ModeLSB;
         private System.Windows.Forms.RadioButtonTS radRX2ModeSPEC;
         private System.Windows.Forms.RadioButtonTS radRX2ModeDRM;
-        private System.Windows.Forms.RadioButtonTS radRX2ModeFMN;
+        public System.Windows.Forms.RadioButtonTS radRX2ModeFMN;
         public System.Windows.Forms.RadioButtonTS radRX2ModeUSB;
         private System.Windows.Forms.RadioButtonTS radRX2ModeCWL;
         private System.Windows.Forms.CheckBoxTS chkRX2BIN;
@@ -7166,10 +7175,9 @@ namespace PowerSDR
         private System.Windows.Forms.CheckBoxTS chkFMTXLow;
         private System.Windows.Forms.CheckBoxTS chkFMTXSimplex;
         private System.Windows.Forms.CheckBoxTS chkFMTXHigh;
-        private System.Windows.Forms.CheckBoxTS chkFMCTCSS;
         private System.Windows.Forms.ComboBoxTS comboFMCTCSS;
-        private System.Windows.Forms.RadioButtonTS radFMDeviation2kHz;
-        private System.Windows.Forms.RadioButtonTS radFMDeviation5kHz;
+        public System.Windows.Forms.RadioButtonTS radFMDeviation2kHz;
+        public System.Windows.Forms.RadioButtonTS radFMDeviation5kHz;
         private System.Windows.Forms.LabelTS lblFMDeviation;
         private System.Windows.Forms.CheckBoxTS chkFMTXRev;
         private System.Windows.Forms.LabelTS lblFMOffset;
@@ -7376,6 +7384,8 @@ namespace PowerSDR
         private System.Windows.Forms.ToolStripMenuItem SWLMenuItem;
         public System.Windows.Forms.CheckBoxTS chkVFOBSplit;
         private System.Windows.Forms.Panel panelVFOBSubHover;
+        public System.Windows.Forms.CheckBox checkBox1;
+        public System.Windows.Forms.CheckBoxTS chkFMCTCSS;
     } // class console
 
 

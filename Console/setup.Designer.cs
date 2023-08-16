@@ -118,7 +118,6 @@ namespace PowerSDR
             this.tpGeneralOptions = new System.Windows.Forms.TabPage();
             this.chkPM2 = new System.Windows.Forms.CheckBoxTS();
             this.udPwrMstrCOM = new System.Windows.Forms.NumericUpDownTS();
-            this.chkBoxWheelRev = new System.Windows.Forms.CheckBoxTS();
             this.chkBoxPM1 = new System.Windows.Forms.CheckBoxTS();
             this.chkBoxIICON = new System.Windows.Forms.CheckBoxTS();
             this.chkBoxIIC = new System.Windows.Forms.CheckBoxTS();
@@ -126,7 +125,6 @@ namespace PowerSDR
             this.buttonTS2 = new System.Windows.Forms.ButtonTS();
             this.chkBoxBandStack = new System.Windows.Forms.CheckBoxTS();
             this.chkGenOptionsShowATUPopup = new System.Windows.Forms.CheckBoxTS();
-            this.chkImportDBRestrict = new System.Windows.Forms.CheckBoxTS();
             this.grpOptUSBBuf = new System.Windows.Forms.GroupBoxTS();
             this.lblOptUSBBufConservative = new System.Windows.Forms.LabelTS();
             this.lblOptUSBBufAggressive = new System.Windows.Forms.LabelTS();
@@ -166,6 +164,8 @@ namespace PowerSDR
             this.chkGeneralSpurRed = new System.Windows.Forms.CheckBoxTS();
             this.grpGeneralProcessPriority = new System.Windows.Forms.GroupBoxTS();
             this.comboGeneralProcessPriority = new System.Windows.Forms.ComboBoxTS();
+            this.chkBoxWheelRev = new System.Windows.Forms.CheckBoxTS();
+            this.chkImportDBRestrict = new System.Windows.Forms.CheckBoxTS();
             this.tpGeneralCalibration = new System.Windows.Forms.TabPage();
             this.chkCalExpert = new System.Windows.Forms.CheckBox();
             this.grpGenCalRXImage = new System.Windows.Forms.GroupBoxTS();
@@ -600,6 +600,7 @@ namespace PowerSDR
             this.udDSPAGCFixedGaindB = new System.Windows.Forms.NumericUpDownTS();
             this.lblDSPAGCFixed = new System.Windows.Forms.LabelTS();
             this.tpTransmit = new System.Windows.Forms.TabPage();
+            this.chkFMDataMode = new System.Windows.Forms.CheckBoxTS();
             this.chkBandModeSave = new System.Windows.Forms.CheckBoxTS();
             this.chkBoxTNTX3 = new System.Windows.Forms.CheckBoxTS();
             this.chkPhaseRotate = new System.Windows.Forms.CheckBoxTS();
@@ -1120,6 +1121,10 @@ namespace PowerSDR
             this.chkExtRX1605 = new System.Windows.Forms.CheckBoxTS();
             this.chkExtRX1604 = new System.Windows.Forms.CheckBoxTS();
             this.tpCAT = new System.Windows.Forms.TabPage();
+            this.chkCXAuto = new System.Windows.Forms.CheckBoxTS();
+            this.txtCXAuto = new System.Windows.Forms.TextBoxTS();
+            this.comboCXAuto = new System.Windows.Forms.ComboBoxTS();
+            this.labelTS68 = new System.Windows.Forms.LabelTS();
             this.groupBoxTS4 = new System.Windows.Forms.GroupBoxTS();
             this.chkKWAI7 = new System.Windows.Forms.CheckBoxTS();
             this.txtCatURL2 = new System.Windows.Forms.TextBoxTS();
@@ -2617,7 +2622,6 @@ namespace PowerSDR
             this.tpGeneralOptions.BackColor = System.Drawing.SystemColors.Control;
             this.tpGeneralOptions.Controls.Add(this.chkPM2);
             this.tpGeneralOptions.Controls.Add(this.udPwrMstrCOM);
-            this.tpGeneralOptions.Controls.Add(this.chkBoxWheelRev);
             this.tpGeneralOptions.Controls.Add(this.chkBoxPM1);
             this.tpGeneralOptions.Controls.Add(this.chkBoxIICON);
             this.tpGeneralOptions.Controls.Add(this.chkBoxIIC);
@@ -2625,7 +2629,6 @@ namespace PowerSDR
             this.tpGeneralOptions.Controls.Add(this.buttonTS2);
             this.tpGeneralOptions.Controls.Add(this.chkBoxBandStack);
             this.tpGeneralOptions.Controls.Add(this.chkGenOptionsShowATUPopup);
-            this.tpGeneralOptions.Controls.Add(this.chkImportDBRestrict);
             this.tpGeneralOptions.Controls.Add(this.grpOptUSBBuf);
             this.tpGeneralOptions.Controls.Add(this.grpGenCustomTitleText);
             this.tpGeneralOptions.Controls.Add(this.grpOptMisc);
@@ -2634,6 +2637,8 @@ namespace PowerSDR
             this.tpGeneralOptions.Controls.Add(this.grpGenTuningOptions);
             this.tpGeneralOptions.Controls.Add(this.grpGeneralOptions);
             this.tpGeneralOptions.Controls.Add(this.grpGeneralProcessPriority);
+            this.tpGeneralOptions.Controls.Add(this.chkBoxWheelRev);
+            this.tpGeneralOptions.Controls.Add(this.chkImportDBRestrict);
             this.tpGeneralOptions.Location = new System.Drawing.Point(4, 22);
             this.tpGeneralOptions.Name = "tpGeneralOptions";
             this.tpGeneralOptions.Size = new System.Drawing.Size(592, 318);
@@ -2684,17 +2689,6 @@ namespace PowerSDR
             0});
             this.udPwrMstrCOM.ValueChanged += new System.EventHandler(this.udPwrMstrCOM_ValueChanged);
             // 
-            // chkBoxWheelRev
-            // 
-            this.chkBoxWheelRev.AllowDrop = true;
-            this.chkBoxWheelRev.Image = null;
-            this.chkBoxWheelRev.Location = new System.Drawing.Point(184, 250);
-            this.chkBoxWheelRev.Name = "chkBoxWheelRev";
-            this.chkBoxWheelRev.Size = new System.Drawing.Size(117, 18);
-            this.chkBoxWheelRev.TabIndex = 63;
-            this.chkBoxWheelRev.Text = "Wheel Reverse";
-            this.toolTip1.SetToolTip(this.chkBoxWheelRev, "Reverse direction of mouse or trackball Wheel for freqency changes\r\n\r\n\r\n");
-            // 
             // chkBoxPM1
             // 
             this.chkBoxPM1.AllowDrop = true;
@@ -2711,7 +2705,7 @@ namespace PowerSDR
             // 
             this.chkBoxIICON.AllowDrop = true;
             this.chkBoxIICON.Image = null;
-            this.chkBoxIICON.Location = new System.Drawing.Point(351, 272);
+            this.chkBoxIICON.Location = new System.Drawing.Point(275, 270);
             this.chkBoxIICON.Name = "chkBoxIICON";
             this.chkBoxIICON.Size = new System.Drawing.Size(161, 18);
             this.chkBoxIICON.TabIndex = 61;
@@ -2723,11 +2717,11 @@ namespace PowerSDR
             // 
             this.chkBoxIIC.AllowDrop = true;
             this.chkBoxIIC.Image = null;
-            this.chkBoxIIC.Location = new System.Drawing.Point(324, 250);
+            this.chkBoxIIC.Location = new System.Drawing.Point(275, 249);
             this.chkBoxIIC.Name = "chkBoxIIC";
-            this.chkBoxIIC.Size = new System.Drawing.Size(247, 25);
+            this.chkBoxIIC.Size = new System.Drawing.Size(296, 25);
             this.chkBoxIIC.TabIndex = 59;
-            this.chkBoxIIC.Text = "Use IIC FlexWire for External AMP control";
+            this.chkBoxIIC.Text = "Flex Amp PTT control and IIC FlexWire AMP control";
             this.toolTip1.SetToolTip(this.chkBoxIIC, resources.GetString("chkBoxIIC.ToolTip"));
             this.chkBoxIIC.CheckedChanged += new System.EventHandler(this.chkBoxIIC_CheckedChanged);
             // 
@@ -2735,7 +2729,7 @@ namespace PowerSDR
             // 
             this.chkBoxVFOLockAB.AllowDrop = true;
             this.chkBoxVFOLockAB.Image = null;
-            this.chkBoxVFOLockAB.Location = new System.Drawing.Point(184, 272);
+            this.chkBoxVFOLockAB.Location = new System.Drawing.Point(174, 267);
             this.chkBoxVFOLockAB.Name = "chkBoxVFOLockAB";
             this.chkBoxVFOLockAB.Size = new System.Drawing.Size(117, 18);
             this.chkBoxVFOLockAB.TabIndex = 58;
@@ -2780,18 +2774,6 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.chkGenOptionsShowATUPopup, "Check this box to receive feedback popups when running the FLEX-3000 ATU");
             this.chkGenOptionsShowATUPopup.Visible = false;
             this.chkGenOptionsShowATUPopup.CheckedChanged += new System.EventHandler(this.chkGenOptionsShowATUPopup_CheckedChanged);
-            // 
-            // chkImportDBRestrict
-            // 
-            this.chkImportDBRestrict.AllowDrop = true;
-            this.chkImportDBRestrict.Image = null;
-            this.chkImportDBRestrict.Location = new System.Drawing.Point(17, 243);
-            this.chkImportDBRestrict.Name = "chkImportDBRestrict";
-            this.chkImportDBRestrict.Size = new System.Drawing.Size(187, 18);
-            this.chkImportDBRestrict.TabIndex = 31;
-            this.chkImportDBRestrict.Text = "Strict DB Import Compliance";
-            this.toolTip1.SetToolTip(this.chkImportDBRestrict, "Uncheck this box to allow DB import using a DB from a earlier or later version of" +
-        " PowerSDR.  May cause import errors");
             // 
             // grpOptUSBBuf
             // 
@@ -3337,6 +3319,29 @@ namespace PowerSDR
             this.comboGeneralProcessPriority.TabIndex = 0;
             this.toolTip1.SetToolTip(this.comboGeneralProcessPriority, "Sets the process priority of the PowerSDR software.");
             this.comboGeneralProcessPriority.SelectedIndexChanged += new System.EventHandler(this.comboGeneralProcessPriority_SelectedIndexChanged);
+            // 
+            // chkBoxWheelRev
+            // 
+            this.chkBoxWheelRev.AllowDrop = true;
+            this.chkBoxWheelRev.Image = null;
+            this.chkBoxWheelRev.Location = new System.Drawing.Point(174, 250);
+            this.chkBoxWheelRev.Name = "chkBoxWheelRev";
+            this.chkBoxWheelRev.Size = new System.Drawing.Size(110, 18);
+            this.chkBoxWheelRev.TabIndex = 63;
+            this.chkBoxWheelRev.Text = "Wheel Reverse";
+            this.toolTip1.SetToolTip(this.chkBoxWheelRev, "Reverse direction of mouse or trackball Wheel for freqency changes\r\n\r\n\r\n");
+            // 
+            // chkImportDBRestrict
+            // 
+            this.chkImportDBRestrict.AllowDrop = true;
+            this.chkImportDBRestrict.Image = null;
+            this.chkImportDBRestrict.Location = new System.Drawing.Point(17, 243);
+            this.chkImportDBRestrict.Name = "chkImportDBRestrict";
+            this.chkImportDBRestrict.Size = new System.Drawing.Size(187, 18);
+            this.chkImportDBRestrict.TabIndex = 31;
+            this.chkImportDBRestrict.Text = "Strict DB Import Compliance";
+            this.toolTip1.SetToolTip(this.chkImportDBRestrict, "Uncheck this box to allow DB import using a DB from a earlier or later version of" +
+        " PowerSDR.  May cause import errors");
             // 
             // tpGeneralCalibration
             // 
@@ -10108,6 +10113,7 @@ namespace PowerSDR
             // 
             // tpTransmit
             // 
+            this.tpTransmit.Controls.Add(this.chkFMDataMode);
             this.tpTransmit.Controls.Add(this.chkBandModeSave);
             this.tpTransmit.Controls.Add(this.chkBoxTNTX3);
             this.tpTransmit.Controls.Add(this.chkPhaseRotate);
@@ -10136,6 +10142,18 @@ namespace PowerSDR
             this.tpTransmit.Size = new System.Drawing.Size(584, 341);
             this.tpTransmit.TabIndex = 5;
             this.tpTransmit.Text = "Transmit";
+            // 
+            // chkFMDataMode
+            // 
+            this.chkFMDataMode.Image = null;
+            this.chkFMDataMode.Location = new System.Drawing.Point(384, 132);
+            this.chkFMDataMode.Name = "chkFMDataMode";
+            this.chkFMDataMode.Size = new System.Drawing.Size(61, 43);
+            this.chkFMDataMode.TabIndex = 69;
+            this.chkFMDataMode.Text = "FM Data mode";
+            this.toolTip1.SetToolTip(this.chkFMDataMode, "When Checked ON, There is no CTCSS and no PreEmphasis or DeEmphasis.\r\nThis works " +
+        "better for Data transmissions on FM\r\n");
+            this.chkFMDataMode.CheckedChanged += new System.EventHandler(this.chkFMDataMode_CheckedChanged);
             // 
             // chkBandModeSave
             // 
@@ -10176,10 +10194,8 @@ namespace PowerSDR
             this.chkFMDataMic.Name = "chkFMDataMic";
             this.chkFMDataMic.Size = new System.Drawing.Size(61, 43);
             this.chkFMDataMic.TabIndex = 65;
-            this.chkFMDataMic.Text = "FM Wide MIC";
-            this.toolTip1.SetToolTip(this.chkFMDataMic, "When in WFM Data mode: 17khz Dev\r\n(To get into WFM mode, Right Click on the FM bu" +
-        "tton)\r\n\r\nWhen Checked, uses MIC input\r\nUnchecked, acts like DIGU or DIGL input b" +
-        "ypassing MIC\r\n");
+            this.chkFMDataMic.Text = "WFM Wide MIC";
+            this.toolTip1.SetToolTip(this.chkFMDataMic, resources.GetString("chkFMDataMic.ToolTip"));
             this.chkFMDataMic.CheckedChanged += new System.EventHandler(this.chkFMDataMic_CheckedChanged);
             // 
             // grpTXVOX
@@ -16551,6 +16567,10 @@ namespace PowerSDR
             // 
             // tpCAT
             // 
+            this.tpCAT.Controls.Add(this.chkCXAuto);
+            this.tpCAT.Controls.Add(this.txtCXAuto);
+            this.tpCAT.Controls.Add(this.comboCXAuto);
+            this.tpCAT.Controls.Add(this.labelTS68);
             this.tpCAT.Controls.Add(this.groupBoxTS4);
             this.tpCAT.Controls.Add(this.chkFPInstalled);
             this.tpCAT.Controls.Add(this.chkDigUIsUSB);
@@ -16566,6 +16586,50 @@ namespace PowerSDR
             this.tpCAT.TabIndex = 10;
             this.tpCAT.Text = "CAT Control";
             this.tpCAT.Paint += new System.Windows.Forms.PaintEventHandler(this.tpCAT_Paint);
+            // 
+            // chkCXAuto
+            // 
+            this.chkCXAuto.Image = null;
+            this.chkCXAuto.Location = new System.Drawing.Point(356, 233);
+            this.chkCXAuto.Name = "chkCXAuto";
+            this.chkCXAuto.Size = new System.Drawing.Size(44, 24);
+            this.chkCXAuto.TabIndex = 127;
+            this.chkCXAuto.Text = "on";
+            this.toolTip1.SetToolTip(this.chkCXAuto, "Activate CX Auto Ant switch CI-V serial link\r\n");
+            this.chkCXAuto.CheckedChanged += new System.EventHandler(this.chkCXAuto_CheckedChanged);
+            // 
+            // txtCXAuto
+            // 
+            this.txtCXAuto.Location = new System.Drawing.Point(321, 234);
+            this.txtCXAuto.MaxLength = 1;
+            this.txtCXAuto.Name = "txtCXAuto";
+            this.txtCXAuto.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtCXAuto.Size = new System.Drawing.Size(29, 20);
+            this.txtCXAuto.TabIndex = 128;
+            this.txtCXAuto.Text = "0";
+            this.toolTip1.SetToolTip(this.txtCXAuto, "CXAuto ant port 0-8 (8 = OFF)\r\n\r\n");
+            this.txtCXAuto.TextChanged += new System.EventHandler(this.txtCXAuto_TextChanged);
+            // 
+            // comboCXAuto
+            // 
+            this.comboCXAuto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCXAuto.DropDownWidth = 56;
+            this.comboCXAuto.Location = new System.Drawing.Point(243, 234);
+            this.comboCXAuto.Name = "comboCXAuto";
+            this.comboCXAuto.Size = new System.Drawing.Size(72, 21);
+            this.comboCXAuto.TabIndex = 127;
+            this.toolTip1.SetToolTip(this.comboCXAuto, "CI-V Serial (address 0x80) to CX AUTO antenna switch\r\nSelect the Serial Port#\r\n");
+            this.comboCXAuto.SelectedIndexChanged += new System.EventHandler(this.comboCXAuto_SelectedIndexChanged);
+            // 
+            // labelTS68
+            // 
+            this.labelTS68.Image = null;
+            this.labelTS68.Location = new System.Drawing.Point(247, 217);
+            this.labelTS68.Name = "labelTS68";
+            this.labelTS68.Size = new System.Drawing.Size(60, 23);
+            this.labelTS68.TabIndex = 127;
+            this.labelTS68.Text = "CX-AUTO";
+            this.toolTip1.SetToolTip(this.labelTS68, "CI-V Serial (address 0x80) to CX AUTO antenna switch");
             // 
             // groupBoxTS4
             // 
@@ -16690,7 +16754,7 @@ namespace PowerSDR
             // chkFPInstalled
             // 
             this.chkFPInstalled.Image = null;
-            this.chkFPInstalled.Location = new System.Drawing.Point(251, 204);
+            this.chkFPInstalled.Location = new System.Drawing.Point(251, 160);
             this.chkFPInstalled.Name = "chkFPInstalled";
             this.chkFPInstalled.Size = new System.Drawing.Size(132, 24);
             this.chkFPInstalled.TabIndex = 97;
@@ -16702,7 +16766,7 @@ namespace PowerSDR
             // chkDigUIsUSB
             // 
             this.chkDigUIsUSB.Image = null;
-            this.chkDigUIsUSB.Location = new System.Drawing.Point(251, 234);
+            this.chkDigUIsUSB.Location = new System.Drawing.Point(251, 184);
             this.chkDigUIsUSB.Name = "chkDigUIsUSB";
             this.chkDigUIsUSB.Size = new System.Drawing.Size(154, 24);
             this.chkDigUIsUSB.TabIndex = 96;
@@ -16754,7 +16818,7 @@ namespace PowerSDR
             this.grpPTTBitBang.Controls.Add(this.chkCATPTTEnabled);
             this.grpPTTBitBang.Location = new System.Drawing.Point(262, 20);
             this.grpPTTBitBang.Name = "grpPTTBitBang";
-            this.grpPTTBitBang.Size = new System.Drawing.Size(128, 152);
+            this.grpPTTBitBang.Size = new System.Drawing.Size(128, 128);
             this.grpPTTBitBang.TabIndex = 91;
             this.grpPTTBitBang.TabStop = false;
             this.grpPTTBitBang.Text = "PTT Control";
@@ -16763,7 +16827,7 @@ namespace PowerSDR
             // 
             this.comboCATPTTPort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboCATPTTPort.DropDownWidth = 56;
-            this.comboCATPTTPort.Location = new System.Drawing.Point(40, 56);
+            this.comboCATPTTPort.Location = new System.Drawing.Point(42, 46);
             this.comboCATPTTPort.Name = "comboCATPTTPort";
             this.comboCATPTTPort.Size = new System.Drawing.Size(80, 21);
             this.comboCATPTTPort.TabIndex = 96;
@@ -16773,7 +16837,7 @@ namespace PowerSDR
             // lblCATPTTPort
             // 
             this.lblCATPTTPort.Image = null;
-            this.lblCATPTTPort.Location = new System.Drawing.Point(8, 56);
+            this.lblCATPTTPort.Location = new System.Drawing.Point(5, 49);
             this.lblCATPTTPort.Name = "lblCATPTTPort";
             this.lblCATPTTPort.Size = new System.Drawing.Size(40, 23);
             this.lblCATPTTPort.TabIndex = 6;
@@ -16782,7 +16846,7 @@ namespace PowerSDR
             // chkCATPTT_RTS
             // 
             this.chkCATPTT_RTS.Image = null;
-            this.chkCATPTT_RTS.Location = new System.Drawing.Point(40, 88);
+            this.chkCATPTT_RTS.Location = new System.Drawing.Point(40, 73);
             this.chkCATPTT_RTS.Name = "chkCATPTT_RTS";
             this.chkCATPTT_RTS.Size = new System.Drawing.Size(48, 24);
             this.chkCATPTT_RTS.TabIndex = 0;
@@ -16792,7 +16856,7 @@ namespace PowerSDR
             // chkCATPTT_DTR
             // 
             this.chkCATPTT_DTR.Image = null;
-            this.chkCATPTT_DTR.Location = new System.Drawing.Point(40, 120);
+            this.chkCATPTT_DTR.Location = new System.Drawing.Point(40, 103);
             this.chkCATPTT_DTR.Name = "chkCATPTT_DTR";
             this.chkCATPTT_DTR.Size = new System.Drawing.Size(60, 16);
             this.chkCATPTT_DTR.TabIndex = 1;
@@ -18648,6 +18712,7 @@ namespace PowerSDR
             this.grpExtTX.ResumeLayout(false);
             this.grpExtRX.ResumeLayout(false);
             this.tpCAT.ResumeLayout(false);
+            this.tpCAT.PerformLayout();
             this.groupBoxTS4.ResumeLayout(false);
             this.groupBoxTS4.PerformLayout();
             this.grpPTTBitBang.ResumeLayout(false);
@@ -19905,6 +19970,11 @@ namespace PowerSDR
         public System.Windows.Forms.NumericUpDownTS udTXAMCarrierLevel;
         public System.Windows.Forms.CheckBoxTS chkCWXOverRide;
         private System.Windows.Forms.LabelTS labelTS67;
+        private System.Windows.Forms.LabelTS labelTS68;
+        private System.Windows.Forms.ComboBoxTS comboCXAuto;
+        public System.Windows.Forms.TextBoxTS txtCXAuto;
+        private System.Windows.Forms.CheckBoxTS chkCXAuto;
+        public System.Windows.Forms.CheckBoxTS chkFMDataMode;
     } // class setup
 
 

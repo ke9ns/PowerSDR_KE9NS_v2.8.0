@@ -72,6 +72,8 @@ namespace PowerSDR
         } // SIOListenerIII(Console c)
 
 
+      
+
         public void enableROTOR()
         {
             if (console.ROTORPort == 0) return;
@@ -106,7 +108,7 @@ namespace PowerSDR
             Initialize();
             
 
-        }
+        } // enableRotor
 
 
         // typically called when the end user has disabled CAT control through a UI element ... this 
@@ -128,7 +130,7 @@ namespace PowerSDR
             }
             Fpass = true; // reset init flag 
             return;
-        }
+        } //  disableRotor
 
         #endregion Constructor
 
@@ -143,6 +145,8 @@ namespace PowerSDR
         private bool Fpass = true;
         private bool rotor_enabled = false;  // is cat currently enabled by user? 
                                              //		private System.Timers.Timer SIOMonitor;
+        private bool CXAuto_enabled = false; // .275
+
         CATParser parser;
         //		private int SIOMonitorCount = 0;
 

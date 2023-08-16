@@ -564,6 +564,8 @@ namespace PowerSDR
 
 
 
+        public bool SP_SHOWDX = false; // .276 true = show/dx in process
+        public bool SP_SPOTSTART = false; // .276 true = received your callsign to indicate the spotter is ready to send spots to you
 
         public static byte SP_Active = 0;  // 0= off, 1= DX Spot feature ON, 2=logging in 3=waiting for spots
         public static byte SP2_Active = 0; // DX Spot: 0=closed so ok to open again if you want, 1=in process of shutting down
@@ -693,20 +695,20 @@ namespace PowerSDR
 
 
         // these are pulled from SWL2.csv file
-        public static string[] SWL2_Station = new string[4000];       // Station name
-        public static int[] SWL2_Freq = new int[4000];              // in hz
-        public static byte[] SWL2_Band = new byte[4000];              // in Mhz
+        public static string[] SWL2_Station = new string[3000];       // Station name
+        public static int[] SWL2_Freq = new int[3000];              // in hz
+        public static int[] SWL2_Band = new int[3000];              // in Mhz was byte .275
 
-        public static string[] SWL2_Lang = new string[4000];          // language of transmitter
-        public static int[] SWL2_TimeN = new int[4000];                // UTC time of operation ON air
-        public static int[] SWL2_TimeF = new int[4000];                // UTC time of operation OFF air
-        public static string[] SWL2_Mode = new string[4000];          // operating mode
-        public static string[] SWL2_Day = new string[4000];          // days of operation
-        public static byte[] SWL2_Day1 = new byte[4000];          // days of operation mo,tu,we,th,fr,sa,su = 1,2,4,8,16,32,64
+        public static string[] SWL2_Lang = new string[3000];          // language of transmitter
+        public static int[] SWL2_TimeN = new int[3000];                // UTC time of operation ON air
+        public static int[] SWL2_TimeF = new int[3000];                // UTC time of operation OFF air
+        public static string[] SWL2_Mode = new string[3000];          // operating mode
+        public static string[] SWL2_Day = new string[3000];          // days of operation
+        public static byte[] SWL2_Day1 = new byte[3000];          // days of operation mo,tu,we,th,fr,sa,su = 1,2,4,8,16,32,64
 
 
-        public static string[] SWL2_Loc = new string[4000];          // location of transmitter
-        public static string[] SWL2_Target = new string[4000];          // target area of station
+        public static string[] SWL2_Loc = new string[3000];          // location of transmitter
+        public static string[] SWL2_Target = new string[3000];          // target area of station
         public static int SWL2_Index1;  // local index that reset back to 0 after reaching max
         public static byte Flag21 = 0; // flag to skip header line in SWL.csv file
 
@@ -714,7 +716,7 @@ namespace PowerSDR
         // these are pulled from SWL.csv file
         public static string[] SWL_Station = new string[17000];       // Station name
         public static int[] SWL_Freq = new int[17000];              // in hz
-        public static byte[] SWL_Band = new byte[17000];              // in Mhz
+        public static int[] SWL_Band = new int[17000];              // in Mhz (was byte .275)
         public static int[] SWL_BandL = new int[17000];              // index for each start of mhz listed in swl.csv 
 
         public static string[] SWL_Lang = new string[17000];          // language of transmitter
@@ -778,6 +780,13 @@ namespace PowerSDR
 
 
             file_name = console.AppDataPath + "SWL.csv"; //  sked - b15.csv  
+
+            String last = File.ReadLines(file_name).Last(); //.275
+
+            if (last.Contains("469999") == false)
+            File.AppendAllText(file_name, "469999;0000-2400;;Wld;VHF;;Wld;;1;;" + Environment.NewLine); //.275
+
+
             file_name1 = console.AppDataPath + "SWL2.csv"; // ke9ns extra swl freq that eibispace.de wont add
 
 
@@ -842,7 +851,7 @@ namespace PowerSDR
                                 values = result.ToString().Split(';'); // split line up into segments divided by ;
 
                                 SWL2_Freq[SWL2_Index1] = (int)(Convert.ToDouble(values[0]) * 1000); // get freq and convert to hz
-                                SWL2_Band[SWL2_Index1] = (byte)(SWL2_Freq[SWL2_Index1] / 1000000); // get freq and convert to mhz
+                                SWL2_Band[SWL2_Index1] = (int)(SWL2_Freq[SWL2_Index1] / 1000000); // get freq and convert to mhz (was byte .275)
 
                                 //  Debug.WriteLine("SWL2 FREQ " + SWL2_Freq[SWL2_Index1] + " , " + SWL2_Index1);
 
@@ -976,7 +985,7 @@ namespace PowerSDR
                         {
                             newChar = (char)reader2a.ReadChar(); // read \n char to finishline
 
-                            //  Debug.WriteLine("SWL LINE: " + result);
+                          //   Debug.WriteLine("SWL LINE: " + result);
 
                             if (Flag1 == 1)
                             {
@@ -986,9 +995,9 @@ namespace PowerSDR
                                 values = result.ToString().Split(';'); // split line up into segments divided by ;
 
                                 SWL_Freq[SWL_Index1] = (int)(Convert.ToDouble(values[0]) * 1000); // get freq and convert to hz
-                                SWL_Band[SWL_Index1] = (byte)(SWL_Freq[SWL_Index1] / 1000000); // get freq and convert to mhz
+                                SWL_Band[SWL_Index1] = (int)(SWL_Freq[SWL_Index1] / 1000000); // get freq and convert to mhz (was byte .275)
 
-                                //    Debug.WriteLine("SWL INDEX , FREQ "+ SWL_Index1 + " , " + SWL_Freq[SWL_Index1]);
+                                //  Debug.WriteLine("SWL INDEX , FREQ "+ SWL_Index1 + " , " + SWL_Freq[SWL_Index1]);
 
                                 /*
                                                                     if (SWL_Band[SWL_Index1] > SWL_Index)
@@ -1742,7 +1751,7 @@ namespace PowerSDR
                     } // SP_active == 2
                     //------------------------------------------------------------------------
                     // sned string SH/DX or show/dx (shows last 30) oldest first
-                    // 0         10          22          34    40                         67
+                    // 0         10          22          34    40                         67       76
                     //  14031.9  VE2GDI      05-Aug-2020 0158Z  CW 599 <>FM17rj Glouceste <AI4FH>
                     // xxxxxx.xx xxxxxxxxxxx xxxxxxxxxxx xxxxx xxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxx
                     //------------------------------------------------------------------------
@@ -1765,7 +1774,8 @@ namespace PowerSDR
                             {
                                 processDXAGE();
 
-                                Thread.Sleep(50); // slow down the thread here
+                                if (SP_SPOTSTART == false || SP_SHOWDX == true) Thread.Sleep(5);
+                                else  Thread.Sleep(50); // slow down the thread here
 
                                 sb.Append((char)SP_reader.Read());  // get next char from socket and add it to build the next dx spot string to parse out 
 
@@ -1785,16 +1795,16 @@ namespace PowerSDR
 
                             }// for (;!(sb.ToString().Contains("\r\n"));) //  wait for end of line
                              //-------------------------------------------------------------------------------------------------------------------------------------
-
+                            // come here after the CR and line feed characters
 
                             statusBox.ForeColor = Color.Green;
                             statusBox.Text = "Spotting";
                             SP_Active = 3;
 
 
-                            sb.Replace("\a", "");// get rig of bell 
-                            sb.Replace("\r", "");// get rig of cr 
-                            sb.Replace("\n", "");// get rig of line feed 
+                            sb.Replace("\a", "");// get rid of bell 
+                            sb.Replace("\r", "");// get rid of cr 
+                            sb.Replace("\n", "");// get rid of line feed 
 
                             int qq = sb.Length;
                             // Debug.WriteLine("message1 length " + qq);
@@ -1826,8 +1836,8 @@ namespace PowerSDR
 
 
                         //-------------------------------------------------------------------------------------------------------------------------------------
-                        // ke9ns process received message
-                        if ((message1.StartsWith("DX de ") == true) && (message1.Length > 76)) // string can be 77 (with no grid) or 82 (with grid)
+                        // ke9ns process received standard DX spot message .276
+                        if ((message1.StartsWith("DX de ") == true) && (message1.Length > 76) ) // string can be 77 (with no grid) or 82 (with grid)
                         {
 
                             DX_Index1 = 250; // use 250 as a temp holding spot. always fill from the top
@@ -3861,6 +3871,2088 @@ namespace PowerSDR
 
                         } // (message1.StartsWith("DX de ") valid message
 
+                        else if (SP_SHOWDX == true && SP_SPOTSTART == true && message1.Length > 69) // .276 SHOW/DX added This is the output of a SHOW/DX command
+                        {
+                            //------------------------------------------------------------------------
+                            // sned string SH/DX or show/dx (shows last 30) oldest first
+                            // 0         10          22          34    40                         67       76
+                            //  14031.9  VE2GDI      05-Aug-2020 0158Z  CW 599 <>FM17rj Glouceste <AI4FH>
+                            // xxxxxx.xx xxxxxxxxxxx xxxxxxxxxxx xxxxx xxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxx
+                            //------------------------------------------------------------------------
+                            // ke9ns standard DX spotting format:  
+                            // 0     6            23 26          39                  70    76   80818283 (83 with everything or 79 with no Grid)
+                            // DX de ke9ns:  7003.5  kc9ffv      up 5                0204Z en52 \a\a\r\n
+                            //------------------------------------------------------------------------
+
+
+
+                            DX_Index1 = 250; // use 250 as a temp holding spot. always fill from the top
+
+                            SpotWatchFound = false;
+                            SpotWatchFoundDX = false;
+                            SpotWatchFoundMess = false;
+                            SpotWatchOK = false;
+
+                            // grab DX_Spotter callsign=======================================================================================
+                            try
+                            {
+                                int pos2 = message1.IndexOf(">", 67);
+                               
+                                DX_Spotter[DX_Index1] = message1.Substring(67, pos2 - 66); // get dx call with : at the end
+                              
+                                Debug.WriteLine("SHOWDX_spotter:" + DX_Spotter[DX_Index1]);
+
+                                if (DX_Spotter[DX_Index1].IndexOf(SpotWatchCall, StringComparison.OrdinalIgnoreCase) != -1) //.269 ignore case
+                                {
+                                    SpotWatchFound = true;
+                                }
+                            
+
+                            }
+                            catch (FormatException)
+                            {
+                                DX_Spotter[DX_Index1] = "NA";
+                                Debug.WriteLine("SHOWDX_spotter not found");
+                                //    textBox1.Text = e.ToString();
+                            }
+                            catch (ArgumentOutOfRangeException)
+                            {
+                                Debug.WriteLine("SHOWDX_spotter not found");
+                                //    textBox1.Text = e.ToString();
+                            }
+
+
+
+                            // grab DX_Freq ========================================================================================
+                            try
+                            {
+                              
+                                DX_Freq[DX_Index1] = (int)((double)Convert.ToDouble(message1.Substring(0, 9)) * (double)1000.0); //   get dx freq 7016.0  in khz 
+
+
+                                if ((DX_Freq[DX_Index1] >= 1800000) && (DX_Freq[DX_Index1] <= 2000000))
+                                {
+
+                                    DX_band[DX_Index1] = "160M";
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 3500000) && (DX_Freq[DX_Index1] <= 4000000))
+                                {
+
+                                    DX_band[DX_Index1] = "80M";
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 5000000) && (DX_Freq[DX_Index1] <= 6000000))
+                                {
+
+                                    DX_band[DX_Index1] = "60M";
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 7000000) && (DX_Freq[DX_Index1] <= 7300000))
+                                {
+
+                                    DX_band[DX_Index1] = "40M";
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 10000000) && (DX_Freq[DX_Index1] <= 11000000))
+                                {
+
+                                    DX_band[DX_Index1] = "30M";
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 14000000) && (DX_Freq[DX_Index1] <= 14400000))
+                                {
+
+                                    DX_band[DX_Index1] = "20M";
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 18000000) && (DX_Freq[DX_Index1] <= 18670000))
+                                {
+
+                                    DX_band[DX_Index1] = "17M";
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 21000000) && (DX_Freq[DX_Index1] <= 24500000))
+                                {
+
+                                    DX_band[DX_Index1] = "15M";
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 24800000) && (DX_Freq[DX_Index1] <= 24990000))
+                                {
+                                    DX_band[DX_Index1] = "12M";
+                                }
+
+                                else if ((DX_Freq[DX_Index1] >= 28000000) && (DX_Freq[DX_Index1] <= 30000000))
+                                {
+
+                                    DX_band[DX_Index1] = "10M";
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 50000000) && (DX_Freq[DX_Index1] <= 54000000))
+                                {
+
+                                    DX_band[DX_Index1] = "6M";
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 54000001) && (DX_Freq[DX_Index1] <= 98999999)) // .219
+                                {
+
+                                    DX_band[DX_Index1] = "4M";
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 99000000) && (DX_Freq[DX_Index1] <= 143999999)) //.219
+                                {
+
+                                    DX_band[DX_Index1] = "3M";
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 144000000) && (DX_Freq[DX_Index1] <= 148000000))
+                                {
+
+                                    DX_band[DX_Index1] = "2M";
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 148000001) && (DX_Freq[DX_Index1] <= 180000000)) //.219
+                                {
+
+                                    DX_band[DX_Index1] = "1M";
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 440000000) && (DX_Freq[DX_Index1] <= 448000000))
+                                {
+
+                                    DX_band[DX_Index1] = "70CM";
+                                }
+
+                                //.................................................
+
+                                if ((DX_Freq[DX_Index1] >= 1800000) && (DX_Freq[DX_Index1] <= 1830000))
+                                {
+                                    DX_Mode[DX_Index1] = 1; // cw mode
+
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 3500000) && (DX_Freq[DX_Index1] <= 3600000))
+                                {
+                                    DX_Mode[DX_Index1] = 1; // cw mode
+
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 7000000) && (DX_Freq[DX_Index1] <= 7125000))
+                                {
+                                    DX_Mode[DX_Index1] = 1; // cw mode
+
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 10000000) && (DX_Freq[DX_Index1] <= 11000000))
+                                {
+                                    DX_Mode[DX_Index1] = 1; // cw mode
+
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 14000000) && (DX_Freq[DX_Index1] <= 14150000))
+                                {
+                                    DX_Mode[DX_Index1] = 1; // cw mode
+
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 18000000) && (DX_Freq[DX_Index1] <= 18110000))
+                                {
+                                    DX_Mode[DX_Index1] = 1; // cw mode
+
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 21000000) && (DX_Freq[DX_Index1] <= 21200000))
+                                {
+                                    DX_Mode[DX_Index1] = 1; // cw mode
+
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 24800000) && (DX_Freq[DX_Index1] <= 24930000))
+                                {
+                                    DX_Mode[DX_Index1] = 1; // cw mode
+
+                                }
+
+                                else if ((DX_Freq[DX_Index1] >= 28000000) && (DX_Freq[DX_Index1] <= 28300000))
+                                {
+                                    DX_Mode[DX_Index1] = 1; // cw mode
+
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 50000000) && (DX_Freq[DX_Index1] <= 50100000))
+                                {
+                                    DX_Mode[DX_Index1] = 1; // cw mode
+
+                                }
+                                else if ((DX_Freq[DX_Index1] >= 144000000) && (DX_Freq[DX_Index1] <= 144100000))
+                                {
+                                    DX_Mode[DX_Index1] = 1; // cw mode
+
+                                }
+                                else if (
+                                    (DX_Freq[DX_Index1] == 1885000) || (DX_Freq[DX_Index1] == 1900000) || (DX_Freq[DX_Index1] == 1945000) || (DX_Freq[DX_Index1] == 1985000)
+                                    || (DX_Freq[DX_Index1] == 3825000) || (DX_Freq[DX_Index1] == 3870000) || (DX_Freq[DX_Index1] == 3880000) || (DX_Freq[DX_Index1] == 38850000)
+                                     || (DX_Freq[DX_Index1] == 7290000) || (DX_Freq[DX_Index1] == 7295000) || (DX_Freq[DX_Index1] == 14286000) || (DX_Freq[DX_Index1] == 18150000)
+                                     || (DX_Freq[DX_Index1] == 21285000) || (DX_Freq[DX_Index1] == 21425000) || ((DX_Freq[DX_Index1] >= 29000000) && (DX_Freq[DX_Index1] < 29200000))
+                                     || (DX_Freq[DX_Index1] == 50400000) || (DX_Freq[DX_Index1] == 50250000) || (DX_Freq[DX_Index1] == 144400000) || (DX_Freq[DX_Index1] == 144425000)
+                                     || (DX_Freq[DX_Index1] == 144280000) || (DX_Freq[DX_Index1] == 144450000)
+
+                                    )
+                                {
+                                    DX_Mode[DX_Index1] = 14; // AM mode
+                                }
+                                else if (
+                                         ((DX_Freq[DX_Index1] >= 146000000) && (DX_Freq[DX_Index1] <= 148000000)) || ((DX_Freq[DX_Index1] >= 29200000) && (DX_Freq[DX_Index1] <= 29270000))
+                                       || ((DX_Freq[DX_Index1] >= 144500000) && (DX_Freq[DX_Index1] <= 144900000)) || ((DX_Freq[DX_Index1] >= 145100000) && (DX_Freq[DX_Index1] <= 145500000))
+                                       )
+                                {
+                                    DX_Mode[DX_Index1] = 114; // FM mode
+                                }
+
+                                else
+                                {
+                                    DX_Mode[DX_Index1] = 0; // ssb mode
+                                }
+
+
+                            } // try to determine if in the cw portion or ssb portion of each band
+                            catch (FormatException)
+                            {
+                                DX_Freq[DX_Index1] = 0;
+                                DX_Mode[DX_Index1] = 0; // ssb mode
+
+                                Debug.WriteLine("SHOWDX_FREQ not found");
+                            }
+                            catch (ArgumentOutOfRangeException)
+                            {
+                                DX_Freq[DX_Index1] = 0;
+                                DX_Mode[DX_Index1] = 0; // ssb mode
+                                Debug.WriteLine("SHOWDX_FREQ not found");
+                            }
+                            Debug.WriteLine("SHOWDX_Freq:" + DX_Freq[DX_Index1]);
+
+
+
+                            // grab DX_Station Call sign =========================================================================================
+                            // .276
+                            //------------------------------------------------------------------------
+                            // sned string SH/DX or show/dx (shows last 30) oldest first
+                            // 0         10          22          34    40                         67       76
+                            //  14031.9  VE2GDI      05-Aug-2020 0158Z  CW 599 <>FM17rj Glouceste <AI4FH>
+                            // xxxxxx.xx xxxxxxxxxxx xxxxxxxxxxx xxxxx xxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxx
+                            //------------------------------------------------------------------------
+                            // ke9ns standard DX spotting format:  
+                            // 0     6            23 26          39                  70    76   80818283 (83 with everything or 79 with no Grid)
+                            // DX de ke9ns:  7003.5  kc9ffv      up 5                0204Z en52 \a\a\r\n
+                            //------------------------------------------------------------------------
+
+                            try
+                            {
+                                DX_Station[DX_Index1] = message1.Substring(10, 11); // get dx call with 
+                                int pos = DX_Station[DX_Index1].IndexOf(' '); // find the
+                                DX_Station[DX_Index1] = DX_Station[DX_Index1].Substring(0, pos); // reduce the call without the
+
+                                  Debug.WriteLine("DX_Station:" + DX_Station[DX_Index1] + " >" + SpotWatchCall +"<" );
+
+
+                                if (DX_Station[DX_Index1].IndexOf(SpotWatchCall, StringComparison.OrdinalIgnoreCase) != -1) //.269 ignore case
+                                {
+                                    SpotWatchFoundDX = true;
+
+                                }
+
+                            }
+                            catch (FormatException)
+                            {
+                                DX_Station[DX_Index1] = "NA";
+                                Debug.WriteLine("SHOWDX_Callsign not found");
+                            }
+                            catch (ArgumentOutOfRangeException)
+                            {
+                                DX_Station[DX_Index1] = "NA";
+                                Debug.WriteLine("SHOWDX_Callsign not found");
+                            }
+
+
+
+
+                            // grab comments
+                            try
+                            {
+                                DX_Mode2[DX_Index1] = 0; // reset split hz
+
+                                DX_Message[DX_Index1] = message1.Substring(40, 26).ToLower(); // get dx call with : at the end
+
+
+                                if (DX_Message[DX_Index1].IndexOf(SpotWatchCall, StringComparison.OrdinalIgnoreCase) != -1) //.269 ignore case
+                                {
+                                    SpotWatchFoundMess = true;
+
+                                }
+
+                                if (DX_Message[DX_Index1].Contains("cw"))
+                                {
+                                    DX_Mode[DX_Index1] = 1; // cw mode
+
+                                }
+                                else if (DX_Message[DX_Index1].Contains(" rty ") || DX_Message[DX_Index1].Contains("rtty"))
+                                {
+                                    if (chkBoxDIG.Checked != true) continue; // check for a Digitla mode spot
+                                    DX_Mode[DX_Index1] = 2; // RTTY mode
+
+                                }
+                                else if (DX_Message[DX_Index1].Contains("psk"))
+                                {
+                                    if (chkBoxDIG.Checked != true) continue; // check for a Digitla mode spot
+                                    DX_Mode[DX_Index1] = 3; // psk mode
+
+                                }
+                                else if (DX_Message[DX_Index1].Contains("oliv"))
+                                {
+                                    if (chkBoxDIG.Checked != true) continue; // check for a Digitla mode spot
+                                    DX_Mode[DX_Index1] = 4; // olivia mode
+
+                                }
+                                else if (DX_Message[DX_Index1].Contains("jt6"))
+
+                                {
+                                    if (chkBoxDIG.Checked != true) continue; // check for a Digitla mode spot
+                                    DX_Mode[DX_Index1] = 5; // jt65 mode
+
+                                }
+                                else if (DX_Message[DX_Index1].Contains("contesa"))
+                                {
+                                    if (chkBoxDIG.Checked != true) continue; // check for a Digitla mode spot
+                                    DX_Mode[DX_Index1] = 6; // contesa mode
+
+                                }
+                                else if (DX_Message[DX_Index1].Contains("fsk"))
+                                {
+                                    if (chkBoxDIG.Checked != true) continue; // check for a Digitla mode spot
+                                    DX_Mode[DX_Index1] = 7; // fsk mode
+
+                                }
+                                else if (DX_Message[DX_Index1].Contains("mt63"))
+                                {
+                                    if (chkBoxDIG.Checked != true) continue; // check for a Digitla mode spot
+                                    DX_Mode[DX_Index1] = 8; // mt63 mode
+
+                                }
+                                else if (DX_Message[DX_Index1].Contains("domi"))
+                                {
+                                    if (chkBoxDIG.Checked != true) continue; // check for a Digitla mode spot
+                                    DX_Mode[DX_Index1] = 9; // domino mode
+
+                                }
+                                else if (DX_Message[DX_Index1].Contains("packact") || DX_Message[DX_Index1].Contains("packtor") || DX_Message[DX_Index1].Contains("amtor"))
+                                {
+                                    if (chkBoxDIG.Checked != true) continue; // check for a Digitla mode spot
+                                    DX_Mode[DX_Index1] = 10; // pactor mode
+
+                                }
+                                else if (DX_Message[DX_Index1].Contains("fm "))
+                                {
+                                    if (chkBoxSSB.Checked != true) continue; // check for a SSB mode spot
+                                    DX_Mode[DX_Index1] = 11; // fm mode
+
+                                }
+                                else if (DX_Message[DX_Index1].Contains("drm"))
+                                {
+                                    if (chkBoxDIG.Checked != true) continue; // check for a Digitla mode spot
+                                    DX_Mode[DX_Index1] = 12; // DRM mode
+
+                                }
+                                else if (DX_Message[DX_Index1].Contains("sstv"))
+                                {
+                                    if (chkBoxDIG.Checked != true) continue; // check for a Digitla mode spot
+                                    DX_Mode[DX_Index1] = 13; // sstv mode
+
+                                }
+                                else if (DX_Message[DX_Index1].Contains("easypal"))
+                                {
+                                    if (chkBoxDIG.Checked != true) continue; // check for a Digitla mode spot
+                                    DX_Mode[DX_Index1] = 12; // drm mode
+
+                                }
+                                else if (DX_Message[DX_Index1].Contains(" am ") || DX_Message[DX_Index1].Contains(" sam "))
+                                {
+                                    if (chkBoxSSB.Checked != true) continue; // check for a SSB mode spot
+                                    DX_Mode[DX_Index1] = 14; // AM mode
+
+                                }
+                                else if (DX_Message[DX_Index1].Contains("ft8")
+                                    || ((DX_Freq[DX_Index1] >= 1840000) && (DX_Freq[DX_Index1] <= 1865000))
+                                    || ((DX_Freq[DX_Index1] >= 3573000) && (DX_Freq[DX_Index1] <= 3575500))
+                                    // || ((DX_Freq[DX_Index1] >= 5357000)  && (DX_Freq[DX_Index1] <= 5359500))
+                                    || ((DX_Freq[DX_Index1] >= 7074000) && (DX_Freq[DX_Index1] <= 7076500))
+                                    || ((DX_Freq[DX_Index1] >= 10136000) && (DX_Freq[DX_Index1] <= 10138500))
+                                    || ((DX_Freq[DX_Index1] >= 14074000) && (DX_Freq[DX_Index1] <= 14076500))
+                                    || ((DX_Freq[DX_Index1] >= 18100000) && (DX_Freq[DX_Index1] <= 18102500))
+                                    || ((DX_Freq[DX_Index1] >= 21074000) && (DX_Freq[DX_Index1] <= 21076500))
+                                    || ((DX_Freq[DX_Index1] >= 24915000) && (DX_Freq[DX_Index1] <= 24917500))
+                                    || ((DX_Freq[DX_Index1] >= 28074000) && (DX_Freq[DX_Index1] <= 28076500))
+                                    || ((DX_Freq[DX_Index1] >= 50313000) && (DX_Freq[DX_Index1] <= 50315500))
+                                    || ((DX_Freq[DX_Index1] >= 50323000) && (DX_Freq[DX_Index1] <= 50325500))
+                                    )  // FT8 1.84, 3.573, 5.357, 7.074, 10.136, 14.074, 18.1, 21.074, 24.915, 28.074, 50.313
+
+                                {
+                                    if (chkBoxDIG.Checked != true) continue; // check for a Digital mode spot
+                                    DX_Mode[DX_Index1] = 15; // ft8 mode
+
+                                  
+
+                                } // FT8
+                                else if (DX_Message[DX_Index1].Contains("ft4")
+                                  || ((DX_Freq[DX_Index1] >= 3568000) && (DX_Freq[DX_Index1] <= 3571500))
+                                  || ((DX_Freq[DX_Index1] >= 3575000) && (DX_Freq[DX_Index1] <= 3577500))
+                                  || ((DX_Freq[DX_Index1] >= 7047000) && (DX_Freq[DX_Index1] <= 7050500))
+                                  || ((DX_Freq[DX_Index1] >= 10140000) && (DX_Freq[DX_Index1] <= 10142500))
+                                  || ((DX_Freq[DX_Index1] >= 14080000) && (DX_Freq[DX_Index1] <= 14082500))
+                                  || ((DX_Freq[DX_Index1] >= 18104000) && (DX_Freq[DX_Index1] <= 18105500))
+                                  || ((DX_Freq[DX_Index1] >= 21140000) && (DX_Freq[DX_Index1] <= 21142500))
+                                  || ((DX_Freq[DX_Index1] >= 24919000) && (DX_Freq[DX_Index1] <= 24921500))
+                                  || ((DX_Freq[DX_Index1] >= 28180000) && (DX_Freq[DX_Index1] <= 28182500))
+                                  || ((DX_Freq[DX_Index1] >= 50313000) && (DX_Freq[DX_Index1] <= 50315500))
+
+                                  )  // FT8 1.84, 3.573, 5.357, 7.074, 10.136, 14.074, 18.1, 21.074, 24.915, 28.074, 50.313
+
+                                {
+                                    if (chkBoxDIG.Checked != true) continue; // check for a Digital mode spot
+                                    DX_Mode[DX_Index1] = 16; // ft8 mode
+
+
+                                } // FT4
+                                else if (DX_Message[DX_Index1].Contains("mfsk"))
+                                {
+                                    if (chkBoxDIG.Checked != true) continue; // check for a Digitla mode spot
+                                    DX_Mode[DX_Index1] = 16; // mfsk mode
+
+                                }
+                                else if (DX_Message[DX_Index1].Contains("feld"))
+                                {
+                                    if (chkBoxDIG.Checked != true) continue; // check for a Digitla mode spot
+                                    DX_Mode[DX_Index1] = 17; // Feld hell mode
+
+                                }
+
+                                if (DX_Mode[DX_Index1] == 0)
+                                {
+
+                                    if (chkBoxSSB.Checked != true)
+                                    {
+                                        //   Debug.WriteLine("bypass ssb because not looking for ssb");
+                                        continue; // check for a SSB mode spot
+                                    }
+
+                                }
+
+                                if (DX_Mode[DX_Index1] == 1)
+                                {
+
+                                    if (chkBoxCW.Checked != true)
+                                    {
+                                        //  Debug.WriteLine("bypass CW because not looking for CW");
+                                        continue; // check for a CW mode spot
+                                    }
+
+                                }
+
+                                if (DX_Station[DX_Index1].EndsWith("/B") == true) // spot is a beacon
+                                {
+
+                                    if (chkBoxBeacon.Checked != true)
+                                    {
+                                        //   Debug.WriteLine("bypass Beacon because not looking for Beacons");
+                                        continue; // check for a Beacon spot
+                                    }
+
+                                }
+
+                                //----------------------------------------------------------
+                                //.276
+
+                                //------------------------------------------------------------------------
+                                // sned string SH/DX or show/dx (shows last 30) oldest first
+                                // 0         10          22          34    40                         67       76
+                                //  14031.9  VE2GDI      05-Aug-2020 0158Z  CW 599 <>FM17rj Glouceste <AI4FH>
+                                // xxxxxx.xx xxxxxxxxxxx xxxxxxxxxxx xxxxx xxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxx
+                                //------------------------------------------------------------------------
+                                // ke9ns standard DX spotting format:  
+                                // 0     6            23 26          39                  70    76   80818283 (83 with everything or 79 with no Grid)
+                                // DX de ke9ns:  7003.5  kc9ffv      up 5                0204Z en52 \a\a\r\n
+                                //------------------------------------------------------------------------
+
+                                // grab GRID #
+                              //  DX_Grid[DX_Index1] = message1.Substring(76, 4); // get grid
+
+                             //   sb = new StringBuilder(DX_Grid[DX_Index1]); // clear sb string over again
+                             //   sb.Append(')');
+                             //   sb.Insert(0, '('); // to differentiate the spotter from the spotted
+
+                             //   DX_Grid[DX_Index1] = sb.ToString();
+
+
+
+
+                                //--------------------------------------------------------------------------
+                                if (DX_Message[DX_Index1].Contains("<") && DX_Message[DX_Index1].Contains(">")) // check for Grid
+                                {
+
+                                    int ind = DX_Message[DX_Index1].IndexOf(">") + 1;
+
+                                    try // 
+                                    {
+                                        DX_Grid[DX_Index1] = DX_Message[DX_Index1].Substring(ind, 6);
+                                        Debug.WriteLine("SHOWFOUND COMMENT GRID " + DX_Grid[DX_Index1]);
+
+                                    }
+                                    catch // 
+                                    {
+                                        Debug.WriteLine("SHOWDX_GRID not found");
+                                    }
+
+                                } // get Grid from comments
+
+
+                                //----------------------------------------------------------
+
+                                DX_Mode2[DX_Index1] = 0;
+                                //  resultString = Regex.Match(subjectString, @"\d+").Value;  Int32.Parse(resultString) will then give you the number.
+
+                                if (DX_Message[DX_Index1].Contains("up")) // check for split
+                                {
+
+                                    int ind = DX_Message[DX_Index1].IndexOf("up") + 2;
+
+                                    try // try 1
+                                    {
+                                        int split_hz = (int)(Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 4)) * 1000));
+                                        Debug.WriteLine("SHOWFound UP split hz" + split_hz);
+                                        DX_Mode2[DX_Index1] = split_hz;
+                                    }
+                                    catch // catch 1
+                                    {
+
+                                        try // try 2
+                                        {
+                                            int split_hz = (int)(Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 3)) * 1000));
+                                            Debug.WriteLine("Found UP split hz" + split_hz);
+                                            DX_Mode2[DX_Index1] = split_hz;
+                                        }
+                                        catch // catch 2
+                                        {
+
+                                            try // try 3
+                                            {
+                                                int split_hz = (int)(Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 2)) * 1000));
+                                                Debug.WriteLine("Found UP split hz" + split_hz);
+                                                DX_Mode2[DX_Index1] = split_hz;
+                                            }
+                                            catch // catch 3
+                                            {
+
+                                                int ind1 = DX_Message[DX_Index1].IndexOf("up") - 4; //
+
+                                                try // try 4
+                                                {
+
+                                                    int split_hz = (int)(Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind1, 4)) * 1000));
+                                                    Debug.WriteLine("Found UP split hz" + split_hz);
+                                                    DX_Mode2[DX_Index1] = split_hz;
+                                                }
+                                                catch // catch 4
+                                                {
+                                                    ind1++; //
+
+                                                    try // try 5
+                                                    {
+
+                                                        int split_hz = (int)(Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind1, 3)) * 1000));
+                                                        Debug.WriteLine("Found UP split hz" + split_hz);
+                                                        DX_Mode2[DX_Index1] = split_hz;
+                                                    }
+                                                    catch // catch 5
+                                                    {
+                                                        ind1++; //
+
+                                                        try // try 6
+                                                        {
+
+                                                            int split_hz = (int)(Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind1, 2)) * 1000));
+                                                            Debug.WriteLine("Found UP split hz" + split_hz);
+                                                            DX_Mode2[DX_Index1] = split_hz;
+                                                        }
+                                                        catch // catch 6
+                                                        {
+
+                                                            Debug.WriteLine("failed to find up value================");
+                                                            DX_Mode2[DX_Index1] = 1000; // 1khz up
+
+                                                        } // catch6   (2 digits to left side)
+
+                                                    } // catch5   (3 digits to left side)
+
+                                                } // catch4   (4 digits to left side)
+
+                                            } // catch3   (2 digits to right side)
+
+                                        } //catch2  (3 digits to right side)
+
+                                    } // catch 1   (4 digits to right side)
+
+
+                                } // split up
+
+                                else if ((DX_Message[DX_Index1].Contains("dn"))) // check for split down
+                                {
+
+                                    int ind = DX_Message[DX_Index1].IndexOf("dn") + 2;
+
+
+
+                                    try // try 1
+                                    {
+                                        int split_hz = (int)(-Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 4)) * 1000));
+                                        Debug.WriteLine("Found dn split hz" + split_hz);
+                                        DX_Mode2[DX_Index1] = split_hz;
+                                    }
+                                    catch // catch 1
+                                    {
+
+                                        try // try 2
+                                        {
+                                            if (DX_Message[DX_Index1].Substring(ind - 2, 2) == "dn")
+                                            {
+                                                int split_hz = (int)(-Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 3)) * 1000)); // 3 digits after the dnXXX (and dn XX)
+                                                Debug.WriteLine("Found dn split hz" + split_hz);
+                                                DX_Mode2[DX_Index1] = split_hz;
+                                            }
+                                        }
+                                        catch // catch 2
+                                        {
+
+                                            try // try 3
+                                            {
+                                                if (DX_Message[DX_Index1].Substring(ind - 2, 2) == "dn")
+                                                {
+                                                    int split_hz = (int)(-Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 2)) * 1000)); // 2 digits after the dnXX
+                                                    Debug.WriteLine("Found dn split hz" + split_hz);
+                                                    DX_Mode2[DX_Index1] = split_hz;
+                                                }
+                                            }
+                                            catch // catch 3
+                                            {
+
+                                                int ind1 = DX_Message[DX_Index1].IndexOf("dn") - 4; //
+
+                                                try // try 4
+                                                {
+                                                    int split_hz = (int)(-Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind1, 4)) * 1000)); // 4 digits dn  XXXX
+                                                    Debug.WriteLine("Found dn split hz" + split_hz);
+                                                    DX_Mode2[DX_Index1] = split_hz;
+                                                }
+                                                catch // catch 4
+                                                {
+                                                    ind++; //
+
+                                                    try // try 5
+                                                    {
+                                                        int split_hz = (int)(-Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind1, 3)) * 1000));
+                                                        Debug.WriteLine("Found dn split hz" + split_hz);
+                                                        DX_Mode2[DX_Index1] = split_hz;
+                                                    }
+                                                    catch // catch 5
+                                                    {
+                                                        ind1++; //
+
+                                                        try // try 6
+                                                        {
+                                                            int split_hz = (int)(-Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind1, 2)) * 1000));
+                                                            Debug.WriteLine("Found dn split hz" + split_hz);
+                                                            DX_Mode2[DX_Index1] = split_hz;
+                                                        }
+                                                        catch // catch 6
+                                                        {
+
+                                                            Debug.WriteLine("failed to find dn value================");
+                                                            DX_Mode2[DX_Index1] = -1000; // 1khz dn
+
+                                                        } // catch6   (2 digits to left side)
+
+                                                    } // catch5   (3 digits to left side)
+
+                                                } // catch4   (4 digits to left side)
+
+                                            } // catch3   (2 digits to right side)
+
+                                        } //catch2  (3 digits to right side)
+
+                                    } // catch 1   (4 digits to right side)
+
+
+                                } // split down
+                                else if (DX_Message[DX_Index1].Contains("dwn")) // check for split down
+                                {
+
+                                    int ind = DX_Message[DX_Index1].IndexOf("dwn") + 3;
+
+                                    try // try 1
+                                    {
+                                        int split_hz = (int)(-Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 4)) * 1000));
+                                        Debug.WriteLine("Found dn split hz" + split_hz);
+                                        DX_Mode2[DX_Index1] = split_hz;
+                                    }
+                                    catch // catch 1
+                                    {
+
+                                        try // try 2
+                                        {
+                                            int split_hz = (int)(-Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 3)) * 1000));
+                                            Debug.WriteLine("Found dn split hz" + split_hz);
+                                            DX_Mode2[DX_Index1] = split_hz;
+                                        }
+                                        catch // catch 2
+                                        {
+
+                                            try // try 3
+                                            {
+                                                int split_hz = (int)(-Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 2)) * 1000));
+                                                Debug.WriteLine("Found dn split hz" + split_hz);
+                                                DX_Mode2[DX_Index1] = split_hz;
+                                            }
+                                            catch // catch 3
+                                            {
+
+                                                int ind1 = DX_Message[DX_Index1].IndexOf("dwn") - 4; //
+
+                                                try // try 4
+                                                {
+                                                    int split_hz = (int)(-Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind1, 4)) * 1000));
+                                                    Debug.WriteLine("Found dn split hz" + split_hz);
+                                                    DX_Mode2[DX_Index1] = split_hz;
+                                                }
+                                                catch // catch 4
+                                                {
+                                                    ind1++; //
+
+                                                    try // try 5
+                                                    {
+                                                        int split_hz = (int)(-Convert.ToDouble(DX_Message[DX_Index1].Substring(ind1, 3)) * 1000);
+                                                        Debug.WriteLine("Found dn split hz" + split_hz);
+                                                        DX_Mode2[DX_Index1] = split_hz;
+                                                    }
+                                                    catch // catch 5
+                                                    {
+                                                        ind1++; //
+
+                                                        try // try 6
+                                                        {
+                                                            int split_hz = (int)(-Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind1, 2)) * 1000));
+                                                            Debug.WriteLine("Found dn split hz" + split_hz);
+                                                            DX_Mode2[DX_Index1] = split_hz;
+                                                        }
+                                                        catch // catch 6
+                                                        {
+
+                                                            Debug.WriteLine("failed to find dn value================");
+                                                            DX_Mode2[DX_Index1] = -1000; // 1khz dn
+
+                                                        } // catch6   (2 digits to left side)
+
+                                                    } // catch5   (3 digits to left side)
+
+                                                } // catch4   (4 digits to left side)
+
+                                            } // catch3   (2 digits to right side)
+
+                                        } //catch2  (3 digits to right side)
+
+                                    } // catch 1   (4 digits to right side)
+
+
+                                } // split down
+                                else if (DX_Message[DX_Index1].Contains("down")) // check for split down
+                                {
+
+                                    int ind = DX_Message[DX_Index1].IndexOf("down") + 4;
+
+                                    try // try 1
+                                    {
+                                        int split_hz = (int)(-Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 4)) * 1000));
+                                        Debug.WriteLine("Found dn split hz" + split_hz);
+                                        DX_Mode2[DX_Index1] = split_hz;
+                                    }
+                                    catch // catch 1
+                                    {
+
+                                        try // try 2
+                                        {
+                                            int split_hz = (int)(-Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 3)) * 1000));
+                                            Debug.WriteLine("Found dn split hz" + split_hz);
+                                            DX_Mode2[DX_Index1] = split_hz;
+                                        }
+                                        catch // catch 2
+                                        {
+
+                                            try // try 3
+                                            {
+                                                int split_hz = (int)(-Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 2)) * 1000));
+                                                Debug.WriteLine("Found dn split hz" + split_hz);
+                                                DX_Mode2[DX_Index1] = split_hz;
+                                            }
+                                            catch // catch 3
+                                            {
+
+                                                int ind1 = DX_Message[DX_Index1].IndexOf("down") - 4; //
+
+                                                try // try 4
+                                                {
+                                                    int split_hz = (int)(-Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind1, 4)) * 1000));
+                                                    Debug.WriteLine("Found dn split hz" + split_hz);
+                                                    DX_Mode2[DX_Index1] = split_hz;
+                                                }
+                                                catch // catch 4
+                                                {
+                                                    ind1++; //
+
+                                                    try // try 5
+                                                    {
+                                                        int split_hz = (int)(-Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind1, 3)) * 1000));
+                                                        Debug.WriteLine("Found dn split hz" + split_hz);
+                                                        DX_Mode2[DX_Index1] = split_hz;
+                                                    }
+                                                    catch // catch 5
+                                                    {
+                                                        ind1++; //
+
+                                                        try // try 6
+                                                        {
+                                                            int split_hz = (int)(-Math.Abs(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind1, 2)) * 1000));
+                                                            Debug.WriteLine("Found dn split hz" + split_hz);
+                                                            DX_Mode2[DX_Index1] = split_hz;
+                                                        }
+                                                        catch // catch 6
+                                                        {
+
+                                                            Debug.WriteLine("failed to find dn value================");
+                                                            DX_Mode2[DX_Index1] = -1000; // 1khz dn
+
+                                                        } // catch6   (2 digits to left side)
+
+                                                    } // catch5   (3 digits to left side)
+
+                                                } // catch4   (4 digits to left side)
+
+                                            } // catch3   (2 digits to right side)
+
+                                        } //catch2  (3 digits to right side)
+
+                                    } // catch 1   (4 digits to right side)
+
+                                } // split down
+                                else if ((DX_Message[DX_Index1].Contains("9+")) || (DX_Message[DX_Index1].Contains("59+"))) // check for split
+                                {
+                                    // ignore + if its part of s9+
+                                }
+
+                                else if (DX_Message[DX_Index1].Contains("+")) // check for split
+                                {
+
+                                    int ind = DX_Message[DX_Index1].IndexOf("+") + 1;
+
+                                    try // try 1
+                                    {
+                                        int split_hz = (int)(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 4)) * 1000);
+                                        Debug.WriteLine("Found UP split hz" + split_hz);
+                                        DX_Mode2[DX_Index1] = split_hz;
+                                    }
+                                    catch // catch 1
+                                    {
+
+                                        try // try 2
+                                        {
+                                            int split_hz = (int)(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 3)) * 1000);
+                                            Debug.WriteLine("Found UP split hz" + split_hz);
+                                            DX_Mode2[DX_Index1] = split_hz;
+                                        }
+                                        catch // catch 2
+                                        {
+
+                                            try // try 3
+                                            {
+                                                int split_hz = (int)(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 2)) * 1000);
+                                                Debug.WriteLine("Found UP split hz" + split_hz);
+                                                DX_Mode2[DX_Index1] = split_hz;
+                                            }
+                                            catch // catch 3
+                                            {
+
+                                                Debug.WriteLine("failed to find up value================");
+                                                DX_Mode2[DX_Index1] = 0; // 
+
+
+                                            } // catch3   (2 digits to right side)
+
+                                        } //catch2  (3 digits to right side)
+
+                                    } // catch 1   (4 digits to right side)
+
+                                    //  if (DX_Mode2[DX_Index1] > 9000) DX_Mode2[DX_Index1] = 0;
+
+                                } // split up+
+
+                                else if (DX_Message[DX_Index1].Contains(" -")) // check for split
+                                {
+
+                                    int ind = DX_Message[DX_Index1].IndexOf("-") + 1;
+
+                                    try // try 1
+                                    {
+                                        int split_hz = (int)(-Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 4)) * 1000);
+                                        Debug.WriteLine("Found dn split hz" + split_hz);
+                                        DX_Mode2[DX_Index1] = split_hz;
+                                    }
+                                    catch // catch 1
+                                    {
+
+                                        try // try 2
+                                        {
+                                            int split_hz = (int)(-Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 3)) * 1000);
+                                            Debug.WriteLine("Found dn split hz" + split_hz);
+                                            DX_Mode2[DX_Index1] = split_hz;
+                                        }
+                                        catch // catch 2
+                                        {
+
+                                            try // try 3
+                                            {
+                                                int split_hz = (int)(-Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 2)) * 1000);
+                                                Debug.WriteLine("Found dn split hz" + split_hz);
+                                                DX_Mode2[DX_Index1] = split_hz;
+                                            }
+                                            catch // catch 3
+                                            {
+
+                                                Debug.WriteLine("failed to find up value================");
+                                                DX_Mode2[DX_Index1] = 0; // 
+
+
+                                            } // catch3   (2 digits to right side)
+
+                                        } //catch2  (3 digits to right side)
+
+                                    } // catch 1   (4 digits to right side)
+
+
+                                } // split dwn -
+
+                                else if ((DX_Message[DX_Index1].Contains("qsx"))) // check for split
+                                {
+
+                                    int ind = DX_Message[DX_Index1].IndexOf("qsx") + 3;
+
+                                    try // try 1
+                                    {
+                                        int split_hz = (int)(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 8)) * 1000);
+                                        Debug.WriteLine("Found dn split hz" + split_hz);
+                                        DX_Mode2[DX_Index1] = split_hz;
+
+                                        DX_Mode2[DX_Index1] = DX_Mode2[DX_Index1] - DX_Freq[DX_Index1];
+
+
+                                    }
+                                    catch // catch 1
+                                    {
+
+                                        try // try 2
+                                        {
+                                            int split_hz = (int)(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 7)) * 1000);
+
+                                            if (split_hz < 10000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QsX .412  then treat it with the same mhz as DX_Freq
+                                            else if (split_hz < 100000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QsX 18.412  then it must be in mhz
+
+                                            Debug.WriteLine("Found qsx split hz" + split_hz);
+
+                                            DX_Mode2[DX_Index1] = split_hz;
+                                            DX_Mode2[DX_Index1] = DX_Mode2[DX_Index1] - DX_Freq[DX_Index1];
+
+
+                                        }
+                                        catch // catch 2
+                                        {
+                                            try // try 3
+                                            {
+                                                int split_hz = (int)(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 6)) * 1000);
+
+                                                if (split_hz < 10000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QSX .412  then treat it with the same mhz as DX_Freq
+                                                else if (split_hz < 100000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QSX 18.412  then it must be in mhz
+
+                                                Debug.WriteLine("Found dn split hz" + split_hz);
+
+                                                DX_Mode2[DX_Index1] = split_hz;
+                                                DX_Mode2[DX_Index1] = DX_Mode2[DX_Index1] - DX_Freq[DX_Index1];
+
+
+                                            }
+                                            catch // catch 3
+                                            {
+
+                                                Debug.WriteLine("failed to find up value================");
+                                                DX_Mode2[DX_Index1] = 0; // 
+
+                                            } // catch 3   (6 digits to right side)
+
+                                        } // catch 2   (7 digits to right side)
+
+                                    } // catch 1   (8 digits to right side)
+
+
+                                } // split qSx
+                                else if ((DX_Message[DX_Index1].Contains("QSX"))) // check for split
+                                {
+
+                                    int ind = DX_Message[DX_Index1].IndexOf("QSX") + 3;
+
+                                    try // try 1
+                                    {
+                                        int split_hz = (int)(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 8)) * 1000);
+                                        Debug.WriteLine("Found dn split hz" + split_hz);
+                                        DX_Mode2[DX_Index1] = split_hz;
+
+                                        DX_Mode2[DX_Index1] = DX_Mode2[DX_Index1] - DX_Freq[DX_Index1];
+
+
+                                    }
+                                    catch // catch 1
+                                    {
+
+                                        try // try 2
+                                        {
+                                            int split_hz = (int)(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 7)) * 1000);
+
+                                            if (split_hz < 10000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QsX .412  then treat it with the same mhz as DX_Freq
+                                            else if (split_hz < 100000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QsX 18.412  then it must be in mhz
+
+                                            Debug.WriteLine("Found qsx split hz" + split_hz);
+
+                                            DX_Mode2[DX_Index1] = split_hz;
+                                            DX_Mode2[DX_Index1] = DX_Mode2[DX_Index1] - DX_Freq[DX_Index1];
+
+
+                                        }
+                                        catch // catch 2
+                                        {
+                                            try // try 3
+                                            {
+                                                int split_hz = (int)(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 6)) * 1000);
+
+                                                if (split_hz < 10000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QSX .412  then treat it with the same mhz as DX_Freq
+                                                else if (split_hz < 100000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QSX 18.412  then it must be in mhz
+
+                                                Debug.WriteLine("Found dn split hz" + split_hz);
+
+                                                DX_Mode2[DX_Index1] = split_hz;
+                                                DX_Mode2[DX_Index1] = DX_Mode2[DX_Index1] - DX_Freq[DX_Index1];
+
+
+                                            }
+                                            catch // catch 3
+                                            {
+
+                                                Debug.WriteLine("failed to find up value================");
+                                                DX_Mode2[DX_Index1] = 0; // 
+
+                                            } // catch 3   (6 digits to right side)
+
+                                        } // catch 2   (7 digits to right side)
+
+                                    } // catch 1   (8 digits to right side)
+
+
+                                } // split qSx
+
+                                else if (DX_Message[DX_Index1].Contains("qrz")) // check for split
+                                {
+
+                                    int ind = DX_Message[DX_Index1].IndexOf("qrz") + 3;
+
+                                    try // try 1
+                                    {
+                                        int split_hz = (int)(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 8)) * 1000);
+
+                                        if (split_hz < 10000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QSX .412  then treat it with the same mhz as DX_Freq
+                                        else if (split_hz < 100000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QSX 18.412  then it must be in mhz
+
+                                        Debug.WriteLine("Found qrz split hz" + split_hz);
+
+                                        DX_Mode2[DX_Index1] = split_hz;
+                                        DX_Mode2[DX_Index1] = DX_Mode2[DX_Index1] - DX_Freq[DX_Index1];
+
+
+                                    }
+                                    catch // catch 1
+                                    {
+                                        try // try 2
+                                        {
+                                            int split_hz = (int)(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 7)) * 1000);
+
+                                            if (split_hz < 10000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QSX .412  then treat it with the same mhz as DX_Freq
+                                            else if (split_hz < 100000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QSX 18.412  then it must be in mhz
+
+                                            Debug.WriteLine("Found qrz split hz" + split_hz);
+
+                                            DX_Mode2[DX_Index1] = split_hz;
+                                            DX_Mode2[DX_Index1] = DX_Mode2[DX_Index1] - DX_Freq[DX_Index1];
+
+                                        }
+                                        catch // catch 2
+                                        {
+                                            try // try 3
+                                            {
+                                                int split_hz = (int)(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 6)) * 1000);
+
+                                                if (split_hz < 10000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QSX .412  then treat it with the same mhz as DX_Freq
+                                                else if (split_hz < 100000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QSX 18.412  then it must be in mhz
+
+                                                Debug.WriteLine("Found dn split hz" + split_hz);
+                                                DX_Mode2[DX_Index1] = split_hz;
+
+                                                DX_Mode2[DX_Index1] = DX_Mode2[DX_Index1] - DX_Freq[DX_Index1];
+
+
+                                            }
+                                            catch // catch 3
+                                            {
+
+                                                Debug.WriteLine("failed to find up value================");
+                                                DX_Mode2[DX_Index1] = 0; // 
+
+                                            } // catch 3   (6 digits to right side)
+
+                                        } // catch 2   (7 digits to right side)
+
+                                    } // catch 1   (8 digits to right side)
+
+
+                                } // split qrz
+
+                                else if (DX_Message[DX_Index1].Contains("QRZ")) // check for split
+                                {
+
+                                    int ind = DX_Message[DX_Index1].IndexOf("QRZ") + 3;
+
+                                    try // try 1
+                                    {
+                                        int split_hz = (int)(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 8)) * 1000);
+
+                                        if (split_hz < 10000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QSX .412  then treat it with the same mhz as DX_Freq
+                                        else if (split_hz < 100000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QSX 18.412  then it must be in mhz
+
+                                        Debug.WriteLine("Found qrz split hz" + split_hz);
+
+                                        DX_Mode2[DX_Index1] = split_hz;
+                                        DX_Mode2[DX_Index1] = DX_Mode2[DX_Index1] - DX_Freq[DX_Index1];
+
+
+                                    }
+                                    catch // catch 1
+                                    {
+                                        try // try 2
+                                        {
+                                            int split_hz = (int)(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 7)) * 1000);
+
+                                            if (split_hz < 10000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QSX .412  then treat it with the same mhz as DX_Freq
+                                            else if (split_hz < 100000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QSX 18.412  then it must be in mhz
+
+                                            Debug.WriteLine("Found qrz split hz" + split_hz);
+
+                                            DX_Mode2[DX_Index1] = split_hz;
+                                            DX_Mode2[DX_Index1] = DX_Mode2[DX_Index1] - DX_Freq[DX_Index1];
+
+                                        }
+                                        catch // catch 2
+                                        {
+                                            try // try 3
+                                            {
+                                                int split_hz = (int)(Convert.ToDouble(DX_Message[DX_Index1].Substring(ind, 6)) * 1000);
+
+                                                if (split_hz < 10000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QSX .412  then treat it with the same mhz as DX_Freq
+                                                else if (split_hz < 100000) split_hz = (DX_Freq[DX_Index1] / 1000000) + split_hz; // if its QSX 18.412  then it must be in mhz
+
+                                                Debug.WriteLine("Found dn split hz" + split_hz);
+                                                DX_Mode2[DX_Index1] = split_hz;
+
+                                                DX_Mode2[DX_Index1] = DX_Mode2[DX_Index1] - DX_Freq[DX_Index1];
+
+
+                                            }
+                                            catch // catch 3
+                                            {
+
+                                                Debug.WriteLine("failed to find up value================");
+                                                DX_Mode2[DX_Index1] = 0; // 
+
+                                            } // catch 3   (6 digits to right side)
+
+                                        } // catch 2   (7 digits to right side)
+
+                                    } // catch 1   (8 digits to right side)
+
+
+                                } // split qrz
+
+
+
+
+                            } // try to parse dx spot message above
+                            catch (FormatException e)
+                            {
+                                Debug.WriteLine("mode issue" + e);
+                                Debug.WriteLine("SHOWDX_Message not found");
+
+                            }
+                            catch (ArgumentOutOfRangeException e)
+                            {
+                                Debug.WriteLine("mode1 issue" + e);
+                                Debug.WriteLine("SHOWDX_Message not found");
+                            }
+                            //  Debug.WriteLine("DX_Message " + DX_Message[DX_Index1]);
+
+                            // grab time
+                            try
+                            {
+                                //  DX_Time[DX_Index1] = Convert.ToInt16(message1.Substring(70, 4)); // get time from dx spot
+
+                                DX_Time[DX_Index1] = UTCNEW; // use the my UTC because some spotters have issues and the spot has the wrong time in it.
+
+
+                            }
+                            catch (Exception)
+                            {
+                                DX_Time[DX_Index1] = UTCNEW;
+
+                            }
+
+                            //   Debug.WriteLine("DX_Time " + DX_Time[DX_Index1])
+
+
+
+                            // set age of spot to 0;
+                            DX_Age[DX_Index1] = "00"; // reset to start
+
+
+
+
+                            //=================================================================================================
+                            //=================================================================================================
+
+                            // CHECK HERE FOR (NA) NORTH AMERICAN,  OR EXCLUDE NORTH AMERICAN SPOTS
+
+                            //=================================================================
+                            //=================================================================
+                            //=================================================================
+                            // ke9ns DX SPOT FILTERS (EXCLUDE NA HERE)
+                            if (chkBoxWrld.Checked) // filter out US calls signs
+                            {
+
+                                string us1 = DX_Spotter[DX_Index1].Substring(1, 1); // grab first char of Spotter callsign becuase I added a < > around the spotter callsign
+                                string us2 = DX_Spotter[DX_Index1].Substring(2, 1); // grab second char of Spotter callsign
+
+                                //   Debug.WriteLine("us1 " + us1 + " us2 " + us2);
+
+                                Regex r = new Regex("[KNWAX]"); // first char (include X for Mexico in the NA spots)
+                                Regex r1 = new Regex("[A-Z0-9]"); // 2nd char to select as a NA spot
+                                Regex r2 = new Regex("[ABCDEFGYO]"); // 2nd char // for V as the first char for Canada
+                                Regex r3 = new Regex("[YGFIJK]"); // 2nd char // for C as the first char
+
+
+                                if ((us1 == "V") || (us1 == "C")) // check for Canada (NA)
+                                {
+                                    if (((us1 == "V") && (r2.IsMatch(us2))) || ((us1 == "C") && (r3.IsMatch(us2))))
+                                    {
+                                        Debug.WriteLine("bypass4a " + DX_Spotter[DX_Index1]);
+                                        continue; // dont show spot if not on the r1 list
+                                    }
+                                    goto PASS2; // if the 1st letter is not a US letter then GOOD use SPOT
+
+                                }
+                                else
+                                {
+                                    if ((r.IsMatch(us1)))
+                                    {
+                                        Debug.WriteLine("bypass3 " + DX_Spotter[DX_Index1]);
+                                        continue;// dont show spot if not on the r list
+                                    }
+
+                                    // Debug.WriteLine("============CHECK3, fist us1 letter good for not being NA " + DX_Spotter[DX_Index1]);
+                                    goto PASS2; // if the 1st letter is not a US letter then GOOD use SPOT
+
+                                }
+
+                                if ((r1.IsMatch(us2)))
+                                {
+                                    Debug.WriteLine("bypass4 " + DX_Spotter[DX_Index1]);
+                                    continue; // dont show spot if not on the r1 list
+                                }
+
+
+                            }
+                            else if (chkBoxNA.Checked) // filter out call signs outside of NA
+                            {
+
+                                string us1 = DX_Spotter[DX_Index1].Substring(1, 1);// was 0,1 now 1,1 because I added <>
+                                string us2 = DX_Spotter[DX_Index1].Substring(2, 1);// was 1,1
+                                string us3 = DX_Spotter[DX_Index1].Substring(3, 1);// 3rc char
+
+
+                                Debug.WriteLine("us1 " + us1 + " us2 " + us2);
+
+
+                                Regex r = new Regex("[KNWAVX]"); // first char
+                                Regex r1 = new Regex("[A-Z0-9]"); // 2nd char
+                                Regex r2 = new Regex("[ABCDEFGYO]"); // 2nd char // for V as the first char
+                                Regex r3 = new Regex("[YGFIJK]"); // 2nd char // for C as the first char
+                                Regex r4 = new Regex("[0-9]"); // 3rd char to filter out A71xx for example
+
+                                if (!(r.IsMatch(us1)))
+                                {
+                                    Debug.WriteLine("bypass1 " + DX_Spotter[DX_Index1]);
+                                    continue;// dont show spot if not on the r list
+                                }
+
+                                if ((r4.IsMatch(us2)) && (r4.IsMatch(us3))) // if call has 2 numbers in it, then its not North america
+                                {
+                                    Debug.WriteLine("bypass3 " + DX_Spotter[DX_Index1]);
+                                    continue;// dont show spot if not on the r list
+
+                                }
+                                else if ((us1 == "V") || (us1 == "C"))
+                                {
+                                    if (((us1 == "V") && !(r2.IsMatch(us2))) || ((us1 == "C") && !(r3.IsMatch(us2))))
+                                    {
+                                        Debug.WriteLine("bypass2a " + DX_Spotter[DX_Index1]);
+                                        continue; // dont show spot if not on the r1 list
+                                    }
+                                }
+                                else
+                                {
+                                    if (!(r1.IsMatch(us2)))
+                                    {
+                                        Debug.WriteLine("bypass2 " + DX_Spotter[DX_Index1]);
+                                        continue; // dont show spot if not on the r1 list
+                                    }
+                                }
+
+
+                            } // checkBoxUSspot.Checked)
+
+                            SP4_Active = 1; // processing message
+
+                        //=================================================================
+                        //=================================================================
+                        //=================================================================
+                        // ke9ns check for STATION DUPLICATES , there can only be 1 possible duplicate per spot added (but IGNORE if on 2nd band)
+
+                        PASS2: int xx = 0;
+
+                            if (SpotWatchFound || SpotWatchFoundDX || SpotWatchFoundMess) //.269 270
+                            {
+                                SpotWatchOK = true;
+
+                                SpotWatchGoVfoA = false;
+                                SpotWatchGoVfoB = false;
+
+                                Debug.WriteLine("WATCH FOUND " + message1);
+
+                                console.SpotWatchNow = message1; // ke9ns: open WATCH BOX now check if user wants to go to VFOA/B with watch spot
+
+                                SpotWatchFound = false; // reset for next
+                                SpotWatchFoundDX = false;
+                                SpotWatchFoundMess = false;
+                                SpotWatchOK = false;
+
+                            }
+
+
+                            for (int ii = 0; ii <= DX_Index; ii++)
+                            {
+                                if ((xx == 0) && (DX_Station[DX_Index1] == DX_Station[ii])) // if DX stations Match
+                                {
+                                    if ((Math.Abs(DX_Freq[DX_Index1] - DX_Freq[ii])) < 1000000) // if DX stations freq changes by less than 1mhz, then remove it as a dup, DX station moved freq
+                                    {
+
+                                        xx = 1;
+                                        Debug.WriteLine("station dup============" + DX_Freq[ii] + " dup " + DX_Freq[DX_Index1] + " dup " + DX_Station[DX_Index1] + " dup " + DX_Station[ii]);
+                                    } // freq too close so its a dup
+                                }
+
+                                if (xx == 1)
+                                {
+                                    DX_FULLSTRING[ii] = DX_FULLSTRING[ii + 1]; // 
+
+                                    DX_Station[ii] = DX_Station[ii + 1];
+                                    DX_Freq[ii] = DX_Freq[ii + 1];
+                                    DX_Spotter[ii] = DX_Spotter[ii + 1];
+                                    DX_Message[ii] = DX_Message[ii + 1];
+                                    DX_Grid[ii] = DX_Grid[ii + 1];
+                                    DX_Time[ii] = DX_Time[ii + 1];
+                                    DX_Age[ii] = DX_Age[ii + 1];
+                                    DX_Mode[ii] = DX_Mode[ii + 1];
+                                    DX_Mode2[ii] = DX_Mode2[ii + 1];
+
+                                    DX_country[ii] = DX_country[ii + 1];
+                                    DX_X[ii] = DX_X[ii + 1];
+                                    DX_Y[ii] = DX_Y[ii + 1];
+                                    DX_Beam[ii] = DX_Beam[ii + 1];
+
+
+                                    DX_LoTW[ii] = DX_LoTW[ii + 1]; // used by LoTW
+                                    DX_band[ii] = DX_band[ii + 1];
+                                    DX_modegroup[ii] = DX_modegroup[ii + 1];
+                                    DX_dxcc[ii] = DX_dxcc[ii + 1];
+                                    DX_state[ii] = DX_state[ii + 1];
+
+                                    DX_LoTW_RTF[ii] = DX_LoTW_RTF[ii + 1];
+                                    DX_LoTW_Status[ii] = DX_LoTW_Status[ii + 1]; // .201
+
+                                }
+
+                            } // for ii check for dup in list
+                            DX_Index = (DX_Index - xx);  // readjust the length of the spot list after taking out the duplicates
+
+                            //=================================================================================================
+                            //=================================================================================================
+                            // ke9ns check for FREQ DUPLICATES , there can only be 1 possible duplicate per spot added (but IGNORE if on 2nd band)
+                            //   except for FT8 frequencies
+
+                            xx = 0;
+                            for (int ii = 0; ii <= DX_Index; ii++)
+                            {
+
+                                //                                if ((xx == 0) && (DX_Freq[DX_Index1] == DX_Freq[ii])) // if you already have this station in the spot list on the screen remove the old spot
+                                if ((xx == 0) && ((DX_Freq[DX_Index1] == DX_Freq[ii]) &&
+                                     (DX_Freq[ii] != 1840000) && (DX_Freq[ii] != 3573000) && (DX_Freq[ii] != 7074000) && (DX_Freq[ii] != 10136000) &&
+                                     (DX_Freq[ii] != 14074000) && (DX_Freq[ii] != 18100000) && (DX_Freq[ii] != 21074000) && (DX_Freq[ii] != 24915000) &&
+                                      (DX_Freq[ii] != 50313000) && (DX_Freq[ii] != 50323000))) // if you already have this station in the spot list on the screen remove the old spot
+                                {
+                                    xx = 1;
+                                    Debug.WriteLine("freq dup============");
+                                }
+
+                                if (xx == 1)
+                                {
+                                    DX_FULLSTRING[ii] = DX_FULLSTRING[ii + 1]; // 
+
+                                    DX_Station[ii] = DX_Station[ii + 1];
+                                    DX_Freq[ii] = DX_Freq[ii + 1];
+                                    DX_Spotter[ii] = DX_Spotter[ii + 1];
+                                    DX_Message[ii] = DX_Message[ii + 1];
+                                    DX_Grid[ii] = DX_Grid[ii + 1];
+                                    DX_Time[ii] = DX_Time[ii + 1];
+                                    DX_Age[ii] = DX_Age[ii + 1];
+                                    DX_Mode[ii] = DX_Mode[ii + 1];
+                                    DX_Mode2[ii] = DX_Mode2[ii + 1];
+
+                                    DX_country[ii] = DX_country[ii + 1];
+                                    DX_X[ii] = DX_X[ii + 1];
+                                    DX_Y[ii] = DX_Y[ii + 1];
+                                    DX_Beam[ii] = DX_Beam[ii + 1];
+
+
+                                    DX_LoTW[ii] = DX_LoTW[ii + 1]; // used by LoTW
+                                    DX_band[ii] = DX_band[ii + 1];
+                                    DX_modegroup[ii] = DX_modegroup[ii + 1];
+                                    DX_dxcc[ii] = DX_dxcc[ii + 1];
+                                    DX_state[ii] = DX_state[ii + 1];
+
+                                    DX_LoTW_RTF[ii] = DX_LoTW_RTF[ii + 1];
+                                    DX_LoTW_Status[ii] = DX_LoTW_Status[ii + 1]; // .201
+                                }
+
+                            } // for ii check for dup in list
+
+                            DX_Index = (DX_Index - xx);  // readjust the length of the spot list after taking out the duplicates
+
+
+
+
+                            //=================================================================================================
+                            //=================================================================================================
+                            // ke9ns  passed the spotter, dx station , freq, and time test
+
+
+                            DX_Index++; // jump to PASS2 if it passed the valid call spotter test
+
+
+
+                            if (DX_Index > 150)
+                            {
+                                Debug.WriteLine("SHOWDX SPOT REACH 150 ");
+                                DX_Index = 150; // you have reached max spots
+                            }
+
+                            //   Debug.WriteLine("index "+ DX_Index);
+
+
+
+                            //=================================================================================================
+                            //=================================================================================================
+                            // ke9ns FILO buffer after taking out duplicate from above
+                            for (int ii = DX_Index; ii > 0; ii--)
+                            {
+                                DX_FULLSTRING[ii] = DX_FULLSTRING[ii - 1]; // move array stack down one (oldest dropped off)
+
+                                DX_Station[ii] = DX_Station[ii - 1];
+                                DX_Freq[ii] = DX_Freq[ii - 1];
+                                DX_Spotter[ii] = DX_Spotter[ii - 1];
+                                DX_Message[ii] = DX_Message[ii - 1];
+                                DX_Grid[ii] = DX_Grid[ii - 1];
+                                DX_Time[ii] = DX_Time[ii - 1];
+                                DX_Age[ii] = DX_Age[ii - 1];
+                                DX_Mode[ii] = DX_Mode[ii - 1];
+                                DX_Mode2[ii] = DX_Mode2[ii - 1];
+
+                                DX_country[ii] = DX_country[ii - 1];
+                                DX_X[ii] = DX_X[ii - 1];
+                                DX_Y[ii] = DX_Y[ii - 1];
+                                DX_Beam[ii] = DX_Beam[ii - 1];
+
+
+                                DX_LoTW[ii] = DX_LoTW[ii - 1]; // used by LoTW
+                                DX_band[ii] = DX_band[ii - 1];
+                                DX_modegroup[ii] = DX_modegroup[ii - 1];
+                                DX_dxcc[ii] = DX_dxcc[ii - 1];
+                                DX_state[ii] = DX_state[ii - 1];
+
+                                DX_LoTW_RTF[ii] = DX_LoTW_RTF[ii - 1];
+                                DX_LoTW_Status[ii] = DX_LoTW_Status[ii - 1]; // .201
+
+                            } // for ii
+
+
+
+                            //=================================================================================================
+                            //=================================================================================================
+                            //.276 this is the SHOWDX section
+                            //------------------------------------------------------------------------
+                            // sned string SH/DX or show/dx (shows last 30) oldest first
+                            // 0         10          22          34    40                         67       76
+                            //  14031.9  VE2GDI      05-Aug-2020 0158Z  CW 599 <>FM17rj Glouceste <AI4FH>
+                            // xxxxxx.xx xxxxxxxxxxx xxxxxxxxxxx xxxxx xxxxxxxxxxxxxxxxxxxxxxxxxx xxxxxxxxxx
+                            //------------------------------------------------------------------------
+                            // ke9ns standard DX spotting format:  
+                            // 0     6            23 26          39                  70    76   80818283 (83 with everything or 79 with no Grid)
+                            // DX de ke9ns:  7003.5  kc9ffv      up 5                0204Z en52 \a\a\r\n
+                            //------------------------------------------------------------------------
+
+
+                            Debug.WriteLine("SHOWDX= DXStation=" + message1.Substring(10, 11));
+                            int pos1 = message1.IndexOf(">", 67);
+                            Debug.WriteLine("SHOWDX= DXSpotter=" + message1.Substring(67, pos1 - 66));
+                            Debug.WriteLine("SHOWDX= DXComments=" + message1.Substring(40, 26).ToLower());
+                            Debug.WriteLine("SHOWDX= DXFREQ=" + message1.Substring(0, 9));
+                            Debug.WriteLine("SHOWDX= DXFREQ=" + (int)((double)Convert.ToDouble(message1.Substring(0, 9)) * (double)1000.0));
+
+                            int pos5 = message1.Substring(68, pos1 - 68).Length; // length of spotter callsign
+                            int pos6 = 10 - pos5; // max is 10, so how many white spaces to add?
+
+                            // .276 make a line for the spotter screen when in SHOW/DX
+                            DX_FULLSTRING[0] = "DX de " + message1.Substring(68, pos1 - 68) + ":".PadRight(pos6) + message1.Substring(0, 9) + " " + message1.Substring(10,11) + " " + message1.Substring(40,26)+ "      " + message1.Substring(34,5).PadRight(10);
+
+
+
+                          //  DX_FULLSTRING[0] = message1; // add newest message to top
+
+
+                            DX_Station[0] = DX_Station[DX_Index1];    //insert new spot on top of list now
+                            DX_Freq[0] = DX_Freq[DX_Index1];
+                            DX_Spotter[0] = DX_Spotter[DX_Index1];
+                            DX_Message[0] = DX_Message[DX_Index1];
+                            DX_Grid[0] = DX_Grid[DX_Index1];
+                            DX_Time[0] = DX_Time[DX_Index1];
+                            DX_Age[0] = DX_Age[DX_Index1];
+                            DX_Mode[0] = DX_Mode[DX_Index1];
+                            DX_Mode2[0] = DX_Mode2[DX_Index1];
+
+                            DX_country[0] = DX_country[DX_Index1];
+                            DX_X[0] = DX_X[DX_Index1];
+                            DX_Y[0] = DX_Y[DX_Index1];
+                            DX_Beam[0] = DX_Beam[DX_Index1];
+
+
+                            DX_band[0] = DX_band[DX_Index1];
+                            DX_modegroup[0] = DX_modegroup[DX_Index1];
+
+                            //   DX_dxcc[0] = DX_dxcc[DX_Index1]; // updated in upatemapspots
+                            //   DX_state[0] = DX_state[DX_Index1]; 
+                            //   DX_LoTW[0] = DX_LoTW[DX_Index1]; // used by LoTW updated down below
+                            //   DX_LoTW_RTF[0] = DX_LoTW_RTF[DX_Index1];
+                            //------------------------------------------------------------------------------------
+                            //------------------------------------------------------------------------------------
+                            //------------------------------------------------------------------------------------
+                            // Crosscheck Station Call sign Prefix with data from DXLOC.txt (lat and lon) 
+                            // and create a list of Country, Callsign, X, Y on unscaled map
+
+                            //.269 270
+
+
+                            updatemapspots(); // Updater map
+
+
+                            /*
+                               1=    confirmed LoTW qsl with DXcall 
+                               2=    LoTW qsl with DXcall on this Band 
+                               4=    nonconfirmed (but not new) LoTW qsl with DXcall on this Band awaiting confirmation
+                               8=    indicates nothing in your LoTW log (purple)
+                               16=   I have a confirmed contact with some other station at this DXCC entity
+                               32=   I have a confirmed contact with some other station at this DXCC entity and the same Band 
+                               64=   This DXcall grid is new to me
+                               128=  This DXcall grid on this band is new to me 
+                               256=   I have a confirmed contact with some other station of this US state
+                               512=   I have a confirmed contact with some other station at this US state and same Band 
+                               1024= beacon Spot cannot make a contact with a beacon
+
+                               3 = I have a confirmed LoTW with this DX station and on this Band
+                              48= I have a confirmed LoTW contact on this BAND with this DXCC entity (but not this DX station)
+
+
+
+                            3=  Green: You have this DX Station confirmed on this Band(dont need this Dx Station)
+                            1=  LightGreen: You have this DX Station confirmed on some other Band
+                            1+48=  Yellow: You have this DX station confirmed on some other band, and some other station already confirmed on this band (dont need this DX Station)
+
+                            48=  Orange: You have this DXCC country CONFIRMED on this Band (you dont need this DX Station)
+                            16=  Brown: You have this DXCC country CONFIRMED on some other Band (you WANT this DX Station)
+                            8=  Purple You WANT this DXCC country (you WANT this DX Station)
+
+                              Pink: You have worked this DX Station on this Band(But they have not confirmed)
+                              LightPink: You have worked DX Station on some other Band(But they have not confirmed)
+
+                              */
+
+
+                            //=================================================================================================
+                            //=================================================================================================
+                            // ke9ns check new DX SPOT against the LoTW database
+
+                            string dxtemp = "";
+
+                            DX_LoTW[0] = 0;
+
+                            DX_LoTW_RTF[0] = new RTFBuilder(RTFFont.CourierNew, 18f);
+
+                            DX_LoTW_RTF[0].Clear();
+                            DX_LoTW_RTF[0].Reset();
+
+                            DX_LoTW_Status[0] = 0;  // .201
+
+                            if (lotw_records > 0) // if you have LoTW files then check otherwise skip it
+                            {
+
+                                if ((DX_country[0].Contains("USA") == true) && (FCCSTATE_NUM > 0)) // only check USA stations for STATE
+                                {
+
+                                    try
+                                    {
+                                        //  int q = DX_Station[0].Length; // length of callsign
+
+                                        DX_state[0] = "--";
+
+                                        dxtemp = DX_Station[0];
+
+                                        if (dxtemp.Contains("/"))
+                                        {
+                                            dxtemp = DX_Station[0].Substring(0, DX_Station[0].IndexOf('/')); // remove stuff after the /
+                                            Debug.WriteLine("STATION/: " + dxtemp);
+                                        }
+
+                                        for (int v = 0; v < FCCSTATE_NUM; v++)
+                                        {
+                                            //  if (FCCCALL[v] == DX_Station[0])
+                                            if (FCCCALL[v] == dxtemp)  // this is used to ignore /AM = air mobile, /MM = maritime mobile /B = beacon
+                                            {
+                                                DX_state[0] = FCCSTATE[v];
+                                                Debug.WriteLine("STATE FOUND:" + dxtemp + ", " + DX_Station[0] + ", " + DX_state[0]);
+                                                break;
+                                            }
+
+
+                                        } // for loop fccstate_num
+
+                                        Debug.WriteLine("PROBLEM: Could not find station in FCC database: " + dxtemp + ", " + DX_Station[0]);
+                                    }
+                                    catch
+                                    {
+                                        Debug.WriteLine("STATION: " + dxtemp);
+                                        DX_state[0] = "++";
+                                    }
+
+                                } // USA stations when FCC database is present
+                                else
+                                {
+                                    Debug.WriteLine("STATION: " + dxtemp);
+                                    Debug.WriteLine("NOT USA Station, Only USA stations checked against FCC database");
+                                    DX_state[0] = "--";
+                                }
+
+
+                                Debug.WriteLine("+++++++++++++++++LoTW Parse START here: ");
+                                // DX_LoTW[0]: definition
+                                // 8= no match 
+                                // 4= QSO & Match Call
+                                // 2= Match Call & Band (sets in both QSO and QSL situations)
+                                // 1= QSL & Match Call
+                                // 16 = QSL & Match DX entity & NO Call match
+                                // 32 = QSL & Match DX entity & Match Band & NO Call Match
+                                // 256 = QSL & No Call Match & Match State
+                                // 512 = QSL & No Call Match & Match State & Match Band
+                                // 1024 = beacon
+                                // 2048 =
+                                // 4096 =
+
+                                DX_LoTW[0] = 8;
+
+                                if (DX_Station[0].EndsWith("/B")) // beacon dxspot (not a station you can contact
+                                {
+                                    DX_LoTW[0] = 1024; // beacon
+
+                                }
+                                else
+                                {
+                                    for (int x1 = 0; x1 < lotw_records; x1++) // check your entire LoTW QSO log against the DX SPOT
+                                    {
+
+                                        if (LoTW_qsl[x1] != "Y") //  check LoTW records that you have a confirmed QSL "NO"
+                                        {
+                                            // LoTW records that are un-confirmed QSO's (below)
+
+                                            if (LoTW_callsign[x1] == DX_Station[0])  // if DX spot Station callsign matches (BUT not yet confirmed)
+                                            {
+                                                DX_LoTW[0] = DX_LoTW[0] | 4; // light Yellow = Not New, but not confirmed yet
+
+                                                // Debug.WriteLine("DX_LoTW: 4 " + x1);
+
+                                                if (LoTW_band[x1] == DX_band[0])
+                                                {
+                                                    DX_LoTW[0] = DX_LoTW[0] | 2; // Dark Yellow = Not new and on this band, but not confirmed yet
+                                                                                 // Debug.WriteLine("DX_LoTW: 2+4 " + x1);
+                                                }
+
+                                            } //if (LoTW_callsign[x1] == DX_Station[DX_Index1])
+
+                                            else // this LoTW QSO is not the same callsign as the DXspot  and not confirmed yet
+                                            {
+                                                // Dont need to check here since this is not a matching callsign and is not confirmed yet
+
+
+                                            } // this LoTW QSO is not the same callsign as the DXspot
+
+                                        } // LoTW records that are un-confirmed QSO's (above)
+
+                                        else // LoTW records that are confirmed QSL's (below)
+                                        {
+
+                                            if (LoTW_callsign[x1] == DX_Station[0])  // check if confirmed LoTW QSL is this DX stations Call sign
+                                            {
+                                                DX_LoTW[0] = DX_LoTW[0] | 1;     // Light Green = confirmed contact with this DX Station
+
+                                                if (LoTW_band[x1] == DX_band[0]) // if it was on this very band, then Dark green
+                                                {
+                                                    DX_LoTW[0] = DX_LoTW[0] | 2; // Dark Green = confirmed contact on this very Band
+                                                                                 //  Debug.WriteLine("DX_LoTW: 1+2 " + x1);
+
+                                                    Debug.WriteLine("Break");
+                                                    break; // dont need this contact
+                                                }
+
+                                            } // if (LoTW_callsign[x1] == DX_Station[DX_Index1])
+
+                                            else // QSL & NO CALL MATCH, so check to see if DXspot is needed for DXCC,state,grid,
+                                            {
+                                                if (LoTW_dxcc[x1] == DX_dxcc[0]) // check if I already have this DXCC entity confirmed with some other callsign (fed republic of Germany= 230
+                                                {
+                                                    DX_LoTW[0] = DX_LoTW[0] | 16; // I have a confirmed QSO with someone else from this DXCC entity but not nessesarily the band
+
+                                                    if (LoTW_band[x1] == DX_band[0])
+                                                    {
+                                                        DX_LoTW[0] = DX_LoTW[0] | 32; // I have a confirmed QSO with some other callsign, at this DXCC entity and Band
+                                                                                      //   Debug.WriteLine("DX_LoTW: 16+32 " + x1);
+                                                    }
+                                                } // matching DXCC entity
+
+                                                if ((DX_country[0].Contains("USA") == true) && (FCCSTATE_NUM > 0))
+                                                {
+                                                    if (LoTW_state[x1] == DX_state[0]) // check if I already have this US state confirmed with some other callsign 
+                                                    {
+                                                        DX_LoTW[0] = DX_LoTW[0] | 256; // I have a confirmed QSL with someone else from this US state  but not nessesarily the band
+
+                                                        if (LoTW_band[x1] == DX_band[0])
+                                                        {
+                                                            DX_LoTW[0] = DX_LoTW[0] | 512; // I have a confirmed QSL with some other callsign, at this US state and Band
+                                                            Debug.WriteLine("QSO 512 " + LoTW_callsign[x1] + " worked on this band to this state already");
+
+                                                        }
+                                                        else Debug.WriteLine("QSO 256 " + LoTW_callsign[x1] + " worked on this state already but not this band");
+
+                                                    } // matching US state
+                                                }
+                                            } // this LoTW QSO is not the same callsign as the DXspot
+
+                                        } // LoTW records that are confirmed QSO's (above)
+
+                                    } // for x1 loop thru LoTW database
+
+                                    Debug.WriteLine("+++++++++++++++++LoTW Parse FINISH here: " + lotw_records +
+                                        ",DX_INDEX1= " + DX_Index1 + ", " + DX_Station[0] + ", " + DX_band[0] +
+                                        ", " + DX_dxcc[0] + ", " + DX_country[0] + ",DX_LoTW= " + DX_LoTW[0] + ",DX_state= " + DX_state[0]);
+
+
+                                } // beacon check else (do the above)
+
+
+
+                                Color DXColor = new Color();
+
+
+                                // 1 Green: You have this DX Station confirmed on this Band(dont need this Dx Station)
+                                // 2 LightGreen: You have this DX entity confirmed on this band
+                                // 3 Yellow: You have this DX station confirmed on some other band, and some other station already confirmed on this band(dont need this DX Station)
+                                // 4 Orange: You have QSL for DXCC country confirmed on this Band or QSL for this state
+                                // 5 LightPurple (violet): You have this DXCC country CONFIRMED on some other Band(you WANT this DX Station)
+                                // 6 Purple (mediumOrchid): You WANT this DXCC country(you WANT this DX Station)
+                                // 7 DeepPink: You have worked this DX Station on this Band(But they have not  confirmed)
+                                // 8 Pink: You have worked DX Station on some other Band(But they have not confirmed)
+                                // 9 LightBlue: You have this US State confirmed on some other band(you WANT this DX Station)
+                                // 10 Blue: You WANT this US State(You Want this DX Station).
+                                //11 Gray: Beacon Station
+
+                                // DX_LoTW[0]: definition
+                                // 1= QSL & Match Call
+                                // 2= Match Call & Band (sets in both QSO and QSL situations)
+                                // 4= QSO & Match Call
+                                // 8= No Match at all                                               (Dark purple) 
+                                // 16 = QSL & Match DX entity & NO Call match
+                                // 32 = QSL & Match DX entity & Match Band & NO Call Match
+                                // 256 = QSL & No Call Match & Match State
+                                // 512 = QSL & No Call Match & Match State & Match Band
+                                // 1024 = beacon                                                      (gray)
+                                // 2048 =
+                                // 4096 =
+
+                                DXColor = Color.LightYellow; // default
+
+
+                                if ((DX_LoTW[0] == 8)) // if 8 then we dont have a QSL for any call matching this DX spots DXCC entity 
+                                {
+                                    DXColor = Color.MediumOrchid;
+                                    DX_LoTW_Status[0] = 6;// dark purple
+                                    goto GO1;
+
+                                } // 8
+
+                                if ((DX_LoTW[0] == 1024)) // beacon only
+                                {
+                                    DXColor = Color.SlateGray;
+                                    DX_LoTW_Status[0] = 11;
+                                    goto GO1;
+
+                                } // 8
+
+
+                                else if ((DX_LoTW[0] & 1) == 1) // confirmed you have worked this DX station
+                                {
+                                    if ((DX_LoTW[0] & 2) == 2) // confirmed you also worked this station on this very band
+                                    {
+                                        DXColor = Color.Green; // green DONE
+                                        DX_LoTW_Status[0] = 1;
+                                        goto GO1;
+
+                                    } // 2
+                                    else // Worked this station on some other band, BUT check if you worked some other call in this DX entity on this band?         
+                                    {
+                                        if ((DX_LoTW[0] & 48) == 48) // you have this DXCC entity confirmed on this band so you dont need this dx station
+                                        {
+                                            if (((DX_LoTW[0] & 256) == 256)) // I have this state but not necessarily on this band
+                                            {
+                                                if ((DX_LoTW[0] & 512) == 512) // I have someone else QSL this state and on this band
+                                                {
+                                                    DXColor = Color.Orange; // 
+                                                    DX_LoTW_Status[0] = 4;
+                                                    goto GO1;
+                                                }
+
+                                                DXColor = Color.SkyBlue; // light blue // I have QSL for state on some other band with someone else
+                                                DX_LoTW_Status[0] = 9;
+                                                goto GO1;
+                                            }
+
+                                            if ((FCCSTATE_NUM > 0) && (DX_Station.Contains("USA") == true)) // if your checking for states, then you dont have this state QSL yet
+                                            {
+                                                DXColor = Color.RoyalBlue; // dark blue (dont have this state, you want this state)
+                                                DX_LoTW_Status[0] = 10;
+                                                goto GO1;
+                                            }
+                                            else
+                                            {
+                                                DXColor = Color.Yellow; // yellow
+                                                DX_LoTW_Status[0] = 3; // not a state and have someone else QSL on this band
+                                                goto GO1;
+                                            }
+
+
+                                        } // 48
+                                        else // you have worked this station, but on another band.
+                                        {
+
+                                            if ((DX_LoTW[0] & 256) == 256) // I have this state but not necessarily on this band
+                                            {
+                                                if ((DX_LoTW[0] & 512) == 512) // I have this state and on this band
+                                                {
+                                                    DXColor = Color.LightGreen; // 
+                                                    DX_LoTW_Status[0] = 2; //
+                                                    goto GO1;
+                                                }
+
+                                                DXColor = Color.SkyBlue; // you need this state on this band
+                                                DX_LoTW_Status[0] = 9; //
+                                                goto GO1;
+                                            }
+
+                                            if ((FCCSTATE_NUM > 0) && (DX_Station.Contains("USA") == true))
+                                            {
+
+
+                                            }
+                                            else
+                                            {
+                                                DXColor = Color.LightGreen; // light green
+                                                DX_LoTW_Status[0] = 2; //
+                                                goto GO1;
+                                            }
+                                        }
+                                    }
+                                } // 1= QSL and a Match call
+                                else if ((DX_LoTW[0] & 4) == 4)// You have worked this station but not confirmed
+                                {
+
+                                    if ((DX_LoTW[0] & 2) == 2) // worked unconfirmed DXstation on this very band
+                                    {
+                                        DXColor = Color.DeepPink; // this very DX station did not confirm you on this very band
+                                        DX_LoTW_Status[0] = 7; // deep pink
+                                        goto GO1;
+
+                                    } // 2
+                                    else // work this station on another band and not confirmed
+                                    {
+                                        DXColor = Color.HotPink; // light pink this very DX station did not confirm you on some other band
+                                        DX_LoTW_Status[0] = 8; // pink
+                                        goto GO1;
+
+                                    }
+
+                                } // 4
+
+                                else if ((DX_LoTW[0] & 16) == 16) // You have some other confirmed station at this DXCC entity location
+                                {
+
+                                    if ((DX_LoTW[0] & 32) == 32) // You have some other confirmed station at this DXCC entity location and this Band.
+                                    {
+                                        if (((DX_LoTW[0] & 256) == 256)) // I have this state but not necessarily on this band
+                                        {
+                                            if ((DX_LoTW[0] & 512) == 512) // I have this state and on this band
+                                            {
+                                                DXColor = Color.Orange; // 
+                                                DX_LoTW_Status[0] = 4; // orange
+                                                goto GO1;
+                                            }
+
+                                            DXColor = Color.SkyBlue; //
+                                            DX_LoTW_Status[0] = 9; // light blue
+                                            goto GO1;
+                                        }
+
+
+                                        if ((FCCSTATE_NUM > 0) && (DX_Station.Contains("USA") == true))// if your checking for states, then you dont have this state QSL yet
+                                        {
+                                            DXColor = Color.RoyalBlue; // 
+                                            DX_LoTW_Status[0] = 10; // blue
+                                            goto GO1;
+                                        }
+                                        else
+                                        {
+
+                                            DXColor = Color.Orange;//Orange so you dont really need the DX station
+                                            DX_LoTW_Status[0] = 4; // orange
+                                            goto GO1;
+                                        }
+
+                                    } // 32
+                                    else // you have a confirmed dxcc contact of some other station, but on a different band
+                                    {
+                                        DXColor = Color.Violet;
+                                        DX_LoTW_Status[0] = 5; // light purple
+                                        goto GO1;
+                                    }
+
+                                } // 16
+                            GO1:;
+                                DX_LoTW_RTF[0].BackColor(DXColor).Append(DX_Station[0].PadRight(11)); // Color the DXSPOT
+
+                            } // lotw records available to check
+                            else
+                            {
+                                DX_LoTW_RTF[0].BackColor(Color.LightYellow).Append(DX_Station[0].PadRight(11)); //  if LoTW button is OFF
+                                DX_LoTW_Status[0] = 0;
+                            }
+
+
+
+                            //------------------------------------------------------------------------------------
+                            //------------------------------------------------------------------------------------
+                            //------------------------------------------------------------------------------------
+
+                            Debug.WriteLine("INSTALL NEW [0]=========== " + DX_Index);
+                            processTCPMessage(); // send to spot window
+                            Debug.WriteLine("INSTALL NEW [1]=========== " + DX_Index);
+
+
+                            SP4_Active = 0; // done processing message
+
+
+
+
+                        }
+                        else if (SP_SHOWDX == true)
+                        {
+                            Debug.WriteLine("SHOWDX:" + message1.ToLower());
+
+                            Debug.WriteLine("SHOWDX:" + callBox.Text.ToLower() + ":");
+                            try
+                            {
+                               
+                                if (message1.ToLower().StartsWith(callBox.Text.ToLower() + " de "))
+                                {
+                                    SP_SHOWDX = false;
+                                    button5.BackColor = Color.MediumSpringGreen; // SystemColors.ButtonFace;
+
+                                    continue;
+                                }
+                            }
+                            catch
+                            {
+                                Debug.WriteLine("SHOWDX: BAD END");
+
+                            }
+
+
+
+                        }
+                        else if (SP_SHOWDX == false)
+                        {
+                            Debug.WriteLine("SHOWDX1:" + message1.ToLower());
+
+                            Debug.WriteLine("SHOWDX1:" + callBox.Text.ToLower() + ":");
+                            try
+                            {
+
+                                if (message1.ToLower().StartsWith(callBox.Text.ToLower() + " de "))
+                                {
+                                    SP_SPOTSTART = true;
+                                    button5.BackColor = Color.LightBlue; //   SystemColors.ButtonFace;
+                                    
+
+                                    continue;
+                                }
+                            }
+                            catch
+                            {
+                                Debug.WriteLine("SHOWDX: BAD END");
+
+                            }
+
+
+
+                        }
 
                         else if (message1.Contains(" disconnected"))
                         {
@@ -4199,16 +6291,39 @@ namespace PowerSDR
 
                 ListHide = false;
 
-                if (((hkBoxSpotBand.Checked == true) && (DX_band[ii] == band1)) || ((hkBoxSpotRX2.Checked == true) && (DX_band[ii] == band2)))
+                if (checkBoxTS1.Checked) //.277 search spotter listing for a specific call sign or spotter
                 {
-                    ListHide = false; // show this spot in the list
+                    //  Debug.WriteLine("CALLSEARCH " + textBoxDXCall.Text + " , " + DX_Spotter[ii] + " , " + DX_Station[ii]);
+                    // DX_Spotter[ii].Substring(1, DX_Spotter[ii].Length - 2).ToLower().Contains(textBoxDXCall.Text.ToLower())
+
+                    // DX_Spotter[ii].Substring(1, DX_Spotter[ii].Length-2).ToLower() == textBoxDXCall.Text.ToLower()
+                    // .277 check partial call signs and full call signs
+
+                    if ( DX_Station[ii].ToLower() == textBoxDXCall.Text.ToLower() || DX_Station[ii].ToLower().Contains(textBoxDXCall.Text.ToLower()) )
+                    {
+                        ListHide = false; // show this spot in the list
+                      
+                    }
+                    else
+                    {
+                        ListHide = true; // HIDE this spot from the listing
+                       
+                    }
+
+                } //.277
+                else
+                {
+                    if (((hkBoxSpotBand.Checked == true) && (DX_band[ii] == band1)) || ((hkBoxSpotRX2.Checked == true) && (DX_band[ii] == band2)))
+                    {
+                        ListHide = false; // show this spot in the list
+
+                    }
+                    else if ((hkBoxSpotBand.Checked == true) || (hkBoxSpotRX2.Checked == true))
+                    {
+                        ListHide = true; // HIDE this spot from the listing
+                    }
 
                 }
-                else if ((hkBoxSpotBand.Checked == true) || (hkBoxSpotRX2.Checked == true))
-                {
-                    ListHide = true; // HIDE this spot from the listing
-                }
-
 
                 if ((FCCSTATE_NUM > 0) && (DX_country[ii].Contains("USA") == true)) // for USA only here
                 {
@@ -16491,6 +18606,46 @@ namespace PowerSDR
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //  sb = new StringBuilder(message2); // clear sb string over
+
+            if (SP_Active > 2 && SP_SHOWDX == false && SP_SPOTSTART == true)
+            {
+                char[] messageDXSPOT1 = ("SHOW/DX").ToCharArray(); // 
+                Debug.WriteLine("SHOW DX: ");
+                button5.BackColor = Color.Yellow;
+
+                for (int i = 0; i < messageDXSPOT1.Length; i++)    // do it this way because telnet server wants slow typing
+                {
+                    SP_writer.Write((char)messageDXSPOT1[i]);
+
+                }  // for loop length of your call sign
+
+                SP_writer.Write((char)13);
+                SP_writer.Write((char)10);
+
+              //  textBoxDXCall.Text = "SHOW/DX"; // reset back
+
+                SP_SHOWDX = true;
+
+            }
+            else
+            {
+                textBoxDXCall.Text = "Spotter not active, or you have already hit the SHOW/DX button"; // reset back
+                button5.BackColor = SystemColors.ButtonFace;
+            }
+
+        }
+
+        private void checkBoxTS1_CheckedChanged(object sender, EventArgs e) //.277
+        {
+            if (checkBoxTS1.Checked == false) textBoxDXCall.Text = "DX Callsign"; //.277
+
+            processTCPMessage(); // using dx_band[] to list only spots for the callsign your searching for.
 
         }
     } //SPOTCONTROL

@@ -1730,8 +1730,8 @@ namespace PowerSDR
             float[] audiotemp = new float[frameCount + 1]; // ke9ns add
             float[] audiotemp1 = new float[frameCount + 1]; // ke9ns add
 
-            fixed (float* in_tl_ptr1 = &audiotemp[0]) // ke9ns add temp ptr to preprocessed data
-            fixed (float* in_tr_ptr1 = &audiotemp1[0]) // ke9ns add temp ptr to preprocessed data
+            fixed (float* in_tl_ptr1 = &audiotemp[0]) // ke9ns: add temp ptr to preprocessed data
+            fixed (float* in_tr_ptr1 = &audiotemp1[0]) // ke9ns: add temp ptr to preprocessed data
 
             //   fixed (float* in_l1_ptr1 = &AudioInBuf1[0]) // ke9ns add
             //   fixed (float* in_r1_ptr1 = &AudioInBuf2[0]) // ke9ns add
@@ -1899,6 +1899,10 @@ namespace PowerSDR
                 } // VAC2 on
 
 
+
+             //   peak = MaxSample(in_l, in_r, frameCount); // 1500 does not have an active TX channel during Receive
+
+            //    Debug.WriteLine("VOX = peak " + peak);
 
 
                 min_in_l = Math.Min(min_in_l, MinSample(in_l, frameCount));
@@ -2834,8 +2838,6 @@ namespace PowerSDR
                     }                    
                 }
             }*/
-
-
 
 
 

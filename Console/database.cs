@@ -32,6 +32,7 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PowerSDR
 {
@@ -2843,6 +2844,39 @@ namespace PowerSDR
                                 446.000000, 446.000000, "70cm Simplex",         true,
                                 446.000001, 446.999999, "70cm Local Option",    true,
                                 447.000000, 450.000000, "70cm Local Repeaters", true,
+
+                                462.543751, 462.556250, "Ch15 FRS/GMRS RPTout", true,   //   462550;   .275
+                                462.556251, 462.568750, "Ch1 FRS/GMRS low", true,       //   462562.5;
+                                462.568751, 462.581250, "Ch16 FRS/GMRS RPTout", true,   //   462575; 
+                                462.581251, 462.593750, "Ch2 FRS/GMRS low", true,       //   462587.5; 
+                                462.593751, 462.606250, "Ch17 FRS/GMRS RPTout", true,  //   462600; 
+                                462.606251, 462.618750, "Ch3 FRS/GMRS low", true,     //   462612.5; 
+                                462.618751, 462.631250, "Ch18 FRS/GMRS RPTout", true,   //   462625; 
+                                462.631251, 462.643750, "Ch4 FRS/GMRS low", true,       //   462637.5; 
+                                462.643751, 462.656250, "Ch19 FRS/GMRS RPTout", true,  //   462650; 
+                                462.656251, 462.668750, "Ch5 FRS/GMRS low", true,     //   462662.5; 
+                                462.668751, 462.681250, "Ch20 FRS/GMRS RPTout", true,   //   462675; 
+                                462.681251, 462.693750, "Ch6 FRS/GMRS low", true,     //   462687.5; 
+                                462.693751, 462.706250, "Ch21 FRS/GMRS RPTout", true,   //   462700; 
+                                462.706251, 462.718750, "Ch7 FRS/GMRS low", true,     //   462712.5; 
+                                462.718751, 462.731250, "Ch22 FRS/GMRS RPTout", true,   //   462725; 
+                                
+                                467.543751, 467.556250, "Ch15R FRS/GMRS RPTin", true,    //   467550; 
+                                467.556251, 467.568750, "Ch8 FRS LP", true,        //   467565.5; 
+                                467.568751, 467.581250, "Ch16R FRS/GMRS RPTin", true,      //   462575; 
+                                467.581251, 467.593750, "Ch9 FRS LP", true,            //   467587.5;
+                                467.593751, 467.606250, "Ch17R FRS/GMRS RPTin", true,      //   467600; 
+                                467.606251, 467.618750, "Ch10 FRS LP", true,            //   467612.5; 
+                                467.631251, 467.643750, "Ch18R FRS/GMRS RPTin", true,      //   467625; 
+                                467.631251, 467.643750, "Ch11 FRS LP", true,            //   467637.5; 
+                                467.643751, 467.656250, "Ch19R FRS/GMRS RPTin", true,      //   467650;
+                                467.656251, 467.668750, "Ch12 FRS LP", true,            //   467662.5; 
+                                467.668751, 467.681250, "Ch20R FRS/GMRS RPTin", true,      //   467675; 
+                                467.681251, 467.693750, "Ch13 FRS LP", true,            //   467687.5; 
+                                467.693751, 467.706250, "Ch21R FRS/GMRS RPTin", true,      //   467700; 
+                                467.706251, 467.718750, "Ch14 FRS LP", true,            //   467712.5; 
+                                467.718751, 467.731250, "Ch22R FRS/GMRS RPTin", true,      //   467725; 
+
 
                                 902.000000, 902.099999, "33cm Weak Signal SSTV/FAX/ACSSB", true,
                                 902.100000, 902.100000, "33cm Weak Signal Calling", true,

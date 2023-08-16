@@ -125,7 +125,7 @@ namespace PowerSDR
 
 
 
-        public string put1(string s)
+        public string put1(string s) // ke9ns: AI1; = inquire about current bearing angle. Responds with ;xxx degrees 000 to 360
         {
             string answer = "---";
 

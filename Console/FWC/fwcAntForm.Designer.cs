@@ -44,16 +44,22 @@ namespace PowerSDR
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FWCAntForm));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.chkAlwaysOnTop1 = new System.Windows.Forms.CheckBoxTS();
-            this.txtStatus = new System.Windows.Forms.TextBoxTS();
-            this.grpComplexity = new System.Windows.Forms.GroupBoxTS();
-            this.lblBand2 = new System.Windows.Forms.LabelTS();
             this.radModeSimple = new System.Windows.Forms.RadioButtonTS();
             this.radModeExpert = new System.Windows.Forms.RadioButtonTS();
             this.comboBand = new System.Windows.Forms.ComboBoxTS();
             this.comboBand2 = new System.Windows.Forms.ComboBoxTS();
-            this.lblBand = new System.Windows.Forms.LabelTS();
-            this.grpAntenna = new System.Windows.Forms.GroupBoxTS();
+            this.txtBoxAnt12 = new System.Windows.Forms.TextBoxTS();
+            this.txtBoxAnt11 = new System.Windows.Forms.TextBoxTS();
+            this.txtBoxAnt10 = new System.Windows.Forms.TextBoxTS();
+            this.txtBoxAnt9 = new System.Windows.Forms.TextBoxTS();
+            this.txtBoxAnt8 = new System.Windows.Forms.TextBoxTS();
+            this.txtBoxAnt7 = new System.Windows.Forms.TextBoxTS();
+            this.txtBoxAnt6 = new System.Windows.Forms.TextBoxTS();
+            this.txtBoxAnt5 = new System.Windows.Forms.TextBoxTS();
+            this.txtBoxAnt4 = new System.Windows.Forms.TextBoxTS();
+            this.txtBoxAnt3 = new System.Windows.Forms.TextBoxTS();
+            this.txtBoxAnt2 = new System.Windows.Forms.TextBoxTS();
+            this.txtBoxAnt1 = new System.Windows.Forms.TextBoxTS();
             this.textBoxTX2Ant = new System.Windows.Forms.TextBoxTS();
             this.textBoxRX2Ant = new System.Windows.Forms.TextBoxTS();
             this.textBoxTX1Ant = new System.Windows.Forms.TextBoxTS();
@@ -61,18 +67,11 @@ namespace PowerSDR
             this.chkTX2Active = new System.Windows.Forms.CheckBoxTS();
             this.chkLock = new System.Windows.Forms.CheckBoxTS();
             this.comboTXAnt2 = new System.Windows.Forms.ComboBoxTS();
-            this.lblLoopGain = new System.Windows.Forms.LabelTS();
-            this.udLoopGain = new System.Windows.Forms.NumericUpDownTS();
             this.chkEnable6mPreamp = new System.Windows.Forms.CheckBoxTS();
             this.comboRX1Ant = new System.Windows.Forms.ComboBoxTS();
             this.chkRX1Loop = new System.Windows.Forms.CheckBoxTS();
             this.comboRX2Ant = new System.Windows.Forms.ComboBoxTS();
-            this.lblRX2 = new System.Windows.Forms.LabelTS();
             this.comboTXAnt = new System.Windows.Forms.ComboBoxTS();
-            this.lblTX = new System.Windows.Forms.LabelTS();
-            this.lblRX1 = new System.Windows.Forms.LabelTS();
-            this.labelTS1 = new System.Windows.Forms.LabelTS();
-            this.grpSwitchRelay = new System.Windows.Forms.GroupBoxTS();
             this.chkRX2TX3 = new System.Windows.Forms.CheckBoxTS();
             this.chkRX2TX2 = new System.Windows.Forms.CheckBoxTS();
             this.textBoxTS1 = new System.Windows.Forms.TextBoxTS();
@@ -86,13 +85,26 @@ namespace PowerSDR
             this.chkRCATX2 = new System.Windows.Forms.CheckBoxTS();
             this.chkRCATX1 = new System.Windows.Forms.CheckBoxTS();
             this.chkRX2TX1 = new System.Windows.Forms.CheckBoxTS();
+            this.chkAlwaysOnTop1 = new System.Windows.Forms.CheckBoxTS();
+            this.txtStatus = new System.Windows.Forms.TextBoxTS();
+            this.grpComplexity = new System.Windows.Forms.GroupBoxTS();
+            this.lblBand2 = new System.Windows.Forms.LabelTS();
+            this.lblBand = new System.Windows.Forms.LabelTS();
+            this.grpAntenna = new System.Windows.Forms.GroupBoxTS();
+            this.lblLoopGain = new System.Windows.Forms.LabelTS();
+            this.udLoopGain = new System.Windows.Forms.NumericUpDownTS();
+            this.lblRX2 = new System.Windows.Forms.LabelTS();
+            this.lblTX = new System.Windows.Forms.LabelTS();
+            this.lblRX1 = new System.Windows.Forms.LabelTS();
+            this.labelTS1 = new System.Windows.Forms.LabelTS();
+            this.grpSwitchRelay = new System.Windows.Forms.GroupBoxTS();
+            ((System.ComponentModel.ISupportInitialize)(this.udTX3Delay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTX2Delay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTX1Delay)).BeginInit();
             this.grpComplexity.SuspendLayout();
             this.grpAntenna.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udLoopGain)).BeginInit();
             this.grpSwitchRelay.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udTX3Delay)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udTX2Delay)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udTX1Delay)).BeginInit();
             this.SuspendLayout();
             // 
             // toolTip1
@@ -103,53 +115,6 @@ namespace PowerSDR
             this.toolTip1.IsBalloon = true;
             this.toolTip1.ReshowDelay = 80;
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            // 
-            // chkAlwaysOnTop1
-            // 
-            this.chkAlwaysOnTop1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.chkAlwaysOnTop1.Image = null;
-            this.chkAlwaysOnTop1.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.chkAlwaysOnTop1.Location = new System.Drawing.Point(169, 385);
-            this.chkAlwaysOnTop1.Name = "chkAlwaysOnTop1";
-            this.chkAlwaysOnTop1.Size = new System.Drawing.Size(103, 24);
-            this.chkAlwaysOnTop1.TabIndex = 60;
-            this.chkAlwaysOnTop1.Text = "Always On Top";
-            this.chkAlwaysOnTop1.CheckedChanged += new System.EventHandler(this.ChkAlwaysOnTop1_CheckedChanged);
-            // 
-            // txtStatus
-            // 
-            this.txtStatus.Location = new System.Drawing.Point(8, 360);
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.ReadOnly = true;
-            this.txtStatus.Size = new System.Drawing.Size(264, 20);
-            this.txtStatus.TabIndex = 23;
-            this.txtStatus.Text = "Simple Mode: Settings are applied to all bands";
-            // 
-            // grpComplexity
-            // 
-            this.grpComplexity.Controls.Add(this.lblBand2);
-            this.grpComplexity.Controls.Add(this.radModeSimple);
-            this.grpComplexity.Controls.Add(this.radModeExpert);
-            this.grpComplexity.Controls.Add(this.comboBand);
-            this.grpComplexity.Controls.Add(this.comboBand2);
-            this.grpComplexity.Controls.Add(this.lblBand);
-            this.grpComplexity.Location = new System.Drawing.Point(8, 6);
-            this.grpComplexity.Name = "grpComplexity";
-            this.grpComplexity.Size = new System.Drawing.Size(264, 72);
-            this.grpComplexity.TabIndex = 21;
-            this.grpComplexity.TabStop = false;
-            this.grpComplexity.Text = "Complexity";
-            // 
-            // lblBand2
-            // 
-            this.lblBand2.Image = null;
-            this.lblBand2.Location = new System.Drawing.Point(132, 40);
-            this.lblBand2.Name = "lblBand2";
-            this.lblBand2.Size = new System.Drawing.Size(57, 24);
-            this.lblBand2.TabIndex = 21;
-            this.lblBand2.Text = "RX2Band:";
-            this.lblBand2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblBand2.Visible = false;
             // 
             // radModeSimple
             // 
@@ -285,47 +250,176 @@ namespace PowerSDR
             this.comboBand2.Visible = false;
             this.comboBand2.SelectedIndexChanged += new System.EventHandler(this.comboBand_SelectedIndexChanged);
             // 
-            // lblBand
+            // txtBoxAnt12
             // 
-            this.lblBand.Image = null;
-            this.lblBand.Location = new System.Drawing.Point(132, 14);
-            this.lblBand.Name = "lblBand";
-            this.lblBand.Size = new System.Drawing.Size(59, 24);
-            this.lblBand.TabIndex = 19;
-            this.lblBand.Text = "RX1Band:";
-            this.lblBand.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblBand.Visible = false;
+            this.txtBoxAnt12.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxAnt12.Location = new System.Drawing.Point(164, 29);
+            this.txtBoxAnt12.MaxLength = 10;
+            this.txtBoxAnt12.Name = "txtBoxAnt12";
+            this.txtBoxAnt12.ShortcutsEnabled = false;
+            this.txtBoxAnt12.Size = new System.Drawing.Size(29, 20);
+            this.txtBoxAnt12.TabIndex = 38;
+            this.txtBoxAnt12.Text = "PA";
+            this.toolTip1.SetToolTip(this.txtBoxAnt12, "Assign a name to currently select RX1 antenna");
+            this.txtBoxAnt12.Visible = false;
+            this.txtBoxAnt12.WordWrap = false;
             // 
-            // grpAntenna
+            // txtBoxAnt11
             // 
-            this.grpAntenna.Controls.Add(this.textBoxTX2Ant);
-            this.grpAntenna.Controls.Add(this.textBoxRX2Ant);
-            this.grpAntenna.Controls.Add(this.textBoxTX1Ant);
-            this.grpAntenna.Controls.Add(this.textBoxRX1Ant);
-            this.grpAntenna.Controls.Add(this.chkTX2Active);
-            this.grpAntenna.Controls.Add(this.chkLock);
-            this.grpAntenna.Controls.Add(this.comboTXAnt2);
-            this.grpAntenna.Controls.Add(this.lblLoopGain);
-            this.grpAntenna.Controls.Add(this.udLoopGain);
-            this.grpAntenna.Controls.Add(this.chkEnable6mPreamp);
-            this.grpAntenna.Controls.Add(this.comboRX1Ant);
-            this.grpAntenna.Controls.Add(this.chkRX1Loop);
-            this.grpAntenna.Controls.Add(this.comboRX2Ant);
-            this.grpAntenna.Controls.Add(this.lblRX2);
-            this.grpAntenna.Controls.Add(this.comboTXAnt);
-            this.grpAntenna.Controls.Add(this.lblTX);
-            this.grpAntenna.Controls.Add(this.lblRX1);
-            this.grpAntenna.Controls.Add(this.labelTS1);
-            this.grpAntenna.Location = new System.Drawing.Point(8, 82);
-            this.grpAntenna.Name = "grpAntenna";
-            this.grpAntenna.Size = new System.Drawing.Size(264, 124);
-            this.grpAntenna.TabIndex = 20;
-            this.grpAntenna.TabStop = false;
-            this.grpAntenna.Text = "Antenna";
+            this.txtBoxAnt11.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxAnt11.Location = new System.Drawing.Point(123, 29);
+            this.txtBoxAnt11.MaxLength = 10;
+            this.txtBoxAnt11.Name = "txtBoxAnt11";
+            this.txtBoxAnt11.ShortcutsEnabled = false;
+            this.txtBoxAnt11.Size = new System.Drawing.Size(29, 20);
+            this.txtBoxAnt11.TabIndex = 37;
+            this.txtBoxAnt11.Text = "XVTX/C";
+            this.toolTip1.SetToolTip(this.txtBoxAnt11, "Assign a name to currently select RX1 antenna");
+            this.txtBoxAnt11.Visible = false;
+            this.txtBoxAnt11.WordWrap = false;
+            // 
+            // txtBoxAnt10
+            // 
+            this.txtBoxAnt10.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxAnt10.Location = new System.Drawing.Point(82, 33);
+            this.txtBoxAnt10.MaxLength = 10;
+            this.txtBoxAnt10.Name = "txtBoxAnt10";
+            this.txtBoxAnt10.ShortcutsEnabled = false;
+            this.txtBoxAnt10.Size = new System.Drawing.Size(29, 20);
+            this.txtBoxAnt10.TabIndex = 36;
+            this.txtBoxAnt10.Text = "XVTR";
+            this.toolTip1.SetToolTip(this.txtBoxAnt10, "Assign a name to currently select RX1 antenna");
+            this.txtBoxAnt10.Visible = false;
+            this.txtBoxAnt10.WordWrap = false;
+            // 
+            // txtBoxAnt9
+            // 
+            this.txtBoxAnt9.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxAnt9.Location = new System.Drawing.Point(47, 29);
+            this.txtBoxAnt9.MaxLength = 10;
+            this.txtBoxAnt9.Name = "txtBoxAnt9";
+            this.txtBoxAnt9.ShortcutsEnabled = false;
+            this.txtBoxAnt9.Size = new System.Drawing.Size(29, 20);
+            this.txtBoxAnt9.TabIndex = 35;
+            this.txtBoxAnt9.Text = "UHF";
+            this.toolTip1.SetToolTip(this.txtBoxAnt9, "Assign a name to currently select RX1 antenna");
+            this.txtBoxAnt9.Visible = false;
+            this.txtBoxAnt9.WordWrap = false;
+            // 
+            // txtBoxAnt8
+            // 
+            this.txtBoxAnt8.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxAnt8.Location = new System.Drawing.Point(12, 33);
+            this.txtBoxAnt8.MaxLength = 10;
+            this.txtBoxAnt8.Name = "txtBoxAnt8";
+            this.txtBoxAnt8.ShortcutsEnabled = false;
+            this.txtBoxAnt8.Size = new System.Drawing.Size(29, 20);
+            this.txtBoxAnt8.TabIndex = 34;
+            this.txtBoxAnt8.Text = "VHF";
+            this.toolTip1.SetToolTip(this.txtBoxAnt8, "Assign a name to currently select RX1 antenna");
+            this.txtBoxAnt8.Visible = false;
+            this.txtBoxAnt8.WordWrap = false;
+            // 
+            // txtBoxAnt7
+            // 
+            this.txtBoxAnt7.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxAnt7.Location = new System.Drawing.Point(222, 2);
+            this.txtBoxAnt7.MaxLength = 10;
+            this.txtBoxAnt7.Name = "txtBoxAnt7";
+            this.txtBoxAnt7.ShortcutsEnabled = false;
+            this.txtBoxAnt7.Size = new System.Drawing.Size(29, 20);
+            this.txtBoxAnt7.TabIndex = 33;
+            this.txtBoxAnt7.Text = "Sig Gen";
+            this.toolTip1.SetToolTip(this.txtBoxAnt7, "Assign a name to currently select RX1 antenna");
+            this.txtBoxAnt7.Visible = false;
+            this.txtBoxAnt7.WordWrap = false;
+            // 
+            // txtBoxAnt6
+            // 
+            this.txtBoxAnt6.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxAnt6.Location = new System.Drawing.Point(187, 2);
+            this.txtBoxAnt6.MaxLength = 10;
+            this.txtBoxAnt6.Name = "txtBoxAnt6";
+            this.txtBoxAnt6.ShortcutsEnabled = false;
+            this.txtBoxAnt6.Size = new System.Drawing.Size(29, 20);
+            this.txtBoxAnt6.TabIndex = 32;
+            this.txtBoxAnt6.Text = "TX1 Tap";
+            this.toolTip1.SetToolTip(this.txtBoxAnt6, "Assign a name to currently select RX1 antenna");
+            this.txtBoxAnt6.Visible = false;
+            this.txtBoxAnt6.WordWrap = false;
+            // 
+            // txtBoxAnt5
+            // 
+            this.txtBoxAnt5.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxAnt5.Location = new System.Drawing.Point(152, 2);
+            this.txtBoxAnt5.MaxLength = 10;
+            this.txtBoxAnt5.Name = "txtBoxAnt5";
+            this.txtBoxAnt5.ShortcutsEnabled = false;
+            this.txtBoxAnt5.Size = new System.Drawing.Size(29, 20);
+            this.txtBoxAnt5.TabIndex = 31;
+            this.txtBoxAnt5.Text = "RX2 IN";
+            this.toolTip1.SetToolTip(this.txtBoxAnt5, "Assign a name to currently select RX1 antenna");
+            this.txtBoxAnt5.Visible = false;
+            this.txtBoxAnt5.WordWrap = false;
+            // 
+            // txtBoxAnt4
+            // 
+            this.txtBoxAnt4.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxAnt4.Location = new System.Drawing.Point(117, 2);
+            this.txtBoxAnt4.MaxLength = 10;
+            this.txtBoxAnt4.Name = "txtBoxAnt4";
+            this.txtBoxAnt4.ShortcutsEnabled = false;
+            this.txtBoxAnt4.Size = new System.Drawing.Size(29, 20);
+            this.txtBoxAnt4.TabIndex = 30;
+            this.txtBoxAnt4.Text = "RX1 IN";
+            this.toolTip1.SetToolTip(this.txtBoxAnt4, "Assign a name to currently select RX1 antenna");
+            this.txtBoxAnt4.Visible = false;
+            this.txtBoxAnt4.WordWrap = false;
+            // 
+            // txtBoxAnt3
+            // 
+            this.txtBoxAnt3.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxAnt3.Location = new System.Drawing.Point(82, 0);
+            this.txtBoxAnt3.MaxLength = 10;
+            this.txtBoxAnt3.Name = "txtBoxAnt3";
+            this.txtBoxAnt3.ShortcutsEnabled = false;
+            this.txtBoxAnt3.Size = new System.Drawing.Size(29, 20);
+            this.txtBoxAnt3.TabIndex = 29;
+            this.txtBoxAnt3.Text = "ANT3";
+            this.toolTip1.SetToolTip(this.txtBoxAnt3, "Assign a name to currently select RX1 antenna");
+            this.txtBoxAnt3.Visible = false;
+            this.txtBoxAnt3.WordWrap = false;
+            // 
+            // txtBoxAnt2
+            // 
+            this.txtBoxAnt2.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxAnt2.Location = new System.Drawing.Point(47, 0);
+            this.txtBoxAnt2.MaxLength = 10;
+            this.txtBoxAnt2.Name = "txtBoxAnt2";
+            this.txtBoxAnt2.ShortcutsEnabled = false;
+            this.txtBoxAnt2.Size = new System.Drawing.Size(29, 20);
+            this.txtBoxAnt2.TabIndex = 28;
+            this.txtBoxAnt2.Text = "ANT2";
+            this.toolTip1.SetToolTip(this.txtBoxAnt2, "Assign a name to currently select RX1 antenna");
+            this.txtBoxAnt2.Visible = false;
+            this.txtBoxAnt2.WordWrap = false;
+            // 
+            // txtBoxAnt1
+            // 
+            this.txtBoxAnt1.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxAnt1.Location = new System.Drawing.Point(12, 0);
+            this.txtBoxAnt1.MaxLength = 10;
+            this.txtBoxAnt1.Name = "txtBoxAnt1";
+            this.txtBoxAnt1.ShortcutsEnabled = false;
+            this.txtBoxAnt1.Size = new System.Drawing.Size(29, 20);
+            this.txtBoxAnt1.TabIndex = 27;
+            this.txtBoxAnt1.Text = "ANT1";
+            this.toolTip1.SetToolTip(this.txtBoxAnt1, "Assign a name to currently select RX1 antenna");
+            this.txtBoxAnt1.Visible = false;
+            this.txtBoxAnt1.WordWrap = false;
             // 
             // textBoxTX2Ant
             // 
-            this.textBoxTX2Ant.Enabled = false;
             this.textBoxTX2Ant.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxTX2Ant.Location = new System.Drawing.Point(199, 13);
             this.textBoxTX2Ant.MaxLength = 10;
@@ -333,12 +427,14 @@ namespace PowerSDR
             this.textBoxTX2Ant.ShortcutsEnabled = false;
             this.textBoxTX2Ant.Size = new System.Drawing.Size(60, 20);
             this.textBoxTX2Ant.TabIndex = 26;
-            this.toolTip1.SetToolTip(this.textBoxTX2Ant, "Assign a name to currently select TX2 antenna");
+            this.toolTip1.SetToolTip(this.textBoxTX2Ant, "Assign a name to currently select TX2 antenna\r\nRight Click to RESET back to DEFAU" +
+        "LT names");
             this.textBoxTX2Ant.TextChanged += new System.EventHandler(this.textBoxTX2Ant_TextChanged);
+            this.textBoxTX2Ant.Leave += new System.EventHandler(this.textBoxTX2Ant_Leave);
+            this.textBoxTX2Ant.MouseUp += new System.Windows.Forms.MouseEventHandler(this.textBoxRX1Ant_MouseUp);
             // 
             // textBoxRX2Ant
             // 
-            this.textBoxRX2Ant.Enabled = false;
             this.textBoxRX2Ant.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxRX2Ant.Location = new System.Drawing.Point(133, 13);
             this.textBoxRX2Ant.MaxLength = 10;
@@ -346,12 +442,14 @@ namespace PowerSDR
             this.textBoxRX2Ant.ShortcutsEnabled = false;
             this.textBoxRX2Ant.Size = new System.Drawing.Size(60, 20);
             this.textBoxRX2Ant.TabIndex = 25;
-            this.toolTip1.SetToolTip(this.textBoxRX2Ant, "Assign a name to currently select RX2 antenna");
+            this.toolTip1.SetToolTip(this.textBoxRX2Ant, "Assign a name to currently select RX2 antenna\r\nRight Click to RESET back to DEFAU" +
+        "LT names");
             this.textBoxRX2Ant.TextChanged += new System.EventHandler(this.textBoxRX2Ant_TextChanged);
+            this.textBoxRX2Ant.Leave += new System.EventHandler(this.textBoxRX2Ant_Leave);
+            this.textBoxRX2Ant.MouseUp += new System.Windows.Forms.MouseEventHandler(this.textBoxRX1Ant_MouseUp);
             // 
             // textBoxTX1Ant
             // 
-            this.textBoxTX1Ant.Enabled = false;
             this.textBoxTX1Ant.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxTX1Ant.Location = new System.Drawing.Point(69, 13);
             this.textBoxTX1Ant.MaxLength = 10;
@@ -359,12 +457,14 @@ namespace PowerSDR
             this.textBoxTX1Ant.ShortcutsEnabled = false;
             this.textBoxTX1Ant.Size = new System.Drawing.Size(60, 20);
             this.textBoxTX1Ant.TabIndex = 24;
-            this.toolTip1.SetToolTip(this.textBoxTX1Ant, "Assign a name to currently select TX1 antenna");
+            this.toolTip1.SetToolTip(this.textBoxTX1Ant, "Assign a name to currently select TX1 antenna\r\nRight Click to RESET back to DEFAU" +
+        "LT names");
             this.textBoxTX1Ant.TextChanged += new System.EventHandler(this.textBoxTX1Ant_TextChanged);
+            this.textBoxTX1Ant.Leave += new System.EventHandler(this.textBoxTX1Ant_Leave);
+            this.textBoxTX1Ant.MouseUp += new System.Windows.Forms.MouseEventHandler(this.textBoxRX1Ant_MouseUp);
             // 
             // textBoxRX1Ant
             // 
-            this.textBoxRX1Ant.Enabled = false;
             this.textBoxRX1Ant.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxRX1Ant.Location = new System.Drawing.Point(3, 13);
             this.textBoxRX1Ant.MaxLength = 10;
@@ -372,8 +472,12 @@ namespace PowerSDR
             this.textBoxRX1Ant.ShortcutsEnabled = false;
             this.textBoxRX1Ant.Size = new System.Drawing.Size(60, 20);
             this.textBoxRX1Ant.TabIndex = 23;
-            this.toolTip1.SetToolTip(this.textBoxRX1Ant, "Assign a name to currently select RX1 antenna");
+            this.toolTip1.SetToolTip(this.textBoxRX1Ant, "Assign a name to currently select RX1 antenna\r\nRight Click to RESET back to DEFAU" +
+        "LT names");
+            this.textBoxRX1Ant.WordWrap = false;
             this.textBoxRX1Ant.TextChanged += new System.EventHandler(this.textBoxRX1Ant_TextChanged);
+            this.textBoxRX1Ant.Leave += new System.EventHandler(this.textBoxRX1Ant_Leave);
+            this.textBoxRX1Ant.MouseUp += new System.Windows.Forms.MouseEventHandler(this.textBoxRX1Ant_MouseUp);
             // 
             // chkTX2Active
             // 
@@ -414,45 +518,6 @@ namespace PowerSDR
             this.comboTXAnt2.TabIndex = 20;
             this.toolTip1.SetToolTip(this.comboTXAnt2, "Selects the Transmitter 2 Antenna\r\nOnly for Flex-5000 units with 2nd receiver");
             this.comboTXAnt2.SelectedIndexChanged += new System.EventHandler(this.comboTXAnt2_SelectedIndexChanged);
-            // 
-            // lblLoopGain
-            // 
-            this.lblLoopGain.Image = null;
-            this.lblLoopGain.Location = new System.Drawing.Point(175, 97);
-            this.lblLoopGain.Name = "lblLoopGain";
-            this.lblLoopGain.Size = new System.Drawing.Size(32, 16);
-            this.lblLoopGain.TabIndex = 19;
-            this.lblLoopGain.Text = "Gain:";
-            this.lblLoopGain.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // udLoopGain
-            // 
-            this.udLoopGain.DecimalPlaces = 1;
-            this.udLoopGain.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.udLoopGain.Location = new System.Drawing.Point(207, 97);
-            this.udLoopGain.Maximum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.udLoopGain.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.udLoopGain.Name = "udLoopGain";
-            this.udLoopGain.Size = new System.Drawing.Size(48, 20);
-            this.udLoopGain.TabIndex = 18;
-            this.udLoopGain.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udLoopGain.ValueChanged += new System.EventHandler(this.udLoopGain_ValueChanged);
             // 
             // chkEnable6mPreamp
             // 
@@ -511,15 +576,6 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.comboRX2Ant, resources.GetString("comboRX2Ant.ToolTip"));
             this.comboRX2Ant.SelectedIndexChanged += new System.EventHandler(this.comboRX2Ant_SelectedIndexChanged);
             // 
-            // lblRX2
-            // 
-            this.lblRX2.Image = null;
-            this.lblRX2.Location = new System.Drawing.Point(131, 33);
-            this.lblRX2.Name = "lblRX2";
-            this.lblRX2.Size = new System.Drawing.Size(62, 16);
-            this.lblRX2.TabIndex = 15;
-            this.lblRX2.Text = "Receiver 2:";
-            // 
             // comboTXAnt
             // 
             this.comboTXAnt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -534,56 +590,6 @@ namespace PowerSDR
             this.comboTXAnt.TabIndex = 12;
             this.toolTip1.SetToolTip(this.comboTXAnt, "Selects the Transmitter Antenna for RX1");
             this.comboTXAnt.SelectedIndexChanged += new System.EventHandler(this.comboTXAnt_SelectedIndexChanged);
-            // 
-            // lblTX
-            // 
-            this.lblTX.Image = null;
-            this.lblTX.Location = new System.Drawing.Point(66, 33);
-            this.lblTX.Name = "lblTX";
-            this.lblTX.Size = new System.Drawing.Size(64, 16);
-            this.lblTX.TabIndex = 13;
-            this.lblTX.Text = "Transmit 1:";
-            // 
-            // lblRX1
-            // 
-            this.lblRX1.Image = null;
-            this.lblRX1.Location = new System.Drawing.Point(3, 33);
-            this.lblRX1.Name = "lblRX1";
-            this.lblRX1.Size = new System.Drawing.Size(72, 16);
-            this.lblRX1.TabIndex = 11;
-            this.lblRX1.Text = "Receiver 1:";
-            // 
-            // labelTS1
-            // 
-            this.labelTS1.Image = null;
-            this.labelTS1.Location = new System.Drawing.Point(195, 33);
-            this.labelTS1.Name = "labelTS1";
-            this.labelTS1.Size = new System.Drawing.Size(64, 16);
-            this.labelTS1.TabIndex = 21;
-            this.labelTS1.Text = "Transmit 2:";
-            // 
-            // grpSwitchRelay
-            // 
-            this.grpSwitchRelay.Controls.Add(this.chkRX2TX3);
-            this.grpSwitchRelay.Controls.Add(this.chkRX2TX2);
-            this.grpSwitchRelay.Controls.Add(this.textBoxTS1);
-            this.grpSwitchRelay.Controls.Add(this.udTX3Delay);
-            this.grpSwitchRelay.Controls.Add(this.chkTX3DelayEnable);
-            this.grpSwitchRelay.Controls.Add(this.udTX2Delay);
-            this.grpSwitchRelay.Controls.Add(this.chkTX2DelayEnable);
-            this.grpSwitchRelay.Controls.Add(this.udTX1Delay);
-            this.grpSwitchRelay.Controls.Add(this.chkTX1DelayEnable);
-            this.grpSwitchRelay.Controls.Add(this.chkRCATX3);
-            this.grpSwitchRelay.Controls.Add(this.chkRCATX2);
-            this.grpSwitchRelay.Controls.Add(this.chkRCATX1);
-            this.grpSwitchRelay.Controls.Add(this.chkRX2TX1);
-            this.grpSwitchRelay.Location = new System.Drawing.Point(8, 212);
-            this.grpSwitchRelay.Name = "grpSwitchRelay";
-            this.grpSwitchRelay.Size = new System.Drawing.Size(264, 142);
-            this.grpSwitchRelay.TabIndex = 21;
-            this.grpSwitchRelay.TabStop = false;
-            this.grpSwitchRelay.Text = "Switch Relay with TR";
-            this.grpSwitchRelay.Visible = false;
             // 
             // chkRX2TX3
             // 
@@ -794,6 +800,201 @@ namespace PowerSDR
         "\n\r\n");
             this.chkRX2TX1.CheckedChanged += new System.EventHandler(this.chkRX1TX1_CheckedChanged);
             // 
+            // chkAlwaysOnTop1
+            // 
+            this.chkAlwaysOnTop1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.chkAlwaysOnTop1.Image = null;
+            this.chkAlwaysOnTop1.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.chkAlwaysOnTop1.Location = new System.Drawing.Point(169, 385);
+            this.chkAlwaysOnTop1.Name = "chkAlwaysOnTop1";
+            this.chkAlwaysOnTop1.Size = new System.Drawing.Size(103, 24);
+            this.chkAlwaysOnTop1.TabIndex = 60;
+            this.chkAlwaysOnTop1.Text = "Always On Top";
+            this.chkAlwaysOnTop1.CheckedChanged += new System.EventHandler(this.ChkAlwaysOnTop1_CheckedChanged);
+            // 
+            // txtStatus
+            // 
+            this.txtStatus.Location = new System.Drawing.Point(8, 360);
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.ReadOnly = true;
+            this.txtStatus.Size = new System.Drawing.Size(264, 20);
+            this.txtStatus.TabIndex = 23;
+            this.txtStatus.Text = "Simple Mode: Settings are applied to all bands";
+            // 
+            // grpComplexity
+            // 
+            this.grpComplexity.Controls.Add(this.lblBand2);
+            this.grpComplexity.Controls.Add(this.radModeSimple);
+            this.grpComplexity.Controls.Add(this.radModeExpert);
+            this.grpComplexity.Controls.Add(this.comboBand);
+            this.grpComplexity.Controls.Add(this.comboBand2);
+            this.grpComplexity.Controls.Add(this.lblBand);
+            this.grpComplexity.Location = new System.Drawing.Point(8, 6);
+            this.grpComplexity.Name = "grpComplexity";
+            this.grpComplexity.Size = new System.Drawing.Size(264, 72);
+            this.grpComplexity.TabIndex = 21;
+            this.grpComplexity.TabStop = false;
+            this.grpComplexity.Text = "Complexity";
+            // 
+            // lblBand2
+            // 
+            this.lblBand2.Image = null;
+            this.lblBand2.Location = new System.Drawing.Point(132, 40);
+            this.lblBand2.Name = "lblBand2";
+            this.lblBand2.Size = new System.Drawing.Size(57, 24);
+            this.lblBand2.TabIndex = 21;
+            this.lblBand2.Text = "RX2Band:";
+            this.lblBand2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblBand2.Visible = false;
+            // 
+            // lblBand
+            // 
+            this.lblBand.Image = null;
+            this.lblBand.Location = new System.Drawing.Point(132, 14);
+            this.lblBand.Name = "lblBand";
+            this.lblBand.Size = new System.Drawing.Size(59, 24);
+            this.lblBand.TabIndex = 19;
+            this.lblBand.Text = "RX1Band:";
+            this.lblBand.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblBand.Visible = false;
+            // 
+            // grpAntenna
+            // 
+            this.grpAntenna.Controls.Add(this.txtBoxAnt12);
+            this.grpAntenna.Controls.Add(this.txtBoxAnt11);
+            this.grpAntenna.Controls.Add(this.txtBoxAnt10);
+            this.grpAntenna.Controls.Add(this.txtBoxAnt9);
+            this.grpAntenna.Controls.Add(this.txtBoxAnt8);
+            this.grpAntenna.Controls.Add(this.txtBoxAnt7);
+            this.grpAntenna.Controls.Add(this.txtBoxAnt6);
+            this.grpAntenna.Controls.Add(this.txtBoxAnt5);
+            this.grpAntenna.Controls.Add(this.txtBoxAnt4);
+            this.grpAntenna.Controls.Add(this.txtBoxAnt3);
+            this.grpAntenna.Controls.Add(this.txtBoxAnt2);
+            this.grpAntenna.Controls.Add(this.txtBoxAnt1);
+            this.grpAntenna.Controls.Add(this.textBoxTX2Ant);
+            this.grpAntenna.Controls.Add(this.textBoxRX2Ant);
+            this.grpAntenna.Controls.Add(this.textBoxTX1Ant);
+            this.grpAntenna.Controls.Add(this.textBoxRX1Ant);
+            this.grpAntenna.Controls.Add(this.chkTX2Active);
+            this.grpAntenna.Controls.Add(this.chkLock);
+            this.grpAntenna.Controls.Add(this.comboTXAnt2);
+            this.grpAntenna.Controls.Add(this.lblLoopGain);
+            this.grpAntenna.Controls.Add(this.udLoopGain);
+            this.grpAntenna.Controls.Add(this.chkEnable6mPreamp);
+            this.grpAntenna.Controls.Add(this.comboRX1Ant);
+            this.grpAntenna.Controls.Add(this.chkRX1Loop);
+            this.grpAntenna.Controls.Add(this.comboRX2Ant);
+            this.grpAntenna.Controls.Add(this.lblRX2);
+            this.grpAntenna.Controls.Add(this.comboTXAnt);
+            this.grpAntenna.Controls.Add(this.lblTX);
+            this.grpAntenna.Controls.Add(this.lblRX1);
+            this.grpAntenna.Controls.Add(this.labelTS1);
+            this.grpAntenna.Location = new System.Drawing.Point(8, 82);
+            this.grpAntenna.Name = "grpAntenna";
+            this.grpAntenna.Size = new System.Drawing.Size(264, 124);
+            this.grpAntenna.TabIndex = 20;
+            this.grpAntenna.TabStop = false;
+            this.grpAntenna.Text = "Antenna";
+            // 
+            // lblLoopGain
+            // 
+            this.lblLoopGain.Image = null;
+            this.lblLoopGain.Location = new System.Drawing.Point(175, 97);
+            this.lblLoopGain.Name = "lblLoopGain";
+            this.lblLoopGain.Size = new System.Drawing.Size(32, 16);
+            this.lblLoopGain.TabIndex = 19;
+            this.lblLoopGain.Text = "Gain:";
+            this.lblLoopGain.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // udLoopGain
+            // 
+            this.udLoopGain.DecimalPlaces = 1;
+            this.udLoopGain.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udLoopGain.Location = new System.Drawing.Point(207, 97);
+            this.udLoopGain.Maximum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udLoopGain.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.udLoopGain.Name = "udLoopGain";
+            this.udLoopGain.Size = new System.Drawing.Size(48, 20);
+            this.udLoopGain.TabIndex = 18;
+            this.udLoopGain.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udLoopGain.ValueChanged += new System.EventHandler(this.udLoopGain_ValueChanged);
+            // 
+            // lblRX2
+            // 
+            this.lblRX2.Image = null;
+            this.lblRX2.Location = new System.Drawing.Point(131, 33);
+            this.lblRX2.Name = "lblRX2";
+            this.lblRX2.Size = new System.Drawing.Size(62, 16);
+            this.lblRX2.TabIndex = 15;
+            this.lblRX2.Text = "Receiver 2:";
+            // 
+            // lblTX
+            // 
+            this.lblTX.Image = null;
+            this.lblTX.Location = new System.Drawing.Point(66, 33);
+            this.lblTX.Name = "lblTX";
+            this.lblTX.Size = new System.Drawing.Size(64, 16);
+            this.lblTX.TabIndex = 13;
+            this.lblTX.Text = "Transmit 1:";
+            // 
+            // lblRX1
+            // 
+            this.lblRX1.Image = null;
+            this.lblRX1.Location = new System.Drawing.Point(3, 33);
+            this.lblRX1.Name = "lblRX1";
+            this.lblRX1.Size = new System.Drawing.Size(72, 16);
+            this.lblRX1.TabIndex = 11;
+            this.lblRX1.Text = "Receiver 1:";
+            // 
+            // labelTS1
+            // 
+            this.labelTS1.Image = null;
+            this.labelTS1.Location = new System.Drawing.Point(195, 33);
+            this.labelTS1.Name = "labelTS1";
+            this.labelTS1.Size = new System.Drawing.Size(64, 16);
+            this.labelTS1.TabIndex = 21;
+            this.labelTS1.Text = "Transmit 2:";
+            // 
+            // grpSwitchRelay
+            // 
+            this.grpSwitchRelay.Controls.Add(this.chkRX2TX3);
+            this.grpSwitchRelay.Controls.Add(this.chkRX2TX2);
+            this.grpSwitchRelay.Controls.Add(this.textBoxTS1);
+            this.grpSwitchRelay.Controls.Add(this.udTX3Delay);
+            this.grpSwitchRelay.Controls.Add(this.chkTX3DelayEnable);
+            this.grpSwitchRelay.Controls.Add(this.udTX2Delay);
+            this.grpSwitchRelay.Controls.Add(this.chkTX2DelayEnable);
+            this.grpSwitchRelay.Controls.Add(this.udTX1Delay);
+            this.grpSwitchRelay.Controls.Add(this.chkTX1DelayEnable);
+            this.grpSwitchRelay.Controls.Add(this.chkRCATX3);
+            this.grpSwitchRelay.Controls.Add(this.chkRCATX2);
+            this.grpSwitchRelay.Controls.Add(this.chkRCATX1);
+            this.grpSwitchRelay.Controls.Add(this.chkRX2TX1);
+            this.grpSwitchRelay.Location = new System.Drawing.Point(8, 212);
+            this.grpSwitchRelay.Name = "grpSwitchRelay";
+            this.grpSwitchRelay.Size = new System.Drawing.Size(264, 142);
+            this.grpSwitchRelay.TabIndex = 21;
+            this.grpSwitchRelay.TabStop = false;
+            this.grpSwitchRelay.Text = "Switch Relay with TR";
+            this.grpSwitchRelay.Visible = false;
+            // 
             // FWCAntForm
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -813,27 +1014,21 @@ namespace PowerSDR
             this.Closing += new System.ComponentModel.CancelEventHandler(this.FWCAntForm_Closing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FWCAntForm_KeyDown);
             this.MouseEnter += new System.EventHandler(this.FWCAntForm_MouseEnter);
+            ((System.ComponentModel.ISupportInitialize)(this.udTX3Delay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTX2Delay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTX1Delay)).EndInit();
             this.grpComplexity.ResumeLayout(false);
             this.grpAntenna.ResumeLayout(false);
             this.grpAntenna.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udLoopGain)).EndInit();
             this.grpSwitchRelay.ResumeLayout(false);
             this.grpSwitchRelay.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udTX3Delay)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udTX2Delay)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udTX1Delay)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
         #endregion
-
-      
-        private System.Windows.Forms.ComboBoxTS comboRX1Ant;
-        private System.Windows.Forms.LabelTS lblTX;
-        private System.Windows.Forms.ComboBoxTS comboTXAnt;
         private System.Windows.Forms.LabelTS lblRX2;
-        private System.Windows.Forms.ComboBoxTS comboRX2Ant;
         private System.Windows.Forms.RadioButtonTS radModeSimple;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.LabelTS lblBand;
@@ -873,5 +1068,21 @@ namespace PowerSDR
         private System.Windows.Forms.TextBoxTS textBoxRX2Ant;
         private System.Windows.Forms.TextBoxTS textBoxTX1Ant;
         private System.Windows.Forms.TextBoxTS textBoxRX1Ant;
+        public System.Windows.Forms.ComboBoxTS comboRX1Ant;
+        public System.Windows.Forms.LabelTS lblTX;
+        public System.Windows.Forms.ComboBoxTS comboTXAnt;
+        public System.Windows.Forms.ComboBoxTS comboRX2Ant;
+        public System.Windows.Forms.TextBoxTS txtBoxAnt12;
+        public System.Windows.Forms.TextBoxTS txtBoxAnt11;
+        public System.Windows.Forms.TextBoxTS txtBoxAnt10;
+        public System.Windows.Forms.TextBoxTS txtBoxAnt9;
+        public System.Windows.Forms.TextBoxTS txtBoxAnt8;
+        public System.Windows.Forms.TextBoxTS txtBoxAnt7;
+        public System.Windows.Forms.TextBoxTS txtBoxAnt6;
+        public System.Windows.Forms.TextBoxTS txtBoxAnt5;
+        public System.Windows.Forms.TextBoxTS txtBoxAnt4;
+        public System.Windows.Forms.TextBoxTS txtBoxAnt3;
+        public System.Windows.Forms.TextBoxTS txtBoxAnt2;
+        public System.Windows.Forms.TextBoxTS txtBoxAnt1;
     }
 }

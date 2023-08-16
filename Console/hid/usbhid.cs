@@ -561,6 +561,12 @@ namespace PowerSDR
         {
             return Flex1500.WriteOp(Opcode.USB_OP_SET_RCA_TX1, Convert.ToUInt32(b), 0);
         }
+        public static int SetAmpTX(bool b) //.272
+        {
+            return Flex1500.WriteOp(Opcode.USB_OP_SET_AMP_TX1, Convert.ToUInt32(b), 0);
+        }
+
+        
 
         public static int SetLED(bool b)
         {

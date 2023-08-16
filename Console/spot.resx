@@ -203,12 +203,12 @@ Right Click on "Callout" button to Post spot from VFOB Frequency
 </value>
   </data>
   <data name="textBoxDXCall.ToolTip" xml:space="preserve">
-    <value>Enter the Call Sign of the DX station you made Contact with.
-
-If you do not enter a Call Sign, you must select a DX station from a line above.
-
+    <value>For DX Spotting: Enter the Call Sign of the DX station you made Contact with.
+If you do not enter a Call Sign, you must select a DX station from the DX Spots above.
 Left Click on "Callout" button to Post spot from VFOA Frequency
-Right Click on "Callout" button to Post spot from VFOB Frequency</value>
+Right Click on "Callout" button to Post spot from VFOB Frequency
+
+For Searching DX: Enter the Call Sign or partial Call Sign, then check the "Call Search" box below</value>
   </data>
   <data name="RotorHead.ToolTip" xml:space="preserve">
     <value>When Connected to your Antenna Rotor Controller via DDUtil
@@ -249,6 +249,23 @@ RED LoTW  when a fault occured.
 
 To download a new fcc database: ftp://wirelessftp.fcc.gov/pub/uls/complete/l_amat.zip</value>
   </data>
+  <data name="button5.ToolTip" xml:space="preserve">
+    <value>Click to send SHOW/DX command to the DX Cluster.
+This will pull up recent DX spots that occured before 
+the PowerSDR DX spotter was active (older spots).
+
+You must have a valid Call sign in the lower Right Call sign box on this spotter window
+
+Gray = Not Ready
+LightBlue = Your Call Sign has logged in to the Cluster
+Yellow = Currently downloading older Spots.
+Green = Done. Your up to date.
+
+</value>
+  </data>
+  <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>264, 17</value>
+  </metadata>
   <data name="chkCloudOn.ToolTip" xml:space="preserve">
     <value>CLOUD COVER Mosaic Map Provided by: University of Wisconsin-Madison
 Real-Time but updated every 30 min
@@ -417,9 +434,6 @@ Until I can use a PLL to detect weak signals.
 Reception will start on the WWV minute 1khz tone.
 </value>
   </data>
-  <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>264, 17</value>
-  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>47</value>
   </metadata>

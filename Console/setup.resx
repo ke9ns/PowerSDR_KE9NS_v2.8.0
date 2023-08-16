@@ -236,7 +236,9 @@ See page: http://k3tuf.com/FW.html , for info on FlexWire and UCB
 </value>
   </data>
   <data name="chkBoxIIC.ToolTip" xml:space="preserve">
-    <value>Check to use IIC FlexWire bus (8bit address 0x4E &amp; 4A) to send commands to an external device for AMP control.
+    <value>When Enabled, AmpPTT button will Enable/Disable the Flex Amp PTT line and send IIC FlexWire commands for use with IIC capable Amps(see below).
+
+Check to use IIC FlexWire bus (8bit address 0x4E &amp; 4A) to send commands to an external device for AMP control.
 NOTE: 8bit address 0x40 = Heros Preselector, 0x4C = UCB XVTR, 0x42 &amp; 0x44 &amp; 0x46 = HF band select (starting with 2200m = 1)
 
 The AMP uses the relay controlled W6PQL Output FIlter board and a relay for ON/OFF of the AMP 
@@ -613,6 +615,14 @@ Normally (unchecked), Only Transmit Drive Slider setpoint is saved per Band
 AGC-T continues to be saves on a per Band basis only.
 
 Do not use this feature if an external program like DDUtil, controls your Drive levels.</value>
+  </data>
+  <data name="chkFMDataMic.ToolTip" xml:space="preserve">
+    <value>When in WFM Data mode: 17khz Dev
+(To get into WFM mode, Right Click on the FM button)
+
+When Checked, uses MIC input (allows for WFM using your MIC with standard PreEmphasis and DeEmphasis)
+Unchecked, acts like DIGU or DIGL input bypassing MIC and no Emphasis or Demphasis.
+</value>
   </data>
   <data name="chkRememberTXProfileOnModeChange.ToolTip" xml:space="preserve">
     <value>When checked the previous TX Profile used for a particular mode is remembered.
