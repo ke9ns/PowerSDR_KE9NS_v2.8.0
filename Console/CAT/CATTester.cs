@@ -83,7 +83,9 @@ namespace PowerSDR
             ExecuteCommand();
         }
 
+        private void txtResult_TextChanged(object sender, System.EventArgs e)
+        {
 
-
+        }
     }
 }

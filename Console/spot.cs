@@ -211,6 +211,7 @@ namespace PowerSDR
         public static SpotOptions SpotOptions;
         public static SpotDecoder SpotDecoderForm;
         public static SpotAge SpotAge;
+        public static SpotWatch SpotWatch; //.278
 
         public static Conrec conrec;
 
@@ -241,6 +242,7 @@ namespace PowerSDR
             SpotOptions.SpotForm = this; // allows Spotoptions to see public data 
             SpotDecoder.SpotForm = this; // allows SpotDecoder to see public data 
             SpotAge.SpotForm = this; // 
+            SpotWatch.SpotForm = this; // .278
 
             Display.SpotForm = this;  // allows Display to see public data (not public static data)
             StackControl.SpotForm = this; // allows Stack to see public data from spot
@@ -253,6 +255,11 @@ namespace PowerSDR
 
             SpotAge.Show();
             SpotAge.Hide();
+
+            if (SpotWatch == null || SpotWatch.IsDisposed) SpotWatch = new SpotWatch();  // create spotWatch
+
+            SpotWatch.Show();
+            SpotWatch.Hide();
 
             // ke9ns doublebuffered 
             //  this.SetStyle( ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true );
@@ -18648,6 +18655,16 @@ namespace PowerSDR
             processTCPMessage(); // using dx_band[] to list only spots for the callsign your searching for.
 
         }
+
+        private void mnuSpotWatch_Click(object sender, EventArgs e) //.278
+        {
+            if (SpotWatch == null || SpotWatch.IsDisposed)
+                SpotWatch = new SpotWatch();
+
+            SpotWatch.Show();
+            SpotWatch.Focus();
+        }
+
     } //SPOTCONTROL
 
 

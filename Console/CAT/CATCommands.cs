@@ -229,7 +229,15 @@ namespace PowerSDR
                 return "";
             }
             else if (s.Length == parser.nGet)
-                return "0";
+            {
+                bool retval = console.SwapVFOA_BTX; // .278 whichever one is TX the other is obviously RX
+                if (retval)
+                  
+                    return "0";
+                  else
+                    return "1";
+   
+            }
             else
                 return parser.Error1;
         }
@@ -300,7 +308,7 @@ namespace PowerSDR
 
         // Reads the transceiver status
         // needs work in the split area
-        public string IF()
+        public string IF() // 35 characters of data to return  P9=1 in kenwood, p9=2 in zzif
         {
             string rtn = "";
             string rit = "0";
@@ -344,7 +352,7 @@ namespace PowerSDR
 
             string f = ZZFA("");
 
-            if (console.SpoofAB == true) // return VFOB freq instead
+            if (console.SpoofAB == true) // ke9ns: return VFOB freq instead when using RX2 VFOB COM port which spoofs the program into using RX2
             {
                 f = ZZFB("");
             }
@@ -353,14 +361,14 @@ namespace PowerSDR
             {
                 f = f.Substring(f.Length - 11, 11);
             }
-            rtn += f;
-            //			rtn += StrVFOFreq("A");						// VFO A frequency			11 bytes
-            rtn += stepsize;                            // Console step frequency	 4 bytes
-            rtn += incr;                                // incremental tuning value	 6 bytes
-            rtn += rit;                                 // RIT status				 1 byte
-            rtn += xit;                                 // XIT status				 1 byte
-            rtn += "000";                               // dummy for memory bank	 3 bytes
-            rtn += tx;                                  // tx-rx status				 1 byte
+            rtn += f; // p1
+            //			rtn += StrVFOFreq("A");						// P1 VFO A frequency			11 bytes
+            rtn += stepsize;                            // P2  Console step frequency	 4 bytes
+            rtn += incr;                                // P3 incremental tuning value	 6 bytes
+            rtn += rit;                                 // P4 RIT status				 1 byte
+            rtn += xit;                                 // P5 XIT status				 1 byte
+            rtn += "000";                               // P6 P7 dummy for memory bank	 3 bytes
+            rtn += tx;                                  // P8 tx-rx status				 1 byte
                                                         //			rtn += temp;
                                                         //			rtn += Mode2KString(console.RX1DSPMode);	// current mode			 1 bytes
 
@@ -376,11 +384,22 @@ namespace PowerSDR
             if (tempmode == "?;")
                 rtn += "2";
             else
-                rtn += tempmode;
-            rtn += "0";                                 // dummy for FR/FT			 1 byte
-            rtn += "0";                                 // dummy for scan status	 1 byte
-            rtn += split;                               // VFO Split status			 1 byte
-            rtn += "0000";                              // dummy for the balance	 4 bytes
+                rtn += tempmode;                        // P9 (1 byte kenwood, 2 bytes ZZIF)
+
+            rtn += "0";                                 // P10 dummy for FR/FT			 1 byte
+            rtn += "0";                                 // P11 dummy for scan status	 1 byte
+
+            if (split == "0" && console.chkVFOBTX.Checked) //.278 you are in split mode if the 2nd receiver is on and its in TX mode
+            {
+                rtn += "1";
+            }
+            else
+            {
+                rtn += split;                               // P12 VFO Split status			 1 byte
+            }
+
+            rtn += "0000";                              // P13,P14,P15 dummy for the balance	 4 bytes
+
             return rtn;                                 // total bytes				35
 
             //			// Initalize the command word
@@ -3229,23 +3248,54 @@ namespace PowerSDR
                 split = "1";
 
             string f = ZZFA("");
+
+            if (console.SpoofAB == true) //.278  ke9ns: return VFOB freq instead when using RX2 VFOB COM port which spoofs the program into using RX2
+            {
+                f = ZZFB("");
+            }
+
             if (f.Length > 11)
             {
                 f = f.Substring(f.Length - 11, 11);
             }
-            rtn += f;
+
+           
+          
+            rtn += f; // P1
             //			rtn += StrVFOFreq("A");						// VFO A frequency			11 bytes
-            rtn += stepsize;                            // Console step frequency	 4 bytes
-            rtn += incr;                                // incremental tuning value	 6 bytes
-            rtn += rit;                                 // RIT status				 1 byte
-            rtn += xit;                                 // XIT status				 1 byte
-            rtn += "000";                               // dummy for memory bank	 3 bytes
-            rtn += tx;                                  // tx-rx status				 1 byte
-            rtn += Mode2String(console.RX1DSPMode); // current mode				 2 bytes
-            rtn += "0";                                 // dummy for FR/FT			 1 byte
-            rtn += "0";                                 // dummy for scan status	 1 byte
-            rtn += split;                               // VFO Split status			 1 byte
-            rtn += "0000";                              // dummy for the balance	 4 bytes
+            rtn += stepsize;                            // P2 Console step frequency	 4 bytes
+            rtn += incr;                                // P3 incremental tuning value	 6 bytes
+            rtn += rit;                                 // P4 RIT status				 1 byte
+            rtn += xit;                                 // P5 XIT status				 1 byte
+            rtn += "000";                               // P6P7 dummy for memory bank	 3 bytes
+            rtn += tx;                                  // P8tx-rx status				 1 byte
+
+           
+            if (console.SpoofAB == true) // return VFOB mode instead
+            {
+                rtn += Mode2KString(console.RX2DSPMode); // P9
+       
+            }
+            else
+            {
+                rtn += Mode2String(console.RX1DSPMode);      // P9 current mode				 2 bytes (only 1 in kenwood)
+            }
+
+
+            rtn += "0";                                 // P10 dummy for FR/FT			 1 byte
+            rtn += "0";                                 // P11 dummy for scan status	 1 byte
+
+            if (split == "0" && console.chkVFOBTX.Checked) //.278 you are in split mode if the 2nd receiver is on and its in TX mode
+            {
+                rtn += "1";
+            }
+            else
+            {
+                rtn += split;                               // P12 VFO Split status			 1 byte
+            }
+          
+
+            rtn += "0000";                              // P13-P15 dummy for the balance	 4 bytes
             return rtn;
         }
 

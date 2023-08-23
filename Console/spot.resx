@@ -263,9 +263,6 @@ Green = Done. Your up to date.
 
 </value>
   </data>
-  <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>264, 17</value>
-  </metadata>
   <data name="chkCloudOn.ToolTip" xml:space="preserve">
     <value>CLOUD COVER Mosaic Map Provided by: University of Wisconsin-Madison
 Real-Time but updated every 30 min
@@ -434,6 +431,9 @@ Until I can use a PLL to detect weak signals.
 Reception will start on the WWV minute 1khz tone.
 </value>
   </data>
+  <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>264, 17</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>47</value>
   </metadata>

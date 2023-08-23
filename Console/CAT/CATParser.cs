@@ -108,8 +108,9 @@ namespace PowerSDR
 
 
 
+        int counter1 = 0; //.278
 
-        public string Get(string pCmdString)
+        public string Get(string pCmdString) //ke9ns: receive a CAT command via COM or TCP, go to CATCommanders.cs and return string as your response  parser.Get( )
         {
             current_cat = pCmdString;
             string rtncmd = "";
@@ -131,94 +132,128 @@ namespace PowerSDR
 
             if (goodcmd)
             {
+              //  console.helpboxForm.helpbox_message.Text += " " + counter1 + " CAT REC: " + prefix +  "\n\r"; //.278
+
                 switch (prefix)
                 {
                     case "AC":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "AG":
                         rtncmd = cmdlist.AG(suffix);
                         break;
                     case "AI":
                         rtncmd = cmdlist.AI(suffix);
+                        console.Siolisten.CATDEF = "set-get auto info func"; //.278
                         break;
                     case "AL":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "AM":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "AN":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "AR":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "AS":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "BC":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "BD":
                         rtncmd = cmdlist.BD();
                         break;
                     case "BP":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "BU":
                         rtncmd = cmdlist.BU();
                         break;
                     case "BY":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "CA":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "CG":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "CH":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "CI":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "CM":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "CN":
                         rtncmd = cmdlist.CN(suffix);
+                        console.Siolisten.CATDEF = "set-get CTCSS freq"; //.278
                         break;
                     case "CT":
                         rtncmd = cmdlist.CT(suffix);
+                        console.Siolisten.CATDEF = "set-get CTCSS button"; //.278
                         break;
                     case "DC":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "DN":
                         rtncmd = cmdlist.DN();
+                        console.Siolisten.CATDEF = "move VFOA down 1 step"; //.278
                         break;
                     case "DQ":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "EX":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "FA":
                         rtncmd = cmdlist.FA(suffix);
+                        console.Siolisten.CATDEF = "Get-Set VFOA"; //.278
                         break;
                     case "FB":
                         rtncmd = cmdlist.FB(suffix);
+                        console.Siolisten.CATDEF = "Get-Set VFOB"; //.278
                         break;
                     case "FC":
+                        console.Siolisten.CATDEF = "Get-Set sub-rx VFO freq"; //.278
                         break;
                     case "FD":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "FR":
                         rtncmd = cmdlist.FR(suffix);
+                        console.Siolisten.CATDEF = "Get-Set RX on VFO 0=A/1=B"; //.278
                         break;
                     case "FS":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "FT":
                         rtncmd = cmdlist.FT(suffix);
+                        console.Siolisten.CATDEF = "Get-Set TX on VFO 0=A/1=B"; //.278
                         break;
                     case "FW":
                         rtncmd = cmdlist.FW(suffix);
+                        console.Siolisten.CATDEF = "Get-Set RX filter width"; //.278
                         break;
                     case "GT":
                         rtncmd = cmdlist.GT(suffix);
                         break;
                     case "ID":
                         rtncmd = cmdlist.ID();
+                        console.Siolisten.CATDEF = "Tranceiver ID"; //.278
                         break;
                     case "IF":
                         rtncmd = cmdlist.IF();
+                        console.Siolisten.CATDEF = "Read Radio status of VFOA"; //.278
                         break;
                     case "IS":
+                        console.Siolisten.CATDEF = "Get-Set IF shift status"; //.278
                         break;
                     case "KS":
                         rtncmd = cmdlist.KS(suffix);
@@ -227,17 +262,23 @@ namespace PowerSDR
                         rtncmd = cmdlist.KY(suffix);
                         break;
                     case "LK":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "LM":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "LT":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "MC":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "MD":
                         rtncmd = cmdlist.MD(suffix);
+                        console.Siolisten.CATDEF = "Get-Set RX1 mode"; //.278
                         break;
                     case "MF":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "MG":
                         rtncmd = cmdlist.MG(suffix);
@@ -248,17 +289,22 @@ namespace PowerSDR
                         rtncmd = cmdlist.MO(suffix);
                         break;
                     case "MR":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "MU":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "MW":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "NB":
                         rtncmd = cmdlist.NB(suffix);
                         break;
                     case "NL":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "NR":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "NT":
                         rtncmd = cmdlist.NT(suffix);
@@ -267,39 +313,51 @@ namespace PowerSDR
                         rtncmd = cmdlist.OF(suffix);
                         break;
                     case "OI":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "OS":
                         rtncmd = cmdlist.OS(suffix);
                         break;
                     case "PA":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "PB":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "PC":
                         rtncmd = cmdlist.PC(suffix);
                         break;
                     case "PI":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "PK":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "PL":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "PM":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "PR":
                         rtncmd = cmdlist.PR(suffix);
                         break;
                     case "PS":
                         rtncmd = cmdlist.PS(suffix);
+                        console.Siolisten.CATDEF = "Start Button 0=off, 1=on"; //.278
                         break;
                     case "QC":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "QI":
                         rtncmd = cmdlist.QI();
+                        console.Siolisten.CATDEF = "Quick Save Memory"; //.278
                         break;
                     case "QR":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "RA":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "RC":
                         rtncmd = cmdlist.RC();
@@ -308,10 +366,13 @@ namespace PowerSDR
                         rtncmd = cmdlist.RD(suffix);
                         break;
                     case "RG":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "RL":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "RM":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "RT":
                         rtncmd = cmdlist.RT(suffix);
@@ -321,19 +382,25 @@ namespace PowerSDR
                         break;
                     case "RX":
                         rtncmd = cmdlist.RX(suffix);
+                        console.Siolisten.CATDEF = "Set MOX OFF "; //.278
                         break;
                     case "SA":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "SB":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "SC":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "SD":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "SH":
                         rtncmd = cmdlist.SH(suffix);
                         break;
                     case "SI":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "SL":
                         rtncmd = cmdlist.SL(suffix);
@@ -345,44 +412,61 @@ namespace PowerSDR
                         rtncmd = cmdlist.SQ(suffix);
                         break;
                     case "SR":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "SS":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "ST":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "SU":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "SV":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "TC":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "TD":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "TI":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "TN":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "TO":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "TS":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "TX":
                         rtncmd = cmdlist.TX(suffix);
                         break;
                     case "TY":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "UL":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "UP":
                         rtncmd = cmdlist.UP();
                         break;
                     case "VD":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "VG":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "VR":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "VX":
+                        console.Siolisten.CATDEF = "-NA-"; //.278
                         break;
                     case "XT":
                         rtncmd = cmdlist.XT(suffix);
@@ -410,7 +494,7 @@ namespace PowerSDR
                 rtncmd = ProcessError(Error1);  // this was a bad command
 
             return rtncmd;  // Read successfully executed
-        }
+        } // Get()
 
         private bool CheckFormat()
         {
@@ -741,24 +825,30 @@ namespace PowerSDR
                     break;
                 case "ZZFI":
                     rtncmd = cmdlist.ZZFI(suffix);
+                    console.Siolisten.CATDEF = "Set-get RX1 filter"; //.278
                     break;
                 case "ZZFJ":
                     rtncmd = cmdlist.ZZFJ(suffix);
+                    console.Siolisten.CATDEF = "Set-get RX2 filter"; //.278
                     break;
                 case "ZZFL":
                     rtncmd = cmdlist.ZZFL(suffix);
+                    console.Siolisten.CATDEF = "Set RX1 filter low"; //.278
                     break;
                 case "ZZFH":
                     rtncmd = cmdlist.ZZFH(suffix);
+                    console.Siolisten.CATDEF = "Set RX1 filter high"; //.278
                     break;
                 case "ZZFM":
                     rtncmd = cmdlist.ZZFM();
                     break;
                 case "ZZFR":
                     rtncmd = cmdlist.ZZFR(suffix);
+                    console.Siolisten.CATDEF = "Set RX2 filter high"; //.278
                     break;
                 case "ZZFS":
                     rtncmd = cmdlist.ZZFS(suffix);
+                    console.Siolisten.CATDEF = "Set RX2 filter low"; //.278
                     break;
                 case "ZZFV":
                     rtncmd = cmdlist.ZZFV(suffix);
@@ -807,9 +897,11 @@ namespace PowerSDR
                     break;
                 case "ZZIF":
                     rtncmd = cmdlist.ZZIF(suffix);
+                    console.Siolisten.CATDEF = "get Radio VFOA status"; //.278
                     break;
                 case "ZZIO":
                     rtncmd = cmdlist.ZZIO();
+                    console.Siolisten.CATDEF = "get radio options"; //.278
                     break;
                 case "ZZIS":
                     rtncmd = cmdlist.ZZIS(suffix);
@@ -861,15 +953,19 @@ namespace PowerSDR
                     break;
                 case "ZZMA":
                     rtncmd = cmdlist.ZZMA(suffix);
+                    console.Siolisten.CATDEF = "Get-Set RX1 mute"; //.278
                     break;
                 case "ZZMB":
                     rtncmd = cmdlist.ZZMB(suffix);
+                    console.Siolisten.CATDEF = "Get-Set RX2 mute"; //.278
                     break;
                 case "ZZMD":
                     rtncmd = cmdlist.ZZMD(suffix);
+                    console.Siolisten.CATDEF = "Get-Set RX1 mode"; //.278
                     break;
                 case "ZZME":
                     rtncmd = cmdlist.ZZME(suffix);
+                    console.Siolisten.CATDEF = "Get-Set RX2 mode"; //.278
                     break;
                 case "ZZMG":
                     rtncmd = cmdlist.ZZMG(suffix);
@@ -1164,6 +1260,7 @@ namespace PowerSDR
                     break;
                 case "ZZTX":
                     rtncmd = cmdlist.ZZTX(suffix);
+                    console.Siolisten.CATDEF = "Get-Set MOX 0=RX,1=TX"; //.278
                     break;
                 case "ZZUA":
                     rtncmd = cmdlist.ZZUA();

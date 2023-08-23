@@ -717,6 +717,9 @@
     <Compile Include="SpotWatchBox.Designer.cs">
       <DependentUpon>SpotWatchBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="spot_watch.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="spot_decoder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -958,6 +961,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SpotWatchBox.resx">
       <DependentUpon>SpotWatchBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="spot_watch.resx">
+      <DependentUpon>spot_watch.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="spot_decoder.resx">
       <DependentUpon>spot_decoder.cs</DependentUpon>

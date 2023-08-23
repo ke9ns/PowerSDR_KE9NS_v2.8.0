@@ -48,6 +48,7 @@ namespace PowerSDR
             this.txtResult.Name = "txtResult";
             this.txtResult.Size = new System.Drawing.Size(392, 20);
             this.txtResult.TabIndex = 3;
+            this.txtResult.TextChanged += new System.EventHandler(this.txtResult_TextChanged);
             // 
             // label1
             // 

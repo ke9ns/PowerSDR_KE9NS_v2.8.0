@@ -17318,7 +17318,10 @@ namespace PowerSDR
             this.chkCATEnable.Size = new System.Drawing.Size(38, 24);
             this.chkCATEnable.TabIndex = 0;
             this.chkCATEnable.Text = "on";
+            this.toolTip1.SetToolTip(this.chkCATEnable, "CHECK to Enable CAT on this assigned port.\r\n\r\nRIGHT CLICK to open Diagnostics Win" +
+        "dow for TCP CAT communications Received and Transmitted.");
             this.chkCATEnable.CheckedChanged += new System.EventHandler(this.chkCATEnable_CheckedChanged);
+            this.chkCATEnable.MouseDown += new System.Windows.Forms.MouseEventHandler(this.chkCATEnable_MouseDown);
             // 
             // lblCATParity
             // 

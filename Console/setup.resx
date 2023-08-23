@@ -669,7 +669,7 @@ If your CAT device sends an AI OFF command it will not disable AI for the other 
 
 This allows CAT commands to/from PowerSDR form any TCP/IP device linked to your IP and Port
 
-Right click to open Display screen for CAT communications Received and Transmitted.
+RIGHT CLICK to open Diagnostics Window for TCP CAT communications Received and Transmitted.
 </value>
   </data>
   <data name="chkKWAI6.ToolTip" xml:space="preserve">

@@ -2344,6 +2344,7 @@ namespace PowerSDR
             this.chkVFOBTX.Name = "chkVFOBTX";
             this.toolTip1.SetToolTip(this.chkVFOBTX, resources.GetString("chkVFOBTX.ToolTip"));
             this.chkVFOBTX.CheckedChanged += new System.EventHandler(this.chkVFOBTX_CheckedChanged);
+            this.chkVFOBTX.MouseDown += new System.Windows.Forms.MouseEventHandler(this.chkVFOBTX_MouseDown);
             // 
             // chkVFOATX
             // 

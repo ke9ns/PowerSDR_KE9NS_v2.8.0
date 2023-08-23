@@ -134,6 +134,7 @@ namespace PowerSDR
                 cat_enabled = true;
             }
             Debug.WriteLine("==============CAT PORT OPEN");
+          
 
             int port_num = console.CATPort;
 
@@ -145,7 +146,10 @@ namespace PowerSDR
                             console.CATHandshake);
 
             Initialize();
-        }
+
+         //   console.helpboxForm.helpbox_message.Text = "Initialize CAT port OPEN NOW \n\r"; //.278
+
+        } // enableCAT()
 
         public bool UseForKeyPTT
         {
@@ -336,6 +340,9 @@ namespace PowerSDR
             }
         }
 
+        int counter1 = 0; //.278
+        public string CATDEF = ""; //.278
+
         StringBuilder CommBuffer = new StringBuilder();//"";				//holds incoming serial data from the port
         private void SerialRXEventHandler(object source, SerialRXEvent e)
         {
@@ -362,6 +369,12 @@ namespace PowerSDR
                         //testTimer1.Start();
                         console.KWAI1 = true; // .214
                         answer = parser.Get(m.Value);                                   //send the match to the parser
+
+                        if (console.helpboxForm != null && console.helpboxForm.helpbox_message.Visible) //.278
+                            console.helpboxForm.helpbox_message.Text += "CAT:" +counter1++ + "  Received=" +m.Value + "(" + console.Siolisten.CATDEF + ")" + "  Transmit=" + answer + "\n\r"; //.278
+
+                        //console.helpboxForm.helpbox_message.Text = console.helpboxForm.helpbox_message.Text + counter1 + " CAT REC: " + prefix + "\n\r"; //.278
+
                         console.KWAI1 = false; // .214
 
                         //testTimer1.Stop();

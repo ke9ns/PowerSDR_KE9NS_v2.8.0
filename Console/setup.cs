@@ -9754,6 +9754,7 @@ namespace PowerSDR
             // wjt fixme -- need to hand baudrate, parity, data, stop -- see initCATandPTTprops 
         } // copyCATPropsToDialogVars()
 
+       
         private void chkCATEnable_CheckedChanged(object sender, System.EventArgs e)
         {
             if (initializing) return;
@@ -9800,6 +9801,11 @@ namespace PowerSDR
                 try
                 {
                     console.CATEnabled = true;
+
+                    console.helpboxForm.helpbox_message.Text = "CAT1 Enabled " + comboCATPort.Text + "\n\r"; //.278
+
+                   
+
                 }
                 catch (Exception ex)
                 {
@@ -15616,7 +15622,7 @@ namespace PowerSDR
                         }
                         else if (RX2.Contains("\r") && (cnt > 2))
                         {
-                            console.helpboxForm.helpbox_message.Text += "\r\n>>Command ReceiveD: " + RX2;
+                          //  console.helpboxForm.helpbox_message.Text += "\r\n>>Command ReceiveD: " + RX2;
 
                             Debug.WriteLine("got CR instead of end character " + cnt + " length: " + msg.Length);
                             if (cnt > 1)
@@ -15629,7 +15635,12 @@ namespace PowerSDR
                             RX2 = Encoding.Default.GetString(msg, 0, cnt); // TCP/IP RECEIVED DATA into RX2 string (like ZZAU;) to send to PowerSDR for CAT decoding
                             RX3 = parser.Get(RX2); // PowerSDR CAT parser to string RX3 to send reponse back to TCP/IP CAT device 
 
-                            console.helpboxForm.helpbox_message.Text += "\r\n>>PowerSDR sent: " + RX3;
+
+                            //   console.helpboxForm.helpbox_message.Text += "\r\n>>PowerSDR sent: " + RX3;
+
+                            if(console.helpboxForm != null && console.helpboxForm.helpbox_message.Visible) //.278
+                            console.helpboxForm.helpbox_message.Text += "CAT:" + "  Received=" + RX2 + "(" + console.Siolisten.CATDEF + ")" + "  Transmit=" + RX3 + "\n\r"; //.278
+
 
                             test = Encoding.Default.GetBytes(RX3); // convert CAT answer to byte array in order to send back via TCP/IP
 
@@ -15839,7 +15850,7 @@ namespace PowerSDR
 
                 if (console.helpboxForm == null || console.helpboxForm.IsDisposed) console.helpboxForm = new helpbox(console);
 
-                console.helpboxForm.Text = "PowerSDR CAT TCP Server.";
+                console.helpboxForm.Text = "PowerSDR CAT TCP Server Diagnostics window.";
                 console.helpboxForm.Show();
                 console.helpboxForm.Focus();
                 console.helpboxForm.WindowState = FormWindowState.Normal; // ke9ns add
@@ -16140,41 +16151,59 @@ namespace PowerSDR
              
          } // chkFMDataMode_CheckedChanged
 
+        private void chkCATEnable_MouseDown(object sender, MouseEventArgs e)
+        {
+            MouseEventArgs me = (MouseEventArgs)e;
+
+            if (me.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+
+                if (console.helpboxForm == null || console.helpboxForm.IsDisposed) console.helpboxForm = new helpbox(console);
+
+                console.helpboxForm.Text = "PowerSDR CAT 1 Diagnostics Window.";
+                console.helpboxForm.Show();
+                console.helpboxForm.Focus();
+                console.helpboxForm.WindowState = FormWindowState.Normal; // ke9ns add
 
 
-
-            //setupForm.gridBoxTS.CheckedChanged -= setupForm.gridBoxTS_CheckedChanged;  // ke9ns turn off checkchanged temporarily   
-            // 
-            // setupForm.gridBoxTS.CheckedChanged += setupForm.gridBoxTS_CheckedChanged;
-
-
-
-
-
-            // ke9ns add
-            //    private void chkPHROTEnable_CheckedChanged(object sender, EventArgs e)
-            //   {
-            //  int run;
-            //  if (chkPHROTEnable.Checked) run = 1;
-            //  else run = 0;
-            //  wdsp.SetTXAPHROTRun(wdsp.id(1, 0), run);
-            //   }
+            }
+        }
 
 
 
 
-
-            //===============================================================================
-
-
-
-        } // class setup
+        //setupForm.gridBoxTS.CheckedChanged -= setupForm.gridBoxTS_CheckedChanged;  // ke9ns turn off checkchanged temporarily   
+        // 
+        // setupForm.gridBoxTS.CheckedChanged += setupForm.gridBoxTS_CheckedChanged;
 
 
 
-        #region PADeviceInfo Helper Class
 
-        public class PADeviceInfo
+
+        // ke9ns add
+        //    private void chkPHROTEnable_CheckedChanged(object sender, EventArgs e)
+        //   {
+        //  int run;
+        //  if (chkPHROTEnable.Checked) run = 1;
+        //  else run = 0;
+        //  wdsp.SetTXAPHROTRun(wdsp.id(1, 0), run);
+        //   }
+
+
+
+
+
+        //===============================================================================
+
+
+
+    } // class setup
+
+
+
+    #region PADeviceInfo Helper Class
+
+    public class PADeviceInfo
     {
         private string _Name;
         private int _Index;

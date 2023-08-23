@@ -20785,6 +20785,7 @@ namespace PowerSDR
             -  Invalid     1       1       0       0 (Split)
             */
             if (swapping) return 0;
+
             int rx2_xvtr_index_local = rx2_xvtr_index;
             if (!rx2_enabled)
                 rx2_xvtr_index_local = -1;
@@ -27086,17 +27087,20 @@ namespace PowerSDR
             get { return swap_vfo_ab_tx; }
             set
             {
-                if (value)
+                if (VFOBlock == false) //.278 if VFOB TX is locked, dont swap
                 {
-                    //chkVFOATX.Checked = false;
-                    chkVFOBTX.Checked = true;
+                    if (value)
+                    {
+                        //chkVFOATX.Checked = false;
+                        chkVFOBTX.Checked = true;
+                    }
+                    else
+                    {
+                        chkVFOATX.Checked = true;
+                        //chkVFOBTX.Checked = false;
+                    }
+                    swap_vfo_ab_tx = value;
                 }
-                else
-                {
-                    chkVFOATX.Checked = true;
-                    //chkVFOBTX.Checked = false;
-                }
-                swap_vfo_ab_tx = value;
             }
         }
 
@@ -61329,10 +61333,12 @@ namespace PowerSDR
                 {
                     if (rx1_xvtr_index == 0 && rx2_xvtr_index == 0 && rx2_enabled && !swapping)
                     {
-                        MessageBox.Show(new Form { TopMost = true }, "Error: Cannot use VHF on both RX1 and RX2",
-                                        "VU Error",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Error);
+                        RX2Enabled = false; //.278 if you try to enable the same VHF or UHF module on both receivers, just shut off RX2
+
+
+                        // .278 MessageBox.Show(new Form { TopMost = true }, "Error: Cannot use VHF on both RX1 and RX2",
+                        //                "VU Error", MessageBoxButtons.OK,MessageBoxIcon.Error);
+
                         rx1_band = Band.VHF0;
                         VFOAFreq = saved_vfoa_freq;
                         //Give an error message, set to the last set frequency
@@ -61340,10 +61346,13 @@ namespace PowerSDR
                     }
                     else if (rx1_xvtr_index == 1 && rx2_xvtr_index == 1 && rx2_enabled && !swapping)
                     {
-                        MessageBox.Show(new Form { TopMost = true }, "Error: Cannot use UHF on both RX1 and RX2",
-                                        "VU Error",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Error);
+                      
+                        RX2Enabled = false; //.278 if you try to enable the same VHF or UHF module on both receivers, just shut off RX2
+
+
+                      // .278  MessageBox.Show(new Form { TopMost = true }, "Error: Cannot use UHF on both RX1 and RX2",
+                      //                  "VU Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                         //Give an error message, set to the last set frequency
                         rx1_band = Band.VHF1;
                         VFOAFreq = saved_vfoa_freq;
@@ -61353,9 +61362,8 @@ namespace PowerSDR
                             tx_xvtr_index >= 2 && !swapping)  //VFOB is XVTR using Split (can't use XVTR with RX2)
                     {
                         MessageBox.Show(new Form { TopMost = true }, "Error: Cannot use Split with XVTR on VFOB.  Try swapping VFOs",
-                                        "VU Error",
-                                        MessageBoxButtons.OK,
-                                        MessageBoxIcon.Error);
+                                        "VU Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                         //Give an error message, set to the last set frequency
                         //chkVFOATX.Focus();
                         //Application.DoEvents();
@@ -63118,10 +63126,11 @@ namespace PowerSDR
                     {
                         if (rx1_xvtr_index == 0 && rx2_xvtr_index == 0 && !swapping)
                         {
-                            MessageBox.Show(new Form { TopMost = true }, "Error: Cannot use VHF on both RX1 and RX2",
-                                            "VU Error",
-                                            MessageBoxButtons.OK,
-                                            MessageBoxIcon.Error);
+
+                            RX2Enabled = false; //.278 if you try to enable the same VHF or UHF module on both receivers, just shut off RX2
+
+                           // .278 MessageBox.Show(new Form { TopMost = true }, "Error: Cannot use VHF on both RX1 and RX2",
+                            //                "VU Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                             if (saved_vfob_freq >= 134.0 && saved_vfob_freq <= 163.0) chkRX2.Checked = false;  // ke9ns test was 144.0 and 148.0
                             else
@@ -63131,10 +63140,11 @@ namespace PowerSDR
                         }
                         else if (rx1_xvtr_index == 1 && rx2_xvtr_index == 1 && !swapping)
                         {
-                            MessageBox.Show(new Form { TopMost = true }, "Error: Cannot use UHF on both RX1 and RX2",
-                                            "VU Error",
-                                            MessageBoxButtons.OK,
-                                            MessageBoxIcon.Error);
+                            RX2Enabled = false; //.278 if you try to enable the same VHF or UHF module on both receivers, just shut off RX2
+
+                          //  MessageBox.Show(new Form { TopMost = true }, "Error: Cannot use UHF on both RX1 and RX2",
+                           //                 "VU Error",  MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                             if (saved_vfob_freq >= 430.0 && saved_vfob_freq <= 450.0)
                                 chkRX2.Checked = false;
                             else
@@ -68780,7 +68790,9 @@ namespace PowerSDR
 
                     grpVFOB.Font = ff5; //new Font("Swis721 BT", 8.25F, FontStyle.Italic | FontStyle.Regular);
                     grpVFOB.ForeColor = SystemColors.ControlLightLight;
-                    chkVFOATX.Checked = true;
+                   
+                    if (VFOBlock == false) chkVFOATX.Checked = true; // .278 mod
+
                     if (chkPower.Checked)
                     {
                         if (chkEnableMultiRX.Checked)
@@ -71451,7 +71463,10 @@ namespace PowerSDR
                             panelVFOASubHover.Visible = false;
                         }
                         if (chkVFOBTX.Checked && FWCEEPROM.RX2OK && !chkVFOSplit.Checked)
-                            chkVFOATX.Checked = true;
+                        {
+                            if (VFOBlock == false) //.278 add 
+                                chkVFOATX.Checked = true;
+                        }
                         UpdateVFOASub();
                     }
 
@@ -74099,7 +74114,15 @@ namespace PowerSDR
 
         public void chkVFOATX_CheckedChanged(object sender, System.EventArgs e)
         {
-            if (chkVFOATX.Focused && chkVFOATX.Checked == false) chkVFOATX.Checked = true;
+            if (chkVFOATX.Focused && chkVFOATX.Checked == false)
+            {
+                chkVFOATX.Checked = true;
+            }
+
+
+            VFOBlock = false;  // .278 remove lock anytime you touch the VFOB TX button
+            chkVFOBTX.Text = "TX"; //.278
+                
 
             if (chkVFOATX.Checked)
             {
@@ -87837,7 +87860,7 @@ namespace PowerSDR
 
         } // buttondel_mouseup
 
-        private void lblAntTX_Click_1(object sender, EventArgs e)
+        private void lblAntTX_Click_1(object sender, EventArgs e) // ke9ns: click on TX1: in ant panel
         {
             chkVFOATX.Checked = true; //.213
 
@@ -88652,6 +88675,25 @@ namespace PowerSDR
             }
 
 
+        }
+
+
+        public bool VFOBlock = false; //.278 true = prevent CAT from changing VFOB TX to VFOA TX
+
+        private void chkVFOBTX_MouseDown(object sender, MouseEventArgs e) //.278 Right click to prevent CAT from changing the TX VFOB to A
+        {
+
+            MouseEventArgs me = (MouseEventArgs)e;
+
+            if ((me.Button == System.Windows.Forms.MouseButtons.Right))
+            {
+                if (chkVFOBTX.Checked)
+                {
+                    VFOBlock = true; // can only unlock from reset or Click on VFOA button itself
+                    chkVFOBTX.Text = "tx";
+                }
+
+            }
         }
 
         private void chkLockR_CheckedChanged(object sender, EventArgs e)
