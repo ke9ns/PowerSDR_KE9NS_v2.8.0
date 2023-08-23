@@ -203,6 +203,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\Release\FlexCW.dll</HintPath>
     </Reference>
+    <Reference Include="Interop.mcl_pm">
+      <HintPath>..\Interop.mcl_pm.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Interop.TDxInput, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\Release\Interop.TDxInput.dll</HintPath>
