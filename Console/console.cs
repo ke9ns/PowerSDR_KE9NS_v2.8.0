@@ -514,6 +514,8 @@ namespace PowerSDR
         OFF = 0,
         LOCAL,
         UTC,
+        UPTIME,   // .280
+        UPTIME2, //.280
         LAST,
     }
 
@@ -5549,6 +5551,7 @@ namespace PowerSDR
             // ke9ns RECALL SWR PLOTS
             string file_nameSWR = AppDataPath + "ke9ns_SWR1.dat"; // save data for my mods
 
+            
 
             if (!File.Exists(file_nameSWR))
             {
@@ -32060,7 +32063,7 @@ namespace PowerSDR
                     if (!timer_clock.Enabled) timer_clock.Enabled = true;
                 }
             }
-        }
+        } // CurrentDateTimeMode
 
         private double soft_rock_center_freq = 7.056;
         public double SoftRockCenterFreq
@@ -52412,6 +52415,9 @@ namespace PowerSDR
 
         private int last_sec;       // for time of day clock
         private DateTime last_date; // for date
+        private DateTime start_date = DateTime.Now; // .280 when you launch PowerSDR recored the time/date
+        private TimeSpan ts; //.280
+
         private void timer_clock_Tick(object sender, System.EventArgs e)
         {
 
@@ -52520,6 +52526,42 @@ namespace PowerSDR
                     {
                         last_sec = sec;
                         txtTime.Text = "UTC  " + DateTime.UtcNow.ToString("HH:mm:ss");
+                    }
+                    break;
+                case DateTimeMode.UPTIME: // Total Days, Hours, Min
+                    date = DateTime.Now.Date;
+                   
+                     sec = DateTime.Now.Second;
+                    if (sec != last_sec)
+                    {
+
+                        ts = DateTime.Now - start_date;
+
+                        string days = ts.Days.ToString("00");
+                        string hours = ts.Hours.ToString("00");
+                        string minutes = ts.Minutes.ToString("00");
+                        
+
+                        last_sec = sec;
+                      //  txtTime.Font.Size();
+                        txtTime.Text = "UPT " + days + "d " + hours + "h " + minutes + "m"; // (DateTime.Now - start_date).TotalMinutes;
+                    }
+                    break;
+                case DateTimeMode.UPTIME2: // Total minutes
+                    date = DateTime.Now.Date;
+
+                    sec = DateTime.Now.Second;
+                    if (sec != last_sec)
+                    {
+
+                        ts = DateTime.Now - start_date;
+
+                        
+                        string minutes = ts.TotalMinutes.ToString("00000");
+
+
+                        last_sec = sec;
+                        txtTime.Text = "UPT  " + minutes + "m"; // (DateTime.Now - start_date).TotalMinutes;
                     }
                     break;
                 case DateTimeMode.OFF:
@@ -60295,14 +60337,11 @@ namespace PowerSDR
 
             setupForm.TXProfile = comboTXProfile.Text;
 
-            if (comboDigTXProfile.Text != comboTXProfile.Text)
-                comboDigTXProfile.Text = comboTXProfile.Text;
+            if (comboDigTXProfile.Text != comboTXProfile.Text) comboDigTXProfile.Text = comboTXProfile.Text;
 
-            if (comboFMTXProfile.Text != comboTXProfile.Text)
-                comboFMTXProfile.Text = comboTXProfile.Text;
+            if (comboFMTXProfile.Text != comboTXProfile.Text) comboFMTXProfile.Text = comboTXProfile.Text;
 
-            if (comboCWTXProfile.Text != comboTXProfile.Text)
-                comboCWTXProfile.Text = comboTXProfile.Text;
+            if (comboCWTXProfile.Text != comboTXProfile.Text) comboCWTXProfile.Text = comboTXProfile.Text;
 
             UpdateDisplay();
 

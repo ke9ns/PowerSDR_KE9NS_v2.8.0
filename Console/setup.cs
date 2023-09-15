@@ -290,7 +290,7 @@ namespace PowerSDR
 
             if (comboAudioDriver2B.SelectedIndex < 0 &&
               comboAudioDriver2B.Items.Count > 0)
-                comboAudioDriver2B.SelectedIndex = 0; // .204
+                comboAudioDriver2B.SelectedIndex = 0; // .204  (select B for VAC1)
 
             if (comboAudioDriver3.SelectedIndex < 0 &&
                 comboAudioDriver3.Items.Count > 0)
@@ -835,7 +835,7 @@ namespace PowerSDR
 
         } // getdevices 1
 
-        private void GetDevices2()  // VAC1
+        private void GetDevices2()  // VAC1 (select A)
         {
             comboAudioInput2.Items.Clear();
             comboAudioOutput2.Items.Clear();
@@ -863,7 +863,7 @@ namespace PowerSDR
             }
         } // GetDevices2() VAC1
 
-        private void GetDevices2B()  // VAC1 .204
+        private void GetDevices2B()  // VAC1 .204 (select B)
         {
             comboAudioInput2B.Items.Clear();
             comboAudioOutput2B.Items.Clear();
@@ -1539,8 +1539,16 @@ namespace PowerSDR
                 if (comboTXProfileName != null) return comboTXProfileName.Text;
                 else return "";
             }
-            set { if (comboTXProfileName != null) comboTXProfileName.Text = value; }
-        }
+            set { 
+                
+                if (comboTXProfileName != null) comboTXProfileName.Text = value;
+
+               comboTXProfileName_SelectedIndexChanged(this, EventArgs.Empty); //.279a
+
+                }
+       
+        
+        } // TXProfile
 
 
         //==========================================================
@@ -1852,7 +1860,25 @@ namespace PowerSDR
             }
 
             //===============================================================
-         //   dr["VACMix"] = chkBoxMixAudio.Checked; //.255
+            //   dr["VACMix"] = chkBoxMixAudio.Checked; //.255
+
+            try
+            {
+                dr["VAC1_SelectA"] = radVAC1SelectA.Checked; //.279
+                dr["VAC1_SelectB"] = radVAC1SelectB.Checked; //.279
+
+                dr["VAC1_MixAudio"] = chkBoxMixAudio.Checked; //.279
+                dr["VAC1_Reset"] = chkVACReset.Checked; //.279
+
+                dr["Drive_Max"] = (int)udTXDriveMax.Value; // .279a
+
+                Debug.WriteLine("VAC1 save selectAB WORKED");
+            }
+            catch (Exception G)
+            {
+
+                Debug.WriteLine("VAC1 save selectAB did not work " + G);
+            }
 
 
             //------------------------------------------------------------------
@@ -2075,32 +2101,23 @@ namespace PowerSDR
             }
         }
 
-        public int VACDriver
+        public int VACDriver  // used by CAT zzvm
         {
             get
             {
-                return comboAudioDriver2.SelectedIndex;
+                if (radVAC1SelectA.Checked) return comboAudioDriver2.SelectedIndex; //.279 mod
+                else return comboAudioDriver2B.SelectedIndex;
             }
             set
             {
-                if (comboAudioDriver2.Items.Count - 1 >= value)
-                    comboAudioDriver2.SelectedIndex = value;
+                if (radVAC1SelectA.Checked)
+                {
+                    if (comboAudioDriver2.Items.Count - 1 >= value) comboAudioDriver2.SelectedIndex = value;
+                }
+                else if (comboAudioDriver2B.Items.Count - 1 >= value) comboAudioDriver2B.SelectedIndex = value;
             }
         }
-        public int VACDriverB
-        {
-            get
-            {
-                return comboAudioDriver2B.SelectedIndex;
-            }
-            set
-            {
-                if (comboAudioDriver2B.Items.Count - 1 >= value)
-                    comboAudioDriver2B.SelectedIndex = value;
-            }
-        }
-
-
+       
         public int VAC2Driver
         {
             get
@@ -2114,16 +2131,21 @@ namespace PowerSDR
             }
         }
 
-        public int VACInputCable
+        public int VACInputCable // used by CAT ZZVI
         {
             get
             {
-                return comboAudioInput2.SelectedIndex;
+                if (radVAC1SelectA.Checked) return comboAudioInput2.SelectedIndex; //.279 mod to add select A/B
+                else return comboAudioInput2B.SelectedIndex;
+
             }
             set
             {
-                if (comboAudioInput2.Items.Count - 1 >= value)
-                    comboAudioInput2.SelectedIndex = value;
+                if (radVAC1SelectA.Checked) //.279 mod
+                {
+                    if (comboAudioInput2.Items.Count - 1 >= value) comboAudioInput2.SelectedIndex = value;
+                }
+                else if (comboAudioInput2B.Items.Count - 1 >= value) comboAudioInput2B.SelectedIndex = value;
             }
         }
 
@@ -2140,16 +2162,20 @@ namespace PowerSDR
             }
         }
 
-        public int VACOutputCable
+        public int VACOutputCable // zzvo
         {
             get
             {
-                return comboAudioOutput2.SelectedIndex;
+                if (radVAC1SelectA.Checked) return comboAudioOutput2.SelectedIndex;
+                else return comboAudioOutput2B.SelectedIndex;
             }
             set
             {
-                if (comboAudioOutput2.Items.Count - 1 >= value)
-                    comboAudioOutput2.SelectedIndex = value;
+                if (radVAC1SelectA.Checked)
+                {
+                    if (comboAudioOutput2.Items.Count - 1 >= value) comboAudioOutput2.SelectedIndex = value;
+                }
+                else if (comboAudioOutput2B.Items.Count - 1 >= value) comboAudioOutput2B.SelectedIndex = value;
             }
         }
 
@@ -8047,6 +8073,11 @@ namespace PowerSDR
 
             //int[] eq = null;
 
+
+         
+
+
+
             Debug.WriteLine("LOAD EQ==============");
 
             try
@@ -8255,7 +8286,32 @@ namespace PowerSDR
             udTXFilterLow.Value = Math.Min(Math.Max((int)dr["FilterLow"], udTXFilterLow.Minimum), udTXFilterLow.Maximum);
             udTXFilterHigh.Value = Math.Min(Math.Max((int)dr["FilterHigh"], udTXFilterHigh.Minimum), udTXFilterHigh.Maximum);
 
-         //   chkBoxMixAudio.Checked = (bool)dr["VACMix"]; // .255
+            //   chkBoxMixAudio.Checked = (bool)dr["VACMix"]; // .255
+
+           
+
+
+            Debug.WriteLine("LOAD VAC1 extras1 =============="); //.279
+            try
+            {
+                radVAC1SelectA.Checked = (bool)dr["VAC1_SelectA"]; //.279
+                radVAC1SelectB.Checked = (bool)dr["VAC1_SelectB"]; //.279
+                chkBoxMixAudio.Checked = (bool)dr["VAC1_MixAudio"]; //.279
+                chkVACReset.Checked = (bool)dr["VAC1_Reset"]; //.279
+                udTXDriveMax.Value = (int)dr["Drive_Max"]; //.279a
+
+            }
+            catch (Exception g)
+            {
+                Debug.WriteLine("LOAD VAC1 extras failed1 ============" + g); //.279
+                radVAC1SelectA.Checked = true;
+                radVAC1SelectA.Checked = false;
+                chkBoxMixAudio.Checked = false;
+                chkVACReset.Checked = false;
+                udTXDriveMax.Value = 100;
+
+            }
+
 
             console.DX = (bool)dr["DXOn"];
             console.DXLevel = (int)dr["DXLevel"];
@@ -8334,6 +8390,25 @@ namespace PowerSDR
             comboDSPDigRXBuf.Text = (string)dr["Digi_RX_DSP_Buffer"];
             comboDSPDigTXBuf.Text = (string)dr["Digi_TX_DSP_Buffer"];
             comboDSPCWRXBuf.Text = (string)dr["CW_RX_DSP_Buffer"];
+
+            Debug.WriteLine("LOAD VAC1 extras =============="); //.279
+            try
+            {
+                radVAC1SelectA.Checked = (bool)dr["VAC1_SelectA"]; //.279
+                radVAC1SelectB.Checked = (bool)dr["VAC1_SelectB"]; //.279
+                chkBoxMixAudio.Checked = (bool)dr["VAC1_MixAudio"]; //.279
+                chkVACReset.Checked = (bool)dr["VAC1_Reset"]; //.279
+
+            }
+            catch (Exception g)
+            {
+                Debug.WriteLine("LOAD VAC1 extras failed============" + g); //.279
+                radVAC1SelectA.Checked = true;
+                radVAC1SelectA.Checked = false;
+                chkBoxMixAudio.Checked = false;
+                chkVACReset.Checked = false;
+
+            }
 
             switch (console.CurrentModel)
             {
@@ -8683,7 +8758,30 @@ namespace PowerSDR
             }
 
             //===============================================================
-         //   dr["VACMix"] = chkBoxMixAudio.Checked; //.255
+            //   dr["VACMix"] = chkBoxMixAudio.Checked; //.255
+
+
+
+            //.279
+
+            try
+            {
+                dr["VAC1_SelectA"] = radVAC1SelectA.Checked; //.279
+                dr["VAC1_SelectB"] = radVAC1SelectB.Checked; //.279
+
+                dr["VAC1_MixAudio"] = chkBoxMixAudio.Checked; //.279
+                dr["VAC1_Reset"] = chkVACReset.Checked; //.279
+
+                dr["Drive_Max"] = (int)udTXDriveMax.Value; //.279a
+
+                Debug.WriteLine("VAC1 save selectAB WORKED");
+
+            }
+            catch (Exception G)
+            {
+
+                Debug.WriteLine("VAC1 save selectAB did not work " + G);
+            }
 
 
             //===============================================================
@@ -8691,6 +8789,7 @@ namespace PowerSDR
             dr["RX1DSPMODE"] = console.RX1DSPMODE; // .196
             dr["RX2DSPMODE"] = console.RX2DSPMODE; // .196
 
+           
 
             //===============================================================
             dr["DXOn"] = console.DX;

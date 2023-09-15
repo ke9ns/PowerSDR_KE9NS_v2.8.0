@@ -6061,6 +6061,14 @@ namespace PowerSDR
             t.Columns.Add("RX1DSPMODE", typeof(DSPMode)); // .196
             t.Columns.Add("RX2DSPMODE", typeof(DSPMode)); // .196
 
+            //==================================
+
+            t.Columns.Add("VAC1_SelectA", typeof(bool)); //.279
+            t.Columns.Add("VAC1_SelectB", typeof(bool)); //.279
+            t.Columns.Add("VAC1_MixAudio", typeof(bool)); //.279
+            t.Columns.Add("VAC1_Reset", typeof(bool)); //.279
+
+            t.Columns.Add("Drive_Max", typeof(int)); //.279a
 
             //==================================
 
@@ -6233,6 +6241,15 @@ namespace PowerSDR
 
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
+
+            //=================================================
+
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
+
+            dr["Drive_Max"] = 100; // .279a
 
             //=================================================
             dr["DXOn"] = false;
@@ -6430,6 +6447,16 @@ namespace PowerSDR
 
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
+
+            //=================================================
+
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
+
+            dr["Drive_Max"] = 100; // .279a
+
 
             //============================================
             dr["DXOn"] = true;
@@ -6631,6 +6658,15 @@ namespace PowerSDR
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
 
+            //=================================================
+
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
+
+            dr["Drive_Max"] = 100; // .279a
+
             //============================================
             dr["DXOn"] = false;
             dr["DXLevel"] = 3;
@@ -6828,6 +6864,16 @@ namespace PowerSDR
 
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
+
+
+            //=================================================
+
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
+
+            dr["Drive_Max"] = 100; // .279a
 
             //============================================
 
@@ -7041,6 +7087,16 @@ namespace PowerSDR
             t.Columns.Add("RX2DSPMODE", typeof(DSPMode)); // .196
 
 
+            //==================================
+
+            t.Columns.Add("VAC1_SelectA", typeof(bool)); //.279
+            t.Columns.Add("VAC1_SelectB", typeof(bool)); //.279
+            t.Columns.Add("VAC1_MixAudio", typeof(bool)); //.279
+            t.Columns.Add("VAC1_Reset", typeof(bool)); //.279
+           
+            t.Columns.Add("Drive_Max", typeof(int)); //.279a
+
+
             //===============================================
             t.Columns.Add("DXOn", typeof(bool));
             t.Columns.Add("DXLevel", typeof(int));
@@ -7210,6 +7266,13 @@ namespace PowerSDR
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
 
+         
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
+
+            dr["Drive_Max"] = 100; // .279a
 
             //============================================
             dr["DXOn"] = false;
@@ -7409,7 +7472,13 @@ namespace PowerSDR
 
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
+          
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
 
+            dr["Drive_Max"] = 100; // .279a
 
             //============================================
 
@@ -7611,6 +7680,13 @@ namespace PowerSDR
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
 
 
+         
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
+            dr["Drive_Max"] = 100; // .279a
+
             //============================================
             dr["DXOn"] = false;
             dr["DXLevel"] = 3;
@@ -7811,6 +7887,13 @@ namespace PowerSDR
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
 
+        
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
+
+            dr["Drive_Max"] = 100; // .279a
 
             //============================================
             dr["DXOn"] = true;
@@ -8010,6 +8093,13 @@ namespace PowerSDR
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
 
+         
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            
+            dr["VAC1_Reset"] = false; //.279
+            dr["Drive_Max"] = 100; // .279a
 
             //============================================
 
@@ -8211,7 +8301,13 @@ namespace PowerSDR
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
 
+         
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
 
+            dr["Drive_Max"] = 100; // .279a
             //============================================
 
             dr["DXOn"] = false;
@@ -8413,7 +8509,12 @@ namespace PowerSDR
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
 
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
 
+            dr["Drive_Max"] = 100; // .279a
             //============================================
 
             dr["DXOn"] = false;
@@ -8614,7 +8715,12 @@ namespace PowerSDR
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
 
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
 
+            dr["Drive_Max"] = 100; // .279a
             //============================================
 
             dr["DXOn"] = false;
@@ -8815,7 +8921,12 @@ namespace PowerSDR
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
 
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
 
+            dr["Drive_Max"] = 100; // .279a
             //============================================
             dr["DXOn"] = false;
             dr["DXLevel"] = 3;
@@ -9015,7 +9126,12 @@ namespace PowerSDR
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
 
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
 
+            dr["Drive_Max"] = 100; // .279a
             //============================================
 
             dr["DXOn"] = false;
@@ -9216,7 +9332,12 @@ namespace PowerSDR
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
 
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
 
+            dr["Drive_Max"] = 100; // .279a
             //============================================
 
             dr["DXOn"] = false;
@@ -9418,7 +9539,12 @@ namespace PowerSDR
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
 
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
 
+            dr["Drive_Max"] = 100; // .279a
             //============================================
 
             dr["DXOn"] = true;
@@ -9618,7 +9744,12 @@ namespace PowerSDR
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
 
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
 
+            dr["Drive_Max"] = 100; // .279a
             //============================================
 
             dr["DXOn"] = false;
@@ -9819,7 +9950,12 @@ namespace PowerSDR
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
 
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
 
+            dr["Drive_Max"] = 100; // .279a
             //============================================
             dr["DXOn"] = false;
             dr["DXLevel"] = 3;
@@ -10018,7 +10154,12 @@ namespace PowerSDR
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
 
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
 
+            dr["Drive_Max"] = 100; // .279a
             //============================================
             dr["DXOn"] = false;
             dr["DXLevel"] = 3;
@@ -10218,7 +10359,12 @@ namespace PowerSDR
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
 
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
 
+            dr["Drive_Max"] = 100; // .279a
             //============================================
 
             dr["DXOn"] = false;
@@ -10419,7 +10565,12 @@ namespace PowerSDR
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
 
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
 
+            dr["Drive_Max"] = 100; // .279a
             //============================================
 
             dr["DXOn"] = false;
@@ -10620,8 +10771,12 @@ namespace PowerSDR
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
 
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
 
-
+            dr["Drive_Max"] = 100; // .279a
             //============================================
             dr["DXOn"] = false;
             dr["DXLevel"] = 3;
@@ -10821,7 +10976,12 @@ namespace PowerSDR
             dr["RX1DSPMODE"] = DSPMode.LSB; // .196
             dr["RX2DSPMODE"] = DSPMode.LSB; // .196
 
+            dr["VAC1_SelectA"] = true; //.279
+            dr["VAC1_SelectB"] = false; //.279
+            dr["VAC1_MixAudio"] = false; //.279
+            dr["VAC1_Reset"] = false; //.279
 
+            dr["Drive_Max"] = 100; // .279a
             //============================================
 
             dr["DXOn"] = false;

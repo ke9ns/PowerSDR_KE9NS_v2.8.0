@@ -6618,7 +6618,6 @@ namespace PowerSDR
             // 
             resources.ApplyResources(this, "$this");
             this.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.Controls.Add(this.panelModeSpecificFM);
             this.Controls.Add(this.panelTSRadar);
             this.Controls.Add(this.panelBandVHFRX2);
             this.Controls.Add(this.panelBandHFRX2);
@@ -6648,7 +6647,6 @@ namespace PowerSDR
             this.Controls.Add(this.ptbRX2RF);
             this.Controls.Add(this.panelOptions);
             this.Controls.Add(this.panelMode);
-            this.Controls.Add(this.panelModeSpecificCW);
             this.Controls.Add(this.panelAntenna);
             this.Controls.Add(this.panelFilter);
             this.Controls.Add(this.panelRX2Filter);
@@ -6674,11 +6672,13 @@ namespace PowerSDR
             this.Controls.Add(this.panelDisplay);
             this.Controls.Add(this.ptbSquelch);
             this.Controls.Add(this.VFODialA);
-            this.Controls.Add(this.panelModeSpecificDigital);
             this.Controls.Add(this.VFODialB);
             this.Controls.Add(this.labelMax);
             this.Controls.Add(this.panelBandGN);
             this.Controls.Add(this.panelModeSpecificPhone);
+            this.Controls.Add(this.panelModeSpecificFM);
+            this.Controls.Add(this.panelModeSpecificCW);
+            this.Controls.Add(this.panelModeSpecificDigital);
             this.DoubleBuffered = true;
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;

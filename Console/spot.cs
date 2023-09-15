@@ -1401,6 +1401,9 @@ namespace PowerSDR
             }
             else if ((callBox.Text == "callsign") || (callBox.Text == null))
             {
+                button5.BackColor = SystemColors.ButtonFace; //.279b
+                SP_SPOTSTART = false; //.279b
+                SP_SHOWDX = false;
 
                 chkDXOn.Checked = false;
 
@@ -1414,6 +1417,10 @@ namespace PowerSDR
             }
             else
             {
+
+                button5.BackColor = SystemColors.ButtonFace; //.279b
+                SP_SPOTSTART = false; //.279b
+                SP_SHOWDX = false;
 
                 chkDXOn.Checked = false;
 
@@ -1649,10 +1656,13 @@ namespace PowerSDR
 
             try // opening socket
             {
-                textBox1.Text += "Attempt Opening socket \r\n";
+                textBox1.Text += "Attempt Opening socket for";
 
                 client = new TcpClient(); // for new socket
 
+                button5.BackColor = SystemColors.ButtonFace; //.279b
+                SP_SPOTSTART = false; //.279b
+                SP_SHOWDX = false;
 
                 DXMemRecord nodeBox5 = new DXMemRecord(console.DXMemList.List[dataGridView1.CurrentCell.RowIndex]); // ke9ns 
 
@@ -1675,6 +1685,7 @@ namespace PowerSDR
                     Debug.WriteLine("port " + PORT1);
                     Debug.WriteLine("index " + portBox2.Text);
 
+                    textBox1.Text += " " + URL1 + " Port:" + PORT1 + " index: " + portBox2.Text + " \r\n";
 
                     client.Connect(URL1, Convert.ToInt16(PORT1));      // 'EXAMPLE  client.Connect("192.168.0.149", 230) 
                 }
@@ -5965,6 +5976,10 @@ namespace PowerSDR
                         {
                             textBox1.Text += "Your Socket was disconnected \r\n";
 
+                            button5.BackColor = SystemColors.ButtonFace; //.279b
+                            SP_SPOTSTART = false; //.279b
+                            SP_SHOWDX = false;
+
                             statusBox.ForeColor = Color.Red;
                             statusBox.Text = "Closed";
                             console.spotterMenu.BackColor = Color.Red;
@@ -6018,6 +6033,9 @@ namespace PowerSDR
                 SP_reader.Close();
                 networkStream.Close();
 
+                button5.BackColor = SystemColors.ButtonFace; //.279b
+                SP_SPOTSTART = false; //.279b
+                SP_SHOWDX = false;
 
                 client.Close();
                 //   Debug.WriteLine("END DX SPOT thread");
@@ -6041,6 +6059,10 @@ namespace PowerSDR
             catch (SocketException SE)
             {
                 textBox1.Text += "Socket Forced closed \r\n";
+
+                button5.BackColor = SystemColors.ButtonFace; //.279b
+                SP_SPOTSTART = false; //.279b
+                SP_SHOWDX = false;
 
                 Debug.WriteLine("cannot open socket or socket closed on me" + SE);
                 statusBox.ForeColor = Color.Red;
@@ -10586,7 +10608,7 @@ namespace PowerSDR
 
             string file_name = console.AppDataPath + "DXLOC.txt"; // //  sked - b15.csv
 
-            textBox1.Text += "Attempting to open DX Location list\r\n";
+            textBox1.Text += "Attempting to open DX Location list (DXLOC.txt)\r\n";
 
             if (File.Exists(file_name))
             {
@@ -18622,7 +18644,7 @@ namespace PowerSDR
 
             if (SP_Active > 2 && SP_SHOWDX == false && SP_SPOTSTART == true)
             {
-                char[] messageDXSPOT1 = ("SHOW/DX").ToCharArray(); // 
+                char[] messageDXSPOT1 = ("SHOW/DX 20").ToCharArray(); // 
                 Debug.WriteLine("SHOW DX: ");
                 button5.BackColor = Color.Yellow;
 
@@ -18644,6 +18666,9 @@ namespace PowerSDR
             {
                 textBoxDXCall.Text = "Spotter not active, or you have already hit the SHOW/DX button"; // reset back
                 button5.BackColor = SystemColors.ButtonFace;
+
+                SP_SHOWDX = false; //.279b
+                SP_SPOTSTART = false;
             }
 
         }
