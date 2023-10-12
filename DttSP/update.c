@@ -279,8 +279,8 @@ DttSP_EXP void SetTXFMDeviation(unsigned int thread, double deviation)
 {
 	sem_wait(&top[thread].sync.upd.sem);
 
-	fprintf(stderr, "TX dttsp SetTXFMDeviation: %f\n", deviation);
-	fflush(stderr);
+	//fprintf(stderr, "TX dttsp SetTXFMDeviation: %f\n", deviation);
+	//fflush(stderr);
 
 	tx[thread].fm.cvtmod2freq = (REAL) (deviation * TWOPI / uni[thread].samplerate); // 
 	
@@ -336,8 +336,8 @@ DttSP_EXP void SetRXFMDeviation(unsigned int thread, unsigned int k, double devi
 	rx[thread][k].fm.gen->deviation = (REAL)deviation;
 	rx[thread][k].fm.gen->cvt = (REAL)(uni[thread].samplerate / (deviation * TWOPI));
 
-	fprintf(stderr, "dttsp SetRXFMDeviation: %f\n", deviation);
-	fflush(stderr);
+	//fprintf(stderr, "dttsp SetRXFMDeviation: %f\n", deviation);
+	//fflush(stderr);
 
 	sem_post(&top[thread].sync.upd.sem);
 }

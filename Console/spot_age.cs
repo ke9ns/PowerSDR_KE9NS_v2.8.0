@@ -100,13 +100,12 @@ namespace PowerSDR
             // 
             // udSpotAge
             // 
-            this.udSpotAge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.udSpotAge.Increment = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.udSpotAge.Location = new System.Drawing.Point(173, 6);
+            this.udSpotAge.Location = new System.Drawing.Point(175, 12);
             this.udSpotAge.Maximum = new decimal(new int[] {
             59,
             0,
@@ -171,9 +170,9 @@ namespace PowerSDR
             // 
             // label5
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 13);
+            this.label5.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.label5.Location = new System.Drawing.Point(12, 15);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(144, 13);
             this.label5.TabIndex = 85;
@@ -182,7 +181,7 @@ namespace PowerSDR
             // SpotAge
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.ClientSize = new System.Drawing.Size(367, 246);
+            this.ClientSize = new System.Drawing.Size(367, 204);
             this.Controls.Add(this.chkPanNoVert);
             this.Controls.Add(this.chkPanLoTWColor);
             this.Controls.Add(this.chkPanSpotBlank);

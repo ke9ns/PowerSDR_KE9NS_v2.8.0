@@ -1381,6 +1381,15 @@ namespace PowerSDR
                 dxon = true;
                 chkDXOn.Checked = true;
 
+                DX_Index = 0; //.280 
+                DX_Index1 = 0; //
+                DX_Last = 0; // 
+
+                DXt_Index = 0; //
+                DXt_Index1 = 0; //
+                DXt_Last = 0; //
+                Map_Last = 0; //
+                DXK_Last = 0; //.280
 
                 //  Debug.WriteLine("DX SPOTTER ON start THREAD");
                 SP_Active = 1;
@@ -1462,6 +1471,10 @@ namespace PowerSDR
 
                     SP_Active = 0; // turn off DX Spotter
                     SP2_Active = 0; // turn off DX Spotter
+
+                  
+
+
                 }
                 else SP2_Active = 1; // in process of shutting down.
 

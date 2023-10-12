@@ -1413,7 +1413,11 @@ namespace PowerSDR
                                 29.610000, 29.649999, "10M FM Simplex",         true,
                                 29.650000, 29.659999, "10M Deadband",           true,
                                 29.660000, 29.699999, "10M Repeater Outputs",   true,
-
+                           //------------------------------------------------------------------
+                                40.660000, 40.681999, "8m band", false, //.281
+                                40.682000, 40.685000, "8m FT8", false, //.281
+                                40.685001, 40.700000, "8m band", false, //.281
+						    //------------------------------------------------------------------
 
 
                             };
@@ -2667,7 +2671,12 @@ namespace PowerSDR
                                 29.600000, 29.600000, "10M FM Simplex",         true,
                                 29.600001, 29.609999, "10M Deadband",           true,
                                 29.610000, 29.699999, "10M Repeater Outputs",   true,
-                            //------------------------------------------------------------------
+
+                           //------------------------------------------------------------------
+                                40.660000, 40.681999, "8m band", false, //.281
+                                40.682000, 40.685000, "8m FT8", false, //.281
+                                40.685001, 40.700000, "8m band", false, //.281
+						    //------------------------------------------------------------------
 								
 								50.000000, 50.059999, "6M CW",                   true,
                                 50.060000, 50.079999, "6M Beacon Sub-Band",     true,
@@ -3286,6 +3295,12 @@ namespace PowerSDR
                                 29.600000, 29.600000, "10M FM Simplex",         true,
                                 29.600001, 29.609999, "10M Deadband",           true,
                                 29.610000, 29.699999, "10M Repeater Outputs",   true,
+                           //------------------------------------------------------------------
+                                40.660000, 40.681999, "8m band", false, //.281
+                                40.682000, 40.685000, "8m FT8", false, //.281
+                                40.685001, 40.700000, "8m band", false, //.281
+						    //------------------------------------------------------------------
+                              
 
                                 50.000000, 50.059999, "6M CW",                  true,
                                 50.060000, 50.079999, "6M Beacon Sub-Band",     true,
@@ -3792,6 +3807,11 @@ namespace PowerSDR
                                 29.600000, 29.600000, "10M FM Simplex",         true,
                                 29.600001, 29.609999, "10M Deadband",           true,
                                 29.610000, 29.699999, "10M Repeater Outputs",   true,
+                           //------------------------------------------------------------------
+                                40.660000, 40.681999, "8m band", false, //.281
+                                40.682000, 40.685000, "8m FT8", false, //.281
+                                40.685001, 40.700000, "8m band", false, //.281
+						    //------------------------------------------------------------------
 
                                 50.000000, 50.059999, "6M CW",                  true,
                                 50.060000, 50.079999, "6M Beacon Sub-Band",     true,
@@ -4771,6 +4791,12 @@ namespace PowerSDR
                                 29.510000, 29.589999, "10M Repeater",           true,
                                 29.590000, 29.609999, "10M Wide Phone & CW",    true,
                                 29.610000, 29.699999, "10M Repeater",           true,
+                           //------------------------------------------------------------------
+                                40.660000, 40.681999, "8m band", false, //.281
+                                40.682000, 40.685000, "8m FT8", false, //.281
+                                40.685001, 40.700000, "8m band", false, //.281
+						    //------------------------------------------------------------------
+
                             };
 
             for (int i = 0; i < data.Length / 4; i++)
@@ -5773,6 +5799,27 @@ namespace PowerSDR
             }
 
 
+            try
+            {
+                t.Columns.Add("VAC1_SelectA", typeof(bool)); //.281
+                t.Columns.Add("VAC1_SelectB", typeof(bool)); //.281
+                t.Columns.Add("VAC1_MixAudio", typeof(bool)); //.281
+                t.Columns.Add("VAC1_Reset", typeof(bool)); //.281
+                t.Columns.Add("Drive_Max", typeof(int)); //.281
+
+                //  radVAC1SelectA.Checked = (bool)dr["VAC1_SelectA"]; //.279
+                //   radVAC1SelectB.Checked = (bool)dr["VAC1_SelectB"]; //.279
+                //  chkBoxMixAudio.Checked = (bool)dr["VAC1_MixAudio"]; //.279
+                //  chkVACReset.Checked = (bool)dr["VAC1_Reset"]; //.279
+                //  udTXDriveMax.Value = (int)dr["Drive_Max"]; //.279a
+
+            }
+            catch (Exception )
+            {
+               
+
+            }
+
         } // ModTXProfileTable()
 
         //=================================================================================
@@ -5956,6 +6003,23 @@ namespace PowerSDR
             }
             catch (Exception)
             {
+
+            }
+
+
+            try
+            {
+                t.Columns.Add("VAC1_SelectA", typeof(bool)); //.281
+                t.Columns.Add("VAC1_SelectB", typeof(bool)); //.281
+                t.Columns.Add("VAC1_MixAudio", typeof(bool)); //.281
+                t.Columns.Add("VAC1_Reset", typeof(bool)); //.281
+                t.Columns.Add("Drive_Max", typeof(int)); //.281
+
+           
+            }
+            catch (Exception)
+            {
+
 
             }
 

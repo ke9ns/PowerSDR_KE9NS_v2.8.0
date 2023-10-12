@@ -1658,14 +1658,16 @@ namespace PowerSDR
             // 
             // chkBoxPFN
             // 
+            this.chkBoxPFN.Checked = true;
+            this.chkBoxPFN.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkBoxPFN.Image = null;
-            this.chkBoxPFN.Location = new System.Drawing.Point(481, 267);
+            this.chkBoxPFN.Location = new System.Drawing.Point(460, 268);
             this.chkBoxPFN.Name = "chkBoxPFN";
-            this.chkBoxPFN.Size = new System.Drawing.Size(86, 16);
+            this.chkBoxPFN.Size = new System.Drawing.Size(111, 16);
             this.chkBoxPFN.TabIndex = 41;
-            this.chkBoxPFN.Text = "PFN issue";
-            this.toolTip1.SetToolTip(this.chkBoxPFN, "Check if you are having a PFN Crash issues whenever you Click the Setup OK or App" +
-        "ly buttons.");
+            this.chkBoxPFN.Text = "Fix crash issues";
+            this.toolTip1.SetToolTip(this.chkBoxPFN, "Check if you are having Crash issues, especially whenever you Click the Setup OK " +
+        "or Apply buttons, or change DSP buffer sizes.");
             this.chkBoxPFN.CheckedChanged += new System.EventHandler(this.chkBoxPFN_CheckedChanged);
             // 
             // chkBoxShutdown

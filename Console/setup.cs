@@ -932,7 +932,17 @@ namespace PowerSDR
             // NumericUpDown, RadioButton, TextBox, and TrackBar (slider)
 
             saving = true;
-             
+
+            if (console.chkPower.Checked) //.254
+            {
+                textBoxSAVE.Text = "Radio Paused";
+
+                PON = true;
+                console.chkPower.Checked = false;
+                Thread.Sleep(400);
+
+            }
+
             if (chkBoxPFN.Checked)  //.255
             {
                 if (console.chkPower.Checked) //.254
@@ -941,7 +951,7 @@ namespace PowerSDR
 
                     PON = true;
                     console.chkPower.Checked = false;
-                    Thread.Sleep(800);
+                    Thread.Sleep(500);
 
                 }
             }
@@ -1621,7 +1631,7 @@ namespace PowerSDR
 
             if (console.eqForm.TXEQEnabled != (bool)rows[0]["TXEQEnabled"]) return true;
 
-
+           
 
             for (int i = 1; i < eq.Length; i++)
             {
@@ -1675,6 +1685,9 @@ namespace PowerSDR
 
 
             } // for loop
+
+
+           
 
             Debug.WriteLine("5EQ ");
 
@@ -1859,6 +1872,11 @@ namespace PowerSDR
 
             }
 
+            //------------------------------------------------------------------
+
+            dr["RX1DSPMODE"] = console.RX1DSPMODE; // .196
+            dr["RX2DSPMODE"] = console.RX2DSPMODE; // .196
+
             //===============================================================
             //   dr["VACMix"] = chkBoxMixAudio.Checked; //.255
 
@@ -1881,11 +1899,7 @@ namespace PowerSDR
             }
 
 
-            //------------------------------------------------------------------
-
-            dr["RX1DSPMODE"] = console.RX1DSPMODE; // .196
-            dr["RX2DSPMODE"] = console.RX2DSPMODE; // .196
-
+         
 
             //------------------------------------------------------------------
             dr["DXOn"] = console.DX;
@@ -8271,8 +8285,7 @@ namespace PowerSDR
                 console.eqForm.chkBothEQ.Checked = false;
             }
 
-           
-
+          
             //----------------------------------
             // ke9ns: done with retrieving database data and puting into EQ registers, not update buffers
 
@@ -8597,6 +8610,12 @@ namespace PowerSDR
 
 
                             }
+                            if ((bool)d["VAC1_SelectA"] == false) //.281  VAC1_SelectA, VAC1_SelectB, VAC1_MixAudio, VAC1_Reset, Drive_Max
+                            {
+
+                            }
+
+
                          //   if ((bool)d["VACMix"] == false) //.255
                           //  {
 
@@ -8762,6 +8781,11 @@ namespace PowerSDR
 
 
 
+            //===============================================================
+
+            dr["RX1DSPMODE"] = console.RX1DSPMODE; // .196
+            dr["RX2DSPMODE"] = console.RX2DSPMODE; // .196
+
             //.279
 
             try
@@ -8782,14 +8806,6 @@ namespace PowerSDR
 
                 Debug.WriteLine("VAC1 save selectAB did not work " + G);
             }
-
-
-            //===============================================================
-
-            dr["RX1DSPMODE"] = console.RX1DSPMODE; // .196
-            dr["RX2DSPMODE"] = console.RX2DSPMODE; // .196
-
-           
 
             //===============================================================
             dr["DXOn"] = console.DX;
@@ -11048,6 +11064,15 @@ namespace PowerSDR
 
             if (saving) return;
 
+            if (console.chkPower.Checked) //.254
+            {
+                textBoxSAVE.Text = "Radio Paused";
+                PON = true;
+                console.chkPower.Checked = false;
+                Thread.Sleep(400);
+
+            }
+
             if (chkBoxPFN.Checked) //.255
             {
                 if (console.chkPower.Checked) //.254
@@ -11055,10 +11080,11 @@ namespace PowerSDR
                     textBoxSAVE.Text = "Radio Paused";
                     PON = true;
                     console.chkPower.Checked = false;
-                    Thread.Sleep(800);
+                    Thread.Sleep(500);
 
                 }
             }
+
             console.SWR_Logger_Write(); // save SWR file now
 
             textBoxSAVE.Text = "Saving Changes";
@@ -16088,7 +16114,7 @@ namespace PowerSDR
 
         private void chkBoxPFN_CheckedChanged(object sender, EventArgs e)
         {
-
+            // used in the Apply and save buttons
         }
 
         private void chkCWXOverRide_CheckedChanged(object sender, EventArgs e)

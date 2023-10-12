@@ -1339,7 +1339,7 @@ namespace PowerSDR
             171.3, 173.8, 177.3, 179.9, 183.5, 186.2, 189.9, 192.8, 199.5, 203.5,
             206.5, 210.7, 218.1, 225.7, 229.1, 233.6, 241.8, 250.3, 254.1};
 
-        public double[] FM_deviation_array = { 9000, 5000, 2500 }; // ke9ns mod  was 5000, 2500. add 9000 (used my memoryform.cs)
+        public double[] FM_deviation_array = { 17000, 5000, 2500 }; // ke9ns mod  was 5000, 2500. add 9000 (used my memoryform.cs)
 
         public bool oldATU = true;
 
@@ -56788,7 +56788,7 @@ namespace PowerSDR
             if (chkPower.Checked) //.254
             {
                 chkPower.Checked = false;
-                Thread.Sleep(800);
+                Thread.Sleep(800); // give time to actually stop
                     
             }
 
@@ -73252,10 +73252,13 @@ namespace PowerSDR
             {
                 bool poweron = PowerOn;
 
-                if (poweron) //.204 pause to prevent a PFN_ BSOD
+                if (setupForm != null && setupForm.chkBoxPFN.Checked) //.281
                 {
-                    PowerOn = false;
-                    Thread.Sleep(700);
+                    if (poweron) //.204 pause to prevent a PFN_ BSOD
+                    {
+                        PowerOn = false;
+                        Thread.Sleep(700);
+                    }
                 }
 
                 RX1FilterSizeCalOffset = (float)offset;
@@ -73289,7 +73292,7 @@ namespace PowerSDR
                     }
                 }
 
-                if (poweron) PowerOn = true;
+                if (poweron) PowerOn = true; //.204
             }
         } // update dsp rx1 buffer
 
@@ -73342,12 +73345,14 @@ namespace PowerSDR
             if (dsp.GetDSPRX(1, 0).BufferSize != size || dsp.GetDSPRX(1, 1).BufferSize != size)
             {
                 bool poweron = PowerOn;
-                if (poweron)  //.204
+                if (setupForm != null && setupForm.chkBoxPFN.Checked) //.281
                 {
-                    PowerOn = false;
-                    Thread.Sleep(700);
+                    if (poweron)  //.204
+                    {
+                        PowerOn = false;
+                        Thread.Sleep(700);
+                    }
                 }
-
                 RX2FilterSizeCalOffset = (float)offset;
                 dsp.GetDSPRX(1, 0).BufferSize = size;
                 dsp.GetDSPRX(1, 1).BufferSize = size;
@@ -73378,7 +73383,7 @@ namespace PowerSDR
                     }
                 }
 
-                if (poweron) PowerOn = true;
+                if (poweron) PowerOn = true; //.204
             }
         }
 
@@ -73411,10 +73416,13 @@ namespace PowerSDR
             if (dsp.GetDSPTX(0).BufferSize != size)
             {
                 bool poweron = PowerOn;
-                if (poweron)  //.204
+                if (setupForm != null && setupForm.chkBoxPFN.Checked) //.281
                 {
-                    PowerOn = false;
-                    Thread.Sleep(700);
+                    if (poweron)  //.204
+                    {
+                        PowerOn = false;
+                        Thread.Sleep(700);
+                    }
                 }
 
                 dsp.GetDSPTX(0).BufferSize = size;
@@ -73447,7 +73455,7 @@ namespace PowerSDR
 
                 if (poweron) PowerOn = true; //.204
             }
-        }
+        } // UpdateDSPBufTX
 
 
         //=========================================================
@@ -84860,7 +84868,7 @@ namespace PowerSDR
             {
                 if (chkPower.Checked) //.254
                 {
-                    chkPower.Checked = false; //
+                    chkPower.Checked = false; // STOP radio and wait to give time to actually stop
                     Thread.Sleep(800);
                    
                 }
