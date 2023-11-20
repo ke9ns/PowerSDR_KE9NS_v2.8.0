@@ -12913,8 +12913,10 @@ namespace PowerSDR
 
             console.PowerOn = true; //.257
 
+
             ST.Restart();
 
+            console.PowerOn = true; //.257
 
             while (ST.ElapsedMilliseconds < 6000)    // wait for things to calm down after you make changes to the mode
             {
@@ -12922,6 +12924,7 @@ namespace PowerSDR
                 BCDSignalOFF = 0;
 
             }
+            console.PowerOn = true; //.257
 
             BCDSignalON = 0;         // RESET BCD data steam high dbm signal found while running
             BCDSignalON1 = 0;         // RESET BCD data steam high dbm signal found while running

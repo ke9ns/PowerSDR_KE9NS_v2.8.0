@@ -151,12 +151,8 @@ void compute_spectrum (SpecBlock * sb)
 	{				// SPEC_PWR
 		for (i = 0, j = half; i < half; i++, j++)
 		{
-			sb->output[i] =
-				(float) (10.0 *
-				log10 (Csqrmag (CXBdata (sb->freqbuf, j)) + 1e-60));
-			sb->output[j] =
-				(float) (10.0 *
-				log10 (Csqrmag (CXBdata (sb->freqbuf, i)) + 1e-60));
+			sb->output[i] =	(float) (10.0 *	log10 (Csqrmag (CXBdata (sb->freqbuf, j)) + 1e-60));
+			sb->output[j] =	(float) (10.0 *	log10 (Csqrmag (CXBdata (sb->freqbuf, i)) + 1e-60));
 		}
 	}
 

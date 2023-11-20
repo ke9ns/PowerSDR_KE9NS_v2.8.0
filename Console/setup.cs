@@ -80,6 +80,8 @@ namespace PowerSDR
 
         #region Constructor and Destructor
 
+        public bool CrashProtection = true; // .281  replacing chkBoxPFN.Checked
+
         public Setup(Console c)
         {
             Debug.WriteLine("SETUP  FILE OPEN");
@@ -925,6 +927,8 @@ namespace PowerSDR
 
         private static bool saving = false;
 
+       
+
         public void SaveOptions()
         {
             // Automatically saves all control settings to the database in the tab
@@ -933,17 +937,10 @@ namespace PowerSDR
 
             saving = true;
 
-            if (console.chkPower.Checked) //.254
-            {
-                textBoxSAVE.Text = "Radio Paused";
 
-                PON = true;
-                console.chkPower.Checked = false;
-                Thread.Sleep(400);
+           
 
-            }
-
-            if (chkBoxPFN.Checked)  //.255
+            if (CrashProtection)  //.255
             {
                 if (console.chkPower.Checked) //.254
                 {
@@ -951,7 +948,7 @@ namespace PowerSDR
 
                     PON = true;
                     console.chkPower.Checked = false;
-                    Thread.Sleep(500);
+                    Thread.Sleep(600);
 
                 }
             }
@@ -4984,10 +4981,14 @@ namespace PowerSDR
 
             bool power = console.PowerOn;
 
-            if (power && val != old_val)
+            if (CrashProtection) //.281
             {
-                console.PowerOn = false;
-                Thread.Sleep(200);
+               
+                if (power && val != old_val)
+                {
+                    console.PowerOn = false;
+                    Thread.Sleep(200);
+                }
             }
 
 
@@ -5021,7 +5022,11 @@ namespace PowerSDR
 
             console.VACEnabled = val;
 
-            if (power && val != old_val) console.PowerOn = true;
+
+            if (CrashProtection) //.281
+            {
+                if (power && val != old_val) console.PowerOn = true;
+            }
 
 
         } // VAC1 chkAudioEnableVAC_CheckedChanged
@@ -5132,19 +5137,27 @@ namespace PowerSDR
 
             bool power = console.PowerOn;
 
-            if (power && val != old_val)
+
+            if (CrashProtection) //.281
             {
 
-                console.PowerOn = false;
-                Thread.Sleep(500);
+                if (power && val != old_val)
+                {
+
+                    console.PowerOn = false;
+                    Thread.Sleep(500);
+                }
             }
 
             if (chkVAC2DirectIQ.Checked) console.SpurReduction = false;
 
             console.VAC2Enabled = val;
 
-            if (power && val != old_val) console.PowerOn = true;
 
+            if (CrashProtection) //.281
+            {
+                if (power && val != old_val) console.PowerOn = true;
+            }
 
         } // chkVAC2Enable_CheckedChanged
 
@@ -5161,17 +5174,26 @@ namespace PowerSDR
             int new_chan = Int32.Parse(comboAudioChannels1.Text);
             bool power = console.PowerOn;
 
-            if (power && chkAudioEnableVAC.Checked && old_chan != new_chan)
+
+            if (CrashProtection) //.281
             {
-                console.PowerOn = false;
-                Thread.Sleep(500);
+                if (power && chkAudioEnableVAC.Checked && old_chan != new_chan)
+                {
+                    console.PowerOn = false;
+                    Thread.Sleep(500);
+                }
             }
 
             console.NumChannels = new_chan;
             Audio.NumChannels = new_chan;
 
             //DSP.SetThreadNumber((uint)new_chan/2);
-            if (power && chkAudioEnableVAC.Checked && old_chan != new_chan) console.PowerOn = true;
+
+
+            if (CrashProtection) //.281
+            {
+                if (power && chkAudioEnableVAC.Checked && old_chan != new_chan) console.PowerOn = true;
+            }
         }
 
 
@@ -5187,10 +5209,14 @@ namespace PowerSDR
             int new_driver = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Index;
             bool power = console.PowerOn;
 
-            if (power && chkAudioEnableVAC.Checked && old_driver != new_driver)
+
+            if (CrashProtection) //.281
             {
-                console.PowerOn = false;
-                Thread.Sleep(500);
+                if (power && chkAudioEnableVAC.Checked && old_driver != new_driver)
+                {
+                    console.PowerOn = false;
+                    Thread.Sleep(500);
+                }
             }
 
             string new_driver_name = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Name;
@@ -5219,8 +5245,12 @@ namespace PowerSDR
             if (comboAudioInput2.Items.Count != 0) comboAudioInput2.SelectedIndex = 0;
             if (comboAudioOutput2.Items.Count != 0) comboAudioOutput2.SelectedIndex = 0;
 
-            if (power && chkAudioEnableVAC.Checked && old_driver != new_driver)
-                console.PowerOn = true;
+
+            if (CrashProtection) //.281
+            {
+                if (power && chkAudioEnableVAC.Checked && old_driver != new_driver)
+                    console.PowerOn = true;
+            }
 
         } //  VAC1 comboAudioDriver2_SelectedIndexChanged
 
@@ -5234,10 +5264,14 @@ namespace PowerSDR
             int new_driver = ((PADeviceInfo)comboAudioDriver2B.SelectedItem).Index;
             bool power = console.PowerOn;
 
-            if (power && chkAudioEnableVAC.Checked && old_driver != new_driver && radVAC1SelectB.Checked)
+
+            if (CrashProtection) //.281
             {
-                console.PowerOn = false;
-                Thread.Sleep(500);
+                if (power && chkAudioEnableVAC.Checked && old_driver != new_driver && radVAC1SelectB.Checked)
+                {
+                    console.PowerOn = false;
+                    Thread.Sleep(500);
+                }
             }
 
             string new_driver_name = ((PADeviceInfo)comboAudioDriver2B.SelectedItem).Name;
@@ -5267,8 +5301,12 @@ namespace PowerSDR
             if (comboAudioInput2.Items.Count != 0) comboAudioInput2.SelectedIndex = 0;
             if (comboAudioOutput2.Items.Count != 0) comboAudioOutput2.SelectedIndex = 0;
 
-            if (power && chkAudioEnableVAC.Checked && old_driver != new_driver)
-                console.PowerOn = true;
+
+            if (CrashProtection) //.281
+            {
+                if (power && chkAudioEnableVAC.Checked && old_driver != new_driver)
+                    console.PowerOn = true;
+            }
 
         } // comboAudioDriver2B_SelectedIndexChanged
 
@@ -5285,10 +5323,14 @@ namespace PowerSDR
             int new_driver = ((PADeviceInfo)comboAudioDriver3.SelectedItem).Index;
             bool power = console.PowerOn;
 
-            if (power && chkVAC2Enable.Checked && old_driver != new_driver)
+
+            if (CrashProtection) //.281
             {
-                console.PowerOn = false;
-                Thread.Sleep(500);
+                if (power && chkVAC2Enable.Checked && old_driver != new_driver)
+                {
+                    console.PowerOn = false;
+                    Thread.Sleep(500);
+                }
             }
 
             string new_driver_name = ((PADeviceInfo)comboAudioDriver3.SelectedItem).Name;
@@ -5312,7 +5354,11 @@ namespace PowerSDR
             if (comboAudioInput3.Items.Count != 0) comboAudioInput3.SelectedIndex = 0;
             if (comboAudioOutput3.Items.Count != 0) comboAudioOutput3.SelectedIndex = 0;
 
-            if (power && chkVAC2Enable.Checked && old_driver != new_driver) console.PowerOn = true;
+
+            if (CrashProtection) //.281
+            {
+                if (power && chkVAC2Enable.Checked && old_driver != new_driver) console.PowerOn = true;
+            }
         }
 
 
@@ -5331,10 +5377,16 @@ namespace PowerSDR
             int new_input = ((PADeviceInfo)comboAudioInput2.SelectedItem).Index;
             bool power = console.PowerOn;
             Debug.WriteLine("VAC1 A INPUT INDEX CHANGED=============== " + new_input);
-            if (power && chkAudioEnableVAC.Checked && old_input != new_input)
+
+
+
+            if (CrashProtection) //.281
             {
-                console.PowerOn = false;
-                Thread.Sleep(500);
+                if (power && chkAudioEnableVAC.Checked && old_input != new_input)
+                {
+                    console.PowerOn = false;
+                    Thread.Sleep(500);
+                }
             }
 
             //  Debug.WriteLine("test3===============");
@@ -5345,8 +5397,11 @@ namespace PowerSDR
                 Audio.Input2 = new_input;
             }
 
-            if (power && chkAudioEnableVAC.Checked && old_input != new_input) console.PowerOn = true;
 
+            if (CrashProtection) //.281
+            {
+                if (power && chkAudioEnableVAC.Checked && old_input != new_input) console.PowerOn = true;
+            }
         } //VAC1 comboAudioInput2_SelectedIndexChanged
 
         // ke9ns add .204
@@ -5363,10 +5418,14 @@ namespace PowerSDR
             bool power = console.PowerOn;
             Debug.WriteLine("VAC1 B INPUT INDEX CHANGED=============== " + new_input);
 
-            if (power && chkAudioEnableVAC.Checked && old_input != new_input && radVAC1SelectB.Checked)
+
+            if (CrashProtection) //.281
             {
-                console.PowerOn = false;
-                Thread.Sleep(500);
+                if (power && chkAudioEnableVAC.Checked && old_input != new_input && radVAC1SelectB.Checked)
+                {
+                    console.PowerOn = false;
+                    Thread.Sleep(500);
+                }
             }
 
             //  Debug.WriteLine("test3===============");
@@ -5377,7 +5436,10 @@ namespace PowerSDR
                 Audio.Input2 = new_input;
             }
 
-            if (power && chkAudioEnableVAC.Checked && old_input != new_input && radVAC1SelectB.Checked) console.PowerOn = true;
+            if (CrashProtection) //.281
+            {
+                if (power && chkAudioEnableVAC.Checked && old_input != new_input && radVAC1SelectB.Checked) console.PowerOn = true;
+            }
 
         } // VAC1 comboAudioInput2B_SelectedIndexChanged
 
@@ -5394,17 +5456,25 @@ namespace PowerSDR
             int new_input = ((PADeviceInfo)comboAudioInput3.SelectedItem).Index;
             bool power = console.PowerOn;
 
-            if (power && chkVAC2Enable.Checked && old_input != new_input)
+
+            if (CrashProtection) //.281
             {
-                console.PowerOn = false;
-                Thread.Sleep(500);
+                if (power && chkVAC2Enable.Checked && old_input != new_input)
+                {
+                    console.PowerOn = false;
+                    Thread.Sleep(500);
+                }
             }
 
             console.AudioInputIndex3 = new_input;
             Audio.Input3 = new_input;
 
-            if (power && chkVAC2Enable.Checked && old_input != new_input)
-                console.PowerOn = true;
+
+            if (CrashProtection) //.281
+            {
+                if (power && chkVAC2Enable.Checked && old_input != new_input)
+                    console.PowerOn = true;
+            }
         }
 
         //=======================================================================================
@@ -5417,10 +5487,15 @@ namespace PowerSDR
             int old_output = Audio.Output2;
             int new_output = ((PADeviceInfo)comboAudioOutput2.SelectedItem).Index;
             bool power = console.PowerOn;
-            if (power && chkAudioEnableVAC.Checked && old_output != new_output)
+
+
+            if (CrashProtection) //.281
             {
-                console.PowerOn = false;
-                Thread.Sleep(500);
+                if (power && chkAudioEnableVAC.Checked && old_output != new_output)
+                {
+                    console.PowerOn = false;
+                    Thread.Sleep(500);
+                }
             }
             if (radVAC1SelectA.Checked)
             {
@@ -5428,8 +5503,12 @@ namespace PowerSDR
                 Audio.Output2 = new_output;
             }
 
-            if (power && chkAudioEnableVAC.Checked && old_output != new_output)
-                console.PowerOn = true;
+
+            if (CrashProtection) //.281
+            {
+                if (power && chkAudioEnableVAC.Checked && old_output != new_output)
+                    console.PowerOn = true;
+            }
 
         } // VAC1 comboAudioOutput2_SelectedIndexChanged
 
@@ -5446,20 +5525,28 @@ namespace PowerSDR
 
 
             bool power = console.PowerOn;
-            if (power && chkAudioEnableVAC.Checked && old_output != new_output && radVAC1SelectB.Checked)
+
+
+            if (CrashProtection) //.281
             {
-                console.PowerOn = false;
-                Thread.Sleep(500);
+                if (power && chkAudioEnableVAC.Checked && old_output != new_output && radVAC1SelectB.Checked)
+                {
+                    console.PowerOn = false;
+                    Thread.Sleep(500);
+                }
             }
+
             if (radVAC1SelectB.Checked)
             {
                 console.AudioOutputIndex2 = new_output;
                 Audio.Output2 = new_output;
             }
 
-            if (power && chkAudioEnableVAC.Checked && old_output != new_output && radVAC1SelectB.Checked)
-                console.PowerOn = true;
-
+            if (CrashProtection) //.281
+            {
+                if (power && chkAudioEnableVAC.Checked && old_output != new_output && radVAC1SelectB.Checked)
+                    console.PowerOn = true;
+            }
 
         } // VAC1 comboAudioOutput2B_SelectedIndexChanged
 
@@ -5474,17 +5561,26 @@ namespace PowerSDR
             int old_output = Audio.Output3;
             int new_output = ((PADeviceInfo)comboAudioOutput3.SelectedItem).Index;
             bool power = console.PowerOn;
-            if (power && chkVAC2Enable.Checked && old_output != new_output)
+
+
+            if (CrashProtection) //.281
             {
-                console.PowerOn = false;
-                Thread.Sleep(500);
+                if (power && chkVAC2Enable.Checked && old_output != new_output)
+                {
+                    console.PowerOn = false;
+                    Thread.Sleep(500);
+                }
             }
 
             console.AudioOutputIndex3 = new_output;
             Audio.Output3 = new_output;
 
-            if (power && chkVAC2Enable.Checked && old_output != new_output)
-                console.PowerOn = true;
+
+            if (CrashProtection) //.281
+            {
+                if (power && chkVAC2Enable.Checked && old_output != new_output)
+                    console.PowerOn = true;
+            }
         }
 
         //=============================================================================================
@@ -11073,7 +11169,7 @@ namespace PowerSDR
 
             }
 
-            if (chkBoxPFN.Checked) //.255
+            if (CrashProtection) //.255
             {
                 if (console.chkPower.Checked) //.254
                 {
@@ -16292,6 +16388,11 @@ namespace PowerSDR
 
 
             }
+        }
+
+        private void chkBoxChannels_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
 
 

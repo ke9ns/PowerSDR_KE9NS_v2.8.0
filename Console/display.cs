@@ -3569,9 +3569,9 @@ namespace PowerSDR
                         }
 
                         if (bottom)
-                            drawChannelBar(g, c, chan_left_x, chan_right_x, chan_center_x, H + top, H - top, c1, c2); // draw box and lines on RX2
+                            drawChannelBar(g, c, chan_left_x, chan_right_x, chan_center_x, H + top, (int)((H - top)/2), c1, c2); // draw box and lines on RX2 .281 draw lines half height
                         else
-                            drawChannelBar(g, c, chan_left_x, chan_right_x, chan_center_x, top, H - top, c1, c2);// draw box and lines on RX1
+                            drawChannelBar(g, c, chan_left_x, chan_right_x, chan_center_x, top, (int)((H - top)/2), c1, c2);// draw box and lines on RX1  .281 draw lines half height
 
                         //if (bottom)
                         //    drawNotchStatus(g, n, (notch_left_x + notch_right_x) / 2, H + top + 75, W, H);

@@ -9715,6 +9715,8 @@ namespace PowerSDR
                     }
                 }
             }
+
+
         }
 
         private void EnableAllRX2Filters()
@@ -9737,6 +9739,9 @@ namespace PowerSDR
         // ke9ns used to disable all the buttons on the HF,VHF,SWL band panel
         private void DisableAllBands()
         {
+           
+
+          
             foreach (Control c in panelBandHF.Controls)
             {
                 c.Enabled = false;
@@ -9768,7 +9773,7 @@ namespace PowerSDR
 
             foreach (Control c in panelBandGN.Controls)
             {
-                //   c.Enabled = false;
+                   c.Enabled = false;
 
                 RadioButtonTS b = c as RadioButtonTS;
                 if (b != null)
@@ -9811,7 +9816,7 @@ namespace PowerSDR
 
             foreach (Control c in panelBandGNRX2.Controls)
             {
-                //   c.Enabled = false;
+                 c.Enabled = false;
 
                 RadioButtonTS b = c as RadioButtonTS;
                 if (b != null)
@@ -9832,136 +9837,146 @@ namespace PowerSDR
         private void EnableAllBands()
         {
 
+              Debug.WriteLine("EnableAllBands");
 
-            foreach (Control c in panelBandHF.Controls)
+            if (VFOLock == false) //.282 dont enable if VFOLOck is active
             {
-                RadioButtonTS b = c as RadioButtonTS;
-                if (b != null)
+
+
+                foreach (Control c in panelBandHF.Controls)
                 {
-                    if (b.Text == "2") b.Enabled = XVTRPresent;
-                    else b.Enabled = true;
-
-                    if (b.BackColor == vfo_text_dark_color) b.BackColor = button_selected_color;
-                }
-                else c.Enabled = true;
-            }
-
-
-            foreach (Control c in panelBandGN.Controls) // ke9ns add
-            {
-                RadioButtonTS b = c as RadioButtonTS;
-                //   Debug.WriteLine("enableallbands");
-
-                if (b != null)
-                {
-
-                    if (b.Name == "panelBandHF")
+                    RadioButtonTS b = c as RadioButtonTS;
+                    if (b != null)
                     {
-                        b.Enabled = true;
+                        if (b.Text == "2") b.Enabled = XVTRPresent;
+                        else b.Enabled = true;
+
+                        if (b.BackColor == vfo_text_dark_color) b.BackColor = button_selected_color;
                     }
-                    else
-                    {
-                        b.Enabled = true;
-
-                    }
-
-                    if (b.BackColor == vfo_text_dark_color) b.BackColor = button_selected_color;
+                    else c.Enabled = true;
                 }
-                else
+
+
+                foreach (Control c in panelBandGN.Controls) // ke9ns add
                 {
-                    c.Enabled = true;
-
-                }
-            }
+                    RadioButtonTS b = c as RadioButtonTS;
 
 
-            foreach (Control c in panelBandVHF.Controls)
-            {
-                RadioButtonTS b = c as RadioButtonTS;
-                if (b != null)
-                {
-                    if (b.Name == "panelBandHF") b.Enabled = true;
-                    else
+                    if (b != null)
                     {
-                        int index = Int32.Parse(b.Name.Substring(10));
-                        if (xvtrForm.GetEnabled(index))
+
+                        if (b.Name == "panelBandHF")
+                        {
                             b.Enabled = true;
+                        }
+                        else
+                        {
+                            b.Enabled = true;
+
+                        }
+
+                        if (b.BackColor == vfo_text_dark_color) b.BackColor = button_selected_color;
                     }
+                    else
+                    {
+                        c.Enabled = true;
 
-                    if (b.BackColor == vfo_text_dark_color)
-                        b.BackColor = button_selected_color;
+                    }
                 }
-                else c.Enabled = true;
-            }
 
+
+                foreach (Control c in panelBandVHF.Controls)
+                {
+                    RadioButtonTS b = c as RadioButtonTS;
+                    if (b != null)
+                    {
+                        if (b.Name == "panelBandHF") b.Enabled = true;
+                        else
+                        {
+                            int index = Int32.Parse(b.Name.Substring(10));
+                            if (xvtrForm.GetEnabled(index))
+                                b.Enabled = true;
+                        }
+
+                        if (b.BackColor == vfo_text_dark_color)
+                            b.BackColor = button_selected_color;
+                    }
+                    else c.Enabled = true;
+                }
+
+            } // VFOLock = false
             //...........................
 
 
-
-            foreach (Control c in panelBandHFRX2.Controls)
+            if (VFOLockB == false) //.282
             {
-                RadioButtonTS b = c as RadioButtonTS;
-                if (b != null)
+
+
+                foreach (Control c in panelBandHFRX2.Controls)
                 {
-                    if (b.Text == "2") b.Enabled = XVTRPresent;
-                    else b.Enabled = true;
-
-                    if (b.BackColor == vfo_text_dark_color) b.BackColor = button_selected_color;
-                }
-                else c.Enabled = true;
-            }
-
-
-            foreach (Control c in panelBandGNRX2.Controls) // ke9ns add
-            {
-                RadioButtonTS b = c as RadioButtonTS;
-                //   Debug.WriteLine("enableallbands");
-
-                if (b != null)
-                {
-
-                    if (b.Name == "panelBandHFRX2")
+                    RadioButtonTS b = c as RadioButtonTS;
+                    if (b != null)
                     {
-                        b.Enabled = true;
+                        if (b.Text == "2") b.Enabled = XVTRPresent;
+                        else b.Enabled = true;
+
+                        if (b.BackColor == vfo_text_dark_color) b.BackColor = button_selected_color;
+                    }
+                    else c.Enabled = true;
+                }
+
+
+                foreach (Control c in panelBandGNRX2.Controls) // ke9ns add
+                {
+                    RadioButtonTS b = c as RadioButtonTS;
+
+
+                    if (b != null)
+                    {
+
+                        if (b.Name == "panelBandHFRX2")
+                        {
+                            b.Enabled = true;
+                        }
+                        else
+                        {
+                            b.Enabled = true;
+
+                        }
+
+                        if (b.BackColor == vfo_text_dark_color) b.BackColor = button_selected_color;
                     }
                     else
                     {
-                        b.Enabled = true;
+                        c.Enabled = true;
 
                     }
-
-                    if (b.BackColor == vfo_text_dark_color) b.BackColor = button_selected_color;
                 }
-                else
+
+                //   Debug.WriteLine("NOW VHFRX2");
+
+                foreach (Control c in panelBandVHFRX2.Controls)
                 {
-                    c.Enabled = true;
-
-                }
-            }
-
-            //   Debug.WriteLine("NOW VHFRX2");
-
-            foreach (Control c in panelBandVHFRX2.Controls)
-            {
-                RadioButtonTS b = c as RadioButtonTS;
-                if (b != null)
-                {
-                    if (b.Name == "panelBandHFRX2") b.Enabled = true;
-                    else
+                    RadioButtonTS b = c as RadioButtonTS;
+                    if (b != null)
                     {
-                        int e = b.Name.IndexOf("RX2"); // ke9ns 
+                        if (b.Name == "panelBandHFRX2") b.Enabled = true;
+                        else
+                        {
+                            int e = b.Name.IndexOf("RX2"); // ke9ns 
 
-                        string d = b.Name.Substring(10, (e - 10));
-                        //  int index = Int32.Parse(b.Name.Substring(10));
-                        int index = Int32.Parse(d);
+                            string d = b.Name.Substring(10, (e - 10));
+                            //  int index = Int32.Parse(b.Name.Substring(10));
+                            int index = Int32.Parse(d);
 
-                        if (xvtrForm.GetEnabled(index)) b.Enabled = true;
+                            if (xvtrForm.GetEnabled(index)) b.Enabled = true;
+                        }
+
+                        if (b.BackColor == vfo_text_dark_color) b.BackColor = button_selected_color;
                     }
-
-                    if (b.BackColor == vfo_text_dark_color) b.BackColor = button_selected_color;
+                    else c.Enabled = true;
                 }
-                else c.Enabled = true;
-            }
+            } // VFOLockB == false
 
         } // EnableAllBands()
 
@@ -9976,15 +9991,36 @@ namespace PowerSDR
                 if (r.BackColor == button_selected_color)
                     r.BackColor = vfo_text_dark_color;
             }
+
+            foreach (RadioButtonTS r in panelRX2Mode.Controls) //.282
+            {
+                r.Enabled = false;
+                if (r.BackColor == button_selected_color)
+                    r.BackColor = vfo_text_dark_color;
+            }
         }
 
         private void EnableAllModes()
         {
-            foreach (RadioButtonTS r in panelMode.Controls)
+
+            if (VFOLock == false) //.282
             {
-                if (r.Text != "") r.Enabled = true;
-                if (r.BackColor == vfo_text_dark_color) r.BackColor = button_selected_color;
+                foreach (RadioButtonTS r in panelMode.Controls)
+                {
+                    if (r.Text != "") r.Enabled = true;
+                    if (r.BackColor == vfo_text_dark_color) r.BackColor = button_selected_color;
+                }
             }
+
+            if (VFOLockB == false) //.282
+            {
+                foreach (RadioButtonTS r in panelRX2Mode.Controls)
+                {
+                    if (r.Text != "") r.Enabled = true;
+                    if (r.BackColor == vfo_text_dark_color) r.BackColor = button_selected_color;
+                }
+            }
+
         }
 
         private void DisableFilters(int lowcutoff)
@@ -19362,8 +19398,7 @@ namespace PowerSDR
             ptbFilterWidth_Update(low, high);
 
             // Update Display data if not in panadapter mode
-            if (!dsp.GetDSPRX(0, 0).SpectrumPreFilter)
-                UpdateRXDisplayVars(low, high);
+            if (!dsp.GetDSPRX(0, 0).SpectrumPreFilter) UpdateRXDisplayVars(low, high);
 
             // update display
             if (!chkPower.Checked)
@@ -32453,10 +32488,75 @@ namespace PowerSDR
                 vfo_lockB = value;
                 bool enabled = !value;
                 txtVFOBFreq.Enabled = enabled;
-                comboRX2Band.Enabled = enabled;
+              
+                comboRX2Band.Enabled = enabled; // ke9ns: small original pull down band selector for RX2 only
 
-                btnVFOBtoA.Enabled = enabled;
+
+                foreach (Control c in panelRX2Mode.Controls) //.282d enable/disable mode buttons
+                {
+                    c.Enabled = enabled;
+
+                    RadioButtonTS b = c as RadioButtonTS;
+                    if (b != null)
+                    {
+                        if (b.BackColor == button_selected_color)
+                        {
+                            b.BackColor = vfo_text_dark_color;
+                        }
+                    }
+                }
+
+                foreach (Control c in panelBandHFRX2.Controls)
+                {
+                    c.Enabled = enabled;
+
+                    RadioButtonTS b = c as RadioButtonTS;
+                    if (b != null)
+                    {
+                        if (b.BackColor == button_selected_color)
+                        {
+                            b.BackColor = vfo_text_dark_color;
+                        }
+                    }
+                }
+
+
+                foreach (Control c in panelBandVHFRX2.Controls)
+                {
+                    c.Enabled = enabled;
+
+                    RadioButtonTS b = c as RadioButtonTS;
+                    if (b != null)
+                    {
+                        if (b.BackColor == button_selected_color)
+                        {
+                            b.BackColor = vfo_text_dark_color;
+                        }
+                    }
+                }
+
+                foreach (Control c in panelBandGNRX2.Controls)
+                {
+                       c.Enabled = enabled;
+
+                    RadioButtonTS b = c as RadioButtonTS;
+                    if (b != null)
+                    {
+                        if (b.BackColor == button_selected_color)
+                        {
+                            b.BackColor = vfo_text_dark_color;
+                        }
+                    }
+                }
+
+                btnVFOAtoB.Enabled = enabled;
                 btnVFOSwap.Enabled = enabled;
+
+             //   chkVFOSplit.Enabled = true;
+             //   btnVFOAtoB.Enabled = true;
+              //  btnVFOBtoA.Enabled = true;
+             //   btnVFOSwap.Enabled = true;
+
                 btnMemoryQuickRestore.Enabled = enabled;
 
             } // set
@@ -32476,10 +32576,11 @@ namespace PowerSDR
 
                 txtVFOAFreq.Enabled = enabled;
 
+                /*
                 radBand160.Enabled = enabled;
                 radBand80.Enabled = enabled;
                 radBand60.Enabled = enabled;
-                radBand40.Enabled = enabled;
+                radBand40.Enabled = enabled;  // ke9ns: lock or unlock here
                 radBand30.Enabled = enabled;
                 radBand20.Enabled = enabled;
                 radBand17.Enabled = enabled;
@@ -32491,22 +32592,22 @@ namespace PowerSDR
                 radBandWWV.Enabled = enabled;
                 radBandGEN.Enabled = enabled;
 
-                //   btnBandVHF.Enabled = enabled; 
-                //   radBandVHF0.Enabled = enabled;
-                //  radBandVHF1.Enabled = enabled;
-                //  radBandVHF2.Enabled = enabled;
-                //  radBandVHF3.Enabled = enabled;
-                //  radBandVHF4.Enabled = enabled;
-                //  radBandVHF5.Enabled = enabled;
-                //  radBandVHF6.Enabled = enabled;
-                //  radBandVHF7.Enabled = enabled;
-                //  radBandVHF8.Enabled = enabled;
-                //  radBandVHF5.Enabled = enabled;
-                //  radBandVHF9.Enabled = enabled;
-                // radBandVHF10.Enabled = enabled;
-                //  radBandVHF11.Enabled = enabled;
-                // radBandVHF12.Enabled = enabled;
-                //  radBandVHF13.Enabled = enabled;
+                btnBandVHF.Enabled = enabled; 
+                radBandVHF0.Enabled = enabled;
+                radBandVHF1.Enabled = enabled;
+                radBandVHF2.Enabled = enabled;
+                radBandVHF3.Enabled = enabled;
+                radBandVHF4.Enabled = enabled;
+                radBandVHF5.Enabled = enabled;
+                radBandVHF6.Enabled = enabled;
+                radBandVHF7.Enabled = enabled;
+                radBandVHF8.Enabled = enabled;
+                radBandVHF5.Enabled = enabled;
+                radBandVHF9.Enabled = enabled;
+                radBandVHF10.Enabled = enabled;
+                radBandVHF11.Enabled = enabled;
+                radBandVHF12.Enabled = enabled;
+                radBandVHF13.Enabled = enabled;
 
 
 
@@ -32540,7 +32641,67 @@ namespace PowerSDR
                 radModeDIGL.Enabled = enabled;
                 radModeDIGU.Enabled = enabled;
                 radModeDRM.Enabled = enabled;
+*/
 
+
+
+                foreach (Control c in panelMode.Controls) //.282d enable/disable mode buttons
+                {
+                    c.Enabled = enabled;
+
+                    RadioButtonTS b = c as RadioButtonTS;
+                    if (b != null)
+                    {
+                        if (b.BackColor == button_selected_color)
+                        {
+                            b.BackColor = vfo_text_dark_color;
+                        }
+                    }
+                }
+
+                foreach (Control c in panelBandHF.Controls)
+                {
+                    c.Enabled = enabled;
+
+                    RadioButtonTS b = c as RadioButtonTS;
+                    if (b != null)
+                    {
+                        if (b.BackColor == button_selected_color)
+                        {
+                            b.BackColor = vfo_text_dark_color;
+                        }
+                    }
+                }
+
+                foreach (Control c in panelBandVHF.Controls)
+                {
+                    c.Enabled = enabled;
+
+                    RadioButtonTS b = c as RadioButtonTS;
+                    if (b != null)
+                    {
+                        if (b.BackColor == button_selected_color)
+                        {
+                            b.BackColor = vfo_text_dark_color;
+                        }
+                    }
+                }
+
+                foreach (Control c in panelBandGN.Controls)
+                {
+                      c.Enabled = enabled;
+
+                    RadioButtonTS b = c as RadioButtonTS;
+                    if (b != null)
+                    {
+                        if (b.BackColor == button_selected_color)
+                        {
+                            b.BackColor = vfo_text_dark_color;
+                        }
+                    }
+                }
+
+               
                 btnVFOBtoA.Enabled = enabled;
                 btnVFOSwap.Enabled = enabled;
 
@@ -32818,7 +32979,7 @@ namespace PowerSDR
             {
                 if (rx1_dds_freq_updated) // ke9ns: Occurs after FWCDDSFreq is called (but not all time, as it depends on where you are)
                 {
-                    Debug.WriteLine("UpdateRX1DDSFreq");
+                  //  Debug.WriteLine("UpdateRX1DDSFreq");
 
 
                     uint tw = rx1_dds_freq_tw;
@@ -32829,7 +32990,15 @@ namespace PowerSDR
                         case Model.FLEX5000:
                         case Model.FLEX3000:
 
+                           
+
                             FWC.SetRX1FreqTW(tw, freq); // ke9ns: send new corrected clock and freq to radio ?
+                            Debug.WriteLine("UpdateRX1DDSFreq " + tw + " , " + freq);//
+
+                            //UpdateRX1DDSFreq 235,160,391 , 27.37625  (with virutal -9khz IF) so tw 2148 = 0.250 khz or tw 8590 = 1khz step
+                            // UpdateRX1DDSFreq 235,162,538 , 27.3765
+                            //  UpdateRX1DDSFreq 235,164,686 , 27.37675
+                            // tw = (0xFFFFFFFF * freq / 500.0); 
 
                             break;
                         case Model.FLEX1500:
@@ -32909,7 +33078,7 @@ namespace PowerSDR
 
 
         private uint last_tw = 0;
-        private double fwc_dds_freq = 7.0;
+        private double fwc_dds_freq = 7.0; // UpdateRX1DDSFreq() // ke9ns: THREAD running all the time when power on
         public double FWCDDSFreq  // ke9ns: Used to actually change RX1 freq of the DSP routine from txtVFOAFreq_lostFocus() routine (for Flex-1500,3000,5000 only)
         {
             get { return fwc_dds_freq; }
@@ -32922,7 +33091,7 @@ namespace PowerSDR
                 {
                     double f = fwc_dds_freq + vfo_offset;
                     if (if_shift) f -= if_freq;
-                    uint tw = (uint)Freq2TW(f); //Debug.WriteLine("tw: "+tw.ToString("X"));
+                    uint tw = (uint)Freq2TW(f); //Debug.WriteLine("tw: "+tw.ToString("X")); //   tw = (long)(0xFFFFFFFF * freq / fwc_corrected_dds_clock);
                     uint sr_tw = tw & 0xFFFF0000;
 
                     double step_size = fwc_dds_step_size;
@@ -32988,14 +33157,17 @@ namespace PowerSDR
                                 FWC.SetDDSFreq(fwc_index, (float)fwc_dds_freq-(float)if_freq);
                                 break;*/
                             case Model.FLEX5000:
-                            case Model.FLEX3000:
-                                double f = fwc_dds_freq + vfo_offset;
-                                if (if_shift) f -= if_freq;
-                                uint tw = (uint)Freq2TW(f);
+                            case Model.FLEX3000: //  
+                                double f = fwc_dds_freq + vfo_offset; // UpdateRX1DDSFreq() // ke9ns: THREAD running all the time when power on
+                                if (if_shift) f -= if_freq; // 9khz for 5000
+                                uint tw = (uint)Freq2TW(f); //   tw = (long)(0xFFFFFFFF * freq / fwc_corrected_dds_clock); fwc_corrected_dds_clock = 500.0
                                 rx1_dds_freq_tw = tw;
                                 rx1_dds_freq_mhz = (float)f;
                                 rx1_dds_freq_updated = true;
                                 //FWC.SetRX1FreqTW(tw, (float)f);
+
+                                Debug.WriteLine("NEW FREQ DDS===> " + fwc_dds_freq + " , " + vfo_offset + " , " + f + " , " + tw); // UpdateRX1DDSFreq()
+
                                 break;
                             case Model.FLEX1500:
                                 f = fwc_dds_freq + vfo_offset;
@@ -33011,7 +33183,8 @@ namespace PowerSDR
                     else
                         dsp.GetDSPRX(0, 0).RXOsc = 0.0;
                     last_tw = 0;
-                    //Debug.WriteLine("dds: "+fwc_dds_freq.ToString("f6" )+" osc: "+(-if_freq*1e6).ToString("f6" )+" total: "+(fwc_dds_freq+if_freq).ToString("f6" ));
+                   
+                   // Debug.WriteLine("dds: "+fwc_dds_freq.ToString("f6" )+" osc: "+(-if_freq*1e6).ToString("f6" )+" total: "+(fwc_dds_freq+if_freq).ToString("f6" ));
 
                 } // spur_reduction = no
 
@@ -40437,7 +40610,11 @@ namespace PowerSDR
           else 
           {
                 buttonCall1.Image = global::PowerSDR.Properties.Resources.wideblue3; // original buttons
-                buttonCQ1.Image = global::PowerSDR.Properties.Resources.wideblue4;
+                if (CWXON == false && CWXF4ReplayON == false && CQCQReplayON == false)
+                {
+                    buttonCQ1.Image = global::PowerSDR.Properties.Resources.wideblue4;
+                  
+                }
                 buttonVK1.Image = global::PowerSDR.Properties.Resources.VK1;
                 buttonVK2.Image = global::PowerSDR.Properties.Resources.VK2;
 
@@ -54482,8 +54659,7 @@ namespace PowerSDR
                         }
                         break;
                     case Keys.L:
-                        if (chkVFOLock.Enabled)
-                            chkVFOLock.Checked = !chkVFOLock.Checked;
+                        if (chkVFOLock.Enabled) chkVFOLock.Checked = !chkVFOLock.Checked;
                         break;
                     case Keys.M:
                         if (chkMOX.Enabled) chkMOX.Checked = !mox;
@@ -56127,6 +56303,7 @@ namespace PowerSDR
                     chkMOX.Enabled = true;
                     chkTUN.Enabled = true;
                 }
+
                 chkVFOLock.Enabled = true;
 
                 timer_peak_text.Enabled = true;
@@ -58884,9 +59061,22 @@ namespace PowerSDR
                 EnableAllBands();
                 EnableAllModes();
                 chkVFOSplit.Enabled = true;
-                btnVFOAtoB.Enabled = true;
-                btnVFOBtoA.Enabled = true;
-                btnVFOSwap.Enabled = true;
+
+                if (VFOLock == false && VFOLockB == false) //.282 if either is activated, dont enable it 
+                {
+                    btnVFOSwap.Enabled = true;
+                }
+                if (VFOLock == false) //.282
+                {
+                   
+                    btnVFOBtoA.Enabled = true;
+                }
+                if (VFOLockB == false) //.282
+                {
+                    btnVFOAtoB.Enabled = true;
+
+                }
+
             }
 
             if (chkPower.Checked) chkPower.BackColor = button_selected_color;
@@ -61855,7 +62045,7 @@ namespace PowerSDR
 
                         if (f < -sample_rate1 / 2) f += sample_rate1;
 
-                        dsp.GetDSPRX(0, 0).RXOsc = f;
+                        dsp.GetDSPRX(0, 0).RXOsc = f;   //ke9ns: set freq on Receiver
                     }
                     else
                     {
@@ -61865,7 +62055,7 @@ namespace PowerSDR
                             case Model.FLEX3000:
 
                                 //  if (setupForm != null && setupForm.chkAvgMove.Checked)
-                                FWCDDSFreq = rx_freq;
+                                FWCDDSFreq = rx_freq; // actually set the frequency
 
 
                                 break;
@@ -61911,7 +62101,7 @@ namespace PowerSDR
 
                             if (rx2_osc > -sample_rate1 / 2 && rx2_osc < sample_rate1 / 2)
                             {
-                                dsp.GetDSPRX(0, 1).RXOsc = rx2_osc;
+                                dsp.GetDSPRX(0, 1).RXOsc = rx2_osc; // ke9ns: set freq of subreceiver
                             }
                             else if (chkEnableMultiRX.Checked) chkEnableMultiRX.Checked = false;
                         }
@@ -61993,7 +62183,7 @@ namespace PowerSDR
                                 double f = (wave_freq - (VFOAFreq * 1e6) % sample_rate1);
                                 if (f > sample_rate1 / 2) f -= sample_rate1;
                                 if (f < -sample_rate1 / 2) f += sample_rate1;
-                                dsp.GetDSPRX(0, 0).RXOsc = f;
+                                dsp.GetDSPRX(0, 0).RXOsc = f; // ke9ns: set freq of main receiver
                             }
                             else
                             {
@@ -62008,7 +62198,7 @@ namespace PowerSDR
                                         int rx2_osc = (int)(dsp.GetDSPRX(0, 0).RXOsc - diff);
                                         if (rx2_osc > -sample_rate1 / 2 && rx2_osc < sample_rate1 / 2)
                                         {
-                                            dsp.GetDSPRX(0, 1).RXOsc = rx2_osc;
+                                            dsp.GetDSPRX(0, 1).RXOsc = rx2_osc;  // ke9ns: set subreceiver freq
                                         }
                                         else chkEnableMultiRX.Checked = false;
                                     }
@@ -62251,7 +62441,7 @@ namespace PowerSDR
 
                 if (sub_osc > -sample_rate1 / 2 && sub_osc < sample_rate1 / 2)
                 {
-                    dsp.GetDSPRX(0, 1).RXOsc = sub_osc;
+                    dsp.GetDSPRX(0, 1).RXOsc = sub_osc; // ke9ns: set sub rx freq
                 }
 
                 UpdateRX1SubNotches();
@@ -62297,8 +62487,7 @@ namespace PowerSDR
 
                 }
 
-                if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.VUOK &&
-                (tx_xvtr_index == 0 || tx_xvtr_index == 1))
+                if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.VUOK && (tx_xvtr_index == 0 || tx_xvtr_index == 1))
                     ptbPWR_Scroll(this, EventArgs.Empty);
 
                 //tx
@@ -62334,8 +62523,7 @@ namespace PowerSDR
 
                 }
 
-                if (tx_xvtr_index >= 0)
-                    freq = xvtrForm.TranslateFreq(freq);
+                if (tx_xvtr_index >= 0) freq = xvtrForm.TranslateFreq(freq);
 
                 if (old_tx_band != tx_band)
                 {
@@ -62760,7 +62948,7 @@ namespace PowerSDR
 
                 if (rx2_osc > -sample_rate1 / 2 && rx2_osc < sample_rate1 / 2)
                 {
-                    dsp.GetDSPRX(0, 1).RXOsc = rx2_osc;
+                    dsp.GetDSPRX(0, 1).RXOsc = rx2_osc; // ke9ns set sub rx freq
                 }
 
                 UpdateRX1SubNotches();
@@ -63450,6 +63638,14 @@ namespace PowerSDR
             // Debug.WriteLine("VFOAmouseleave");
 
             txtVFOAFreq_MouseLeave(txtVFOAMSD, e);
+
+            // UpdateRX1DDSFreq() // ke9ns: THREAD running all the time when power on
+            // sends TW,FREQ to radio via PAL command.
+            // UpdateTXDDSFreq() thread
+            // UpdateRX2DDSFreq thread as well
+            //   FWCDDSFreq  // ke9ns: Used to actually change RX1 freq of the DSP routine from txtVFOAFreq_lostFocus() routine (for Flex-1500,3000,5000 only)
+
+
         }
 
         private void txtVFOBMSD_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -66884,7 +67080,7 @@ namespace PowerSDR
 
                     //grpMode.Text = "Mode - SPEC";
                     if_shift = false;
-                    dsp.GetDSPRX(0, 0).RXOsc = 0.0;
+                    dsp.GetDSPRX(0, 0).RXOsc = 0.0; 
                     DisableAllFilters();
                     ptbFilterShift.Enabled = false;
                     btnFilterShiftReset.Enabled = false;
@@ -73252,7 +73448,7 @@ namespace PowerSDR
             {
                 bool poweron = PowerOn;
 
-                if (setupForm != null && setupForm.chkBoxPFN.Checked) //.281
+                if (setupForm != null && setupForm.CrashProtection) //.281
                 {
                     if (poweron) //.204 pause to prevent a PFN_ BSOD
                     {
@@ -73345,7 +73541,7 @@ namespace PowerSDR
             if (dsp.GetDSPRX(1, 0).BufferSize != size || dsp.GetDSPRX(1, 1).BufferSize != size)
             {
                 bool poweron = PowerOn;
-                if (setupForm != null && setupForm.chkBoxPFN.Checked) //.281
+                if (setupForm != null && setupForm.CrashProtection) //.281
                 {
                     if (poweron)  //.204
                     {
@@ -73416,7 +73612,7 @@ namespace PowerSDR
             if (dsp.GetDSPTX(0).BufferSize != size)
             {
                 bool poweron = PowerOn;
-                if (setupForm != null && setupForm.chkBoxPFN.Checked) //.281
+                if (setupForm != null && setupForm.CrashProtection) //.281
                 {
                     if (poweron)  //.204
                     {
@@ -83688,7 +83884,11 @@ namespace PowerSDR
                                 else // if you click the CQCQ button before the audio is finished playing, stop the recording now.
                                 {
 
-                                    buttonCQ1.Image = global::PowerSDR.Properties.Resources.wideblue4; //   buttonCQ.BackColor = Color.Blue;
+                                    if (CQCQReplayON == false && CWXF4ReplayON == false)
+                                    {
+                                        buttonCQ1.Image = global::PowerSDR.Properties.Resources.wideblue4; // .281a  buttonCQ.BackColor = Color.Blue;
+                                       
+                                    }
 
 
                                     checkBoxID.Checked = false;     // REC/PLAY ID box
@@ -83801,7 +84001,7 @@ namespace PowerSDR
                     {
                         if (CWXF4ReplayON == true)
                         {
-                            if (++replayCount < 8) // max count
+                            if (++replayCount < 50) // max count
                             {
                                 // REPEAT PLAY NOW
                               //  if (chkVAC1.Checked) // turn OFF VAC while transmitting (override it)
@@ -83819,14 +84019,14 @@ namespace PowerSDR
                             }
                             else
                             {
-                                Debug.WriteLine("8 times... BREAK BREAK BREAK=====");
-                                break; // end after 8 times
+                                Debug.WriteLine("50 times... BREAK BREAK BREAK=====");
+                                break; // end after 50 times
                             }
                         }
 
                     } //  if (CWXF4Replay.ElapsedMilliseconds >= ((long)udCQCQRepeat.Value * 1000))
 
-                }
+                } // if (CWXON == false)
 
 
             } // for loop forever
@@ -83969,7 +84169,7 @@ namespace PowerSDR
             buttonCQ1.Image = global::PowerSDR.Properties.Resources.wideblue4;  //   buttonCQ.BackColor = Color.Blue;
 
 
-            Debug.WriteLine("DONE BREAK BREAK BREAK=====");
+            Debug.WriteLine("BLUE0 DONE BREAK BREAK BREAK=====");
 
             CQReplay.Stop();
 

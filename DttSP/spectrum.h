@@ -85,13 +85,13 @@ typedef struct _spec_block
 {
   BOOLEAN flag;
   int label;
-  CXB accum, timebuf, freqbuf;
+  CXB accum, timebuf, freqbuf; // ke9ns: complex value buffers
   int fill, buflen, rxk, scale, size, type, mask; // ke9ns: size=4096 points of specturm for panadapter display
-  Windowtype wintype;
+  Windowtype wintype;  // ke9ns: bartlett, Rectangular, Hanning, Blackman
   REAL *window;
   float *output, *oscope;
   COMPLEX *coutput;
-  int planbits;
+  int planbits;		// ke9ns: 
   fftwf_plan plan;
   BOOLEAN polyphase;
 

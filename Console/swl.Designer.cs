@@ -134,9 +134,9 @@ namespace PowerSDR
             this.richTextBox3.Name = "richTextBox3";
             this.richTextBox3.Size = new System.Drawing.Size(76, 327);
             this.richTextBox3.TabIndex = 86;
-            this.richTextBox3.Text = "Examples searches to Click:\n\nALE\nTIME\nVOLMET\nHFDL\nDIGITAL\nSTANAG\nFAX\nDSC\nNAVY\nNAV" +
-    "TEX\nMOBILE\nMARITIME\nBEACON\nHabana\nDRM\n\n\nClear Search field to show all Stations." +
-    "";
+            this.richTextBox3.Text = "Examples searches to Click:\n\nALE\nAPRS\nTIME\nVOLMET\nHFDL\nDIGITAL\nSTANAG\nFAX\nDSC\nNAV" +
+    "Y\nNAVTEX\nMOBILE\nMARITIME\nBEACON\nHabana\nDRM\n\nClear Search field to show all Stati" +
+    "ons.";
             this.richTextBox3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.richTextBox3_MouseClick);
             this.richTextBox3.MouseEnter += new System.EventHandler(this.SwlControl_MouseEnter);
             // 

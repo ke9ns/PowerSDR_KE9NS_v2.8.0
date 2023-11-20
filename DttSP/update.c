@@ -518,7 +518,9 @@ DttSP_EXP int SetRXOsc (unsigned int thread, unsigned subrx, double newfreq)
 
 	newfreq *= 2.0 * M_PI / uni[thread].samplerate;
 	sem_wait(&top[thread].sync.upd.sem);
+
 	rx[thread][subrx].osc.gen->Frequency = (REAL)newfreq;
+
 	sem_post(&top[thread].sync.upd.sem);
 	return 0;
 }
@@ -2124,7 +2126,7 @@ DttSP_EXP void Process_Spectrum (unsigned int thread, float *results)
 
 
 //=========================================================================================
-// ke9ns  console uses this to get 4096 data points for panadapter and waterfall info
+// ke9ns  console uses this to get 4096 (hi-res papafall option to increase to 16k) data points for panadapter and waterfall info
 //        BUT its always 4096 based on the SR and not whats in view on the panadapter
 //        SO zooming in does not show more detail
 // #define SPEC_PRE_FILT	(1)  samplerate wide
@@ -2137,7 +2139,7 @@ DttSP_EXP void Process_Spectrum (unsigned int thread, float *results)
 //	                                BOOLEAN flag;
 //	                                int label;
 //	                                CXB accum, timebuf, freqbuf;
-//	                                int fill, buflen, rxk, scale, size, type, mask;
+//	                                int fill, buflen, rxk, scale, size, type, mask;   
 //	                                Windowtype wintype;
 //	                                REAL* window;
 //	                                float* output, * oscope;
