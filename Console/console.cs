@@ -7175,6 +7175,9 @@ namespace PowerSDR
 
             tempVFOAFreq = VFOAFreq; // ke9ns add get CTUN ready quickly
 
+         //   tempVFOAFreqIF = VFOAFreq; //.284
+         //   tempVFOBFreqIF = VFOBFreq; //.284
+
 
             //--------------------------------------------------------------------------------------------------------------------------------------------
             //ke9ns .248 copy over normal Ham band data into Extended SWL bands (since we only calibrate ham bands)
@@ -9621,7 +9624,7 @@ namespace PowerSDR
                 comboAGC.Items.Add(s);
             }
 
-            for (AGCMode agc = AGCMode.FIRST + 1; agc < AGCMode.CUSTOM; agc++) //ke9ns mod to add custom for (AGCMode agc = AGCMode.FIRST + 1; agc < AGCMode.CUSTOM; agc++)
+            for (AGCMode agc = AGCMode.FIRST + 1; agc < AGCMode.LAST; agc++) //ke9ns mod to add custom for (AGCMode agc = AGCMode.FIRST + 1; agc < AGCMode.CUSTOM; agc++)
             {
                 string s = agc.ToString().ToLower();
                 s = s.Substring(0, 1).ToUpper() + s.Substring(1, s.Length - 1);
@@ -10713,6 +10716,10 @@ namespace PowerSDR
 
             tempVFOAFreq = VFOAFreq; // ke9ns add  CTUN operation changed freq so update temp value
 
+            tempVFOAFreqIF = VFOAFreq; //.284
+            btnDisplayPanCenter_Click(this, EventArgs.Empty); // .284 recenter 
+
+
             if (SpotForm != null) // ke9ns add .157
             {
                 if (SpotControl.SP_Active > 2)
@@ -10750,6 +10757,9 @@ namespace PowerSDR
             VFOBFreq = freq;
 
             //  tempVFOAFreq = VFOAFreq; // ke9ns add  CTUN operation changed freq so update temp value
+
+            tempVFOBFreqIF = VFOBFreq; //.284
+            VFOBCenter(); //.284
 
             if (SpotForm != null) // ke9ns add .157
             {
@@ -17807,8 +17817,7 @@ namespace PowerSDR
         {
             Band old_band = rx2_band;
             RX2Band = b;
-            if (old_band != b)
-                UpdateBandButtonColors();
+            if (old_band != b) UpdateBandButtonColors();
 
             if (setupForm != null) // ke9ns add: Force UPDATE of ANT Display .119
             {
@@ -19932,8 +19941,9 @@ namespace PowerSDR
                 if (width2 > sample_rate1 - 2 * spur_tune_width) width2 = (int)(sample_rate1 - 2 * spur_tune_width);
 
                 // ke9ns: below calculates the +/- hz of the full absolute widest the display could be (with no zoom at all)
-                int abs_low2 = (int)(-(double)sample_rate1 * 0.5 - if_freq * 1e6 + spur_tune_width); // (-192000 * .5) - (0.009000 * 1000000) + 7629.39453125 = -96000 - 9000 + 7629.39453125  = -97373
-                int abs_high2 = (int)((double)sample_rate1 * 0.5 - if_freq * 1e6 - spur_tune_width); // +97373 
+                // .284 was if_freq now rx2_if_freq
+                int abs_low2 = (int)(-(double)sample_rate1 * 0.5 - rx2_if_freq * 1e6 + spur_tune_width); // (-192000 * .5) - (0.009000 * 1000000) + 7629.39453125 = -96000 - 9000 + 7629.39453125  = -97373
+                int abs_high2 = (int)((double)sample_rate1 * 0.5 - rx2_if_freq * 1e6 - spur_tune_width); // +97373 
 
                 if (high2 > abs_high2)
                 {
@@ -24925,7 +24935,7 @@ namespace PowerSDR
             FWC.SetQSE(false);
             //Thread.Sleep(50);
 
-            VFOBFreq = freq + 2 * (float)if_freq;				// set frequency to passed value + 2*IF
+            VFOBFreq = freq + 2 * (float)rx2_if_freq;				// set frequency to passed value + 2*IF
             //Thread.Sleep(100);
 
             UpdateRX1Filters(-5000, 5000);
@@ -25276,6 +25286,7 @@ namespace PowerSDR
                         /*if (freq < 15.0)
                             IFFreq = 0.002;
                         else IFFreq = 0.005;*/
+
                         IFFreq = 0.0006;
 
                         // use sig gen to cal RX WBIR
@@ -32021,8 +32032,7 @@ namespace PowerSDR
                         break;
                     case Model.SDR1000:
                         MinFreq = Math.Max(if_freq, 0.000001);
-                        if (XVTRPresent)
-                            MaxFreq = 146.0;
+                        if (XVTRPresent) MaxFreq = 146.0;
                         else MaxFreq = 65.0;
                         comboPreamp.Items.Clear();
                         comboPreamp.Items.Add("Off");
@@ -32057,8 +32067,7 @@ namespace PowerSDR
                         break;
                     case Model.DEMO:
                         MinFreq = Math.Max(if_freq, 0.000001);
-                        if (XVTRPresent)
-                            MaxFreq = 146.0;
+                        if (XVTRPresent) MaxFreq = 146.0;
                         else MaxFreq = 65.0;
                         //mnuFWC.Visible = false;
                         mixerToolStripMenuItem.Visible = false;
@@ -32973,24 +32982,40 @@ namespace PowerSDR
         uint rx1_dds_freq_tw;
         float rx1_dds_freq_mhz;
 
-        private void UpdateRX1DDSFreq() // ke9ns: THREAD running all the time when power on
+        private void UpdateRX1DDSFreq() // ke9ns:<<< THREAD running all the time when power on
         {
             while (chkPower.Checked)
             {
+
+                if (CTUNIF == true)
+                {
+                    if (setupForm.udDDSIFFreq.Maximum == 85000)
+                    {
+                        double zoom_factor = 1.0 / ((ptbDisplayZoom.Maximum + ptbDisplayZoom.Minimum - ptbDisplayZoom.Value) * 0.01); // ke9ns: 1/(260 - value)*.01 =   LEFT=.3846 <---> RIGHT= 10
+
+                        if (zoom_factor < 0.6)
+                        {
+                            ptbDisplayZoom.Value = ptbDisplayZoom.Maximum + ptbDisplayZoom.Minimum - (int)(100.0 / MinZoom);
+                            //   ptbDisplayZoom2.Value = ptbDisplayZoom2.Maximum + ptbDisplayZoom2.Minimum - (int)(100.0 / MinZoom);
+                        }
+
+                    }
+                } // CTUNIF
+
                 if (rx1_dds_freq_updated) // ke9ns: Occurs after FWCDDSFreq is called (but not all time, as it depends on where you are)
                 {
                   //  Debug.WriteLine("UpdateRX1DDSFreq");
-
+                 
 
                     uint tw = rx1_dds_freq_tw;
                     float freq = rx1_dds_freq_mhz;
-                    rx1_dds_freq_updated = false;
+                    rx1_dds_freq_updated = false; // do only 1 time flag
+
                     switch (current_model)
                     {
                         case Model.FLEX5000:
                         case Model.FLEX3000:
-
-                           
+                          
 
                             FWC.SetRX1FreqTW(tw, freq); // ke9ns: send new corrected clock and freq to radio ?
                             Debug.WriteLine("UpdateRX1DDSFreq " + tw + " , " + freq);//
@@ -33018,15 +33043,37 @@ namespace PowerSDR
         bool rx2_dds_freq_updated = false;
         uint rx2_dds_freq_tw;
         float rx2_dds_freq_mhz;
-        private void UpdateRX2DDSFreq() // ke9ns: THREAD routine running all the time
+        private void UpdateRX2DDSFreq() // ke9ns: <<<THREAD>>> routine running all the time
         {
             while (chkPower.Checked)
             {
+
+                if (CTUNIF == true)
+                {
+                    if (setupForm.udDDSIFFreq.Maximum == 85000)
+                    {
+                        double zoom_factor = 1.0 / ((ptbDisplayZoom2.Maximum + ptbDisplayZoom2.Minimum - ptbDisplayZoom2.Value) * 0.01); // ke9ns: 1/(260 - value)*.01 =   LEFT=.3846 <---> RIGHT= 10
+
+                        if (zoom_factor < 0.6)
+                        {
+                            //  ptbDisplayZoom.Value = ptbDisplayZoom.Maximum + ptbDisplayZoom.Minimum - (int)(100.0 / MinZoom);
+                            ptbDisplayZoom2.Value = ptbDisplayZoom2.Maximum + ptbDisplayZoom2.Minimum - (int)(100.0 / MinZoom);
+                        }
+
+                    }
+                } // CTUNIF
+
                 if (rx2_dds_freq_updated)
                 {
+
+                    Debug.WriteLine("RX2 NEW DDSFREQ");
+
+                  
+                 
+
                     uint tw = rx2_dds_freq_tw;
                     float freq = rx2_dds_freq_mhz;
-                    rx2_dds_freq_updated = false;
+                    rx2_dds_freq_updated = false; // 1 time flag
                     FWC.SetRX2FreqTW(tw, freq);
                     if (!mox) WBIRRX1Holdoff();
                 }
@@ -33034,11 +33081,13 @@ namespace PowerSDR
             }
         } // UpdateRX2DDSFreq()
 
+
+
         bool tx_dds_freq_updated = false;
         uint tx_dds_freq_tw;
         float tx_dds_freq_mhz;
         double last_tx_carrier_key = 0.0;
-        private void UpdateTXDDSFreq() //ke9ns:  THREAD to update TX freq of DSP routine all the time
+        private void UpdateTXDDSFreq() //ke9ns:  <<<THREAD>>> to update TX freq of DSP routine all the time
         {
             while (chkPower.Checked)
             {
@@ -33087,6 +33136,9 @@ namespace PowerSDR
 
                 fwc_dds_freq = value; // ke9ns: freq that you want from txtVFOAFreq_lostFocus() routine
 
+                Debug.WriteLine("FWCDDSFREQ newfreq:"+ value + ", if_freq= "+ if_freq); //.284
+
+
                 if (spur_reduction)
                 {
                     double f = fwc_dds_freq + vfo_offset;
@@ -33115,7 +33167,8 @@ namespace PowerSDR
                                     FWC.SetDDSFreq(fwc_index, (float)TW2Freq(sr_tw));
                                     break;*/
                                 case Model.FLEX5000:
-                                    rx1_dds_freq_tw = sr_tw;
+                                    rx1_dds_freq_tw = sr_tw; // ke9ns: thread UPDATERX1DDSFREQ
+
                                     rx1_dds_freq_mhz = (float)TW2Freq(sr_tw) * (float)(500.0 / fwc_corrected_dds_clock);
                                     rx1_dds_freq_updated = true;
                                     //   Debug.WriteLine("DDS_FREQ===sr_tw=====" + sr_tw);
@@ -33179,7 +33232,11 @@ namespace PowerSDR
                         }
                     }
                     if (if_shift)
+                    {
+                        Debug.WriteLine("IFSHIFT " + if_freq);
+
                         dsp.GetDSPRX(0, 0).RXOsc = -if_freq * 1e6;
+                    }
                     else
                         dsp.GetDSPRX(0, 0).RXOsc = 0.0;
                     last_tw = 0;
@@ -33188,8 +33245,9 @@ namespace PowerSDR
 
                 } // spur_reduction = no
 
-                Debug.WriteLine("FWCDDSFreq");
+                Debug.WriteLine("FWCDDSFreq DONE");
 
+              
                 //  UP1 = true; // .251
 
             } // set
@@ -33200,13 +33258,16 @@ namespace PowerSDR
 
         private uint rx2_last_tw = 0;
         private double rx2_dds_freq = 7.0;
-        public double RX2DDSFreq        // ke9ns: set freq for 2nd receiver (flex-5000 only)
+        public double RX2DDSFreq        // ke9ns: RX2 set freq for 2nd receiver (flex-5000 only)
         {
             get { return rx2_dds_freq; }
             set
             {
                 rx2_dds_freq = value;
 
+                Debug.WriteLine("RX2DDSFREQ newfreq:" + value + ", rx2_if_freq= " + rx2_if_freq); //.284
+
+               
                 if (rx2_spur_reduction)
                 {
                     double f = rx2_dds_freq + rx2_vfo_offset;
@@ -33229,7 +33290,8 @@ namespace PowerSDR
                                 case Model.FLEX5000:
                                     //FWC.SetRX2Freq((float)TW2Freq(sr_tw) * (float)(500.0 / fwc_corrected_dds_clock));
                                     //FWC.SetRX2FreqTW(sr_tw, (float)TW2Freq(sr_tw) * (float)(500.0 / fwc_corrected_dds_clock));
-                                    rx2_dds_freq_tw = sr_tw;
+                                    rx2_dds_freq_tw = sr_tw; // ke9ns: THREAD  UPDATEDRX2DDSFREQ
+
                                     rx2_dds_freq_mhz = (float)TW2Freq(sr_tw) * (float)(500.0 / fwc_corrected_dds_clock);
                                     rx2_dds_freq_updated = true;
                                     break;
@@ -33255,13 +33317,21 @@ namespace PowerSDR
                                 //FWC.SetRX2FreqTW(tw, (float)f);
                                 rx2_dds_freq_tw = tw;
                                 rx2_dds_freq_mhz = (float)f;
-                                rx2_dds_freq_updated = true;
+                                rx2_dds_freq_updated = true; // update 1 time
+
+                           
+                                Debug.WriteLine("B NEW FREQ DDS===> " + rx2_dds_freq + " , " + rx2_vfo_offset + " , " + f + " , " + tw); // UpdateRX2DDSFreq()
+
                                 break;
                         }
                     }
 
                     if (rx2_if_shift)
-                        dsp.GetDSPRX(1, 0).RXOsc = -rx2_if_freq * 1e6;
+                    {
+                        Debug.WriteLine("RX2IFSHIFT " + rx2_if_freq);
+
+                        dsp.GetDSPRX(1, 0).RXOsc = -rx2_if_freq * 1e6;  // .009
+                    }
                     else
                         dsp.GetDSPRX(1, 0).RXOsc = 0.0;
                     last_tw = 0;
@@ -33353,8 +33423,7 @@ namespace PowerSDR
             set
             {
                 min_freq = value;
-                if (VFOAFreq < min_freq)
-                    VFOAFreq = min_freq;
+                if (VFOAFreq < min_freq)  VFOAFreq = min_freq;
             }
         }
 
@@ -33386,6 +33455,7 @@ namespace PowerSDR
         }
 
         private double if_freq = 0.009000; // ke9ns .009 = 9000 value
+        private double iffreq = 0.009; // .284
         public double IFFreq
         {
             get { return if_freq; }
@@ -33395,9 +33465,10 @@ namespace PowerSDR
                 if (setupForm != null) txtVFOAFreq_LostFocus(this, EventArgs.Empty);
                 ptbDisplayPan_Scroll(this, EventArgs.Empty);
             }
-        }
+        } // IFFreq
 
-        private double rx2_if_freq = 0.009000;
+        private double rx2_if_freq = 0.009000; // ke9ns: always 9000 since RX2 is only on the Flex-5000
+        private double rx2iffreq = 0.009; // .284
         public double RX2IFFreq
         {
             get { return rx2_if_freq; }
@@ -33405,9 +33476,13 @@ namespace PowerSDR
             {
                 rx2_if_freq = value;
                 if (setupForm != null && rx2_enabled)
+                {
                     txtVFOBFreq_LostFocus(this, EventArgs.Empty);
+                    ptbDisplayPan2_Scroll(this, EventArgs.Empty); //.284
+                }
+
             }
-        }
+        } // RX2IFFreq
 
         private bool if_shift = true;
         public bool IFShift
@@ -36881,11 +36956,6 @@ namespace PowerSDR
 
 
 
-
-
-
-
-
         private int tx_filter_low_save = 200;
         private int tx_filter_high_save = 3100;
 
@@ -36895,6 +36965,8 @@ namespace PowerSDR
             get { return chkVFOLock.Checked; }
             set { chkVFOLock.Checked = value; }
         }
+
+
 
         public string CATGetVersion()
         {
@@ -37846,6 +37918,108 @@ namespace PowerSDR
 
                 //   UP1 = true; // .251
 
+                // PAN SCROLL FEATURE
+                if (CTUNIF == true) //.284
+                {
+                    decimal tempA = ((decimal)value * (decimal)1e6) - ((decimal)tempVFOAFreqIF * (decimal)1e6);
+
+                    double tempC = value;
+
+                    if (CurrentModel == Model.FLEX5000 || CurrentModel == Model.FLEX3000)
+                    {
+                        if (setupForm.udDDSIFFreq.Maximum == 85000) // 192khz
+                        {
+                            if ((tempA + 9000) > 73000 || (tempA + 9000) < -55000) // ZOOM set to .6 factor
+                            {
+                                tempVFOAFreqIF = value; // new center value
+
+                                //   setupForm.udDDSIFFreq.Value = 9000; // reset back to center
+
+                                setupForm.DDSIFAFreq = 9000; // reset back to center
+                                IFFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6);
+
+                                btnDisplayPanCenter_Click(this, EventArgs.Empty); // recenter 
+                                Debug.WriteLine("VFOAFreq RECENTER 192000");
+
+                            }
+                            else
+                            {
+                                 setupForm.DDSIFAFreq = 9000 + tempA; // reset back to center
+                                 IFFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6);
+         
+                            }
+                        }
+                        else if (setupForm.udDDSIFFreq.Maximum == 47000)
+                        {
+                            if ((tempA + 9000) > 47000 || (tempA + 9000) < -47000)
+                            {
+                                tempVFOAFreqIF = value; // new center value
+
+                                //  setupForm.udDDSIFFreq.Value = 9000; // reset back to center
+
+                                setupForm.DDSIFAFreq = 9000; // reset back to center
+                                IFFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6);
+
+                                btnDisplayPanCenter_Click(this, EventArgs.Empty); // recenter 
+                                Debug.WriteLine("VFOAFreq RECENTER 96000");
+                            }
+                            else
+                            {
+                                setupForm.DDSIFAFreq = 9000 + tempA; // reset back to center
+                                IFFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6);
+                            }
+                        }
+                        else // 23000 maximum IF
+                        {
+                            if ((tempA + 9000) > 23000 || (tempA + 9000) < -23000)
+                            {
+                                tempVFOAFreqIF = value; // new center value
+
+                                //   setupForm.udDDSIFFreq.Value = 9000; // reset back to center
+
+                                setupForm.DDSIFAFreq = 9000; // reset back to center
+                                IFFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6);
+
+
+                                btnDisplayPanCenter_Click(this, EventArgs.Empty); // recenter 
+                                Debug.WriteLine("VFOAFreq RECENTER 48000");
+                            }
+                            else
+                            {
+                                setupForm.DDSIFAFreq = 9000 + tempA; // reset back to center
+                                IFFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6);
+                            }
+                        }
+                    }
+                    else // Flex-1500 below
+                    {
+                        if ((tempA + 3800) > 23000 || (tempA + 3800) < -23000)
+                        {
+                            tempVFOAFreqIF = value; // new center value
+
+                            setupForm.DDSIFAFreq = 3800; // reset back to center
+                            IFFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6);
+
+                            btnDisplayPanCenter_Click(this, EventArgs.Empty); // recenter 
+
+                        }
+                        else
+                        {
+                            setupForm.DDSIFAFreq = 3800 + tempA; // reset back to center
+                            IFFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6);
+                        }
+                    }
+
+
+                    Debug.WriteLine("CTUNIF StartAFreq:" + tempVFOAFreqIF + " ,NewAFreq:" + tempC + " ,CurrentAIF:" + IFFreq );
+                    
+                    UpdateVFOAFreq(tempC.ToString("f6")); // .284 in mhz  7.123
+
+                   
+
+                } // IF ctunif
+
+
 
                 if (!this.InvokeRequired)
                 {
@@ -37915,6 +38089,7 @@ namespace PowerSDR
                 }
 
                 if (ESCSYNC == true && VFOSync == false && FWCEEPROM.RX2OK) picRadar.Invalidate(); //.246 .249
+
 
             } //set
 
@@ -38006,7 +38181,8 @@ namespace PowerSDR
 
                 txtVFOABand_LostFocus(this, EventArgs.Empty);
             }
-        }
+
+        } // VFOASubFreq
 
 
         public double VFOBSubFreq //.271
@@ -38038,6 +38214,65 @@ namespace PowerSDR
             }
         } // VFOBSub
 
+
+
+        public void VFOBCenter() // .284 add to simlulate a mouse wheel click on the center button to reset and center RX2 only
+        {
+
+            // can only be a Flex-5000 with RX2 here
+
+            if (CTUNIF == true) //.284
+            {
+                tempVFOBFreqIF = VFOBFreq; // 7.123 mhz
+
+                setupForm.DDSIFBFreq = 9000;
+                RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6); // 0.009
+
+            }
+           else
+            {
+               
+                setupForm.udDDSIFBFreq.Value = 9000;
+                setupForm.DDSIFBFreq = 9000;
+
+                RX2IFFreq = 0.009000;
+          
+
+            } //
+
+            CalcDisplayFreq(); // .225 add
+
+            //double edge_alias = 7200.0;
+            //double if_freq = 11025.0;
+
+            CTUN1_HZ = 0; // reset CTUN to center
+
+            double spur_tune_width = 200e6 / Math.Pow(2, 16);
+            if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
+                spur_tune_width = 500e6 / Math.Pow(2, 16);
+
+            int width = Display.RXDisplayHigh2 - Display.RXDisplayLow2;
+
+            int max_pan_width = (int)(sample_rate1 - 2 * spur_tune_width - width);
+            if (max_pan_width == 0)
+            {
+                ptbDisplayPan2.Value = (ptbDisplayPan2.Maximum - ptbDisplayPan2.Minimum) / 2;
+                ptbDisplayPan2_Scroll(btnDisplayPanCenter, EventArgs.Empty);
+                return;
+            }
+
+            int low = -width / 2; // target -- if width is centered at 0, low will be half the width below 0
+            int abs_low = (int)(-(double)sample_rate1 * 0.5 - rx2_if_freq * 1e6 + spur_tune_width); //.284 was if_freq
+            int offset = low - abs_low;
+
+            int new_val = (int)((double)offset * (double)ptbDisplayPan2.Maximum / (double)max_pan_width);
+            ptbDisplayPan2.Value = Math.Min(Math.Max(ptbDisplayPan2.Minimum, new_val), ptbDisplayPan2.Maximum);
+            ptbDisplayPan2_Scroll(btnDisplayPanCenter, EventArgs.Empty);
+
+
+
+        } // VFOBCenter
+
         public double VFOBFreq
         {
             get
@@ -38055,14 +38290,94 @@ namespace PowerSDR
             {
                 if (vfo_lockB || setupForm == null) return;
 
+                if (CTUNIF == true && chkRX2.Checked == true) //.284
+                {
+                    decimal tempB = ((decimal)value * (decimal)1e6) - ((decimal)tempVFOBFreqIF * (decimal)1e6);
+
+                    double tempC = value;
+                   
+                    if (setupForm.udDDSIFFreq.Maximum == 85000)
+                    {
+                        if ((tempB + 9000) > 73000 || (tempB + 9000) < -55000)
+                        {
+                            tempVFOBFreqIF = value; // new center value
+
+                            setupForm.DDSIFBFreq = 9000; // reset back to center
+                            RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6);
+
+                            //   btnDisplayPanCenter_Click(this, EventArgs.Empty); // recenter 
+                            //  btnDisplayPanCenter_MouseDown(this, MouseEventArgs.Equals = 4194304);
+
+                            VFOBCenter();
+
+                        }
+                        else
+                        {
+                            setupForm.DDSIFBFreq = 9000 + tempB;
+                            RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6);
+                         
+                        }
+                    }
+                    else if (setupForm.udDDSIFFreq.Maximum == 47000)
+                    {
+                        if ((tempB + 9000) > 47000 || (tempB + 9000) < -47000)
+                        {
+                            tempVFOBFreqIF = value; // new center value
+
+                            setupForm.DDSIFBFreq = 9000; // reset back to center
+                            RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6);
+
+                            //   btnDisplayPanCenter_Click(this, EventArgs.Empty); // recenter 
+                            VFOBCenter();
+                        }
+                        else
+                        {
+                            setupForm.DDSIFBFreq = 9000 + tempB;
+                             RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6);
+
+                        }
+                    }
+                    else // 23000 maximum IF
+                    {
+                        if ((tempB + 9000) > 23000 || (tempB + 9000) < -23000)
+                        {
+                            tempVFOBFreqIF = value; // new center value
+
+                            setupForm.DDSIFBFreq = 9000; // reset back to center
+                            RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6);
+
+                            //  btnDisplayPanCenter_Click(this, EventArgs.Empty); // recenter 
+                            VFOBCenter();
+                        }
+                        else
+                        {
+                            setupForm.DDSIFBFreq = 9000 + tempB;
+                             RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6);
+
+                        }
+                    }
+
+                    Debug.WriteLine("CTUNIF StartBFreq:" + tempVFOBFreqIF + " ,NewBFreq:" + tempC + " ,CurrentBIF:" + RX2IFFreq );
+                   
+                    UpdateVFOBFreq(tempC.ToString("f6")); // .284 in mhz  7.123
+
+                  
+
+                } // IF ctunif             
+
+
                 value = Math.Max(0, value);
                 txtVFOBFreq.Text = value.ToString("f6" );
                 txtVFOBFreq_LostFocus(this, EventArgs.Empty);
 
                 if (ESCSYNC == true && VFOSync == false && FWCEEPROM.RX2OK) picRadar.Invalidate(); //.246 .249
-            }
 
-        }
+
+
+
+            } // set
+
+        } // VFOBFreq
 
         public int PWR
         {
@@ -56916,8 +57231,7 @@ namespace PowerSDR
                     break;
             }
 
-            if (comboAGC.Focused)
-                btnHidden.Focus();
+            if (comboAGC.Focused)    btnHidden.Focus();
 
         } // comboAGC settings
 
@@ -60267,6 +60581,91 @@ namespace PowerSDR
             btnHidden.Focus();
         }
 
+
+
+        public int CATVFOLockAB    //.283 add
+        {
+            get
+            {
+                return 0; // chkVFOLock.Checked; 
+            }
+
+            set 
+            {
+                //  chkVFOLock.Checked = value; 
+
+                //setupForm.gridBoxTS.CheckedChanged -= setupForm.gridBoxTS_CheckedChanged;  // ke9ns turn off checkchanged temporarily   
+                // 
+                // setupForm.gridBoxTS.CheckedChanged += setupForm.gridBoxTS_CheckedChanged;
+
+                if ((setupForm == null) || (setupForm.chkBoxVFOLockAB.Checked == false))
+                {
+
+                    VFOLOCKAB = 0;
+
+                    if (value == 0)
+                    {
+                        chkVFOLock.Checked = false;
+                    }
+                    else
+                    {
+                        chkVFOLock.Checked = true;
+                    }
+
+
+                } // chkBoxVFOLockAB.Checked == false
+                else
+                {
+
+                    if (value == 0) // unlock all
+                    {
+                        VFOLOCKAB = 0;
+                        chkVFOLock.Checked = false;
+
+                    }
+                    else if (value == 1) // lock A
+                    {
+                        VFOLOCKAB = 0;
+
+                        if (chkVFOLock.Checked == true)
+                        {
+                            chkVFOLock_CheckedChanged(this, EventArgs.Empty);
+                        }
+                        else chkVFOLock.Checked = true;
+
+                    }
+                    else if (value == 2) // lock B
+                    {
+                        VFOLOCKAB =2;
+                        if (chkVFOLock.Checked == true)
+                        {
+                            chkVFOLock_CheckedChanged(this, EventArgs.Empty);
+                        }
+                        else chkVFOLock.Checked = true;
+
+                    }
+                    else if (value == 3) //lock  both AB
+                    {
+                        VFOLOCKAB = 1;
+                        if (chkVFOLock.Checked == true)
+                        {
+                            chkVFOLock_CheckedChanged(this, EventArgs.Empty);
+                        }
+                        else chkVFOLock.Checked = true;
+
+                    }
+
+
+                } //  chkBoxVFOLockAB.Checked == true
+
+            } // set
+
+
+        } // CATVFOLockAB
+
+
+
+
         //============================================================================
         // ke9ns add
 
@@ -60506,6 +60905,8 @@ namespace PowerSDR
             else chkSR.BackColor = SystemColors.Control;
 
             tempVFOAFreq = VFOAFreq; // ke9ns add
+         //   tempVFOAFreqIF = VFOAFreq; //.284
+
             CTUN1_HZ = 0; // ke9ns add: when changing SR, reset CTUN
 
             CalcDisplayFreq();
@@ -61087,6 +61488,11 @@ namespace PowerSDR
 
             } // ctun mode
 
+           
+
+
+
+
             if (this.ActiveControl is TextBoxTS ||
                 this.ActiveControl is NumericUpDownTS ||
                 this.ActiveControl is TrackBarTS)
@@ -61356,7 +61762,8 @@ namespace PowerSDR
         private void txtVFOAFreq_LostFocus(object sender, System.EventArgs e)
         {
 
-          //  Debug.WriteLine("START LostFocus " + txtVFOAFreq.Text + " , " + saved_vfoa_freq + " , " + VFOAFreq); // 144,00000, 7,0001, 144
+            Debug.WriteLine("START LostFocus " + txtVFOAFreq.Text + " , " + saved_vfoa_freq + " , " + VFOAFreq + " ,IF" + if_freq); // 144,00000, 7,0001, 144
+             
 
 
             if (txtVFOAFreq.Text == separator || txtVFOAFreq.Text == "") // "."
@@ -61375,7 +61782,7 @@ namespace PowerSDR
             }
             catch (Exception)
             {
-                  Debug.WriteLine("BAD txtVFOAFreq_LostFocus " + txtVFOAFreq.Text);
+                Debug.WriteLine("BAD txtVFOAFreq_LostFocus " + txtVFOAFreq.Text);
 
                 VFOAFreq = saved_vfoa_freq;
                 return;
@@ -61454,7 +61861,7 @@ namespace PowerSDR
             {
                 //  Debug.WriteLine("BAD txtVFOAFreq_LostFocus " + txtVFOAFreq.Text);
 
-                VFOBFreq = saved_vfoa_freq;
+                VFOBFreq = saved_vfob_freq;
                 return;
             }
          
@@ -61539,11 +61946,8 @@ namespace PowerSDR
             if (xvtrForm != null) // add .253
             {
                 rx1_xvtr_index = xvtrForm.XVTRFreq(freq);
-
                
-                if (!chkVFOSplit.Checked && !chkVFOBTX.Checked)
-                    tx_xvtr_index = rx1_xvtr_index;
-
+                if (!chkVFOSplit.Checked && !chkVFOBTX.Checked) tx_xvtr_index = rx1_xvtr_index;
 
                 if (rx1_xvtr_index < 0)  //in HF
                 {
@@ -61564,7 +61968,6 @@ namespace PowerSDR
                     {
                         RX2Enabled = false; //.278 if you try to enable the same VHF or UHF module on both receivers, just shut off RX2
 
-
                         // .278 MessageBox.Show(new Form { TopMost = true }, "Error: Cannot use VHF on both RX1 and RX2",
                         //                "VU Error", MessageBoxButtons.OK,MessageBoxIcon.Error);
 
@@ -61575,9 +61978,7 @@ namespace PowerSDR
                     }
                     else if (rx1_xvtr_index == 1 && rx2_xvtr_index == 1 && rx2_enabled && !swapping)
                     {
-                      
                         RX2Enabled = false; //.278 if you try to enable the same VHF or UHF module on both receivers, just shut off RX2
-
 
                       // .278  MessageBox.Show(new Form { TopMost = true }, "Error: Cannot use UHF on both RX1 and RX2",
                       //                  "VU Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -61608,14 +62009,12 @@ namespace PowerSDR
                             switch (rx1_xvtr_index)
                             {
                                 case 0:
-                                    if (xvtrForm.VIFGain)
-                                        RX1XVTRGainOffset = vhf_level_table[1];
+                                    if (xvtrForm.VIFGain)  RX1XVTRGainOffset = vhf_level_table[1];
                                     else
                                         RX1XVTRGainOffset = vhf_level_table[0];
                                     break;
                                 case 1:
-                                    if (xvtrForm.UIFGain)
-                                        RX1XVTRGainOffset = uhf_level_table[1];
+                                    if (xvtrForm.UIFGain)  RX1XVTRGainOffset = uhf_level_table[1];
                                     else
                                         RX1XVTRGainOffset = uhf_level_table[0];
                                     break;
@@ -61721,8 +62120,7 @@ namespace PowerSDR
 
            
 
-            if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.VUOK &&
-                    (tx_xvtr_index == 0 || tx_xvtr_index == 1) && chkVFOATX.Checked)
+            if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.VUOK && (tx_xvtr_index == 0 || tx_xvtr_index == 1) && chkVFOATX.Checked)
             {
                 ptbPWR_Scroll(this, EventArgs.Empty);
             }
@@ -61934,20 +62332,17 @@ namespace PowerSDR
                 }
             }
 
-            if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000) ||
-                hid_init && current_model == Model.FLEX1500)
+            if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000) ||  hid_init && current_model == Model.FLEX1500)
             {
                 double rx_freq = freq;
                 double tx_freq = freq;
 
-                if (chkRIT.Checked)
-                    rx_freq += (int)udRIT.Value * 0.000001;
+                if (chkRIT.Checked) rx_freq += (int)udRIT.Value * 0.000001;
 
                 if (rx_freq < min_freq) rx_freq = min_freq;
                 else if (rx_freq > max_freq) rx_freq = max_freq;
 
-                if (chkXIT.Checked)
-                    tx_freq += (int)udXIT.Value * 0.000001;
+                if (chkXIT.Checked) tx_freq += (int)udXIT.Value * 0.000001;
 
                 if (tx_freq < min_freq) tx_freq = min_freq;
                 else if (tx_freq > max_freq) tx_freq = max_freq;
@@ -62072,7 +62467,7 @@ namespace PowerSDR
                                 case Model.FLEX3000:
                                 case Model.FLEX5000:
                                     uint tw = (uint)Freq2TW(tx_freq);
-                                    //FWC.SetTXFreqTW(tw, (float)tx_freq); // ke9ns: using a thread instead of this
+                                    //FWC.SetTXFreqTW(tw, (float)tx_freq); // ke9ns: using a <<<thread>>> instead of this
                                     tx_dds_freq_tw = tw;
                                     tx_dds_freq_mhz = (float)tx_freq;
                                     tx_dds_freq_updated = true;
@@ -62973,7 +63368,7 @@ namespace PowerSDR
                 SetRX2Band(b2);
             }
 
-            if (rx2_enabled)
+            if (rx2_enabled) // Flex-5000 RX2 ON  .285
             {
                 Display.VFOB = (long)(freq * 1e6);
 
@@ -63065,7 +63460,9 @@ namespace PowerSDR
             if ((fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) || (hid_init && current_model == Model.FLEX1500))
             {
                 if (chkVFOBTX.Checked) goto set_tx_freq;
+
                 if (FWCEEPROM.RX2OK && rx2_enabled) goto set_rx2_freq;
+
                 else if (chkVFOSplit.Checked || full_duplex) goto set_tx_freq;
                 else goto end;
             }
@@ -63080,9 +63477,7 @@ namespace PowerSDR
             //if (old_tx_xvtr_index != tx_xvtr_index)
             //    last_tx_xvtr_index = old_tx_xvtr_index;
 
-            if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.VUOK &&
-                tx_xvtr_index != last_tx_xvtr_index &&
-                (tx_xvtr_index == 0 || tx_xvtr_index == 1))
+            if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.VUOK && tx_xvtr_index != last_tx_xvtr_index && (tx_xvtr_index == 0 || tx_xvtr_index == 1))
                 ptbPWR_Scroll(this, EventArgs.Empty);
 
             double tx_freq = freq;
@@ -63160,7 +63555,6 @@ namespace PowerSDR
 
                         if (last_tx_xvtr_index >= 0)
                         {
-
                             RXOnly = saved_rx_only;
                         }
                     }
@@ -63423,7 +63817,12 @@ namespace PowerSDR
             else if (rx2_dsp_mode == DSPMode.CWU)
                 freq -= (double)cw_pitch * 0.0000010;
 
-            RX2DDSFreq = freq;
+
+             
+              RX2DDSFreq = freq; //.284
+
+         
+
             UpdateRX2Notches();
             goto end;
 
@@ -64822,7 +65221,7 @@ namespace PowerSDR
                                 int low = (int)PixelToHz(e.X - 3);
                                 int high = (int)PixelToHz(e.X + 3);
 
-                                if ((Display.CurrentDisplayModeBottom != DisplayMode.OFF) && (rx2_enabled) && (e.Y > H7))  // ke9ns mod (in case when rX2 display is off)
+                                if ((Display.CurrentDisplayModeBottom != DisplayMode.OFF) && (rx2_enabled) && (e.Y > H7))  // ke9ns: mod (in case when rX2 display is off)
                                 {
                                     rf_freq = VFOBFreq;
 
@@ -65837,7 +66236,39 @@ namespace PowerSDR
           
             //double edge_alias = 7200.0;
             //double if_freq = 11025.0;
+            
+            if (CTUNIF == true) //.284   rx1 here (mouse wheel for rx2)
+            {
+                tempVFOAFreqIF = VFOAFreq;
+                if (CurrentModel == Model.FLEX5000 || CurrentModel == Model.FLEX3000)
+                {
+                    setupForm.udDDSIFFreq.Value = 9000;
+                    setupForm.DDSIFAFreq = 9000;
 
+                }
+                else
+                {
+                    setupForm.udDDSIFFreq.Value = 3800;
+                    setupForm.DDSIFAFreq = 3800;
+                }
+            }
+            else
+            {
+                if (CurrentModel == Model.FLEX5000 || CurrentModel == Model.FLEX3000)
+                {
+                    setupForm.udDDSIFFreq.Value = 9000;
+                    setupForm.DDSIFAFreq = 9000;
+
+                    IFFreq = 0.009000;
+
+                }
+                else
+                {
+                    setupForm.udDDSIFFreq.Value = 3800;
+                    setupForm.DDSIFAFreq = 3800;
+                    IFFreq = 0.0038000;
+                }
+            }
            
             CTUN1_HZ = 0; // reset CTUN to center
 
@@ -66497,6 +66928,7 @@ namespace PowerSDR
 
         public void SetRX1Mode(DSPMode new_mode)
         {
+            Debug.WriteLine("SETRX1MODE current VFOA:" +VFOAFreq);
 
             RX1DSPMODE = new_mode; // .196
 
@@ -66525,8 +66957,8 @@ namespace PowerSDR
                 if (mox == false) SplitModeRX = SplitModeTX = new_mode;  // reset them if you turn Split OFF
             }
 
-            Debug.WriteLine("New_mode: " + new_mode);
-            Debug.WriteLine("Old_mode: " + old_mode);
+          //  Debug.WriteLine("New_mode: " + new_mode);
+          //  Debug.WriteLine("Old_mode: " + old_mode);
 
             grpVFOBetween.Invalidate();
 
@@ -66613,7 +67045,7 @@ namespace PowerSDR
                                 rx1_freq += (cw_pitch * 0.0000010);
                                 break;
                         }
-                        txtVFOAFreq.Text = rx1_freq.ToString("f6" );
+                        txtVFOAFreq.Text = rx1_freq.ToString("f6" ); // from VFOAFreq routine
                     }
 
                     break;
@@ -66770,17 +67202,13 @@ namespace PowerSDR
 
                     if_shift = true;
                     vfo_offset = 0.0;
-                    if (vac_auto_enable &&
-                        new_mode != DSPMode.DIGL &&
-                        new_mode != DSPMode.DIGU &&
-                        new_mode != DSPMode.DRM)
+                    if (vac_auto_enable && new_mode != DSPMode.DIGL && new_mode != DSPMode.DIGU && new_mode != DSPMode.DRM)
                     {
                         setupForm.VACEnable = false;
                     }
                     ptbFilterShift.Enabled = true;
                     btnFilterShiftReset.Enabled = true;
-                    if (new_mode != DSPMode.SPEC || new_mode != DSPMode.FM)
-                        EnableAllFilters();
+                    if (new_mode != DSPMode.SPEC || new_mode != DSPMode.FM) EnableAllFilters();
                     if_freq = setupForm.IFFreq;
                     CalcDisplayFreq();
                     chkTNF.Enabled = true;
@@ -72259,9 +72687,8 @@ namespace PowerSDR
                     {
                         setupForm.VAC2Enable = false;
                     }
-                    if (new_mode != DSPMode.FM)
-                        EnableAllRX2Filters();
-                    rx2_if_freq = setupForm.IFFreq;
+                    if (new_mode != DSPMode.FM) EnableAllRX2Filters();
+                    rx2_if_freq = setupForm.RX2IFFreq; //.284 modify
                     CalcDisplayFreq();
                     break;
             } // old mode
@@ -72469,21 +72896,18 @@ namespace PowerSDR
 
                         dsp.GetDSPTX(0).TXOsc = 0.0;
                     }
-                    if (rx2_enabled && vac2_auto_enable)
-                        setupForm.VAC2Enable = true;
+                    if (rx2_enabled && vac2_auto_enable) setupForm.VAC2Enable = true;
                     break;
                 case DSPMode.DRM:
                     rx2_if_shift = false;
                     rx2_vfo_offset = -0.012;
                     radRX2ModeDRM.BackColor = button_selected_color;
                     //grpRX2Mode.Text = "RX2 Mode - DRM";
-                    if (rx2_enabled && vac2_auto_enable)
-                        setupForm.VAC2Enable = true;
+                    if (rx2_enabled && vac2_auto_enable) setupForm.VAC2Enable = true;
 
                     if (chkVFOBTX.Checked && rx2_enabled)
                     {
                         SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
-
                         dsp.GetDSPTX(0).TXOsc = 0.0;
                     }
                     //DisableAllRX2Filters(); // !FIXME
@@ -72505,8 +72929,7 @@ namespace PowerSDR
             int new_txosc = (int)dsp.GetDSPTX(0).TXOsc;
             if (new_txosc != old_txosc)
             {
-                if (fwc_init && (current_model == Model.FLEX5000))
-                    FWC.SetTXOffset(new_txosc);
+                if (fwc_init && (current_model == Model.FLEX5000)) FWC.SetTXOffset(new_txosc);
             }
 
             radRX2Filter1.Text = rx2_filters[(int)new_mode].GetName(Filter.F1);
@@ -72521,11 +72944,9 @@ namespace PowerSDR
 
             rx2_dsp_mode = new_mode;
 
-            if (old_mode == DSPMode.FM)
-                chkRX2Squelch.Checked = rx2_squelch_on;
+            if (old_mode == DSPMode.FM) chkRX2Squelch.Checked = rx2_squelch_on;
 
-            if (old_mode == DSPMode.FM || new_mode == DSPMode.FM)
-                ptbRX2Squelch_Scroll(this, EventArgs.Empty);
+            if (old_mode == DSPMode.FM || new_mode == DSPMode.FM) ptbRX2Squelch_Scroll(this, EventArgs.Empty);
 
             if (rx2_dsp_mode != DSPMode.FM && rx2_dsp_mode != DSPMode.DRM)
             {
@@ -73187,8 +73608,7 @@ namespace PowerSDR
             float val = (int)ptbRX2Pan.Value / 100.0f;
             dsp.GetDSPRX(1, 0).Pan = val;
 
-            if (ptbRX2Pan.Focused)
-                btnHidden.Focus();
+            if (ptbRX2Pan.Focused) btnHidden.Focus();
         }
 
         //===================================================================
@@ -74234,6 +74654,90 @@ namespace PowerSDR
         {
             if (!fwc_init || current_model != Model.FLEX5000 || comboRX2AGC.SelectedIndex < 0) return;
 
+
+            if (comboRX2AGC.SelectedIndex < 0) return;
+
+            dsp.GetDSPRX(1, 0).RXAGCMode = (AGCMode)comboRX2AGC.SelectedIndex;
+        //    dsp.GetDSPRX(1, 1).RXAGCMode = (AGCMode)comboRX2AGC.SelectedIndex;
+
+            // set whether custom controls are active
+            switch ((AGCMode)comboRX2AGC.SelectedIndex)
+            {
+                case AGCMode.LONG:
+                    setupForm.CustomRX2AGCEnabled = false;
+                    /*SetupForm.RXAGCAttack = 2;
+					SetupForm.RXAGCHang = 750;
+					SetupForm.RXAGCDecay = 2000;*/
+                    //comboAGC.BackColor = SystemColors.Window;
+                    toolTip1.SetToolTip(comboAGC, "Automatic Gain Control Mode Setting:\n" +
+                        "Long (Attack 2ms, Hang 750ms, Decay 200ms)");
+                    break;
+                case AGCMode.SLOW:
+                    setupForm.CustomRX2AGCEnabled = false;
+                    /*SetupForm.RXAGCAttack = 2;
+					SetupForm.RXAGCHang = 500;
+					SetupForm.RXAGCDecay = 500;*/
+                    toolTip1.SetToolTip(comboAGC, "Automatic Gain Control Mode Setting:\n" +
+                        "Slow (Attack 2ms, Hang 500ms, Decay 500ms)");
+                    //comboAGC.BackColor = SystemColors.Window;
+                    break;
+                case AGCMode.MED:
+                    setupForm.CustomRX2AGCEnabled = false;
+                    /*SetupForm.RXAGCAttack = 2;
+					SetupForm.RXAGCHang = 250;
+					SetupForm.RXAGCDecay = 250;*/
+                    toolTip1.SetToolTip(comboAGC, "Automatic Gain Control Mode Setting:\n" +
+                        "Medium (Attack 2ms, Hang 250ms, Decay 250ms)");
+                    //comboAGC.BackColor = SystemColors.Window;
+                    break;
+                case AGCMode.FAST:
+                    setupForm.CustomRX2AGCEnabled = false;
+                    /*SetupForm.RXAGCAttack = 2;
+					SetupForm.RXAGCHang = 100;
+					SetupForm.RXAGCDecay = 100;*/
+                    toolTip1.SetToolTip(comboAGC, "Automatic Gain Control Mode Setting:\n" +
+                        "Fast (Attack 2ms, Hang 100ms, Decay 100ms)");
+                    //comboAGC.BackColor = SystemColors.Window;
+                    break;
+                case AGCMode.CUSTOM:
+                    setupForm.CustomRX2AGCEnabled = true;
+                    toolTip1.SetToolTip(comboAGC, "Automatic Gain Control Mode Setting:\n" +
+                        "Custom - Set specifics in Setup Form -> DSP -> AGC/ALC");
+                    //comboAGC.BackColor = SystemColors.Window;
+                    break;
+                case AGCMode.FIXD:
+                    setupForm.CustomRX2AGCEnabled = false;
+                    toolTip1.SetToolTip(comboAGC, "Automatic Gain Control Mode Setting:\n" +
+                        "Fixed - Set gain with AGC-T control above");
+                    //comboAGC.BackColor = Color.Orange;
+                    break;
+            }
+
+            // set RF control to Max or Fixed gain depending on mode
+          
+            switch ((AGCMode)comboRX2AGC.SelectedIndex)
+            {
+                case AGCMode.FIXD:
+                    ptbRX2RF.Value = setupForm.AGCRX2FixedGain;  //was rx2_fixed_gain; // RX1 = RF = setupForm.AGCRX2FixedGain;
+                    ptbRX2RF_Scroll(this, EventArgs.Empty);
+                    break;
+
+                default:
+                    ptbRX2RF.Value = setupForm.AGCRX2MaxGain;  // was rx2_max_gain; //  RX1:  RF = setupForm.AGCRX2MaxGain;
+                    ptbRX2RF_Scroll(this, EventArgs.Empty);
+                    break;
+            }
+
+
+            if (comboRX2AGC.Focused) btnHidden.Focus();
+
+
+//-----------------------------------------------------
+
+/*
+
+
+
             dsp.GetDSPRX(1, 0).RXAGCMode = (AGCMode)comboRX2AGC.SelectedIndex;
 
             switch ((AGCMode)comboRX2AGC.SelectedIndex)
@@ -74285,7 +74789,14 @@ namespace PowerSDR
                     ptbRX2RF_Scroll(this, EventArgs.Empty);
                     break;
             }
-        }
+
+            */
+
+        } // comboRX2AGC_selectedindexchanged
+
+
+
+
 
         private void chkVFOSync_CheckedChanged(object sender, System.EventArgs e)
         {
@@ -79836,6 +80347,26 @@ namespace PowerSDR
 
                 if (current_model == Model.FLEX5000 && FWCEEPROM.RX2OK && chkRX2.Checked)  //.220 corrected
                 {
+                    if (CTUNIF == true) //.284
+                    {
+                        tempVFOBFreqIF = VFOBFreq; // 7.123 mhz
+                      
+                        setupForm.DDSIFBFreq = 9000;
+                        setupForm.udDDSIFBFreq.Value = 9000;
+
+                        RX2IFFreq = (double) (setupForm.DDSIFBFreq * (decimal)1e-6); // 0.009
+                       
+                    }
+                    else
+                    {
+                        
+                            setupForm.udDDSIFBFreq.Value = 9000;
+                            setupForm.DDSIFBFreq = 9000;
+
+                        RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6); // 0.009
+
+
+                    }
 
                     CalcDisplayFreq(); // .225 add
 
@@ -82487,25 +83018,95 @@ namespace PowerSDR
         public double tempVFOAFreq = 0.0; //  ke9ns add hold new vfo freq seperate from real vfoafreq to sync up display movement
         public static int UPDATEOFF = 0;  // ke9ns add pan & waterfall delay while CTUN is on and your sliding across the display
 
+
+        public static bool CTUNIF = false; //.284 new PAN function shifting the virutal IF around instead (smoother)
+        public double tempVFOAFreqIF = 0.0;
+        public double tempVFOBFreqIF = 0.0; // RX2 only
+        public double MinZoom = 0.6; // mininum zoom required for PAN scroll to work correctly
+
         //============================================================================
         // ke9ns add: To turn on/off CTUN feature
         //  CTUN=0 normal, 1=main bandpass moves (just like the sub does across the display)
         private void lblDisplayPan_MouseDown(object sender, MouseEventArgs e)
         {
-            if (CTUN == false)
-            {
-                //  CTUN1_HZ = 0;
-                CTUN = true;
 
-                lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.PanRed;  // lblDisplayPan.ForeColor = Color.Red;
-            }
-            else
+       /*     if (e.Button == MouseButtons.Left)
             {
-                //  CTUN1_HZ = 0;
-                CTUN = false;
+                if (CTUN == false)
+                {
+                    //  CTUN1_HZ = 0;
+                    CTUN = true;
+
+                    lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.PanRed;  // lblDisplayPan.ForeColor = Color.Red;
+                }
+                else
+                {
+                    //  CTUN1_HZ = 0;
+                    CTUN = false;
+                    lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.panGray;  // lblDisplayPan.ForeColor = Color.White;
+
+                }
+            }
+            else if (e.Button == MouseButtons.Right) //.284n use IFFreq +/- 950000 to move around in PAN mode instead of CTUN
+            {
+       */
+       // KE9NS: new way to achieve PAN scroll mode
+
+            if (CTUNIF == false) //.284
+            {
+                if (setupForm.udDDSIFFreq.Maximum == 85000) // 192k SR
+                {
+                   
+                    ptbDisplayZoom.Value = ptbDisplayZoom.Maximum + ptbDisplayZoom.Minimum - (int)(100.0 / MinZoom); // RX1 = 61=.5 
+                    ptbDisplayZoom2.Value = ptbDisplayZoom2.Maximum + ptbDisplayZoom2.Minimum - (int)(100.0 / MinZoom); // RX2 = 61
+                }
+             
+                ptbDisplayZoom_Scroll(this, EventArgs.Empty);
+                btnDisplayPanCenter_Click(this, EventArgs.Empty);
+                VFOBCenter();
+
+                CTUNIF = true;
+                tempVFOAFreqIF = VFOAFreq; // starting point for PANNING AROUND
+                tempVFOBFreqIF = VFOBFreq;
+                setupForm.chkAvgMove.Checked = true; 
+
+                lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.PanRed;  // lblDisplayPan.ForeColor = Color.red;
+            }
+            else // CTUNIF was ON
+            {
+                   
+                CTUNIF = false;
+
+                if (CurrentModel == Model.FLEX5000 || CurrentModel == Model.FLEX3000)
+                {
+                    setupForm.udDDSIFFreq.Value = 9000;
+                    setupForm.DDSIFAFreq = 9000;
+                    setupForm.DDSIFBFreq = 9000;
+                    FWCDDSFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6); // reset IF for RX1, back 
+                    RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6); // reset IF for RX2 back
+
+                }
+                else
+                {
+                    setupForm.udDDSIFFreq.Value = 3800;
+                    setupForm.DDSIFAFreq = 3800;
+                    FWCDDSFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6); // reset IF for RX1, back 
+                }
+
+                //    txtVFOABand_LostFocus(this, EventArgs.Empty);
+              
+
                 lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.panGray;  // lblDisplayPan.ForeColor = Color.White;
 
-            }
+                btnDisplayPanCenter_Click(this, EventArgs.Empty);
+                VFOBCenter();
+
+            } // CTUNIF OFF
+
+
+
+         //   } // right mouse button
+
 
         } // pan text from console window
 
@@ -82520,6 +83121,8 @@ namespace PowerSDR
             set
             {
                 CTUN = value;
+              
+
                 if (CTUN == true) lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.PanRed; //lblDisplayPan.ForeColor = Color.Red;
                 else lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.panGray;  // lblDisplayPan.ForeColor = Color.White;
 

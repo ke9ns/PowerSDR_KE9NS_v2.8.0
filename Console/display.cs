@@ -21365,7 +21365,7 @@ namespace PowerSDR
                 WaterMove2 = W * 3 * WaterMove1; // find the absolute center of the bitmap row[WaterMove2] array specifically 
                                                  // 3 bytes per pixel
 
-                if (rx == 1)
+                if (rx == 1 && Console.CTUNIF == false) //.284 mod if CTUNIF on then dont move waterfall
                 {
                     if (F2A == 2)  // wait for freq to be set and 1 extra cycle because of the timing between freq set and getting here first.
                     {
@@ -21420,63 +21420,63 @@ namespace PowerSDR
 
 
                 } //rx == 1
-                else  // rx2
+                else if (rx == 2 && Console.CTUNIF == false) // rx2
                 {
-
-                    if (F2B == 2)                // wait for freq to be set and 1 extra cycle because of the timing between freq set and getting here first.
-                    {
-
-                        if ((WM2B_LAST != vfob_hz))
+                   
+                        if (F2B == 2)                // wait for freq to be set and 1 extra cycle because of the timing between freq set and getting here first.
                         {
 
-                            if (F3B == 2) // routine to delay 1 cycle updating the watermove because of timing error.
+                            if ((WM2B_LAST != vfob_hz))
                             {
 
-                                F3B = 0;
-
-                                WM2B_LAST = vfob_hz; // new last value
-
-                                WM2B_DIFF = WM2B_LAST - WM2B; //  difference from original spot in bmp
-
-                                WM5 = (float)((float)(High - Low) / (float)num_samples); // number of hz on screen
-
-                                WM2 = (int)((float)WM2B_DIFF / WM5 / slope); // how many pixels to move the bmp frame -=going down in freq +=going up in freq
-
-                                //  Debug.WriteLine("wm2 " + WM2);
-                                //    Debug.WriteLine("wm5 " + WM5);
-                                //    Debug.WriteLine("WM2B " + WM2B);
-
-                                if ((WM2 >= ((W * WaterMove1) - 2)) || (WM2 <= (-(W * WaterMove1) + 2)))  // either you move W beyond or -W below
+                                if (F3B == 2) // routine to delay 1 cycle updating the watermove because of timing error.
                                 {
-                                    K10LAST = 0; // redraw bitmap
-                                    WM2 = 0;
 
-                                } // reset the bitmap
+                                    F3B = 0;
 
-                                // this is the position to place the upper left corner of the 3W bitmap so WM2 appears in the upper left corner of the display window 
-                                // WM2F = the pixel offset from the original freq when the bitmap was created.
+                                    WM2B_LAST = vfob_hz; // new last value
 
-                                WM2F = WM2;
+                                    WM2B_DIFF = WM2B_LAST - WM2B; //  difference from original spot in bmp
 
-                                // final WM2 = Position within the 3W bitmap that you start writing too.
-                                // WM2F*3 = # of RGB pixels to shift +/-
-                                // 3*w = start at the center of the 3Wide bitmap
-                                WM2 = (WM2F * 3) + WaterMove2; //(WM2F * 3) + (3 * W);
+                                    WM5 = (float)((float)(High - Low) / (float)num_samples); // number of hz on screen
 
-                            } // F3B
-                            else F3B++;
+                                    WM2 = (int)((float)WM2B_DIFF / WM5 / slope); // how many pixels to move the bmp frame -=going down in freq +=going up in freq
 
-                            W2temp = (W * 3) / 4;
-                            M2temp = (W * 3 * WaterMove) / 4; // used by black routine
+                                    //  Debug.WriteLine("wm2 " + WM2);
+                                    //    Debug.WriteLine("wm5 " + WM5);
+                                    //    Debug.WriteLine("WM2B " + WM2B);
 
-                        } // vfoB moved in freq
-                    }
-                    else
-                    {
-                        F2B++;
-                        WM2 = (WM2F * 3) + WaterMove2; // for RGB (WM2F * 3) + (3 * W);
-                    }
+                                    if ((WM2 >= ((W * WaterMove1) - 2)) || (WM2 <= (-(W * WaterMove1) + 2)))  // either you move W beyond or -W below
+                                    {
+                                        K10LAST = 0; // redraw bitmap
+                                        WM2 = 0;
 
+                                    } // reset the bitmap
+
+                                    // this is the position to place the upper left corner of the 3W bitmap so WM2 appears in the upper left corner of the display window 
+                                    // WM2F = the pixel offset from the original freq when the bitmap was created.
+
+                                    WM2F = WM2;
+
+                                    // final WM2 = Position within the 3W bitmap that you start writing too.
+                                    // WM2F*3 = # of RGB pixels to shift +/-
+                                    // 3*w = start at the center of the 3Wide bitmap
+                                    WM2 = (WM2F * 3) + WaterMove2; //(WM2F * 3) + (3 * W);
+
+                                } // F3B
+                                else F3B++;
+
+                                W2temp = (W * 3) / 4;
+                                M2temp = (W * 3 * WaterMove) / 4; // used by black routine
+
+                            } // vfoB moved in freq
+                        }
+                        else
+                        {
+                            F2B++;
+                            WM2 = (WM2F * 3) + WaterMove2; // for RGB (WM2F * 3) + (3 * W);
+                        }
+                   
                 } // rx2
 
 

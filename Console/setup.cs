@@ -2,6 +2,7 @@
 // setup.cs
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
+// PowerSDR is a C# implementation of a Software Defined Radio.
 // Copyright (C) 2003-2013  FlexRadio Systems
 //
 // This program is free software; you can redistribute it and/or
@@ -426,12 +427,20 @@ namespace PowerSDR
             {
                 chkCATEnable6.Enabled = true; // only enable if you have the 2nd RX unit
                 Debug.WriteLine("SPOOF OK YOU HAVE 2nd RX");
+
+                grpRX2DSPAGC.Visible = true; //.283
             }
             else
             {
                 chkCATEnable6.Enabled = false;
                 Debug.WriteLine("SPOOF NOT ALLOWED");
+
+                grpRX2DSPAGC.Visible = false; //.283
             }
+
+            
+            
+
 
         } // setup
 
@@ -1421,6 +1430,7 @@ namespace PowerSDR
             udDDSCorrection_ValueChanged(this, e);
             udDDSPLLMult_ValueChanged(this, e);
             udDDSIFFreq_ValueChanged(this, e);
+            udDDSIFBFreq_ValueChanged(this, e); // .284
             chkGeneralSpurRed_CheckedChanged(this, e);
             chkGeneralDisablePTT_CheckedChanged(this, e);
             chkGeneralSoftwareGainCorr_CheckedChanged(this, e);
@@ -2383,12 +2393,25 @@ namespace PowerSDR
         {
             get
             {
-                if (udDDSIFFreq != null) return (double)udDDSIFFreq.Value * 1e-6;
+                if (udDDSIFFreq != null) return (double)udDDSIFFreq.Value * 1e-6; // return 0.009 
                 else return 0.0;
             }
             set
             {
                 if (udDDSIFFreq != null) udDDSIFFreq.Value = (int)(value * 1e6);
+            }
+        }
+
+        public double RX2IFFreq //.284 add
+        {
+            get
+            {
+                if (udDDSIFBFreq != null) return (double)udDDSIFBFreq.Value * 1e-6;
+                else return 0.0;
+            }
+            set
+            {
+                if (udDDSIFBFreq != null) udDDSIFBFreq.Value = (int)(value * 1e6);
             }
         }
 
@@ -2789,6 +2812,19 @@ namespace PowerSDR
             }
         }
 
+        public int AGCRX2MaxGain //.283
+        {
+            get
+            {
+                if (udRX2DSPAGCMaxGaindB != null) return (int)udRX2DSPAGCMaxGaindB.Value;
+                else return -1;
+            }
+            set
+            {
+                if (udRX2DSPAGCMaxGaindB != null) udRX2DSPAGCMaxGaindB.Value = value;
+            }
+        } // AGCRX2MaxGain
+
         public int AGCFixedGain
         {
             get
@@ -2805,6 +2841,25 @@ namespace PowerSDR
                 if (udDSPAGCFixedGaindB != null) udDSPAGCFixedGaindB.Value = value;
             }
         }
+
+        public int AGCRX2FixedGain //.283
+        {
+            get
+            {
+                if (udRX2DSPAGCFixedGaindB != null)
+                {
+                    udRX2DSPAGCFixedGaindB_ValueChanged(this, EventArgs.Empty);
+                    return (int)udRX2DSPAGCFixedGaindB.Value;
+                }
+                else return -1;
+            }
+            set
+            {
+                if (udRX2DSPAGCFixedGaindB != null) udRX2DSPAGCFixedGaindB.Value = value;
+            }
+        } // AGCRX2FixedGain 
+
+
 
         public int TXFilterHigh
         {
@@ -2850,6 +2905,23 @@ namespace PowerSDR
                 }
             }
         }
+
+        public bool CustomRX2AGCEnabled //.283
+        {
+            set
+            {
+                udRX2DSPAGCAttack.Enabled = value;
+                udRX2DSPAGCDecay.Enabled = value;
+                udRX2DSPAGCHangTime.Enabled = value;
+
+                if (value)
+                {
+                    udRX2DSPAGCAttack_ValueChanged(this, EventArgs.Empty);
+                    udRX2DSPAGCDecay_ValueChanged(this, EventArgs.Empty);
+                    udRX2DSPAGCHangTime_ValueChanged(this, EventArgs.Empty);
+                }
+            }
+        } // CustomRX2AGCEnabled
 
         public bool DirectX
         {
@@ -4561,13 +4633,19 @@ namespace PowerSDR
 
         private void udDDSPLLMult_ValueChanged(object sender, System.EventArgs e)
         {
-            if (console.Hdw != null)
-                console.Hdw.PLLMult = (int)udDDSPLLMult.Value;
+            if (console.Hdw != null) console.Hdw.PLLMult = (int)udDDSPLLMult.Value;
         }
 
-        private void udDDSIFFreq_ValueChanged(object sender, System.EventArgs e)
+        public decimal DDSIFAFreq = 9000; //.284 add for RX1 so PAN function does not effect the IF freq
+        private void udDDSIFFreq_ValueChanged(object sender, System.EventArgs e) // now RX1 only
         {
-            console.IFFreq = (double)udDDSIFFreq.Value * 1e-6;
+            console.IFFreq = (double)udDDSIFFreq.Value * 1e-6; // send 0.009
+        }
+
+        public decimal DDSIFBFreq = 9000; //.284 add for RX2 Flex5000 only
+        private void udDDSIFBFreq_ValueChanged(object sender, EventArgs e) //.284 RX2
+        {
+            console.RX2IFFreq = (double)udDDSIFBFreq.Value * 1e-6;
         }
 
         private void btnGeneralCalFreqUseVFOA_Click(object sender, System.EventArgs e)
@@ -5621,6 +5699,49 @@ namespace PowerSDR
 
             console.SampleRate1 = new_rate;
 
+
+
+            console.tempVFOAFreqIF = console.VFOAFreq; //.284
+            console.tempVFOBFreqIF = console.VFOBFreq;
+
+
+            if (new_rate == 192000) //.284
+            {
+                udDDSIFFreq.Maximum = 85000; // ke9ns: larger settings than normal
+                udDDSIFFreq.Minimum = -85000;
+                udDDSIFFreq.Value = 9000;
+
+                udDDSIFBFreq.Maximum = 42000;
+                udDDSIFBFreq.Minimum = -85000;
+                udDDSIFBFreq.Value = 9000;
+
+
+            }
+            else if (new_rate == 96000) //.284
+            {
+                udDDSIFFreq.Maximum = 47000; // ke9ns: larger settings than normal
+                udDDSIFFreq.Minimum = -47000;
+                udDDSIFFreq.Value = 9000;
+
+                udDDSIFBFreq.Maximum = 47000;
+                udDDSIFBFreq.Minimum = -47000;
+                udDDSIFBFreq.Value = 9000;
+
+            }
+            else
+            {
+                udDDSIFFreq.Maximum = 23000; // the normal settings was 20k
+                udDDSIFFreq.Minimum = -23000;
+                
+                udDDSIFBFreq.Maximum = 23000; // rx2
+                udDDSIFBFreq.Minimum = -23000;
+                udDDSIFBFreq.Value = 9000;
+
+
+                if (console.CurrentModel == Model.FLEX1500) udDDSIFFreq.Value = 3800;
+                else udDDSIFFreq.Value = 9000;
+            }
+
             Display.DrawBackground();
             console.SoftRockCenterFreq = console.SoftRockCenterFreq; // warning -- this appears to do nothing - not true, these are
                                                                      // properties and the assignment is needed due to side effects!   
@@ -5630,7 +5751,7 @@ namespace PowerSDR
 
             if (!initializing)
             {
-                DSP.SyncStatic();        // ke9ns: hires
+                DSP.SyncStatic();        // ke9ns: hi-res
 
                 for (int i = 0; i < 2; i++)
                 {
@@ -7569,7 +7690,7 @@ namespace PowerSDR
             console.dsp.GetDSPRX(0, 0).NBDLY = (int)(udDSPDLY.Value);
             console.dsp.GetDSPRX(0, 1).NBDLY = (int)(udDSPDLY.Value);
 
-            if (chkDSPRX2.Checked == true)  // ke9ns add RX2 console.chkRX2.Visible == true && 
+            if (chkDSPRX2.Checked == true)  // ke9ns: add RX2 console.chkRX2.Visible == true && 
             {
                 console.dsp.GetDSPRX(1, 0).NBDLY = (int)(udDSPDLY.Value);
                 console.dsp.GetDSPRX(1, 1).NBDLY = (int)(udDSPDLY.Value);
@@ -7944,8 +8065,7 @@ namespace PowerSDR
             console.dsp.GetDSPRX(0, 0).RXFixedAGC = (double)udDSPAGCFixedGaindB.Value;
             console.dsp.GetDSPRX(0, 1).RXFixedAGC = (double)udDSPAGCFixedGaindB.Value;
 
-            if (console.RX1AGCMode == AGCMode.FIXD)
-                console.RF = (int)udDSPAGCFixedGaindB.Value;
+            if (console.RX1AGCMode == AGCMode.FIXD)  console.RF = (int)udDSPAGCFixedGaindB.Value;
         }
 
         private void udDSPAGCMaxGaindB_ValueChanged(object sender, System.EventArgs e)
@@ -11521,6 +11641,11 @@ namespace PowerSDR
             udDDSIFFreq.Value = udDDSIFFreq.Value;
         }
 
+        private void udDDSIFBFreq_LostFocus(object sender, EventArgs e) //.284
+        {
+            udDDSIFBFreq.Value = udDDSIFBFreq.Value;
+        }
+
         private void udDDSPLLMult_LostFocus(object sender, EventArgs e)
         {
             udDDSPLLMult.Value = udDDSPLLMult.Value;
@@ -12393,13 +12518,21 @@ namespace PowerSDR
             switch (console.CurrentModel)
             {
                 case Model.FLEX5000:
+                    lblClockCorrection.Visible = b;
+                    udDDSCorrection.Visible = b;
+                    lblIFFrequency.Visible = b;
+                    udDDSIFFreq.Visible = b;
+                    udDDSIFBFreq.Visible = b; // .284
+                    lblIFBFrequency.Visible = b; //.284
+
+                    break;
                 case Model.FLEX3000:
                 case Model.FLEX1500:
                     lblClockCorrection.Visible = b;
                     udDDSCorrection.Visible = b;
                     lblIFFrequency.Visible = b;
                     udDDSIFFreq.Visible = b;
-                    break;
+                     break;
                 default:
                     lblClockCorrection.Visible = b;
                     udDDSCorrection.Visible = b;
@@ -12407,6 +12540,7 @@ namespace PowerSDR
                     udDDSPLLMult.Visible = b;
                     lblIFFrequency.Visible = b;
                     udDDSIFFreq.Visible = b;
+                  
                     break;
             }
         }
@@ -16394,6 +16528,64 @@ namespace PowerSDR
         {
 
         }
+
+        private void udRX2DSPAGCSlope_ValueChanged(object sender, EventArgs e) //.283
+        {
+            console.dsp.GetDSPRX(1, 0).RXAGCSlope = 10 * (int)(udRX2DSPAGCSlope.Value);
+         //   console.dsp.GetDSPRX(1, 1).RXAGCSlope = 10 * (int)(udRX2DSPAGCSlope.Value);
+        }
+
+        private void udRX2DSPAGCMaxGaindB_ValueChanged(object sender, EventArgs e) //.283
+        {
+            console.dsp.GetDSPRX(1, 0).RXAGCMaxGain = (double)udRX2DSPAGCMaxGaindB.Value;
+          //  console.dsp.GetDSPRX(1, 1).RXAGCMaxGain = (double)udRX2DSPAGCMaxGaindB.Value;
+
+            if (console.RX2AGCMode != AGCMode.FIXD) console.RF = (int)udRX2DSPAGCMaxGaindB.Value;
+        }
+
+        private void udRX2DSPAGCAttack_ValueChanged(object sender, EventArgs e) //.283
+        {
+            if (udRX2DSPAGCAttack.Enabled)
+            {
+                console.dsp.GetDSPRX(1, 0).RXAGCAttack = (int)udRX2DSPAGCAttack.Value;
+             //   console.dsp.GetDSPRX(1, 1).RXAGCAttack = (int)udRX2DSPAGCAttack.Value;
+
+            }
+        }
+
+        private void udRX2DSPAGCDecay_ValueChanged(object sender, EventArgs e) //.283
+        {
+            if (udRX2DSPAGCDecay.Enabled)
+            {
+                console.dsp.GetDSPRX(1, 0).RXAGCDecay = (int)udRX2DSPAGCDecay.Value;
+              //  console.dsp.GetDSPRX(1, 1).RXAGCDecay = (int)udRX2DSPAGCDecay.Value;
+            }
+        }
+
+        private void udRX2DSPAGCHangTime_ValueChanged(object sender, EventArgs e) //.283
+        {
+            if (udRX2DSPAGCHangTime.Enabled)
+            {
+                console.dsp.GetDSPRX(1, 0).RXAGCHang = (int)udRX2DSPAGCHangTime.Value;
+             //   console.dsp.GetDSPRX(10, 1).RXAGCHang = (int)udRX2DSPAGCHangTime.Value;
+            }
+        }
+
+        private void tbRX2DSPAGCHangThreshold_Scroll(object sender, EventArgs e) //.283
+        {
+            console.dsp.GetDSPRX(1, 0).RXAGCHangThreshold = (int)tbRX2DSPAGCHangThreshold.Value;
+          // console.dsp.GetDSPRX(1, 1).RXAGCHangThreshold = (int)tbRX2DSPAGCHangThreshold.Value;
+        }
+
+        private void udRX2DSPAGCFixedGaindB_ValueChanged(object sender, EventArgs e) //.283
+        {
+            console.dsp.GetDSPRX(1, 0).RXFixedAGC = (double)udRX2DSPAGCFixedGaindB.Value;
+          //  console.dsp.GetDSPRX(1, 1).RXFixedAGC = (double)udRX2DSPAGCFixedGaindB.Value;
+
+            if (console.RX2AGCMode == AGCMode.FIXD)  console.RF = (int)udRX2DSPAGCFixedGaindB.Value;
+        }
+
+       
 
 
 

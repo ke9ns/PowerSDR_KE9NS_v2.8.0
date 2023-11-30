@@ -7330,12 +7330,29 @@ namespace PowerSDR
         // Reads or sets the VFO Lock button status
         public string ZZVL(string s)
         {
-            if (s.Length == parser.nSet && (s == "0" || s == "1"))
+            if (s.Length == parser.nSet && (s == "0" || s == "1" || s == "2" || s == "3")) //.283 1=vfoA lock (original function), 2= vfoB lock, 3= vfoAB lock both
             {
                 if (s == "0")
-                    console.CATVFOLock = false;
+                {
+                   // console.CATVFOLock = false;
+                    console.CATVFOLockAB = 0;
+                }
                 else if (s == "1")
-                    console.CATVFOLock = true;
+                {
+                  //  console.CATVFOLock = true;
+                    console.CATVFOLockAB = 1;
+                }
+                else if (s == "2")
+                {
+                   
+                    console.CATVFOLockAB = 2;
+                     
+                }
+                else if (s == "3")
+                {
+                    console.CATVFOLockAB = 3;
+                }
+
                 return "";
             }
             else if (s.Length == parser.nGet)

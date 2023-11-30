@@ -174,6 +174,9 @@ namespace PowerSDR.DJConsoleUI
             }
         }
 
+        private void cbConsoleSelect_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
 
+        }
     }
 }

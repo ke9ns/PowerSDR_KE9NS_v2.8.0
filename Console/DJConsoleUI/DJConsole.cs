@@ -3494,7 +3494,7 @@ namespace PowerSDR
             }
         }
 
-        private void LockVFO(int msg)
+        private void LockVFO(int msg) //.284 fix
         {
             if (msg == 127)
             {
@@ -3505,14 +3505,25 @@ namespace PowerSDR
 
                 if (VfoLockState == 0)
                 {
-                    commands.ZZVL("1");
+                    commands.ZZVL("1"); // Lock VFOA
                     return;
                 }
-                if (VfoLockState == 1)
+                else if (VfoLockState == 1)
                 {
-                    commands.ZZVL("0");
+                    commands.ZZVL("2"); // was 0 .284 Lock VFOB
                     return;
                 }
+                else if (VfoLockState == 2)
+                {
+                    commands.ZZVL("3"); // add .284 Lock VFOA/B
+                    return;
+                }
+                else if (VfoLockState == 3)
+                {
+                    commands.ZZVL("0"); //add .284  UnLock VFO A/B
+                    return;
+                }
+
             }
         }
 

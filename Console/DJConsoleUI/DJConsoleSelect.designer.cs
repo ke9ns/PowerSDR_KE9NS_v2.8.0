@@ -51,6 +51,7 @@
             this.cbConsoleSelect.Name = "cbConsoleSelect";
             this.cbConsoleSelect.Size = new System.Drawing.Size(215, 21);
             this.cbConsoleSelect.TabIndex = 0;
+            this.cbConsoleSelect.SelectedIndexChanged += new System.EventHandler(this.cbConsoleSelect_SelectedIndexChanged_1);
             // 
             // btnConfigure
             // 
