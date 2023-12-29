@@ -32982,7 +32982,7 @@ namespace PowerSDR
         uint rx1_dds_freq_tw;
         float rx1_dds_freq_mhz;
 
-        private void UpdateRX1DDSFreq() // ke9ns:<<< THREAD running all the time when power on
+        private void UpdateRX1DDSFreq() // ke9ns:<<< THREAD running all the time when power on (see RX2 for other thread)
         {
             while (chkPower.Checked)
             {
@@ -32995,8 +32995,38 @@ namespace PowerSDR
 
                         if (zoom_factor < 0.6)
                         {
-                            ptbDisplayZoom.Value = ptbDisplayZoom.Maximum + ptbDisplayZoom.Minimum - (int)(100.0 / MinZoom);
-                            //   ptbDisplayZoom2.Value = ptbDisplayZoom2.Maximum + ptbDisplayZoom2.Minimum - (int)(100.0 / MinZoom);
+                           
+                            //  ptbDisplayZoom.Value = ptbDisplayZoom.Maximum + ptbDisplayZoom.Minimum - (int)(100.0 / MinZoom);
+
+                            CTUNIF = false;
+
+                            if (CurrentModel == Model.FLEX5000 || CurrentModel == Model.FLEX3000)
+                            {
+                                setupForm.udDDSIFFreq.Value = 9000;
+                                setupForm.DDSIFAFreq = 9000;
+                                setupForm.DDSIFBFreq = 9000;
+                                FWCDDSFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6); // reset IF for RX1, back 
+                                RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6); // reset IF for RX2 back
+
+                            }
+                            else
+                            {
+                                setupForm.udDDSIFFreq.Value = 3800;
+                                setupForm.DDSIFAFreq = 3800;
+                                FWCDDSFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6); // reset IF for RX1, back 
+                            }
+
+                           
+                            lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.panGray;  // lblDisplayPan.ForeColor = Color.White;
+
+                            btnDisplayPanCenter_Click(this, EventArgs.Empty);
+                            VFOBCenter();
+
+
+
+
+
+
                         }
 
                     }
@@ -60582,12 +60612,13 @@ namespace PowerSDR
         }
 
 
+        public int catvfolockab = 0; //.284
 
         public int CATVFOLockAB    //.283 add
         {
             get
             {
-                return 0; // chkVFOLock.Checked; 
+                return catvfolockab; // chkVFOLock.Checked; 
             }
 
             set 
@@ -60619,12 +60650,15 @@ namespace PowerSDR
 
                     if (value == 0) // unlock all
                     {
+                        catvfolockab = 0; //.284
                         VFOLOCKAB = 0;
                         chkVFOLock.Checked = false;
 
                     }
                     else if (value == 1) // lock A
                     {
+
+                        catvfolockab = 1; //.284
                         VFOLOCKAB = 0;
 
                         if (chkVFOLock.Checked == true)
@@ -60636,7 +60670,8 @@ namespace PowerSDR
                     }
                     else if (value == 2) // lock B
                     {
-                        VFOLOCKAB =2;
+                        catvfolockab = 2; //.284
+                        VFOLOCKAB = 2;
                         if (chkVFOLock.Checked == true)
                         {
                             chkVFOLock_CheckedChanged(this, EventArgs.Empty);
@@ -60646,6 +60681,8 @@ namespace PowerSDR
                     }
                     else if (value == 3) //lock  both AB
                     {
+
+                        catvfolockab = 3; //.284
                         VFOLOCKAB = 1;
                         if (chkVFOLock.Checked == true)
                         {
@@ -75233,6 +75270,7 @@ namespace PowerSDR
                     dsp.GetDSPTX(0).CurrentDSPMode = rx2_dsp_mode;
                     if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)) FWC.SetTXDSPMode(rx2_dsp_mode);
                     SetRX2Mode(rx2_dsp_mode);
+
                     Display.TXOnVFOB = true;
 
                
@@ -78616,7 +78654,7 @@ namespace PowerSDR
         public bool waterpanClick2 = false; //RX2 true = a click and not auto mode
         public bool waterpanClick3 = false; //RX2 true = a click and not auto mode
 
-        public void autoBrightBox_Click(object sender, EventArgs e)
+        public void autoBrightBox_Click(object sender, EventArgs e) // adjust water brightness here
         {
 
 
@@ -80478,7 +80516,7 @@ namespace PowerSDR
 
             autoBrightBox.ShortcutsEnabled = false; // added to eliminate the contextmenu from popping up
 
-            if ((me.Button == System.Windows.Forms.MouseButtons.Right))
+            if ((me.Button == System.Windows.Forms.MouseButtons.Right)) // adjust pan (not water)
             {
                 autoBrightBox.ForeColor = Color.LightPink;
 

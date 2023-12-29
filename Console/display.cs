@@ -176,10 +176,10 @@ namespace PowerSDR
             set
             {
                 tx_on_vfob = value;
-                if (current_display_mode == DisplayMode.PANADAPTER)
-                    DrawBackground();
+                if (current_display_mode == DisplayMode.PANADAPTER || current_display_mode == DisplayMode.PANAFALL8020 || current_display_mode == DisplayMode.PANAFALL) DrawBackground();
             }
         }
+
         private static bool split_display = false;
         public static bool SplitDisplay // // ke9ns: true = RX2 enabled (you must split the display between VFOA and B)
         {
@@ -340,7 +340,7 @@ namespace PowerSDR
             set
             {
                 splitb_enabled = value;
-               if (current_display_mode == DisplayMode.PANADAPTER && draw_tx_filter) DrawBackground();
+                if (current_display_mode == DisplayMode.PANADAPTER && draw_tx_filter) DrawBackground();
             }
         }
         private static bool show_freq_offset = false;
@@ -401,7 +401,7 @@ namespace PowerSDR
             set
             {
                 vfoa_hz = value;
-               
+
             }
         }
 
@@ -414,7 +414,7 @@ namespace PowerSDR
             {
                 vfoa_sub_hz = value; // value is in hz (full vfob value)
                                      //   Debug.WriteLine("vfoa_sub_hz" + vfoa_sub_hz);
-              
+
             }
         }
 
@@ -425,7 +425,7 @@ namespace PowerSDR
             set
             {
                 vfob_hz = value;
-               
+
             }
         }
 
@@ -436,7 +436,7 @@ namespace PowerSDR
             set
             {
                 vfob_sub_hz = value;
-               
+
             }
         }
 
@@ -501,6 +501,7 @@ namespace PowerSDR
         private static float temp_low_threshold = 0; // ke9ns add: to switch between TX and RX low level waterfall levels
         private static float temp_high_threshold = 0; // ke9ns add: for TX upper level
 
+      
         public static int DIS_X = 0; // ke9ns add: always the size of picdisplay
         public static int DIS_Y = 0; // ke9ns add:
 
@@ -2383,12 +2384,12 @@ namespace PowerSDR
                 g.DrawLine(new Pen(grid_color), W / 2, 0, W / 2, H);    // draw vertical line
             }
 
-            if (high_swr && !bottom)  g.DrawString("High SWR", new System.Drawing.Font("Arial", 14, FontStyle.Bold), new SolidBrush(Color.Red), 245, 20);
+            if (high_swr && !bottom) g.DrawString("High SWR", new System.Drawing.Font("Arial", 14, FontStyle.Bold), new SolidBrush(Color.Red), 245, 20);
 
-            if (mox && (console.RX1DSPMode == DSPMode.AM || console.RX1DSPMode == DSPMode.SAM) ) //.265        
+            if (mox && (console.RX1DSPMode == DSPMode.AM || console.RX1DSPMode == DSPMode.SAM)) //.265        
             {
                 if (console.AMCAR_NEG_FLAG > 0)
-                   
+
                     g.DrawString("AM NEG Modulation >100%: " + console.AMCAR_NEG_FLAG, new System.Drawing.Font("Arial", 14, FontStyle.Bold), new SolidBrush(Color.Red), 100, 20);
 
             }
@@ -2782,12 +2783,12 @@ namespace PowerSDR
 
         public static int[] holder2 = new int[160];                           // ke9ns add MEMORY Spot used to allow the vertical lines to all be drawn first so the call sign text can draw over the top of it.
         public static int[] holder2RX1 = new int[160];                          // .268 because Display with (Bottom) RX2 on destroys the index for RX1
-       
+
         public static int[] holder3 = new int[160];                          // ke9ns add
 
         public static int[] holder = new int[160];                           // ke9ns add DX Spot used to allow the vertical lines to all be drawn first so the call sign text can draw over the top of it.
         public static int[] holderRX1 = new int[160];                         // .268 for rx2 holder because Display with (Bottom) RX2 on destroys the index for RX1
-       
+
         public static int[] holder1 = new int[160];                          // ke9ns add
         private static Font font1 = new Font("Ariel", 9, FontStyle.Regular);  // ke9ns add dx spot call sign font style
 
@@ -3298,18 +3299,27 @@ namespace PowerSDR
                         }
                     } // VFOA = TX (RX1)
 
-                    if (bottom) // draw TX on RX2?                              
+
+                    if (bottom) // draw TX on RX2? .285
                     {
                         // draw tx filter overlay
                         g.DrawLine(tx_filter_pen, filter_left_x, H + top, filter_left_x, H + H);
                         g.DrawLine(tx_filter_pen, filter_right_x, H + top, filter_right_x, H + H);  // draw tx filter overlay
+                                                                                                    //   Debug.WriteLine("RX2C=================");
+
 
                     }
                     else //.271 if ((tx_on_vfob == false) && (bottom == false)) // ke9ns: if TX on normal RX1 draw lines // KE9NS ADD  fix mistake made by flex  makes the line thicker
                     {
                         // ke9ns pgrid  LEFT and RIGHT TX WIDTH LINES for TRANSMITTER ONLY
-                        g.DrawLine(tx_filter_pen, filter_left_x, top, filter_left_x, H);        // LEFT draw tx filter overlay
-                        g.DrawLine(tx_filter_pen, filter_right_x, top, filter_right_x, H);      // RIGHT draw tx filter ovelay
+                        if (tx_on_vfob == false) // .285
+                        {
+                            g.DrawLine(tx_filter_pen, filter_left_x, top, filter_left_x, H);        // LEFT draw tx filter overlay
+                            g.DrawLine(tx_filter_pen, filter_right_x, top, filter_right_x, H);      // RIGHT draw tx filter ovelay
+
+                            //  Debug.WriteLine("RX2D=================");
+                        }
+
                     }
 
                 } // draw ssb TX1 filter width lines
@@ -3321,7 +3331,7 @@ namespace PowerSDR
                 //   if ((!local_mox) && (draw_tx_cw_freq || console.setupForm.chkCWDisplay.Checked) && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)) // ke9ns mod
                 if ((draw_tx_cw_freq || console.setupForm.chkCWDisplay.Checked) && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)) // ke9ns mod
                 {
-                  
+
                     int pitch = cw_pitch;
                     if ((rx1_dsp_mode == DSPMode.CWL)) pitch = -cw_pitch;
 
@@ -3335,9 +3345,9 @@ namespace PowerSDR
                     {
                         if ((!local_mox)) // rx
                         {
-                             
+
                             cw_line_x = (int)((float)(pitch - Low + xit_hz - rit_hz + (vfoa_sub_hz - vfoa_hz)) / (High - Low) * W); // in RX show the TX line
-                        
+
                         }
                         else // tx
                         {
@@ -3387,8 +3397,10 @@ namespace PowerSDR
                     if (filter_left_x == filter_right_x) filter_right_x = filter_left_x + 1;
 
                     // rx2 always on the bottom
-                    g.FillRectangle(new SolidBrush(display_filter_color),   // draw filter overlay
-                        filter_left_x, H + top, filter_right_x - filter_left_x, H + H - top);
+                    g.FillRectangle(new SolidBrush(display_filter_color), filter_left_x, H + top, filter_right_x - filter_left_x, H + H - top);// draw filter overlay
+
+                    //   Debug.WriteLine("RX2F=================" + filter_left_x + " , "+ filter_right_x);
+
 
                 } // filter
                 else if ((local_mox) && (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU) && (!splitb_enabled)) // draw RX bandpass for CW mode .271 mod
@@ -3420,23 +3432,28 @@ namespace PowerSDR
                     int filter_right_x;
 
 
-              
-                        if (splitb_enabled == false) // just VFOA is in SPLIT mode but TXONVFOB = true
-                        {
-                            filter_left_x = (int)((float)(tx_filter_low - Low + xit_hz - rit_hz + (vfob_sub_hz - vfoa_hz)) / (High - Low) * W); //.271 if RX2 ON, then VFOA slit is sub VFOA
-                            filter_right_x = (int)((float)(tx_filter_high - Low + xit_hz - rit_hz + (vfob_sub_hz - vfoa_hz)) / (High - Low) * W);
-                           
-                        }
-                        else
-                        {
-                            filter_left_x = (int)((float)(tx_filter_low - Low + xit_hz - rit_hz + (vfob_sub_hz - vfob_hz)) / (High - Low) * W); //.271 if RX2 ON, then VFOA slit is sub VFOA
-                            filter_right_x = (int)((float)(tx_filter_high - Low + xit_hz - rit_hz + (vfob_sub_hz - vfob_hz)) / (High - Low) * W);
+                    if (splitb_enabled == false) // just VFOA is in SPLIT mode but TXONVFOB = true
+                    {
+                        filter_left_x = (int)((float)(tx_filter_low - Low + xit_hz - rit_hz) / (High - Low) * W); //.271 if RX2 ON, then VFOA slit is sub VFOA
+                        filter_right_x = (int)((float)(tx_filter_high - Low + xit_hz - rit_hz) / (High - Low) * W);
 
-                        }
+
+                    }
+                    else
+                    {
+                        filter_left_x = (int)((float)(tx_filter_low - Low + xit_hz - rit_hz + (vfob_sub_hz - vfob_hz)) / (High - Low) * W); //.271 if RX2 ON, then VFOA slit is sub VFOA
+                        filter_right_x = (int)((float)(tx_filter_high - Low + xit_hz - rit_hz + (vfob_sub_hz - vfob_hz)) / (High - Low) * W);
+
+                    }
 
                     // draw tx filter overlay for RX2 
+
+
                     g.DrawLine(tx_filter_pen, filter_left_x, H + top, filter_left_x, H + H);
                     g.DrawLine(tx_filter_pen, filter_right_x, H + top, filter_right_x, H + H);  // draw tx filter overlay
+
+                    //   Debug.WriteLine("RX2==================" + filter_left_x + " , " +filter_right_x +" ," + splitb_enabled + ", " + vfob_sub_hz + " , " + vfob_hz);
+
 
 
                 } // draw filter width lines
@@ -3569,9 +3586,9 @@ namespace PowerSDR
                         }
 
                         if (bottom)
-                            drawChannelBar(g, c, chan_left_x, chan_right_x, chan_center_x, H + top, (int)((H - top)/2), c1, c2); // draw box and lines on RX2 .281 draw lines half height
+                            drawChannelBar(g, c, chan_left_x, chan_right_x, chan_center_x, H + top, (int)((H - top) / 2), c1, c2); // draw box and lines on RX2 .281 draw lines half height
                         else
-                            drawChannelBar(g, c, chan_left_x, chan_right_x, chan_center_x, top, (int)((H - top)/2), c1, c2);// draw box and lines on RX1  .281 draw lines half height
+                            drawChannelBar(g, c, chan_left_x, chan_right_x, chan_center_x, top, (int)((H - top) / 2), c1, c2);// draw box and lines on RX1  .281 draw lines half height
 
                         //if (bottom)
                         //    drawNotchStatus(g, n, (notch_left_x + notch_right_x) / 2, H + top + 75, W, H);
@@ -12175,7 +12192,7 @@ namespace PowerSDR
 
                             size = g.MeasureString(SS, font);
 
-                          //  Debug.WriteLine("++WIDTH =" + W); //1591
+                            //  Debug.WriteLine("++WIDTH =" + W); //1591
 
                             x = (int)(W - size.Width - 3); //draw on right side .262
 
@@ -12653,7 +12670,7 @@ namespace PowerSDR
 
                             kk++;
 
-                          if (SpotForm != null && SpotForm.SpotNoVert == false)  g.DrawLine(p3, VFO_DXPos, H1b, VFO_DXPos, H1a);   // draw vertical line .269
+                            if (SpotForm != null && SpotForm.SpotNoVert == false) g.DrawLine(p3, VFO_DXPos, H1b, VFO_DXPos, H1a);   // draw vertical line .269
 
                         }
 
@@ -12821,7 +12838,7 @@ namespace PowerSDR
                         VFOHigh = (int)vfoa_hz + RXDisplayHigh; // high freq (right side) in hz
                         VFODiff = VFOHigh - VFOLow; // diff in hz
 
-                        int VFOLowB =(int)(VFOLow / 1000000); // freq in mhz (was byte .275)
+                        int VFOLowB = (int)(VFOLow / 1000000); // freq in mhz (was byte .275)
                         int VFOHighB = (int)(VFOHigh / 1000000); // freq in mhz (was byte .275)
 
                         //  Debug.WriteLine("VFOLowB "+ VFOLowB + " , " + VFOHighB);
@@ -13382,10 +13399,10 @@ namespace PowerSDR
                             int VFO_DXPos = (int)((((float)W / (float)VFODiff) * (float)(SpotControl.DX_Freq[ii] - CWPitch1 - VFOLow))); // determine DX spot line pos on current panadapter screen
 
                             holder[kk] = ii;                    // ii is the actual DX_Index pos that the KK holds
-                          
+
                             if (bottom == false) holderRX1[kk] = ii; //.268
-                           
-                          
+
+
                             holder1[kk] = VFO_DXPos;
 
                             kk++;
@@ -13420,9 +13437,9 @@ namespace PowerSDR
 
                             if (Console.DXR == 0) // display Spotted on Pan
                             {
-                               
+
                                 length = g.MeasureString(SpotControl.DX_Station[holder[ii]], font1); //  temp used to determine the size of the string when in LSB and you need to reserve a certain space//  (cl.Width);
-                               
+
                                 if ((bb > 0) && (SpotControl.SP6_Active != 0))
                                 {
                                     int x2 = holder1[ii] - (int)length.Width;
@@ -13446,7 +13463,7 @@ namespace PowerSDR
                                 if (SpotForm.SpotLoTWColor == true) //.262
                                 {
                                     int SpotColor = SpotControl.DX_LoTW_Status[holder[ii]];
-                                   
+
                                     Color DXColor;
                                     Color DXColor1;
 
@@ -13514,8 +13531,8 @@ namespace PowerSDR
                                         g.FillRectangle(new SolidBrush(DXColor), holder1[ii] - (int)length.Width - 2, H1b + iii + 2, (int)length.Width + 4, (int)length.Height - 2); //.261
                                     }
 
-                                   
-                                     g.DrawString(SpotControl.DX_Station[holder[ii]], font1, new SolidBrush(DXColor1), holder1[ii] - (int)length.Width, H1b + iii); // DX call sign to panadapter
+
+                                    g.DrawString(SpotControl.DX_Station[holder[ii]], font1, new SolidBrush(DXColor1), holder1[ii] - (int)length.Width, H1b + iii); // DX call sign to panadapter
 
 
                                 } //  if (SpotForm.SpotLoTWColor== true) //.262
@@ -13523,7 +13540,7 @@ namespace PowerSDR
                                 {
 
                                     g.FillRectangle(new SolidBrush(Color.Black), holder1[ii] - (int)length.Width - 2, H1b + iii + 2, (int)length.Width + 4, (int)length.Height - 2); //.261
-    
+
                                     g.DrawString(SpotControl.DX_Station[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width, H1b + iii); // DX call sign to panadapter
 
                                 }
@@ -13536,7 +13553,7 @@ namespace PowerSDR
                             else // display SPOTTER on Pan (not the Spotted)
                             {
                                 length = g.MeasureString(SpotControl.DX_Spotter[holder[ii]], font1); //  temp used to determine the size of the string when in LSB and you need to reserve a certain space//  (cl.Width);
-                               
+
                                 if ((bb > 0) && (SpotControl.SP6_Active != 0))
                                 {
                                     int x2 = holder1[ii] - (int)length.Width;
@@ -13557,12 +13574,12 @@ namespace PowerSDR
                                     } // for loop to check if DX text will draw over top of Memory text
                                 }
 
-                              
+
 
                                 if (SpotForm.SpotLoTWColor == true) //.262
                                 {
                                     int SpotColor = SpotControl.DX_LoTW_Status[holder[ii]];
-                                   
+
                                     Color DXColor;
                                     Color DXColor1;
 
@@ -13631,14 +13648,14 @@ namespace PowerSDR
 
 
                                 } //  if (SpotForm.SpotLoTWColor== true) //.262
-                                else  if (SpotForm.SpotBackground == true) //.261
+                                else if (SpotForm.SpotBackground == true) //.261
                                 {
                                     g.FillRectangle(new SolidBrush(Color.Black), holder1[ii] - (int)length.Width - 2, H1b + iii + 2, (int)length.Width + 4, (int)length.Height - 2); //.261
                                     g.DrawString(SpotControl.DX_Spotter[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width, H1b + iii); // .262  grid_text_brush
 
                                 }
                                 else
-                                g.DrawString(SpotControl.DX_Spotter[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width, H1b + iii); // .262  grid_text_brush
+                                    g.DrawString(SpotControl.DX_Spotter[holder[ii]], font1, grid_text_brush, holder1[ii] - (int)length.Width, H1b + iii); // .262  grid_text_brush
 
                             }
 
@@ -13764,7 +13781,7 @@ namespace PowerSDR
 
                                 }
                                 else
-                                g.DrawString(SpotControl.DX_Station[holder[ii]], font1, grid_text_brush, holder1[ii], H1b + iii); // DX station name
+                                    g.DrawString(SpotControl.DX_Station[holder[ii]], font1, grid_text_brush, holder1[ii], H1b + iii); // DX station name
 
 
                             }
@@ -13872,7 +13889,7 @@ namespace PowerSDR
 
                                 }
                                 else
-                                g.DrawString(SpotControl.DX_Spotter[holder[ii]], font1, grid_text_brush, holder1[ii], H1b + iii); // DX station name
+                                    g.DrawString(SpotControl.DX_Spotter[holder[ii]], font1, grid_text_brush, holder1[ii], H1b + iii); // DX station name
 
                             }
 
@@ -14134,6 +14151,8 @@ namespace PowerSDR
                         {
                             g.DrawLine(tx_filter_pen, filter_left_x, 0, filter_left_x, top);        // draw tx filter overlay  0. H + top
                             g.DrawLine(tx_filter_pen, filter_right_x, 0, filter_right_x, top);      // draw tx filter overlay
+
+
                         }
                         else // bottom half  K9 ==3 or K9==5 if rX2 on
                         {
@@ -14142,6 +14161,8 @@ namespace PowerSDR
                             {
                                 g.DrawLine(tx_filter_pen, filter_left_x, H, filter_left_x, H + top);        // draw tx filter overlay  0. H + top
                                 g.DrawLine(tx_filter_pen, filter_right_x, H, filter_right_x, H + top);      // draw tx filter overlay
+
+
                             }
 
                         }
@@ -14363,10 +14384,10 @@ namespace PowerSDR
                         }
                         else // rx==2
                         {
-                          
-                           if (splitb_enabled) vfo = vfob_sub_hz; //.271
-                           else vfo = vfob_hz;
-  
+
+                            if (splitb_enabled) vfo = vfob_sub_hz; //.271
+                            else vfo = vfob_hz;
+
                             vfo += xit_hz;
 
                             switch (rx2_dsp_mode)
@@ -17874,7 +17895,7 @@ namespace PowerSDR
         }
         unsafe private static bool DrawScope(Graphics g, int W, int H, bool bottom)
         {
-               
+
 
             //    g.TextRenderingHint = TextRenderingHint.ClearTypeGridFit;
             //   g.CompositingMode = CompositingMode.SourceOver;
@@ -17914,32 +17935,32 @@ namespace PowerSDR
                 if (bottom) pixel = (int)(H / 2 * scope_max[i]);
                 else pixel = (int)(H / 2 * scope_max[i]);          // ke9ns: scope data scaled to fit display area available
 
-              
+
                 int y = H / 2 - pixel;  // ke9ns: this is the actual data moved to the part of the display being used
 
                 points[i].X = i; // index
                 points[i].Y = y; // max value  y=H/2 - H/2*max
 
-               
+
                 if (bottom) points[i].Y += H; // shift down toward bottom by adding H    point[50].Y = H + (H/2 - H/2*max)
-  
+
                 //------------------------------------------------------
                 //ke9ns: a second set of points
-                
-                 if (bottom) pixel = (int)(H / 2 * scope_min[i]);
-                 else pixel = (int)(H / 2 * scope_min[i]);
+
+                if (bottom) pixel = (int)(H / 2 * scope_min[i]);
+                else pixel = (int)(H / 2 * scope_min[i]);
 
 
-                 int y1 = H / 2 - pixel;
-                 points[W * 2 - 1 - i].X = i; // for loop is X
+                int y1 = H / 2 - pixel;
+                points[W * 2 - 1 - i].X = i; // for loop is X
 
-                 points[W * 2 - 1 - i].Y = y1; // y min value  y = h/2 - h/2*min
+                points[W * 2 - 1 - i].Y = y1; // y min value  y = h/2 - h/2*min
 
-                 if (bottom) points[W * 2 - 1 - i].Y += H;  // point[149].Y = H + (H/2 - H/2*min)
-               
+                if (bottom) points[W * 2 - 1 - i].Y += H;  // point[149].Y = H + (H/2 - H/2*min)
+
                 //---------------------------------------------------------------
 
-           //   Debug.WriteLine("X=" + i + " Ymax=" + y + " Ymin=" + y1 + " point=" + (W*2-1-i) + "float: " + pixel + "M " + scope_min[i] + "M " + scope_max[i]);
+                //   Debug.WriteLine("X=" + i + " Ymax=" + y + " Ymin=" + y1 + " point=" + (W*2-1-i) + "float: " + pixel + "M " + scope_min[i] + "M " + scope_max[i]);
 
                 //if(points[W*2-1-i].Y == points[i].Y)	points[W*2-1-i].Y += 1;
             }
@@ -18775,14 +18796,14 @@ namespace PowerSDR
                     Low = rx_display_low2;               // low freqency on display window (left side)
                     High = rx_display_high2;             // high freqency on display window (right side)
 
-                  //  Debug.WriteLine("4444 RX2 " + High + " , " + Low); //.260
+                    //  Debug.WriteLine("4444 RX2 " + High + " , " + Low); //.260
                 }
                 else
                 {
                     Low = rx_display_low;               // low freqency on display window (left side)
                     High = rx_display_high;             // high freqency on display window (right side)
 
-                  //  Debug.WriteLine("5555 RX1 " + High + " , " + Low); //.260
+                    //  Debug.WriteLine("5555 RX1 " + High + " , " + Low); //.260
                 }
 
                 // ke9ns: High max value = 79371, low max = -97370
@@ -18831,7 +18852,7 @@ namespace PowerSDR
 
                         int pos1 = (int)(((float)cw_line_x / (float)W) * (float)num_samples) + start_sample_index;
 
-                         //  Debug.WriteLine("6666 pos1 " + pos1 +  " , " + tx_on_vfob);
+                        //  Debug.WriteLine("6666 pos1 " + pos1 +  " , " + tx_on_vfob);
 
                         if ((pos1 > 500) && (pos1 < BUFFER_SIZE - 500))
                         {
@@ -18843,13 +18864,13 @@ namespace PowerSDR
                             {
                                 new_display_data[pos1] = 60;            // ke9ns the display ranges from -130db to 0 db  
                                 new_display_data[pos1 + 1] = 60;
-                              
+
                             }
                             else if ((!tx_on_vfob) && (!bottom) && (console.CW_STATE)) //else if ((!tx_on_vfob) && (!bottom) && (console.cwxForm.CW_STATE || dot || dash))
                             {
                                 new_display_data[pos1] = 60;
                                 new_display_data[pos1 + 1] = 60;
-                              
+
                             }
                         }
 
@@ -18913,10 +18934,10 @@ namespace PowerSDR
                             start_sample_index = (BUFFER_SIZE >> 1) + (int)((Low * BUFFER_SIZE) / sample_rate);
                             num_samples = (int)((long)(High - Low) * (long)BUFFER_SIZE / (long)sample_rate);  // same as in panadapter draw //.260 change to long to handle hi-res panafall buffer size increase
 
-                           
+
                             int pos1 = (int)(((float)cw_line_x / (float)W) * (float)num_samples) + start_sample_index;
 
-                          //  Debug.WriteLine("3333 pos1 " + pos1 + " , " + cw_line_x + " , " + High + " , " + Low);
+                            //  Debug.WriteLine("3333 pos1 " + pos1 + " , " + cw_line_x + " , " + High + " , " + Low);
 
                             if ((pos1 > 500) && (pos1 < BUFFER_SIZE - 500))
                             {
@@ -19026,7 +19047,7 @@ namespace PowerSDR
             // VFOA
             //  if (average_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) && ((PWM2A_LAST != vfoa_hz) && (Console.CTUN1_HZ == 0)) || (PWM2A_LAST < (vfoa_hz - 200000) || PWM2A_LAST > (vfoa_hz + 200000))) // ke9ns dont move waterfall if in CTUN mode
 
-            if (average_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) && ((PWM2A_LAST != vfoa_hz) ) || (PWM2A_LAST < (vfoa_hz - 200000) || PWM2A_LAST > (vfoa_hz + 200000))) // ke9ns dont move waterfall if in CTUN mode
+            if (average_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) && ((PWM2A_LAST != vfoa_hz)) || (PWM2A_LAST < (vfoa_hz - 200000) || PWM2A_LAST > (vfoa_hz + 200000))) // ke9ns dont move waterfall if in CTUN mode
             {
 
                 PF3A = 1; // was 1
@@ -19046,8 +19067,8 @@ namespace PowerSDR
 
                 PWM1A = (int)Math.Floor(((PWM1 / (float)W) * (float)num_samples)); // this is supposed to be the # of points in the data stream array to move
 
-              //  Debug.WriteLine("228: " + PWM1A + " W:" + W + " N:" + num_samples + " P:" + PWM1 + " P4:" + PWM4 + " S:" + slope + " P2:" + PWM2A_DIFF);
-             //   Debug.WriteLine("228: " + Math.Abs(PWM1A));
+                //  Debug.WriteLine("228: " + PWM1A + " W:" + W + " N:" + num_samples + " P:" + PWM1 + " P4:" + PWM4 + " S:" + slope + " P2:" + PWM2A_DIFF);
+                //   Debug.WriteLine("228: " + Math.Abs(PWM1A));
 
 
                 if ((Math.Abs(PWM1A) < num_samples) && PWM1A != 0) // check for valid number
@@ -19092,9 +19113,9 @@ namespace PowerSDR
 
             //=======================================================================================================
             // VFOB
-          //  if (rx2_avg_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) && ((PWM2B_LAST != vfob_hz) && (Console.CTUN1_HZ == 0)) || (PWM2B_LAST < (vfob_hz - 200000) || PWM2B_LAST > (vfob_hz + 200000))) // ke9ns dont move waterfall if in CTUN mode
+            //  if (rx2_avg_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) && ((PWM2B_LAST != vfob_hz) && (Console.CTUN1_HZ == 0)) || (PWM2B_LAST < (vfob_hz - 200000) || PWM2B_LAST > (vfob_hz + 200000))) // ke9ns dont move waterfall if in CTUN mode
 
-                if (rx2_avg_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) && ((PWM2B_LAST != vfob_hz)) || (PWM2B_LAST < (vfob_hz - 200000) || PWM2B_LAST > (vfob_hz + 200000))) // ke9ns dont move waterfall if in CTUN mode
+            if (rx2_avg_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) && ((PWM2B_LAST != vfob_hz)) || (PWM2B_LAST < (vfob_hz - 200000) || PWM2B_LAST > (vfob_hz + 200000))) // ke9ns dont move waterfall if in CTUN mode
             {
                 PF3B = 1; // flag to prevent normal avg routine from running
 
@@ -19355,11 +19376,26 @@ namespace PowerSDR
                 if (rx == 1) max += rx1_display_cal_offset;
                 else if (rx == 2) max += rx2_display_cal_offset;
 
-                if (!local_mox)
+              
+                if (!local_mox) // RX below    
                 {
-                    if (rx == 1) max += rx1_preamp_offset;
+                    if (rx == 1) max += rx1_preamp_offset;         // adjust for preamp on/off
                     else if (rx == 2) max += rx2_preamp_offset;
                 }
+                else // if TX the other receiver still needs the preamp added    add .286
+                {
+                    if (tx_on_vfob)
+                    {
+                        if (rx == 1) max += rx1_preamp_offset; // if TX on RX2, keep RX1 normal (preamp was not included in full duplex TX VFOB before)
+                    }
+                    else // vfoa
+                    {
+                        if (rx == 2) max += rx2_preamp_offset;
+                    }
+
+                } // tx above
+
+
 
                 if (max > local_max_y)
                 {
@@ -20262,11 +20298,24 @@ namespace PowerSDR
                         if (rx == 1) max += rx1_display_cal_offset;
                         else if (rx == 2) max += rx2_display_cal_offset;
 
-                        if (!local_mox)
+                        if (!local_mox) // RX below    
                         {
-                            if (rx == 1) max += rx1_preamp_offset;
+                            if (rx == 1) max += rx1_preamp_offset;         // adjust for preamp on/off
                             else if (rx == 2) max += rx2_preamp_offset;
                         }
+                        else // if TX the other receiver still needs the preamp added    add .286
+                        {
+                            if (tx_on_vfob)
+                            {
+                                if (rx == 1) max += rx1_preamp_offset; // if TX on RX2, keep RX1 normal (preamp was not included in full duplex TX VFOB before)
+                            }
+                            else // vfoa
+                            {
+                                if (rx == 2) max += rx2_preamp_offset;
+                            }
+
+                        } // tx above
+
 
                         if (max > local_max_y)
                         {
@@ -20452,11 +20501,24 @@ namespace PowerSDR
                         if (rx == 1) max += rx1_display_cal_offset;
                         else if (rx == 2) max += rx2_display_cal_offset;
 
-                        if (!local_mox)
+                        if (!local_mox) // RX below    
                         {
-                            if (rx == 1) max += rx1_preamp_offset;
+                            if (rx == 1) max += rx1_preamp_offset;         // adjust for preamp on/off
                             else if (rx == 2) max += rx2_preamp_offset;
                         }
+                        else // if TX the other receiver still needs the preamp added    add .286
+                        {
+                            if (tx_on_vfob)
+                            {
+                                if (rx == 1) max += rx1_preamp_offset; // if TX on RX2, keep RX1 normal (preamp was not included in full duplex TX VFOB before)
+                            }
+                            else // vfoa
+                            {
+                                if (rx == 2) max += rx2_preamp_offset;
+                            }
+
+                        } // tx above
+
 
                         if (max > local_max_y)
                         {
@@ -20682,7 +20744,7 @@ namespace PowerSDR
 
         private static HiPerfTimer timer_waterfall = new HiPerfTimer();
         private static HiPerfTimer timer_waterfall2 = new HiPerfTimer();
-        private static float[] waterfall_data;
+        private static float[] waterfall_data; // 
 
 
         //WaterMove=5,2 you get scan0 301662208 total size 6351696 W 1123 bitmapData.Stride  16848  (.0000200 sec for black routine) (.0222519 for drawwaterfall )
@@ -20840,7 +20902,7 @@ namespace PowerSDR
             temp_low_threshold = waterfall_low_threshold;  // store original low rx1 threshold
             temp_high_threshold = waterfall_high_threshold; // store original high rx1/rx2 threshold
 
-
+        
 
             //================================================
             // STEP 1) ke9ns change waterfall bitmap size to mode your in
@@ -21013,6 +21075,7 @@ namespace PowerSDR
             if (waterfall_data == null || waterfall_data.Length < W)
             {
                 waterfall_data = new float[W];      // array of points to display
+
             }
 
             float slope = 0.0F;                     // samples to process per pixel
@@ -21650,7 +21713,6 @@ namespace PowerSDR
                     if (rx == 1)
                     {
 
-
                         if (slope <= 1.0 || lindex == rindex)  // means high zoom level which means zooming into not enough resolution
                         {
                             // find location in current display buffer to represent location on screen (left to right)
@@ -21660,7 +21722,7 @@ namespace PowerSDR
                             {
                                 max = current_display_data[lindex % DATA_BUFFER_SIZE] * ((float)lindex - dval + 1) + current_display_data[(lindex + 1) % DATA_BUFFER_SIZE] * (dval - (float)lindex);
                             }
-                            else
+                            else // data below is not averaged so you can see more data
                             {
                                 max = current_display_data1[lindex % DATA_BUFFER_SIZE] * ((float)lindex - dval + 1) + current_display_data1[(lindex + 1) % DATA_BUFFER_SIZE] * (dval - (float)lindex);
                             }
@@ -21715,11 +21777,24 @@ namespace PowerSDR
                     if (rx == 1) max += rx1_display_cal_offset;
                     else if (rx == 2) max += rx2_display_cal_offset;
 
-                    if (!mox)
+                    if (!mox) // RX below    
                     {
                         if (rx == 1) max += rx1_preamp_offset;         // adjust for preamp on/off
                         else if (rx == 2) max += rx2_preamp_offset;
                     }
+                    else // if TX the other receiver still needs the preamp added    add .286
+                    {
+                        if (tx_on_vfob)
+                        {
+                            if (rx == 1) max += rx1_preamp_offset; // if TX on RX2, keep RX1 normal (preamp was not included in full duplex TX VFOB before)
+                        }   
+                        else // vfoa
+                        {
+                            if (rx == 2) max += rx2_preamp_offset;
+                        }
+
+                    } // tx above
+
 
                     if (max > local_max_y)
                     {
@@ -21741,7 +21816,7 @@ namespace PowerSDR
                     }
 
 
-                    if ((continuum == 0) || (rx == 2)) // ke9ns add special Peak Power db shown vs Time
+                    if ((continuum == 0) || (rx == 2)) // ke9ns add: special Peak Power db shown vs Time
                     {
                         // ke9ns this is the actual brightness data per pixel to draw to the screen (either color or gray)
                         waterfall_data[i] = max;                            // RX signal strength per pixel of data 0 to i = 0 to W wide (1 line of waterfall data)
@@ -22134,92 +22209,98 @@ namespace PowerSDR
                 //=================================================================
                 // ke9ns choose a threshold for RX or TX
                 //=================================================================
-                if (local_mox)
+                if (local_mox) // ke9ns: local_mox will only be true for rx =2 when VFOB is TX, and true only for rx = 1when VFOA is TX
                 {
-                    if ((tx_on_vfob) && (rx == 2))
+                    
+                    if (tx_on_vfob == true ) // transmit VFOB below (ke9ns: local_mox will only be true for rx =2 when vfob is TX)
                     {
 
-                        waterfall_low_threshold = waterfall_lowMic_threshold;  // TX low level db
-                        waterfall_high_threshold = 0;
-
-                        if (console.setupForm.chkCWDisplay.Checked) // option to view cw TX signal
+                        if (rx == 2) // and VFOB is the TX
                         {
-                            if (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU) // ke9ns add to allow CW signals to show up in the waterfall if selected
+
+                            if (rx2_dsp_mode == DSPMode.CWL || rx2_dsp_mode == DSPMode.CWU) // ke9ns add to allow CW signals to show up in the waterfall if selected
                             {
-
-                                waterfall_low_threshold = -110f;
-                                waterfall_high_threshold = -70f;
-                            }
-                        }
-
-
-                    }
-                    else if ((!tx_on_vfob) && (rx == 1))
-                    {
-
-                        if (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU) // ke9ns add to allow CW signals to show up in the waterfall if selected
-                        {
-                            if (console.setupForm.chkCWDisplay.Checked) // option to view cw TX signal
-                            {
-                                waterfall_low_threshold = -110f;
-                                waterfall_high_threshold = -70f;
-
-                                //   waterfall_low_threshold = waterfall_lowMic_threshold; // TX low level
-                                //   waterfall_high_threshold = waterfall_high_threshold;
-
+                                if (console.setupForm.chkCWDisplay.Checked) // option to view cw TX signal
+                                {
+                                    waterfall_low_threshold = -110f;
+                                    waterfall_high_threshold = -70f;
+                                }
+                                else
+                                {
+                                    waterfall_low_threshold = waterfall_lowMic_threshold; // TX low level
+                                    waterfall_high_threshold = 0;
+                                }
                             }
                             else
                             {
                                 waterfall_low_threshold = waterfall_lowMic_threshold; // TX low level
                                 waterfall_high_threshold = 0;
+
                             }
                         }
-                        else
+                        else // should never get here
                         {
-                            waterfall_low_threshold = waterfall_lowMic_threshold; // TX low level
-                            waterfall_high_threshold = 0;
-
-                        }
-
-
-                    }
-                    else
-                    {
-                        //  waterfall_low_threshold = -200; // if you dont have a low level use -200
-                        //   Debug.WriteLine("never ");
-
-
-                        // ke9ns: .216 add below so 2nd Receiver RX threshold stays OK when in full duplex
-                        if (rx == 1)
-                        {
+                       
                             waterfall_low_threshold = temp_low_threshold;  // rx1 db
                             waterfall_high_threshold = temp_high_threshold;  // rx1 db
-
+                            
                         }
-                        else
+
+
+                    } // TX VFOB above
+                    else // transmit VFOA below
+                    {
+                        Debug.WriteLine("VFOA TX");
+
+                        if (rx == 1)
+                        {
+                            if (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU) // ke9ns add to allow CW signals to show up in the waterfall if selected
+                            {
+                                if (console.setupForm.chkCWDisplay.Checked) // option to view cw TX signal
+                                {
+                                    waterfall_low_threshold = -110f;
+                                    waterfall_high_threshold = -70f;
+                                }
+                                else
+                                {
+                                    waterfall_low_threshold = waterfall_lowMic_threshold; // TX low level
+                                    waterfall_high_threshold = 0;
+                                }
+                            }
+                            else
+                            {
+                                waterfall_low_threshold = waterfall_lowMic_threshold; // TX low level
+                                waterfall_high_threshold = 0;
+
+                            }
+                        }
+                        else // RX2 should never get here
                         {
                             waterfall_low_threshold = waterfall_lowRX2_threshold; // rx2
                             waterfall_high_threshold = temp_high_threshold;  // rx1 db
                         }
-                    }
 
+                    } // transmit VFOA above
+                   
 
-                }
-                else  // if in RX mode
+                } // transmitting above
+                else  // do below if Receiving (no transmit on either VFOA or B)
                 {
                     if (rx == 1)
                     {
                         waterfall_low_threshold = temp_low_threshold;  // rx1 db
                         waterfall_high_threshold = temp_high_threshold;  // rx1 db
+
                     }
-                    else
+                    else // RX2
                     {
 
                         waterfall_low_threshold = waterfall_lowRX2_threshold; // rx2
                         waterfall_high_threshold = temp_high_threshold;  // rx1 db
+
                     }
 
-                }
+                } // receiving above
 
 
 
@@ -22362,8 +22443,6 @@ namespace PowerSDR
                 }
                 else  // Gray=0 RGB scale
                 {
-
-
 
                     Byte Gray = 0;        // Gray scale 0 to 255
                     float offset = 0;

@@ -19222,7 +19222,6 @@ namespace PowerSDR
         private System.Windows.Forms.LabelTS lblDisplayCPUMeter;
         private System.Windows.Forms.ComboBoxTS comboGeneralXVTR;
         public System.Windows.Forms.GroupBoxTS grpDisplayWaterfall;
-        private System.Windows.Forms.NumericUpDownTS udDisplayWaterfallHighLevel;
         private System.Windows.Forms.LabelTS lblDisplayWaterfallHighLevel;
         private System.Windows.Forms.LabelTS lblDisplayWaterfallLowLevel;
         public System.Windows.Forms.NumericUpDownTS udDisplayWaterfallLowLevel;
@@ -20357,6 +20356,7 @@ namespace PowerSDR
         public System.Windows.Forms.NumericUpDownTS udDDSIFFreq;
         private System.Windows.Forms.LabelTS lblIFBFrequency;
         public System.Windows.Forms.NumericUpDownTS udDDSIFBFreq;
+        public System.Windows.Forms.NumericUpDownTS udDisplayWaterfallHighLevel;
     } // class setup
 
 

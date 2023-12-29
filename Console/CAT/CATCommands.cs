@@ -7355,13 +7355,37 @@ namespace PowerSDR
 
                 return "";
             }
-            else if (s.Length == parser.nGet)
+            else if (s.Length == parser.nGet) // ke9ns: if you send ZZVL with no number after then come here
             {
-                bool retval = console.CATVFOLock;
-                if (retval)
-                    return "1";
+
+              
+                if (console.setupForm != null && console.setupForm.chkBoxVFOLockAB.Checked) //.284
+                {
+                    int retval = console.CATVFOLockAB;
+                    Debug.WriteLine("--ZZVL " + retval);
+
+                  
+                    if (retval == 0) return "0";
+                    else if (retval == 1) return "1";
+                    else if (retval == 2) return "2";
+                    else return "3";
+                }
                 else
-                    return "0";
+                {
+                   
+                    bool retval = console.CATVFOLock;
+                    if (retval)
+                    {
+                        return "1";
+                    }
+                    else
+                    {
+                        return "0";
+                    }
+                }
+                
+
+                
             }
             else
             {

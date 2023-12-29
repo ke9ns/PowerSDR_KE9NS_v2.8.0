@@ -49,9 +49,10 @@ namespace PowerSDR
             // pnlStatus
             // 
             this.pnlStatus.BackColor = System.Drawing.Color.Transparent;
-            this.pnlStatus.Location = new System.Drawing.Point(50, 247);
+            this.pnlStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.pnlStatus.Location = new System.Drawing.Point(58, 207);
             this.pnlStatus.Name = "pnlStatus";
-            this.pnlStatus.Size = new System.Drawing.Size(475, 24);
+            this.pnlStatus.Size = new System.Drawing.Size(475, 17);
             this.pnlStatus.TabIndex = 2;
             this.pnlStatus.Paint += new System.Windows.Forms.PaintEventHandler(this.pnlStatus_Paint);
             // 
@@ -62,11 +63,11 @@ namespace PowerSDR
             // 
             // textBox1
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.textBox1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox1.ForeColor = System.Drawing.Color.Yellow;
-            this.textBox1.Location = new System.Drawing.Point(209, 217);
+            this.textBox1.Location = new System.Drawing.Point(218, 155);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(133, 24);
             this.textBox1.TabIndex = 3;
@@ -79,9 +80,9 @@ namespace PowerSDR
             this.lblTimeRemaining.BackColor = System.Drawing.Color.Transparent;
             this.lblTimeRemaining.ForeColor = System.Drawing.Color.White;
             this.lblTimeRemaining.Image = null;
-            this.lblTimeRemaining.Location = new System.Drawing.Point(296, 289);
+            this.lblTimeRemaining.Location = new System.Drawing.Point(433, 240);
             this.lblTimeRemaining.Name = "lblTimeRemaining";
-            this.lblTimeRemaining.Size = new System.Drawing.Size(100, 16);
+            this.lblTimeRemaining.Size = new System.Drawing.Size(100, 14);
             this.lblTimeRemaining.TabIndex = 1;
             this.lblTimeRemaining.Text = "Time";
             // 
@@ -90,7 +91,7 @@ namespace PowerSDR
             this.lblStatus.BackColor = System.Drawing.Color.Transparent;
             this.lblStatus.ForeColor = System.Drawing.Color.White;
             this.lblStatus.Image = null;
-            this.lblStatus.Location = new System.Drawing.Point(0, 287);
+            this.lblStatus.Location = new System.Drawing.Point(38, 238);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(400, 16);
             this.lblStatus.TabIndex = 0;

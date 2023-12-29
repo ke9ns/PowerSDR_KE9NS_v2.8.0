@@ -7454,7 +7454,7 @@ namespace PowerSDR
 
 
         // ke9ns:   update the database with the new HIGH waterfall value to save at powerdown
-        private void udDisplayWaterfallHighLevel_ValueChanged(object sender, System.EventArgs e)
+        public void udDisplayWaterfallHighLevel_ValueChanged(object sender, System.EventArgs e)
         {
             UpdateWaterfallBandInfo();
             switch (console.RX1Band)
@@ -8073,8 +8073,7 @@ namespace PowerSDR
             console.dsp.GetDSPRX(0, 0).RXAGCMaxGain = (double)udDSPAGCMaxGaindB.Value;
             console.dsp.GetDSPRX(0, 1).RXAGCMaxGain = (double)udDSPAGCMaxGaindB.Value;
 
-            if (console.RX1AGCMode != AGCMode.FIXD)
-                console.RF = (int)udDSPAGCMaxGaindB.Value;
+            if (console.RX1AGCMode != AGCMode.FIXD) console.RF = (int)udDSPAGCMaxGaindB.Value;
         }
 
         private void udDSPAGCAttack_ValueChanged(object sender, System.EventArgs e)
@@ -16540,7 +16539,7 @@ namespace PowerSDR
             console.dsp.GetDSPRX(1, 0).RXAGCMaxGain = (double)udRX2DSPAGCMaxGaindB.Value;
           //  console.dsp.GetDSPRX(1, 1).RXAGCMaxGain = (double)udRX2DSPAGCMaxGaindB.Value;
 
-            if (console.RX2AGCMode != AGCMode.FIXD) console.RF = (int)udRX2DSPAGCMaxGaindB.Value;
+            if (console.RX2AGCMode != AGCMode.FIXD) console.RX2RF = (int)udRX2DSPAGCMaxGaindB.Value;
         }
 
         private void udRX2DSPAGCAttack_ValueChanged(object sender, EventArgs e) //.283
@@ -16582,7 +16581,7 @@ namespace PowerSDR
             console.dsp.GetDSPRX(1, 0).RXFixedAGC = (double)udRX2DSPAGCFixedGaindB.Value;
           //  console.dsp.GetDSPRX(1, 1).RXFixedAGC = (double)udRX2DSPAGCFixedGaindB.Value;
 
-            if (console.RX2AGCMode == AGCMode.FIXD)  console.RF = (int)udRX2DSPAGCFixedGaindB.Value;
+            if (console.RX2AGCMode == AGCMode.FIXD)  console.RX2RF = (int)udRX2DSPAGCFixedGaindB.Value;
         }
 
        

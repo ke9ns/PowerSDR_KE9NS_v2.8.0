@@ -3501,7 +3501,8 @@ namespace PowerSDR
                 parser.nGet = 0;
                 parser.nSet = 1;
 
-                int VfoLockState = Convert.ToInt16(commands.ZZVL(""));
+                int VfoLockState = Convert.ToInt16(commands.ZZVL("")); // ke9ns: check to see the current status of the VFO LOCK
+
 
                 if (VfoLockState == 0)
                 {
