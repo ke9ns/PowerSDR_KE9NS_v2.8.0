@@ -7896,7 +7896,7 @@ namespace PowerSDR
             // udTNFWidth
             // 
             this.udTNFWidth.Increment = new decimal(new int[] {
-            20,
+            10,
             0,
             0,
             0});
@@ -7907,7 +7907,7 @@ namespace PowerSDR
             0,
             0});
             this.udTNFWidth.Minimum = new decimal(new int[] {
-            100,
+            10,
             0,
             0,
             0});
@@ -9438,6 +9438,7 @@ namespace PowerSDR
             this.tbRX2DSPAGCHangThreshold.Size = new System.Drawing.Size(134, 16);
             this.tbRX2DSPAGCHangThreshold.TabIndex = 47;
             this.tbRX2DSPAGCHangThreshold.TickFrequency = 10;
+            this.toolTip1.SetToolTip(this.tbRX2DSPAGCHangThreshold, "RX2:");
             this.tbRX2DSPAGCHangThreshold.Scroll += new System.EventHandler(this.tbRX2DSPAGCHangThreshold_Scroll);
             // 
             // labelTS69
@@ -9480,7 +9481,7 @@ namespace PowerSDR
             this.udRX2DSPAGCHangTime.Name = "udRX2DSPAGCHangTime";
             this.udRX2DSPAGCHangTime.Size = new System.Drawing.Size(48, 20);
             this.udRX2DSPAGCHangTime.TabIndex = 44;
-            this.toolTip1.SetToolTip(this.udRX2DSPAGCHangTime, "10 - 5000. Used only in Custom");
+            this.toolTip1.SetToolTip(this.udRX2DSPAGCHangTime, "RX2: 10 - 5000. Used only in Custom");
             this.udRX2DSPAGCHangTime.Value = new decimal(new int[] {
             250,
             0,
@@ -9495,7 +9496,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udRX2DSPAGCMaxGaindB.Location = new System.Drawing.Point(90, 48);
+            this.udRX2DSPAGCMaxGaindB.Location = new System.Drawing.Point(98, 48);
             this.udRX2DSPAGCMaxGaindB.Maximum = new decimal(new int[] {
             120,
             0,
@@ -9524,7 +9525,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udRX2DSPAGCSlope.Location = new System.Drawing.Point(90, 24);
+            this.udRX2DSPAGCSlope.Location = new System.Drawing.Point(98, 24);
             this.udRX2DSPAGCSlope.Maximum = new decimal(new int[] {
             10,
             0,
@@ -9539,7 +9540,7 @@ namespace PowerSDR
             this.udRX2DSPAGCSlope.Size = new System.Drawing.Size(40, 20);
             this.udRX2DSPAGCSlope.TabIndex = 13;
             this.udRX2DSPAGCSlope.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.toolTip1.SetToolTip(this.udRX2DSPAGCSlope, "0 to 10");
+            this.toolTip1.SetToolTip(this.udRX2DSPAGCSlope, "RX2: 0 to 10");
             this.udRX2DSPAGCSlope.Value = new decimal(new int[] {
             0,
             0,
@@ -9569,7 +9570,7 @@ namespace PowerSDR
             this.udRX2DSPAGCDecay.Name = "udRX2DSPAGCDecay";
             this.udRX2DSPAGCDecay.Size = new System.Drawing.Size(48, 20);
             this.udRX2DSPAGCDecay.TabIndex = 12;
-            this.toolTip1.SetToolTip(this.udRX2DSPAGCDecay, "10 - 5000. Used only in Custom");
+            this.toolTip1.SetToolTip(this.udRX2DSPAGCDecay, "RX2: 10 - 5000. Used only in Custom");
             this.udRX2DSPAGCDecay.Value = new decimal(new int[] {
             250,
             0,
@@ -9594,7 +9595,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udRX2DSPAGCAttack.Location = new System.Drawing.Point(90, 72);
+            this.udRX2DSPAGCAttack.Location = new System.Drawing.Point(98, 72);
             this.udRX2DSPAGCAttack.Maximum = new decimal(new int[] {
             10,
             0,
@@ -9608,7 +9609,7 @@ namespace PowerSDR
             this.udRX2DSPAGCAttack.Name = "udRX2DSPAGCAttack";
             this.udRX2DSPAGCAttack.Size = new System.Drawing.Size(40, 20);
             this.udRX2DSPAGCAttack.TabIndex = 10;
-            this.toolTip1.SetToolTip(this.udRX2DSPAGCAttack, "0 to 10 Used only in Custom");
+            this.toolTip1.SetToolTip(this.udRX2DSPAGCAttack, "RX2: 0 to 10 Used only in Custom");
             this.udRX2DSPAGCAttack.Value = new decimal(new int[] {
             2,
             0,
@@ -9641,7 +9642,7 @@ namespace PowerSDR
             this.labelTS74.Name = "labelTS74";
             this.labelTS74.Size = new System.Drawing.Size(88, 24);
             this.labelTS74.TabIndex = 7;
-            this.labelTS74.Text = "Max Gain (dB):";
+            this.labelTS74.Text = "Max-T Gain (dB):";
             this.toolTip1.SetToolTip(this.labelTS74, resources.GetString("labelTS74.ToolTip"));
             // 
             // udRX2DSPAGCFixedGaindB
@@ -9651,7 +9652,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udRX2DSPAGCFixedGaindB.Location = new System.Drawing.Point(90, 200);
+            this.udRX2DSPAGCFixedGaindB.Location = new System.Drawing.Point(98, 200);
             this.udRX2DSPAGCFixedGaindB.Maximum = new decimal(new int[] {
             120,
             0,
@@ -9665,8 +9666,8 @@ namespace PowerSDR
             this.udRX2DSPAGCFixedGaindB.Name = "udRX2DSPAGCFixedGaindB";
             this.udRX2DSPAGCFixedGaindB.Size = new System.Drawing.Size(40, 20);
             this.udRX2DSPAGCFixedGaindB.TabIndex = 4;
-            this.toolTip1.SetToolTip(this.udRX2DSPAGCFixedGaindB, "When you choose Fixed AGC on the front panel, this number is used to multiply the" +
-        " signal.");
+            this.toolTip1.SetToolTip(this.udRX2DSPAGCFixedGaindB, "RX2: When you choose Fixed AGC on the front panel, this number is used to multipl" +
+        "y the signal.");
             this.udRX2DSPAGCFixedGaindB.Value = new decimal(new int[] {
             75,
             0,
@@ -9774,7 +9775,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udDSPLevelerThreshold.Location = new System.Drawing.Point(88, 72);
+            this.udDSPLevelerThreshold.Location = new System.Drawing.Point(96, 70);
             this.udDSPLevelerThreshold.Maximum = new decimal(new int[] {
             20,
             0,
@@ -9806,7 +9807,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udDSPLevelerSlope.Location = new System.Drawing.Point(88, 48);
+            this.udDSPLevelerSlope.Location = new System.Drawing.Point(96, 46);
             this.udDSPLevelerSlope.Maximum = new decimal(new int[] {
             100,
             0,
@@ -9875,7 +9876,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udDSPLevelerAttack.Location = new System.Drawing.Point(88, 96);
+            this.udDSPLevelerAttack.Location = new System.Drawing.Point(96, 96);
             this.udDSPLevelerAttack.Maximum = new decimal(new int[] {
             10,
             0,
@@ -10060,7 +10061,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udDSPALCSlope.Location = new System.Drawing.Point(88, 24);
+            this.udDSPALCSlope.Location = new System.Drawing.Point(96, 24);
             this.udDSPALCSlope.Maximum = new decimal(new int[] {
             100,
             0,
@@ -10128,7 +10129,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udDSPALCAttack.Location = new System.Drawing.Point(88, 72);
+            this.udDSPALCAttack.Location = new System.Drawing.Point(96, 72);
             this.udDSPALCAttack.Maximum = new decimal(new int[] {
             10,
             0,
@@ -10270,7 +10271,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udDSPAGCMaxGaindB.Location = new System.Drawing.Point(90, 48);
+            this.udDSPAGCMaxGaindB.Location = new System.Drawing.Point(98, 48);
             this.udDSPAGCMaxGaindB.Maximum = new decimal(new int[] {
             120,
             0,
@@ -10300,7 +10301,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udDSPAGCSlope.Location = new System.Drawing.Point(90, 24);
+            this.udDSPAGCSlope.Location = new System.Drawing.Point(98, 24);
             this.udDSPAGCSlope.Maximum = new decimal(new int[] {
             10,
             0,
@@ -10372,7 +10373,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udDSPAGCAttack.Location = new System.Drawing.Point(90, 72);
+            this.udDSPAGCAttack.Location = new System.Drawing.Point(98, 72);
             this.udDSPAGCAttack.Maximum = new decimal(new int[] {
             10,
             0,
@@ -10420,7 +10421,7 @@ namespace PowerSDR
             this.lblDSPAGCMaxGain.Name = "lblDSPAGCMaxGain";
             this.lblDSPAGCMaxGain.Size = new System.Drawing.Size(88, 24);
             this.lblDSPAGCMaxGain.TabIndex = 7;
-            this.lblDSPAGCMaxGain.Text = "Max Gain (dB):";
+            this.lblDSPAGCMaxGain.Text = "Max-T Gain (dB):";
             this.toolTip1.SetToolTip(this.lblDSPAGCMaxGain, resources.GetString("lblDSPAGCMaxGain.ToolTip"));
             // 
             // udDSPAGCFixedGaindB
@@ -10430,7 +10431,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udDSPAGCFixedGaindB.Location = new System.Drawing.Point(90, 200);
+            this.udDSPAGCFixedGaindB.Location = new System.Drawing.Point(98, 200);
             this.udDSPAGCFixedGaindB.Maximum = new decimal(new int[] {
             120,
             0,

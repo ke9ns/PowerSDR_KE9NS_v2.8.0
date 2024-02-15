@@ -574,7 +574,7 @@ You can now use the Function keys F3,F4,F5,F6 without having the CWX panel open.
 </value>
   </data>
   <data name="udRX2DSPAGCMaxGaindB.ToolTip" xml:space="preserve">
-    <value>AGC Max Gain T=Threshold - Operates similarly to traditional RF Gain (but this way the Panadapter signal does not change when you change the gain)
+    <value>RX2 AGC-T  Max Gain Threshold - Operates similarly to traditional RF Gain (but this way the Panadapter signal does not change when you change the gain)
 This provides for a “threshold” AGC  (see AGC-T on the main Console Screen)
 Irrespective of how weak a signal is, no gain over this Max Gain is applied. (-20 dB to +120 dB gain)
 AGC-T = 90 (means the AGC will not add more than 90dBm of gain to any signal you hear)
@@ -583,7 +583,7 @@ RIGHT CLICK (on top of AGC-T text): Toggle Panadapter Control (Grab Green line w
 </value>
   </data>
   <data name="labelTS74.ToolTip" xml:space="preserve">
-    <value>AGC Max Gain T=Threshold - Operates similarly to traditional RF Gain (but this way the Panadapter signal does not change when you change the gain)
+    <value>RX2 AGC-T  Max Gain Threshold - Operates similarly to traditional RF Gain (but this way the Panadapter signal does not change when you change the gain)
 This provides for a “threshold” AGC  (see AGC-T on the main console screen)
 Irrespective of how weak a signal is, no gain over this Max Gain is applied. (-20 dB to +120 dB gain)
 AGC-T = 90 (means the AGC will not add more than 90dBm of gain to any signal you hear)
@@ -592,7 +592,7 @@ RIGHT CLICK (on top of AGC-T text): Toggle Panadapter Control (Grab Green line w
 </value>
   </data>
   <data name="grpRX2DSPAGC.ToolTip" xml:space="preserve">
-    <value>The AGC is a state of the art, dual track AGC with anticipatory response on both fast and slower tracks.
+    <value>RX2 only: The AGC is a state of the art, dual track AGC with anticipatory response on both fast and slower tracks.
 Or, stated differently, the AGC is in essence the combination of two AGCs, one with a very fast time
 constant, the other with a much slower time constant</value>
   </data>
@@ -615,7 +615,7 @@ Controls – Phone on page 82) work very well together with the ALC to increase 
 overdrive.</value>
   </data>
   <data name="udDSPAGCMaxGaindB.ToolTip" xml:space="preserve">
-    <value>AGC Max Gain T=Threshold - Operates similarly to traditional RF Gain (but this way the Panadapter signal does not change when you change the gain)
+    <value>AGC-T  Max Gain Threshold - Operates similarly to traditional RF Gain (but this way the Panadapter signal does not change when you change the gain)
 This provides for a “threshold” AGC  (see AGC-T on the main Console Screen)
 Irrespective of how weak a signal is, no gain over this Max Gain is applied. (-20 dB to +120 dB gain)
 AGC-T = 90 (means the AGC will not add more than 90dBm of gain to any signal you hear)
@@ -624,7 +624,7 @@ RIGHT CLICK (on top of AGC-T text): Toggle Panadapter Control (Grab Green line w
 </value>
   </data>
   <data name="lblDSPAGCMaxGain.ToolTip" xml:space="preserve">
-    <value>AGC Max Gain T=Threshold - Operates similarly to traditional RF Gain (but this way the Panadapter signal does not change when you change the gain)
+    <value>AGC-T  Max Gain Threshold - Operates similarly to traditional RF Gain (but this way the Panadapter signal does not change when you change the gain)
 This provides for a “threshold” AGC  (see AGC-T on the main console screen)
 Irrespective of how weak a signal is, no gain over this Max Gain is applied. (-20 dB to +120 dB gain)
 AGC-T = 90 (means the AGC will not add more than 90dBm of gain to any signal you hear)

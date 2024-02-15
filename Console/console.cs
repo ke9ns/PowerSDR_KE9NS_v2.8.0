@@ -66,6 +66,8 @@
 
 //  if ((Display.CurrentDisplayModeBottom != DisplayMode.OFF) && (rx2_enabled) && (e.Y > H7)) to check if your clicked inside RX2 pan area
 
+// skin.cs allows you to add buttons to skin on console screen
+
 // skin is in
 
 // this.txtMultiText.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
@@ -17778,17 +17780,24 @@ namespace PowerSDR
                 {
                     if (current_model == Model.FLEX5000)
                     {
-                        if (fwcAntForm.radModeExpert.Checked)
+                        if (fwcAntForm != null && fwcAntForm.radModeExpert.Checked)
                         {
-                            CurrentAntMode = AntMode.Expert;
-                            fwcAntForm.CurrentAntMode = current_ant_mode;
-                            fwcAntForm.RX1Ant = rx1_ant;
-                            fwcAntForm.RX1Loop = rx1_loop;
-                            fwcAntForm.RX2Ant = rx2_ant;
-                            fwcAntForm.TXAnt = tx_ant;
-                            fwcAntForm.TXAnt2 = tx_ant2; // ke9ns add .205
+                          //  Debug.WriteLine("EXPERT3 Set RX1Band");
+
+                            if (CurrentAntMode != AntMode.Expert) CurrentAntMode = AntMode.Expert; //mod .290
+                            if (fwcAntForm.CurrentAntMode != current_ant_mode) fwcAntForm.CurrentAntMode = current_ant_mode; // mod .290
+
+                            if (fwcAntForm.RX1Ant != rx1_ant) fwcAntForm.RX1Ant = rx1_ant; //mod .290
+                            if (fwcAntForm.RX1Loop != rx1_loop) fwcAntForm.RX1Loop = rx1_loop; // mod.290
+                            if (fwcAntForm.RX2Ant != rx2_ant) fwcAntForm.RX2Ant = rx2_ant; // mod.290
+                            if (fwcAntForm.TXAnt != tx_ant) fwcAntForm.TXAnt = tx_ant; //mod .290
+                            if (fwcAntForm.TXAnt2 != tx_ant2) fwcAntForm.TXAnt2 = tx_ant2; // ke9ns add .205 mod .290
+
                         }
-                        else CurrentAntMode = AntMode.Simple;
+                        else
+                        {
+                            CurrentAntMode = AntMode.Simple;
+                        }
                     }
                 }
 
@@ -17823,17 +17832,23 @@ namespace PowerSDR
             {
                 if (current_model == Model.FLEX5000)
                 {
-                    if (fwcAntForm.radModeExpert.Checked)
+                    if (fwcAntForm != null && fwcAntForm.radModeExpert.Checked)
                     {
-                        CurrentAntMode = AntMode.Expert;
-                        fwcAntForm.CurrentAntMode = current_ant_mode;
-                        fwcAntForm.RX1Ant = rx1_ant;
-                        fwcAntForm.RX1Loop = rx1_loop;
-                        fwcAntForm.RX2Ant = rx2_ant;
-                        fwcAntForm.TXAnt = tx_ant;
-                        fwcAntForm.TXAnt2 = tx_ant2; // ke9ns add .205
+                    //    Debug.WriteLine("EXPERT3 Set RX2Band");
+
+                        if (CurrentAntMode != AntMode.Expert)  CurrentAntMode = AntMode.Expert; //mod .290
+                        if (fwcAntForm.CurrentAntMode != current_ant_mode)  fwcAntForm.CurrentAntMode = current_ant_mode; // mod .290
+
+                        if(fwcAntForm.RX1Ant != rx1_ant) fwcAntForm.RX1Ant = rx1_ant; //mod .290
+                        if(fwcAntForm.RX1Loop != rx1_loop) fwcAntForm.RX1Loop = rx1_loop; // mod.290
+                        if(fwcAntForm.RX2Ant != rx2_ant) fwcAntForm.RX2Ant = rx2_ant; // mod.290
+                        if(fwcAntForm.TXAnt != tx_ant) fwcAntForm.TXAnt = tx_ant; //mod .290
+                        if(fwcAntForm.TXAnt2 != tx_ant2) fwcAntForm.TXAnt2 = tx_ant2; // ke9ns add .205 mod .290
                     }
-                    else CurrentAntMode = AntMode.Simple;
+                    else
+                    {
+                        CurrentAntMode = AntMode.Simple;
+                    }
                 }
 
             }
@@ -20951,8 +20966,11 @@ namespace PowerSDR
 
         #region Test and Calibration Routines
 
+
+        //ke9ns: CLASS AB: Driver=1 Final=2, CLASS A: Driver=2 Final=4, tol=.05  index=0
+
         private Progress p;
-        public bool CalibratePABias(Progress progress, float driver_target, float final_target, float tol, int index)
+        public bool CalibratePABias(Progress progress, float driver_target, float final_target, float tol, int index) 
         {
             bool ret_val = false;
             float driver_limit = 10.0f;
@@ -21144,6 +21162,7 @@ namespace PowerSDR
                 if (Q2 == 255) goto error;
             }
             while (current < baseline + driver_target / 4);
+
             progress.SetPercent(++counter / (float)16);
 
             float q2_current = current - baseline;
@@ -28101,7 +28120,7 @@ namespace PowerSDR
         private int[] rx2_agct_by_band;
 
         private AntMode current_ant_mode = AntMode.Simple;
-        public AntMode CurrentAntMode // called by fwcAntForm.cs
+        public AntMode CurrentAntMode // called by fwcAntForm.cs one time when you switch between SIMPLE and EXPERT
         {
 
             get { return current_ant_mode; }
@@ -28111,15 +28130,19 @@ namespace PowerSDR
                 autoadjust1 = true; // ke9ns add for automatic water and pan level updates
 
                 current_ant_mode = value;
+
                 if (current_ant_mode == AntMode.Expert && !initializing)
                 {
-                    TXAnt = GetTXAnt(rx1_band);
-                    RX1Ant = GetRX1Ant(rx1_band);
+                  //  Debug.WriteLine("EXPERT CurrentAntMode");
+
+                    TXAnt = GetTXAnt(rx1_band);   // Set RX1 transmit antenna from expert database list
+                    RX1Ant = GetRX1Ant(rx1_band); // Set RX1 receive antenna from exper database list
 
                     if (FWCEEPROM.RX2OK)
                     {
                         TXAnt2 = GetTXAnt2(rx2_band); // ke9ns add .205
                         RX2Ant = GetRX2Ant(rx2_band);
+
                         // RX2Ant = GetRX2Ant(rx1_band); // original
                     }
 
@@ -28131,7 +28154,7 @@ namespace PowerSDR
 
                 }
             }
-        }
+        } // CurrentAntMode
 
         private FWCAnt[] rx1_ant_by_band;
         public void SetRX1Ant(Band b, FWCAnt ant)
@@ -28226,6 +28249,9 @@ namespace PowerSDR
                     tx_ant_by_band[(int)b] = ant; // ke9ns set to ant selected in the antform
 
                     //ke9ns remove		if(tx_band == b)
+
+                //    Debug.WriteLine("EXPERT SetTXAnt");
+
                     TXAnt = ant; // ke9ns causes problems for openned radio in expert mode.
 
                     break;
@@ -28691,28 +28717,28 @@ namespace PowerSDR
                             break;
                         case FWCAnt.ANT1:
                             //.274
-                            if (fwcAntForm != null) lblAntRX1a.Text =  fwcAntForm.txtBoxAnt1.Text; //.274
+                            if (fwcAntForm != null && lblAntRX1a.Text != fwcAntForm.txtBoxAnt1.Text) lblAntRX1a.Text =  fwcAntForm.txtBoxAnt1.Text; //.274 .290
                             else lblAntRX1a.Text = "ANT1";
 
                             FWC.SetRX1Ant(1);
                             rx1_path_offset = 0.5f;
                             break;
                         case FWCAnt.ANT2:
-                            if (fwcAntForm != null) lblAntRX1a.Text = fwcAntForm.txtBoxAnt2.Text;
+                            if (fwcAntForm != null && lblAntRX1a.Text != fwcAntForm.txtBoxAnt2.Text) lblAntRX1a.Text = fwcAntForm.txtBoxAnt2.Text;
                             else lblAntRX1a.Text = "ANT2";
 
                             FWC.SetRX1Ant(2);
                             rx1_path_offset = 0.5f;
                             break;
                         case FWCAnt.ANT3:
-                            if (fwcAntForm != null) lblAntRX1a.Text = fwcAntForm.txtBoxAnt3.Text;
+                            if (fwcAntForm != null && lblAntRX1a.Text != fwcAntForm.txtBoxAnt3.Text) lblAntRX1a.Text = fwcAntForm.txtBoxAnt3.Text;
                             else lblAntRX1a.Text = "ANT3";
 
                             FWC.SetRX1Ant(3);
                             rx1_path_offset = 0.5f;
                             break;
                         case FWCAnt.RX1IN:
-                            if (fwcAntForm != null) lblAntRX1a.Text = fwcAntForm.txtBoxAnt4.Text;
+                            if (fwcAntForm != null && lblAntRX1a.Text != fwcAntForm.txtBoxAnt4.Text) lblAntRX1a.Text = fwcAntForm.txtBoxAnt4.Text;
                             else lblAntRX1a.Text = "RX1 IN";
 
                             FWC.SetRX1Ant(4);
@@ -28900,16 +28926,13 @@ namespace PowerSDR
             }
             set
             {
-
                 if (!fwc_init || current_model != Model.FLEX5000) return;
                 Debug.WriteLine("SET TXAnt: " + tx_ant + " , " + value);
-
                
                 FWCAnt old = 0;
                 tx_ant = value;
 
                 Debug.WriteLine("XVTR TXAnt: " + rx1_xvtr_index);
-
 
                 //  if (old != value || tx_ant_6m_reset || initializing || tx_cal || value != tx_ant2)
                 //  {
@@ -29118,10 +29141,8 @@ namespace PowerSDR
             }
             set
             {
-
                 if (!fwc_init || current_model != Model.FLEX5000) return;
                 Debug.WriteLine("SET TXAnt2: " + value + " 2: " + tx_ant2 + " , " + lblAntRX2a.Text + " , " + lblAntTX2a.Text);
-
                
                 FWCAnt old = 0;
                 tx_ant2 = value;
@@ -32105,6 +32126,8 @@ namespace PowerSDR
                 {
                     if (panelDateTime.Text != "Date/Time") panelDateTime.Text = "Date/Time";
                     if (!timer_clock.Enabled) timer_clock.Enabled = true;
+
+
                 }
             }
         } // CurrentDateTimeMode
@@ -36548,6 +36571,8 @@ namespace PowerSDR
                                 int band = (int)value;
                                 if (tx_xvtr_index >= 0) band = (int)Band.VHF0 + tx_xvtr_index;
 
+                              //  Debug.WriteLine("EXPERT TXBand");
+
                                 TXAnt = tx_ant_by_band[band];
 
                                 FWCAmpTX1 = tx1_by_band[band];
@@ -36689,17 +36714,23 @@ namespace PowerSDR
                     {
                         if (current_model == Model.FLEX5000)
                         {
-                            if (fwcAntForm.radModeExpert.Checked)
+                            if (fwcAntForm != null && fwcAntForm.radModeExpert.Checked)
                             {
-                                CurrentAntMode = AntMode.Expert;
-                                fwcAntForm.CurrentAntMode = current_ant_mode;
-                                fwcAntForm.RX1Ant = rx1_ant;
-                                fwcAntForm.RX1Loop = rx1_loop;
-                                fwcAntForm.RX2Ant = rx2_ant;
-                                fwcAntForm.TXAnt = tx_ant;
-                                fwcAntForm.TXAnt2 = tx_ant2; // ke9ns add .205
+                             //   Debug.WriteLine("EXPERT MODE");
+
+                                if (CurrentAntMode != AntMode.Expert) CurrentAntMode = AntMode.Expert; //mod .290
+                                if (fwcAntForm.CurrentAntMode != current_ant_mode) fwcAntForm.CurrentAntMode = current_ant_mode; // mod .290
+
+                                if (fwcAntForm.RX1Ant != rx1_ant) fwcAntForm.RX1Ant = rx1_ant; //mod .290
+                                if (fwcAntForm.RX1Loop != rx1_loop) fwcAntForm.RX1Loop = rx1_loop; // mod.290
+                                if (fwcAntForm.RX2Ant != rx2_ant) fwcAntForm.RX2Ant = rx2_ant; // mod.290
+                                if (fwcAntForm.TXAnt != tx_ant) fwcAntForm.TXAnt = tx_ant; //mod .290
+                                if (fwcAntForm.TXAnt2 != tx_ant2) fwcAntForm.TXAnt2 = tx_ant2; // ke9ns add .205 mod .290
                             }
-                            else CurrentAntMode = AntMode.Simple;
+                            else
+                            {
+                                CurrentAntMode = AntMode.Simple;
+                            }
                         }
 
                     }
@@ -36849,6 +36880,8 @@ namespace PowerSDR
                                 FWCAmpTX1 = tx1_by_band[band];
                                 FWCAmpTX2 = tx2_by_band[band];
                                 FWCAmpTX3 = tx3_by_band[band];
+
+                                Debug.WriteLine("EXPERT TXBAND2 " + tx_ant2);
                             }
                             else // if (value != Band.B6M)
                             {
@@ -36959,17 +36992,23 @@ namespace PowerSDR
                     {
                         if (current_model == Model.FLEX5000)
                         {
-                            if (fwcAntForm.radModeExpert.Checked)
+                            if (fwcAntForm != null && fwcAntForm.radModeExpert.Checked)
                             {
-                                CurrentAntMode = AntMode.Expert;
-                                fwcAntForm.CurrentAntMode = current_ant_mode;
-                                fwcAntForm.RX1Ant = rx1_ant;
-                                fwcAntForm.RX1Loop = rx1_loop;
-                                fwcAntForm.RX2Ant = rx2_ant;
-                                fwcAntForm.TXAnt = tx_ant;
-                                fwcAntForm.TXAnt2 = tx_ant2; // ke9ns add .205
+                                Debug.WriteLine("EXPERT2");
+
+                                if (CurrentAntMode != AntMode.Expert) CurrentAntMode = AntMode.Expert; //mod .290
+                                if (fwcAntForm.CurrentAntMode != current_ant_mode) fwcAntForm.CurrentAntMode = current_ant_mode; // mod .290
+
+                                if (fwcAntForm.RX1Ant != rx1_ant) fwcAntForm.RX1Ant = rx1_ant; //mod .290
+                                if (fwcAntForm.RX1Loop != rx1_loop) fwcAntForm.RX1Loop = rx1_loop; // mod.290
+                                if (fwcAntForm.RX2Ant != rx2_ant) fwcAntForm.RX2Ant = rx2_ant; // mod.290
+                                if (fwcAntForm.TXAnt != tx_ant) fwcAntForm.TXAnt = tx_ant; //mod .290
+                                if (fwcAntForm.TXAnt2 != tx_ant2) fwcAntForm.TXAnt2 = tx_ant2; // ke9ns add .205 mod .290
                             }
-                            else CurrentAntMode = AntMode.Simple;
+                            else
+                            {
+                                CurrentAntMode = AntMode.Simple;
+                            }
                         }
 
                     }
@@ -53022,6 +53061,7 @@ namespace PowerSDR
             {
                 case DateTimeMode.LOCAL:
                     DateTime date = DateTime.Now.Date;
+
                     if (date != last_date || txtDate.Text == "")
                     {
                         last_date = date;
@@ -53052,8 +53092,16 @@ namespace PowerSDR
                     break;
                 case DateTimeMode.UPTIME: // Total Days, Hours, Min
                     date = DateTime.Now.Date;
-                   
-                     sec = DateTime.Now.Second;
+                                        
+
+                    if (date != last_date || txtDate.Text == "") //.289
+                    {
+                        last_date = date;
+                        txtDate.Text = DateTime.Now.ToShortDateString();
+                    }
+
+
+                    sec = DateTime.Now.Second;
                     if (sec != last_sec)
                     {
 
@@ -53071,6 +53119,12 @@ namespace PowerSDR
                     break;
                 case DateTimeMode.UPTIME2: // Total minutes
                     date = DateTime.Now.Date;
+
+                    if (date != last_date || txtDate.Text == "") //.289
+                    {
+                        last_date = date;
+                        txtDate.Text = DateTime.Now.ToShortDateString();
+                    }
 
                     sec = DateTime.Now.Second;
                     if (sec != last_sec)
@@ -53114,7 +53168,8 @@ namespace PowerSDR
             txtTime.Select(0, 0);
             txtDate.Select(0, 0);
 
-       
+            if (txtTime.Focused) btnHidden.Focus(); //.289
+
 
         } //timer_clock_tick
 
@@ -58674,6 +58729,40 @@ namespace PowerSDR
         }
 
 
+        private void ptbRX2RF_Scroll(object sender, System.EventArgs e) //.289 mod
+        {
+            if (!FWCEEPROM.RX2OK) return;
+
+            lblRX2RF.Text = "AGC-T:  " + ptbRX2RF.Value.ToString();
+
+            switch (RX2AGCMode)
+            {
+  
+                case AGCMode.FIXD:
+
+                  //  dsp.GetDSPRX(1, 0).RXFixedAGC = (double)ptbRX2RF.Value; // now done in setup.cs
+                  //  dsp.GetDSPRX(1, 1).RXFixedAGC = (double)ptbRX2RF.Value;
+
+                    rx2_fixed_gain = ptbRX2RF.Value;
+                    if (setupForm != null) setupForm.AGCRX2FixedGain = ptbRX2RF.Value;
+                    break;
+                default:
+
+                  //  dsp.GetDSPRX(1, 0).RXAGCMaxGain = (double)ptbRX2RF.Value; //. now down in setup.cs
+                  //  dsp.GetDSPRX(1, 1).RXAGCMaxGain = (double)ptbRX2RF.Value;
+
+                    rx2_max_gain = ptbRX2RF.Value;
+
+                    if (setupForm != null) setupForm.AGCRX2MaxGain = ptbRX2RF.Value;
+                    break;
+
+            }
+
+            rx2_agct_by_band[(int)rx2_band] = ptbRX2RF.Value;
+
+            if (ptbRX2RF.Focused) btnHidden.Focus();
+        }
+
         //=============================================================================
         private void ptbMic_Scroll(object sender, System.EventArgs e)
         {
@@ -60931,6 +61020,7 @@ namespace PowerSDR
             if (current_datetime_mode + 1 == DateTimeMode.LAST) CurrentDateTimeMode = DateTimeMode.OFF;
             else CurrentDateTimeMode = current_datetime_mode + 1;
 
+            btnHidden.Enabled = true;
             btnHidden.Focus();
         }
 
@@ -62667,7 +62757,8 @@ namespace PowerSDR
             last_tx_xvtr_index = tx_xvtr_index;
 
             UpdateRX1Notches();
-
+            UpdateRX1SubNotches(); //.292
+            UpdateRX2Notches(); // .292
 
         } // txtVFOAFreq_LostFocus
 
@@ -69465,7 +69556,7 @@ namespace PowerSDR
                 {
                     if (chkVFOSync.Checked) chkVFOSync.Checked = false;
 
-                     TXBand = BandByFreq(VFOBFreq, tx_xvtr_index, true, current_region);
+                    TXBand = BandByFreq(VFOBFreq, tx_xvtr_index, true, current_region);
                     grpVFOB.Font = ff5; // new Font("Swis721 BT", 8.25F, FontStyle.Regular | FontStyle.Italic);
                     grpVFOB.ForeColor = Color.Red;
                     chkVFOBTX.Checked = true;
@@ -70470,7 +70561,7 @@ namespace PowerSDR
         {
             dsp.GetDSPRX(0, 1).Active = chkEnableMultiRX.Checked;
 
-            if (chkEnableMultiRX.Checked)
+            if (chkEnableMultiRX.Checked) // 
             {
 
                 //tbPanMainRX_Scroll(this, EventArgs.Empty);
@@ -70488,10 +70579,13 @@ namespace PowerSDR
                     }
                     else
                     {
-                        if (setupForm.chkBoxMRX.Checked == true) VFOBFreq = VFOAFreq; // ke9ns add:  start with B synced to A
+                        if (setupForm.chkBoxMRX.Checked == true) VFOBFreq = VFOAFreq; // ke9ns add:  start with B synced to A if auto reset is checked
 
                         txtVFOBFreq_LostFocus(this, EventArgs.Empty);
-                        if (chkVFOSplit.Checked) chkVFOSplit_CheckedChanged(this, EventArgs.Empty);
+                        if (chkVFOSplit.Checked)
+                        {
+                            chkVFOSplit_CheckedChanged(this, EventArgs.Empty);
+                        }
                         else
                         {
                             txtVFOBFreq.ForeColor = vfo_text_light_color;
@@ -70506,7 +70600,7 @@ namespace PowerSDR
 
                 dsp.GetDSPRX(0, 1).SetRXFilter(dsp.GetDSPRX(0, 0).RXFilterLow, dsp.GetDSPRX(0, 0).RXFilterHigh);   // turn on sub receiver 
             }
-            else // ke9ns: if multiRX turned OFF (below)
+            else // ke9ns: if multiRX turned OFF  (below)
             {
                 //dsp.GetDSPRX(0, 0).RXOutputGain = 1.0;
                 //dsp.GetDSPRX(0, 0).Pan = 0.5f;
@@ -73540,27 +73634,7 @@ namespace PowerSDR
 
         } // chkRX2Preamp_CheckedChanged
 
-        private void ptbRX2RF_Scroll(object sender, System.EventArgs e)
-        {
-            if (!FWCEEPROM.RX2OK) return;
-            lblRX2RF.Text = "AGC-T:  " + ptbRX2RF.Value.ToString();
-            switch (RX2AGCMode)
-            {
-                case AGCMode.FIXD:
-                    dsp.GetDSPRX(1, 0).RXFixedAGC = (double)ptbRX2RF.Value;
-                    dsp.GetDSPRX(1, 1).RXFixedAGC = (double)ptbRX2RF.Value;
-                    rx2_fixed_gain = ptbRX2RF.Value;
-                    break;
-                default:
-                    dsp.GetDSPRX(1, 0).RXAGCMaxGain = (double)ptbRX2RF.Value;
-                    dsp.GetDSPRX(1, 1).RXAGCMaxGain = (double)ptbRX2RF.Value;
-                    rx2_max_gain = ptbRX2RF.Value;
-                    break;
-            }
-
-            rx2_agct_by_band[(int)rx2_band] = ptbRX2RF.Value;
-            if (ptbRX2RF.Focused) btnHidden.Focus();
-        }
+      
 
         private void chkRX2Squelch_CheckedChanged(object sender, System.EventArgs e)
         {
@@ -74695,7 +74769,7 @@ namespace PowerSDR
             if (comboRX2AGC.SelectedIndex < 0) return;
 
             dsp.GetDSPRX(1, 0).RXAGCMode = (AGCMode)comboRX2AGC.SelectedIndex;
-        //    dsp.GetDSPRX(1, 1).RXAGCMode = (AGCMode)comboRX2AGC.SelectedIndex;
+            dsp.GetDSPRX(1, 1).RXAGCMode = (AGCMode)comboRX2AGC.SelectedIndex;
 
             // set whether custom controls are active
             switch ((AGCMode)comboRX2AGC.SelectedIndex)
@@ -75836,7 +75910,8 @@ namespace PowerSDR
             UpdateRX1Notches();
             UpdateRX1SubNotches();
             UpdateRX2Notches();
-            Display.TNFActive = chkTNF.Checked;
+
+            Display.TNFActive = chkTNF.Checked; // display the notches on the pan (both RX1 and RX2)
         }
 
 #if (!NO_TNF)
@@ -75873,8 +75948,7 @@ namespace PowerSDR
             double rf_freq = vfo + midpoint * 1e-6;
 
             // if there's already another notch within 100Hz, then quit now
-            if (NotchList.NotchNearFreq(rf_freq, 100))
-                return;
+            if (NotchList.NotchNearFreq(rf_freq, 100)) return;
 
             // if there's already 3+ filters within the RF window, quit now
             if (NotchList.NotchesInBW(VFOAFreq, low, high).Count >= MAX_NOTCHES_INITIALLY_IN_PASSBAND)
@@ -75890,6 +75964,53 @@ namespace PowerSDR
             UpdateRX2Notches();
 #endif
         } // btnTNFAdd_Click
+
+
+        private void btnTNFRX2Add_Click(object sender, EventArgs e) //.292 add
+        {
+#if (!NO_TNF)
+            // calculate the mid-point for the filter
+            int low = dsp.GetDSPRX(1, 0).RXFilterLow;
+            int high = dsp.GetDSPRX(1, 0).RXFilterHigh;
+            int midpoint = (low + high) / 2;
+
+            // offset for double sideband modes so the filter is visible
+            switch (rx1_dsp_mode)
+            {
+                case DSPMode.DSB:
+                case DSPMode.AM:
+                case DSPMode.SAM:
+                case DSPMode.FM:
+                    midpoint += (high - low) / 4;
+                    break;
+            }
+
+            if (midpoint < -9999 || midpoint > 9999)
+                throw new Exception("TNF: The filter limits [" + low + "," + high + "] do not make sense");
+
+            double vfo = VFOBFreq;
+            if (chkRIT.Checked) vfo += (double)udRIT.Value * 1e-6; // check for RIT
+
+            double rf_freq = vfo + midpoint * 1e-6;
+
+            // if there's already another notch within 100Hz, then quit now
+            if (NotchList.NotchNearFreq(rf_freq, 100)) return;
+
+            // if there's already 3+ filters within the RF window, quit now
+            if (NotchList.NotchesInBW(VFOBFreq, low, high).Count >= MAX_NOTCHES_INITIALLY_IN_PASSBAND)
+                return;
+
+            if (setupForm.udTNFWidth.Value < 100) setupForm.udTNFWidth.Value = default_notch_width; // ke9ns add
+            else default_notch_width = (int)setupForm.udTNFWidth.Value;
+
+            NotchList.List.Add(new Notch(rf_freq, default_notch_width)); // ke9ns mod
+
+            UpdateRX1Notches();
+            UpdateRX1SubNotches();
+            UpdateRX2Notches();
+#endif
+        } // btnTNFRX2Add_Click //292 add
+
 
         private void addNotch(int thread, int subrx, uint count, double freq, double bw)
         {
@@ -75909,6 +76030,8 @@ namespace PowerSDR
 #if (!NO_TNF)
             if (!chkTNF.Checked)
             {
+            //    Debug.WriteLine("RX1NOTCHES0 " + MAX_NOTCHES_IN_PASSBAND + " , ");
+
                 for (uint i = 0; i < MAX_NOTCHES_IN_PASSBAND; i++)
                     dsp.GetDSPRX(0, 0).SetNotchOn(i, false);
                 return;
@@ -75932,6 +76055,9 @@ namespace PowerSDR
 
 
             List<Notch> l = NotchList.NotchesInBW(vfo, low, high);
+
+          //  Debug.WriteLine("RX1Notches1 " + l.Count);
+
             if (l.Count == 0)
             {
                 for (uint i = 0; i < MAX_NOTCHES_IN_PASSBAND; i++)
@@ -75948,14 +76074,20 @@ namespace PowerSDR
                 // translate RF to audio frequency
                 double audio_freq = Math.Abs((n.Freq - vfo)) * 1e6; // now in Hz
 
+             //   Debug.WriteLine("RX1NOTCHES3 " + n.Freq + " , " + vfo + " , " + n.Depth + ", " + audio_freq);
+
                 for (int x = 0; x < n.Depth; x++)
                 {
                     if (audio_freq > 0)
+                    {
+                      //  Debug.WriteLine("RX1NOTCHES2 " + count + " , " + audio_freq + " , " +n.BW);
+
                         addNotch(0, 0, count++, audio_freq, n.BW);
+                    }
                 }
 
-                if (count >= MAX_NOTCHES_IN_PASSBAND) // don't enable more than 9 notches!
-                    break;
+                if (count >= MAX_NOTCHES_IN_PASSBAND) break;// don't enable more than 9 notches!
+
             } // for loop
 
             // turn off unused notches
@@ -75965,8 +76097,7 @@ namespace PowerSDR
                     dsp.GetDSPRX(0, 0).SetNotchOn(i, false);
             }
 
-            if (!chkPower.Checked)
-                Display.DrawBackground();
+            if (!chkPower.Checked)  Display.DrawBackground();
 #endif
         } // UpdateRX1Notches()
 
@@ -76033,13 +76164,15 @@ namespace PowerSDR
             if (!chkPower.Checked)
                 Display.DrawBackground();
 #endif
-        }
+        } // UpdateRX1SubNotches
 
         private void UpdateRX2Notches()
         {
 #if (!NO_TNF)
             if (!chkTNF.Checked || !rx2_enabled)
             {
+             //   Debug.WriteLine("RX2NOTCHES0 " + MAX_NOTCHES_IN_PASSBAND + " , ");
+
                 for (uint i = 0; i < MAX_NOTCHES_IN_PASSBAND; i++)
                     dsp.GetDSPRX(1, 0).SetNotchOn(i, false);
                 return;
@@ -76062,6 +76195,9 @@ namespace PowerSDR
             int high = dsp.GetDSPRX(1, 0).RXFilterHigh + 200;
 
             List<Notch> l = NotchList.NotchesInBW(vfo, low, high);
+
+          //  Debug.WriteLine("RX2NOTCHES1 " + l.Count);
+
             if (l.Count == 0)
             {
                 for (uint i = 0; i < MAX_NOTCHES_IN_PASSBAND; i++)
@@ -76076,15 +76212,22 @@ namespace PowerSDR
             foreach (Notch n in l)
             {
                 // translate RF to audio frequency
-                double audio_freq = (n.Freq - vfo) * 1e6; // now in Hz
+              
+                double audio_freq = Math.Abs((n.Freq - vfo)) * 1e6; // now in Hz // fix .292 flex forgot the Abs
+
+             //   Debug.WriteLine("RX2NOTCHES3 " + n.Freq + " , " + vfo + " , " + n.Depth + ", " + audio_freq);
 
                 for (int x = 0; x < n.Depth; x++)
                 {
                     if (audio_freq > 0)
+                    {
+                     //   Debug.WriteLine("RX2NOTCHES2 " + count + " , " + audio_freq + " , " + n.BW);
+
                         addNotch(1, 0, count++, audio_freq, n.BW);
+                    }
                 }
-                if (count >= MAX_NOTCHES_IN_PASSBAND) // don't enable more than 9 notches!
-                    break;
+                if (count >= MAX_NOTCHES_IN_PASSBAND) break;// don't enable more than 9 notches!
+
 
             }
 
@@ -76095,10 +76238,9 @@ namespace PowerSDR
                     dsp.GetDSPRX(1, 0).SetNotchOn(i, false);
             }
 
-            if (!chkPower.Checked)
-                Display.DrawBackground();
+            if (!chkPower.Checked)  Display.DrawBackground();
 #endif
-        }
+        } // UpdateRX2Notches
 
         private void mnuESC_Click(object sender, EventArgs e)
         {

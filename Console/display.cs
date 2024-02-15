@@ -312,7 +312,7 @@ namespace PowerSDR
         }
 
         private static bool sub_rx1_enabled = false;
-        public static bool SubRX1Enabled
+        public static bool SubRX1Enabled  // chkEnableMultiRX.Checked in console
         {
             get { return sub_rx1_enabled; }
             set
@@ -3331,7 +3331,7 @@ namespace PowerSDR
                 //   if ((!local_mox) && (draw_tx_cw_freq || console.setupForm.chkCWDisplay.Checked) && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)) // ke9ns mod
                 if ((draw_tx_cw_freq || console.setupForm.chkCWDisplay.Checked) && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)) // ke9ns mod
                 {
-
+                  
                     int pitch = cw_pitch;
                     if ((rx1_dsp_mode == DSPMode.CWL)) pitch = -cw_pitch;
 
@@ -3360,6 +3360,7 @@ namespace PowerSDR
                     //  if (draw_tx_cw_freq) // ke9ns add
                     if ((!local_mox) && (draw_tx_cw_freq)) //RX
                     {
+                        Debug.WriteLine("CW1=======================");
                         if ((bottom)) // && tx_on_vfob) // KE9NS ADD  fix mistake made by flex (draw TX line on bottom for VFOB)
                         {
                             g.DrawLine(tx_filter_pen, cw_line_x, H + top, cw_line_x, H + H);
@@ -3370,6 +3371,8 @@ namespace PowerSDR
                         {
                             g.DrawLine(tx_filter_pen, cw_line_x, top, cw_line_x, H);
                             g.DrawLine(tx_filter_pen, cw_line_x + 1, top, cw_line_x + 1, H);
+
+                            Debug.WriteLine("CW2=======================");
 
                         }
                     }

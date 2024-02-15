@@ -2914,7 +2914,7 @@ namespace PowerSDR
                 udRX2DSPAGCDecay.Enabled = value;
                 udRX2DSPAGCHangTime.Enabled = value;
 
-                if (value)
+                if (value) // if true
                 {
                     udRX2DSPAGCAttack_ValueChanged(this, EventArgs.Empty);
                     udRX2DSPAGCDecay_ValueChanged(this, EventArgs.Empty);
@@ -16531,15 +16531,15 @@ namespace PowerSDR
         private void udRX2DSPAGCSlope_ValueChanged(object sender, EventArgs e) //.283
         {
             console.dsp.GetDSPRX(1, 0).RXAGCSlope = 10 * (int)(udRX2DSPAGCSlope.Value);
-         //   console.dsp.GetDSPRX(1, 1).RXAGCSlope = 10 * (int)(udRX2DSPAGCSlope.Value);
+            console.dsp.GetDSPRX(1, 1).RXAGCSlope = 10 * (int)(udRX2DSPAGCSlope.Value);
         }
 
         private void udRX2DSPAGCMaxGaindB_ValueChanged(object sender, EventArgs e) //.283
         {
             console.dsp.GetDSPRX(1, 0).RXAGCMaxGain = (double)udRX2DSPAGCMaxGaindB.Value;
-          //  console.dsp.GetDSPRX(1, 1).RXAGCMaxGain = (double)udRX2DSPAGCMaxGaindB.Value;
+            console.dsp.GetDSPRX(1, 1).RXAGCMaxGain = (double)udRX2DSPAGCMaxGaindB.Value;
 
-            if (console.RX2AGCMode != AGCMode.FIXD) console.RX2RF = (int)udRX2DSPAGCMaxGaindB.Value;
+            if (console.RX2AGCMode != AGCMode.FIXD) console.RX2RF = (int)udRX2DSPAGCMaxGaindB.Value; // update the AGC-T RX2 slider here
         }
 
         private void udRX2DSPAGCAttack_ValueChanged(object sender, EventArgs e) //.283
@@ -16547,7 +16547,7 @@ namespace PowerSDR
             if (udRX2DSPAGCAttack.Enabled)
             {
                 console.dsp.GetDSPRX(1, 0).RXAGCAttack = (int)udRX2DSPAGCAttack.Value;
-             //   console.dsp.GetDSPRX(1, 1).RXAGCAttack = (int)udRX2DSPAGCAttack.Value;
+                console.dsp.GetDSPRX(1, 1).RXAGCAttack = (int)udRX2DSPAGCAttack.Value;
 
             }
         }
@@ -16557,7 +16557,7 @@ namespace PowerSDR
             if (udRX2DSPAGCDecay.Enabled)
             {
                 console.dsp.GetDSPRX(1, 0).RXAGCDecay = (int)udRX2DSPAGCDecay.Value;
-              //  console.dsp.GetDSPRX(1, 1).RXAGCDecay = (int)udRX2DSPAGCDecay.Value;
+                console.dsp.GetDSPRX(1, 1).RXAGCDecay = (int)udRX2DSPAGCDecay.Value;
             }
         }
 
@@ -16566,20 +16566,20 @@ namespace PowerSDR
             if (udRX2DSPAGCHangTime.Enabled)
             {
                 console.dsp.GetDSPRX(1, 0).RXAGCHang = (int)udRX2DSPAGCHangTime.Value;
-             //   console.dsp.GetDSPRX(10, 1).RXAGCHang = (int)udRX2DSPAGCHangTime.Value;
+                console.dsp.GetDSPRX(1, 1).RXAGCHang = (int)udRX2DSPAGCHangTime.Value;
             }
         }
 
         private void tbRX2DSPAGCHangThreshold_Scroll(object sender, EventArgs e) //.283
         {
             console.dsp.GetDSPRX(1, 0).RXAGCHangThreshold = (int)tbRX2DSPAGCHangThreshold.Value;
-          // console.dsp.GetDSPRX(1, 1).RXAGCHangThreshold = (int)tbRX2DSPAGCHangThreshold.Value;
+            console.dsp.GetDSPRX(1, 1).RXAGCHangThreshold = (int)tbRX2DSPAGCHangThreshold.Value;
         }
 
         private void udRX2DSPAGCFixedGaindB_ValueChanged(object sender, EventArgs e) //.283
         {
             console.dsp.GetDSPRX(1, 0).RXFixedAGC = (double)udRX2DSPAGCFixedGaindB.Value;
-          //  console.dsp.GetDSPRX(1, 1).RXFixedAGC = (double)udRX2DSPAGCFixedGaindB.Value;
+            console.dsp.GetDSPRX(1, 1).RXFixedAGC = (double)udRX2DSPAGCFixedGaindB.Value;
 
             if (console.RX2AGCMode == AGCMode.FIXD)  console.RX2RF = (int)udRX2DSPAGCFixedGaindB.Value;
         }

@@ -138,7 +138,9 @@ namespace PowerSDR
 
             f.Name = f.Name.Replace("chkVFOBSplit", "chkVFOSplit"); // ke9ns add .271
 
-            f.Name = f.Name.Replace("chkVFOBSplit", "chkVFOSplit"); // ke9ns add .271
+          //  f.Name = f.Name.Replace("chkVFOBSplit", "chkVFOSplit"); // ke9ns add .271
+
+            f.Name = f.Name.Replace("btnTNFAdd2", "btnTNFAdd"); // .292
 
             //  Debug.WriteLine("SKIN RESTORE AFTER>" + f.Name + "<");
 
@@ -737,6 +739,7 @@ namespace PowerSDR
 
             s = s.Replace("chkVFOBSplit", "chkVFOSplit"); // ke9ns add .271
 
+            s = s.Replace("btnTNFAdd2", "btnTNFAdd"); // .292
 
             for (int i = 0; i < 8; i++)
             {
@@ -948,6 +951,9 @@ namespace PowerSDR
             s = s.Replace("prettyTrackBarVOX", "ptbVOX"); // ke9ns add
 
             s = s.Replace("chkVFOBSplit", "chkVFOSplit"); // ke9ns add .271
+
+            s = s.Replace("btnTNFAdd2", "btnTNFAdd"); // .292
+
 
             for (int i = 0; i < 8; i++)
             {
@@ -1373,6 +1379,7 @@ namespace PowerSDR
 
             s = s.Replace("chkVFOBSplit", "chkVFOSplit"); // ke9ns add .271
 
+            s = s.Replace("btnTNFAdd2", "btnTNFAdd"); // .292
 
             for (int i = 0; i < 8; i++)
             {
@@ -1611,7 +1618,9 @@ namespace PowerSDR
             s = s.Replace("checkVOX", "chkVOX"); // ke9ns add
             s = s.Replace("prettyTrackBarVOX", "ptbVOX"); // ke9ns add
 
-           s = s.Replace("chkVFOBSplit", "chkVFOSplit"); // ke9ns add .271
+            s = s.Replace("chkVFOBSplit", "chkVFOSplit"); // ke9ns add .271
+
+            s = s.Replace("btnTNFAdd2", "btnTNFAdd"); // .292
 
 
             if (File.Exists(s + "back" + pic_file_ext))
@@ -1793,6 +1802,8 @@ namespace PowerSDR
             c.Name = c.Name.Replace("prettyTrackBarVOX", "ptbVOX"); // ke9ns add
 
             c.Name = c.Name.Replace("chkVFOBSplit", "chkVFOSplit"); // ke9ns add .271
+
+            c.Name = c.Name.Replace("btnTNFAdd2", "btnTNFAdd"); // .292
 
 
             if (File.Exists(path + "\\" + c.TopLevelControl.Name + "\\" + c.Name + pic_file_ext)) // pic_file_ext = .png

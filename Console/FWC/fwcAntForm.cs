@@ -28,6 +28,7 @@
 
 using System;
 using System.Collections;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -458,15 +459,16 @@ namespace PowerSDR
 
                 comboBand.Visible = false;
                 comboBand2.Visible = false; // ke9ns add
-                grpSwitchRelay.Visible = true;
+
+                grpSwitchRelay.Visible = true; // visible for both SIMPLE and EXPERT
 
                 comboRX1Ant.Text = AntToString(console.RX1Ant);
                 comboRX2Ant.Text = AntToString(console.RX2Ant);
                 comboTXAnt.Text = AntToString(console.TXAnt);
+
                 chkRX1Loop.Checked = console.RX1Loop;
 
-                if (console.TXBand == Band.B6M)
-                    comboTXAnt.Enabled = false;
+                if (console.TXBand == Band.B6M)  comboTXAnt.Enabled = false;
 
                 chkRCATX1_CheckedChanged(this, EventArgs.Empty);
                 chkRCATX2_CheckedChanged(this, EventArgs.Empty);
@@ -476,17 +478,15 @@ namespace PowerSDR
             }
         }
 
-
-
         private void radModeExpert_CheckedChanged(object sender, System.EventArgs e)
         {
             if (radModeExpert.Checked)
             {
-                console.CurrentAntMode = AntMode.Expert;
+                console.CurrentAntMode = AntMode.Expert; // set RX1 RX and TX, RX2 RX and TX antenna selections based on stored database list
+                console.CurrentAntMode = AntMode.Expert; // set RX1 RX and TX, RX2 RX and TX antenna selections based on stored database list
 
                 lblBand.Visible = true;
                 comboBand.Visible = true;
-
 
                 if ((rx2_ok) && (console.CurrentModel == Model.FLEX5000) && (console.chkRX2.Checked == true)) // ke9ns add: also checked in console chkRX2 checkchanged
                 {
@@ -494,8 +494,8 @@ namespace PowerSDR
                     lblBand2.Visible = true;
                 }
 
+                grpSwitchRelay.Visible = true; // PTT SWITCHING OUTPUTS // visible for both SIMPLE and EXPERT
 
-                grpSwitchRelay.Visible = true;
                 if (comboBand.Text != "6m" || (byte)FWCEEPROM.RFIORev >= 34) comboTXAnt.Enabled = true;
 
                 comboBand.Text = BandToString(console.RX1Band);
@@ -603,8 +603,7 @@ namespace PowerSDR
                 return;
             }
 
-            if (comboRX1Ant.Text == "RX1 IN")
-                chkRX1Loop.Enabled = false;
+            if (comboRX1Ant.Text == "RX1 IN")  chkRX1Loop.Enabled = false;
             else
                 chkRX1Loop.Enabled = true;
 
@@ -642,7 +641,18 @@ namespace PowerSDR
                 comboRX2Ant.Text = AntToString(console.RX2Ant);
                 return;
             }
-            if (rx2_ok) console.SetRX2Ant(StringToBand(comboBand.Text), StringToAnt(comboRX2Ant.Text));
+            if (rx2_ok)
+            {
+                if (radModeExpert.Checked)
+                {
+                    console.SetRX2Ant(StringToBand(comboBand2.Text), StringToAnt(comboRX2Ant.Text)); // RX2 band and antenna
+                }
+                else
+                {
+                    console.SetRX2Ant(StringToBand(comboBand.Text), StringToAnt(comboRX2Ant.Text)); // RX2 band and antenna
+                }
+
+            }
 
 
             if (chkLock.Checked)
@@ -906,7 +916,6 @@ namespace PowerSDR
             }
             else
             {
-
                 console.SetTXAnt2(StringToBand(comboBand2.Text), StringToAnt(comboTXAnt2.Text));
             }
 

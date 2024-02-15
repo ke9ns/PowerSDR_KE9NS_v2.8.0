@@ -374,6 +374,7 @@ namespace PowerSDR
             this.ptbDisplayPan2 = new PowerSDR.PrettyTrackBar();
             this.chkVFOBSplit = new System.Windows.Forms.CheckBoxTS();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.btnTNFAdd2 = new System.Windows.Forms.ButtonTS();
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStripFilterRX1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemRX1FilterConfigure = new System.Windows.Forms.ToolStripMenuItem();
@@ -4534,6 +4535,15 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.checkBox1, resources.GetString("checkBox1.ToolTip"));
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // btnTNFAdd2
+            // 
+            this.btnTNFAdd2.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.btnTNFAdd2, "btnTNFAdd2");
+            this.btnTNFAdd2.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnTNFAdd2.Name = "btnTNFAdd2";
+            this.toolTip1.SetToolTip(this.btnTNFAdd2, resources.GetString("btnTNFAdd2.ToolTip"));
+            this.btnTNFAdd2.Click += new System.EventHandler(this.btnTNFRX2Add_Click);
+            // 
             // timer_clock
             // 
             this.timer_clock.Enabled = true;
@@ -6186,6 +6196,7 @@ namespace PowerSDR
             // 
             resources.ApplyResources(this.panelRX2Display, "panelRX2Display");
             this.panelRX2Display.BackColor = System.Drawing.Color.Transparent;
+            this.panelRX2Display.Controls.Add(this.btnTNFAdd2);
             this.panelRX2Display.Controls.Add(this.chkVFOBSplit);
             this.panelRX2Display.Controls.Add(this.chkRX2DisplayPeak);
             this.panelRX2Display.Controls.Add(this.comboRX2DisplayMode);
@@ -7387,6 +7398,7 @@ namespace PowerSDR
         private System.Windows.Forms.Panel panelVFOBSubHover;
         public System.Windows.Forms.CheckBox checkBox1;
         public System.Windows.Forms.CheckBoxTS chkFMCTCSS;
+        private System.Windows.Forms.ButtonTS btnTNFAdd2;
     } // class console
 
 

@@ -146,7 +146,7 @@ namespace PowerSDR
             // indup
             // 
             this.indup.Image = null;
-            this.indup.Location = new System.Drawing.Point(374, 71);
+            this.indup.Location = new System.Drawing.Point(362, 67);
             this.indup.Name = "indup";
             this.indup.Size = new System.Drawing.Size(31, 23);
             this.indup.TabIndex = 13;
@@ -157,7 +157,7 @@ namespace PowerSDR
             // inddown
             // 
             this.inddown.Image = null;
-            this.inddown.Location = new System.Drawing.Point(254, 67);
+            this.inddown.Location = new System.Drawing.Point(328, 67);
             this.inddown.Name = "inddown";
             this.inddown.Size = new System.Drawing.Size(31, 23);
             this.inddown.TabIndex = 12;
@@ -168,7 +168,7 @@ namespace PowerSDR
             // capup
             // 
             this.capup.Image = null;
-            this.capup.Location = new System.Drawing.Point(374, 42);
+            this.capup.Location = new System.Drawing.Point(362, 41);
             this.capup.Name = "capup";
             this.capup.Size = new System.Drawing.Size(31, 23);
             this.capup.TabIndex = 11;
@@ -179,7 +179,7 @@ namespace PowerSDR
             // capdown
             // 
             this.capdown.Image = null;
-            this.capdown.Location = new System.Drawing.Point(254, 41);
+            this.capdown.Location = new System.Drawing.Point(328, 41);
             this.capdown.Name = "capdown";
             this.capdown.Size = new System.Drawing.Size(31, 23);
             this.capdown.TabIndex = 10;
@@ -190,7 +190,7 @@ namespace PowerSDR
             // lblIND
             // 
             this.lblIND.Image = null;
-            this.lblIND.Location = new System.Drawing.Point(291, 71);
+            this.lblIND.Location = new System.Drawing.Point(250, 72);
             this.lblIND.Name = "lblIND";
             this.lblIND.Size = new System.Drawing.Size(72, 16);
             this.lblIND.TabIndex = 9;
@@ -200,7 +200,7 @@ namespace PowerSDR
             // lblCAP
             // 
             this.lblCAP.Image = null;
-            this.lblCAP.Location = new System.Drawing.Point(291, 46);
+            this.lblCAP.Location = new System.Drawing.Point(250, 49);
             this.lblCAP.Name = "lblCAP";
             this.lblCAP.Size = new System.Drawing.Size(72, 16);
             this.lblCAP.TabIndex = 8;

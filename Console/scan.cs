@@ -150,10 +150,36 @@ namespace PowerSDR
         // ke9ns add    scan just the Band stacking reg 
         private void btnBandstack_Click(object sender, EventArgs e)
         {
-            ST3.Stop();
-            ST3.Reset();
+            //  ST3.Stop();
+            //  ST3.Reset();
+            //  ScanPause = false;
 
-            ScanPause = false;
+
+            comboBoxTS1.Text = ""; //.288
+            textBox1.Text = ""; //.288
+            currFBox.Text = ""; //.288
+
+            Gname = "";
+            memcount = 0;
+           
+            ST3.Stop(); // .288
+            ST3.Reset(); //.288
+            ST2.Stop(); //.288
+            ST2.Reset(); //.288
+            ScanPause = false; //.288
+            ScanRST = 0; // .288
+
+            scanstop = false; //.288
+            scanstop2 = false; //.288
+            SP5_Active = 0; //.288 stop any scan
+
+
+            if (ScanRun == true)
+            {
+                ScanRun = false; //.288
+              //  scantype = 0; // .288 reset
+                return;
+            }
 
             if (ScanRun == false) // if stopped
             {
@@ -918,8 +944,31 @@ namespace PowerSDR
         // Group memory scanner. Scanning only frequencies in 1 group name
         private void btnGroupMemory_Click(object sender, EventArgs e)
         {
-            ST3.Stop();
-            ST3.Reset();
+         //   ST3.Stop();
+         //   ST3.Reset();
+
+            
+            textBox1.Text = ""; //.288 clear SWL listing
+
+            ST3.Stop(); // .288
+            ST3.Reset(); //.288
+            ST2.Stop(); //.288
+            ST2.Reset(); //.288
+            ScanPause = false; //.288
+            ScanRST = 0; // .288
+            scanstop = false; //.288
+            scanstop2 = false; //.288
+            SP5_Active = 0; //.288 stop any scan
+
+
+            if (ScanRun == true)
+            {
+                ScanRun = false; //.288
+              //  scantype = 0; // .288 reset
+                
+                return;
+            }
+
 
             if (ScanVFOB == true) //.244
             {
@@ -967,8 +1016,32 @@ namespace PowerSDR
         // Group memory scanner. Scanning only frequencies in 1 group name
         private void btnGroupMemory1_Click(object sender, EventArgs e)
         {
-            ST3.Stop();
-            ST3.Reset();
+            //  ST3.Stop();
+            //  ST3.Reset();
+
+            comboBoxTS1.Text = ""; //.288 // clear Memory listing
+           
+           
+            ST3.Stop(); // .288
+            ST3.Reset(); //.288
+            ST2.Stop(); //.288
+            ST2.Reset(); //.288
+            ScanPause = false; //.288
+            ScanRST = 0; // .288
+            scanstop = false; //.288
+            scanstop2 = false; //.288
+            SP5_Active = 0; //.288 stop any scan
+
+
+            if (ScanRun == true)
+            {
+                ScanRun = false; //.288
+              //  scantype = 0; // .288 reset
+
+                return;
+            }
+
+
 
             ScanPause = false;
             bandSwlupdate1(); // determine if there are any SWL stations ON the air that contain the name you just typed int the combobox of the scanner 
@@ -1031,7 +1104,7 @@ namespace PowerSDR
         // ke9ns combobox to display all the unique (SUB) group names from the memory listing
         private void comboBoxTS1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ScanPause = false;
+            ScanPause = false; // runs Thread Scan1  memory scan
             ScanRun = false;
             scantype = 1;
 
@@ -1040,6 +1113,20 @@ namespace PowerSDR
             {
                 Gname = "";
                 memcount = 0;
+                scantype = 0; // .288 reset
+                ST3.Stop(); // .288
+                ST3.Reset(); //.288
+                ST2.Stop(); //.288
+                ST2.Reset(); //.288
+                ScanPause = false; //.288
+                ScanRST = 0; // .288
+
+                currFBox.Text = ""; //.288
+                ScanRun = false; //.288
+                scanstop = false; //.288
+                scanstop2 = false; //.288
+                SP5_Active = 0; //.288 stop any scan
+
                 return;
             }
 
@@ -1079,9 +1166,30 @@ namespace PowerSDR
 
         private void comboBoxTS2_SelectedIndexChanged(object sender, KeyEventArgs e)
         {
-            ScanPause = false;
-            ScanRun = false;
-            scantype = 1;
+          //  ScanPause = false;
+         //   ScanRun = false;
+           scantype = 1;
+
+
+           
+              //  Gname = "";
+              //  memcount = 0;
+             //   scantype = 0; // .288 reset
+                ST3.Stop(); // .288
+                ST3.Reset(); //.288
+                ST2.Stop(); //.288
+                ST2.Reset(); //.288
+                ScanPause = false; //.288
+                ScanRST = 0; // .288
+
+               // currFBox.Text = ""; //.288
+                ScanRun = false; //.288
+                scanstop = false; //.288
+                scanstop2 = false; //.288
+                SP5_Active = 0; //.288 stop any scan
+
+           
+
 
             //  comboBoxTS1.SelectedIndexChanged -= comboBoxTS1_SelectedIndexChanged;  // ke9ns turn off checkchanged temporarily   
             comboBoxTS1.Text = "";
@@ -2023,8 +2131,35 @@ namespace PowerSDR
         // check for TX auth on freq, if not go to next freq, otherwise TUNE and check SWR, save in array
         private void button2_Click(object sender, EventArgs e)
         {
-            ST3.Stop();
-            ST3.Reset();
+            //   ST3.Stop();
+            //   ST3.Reset();
+
+            // kill any current scan to now go into SWR scan
+            comboBoxTS1.Text = ""; //.288
+            textBox1.Text = ""; //.288
+            Gname = "";
+            memcount = 0;
+            scantype = 0; // .288 reset
+            ST3.Stop(); // .288
+            ST3.Reset(); //.288
+            ST2.Stop(); //.288
+            ST2.Reset(); //.288
+            ScanPause = false; //.288
+            ScanRST = 0; // .288
+
+            currFBox.Text = ""; //.288
+            ScanRun = false; //.288
+            scanstop = false; //.288
+            scanstop2 = false; //.288
+
+
+            if (SP5_Active == 1)
+            {
+                SP5_Active = 0; //.288 stop SWR scan now
+                return;
+            }
+
+
 
             switch (console.CurrentModel)
             {
@@ -2093,7 +2228,7 @@ namespace PowerSDR
         } // button2_Click
 
         //===================================================================================================
-        private async void SWR_SCANNER()
+        private async void SWR_SCANNER() // thread
         {
 
             Stopwatch x1 = new Stopwatch();
@@ -2219,12 +2354,14 @@ namespace PowerSDR
             writer4.Write(textb);
 
 
+            // if SP5_Active == 0, then break and end now.
             for (; ii <= freq_High; ii = ii + step, SWR_SLOT = SWR_SLOT + (int)(udstepBox.Value))
             {
 
                 // find if you are authorized to TX on this freq
                 if (console.CheckValidTXFreq(console.current_region, ii, console.dsp.GetDSPTX(0).CurrentDSPMode) == false) continue;
 
+                
                 console.chkTUN.Checked = true; // TX 
 
                 if (SWR_SLOT == 10)
@@ -3876,7 +4013,29 @@ namespace PowerSDR
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            comboBoxTS1.Text = "";
+            comboBoxTS1.Text = ""; // wipe out memory scan
+
+            // runs thread Scan6 (SWL scan)
+
+            
+              //  Gname = "";
+               // memcount = 0;
+              //  scantype = 0; // .288 reset
+                ST3.Stop(); // .288
+                ST3.Reset(); //.288
+                ST2.Stop(); //.288
+                ST2.Reset(); //.288
+                ScanPause = false; //.288
+                ScanRST = 0; // .288
+
+                currFBox.Text = ""; //.288
+                ScanRun = false; //.288
+                scanstop = false; //.288
+                scanstop2 = false; //.288
+                SP5_Active = 0; //.288 stop any scan
+
+            
+
 
         }
 
