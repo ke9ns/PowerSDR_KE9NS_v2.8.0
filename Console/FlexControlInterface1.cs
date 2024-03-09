@@ -75,6 +75,7 @@ namespace PowerSDR
                 if (flexControl != null)
                 {
                     flexControl.KnobRotated -= new FlexControl.KnobRotatedEventHandler(FlexControl_KnobRotated);
+
                     flexControl.ButtonClicked -= new FlexControl.ButtonClickedEventHandler(FlexControl_ButtonClicked);
                     flexControl.SetLEDStatus(false, false, false);
                 }
@@ -84,6 +85,7 @@ namespace PowerSDR
                 if (flexControl != null)
                 {
                     flexControl.KnobRotated += new FlexControl.KnobRotatedEventHandler(FlexControl_KnobRotated);
+
                     flexControl.ButtonClicked += new FlexControl.ButtonClickedEventHandler(FlexControl_ButtonClicked);
                     flexControl.SetLEDStatus(led1, led2, led3);
                 }
@@ -360,47 +362,15 @@ namespace PowerSDR
                     switch (dir)
                     {
                         case FlexControl.RotateDirection.Clockwise:
-
-                            if (Console.CTUN == true)
-                            {
-                                if ((Display.CurrentDisplayMode == DisplayMode.PANADAPTER) || (Display.CurrentDisplayMode == DisplayMode.PANAFALL) || (Display.CurrentDisplayMode == DisplayMode.PANASCOPE) || (Display.CurrentDisplayMode == DisplayMode.WATERFALL))
-                                {
-                                    Console.UPDATEOFF = 2; // ke9ns add: let system know not to update screen for a little while pan
-                                }
-
-                                double temp1 = console.SnapTune(0.0, step, num_steps); // in mhz
-                                Console.CTUN1_HZ = Console.CTUN1_HZ + (long)(temp1 * 1e6);// ke9ns add allow bandpass window to scroll across display instead of display freq scroll under bandpass.
-                                console.tempVFOAFreq = console.VFOAFreq + temp1; // vfoafreq in mhz
-                                console.CalcDisplayFreq(); // ke9ns keep display from moving
-
-                            }
-                            else // CTUN == false
-                            {
+                                                      
                                 console.VFOAFreq = console.SnapTune(console.VFOAFreq, step, num_steps);
-                            }
-
+                           
                             break;
                         case FlexControl.RotateDirection.CounterClockwise:
 
-                            if (Console.CTUN == true)
-                            {
-                                if ((Display.CurrentDisplayMode == DisplayMode.PANADAPTER) || (Display.CurrentDisplayMode == DisplayMode.PANAFALL) || (Display.CurrentDisplayMode == DisplayMode.PANASCOPE) || (Display.CurrentDisplayMode == DisplayMode.WATERFALL))
-                                {
-                                    Console.UPDATEOFF = 2; // ke9ns add let system know not to update screen for a little while pan
-                                }
-
-                                double temp1 = console.SnapTune(0.0, step, -num_steps); // in mhz
-                                Console.CTUN1_HZ = Console.CTUN1_HZ + (long)(temp1 * 1e6);// ke9ns add allow bandpass window to scroll across display instead of display freq scroll under bandpass.
-                                console.tempVFOAFreq = console.VFOAFreq + temp1; // vfoafreq in mhz
-                                console.CalcDisplayFreq(); // ke9ns keep display from moving
-
-
-
-                            }
-                            else // CTUN == false
-                            {
-                                console.VFOAFreq = console.SnapTune(console.VFOAFreq, step, -num_steps);
-                            }
+                          
+                               console.VFOAFreq = console.SnapTune(console.VFOAFreq, step, -num_steps);
+                           
 
                             break;
                     }
@@ -486,8 +456,7 @@ namespace PowerSDR
         {
             if (console == null || flexControl == null) return;
 
-            if (button == FlexControl.Button.Knob &&
-                        (type == FlexControl.ClickType.Single || type == FlexControl.ClickType.Long))
+            if (button == FlexControl.Button.Knob && (type == FlexControl.ClickType.Single || type == FlexControl.ClickType.Long))
             {
                 switch (type)
                 {

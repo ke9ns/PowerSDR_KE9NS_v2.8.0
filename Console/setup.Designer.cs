@@ -444,6 +444,8 @@ namespace PowerSDR
             this.lblDisplayPhasePts = new System.Windows.Forms.LabelTS();
             this.udDisplayPhasePts = new System.Windows.Forms.NumericUpDownTS();
             this.grpDisplaySpectrumGrid = new System.Windows.Forms.GroupBoxTS();
+            this.labelTS76 = new System.Windows.Forms.LabelTS();
+            this.udDisplayGridRX2Min = new System.Windows.Forms.NumericUpDownTS();
             this.comboDisplayLabelAlign = new System.Windows.Forms.ComboBoxTS();
             this.lblDisplayAlign = new System.Windows.Forms.LabelTS();
             this.udDisplayGridStep = new System.Windows.Forms.NumericUpDownTS();
@@ -1416,6 +1418,7 @@ namespace PowerSDR
             this.grpDisplayPhase.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udDisplayPhasePts)).BeginInit();
             this.grpDisplaySpectrumGrid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udDisplayGridRX2Min)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDisplayGridStep)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDisplayGridMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDisplayGridMax)).BeginInit();
@@ -4667,7 +4670,7 @@ namespace PowerSDR
             this.chkBoxIND2.Name = "chkBoxIND2";
             this.chkBoxIND2.Size = new System.Drawing.Size(182, 16);
             this.chkBoxIND2.TabIndex = 81;
-            this.chkBoxIND2.Text = "Alt1 Tune Step for FlexControl\r\n";
+            this.chkBoxIND2.Text = "Alt1-2 Tune Step for FlexControl\r\n";
             this.toolTip1.SetToolTip(this.chkBoxIND2, "Check to use the  Alternative Tune Step \r\nFor the FlexControl\r\n\r\nUncheck to use t" +
         "he main cosnsole PowerSDR Tune Step");
             // 
@@ -7603,6 +7606,8 @@ namespace PowerSDR
             // 
             // grpDisplaySpectrumGrid
             // 
+            this.grpDisplaySpectrumGrid.Controls.Add(this.labelTS76);
+            this.grpDisplaySpectrumGrid.Controls.Add(this.udDisplayGridRX2Min);
             this.grpDisplaySpectrumGrid.Controls.Add(this.comboDisplayLabelAlign);
             this.grpDisplaySpectrumGrid.Controls.Add(this.lblDisplayAlign);
             this.grpDisplaySpectrumGrid.Controls.Add(this.udDisplayGridStep);
@@ -7619,10 +7624,52 @@ namespace PowerSDR
             this.grpDisplaySpectrumGrid.Text = "Spectrum Grid";
             this.toolTip1.SetToolTip(this.grpDisplaySpectrumGrid, resources.GetString("grpDisplaySpectrumGrid.ToolTip"));
             // 
+            // labelTS76
+            // 
+            this.labelTS76.Image = null;
+            this.labelTS76.Location = new System.Drawing.Point(8, 61);
+            this.labelTS76.Name = "labelTS76";
+            this.labelTS76.Size = new System.Drawing.Size(35, 16);
+            this.labelTS76.TabIndex = 32;
+            this.labelTS76.Text = "Min2:";
+            this.toolTip1.SetToolTip(this.labelTS76, "RX2 Floor");
+            // 
+            // udDisplayGridRX2Min
+            // 
+            this.udDisplayGridRX2Min.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.udDisplayGridRX2Min.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.udDisplayGridRX2Min.Location = new System.Drawing.Point(48, 61);
+            this.udDisplayGridRX2Min.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.udDisplayGridRX2Min.Minimum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            -2147483648});
+            this.udDisplayGridRX2Min.Name = "udDisplayGridRX2Min";
+            this.udDisplayGridRX2Min.Size = new System.Drawing.Size(56, 18);
+            this.udDisplayGridRX2Min.TabIndex = 31;
+            this.toolTip1.SetToolTip(this.udDisplayGridRX2Min, "Signal Level at bottom Floor of the RX2 Panadapter display in dBm.\r\n\r\n\"Auto wtr/p" +
+        "an\" box will automatically adjust this for both RX & TX modes\r\n ");
+            this.udDisplayGridRX2Min.Value = new decimal(new int[] {
+            135,
+            0,
+            0,
+            -2147483648});
+            this.udDisplayGridRX2Min.ValueChanged += new System.EventHandler(this.udDisplayGridRX2Min_ValueChanged);
+            // 
             // comboDisplayLabelAlign
             // 
             this.comboDisplayLabelAlign.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboDisplayLabelAlign.DropDownWidth = 48;
+            this.comboDisplayLabelAlign.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboDisplayLabelAlign.Items.AddRange(new object[] {
             "Left",
             "Cntr",
@@ -7630,9 +7677,9 @@ namespace PowerSDR
             "Auto",
             "S-Unit",
             "Off"});
-            this.comboDisplayLabelAlign.Location = new System.Drawing.Point(48, 96);
+            this.comboDisplayLabelAlign.Location = new System.Drawing.Point(48, 103);
             this.comboDisplayLabelAlign.Name = "comboDisplayLabelAlign";
-            this.comboDisplayLabelAlign.Size = new System.Drawing.Size(56, 21);
+            this.comboDisplayLabelAlign.Size = new System.Drawing.Size(56, 20);
             this.comboDisplayLabelAlign.TabIndex = 30;
             this.toolTip1.SetToolTip(this.comboDisplayLabelAlign, resources.GetString("comboDisplayLabelAlign.ToolTip"));
             this.comboDisplayLabelAlign.SelectedIndexChanged += new System.EventHandler(this.comboDisplayLabelAlign_SelectedIndexChanged);
@@ -7640,7 +7687,7 @@ namespace PowerSDR
             // lblDisplayAlign
             // 
             this.lblDisplayAlign.Image = null;
-            this.lblDisplayAlign.Location = new System.Drawing.Point(8, 96);
+            this.lblDisplayAlign.Location = new System.Drawing.Point(8, 100);
             this.lblDisplayAlign.Name = "lblDisplayAlign";
             this.lblDisplayAlign.Size = new System.Drawing.Size(40, 16);
             this.lblDisplayAlign.TabIndex = 29;
@@ -7648,12 +7695,13 @@ namespace PowerSDR
             // 
             // udDisplayGridStep
             // 
+            this.udDisplayGridStep.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.udDisplayGridStep.Increment = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.udDisplayGridStep.Location = new System.Drawing.Point(48, 72);
+            this.udDisplayGridStep.Location = new System.Drawing.Point(48, 83);
             this.udDisplayGridStep.Maximum = new decimal(new int[] {
             40,
             0,
@@ -7665,7 +7713,7 @@ namespace PowerSDR
             0,
             0});
             this.udDisplayGridStep.Name = "udDisplayGridStep";
-            this.udDisplayGridStep.Size = new System.Drawing.Size(56, 20);
+            this.udDisplayGridStep.Size = new System.Drawing.Size(56, 18);
             this.udDisplayGridStep.TabIndex = 25;
             this.toolTip1.SetToolTip(this.udDisplayGridStep, resources.GetString("udDisplayGridStep.ToolTip"));
             this.udDisplayGridStep.Value = new decimal(new int[] {
@@ -7678,12 +7726,13 @@ namespace PowerSDR
             // 
             // udDisplayGridMin
             // 
+            this.udDisplayGridMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.udDisplayGridMin.Increment = new decimal(new int[] {
             5,
             0,
             0,
             0});
-            this.udDisplayGridMin.Location = new System.Drawing.Point(48, 48);
+            this.udDisplayGridMin.Location = new System.Drawing.Point(48, 39);
             this.udDisplayGridMin.Maximum = new decimal(new int[] {
             200,
             0,
@@ -7695,7 +7744,7 @@ namespace PowerSDR
             0,
             -2147483648});
             this.udDisplayGridMin.Name = "udDisplayGridMin";
-            this.udDisplayGridMin.Size = new System.Drawing.Size(56, 20);
+            this.udDisplayGridMin.Size = new System.Drawing.Size(56, 18);
             this.udDisplayGridMin.TabIndex = 24;
             this.toolTip1.SetToolTip(this.udDisplayGridMin, resources.GetString("udDisplayGridMin.ToolTip"));
             this.udDisplayGridMin.Value = new decimal(new int[] {
@@ -7708,12 +7757,13 @@ namespace PowerSDR
             // 
             // udDisplayGridMax
             // 
+            this.udDisplayGridMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.udDisplayGridMax.Increment = new decimal(new int[] {
             5,
             0,
             0,
             0});
-            this.udDisplayGridMax.Location = new System.Drawing.Point(48, 24);
+            this.udDisplayGridMax.Location = new System.Drawing.Point(48, 17);
             this.udDisplayGridMax.Maximum = new decimal(new int[] {
             200,
             0,
@@ -7725,7 +7775,7 @@ namespace PowerSDR
             0,
             -2147483648});
             this.udDisplayGridMax.Name = "udDisplayGridMax";
-            this.udDisplayGridMax.Size = new System.Drawing.Size(56, 20);
+            this.udDisplayGridMax.Size = new System.Drawing.Size(56, 18);
             this.udDisplayGridMax.TabIndex = 23;
             this.toolTip1.SetToolTip(this.udDisplayGridMax, resources.GetString("udDisplayGridMax.ToolTip"));
             this.udDisplayGridMax.Value = new decimal(new int[] {
@@ -7739,7 +7789,7 @@ namespace PowerSDR
             // lblDisplayGridStep
             // 
             this.lblDisplayGridStep.Image = null;
-            this.lblDisplayGridStep.Location = new System.Drawing.Point(8, 72);
+            this.lblDisplayGridStep.Location = new System.Drawing.Point(8, 85);
             this.lblDisplayGridStep.Name = "lblDisplayGridStep";
             this.lblDisplayGridStep.Size = new System.Drawing.Size(32, 16);
             this.lblDisplayGridStep.TabIndex = 28;
@@ -7748,16 +7798,17 @@ namespace PowerSDR
             // lblDisplayGridMin
             // 
             this.lblDisplayGridMin.Image = null;
-            this.lblDisplayGridMin.Location = new System.Drawing.Point(8, 48);
+            this.lblDisplayGridMin.Location = new System.Drawing.Point(8, 40);
             this.lblDisplayGridMin.Name = "lblDisplayGridMin";
             this.lblDisplayGridMin.Size = new System.Drawing.Size(32, 16);
             this.lblDisplayGridMin.TabIndex = 27;
             this.lblDisplayGridMin.Text = "Min:";
+            this.toolTip1.SetToolTip(this.lblDisplayGridMin, "RX1 Floor");
             // 
             // lblDisplayGridMax
             // 
             this.lblDisplayGridMax.Image = null;
-            this.lblDisplayGridMax.Location = new System.Drawing.Point(8, 24);
+            this.lblDisplayGridMax.Location = new System.Drawing.Point(8, 20);
             this.lblDisplayGridMax.Name = "lblDisplayGridMax";
             this.lblDisplayGridMax.Size = new System.Drawing.Size(32, 16);
             this.lblDisplayGridMax.TabIndex = 26;
@@ -18915,6 +18966,7 @@ namespace PowerSDR
             this.grpDisplayPhase.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udDisplayPhasePts)).EndInit();
             this.grpDisplaySpectrumGrid.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.udDisplayGridRX2Min)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDisplayGridStep)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDisplayGridMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDisplayGridMax)).EndInit();
@@ -20358,6 +20410,8 @@ namespace PowerSDR
         private System.Windows.Forms.LabelTS lblIFBFrequency;
         public System.Windows.Forms.NumericUpDownTS udDDSIFBFreq;
         public System.Windows.Forms.NumericUpDownTS udDisplayWaterfallHighLevel;
+        public System.Windows.Forms.NumericUpDownTS udDisplayGridRX2Min;
+        private System.Windows.Forms.LabelTS labelTS76;
     } // class setup
 
 

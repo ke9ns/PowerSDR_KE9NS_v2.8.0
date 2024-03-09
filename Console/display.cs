@@ -770,7 +770,11 @@ namespace PowerSDR
                         break;
                 }
 
-                if (average_on) ResetRX1DisplayAverage();      // ke9ns: rx1_average_buffer[0] = -999.999f
+                if (average_on)
+                {
+                    Debug.WriteLine("294 reset avg");
+                    ResetRX1DisplayAverage();      // ke9ns: rx1_average_buffer[0] = -999.999f
+                }
                 if (peak_on) ResetRX1DisplayPeak();
 
                 DrawBackground();
@@ -912,6 +916,24 @@ namespace PowerSDR
                 DrawBackground();
             }
         }
+
+        // .295 add
+        private static int spectrum_grid_rx2_min1 = -160; // ke9ns add 
+        private static int spectrum_grid_rx2_min = -160;
+        public static int SpectrumGridRX2Min
+        {
+            get { return spectrum_grid_rx2_min; }
+            set
+            {
+                spectrum_grid_rx2_min1 = spectrum_grid_rx2_min = value;
+             //   Debug.WriteLine("RX2 " + spectrum_grid_rx2_min);
+
+                DrawBackground();
+            }
+        }
+
+
+
         private static int spectrum_grid_step1 = 10;
         private static int spectrum_grid_step = 10;
         public static int SpectrumGridStep
@@ -2450,6 +2472,7 @@ namespace PowerSDR
             int step_index = 0;
             int freq_step_size = 50;
             int y_range = spectrum_grid_max - spectrum_grid_min;
+
             int grid_step = spectrum_grid_step;
 
             if (split_display) grid_step *= 2;
@@ -2873,7 +2896,7 @@ namespace PowerSDR
         static int bandtext_counter2 = 0; // ke9ns add for bandtext .210
         static int cw_line_x; // ke9ns used to move the 0hz line over by the pitch mount of hz
         static int top1; // ke9ns
-
+        static int top3; // .295
         private static void DrawPanadapterGrid(ref Graphics g, int W, int H, int rx, bool bottom)
         {
 
@@ -3038,7 +3061,7 @@ namespace PowerSDR
 
 
             int y_range = spectrum_grid_max - spectrum_grid_min; // ke9ns H grid span min to max
-
+            int y_range2 = spectrum_grid_max - spectrum_grid_rx2_min; // .295 add
 
             int filter_low, filter_high;     // filter bandwidth        
 
@@ -3134,6 +3157,8 @@ namespace PowerSDR
 
 
             int top = top1 = (int)((double)grid_step * H / y_range); // find top of each window for the panadapter
+          
+            int top2 = top3 = (int)((double)grid_step * H / y_range2); // find top of each window for the panadapter //.295
 
 
 
@@ -3157,7 +3182,7 @@ namespace PowerSDR
                 if (bottom)
                 {
                     g.FillRectangle(new SolidBrush(sub_rx_filter_color),    // draw filter overlay
-                        filter_left_x, H + top, filter_right_x - filter_left_x, H + H - top);
+                        filter_left_x, H + top, filter_right_x - filter_left_x, H + H - top2); // was top
                 }
                 else
                 {
@@ -3174,8 +3199,8 @@ namespace PowerSDR
 
                 if (bottom)
                 {
-                    g.DrawLine(new Pen(sub_rx_zero_line_color), x, H + top, x, H + H); // ke9ns draw red line
-                    g.DrawLine(new Pen(sub_rx_zero_line_color), x - 1, H + top, x - 1, H + H);
+                    g.DrawLine(new Pen(sub_rx_zero_line_color), x, H + top2, x, H + H); // ke9ns draw red line  .295 was top
+                    g.DrawLine(new Pen(sub_rx_zero_line_color), x - 1, H + top2, x - 1, H + H);
                 }
                 else
                 {
@@ -3400,7 +3425,7 @@ namespace PowerSDR
                     if (filter_left_x == filter_right_x) filter_right_x = filter_left_x + 1;
 
                     // rx2 always on the bottom
-                    g.FillRectangle(new SolidBrush(display_filter_color), filter_left_x, H + top, filter_right_x - filter_left_x, H + H - top);// draw filter overlay
+                    g.FillRectangle(new SolidBrush(display_filter_color), filter_left_x, H + top, filter_right_x - filter_left_x, H + H - top2);// draw filter overlay .295 was top
 
                     //   Debug.WriteLine("RX2F=================" + filter_left_x + " , "+ filter_right_x);
 
@@ -3421,7 +3446,7 @@ namespace PowerSDR
 
 
                     g.FillRectangle(new SolidBrush(display_filter_color),   // draw filter overlay
-                        filter_left_x, top, filter_right_x - filter_left_x, H - top);
+                        filter_left_x, top, filter_right_x - filter_left_x, H - top2); // .295 was top
 
                 }
 
@@ -12043,7 +12068,7 @@ namespace PowerSDR
                 }
 
 
-                if ((console.BeaconSigAvg == true)) // ke9ns add draw blue line to show 0 and 1 threshold for BCD time signal from WWV
+                if ((console.BeaconSigAvg == true)) // ke9ns add: draw blue line to show 0 and 1 threshold for BCD time signal from WWV
                 {
 
 
@@ -18126,7 +18151,21 @@ namespace PowerSDR
         //============================================================================================================
         unsafe static private bool DrawSpectrum(Graphics g, int W, int H, bool bottom)
         {
-
+            if (console.powerMate.Look(10) != 0) //.294 use instad of onRotateEvent handler because it caused a strange pan lag glitch as you scroll left/right
+            {
+                //   Debug.WriteLine("294 ROTATE> " + console.powerMate.Look(10));
+                console.OnRotateEvent(console.powerMate.Look(10)); //.294 use instead of a actual event handler
+            }
+            else if (console.powerMate.Lookflex(10) != 0) //.296 use instad of onRotateEvent handler because it caused a strange pan lag glitch as you scroll left/right
+            {
+                //   Debug.WriteLine("296 ROTATE> " + console.powerMate.Look(10));
+                console.OnRotateEventFlex(console.powerMate.Lookflex(10)); //.296 use instead of a actual event handler
+            }
+            if (console.flexControl.FlexPush == true && console.setupForm.chkBoxIND2.Checked) //.296 if flexcontrol pushed when alt1-2 selected
+            {
+                console.onbuttonflex();
+                console.flexControl.FlexPush = false; // reset the push
+            }
             DrawSpectrumGrid(ref g, W, H, bottom);
 
             if (points == null || points.Length < W) points = new Point[W];         // array of points to display
@@ -18528,6 +18567,24 @@ namespace PowerSDR
             X1 = (int)console.setupForm.number3DX.Value;
             Y1 = (int)console.setupForm.number3DY.Value;
 
+            if (console.powerMate.Look(10) != 0) //.294 use instad of onRotateEvent handler because it caused a strange pan lag glitch as you scroll left/right
+            {
+                Debug.WriteLine("296 ROTATE> " + console.powerMate.Look(10));
+                console.OnRotateEvent(console.powerMate.Look(10)); //.294 use instead of a actual event handler
+            }
+            else if (console.powerMate.Lookflex(10) != 0) //.296 use instad of onRotateEvent handler because it caused a strange pan lag glitch as you scroll left/right
+            {
+                //   Debug.WriteLine("296 ROTATE> " + console.powerMate.Look(10));
+                console.OnRotateEventFlex(console.powerMate.Lookflex(10)); //.296 use instead of a actual event handler
+            }
+            if (console.flexControl.FlexPush == true && console.setupForm.chkBoxIND2.Checked) //.296 if flexcontrol pushed when alt1-2 selected
+            {
+              //  Debug.WriteLine("296 flexpush ");
+
+               console.onbuttonflex();
+                console.flexControl.FlexPush = false; // reset the push
+            }
+
 
             if ((panfillgradient) && (pan_fill) && (H10 != H) || (W10 != W))
             {
@@ -18817,6 +18874,7 @@ namespace PowerSDR
             } //
 
             int yRange = spectrum_grid_max - spectrum_grid_min; // find vertical range of panadapter (around 120dbm)
+            int yRange2 = spectrum_grid_max - spectrum_grid_rx2_min; //.295 add
 
             float local_max_y = float.MinValue;
 
@@ -18976,7 +19034,8 @@ namespace PowerSDR
                         {
                             for (int i = 0; i < current_display_data_bottom.Length; i++)
                             {
-                                current_display_data_bottom[i] = spectrum_grid_min - rx2_display_cal_offset;
+                                //  current_display_data_bottom[i] = spectrum_grid_min - rx2_display_cal_offset; // was
+                                current_display_data_bottom[i] = spectrum_grid_rx2_min - rx2_display_cal_offset; //.295 mod
                             }
 
                         }
@@ -19048,14 +19107,19 @@ namespace PowerSDR
             // console UP1 = true indicates the DSP now has a new VFOA freq, so you must shift pan left<>right
             //=================================================================
             // VFOA
-            //  if (average_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) && ((PWM2A_LAST != vfoa_hz) && (Console.CTUN1_HZ == 0)) || (PWM2A_LAST < (vfoa_hz - 200000) || PWM2A_LAST > (vfoa_hz + 200000))) // ke9ns dont move waterfall if in CTUN mode
 
-            if (average_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) && ((PWM2A_LAST != vfoa_hz)) || (PWM2A_LAST < (vfoa_hz - 200000) || PWM2A_LAST > (vfoa_hz + 200000))) // ke9ns dont move waterfall if in CTUN mode
+           
+            // do below if AVG is ON, and Avg move ON, and freq changed OR
+
+            if ( average_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) && ((PWM2A_LAST != vfoa_hz))
+                || ( PWM2A_LAST < (vfoa_hz - 200000) || PWM2A_LAST > (vfoa_hz + 200000) ) ) // ke9ns dont move waterfall if in  PAN mode CTUN
             {
+
+                Debug.WriteLine("294 freq moved");
 
                 PF3A = 1; // was 1
 
-                PWM2A_DIFF = vfoa_hz - PWM2A_LAST;
+                PWM2A_DIFF = vfoa_hz - PWM2A_LAST; // how much did you move
 
                 PWM2A_LAST = vfoa_hz;               // new last value
 
@@ -19082,35 +19146,38 @@ namespace PowerSDR
                     if (PWM1A > 0) //the Pan moved from Right <---- Left) so the data needs to shift from Left ---> Right, leaving no valid data on the lower end (Left)
                     {
                         // copy last AVG stream into the NEW stream, then SHIFT both over
-                        Array.Copy(rx1_average_buffer, PWM1A, current_display_data, 0, T); // source array, source indes start point, dest arry, dest indes start point, length
-                        Array.Copy(rx1_average_buffer, PWM1A, rx1_average_buffer, 0, T); // source array, source indes start point, dest arry, dest indes start point, length
-
+                        Array.Copy(rx1_average_buffer, PWM1A, current_display_data, 0, T); // source array, source index start point, dest arry, dest index start point, length
+                       Array.Copy(rx1_average_buffer, PWM1A, rx1_average_buffer, 0, T); // source array, source index start point, dest arry, dest index start point, length
+                        Debug.WriteLine("294 MOVE LEFT");
                     }
                     else if (PWM1A < 0) //the Pan moved from Left ---> right) so the data needs to shift from Right <---- Left, leaving no valid data on the Upper end (Right)
                     {
                         Array.Copy(rx1_average_buffer, 0, current_display_data, TT, T); // source array, source indes start point, dest arry, dest indes start point, length
                         Array.Copy(rx1_average_buffer, 0, rx1_average_buffer, TT, T); // source array, source indes start point, dest arry, dest indes start point, length
+                        Debug.WriteLine("294 MOVE RIGHT");
 
                     } //  if (PWM1A < 0)
 
+                  
 
                 } //   if ((Math.Abs(PWM1A) < num_samples) && PWM1A != 0)
                 else
                 {
+                    Debug.WriteLine("294 problem");
                     PF3A = 0;
                 }
 
                 console.UP1 = false; // .251
             } // freq change
-            else if (PF3A != 0 && average_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked))
+            else if (PF3A != 0 && average_on && (console.setupForm != null && console.setupForm.chkAvgMove.Checked) )
             {
-                //  Array.Copy(rx1_average_buffer, 0, current_display_data,0, BUFFER_SIZE);
-                //   PF3A = 0;
-
+                
+             //   Debug.WriteLine("294- " + PF3A);
                 PF3A--;
             }
             else
             {
+              //  Debug.WriteLine("HOLDHOLDHOLD0");
                 PF3A = 0;
             }
 
@@ -19183,14 +19250,20 @@ namespace PowerSDR
             //=================================================================
 
 
-            if (rx == 1 && average_on && PF3A == 0)
+            if (rx == 1 && average_on && PF3A == 0) //
             {
-                //  Debug.WriteLine("AVERAGE= " );
+              //   Debug.WriteLine("294 AVERAGE update " );
                 console.UpdateRX1DisplayAverage(rx1_average_buffer, current_display_data); // only do an AVG if AVG is ON and your not turning the VFO
+                // rx1_average_buffer = current_display_data * factor + old rx1_average_buffer * factor
+                // so we get new averaged rx1_average_buffer
             }
             else if (rx == 2 && rx2_avg_on && PF3B == 0)
             {
                 console.UpdateRX2DisplayAverage(rx2_average_buffer, current_display_data_bottom);
+            }
+            else
+            {
+                Debug.WriteLine("294 NO AVERAGE update ");
             }
 
 
@@ -19637,8 +19710,8 @@ namespace PowerSDR
 
                 points[i].X = i; //  X position as you progress left to right (for loop loads data here) i goes up to W
 
-                if ((K9 == 5) && (K10 != 5) && (bottom)) points[i].Y = (int)(Math.Floor((spectrum_grid_max - max) * H1 / yRange));  // display in 3rds
-                else if ((K9 == 5) && (K10 == 5) && (bottom)) points[i].Y = (int)(Math.Floor((spectrum_grid_max - max) * H2 / yRange));  // display in 4ths
+                if ((K9 == 5) && (K10 != 5) && (bottom)) points[i].Y = (int)(Math.Floor((spectrum_grid_max - max) * H1 / yRange2));  // display in 3rds .295
+                else if ((K9 == 5) && (K10 == 5) && (bottom)) points[i].Y = (int)(Math.Floor((spectrum_grid_max - max) * H2 / yRange2));  // display in 4ths
                 else points[i].Y = (int)(Math.Floor((spectrum_grid_max - max) * H / yRange));  // display normal
 
                 points[i].Y = Math.Min(points[i].Y, H); // returns smaller of the 2 numbers
@@ -19887,6 +19960,8 @@ namespace PowerSDR
                         if ((AB3 > -170) && (AB3 < -50))
                         {
                             console.setupForm.udDisplayGridMin.Value = (decimal)(AB3 - abrightpan - (gridoffset - 20));
+                            console.setupForm.udDisplayGridRX2Min.Value = (decimal)(AB3 - abrightpan - (gridoffset - 20)); // .295 add
+
                             SpectrumGridMin = (int)(AB3 - abrightpan - (gridoffset - 20));
                             Debug.WriteLine("min = " + SpectrumGridMin);
                         }
@@ -20007,8 +20082,10 @@ namespace PowerSDR
                     }
                     else
                     {
-                        // temporarilly moved
+                                               
                         g.FillPolygon(pan_Brush, points); // fill with gradient color
+
+                      //  Debug.WriteLine("294 DRAW");
                     }
                 } //  if (panfillgradient == true)
 
@@ -20116,6 +20193,8 @@ namespace PowerSDR
                             {
                                 // temporarilly moved
                                 g.FillPolygon(pan_Brush, points0); // fill with gradient color
+
+                               
                             }
                         } //  if (panfillgradient == true)
 
@@ -20154,6 +20233,7 @@ namespace PowerSDR
             {
 
                 List<Notch> notches;
+
                 if (!bottom)
                     notches = NotchList.NotchesInBW((double)vfoa_hz * 1e-6, Low, High);
                 else
@@ -20212,13 +20292,19 @@ namespace PowerSDR
                         }
                     }
 
-                    int zoomed_notch_center_freq = (int)(notch_zoom_start_freq * 1e6 - rf_freq - rit);
+                    int zoomed_notch_center_freq = (int)(notch_zoom_start_freq * 1e6 - rf_freq - rit); //ke9ns: find center passed from console vfoafreq (7.158 mhz)
+
+                    // .293 ke9ns draw grid_zero_color on zoomed display
+
+                  
 
                     int original_bw = High - Low;
                     int zoom_bw = original_bw / 10;
 
                     int low = zoomed_notch_center_freq - zoom_bw / 2;
                     int high = zoomed_notch_center_freq + zoom_bw / 2;
+
+
 
                     if (low < Low) // check left limit
                     {
@@ -20231,7 +20317,7 @@ namespace PowerSDR
                         low = High - zoom_bw;
                     }
 
-                    // decide colors to draw notch
+                 // decide colors to draw notch
                     c1 = notch_on_color_zoomed;
                     c2 = notch_highlight_color_zoomed;
 
@@ -20424,6 +20510,27 @@ namespace PowerSDR
                         low = High - zoom_bw;
                     }
 
+
+                    int center_line_x = (int)(-(double)low / (high - low) * W); // center of display window
+                                                                                //  int top = top1 = (int)((double)grid_step * H / y_range); // find top of each window for the panadapter
+
+
+
+                    //  g.DrawLine(new Pen(grid_zero_color), center_line_x, top, center_line_x, H);
+                    //  g.DrawLine(new Pen(grid_zero_color), center_line_x + 1, top, center_line_x + 1, H);
+
+                    g.DrawLine(new Pen(grid_zero_color), center_line_x, 0, center_line_x, (int)(H / zoom_height));
+                    g.DrawLine(new Pen(grid_zero_color), center_line_x + 1, 0, center_line_x + 1, (int)(H / zoom_height));
+
+                  //  Debug.WriteLine("ZOOM1 " + W + " , " + High + " , " + Low + " , " + high + " , " + low + " , " + center_line_x + " , " + zoomed_notch_center_freq);
+
+
+
+
+                    // notch_zoom_left_x, notch_zoom_right_x, 0, (int)(H / zoom_height)
+
+
+
                     // decide colors to draw notch
                     c1 = notch_on_color_zoomed;
                     c2 = notch_highlight_color_zoomed;
@@ -20555,7 +20662,10 @@ namespace PowerSDR
                         points[W + 1] = points[W - 1];
 
                         data_line_pen.Color = data_line_color;
+
                         g.DrawLines(data_line_pen, points);
+                       
+
                     }
                     else
                     {
@@ -20889,6 +20999,21 @@ namespace PowerSDR
 
         unsafe static private bool DrawWaterfall(Graphics g, int W, int H, int rx, bool bottom)
         {
+            if (console.powerMate.Look(10) != 0) //.294 use instad of onRotateEvent handler because it caused a strange pan lag glitch as you scroll left/right
+            {
+                //   Debug.WriteLine("294 ROTATE> " + console.powerMate.Look(10));
+                console.OnRotateEvent(console.powerMate.Look(10)); //.294 use instead of a actual event handler
+            }
+            else if (console.powerMate.Lookflex(10) != 0) //.296 use instad of onRotateEvent handler because it caused a strange pan lag glitch as you scroll left/right
+            {
+                //   Debug.WriteLine("296 ROTATE> " + console.powerMate.Look(10));
+                console.OnRotateEventFlex(console.powerMate.Lookflex(10)); //.296 use instead of a actual event handler
+            }
+            if (console.flexControl.FlexPush == true && console.setupForm.chkBoxIND2.Checked) //.296 if flexcontrol pushed when alt1-2 selected
+            {
+                console.onbuttonflex();
+                console.flexControl.FlexPush = false; // reset the push
+            }
 
             //  Stopwatch stopWatch = new Stopwatch();
             //  stopWatch.Start();
@@ -21123,6 +21248,7 @@ namespace PowerSDR
 
 
             int yRange = spectrum_grid_max - spectrum_grid_min;   // grid range  (around 120db)
+            int yRange2 = spectrum_grid_max - spectrum_grid_rx2_min; //.295 add
 
 
             float local_max_y = float.MinValue;     // top of waterfall
@@ -21310,7 +21436,8 @@ namespace PowerSDR
                     {
 
                         for (int i = 0; i < current_display_data_bottom.Length; i++)
-                            current_display_data_bottom[i] = spectrum_grid_min - rx2_display_cal_offset;
+                            current_display_data_bottom[i] = spectrum_grid_rx2_min - rx2_display_cal_offset; //.295
+                        // current_display_data_bottom[i] = spectrum_grid_min - rx2_display_cal_offset; // was
                     }
 
 
@@ -22820,6 +22947,8 @@ namespace PowerSDR
 
         public static void ResetRX1DisplayAverage()
         {
+            Debug.WriteLine("294 RESET============");
+
             rx1_average_buffer[0] = CLEAR_FLAG; // set reset flag
         }
 

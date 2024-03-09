@@ -382,6 +382,8 @@
     <Compile Include="FLEX3000ATUForm.Designer.cs">
       <DependentUpon>FLEX3000ATUForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FlexControl.cs" />
+    <Compile Include="FlexControlManager.cs" />
     <Compile Include="FWC\FLEX3000MixerForm.Designer.cs">
       <DependentUpon>FLEX3000MixerForm.cs</DependentUpon>
     </Compile>

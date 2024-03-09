@@ -251,6 +251,8 @@ using NAudio.Lame; // ke9ns add
 using NAudio.Gui;
 using System.Security.Policy;
 using System.Web.UI.Design;
+using HidDevice;
+
 
 //using MahApps.Metro.Controls; // ke9ns add
 
@@ -950,12 +952,12 @@ namespace PowerSDR
 
         public FlexControlBasicForm flexControlBasicForm;
         public FlexControlAdvancedForm flexControlAdvancedForm;
+        public FlexControl flexControl; //.296
+        //   public FlexControlManager FlexControlManager; //.250
+
+
         public Http httpFile;                           // ke9ns add
         public HttpServer httpServer = null;           // rn3kk add
-
-
-        //  public FlexControl FlexControl; //.250
-        //   public FlexControlManager FlexControlManager; //.250
 
 
         public Setup setupForm;                        // ke9ns communications with setupform  (i.e. allow combometertype.text update from inside console.cs) 
@@ -1026,7 +1028,10 @@ namespace PowerSDR
 
         public HidDevice.PowerMate PowerMate;              // ke9ns add communicate with powermate HID
 
-        HidDevice.PowerMate powerMate = new HidDevice.PowerMate();  // ke9ns add link back to PowerMate.cpp and PowerMate.h
+        //this.Invoke(new MethodInvoker(p.Show));
+
+       
+        public HidDevice.PowerMate powerMate = new HidDevice.PowerMate();  // ke9ns add link back to PowerMate.cpp and PowerMate.h
 
         // ======================================================
         // thread Declarations 
@@ -3221,6 +3226,9 @@ namespace PowerSDR
 
             flexControlBasicForm = new FlexControlBasicForm(this);
             flexControlAdvancedForm = new FlexControlAdvancedForm(this);
+            flexControl = new FlexControl(this);              // .296 ke9ns add
+
+            FlexControl.console = this; //.296
 
             //--------------------------------------------------------------
             SetCurrentFlexControlMode(null, current_flexcontrol_mode);
@@ -19925,7 +19933,7 @@ namespace PowerSDR
 
             low = abs_low + pan_freq; // ke9ns: -97373 + 57367 = -40000
 
-            low = low - (int)CTUN1_HZ; // ke9ns add: CTUN (adjust display so it appears as if the VFOA bandpass is moving but not the panadapter and not the waterfall 
+          //  low = low - (int)CTUN1_HZ; // ke9ns add: CTUN (adjust display so it appears as if the VFOA bandpass is moving but not the panadapter and not the waterfall 
 
             high = low + width; // -4000 + 8000 = 40000
 
@@ -19937,7 +19945,7 @@ namespace PowerSDR
             //  Debug.WriteLine("Display Limits: " + low + ", " + high);
 
 
-            if (CTUN == true) // ke9ns add
+            if (CTUN == true) // ke9ns add .294 was CTUN
             {
                 VFOAFreq = tempVFOAFreq; // CTUN operation changed freq
             }
@@ -19986,7 +19994,7 @@ namespace PowerSDR
 
                 low2 = abs_low2 + pan_freq2; // ke9ns: -97373 + 57367 = -40000
 
-                low2 = low2 - (int)CTUN1_HZ; // ke9ns add: CTUN (adjust display so it appears as if the VFOB bandpass is moving but not the panadapter and not the waterfall 
+            //   low2 = low2 - (int)CTUN1_HZ; // ke9ns add: CTUN (adjust display so it appears as if the VFOB bandpass is moving but not the panadapter and not the waterfall 
 
                 high2 = low2 + width2; // -4000 + 8000 = 40000
 
@@ -27047,8 +27055,7 @@ namespace PowerSDR
             {
                 if (value)
                 {
-                    if (diversityForm == null || diversityForm.IsDisposed)
-                        diversityForm = new DiversityForm(this);
+                    if (diversityForm == null || diversityForm.IsDisposed)  diversityForm = new DiversityForm(this);
                     diversityForm.Focus();
                     this.Invoke(new MethodInvoker(diversityForm.Show));
                 }
@@ -39462,7 +39469,7 @@ namespace PowerSDR
                     case DisplayMode.PANAFALL:
                     case DisplayMode.PANASCOPE:
 
-                        if (CTUN == false) CalcDisplayFreq(); // ke9ns mod
+                        if (CTUN == false) CalcDisplayFreq(); // ke9ns mod  was CTUN .294
                         btnDisplayPanCenter.PerformClick();
                         break;
                 }
@@ -49377,6 +49384,9 @@ namespace PowerSDR
 
         public void UpdateRX1DisplayAverage(float[] buffer, float[] new_data) // comment all the wjt stuff. it isnt for the Flex-5000
         {
+                               
+           
+
             //  double dttsp_osc = dsp.GetDSPRX(0, 0).RXOsc; // ke9ns  = -9000 (if value)
 
             //    Debug.WriteLine("last vfo:  vfo: " + DDSFreq + " , " + rx1_avg_last_ddsfreq + " , " + dttsp_osc); // ke9ns = always 7 @192k
@@ -49389,6 +49399,8 @@ namespace PowerSDR
                 //   {
                 //     buffer[i] = new_data[i]; // The avg buffer is now = to current new data
                 //  }
+
+                Debug.WriteLine("294 CLEAR AVG BUFFER");
 
                 Array.Copy(new_data, 0, buffer, 0, Display.BUFFER_SIZE);
             }
@@ -49510,7 +49522,12 @@ namespace PowerSDR
  */
                 // ke9ns: dont do avg if chkavgmove enabled use routine in display.cs
                 // UP1
-                if (Display.PF3A != 0) return;   // && (setupForm != null && setupForm.chkAvgMove.Checked)) return; // ke9ns .251
+                if (Display.PF3A != 0)
+                {
+                    Debug.WriteLine("294   mouse wheel DELAY");
+
+                    return;   // && (setupForm != null && setupForm.chkAvgMove.Checked)) return; // ke9ns .251
+                }
 
                 //........................................
 
@@ -50165,8 +50182,7 @@ namespace PowerSDR
 
                 if (chkPower.Checked)
                 {
-                    // if (UPDATEOFF > 0) Thread.Sleep(display_delay/4); // ke9sn mod  increase update speed to screen for short time when CTUN is on
-                    // else
+                    
                     Thread.Sleep(display_delay);
                 }
 
@@ -52476,7 +52492,7 @@ namespace PowerSDR
             //   Stopwatch stopWatch = new Stopwatch();
             //   stopWatch.Start();
 
-
+           
 
             labelTS3.ForeColor = Color.WhiteSmoke;
             labelTS4.ForeColor = Color.WhiteSmoke;
@@ -54980,14 +54996,12 @@ namespace PowerSDR
                         break;
                     case Keys.Up:
 
-                        if (setupForm != null)
+                        if (setupForm != null) //.294
                         {
                             if (setupForm.chkBoxWheelRev.Checked == true) Console_MouseWheel(this, new MouseEventArgs(MouseButtons.None, 0, 0, 0, -120)); // reverse it here because I will reverse it again in the mousewheel routine
                             else Console_MouseWheel(this, new MouseEventArgs(MouseButtons.None, 0, 0, 0, 120));
                         }
-
-                        //  Console_MouseWheel(this, new MouseEventArgs(MouseButtons.None, 0, 0, 0, 120));
-
+                       
                         e.Handled = true;
                         break;
                     case Keys.Down:
@@ -54998,7 +55012,7 @@ namespace PowerSDR
                             else Console_MouseWheel(this, new MouseEventArgs(MouseButtons.None, 0, 0, 0, -120));
                         }
 
-                        //  Console_MouseWheel(this, new MouseEventArgs(MouseButtons.None, 0, 0, 0, -120));
+                      
                         e.Handled = true;
                         break;
                     case Keys.A:
@@ -61578,58 +61592,18 @@ namespace PowerSDR
             //				&& this.ActiveControl != txtVFOBFreq) return;
             //			if(this.ActiveControl is NumericUpDownTS) return;
 
+           Debug.WriteLine("MOUSEMOUSEROTATE");
 
-            if (CTUN == true) // ke9ns add: true = bandpass moves and panadapter stays put.
-            {
-                if (e.Delta == 0) return;
-
-                int mousewheel = (e.Delta > 0 ? 1 : -1); // 1 per click
-
-                if (setupForm != null)
-                {
-                    if (setupForm.chkBoxWheelRev.Checked == true) mousewheel = -mousewheel; // ke9ns add: reverse wheel rotation option
-                }
-
-                if ((Display.CurrentDisplayMode == DisplayMode.PANADAPTER) || (Display.CurrentDisplayMode == DisplayMode.PANAFALL) || (Display.CurrentDisplayMode == DisplayMode.PANASCOPE) || (Display.CurrentDisplayMode == DisplayMode.WATERFALL))
-                {
-                    UPDATEOFF = 2; // ke9ns: let system know not to update screen for a little while pan
-
-                }
-
-                if (mousewheel < 0)
-                {
-                    CTUN1_HZ = CTUN1_HZ - CurrentTuneStepHz;      // ke9ns add: allow bandpass window to scroll across display instead of display freq scroll under bandpass.
-                    tempVFOAFreq = VFOAFreq - (double)CurrentTuneStepHz / 1e6; // vfoafreq in mhz
-                    CalcDisplayFreq(); // ke9ns keep display from moving
-                }
-                else // value >= 0
-                {
-                    CTUN1_HZ = CTUN1_HZ + CurrentTuneStepHz;     // ke9ns add: allow bandpass window to scroll across display instead of display freq scroll under bandpass.
-                    tempVFOAFreq = VFOAFreq + (double)CurrentTuneStepHz / 1e6;
-                    CalcDisplayFreq(); // ke9ns keep display from moving
-                }
-                Debug.WriteLine("CTUN=" + CTUN1_HZ);
-
-                return;
-
-
-            } // ctun mode
-
-           
-
-
-
-
-            if (this.ActiveControl is TextBoxTS ||
-                this.ActiveControl is NumericUpDownTS ||
-                this.ActiveControl is TrackBarTS)
+         
+            if (this.ActiveControl is TextBoxTS || this.ActiveControl is NumericUpDownTS || this.ActiveControl is TrackBarTS)
             {
                 Console_KeyPress(this, new KeyPressEventArgs((char)Keys.Enter));
+               
                 return;
             }
 
 
-            if (e.Delta == 0) return;
+            if (e.Delta == 0) return; // if the mouse wheel didnt move, do nothing.
 
             int num_steps = (e.Delta > 0 ? 1 : -1); // 1 per click
 
@@ -61641,8 +61615,6 @@ namespace PowerSDR
 
                 Debug.WriteLine("ROTA  " + XX);
                 dialcheckA = true;
-
-
 
                 return;
             }
@@ -61699,7 +61671,7 @@ namespace PowerSDR
                         //Debug.WriteLine("freq: "+freq.ToString("f6" ));
                         VFOAFreq = freq;
                     }
-
+                  //  Debug.WriteLine("MOUSEMOUSEROTATE2");
 
                     break;
 
@@ -61810,7 +61782,10 @@ namespace PowerSDR
                     else if (rx2_enabled || (current_click_tune_mode == ClickTuneMode.VFOB && wheel_tunes_vfob))
                         VFOBFreq = SnapTune(VFOBFreq, step, num_steps);
                     else
+                    {
                         VFOAFreq = SnapTune(VFOAFreq, step, num_steps);
+                      //  Debug.WriteLine("MOUSEMOUSEROTATE3");
+                    }
                     break;
 
                 case TuneLocation.Other:
@@ -61821,7 +61796,12 @@ namespace PowerSDR
                         else
                             VFOBFreq = SnapTune(VFOBFreq, step, num_steps);
                     }
-                    else VFOAFreq = SnapTune(VFOAFreq, step, num_steps);
+                    else
+                    {
+                        Debug.WriteLine("MOUSEMOUSEROTATE4 " + VFOAFreq + " , " + step + " , " + num_steps); // 7.324,500,1 .294
+                        VFOAFreq = SnapTune(VFOAFreq, step, num_steps); // ke9ns: when mouse over the VFOA pan comes here
+                       
+                    }
                     break;
 
             } //switch(TuneHitTest(e.X, e.Y))
@@ -64262,7 +64242,7 @@ namespace PowerSDR
 
         public static int H10 = 0; // ke9ns add .197 H value of DrawWaterfallGrid routine in Display
 
-        public bool ZoomOn = false; //.241
+        public bool ZoomOn = false; //.241 true = CTRL Z ZOOM of image on pan
         public int ZoomX = 0;
         public int ZoomY = 0;
         public float ZoomFactor = 2.0f; // .241 2 to 1 but may change to a slider
@@ -64464,7 +64444,11 @@ namespace PowerSDR
             if ((e.X < 25)) // ke9ns: .141 see if mouse close to left side dBm line on display  (adjust Spectrum Grid MIN  or tbGriddoffset slider)
             {
                 System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Hand; // ke9ns: change cursor to HAND when over GRAB area
+               
                 mouseinS = true;
+
+                int updown = e.Y; // .295
+
 
                 if (mousestartP == true) //  false do this below only 1 time unless you release the mouse (mouseup)
                 {
@@ -64509,7 +64493,8 @@ namespace PowerSDR
                     mousefirstP_Y = mouseP_Y;
 
                     return;
-                }
+
+                } //if (mousestartP == true) 
 
 
 
@@ -83085,11 +83070,13 @@ namespace PowerSDR
         //============================================================================================
         // ke9ns add everything below as part of PowerMate add one
         //================================================================================================
-        // Button Push event handler
+        // Button Push event handler  (also OnRotateEvent as well)
         //================================================================================================
         public void OnButtonEvent(HidDevice.PowerMate.ButtonState bs, int value, int value1, int value2)
         {
+            Debug.WriteLine("294 ONBUTTON");
 
+          
             switch (bs)   // 2 cases UP or DOwn
             {
                 case HidDevice.PowerMate.ButtonState.Down:
@@ -83171,7 +83158,39 @@ namespace PowerSDR
 
         } // onbutton
 
+        public void onbuttonflex()  //.296
+        {
 
+             if (setupForm.chkKnobVFO.Checked == true) // 
+             {
+                  if (setupForm.chkKnobVFOB.Checked) setupForm.chkKnobVFOB.Checked = false;
+                  else setupForm.chkKnobVFOB.Checked = true;
+             }
+             else
+             {
+               
+
+                     if (setupForm.chkBoxIND2.Checked == true) // ke9ns (check if Alt tune step ON for flexcontrol knob)
+                     {
+                       Debug.WriteLine("296 onflex");
+
+                    if (setupForm.tune_step_index4 != setupForm.tune_step_index3)
+                         {
+                             setupForm.tune_step_index4 = setupForm.tune_step_index3; // ke9ns temp storage
+                         }
+                         else
+                         {
+                             setupForm.tune_step_index4 = setupForm.tune_step_index2; // ke9ns 
+                         }
+
+                            setupForm.txtWheelTune2.Text = tune_step_list[setupForm.tune_step_index2].Name;
+                            setupForm.txtWheelTune3.Text = tune_step_list[setupForm.tune_step_index3].Name;
+
+                     }
+                    
+             }
+
+        } //onbuttonflex
 
         //================================================================================================
         //   LED brightness event handler (slider)
@@ -83180,6 +83199,8 @@ namespace PowerSDR
         public void OnSliderBrightness(object sender, EventArgs e)
         {
             TrackBar slider = sender as TrackBar;
+
+            Debug.WriteLine("294 LED");
 
             if (slider != null)
             {
@@ -83193,13 +83214,13 @@ namespace PowerSDR
         }
 
         public static int CTUN3 = 0;      // ke9ns add keep rundisplay() thread from updating pan and water too soon in CTUn mode
-        public static bool CTUN = false;  // ke9ns add CTUN feature ON/OFF
+        public static bool CTUN = false;  // ke9ns add CTUN feature ON/OFF .294 (not used anymore, now use CTUNIF instead
         public static long CTUN1_HZ = 0;  // ke9ns add used in Calcdisplayfreq() to keep display from moving and allow vfoa bandpass to move across display
         public double tempVFOAFreq = 0.0; //  ke9ns add hold new vfo freq seperate from real vfoafreq to sync up display movement
         public static int UPDATEOFF = 0;  // ke9ns add pan & waterfall delay while CTUN is on and your sliding across the display
 
 
-        public static bool CTUNIF = false; //.284 new PAN function shifting the virutal IF around instead (smoother)
+        public static bool CTUNIF = false; //.284 new PAN function shifting the virutal IF around instead (smoother) (do not use CTUN)
         public double tempVFOAFreqIF = 0.0;
         public double tempVFOBFreqIF = 0.0; // RX2 only
         public double MinZoom = 0.6; // mininum zoom required for PAN scroll to work correctly
@@ -83209,6 +83230,7 @@ namespace PowerSDR
         //  CTUN=0 normal, 1=main bandpass moves (just like the sub does across the display)
         private void lblDisplayPan_MouseDown(object sender, MouseEventArgs e)
         {
+            CTUN = false;
 
        /*     if (e.Button == MouseButtons.Left)
             {
@@ -83300,10 +83322,10 @@ namespace PowerSDR
             }
             set
             {
-                CTUN = value;
+                CTUNIF = value; // was CTUN
               
 
-                if (CTUN == true) lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.PanRed; //lblDisplayPan.ForeColor = Color.Red;
+                if (CTUNIF == true) lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.PanRed; //lblDisplayPan.ForeColor = Color.Red;
                 else lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.panGray;  // lblDisplayPan.ForeColor = Color.White;
 
             }
@@ -83311,12 +83333,173 @@ namespace PowerSDR
 
         } // CTUN1
 
+
+        public bool KNOB = false;
+
         //================================================================================================
         // ke9ns add  PowerMate Griffin Knob rotation value event handler
+        // now use powerMate.Look() instead (event handler disabled in setup.cs)
+        // Display panadapter checks powermate.Look()
         //================================================================================================
-        public void OnRotateEvent(int value1)
+        public void OnRotateEvent(int value1) // values from -2 to + 2
         {
-            // Trace.WriteLine("ROTATE "+ value1);
+            powerMate.Look(0); // .294 reset
+
+            Debug.WriteLine("294 ONROTATE " + value1   );
+
+           
+            if (((lastvalue < 0) && (value1 > 0)) || ((lastvalue > 0) && (value1 < 0))) // if knob changes directions, reset speed counter
+            {
+                speed = 0;
+                lastvalue = value1;
+                return;
+            }
+
+            lastvalue = value1;
+
+            if (speed < (int)setupForm.udSpeedPM.Value)
+            {
+                speed++;
+                return; // wait until you turn knob in 1 direction far enough to exceed speed rating you set in setup.cs
+            }
+            else speed = 0; // you turned knob far enough so reset speed counter
+
+
+            if (setupForm != null && setupForm.chkKnobVFOB.Checked == false) //.249
+            {
+                  
+                    if (value1 < 0) // check direction of rotation
+                    {
+                        if (RIT == true)
+                        {
+                            RITValue = RITValue - 1;
+                        }
+                        else
+                        {
+                            if (setupForm.chkBoxIND.Checked == true) // alt1-2 tune step for knob
+                            {
+                                int num_steps = value1;
+                                if (vfo_char_width == 0) GetVFOCharWidth();
+                                int step = CurrentTuneStepHz2;  // ke9ns add
+
+                                if (setupForm.chkBoxWheelRev.Checked == true) VFOAFreq = SnapTune(VFOAFreq, step, -num_steps);
+                                VFOAFreq = SnapTune(VFOAFreq, step, num_steps);
+                            }
+                            else // use console tune step for knob
+                            {
+                                if (vfo_char_width == 0) GetVFOCharWidth();
+                                if (setupForm.chkBoxWheelRev.Checked == true) VFOAFreq = SnapTune(VFOAFreq, CurrentTuneStepHz, -value1);
+                                VFOAFreq = SnapTune(VFOAFreq, CurrentTuneStepHz, value1);
+                            }
+
+                           
+                        }
+                    }
+                    else // value >= 0
+                    {
+                        if (RIT == true)
+                        {
+                            RITValue = RITValue + 1;
+                        }
+                        else
+                        {
+                            if (setupForm.chkBoxIND.Checked == true) // alt tune step value
+                            {
+                                int num_steps = value1;
+                                if (vfo_char_width == 0) GetVFOCharWidth();
+                                int step = CurrentTuneStepHz2;  // ke9ns add
+                                VFOAFreq = SnapTune(VFOAFreq, step, num_steps);
+
+                            }
+                            else
+                            {
+                                if (vfo_char_width == 0) GetVFOCharWidth();
+                                if (setupForm.chkBoxWheelRev.Checked == true) VFOAFreq = SnapTune(VFOAFreq, CurrentTuneStepHz, -value1);
+                                VFOAFreq = SnapTune(VFOAFreq, CurrentTuneStepHz, value1);
+
+                             }
+     
+                        }
+                    }
+               
+
+            } //   if (setupForm.chkKnobVFOB.Checked == false)
+            else // VFOB
+            {
+                //.249 ke9ns have not made a CTUN for VFOB yet.
+
+              
+                    //---------------------------------------------
+                    if (value1 < 0)
+                    {
+                        if (RIT == true)
+                        {
+                            RITValue = RITValue - 1;
+                        }
+                        else
+                        {
+                            if (setupForm.chkBoxIND.Checked == true)
+                            {
+                                int num_steps = value1;
+                                if (vfo_char_width == 0) GetVFOCharWidth();
+                                int step = CurrentTuneStepHz2;  // ke9ns add
+                                VFOBFreq = SnapTune(VFOBFreq, step, num_steps);
+                            }
+                            else
+                            {
+
+                                int step = CurrentTuneStepHz;
+                                int num_steps = value1;
+                                if (vfo_char_width == 0) GetVFOCharWidth();
+                                VFOBFreq = SnapTune(VFOBFreq, step, num_steps);
+                            }
+                        }
+                    }
+                    else // value >= 0
+                    {
+                        if (RIT == true)
+                        {
+                            RITValue = RITValue + 1;
+                        }
+                        else
+                        {
+                            if (setupForm.chkBoxIND.Checked == true) // alt tune step value
+                            {
+                                int num_steps = value1;
+                                if (vfo_char_width == 0) GetVFOCharWidth();
+                                int step = CurrentTuneStepHz2;  // ke9ns add
+                                VFOBFreq = SnapTune(VFOBFreq, step, num_steps);
+
+                            }
+                            else
+                            {
+                                int step = CurrentTuneStepHz;
+                                int num_steps = value1;
+                                if (vfo_char_width == 0) GetVFOCharWidth();
+                                VFOBFreq = SnapTune(VFOBFreq, step, num_steps);
+
+
+                            }
+                        }
+                    }
+               
+              
+
+            } //   VFOB
+
+
+            KNOB = false;
+
+        } //onrotateevent
+
+//=====================================================================================
+
+        public void OnRotateEventFlex(int value1) // .296
+        {
+            powerMate.Lookflex(0); // .294 reset
+
+            Debug.WriteLine("296 ONROTATEflex " + value1);
+
 
             if (((lastvalue < 0) && (value1 > 0)) || ((lastvalue > 0) && (value1 < 0))) // if knob changes directions, reset speed counter
             {
@@ -83334,196 +83517,113 @@ namespace PowerSDR
             }
             else speed = 0; // you turned knob far enough so reset speed counter
 
+
             if (setupForm != null && setupForm.chkKnobVFOB.Checked == false) //.249
             {
-                if (CTUN == false) // ke9ns: CTUN is where the Screen stays put and the bandpass window moves (when TRUE).
+
+                if (value1 < 0) // check direction of rotation
                 {
-                    //---------------------------------------------
-                    if (value1 < 0)
+                    
+                    if (setupForm.chkBoxIND2.Checked == true) // alt1-2 tune step for flexknob
                     {
-                        if (RIT == true)
-                        {
-                            RITValue = RITValue - 1;
-                        }
-                        else
-                        {
-                            if (setupForm.chkBoxIND.Checked == true)
-                            {
-                                int num_steps = -1;
-                                if (vfo_char_width == 0) GetVFOCharWidth();
-                                int step = CurrentTuneStepHz2;  // ke9ns add
-                                VFOAFreq = SnapTune(VFOAFreq, step, num_steps);
-                            }
-                            else
-                            {
-                                if (setupForm != null)
-                                {
-                                    if (setupForm.chkBoxWheelRev.Checked == true) Console_MouseWheel(this, new MouseEventArgs(MouseButtons.None, 0, 0, 0, 120)); // reverse it here, I will reverse it later also
-                                    else Console_MouseWheel(this, new MouseEventArgs(MouseButtons.None, 0, 0, 0, -120));
-                                }
+                        int num_steps = value1;
+                        if (vfo_char_width == 0) GetVFOCharWidth();
+                        int step = CurrentTuneStepHz2;  // ke9ns add
 
-                            }
-                        }
+                        if (setupForm.chkBoxWheelRev.Checked == true) VFOAFreq = SnapTune(VFOAFreq, step, -num_steps);
+                        VFOAFreq = SnapTune(VFOAFreq, step, num_steps);
                     }
-                    else // value >= 0
+                    else // use console tune step for knob
                     {
-                        if (RIT == true)
-                        {
-                            RITValue = RITValue + 1;
-                        }
-                        else
-                        {
-                            if (setupForm.chkBoxIND.Checked == true) // alt tune step value
-                            {
-                                int num_steps = 1;
-
-                                if (vfo_char_width == 0) GetVFOCharWidth();
-
-                                int step = CurrentTuneStepHz2;  // ke9ns add
-
-                                VFOAFreq = SnapTune(VFOAFreq, step, num_steps);
-
-                            }
-                            else
-                            {
-                                if (setupForm != null)
-                                {
-                                    if (setupForm.chkBoxWheelRev.Checked == true) Console_MouseWheel(this, new MouseEventArgs(MouseButtons.None, 0, 0, 0, -120));
-                                    else Console_MouseWheel(this, new MouseEventArgs(MouseButtons.None, 0, 0, 0, 120));
-                                }
-
-                                //  Console_MouseWheel(this, new MouseEventArgs(MouseButtons.None, 0, 0, 0, 120));
-                            }
-                        }
+                        if (vfo_char_width == 0) GetVFOCharWidth();
+                        if (setupForm.chkBoxWheelRev.Checked == true) VFOAFreq = SnapTune(VFOAFreq, CurrentTuneStepHz, -value1);
+                        VFOAFreq = SnapTune(VFOAFreq, CurrentTuneStepHz, value1);
                     }
-                } // CTUN false
-                else // CTUN true
+
+
+                   
+                }
+                else // value >= 0
                 {
-
-                    if ((Display.CurrentDisplayMode == DisplayMode.PANADAPTER) || (Display.CurrentDisplayMode == DisplayMode.PANAFALL) || (Display.CurrentDisplayMode == DisplayMode.PANASCOPE) || (Display.CurrentDisplayMode == DisplayMode.WATERFALL))
+                    
+                    if (setupForm.chkBoxIND2.Checked == true) // alt tune step value
                     {
-                        UPDATEOFF = 2; // 2 ke9ns let system know not to update screen for a little while pan
+                        int num_steps = value1;
+                        if (vfo_char_width == 0) GetVFOCharWidth();
+                        int step = CurrentTuneStepHz2;  // ke9ns add
+                        VFOAFreq = SnapTune(VFOAFreq, step, num_steps);
+
+                    }
+                    else
+                    {
+                        if (vfo_char_width == 0) GetVFOCharWidth();
+                        if (setupForm.chkBoxWheelRev.Checked == true) VFOAFreq = SnapTune(VFOAFreq, CurrentTuneStepHz, -value1);
+                        VFOAFreq = SnapTune(VFOAFreq, CurrentTuneStepHz, value1);
+
                     }
 
-                    if (value1 < 0)
-                    {
-                        CTUN1_HZ = CTUN1_HZ - CurrentTuneStepHz;// ke9ns add allow bandpass window to scroll across display instead of display freq scroll under bandpass.
-                        tempVFOAFreq = VFOAFreq - (double)CurrentTuneStepHz / 1e6; // vfoafreq in mhz
-                        CalcDisplayFreq(); // ke9ns keep display from moving
-                    }
-                    else if (value1 > 0) // value >= 0
-                    {
+                    
+                }
 
-                        //  commands.ZZAU("01"); // .178
-                        //  setupForm.parser.Get("ZZAU01;");
-
-                        CTUN1_HZ = CTUN1_HZ + CurrentTuneStepHz;// ke9ns add allow bandpass window to scroll across display instead of display freq scroll under bandpass.
-                        tempVFOAFreq = VFOAFreq + (double)CurrentTuneStepHz / 1e6;
-                        CalcDisplayFreq(); // ke9ns keep display from moving
-                    }
-
-                    //   Debug.WriteLine("CTUN="+ CTUN1_HZ);
-
-
-                } // CTUN true
 
             } //   if (setupForm.chkKnobVFOB.Checked == false)
             else // VFOB
             {
                 //.249 ke9ns have not made a CTUN for VFOB yet.
 
-                if (CTUN == false) // ke9ns: CTUN is where the Screen stays put and the bandpass window moves (when TRUE).
+
+                //---------------------------------------------
+                if (value1 < 0)
                 {
-                    //---------------------------------------------
-                    if (value1 < 0)
-                    {
-                        if (RIT == true)
+                    
+                        if (setupForm.chkBoxIND.Checked == true)
                         {
-                            RITValue = RITValue - 1;
+                            int num_steps = value1;
+                            if (vfo_char_width == 0) GetVFOCharWidth();
+                            int step = CurrentTuneStepHz2;  // ke9ns add
+                            VFOBFreq = SnapTune(VFOBFreq, step, num_steps);
                         }
                         else
                         {
-                            if (setupForm.chkBoxIND.Checked == true)
-                            {
-                                int num_steps = -1;
-                                if (vfo_char_width == 0) GetVFOCharWidth();
-                                int step = CurrentTuneStepHz2;  // ke9ns add
-                                VFOBFreq = SnapTune(VFOBFreq, step, num_steps);
-                            }
-                            else
-                            {
 
-                                int step = CurrentTuneStepHz;
-                                int num_steps = -1;
-                                if (vfo_char_width == 0) GetVFOCharWidth();
-                                VFOBFreq = SnapTune(VFOBFreq, step, num_steps);
-                            }
+                            int step = CurrentTuneStepHz;
+                            int num_steps = value1;
+                            if (vfo_char_width == 0) GetVFOCharWidth();
+                            VFOBFreq = SnapTune(VFOBFreq, step, num_steps);
                         }
-                    }
-                    else // value >= 0
-                    {
-                        if (RIT == true)
+                   
+                }
+                else // value >= 0
+                {
+                   
+                        if (setupForm.chkBoxIND.Checked == true) // alt tune step value
                         {
-                            RITValue = RITValue + 1;
+                            int num_steps = value1;
+                            if (vfo_char_width == 0) GetVFOCharWidth();
+                            int step = CurrentTuneStepHz2;  // ke9ns add
+                            VFOBFreq = SnapTune(VFOBFreq, step, num_steps);
+
                         }
                         else
                         {
-                            if (setupForm.chkBoxIND.Checked == true) // alt tune step value
-                            {
-                                int num_steps = 1;
-                                if (vfo_char_width == 0) GetVFOCharWidth();
-                                int step = CurrentTuneStepHz2;  // ke9ns add
-                                VFOBFreq = SnapTune(VFOBFreq, step, num_steps);
-
-                            }
-                            else
-                            {
-                                int step = CurrentTuneStepHz;
-                                int num_steps = 1;
-                                if (vfo_char_width == 0) GetVFOCharWidth();
-                                VFOBFreq = SnapTune(VFOBFreq, step, num_steps);
+                            int step = CurrentTuneStepHz;
+                            int num_steps = value1;
+                            if (vfo_char_width == 0) GetVFOCharWidth();
+                            VFOBFreq = SnapTune(VFOBFreq, step, num_steps);
 
 
-                            }
                         }
-                    }
-                } // CTUN false
-                else // CTUN true
-                {
-
-                    if ((Display.CurrentDisplayMode == DisplayMode.PANADAPTER) || (Display.CurrentDisplayMode == DisplayMode.PANAFALL) || (Display.CurrentDisplayMode == DisplayMode.PANASCOPE) || (Display.CurrentDisplayMode == DisplayMode.WATERFALL))
-                    {
-                        UPDATEOFF = 2; // 2 ke9ns let system know not to update screen for a little while pan
-                    }
-
-                    if (value1 < 0)
-                    {
-                        CTUN1_HZ = CTUN1_HZ - CurrentTuneStepHz;// ke9ns add allow bandpass window to scroll across display instead of display freq scroll under bandpass.
-                        tempVFOAFreq = VFOAFreq - (double)CurrentTuneStepHz / 1e6; // vfoafreq in mhz
-                        CalcDisplayFreq(); // ke9ns keep display from moving
-                    }
-                    else if (value1 > 0) // value >= 0
-                    {
-
-                        //  commands.ZZAU("01"); // .178
-                        //  setupForm.parser.Get("ZZAU01;");
-
-                        CTUN1_HZ = CTUN1_HZ + CurrentTuneStepHz;// ke9ns add allow bandpass window to scroll across display instead of display freq scroll under bandpass.
-                        tempVFOAFreq = VFOAFreq + (double)CurrentTuneStepHz / 1e6;
-                        CalcDisplayFreq(); // ke9ns keep display from moving
-                    }
-
-                    //   Debug.WriteLine("CTUN="+ CTUN1_HZ);
-
-
-                } // CTUN true
-
-
-            } //   if (setupForm.chkKnobVFOB.Checked == true
+                    
+                }
 
 
 
-        } //onrotateevent
+            } //   VFOB
+
+
+            KNOB = false;
+
+        } //onrotateeventflex
 
         //================================================================================================
         // rotation value to screen invoked from above
@@ -83531,6 +83631,9 @@ namespace PowerSDR
 
         void SetRotateLabel()
         {
+
+            Debug.WriteLine("294 SETROTATE");
+
             //  this.rotationLabel.Text = currentRotationalValue.ToString();
 
         }
@@ -83540,6 +83643,7 @@ namespace PowerSDR
 
         void SetSENDLabel()
         {
+            Debug.WriteLine("294 SendROTATE");
 
         }
 
@@ -83885,7 +83989,7 @@ namespace PowerSDR
 
         //=========================================================================================
         //=========================================================================================
-        // rn3kk add method for change if mousewheell on web
+        // rn3kk add method for change if mousewheel on web
         public void wheelEventOnWeb(bool direction)
         {
             if (direction)
@@ -83896,6 +84000,8 @@ namespace PowerSDR
             {
                 VFOAFreq -= CurrentTuneStepMHz;
             }
+
+          
         }
 
         // rn3kk add

@@ -7241,12 +7241,27 @@ namespace PowerSDR
         private void udDisplayGridMin_ValueChanged(object sender, System.EventArgs e)
         {
             if (udDisplayGridMin.Value >= udDisplayGridMax.Value) udDisplayGridMin.Value = udDisplayGridMax.Value - 10;
+
             Display.SpectrumGridMin = (int)udDisplayGridMin.Value;
 
             Display.Gradient(Display.SpectrumGridMax, Display.SpectrumGridMin); // set new Gradient color scheme
 
             // console.AutoPanScaleMin = (int)udDisplayGridMin.Value; // ke9ns add storage of original  value
         }
+
+        // .295 add
+        private void udDisplayGridRX2Min_ValueChanged(object sender, System.EventArgs e)
+        {
+            if (udDisplayGridRX2Min.Value >= udDisplayGridMax.Value) udDisplayGridRX2Min.Value = udDisplayGridMax.Value - 10;
+
+            Display.SpectrumGridRX2Min = (int)udDisplayGridRX2Min.Value;
+
+          //  Display.Gradient(Display.SpectrumGridMax, Display.SpectrumGridMin); // set new Gradient color scheme
+
+            // console.AutoPanScaleMin = (int)udDisplayGridMin.Value; // ke9ns add storage of original  value
+        }
+
+
 
         private void udDisplayGridStep_ValueChanged(object sender, System.EventArgs e)
         {
@@ -13819,7 +13834,17 @@ namespace PowerSDR
                     console.WaterfallLowRX2ThresholdXVTR = (float)udDisplayWaterfallRX2Level.Value;
                     Display.WaterfallLowRX2Threshold = console.WaterfallLowRX2ThresholdXVTR;
                     break;
-            }
+
+
+            } // switch (RX2 band) 
+
+            // .295 add
+           // decimal temp1 = udDisplayGridMin.Value - udDisplayWaterfallLowLevel.Value;
+
+
+            udDisplayGridRX2Min.Value = udDisplayGridMin.Value - udDisplayWaterfallLowLevel.Value + udDisplayWaterfallRX2Level.Value;
+
+
 
         }// rx2 water level
 
@@ -14057,10 +14082,10 @@ namespace PowerSDR
                         console.KBON = 1;
                         Debug.WriteLine("FOUND KNOB2==============" + console.KBON);
                         powerMate.ButtonEvent += new HidDevice.PowerMate.ButtonHandler(console.OnButtonEvent);      // create button event
-                        powerMate.RotateEvent += new HidDevice.PowerMate.RotationHandler(console.OnRotateEvent);    // create rotation event
-
-                        //  this.powerMate.LedBrightness = 60;              // turns on LED light at startup
-
+                      
+                     //   powerMate.RotateEvent += new HidDevice.PowerMate.RotationHandler(console.OnRotateEvent);    // create rotation event
+                     // .294 turn off event handler and just use console.UpdateRX1
+                       
 
                     }
                 }
@@ -14077,6 +14102,7 @@ namespace PowerSDR
 
         } //chkBoxPM_CheckedChanged
 
+      
 
         // ke9ns add
         private void udSpeedPM_ValueChanged(object sender, EventArgs e)
@@ -14181,7 +14207,7 @@ namespace PowerSDR
             ChangeTuneStepUp3();
         }
 
-        // ke9ns see console init routine calls this at powerSDR startup to get values set
+        // ke9ns: see console init routine calls this at powerSDR startup to get values set
         public void ChangeTuneStepUp2()
         {
             tune_step_index4 = tune_step_index2 = (tune_step_index2 + 1) % console.tune_step_list.Count;
@@ -16584,7 +16610,9 @@ namespace PowerSDR
             if (console.RX2AGCMode == AGCMode.FIXD)  console.RX2RF = (int)udRX2DSPAGCFixedGaindB.Value;
         }
 
-       
+
+
+
 
 
 

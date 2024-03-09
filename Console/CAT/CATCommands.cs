@@ -1164,6 +1164,9 @@ namespace PowerSDR
         public string ZZAD(string s)
         {
             int step = 0;
+
+         //   Debug.WriteLine("294 ZZAD " + s + " , " + s.Length );
+
             if (s.Length == parser.nSet)
             {
                 step = Convert.ToInt32(s);
@@ -1171,10 +1174,11 @@ namespace PowerSDR
                 if (step >= 0 || step <= 14)
                 {
 
-                    if (Console.CTUN == true) // ke9ns add .178
+                    if (Console.CTUNIF == true) // ke9ns add .178 updated in .294
                     {
                         if (console.setupForm != null)
                         {
+                          
                             if (console.setupForm.chkBoxWheelRev.Checked == true) console.Console_MouseWheel(this.console, new MouseEventArgs(MouseButtons.None, 0, 0, 0, 120));
                             else console.Console_MouseWheel(this.console, new MouseEventArgs(MouseButtons.None, 0, 0, 0, -120));
                         }
@@ -1455,7 +1459,7 @@ namespace PowerSDR
                 if (step >= 0 || step <= 14)
                 {
 
-                    if (Console.CTUN == true) // ke9ns add .178
+                    if (Console.CTUNIF == true) // ke9ns add .178 //.294
                     {
                         if (console.setupForm != null)
                         {

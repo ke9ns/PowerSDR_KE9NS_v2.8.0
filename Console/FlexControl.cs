@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
@@ -12,6 +13,23 @@ namespace PowerSDR //Flex.Control
 {
     public class FlexControl
     {
+
+        public static Console console;   // .296 ke9ns mod  to allow console to pass back values to setup screen
+        public static Setup setupForm;   // .296 ke9ns communications with setupform  (i.e. allow combometertype.text update from inside console.cs) 
+
+      
+        public FlexControl(Console c) //.296 add
+        {
+            console = c;
+        }
+
+        public static bool push = false;
+        public bool FlexPush //.296
+        {
+            get { return push; }
+            set { push = value; }
+        }
+
         public enum RotateDirection
         {
             Clockwise,
@@ -70,7 +88,7 @@ namespace PowerSDR //Flex.Control
 
         public event DisconnectHandler Disconnected;
 
-        private void OnKnobRotated(RotateDirection direction, int num_steps)
+        private void OnKnobRotated(RotateDirection direction, int num_steps) //.296 use powerMate Look for PAN mode instead of this
         {
             if (this.KnobRotated != null)
             {
@@ -183,32 +201,43 @@ namespace PowerSDR //Flex.Control
             switch (token)
             {
                 case "U;":
-                    OnKnobRotated(RotateDirection.Clockwise, 1);
+
+                    if (Console.CTUNIF) console.powerMate.Lookflex(1); //.296
+                    else   OnKnobRotated(RotateDirection.Clockwise, 1);
                     break;
                 case "D;":
-                    OnKnobRotated(RotateDirection.CounterClockwise, 1);
+                    if (Console.CTUNIF) console.powerMate.Lookflex(-1); //.296
+                    else  OnKnobRotated(RotateDirection.CounterClockwise, 1);
                     break;
                 case "S;":
-                    OnButtonClicked(Button.Knob, ClickType.Single);
+                  //  Debug.WriteLine("296 PUSH S");
+                    if (console.setupForm.chkBoxIND2.Checked) FlexPush = true;  //.296
+                    else OnButtonClicked(Button.Knob, ClickType.Single);
                     break;
                 case "C;":
-                    OnButtonClicked(Button.Knob, ClickType.Double);
+                  //  Debug.WriteLine("296 PUSH C");
+                    if (console.setupForm.chkBoxIND2.Checked) FlexPush = true;  //.296
+                    else OnButtonClicked(Button.Knob, ClickType.Double);
                     break;
                 case "L;":
-                    OnButtonClicked(Button.Knob, ClickType.Long);
+                  //  Debug.WriteLine("296 PUSH L");
+                    if (console.setupForm.chkBoxIND2.Checked) FlexPush = true;  //.296
+                    else OnButtonClicked(Button.Knob, ClickType.Long);
                     break;
                 default:
                     if (token.StartsWith("U") && token.Length == 4)
                     {
                         int num_steps = int.Parse(token.Substring(1, 2));
-                        OnKnobRotated(RotateDirection.Clockwise, num_steps);
+                        if (Console.CTUNIF) console.powerMate.Lookflex(1); //.296
+                        else OnKnobRotated(RotateDirection.Clockwise, num_steps);
                         break;
                     }
 
                     if (token.StartsWith("D") && token.Length == 4)
                     {
                         int num_steps2 = int.Parse(token.Substring(1, 2));
-                        OnKnobRotated(RotateDirection.CounterClockwise, num_steps2);
+                        if (Console.CTUNIF) console.powerMate.Lookflex(-1); //.296
+                        else OnKnobRotated(RotateDirection.CounterClockwise, num_steps2);
                         break;
                     }
 
@@ -232,13 +261,16 @@ namespace PowerSDR //Flex.Control
                         switch (token.Substring(2, 1))
                         {
                             case "S":
-                                type = ClickType.Single;
+                                if (console.setupForm.chkBoxIND2.Checked) FlexPush = true;  //.296
+                               else type = ClickType.Single;
                                 break;
                             case "C":
-                                type = ClickType.Double;
+                                if (console.setupForm.chkBoxIND2.Checked) FlexPush = true;  //.296
+                               else type = ClickType.Double;
                                 break;
                             case "L":
-                                type = ClickType.Long;
+                                if (console.setupForm.chkBoxIND2.Checked) FlexPush = true;  //.296
+                               else type = ClickType.Long;
                                 break;
                         }
 

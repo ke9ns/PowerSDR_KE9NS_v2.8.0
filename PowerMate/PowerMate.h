@@ -91,7 +91,7 @@ namespace HidDevice
  //-----------------------------------------------------
 
 
-			int rotvalue;
+	public: int rotvalue;
 			int rotationValue;								// is value from rotationHandler
 			int lastrotation;
 			int rotationLowerBound;
@@ -287,7 +287,7 @@ namespace HidDevice
 								SetupDiDestroyDeviceInfoList(hDevInfoSet);
 
 								inputThread = gcnew Thread( gcnew ThreadStart(this, &PowerMate::InputThread));		// THREAD for InputThread
-								inputThread->Priority = ThreadPriority::Normal;
+								inputThread->Priority = ThreadPriority::Highest;
 								inputThread->Start();
 
 								return true;
@@ -315,6 +315,8 @@ namespace HidDevice
 
 		#pragma endregion
 
+		
+
 //=====Shutdown =================================================================================================
 
 		#pragma region Shutdown
@@ -340,7 +342,40 @@ namespace HidDevice
 		#pragma endregion
 
 
+	  // ke9ns: add to eliminate the event handler (found in setup.cs that causes some strange pan glitch
+#pragma region Look
+		public: static int TEMP3 = 0;
 
+		public: int Look(int TEMP1)
+		{
+			static int TEMP2 = 0;
+		
+			if (TEMP1 != 10) // 10 = just read the current value, 0=reset
+			{
+				TEMP2 = TEMP1;
+				TEMP3 = TEMP1;
+			}
+
+		    return TEMP2;
+		
+			
+		} // Look
+
+public: int Lookflex(int TEMP1) //.296 for flexcontrol only
+{
+	static int TEMP4 = 0;
+
+	if (TEMP1 != 10) // 10 = just read the current value, 0=reset
+	{
+		TEMP4 = TEMP1;
+		TEMP3 = TEMP1;
+	}
+
+	return TEMP4;
+
+
+} // Look
+#pragma endregion
 
 //====LED Brightness==================================================================================================
 
@@ -395,7 +430,6 @@ namespace HidDevice
 					{
 						//	Trace::WriteLine("failure to get input report - brightness");	
 					}
-					
 				
 				}
 
@@ -443,7 +477,8 @@ namespace HidDevice
 		#pragma endregion
 
 
-				
+		
+
 //==================================================================================================================
 //==================================================================================================================
 //==================================================================================================================
@@ -478,7 +513,7 @@ namespace HidDevice
 				
 				result = ReadFile(handleToDevice, reportBuffer, sizeof(reportBuffer), &dwBytesRead, &overLap);// async call
 			                                                                                
-				DWORD dw = WaitForSingleObject(hEvent, TIMER_CAT);  // wait for 200=200mSec (was 2 seconds)
+				DWORD dw = WaitForSingleObject(hEvent, 10);  // wait for 200=200mSec (was 2 seconds)
 			
 				switch(dw)
 				{
@@ -509,8 +544,11 @@ namespace HidDevice
 						{
 							rotationValue += reportBuffer[2];
 
-						//	Trace::WriteLine("Reportbuffer " + reportBuffer[2]);
-                 	
+						//	Debug::WriteLine("Reportbuffer " + reportBuffer[2]);
+                 			
+							
+							Look(rotvalue); //.294 new way to allow display to poll knob for PAN mode smoothness
+
 							EventsHelper::Tire(rotationDelegate,rotvalue); // send direction, rotationvalue, txsend
 							
 						} // knob rotation

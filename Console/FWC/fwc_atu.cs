@@ -389,7 +389,7 @@ namespace PowerSDR
                     swr = (1 + ro) / (1 - ro);
                     break;
                 case ATUResponse.CMD_TXFREQ:
-                    txfreq = (double)32768 / (((b2 << 8) + b3) * 1.6);
+                    txfreq = (double)32768 / (((b2 << 8) + b3) * 1.603981); //.296 was 1.6
                     break;
                 case ATUResponse.CMD_TUNEPASS:
                     tune_pass = true;

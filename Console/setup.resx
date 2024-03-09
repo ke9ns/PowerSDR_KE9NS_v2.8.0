@@ -516,7 +516,7 @@ Set Spectrum Grid-&gt;Max = -19, Min = -135, Step = 6 (S signals are 6 dBm apart
 </value>
   </data>
   <data name="udDisplayGridMin.ToolTip" xml:space="preserve">
-    <value>Signal Level at bottom of the Panadapter display in dBm.
+    <value>Signal Level at bottom Floor of the RX1 Panadapter display in dBm.
 
 In order to see a correct scale on the right side matched to the left side,
 Set Spectrum Grid-&gt;Max = -19, Min = -135, Step = 6 (S signals are 6 dBm apart).

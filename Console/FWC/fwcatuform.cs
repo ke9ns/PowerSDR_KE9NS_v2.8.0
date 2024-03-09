@@ -279,7 +279,7 @@ namespace PowerSDR
             {
                 lblTuneComplete.ForeColor = Color.Green;
                 lblTuneComplete.Text = "Tune Completed Successfully";
-                lblFreq.Text = "Freq (MHz): " + FWCATU.TXFreq.ToString("f2");
+                lblFreq.Text = "Freq (MHz): " + FWCATU.TXFreq.ToString("f3"); //.296 was f2
                 lblForward.Text = "Forward: " + FWCATU.ForwardPower.ToString("f0");
                 lblReflected.Text = "Reflected: " + FWCATU.ReflectedPower.ToString("f0");
 
