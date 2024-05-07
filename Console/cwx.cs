@@ -42,6 +42,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -111,8 +112,8 @@ namespace PowerSDR
         public bool stopPoll = true;      // ke9ns add  false = stop poll cw key
 
         // define the position and size of the keyboard area
-        private int kylx = 12, kyty = 180;              // ulc of key area
-        private int kyysz = 82, kyxsz = 665;            // extents
+        private int kylx = 17, kyty = 215;              // ulc of key area  12  180  (location of formGraphics graphics window to replace the txtdummy1)
+        private int kyysz = 82, kyxsz = 665;            // extents  82 665
         private char[] kbufold = new char[NKEYS];       // sent keys
         private char[] kbufnew = new char[NKEYS];       // unsent keys
 
@@ -1781,6 +1782,18 @@ namespace PowerSDR
                 default: tqq = "?bad msg?"; break;
             }
 
+           
+
+            try
+            {
+                tqq = tqq.Replace("~", txt10.Text); //.298 wild card ~ insert here
+            }
+            catch
+            {
+
+            }
+
+
             if (tqq.Length < 1) return; // ke9ns add  return if clicked on empty string
 
             Debug.WriteLine("size of tqq= " + tqq.Length);
@@ -2037,6 +2050,15 @@ namespace PowerSDR
                 case 8: qq = txt8.Text; break;
                 case 9: qq = txt9.Text; break;
                 default: qq = "?bad msg?"; break;
+            }
+
+            try
+            {
+                qq = qq.Replace("~", txt10.Text); //.298 wild card ~ insert here
+            }
+            catch
+            {
+
             }
 
             insert_key(' ');

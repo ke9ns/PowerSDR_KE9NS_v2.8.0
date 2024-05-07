@@ -202,7 +202,7 @@ namespace PowerSDR //Flex.Control
             {
                 case "U;":
 
-                    if (Console.CTUNIF) console.powerMate.Lookflex(1); //.296
+                    if (Console.CTUNIF) console.powerMate.Lookflex(1); //.296 
                     else   OnKnobRotated(RotateDirection.Clockwise, 1);
                     break;
                 case "D;":

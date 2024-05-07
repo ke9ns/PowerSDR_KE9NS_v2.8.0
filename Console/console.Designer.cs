@@ -813,6 +813,7 @@ namespace PowerSDR
             this.btnEnable.Name = "btnEnable";
             this.toolTip1.SetToolTip(this.btnEnable, resources.GetString("btnEnable.ToolTip"));
             this.btnEnable.Click += new System.EventHandler(this.btnEnable_Click);
+            this.btnEnable.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnEnable_MouseDown);
             // 
             // btnSync
             // 

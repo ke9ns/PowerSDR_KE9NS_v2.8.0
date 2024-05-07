@@ -54,9 +54,10 @@ namespace PowerSDR
             this.keyLed = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.keyboardLed = new System.Windows.Forms.Panel();
+            this.labelTS1 = new System.Windows.Forms.LabelTS();
+            this.txt10 = new System.Windows.Forms.TextBoxTS();
             this.checkBoxTS1 = new System.Windows.Forms.CheckBoxTS();
             this.checkBoxCWD = new System.Windows.Forms.CheckBoxTS();
-            this.chkAlwaysOnTop = new System.Windows.Forms.CheckBoxTS();
             this.chkKeyPoll = new System.Windows.Forms.CheckBoxTS();
             this.udWPM = new System.Windows.Forms.NumericUpDownTS();
             this.pttdelaylabel = new System.Windows.Forms.LabelTS();
@@ -65,7 +66,6 @@ namespace PowerSDR
             this.keyboardButton = new System.Windows.Forms.ButtonTS();
             this.clearButton = new System.Windows.Forms.ButtonTS();
             this.chkPause = new System.Windows.Forms.CheckBoxTS();
-            this.txtdummy1 = new System.Windows.Forms.TextBoxTS();
             this.txt9 = new System.Windows.Forms.TextBoxTS();
             this.txt8 = new System.Windows.Forms.TextBoxTS();
             this.txt7 = new System.Windows.Forms.TextBoxTS();
@@ -75,17 +75,13 @@ namespace PowerSDR
             this.txt3 = new System.Windows.Forms.TextBoxTS();
             this.txt2 = new System.Windows.Forms.TextBoxTS();
             this.txt1 = new System.Windows.Forms.TextBoxTS();
-            this.label7 = new System.Windows.Forms.LabelTS();
             this.keyButton = new System.Windows.Forms.ButtonTS();
             this.dropdelaylabel = new System.Windows.Forms.LabelTS();
             this.udDrop = new System.Windows.Forms.NumericUpDownTS();
             this.s9 = new System.Windows.Forms.ButtonTS();
             this.s8 = new System.Windows.Forms.ButtonTS();
             this.s7 = new System.Windows.Forms.ButtonTS();
-            this.label6 = new System.Windows.Forms.LabelTS();
-            this.label5 = new System.Windows.Forms.LabelTS();
             this.stopButton = new System.Windows.Forms.ButtonTS();
-            this.label4 = new System.Windows.Forms.LabelTS();
             this.repeatdelayLabel = new System.Windows.Forms.LabelTS();
             this.udDelay = new System.Windows.Forms.NumericUpDownTS();
             this.cbMorse = new System.Windows.Forms.ComboBoxTS();
@@ -97,6 +93,13 @@ namespace PowerSDR
             this.s3 = new System.Windows.Forms.ButtonTS();
             this.s2 = new System.Windows.Forms.ButtonTS();
             this.s1 = new System.Windows.Forms.ButtonTS();
+            this.labelTS2 = new System.Windows.Forms.LabelTS();
+            this.chkAlwaysOnTop = new System.Windows.Forms.CheckBoxTS();
+            this.txtdummy1 = new System.Windows.Forms.TextBoxTS();
+            this.label7 = new System.Windows.Forms.LabelTS();
+            this.label6 = new System.Windows.Forms.LabelTS();
+            this.label5 = new System.Windows.Forms.LabelTS();
+            this.label4 = new System.Windows.Forms.LabelTS();
             ((System.ComponentModel.ISupportInitialize)(this.udWPM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udPtt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDrop)).BeginInit();
@@ -124,16 +127,38 @@ namespace PowerSDR
             // keyboardLed
             // 
             this.keyboardLed.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.keyboardLed.Location = new System.Drawing.Point(344, 157);
+            this.keyboardLed.Location = new System.Drawing.Point(353, 187);
             this.keyboardLed.Name = "keyboardLed";
             this.keyboardLed.Size = new System.Drawing.Size(24, 13);
             this.keyboardLed.TabIndex = 52;
             this.toolTip1.SetToolTip(this.keyboardLed, " Keyboard active indicator.");
             // 
+            // labelTS1
+            // 
+            this.labelTS1.Image = null;
+            this.labelTS1.Location = new System.Drawing.Point(193, 59);
+            this.labelTS1.Name = "labelTS1";
+            this.labelTS1.Size = new System.Drawing.Size(86, 16);
+            this.labelTS1.TabIndex = 61;
+            this.labelTS1.Text = "Wild Card Text:";
+            this.toolTip1.SetToolTip(this.labelTS1, "WildCard Text goes here.\r\nThen in F1 through F9 use a ~ character \r\nThe ~ will be" +
+        " replace with the WildCard text\r\n");
+            // 
+            // txt10
+            // 
+            this.txt10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt10.Location = new System.Drawing.Point(281, 56);
+            this.txt10.MaxLength = 30;
+            this.txt10.Name = "txt10";
+            this.txt10.Size = new System.Drawing.Size(194, 21);
+            this.txt10.TabIndex = 60;
+            this.toolTip1.SetToolTip(this.txt10, "WildCard Text goes here.\r\nThen in F1 through F9 use a ~ character \r\nThe ~ will be" +
+        " replace with the WildCard text");
+            // 
             // checkBoxTS1
             // 
             this.checkBoxTS1.Image = null;
-            this.checkBoxTS1.Location = new System.Drawing.Point(218, 273);
+            this.checkBoxTS1.Location = new System.Drawing.Point(227, 303);
             this.checkBoxTS1.Name = "checkBoxTS1";
             this.checkBoxTS1.Size = new System.Drawing.Size(294, 24);
             this.checkBoxTS1.TabIndex = 59;
@@ -151,16 +176,6 @@ namespace PowerSDR
             this.checkBoxCWD.Text = "Visual CW\r\n";
             this.toolTip1.SetToolTip(this.checkBoxCWD, "Check Box to Visually display CW in Panadapter and Waterfall\r\n");
             this.checkBoxCWD.CheckedChanged += new System.EventHandler(this.checkBoxCWD_CheckedChanged);
-            // 
-            // chkAlwaysOnTop
-            // 
-            this.chkAlwaysOnTop.Image = null;
-            this.chkAlwaysOnTop.Location = new System.Drawing.Point(565, 278);
-            this.chkAlwaysOnTop.Name = "chkAlwaysOnTop";
-            this.chkAlwaysOnTop.Size = new System.Drawing.Size(123, 19);
-            this.chkAlwaysOnTop.TabIndex = 57;
-            this.chkAlwaysOnTop.Text = "Always On Top";
-            this.chkAlwaysOnTop.CheckedChanged += new System.EventHandler(this.chkAlwaysOnTop_CheckedChanged);
             // 
             // chkKeyPoll
             // 
@@ -249,7 +264,7 @@ namespace PowerSDR
             this.expandButton.BackColor = System.Drawing.Color.RoyalBlue;
             this.expandButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.expandButton.Image = null;
-            this.expandButton.Location = new System.Drawing.Point(680, 264);
+            this.expandButton.Location = new System.Drawing.Point(705, 284);
             this.expandButton.Name = "expandButton";
             this.expandButton.Size = new System.Drawing.Size(8, 8);
             this.expandButton.TabIndex = 53;
@@ -261,7 +276,7 @@ namespace PowerSDR
             // 
             this.keyboardButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.keyboardButton.Image = null;
-            this.keyboardButton.Location = new System.Drawing.Point(216, 152);
+            this.keyboardButton.Location = new System.Drawing.Point(225, 182);
             this.keyboardButton.Name = "keyboardButton";
             this.keyboardButton.Size = new System.Drawing.Size(112, 23);
             this.keyboardButton.TabIndex = 45;
@@ -274,7 +289,7 @@ namespace PowerSDR
             // clearButton
             // 
             this.clearButton.Image = null;
-            this.clearButton.Location = new System.Drawing.Point(120, 152);
+            this.clearButton.Location = new System.Drawing.Point(129, 182);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(75, 23);
             this.clearButton.TabIndex = 46;
@@ -285,7 +300,7 @@ namespace PowerSDR
             // chkPause
             // 
             this.chkPause.Image = null;
-            this.chkPause.Location = new System.Drawing.Point(16, 156);
+            this.chkPause.Location = new System.Drawing.Point(25, 186);
             this.chkPause.Name = "chkPause";
             this.chkPause.Size = new System.Drawing.Size(98, 16);
             this.chkPause.TabIndex = 43;
@@ -293,19 +308,10 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.chkPause, " Pause keyboard transmission.");
             this.chkPause.CheckedChanged += new System.EventHandler(this.chkPause_CheckedChanged);
             // 
-            // txtdummy1
-            // 
-            this.txtdummy1.Location = new System.Drawing.Point(16, 181);
-            this.txtdummy1.Multiline = true;
-            this.txtdummy1.Name = "txtdummy1";
-            this.txtdummy1.Size = new System.Drawing.Size(672, 82);
-            this.txtdummy1.TabIndex = 42;
-            this.txtdummy1.Text = "the actual text box will be a graphic here and this one disabled";
-            // 
             // txt9
             // 
             this.txt9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt9.Location = new System.Drawing.Point(504, 120);
+            this.txt9.Location = new System.Drawing.Point(513, 150);
             this.txt9.Name = "txt9";
             this.txt9.Size = new System.Drawing.Size(184, 21);
             this.txt9.TabIndex = 34;
@@ -314,7 +320,7 @@ namespace PowerSDR
             // txt8
             // 
             this.txt8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt8.Location = new System.Drawing.Point(504, 88);
+            this.txt8.Location = new System.Drawing.Point(513, 118);
             this.txt8.Name = "txt8";
             this.txt8.Size = new System.Drawing.Size(184, 21);
             this.txt8.TabIndex = 32;
@@ -323,7 +329,7 @@ namespace PowerSDR
             // txt7
             // 
             this.txt7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt7.Location = new System.Drawing.Point(504, 56);
+            this.txt7.Location = new System.Drawing.Point(513, 86);
             this.txt7.Name = "txt7";
             this.txt7.Size = new System.Drawing.Size(184, 21);
             this.txt7.TabIndex = 29;
@@ -332,7 +338,7 @@ namespace PowerSDR
             // txt6
             // 
             this.txt6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt6.Location = new System.Drawing.Point(272, 120);
+            this.txt6.Location = new System.Drawing.Point(281, 150);
             this.txt6.Name = "txt6";
             this.txt6.Size = new System.Drawing.Size(194, 21);
             this.txt6.TabIndex = 13;
@@ -341,7 +347,7 @@ namespace PowerSDR
             // txt5
             // 
             this.txt5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt5.Location = new System.Drawing.Point(272, 88);
+            this.txt5.Location = new System.Drawing.Point(281, 118);
             this.txt5.Name = "txt5";
             this.txt5.Size = new System.Drawing.Size(194, 21);
             this.txt5.TabIndex = 11;
@@ -350,7 +356,7 @@ namespace PowerSDR
             // txt4
             // 
             this.txt4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt4.Location = new System.Drawing.Point(272, 56);
+            this.txt4.Location = new System.Drawing.Point(281, 86);
             this.txt4.Name = "txt4";
             this.txt4.Size = new System.Drawing.Size(194, 21);
             this.txt4.TabIndex = 9;
@@ -359,7 +365,7 @@ namespace PowerSDR
             // txt3
             // 
             this.txt3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt3.Location = new System.Drawing.Point(40, 120);
+            this.txt3.Location = new System.Drawing.Point(49, 150);
             this.txt3.Name = "txt3";
             this.txt3.Size = new System.Drawing.Size(194, 21);
             this.txt3.TabIndex = 7;
@@ -368,7 +374,7 @@ namespace PowerSDR
             // txt2
             // 
             this.txt2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt2.Location = new System.Drawing.Point(40, 88);
+            this.txt2.Location = new System.Drawing.Point(49, 118);
             this.txt2.Name = "txt2";
             this.txt2.Size = new System.Drawing.Size(194, 21);
             this.txt2.TabIndex = 5;
@@ -377,21 +383,12 @@ namespace PowerSDR
             // txt1
             // 
             this.txt1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt1.Location = new System.Drawing.Point(40, 56);
+            this.txt1.Location = new System.Drawing.Point(49, 86);
             this.txt1.Name = "txt1";
             this.txt1.Size = new System.Drawing.Size(194, 21);
             this.txt1.TabIndex = 3;
             this.txt1.Text = "cq cq test w5sxd test";
             this.toolTip1.SetToolTip(this.txt1, "Message edit box.");
-            // 
-            // label7
-            // 
-            this.label7.Image = null;
-            this.label7.Location = new System.Drawing.Point(376, 352);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(256, 32);
-            this.label7.TabIndex = 47;
-            this.label7.Text = "label7";
             // 
             // keyButton
             // 
@@ -451,7 +448,7 @@ namespace PowerSDR
             // s9
             // 
             this.s9.Image = null;
-            this.s9.Location = new System.Drawing.Point(472, 120);
+            this.s9.Location = new System.Drawing.Point(481, 150);
             this.s9.Name = "s9";
             this.s9.Size = new System.Drawing.Size(27, 20);
             this.s9.TabIndex = 33;
@@ -463,7 +460,7 @@ namespace PowerSDR
             // s8
             // 
             this.s8.Image = null;
-            this.s8.Location = new System.Drawing.Point(472, 88);
+            this.s8.Location = new System.Drawing.Point(481, 118);
             this.s8.Name = "s8";
             this.s8.Size = new System.Drawing.Size(27, 20);
             this.s8.TabIndex = 31;
@@ -475,7 +472,7 @@ namespace PowerSDR
             // s7
             // 
             this.s7.Image = null;
-            this.s7.Location = new System.Drawing.Point(472, 56);
+            this.s7.Location = new System.Drawing.Point(481, 86);
             this.s7.Name = "s7";
             this.s7.Size = new System.Drawing.Size(27, 20);
             this.s7.TabIndex = 30;
@@ -483,24 +480,6 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.s7, "F7 Start message 7.\r\n\r\n");
             this.s7.Click += new System.EventHandler(this.s7_Click);
             this.s7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.s7_MouseDown);
-            // 
-            // label6
-            // 
-            this.label6.Image = null;
-            this.label6.Location = new System.Drawing.Point(56, 352);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(256, 32);
-            this.label6.TabIndex = 28;
-            this.label6.Text = "label6";
-            // 
-            // label5
-            // 
-            this.label5.Image = null;
-            this.label5.Location = new System.Drawing.Point(376, 304);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(256, 32);
-            this.label5.TabIndex = 27;
-            this.label5.Text = "label5";
             // 
             // stopButton
             // 
@@ -513,15 +492,6 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.stopButton, "Stop all keying. \r\nAnd also Cancel any Repeat messages (text strings with a \" on " +
         "the end)");
             this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
-            // 
-            // label4
-            // 
-            this.label4.Image = null;
-            this.label4.Location = new System.Drawing.Point(56, 304);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(256, 32);
-            this.label4.TabIndex = 25;
-            this.label4.Text = "label4";
             // 
             // repeatdelayLabel
             // 
@@ -571,7 +541,7 @@ namespace PowerSDR
             this.cbMorse.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMorse.DropDownWidth = 208;
             this.cbMorse.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbMorse.Location = new System.Drawing.Point(480, 153);
+            this.cbMorse.Location = new System.Drawing.Point(489, 183);
             this.cbMorse.Name = "cbMorse";
             this.cbMorse.Size = new System.Drawing.Size(208, 23);
             this.cbMorse.TabIndex = 19;
@@ -604,7 +574,7 @@ namespace PowerSDR
             this.s6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.s6.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.s6.Image = null;
-            this.s6.Location = new System.Drawing.Point(240, 120);
+            this.s6.Location = new System.Drawing.Point(249, 150);
             this.s6.Name = "s6";
             this.s6.Size = new System.Drawing.Size(27, 20);
             this.s6.TabIndex = 14;
@@ -618,7 +588,7 @@ namespace PowerSDR
             this.s5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.s5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.s5.Image = null;
-            this.s5.Location = new System.Drawing.Point(240, 88);
+            this.s5.Location = new System.Drawing.Point(249, 118);
             this.s5.Name = "s5";
             this.s5.Size = new System.Drawing.Size(27, 20);
             this.s5.TabIndex = 12;
@@ -632,7 +602,7 @@ namespace PowerSDR
             this.s4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.s4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.s4.Image = null;
-            this.s4.Location = new System.Drawing.Point(240, 56);
+            this.s4.Location = new System.Drawing.Point(249, 86);
             this.s4.Name = "s4";
             this.s4.Size = new System.Drawing.Size(27, 20);
             this.s4.TabIndex = 10;
@@ -646,7 +616,7 @@ namespace PowerSDR
             this.s3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.s3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.s3.Image = null;
-            this.s3.Location = new System.Drawing.Point(5, 120);
+            this.s3.Location = new System.Drawing.Point(14, 150);
             this.s3.Name = "s3";
             this.s3.Size = new System.Drawing.Size(27, 20);
             this.s3.TabIndex = 8;
@@ -658,7 +628,7 @@ namespace PowerSDR
             // s2
             // 
             this.s2.Image = null;
-            this.s2.Location = new System.Drawing.Point(5, 88);
+            this.s2.Location = new System.Drawing.Point(14, 118);
             this.s2.Name = "s2";
             this.s2.Size = new System.Drawing.Size(27, 20);
             this.s2.TabIndex = 6;
@@ -670,7 +640,7 @@ namespace PowerSDR
             // s1
             // 
             this.s1.Image = null;
-            this.s1.Location = new System.Drawing.Point(5, 56);
+            this.s1.Location = new System.Drawing.Point(14, 86);
             this.s1.Name = "s1";
             this.s1.Size = new System.Drawing.Size(27, 20);
             this.s1.TabIndex = 4;
@@ -679,10 +649,79 @@ namespace PowerSDR
             this.s1.Click += new System.EventHandler(this.s1_Click);
             this.s1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.s1_MouseDown);
             // 
+            // labelTS2
+            // 
+            this.labelTS2.Image = null;
+            this.labelTS2.Location = new System.Drawing.Point(417, 186);
+            this.labelTS2.Name = "labelTS2";
+            this.labelTS2.Size = new System.Drawing.Size(66, 16);
+            this.labelTS2.TabIndex = 62;
+            this.labelTS2.Text = "Edit Morse:";
+            this.toolTip1.SetToolTip(this.labelTS2, "WildCard Text goes here.\r\nThen in F1 through F9 use a ~ character \r\nThe ~ will be" +
+        " replace with the WildCard text\r\n");
+            // 
+            // chkAlwaysOnTop
+            // 
+            this.chkAlwaysOnTop.Image = null;
+            this.chkAlwaysOnTop.Location = new System.Drawing.Point(574, 308);
+            this.chkAlwaysOnTop.Name = "chkAlwaysOnTop";
+            this.chkAlwaysOnTop.Size = new System.Drawing.Size(123, 19);
+            this.chkAlwaysOnTop.TabIndex = 57;
+            this.chkAlwaysOnTop.Text = "Always On Top";
+            this.chkAlwaysOnTop.CheckedChanged += new System.EventHandler(this.chkAlwaysOnTop_CheckedChanged);
+            // 
+            // txtdummy1
+            // 
+            this.txtdummy1.Location = new System.Drawing.Point(25, 215);
+            this.txtdummy1.Multiline = true;
+            this.txtdummy1.Name = "txtdummy1";
+            this.txtdummy1.Size = new System.Drawing.Size(672, 77);
+            this.txtdummy1.TabIndex = 42;
+            this.txtdummy1.Text = "the actual text box will be a graphic here and this one disabled";
+            // 
+            // label7
+            // 
+            this.label7.Image = null;
+            this.label7.Location = new System.Drawing.Point(385, 382);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(256, 32);
+            this.label7.TabIndex = 47;
+            this.label7.Text = "label7";
+            // 
+            // label6
+            // 
+            this.label6.Image = null;
+            this.label6.Location = new System.Drawing.Point(65, 382);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(256, 32);
+            this.label6.TabIndex = 28;
+            this.label6.Text = "label6";
+            // 
+            // label5
+            // 
+            this.label5.Image = null;
+            this.label5.Location = new System.Drawing.Point(385, 334);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(256, 32);
+            this.label5.TabIndex = 27;
+            this.label5.Text = "label5";
+            // 
+            // label4
+            // 
+            this.label4.Image = null;
+            this.label4.Location = new System.Drawing.Point(65, 334);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(256, 32);
+            this.label4.TabIndex = 25;
+            this.label4.Text = "label4";
+            // 
             // CWX
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-            this.ClientSize = new System.Drawing.Size(725, 298);
+            this.ClientSize = new System.Drawing.Size(725, 328);
+            this.Controls.Add(this.labelTS2);
+            this.Controls.Add(this.labelTS1);
+            this.Controls.Add(this.txt10);
             this.Controls.Add(this.checkBoxTS1);
             this.Controls.Add(this.checkBoxCWD);
             this.Controls.Add(this.chkAlwaysOnTop);
@@ -732,8 +771,8 @@ namespace PowerSDR
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.MaximumSize = new System.Drawing.Size(745, 341);
-            this.MinimumSize = new System.Drawing.Size(745, 341);
+            this.MaximumSize = new System.Drawing.Size(745, 371);
+            this.MinimumSize = new System.Drawing.Size(745, 371);
             this.Name = "CWX";
             this.Text = "   CW Memories and Keyboard ...";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.CWX_Closing);
@@ -806,5 +845,8 @@ namespace PowerSDR
         public System.Windows.Forms.CheckBoxTS checkBoxCWD;
         public System.Windows.Forms.CheckBoxTS checkBoxTS1;
         public System.Windows.Forms.ButtonTS stopButton;
+        private System.Windows.Forms.TextBoxTS txt10;
+        private System.Windows.Forms.LabelTS labelTS1;
+        private System.Windows.Forms.LabelTS labelTS2;
     } // end class
 } // end namespace

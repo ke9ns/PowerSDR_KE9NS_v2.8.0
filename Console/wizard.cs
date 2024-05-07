@@ -160,6 +160,9 @@ namespace PowerSDR
                     radGenModelFLEX5000.Text = "FLEX-3000";
                     //radGenModelFLEX5000.Checked = true;
                     break;
+                default:
+                    // nothing
+                    break;
             }
 
             if (console.hid_init && !console.fwc_init) radGenModelFLEX1500.Checked = true;
@@ -1401,6 +1404,10 @@ namespace PowerSDR
                 case Page.DATABASE:
                     button1.Visible = false;
                     break;
+
+                default:
+                    // nothing
+                    break;
             }
         }
 
@@ -1475,6 +1482,10 @@ namespace PowerSDR
                         console.setupForm.PAGain12 = gain_by_band[8];
                         console.setupForm.PAGain10 = gain_by_band[9];
                     }
+                    break;
+
+                default:
+                    // nothing
                     break;
             }
 
