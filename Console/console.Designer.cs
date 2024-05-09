@@ -7031,7 +7031,6 @@ namespace PowerSDR
 
         private System.Windows.Forms.TextBoxTS txtRX2Meter;
         public System.Windows.Forms.LabelTS lblRX2Meter;
-        private System.Windows.Forms.CheckBoxTS chkRX2Preamp;
         private System.Windows.Forms.LabelTS lblRX2RF;
         private System.Windows.Forms.PictureBox picSquelch;
         private System.Windows.Forms.CheckBoxTS chkRX2Squelch;
@@ -7400,6 +7399,7 @@ namespace PowerSDR
         public System.Windows.Forms.CheckBox checkBox1;
         public System.Windows.Forms.CheckBoxTS chkFMCTCSS;
         private System.Windows.Forms.ButtonTS btnTNFAdd2;
+        public System.Windows.Forms.CheckBoxTS chkRX2Preamp;
     } // class console
 
 

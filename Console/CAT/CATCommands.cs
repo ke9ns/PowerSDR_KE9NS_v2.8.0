@@ -5470,9 +5470,11 @@ namespace PowerSDR
                 else if (s.Length == parser.nSet)
                 {
                     if (s == "1")
-                        console.RX2PreampMode = PreampMode.HIGH;
+                        console.chkRX2Preamp.Checked = true; //.300
+                    //  console.RX2PreampMode = PreampMode.HIGH;
                     else
-                        console.RX2PreampMode = PreampMode.OFF;
+                        console.chkRX2Preamp.Checked = false; //.300
+                    //   console.RX2PreampMode = PreampMode.OFF;
                     return "";
                 }
                 else
