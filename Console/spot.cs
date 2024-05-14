@@ -18705,7 +18705,6 @@ namespace PowerSDR
             SpotWatch.Show();
             SpotWatch.Focus();
         }
-
     } //SPOTCONTROL
 
 

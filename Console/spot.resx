@@ -154,6 +154,16 @@ Click to Turn on/off World Map, and/or  GrayLine (Earth Dark &amp; Light Areas),
 and/or Sun Tracking (position of Sun directly overhead a spot on Earth) on Panadapter.
 Sun Tracking Includes Space Weather (Requires Internet for Weather)"</value>
   </data>
+  <data name="dataGridView1.ToolTip" xml:space="preserve">
+    <value>Enter DX address : port#
+Example:  wb8zrl.no-ip.org:7300
+
+scroll down to an empty line and add your DX Cluster address
+OR highlight an existing DX Cluster and overwrite with your own 
+
+Double click to select it.
+</value>
+  </data>
   <data name="SWLbutton2.ToolTip" xml:space="preserve">
     <value>Searchable SWL listing window. Showing only SWL stations curently 
 on the AIR (by their Day and Time Slots).

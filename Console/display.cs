@@ -3614,9 +3614,9 @@ namespace PowerSDR
                         }
 
                         if (bottom)
-                            drawChannelBar(g, c, chan_left_x, chan_right_x, chan_center_x, H + top, (int)((H - top) / 2), c1, c2); // draw box and lines on RX2 .281 draw lines half height
+                            drawChannelBar(g, c, chan_left_x, chan_right_x, chan_center_x, H + top, (int)((H - top) / 3), c1, c2); // draw box and lines on RX2 .281 draw lines half height // .300 now 1/3
                         else
-                            drawChannelBar(g, c, chan_left_x, chan_right_x, chan_center_x, top, (int)((H - top) / 2), c1, c2);// draw box and lines on RX1  .281 draw lines half height
+                            drawChannelBar(g, c, chan_left_x, chan_right_x, chan_center_x, top, (int)((H - top) / 3), c1, c2);// draw box and lines on RX1  .281 draw lines half height //.300 now 1/3
 
                         //if (bottom)
                         //    drawNotchStatus(g, n, (notch_left_x + notch_right_x) / 2, H + top + 75, W, H);
@@ -12882,7 +12882,7 @@ namespace PowerSDR
 
                         float XPOS = (float)W / (float)VFODiff;
 
-                        int H1a = H * 2 / 3; // vert line length from top down
+                        int H1a = H / 2; // H * 2 / 3 vert line length from top down  // .300 shorten line to 1/2 from 2/3
 
                         // DayOfWeek UTCDD = UTCD.DayOfWeek; // day is spelled out: Monday, Tuesday
 
