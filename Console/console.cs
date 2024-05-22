@@ -3936,6 +3936,8 @@ namespace PowerSDR
             ptbPWR.Value = 50;
             ptbTune.Value = 10; // ke9ns add
             btnDisplayPanCenter_Click(this, EventArgs.Empty);
+            VFOBCenter(); // .301
+
             comboTXProfile.Text = setupForm.TXProfile;
             comboDigTXProfile.Text = setupForm.TXProfile;
             comboFMTXProfile.Text = setupForm.TXProfile;
@@ -10772,7 +10774,10 @@ namespace PowerSDR
             //  tempVFOAFreq = VFOAFreq; // ke9ns add  CTUN operation changed freq so update temp value
 
             tempVFOBFreqIF = VFOBFreq; //.284
+
+           // btnDisplayPanCenter_MouseDown(this, new MouseEventArgs(MouseButtons.Middle, 0, 0, 0, 0)); //
             VFOBCenter(); //.284
+            
 
             if (SpotForm != null) // ke9ns add .157
             {
@@ -33036,7 +33041,7 @@ namespace PowerSDR
 
                 if (CTUNIF == true)
                 {
-                    if (setupForm.udDDSIFFreq.Maximum == 85000)
+                    if (setupForm.udDDSIFFreq.Maximum == 85000) // ONly need to worry about the Zoom level if the SR = 192khz
                     {
                         double zoom_factor = 1.0 / ((ptbDisplayZoom.Maximum + ptbDisplayZoom.Minimum - ptbDisplayZoom.Value) * 0.01); // ke9ns: 1/(260 - value)*.01 =   LEFT=.3846 <---> RIGHT= 10
 
@@ -33045,38 +33050,33 @@ namespace PowerSDR
                            
                             //  ptbDisplayZoom.Value = ptbDisplayZoom.Maximum + ptbDisplayZoom.Minimum - (int)(100.0 / MinZoom);
 
-                            CTUNIF = false;
+                            CTUNIF = false; //.302      
 
-                            if (CurrentModel == Model.FLEX5000 || CurrentModel == Model.FLEX3000)
-                            {
-                                setupForm.udDDSIFFreq.Value = 9000;
-                                setupForm.DDSIFAFreq = 9000;
-                                setupForm.DDSIFBFreq = 9000;
-                                FWCDDSFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6); // reset IF for RX1, back 
-                                RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6); // reset IF for RX2 back
+                            // return IF values back to where they were prior to PAN mode (right click on PAN button to go to actual IF defaults)
 
-                            }
-                            else
-                            {
-                                setupForm.udDDSIFFreq.Value = 3800;
-                                setupForm.DDSIFAFreq = 3800;
-                                FWCDDSFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6); // reset IF for RX1, back 
-                            }
+                            setupForm.udDDSIFFreq.Value = tempVFOAFoundIF; //.301
+                            setupForm.DDSIFAFreq = tempVFOAFoundIF;
+                            FWCDDSFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6); // reset IF for RX1, back 
+                            IFFreq = (double)tempVFOAFoundIF * 1e-6;
 
-                           
+
+                            setupForm.udDDSIFBFreq.Value = tempVFOBFoundIF; //.301
+                            setupForm.DDSIFBFreq = tempVFOBFoundIF; //.301
+                            RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6); // reset IF for RX2 back
+
+                          
                             lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.panGray;  // lblDisplayPan.ForeColor = Color.White;
 
                             btnDisplayPanCenter_Click(this, EventArgs.Empty);
+                         
+                            //  btnDisplayPanCenter_MouseDown(this, new MouseEventArgs(MouseButtons.Middle, 0, 0, 0, 0)); //
                             VFOBCenter();
-
-
-
-
 
 
                         }
 
-                    }
+                    } // 192 khz
+
                 } // CTUNIF
 
                 if (rx1_dds_freq_updated) // ke9ns: Occurs after FWCDDSFreq is called (but not all time, as it depends on where you are)
@@ -33127,7 +33127,7 @@ namespace PowerSDR
 
                 if (CTUNIF == true)
                 {
-                    if (setupForm.udDDSIFFreq.Maximum == 85000)
+                    if (setupForm.udDDSIFFreq.Maximum == 85000) // only need to worry if the SR = 192khz
                     {
                         double zoom_factor = 1.0 / ((ptbDisplayZoom2.Maximum + ptbDisplayZoom2.Minimum - ptbDisplayZoom2.Value) * 0.01); // ke9ns: 1/(260 - value)*.01 =   LEFT=.3846 <---> RIGHT= 10
 
@@ -33135,9 +33135,33 @@ namespace PowerSDR
                         {
                             //  ptbDisplayZoom.Value = ptbDisplayZoom.Maximum + ptbDisplayZoom.Minimum - (int)(100.0 / MinZoom);
                             ptbDisplayZoom2.Value = ptbDisplayZoom2.Maximum + ptbDisplayZoom2.Minimum - (int)(100.0 / MinZoom);
+
+                            CTUNIF = false; //.302      
+
+                            // return IF values back to where they were prior to PAN mode (right click on PAN button to go to actual IF defaults)
+
+                            setupForm.udDDSIFFreq.Value = tempVFOAFoundIF; //.301
+                            setupForm.DDSIFAFreq = tempVFOAFoundIF;
+                            FWCDDSFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6); // reset IF for RX1, back 
+                            IFFreq = (double)tempVFOAFoundIF * 1e-6;
+
+
+                            setupForm.udDDSIFBFreq.Value = tempVFOBFoundIF; //.301
+                            setupForm.DDSIFBFreq = tempVFOBFoundIF; //.301
+                            RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6); // reset IF for RX2 back
+
+
+                            lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.panGray;  // lblDisplayPan.ForeColor = Color.White;
+
+                            btnDisplayPanCenter_Click(this, EventArgs.Empty);
+
+                            //  btnDisplayPanCenter_MouseDown(this, new MouseEventArgs(MouseButtons.Middle, 0, 0, 0, 0)); //
+                            VFOBCenter();
+
                         }
 
-                    }
+                    } // 192khz
+
                 } // CTUNIF
 
                 if (rx2_dds_freq_updated)
@@ -38026,7 +38050,7 @@ namespace PowerSDR
 
                     if (CurrentModel == Model.FLEX5000 || CurrentModel == Model.FLEX3000)
                     {
-                        if (setupForm.udDDSIFFreq.Maximum == 85000) // 192khz
+                        if (setupForm.udDDSIFFreq.Maximum == 85000) // if SR = 192khz
                         {
                             if ((tempA + 9000) > 73000 || (tempA + 9000) < -55000) // ZOOM set to .6 factor
                             {
@@ -38324,20 +38348,22 @@ namespace PowerSDR
             {
                 tempVFOBFreqIF = VFOBFreq; // 7.123 mhz
 
+                setupForm.udDDSIFBFreq.Value = 9000;
                 setupForm.DDSIFBFreq = 9000;
                 RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6); // 0.009
 
-            }
-           else
-            {
-               
-                setupForm.udDDSIFBFreq.Value = 9000;
-                setupForm.DDSIFBFreq = 9000;
 
-                RX2IFFreq = 0.009000;
+            }
+        //   else
+           // {
+               
+              //  setupForm.udDDSIFBFreq.Value = 9000;
+               // setupForm.DDSIFBFreq = 9000;
+
+              //  RX2IFFreq = 0.009000;
           
 
-            } //
+          //  } //
 
             CalcDisplayFreq(); // .225 add
 
@@ -38395,7 +38421,7 @@ namespace PowerSDR
 
                     double tempC = value;
                    
-                    if (setupForm.udDDSIFFreq.Maximum == 85000)
+                    if (setupForm.udDDSIFFreq.Maximum == 85000) //if SR = 192khz
                     {
                         if ((tempB + 9000) > 73000 || (tempB + 9000) < -55000)
                         {
@@ -38406,8 +38432,9 @@ namespace PowerSDR
 
                             //   btnDisplayPanCenter_Click(this, EventArgs.Empty); // recenter 
                             //  btnDisplayPanCenter_MouseDown(this, MouseEventArgs.Equals = 4194304);
-
-                            VFOBCenter();
+                           
+                            //   btnDisplayPanCenter_MouseDown(this, new MouseEventArgs(MouseButtons.Middle, 0, 0, 0, 0)); //
+                           VFOBCenter();
 
                         }
                         else
@@ -38427,6 +38454,7 @@ namespace PowerSDR
                             RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6);
 
                             //   btnDisplayPanCenter_Click(this, EventArgs.Empty); // recenter 
+                          //  btnDisplayPanCenter_MouseDown(this, new MouseEventArgs(MouseButtons.Middle, 0, 0, 0, 0)); //
                             VFOBCenter();
                         }
                         else
@@ -38446,6 +38474,7 @@ namespace PowerSDR
                             RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6);
 
                             //  btnDisplayPanCenter_Click(this, EventArgs.Empty); // recenter 
+                            //   btnDisplayPanCenter_MouseDown(this, new MouseEventArgs(MouseButtons.Middle, 0, 0, 0, 0)); //
                             VFOBCenter();
                         }
                         else
@@ -52800,31 +52829,36 @@ namespace PowerSDR
 
                     txtNOAA.Text = "SF: " + SFI + " A: " + Aindex + " K: " + Kindex;
 
-                    if (RadioBlackout.Length < 4) //.252
-                    {
-                        txtNOAA2.Text = "ss:" + EISN + " ef:" + SSNE + " SpW:" + RadioBlackout; //   txtNOAA2.Text = "SS: " + EISN + " SpWX: " + RadioBlackout;
-                    }
-                    else
-                    {
-                        txtNOAA2.Text = "ss:" + EISN + " ef:" + SSNE + " sW:" + RadioBlackout; //   txtNOAA2.Text = "SS: " + EISN + " SpWX: " + RadioBlackout;
-                    } 
+                //    if (RadioBlackout.Length < 4) //.252
+                  //  {
+                  //      txtNOAA2.Text = "ss:" + EISN + " ef:" + SSNE + " SpW:" + RadioBlackout; //   txtNOAA2.Text = "SS: " + EISN + " SpWX: " + RadioBlackout;
+                  //  }
+                  //  else
+                   // {
+                   //     txtNOAA2.Text = "ss:" + EISN + " ef:" + SSNE + " sW:" + RadioBlackout; //   txtNOAA2.Text = "SS: " + EISN + " SpWX: " + RadioBlackout;
+                   // }
+
+                    txtNOAA2.Text = "SS:" + EISN + " SpW:" + RadioBlackout; //   .300
 
 
                     int lenSFI = SFI.ToString().Length;
                     int lenA = Aindex.ToString().Length;
                     int lenK = Kindex.ToString().Length;
-                    int lenEISN = EISN.ToString().Length;
-                    int lenSSNE = SSNE.ToString().Length;
-                    int lenRadio = RadioBlackout.Length;
+                    int lenEISN = EISN.ToString().Length; // SS
+                    int lenSSNE = SSNE.ToString().Length; // EF
+                    int lenRadio = RadioBlackout.Length;  // SPW
 
                     int startSFI = 4;
                     int startA = 4 + lenSFI + 4;
                     int startK = startA + lenA + 4;
 
-                    int startEISN = 3; // was 4
-                    int startSSNE = 3 + lenEISN + 4; // was 4 4
+                    int startEISN = 3; // was 4  SS
 
-                    int startRadio = startSSNE + lenSSNE + 5; //  int startRadio = startEISN + lenEISN + 7;
+                    int startSSNE = 3 + lenEISN + 4; // was 4 4  EF
+
+                    //   int startRadio = startSSNE + lenSSNE + 5; //  int startRadio = startEISN + lenEISN + 7;
+
+                    int startRadio = 3 + lenEISN + 5; //.300
 
                     Color c1 = Color.Red;
 
@@ -52832,30 +52866,31 @@ namespace PowerSDR
 
                     if ((Kindex >= 4) || (RadioBlackout != " "))
                     {
-                        txtNOAA.Select(startSFI, lenSFI);
+                        txtNOAA.Select(startSFI, lenSFI);       //SF
                         txtNOAA.SelectionColor = lightRed;
 
-                        txtNOAA.Select(startA, lenA);
+                        txtNOAA.Select(startA, lenA);           // A
                         txtNOAA.SelectionColor = lightRed;
 
-                        txtNOAA.Select(startK, lenK);
+                        txtNOAA.Select(startK, lenK);           // K
                         txtNOAA.SelectionColor = lightRed;
 
-                        txtNOAA2.Select(startEISN, lenEISN);
+                        txtNOAA2.Select(startEISN, lenEISN);    // SS
                         txtNOAA2.SelectionColor = lightRed;
 
-                        txtNOAA2.Select(startSSNE, lenSSNE);
+                        txtNOAA2.Select(startSSNE, lenSSNE);    // EF
                         txtNOAA2.SelectionColor = lightRed;
 
-                        if (RadioBlackout.Length < 4)
-                        {
-                            txtNOAA2.Select(startRadio, lenRadio);
-                        }
-                        else
-                        {
-                            txtNOAA2.Select(startRadio-1, lenRadio);
-                        }
+                    //    if (RadioBlackout.Length < 4)
+                     //   {
+                      //      txtNOAA2.Select(startRadio, lenRadio);
+                        //  }
+                        //   else
+                        //  {
+                        //      txtNOAA2.Select(startRadio-1, lenRadio);
+                        //  }
 
+                        txtNOAA2.Select(startRadio, lenRadio); // .300
                         txtNOAA2.SelectionColor = lightRed;
 
 
@@ -52877,14 +52912,17 @@ namespace PowerSDR
                         txtNOAA2.Select(startSSNE, lenSSNE);
                         txtNOAA2.SelectionColor = Color.Yellow;
 
-                        if (RadioBlackout.Length < 4)
-                        {
-                            txtNOAA2.Select(startRadio, lenRadio);
-                        }
-                        else
-                        {
-                            txtNOAA2.Select(startRadio-1, lenRadio);
-                        }
+                        //   if (RadioBlackout.Length < 4)
+                        //  {
+                        //      txtNOAA2.Select(startRadio, lenRadio);
+                        //  }
+                        // else
+                        // {
+                        //     txtNOAA2.Select(startRadio-1, lenRadio);
+                        // }
+
+
+                        txtNOAA2.Select(startRadio, lenRadio); //.300
                         txtNOAA2.SelectionColor = Color.Yellow;
 
 
@@ -52906,14 +52944,17 @@ namespace PowerSDR
                         txtNOAA2.Select(startSSNE, lenSSNE);
                         txtNOAA2.SelectionColor = Color.GreenYellow;
 
-                        if (RadioBlackout.Length < 4)
-                        {
-                            txtNOAA2.Select(startRadio, lenRadio);
-                        }
-                        else
-                        {
-                            txtNOAA2.Select(startRadio-1, lenRadio);
-                        }
+                      //  if (RadioBlackout.Length < 4)
+                     //   {
+                      //      txtNOAA2.Select(startRadio, lenRadio);
+                      //  }
+                      //  else
+                      //  {
+                      //      txtNOAA2.Select(startRadio-1, lenRadio);
+                      //  }
+
+
+                        txtNOAA2.Select(startRadio, lenRadio); //.300
                         txtNOAA2.SelectionColor = Color.GreenYellow;
 
 
@@ -66394,7 +66435,40 @@ namespace PowerSDR
 
         } // ptbDisplayPan2_Scroll
 
-        private void btnDisplayPanCenter_Click(object sender, System.EventArgs e) // ke9ns: centers VFOA RX1
+
+        void resetIFFreqA() //.301 only reset IF if you were in CTUN PAN mode, and now turned it off
+        {
+            if (CurrentModel == Model.FLEX5000 || CurrentModel == Model.FLEX3000)
+            {
+                setupForm.udDDSIFFreq.Value = 9000;
+                setupForm.DDSIFAFreq = 9000;
+
+                IFFreq = 0.009000;
+
+            }
+            else
+            {
+                setupForm.udDDSIFFreq.Value = 3800;
+                setupForm.DDSIFAFreq = 3800;
+                IFFreq = 0.0038000;
+            }
+
+        } // resetIFFreqA()
+
+
+        void resetIFFreqB() //.301
+        {
+                  setupForm.udDDSIFBFreq.Value = 9000;
+                 setupForm.DDSIFBFreq = 9000;
+
+                 RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6); // 0.009
+
+
+
+        } // resetIFFreqB()
+
+
+        private void btnDisplayPanCenter_Click(object sender, System.EventArgs e) // ke9ns: CENTER button: centers VFOA RX1
         {
           
             //double edge_alias = 7200.0;
@@ -66415,23 +66489,23 @@ namespace PowerSDR
                     setupForm.DDSIFAFreq = 3800;
                 }
             }
-            else
-            {
-                if (CurrentModel == Model.FLEX5000 || CurrentModel == Model.FLEX3000)
-                {
-                    setupForm.udDDSIFFreq.Value = 9000;
-                    setupForm.DDSIFAFreq = 9000;
+         //   else
+          //  {
+            //    if (CurrentModel == Model.FLEX5000 || CurrentModel == Model.FLEX3000)
+             //   {
+                //    setupForm.udDDSIFFreq.Value = 9000;
+               //     setupForm.DDSIFAFreq = 9000;
 
-                    IFFreq = 0.009000;
+                //     IFFreq = 0.009000;
 
-                }
-                else
-                {
-                    setupForm.udDDSIFFreq.Value = 3800;
-                    setupForm.DDSIFAFreq = 3800;
-                    IFFreq = 0.0038000;
-                }
-            }
+              //  }
+              //  else
+               // {
+                 //   setupForm.udDDSIFFreq.Value = 3800;
+                 //   setupForm.DDSIFAFreq = 3800;
+                 //   IFFreq = 0.0038000;
+              //  }
+          //  }
            
             CTUN1_HZ = 0; // reset CTUN to center
 
@@ -66478,6 +66552,7 @@ namespace PowerSDR
             //   double zoom_factor = 1.0 / ((240 + 10 - ptbDisplayZoom.Value) * 0.01); // ke9ns: 1/(250 - value)*.01 =   LEFT=.4166 <---> RIGHT= 10
 
             Debug.WriteLine("zoom factor " + zoom_factor);
+             
             if (zoom_factor == 0.5) radDisplayZoom05.Checked = true;
             else if (zoom_factor == 1.0) radDisplayZoom1x.Checked = true;
             else if (zoom_factor == 2.0) radDisplayZoom2x.Checked = true;
@@ -66501,19 +66576,13 @@ namespace PowerSDR
                 ZoomRX2 = false; // reset
             }
 
-
         
             if (ptbDisplayZoom.Focused)
             {
-               
-              
                 btnHidden.Focus();
-               
             }
             else if (ptbDisplayZoom2.Focused)
             {
-               
-             
                 btnHidden.Focus();
             }
             
@@ -80574,16 +80643,16 @@ namespace PowerSDR
                         RX2IFFreq = (double) (setupForm.DDSIFBFreq * (decimal)1e-6); // 0.009
                        
                     }
-                    else
-                    {
+                 //   else
+                  //  {
                         
-                            setupForm.udDDSIFBFreq.Value = 9000;
-                            setupForm.DDSIFBFreq = 9000;
+                    //        setupForm.udDDSIFBFreq.Value = 9000;
+                     //       setupForm.DDSIFBFreq = 9000;
 
-                        RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6); // 0.009
+                       //     RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6); // 0.009
 
 
-                    }
+                   // }
 
                     CalcDisplayFreq(); // .225 add
 
@@ -82897,7 +82966,7 @@ namespace PowerSDR
                     try
                     {
                         GeoBlackout = noaa.Substring(ind, 2);
-                        Debug.WriteLine("Geomagnetic storms" + GeoBlackout);
+                        Debug.WriteLine("Geomagnetic storms " + GeoBlackout);
                     }
                     catch (Exception)
                     {
@@ -82911,17 +82980,48 @@ namespace PowerSDR
                     GeoBlackout = " ";
                 }
 
-                if (RadioBlackout != " ")
+                if (noaa.Contains("level occurred") && noaa.Contains("Solar radiation storms reaching the ")) // .300 
                 {
-                    RadioBlackout = RadioBlackout + GeoBlackout;
-                    Debug.WriteLine("radio-geo " + RadioBlackout);
 
-                }
+                    int ind = noaa.IndexOf("Solar radiation storms reaching the ") + 36;
+
+                    try
+                    {
+                        RadiationBlackout = noaa.Substring(ind, 2);
+                        Debug.WriteLine("Solar Radiation " + RadiationBlackout);
+                    }
+                    catch (Exception)
+                    {
+                        RadiationBlackout = " ";
+                    }
+
+
+                } //geo storms
                 else
                 {
-                    RadioBlackout = GeoBlackout;
-                    Debug.WriteLine("geo " + RadioBlackout);
+                    RadiationBlackout = " ";
                 }
+
+                RadioBlackout = RadioBlackout + GeoBlackout + RadiationBlackout; //.300
+                Debug.WriteLine("NOAA FULL " + RadioBlackout);
+
+
+                /*    if (RadioBlackout != " ")
+                    {
+                        RadioBlackout = RadioBlackout + GeoBlackout;
+                        Debug.WriteLine("radio-geo " + RadioBlackout);
+
+                    }
+                    if (RadiationBlackout != " ")
+                    {
+                        RadioBlackout = RadioBlackout + RadiationBlackout;
+                    }
+                    else
+                    {
+                        RadioBlackout = GeoBlackout;
+                        Debug.WriteLine("geo " + RadioBlackout);
+                    }
+                */
 
             } // try
             catch (Exception ex)
@@ -83277,66 +83377,52 @@ namespace PowerSDR
         public double tempVFOBFreqIF = 0.0; // RX2 only
         public double MinZoom = 0.6; // mininum zoom required for PAN scroll to work correctly
 
+        decimal tempVFOAFoundIF = 0; //.301 allows PAN to turn off and go back to a user setting instead of the default IF values
+        decimal tempVFOBFoundIF = 0; //.301 allows PAN to turn off and go back to a user setting instead of the default IF values
+
         //============================================================================
         // ke9ns add: To turn on/off CTUN feature
         //  CTUN=0 normal, 1=main bandpass moves (just like the sub does across the display)
         private void lblDisplayPan_MouseDown(object sender, MouseEventArgs e)
         {
             CTUN = false;
+            MouseEventArgs me = (MouseEventArgs)e;
 
-       /*     if (e.Button == MouseButtons.Left)
+            /*     if (e.Button == MouseButtons.Left)
+                 {
+                     if (CTUN == false)
+                     {
+                         //  CTUN1_HZ = 0;
+                         CTUN = true;
+
+                         lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.PanRed;  // lblDisplayPan.ForeColor = Color.Red;
+                     }
+                     else
+                     {
+                         //  CTUN1_HZ = 0;
+                         CTUN = false;
+                         lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.panGray;  // lblDisplayPan.ForeColor = Color.White;
+
+                     }
+                 }
+                 else if (e.Button == MouseButtons.Right) //.284n use IFFreq +/- 950000 to move around in PAN mode instead of CTUN
+                 {
+            */
+            // KE9NS: new way to achieve PAN scroll mode
+
+            if (me.Button == MouseButtons.Right && CTUNIF == false) //.301
             {
-                if (CTUN == false)
-                {
-                    //  CTUN1_HZ = 0;
-                    CTUN = true;
+              
 
-                    lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.PanRed;  // lblDisplayPan.ForeColor = Color.Red;
-                }
-                else
-                {
-                    //  CTUN1_HZ = 0;
-                    CTUN = false;
-                    lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.panGray;  // lblDisplayPan.ForeColor = Color.White;
-
-                }
-            }
-            else if (e.Button == MouseButtons.Right) //.284n use IFFreq +/- 950000 to move around in PAN mode instead of CTUN
-            {
-       */
-       // KE9NS: new way to achieve PAN scroll mode
-
-            if (CTUNIF == false) //.284
-            {
-                if (setupForm.udDDSIFFreq.Maximum == 85000) // 192k SR
-                {
-                   
-                    ptbDisplayZoom.Value = ptbDisplayZoom.Maximum + ptbDisplayZoom.Minimum - (int)(100.0 / MinZoom); // RX1 = 61=.5 
-                    ptbDisplayZoom2.Value = ptbDisplayZoom2.Maximum + ptbDisplayZoom2.Minimum - (int)(100.0 / MinZoom); // RX2 = 61
-                }
-             
-                ptbDisplayZoom_Scroll(this, EventArgs.Empty);
-                btnDisplayPanCenter_Click(this, EventArgs.Empty);
-                VFOBCenter();
-
-                CTUNIF = true;
-                tempVFOAFreqIF = VFOAFreq; // starting point for PANNING AROUND
-                tempVFOBFreqIF = VFOBFreq;
-                setupForm.chkAvgMove.Checked = true; 
-
-                lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.PanRed;  // lblDisplayPan.ForeColor = Color.red;
-            }
-            else // CTUNIF was ON
-            {
-                   
-                CTUNIF = false;
-
-                if (CurrentModel == Model.FLEX5000 || CurrentModel == Model.FLEX3000)
+                if (CurrentModel == Model.FLEX5000 || CurrentModel == Model.FLEX3000) // reset IF back to normal values (RX1 and RX2)
                 {
                     setupForm.udDDSIFFreq.Value = 9000;
                     setupForm.DDSIFAFreq = 9000;
-                    setupForm.DDSIFBFreq = 9000;
                     FWCDDSFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6); // reset IF for RX1, back 
+                    IFFreq = 0.009000;
+
+                    setupForm.udDDSIFBFreq.Value = 9000;
+                    setupForm.DDSIFBFreq = 9000;
                     RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6); // reset IF for RX2 back
 
                 }
@@ -83345,19 +83431,94 @@ namespace PowerSDR
                     setupForm.udDDSIFFreq.Value = 3800;
                     setupForm.DDSIFAFreq = 3800;
                     FWCDDSFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6); // reset IF for RX1, back 
+                    IFFreq = 0.00380;
                 }
 
-                //    txtVFOABand_LostFocus(this, EventArgs.Empty);
-              
-
-                lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.panGray;  // lblDisplayPan.ForeColor = Color.White;
-
-                btnDisplayPanCenter_Click(this, EventArgs.Empty);
-                VFOBCenter();
-
-            } // CTUNIF OFF
+            }
+            else
+            {
 
 
+                if (CTUNIF == false) //.284  (PAN WAS OFF so turn ON now)
+                {
+
+
+                    tempVFOAFoundIF = setupForm.udDDSIFFreq.Value;  //.301 save current IF values before messging with them for Pan scrolling, set them back to these when you turn off Pan scrolling
+                    tempVFOBFoundIF = setupForm.udDDSIFBFreq.Value;
+
+
+                    CTUNIF = true;
+                    if (setupForm.udDDSIFFreq.Maximum == 85000) // 192k SR
+                    {
+
+                        ptbDisplayZoom.Value = ptbDisplayZoom.Maximum + ptbDisplayZoom.Minimum - (int)(100.0 / MinZoom); // RX1 = 61=.5 
+                        ptbDisplayZoom2.Value = ptbDisplayZoom2.Maximum + ptbDisplayZoom2.Minimum - (int)(100.0 / MinZoom); // RX2 = 61
+                    }
+
+                    ptbDisplayZoom_Scroll(this, EventArgs.Empty);
+                    btnDisplayPanCenter_Click(this, EventArgs.Empty);
+
+                    // btnDisplayPanCenter_MouseDown(this, new MouseEventArgs(MouseButtons.Middle, 0, 0, 0, 0)); //
+                    VFOBCenter();
+
+
+                    tempVFOAFreqIF = VFOAFreq; // starting point for PANNING AROUND
+                    tempVFOBFreqIF = VFOBFreq;
+                    setupForm.chkAvgMove.Checked = true;
+
+                    lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.PanRed;  // lblDisplayPan.ForeColor = Color.red;
+                }
+                else // CTUNIF was ON so TURN OFF (back to normal scrolling)
+                {
+
+                    
+                    CTUNIF = false;
+
+                    setupForm.udDDSIFFreq.Value = tempVFOAFoundIF; //.301
+                    setupForm.DDSIFAFreq = tempVFOAFoundIF;
+                    FWCDDSFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6); // reset IF for RX1, back 
+                    IFFreq = (double)tempVFOAFoundIF * 1e-6;
+
+
+                    setupForm.udDDSIFBFreq.Value = tempVFOBFoundIF; //.301
+                    setupForm.DDSIFBFreq = tempVFOBFoundIF; //.301
+                    RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6); // reset IF for RX2 back
+
+                    //    if (CurrentModel == Model.FLEX5000 || CurrentModel == Model.FLEX3000) // reset IF back to normal values (RX1 and RX2)
+                    //    {
+                    //     setupForm.udDDSIFFreq.Value = 9000;
+                    //    setupForm.DDSIFAFreq = 9000;
+                    //    FWCDDSFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6); // reset IF for RX1, back 
+                    //    IFFreq = 0.009000;
+
+                    //  setupForm.udDDSIFBFreq.Value = 9000;
+                    //      setupForm.DDSIFBFreq = 9000;
+                    //  RX2IFFreq = (double)(setupForm.DDSIFBFreq * (decimal)1e-6); // reset IF for RX2 back
+
+                    //  }
+                    //  else
+                    //  {
+                    //   setupForm.udDDSIFFreq.Value = 3800;
+                    //   setupForm.DDSIFAFreq = 3800;
+                    //   FWCDDSFreq = (double)(setupForm.DDSIFAFreq * (decimal)1e-6); // reset IF for RX1, back 
+                    //     IFFreq = 0.00380;
+                    //  }
+
+
+
+                    //    txtVFOABand_LostFocus(this, EventArgs.Empty);
+
+
+                    lblDisplayPan1.Image = global::PowerSDR.Properties.Resources.panGray;  // lblDisplayPan.ForeColor = Color.White;
+
+                    btnDisplayPanCenter_Click(this, EventArgs.Empty);
+                    btnDisplayPanCenter_MouseDown(this, new MouseEventArgs(MouseButtons.Middle, 0, 0, 0, 0)); //
+
+                    //  VFOBCenter();
+
+                } // CTUNIF OFF
+
+            } // right click
 
          //   } // right mouse button
 
@@ -89537,7 +89698,9 @@ namespace PowerSDR
 
 
 
-            if (VFOSync == true && RX2SpurReduction == false && SpurReduction == false && (VFOAFreq == VFOBFreq) && (RX2DSPMode == RX1DSPMODE) && (RX2FilterHigh == RX1FilterHigh) && (RX2FilterLow == RX1FilterLow) && (RX2PreampMode == RX1PreampMode) && (RX2RF == RF)) //.246
+            if (VFOSync == true && RX2SpurReduction == false && SpurReduction == false &&
+                (VFOAFreq == VFOBFreq) && (RX2DSPMode == RX1DSPMODE) && (RX2FilterHigh == RX1FilterHigh)
+                && (RX2FilterLow == RX1FilterLow) && (RX2PreampMode == RX1PreampMode) && (RX2RF == RF)) //.246
             {
 
                 //  if (VFOSync == false) dsp.GetDSPRX(1, 0).Copy(dsp.GetDSPRX(0, 0));
