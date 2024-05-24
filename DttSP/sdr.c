@@ -85,7 +85,9 @@ PRIVATE void setup_all (REAL rate, int buflen, SDRMODE mode, char *wisdom, int s
 		if (f)
 		{
 			char wisdomstring[32768];
+
 			fread(wisdomstring,1,32768,f);
+
 			if (fftwf_import_wisdom_from_string (wisdomstring) != 0)
 				uni[thread].wisdom.bits = FFTW_MEASURE;
 			fclose (f);

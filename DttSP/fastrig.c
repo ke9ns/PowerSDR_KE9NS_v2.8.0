@@ -34,8 +34,7 @@ East Windsor, NJ 08520
 
 #include <fastrig.h>
 
-REAL
-phasemod (REAL angle)
+REAL phasemod (REAL angle)
 {
 	while (angle >= TWOPI)
 		angle -= (REAL) TWOPI;
@@ -129,8 +128,7 @@ static REAL fast_atan_table[257] = {
 	(REAL)7.853983e-01
 };
 
-void
-InitSPEEDTRIG (void)
+void InitSPEEDTRIG (void)
 {
 	int i, SIZE;
 	TABLE_FACTOR = (REAL)(ONE_OVER_TWOPI * SIN_TABLE_SIZE);
@@ -145,8 +143,7 @@ InitSPEEDTRIG (void)
 	cosT = sinT + (SIN_TABLE_SIZE >> 2);
 }
 
-REAL
-fast_sin (REAL x)
+REAL fast_sin (REAL x)
 {
 #if (TRIG_SPEED==2)
 	x = (x * TABLE_FACTOR) + 0.5;
@@ -162,8 +159,7 @@ fast_sin (REAL x)
 #endif
 }
 
-REAL
-fast_cos (REAL x)
+REAL fast_cos (REAL x)
 {
 #if (TRIG_SPEED==2)
 	x = (x * TABLE_FACTOR) + 0.5;
@@ -197,8 +193,7 @@ fast_cos (REAL x)
                 +/- 0.045 degrees.
 *****************************************************************************/
 
-REAL
-fast_atan2 (REAL y, REAL x)
+REAL fast_atan2 (REAL y, REAL x)
 {
 	REAL x_abs, y_abs, z;
 	REAL alpha, angle, base_angle;

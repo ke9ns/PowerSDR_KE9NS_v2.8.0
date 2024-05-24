@@ -192,7 +192,7 @@ DttSP_EXP void AudioReset (void)
 DttSP_EXP void SetRXManualNotchEnable(unsigned int thread, unsigned int subrx, unsigned int index, BOOLEAN setit)
 {
 	//fprintf(stderr, "DttSP::SetRXManualNotchEnable(%u, %u, %u, %u)\n", thread, subrx, index, setit);
-	fflush(stderr);
+	//fflush(stderr);
 	sem_wait(&top[thread].sync.upd.sem);
 	rx[thread][subrx].notch[index].flag = setit;
 	sem_post(&top[thread].sync.upd.sem);
@@ -229,7 +229,7 @@ DttSP_EXP void SetRXManualNotchFreq(unsigned int thread, unsigned int subrx, uns
 {
 	REAL w0,sw,cw,alpha;
 	//fprintf(stderr, "DttSP::SetRXManualNotchFreq(%u, %u, %u, %lf)\n", thread, subrx, index, F0);
-	fflush(stderr);
+	//fflush(stderr);
 
 	w0 = (REAL)(2*M_PI*F0/rx[thread][subrx].notch[index].gen->Fs);
 	sw = (REAL)sin(w0);
@@ -1298,9 +1298,9 @@ DttSP_EXP void SetGrphTXEQ (unsigned int thread, int *txeq)
 
 	preamp  = (REAL) dB2lin ((REAL) txeq[0]) * 0.5f;
 
-	gain[0] = (REAL) dB2lin ((REAL) txeq[1] * 1.2 ) * preamp; // ke9ns mod .168
-	gain[1] = (REAL) dB2lin ((REAL) txeq[2] * 1.2 ) * preamp;
-	gain[2] = (REAL) dB2lin ((REAL) txeq[3] * 1.2 ) * preamp;
+	gain[0] = (REAL) dB2lin ((REAL) txeq[1] * 1.2f ) * preamp; // ke9ns mod .168
+	gain[1] = (REAL) dB2lin ((REAL) txeq[2] * 1.2f ) * preamp;
+	gain[2] = (REAL) dB2lin ((REAL) txeq[3] * 1.2f ) * preamp;
 
 	sem_wait(&top[thread].sync.upd.sem);
 
@@ -1367,7 +1367,7 @@ DttSP_EXP void SetGrphTXEQ (unsigned int thread, int *txeq)
 
 #define large  512
 #define large1 512.0
-#define small  257
+#define small1  257
 
 //==================================================================================
 // ke9ns EQFORM -> move 10 band Eq slider -> TXEQ10 -> dttsp.setgrphtxeq10 -> update.c (here)
@@ -1408,19 +1408,19 @@ DttSP_EXP void SetGrphTXEQ10(unsigned int thread, int *txeq10)
 		
 		REAL f_below = gmean(f_here / 2.0f, f_here);   // sqrt(x*y) ke9ns: 2.0f value = 1 octave BW
 		REAL f_above = gmean(f_here, f_here * 2.0f);   // sqrt(x*y)
-		REAL g_here = dB2lin((REAL)txeq10[j] * 1.2) * preamp;  // g_here = (10^(txeq[j]))*preamp (I think this is just the overall gain) .168
+		REAL g_here = dB2lin((REAL)txeq10[j] * 1.2f) * preamp;  // g_here = (10^(txeq[j]))*preamp (I think this is just the overall gain) .168
 
-		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, small); // ke9ns low, high, samplerate, size
+		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, small1); // ke9ns low, high, samplerate, size
 	
-		for (i = 0; i < small; i++)
+		for (i = 0; i < small1; i++)
 		{
 			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here));
 		}
 		delFIR_Bandpass_COMPLEX(tmpfilt);
 
-		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, small);
+		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, small1);
 		
-		for (i = 0; i < small; i++)
+		for (i = 0; i < small1; i++)
 		{
 			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here));
 		}
@@ -1430,7 +1430,7 @@ DttSP_EXP void SetGrphTXEQ10(unsigned int thread, int *txeq10)
 
 	//...................................................................................
 
-	for (i = 0; i < small; i++)
+	for (i = 0; i < small1; i++)
 	{
 		filtcoef[254 + i] = Cscl(tmpcoef[i], (REAL)(1.0 / large1));
 	}
@@ -1484,28 +1484,28 @@ DttSP_EXP void SetGrphTXEQ28(unsigned int thread, int *txeq28)
 	//	REAL f_below = gmean(f_here / 1.26f, f_here);   // ke9ns: sqrt(x*y)  2.0f: 100hz input = 70hz f_below this is considered 1 full octave (1.3f = 1/3 octave)
 	//	REAL f_above = gmean(f_here, f_here * 1.26f);   // ke9ns: sqrt(x*y)  100hz input = 141 f_above
 
-		REAL f_below = (REAL)f_here / 1.12246; // ke9ns: calculate low and high frequency based on 1/3 octave value
-		REAL f_above = (REAL)f_here * 1.12246;
+		REAL f_below = (REAL)f_here / 1.12246f; // ke9ns: calculate low and high frequency based on 1/3 octave value
+		REAL f_above = (REAL)f_here * 1.12246f;
 
-		REAL g_here = dB2lin((REAL)txeq28[j] * 1.2) * preamp;  // g_here = (10^(txeq[j]))*preamp (I think this is just the overall gain)
+		REAL g_here = dB2lin((REAL)txeq28[j] * 1.2f) * preamp;  // g_here = (10^(txeq[j]))*preamp (I think this is just the overall gain)
 
 		if (f_here <= 120)
 		{
-			g_here = dB2lin((REAL)txeq28[j] * 2) * preamp;
+			g_here = dB2lin((REAL)txeq28[j] * 2.0f) * preamp;
 		}
 		//.............................................................................
-		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, small); // ke9ns: low, high, samplerate, size  514
+		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, small1); // ke9ns: low, high, samplerate, size  514
 
-		for (i = 0; i < small; i++)
+		for (i = 0; i < small1; i++)
 		{
 			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here) ); // Cadd=Complex# add,  Cscl=Complex# scaler                re, im
 		}
 		delFIR_Bandpass_COMPLEX(tmpfilt); // delete FIR complex numbers
 
 		//.............................................................................
-		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, small);
+		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, small1);
 
-		for (i = 0; i < small; i++)
+		for (i = 0; i < small1; i++)
 		{
 			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here));
 		}
@@ -1517,7 +1517,7 @@ DttSP_EXP void SetGrphTXEQ28(unsigned int thread, int *txeq28)
 
 	//...................................................................................
 
-	for (i = 0; i < small; i++)
+	for (i = 0; i < small1; i++)
 	{
 		filtcoef[254 + i] = Cscl(tmpcoef[i], (REAL)(1.0 / large1));
 	}
@@ -1557,7 +1557,7 @@ DttSP_EXP void SetGrphTXEQ37(unsigned int thread, int* txeq28, int* peq)
 
 					 //ke9ns to allocate a pointer to a buffer of a struct of COMPLEX (which is just 2 REAL values: re, im  (REAL is just a float)
 	COMPLEX* filtcoef = newvec_COMPLEX(large, "filter for EQ"); // COMPLEX =   REAL re, im;  512 769
-	COMPLEX* tmpcoef = newvec_COMPLEX(small, "tmp filter for EQ");   // call to bufvec.c    257 514
+	COMPLEX* tmpcoef = newvec_COMPLEX(small1, "tmp filter for EQ");   // call to bufvec.c    257 514
 
 	ComplexFIR tmpfilt; // ke9ns struct = COMPLEX, int, enum(0-5), BOOLEAN (which is just uchr), struct of freq (real lo, hi)
 
@@ -1578,25 +1578,25 @@ DttSP_EXP void SetGrphTXEQ37(unsigned int thread, int* txeq28, int* peq)
 	//	REAL f_below = gmean(f_here / 1.26f, f_here);   // ke9ns: sqrt(x*y)  2.0f: 100hz input = 70hz f_below this is considered 1 full octave (1.3f = 1/3 octave)
 	//	REAL f_above = gmean(f_here, f_here * 1.26f);   // ke9ns: sqrt(x*y)  100hz input = 141 f_above
 
-		REAL f_below = (REAL)f_here / 1.12246; // ke9ns: calculate low and high frequency based on 1/3 octave value
-		REAL f_above = (REAL)f_here * 1.12246;
+		REAL f_below = (REAL)f_here / 1.12246f; // ke9ns: calculate low and high frequency based on 1/3 octave value
+		REAL f_above = (REAL)f_here * 1.12246f;
 
-		REAL g_here = dB2lin((REAL)txeq28[j] * 1.2) * preamp;  // g_here = (10^(txeq[j]))*preamp (I think this is just the overall gain)
+		REAL g_here = dB2lin((REAL)txeq28[j] * 1.2f) * preamp;  // g_here = (10^(txeq[j]))*preamp (I think this is just the overall gain)
 
 	
 		//.............................................................................
-		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, small); // ke9ns: low, high, samplerate, size
+		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, small1); // ke9ns: low, high, samplerate, size
 
-		for (i = 0; i < small; i++)
+		for (i = 0; i < small1; i++)
 		{
 			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here)); // Cadd=Complex# add,  Cscl=Complex# scaler                re, im
 		}
 		delFIR_Bandpass_COMPLEX(tmpfilt); // delete FIR complex numbers
 
 		//.............................................................................
-		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, small);
+		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, small1);
 
-		for (i = 0; i < small; i++)
+		for (i = 0; i < small1; i++)
 		{
 			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here));
 		}
@@ -1613,7 +1613,7 @@ DttSP_EXP void SetGrphTXEQ37(unsigned int thread, int* txeq28, int* peq)
 	for (j = 1; j <= 9; j++)  // band = 15, ++3 each cycle    ISOband_get_info only allows band= 1 to 43 as legal
 	{
 
-		REAL f_here = peq[j + 18]; // freq ISOband_get_nominal(band);       // isoband.c = ISOband_get_info(band)->nominal,         exact, low, high for band 1 to 43
+		REAL f_here = (REAL)peq[j + 18]; // freq ISOband_get_nominal(band);       // isoband.c = ISOband_get_info(band)->nominal,         exact, low, high for band 1 to 43
 
 
 		xx = (double)peq[j + 9] / 10.0; // octave .1 to 4 octave converts 1.3 = 1/3 octave  and 2.0 = 1 octave
@@ -1623,25 +1623,25 @@ DttSP_EXP void SetGrphTXEQ37(unsigned int thread, int* txeq28, int* peq)
 		REAL f_above = (REAL)f_here * (REAL)pow(1.414, xx);
 
 
-		REAL g_here = dB2lin((REAL)peq[j] * 1.2) * preamp;  // g_here = (10^(peq[j]/20)) *preamp (I think this is just the overall gain)  add *2 as test
+		REAL g_here = dB2lin((REAL)peq[j] * 1.2f) * preamp;  // g_here = (10^(peq[j]/20)) *preamp (I think this is just the overall gain)  add *2 as test
 
 	
 		//	fprintf(stderr,"37 9Band PEQ:  %f %f %f %f\n", f_here, f_below, f_above, g_here),fflush(stderr);
 
 
 			//.............................................................................
-		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, small); // ke9ns: low, high, samplerate, size  257
+		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, small1); // ke9ns: low, high, samplerate, size  257
 
-		for (i = 0; i < small; i++) // 257
+		for (i = 0; i < small1; i++) // 257
 		{
 			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here)); // Cadd=Complex# add,  Cscl=Complex# scaler                re, im
 		}
 		delFIR_Bandpass_COMPLEX(tmpfilt); // delete FIR complex numbers
 
 		//.............................................................................
-		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, small); // 257
+		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, small1); // 257
 
-		for (i = 0; i < small; i++) // 257 514
+		for (i = 0; i < small1; i++) // 257 514
 		{
 			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here));
 		}
@@ -1652,7 +1652,7 @@ DttSP_EXP void SetGrphTXEQ37(unsigned int thread, int* txeq28, int* peq)
 
 	//...................................................................................
 
-	for (i = 0; i < small; i++) // 257 
+	for (i = 0; i < small1; i++) // 257 
 	{
 		filtcoef[254 + i] = Cscl(tmpcoef[i], (REAL)(1.0 / large1));
 	}
@@ -1683,15 +1683,16 @@ DttSP_EXP void SetGrphTXPEQ(unsigned int thread, int* peq)
 {
 //	fprintf(stdout, "9Band: PEQ EQ\n"), fflush(stdout);
 	
-	int i, j, band;
+	int i, j; //, band; not used?
 
 	fftwf_plan ptmp; //fftw3.h   FFTW_DEFINE_API(FFTW_MANGLE_FLOAT, float, fftwf_complex) this is huge 2nd order macro
 
 	double xx;
 
 					 //ke9ns to allocate a pointer to a buffer of a struct of COMPLEX (which is just 2 REAL values: re, im  (REAL is just a float)
+
 	COMPLEX* filtcoef = newvec_COMPLEX(large, "filter for EQ"); // COMPLEX =   REAL re, im;  512  769
-	COMPLEX* tmpcoef = newvec_COMPLEX(small, "tmp filter for EQ");   // call to bufvec.c    257  514
+	COMPLEX* tmpcoef = newvec_COMPLEX(small1, "tmp filter for EQ");   // call to bufvec.c    257  514
 
 	ComplexFIR tmpfilt; // ke9ns struct = COMPLEX, int, enum(0-5), BOOLEAN (which is just uchr), struct of freq (real lo, hi)
 
@@ -1704,7 +1705,7 @@ DttSP_EXP void SetGrphTXPEQ(unsigned int thread, int* peq)
 	for (j = 1; j <= 9; j++)  // band = 15, ++3 each cycle    ISOband_get_info only allows band= 1 to 43 as legal
 	{
 		
-		REAL f_here = peq[j + 18]; // freq ISOband_get_nominal(band);       // isoband.c = ISOband_get_info(band)->nominal,         exact, low, high for band 1 to 43
+		REAL f_here = (REAL)peq[j + 18]; // freq ISOband_get_nominal(band);       // isoband.c = ISOband_get_info(band)->nominal,         exact, low, high for band 1 to 43
 		
 	
 		xx = (double)peq[j + 9] / 10.0; // octave .1 to 4 octave converts 1.3 = 1/3 octave  and 2.0 = 1 octave
@@ -1714,29 +1715,29 @@ DttSP_EXP void SetGrphTXPEQ(unsigned int thread, int* peq)
 		REAL f_above = (REAL)f_here * (REAL)pow(1.414, xx);
 
 
-		REAL g_here = dB2lin((REAL)peq[j] * 1.2 ) * preamp;  // g_here = (10^(peq[j]/20)) *preamp (I think this is just the overall gain)  add *2 as test
+		REAL g_here = dB2lin((REAL)peq[j] * 1.2f ) * preamp;  // g_here = (10^(peq[j]/20)) *preamp (I think this is just the overall gain)  add *2 as test
 
 		if (f_here <= 120)
 		{
-			g_here = dB2lin((REAL)peq[j] * 2) * preamp;
+			g_here = dB2lin((REAL)peq[j] * 2.0f) * preamp;
 		}
 
 		//fprintf(stderr,"9Band PEQ:  %f %f     %f %f\n", f_here, g_here, f_below, f_above ),fflush(stderr);
 
 
 		//.............................................................................
-		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, small); // ke9ns: low, high, samplerate, size  257
+		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, small1); // ke9ns: low, high, samplerate, size  257
 
-		for (i = 0; i < small; i++) // 257
+		for (i = 0; i < small1; i++) // 257
 		{
 			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here)); // Cadd=Complex# add,  Cscl=Complex# scaler                re, im
 		}
 		delFIR_Bandpass_COMPLEX(tmpfilt); // delete FIR complex numbers
 
 		//.............................................................................
-		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, small); // 257
+		tmpfilt = newFIR_Bandpass_COMPLEX(f_below, f_above, uni->samplerate, small1); // 257
 
-		for (i = 0; i < small; i++) // 257
+		for (i = 0; i < small1; i++) // 257
 		{
 			tmpcoef[i] = Cadd(tmpcoef[i], Cscl(tmpfilt->coef[i], g_here));
 		}
@@ -1746,7 +1747,7 @@ DttSP_EXP void SetGrphTXPEQ(unsigned int thread, int* peq)
 
 	  //...................................................................................
 
-	for (i = 0; i < small; i++) // 257
+	for (i = 0; i < small1; i++) // 257
 	{
 		filtcoef[254 + i] = Cscl(tmpcoef[i], (REAL)(1.0 / large1)); // 254  512
 	}
@@ -1799,9 +1800,9 @@ DttSP_EXP void SetGrphRXEQ (unsigned int thread, unsigned int subrx, int *rxeq)
 	filtcoef = newvec_COMPLEX (512, "filter for EQ");
 	tmpcoef = newvec_COMPLEX (257, "tmp filter for EQ");
     preamp  = (REAL) dB2lin ((REAL) rxeq[0]) * 0.5f;
-    gain[0] = (REAL) dB2lin ((REAL) rxeq[1] * 1.5) * preamp;
-    gain[1] = (REAL) dB2lin ((REAL) rxeq[2] * 1.5) * preamp;
-    gain[2] = (REAL) dB2lin ((REAL) rxeq[3] * 1.5) * preamp;
+    gain[0] = (REAL) dB2lin ((REAL) rxeq[1] * 1.5f) * preamp;
+    gain[1] = (REAL) dB2lin ((REAL) rxeq[2] * 1.5f) * preamp;
+    gain[2] = (REAL) dB2lin ((REAL) rxeq[3] * 1.5f) * preamp;
 
 
     sem_wait(&top[thread].sync.upd.sem);
@@ -1874,7 +1875,7 @@ DttSP_EXP void SetGrphRXEQ10(unsigned int thread, unsigned int subrx, int *rxeq)
 		REAL f_here  = ISOband_get_nominal(band),
 			f_below = gmean(f_here / 2.0f, f_here), // sqrt(x*y);
 			f_above = gmean(f_here, f_here * 2.0f),
-			g_here  = dB2lin((REAL) rxeq[j] * 1.5) * preamp; // ke9ns mod .168 (add 1.5 gain to each band)
+			g_here  = dB2lin((REAL) rxeq[j] * 1.5f) * preamp; // ke9ns mod .168 (add 1.5 gain to each band)
 		 
 		tmpfilt = newFIR_Bandpass_COMPLEX(-f_above, -f_below, uni->samplerate, 257);
 

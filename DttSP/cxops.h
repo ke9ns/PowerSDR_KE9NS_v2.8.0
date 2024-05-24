@@ -92,8 +92,7 @@ Cdiv (COMPLEX x, COMPLEX y)
 	return z;
 }
 
-static INLINE REAL
-Cappmag(COMPLEX z)
+static INLINE REAL Cappmag(COMPLEX z)
 {
 	REAL tmpr = (REAL)fabs(z.re);
 	REAL tmpi = (REAL)fabs(z.im);
@@ -107,14 +106,12 @@ static INLINE REAL Cmag (COMPLEX z)
 	//return (REAL) hypot(z.re,z.im);
 }
 
-static INLINE REAL
-Cabs (COMPLEX z)
+static INLINE REAL Cabs (COMPLEX z)
 {
 	return (REAL) sqrt (sqr (z.re) + sqr (z.im));
 }
 
-static INLINE REAL
-Csqrmag (COMPLEX z)
+static INLINE REAL Csqrmag (COMPLEX z)
 {
 	return (REAL) (sqr (z.re) + sqr (z.im));
 }

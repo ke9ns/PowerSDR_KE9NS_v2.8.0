@@ -35,8 +35,7 @@ Bridgewater, NJ 08807
 #include <common.h>
 
 
-DTTSPAGC
-newDttSPAgc (AGCMODE mode,
+DTTSPAGC newDttSPAgc (AGCMODE mode,
 			 COMPLEX *Vec,
 			 int BufSize,   // Size of the input buffer
 			 REAL target,   // The target voltage
@@ -133,14 +132,12 @@ newDttSPAgc (AGCMODE mode,
 	return a;
 }
 
-void
-DttSPAgc_flushbuf(DTTSPAGC a)
+void DttSPAgc_flushbuf(DTTSPAGC a)
 {
 	memset((void *)a->circ,0,sizeof(COMPLEX)*(a->mask+1));
 }
 
-void
-DttSPAgc (DTTSPAGC a, int tick)
+void DttSPAgc (DTTSPAGC a, int tick)
 {
 	int i;
 	int hangtime;
@@ -243,8 +240,7 @@ DttSPAgc (DTTSPAGC a, int tick)
 	}
 }
 
-void
-delDttSPAgc (DTTSPAGC a)
+void delDttSPAgc (DTTSPAGC a)
 {
 	delCXB (a->buff);
 	delvec_COMPLEX (a->circ);

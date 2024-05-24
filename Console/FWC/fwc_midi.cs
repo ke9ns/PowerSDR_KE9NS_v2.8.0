@@ -542,6 +542,7 @@ namespace PowerSDR
         private static void FillTables()
         {
             encode_table = new byte[256][];
+
             for (int i = 0; i < 256; i++)
                 encode_table[i] = new byte[2];
 

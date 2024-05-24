@@ -29,6 +29,9 @@
 // ke9ns:  DSP.cs is used to pass data between C# forms, and update.c
 
 
+using EnvDTE;
+using Microsoft.JScript;
+using Microsoft.VisualBasic.Logging;
 using System;
 using System.Diagnostics;
 using System.Reflection;
@@ -38,7 +41,7 @@ namespace PowerSDR
 {
     #region DSP Class 
 
-    public class DSP
+    public sealed class DSP
     {
         private const int NUM_RX_THREADS = 2;
         private const int NUM_RX_PER_THREAD = 2;
@@ -50,13 +53,14 @@ namespace PowerSDR
             Debug.WriteLine("START DSP  HERE==========================");
 
             CreateDSP();
-            Thread.Sleep(100);
+            System.Threading.Thread.Sleep(100);
             DttSP.ReleaseUpdate();
 
             dsp_rx = new DSPRX[NUM_RX_THREADS][];
             for (int i = 0; i < NUM_RX_THREADS; i++)
             {
                 dsp_rx[i] = new DSPRX[NUM_RX_PER_THREAD];
+
                 for (int j = 0; j < NUM_RX_PER_THREAD; j++)
                     dsp_rx[i][j] = new DSPRX((uint)i * 2, (uint)j);
             }
@@ -102,12 +106,11 @@ namespace PowerSDR
 
         public void CreateDSP()
         {
-            System.String app_data_path = "";
+           // System.String app_data_path = "";
             Assembly assembly = Assembly.GetExecutingAssembly();
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
             System.String version = fvi.FileVersion.Substring(0, fvi.FileVersion.LastIndexOf("."));
-            app_data_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-                + "\\FlexRadio Systems\\PowerSDR v" + version + "\\wisdom";
+            System.String app_data_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\FlexRadio Systems\\PowerSDR v" + version + "\\wisdom";
 
             DttSP.SetupSDR(app_data_path);
         }
@@ -161,7 +164,7 @@ namespace PowerSDR
 
     #region DSPRX Class
 
-    public class DSPRX
+    public sealed class DSPRX
     {
         private uint thread;
         private uint subrx;
@@ -563,7 +566,18 @@ namespace PowerSDR
                         rx_agc_hang = rx_agc_hang_dsp = 100;
                         rx_agc_decay = rx_agc_decay_dsp = 100;
                         break;
+                    case AGCMode.FIXD:
+                    case AGCMode.FIRST:
+                    case AGCMode.CUSTOM:
+                    case AGCMode.LAST:
+
+                        break;
+
+                    default:
+                       
+                        break;
                 }
+
 
                 if (update)
                 {
@@ -1344,7 +1358,7 @@ namespace PowerSDR
 
     #region DSPTX Class
 
-    public class DSPTX
+    public sealed class DSPTX
     {
         private uint thread;
 
@@ -2011,7 +2025,7 @@ namespace PowerSDR
         private int tx_alc_bottom = -120;
         private int TXALCBottom
         {
-            get { return tx_alc_bottom; }
+           get { return tx_alc_bottom; }
             set
             {
                 tx_alc_bottom = value;

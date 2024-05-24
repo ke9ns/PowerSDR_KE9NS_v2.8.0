@@ -31,7 +31,7 @@ using System.Runtime.InteropServices;
 
 namespace PowerSDR
 {
-    unsafe class DttSP
+    unsafe sealed class DttSP
     {
         #region Enums
 
@@ -73,7 +73,7 @@ namespace PowerSDR
         /// <returns></returns>
         public static extern void SetupSDR(System.String app_data_path);
 
-        [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetDSPBuflen")]  // ke9ns found in winmain.c
+        [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetDSPBuflen")]  // ke9ns found in update.c and winmain.c
         public static extern void ResizeSDR(uint thread, int DSPsize);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Destroy_SDR")]
@@ -98,7 +98,7 @@ namespace PowerSDR
         public static extern void ExchangeSamples(void* input_l, void* input_r, void* output_l, void* output_r, int numsamples);
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Audio_Callback2")]   // ke9ns used in the transmit / receive audio   winmain.c
-        public static extern void ExchangeSamples2(void* input, void* output, int numsamples);
+        public static extern void ExchangeSamples2(void* input, void* output, int numsamples); // called from audio.cs
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetAudioSize")]///
 		public static extern void SetAudioSize(int size);
@@ -236,7 +236,7 @@ namespace PowerSDR
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetNB")]///
 		public static extern void SetNB(uint thread, uint subrx, bool setit); // ke9ns: update.c
 
-        [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetNBvals")]///
+        [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "SetNBvals")]/// NB values
 		public static extern void SetNBvals(uint thread, uint subrx, double threshold, int hangTime, int delayTime); // ke9ns mod: update.c
 
         [DllImport("DttSP.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "GetSAMFreq")]///

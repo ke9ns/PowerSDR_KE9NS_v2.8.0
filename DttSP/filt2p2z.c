@@ -91,13 +91,12 @@ IIR_2P2Z new_IIR_2P2Z (CXB buf, REAL Gain, REAL Parameter, Filter_Shape_Param Pa
 	return gen;
 }
 
-void
-del_IIR_2P2Z(IIR_2P2Z gen)
+void del_IIR_2P2Z(IIR_2P2Z gen)
 {
 	if (gen) safefree((char *)gen);
 }
-void
-do_IIR_2P2Z(IIR_2P2Z gen)
+
+void do_IIR_2P2Z(IIR_2P2Z gen)
 {
 	int i;
 	for (i=0;i < CXBsize(gen->sigbuf); i++)
@@ -123,8 +122,8 @@ do_IIR_2P2Z(IIR_2P2Z gen)
 	}
 	
 }
-IIR_LPF_2P 
-new_IIR_LPF_2P (CXB buf, REAL samplerate, REAL cuttoff_freq_Hz, REAL Q)				  
+
+IIR_LPF_2P new_IIR_LPF_2P (CXB buf, REAL samplerate, REAL cuttoff_freq_Hz, REAL Q)				  
 {
 	REAL w = (REAL)TWOPI*cuttoff_freq_Hz / samplerate;
 	//REAL T = 1/samplerate;
@@ -137,11 +136,11 @@ new_IIR_LPF_2P (CXB buf, REAL samplerate, REAL cuttoff_freq_Hz, REAL Q)
 	return lpf;
 }
 
-void
-del_IIR_LPF_2P(IIR_LPF_2P lpf)
+void del_IIR_LPF_2P(IIR_LPF_2P lpf)
 {
 	if (lpf) safefree((char *)lpf);
 }
+
 void do_IIR_LPF_2P (IIR_LPF_2P lpf)
 {
 	//int CXB_size = sizeof(lpf->sigbuf)/sizeof(CXB);
@@ -155,8 +154,7 @@ void do_IIR_LPF_2P (IIR_LPF_2P lpf)
 }
 
 
-IIR_BPF_2P 
-new_IIR_BPF_2P (CXB buf, REAL samplerate, REAL cuttoff_freq_Hz, REAL Q)				  
+IIR_BPF_2P new_IIR_BPF_2P (CXB buf, REAL samplerate, REAL cuttoff_freq_Hz, REAL Q)				  
 {
 	REAL w = (REAL)TWOPI*cuttoff_freq_Hz / samplerate;
 	REAL T = 1/samplerate;
@@ -169,11 +167,12 @@ new_IIR_BPF_2P (CXB buf, REAL samplerate, REAL cuttoff_freq_Hz, REAL Q)
 	bpf->sig1 = 0.0f;
 	return bpf;
 }
-void
-del_IIR_BPF_2P(IIR_BPF_2P bpf)
+
+void del_IIR_BPF_2P(IIR_BPF_2P bpf)
 {
 	if (bpf) safefree((char *)bpf);
 }
+
 void do_IIR_BPF_2P (IIR_BPF_2P bpf)
 {
 	int i = 0;
@@ -188,8 +187,7 @@ void do_IIR_BPF_2P (IIR_BPF_2P bpf)
 	}
 }
 
-IIR_HPF_2P 
-new_IIR_HPF_2P (CXB buf, REAL samplerate, REAL cuttoff_freq_Hz, REAL Q)				  
+IIR_HPF_2P new_IIR_HPF_2P (CXB buf, REAL samplerate, REAL cuttoff_freq_Hz, REAL Q)				  
 {
 	REAL w = (REAL)TWOPI*cuttoff_freq_Hz / samplerate;
 	REAL T = 1/samplerate;
@@ -204,11 +202,11 @@ new_IIR_HPF_2P (CXB buf, REAL samplerate, REAL cuttoff_freq_Hz, REAL Q)
 	return hpf;
 }
 
-void
-del_IIR_HPF_2P(IIR_HPF_2P hpf)
+void del_IIR_HPF_2P(IIR_HPF_2P hpf)
 {
 	if (hpf) safefree((char *)hpf);
 }
+
 void do_IIR_HPF_2P (IIR_HPF_2P hpf)
 {
 	int i = 0;
@@ -227,8 +225,7 @@ void do_IIR_HPF_2P (IIR_HPF_2P hpf)
 	}
 }
 
-IIR_1P1Z 
-new_IIR_1P1Z (CXB buf, REAL samplerate, REAL pole_freq_hz, REAL zero_freq_hz)				  
+IIR_1P1Z new_IIR_1P1Z (CXB buf, REAL samplerate, REAL pole_freq_hz, REAL zero_freq_hz)				  
 {
 	REAL wp = (REAL) TWOPI * pole_freq_hz / samplerate;
 	REAL wz = (REAL) TWOPI * zero_freq_hz / samplerate;
@@ -245,11 +242,11 @@ new_IIR_1P1Z (CXB buf, REAL samplerate, REAL pole_freq_hz, REAL zero_freq_hz)
 	return filter;
 }
 
-void
-del_IIR_1P1Z(IIR_1P1Z filter)
+void del_IIR_1P1Z(IIR_1P1Z filter)
 {
 	if (filter) safefree((char *)filter);
 }
+
 void do_IIR_1P1Z (IIR_1P1Z filter)
 {
 	int i = 0;

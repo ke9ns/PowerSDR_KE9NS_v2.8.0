@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ADODB.dll" size="120864">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ADODB.dll" size="120760">
       <assemblyIdentity name="ADODB" version="7.0.3300.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>cJQT8kkrM1Xn3bj0zzvKWLE/qCbl2xU5THKsY0xRKfA=</dsig:DigestValue>
+        <dsig:DigestValue>hO9ZS39lI5Jp6tW0ycZ+7ejXNHM581da0LtNQeS0sTc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -175,14 +175,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerSDR.exe" size="17506304">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerSDR.exe" size="17608704">
       <assemblyIdentity name="PowerSDR" version="2.8.0.302" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>dfWUlZ5K18/2nqzp3KKzNZfCHOIxZf6jqM1Cf/oQsfo=</dsig:DigestValue>
+        <dsig:DigestValue>/Sm17Isb797JTGGDgWILNXDBez3hLJL/8gFQXvFWOqg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

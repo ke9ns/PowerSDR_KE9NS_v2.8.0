@@ -34,19 +34,16 @@ Bridgewater, NJ 08807
 #include <fromsys.h>
 #include <banal.h>
 
-void
-nilfunc (void)
+void nilfunc (void)
 {
 }
 
-REAL
-sqr (REAL x)
+REAL sqr (REAL x)
 {
 	return x * x;
 }
 
-int
-popcnt (int k)
+int popcnt (int k)
 {
 	int c, i;
 	c = k & 01;
@@ -55,8 +52,7 @@ popcnt (int k)
 	return c;
 }
 
-int
-npoof2 (int n)
+int npoof2 (int n)
 {
 	int i = 0;
 	--n;
@@ -65,14 +61,12 @@ npoof2 (int n)
 	return i;
 }
 
-int
-nblock2 (int n)
+int nblock2 (int n)
 {
 	return 1 << npoof2 (n);
 }
 
-int
-in_blocks (int count, int block_size)
+int in_blocks (int count, int block_size)
 {
 	if (block_size < 1)
 	{
@@ -82,8 +76,7 @@ in_blocks (int count, int block_size)
 	return (1 + ((count - 1) / block_size));
 }
 
-FILE *
-efopen (char *path, char *mode)
+FILE *efopen (char *path, char *mode)
 {
 	FILE *iop = fopen (path, mode);
 	if (!iop)
@@ -94,8 +87,7 @@ efopen (char *path, char *mode)
 	return iop;
 }
 
-FILE *
-efreopen (char *path, char *mode, FILE * strm)
+FILE *efreopen (char *path, char *mode, FILE * strm)
 {
 	FILE *iop = freopen (path, mode, strm);
 	if (!iop)
@@ -106,29 +98,24 @@ efreopen (char *path, char *mode, FILE * strm)
 	return iop;
 }
 
-size_t
-filesize (char *path)
+size_t filesize (char *path)
 {
 	struct stat sbuf;
-	if (stat (path, &sbuf) == -1)
-		return -1;
+	if (stat (path, &sbuf) == -1) return -1;
 	return sbuf.st_size;
 }
 
-size_t
-fdsize (int fd)
+size_t fdsize (int fd)
 {
 	struct stat sbuf;
-	if (fstat (fd, &sbuf) == -1)
-		return -1;
+	if (fstat (fd, &sbuf) == -1) return -1;
 	return sbuf.st_size;
 }
 
 #define MILLION (1000000)
 
 // return current tv
-struct timeval
-now_tv (void)
+struct timeval now_tv (void)
 {
 	struct timeval tv;
 	gettimeofday (&tv, 0);
@@ -136,8 +123,7 @@ now_tv (void)
 }
 
 // return ta - tb
-struct timeval
-diff_tv (struct timeval *ta, struct timeval *tb)
+struct timeval diff_tv (struct timeval *ta, struct timeval *tb)
 {
 	struct timeval tv;
 	if (tb->tv_usec > ta->tv_usec)
@@ -155,8 +141,7 @@ diff_tv (struct timeval *ta, struct timeval *tb)
 }
 
 // return ta + tb
-struct timeval
-sum_tv (struct timeval *ta, struct timeval *tb)
+struct timeval sum_tv (struct timeval *ta, struct timeval *tb)
 {
 	struct timeval tv;
 	tv.tv_sec = ta->tv_sec + tb->tv_sec;
@@ -168,16 +153,14 @@ sum_tv (struct timeval *ta, struct timeval *tb)
 	return tv;
 }
 
-char *
-fmt_tv (struct timeval *tv)
+char * fmt_tv (struct timeval *tv)
 {
 	static char buff[256];
 	snprintf (buff, sizeof (buff), "%ds%du", tv->tv_sec, tv->tv_usec);
 	return buff;
 }
 
-char *
-since (struct timeval *tv)
+char * since (struct timeval *tv)
 {
 	struct timeval nt = now_tv (), dt = diff_tv (&nt, tv);
 	return fmt_tv (&dt);
@@ -189,11 +172,9 @@ since (struct timeval *tv)
 // returns actual number of valid points in u
 // (== n - m/n since v[n] is undefined)
 
-int
-hinterp_vec (REAL * u, int m, REAL * v, int n)
+int hinterp_vec (REAL * u, int m, REAL * v, int n)
 {
-	if (!u || !v || (n < 2) || (m < n) || (m % n))
-		return 0;
+	if (!u || !v || (n < 2) || (m < n) || (m % n)) 	return 0;
 	else
 	{
 		int div = m / n, i, j = 0;
@@ -210,14 +191,12 @@ hinterp_vec (REAL * u, int m, REAL * v, int n)
 	}
 }
 
-void
-status_message (char *msg)
+void status_message (char *msg)
 {
 	write (2, msg, strlen (msg));
 }
 
-FILE *
-find_rcfile (char *base)
+FILE * find_rcfile (char *base)
 {
 	char path[MAXPATHLEN];
 	FILE *fp;
@@ -238,8 +217,7 @@ find_rcfile (char *base)
 
 //------------------------------------------------------------------------
 
-unsigned long
-hash (unsigned char *str)
+unsigned long hash (unsigned char *str)
 {
 	unsigned long hash = 5381;
 	int c;
@@ -248,14 +226,12 @@ hash (unsigned char *str)
 	return hash;
 }
 
-int
-gcd (int m, int n)
+int gcd (int m, int n)
 {
 	return (m % n == 0 ? n : gcd (n, m % n));
 }
 
-int
-least_common_mul (int i, int j)
+int least_common_mul (int i, int j)
 {
 	return (abs ((i * j) / gcd (i, j)));
 }

@@ -36,7 +36,7 @@ using System.Threading;
 
 namespace PowerSDR
 {
-    public class AD9854_v2
+    public sealed class AD9854_v2
     {
         #region Enums
 

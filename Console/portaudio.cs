@@ -75,25 +75,58 @@ namespace PowerSDR
 
         public enum PaErrorCode
         {
-            paNoError = 0, paNotInitialized = -10000, paUnanticipatedHostError, paInvalidChannelCount,
-            paInvalidSampleRate, paInvalidDevice, paInvalidFlag, paSampleFormatNotSupported,
-            paBadIODeviceCombination, paInsufficientMemory, paBufferTooBig, paBufferTooSmall,
-            paNullCallback, paBadStreamPtr, paTimedOut, paInternalError,
-            paDeviceUnavailable, paIncompatibleHostApiSpecificStreamInfo, paStreamIsStopped, paStreamIsNotStopped,
-            paInputOverflowed, paOutputUnderflowed, paHostApiNotFound, paInvalidHostApi,
-            paCanNotReadFromACallbackStream, paCanNotWriteToACallbackStream, paCanNotReadFromAnOutputOnlyStream, paCanNotWriteToAnInputOnlyStream,
+            paNoError = 0,
+            paNotInitialized = -10000,
+            paUnanticipatedHostError,
+            paInvalidChannelCount,
+            paInvalidSampleRate,
+            paInvalidDevice, 
+            paInvalidFlag,
+            paSampleFormatNotSupported,
+            paBadIODeviceCombination, 
+            paInsufficientMemory, 
+            paBufferTooBig, 
+            paBufferTooSmall,
+            paNullCallback, 
+            paBadStreamPtr,
+            paTimedOut, 
+            paInternalError,
+            paDeviceUnavailable,
+            paIncompatibleHostApiSpecificStreamInfo,
+            paStreamIsStopped, 
+            paStreamIsNotStopped,
+            paInputOverflowed, 
+            paOutputUnderflowed, 
+            paHostApiNotFound,
+            paInvalidHostApi,
+            paCanNotReadFromACallbackStream,
+            paCanNotWriteToACallbackStream, 
+            paCanNotReadFromAnOutputOnlyStream, 
+            paCanNotWriteToAnInputOnlyStream,
             paIncompatibleStreamHostApi
+
         }
 
         public enum PaHostApiTypeId
         {
-            paInDevelopment = 0, paDirectSound = 1, paMME = 2, paASIO = 3,
-            paSoundManager = 4, paCoreAudio = 5, paOSS = 7, paALSA = 8,
-            paAL = 9, paBeOS = 10
+            paInDevelopment = 0,
+            paDirectSound = 1,
+            paMME = 2, 
+            paASIO = 3,
+            paSoundManager = 4,
+            paCoreAudio = 5,
+            paOSS = 7,
+            paALSA = 8,
+            paAL = 9,
+            paBeOS = 10
         }
 
         public enum PaStreamCallbackResult
-        { paContinue = 0, paComplete = 1, paAbort = 2 }
+        { 
+            paContinue = 0,
+            paComplete = 1,
+            paAbort = 2
+        }
 
         #endregion
 
@@ -178,6 +211,7 @@ namespace PowerSDR
         // reference.  To fix this, I added a single statement in
         // pa_front.c.  The new line 444 is below.
         // case paNoError:                  result = "1"; result = "Success"; break;
+
         [DllImport("PA19.dll", EntryPoint = "PA_GetErrorText")]
         public static extern IntPtr IntPtr_PA_GetErrorText(PaError error);
 
@@ -244,39 +278,21 @@ namespace PowerSDR
         }
 
         [DllImport("PA19.dll")]
-        unsafe public static extern PaError PA_IsFormatSupported(
-            PaStreamParameters* inputParameters,
-            PaStreamParameters* outputParameters,
-            double sampleRate);
+        unsafe public static extern PaError PA_IsFormatSupported(PaStreamParameters* inputParameters,PaStreamParameters* outputParameters,double sampleRate);
 
         [DllImport("PA19.dll")]
-        unsafe public static extern PaError PA_OpenStream(
-            out void* stream,
-            PaStreamParameters* inputParameters,
-            PaStreamParameters* outputParameters,
-            double sampleRate,
-            uint framesPerBuffer,
-            PaStreamFlags streamFlags,
-            PaStreamCallback streamCallback,
-            int callback_id);       // 0 for callback1, else callback2     // ke9ns 0=callback8 (which is really callback2)
+        unsafe public static extern PaError PA_OpenStream(out void* stream, PaStreamParameters* inputParameters,PaStreamParameters* outputParameters,
+            double sampleRate, uint framesPerBuffer, PaStreamFlags streamFlags, PaStreamCallback streamCallback,int callback_id);       // 0 for callback1, else callback2     // ke9ns 0=callback8 (which is really callback2)
 
         [DllImport("PA19.dll")]
-        unsafe public static extern PaError PA_OpenDefaultStream(
-            out void* stream,
-            int numInputChannels,
-            int numOutputChannels,
-            PaSampleFormat sampleFormat,
-            double sampleRate,
-            uint framesPerBuffer,
-            PaStreamCallback streamCallback,
-            int callback_id);       // 0 for callback1, else callback2
+        unsafe public static extern PaError PA_OpenDefaultStream(out void* stream,int numInputChannels,int numOutputChannels,PaSampleFormat sampleFormat,
+            double sampleRate,uint framesPerBuffer, PaStreamCallback streamCallback, int callback_id);       // 0 for callback1, else callback2
 
         [DllImport("PA19.dll")]
         unsafe public static extern PaError PA_CloseStream(void* stream);
 
         [DllImport("PA19.dll")]
-        unsafe public static extern PaError PA_SetStreamFinishedCallback(
-            void* stream, PaStreamFinishedCallback streamFinishedCallback);
+        unsafe public static extern PaError PA_SetStreamFinishedCallback(void* stream, PaStreamFinishedCallback streamFinishedCallback);
 
         [DllImport("PA19.dll")]
         unsafe public static extern PaError PA_StartStream(void* stream);

@@ -10,7 +10,7 @@
 typedef unsigned long UintPtr;
 
 void* malloc16Align(int BlockSize)
-	{
+{
 	/* allocates the memory needed for a block of memory
 	 *, plus one header bytes that indicates the true start of the malloc'ed block */
 	
@@ -21,13 +21,13 @@ void* malloc16Align(int BlockSize)
 	 * that byte will store the "padding" which is before the aligned block
 	 * so we can free correctly the block of memory */
 	
-	if (AlignedPtr==BasePtr) AlignedPtr+=16;
+	if (AlignedPtr==BasePtr) AlignedPtr += 16;
 	
 	/* stores that famous byte */
 	*((char*)AlignedPtr-1)=(char)(AlignedPtr-BasePtr);
 	
 	return (void *)AlignedPtr;
-	}
+}
 
 #if 0
 void *malloc16Align(int size){
@@ -47,7 +47,9 @@ void *malloc16Align(int size){
   return (void *)p1;
 }
 #endif
-void *calloc16Align(size_t nmemb,size_t size){
+
+void *calloc16Align(size_t nmemb,size_t size)
+{
   int nbytes;
   void *p;
 
@@ -58,15 +60,17 @@ void *calloc16Align(size_t nmemb,size_t size){
   memset(p,0,nbytes);
   return p;
 }
+
 void free16Align(void* p)
-	{
+{
 	char* pAligned=(char*)p;
 	
 	/* *(pAligned-1) is the number of bytes just before the aligned block
 	 * so, pAligned - *(pAligned-1) is the original block of memory
 	 */
 	free(pAligned - *(pAligned-1));
-	}
+}
+
 #if 0
 void free16Align(void *p){
 

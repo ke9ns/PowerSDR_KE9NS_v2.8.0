@@ -28,6 +28,9 @@
 //=================================================================
 
 // ke9ns things to remember:
+
+
+
 //5000 PA has 6 LPF for transmit that switch at the following Frequencies:
 //K1K2 160m :0-2.099, K13K14 80M:2.1-4.099, K5K6 60-40M 4.1-7.399, K9K10 30-20m7.4- 14.449, K11K12 17-15M 14.450-21.549,K3K4 12-10m 21.550-29.799, K7K8 6m 29.8- ? mhz
 // 160m LPF = 4uH/220pf (1200pf) 3 pole filter design ECO in 2010 to change over to a notch filter preventing 630m operation.
@@ -1751,8 +1754,10 @@ namespace PowerSDR
 
             Debug.Assert(File.Exists(master_path + "master.xml"));
 
+            // Performance Analysis Logger tool (PerfMon) 
+
             // decide whether to present a choice of radios to the user
-            Pal.Init();  // ke9ns: Performance Analysis Logger tool (PerfMon) currently at 4.1.3.17357 Flex Radio 1/30/2013
+            Pal.Init();  // ke9ns: pal.dll currently at 4.1.3.17357 Flex Radio 1/30/2013
 
             RadiosAvailable.ScanPal(); // gather info on Pal radios
 

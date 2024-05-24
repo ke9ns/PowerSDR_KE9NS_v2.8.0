@@ -166,13 +166,8 @@ lmsr_adapt_n (LMSR lms)
 }
 
 #else
-LMSR
-new_lmsr (CXB signal,
-		  int delay,
-		  REAL adaptation_rate,
-		  REAL leakage,
-		  int adaptive_filter_size,
-		  int filter_type)
+
+LMSR new_lmsr (CXB signal, int delay, REAL adaptation_rate, REAL leakage, int adaptive_filter_size, int filter_type)
 {
 	LMSR lms = (LMSR) safealloc (1, sizeof (_lmsstate), "new_lmsr state");
 
@@ -192,8 +187,7 @@ new_lmsr (CXB signal,
 	return lms;
 }
 
-void
-del_lmsr (LMSR lms)
+void del_lmsr (LMSR lms)
 {
 	if (lms)
 	{
@@ -204,8 +198,7 @@ del_lmsr (LMSR lms)
 	}
 }
 
-extern void
-lmsr_adapt(LMSR lms)
+extern void lmsr_adapt(LMSR lms)
 {
 	int i, j, k;
 	REAL sum_sq, scl1, scl2;
@@ -262,7 +255,8 @@ void dump_filter(LMSR lms)
 {
 	int i;
 	FILE* file = fopen("lms_filt.csv", "w");
-	for(i=0; i<lms->adaptive_filter_size; i++)
+
+	for(i=0; i < lms->adaptive_filter_size; i++)
 	{
 		fprintf(file, "%f, %f\n", lms->adaptive_filter[i].re, lms->adaptive_filter[i].im);
 	}
@@ -286,8 +280,7 @@ void dump_delay(LMSR lms)
 
 #endif
 
-void
-del_blms (BLMS blms)
+void del_blms (BLMS blms)
 {
 	if (blms)
 	{
@@ -309,9 +302,7 @@ del_blms (BLMS blms)
 	}
 }
 
-BLMS
-new_blms (CXB signal, REAL adaptation_rate, REAL leak_rate, int filter_type,
-	  int pbits)
+BLMS new_blms (CXB signal, REAL adaptation_rate, REAL leak_rate, int filter_type, int pbits)
 {
 	BLMS tmp;
 	tmp = (BLMS) safealloc (1, sizeof (_blocklms), "block lms");
@@ -357,8 +348,8 @@ new_blms (CXB signal, REAL adaptation_rate, REAL leak_rate, int filter_type,
 }
 
 #define BLKSCL (REAL)(3.90625e-3)
-void
-blms_adapt (BLMS blms)
+
+void blms_adapt (BLMS blms)
 {
 	int sigsize = CXBhave (blms->signal);
 	int sigidx = 0;

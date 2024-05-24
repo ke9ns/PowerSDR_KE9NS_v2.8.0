@@ -95,22 +95,18 @@ makewindow (Windowtype type, int size, REAL * window)
 	window[j] = (window[i] = angle);
       break;
     case HAMMING_WINDOW:
-      for (i = 0, j = size - 1, angle = 0.0; i <= midn;
-	   i++, j--, angle += freq)
-	window[j] = (window[i] = (REAL) (0.54 - 0.46 * cos (angle)));
+      for (i = 0, j = size - 1, angle = 0.0; i <= midn; i++, j--, angle += freq)
+	     window[j] = (window[i] = (REAL) (0.54 - 0.46 * cos (angle)));
       break;
     case BLACKMAN2_WINDOW:	/* using Chebyshev polynomial equivalents here */
-      for (i = 0, j = size - 1, angle = 0.0; i <= midn;
-	   i++, j--, angle += freq)
-	{
-	  cx = (REAL) cos (angle);
-	  window[j] = (window[i] =
-		       (REAL) (.34401 + (cx * (-.49755 + (cx * .15844)))));
-	}
+      for (i = 0, j = size - 1, angle = 0.0; i <= midn; i++, j--, angle += freq)
+	  {
+	     cx = (REAL) cos (angle);
+	     window[j] = (window[i] = (REAL) (.34401 + (cx * (-.49755 + (cx * .15844)))));
+	  }
       break;
     case BLACKMAN3_WINDOW:
-      for (i = 0, j = size - 1, angle = 0.0; i <= midn;
-	   i++, j--, angle += freq)
+      for (i = 0, j = size - 1, angle = 0.0; i <= midn; i++, j--, angle += freq)
 	{
 	  cx = (REAL) cos (angle);
 	  window[j] =

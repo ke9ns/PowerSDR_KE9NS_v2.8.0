@@ -29,8 +29,7 @@
 #include <ringb.h>
 #include <bufvec.h>
 
-ringb_t *
-ringb_create (size_t sz2)
+ringb_t * ringb_create (size_t sz2)
 {
 	ringb_t *rb = (ringb_t *) safealloc (1, sizeof (ringb_t), "Ring creation");
 	rb->buf = safealloc (1, sz2, "Ring buffer buf");
@@ -40,8 +39,7 @@ ringb_create (size_t sz2)
 	return rb;
 }
 
-ringb_float_t *
-ringb_float_create (size_t sz2)
+ringb_float_t * ringb_float_create (size_t sz2)
 {
 	ringb_float_t *rb = (ringb_float_t *) safealloc (1, sizeof (ringb_float_t),
 		"Float Ring creation");
@@ -53,8 +51,7 @@ ringb_float_create (size_t sz2)
 	return rb;
 }
 
-ringb_t *
-ringb_create_usemem (char *usemem, size_t sz2)
+ringb_t * ringb_create_usemem (char *usemem, size_t sz2)
 {
 	ringb_t *rb = (ringb_t *) usemem;
 	rb->buf = usemem + sizeof (ringb_t);
@@ -65,38 +62,33 @@ ringb_create_usemem (char *usemem, size_t sz2)
 }
 
 
-void
-ringb_free (ringb_t * rb)
+void ringb_free (ringb_t * rb)
 {
 	safefree (rb->buf);
 	safefree ((char *) rb);
 }
 
-void
-ringb_float_free (ringb_float_t * rb)
+void ringb_float_free (ringb_float_t * rb)
 {
 	safefree ((void *) rb->buf);
 	safefree ((char *) rb);
 }
 
-void
-ringb_reset (ringb_t * rb)
+void ringb_reset (ringb_t * rb)
 {
 	// NB not thread-safe
 	rb->rptr = 0;
 	rb->wptr = 0;
 }
 
-void
-ringb_float_reset (ringb_float_t * rb)
+void ringb_float_reset (ringb_float_t * rb)
 {
 	// NB not thread-safe
 	rb->rptr = 0;
 	rb->wptr = 0;
 }
 
-void
-ringb_clear (ringb_t * rb, size_t nbytes)
+void ringb_clear (ringb_t * rb, size_t nbytes)
 {
 	register size_t i;
 	char zero = 0;
@@ -104,8 +96,7 @@ ringb_clear (ringb_t * rb, size_t nbytes)
 		ringb_write (rb, &zero, 1);
 }
 
-void
-ringb_float_clear (ringb_float_t * rb, size_t nfloats)
+void ringb_float_clear (ringb_float_t * rb, size_t nfloats)
 {
 	register size_t i;
 	float zero = 0.0f;
@@ -113,22 +104,19 @@ ringb_float_clear (ringb_float_t * rb, size_t nfloats)
 		ringb_float_write (rb, &zero, 1);
 }
 
-void
-ringb_restart (ringb_t * rb, size_t nbytes)
+void ringb_restart (ringb_t * rb, size_t nbytes)
 {
 	ringb_reset (rb);
 	ringb_clear (rb, nbytes);
 }
 
-void
-ringb_float_restart (ringb_float_t * rb, size_t nfloats)
+void ringb_float_restart (ringb_float_t * rb, size_t nfloats)
 {
 	ringb_float_reset (rb);
 	ringb_float_clear (rb, nfloats);
 }
 
-size_t
-ringb_read_space (const ringb_t * rb)
+size_t ringb_read_space (const ringb_t * rb)
 {
 	size_t w = rb->wptr, r = rb->rptr;
 	if (w > r)
@@ -137,8 +125,7 @@ ringb_read_space (const ringb_t * rb)
 		return (rb->size + w - r ) & rb->mask;
 }
 
-size_t
-ringb_float_read_space (const ringb_float_t * rb)
+size_t ringb_float_read_space (const ringb_float_t * rb)
 {
 	size_t w = rb->wptr, r = rb->rptr;
 	if (w > r)
@@ -147,8 +134,7 @@ ringb_float_read_space (const ringb_float_t * rb)
 		return (rb->size + w - r ) & rb->mask;
 }
 
-size_t
-ringb_write_space (const ringb_t * rb)
+size_t ringb_write_space (const ringb_t * rb)
 {
 	size_t w = rb->wptr, r = rb->rptr;
 	if (w > r)
@@ -159,8 +145,7 @@ ringb_write_space (const ringb_t * rb)
 		return rb->size - 1;
 }
 
-size_t
-ringb_float_write_space (const ringb_float_t * rb)
+size_t ringb_float_write_space (const ringb_float_t * rb)
 {
 	size_t w = rb->wptr, r = rb->rptr;
 	if (w > r)
@@ -171,8 +156,7 @@ ringb_float_write_space (const ringb_float_t * rb)
 		return rb->size - 1;
 }
 
-size_t
-ringb_read (ringb_t * rb, char *dest, size_t cnt)
+size_t ringb_read (ringb_t * rb, char *dest, size_t cnt)
 {
 	size_t volatile free_cnt, cnt2, to_read, n1, n2;
 	if ((free_cnt = ringb_read_space (rb)) == 0)
@@ -192,19 +176,29 @@ ringb_read (ringb_t * rb, char *dest, size_t cnt)
 	return to_read;
 }
 
-size_t
-ringb_float_read (ringb_float_t * rb, float *dest, size_t cnt)
+size_t ringb_float_read (ringb_float_t * rb, float *dest, size_t cnt)
 {
 	size_t volatile free_cnt, cnt2, to_read, n1, n2;
-	if ((free_cnt = ringb_float_read_space (rb)) == 0)
-		return 0;
-	to_read = cnt > free_cnt ? free_cnt : cnt;
+
+	if ((free_cnt = ringb_float_read_space (rb)) == 0) return 0;
+
+	to_read = cnt > free_cnt ? free_cnt : cnt;    // output = check ? true out : false out
+
 	if ((cnt2 = rb->rptr + to_read) > rb->size)
-		n1 = rb->size - rb->rptr, n2 = cnt2 & rb->mask;
+	{
+		n1 = rb->size - rb->rptr;
+		n2 = cnt2 & rb->mask;
+	}
 	else
-		n1 = to_read, n2 = 0;
+	{
+		n1 = to_read;
+		n2 = 0;
+	}
+
 	memcpy (dest, &(rb->buf[rb->rptr]), n1 * sizeof (float));
+
 	rb->rptr = (rb->rptr + n1) & rb->mask;
+
 	if (n2)
 	{
 		memcpy (dest + n1, &(rb->buf[rb->rptr]), n2 * sizeof (float));
@@ -213,8 +207,7 @@ ringb_float_read (ringb_float_t * rb, float *dest, size_t cnt)
 	return to_read;
 }
 
-size_t
-ringb_peek (ringb_t * rb, char *dest, size_t cnt)
+size_t ringb_peek (ringb_t * rb, char *dest, size_t cnt)
 {
 	size_t volatile free_cnt, cnt2, to_read, n1, n2, tmp_rptr;
 	tmp_rptr = rb->rptr;
@@ -232,8 +225,7 @@ ringb_peek (ringb_t * rb, char *dest, size_t cnt)
 	return to_read;
 }
 
-size_t
-ringb_write (ringb_t * rb, const char *src, size_t cnt)
+size_t ringb_write (ringb_t * rb, const char *src, size_t cnt)
 {
 	size_t volatile free_cnt, cnt2, to_write, n1, n2;
 	if ((free_cnt = ringb_write_space (rb)) == 0)
@@ -253,8 +245,7 @@ ringb_write (ringb_t * rb, const char *src, size_t cnt)
 	return to_write;
 }
 
-size_t
-ringb_float_write (ringb_float_t * rb, const float *src, size_t cnt)
+size_t ringb_float_write (ringb_float_t * rb, const float *src, size_t cnt)
 {
 	size_t volatile free_cnt, cnt2, to_write, n1, n2;
 	if ((free_cnt = ringb_float_write_space (rb)) == 0)
@@ -274,32 +265,27 @@ ringb_float_write (ringb_float_t * rb, const float *src, size_t cnt)
 	return to_write;
 }
 
-void
-ringb_read_advance (ringb_t * rb, size_t cnt)
+void ringb_read_advance (ringb_t * rb, size_t cnt)
 {
 	rb->rptr = (rb->rptr + cnt) & rb->mask;
 }
 
-void
-ringb_write_advance (ringb_t * rb, size_t cnt)
+void ringb_write_advance (ringb_t * rb, size_t cnt)
 {
 	rb->wptr = (rb->wptr + cnt) & rb->mask;
 }
 
-void
-ringb_float_read_advance (ringb_float_t * rb, size_t cnt)
+void ringb_float_read_advance (ringb_float_t * rb, size_t cnt)
 {
 	rb->rptr = (rb->rptr + cnt) & rb->mask;
 }
 
-void
-ringb_float_write_advance (ringb_float_t * rb, size_t cnt)
+void ringb_float_write_advance (ringb_float_t * rb, size_t cnt)
 {
 	rb->wptr = (rb->wptr + cnt) & rb->mask;
 }
 
-void
-ringb_get_read_vector (const ringb_t * rb, ringb_data_t * vec)
+void ringb_get_read_vector (const ringb_t * rb, ringb_data_t * vec)
 {
 	size_t volatile free_cnt, cnt2, w = rb->wptr, r = rb->rptr;
 	if (w > r)
@@ -318,8 +304,7 @@ ringb_get_read_vector (const ringb_t * rb, ringb_data_t * vec)
 	}
 }
 
-void
-ringb_get_write_vector (const ringb_t * rb, ringb_data_t * vec)
+void ringb_get_write_vector (const ringb_t * rb, ringb_data_t * vec)
 {
 	size_t volatile free_cnt, cnt2, w = rb->wptr, r = rb->rptr;
 	if (w > r)

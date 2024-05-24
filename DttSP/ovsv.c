@@ -36,8 +36,8 @@ Bridgewater, NJ 08807
 /*------------------------------------------------------------*/
 /* run the filter */
 
-void
-filter_OvSv(FiltOvSv pflt) {
+void filter_OvSv(FiltOvSv pflt) 
+{
   int i, m = pflt->fftlen, n = pflt->buflen;
   COMPLEX *zfvec = pflt->zfvec,
           *zivec = pflt->zivec,
@@ -63,8 +63,7 @@ filter_OvSv(FiltOvSv pflt) {
   memcpy((void *)zrvec,(const void *)&zrvec[n],n*sizeof(COMPLEX));
 }
 
-void
-reset_OvSv(FiltOvSv pflt) 
+void reset_OvSv(FiltOvSv pflt) 
 {
   memset((char *) pflt->zrvec, 0, pflt->fftlen * sizeof(COMPLEX));
   memset((char *) pflt->zovec, 0, pflt->fftlen * sizeof(COMPLEX));
@@ -76,27 +75,28 @@ reset_OvSv(FiltOvSv pflt)
    the place to read samples into. It's the right half of
    the true buffer. Old samples get slid from here to
    left half after each go-around. */
-COMPLEX *
-FiltOvSv_initpoint(FiltOvSv pflt) {
+
+COMPLEX * FiltOvSv_initpoint(FiltOvSv pflt) 
+{
   return &(pflt->zrvec[pflt->buflen]);
 }
 
 /* how many to put there */
-int
-FiltOvSv_initsize(FiltOvSv pflt) {
+int FiltOvSv_initsize(FiltOvSv pflt)
+{
   return (pflt->fftlen - pflt->buflen);
 }
 
 /* where to put next batch of samples to filter */
-COMPLEX *
-FiltOvSv_fetchpoint(FiltOvSv pflt) {
+COMPLEX * FiltOvSv_fetchpoint(FiltOvSv pflt)
+{
   return &(pflt->zrvec[pflt->buflen]);
 }
 
 /* how many samples to put there */
 
-int
-FiltOvSv_fetchsize(FiltOvSv pflt) {
+int FiltOvSv_fetchsize(FiltOvSv pflt)
+{
   return (pflt->fftlen - pflt->buflen);
 }
 
@@ -107,8 +107,8 @@ FiltOvSv_storepoint(FiltOvSv pflt) {
   return ((pflt->zovec) + pflt->buflen);
 }
 #else
-COMPLEX *
-FiltOvSv_storepoint(FiltOvSv pflt) {
+COMPLEX * FiltOvSv_storepoint(FiltOvSv pflt) 
+{
   return ((pflt->zovec));
 }
 #endif
@@ -117,6 +117,7 @@ FiltOvSv_storepoint(FiltOvSv pflt) {
 /* NB strategy. This is the number of good samples in the
    left half of the true buffer. Samples in right half
    are circular artifacts and are ignored. */
+
 int FiltOvSv_storesize(FiltOvSv pflt)
 {
   return (pflt->fftlen - pflt->buflen);
@@ -125,7 +126,8 @@ int FiltOvSv_storesize(FiltOvSv pflt)
 /*------------------------------------------------------------*/
 /* create a new overlap/save filter from complex coefficients */
 
-FiltOvSv newFiltOvSv(COMPLEX * coefs, int ncoef, int pbits) {
+FiltOvSv newFiltOvSv(COMPLEX * coefs, int ncoef, int pbits) 
+{
   int buflen, fftlen;
   FiltOvSv p;
   fftwf_plan pfwd, pinv;

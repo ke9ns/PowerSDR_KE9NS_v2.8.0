@@ -42,8 +42,7 @@ butterworth_hipass_100_4 (REAL xin, REAL * xv, REAL * yv),
 butterworth_hipass_100_6 (REAL xin, REAL * xv, REAL * yv),
 butterworth_hipass_100_8 (REAL xin, REAL * xv, REAL * yv);
 
-void
-DCBlock (DCBlocker dcb)
+void DCBlock (DCBlocker dcb)
 {
 	int i;
 	REAL x, y;
@@ -104,8 +103,7 @@ DCBlock (DCBlocker dcb)
     }
 }
 
-void
-resetDCBlocker (DCBlocker dcb, int lev)
+void resetDCBlocker (DCBlocker dcb, int lev)
 {
 	memset ((char *) dcb->old.inp, 0, BLKMEM * sizeof (REAL));
 	memset ((char *) dcb->old.out, 0, BLKMEM * sizeof (REAL));
@@ -113,8 +111,7 @@ resetDCBlocker (DCBlocker dcb, int lev)
 	dcb->first = TRUE;
 }
 
-DCBlocker
-newDCBlocker (int lev, CXB buf)
+DCBlocker newDCBlocker (int lev, CXB buf)
 {
 	DCBlocker dcb =
 		(DCBlocker) safealloc (1, sizeof (DCBlockerInfo), "DCBlocker");
@@ -125,8 +122,7 @@ newDCBlocker (int lev, CXB buf)
 	return dcb;
 }
 
-void
-delDCBlocker (DCBlocker dcb)
+void delDCBlocker (DCBlocker dcb)
 {
 	if (dcb)
 	{
@@ -137,8 +133,7 @@ delDCBlocker (DCBlocker dcb)
 
 // f == 0.002083 == 100 Hz at 48k
 
-PRIVATE REAL
-butterworth_hipass_100_2 (REAL xin, REAL * xv, REAL * yv)
+PRIVATE REAL butterworth_hipass_100_2 (REAL xin, REAL * xv, REAL * yv)
 {
 	int i;
 
@@ -155,8 +150,7 @@ butterworth_hipass_100_2 (REAL xin, REAL * xv, REAL * yv)
 	return yv[2];
 }
 
-PRIVATE REAL
-butterworth_hipass_100_4 (REAL xin, REAL * xv, REAL * yv)
+PRIVATE REAL butterworth_hipass_100_4 (REAL xin, REAL * xv, REAL * yv)
 {
 	int i;
 
@@ -176,8 +170,7 @@ butterworth_hipass_100_4 (REAL xin, REAL * xv, REAL * yv)
 	return yv[4];
 }
 
-PRIVATE REAL
-butterworth_hipass_100_6 (REAL xin, REAL * xv, REAL * yv)
+PRIVATE REAL butterworth_hipass_100_6 (REAL xin, REAL * xv, REAL * yv)
 {
 	int i;
 
@@ -200,8 +193,7 @@ butterworth_hipass_100_6 (REAL xin, REAL * xv, REAL * yv)
 	return yv[6];
 }
 
-PRIVATE REAL
-butterworth_hipass_100_8 (REAL xin, REAL * xv, REAL * yv)
+PRIVATE REAL butterworth_hipass_100_8 (REAL xin, REAL * xv, REAL * yv)
 {
 	int i;
 

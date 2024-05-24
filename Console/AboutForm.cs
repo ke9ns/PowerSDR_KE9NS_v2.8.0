@@ -36,7 +36,7 @@ using System.Xml;
 
 namespace PowerSDR
 {
-    partial class AboutForm : Form
+    sealed partial class AboutForm : Form
     {
         public AboutForm()
         {

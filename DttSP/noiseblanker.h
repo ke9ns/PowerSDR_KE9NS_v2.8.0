@@ -52,7 +52,7 @@ typedef struct _nbstate
  
 } *NB, nbstate;
 
-extern NB new_noiseblanker (CXB sigbuf, REAL threshold);
+extern NB new_noiseblanker (CXB sigbuf, REAL threshold, int hangtime, int delaytime); // ke9ns add hangtime and delaytime found in .c
 extern void del_nb (NB nb);
 extern void noiseblanker (NB nb);
 extern void SDROMnoiseblanker (NB nb);

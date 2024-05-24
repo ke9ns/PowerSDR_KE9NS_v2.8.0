@@ -28,7 +28,7 @@
 
 namespace PowerSDR
 {
-    public class ATUDLLTest
+    public sealed class ATUDLLTest
     {
         public static void test()
         {

@@ -35,7 +35,7 @@ namespace PowerSDR
 
     #region CATParser Class
 
-    public class CATParser
+    public sealed class CATParser
     {
 
         #region Variable declarations

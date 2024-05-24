@@ -61,17 +61,17 @@ namespace PowerSDR
 
 
 
-        [DllImport("pal.dll", EntryPoint = "WriteOp", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("pal.dll", EntryPoint = "WriteOp", CallingConvention = CallingConvention.Cdecl)] // uint uint version
         public static extern int WriteOp(FWC.Opcode opcode, uint data1, uint data2);
 
 
 
-        [DllImport("pal.dll", EntryPoint = "WriteOp", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("pal.dll", EntryPoint = "WriteOp", CallingConvention = CallingConvention.Cdecl)] // int int version
         public static extern int WriteOp(FWC.Opcode opcode, int data1, int data2);
 
 
 
-        [DllImport("pal.dll", EntryPoint = "WriteOp", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("pal.dll", EntryPoint = "WriteOp", CallingConvention = CallingConvention.Cdecl)] // uint float version
         public static extern int WriteOp(FWC.Opcode opcode, uint data1, float data2);
 
 
@@ -88,6 +88,8 @@ namespace PowerSDR
 
         [DllImport("pal.dll", EntryPoint = "ReadOp", CallingConvention = CallingConvention.Cdecl)]
         public static extern int ReadOp(FWC.Opcode opcode, uint data1, uint data2, out float rtn);
+
+
 
         [DllImport("pal.dll", EntryPoint = "Exit", CallingConvention = CallingConvention.Cdecl)]
         public static extern void Exit();				// cleanup and leave system in a stable state

@@ -31,7 +31,7 @@ using System.IO;
 
 namespace PowerSDR
 {
-    public class AlphaWarnForm : System.Windows.Forms.Form
+    public sealed class AlphaWarnForm : System.Windows.Forms.Form
     {
         private Console console;
         private System.Windows.Forms.RichTextBox rtxtWarning;

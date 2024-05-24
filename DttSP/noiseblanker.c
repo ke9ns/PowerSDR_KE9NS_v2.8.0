@@ -118,7 +118,7 @@ void noiseblanker(NB nb) // ke9ns: pointer to nb struct
       REAL cmag = Cmag (CXBdata (nb->sigbuf, i));     // ke9ns: get magnitude of complexe buffer data     Cmag = sqrt((z.re)*(z.re) + (z.im)*(z.im)) of ((p)->data) [get magnitude of the signal buffer data ]
       nb->delay[nb->sigindex] = CXBdata (nb->sigbuf, i); // ke9ns: modify the delay[8] with complex buffer data  0, 7,6,5,4,3,2,1
     
-      if (cmag > 0.01) cmag = 0.01; // ke9ns add: .183
+      if (cmag > 0.01) cmag = 0.01f; // ke9ns add: .183
 
           nb->average_mag = (REAL)(0.999 * (nb->average_mag) + 0.001 * cmag); // ke9ns: 99.9% avg + .1% new    0.01 for strong signals  0.002 for avg
 
@@ -154,13 +154,13 @@ void noiseblanker(NB nb) // ke9ns: pointer to nb struct
           {
               if (nb->hangtime == 7)
               {
-                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.6;
-                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.6;
+                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.6f;
+                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.6f;
               }
               else if (nb->hangtime == 6)
               {
-                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.3;
-                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.3;
+                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.3f;
+                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.3f;
               }
               else if (nb->hangtime == 5)
               {
@@ -179,13 +179,13 @@ void noiseblanker(NB nb) // ke9ns: pointer to nb struct
               }
               else if (nb->hangtime == 2)
               {
-                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.3;
-                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.3;
+                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.3f;
+                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.3f;
               }
               else
               {
-                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.6;
-                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.6;
+                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.6f;
+                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.6f;
               }
 
           } // ht = 7
@@ -193,23 +193,23 @@ void noiseblanker(NB nb) // ke9ns: pointer to nb struct
           {
               if (nb->hangtime == 15)
               {
-                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.8;
-                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.8;
+                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.8f;
+                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.8f;
               }
               else if (nb->hangtime == 14)
               {
-                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.6;
-                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.6;
+                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.6f;
+                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.6f;
               }
               else if (nb->hangtime == 13)
               {
-                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.4;
-                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.4;
+                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.4f;
+                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.4f;
               }
               else if (nb->hangtime == 12)
               {
-                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.2;
-                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.2;
+                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.2f;
+                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.2f;
               }
               else if (nb->hangtime == 11)
               {
@@ -248,23 +248,23 @@ void noiseblanker(NB nb) // ke9ns: pointer to nb struct
               }
               else if (nb->hangtime == 4)
               {
-                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.2;
-                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.2;
+                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.2f;
+                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.2f;
               }
               else if (nb->hangtime == 3)
               {
-                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.4;
-                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.4;
+                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.4f;
+                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.4f;
               }
               else if (nb->hangtime == 2)
               {
-                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.6;
-                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.6;
+                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.6f;
+                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.6f;
               }
               else 
               {
-                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.8;
-                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.8;
+                  CXBreal(nb->sigbuf, i) = CXBreal(nb->sigbuf, i) * 0.8f;
+                  CXBimag(nb->sigbuf, i) = CXBimag(nb->sigbuf, i) * 0.8f;
               }
              
 

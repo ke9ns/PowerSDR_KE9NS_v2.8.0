@@ -43,8 +43,7 @@ Bridgewater, NJ 08807
 
 PRIVATE size_t _safemem_currcount = 0;
 
-char *
-safealloc16(int count, int nbytes, char *tag)
+char * safealloc16(int count, int nbytes, char *tag)
 {	
 	char *p = (char *)_aligned_malloc(count*nbytes, 16);
 	memset(p,0,count*nbytes);
@@ -106,26 +105,22 @@ REAL * newvec_REAL(int size, char *tag)
 	return (REAL *) safealloc(size, sizeof(REAL), tag);
 }
 
-REAL *
-newvec_REAL_16(int size, char *tag)
+REAL * newvec_REAL_16(int size, char *tag)
 {
 	return (REAL *) safealloc(size, sizeof(REAL), tag);
 }
 
-void
-delvec_REAL(REAL *vec)
+void delvec_REAL(REAL *vec)
 {
 	safefree((char *) vec);
 }
 
-IMAG *
-newvec_IMAG(int size, char *tag)
+IMAG * newvec_IMAG(int size, char *tag)
 {
 	return (IMAG *) safealloc(size, sizeof(IMAG), tag);
 }
 
-void
-delvec_IMAG(IMAG *vec)
+void delvec_IMAG(IMAG *vec)
 {
 	safefree((char *) vec);
 }
@@ -136,14 +131,12 @@ COMPLEX *newvec_COMPLEX(int size, char *tag)
 	return (COMPLEX *) safealloc(size, sizeof(COMPLEX), tag);
 }
 
-void
-delvec_COMPLEX(COMPLEX *vec)
+void delvec_COMPLEX(COMPLEX *vec)
 {
 	safefree((char *) vec);
 }
 
-COMPLEX *
-newvec_COMPLEX_16(int size, char *tag)
+COMPLEX * newvec_COMPLEX_16(int size, char *tag)
 {
 	COMPLEX *p = (COMPLEX *)safealloc16(size, sizeof(COMPLEX), tag);
 	if (!p)
@@ -158,8 +151,7 @@ newvec_COMPLEX_16(int size, char *tag)
 	return p;
 }
 
-void
-delvec_COMPLEX_16(COMPLEX *vec)
+void delvec_COMPLEX_16(COMPLEX *vec)
 {
 	//fftwf_free((char *) vec);
 	_aligned_free((char *)vec);
@@ -170,8 +162,7 @@ delvec_COMPLEX_16(COMPLEX *vec)
 //------------------------------------------------------------------------
 // complex
 
-CXB
-newCXB(int size, COMPLEX *base, char *tag) 
+CXB newCXB(int size, COMPLEX *base, char *tag) 
 {
 	CXB p = (CXB) safealloc(1, sizeof(CXBuffer), tag);
 	if (base) 
@@ -189,8 +180,7 @@ newCXB(int size, COMPLEX *base, char *tag)
 	return p;
 }
 
-void
-delCXB(CXB p)
+void delCXB(CXB p)
 {
 	if (p)
 	{ 
@@ -203,8 +193,7 @@ delCXB(CXB p)
 //------------------------------------------------------------------------
 // real
 
-RLB
-newRLB(int size, REAL *base, char *tag)
+RLB newRLB(int size, REAL *base, char *tag)
 {
 	RLB p = (RLB) safealloc(1, sizeof(RLBuffer), tag);
 	if (base)
@@ -222,8 +211,7 @@ newRLB(int size, REAL *base, char *tag)
 	return p;
 }
 
-void
-delRLB(RLB p)
+void delRLB(RLB p)
 {
 	if (p)
 	{
@@ -236,8 +224,7 @@ delRLB(RLB p)
 //========================================================================
 // return normalization constant
 
-REAL
-normalize_vec_REAL(REAL *v, int n, REAL scl)
+REAL normalize_vec_REAL(REAL *v, int n, REAL scl)
 {
 	if (v && (n > 0))
 	{
@@ -260,8 +247,7 @@ normalize_vec_REAL(REAL *v, int n, REAL scl)
 	else return 0.0;
 }
 
-REAL
-normalize_vec_COMPLEX(COMPLEX *z, int n, REAL scale)
+REAL normalize_vec_COMPLEX(COMPLEX *z, int n, REAL scale)
 {
 	if (z && (n > 0)) 
 	{
@@ -288,8 +274,7 @@ normalize_vec_COMPLEX(COMPLEX *z, int n, REAL scale)
 //----------------------------------------------------------------------
 // mostly for debugging when necessary
 
-void
-dump_REAL(FILE * fp, char *head, REAL *ptr, int beg, int fin) 
+void dump_REAL(FILE * fp, char *head, REAL *ptr, int beg, int fin) 
 {
 	int i;
 	FILE *iop = fp ? fp : stderr;
@@ -299,8 +284,7 @@ dump_REAL(FILE * fp, char *head, REAL *ptr, int beg, int fin)
 		fprintf(iop, "%5d %g\n", i, ptr[i]);
 }
 
-void
-dump_IMAG(FILE * fp, char *head, IMAG *ptr, int beg, int fin) 
+void dump_IMAG(FILE * fp, char *head, IMAG *ptr, int beg, int fin) 
 {
 	int i;
 	FILE *iop = fp ? fp : stderr;
@@ -310,8 +294,7 @@ dump_IMAG(FILE * fp, char *head, IMAG *ptr, int beg, int fin)
 		fprintf(iop, "%5d %g\n", i, ptr[i]);
 }
 
-void
-dump_CX(FILE * fp, char *head, COMPLEX *ptr, int beg, int fin) 
+void dump_CX(FILE * fp, char *head, COMPLEX *ptr, int beg, int fin) 
 {
 	int i;
 	FILE *iop = fp ? fp : stderr;
