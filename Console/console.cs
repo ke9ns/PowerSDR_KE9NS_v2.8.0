@@ -1,6 +1,6 @@
 ﻿
 //=================================================================
-// consqlole.cs
+// console.cs
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio. 
 // Copyright (C) 2003-2013  FlexRadio Systems.  
@@ -11109,7 +11109,7 @@ namespace PowerSDR
                     break;
                 case Band.VHF1:
                     last_band = "VHF1";// ke9ns add
-                    SpotControl.VFOLOW = 430000000; // 
+                    SpotControl.VFOLOW = 420000000; // 
                     SpotControl.VFOHIGH = 445000000; // 
                     radBandVHF1.Checked = true;
                     regBox.Text = band_vhf1_register.ToString();
@@ -18422,8 +18422,8 @@ namespace PowerSDR
                     else if (f >= 25.0 && f <= 29.7) ret_val = true;     // change
                     else if (f >= 50.0 && f <= 74.0) ret_val = true;
 
-                    else if (FWCEEPROM.VUOK && f >= 134.0 && f <= 163.0) ret_val = true;  // ke9ns test was 144.0 and 148.0  .217
-                    else if (FWCEEPROM.VUOK && f >= 430.0 && f <= 470.0) ret_val = true;  // ke9ns was 450 .224
+                    else if (FWCEEPROM.VUOK && f >= 124.0 && f <= 163.0) ret_val = true;  // ke9ns test was 144.0 and 148.0  .217  //.303 was 134
+                    else if (FWCEEPROM.VUOK && f >= 420.0 && f <= 470.0) ret_val = true;  // ke9ns was 450 .224  //.303 was 430
                     // {
                     //     if (xvtr_present)
                     //         ret_val = true;
@@ -49441,9 +49441,8 @@ namespace PowerSDR
 
         public void UpdateRX1DisplayAverage(float[] buffer, float[] new_data) // comment all the wjt stuff. it isnt for the Flex-5000
         {
-                               
+                             
            
-
             //  double dttsp_osc = dsp.GetDSPRX(0, 0).RXOsc; // ke9ns  = -9000 (if value)
 
             //    Debug.WriteLine("last vfo:  vfo: " + DDSFreq + " , " + rx1_avg_last_ddsfreq + " , " + dttsp_osc); // ke9ns = always 7 @192k
@@ -58378,8 +58377,10 @@ namespace PowerSDR
 
             int new_pwr = ptbPWR.Value;
 
+           
             power_by_band[(int)tx_band] = new_pwr; // original
 
+          
             try
             {
                 if ((int)newMode == 12) newMode = rx1_dsp_mode;
@@ -58389,18 +58390,20 @@ namespace PowerSDR
                     power_by_mode_by_band[(int)tx_band, (int)newMode] = new_pwr; // ke9ns add
                 }
             }
-            catch
+            catch (Exception e4)
             {
+                Debug.WriteLine("ptbPWS scroll here " + e4);
 
             }
-
+           
             if ((!tuning || xvtr_tune_power) && (tx_xvtr_index >= 0))
             {
                 int power = ptbPWR.Value;
 
                 if (ptbPWR.Focused) xvtrForm.SetPower(tx_xvtr_index, power);
-
+              
                 b = BandByFreq(xvtrForm.TranslateFreq(TXFreq), tx_xvtr_index, true, current_region);
+              
 
             }
 
@@ -58430,7 +58433,7 @@ namespace PowerSDR
                         }
                     }
                 }
-                else if (tx_xvtr_index == 1)
+                else if (tx_xvtr_index == 1 && tx_freq >= 430.00)
                 {
                     // loop through linear table looking for proper slope point on UHF
                     for (int i = 1; i < 10; i++)
@@ -58497,8 +58500,9 @@ namespace PowerSDR
 
                     }
                 }
-                else if (tx_xvtr_index == 1)
+                else if (tx_xvtr_index == 1 && tx_freq >= 430.00)
                 {
+                   
                     if (xvtrForm.UPA && enable_vu_power_curve)
                     {
                         for (int i = 0; i < freqs_70cm.Length; i++)
@@ -63970,7 +63974,7 @@ namespace PowerSDR
                           //  MessageBox.Show(new Form { TopMost = true }, "Error: Cannot use UHF on both RX1 and RX2",
                            //                 "VU Error",  MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                            if (saved_vfob_freq >= 430.0 && saved_vfob_freq <= 450.0)
+                            if (saved_vfob_freq >= 420.0 && saved_vfob_freq <= 470.0) //.303  was 430 450
                                 chkRX2.Checked = false;
                             else
                                 VFOBFreq = saved_vfob_freq;
@@ -66488,29 +66492,13 @@ namespace PowerSDR
                     setupForm.DDSIFAFreq = 9000;
 
                 }
-                else
+                else // Flex-1500
                 {
                     setupForm.udDDSIFFreq.Value = 3800;
                     setupForm.DDSIFAFreq = 3800;
                 }
             }
-         //   else
-          //  {
-            //    if (CurrentModel == Model.FLEX5000 || CurrentModel == Model.FLEX3000)
-             //   {
-                //    setupForm.udDDSIFFreq.Value = 9000;
-               //     setupForm.DDSIFAFreq = 9000;
-
-                //     IFFreq = 0.009000;
-
-              //  }
-              //  else
-               // {
-                 //   setupForm.udDDSIFFreq.Value = 3800;
-                 //   setupForm.DDSIFAFreq = 3800;
-                 //   IFFreq = 0.0038000;
-              //  }
-          //  }
+         
            
             CTUN1_HZ = 0; // reset CTUN to center
 
@@ -79433,13 +79421,29 @@ namespace PowerSDR
                 UpdateBandButtonColors();
 
             } // right click
+            else if (me.Button == System.Windows.Forms.MouseButtons.Right) //.303 add 9m and 10m right click
+            {
+                if (radBand10.Text == "10") //
+                {
+                    VFOAFreq = 34.0; // go to 9m band
+
+                }
+                else if (radBand10.Text == "9") // 
+                {
+                    VFOAFreq = 28.4; // go to 10m band
+                }
+               
+
+            }
+
+
         }
 
         private void radBand6_MouseDown(object sender, MouseEventArgs e)
         {
             MouseEventArgs me = (MouseEventArgs)e;
 
-            if ((regBand == 1) && (me.Button == System.Windows.Forms.MouseButtons.Right))
+            if ((regBand == 1) && (me.Button == System.Windows.Forms.MouseButtons.Right)) // ke9ns: if CTRL key held down (regBand = 1) and right click of mouse then: add current freq to band stack
             {
 
                 if (band_6m_register < 10)
@@ -79448,7 +79452,27 @@ namespace PowerSDR
                 UpdateBandButtonColors();
 
             } // right click
-        }
+            else if (me.Button == System.Windows.Forms.MouseButtons.Right) //.303 add 4m and 8m virtual buttons on a standard right click
+            {
+                if (radBand6.Text == "6m") //
+                {
+                    VFOAFreq = 71.0; // go to 4m band
+
+                }
+                else if (radBand6.Text == "8m") // 
+                {
+                    VFOAFreq = 51.0; // go to 6m band
+                }
+                else if (radBand6.Text == "4m") // 4m
+                {
+                    VFOAFreq = 41.0; // go to 8m band 
+                }
+            }
+
+
+
+
+        } // radBand6_MouseDown
 
         private void radBandGN0_MouseDown(object sender, MouseEventArgs e)
         {
@@ -89952,10 +89976,59 @@ namespace PowerSDR
             if (FWCEEPROM.RX2OK) picRadar.Invalidate(); //.246
         }
 
-        private void chkVFOSync_MouseDown(object sender, MouseEventArgs e)
+        private void chkVFOSync_MouseDown(object sender, MouseEventArgs me)
         {
             if (FWCEEPROM.RX2OK) picRadar.Invalidate(); //.246
-        }
+
+            if ((me.Button == System.Windows.Forms.MouseButtons.Right)) //.304
+            {
+              
+                // THIS is a copy of hitting the ESC SYNC button below
+                VFOSync = true;
+                RX2SpurReduction = SpurReduction;
+                RX2DSPMode = RX1DSPMode;
+                RX2Filter = RX1Filter;
+                RX2FilterLow = RX1FilterLow; //.246
+                RX2FilterHigh = RX1FilterHigh; //.246
+
+                chkRX2Preamp.Checked = chkRX1Preamp.Checked; //.299
+                RX2PreampMode = RX1PreampMode;
+
+                RX2RF = RF;                 //W4TME
+
+                if (RX1AGCMode != AGCMode.CUSTOM && RX1AGCMode != AGCMode.FIXD) RX2AGCMode = RX1AGCMode;    // no custom AGC mode for RX2 causes UHE
+
+                dsp.GetDSPRX(1, 0).Copy(dsp.GetDSPRX(0, 0));
+
+                // added in .304
+                ptbDisplayZoom2.Value = ptbDisplayZoom.Value; //.304
+                ptbDisplayPan2.Value = ptbDisplayPan.Value; //.304
+
+                setupForm.udDisplayWaterfallRX2Level.Value = setupForm.udDisplayWaterfallLowLevel.Value; //.304 set the Waterfall LOW level the same 
+                setupForm.udDisplayGridRX2Min.Value = setupForm.udDisplayGridMin.Value; //.304
+
+                CalcDisplayFreq();
+
+
+                string buttonOnPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
+                    "\\FlexRadio Systems\\PowerSDR\\Skins\\" + CurrentSkin + "\\Console\\chkMON-1.png";
+
+                Bitmap buttonOnImage = new Bitmap(buttonOnPath);
+
+                Thread.Sleep(100);
+
+                btnSync.BackgroundImage = buttonOnImage;
+                ESCSYNC = true; // .249
+                             
+                txtVFOAFreq_LostFocus(this, EventArgs.Empty);
+              
+                picRadar.Invalidate(); //.297
+
+            } // right click 
+        
+        } // vfosync mouse down
+
+
 
         private void panelMode_MouseDown(object sender, MouseEventArgs e)
         {
@@ -90115,6 +90188,49 @@ namespace PowerSDR
                     btnEnable.BackgroundImage = buttonOffImage;
                     btnSync.BackgroundImage = buttonOffImage;
                     ESCSYNC = false; // .249
+                }
+
+
+            }
+        }
+
+        private void radBand6RX2_MouseDown(object sender, MouseEventArgs e) //.303
+        {
+            MouseEventArgs me = (MouseEventArgs)e;
+
+            if (me.Button == System.Windows.Forms.MouseButtons.Right) //.303 add 4m and 8m virtual buttons on a standard right click
+            {
+                if (radBand6RX2.Text == "6m") //
+                {
+                    VFOAFreq = 71.0; // go to 4m band
+
+                }
+                else if (radBand6RX2.Text == "8m") // 
+                {
+                    VFOBFreq = 51.0; // go to 6m band
+                }
+                else if (radBand6RX2.Text == "4m") // 4m
+                {
+                    VFOBFreq = 41.0; // go to 8m band 
+                }
+            }
+
+        }
+
+        private void radBand10RX2_MouseDown(object sender, MouseEventArgs e)
+        {
+            MouseEventArgs me = (MouseEventArgs)e;
+
+            if (me.Button == System.Windows.Forms.MouseButtons.Right) //.303 add 9m and 10m right click
+            {
+                if (radBand10RX2.Text == "10") //
+                {
+                    VFOBFreq = 34.0; // go to 9m band
+
+                }
+                else if (radBand10RX2.Text == "9") // 
+                {
+                    VFOBFreq = 28.4; // go to 10m band
                 }
 
 

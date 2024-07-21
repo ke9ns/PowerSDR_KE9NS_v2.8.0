@@ -1690,7 +1690,7 @@ namespace PowerSDR
             this.chkBoxPFN.Checked = true;
             this.chkBoxPFN.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkBoxPFN.Image = null;
-            this.chkBoxPFN.Location = new System.Drawing.Point(460, 268);
+            this.chkBoxPFN.Location = new System.Drawing.Point(467, 267);
             this.chkBoxPFN.Name = "chkBoxPFN";
             this.chkBoxPFN.Size = new System.Drawing.Size(111, 16);
             this.chkBoxPFN.TabIndex = 41;

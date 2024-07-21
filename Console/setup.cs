@@ -16370,6 +16370,10 @@ namespace PowerSDR
         private void chkBoxPFN_CheckedChanged(object sender, EventArgs e)
         {
             // used in the Apply and save buttons
+          //  if (chkBoxPFN.Checked) CrashProtection = true; // delay added
+          //  else CrashProtection = false; // no delay
+           
+            CrashProtection = true;
         }
 
         private void chkCWXOverRide_CheckedChanged(object sender, EventArgs e)

@@ -375,6 +375,20 @@ namespace PowerSDR
             this.chkVFOBSplit = new System.Windows.Forms.CheckBoxTS();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.btnTNFAdd2 = new System.Windows.Forms.ButtonTS();
+            this.radBandVHF13 = new System.Windows.Forms.RadioButtonTS();
+            this.radBandVHF12 = new System.Windows.Forms.RadioButtonTS();
+            this.radBandVHF11 = new System.Windows.Forms.RadioButtonTS();
+            this.radBandVHF10 = new System.Windows.Forms.RadioButtonTS();
+            this.radBandVHF9 = new System.Windows.Forms.RadioButtonTS();
+            this.radBandVHF8 = new System.Windows.Forms.RadioButtonTS();
+            this.radBandVHF7 = new System.Windows.Forms.RadioButtonTS();
+            this.radBandVHF6 = new System.Windows.Forms.RadioButtonTS();
+            this.radBandVHF5 = new System.Windows.Forms.RadioButtonTS();
+            this.radBandVHF4 = new System.Windows.Forms.RadioButtonTS();
+            this.radBandVHF3 = new System.Windows.Forms.RadioButtonTS();
+            this.radBandVHF2 = new System.Windows.Forms.RadioButtonTS();
+            this.radBandVHF1 = new System.Windows.Forms.RadioButtonTS();
+            this.radBandVHF0 = new System.Windows.Forms.RadioButtonTS();
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStripFilterRX1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemRX1FilterConfigure = new System.Windows.Forms.ToolStripMenuItem();
@@ -445,20 +459,6 @@ namespace PowerSDR
             this.btnBandHFRX2 = new System.Windows.Forms.ButtonTS();
             this.panelBandHFRX2 = new System.Windows.Forms.PanelTS();
             this.panelBandVHF = new System.Windows.Forms.PanelTS();
-            this.radBandVHF13 = new System.Windows.Forms.RadioButtonTS();
-            this.radBandVHF12 = new System.Windows.Forms.RadioButtonTS();
-            this.radBandVHF11 = new System.Windows.Forms.RadioButtonTS();
-            this.radBandVHF10 = new System.Windows.Forms.RadioButtonTS();
-            this.radBandVHF9 = new System.Windows.Forms.RadioButtonTS();
-            this.radBandVHF8 = new System.Windows.Forms.RadioButtonTS();
-            this.radBandVHF7 = new System.Windows.Forms.RadioButtonTS();
-            this.radBandVHF6 = new System.Windows.Forms.RadioButtonTS();
-            this.radBandVHF5 = new System.Windows.Forms.RadioButtonTS();
-            this.radBandVHF4 = new System.Windows.Forms.RadioButtonTS();
-            this.radBandVHF3 = new System.Windows.Forms.RadioButtonTS();
-            this.radBandVHF2 = new System.Windows.Forms.RadioButtonTS();
-            this.radBandVHF1 = new System.Windows.Forms.RadioButtonTS();
-            this.radBandVHF0 = new System.Windows.Forms.RadioButtonTS();
             this.btnBandHF = new System.Windows.Forms.ButtonTS();
             this.grpRX2Meter = new System.Windows.Forms.PanelTS();
             this.lblRX2Meter = new System.Windows.Forms.LabelTS();
@@ -970,6 +970,7 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.radBand6RX2, resources.GetString("radBand6RX2.ToolTip"));
             this.radBand6RX2.UseVisualStyleBackColor = true;
             this.radBand6RX2.Click += new System.EventHandler(this.radBand6RX2_Click);
+            this.radBand6RX2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBand6RX2_MouseDown);
             // 
             // radBand10RX2
             // 
@@ -981,6 +982,7 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.radBand10RX2, resources.GetString("radBand10RX2.ToolTip"));
             this.radBand10RX2.UseVisualStyleBackColor = true;
             this.radBand10RX2.Click += new System.EventHandler(this.radBand10RX2_Click);
+            this.radBand10RX2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBand10RX2_MouseDown);
             // 
             // radBand12RX2
             // 
@@ -4545,6 +4547,175 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.btnTNFAdd2, resources.GetString("btnTNFAdd2.ToolTip"));
             this.btnTNFAdd2.Click += new System.EventHandler(this.btnTNFRX2Add_Click);
             // 
+            // radBandVHF13
+            // 
+            resources.ApplyResources(this.radBandVHF13, "radBandVHF13");
+            this.radBandVHF13.FlatAppearance.BorderSize = 0;
+            this.radBandVHF13.ForeColor = System.Drawing.Color.White;
+            this.radBandVHF13.Name = "radBandVHF13";
+            this.radBandVHF13.TabStop = true;
+            this.toolTip1.SetToolTip(this.radBandVHF13, resources.GetString("radBandVHF13.ToolTip"));
+            this.radBandVHF13.UseVisualStyleBackColor = true;
+            this.radBandVHF13.Click += new System.EventHandler(this.radBandVHF_Click);
+            this.radBandVHF13.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF13_MouseDown);
+            // 
+            // radBandVHF12
+            // 
+            resources.ApplyResources(this.radBandVHF12, "radBandVHF12");
+            this.radBandVHF12.FlatAppearance.BorderSize = 0;
+            this.radBandVHF12.ForeColor = System.Drawing.Color.White;
+            this.radBandVHF12.Name = "radBandVHF12";
+            this.radBandVHF12.TabStop = true;
+            this.toolTip1.SetToolTip(this.radBandVHF12, resources.GetString("radBandVHF12.ToolTip"));
+            this.radBandVHF12.UseVisualStyleBackColor = true;
+            this.radBandVHF12.Click += new System.EventHandler(this.radBandVHF_Click);
+            this.radBandVHF12.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF12_MouseDown);
+            // 
+            // radBandVHF11
+            // 
+            resources.ApplyResources(this.radBandVHF11, "radBandVHF11");
+            this.radBandVHF11.FlatAppearance.BorderSize = 0;
+            this.radBandVHF11.ForeColor = System.Drawing.Color.White;
+            this.radBandVHF11.Name = "radBandVHF11";
+            this.radBandVHF11.TabStop = true;
+            this.toolTip1.SetToolTip(this.radBandVHF11, resources.GetString("radBandVHF11.ToolTip"));
+            this.radBandVHF11.UseVisualStyleBackColor = true;
+            this.radBandVHF11.Click += new System.EventHandler(this.radBandVHF_Click);
+            this.radBandVHF11.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF11_MouseDown);
+            // 
+            // radBandVHF10
+            // 
+            resources.ApplyResources(this.radBandVHF10, "radBandVHF10");
+            this.radBandVHF10.FlatAppearance.BorderSize = 0;
+            this.radBandVHF10.ForeColor = System.Drawing.Color.White;
+            this.radBandVHF10.Name = "radBandVHF10";
+            this.radBandVHF10.TabStop = true;
+            this.toolTip1.SetToolTip(this.radBandVHF10, resources.GetString("radBandVHF10.ToolTip"));
+            this.radBandVHF10.UseVisualStyleBackColor = true;
+            this.radBandVHF10.Click += new System.EventHandler(this.radBandVHF_Click);
+            this.radBandVHF10.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF10_MouseDown);
+            // 
+            // radBandVHF9
+            // 
+            resources.ApplyResources(this.radBandVHF9, "radBandVHF9");
+            this.radBandVHF9.FlatAppearance.BorderSize = 0;
+            this.radBandVHF9.ForeColor = System.Drawing.Color.White;
+            this.radBandVHF9.Name = "radBandVHF9";
+            this.radBandVHF9.TabStop = true;
+            this.toolTip1.SetToolTip(this.radBandVHF9, resources.GetString("radBandVHF9.ToolTip"));
+            this.radBandVHF9.UseVisualStyleBackColor = true;
+            this.radBandVHF9.Click += new System.EventHandler(this.radBandVHF_Click);
+            this.radBandVHF9.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF9_MouseDown);
+            // 
+            // radBandVHF8
+            // 
+            resources.ApplyResources(this.radBandVHF8, "radBandVHF8");
+            this.radBandVHF8.FlatAppearance.BorderSize = 0;
+            this.radBandVHF8.ForeColor = System.Drawing.Color.White;
+            this.radBandVHF8.Name = "radBandVHF8";
+            this.radBandVHF8.TabStop = true;
+            this.toolTip1.SetToolTip(this.radBandVHF8, resources.GetString("radBandVHF8.ToolTip"));
+            this.radBandVHF8.UseVisualStyleBackColor = true;
+            this.radBandVHF8.Click += new System.EventHandler(this.radBandVHF_Click);
+            this.radBandVHF8.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF8_MouseDown);
+            // 
+            // radBandVHF7
+            // 
+            resources.ApplyResources(this.radBandVHF7, "radBandVHF7");
+            this.radBandVHF7.FlatAppearance.BorderSize = 0;
+            this.radBandVHF7.ForeColor = System.Drawing.Color.White;
+            this.radBandVHF7.Name = "radBandVHF7";
+            this.radBandVHF7.TabStop = true;
+            this.toolTip1.SetToolTip(this.radBandVHF7, resources.GetString("radBandVHF7.ToolTip"));
+            this.radBandVHF7.UseVisualStyleBackColor = true;
+            this.radBandVHF7.Click += new System.EventHandler(this.radBandVHF_Click);
+            this.radBandVHF7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF7_MouseDown);
+            // 
+            // radBandVHF6
+            // 
+            resources.ApplyResources(this.radBandVHF6, "radBandVHF6");
+            this.radBandVHF6.FlatAppearance.BorderSize = 0;
+            this.radBandVHF6.ForeColor = System.Drawing.Color.White;
+            this.radBandVHF6.Name = "radBandVHF6";
+            this.radBandVHF6.TabStop = true;
+            this.toolTip1.SetToolTip(this.radBandVHF6, resources.GetString("radBandVHF6.ToolTip"));
+            this.radBandVHF6.UseVisualStyleBackColor = true;
+            this.radBandVHF6.Click += new System.EventHandler(this.radBandVHF_Click);
+            this.radBandVHF6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF6_MouseDown);
+            // 
+            // radBandVHF5
+            // 
+            resources.ApplyResources(this.radBandVHF5, "radBandVHF5");
+            this.radBandVHF5.FlatAppearance.BorderSize = 0;
+            this.radBandVHF5.ForeColor = System.Drawing.Color.White;
+            this.radBandVHF5.Name = "radBandVHF5";
+            this.radBandVHF5.TabStop = true;
+            this.toolTip1.SetToolTip(this.radBandVHF5, resources.GetString("radBandVHF5.ToolTip"));
+            this.radBandVHF5.UseVisualStyleBackColor = true;
+            this.radBandVHF5.Click += new System.EventHandler(this.radBandVHF_Click);
+            this.radBandVHF5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF5_MouseDown);
+            // 
+            // radBandVHF4
+            // 
+            resources.ApplyResources(this.radBandVHF4, "radBandVHF4");
+            this.radBandVHF4.FlatAppearance.BorderSize = 0;
+            this.radBandVHF4.ForeColor = System.Drawing.Color.White;
+            this.radBandVHF4.Name = "radBandVHF4";
+            this.radBandVHF4.TabStop = true;
+            this.toolTip1.SetToolTip(this.radBandVHF4, resources.GetString("radBandVHF4.ToolTip"));
+            this.radBandVHF4.UseVisualStyleBackColor = true;
+            this.radBandVHF4.Click += new System.EventHandler(this.radBandVHF_Click);
+            this.radBandVHF4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF4_MouseDown);
+            // 
+            // radBandVHF3
+            // 
+            resources.ApplyResources(this.radBandVHF3, "radBandVHF3");
+            this.radBandVHF3.FlatAppearance.BorderSize = 0;
+            this.radBandVHF3.ForeColor = System.Drawing.Color.White;
+            this.radBandVHF3.Name = "radBandVHF3";
+            this.radBandVHF3.TabStop = true;
+            this.toolTip1.SetToolTip(this.radBandVHF3, resources.GetString("radBandVHF3.ToolTip"));
+            this.radBandVHF3.UseVisualStyleBackColor = true;
+            this.radBandVHF3.CheckedChanged += new System.EventHandler(this.radBandVHF3_CheckedChanged);
+            this.radBandVHF3.Click += new System.EventHandler(this.radBandVHF_Click);
+            this.radBandVHF3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF3_MouseDown);
+            // 
+            // radBandVHF2
+            // 
+            resources.ApplyResources(this.radBandVHF2, "radBandVHF2");
+            this.radBandVHF2.FlatAppearance.BorderSize = 0;
+            this.radBandVHF2.ForeColor = System.Drawing.Color.White;
+            this.radBandVHF2.Name = "radBandVHF2";
+            this.radBandVHF2.TabStop = true;
+            this.toolTip1.SetToolTip(this.radBandVHF2, resources.GetString("radBandVHF2.ToolTip"));
+            this.radBandVHF2.UseVisualStyleBackColor = true;
+            this.radBandVHF2.Click += new System.EventHandler(this.radBandVHF_Click);
+            this.radBandVHF2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF2_MouseDown);
+            // 
+            // radBandVHF1
+            // 
+            resources.ApplyResources(this.radBandVHF1, "radBandVHF1");
+            this.radBandVHF1.FlatAppearance.BorderSize = 0;
+            this.radBandVHF1.ForeColor = System.Drawing.Color.White;
+            this.radBandVHF1.Name = "radBandVHF1";
+            this.radBandVHF1.TabStop = true;
+            this.toolTip1.SetToolTip(this.radBandVHF1, resources.GetString("radBandVHF1.ToolTip"));
+            this.radBandVHF1.UseVisualStyleBackColor = true;
+            this.radBandVHF1.Click += new System.EventHandler(this.radBandVHF_Click);
+            this.radBandVHF1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF1_MouseDown);
+            // 
+            // radBandVHF0
+            // 
+            resources.ApplyResources(this.radBandVHF0, "radBandVHF0");
+            this.radBandVHF0.FlatAppearance.BorderSize = 0;
+            this.radBandVHF0.ForeColor = System.Drawing.Color.White;
+            this.radBandVHF0.Name = "radBandVHF0";
+            this.radBandVHF0.TabStop = true;
+            this.toolTip1.SetToolTip(this.radBandVHF0, resources.GetString("radBandVHF0.ToolTip"));
+            this.radBandVHF0.UseVisualStyleBackColor = true;
+            this.radBandVHF0.Click += new System.EventHandler(this.radBandVHF_Click);
+            this.radBandVHF0.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF0_MouseDown);
+            // 
             // timer_clock
             // 
             this.timer_clock.Enabled = true;
@@ -5164,161 +5335,6 @@ namespace PowerSDR
             this.panelBandVHF.Name = "panelBandVHF";
             this.panelBandVHF.VisibleChanged += new System.EventHandler(this.panelBandVHF_VisibleChanged);
             this.panelBandVHF.Paint += new System.Windows.Forms.PaintEventHandler(this.panelRX1Ring_Paint);
-            // 
-            // radBandVHF13
-            // 
-            resources.ApplyResources(this.radBandVHF13, "radBandVHF13");
-            this.radBandVHF13.FlatAppearance.BorderSize = 0;
-            this.radBandVHF13.ForeColor = System.Drawing.Color.White;
-            this.radBandVHF13.Name = "radBandVHF13";
-            this.radBandVHF13.TabStop = true;
-            this.radBandVHF13.UseVisualStyleBackColor = true;
-            this.radBandVHF13.Click += new System.EventHandler(this.radBandVHF_Click);
-            this.radBandVHF13.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF13_MouseDown);
-            // 
-            // radBandVHF12
-            // 
-            resources.ApplyResources(this.radBandVHF12, "radBandVHF12");
-            this.radBandVHF12.FlatAppearance.BorderSize = 0;
-            this.radBandVHF12.ForeColor = System.Drawing.Color.White;
-            this.radBandVHF12.Name = "radBandVHF12";
-            this.radBandVHF12.TabStop = true;
-            this.radBandVHF12.UseVisualStyleBackColor = true;
-            this.radBandVHF12.Click += new System.EventHandler(this.radBandVHF_Click);
-            this.radBandVHF12.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF12_MouseDown);
-            // 
-            // radBandVHF11
-            // 
-            resources.ApplyResources(this.radBandVHF11, "radBandVHF11");
-            this.radBandVHF11.FlatAppearance.BorderSize = 0;
-            this.radBandVHF11.ForeColor = System.Drawing.Color.White;
-            this.radBandVHF11.Name = "radBandVHF11";
-            this.radBandVHF11.TabStop = true;
-            this.radBandVHF11.UseVisualStyleBackColor = true;
-            this.radBandVHF11.Click += new System.EventHandler(this.radBandVHF_Click);
-            this.radBandVHF11.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF11_MouseDown);
-            // 
-            // radBandVHF10
-            // 
-            resources.ApplyResources(this.radBandVHF10, "radBandVHF10");
-            this.radBandVHF10.FlatAppearance.BorderSize = 0;
-            this.radBandVHF10.ForeColor = System.Drawing.Color.White;
-            this.radBandVHF10.Name = "radBandVHF10";
-            this.radBandVHF10.TabStop = true;
-            this.radBandVHF10.UseVisualStyleBackColor = true;
-            this.radBandVHF10.Click += new System.EventHandler(this.radBandVHF_Click);
-            this.radBandVHF10.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF10_MouseDown);
-            // 
-            // radBandVHF9
-            // 
-            resources.ApplyResources(this.radBandVHF9, "radBandVHF9");
-            this.radBandVHF9.FlatAppearance.BorderSize = 0;
-            this.radBandVHF9.ForeColor = System.Drawing.Color.White;
-            this.radBandVHF9.Name = "radBandVHF9";
-            this.radBandVHF9.TabStop = true;
-            this.radBandVHF9.UseVisualStyleBackColor = true;
-            this.radBandVHF9.Click += new System.EventHandler(this.radBandVHF_Click);
-            this.radBandVHF9.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF9_MouseDown);
-            // 
-            // radBandVHF8
-            // 
-            resources.ApplyResources(this.radBandVHF8, "radBandVHF8");
-            this.radBandVHF8.FlatAppearance.BorderSize = 0;
-            this.radBandVHF8.ForeColor = System.Drawing.Color.White;
-            this.radBandVHF8.Name = "radBandVHF8";
-            this.radBandVHF8.TabStop = true;
-            this.radBandVHF8.UseVisualStyleBackColor = true;
-            this.radBandVHF8.Click += new System.EventHandler(this.radBandVHF_Click);
-            this.radBandVHF8.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF8_MouseDown);
-            // 
-            // radBandVHF7
-            // 
-            resources.ApplyResources(this.radBandVHF7, "radBandVHF7");
-            this.radBandVHF7.FlatAppearance.BorderSize = 0;
-            this.radBandVHF7.ForeColor = System.Drawing.Color.White;
-            this.radBandVHF7.Name = "radBandVHF7";
-            this.radBandVHF7.TabStop = true;
-            this.radBandVHF7.UseVisualStyleBackColor = true;
-            this.radBandVHF7.Click += new System.EventHandler(this.radBandVHF_Click);
-            this.radBandVHF7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF7_MouseDown);
-            // 
-            // radBandVHF6
-            // 
-            resources.ApplyResources(this.radBandVHF6, "radBandVHF6");
-            this.radBandVHF6.FlatAppearance.BorderSize = 0;
-            this.radBandVHF6.ForeColor = System.Drawing.Color.White;
-            this.radBandVHF6.Name = "radBandVHF6";
-            this.radBandVHF6.TabStop = true;
-            this.radBandVHF6.UseVisualStyleBackColor = true;
-            this.radBandVHF6.Click += new System.EventHandler(this.radBandVHF_Click);
-            this.radBandVHF6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF6_MouseDown);
-            // 
-            // radBandVHF5
-            // 
-            resources.ApplyResources(this.radBandVHF5, "radBandVHF5");
-            this.radBandVHF5.FlatAppearance.BorderSize = 0;
-            this.radBandVHF5.ForeColor = System.Drawing.Color.White;
-            this.radBandVHF5.Name = "radBandVHF5";
-            this.radBandVHF5.TabStop = true;
-            this.radBandVHF5.UseVisualStyleBackColor = true;
-            this.radBandVHF5.Click += new System.EventHandler(this.radBandVHF_Click);
-            this.radBandVHF5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF5_MouseDown);
-            // 
-            // radBandVHF4
-            // 
-            resources.ApplyResources(this.radBandVHF4, "radBandVHF4");
-            this.radBandVHF4.FlatAppearance.BorderSize = 0;
-            this.radBandVHF4.ForeColor = System.Drawing.Color.White;
-            this.radBandVHF4.Name = "radBandVHF4";
-            this.radBandVHF4.TabStop = true;
-            this.radBandVHF4.UseVisualStyleBackColor = true;
-            this.radBandVHF4.Click += new System.EventHandler(this.radBandVHF_Click);
-            this.radBandVHF4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF4_MouseDown);
-            // 
-            // radBandVHF3
-            // 
-            resources.ApplyResources(this.radBandVHF3, "radBandVHF3");
-            this.radBandVHF3.FlatAppearance.BorderSize = 0;
-            this.radBandVHF3.ForeColor = System.Drawing.Color.White;
-            this.radBandVHF3.Name = "radBandVHF3";
-            this.radBandVHF3.TabStop = true;
-            this.radBandVHF3.UseVisualStyleBackColor = true;
-            this.radBandVHF3.CheckedChanged += new System.EventHandler(this.radBandVHF3_CheckedChanged);
-            this.radBandVHF3.Click += new System.EventHandler(this.radBandVHF_Click);
-            this.radBandVHF3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF3_MouseDown);
-            // 
-            // radBandVHF2
-            // 
-            resources.ApplyResources(this.radBandVHF2, "radBandVHF2");
-            this.radBandVHF2.FlatAppearance.BorderSize = 0;
-            this.radBandVHF2.ForeColor = System.Drawing.Color.White;
-            this.radBandVHF2.Name = "radBandVHF2";
-            this.radBandVHF2.TabStop = true;
-            this.radBandVHF2.UseVisualStyleBackColor = true;
-            this.radBandVHF2.Click += new System.EventHandler(this.radBandVHF_Click);
-            this.radBandVHF2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF2_MouseDown);
-            // 
-            // radBandVHF1
-            // 
-            resources.ApplyResources(this.radBandVHF1, "radBandVHF1");
-            this.radBandVHF1.FlatAppearance.BorderSize = 0;
-            this.radBandVHF1.ForeColor = System.Drawing.Color.White;
-            this.radBandVHF1.Name = "radBandVHF1";
-            this.radBandVHF1.TabStop = true;
-            this.radBandVHF1.UseVisualStyleBackColor = true;
-            this.radBandVHF1.Click += new System.EventHandler(this.radBandVHF_Click);
-            this.radBandVHF1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF1_MouseDown);
-            // 
-            // radBandVHF0
-            // 
-            resources.ApplyResources(this.radBandVHF0, "radBandVHF0");
-            this.radBandVHF0.FlatAppearance.BorderSize = 0;
-            this.radBandVHF0.ForeColor = System.Drawing.Color.White;
-            this.radBandVHF0.Name = "radBandVHF0";
-            this.radBandVHF0.TabStop = true;
-            this.radBandVHF0.UseVisualStyleBackColor = true;
-            this.radBandVHF0.Click += new System.EventHandler(this.radBandVHF_Click);
-            this.radBandVHF0.MouseDown += new System.Windows.Forms.MouseEventHandler(this.radBandVHF0_MouseDown);
             // 
             // btnBandHF
             // 

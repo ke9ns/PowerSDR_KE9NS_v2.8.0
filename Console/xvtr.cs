@@ -143,10 +143,10 @@ namespace PowerSDR
                 //FWC.SetEN2M(true); //XVINT
                 udUCBAddr0.Value = 0;
                 txtButtonText0.Text = "2m";
-                udLOOffset0.Value = 125;              // ke9ns was 125 .217
-                                                      //   udLOError0.Value = 0;  // ke9ns was not commented out
-                udFreqBegin0.Value = 128;            // ke9ns was 134 144 .217
-                udFreqEnd0.Value = 180;              // ke9ns was 148
+                udLOOffset0.Value = 125;              // cannot change this value
+                                                      //   udLOError0.Value = 0;  // ke9ns: was not commented out
+                udFreqBegin0.Value = 128;            // ke9ns: was 144 .217
+                udFreqEnd0.Value = 180;              // ke9ns: was 148
                 //udRXGain0.Value = 32;
                 //chkRXOnly0.Checked = false;
                 //udPower0.Value = 100;
@@ -154,9 +154,9 @@ namespace PowerSDR
 
                 udUCBAddr1.Value = 1;
                 txtButtonText1.Text = "70cm";
-                udLOOffset1.Value = 400;
-                // udLOError1.Value = 0;    // ke9ns was not commented out
-                udFreqBegin1.Value = 430;
+                udLOOffset1.Value = 400;      // cannot change this value
+                // udLOError1.Value = 0;    // ke9ns: was not commented out
+                udFreqBegin1.Value = 420;   // .303 was 430    
                 udFreqEnd1.Value = 470;  // .224 was 450
                 //udRXGain1.Value = 28;
                 //chkRXOnly1.Checked = false;

@@ -1,5 +1,6 @@
 //=================================================================
 // dsp.cs
+// ke9ns:  DSP.cs is used to pass RX/TX DSP data between C# forms, and update.c
 //=================================================================
 // PowerSDR is a C# implementation of a Software Defined Radio.
 // Copyright (C) 2003-2013  FlexRadio Systems
@@ -25,8 +26,6 @@
 //    Austin, TX 78728
 //    USA
 //=================================================================
-
-// ke9ns:  DSP.cs is used to pass data between C# forms, and update.c
 
 
 using EnvDTE;
