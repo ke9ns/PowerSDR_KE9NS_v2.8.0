@@ -1,0 +1,98 @@
+ImageRuntimeVersion: v4.0.30319
+Assembly PowerMate, Version=1.0.*, Culture=Invariant Language (Invariant Country): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Class HidDevice.EventsHelper: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    Tire(Delegate, Object[]): PrivateScope, Public, Static, HideBySig
+Class HidDevice.PowerMate: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Int32 rotvalue : Public
+    Int32 rotationValue : Public
+    Int32 lastrotation : Public
+    Int32 rotationLowerBound : Public
+    Int32 rotationUpperBound : Public
+    Int32 bandsel : Public
+    Int32 bandsel1 : Public
+    Int32 xxx : Public
+    Int32 txsend : Public
+    Int32 txsend1 : Public
+    Int32 speed : Public
+    Int32 speed1 : Public
+    Int32 RIT : Public
+    Int32 speed4 : Public
+    Int32 RITFreq : Public
+    Int32 qqq : Public
+    Int32 aaa : Public
+    Int32 www : Public
+    Int32 zzz : Public
+    HWND__* hNWnd : Public
+    HWND__* hTWnd : Public
+    UInt32 threadID IsLong : Public
+    Int32 RXM : Public
+    Int32 RXOFF : Public
+    Int32 S2LAST : Public
+    Int32 TIMER_CAT : Public
+    Int32 PTT : Public
+    Int32 TEMP3 : Public, Static
+  Properties:
+    Byte LedBrightness 'get set' : 
+  Events:
+    ButtonHandler ButtonEvent: SpecialName
+    RotationHandler RotateEvent: SpecialName
+  Methods:
+    Initialize(): PrivateScope, Public, HideBySig
+    Shutdown(): PrivateScope, Public, HideBySig
+    Look(Int32): PrivateScope, Public, HideBySig
+    Lookflex(Int32): PrivateScope, Public, HideBySig
+    set_LedBrightness(Byte): PrivateScope, Public, HideBySig, SpecialName
+    get_LedBrightness(): PrivateScope, Public, HideBySig, SpecialName
+    add_RotateEvent(RotationHandler): PrivateScope, Public, HideBySig, SpecialName
+    remove_RotateEvent(RotationHandler): PrivateScope, Public, HideBySig, SpecialName
+    add_ButtonEvent(ButtonHandler): PrivateScope, Public, HideBySig, SpecialName
+    remove_ButtonEvent(ButtonHandler): PrivateScope, Public, HideBySig, SpecialName
+    InputThread(): PrivateScope, Public, HideBySig
+Struct HidDevice.PowerMate+RotationalDirection: AutoLayout, AnsiClass, Class, NestedPublic, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    RotationalDirection Left = 0 : Public, Static, Literal, HasDefault
+    RotationalDirection Right = 1 : Public, Static, Literal, HasDefault
+Struct HidDevice.PowerMate+ButtonState: AutoLayout, AnsiClass, Class, NestedPublic, Sealed, BeforeFieldInit
+  :System.Enum
+  Fields:
+    Int32 value__ : Public, SpecialName, RTSpecialName
+    ButtonState Up = 0 : Public, Static, Literal, HasDefault
+    ButtonState Down = 1 : Public, Static, Literal, HasDefault
+Class HidDevice.PowerMate+RotationHandler: AutoLayout, AnsiClass, Class, NestedPublic, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(Int32): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(Int32, AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class HidDevice.PowerMate+ButtonHandler: AutoLayout, AnsiClass, Class, NestedPublic, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(ButtonState, Int32, Int32, Int32): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(ButtonState, Int32, Int32, Int32, AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+Class HidDevice.PowerMate+SignalHandler: AutoLayout, AnsiClass, Class, NestedPublic, Sealed, BeforeFieldInit
+  :System.MulticastDelegate
+    Void .ctor(System.Object, IntPtr): PrivateScope, Public, SpecialName, RTSpecialName
+  Methods:
+    Invoke(Int32, Int32): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    BeginInvoke(Int32, Int32, AsyncCallback, Object): PrivateScope, Public, Final, Virtual, VtableLayoutMask
+    EndInvoke(IAsyncResult): PrivateScope, Public, Final, Virtual, VtableLayoutMask

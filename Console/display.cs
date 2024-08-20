@@ -35,6 +35,16 @@ using System.Drawing.Imaging;
 using System.Windows.Forms;
 using System.Globalization;
 using System.Diagnostics.Eventing.Reader;
+using stdole;
+using System.Reflection.Emit;
+using System.Windows.Forms.DataVisualization.Charting;
+using Font = System.Drawing.Font;
+using Microsoft.JScript;
+using Convert = System.Convert;
+
+
+
+
 
 #if (!NO_TNF)
 using Flex.TNF;
@@ -772,7 +782,7 @@ namespace PowerSDR
 
                 if (average_on)
                 {
-                    Debug.WriteLine("294 reset avg");
+                 //   Debug.WriteLine("294 reset avg");
                     ResetRX1DisplayAverage();      // ke9ns: rx1_average_buffer[0] = -999.999f
                 }
                 if (peak_on) ResetRX1DisplayPeak();
@@ -1874,7 +1884,7 @@ namespace PowerSDR
             double left_three = (((int)(n.Freq * 1e3)) / 1e3);
             //string perm = n.Permanent ? "*" : "";
             g.DrawString("RF Tracking Notch", // + perm,
-                new Font("Trebuchet MS", 9, FontStyle.Underline),
+                new System.Drawing.Font("Trebuchet MS", 9, FontStyle.Underline),
                 b, new Point(x_start + 5, y_start + 5));
             g.DrawString(left_three.ToString("f3") + " " + right_three.ToString("d3") + " MHz",
                 new Font("Trebuchet MS", 9, FontStyle.Regular),
@@ -2333,7 +2343,7 @@ namespace PowerSDR
             }
             else
             {
-                Debug.WriteLine("display update = false");
+              //  Debug.WriteLine("display update = false");
             }
 
 
@@ -2917,7 +2927,7 @@ namespace PowerSDR
                 {
                     SWR_Multi = true;
                     SWRLINE = 10; // reduce size of SWR plot since you have up to 5 to display
-                    Debug.WriteLine("SWR MULTI");
+                  //  Debug.WriteLine("SWR MULTI");
                 }
                 else
                 {
@@ -3385,7 +3395,7 @@ namespace PowerSDR
                     //  if (draw_tx_cw_freq) // ke9ns add
                     if ((!local_mox) && (draw_tx_cw_freq)) //RX
                     {
-                        Debug.WriteLine("CW1=======================");
+                      //  Debug.WriteLine("CW1=======================");
                         if ((bottom)) // && tx_on_vfob) // KE9NS ADD  fix mistake made by flex (draw TX line on bottom for VFOB)
                         {
                             g.DrawLine(tx_filter_pen, cw_line_x, H + top, cw_line_x, H + H);
@@ -3397,7 +3407,7 @@ namespace PowerSDR
                             g.DrawLine(tx_filter_pen, cw_line_x, top, cw_line_x, H);
                             g.DrawLine(tx_filter_pen, cw_line_x + 1, top, cw_line_x + 1, H);
 
-                            Debug.WriteLine("CW2=======================");
+                         //   Debug.WriteLine("CW2=======================");
 
                         }
                     }
@@ -3957,8 +3967,11 @@ namespace PowerSDR
                                 else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
                                 else offsetL = (int)((label.Length) * 4.1) - 8;
 
+                                // Draw band edge vfo text across the top of the panadapter
+                               
                                 if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                                else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01) );
+
 
                                 //----------------------------------------------------------------
                                 // ke9ns add Check for SWR PLOT Display (ANT and BAND at top of this routine)
@@ -4175,7 +4188,7 @@ namespace PowerSDR
 
                                 } //  for (int j = 1; j < inbetweenies; j++)
 
-
+                                //.305temp
                                 // make freq grid labels (white freq labels not the red band edges)
                                 double actual_fgrid_label = Math.Round(actual_fgrid, 4);
                                 label = actual_fgrid_label.ToString("f4");
@@ -4187,6 +4200,7 @@ namespace PowerSDR
                                 else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
                                 else offsetL = (int)((label.Length) * 4.1) - 8;
 
+                                // ke9ns: this draws VFO freq text (7.185) across the top of the Panadapter window
                                 if (bottom) g.DrawString(label, font, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
                                 else g.DrawString(label, font, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
 
@@ -14576,6 +14590,7 @@ namespace PowerSDR
                                     else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
                                     else offsetL = (int)((label.Length + 1) * 4.1) - 8; */
 
+                                    // draw bandedge text on top of the waterfall area
                                     if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .005)); // was .01 ke9ns draw frequency at band edges in RED
                                     else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .005)); // .01
 
@@ -14692,10 +14707,8 @@ namespace PowerSDR
                                     } */
 
                                     //================================================================
-                                    // ke9ns draw waterfall actually draw text
+                                    // ke9ns draw waterfall vfo freq text on top of waterfall area
                                     //================================================================
-
-
                                     if (bottom) // ke9ns: this can be RX1 on the bottom if in Panafall mode (and always RX2)
                                     {
                                         g.DrawString(label, font, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .005)); // .01
@@ -20447,15 +20460,123 @@ namespace PowerSDR
 
                 //-----------------------------------------------------------------------------------
 
-                else if ((console.ZZOOM == true))
+                else if ((console.ZZOOM == true)) //
                 {
 
                     Debug.WriteLine("TNFZOOM9");
 
-                    // draw zoom background box
+                    // draw zoom background box with alpha = 230 out of 255 (very dark)
                     if (bottom) g.FillRectangle(new SolidBrush(Color.FromArgb(230, 0, 0, 0)), 0, H, W, H / zoom_height);
                     else g.FillRectangle(new SolidBrush(Color.FromArgb(230, 0, 0, 0)), 0, 0, W, H / zoom_height);
 
+                    // .305a draw freq span of the zzoom window (similar to full pan but /15 in span)
+
+                    System.Drawing.Font font = new System.Drawing.Font("Swis721 BT", 9, FontStyle.Italic);
+                    SolidBrush grid_text_brush = new SolidBrush(grid_text_color);
+
+                    //  int mid_w = W / 2;
+                    int[] step_list = { 10, 20, 25, 50}; // 10, 20, 25, 50
+                    int step_power = 1;
+                    int step_index = 0;
+                    int freq_step_size = 50;
+                  //  int inbetweenies = 5; // ke9ns number of lines from 1 freq label to the next (a line every 2khz)
+
+                 //   int grid_step = 0;  // 
+
+                    double vfo;
+                   
+                        if (local_mox && !tx_on_vfob)
+                        {
+                            if (split_enabled) vfo = vfoa_sub_hz;
+                            else vfo = vfoa_hz;
+
+                            vfo += xit_hz;
+                        }
+                        else
+                        {
+                            vfo = vfoa_hz + rit_hz;
+                        }
+
+                  
+                    int zoomed_notch_center_freq = (int)(notch_zoom_start_freq * 1e6 - vfoa_hz - rit_hz);
+
+                    int original_bw = High - Low;
+                    int zoom_bw = original_bw / 15;  // .305a  was /10
+
+                    int low = zoomed_notch_center_freq - zoom_bw / 2;
+                    int high = zoomed_notch_center_freq + zoom_bw / 2;
+                                
+                    
+                    int width = high - low; //  was int width = (High - Low);
+
+                    freq_step_size = 500;
+
+                  double w_pixel_step = (double)W * freq_step_size / width;
+                    int w_steps = width / freq_step_size;   // 15 = 11782 / x =785
+
+                  
+                    long vfo_round = ((long)(vfo / freq_step_size)) * freq_step_size;
+                    long vfo_delta = (long)(vfo - vfo_round);
+
+                    int f_steps = (width / freq_step_size) + 1; // freq_step_size = 50
+
+                    // 192khzSR,current zoom = .45045, vfo = 18200khz, high=79371, low=-97370, zoom=11782, freq stepsize=20000hz, f steps=9
+                   
+                  //  Debug.WriteLine("ZZOOOM " + width + " , " + High + " , " + Low +  " , " + freq_step_size + " , " + f_steps + " , " + high + " , "+ low);
+
+
+                    for (int i = 0; i < f_steps + 1; i++) // ke9ns: step to each freq label across the display
+                    {
+                        string label;
+                        int offsetL; // X pixel offset for every 10khz based on screen size and zoom etc 
+                        int offsetR;
+
+                       
+                        int fgrid = i * freq_step_size + (low / freq_step_size) * freq_step_size;
+
+                        double actual_fgrid = ((double)(vfo_round + fgrid)) / 1000000;
+
+
+                        if (console.ZZOOM1 == true)
+                        {
+                            int vgrid = (int)((double)(fgrid - vfo_delta - low) / width * W); // was High - Low
+
+                            // make freq grid labels (white freq labels not the red band edges)
+                            double actual_fgrid_label = Math.Round(actual_fgrid, 4);
+                            label = actual_fgrid_label.ToString("f4");
+                            label = label.Replace(",", ".");    // handle Windows localization issues
+                            int offset = label.IndexOf('.') + 4;
+                            label = label.Insert(offset, ".");
+
+                            if (actual_fgrid < 10) offsetL = (int)((label.Length + 2) * 4.1) - 14;
+                            else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                            else offsetL = (int)((label.Length) * 4.1) - 8;
+
+                            g.DrawString(label, font, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01)); //.305a
+                            g.DrawString(label, font, grid_text_brush, vgrid - offsetL, H / zoom_height - 24); //.305a
+
+                        }
+                        else
+                        {
+                             int vgrid = Convert.ToInt32((double)-(fgrid - low) / (low - high) * W); //wa6ahl
+
+
+                                double new_fgrid = (vfoa_hz + fgrid) / 1000000;
+
+                                label = fgrid.ToString();
+                                offsetL = (int)((label.Length + 1) * 4.1);
+                                offsetR = (int)(label.Length * 4.1);
+
+                                if ((vgrid - offsetL >= 0) && (vgrid + offsetR < W) && (fgrid != 0))
+                                {
+                                     g.DrawString(label, font, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01)); //.305a
+                                     g.DrawString(label, font, grid_text_brush, vgrid - offsetL, H / zoom_height - 20); //.305a
+
+                                }
+                           
+                        }
+
+                    } // for loop
 
                     // calculate data needed for zoomed notch
                     long rf_freq = vfoa_hz;
@@ -20491,10 +20612,12 @@ namespace PowerSDR
                         }
                     }
 
+                    /*
+                    // see up above now
                     int zoomed_notch_center_freq = (int)(notch_zoom_start_freq * 1e6 - rf_freq - rit);
 
                     int original_bw = High - Low;
-                    int zoom_bw = original_bw / 10;
+                    int zoom_bw = original_bw / 15;  // .305a  was /10
 
                     int low = zoomed_notch_center_freq - zoom_bw / 2;
                     int high = zoomed_notch_center_freq + zoom_bw / 2;
@@ -20510,8 +20633,8 @@ namespace PowerSDR
                         low = High - zoom_bw;
                     }
 
-
-                    int center_line_x = (int)(-(double)low / (high - low) * W); // center of display window
+*/
+                        int center_line_x = (int)(-(double)low / (high - low) * W); // center of display window
                                                                                 //  int top = top1 = (int)((double)grid_step * H / y_range); // find top of each window for the panadapter
 
 
@@ -20522,7 +20645,7 @@ namespace PowerSDR
                     g.DrawLine(new Pen(grid_zero_color), center_line_x, 0, center_line_x, (int)(H / zoom_height));
                     g.DrawLine(new Pen(grid_zero_color), center_line_x + 1, 0, center_line_x + 1, (int)(H / zoom_height));
 
-                  //  Debug.WriteLine("ZOOM1 " + W + " , " + High + " , " + Low + " , " + high + " , " + low + " , " + center_line_x + " , " + zoomed_notch_center_freq);
+                 //   Debug.WriteLine("ZOOM1 " + W + " , " + High + " , " + Low + " , " + high + " , " + low + " , " + center_line_x + " , " + zoomed_notch_center_freq);
 
 
 

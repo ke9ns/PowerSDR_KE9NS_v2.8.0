@@ -1,2 +1,2 @@
-#TargetFrameworkVersion=:PlatformToolSet=v140:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=10.0.19041.0
+PlatformToolSet=v143:VCToolArchitecture=Native32Bit:VCToolsVersion=14.41.34120:TargetPlatformVersion=10.0.26100.0:
 Release|Win32|C:\Users\RADIO\source\PowerSDR_v2.8.0\Source\|

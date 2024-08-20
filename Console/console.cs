@@ -38046,7 +38046,7 @@ namespace PowerSDR
 
                 //   UP1 = true; // .251
 
-                // PAN SCROLL FEATURE
+                // new PAN SCROLL FEATURE
                 if (CTUNIF == true) //.284
                 {
                     decimal tempA = ((decimal)value * (decimal)1e6) - ((decimal)tempVFOAFreqIF * (decimal)1e6);
@@ -38218,6 +38218,30 @@ namespace PowerSDR
 
                 if (ESCSYNC == true && VFOSync == false && FWCEEPROM.RX2OK) picRadar.Invalidate(); //.246 .249
 
+                if (ZZOOM == true) //.305
+                {
+                    try
+                    {
+                        Display.NotchZoomStartFreq = double.Parse(txtVFOAFreq.Text);
+                    }
+                    catch (Exception)
+                    {
+                        Debug.WriteLine("ZZOOM VFOAFreq convert string to double failed " + txtVFOAFreq.Text);
+
+                       
+                    }
+
+
+
+
+
+                     
+
+
+
+
+
+                }
 
             } //set
 
@@ -80855,6 +80879,7 @@ namespace PowerSDR
         public int AutoPanScaleStep = 10; // ke9ns
 
         public bool ZZOOM = false; // ke9ns to allow TNFZOOM feature without TNF ON
+        public bool ZZOOM1 = false; // .305 to cycle between freq and offset for Zoom function
 
         private void lblDisplayZoom_MouseDown(object sender, MouseEventArgs e)
         {
@@ -80864,14 +80889,23 @@ namespace PowerSDR
 
                 if (ZZOOM == false)
                 {
+                    ZZOOM1 = false;
                     Display.NotchZoomStartFreq = VFOAFreq; // in mhz
                     Display.TNFZoom = true;
                     ZZOOM = true;
                 }
                 else
                 {
-                    Display.TNFZoom = false;
-                    ZZOOM = false;
+                    if (ZZOOM1 == true)
+                    {
+                        Display.TNFZoom = false;
+                        ZZOOM = false;
+                        ZZOOM1 = false;
+                    }
+                    else
+                    {
+                        ZZOOM1 = true; // tell display to use offset instead of freq for zoom function
+                    }
                 }
 
                 Debug.WriteLine("TNFZOOM");
