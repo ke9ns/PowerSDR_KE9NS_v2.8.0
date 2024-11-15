@@ -120,6 +120,75 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>157, 17</value>
   </metadata>
+  <data name="chkCDigitalOffsetMatch.ToolTip" xml:space="preserve">
+    <value>Check this box to set the Setup-&gt;General-&gt;Options-&gt;Click Tune Offset values to equal these Cat RTTY/Digital Offsets.
+
+This will allow CAT  3rd party programs (like a logger program) to receive the correct Frequency of the digital signal.</value>
+  </data>
+  <data name="udRTTYU.ToolTip" xml:space="preserve">
+    <value>Sets the DIGU frequency CAT offset in Hz
+
+Reported Freq is based on the MARK 2125hz (which is closer to the 0hz line, SPACE is further to the right)
+
+NOTE: This does not alter the real VFO freq, only the reported freq via CAT.
+See Setup-&gt;General-&gt;Options-&gt;ClickTune to actually Offset VFO Freq.
+
+You must use this in conjuntion with the Setup-&gt;General-&gt;Options-&gt;Click Tune 
+set to the exact same value.
+
+</value>
+  </data>
+  <data name="udRTTYL.ToolTip" xml:space="preserve">
+    <value>Sets the DIGL frequency CAT offset in Hz
+
+Reported Freq is based on the MARK -2125hz (which is closer to the 0hz line, the SPACE is further to the left)
+
+NOTE: This does not alter the real VFO freq, only the reported freq via CAT.
+See Setup-&gt;General-&gt;Options-&gt;ClickTune to actually Offset VFO Freq.
+
+You must use this in conjuntion with the Setup-&gt;General-&gt;Options-&gt;Click Tune 
+set to the exact same value.
+
+</value>
+  </data>
+  <data name="chkRTTYOffsetEnableB.ToolTip" xml:space="preserve">
+    <value>CAT VFOB will report VFOB +/- RTTY/Digital Offset
+
+Reported Freq is based on the MARK (which is closer to the 0hz line)
+
+NOTE: This does not alter the real VFO freq, only the reported freq via CAT.
+See Setup-&gt;General-&gt;Options-&gt;ClickTune to actually Offset VFO Freq.
+
+You must use this in conjuntion with the Setup-&gt;General-&gt;Options-&gt;Click Tune 
+set to the exact same value.
+
+</value>
+  </data>
+  <data name="chkRTTYOffsetEnableA.ToolTip" xml:space="preserve">
+    <value>CAT VFOA will report VFOA +/- RTTY/Digital Offset
+
+Reported Freq is based on the MARK (which is closer to the 0hz line)
+
+NOTE: This does not alter the real VFO freq, only the reported freq via CAT.
+See Setup-&gt;General-&gt;Options-&gt;ClickTune to actually Offset VFO Freq.
+
+You must use this in conjuntion with the Setup-&gt;General-&gt;Options-&gt;Click Tune 
+set to the exact same value.
+</value>
+  </data>
+  <data name="grpRTTYOffset.ToolTip" xml:space="preserve">
+    <value>CAT will report VFO = VFO +/- RTTY/Digital Offset when checked
+
+NOTE: This does not alter the real VFO freq, only the reported freq via CAT.
+See Setup-&gt;General-&gt;Options-&gt;ClickTune to actually Offset VFO Freq.
+
+You must use this in conjuntion with the Setup-&gt;General-&gt;Options-&gt;Click Tune 
+set to the exact same value.
+</value>
+  </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>157, 17</value>
+  </metadata>
   <data name="chkBoxShutdown.ToolTip" xml:space="preserve">
     <value>Normally PowerSDR does not allow Windows to close PowerSDR during a shutdown (unless forced)
 
@@ -293,6 +362,60 @@ See page: http://k3tuf.com/FW.html , for info on FlexWire and UCB
 
 </value>
   </data>
+  <data name="grpGenTuningOptions.ToolTip" xml:space="preserve">
+    <value>When in DIGU/L modes, clicking on a signal will automatially shift the VFO by this amount. 
+This is to help put the signal in the center of your RX/TX Bandpass filter.
+
+2125hz for RTTY (click on the MARK signal closest to the 0hz line)
+1500hz for SSTV, etc
+
+use Setup-&gt;CAT Control-&gt;RTTY/Digital Offset with same value to report correct frequency to logging program
+
+</value>
+  </data>
+  <data name="chkClickTuneCatMatch.ToolTip" xml:space="preserve">
+    <value>Check this box to set the Setup-&gt;CAT Control-&gt;cat RTTY/DIgital Offset values to equal these Click Tune Offsets.
+
+This will allow CAT  3rd party programs (like a logger program) to receive the correct Frequency of the digital signal.</value>
+  </data>
+  <data name="udOptClickTuneOffsetDIGU.ToolTip" xml:space="preserve">
+    <value>Determines the frequency offset for click tuning and 
+the RX filter's center frequency.
+
+1500hz for SSTV
+2125hz for RTTY
+use Setup-&gt;CAT Control-&gt;RTTY/Digital Offset with same value to report correct frequency to logging program
+</value>
+  </data>
+  <data name="lblOptClickTuneDIGL.ToolTip" xml:space="preserve">
+    <value>Determines the frequency offset for click tuning and 
+the RX filter's center frequency
+
+2125hz for RTTY
+For RTTY, MARK is your reported operating Frequency.
+Use CAT RTTY Offset to properly report the Frequency.
+
+</value>
+  </data>
+  <data name="udOptClickTuneOffsetDIGL.ToolTip" xml:space="preserve">
+    <value>Determines the frequency offset for click tuning and 
+the RX filter's center frequency
+
+2125hz for RTTY
+use Setup-&gt;CAT Control-&gt;RTTY/Digital Offset with same value to report correct frequency to logging program
+
+</value>
+  </data>
+  <data name="lblOptClickTuneDIGU.ToolTip" xml:space="preserve">
+    <value>Determines the frequency offset for click tuning and 
+the RX filter's center frequency
+
+1500hz for SSTV
+2125hz for RTTY
+For RTTY, MARK is your reported operating Frequency.
+Use CAT RTTY Offset to properly report the Frequency.
+</value>
+  </data>
   <data name="chkOptCWFilterPitch.ToolTip" xml:space="preserve">
     <value>Unchecked: CW RX (Low -  High) automatically adjust around the CW Pitch value.
 So when you manually enter a Low - High value will change (after its saved) to divide the bandwidth around the CW Pitch value.
@@ -390,6 +513,10 @@ DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 
 WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec) 
 
 ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR</value>
+  </data>
+  <data name="chkAudioIQtoVAC.ToolTip" xml:space="preserve">
+    <value>Check to send pre-processed I/Q to the VAC output instead of post-processed audio, to enable you to use third-party software that has the ability to directly process I/Q signals.
+I/Q audio is audio that spans your entire Panadapter width, not just the bandpass.</value>
   </data>
   <data name="comboAudioSampleRate2.ToolTip" xml:space="preserve">
     <value>Use only a multiple of your Primary Sample Rate, 

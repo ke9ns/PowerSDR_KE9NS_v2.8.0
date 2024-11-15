@@ -59542,7 +59542,7 @@ namespace PowerSDR
             if (!disable_ui_mox_changes)
             {
                 setupForm.SpurRedEnabled = false;
-                DisableAllBands();
+                DisableAllBands(); // ke9ns: gray out all band buttons during MOX
 
                 if (chkVFOSplit.Checked != true) DisableAllModes(); // ke9ns mod to allow MODE change while in SPLIT
                 else
@@ -80893,18 +80893,35 @@ namespace PowerSDR
                     Display.NotchZoomStartFreq = VFOAFreq; // in mhz
                     Display.TNFZoom = true;
                     ZZOOM = true;
+
+                    lblDisplayZoom1.Image = global::PowerSDR.Properties.Resources.zoomOrg;  // .305 lblDisplayZoom.ForeColor = Color.Red; // ke9ns turn ZOOM text red to indicate your viewing small scale
+
                 }
                 else
                 {
+
+                  
                     if (ZZOOM1 == true)
                     {
                         Display.TNFZoom = false;
                         ZZOOM = false;
                         ZZOOM1 = false;
+
+                        if (AutoPanScale == false)
+                        {
+                            lblDisplayZoom1.Image = global::PowerSDR.Properties.Resources.ZoomGray;  // lblDisplayZoom.ForeColor = Color.White; // ke9ns turn back to white when viewing standard scale signals
+                        }
+                        else
+                        {
+                            lblDisplayZoom1.Image = global::PowerSDR.Properties.Resources.zoomRed;  // 
+                        }
+
                     }
                     else
                     {
                         ZZOOM1 = true; // tell display to use offset instead of freq for zoom function
+                        lblDisplayZoom1.Image = global::PowerSDR.Properties.Resources.zoomOrg;  // .305 lblDisplayZoom.ForeColor = Color.Red; // ke9ns turn ZOOM text red to indicate your viewing small scale
+
                     }
                 }
 
@@ -80929,7 +80946,15 @@ namespace PowerSDR
                 {
                     if (AutoPanScale == true)
                     {
-                        lblDisplayZoom1.Image = global::PowerSDR.Properties.Resources.ZoomGray;  // lblDisplayZoom.ForeColor = Color.White; // ke9ns turn back to white when viewing standard scale signals
+                        if (ZZOOM)
+                        {
+                            lblDisplayZoom1.Image = global::PowerSDR.Properties.Resources.zoomOrg;  // .305 lblDisplayZoom.ForeColor = Color.Red; // ke9ns turn ZOOM text red to indicate your viewing small scale
+
+                        }
+                        else
+                        {
+                            lblDisplayZoom1.Image = global::PowerSDR.Properties.Resources.ZoomGray;  // lblDisplayZoom.ForeColor = Color.White; // ke9ns turn back to white when viewing standard scale signals
+                        }
 
                         AutoPanScale = false;
                         Display.AutoBright = 4; // adjust RX pan scale to standard signals

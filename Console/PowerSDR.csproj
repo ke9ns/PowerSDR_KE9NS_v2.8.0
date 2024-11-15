@@ -1042,6 +1042,7 @@
     <Content Include="Resources\widered_3.png" />
     <None Include="Resources\widered_4.png" />
     <Content Include="Resources\ZoomGray.png" />
+    <Content Include="Resources\zoomOrg.png" />
     <Content Include="Resources\zoomRed.png" />
     <Content Include="Scripts\json-serialize.js" />
     <Content Include="Scripts\json-serialize.min.js" />

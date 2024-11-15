@@ -130,6 +130,8 @@ namespace PowerSDR
             // chkPanSpotBlank
             // 
             this.chkPanSpotBlank.AutoSize = true;
+            this.chkPanSpotBlank.Checked = true;
+            this.chkPanSpotBlank.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkPanSpotBlank.Image = null;
             this.chkPanSpotBlank.Location = new System.Drawing.Point(15, 46);
             this.chkPanSpotBlank.Name = "chkPanSpotBlank";
@@ -144,6 +146,8 @@ namespace PowerSDR
             // chkPanLoTWColor
             // 
             this.chkPanLoTWColor.AutoSize = true;
+            this.chkPanLoTWColor.Checked = true;
+            this.chkPanLoTWColor.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkPanLoTWColor.Image = null;
             this.chkPanLoTWColor.Location = new System.Drawing.Point(15, 78);
             this.chkPanLoTWColor.Name = "chkPanLoTWColor";

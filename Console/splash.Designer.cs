@@ -80,7 +80,7 @@ namespace PowerSDR
             this.lblTimeRemaining.BackColor = System.Drawing.Color.Transparent;
             this.lblTimeRemaining.ForeColor = System.Drawing.Color.White;
             this.lblTimeRemaining.Image = null;
-            this.lblTimeRemaining.Location = new System.Drawing.Point(433, 240);
+            this.lblTimeRemaining.Location = new System.Drawing.Point(457, 298);
             this.lblTimeRemaining.Name = "lblTimeRemaining";
             this.lblTimeRemaining.Size = new System.Drawing.Size(100, 14);
             this.lblTimeRemaining.TabIndex = 1;
@@ -91,7 +91,7 @@ namespace PowerSDR
             this.lblStatus.BackColor = System.Drawing.Color.Transparent;
             this.lblStatus.ForeColor = System.Drawing.Color.White;
             this.lblStatus.Image = null;
-            this.lblStatus.Location = new System.Drawing.Point(38, 238);
+            this.lblStatus.Location = new System.Drawing.Point(12, 296);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(400, 16);
             this.lblStatus.TabIndex = 0;

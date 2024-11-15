@@ -4849,12 +4849,28 @@ namespace PowerSDR
 
         private void udOptClickTuneOffsetDIGL_ValueChanged(object sender, System.EventArgs e)
         {
+            if (chkClickTuneCatMatch.Checked) // ke9ns .306 add
+            {
+               
+                udRTTYU.Value = udOptClickTuneOffsetDIGU.Value;
+                udRTTYL.Value = udOptClickTuneOffsetDIGL.Value;
+            }
+           
             console.DIGLClickTuneOffset = (int)udOptClickTuneOffsetDIGL.Value;
         }
 
         private void udOptClickTuneOffsetDIGU_ValueChanged(object sender, System.EventArgs e)
         {
+
+            if (chkClickTuneCatMatch.Checked) // ke9ns .306 add
+            {
+               
+                udRTTYU.Value = udOptClickTuneOffsetDIGU.Value;
+                udRTTYL.Value = udOptClickTuneOffsetDIGL.Value;
+            }
+           
             console.DIGUClickTuneOffset = (int)udOptClickTuneOffsetDIGU.Value;
+          
         }
 
         private void udOptMaxFilterWidth_ValueChanged(object sender, System.EventArgs e)
@@ -12995,11 +13011,29 @@ namespace PowerSDR
 
         private void udRTTYL_ValueChanged(object sender, System.EventArgs e)
         {
+            
+            if (chkCDigitalOffsetMatch.Checked) // ke9ns .306 add
+            {
+              
+                udOptClickTuneOffsetDIGU.Value = udRTTYU.Value;
+                udOptClickTuneOffsetDIGL.Value = udRTTYL.Value;
+            }
+           
+          
             rtty_offset_low = (int)udRTTYL.Value;
         }
 
         private void udRTTYU_ValueChanged(object sender, System.EventArgs e)
         {
+
+            if (chkCDigitalOffsetMatch.Checked) // ke9ns .306 add
+            {
+              
+                udOptClickTuneOffsetDIGU.Value = udRTTYU.Value;
+                udOptClickTuneOffsetDIGL.Value = udRTTYL.Value;
+            }
+           
+           
             rtty_offset_high = (int)udRTTYU.Value;
         }
 
@@ -16612,6 +16646,29 @@ namespace PowerSDR
             console.dsp.GetDSPRX(1, 1).RXFixedAGC = (double)udRX2DSPAGCFixedGaindB.Value;
 
             if (console.RX2AGCMode == AGCMode.FIXD)  console.RX2RF = (int)udRX2DSPAGCFixedGaindB.Value;
+        }
+
+        private void chkClickTuneCatMatch_CheckedChanged(object sender, EventArgs e) // ke9ns add .306
+        {
+            if (chkClickTuneCatMatch.Checked) // ke9ns .306 add
+            {
+                
+                udRTTYU.Value = udOptClickTuneOffsetDIGU.Value;
+                udRTTYL.Value = udOptClickTuneOffsetDIGL.Value;
+            }
+            
+        }
+
+        private void chkCDigitalOffsetMatch_CheckedChanged(object sender, EventArgs e) // ke9ns add .306
+        {
+            if (chkCDigitalOffsetMatch.Checked) // ke9ns .306 add
+            {
+          
+                udOptClickTuneOffsetDIGU.Value = udRTTYU.Value;
+                udOptClickTuneOffsetDIGL.Value = udRTTYL.Value;
+            }
+           
+
         }
 
 

@@ -1727,18 +1727,19 @@ namespace PowerSDR
                 else   // 8bpp 256 color grayscale
                 {
 
-                    byte[] col = new Byte[255 + 1];  // color map
+                    byte[] col = new Byte[255 + 1];  // RGB pixel storage (color map)
+                    byte[] alpha = new byte[255 + 1]; // Alpha storage (brightness of each pixel)
                     xm4 = 4 * ((xm + 3) / 4);
                     byte[] ri = new byte[xm4 + 1];
 
                     ap = new byte[xm4 + 10, ym + 10];  // get bitmap data
-                                                       // ap1 = new float[xm4 + 10, ym + 10];  // convert to grayscale
+                 // ap1 = new float[xm4 + 10, ym + 10];  // convert to grayscale
 
                     // color mapping
-                    for (int n = 0; n < 256; n++)
+                    for (int n = 0; n < 256; n++) // Blue,Green,Red
                     {
                         col[n] = (byte)((bw * (float)reader.ReadByte()) + (gw * (float)reader.ReadByte()) + (rw * (float)reader.ReadByte()));
-                        reader.ReadByte(); // ignore 4th byte
+                        reader.ReadByte(); //  ignore 4th byte, its just a pad
                     }
 
                     //===========================================================================================

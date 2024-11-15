@@ -1926,7 +1926,7 @@ namespace PowerSDR
 
         private double ctcss_freq_hz = 100.0;
         private double ctcss_freq_hz_dsp = 100.0;
-        public double CTCSSFreqHz
+        public double CTCSSFreqHz                   // ke9ns: CTCSS tones Freq
         {
             get { return ctcss_freq_hz; }
             set
@@ -1945,7 +1945,7 @@ namespace PowerSDR
 
         private bool ctcss_flag = false;
         private bool ctcss_flag_dsp = false;
-        public bool CTCSSFlag
+        public bool CTCSSFlag                   // ke9ns: CTCSS Tones ON/OFF
         {
             get { return ctcss_flag; }
             set

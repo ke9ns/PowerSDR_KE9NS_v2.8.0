@@ -342,7 +342,7 @@ DttSP_EXP void SetRXFMDeviation(unsigned int thread, unsigned int k, double devi
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void SetCTCSSFreq(unsigned int thread, double freq_hz)
+DttSP_EXP void SetCTCSSFreq(unsigned int thread, double freq_hz)  //ke9ns: CTCSS TONE FREQ
 {
 	sem_wait(&top[thread].sync.upd.sem);
 

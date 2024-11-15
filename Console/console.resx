@@ -6007,11 +6007,29 @@ This also turns on TNF for optional RX2</value>
   </data>
   <data name="comboDisplayMode.ToolTip" xml:space="preserve">
     <value>Display Mode Selection:
-PanaFall:  Spectrum and Waterfall (50-50)
 
-PanaFall8020: Spectrum and Waterfall (80-20). Click and grab black bar between spectrum and waterfall to adjust 
-                         or hit F9-F10 keys to adjust the window
+Panadater: Spectrum analyzer showing the entire Frequency spectrum (based on current radio Sample Rate, and zoom level)
 
+PanaFall:  Panadapter &amp; Waterfall combo
+NOTE: Click and grab bar between spectrum and waterfall to adjust or hit F9-F10 keys to adjust the window
+
+PanaFall8020: Spectrum and Waterfall (80-20)
+NOTE: Click and grab bar between spectrum and waterfall to adjust or hit F9-F10 keys to adjust the window
+
+Waterfall: : Spectrum analyzer displayed as a history recording the entire Frequency spectrum (based on current radio Sample Rate, and zoom level). 
+The further down the screen, the older the data.
+
+PanaScope: Panadapter &amp; Oscilloscope combo
+
+Spectrum: Traditional "Specturm Analyzer" for your current Receiver/Transmitter passband (with 0hz on left side)
+
+Scope: Tranditional Osciloscope for your your current Receiver/Transmitter passband (AM mode shows NEG Overmodulation warning when scope shows a flat line)
+
+Phase: X and Y dimensions represent Filtered I and Q (left/Right) channels
+
+Phase2: unfiltered version of Phase
+
+Histogram: Spectrum with the 0hz in the center (with a Green peak background)
 
 Continuum: Display BandPass peak dBm vs Time (with Ant pos)
                        Log File contains Date &amp; Time, beam heading, Panadater peak dBm, and S-Meter dBm

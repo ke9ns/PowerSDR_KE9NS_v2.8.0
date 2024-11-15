@@ -12789,12 +12789,22 @@ namespace PowerSDR
                 console.DSPBufPhoneRX = 4096;
             }
 
+          
             textBox2.Text = "";
             checkBoxTone.Checked = false;   // turn off tone marker when done.
 
             // MAX OUT AUDIO BUFFER SIZE
             if (console.BlockSize1 != 2048) console.BlockSize1 = 2048;  // need the largest buffer size for the Tone detection to work.
 
+            Thread.Sleep(300);
+
+            console.chkPower.Checked = true;
+            Thread.Sleep(300);
+
+            console.chkPower.Checked = false;
+            Thread.Sleep(300);
+
+            console.chkPower.Checked = true;
 
             Debug.WriteLine("WWV>>0");
 
@@ -13685,7 +13695,17 @@ namespace PowerSDR
 
             WWVNewTime.Stop();
 
-            console.PowerOn = true; // .257 pause temporarily to put back settings
+            Thread.Sleep(300);
+
+            console.chkPower.Checked = true;
+            Thread.Sleep(300);
+
+            console.chkPower.Checked = false;
+            Thread.Sleep(300);
+
+            console.chkPower.Checked = true;
+
+         //   console.PowerOn = true; // .257 pause temporarily to put back settings
 
 
         } // WWVTime()

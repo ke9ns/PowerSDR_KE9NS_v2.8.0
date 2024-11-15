@@ -37,8 +37,7 @@ Bridgewater, NJ 08807
 
 #define HUGE_PHASE 1256637061.43593
 
-void
-ComplexOSC (OSC p)
+void ComplexOSC (OSC p)
 {
   int i;
   COMPLEX z, delta_z;
@@ -96,19 +95,15 @@ RealOSC (OSC p)
     }
 }
 
-OSC
-newOSC (int size,
-	OscType TypeOsc,
-	double Frequency, double Phase, REAL SampleRate, char *tag)
+OSC newOSC (int size, OscType TypeOsc, double Frequency, double Phase, REAL SampleRate, char *tag)
 {
   OSC p = (OSC) safealloc (1, sizeof (oscillator), tag);
+
   if ((OSCtype (p) = TypeOsc) == ComplexTone)
-    OSCbase (p) = (void *) newCXB (size,
-				   NULL,
-				   "complex buffer for oscillator output");
+    OSCbase (p) = (void *) newCXB (size,NULL,"complex buffer for oscillator output");
   else
-    OSCbase (p) = (void *) newRLB (size,
-				   NULL, "real buffer for oscillator output");
+    OSCbase (p) = (void *) newRLB (size,NULL, "real buffer for oscillator output");
+   
   OSCsize (p) = size;
   OSCfreq (p) = 2.0 * M_PI * Frequency / SampleRate;
   OSCphase (p) = Phase;

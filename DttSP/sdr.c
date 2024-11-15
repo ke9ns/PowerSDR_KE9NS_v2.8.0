@@ -1513,7 +1513,7 @@ PRIVATE void do_tx_FM (unsigned int thread) // ke9ns called from do_tx above
 		do_IIR_LPF_2P(tx[thread].fm.output_LPF2);
 	}
 
-	if(tx[thread].fm.ctcss.flag)	ComplexOSC(tx[thread].fm.ctcss.osc);
+	if(tx[thread].fm.ctcss.flag)	ComplexOSC(tx[thread].fm.ctcss.osc);  // ke9ns: if CTCSS TONES ON 
 	
 	for(i = 0; i < n; i++)
 	{

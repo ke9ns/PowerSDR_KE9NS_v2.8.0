@@ -2532,10 +2532,8 @@ namespace PowerSDR
                         (console.RX1DSPMode == DSPMode.DIGU || console.RX1DSPMode == DSPMode.DIGL))
                     {
                         int f = int.Parse(s);
-                        if (console.RX1DSPMode == DSPMode.DIGU)
-                            f = f - Convert.ToInt32(console.setupForm.RttyOffsetHigh);
-                        else if (console.RX1DSPMode == DSPMode.DIGL)
-                            f = f + Convert.ToInt32(console.setupForm.RttyOffsetLow);
+                        if (console.RX1DSPMode == DSPMode.DIGU) f = f - Convert.ToInt32(console.setupForm.RttyOffsetHigh);
+                        else if (console.RX1DSPMode == DSPMode.DIGL)  f = f + Convert.ToInt32(console.setupForm.RttyOffsetLow);
                         s = AddLeadingZeros(f);
                         s = s.Insert(5, separator);
                     }
@@ -2551,10 +2549,8 @@ namespace PowerSDR
                         (console.RX1DSPMode == DSPMode.DIGU || console.RX1DSPMode == DSPMode.DIGL))
                     {
                         int f = Convert.ToInt32(Math.Round(console.CATVFOB, 6) * 1e6);
-                        if (console.RX1DSPMode == DSPMode.DIGU)
-                            f = f + Convert.ToInt32(console.setupForm.RttyOffsetHigh);
-                        else if (console.RX1DSPMode == DSPMode.DIGL)
-                            f = f - Convert.ToInt32(console.setupForm.RttyOffsetLow);
+                        if (console.RX1DSPMode == DSPMode.DIGU)  f = f + Convert.ToInt32(console.setupForm.RttyOffsetHigh);
+                        else if (console.RX1DSPMode == DSPMode.DIGL)   f = f - Convert.ToInt32(console.setupForm.RttyOffsetLow);
                         return AddLeadingZeros(f);
                     }
                     else
@@ -2575,8 +2571,7 @@ namespace PowerSDR
                     {
                         int f = int.Parse(s);
                         if (console.RX1DSPMode == DSPMode.DIGU) f = f - Convert.ToInt32(console.setupForm.RttyOffsetHigh);
-                        else if (console.RX1DSPMode == DSPMode.DIGL)
-                            f = f + Convert.ToInt32(console.setupForm.RttyOffsetLow);
+                        else if (console.RX1DSPMode == DSPMode.DIGL) f = f + Convert.ToInt32(console.setupForm.RttyOffsetLow);
                         s = AddLeadingZeros(f);
                         s = s.Insert(5, separator);
                     }
@@ -2594,10 +2589,8 @@ namespace PowerSDR
                     if (console.setupForm.RttyOffsetEnabledA && (console.RX1DSPMode == DSPMode.DIGU || console.RX1DSPMode == DSPMode.DIGL))
                     {
                         int f = Convert.ToInt32(Math.Round(console.CATVFOA, 6) * 1e6);
-                        if (console.RX1DSPMode == DSPMode.DIGU)
-                            f = f + Convert.ToInt32(console.setupForm.RttyOffsetHigh);
-                        else if (console.RX1DSPMode == DSPMode.DIGL)
-                            f = f - Convert.ToInt32(console.setupForm.RttyOffsetLow);
+                        if (console.RX1DSPMode == DSPMode.DIGU) f = f + Convert.ToInt32(console.setupForm.RttyOffsetHigh);
+                        else if (console.RX1DSPMode == DSPMode.DIGL) f = f - Convert.ToInt32(console.setupForm.RttyOffsetLow);
 
                         return AddLeadingZeros(f);
                     }
@@ -2622,10 +2615,8 @@ namespace PowerSDR
                     (console.RX1DSPMode == DSPMode.DIGU || console.RX1DSPMode == DSPMode.DIGL))
                 {
                     int f = int.Parse(s);
-                    if (console.RX1DSPMode == DSPMode.DIGU)
-                        f = f - Convert.ToInt32(console.setupForm.RttyOffsetHigh);
-                    else if (console.RX1DSPMode == DSPMode.DIGL)
-                        f = f + Convert.ToInt32(console.setupForm.RttyOffsetLow);
+                    if (console.RX1DSPMode == DSPMode.DIGU) f = f - Convert.ToInt32(console.setupForm.RttyOffsetHigh);
+                    else if (console.RX1DSPMode == DSPMode.DIGL) f = f + Convert.ToInt32(console.setupForm.RttyOffsetLow);
                     s = AddLeadingZeros(f);
                     s = s.Insert(5, separator);
                 }
@@ -2637,14 +2628,11 @@ namespace PowerSDR
             }
             else if (s.Length == parser.nGet)
             {
-                if (console.setupForm.RttyOffsetEnabledB &&
-                    (console.RX1DSPMode == DSPMode.DIGU || console.RX1DSPMode == DSPMode.DIGL))
+                if (console.setupForm.RttyOffsetEnabledB && (console.RX1DSPMode == DSPMode.DIGU || console.RX1DSPMode == DSPMode.DIGL))
                 {
                     int f = Convert.ToInt32(Math.Round(console.CATVFOB, 6) * 1e6);
-                    if (console.RX1DSPMode == DSPMode.DIGU)
-                        f = f + Convert.ToInt32(console.setupForm.RttyOffsetHigh);
-                    else if (console.RX1DSPMode == DSPMode.DIGL)
-                        f = f - Convert.ToInt32(console.setupForm.RttyOffsetLow);
+                    if (console.RX1DSPMode == DSPMode.DIGU) f = f + Convert.ToInt32(console.setupForm.RttyOffsetHigh);
+                    else if (console.RX1DSPMode == DSPMode.DIGL) f = f - Convert.ToInt32(console.setupForm.RttyOffsetLow);
                     return AddLeadingZeros(f);
                 }
                 else

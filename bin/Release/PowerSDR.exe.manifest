@@ -4,7 +4,7 @@
   <description asmv2:iconFile="PowerSDR.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="PowerSDR" version="2.8.0.305" language="neutral" processorArchitecture="x86" />
+    <assemblyIdentity name="PowerSDR" version="2.8.0.306" language="neutral" processorArchitecture="x86" />
     <commandLine file="PowerSDR.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -175,14 +175,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerSDR.exe" size="17514496">
-      <assemblyIdentity name="PowerSDR" version="2.8.0.305" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerSDR.exe" size="17461248">
+      <assemblyIdentity name="PowerSDR" version="2.8.0.306" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>kUrezXTaBua4ggYrDCXMu9MynsOJU+ZHdxOCjSk4uA0=</dsig:DigestValue>
+        <dsig:DigestValue>SceG+vkq1gmP8tWl0rw80CLZ9LsGgq08M8uPRd8lMbw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -448,6 +448,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>KqCzUi+LXI6nkt6xWhd/3tV0ivCv/skDOr+WewQ1GU4=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Resources\zoomOrg.png" size="4995">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>pmiMTyRzVTnBRmr0yMZKYiX/9Nrfb2ugaHw5a70WCdM=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\zoomRed.png" size="5009">

@@ -146,6 +146,7 @@ namespace PowerSDR
             this.grpGenAutoMute = new System.Windows.Forms.GroupBoxTS();
             this.chkGenAutoMute = new System.Windows.Forms.CheckBoxTS();
             this.grpGenTuningOptions = new System.Windows.Forms.GroupBoxTS();
+            this.chkClickTuneCatMatch = new System.Windows.Forms.CheckBoxTS();
             this.udOptClickTuneOffsetDIGU = new System.Windows.Forms.NumericUpDownTS();
             this.lblOptClickTuneDIGL = new System.Windows.Forms.LabelTS();
             this.udOptClickTuneOffsetDIGL = new System.Windows.Forms.NumericUpDownTS();
@@ -1282,6 +1283,7 @@ namespace PowerSDR
             this.textBoxSAVE = new System.Windows.Forms.TextBoxTS();
             this.btnResetDB = new System.Windows.Forms.ButtonTS();
             this.chkAlwaysOnTop1 = new System.Windows.Forms.CheckBoxTS();
+            this.chkCDigitalOffsetMatch = new System.Windows.Forms.CheckBoxTS();
             this.tcSetup.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tcGeneral.SuspendLayout();
@@ -3061,16 +3063,29 @@ namespace PowerSDR
             // 
             // grpGenTuningOptions
             // 
+            this.grpGenTuningOptions.Controls.Add(this.chkClickTuneCatMatch);
             this.grpGenTuningOptions.Controls.Add(this.udOptClickTuneOffsetDIGU);
             this.grpGenTuningOptions.Controls.Add(this.lblOptClickTuneDIGL);
             this.grpGenTuningOptions.Controls.Add(this.udOptClickTuneOffsetDIGL);
             this.grpGenTuningOptions.Controls.Add(this.lblOptClickTuneDIGU);
-            this.grpGenTuningOptions.Location = new System.Drawing.Point(8, 160);
+            this.grpGenTuningOptions.Location = new System.Drawing.Point(8, 158);
             this.grpGenTuningOptions.Name = "grpGenTuningOptions";
-            this.grpGenTuningOptions.Size = new System.Drawing.Size(144, 80);
+            this.grpGenTuningOptions.Size = new System.Drawing.Size(144, 84);
             this.grpGenTuningOptions.TabIndex = 25;
             this.grpGenTuningOptions.TabStop = false;
             this.grpGenTuningOptions.Text = "Click Tune / Filter Offsets";
+            this.toolTip1.SetToolTip(this.grpGenTuningOptions, resources.GetString("grpGenTuningOptions.ToolTip"));
+            // 
+            // chkClickTuneCatMatch
+            // 
+            this.chkClickTuneCatMatch.Image = null;
+            this.chkClickTuneCatMatch.Location = new System.Drawing.Point(4, 65);
+            this.chkClickTuneCatMatch.Name = "chkClickTuneCatMatch";
+            this.chkClickTuneCatMatch.Size = new System.Drawing.Size(138, 16);
+            this.chkClickTuneCatMatch.TabIndex = 13;
+            this.chkClickTuneCatMatch.Text = "Cat Digital Offset Match";
+            this.toolTip1.SetToolTip(this.chkClickTuneCatMatch, resources.GetString("chkClickTuneCatMatch.ToolTip"));
+            this.chkClickTuneCatMatch.CheckedChanged += new System.EventHandler(this.chkClickTuneCatMatch_CheckedChanged);
             // 
             // udOptClickTuneOffsetDIGU
             // 
@@ -3079,7 +3094,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udOptClickTuneOffsetDIGU.Location = new System.Drawing.Point(72, 24);
+            this.udOptClickTuneOffsetDIGU.Location = new System.Drawing.Point(72, 20);
             this.udOptClickTuneOffsetDIGU.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -3093,8 +3108,7 @@ namespace PowerSDR
             this.udOptClickTuneOffsetDIGU.Name = "udOptClickTuneOffsetDIGU";
             this.udOptClickTuneOffsetDIGU.Size = new System.Drawing.Size(56, 20);
             this.udOptClickTuneOffsetDIGU.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.udOptClickTuneOffsetDIGU, "Determines the frequency offset for click tuning and \r\nthe RX filter\'s center fre" +
-        "quency");
+            this.toolTip1.SetToolTip(this.udOptClickTuneOffsetDIGU, resources.GetString("udOptClickTuneOffsetDIGU.ToolTip"));
             this.udOptClickTuneOffsetDIGU.Value = new decimal(new int[] {
             1500,
             0,
@@ -3106,13 +3120,12 @@ namespace PowerSDR
             // lblOptClickTuneDIGL
             // 
             this.lblOptClickTuneDIGL.Image = null;
-            this.lblOptClickTuneDIGL.Location = new System.Drawing.Point(6, 48);
+            this.lblOptClickTuneDIGL.Location = new System.Drawing.Point(6, 44);
             this.lblOptClickTuneDIGL.Name = "lblOptClickTuneDIGL";
             this.lblOptClickTuneDIGL.Size = new System.Drawing.Size(64, 23);
             this.lblOptClickTuneDIGL.TabIndex = 12;
             this.lblOptClickTuneDIGL.Text = "DIGL (Hz):";
-            this.toolTip1.SetToolTip(this.lblOptClickTuneDIGL, "Determines the frequency offset for click tuning and \r\nthe RX filter\'s center fre" +
-        "quency");
+            this.toolTip1.SetToolTip(this.lblOptClickTuneDIGL, resources.GetString("lblOptClickTuneDIGL.ToolTip"));
             // 
             // udOptClickTuneOffsetDIGL
             // 
@@ -3121,7 +3134,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udOptClickTuneOffsetDIGL.Location = new System.Drawing.Point(72, 48);
+            this.udOptClickTuneOffsetDIGL.Location = new System.Drawing.Point(72, 44);
             this.udOptClickTuneOffsetDIGL.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -3135,8 +3148,7 @@ namespace PowerSDR
             this.udOptClickTuneOffsetDIGL.Name = "udOptClickTuneOffsetDIGL";
             this.udOptClickTuneOffsetDIGL.Size = new System.Drawing.Size(56, 20);
             this.udOptClickTuneOffsetDIGL.TabIndex = 11;
-            this.toolTip1.SetToolTip(this.udOptClickTuneOffsetDIGL, "Determines the frequency offset for click tuning and \r\nthe RX filter\'s center fre" +
-        "quency");
+            this.toolTip1.SetToolTip(this.udOptClickTuneOffsetDIGL, resources.GetString("udOptClickTuneOffsetDIGL.ToolTip"));
             this.udOptClickTuneOffsetDIGL.Value = new decimal(new int[] {
             2210,
             0,
@@ -3148,13 +3160,12 @@ namespace PowerSDR
             // lblOptClickTuneDIGU
             // 
             this.lblOptClickTuneDIGU.Image = null;
-            this.lblOptClickTuneDIGU.Location = new System.Drawing.Point(6, 24);
+            this.lblOptClickTuneDIGU.Location = new System.Drawing.Point(6, 20);
             this.lblOptClickTuneDIGU.Name = "lblOptClickTuneDIGU";
             this.lblOptClickTuneDIGU.Size = new System.Drawing.Size(64, 23);
             this.lblOptClickTuneDIGU.TabIndex = 10;
             this.lblOptClickTuneDIGU.Text = "DIGU (Hz):";
-            this.toolTip1.SetToolTip(this.lblOptClickTuneDIGU, "Determines the frequency offset for click tuning and \r\nthe RX filter\'s center fre" +
-        "quency");
+            this.toolTip1.SetToolTip(this.lblOptClickTuneDIGU, resources.GetString("lblOptClickTuneDIGU.ToolTip"));
             // 
             // grpGeneralOptions
             // 
@@ -3410,7 +3421,7 @@ namespace PowerSDR
             // 
             this.chkImportDBRestrict.AllowDrop = true;
             this.chkImportDBRestrict.Image = null;
-            this.chkImportDBRestrict.Location = new System.Drawing.Point(17, 243);
+            this.chkImportDBRestrict.Location = new System.Drawing.Point(17, 246);
             this.chkImportDBRestrict.Name = "chkImportDBRestrict";
             this.chkImportDBRestrict.Size = new System.Drawing.Size(187, 18);
             this.chkImportDBRestrict.TabIndex = 31;
@@ -5494,6 +5505,8 @@ namespace PowerSDR
             this.chkAudioCorrectIQ.Size = new System.Drawing.Size(88, 16);
             this.chkAudioCorrectIQ.TabIndex = 1;
             this.chkAudioCorrectIQ.Text = "Calibrate I/Q";
+            this.toolTip1.SetToolTip(this.chkAudioCorrectIQ, "Check to correct the raw I/Q signal and avoid any image signals going to the thir" +
+        "d-party software.");
             this.chkAudioCorrectIQ.CheckedChanged += new System.EventHandler(this.chkAudioCorrectIQ_CheckChanged);
             // 
             // chkAudioIQtoVAC
@@ -5504,6 +5517,7 @@ namespace PowerSDR
             this.chkAudioIQtoVAC.Size = new System.Drawing.Size(96, 16);
             this.chkAudioIQtoVAC.TabIndex = 0;
             this.chkAudioIQtoVAC.Text = "Output to VAC";
+            this.toolTip1.SetToolTip(this.chkAudioIQtoVAC, resources.GetString("chkAudioIQtoVAC.ToolTip"));
             this.chkAudioIQtoVAC.CheckedChanged += new System.EventHandler(this.chkAudioIQtoVAC_CheckedChanged);
             // 
             // chkVACCombine
@@ -8976,9 +8990,9 @@ namespace PowerSDR
             this.chkCWDisableUI.Name = "chkCWDisableUI";
             this.chkCWDisableUI.Size = new System.Drawing.Size(109, 32);
             this.chkCWDisableUI.TabIndex = 42;
-            this.chkCWDisableUI.Text = "Disable UI MOX Changes";
-            this.toolTip1.SetToolTip(this.chkCWDisableUI, "If enabled, will automatically switch to CW mode when paddles are used no matter " +
-        "the current mode ");
+            this.chkCWDisableUI.Text = "Disable MOX UI Lockout\r\n";
+            this.toolTip1.SetToolTip(this.chkCWDisableUI, "If enabled, will prevent the User Interface from lockout out most of the controls" +
+        " when in Transmit (MOX). \r\nThis allows you to change modes while in TX.");
             this.chkCWDisableUI.CheckedChanged += new System.EventHandler(this.chkCWDisableUI_CheckedChanged);
             // 
             // grpKeyerConnections
@@ -17811,6 +17825,7 @@ namespace PowerSDR
             // 
             // grpRTTYOffset
             // 
+            this.grpRTTYOffset.Controls.Add(this.chkCDigitalOffsetMatch);
             this.grpRTTYOffset.Controls.Add(this.labelTS4);
             this.grpRTTYOffset.Controls.Add(this.labelTS3);
             this.grpRTTYOffset.Controls.Add(this.udRTTYU);
@@ -17822,12 +17837,13 @@ namespace PowerSDR
             this.grpRTTYOffset.Size = new System.Drawing.Size(168, 120);
             this.grpRTTYOffset.TabIndex = 97;
             this.grpRTTYOffset.TabStop = false;
-            this.grpRTTYOffset.Text = "RTTY Offset";
+            this.grpRTTYOffset.Text = "cat RTTY/Digital Offset";
+            this.toolTip1.SetToolTip(this.grpRTTYOffset, resources.GetString("grpRTTYOffset.ToolTip"));
             // 
             // labelTS4
             // 
             this.labelTS4.Image = null;
-            this.labelTS4.Location = new System.Drawing.Point(108, 69);
+            this.labelTS4.Location = new System.Drawing.Point(108, 58);
             this.labelTS4.Name = "labelTS4";
             this.labelTS4.Size = new System.Drawing.Size(40, 16);
             this.labelTS4.TabIndex = 101;
@@ -17836,7 +17852,7 @@ namespace PowerSDR
             // labelTS3
             // 
             this.labelTS3.Image = null;
-            this.labelTS3.Location = new System.Drawing.Point(24, 69);
+            this.labelTS3.Location = new System.Drawing.Point(24, 58);
             this.labelTS3.Name = "labelTS3";
             this.labelTS3.Size = new System.Drawing.Size(40, 16);
             this.labelTS3.TabIndex = 100;
@@ -17849,7 +17865,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udRTTYU.Location = new System.Drawing.Point(104, 88);
+            this.udRTTYU.Location = new System.Drawing.Point(104, 76);
             this.udRTTYU.Maximum = new decimal(new int[] {
             3000,
             0,
@@ -17863,7 +17879,7 @@ namespace PowerSDR
             this.udRTTYU.Name = "udRTTYU";
             this.udRTTYU.Size = new System.Drawing.Size(48, 20);
             this.udRTTYU.TabIndex = 99;
-            this.toolTip1.SetToolTip(this.udRTTYU, "Sets the DIGU frequency offset");
+            this.toolTip1.SetToolTip(this.udRTTYU, resources.GetString("udRTTYU.ToolTip"));
             this.udRTTYU.Value = new decimal(new int[] {
             2125,
             0,
@@ -17878,7 +17894,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udRTTYL.Location = new System.Drawing.Point(16, 88);
+            this.udRTTYL.Location = new System.Drawing.Point(16, 76);
             this.udRTTYL.Maximum = new decimal(new int[] {
             3000,
             0,
@@ -17892,7 +17908,7 @@ namespace PowerSDR
             this.udRTTYL.Name = "udRTTYL";
             this.udRTTYL.Size = new System.Drawing.Size(48, 20);
             this.udRTTYL.TabIndex = 98;
-            this.toolTip1.SetToolTip(this.udRTTYL, "Sets the DIGL frequency offset");
+            this.toolTip1.SetToolTip(this.udRTTYL, resources.GetString("udRTTYL.ToolTip"));
             this.udRTTYL.Value = new decimal(new int[] {
             2125,
             0,
@@ -17903,11 +17919,12 @@ namespace PowerSDR
             // chkRTTYOffsetEnableB
             // 
             this.chkRTTYOffsetEnableB.Image = null;
-            this.chkRTTYOffsetEnableB.Location = new System.Drawing.Point(16, 40);
+            this.chkRTTYOffsetEnableB.Location = new System.Drawing.Point(16, 35);
             this.chkRTTYOffsetEnableB.Name = "chkRTTYOffsetEnableB";
             this.chkRTTYOffsetEnableB.Size = new System.Drawing.Size(136, 24);
             this.chkRTTYOffsetEnableB.TabIndex = 97;
             this.chkRTTYOffsetEnableB.Text = "Enable Offset VFO B";
+            this.toolTip1.SetToolTip(this.chkRTTYOffsetEnableB, resources.GetString("chkRTTYOffsetEnableB.ToolTip"));
             this.chkRTTYOffsetEnableB.CheckedChanged += new System.EventHandler(this.chkRTTYOffsetEnableB_CheckedChanged);
             // 
             // chkRTTYOffsetEnableA
@@ -17918,6 +17935,7 @@ namespace PowerSDR
             this.chkRTTYOffsetEnableA.Size = new System.Drawing.Size(136, 24);
             this.chkRTTYOffsetEnableA.TabIndex = 96;
             this.chkRTTYOffsetEnableA.Text = "Enable Offset VFO A";
+            this.toolTip1.SetToolTip(this.chkRTTYOffsetEnableA, resources.GetString("chkRTTYOffsetEnableA.ToolTip"));
             this.chkRTTYOffsetEnableA.CheckedChanged += new System.EventHandler(this.chkRTTYOffsetEnableA_CheckedChanged);
             // 
             // tpTests
@@ -18792,6 +18810,17 @@ namespace PowerSDR
             this.chkAlwaysOnTop1.TabIndex = 59;
             this.chkAlwaysOnTop1.Text = "Always On Top";
             this.chkAlwaysOnTop1.CheckedChanged += new System.EventHandler(this.ChkAlwaysOnTop1_CheckedChanged);
+            // 
+            // chkCDigitalOffsetMatch
+            // 
+            this.chkCDigitalOffsetMatch.Image = null;
+            this.chkCDigitalOffsetMatch.Location = new System.Drawing.Point(14, 99);
+            this.chkCDigitalOffsetMatch.Name = "chkCDigitalOffsetMatch";
+            this.chkCDigitalOffsetMatch.Size = new System.Drawing.Size(138, 16);
+            this.chkCDigitalOffsetMatch.TabIndex = 102;
+            this.chkCDigitalOffsetMatch.Text = "Click Tune Offset Match";
+            this.toolTip1.SetToolTip(this.chkCDigitalOffsetMatch, resources.GetString("chkCDigitalOffsetMatch.ToolTip"));
+            this.chkCDigitalOffsetMatch.CheckedChanged += new System.EventHandler(this.chkCDigitalOffsetMatch_CheckedChanged);
             // 
             // Setup
             // 
@@ -20412,6 +20441,8 @@ namespace PowerSDR
         public System.Windows.Forms.NumericUpDownTS udDisplayWaterfallHighLevel;
         public System.Windows.Forms.NumericUpDownTS udDisplayGridRX2Min;
         private System.Windows.Forms.LabelTS labelTS76;
+        private System.Windows.Forms.CheckBoxTS chkClickTuneCatMatch;
+        private System.Windows.Forms.CheckBoxTS chkCDigitalOffsetMatch;
     } // class setup
 
 
