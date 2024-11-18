@@ -90121,15 +90121,18 @@ namespace PowerSDR
             // string strParams = " /n /A \"pagemode=bookmarks&nameddest=" + strNamedDestination + "\" \"" + strFilePath + "\"";
             // Process.Start("AcroRd32.exe", strParams);
 
-            try
+
+
+            try //.307 move manuals around
             {
-                System.Diagnostics.Process.Start(@"C:\Program Files (x86)\FlexRadio Systems\PowerSDR v2.8.0\PowerSDR ke9ns keyboard shortcuts.pdf");
+                System.Diagnostics.Process.Start(@"C:\Program Files (x86)\FlexRadio Systems\PowerSDR v2.8.0\FLEX-5000_Owners_Manual_v2.8.pdf");
             }
-            catch(Exception f)
+            catch (Exception f)
             {
-                Debug.WriteLine("keyboard shortcut fault " + f);
+                Debug.WriteLine("Manual file missing " + f);
             }
 
+           
 
         }
 
@@ -90155,12 +90158,13 @@ namespace PowerSDR
             {
                 try
                 {
-                    System.Diagnostics.Process.Start(@"C:\Program Files (x86)\FlexRadio Systems\PowerSDR v2.8.0\FLEX-5000_Owners_Manual_v2.8.pdf");
+                    System.Diagnostics.Process.Start(@"C:\Program Files (x86)\FlexRadio Systems\PowerSDR v2.8.0\PowerSDR ke9ns keyboard shortcuts.pdf");
                 }
                 catch (Exception f)
                 {
-                    Debug.WriteLine("Manual file missing " + f);
+                    Debug.WriteLine("keyboard shortcut fault " + f);
                 }
+
 
             }
 
