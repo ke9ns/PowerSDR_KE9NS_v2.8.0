@@ -312,6 +312,12 @@ namespace PowerSDR
             Darken(); // set the world map brightness
 
 
+            if (SpotAge.chkPanSpotBlank.Checked) SpotBackground = true; //.307
+            else SpotBackground = false;
+       
+            if (SpotAge.chkPanLoTWColor.Checked) SpotLoTWColor = true; //.307
+            else SpotLoTWColor = false;
+
         } // spotcontrol
 
         protected override void Dispose(bool disposing)

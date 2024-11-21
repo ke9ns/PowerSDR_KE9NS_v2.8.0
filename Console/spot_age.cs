@@ -42,8 +42,8 @@ namespace PowerSDR
         public NumericUpDownTS udSpotAge;
         private Label label5;
         private System.ComponentModel.IContainer components;
-        private CheckBoxTS chkPanSpotBlank;
-        private CheckBoxTS chkPanLoTWColor;
+        public CheckBoxTS chkPanSpotBlank;
+        public CheckBoxTS chkPanLoTWColor;
         public CheckBoxTS chkPanNoVert;
         public static SpotControl SpotForm;                       // ke9ns add DX spotter function
 

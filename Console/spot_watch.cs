@@ -125,7 +125,7 @@ namespace PowerSDR
             this.Controls.Add(this.watchBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SpotWatch";
-            this.Text = "Spotter Settings";
+            this.Text = "Spot Watch";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.SpotWatch_Closing);
             this.ResumeLayout(false);
             this.PerformLayout();
