@@ -82,8 +82,7 @@ PRIVATE BOOLEAN gethold (unsigned int proc_thread)
 
 }
 
-PRIVATE void
-puthold(unsigned int proc_thread)
+PRIVATE void puthold(unsigned int proc_thread)
 {
 	   if (ringb_float_write_space (top[proc_thread].jack.ring.o.l) >= top[proc_thread].hold.size.frames)
 		{
@@ -374,6 +373,12 @@ DttSP_EXP void Audio_Callback (float *input_l, float *input_r, float *output_l,	
 // ke9ns  used in audio.cs routine  audio_callback2 ( DttSP.ExchangeSamples2 routine in audio.cs)
 // ke9ns threadno:   1=demo/1500, 2=RX1 3000/5000,  3=RX2 5000 enabled
 //                   1=Transmit/rx,  2=receive only, 3=receive only
+// 
+// 	 l0 = input[0]; left and right channels for Main RX1
+//   r0 = input[1];
+// 
+//   l2 = input[4]; left and right channels for 2nd RX2
+//   r2 = input[5];
 //=======================================================================================================
 DttSP_EXP void Audio_Callback2 (float **input, float **output, unsigned int nframes)
 {
@@ -445,6 +450,8 @@ DttSP_EXP void Audio_Callback2 (float **input, float **output, unsigned int nfra
 		{
 			if (diversity.flag && (thread == 0))
 			{
+				
+
 				if ((ringb_float_write_space (top[2].jack.ring.i.l) >= nframes)	&& (ringb_float_write_space (top[2].jack.ring.i.r) >= nframes))
 				{
 					REAL *l0 = input[0];
@@ -459,8 +466,9 @@ DttSP_EXP void Audio_Callback2 (float **input, float **output, unsigned int nfra
 
 						A = Cscl(Cadd(A,Cmul(B,diversity.scalar)),diversity.gain); // ke9ns: new A = scale signal with diversity.gain = A + (B * diversity.scaler)
 
-						ringb_float_write (top[0].jack.ring.i.l, &A.re, 1);
-						ringb_float_write (top[0].jack.ring.i.r, &A.im, 1);
+						ringb_float_write (top[0].jack.ring.i.l, &A.re, 1); // write the new A which is has RX2 scalared into RX1, into the "jack" struct
+						ringb_float_write (top[0].jack.ring.i.r, &A.im, 1); // ringb_float_t *l, *r;  // ke9ns: ringb_float_t = float *buf; size_t wptr, rptr, size, mask;  buffer, write pointer, read pointer, size of buffer, mask???
+
 					}
 
 					/*ringb_float_write (top[thread].jack.auxr.i.l, input[l], nframes);
@@ -503,7 +511,7 @@ DttSP_EXP void Audio_Callback2 (float **input, float **output, unsigned int nfra
 		// if enough accumulated in ring, fire dsp
 		if ((ringb_float_read_space(top[thread].jack.ring.i.l) >= top[thread].hold.size.frames) && (ringb_float_read_space(top[thread].jack.ring.i.r) >= top[thread].hold.size.frames))
 		{
-			sem_post(&top[thread].sync.buf.sem);
+			sem_post(&top[thread].sync.buf.sem); // sem_t sem; sdrexport.h this contains the buffer ring data
 		}
 
 
@@ -517,7 +525,7 @@ DttSP_EXP void Audio_Callback2 (float **input, float **output, unsigned int nfra
 //========================================================================
 
 
-DttSP_EXP void process_samples_thread (unsigned int proc_thread)
+DttSP_EXP void process_samples_thread (unsigned int proc_thread)  // ke9ns: thread started in console.cs  audio_process_thread[proc_thread] = new Thread(new ThreadStart(pstc[proc_thread].ProcessSampleThread));
 {
 	while (top[proc_thread].running)
 	{
@@ -556,7 +564,7 @@ void closeup ()
 	{
 		top[thread].running = FALSE;
 		top[thread].susp = TRUE;
-		Sleep (96);
+		Sleep(396);										// .310 Sleep (96);	
 		ringb_float_free (top[thread].jack.auxr.i.l);
 		ringb_float_free (top[thread].jack.auxr.i.r);
 		ringb_float_free (top[thread].jack.auxr.o.l);
@@ -569,7 +577,7 @@ void closeup ()
 
 		destroy_workspace (thread);
 	}
-	Sleep(100);
+	Sleep(400);									// .310 Sleep(100);
 	//fprintf(stderr,"Done with destructor\n"),fflush(stderr);
 }
 
@@ -596,11 +604,11 @@ setup_local_audio (unsigned int thread)
 }
 
 
-PRIVATE void
-setup_system_audio (unsigned int thread)
+PRIVATE void setup_system_audio (unsigned int thread)
 {
 
-	sprintf (top[thread].jack.name, "sdr-%d-%0u", top[thread].pid,thread);
+//	sprintf (top[thread].jack.name, "sdr-%0u-%0u", top[thread].pid,thread); // .310 removed sprintf (top[thread].jack.name, "sdr-%d-%0u", top[thread].pid,thread);
+																			// pid is unsigned long (4 bytes)
 	top[thread].jack.size = 2048;
 
 	memset ((char *) &top[thread].jack.blow, 0, sizeof (top[thread].jack.blow));
@@ -612,6 +620,7 @@ setup_system_audio (unsigned int thread)
 	top[thread].jack.auxr.i.r = ringb_float_create (top[thread].jack.size * loc[thread].mult.ring);
 	top[thread].jack.auxr.o.l = ringb_float_create (top[thread].jack.size * loc[thread].mult.ring);
 	top[thread].jack.auxr.o.r = ringb_float_create (top[thread].jack.size * loc[thread].mult.ring);
+
 	ringb_float_clear (top[thread].jack.ring.o.l, top[thread].hold.size.frames);
 	ringb_float_clear (top[thread].jack.ring.o.r, top[thread].hold.size.frames);
 }
@@ -630,19 +639,19 @@ PRIVATE void setup_defaults (unsigned int thread)
 {
 	//fprintf(stderr,"I am inside setup defaults thread: %0u\n",thread),fflush(stderr);
 	loc[thread].name[0] = 0;		// no default name for jack client
-	sprintf (loc[thread].path.rcfile, "%s%0lu_%0u", RCBASE, top[thread].pid,thread);
-	sprintf (loc[thread].path.parm, "%s%0lu_%0u", PARMPATH, top[thread].pid,thread);
-	sprintf (loc[thread].path.meter, "%s%0lu_%0u", METERPATH, top[thread].pid,thread);
-	sprintf (loc[thread].path.spec, "%s%0lu_%0u", SPECPATH, top[thread].pid,thread);
-	sprintf (loc[thread].path.wisdom, "%s%0lu_%0u", WISDOMPATH, top[thread].pid,thread);
-	loc[thread].def.rate = DEFRATE;
-	loc[thread].def.size = DEFSIZE;
-	loc[thread].def.nrx = MAXRX;
-	loc[thread].def.mode = DEFMODE;
-	loc[thread].def.spec = DEFSPEC; // ke9ns: this is specsize= uni[thread].spec.size;
+	sprintf (loc[thread].path.rcfile, "%s%0lu_%0u", RCBASE, top[thread].pid,thread); //  .DttSPrc
+	sprintf (loc[thread].path.parm, "%s%0lu_%0u", PARMPATH, top[thread].pid,thread);    //  \\\\.\\pipe\\SDRcommands    (escape sequence) \\.\SDRcommands (access to a pipe named SDRcommands)
+	sprintf (loc[thread].path.meter, "%s%0lu_%0u", METERPATH, top[thread].pid,thread);  //  \\\\.\\pipe\\SDRmeter                          \\.\SDRmeter
+	sprintf (loc[thread].path.spec, "%s%0lu_%0u", SPECPATH, top[thread].pid,thread);    //  \\\\.\\pipe\\SDRspectrum                       \\.\SDRspectrum
+	sprintf (loc[thread].path.wisdom, "%s%0lu_%0u", WISDOMPATH, top[thread].pid,thread); //  .\\wisdom                                      .\wisdom  (refers to the file wisdom in the current directory)
+	loc[thread].def.rate = DEFRATE; // 48000
+	loc[thread].def.size = DEFSIZE; // 4096
+	loc[thread].def.nrx = MAXRX; // 2
+	loc[thread].def.mode = DEFMODE; // usb
+	loc[thread].def.spec = DEFSPEC; // 4096 ke9ns: this is specsize= uni[thread].spec.size;
 	
-	loc[thread].mult.ring = RINGMULT;
-	loc[thread].def.comp = DEFCOMP;
+	loc[thread].mult.ring = RINGMULT; // 4
+	loc[thread].def.comp = DEFCOMP; //512
 
 } // setup_defaults
 

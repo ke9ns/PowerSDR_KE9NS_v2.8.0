@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-
+// ke9ns: Contouring code for VOACAP
 
 // Conrec is a straightforward method of contouring some surface represented 
 // as a regular triangular mesh.

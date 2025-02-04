@@ -87,6 +87,7 @@ namespace PowerSDR
             this.btnReset = new System.Windows.Forms.Button();
             this.chkAlwaysOnTop = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.chkESCRX2Gain = new System.Windows.Forms.CheckBox();
             this.btnBump180 = new System.Windows.Forms.ButtonTS();
             this.btnBump45 = new System.Windows.Forms.ButtonTS();
             this.udAngle = new System.Windows.Forms.NumericUpDownTS();
@@ -183,6 +184,7 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.chkEnable, resources.GetString("chkEnable.ToolTip"));
             this.chkEnable.UseVisualStyleBackColor = false;
             this.chkEnable.CheckedChanged += new System.EventHandler(this.chkEnable_CheckedChanged);
+            this.chkEnable.MouseDown += new System.Windows.Forms.MouseEventHandler(this.chkEnable_MouseDown);
             // 
             // btnReset
             // 
@@ -215,6 +217,19 @@ namespace PowerSDR
             this.chkAlwaysOnTop.TabIndex = 52;
             this.chkAlwaysOnTop.Text = "Always on Top";
             this.chkAlwaysOnTop.CheckedChanged += new System.EventHandler(this.ChkAlwaysOnTop_CheckedChanged);
+            // 
+            // chkESCRX2Gain
+            // 
+            this.chkESCRX2Gain.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chkESCRX2Gain.BackColor = System.Drawing.Color.Transparent;
+            this.chkESCRX2Gain.ForeColor = System.Drawing.Color.White;
+            this.chkESCRX2Gain.Location = new System.Drawing.Point(57, 262);
+            this.chkESCRX2Gain.Name = "chkESCRX2Gain";
+            this.chkESCRX2Gain.Size = new System.Drawing.Size(81, 20);
+            this.chkESCRX2Gain.TabIndex = 53;
+            this.chkESCRX2Gain.Text = "RX2 -mag";
+            this.chkESCRX2Gain.UseVisualStyleBackColor = false;
+            this.chkESCRX2Gain.CheckedChanged += new System.EventHandler(this.chkESCRX2Gain_CheckedChanged);
             // 
             // btnBump180
             // 
@@ -254,7 +269,7 @@ namespace PowerSDR
             // 
             // udAngle
             // 
-            this.udAngle.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.udAngle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.udAngle.DecimalPlaces = 3;
             this.udAngle.Increment = new decimal(new int[] {
             1,
@@ -275,6 +290,7 @@ namespace PowerSDR
             this.udAngle.Name = "udAngle";
             this.udAngle.Size = new System.Drawing.Size(56, 20);
             this.udAngle.TabIndex = 6;
+            this.udAngle.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.udAngle.Value = new decimal(new int[] {
             0,
             0,
@@ -284,8 +300,7 @@ namespace PowerSDR
             // 
             // udR
             // 
-            this.udR.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.udR.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.udR.DecimalPlaces = 3;
             this.udR.Increment = new decimal(new int[] {
             1,
@@ -304,8 +319,9 @@ namespace PowerSDR
             0,
             -2147483648});
             this.udR.Name = "udR";
-            this.udR.Size = new System.Drawing.Size(45, 20);
+            this.udR.Size = new System.Drawing.Size(58, 20);
             this.udR.TabIndex = 5;
+            this.udR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.udR.Value = new decimal(new int[] {
             0,
             0,
@@ -319,6 +335,7 @@ namespace PowerSDR
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(303, 347);
+            this.Controls.Add(this.chkESCRX2Gain);
             this.Controls.Add(this.chkAlwaysOnTop);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnBump180);
@@ -349,22 +366,20 @@ namespace PowerSDR
 
         }
         #endregion
-
-        private System.Windows.Forms.PictureBox picRadar;
         private System.Windows.Forms.CheckBox chkAuto;
         private System.Windows.Forms.CheckBox chkLockAngle;
         private System.Windows.Forms.NumericUpDownTS udR;
         private System.Windows.Forms.NumericUpDownTS udAngle;
         private System.Windows.Forms.CheckBox chkLockR;
-        private System.Windows.Forms.Button btnSync;
-        private System.Windows.Forms.CheckBox chkEnable;
         private System.Windows.Forms.ButtonTS btnBump45;
         private System.Windows.Forms.ButtonTS btnBump180;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.CheckBox chkAlwaysOnTop;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.ComponentModel.IContainer components;
-
-      
+        public System.Windows.Forms.Button btnSync;
+        public System.Windows.Forms.CheckBox chkEnable;
+        public System.Windows.Forms.PictureBox picRadar;
+        public System.Windows.Forms.CheckBox chkESCRX2Gain;
     }
 }

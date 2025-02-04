@@ -53,6 +53,8 @@ namespace PowerSDR
             this.pwrMstWatts = new System.Windows.Forms.TextBox();
             this.pwrMstSWR = new System.Windows.Forms.TextBox();
             this.panelTSRadar = new System.Windows.Forms.PanelTS();
+            this.chkESCRX2Mag = new System.Windows.Forms.CheckBox();
+            this.ptbAngle = new PowerSDR.PrettyTrackBar();
             this.btnBump180 = new System.Windows.Forms.ButtonTS();
             this.btnReset = new System.Windows.Forms.RadioButtonTS();
             this.btnEnable = new System.Windows.Forms.RadioButtonTS();
@@ -581,6 +583,7 @@ namespace PowerSDR
             this.panelRX2DSP = new System.Windows.Forms.PanelTS();
             this.ptbSquelch = new PowerSDR.PrettyTrackBar();
             this.panelTSRadar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbAngle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udR)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAngle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picRadar)).BeginInit();
@@ -771,6 +774,8 @@ namespace PowerSDR
             // 
             resources.ApplyResources(this.panelTSRadar, "panelTSRadar");
             this.panelTSRadar.BackColor = System.Drawing.Color.Transparent;
+            this.panelTSRadar.Controls.Add(this.chkESCRX2Mag);
+            this.panelTSRadar.Controls.Add(this.ptbAngle);
             this.panelTSRadar.Controls.Add(this.btnBump180);
             this.panelTSRadar.Controls.Add(this.btnReset);
             this.panelTSRadar.Controls.Add(this.btnEnable);
@@ -785,6 +790,33 @@ namespace PowerSDR
             this.panelTSRadar.Name = "panelTSRadar";
             this.toolTip1.SetToolTip(this.panelTSRadar, resources.GetString("panelTSRadar.ToolTip"));
             this.panelTSRadar.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTSRadar_Paint);
+            // 
+            // chkESCRX2Mag
+            // 
+            resources.ApplyResources(this.chkESCRX2Mag, "chkESCRX2Mag");
+            this.chkESCRX2Mag.ForeColor = System.Drawing.Color.White;
+            this.chkESCRX2Mag.Name = "chkESCRX2Mag";
+            this.toolTip1.SetToolTip(this.chkESCRX2Mag, resources.GetString("chkESCRX2Mag.ToolTip"));
+            this.chkESCRX2Mag.CheckedChanged += new System.EventHandler(this.chkESCRX2Mag_CheckedChanged);
+            // 
+            // ptbAngle
+            // 
+            resources.ApplyResources(this.ptbAngle, "ptbAngle");
+            this.ptbAngle.HeadImage = null;
+            this.ptbAngle.LargeChange = 10;
+            this.ptbAngle.Maximum = 229;
+            this.ptbAngle.Minimum = -229;
+            this.ptbAngle.Name = "ptbAngle";
+            this.ptbAngle.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.ptbAngle.SmallChange = 1;
+            this.ptbAngle.TabStop = false;
+            this.toolTip1.SetToolTip(this.ptbAngle, resources.GetString("ptbAngle.ToolTip"));
+            this.ptbAngle.Value = 0;
+            this.ptbAngle.Scroll += new PowerSDR.PrettyTrackBar.ScrollHandler(this.ptbAngle_Scroll);
+            this.ptbAngle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ptbAngle_MouseDown);
+            this.ptbAngle.MouseHover += new System.EventHandler(this.ptbAngle_MouseHover);
+            this.ptbAngle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ptbAngle_MouseMove);
+            this.ptbAngle.MouseUp += new System.Windows.Forms.MouseEventHandler(this.ptbAngle_MouseUp);
             // 
             // btnBump180
             // 
@@ -812,6 +844,7 @@ namespace PowerSDR
             this.btnEnable.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnEnable.Name = "btnEnable";
             this.toolTip1.SetToolTip(this.btnEnable, resources.GetString("btnEnable.ToolTip"));
+            this.btnEnable.CheckedChanged += new System.EventHandler(this.btnEnable_CheckedChanged);
             this.btnEnable.Click += new System.EventHandler(this.btnEnable_Click);
             this.btnEnable.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnEnable_MouseDown);
             // 
@@ -822,6 +855,7 @@ namespace PowerSDR
             this.btnSync.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnSync.Name = "btnSync";
             this.toolTip1.SetToolTip(this.btnSync, resources.GetString("btnSync.ToolTip"));
+            this.btnSync.CheckedChanged += new System.EventHandler(this.btnSync_CheckedChanged);
             this.btnSync.Click += new System.EventHandler(this.btnSync_Click);
             // 
             // chkLockAngle
@@ -864,30 +898,29 @@ namespace PowerSDR
             this.udR.Name = "udR";
             this.toolTip1.SetToolTip(this.udR, resources.GetString("udR.ToolTip"));
             this.udR.Value = new decimal(new int[] {
+            5,
             0,
             0,
-            0,
-            0});
+            65536});
             this.udR.ValueChanged += new System.EventHandler(this.udR_ValueChanged);
             // 
             // udAngle
             // 
             resources.ApplyResources(this.udAngle, "udAngle");
             this.udAngle.BackColor = System.Drawing.Color.Black;
-            this.udAngle.DecimalPlaces = 3;
             this.udAngle.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.udAngle.Increment = new decimal(new int[] {
-            10,
+            1,
             0,
             0,
-            196608});
+            0});
             this.udAngle.Maximum = new decimal(new int[] {
-            4,
+            229,
             0,
             0,
             0});
             this.udAngle.Minimum = new decimal(new int[] {
-            4,
+            229,
             0,
             0,
             -2147483648});
@@ -6724,6 +6757,7 @@ namespace PowerSDR
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.Console_MouseWheel);
             this.Resize += new System.EventHandler(this.Console_Resize);
             this.panelTSRadar.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ptbAngle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udR)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udAngle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picRadar)).EndInit();
@@ -7051,7 +7085,6 @@ namespace PowerSDR
         private System.Windows.Forms.PictureBox picSquelch;
         private System.Windows.Forms.CheckBoxTS chkRX2Squelch;
         private System.Windows.Forms.PictureBox picRX2Squelch;
-        private System.Windows.Forms.CheckBoxTS chkRX1Preamp;
         private System.Windows.Forms.CheckBoxTS chkRX2Mute;
         private System.Windows.Forms.CheckBoxTS chkRX2DisplayPeak;
         private System.Windows.Forms.ComboBoxTS comboRX2DisplayMode;
@@ -7416,6 +7449,9 @@ namespace PowerSDR
         public System.Windows.Forms.CheckBoxTS chkFMCTCSS;
         private System.Windows.Forms.ButtonTS btnTNFAdd2;
         public System.Windows.Forms.CheckBoxTS chkRX2Preamp;
+        public PrettyTrackBar ptbAngle;
+        public System.Windows.Forms.CheckBox chkESCRX2Mag;
+        public System.Windows.Forms.CheckBoxTS chkRX1Preamp;
     } // class console
 
 

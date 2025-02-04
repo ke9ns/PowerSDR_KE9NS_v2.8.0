@@ -39,4 +39,4 @@ struct _rx rx[3][MAXRX];
 
 struct _tx tx[3];
 
-struct _top top[3];
+struct _top top[3]; // top ring struct with 3 possible threads

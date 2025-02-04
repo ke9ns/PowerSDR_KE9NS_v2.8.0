@@ -4,7 +4,7 @@
   <description asmv2:iconFile="PowerSDR.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="PowerSDR" version="2.8.0.307" language="neutral" processorArchitecture="x86" />
+    <assemblyIdentity name="PowerSDR" version="2.8.0.310" language="neutral" processorArchitecture="x86" />
     <commandLine file="PowerSDR.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Xd5pZxdEo6nvI4IFpw+9WHgt5ZIfHgtB9r99pN54Apc=</dsig:DigestValue>
+        <dsig:DigestValue>17PUn69FLSRYUWZfI1fYtKdj/SfY+eyPCmXkpT5Fw0g=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -175,14 +175,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerSDR.exe" size="17461248">
-      <assemblyIdentity name="PowerSDR" version="2.8.0.307" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerSDR.exe" size="17477632">
+      <assemblyIdentity name="PowerSDR" version="2.8.0.310" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>v/FVLRZ/vkJXDwc0FH31/fRlS0BlHf6Fe4fEOUNCWzI=</dsig:DigestValue>
+        <dsig:DigestValue>OGGMtbMUaSdliCHJvhskTZ6XEj9vqkeuFbsm4O1JjBs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -132,6 +132,8 @@ namespace PowerSDR
             f.Name = f.Name.Replace("ptbDisplayZoom2", "ptbDisplayZoom"); // ke9ns .219
             f.Name = f.Name.Replace("ptbDisplayPan2", "ptbDisplayPan"); // ke9ns
 
+            f.Name = f.Name.Replace("ptbAngle", "ptbRX1Gain"); // ke9ns .310
+          
 
             f.Name = f.Name.Replace("checkVOX", "chkVOX"); // ke9ns add
             f.Name = f.Name.Replace("prettyTrackBarVOX", "ptbVOX"); // ke9ns add
@@ -730,6 +732,8 @@ namespace PowerSDR
             s = s.Replace("ptbDisplayZoom2", "ptbDisplayZoom"); // ke9ns add .219
             s = s.Replace("ptbDisplayPan2", "ptbDisplayPan"); // ke9ns add
 
+            s = s.Replace("ptbAngle", "ptbRX1Gain"); // ke9ns .310
+
             s = s.Replace("btnBandHF1", "btnBandHF"); // ke9ns add
             s = s.Replace("GN", "VHF"); // ke9ns add 
 
@@ -942,6 +946,8 @@ namespace PowerSDR
 
             s = s.Replace("ptbDisplayZoom2", "ptbDisplayZoom"); // ke9ns add .219
             s = s.Replace("ptbDisplayPan2", "ptbDisplayPan"); // ke9ns add
+
+            s = s.Replace("ptbAngle", "ptbRX1Gain"); // ke9ns .310
 
             s = s.Replace("btnBandHF1", "btnBandHF"); // ke9ns add
             s = s.Replace("GN", "VHF"); // ke9ns add
@@ -1370,6 +1376,8 @@ namespace PowerSDR
             s = s.Replace("ptbDisplayZoom2", "ptbDisplayZoom"); // ke9ns add .219
             s = s.Replace("ptbDisplayPan2", "ptbDisplayPan"); // ke9ns add
 
+            s = s.Replace("ptbAngle", "ptbRX1Gain"); // ke9ns .310
+
             s = s.Replace("btnBandHF1", "btnBandHF"); // ke9ns add
             s = s.Replace("GN", "VHF"); // ke9ns add
 
@@ -1608,6 +1616,8 @@ namespace PowerSDR
             s = s.Replace("ptbDisplayZoom2", "ptbDisplayZoom"); // ke9ns add .219
             s = s.Replace("ptbDisplayPan2", "ptbDisplayPan"); // ke9ns add
 
+            s = s.Replace("ptbAngle", "ptbRX1Gain"); // ke9ns .310
+
             s = s.Replace("btnBandHF1", "btnBandHF"); // ke9ns add to allow HF1 to use the skin of HF buttons
             s = s.Replace("GN", "VHF"); // ke9ns add  to allow GN to use the skin of VHF buttons
 
@@ -1793,6 +1803,8 @@ namespace PowerSDR
 
             c.Name = c.Name.Replace("ptbDisplayZoom2", "ptbDisplayZoom"); //.219
             c.Name = c.Name.Replace("ptbDisplayPan2", "ptbDisplayPan");
+
+            c.Name = c.Name.Replace("ptbAngle", "ptbRX1Gain"); // ke9ns .310
 
             c.Name = c.Name.Replace("btnBandHF1", "btnBandHF");
             c.Name = c.Name.Replace("GN", "VHF"); // ke9ns add

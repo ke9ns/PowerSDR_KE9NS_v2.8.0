@@ -145,27 +145,31 @@ size_t ringb_write_space (const ringb_t * rb)
 		return rb->size - 1;
 }
 
-size_t ringb_float_write_space (const ringb_float_t * rb)
+// ke9ns: ringb_float_t = float *buf; size_t wptr, rptr, size, mask;  buffer, write pointer, read pointer, size of buffer, mask???
+
+size_t ringb_float_write_space (const ringb_float_t * rb) //ke9ns: rb is the address of the struct ringb_float_t      
+
 {
-	size_t w = rb->wptr, r = rb->rptr;
-	if (w > r)
-		return ((rb->size + r - w) & rb->mask) - 1;
-	else if (w < r)
-		return r - w - 1;
-	else
-		return rb->size - 1;
+	size_t w = rb->wptr, r = rb->rptr; //ke9ns: w=address of the write pointer, r=address of the read pointer
+
+	if (w > r) return ((rb->size + r - w) & rb->mask) - 1;   //ke9ns: if the write > read adress, return  
+	else if (w < r) return r - w - 1; // ke9ns: if write < read address, return new address for writing
+	else	return rb->size - 1; // ke9ns: if = then size -1
 }
+
+// ke9ns: ringb_t = char *buf; size_t wptr, rptr, size, mask;  buffer, write pointer, read pointer, size of buffer, mask???
 
 size_t ringb_read (ringb_t * rb, char *dest, size_t cnt)
 {
 	size_t volatile free_cnt, cnt2, to_read, n1, n2;
-	if ((free_cnt = ringb_read_space (rb)) == 0)
-		return 0;
+
+	if ((free_cnt = ringb_read_space (rb)) == 0) return 0;
+
 	to_read = cnt > free_cnt ? free_cnt : cnt;
-	if ((cnt2 = rb->rptr + to_read) > rb->size)
-		n1 = rb->size - rb->rptr, n2 = cnt2 & rb->mask;
-	else
-		n1 = to_read, n2 = 0;
+
+	if ((cnt2 = rb->rptr + to_read) > rb->size) n1 = rb->size - rb->rptr, n2 = cnt2 & rb->mask;
+	else n1 = to_read, n2 = 0;
+
 	memcpy (dest, &(rb->buf[rb->rptr]), n1);
 	rb->rptr = (rb->rptr + n1) & rb->mask;
 	if (n2)
@@ -248,15 +252,19 @@ size_t ringb_write (ringb_t * rb, const char *src, size_t cnt)
 size_t ringb_float_write (ringb_float_t * rb, const float *src, size_t cnt)
 {
 	size_t volatile free_cnt, cnt2, to_write, n1, n2;
-	if ((free_cnt = ringb_float_write_space (rb)) == 0)
-		return 0;
-	to_write = cnt > free_cnt ? free_cnt : cnt;
+
+	if ((free_cnt = ringb_float_write_space (rb)) == 0)	return 0;
+
+	to_write = cnt > free_cnt ? free_cnt : cnt; // ternary conditional operator  true=free_cnt : false=cnt
+
 	if ((cnt2 = rb->wptr + to_write) > rb->size)
 		n1 = rb->size - rb->wptr, n2 = cnt2 & rb->mask;
 	else
 		n1 = to_write, n2 = 0;
+
 	memcpy (&(rb->buf[rb->wptr]), src, n1 * sizeof (float));
 	rb->wptr = (rb->wptr + n1) & rb->mask;
+
 	if (n2)
 	{
 		memcpy (&(rb->buf[rb->wptr]), src + n1, n2 * sizeof (float));

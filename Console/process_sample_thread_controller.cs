@@ -40,24 +40,7 @@ namespace PowerSDR
 
         public void ProcessSampleThread()
         {
-            /*Thread.BeginThreadAffinity();
-            int id = AppDomain.GetCurrentThreadId();
-            int num_cpus = Environment.ProcessorCount;
-
-            ProcessThreadCollection threads = Process.GetCurrentProcess().Threads;
-            for (int i = 0; i < threads.Count; i++)
-            {
-                if (threads[i].Id == id)
-                {
-                    threads[i].ProcessorAffinity = (IntPtr)next_cpu;
-                    Thread.EndThreadAffinity();
-                    //next_cpu++;
-                    //if (next_cpu > num_cpus)
-                    //    next_cpu = 1;
-                    break;
-                }
-            }*/
-
+           
             DttSP.ProcessSamplesThread(thread);
         }
     }

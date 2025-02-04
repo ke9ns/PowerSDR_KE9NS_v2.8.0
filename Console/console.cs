@@ -72,7 +72,7 @@
 
 // skin.cs allows you to add buttons to skin on console screen
 
-// skin is in
+// skin is in skin.cs (this is where you can copy skin elements over to new elements on the console screen)
 
 // this.txtMultiText.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
 // CONDITIONALS   NO_WIDETX;NO_MCL_PM;NO_KE9NS;NO_DJ
@@ -877,7 +877,7 @@ namespace PowerSDR
                IntPtr pdv, [In] ref uint pcFonts); // this imports the addfont call
 
         private static FontFamily S1, S2, S3, S4;    // setup 3 font families
-        private static Font ff, ff1, ff2, ff3, ff4, ff5, ff6, ff7, ff8, ff9, ff9a;  // 8 different font sizes and styles
+         public static Font ff, ff1, ff2, ff3, ff4, ff5, ff6, ff7, ff8, ff9, ff9a;  // 8 different font sizes and styles
 
 
         //============================================================================ ke9ns ad
@@ -3777,21 +3777,14 @@ namespace PowerSDR
             for (uint proc_thread = 0; proc_thread < 3; proc_thread++)
             {
                 pstc[proc_thread] = new ProcessSampleThreadController(proc_thread);
-                audio_process_thread[proc_thread] = new Thread(new ThreadStart(pstc[proc_thread].ProcessSampleThread));
+
+                audio_process_thread[proc_thread] = new Thread(new ThreadStart(pstc[proc_thread].ProcessSampleThread)); // dttsp.cs to winmain.c  process_samples_thread
                 audio_process_thread[proc_thread].Name = "Audio Process Thread " + proc_thread.ToString();
                 audio_process_thread[proc_thread].Priority = ThreadPriority.Highest;
                 audio_process_thread[proc_thread].IsBackground = true;
                 audio_process_thread[proc_thread].Start();
 
-                /*				DttSP.SetThreadCom(proc_thread);
-
-								audio_process_thread = new Thread(	// create audio process thread
-									new ThreadStart(DttSP.ProcessSamplesThread));
-								audio_process_thread.Name = "Audio Process Thread ";
-								audio_process_thread.Priority = ThreadPriority.Highest;
-								audio_process_thread.IsBackground = true;
-								audio_process_thread.Start();
-				*/
+               
             }
 
 
@@ -38216,7 +38209,11 @@ namespace PowerSDR
                     }
                 }
 
-                if (ESCSYNC == true && VFOSync == false && FWCEEPROM.RX2OK) picRadar.Invalidate(); //.246 .249
+                if (ESCSYNC == true && VFOSync == false && FWCEEPROM.RX2OK)
+                {
+                    picRadar.Invalidate(); //.246 .249
+                    if (diversityForm != null) diversityForm.picRadar.Invalidate(); //
+                }
 
                 if (ZZOOM == true) //.305
                 {
@@ -38527,7 +38524,12 @@ namespace PowerSDR
                 txtVFOBFreq.Text = value.ToString("f6" );
                 txtVFOBFreq_LostFocus(this, EventArgs.Empty);
 
-                if (ESCSYNC == true && VFOSync == false && FWCEEPROM.RX2OK) picRadar.Invalidate(); //.246 .249
+                if (ESCSYNC == true && VFOSync == false && FWCEEPROM.RX2OK)
+                {
+                    picRadar.Invalidate(); //.246 .249
+                    if (diversityForm != null) diversityForm.picRadar.Invalidate(); //.310
+                   
+                }
 
 
 
@@ -74105,7 +74107,7 @@ namespace PowerSDR
                     if (poweron) //.204 pause to prevent a PFN_ BSOD
                     {
                         PowerOn = false;
-                        Thread.Sleep(700);
+                        Thread.Sleep(100 + (int)setupForm.udPFNDelay.Value); //.307
                     }
                 }
 
@@ -74198,7 +74200,7 @@ namespace PowerSDR
                     if (poweron)  //.204
                     {
                         PowerOn = false;
-                        Thread.Sleep(700);
+                        Thread.Sleep(100+ (int)setupForm.udPFNDelay.Value); //.307
                     }
                 }
                 RX2FilterSizeCalOffset = (float)offset;
@@ -74269,7 +74271,7 @@ namespace PowerSDR
                     if (poweron)  //.204
                     {
                         PowerOn = false;
-                        Thread.Sleep(700);
+                        Thread.Sleep(100+(int)setupForm.udPFNDelay.Value); //.307
                     }
                 }
 
@@ -77182,7 +77184,7 @@ namespace PowerSDR
             if (current_model != Model.FLEX5000 || !FWCEEPROM.RX2OK) return;
 
 
-            if (setupForm != null && setupForm.chkBoxESC.Checked == true)
+            if (setupForm != null && setupForm.chkBoxESC.Checked == true) // ke9ns: new embedded ESC panel in console
             {
                 btnReset_Click(this, EventArgs.Empty);
 
@@ -77191,7 +77193,7 @@ namespace PowerSDR
 
 
             }
-            else
+            else // ke9ns original esc screen
             {
 
                 btnReset_Click(this, EventArgs.Empty);
@@ -89682,14 +89684,14 @@ namespace PowerSDR
 
 
 
-        private Point p2 = new Point(100, 100);
-        private double r = 0.0;
-        private double angle1 = 0.0;
+        private Point p2 = new Point(100, 100); // cross hair location x,y on picradar screen
+        private double r = 0.0; // magnitude of gain
+        private double angle1 = 0.0; // phase offset of RX2 in RADs
         private bool mouse_down = false;
         private double locked_r = 0.0f;
         private double locked_angle = 0.0f;
         private Color imageColorTop, imageColorBottom, consoleColorBottom;
-        private bool ESCSYNC = false; // .249 true=RX1 and RX2 synced up for ESC (red button face), false=not synced up (black button face)
+        public bool ESCSYNC = false; // .249 true=RX1 and RX2 synced up for ESC (red button face), false=not synced up (black button face)
 
         private void picRadar_Paint(object sender, PaintEventArgs e) //.246
         {
@@ -89714,25 +89716,14 @@ namespace PowerSDR
                 string consoleBackgroundPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
                 "\\FlexRadio Systems\\PowerSDR\\Skins\\" + CurrentSkin + "\\Console\\Console.png";
 
-
-                //   btnEnable.BackgroundImage = buttonOffImage;
-                //   btnSync.BackgroundImage = buttonOffImage;
-
-                //    btnReset.BackgroundImage = buttonOffImage;  //w4tme
-
-                //    btnSync.FlatAppearance.BorderColor = imageColorBottom;
-
-                //  btnReset.FlatAppearance.BorderColor = imageColorBottom; //w4tme
-
                 Bitmap panadapterBackground = new Bitmap(panadapterBackgroundPath);
                 imageColorTop = panadapterBackground.GetPixel((int)(panadapterBackground.Width - 5), (int)(panadapterBackground.Height - 5));
                 imageColorBottom = panadapterBackground.GetPixel((int)(panadapterBackground.Width / 9), (int)(panadapterBackground.Height / 9));
 
-
                 Bitmap consoleBackground = new Bitmap(consoleBackgroundPath);
                 consoleColorBottom = consoleBackground.GetPixel((int)(consoleBackground.Width - 5), (int)(consoleBackground.Height - 5));
                 picRadar.BackgroundImage = consoleBackground;
-                //this.BackgroundImage = consoleBackground;
+           
                 this.BackColor = consoleColorBottom;
 
                 RadarColorUpdate = false;
@@ -89765,14 +89756,15 @@ namespace PowerSDR
             g.DrawLine(pen, new Point((int)(size / 2), 0), new Point((int)(size / 2), size - 1));
 
 
-            g.DrawString("0°", ff1, new SolidBrush(Color.LightGray), (int)(size) - 17, (int)(size / 2) - 10); //.247     
+            g.DrawString("0°", ff1, new SolidBrush(Color.LightGray), (int)(size) - 25, (int)(size / 2) - 10); //.247  was -17
+                                                                                                              //
             g.DrawString("90°", ff1, new SolidBrush(Color.LightGray), (int)(size / 2) - 10, 3);
             g.DrawString("180°", ff1, new SolidBrush(Color.LightGray), -1, (int)(size / 2) - 10);
             g.DrawString("-90°", ff1, new SolidBrush(Color.LightGray), (int)(size / 2) - 15, (int)(size) - 12);
 
             g.DrawString("Mag", ff1, new SolidBrush(Color.LightGray), 0, picRadar.Height - 35);
 
-            g.DrawString("Φ rad", ff1, new SolidBrush(Color.LightGray), (int)(size) - 40, picRadar.Height - 35);
+            g.DrawString("°Deg", ff1, new SolidBrush(Color.LightGray), (int)(size) - 50, picRadar.Height - 35);
 
             Pen crosshairPen = new Pen(Color.Red, 2);
 
@@ -89786,9 +89778,9 @@ namespace PowerSDR
 
 
 
-            if (VFOSync == true && RX2SpurReduction == false && SpurReduction == false &&
+            if ( VFOSync == true && RX2SpurReduction == false && SpurReduction == false &&
                 (VFOAFreq == VFOBFreq) && (RX2DSPMode == RX1DSPMODE) && (RX2FilterHigh == RX1FilterHigh)
-                && (RX2FilterLow == RX1FilterLow) && (RX2PreampMode == RX1PreampMode) && (RX2RF == RF)) //.246
+                && (RX2FilterLow == RX1FilterLow) && (Nopresync == true || ((RX2PreampMode == RX1PreampMode) && (RX2RF == RF)))    )        //.246 check if the RX1-RX2 syned up
             {
 
                 //  if (VFOSync == false) dsp.GetDSPRX(1, 0).Copy(dsp.GetDSPRX(0, 0));
@@ -89797,10 +89789,19 @@ namespace PowerSDR
                 btnSync.BackgroundImage = buttonOnImage;
                 ESCSYNC = true; // .249
             }
-            else
+            else // not synced up
             {
                 btnSync.BackgroundImage = buttonOffImage;
                 ESCSYNC = false; // .249
+                if (checkBoxRadar.Checked)
+                {
+                    btnEnable_Click(this, EventArgs.Empty); //.309 if you are out of sync then kill ESC
+
+                    if (diversityForm != null) diversityForm.chkEnable.Checked = false;
+                    if (diversityForm != null) diversityForm.chkEnable_CheckedChanged(this, EventArgs.Empty); //ke9ns: tell the original form to turn off
+
+                }
+
             }
             btnBump180.BackgroundImage = buttonOffImage;
 
@@ -89808,28 +89809,24 @@ namespace PowerSDR
 
         private void btnSync_Click(object sender, EventArgs e) //.246
         {
+               if (RX2SpurReduction) RX2SpurReduction = false; // .309 turn off in order to activate ESC
+               if (SpurReduction) SpurReduction = false;       //.309
 
-            
+
                 VFOSync = true;
                 RX2SpurReduction = SpurReduction;
                 RX2DSPMode = RX1DSPMode;
                 RX2Filter = RX1Filter;
                 RX2FilterLow = RX1FilterLow; //.246
                 RX2FilterHigh = RX1FilterHigh; //.246
-
+                RX2RF = RF;                 //W4TME
 
                 if (Nopresync == false) //.300
                 {
-
                     chkRX2Preamp.Checked = chkRX1Preamp.Checked; //.299
                     RX2PreampMode = RX1PreampMode;
-                
                 }
-                 Nopresync = false; //.300
-
-
-                RX2RF = RF;                 //W4TME
-
+              
                 if (RX1AGCMode != AGCMode.CUSTOM && RX1AGCMode != AGCMode.FIXD) RX2AGCMode = RX1AGCMode;    // no custom AGC mode for RX2 causes UHE
 
                 dsp.GetDSPRX(1, 0).Copy(dsp.GetDSPRX(0, 0));
@@ -89876,7 +89873,7 @@ namespace PowerSDR
 
         private void btnEnable_Click(object sender, EventArgs e) //.246
         {
-            Nopresync = false; //.300
+            Nopresync = false; //.300  no preamp sync
 
             string buttonOffPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) +
                "\\FlexRadio Systems\\PowerSDR\\Skins\\" + CurrentSkin + "\\Console\\chkMON-0.png";
@@ -89890,6 +89887,9 @@ namespace PowerSDR
 
             if (checkBoxRadar.Checked == false)
             {
+                if (RX2SpurReduction) RX2SpurReduction = false; // .309 turn off in order to activate ESC
+                if (SpurReduction) SpurReduction = false;       //.309
+
                 btnSync_Click(this, EventArgs.Empty); // simulate SYNC button press  //.297 mod
 
                 checkBoxRadar.Checked = true; // embedded on console here
@@ -89916,10 +89916,17 @@ namespace PowerSDR
 
         } // btnEnable_Click
 
+        bool ESCAngleOneTime = false; //.310
 
         private void picRadar_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (!mouse_down) return;
+
+            if (ESCAngleOneTime == false) //.310
+            {
+                ESCAngleOneTime = true;
+              
+            }
+            else if (!mouse_down) return;
 
             int W = picRadar.Width;
             int H = picRadar.Height;
@@ -89970,13 +89977,17 @@ namespace PowerSDR
 
                 }
                 udR.Value = (decimal)r;
-                udAngle.Value = (decimal)angle1;
+
+                // was udAngle.Value = (decimal)angle1;
+                udAngle.Value = (decimal)(180 * angle1 / Math.PI);
 
                 UpdateDiversity();
 
                 picRadar.Invalidate();
             }
         } // mousemove
+
+
         private Point PolarToXY(double r, double angle)
         {
             int L = (int)Math.Min(picRadar.Width, picRadar.Height);
@@ -89997,20 +90008,40 @@ namespace PowerSDR
 
         private void udTheta_ValueChanged(object sender, System.EventArgs e) //.246
         {
-            angle1 = (double)udAngle.Value;
+            int angle9 = (int)udAngle.Value; //.310
 
+            angle1 = Math.PI * angle9 / 180; // .310 ke9ns convert to rads
+
+            ptbAngle.Value = angle9; //.310
+
+            int L = (int)Math.Min(picRadar.Width, picRadar.Height);
+            p2 = new Point((int)(r * L / 2 * Math.Cos(angle1)) + L / 2, -(int)(r * L / 2 * Math.Sin(angle1)) + L / 2);
+
+            picRadar.Invalidate();
             UpdateDiversity();
         }
 
         private void UpdateDiversity() //.246  update.c =  DiversityControl = sdr.c = winmain.c = diversity.scaler  	A = Cscl(Cadd(A,Cmul(B,diversity.scalar)),diversity.gain); // ke9ns: new A = scale signal with diversity.gain = A + (B * diversity.scaler)
         {
-            DttSP.SetDiversityScalar((float)((r * 1.5) * Math.Cos(angle1)), (float)((r * 1.5) * Math.Sin(angle1)));
+                    
+        //    Debug.WriteLine("UpdateDiversity" + angle1 +  " , " + Math.Cos(angle1) + " , " + r);
+
+
+            if (chkESCRX2Mag.Checked && r != 0)
+            {
+                DttSP.SetDiversityScalar((float)(Math.Cos(angle1) / (r * 1.5)), (float)(Math.Sin(angle1) /(r * 1.5)) );
+            }
+            else
+            {
+                DttSP.SetDiversityScalar((float)((r * 1.5) * Math.Cos(angle1)), (float)((r * 1.5) * Math.Sin(angle1)));
+            }
+
+            // Math.Sin or Cos in radians      0deg=0rad, 90deg=1.57rad, 180deg=3.0rad, -90deg=-1.57rad
+            // Math.Sin(X) = 0, 1, 0, -1
+            // Math.Cos(X) = 1, 0, -1, 0
 
             int L = (int)Math.Min(picRadar.Width, picRadar.Height);
-
-
             p2 = new Point((int)(r * L / 2 * Math.Cos(angle1)) + L / 2, -(int)(r * L / 2 * Math.Sin(angle1)) + L / 2);
-
 
             picRadar.Invalidate();
         }
@@ -90022,22 +90053,38 @@ namespace PowerSDR
 
         private void panelRX2Mode_MouseClick(object sender, MouseEventArgs e)
         {
-            if (FWCEEPROM.RX2OK) picRadar.Invalidate(); //.246
+            if (FWCEEPROM.RX2OK)
+            {
+                picRadar.Invalidate(); //.246
+              if (diversityForm != null)  diversityForm.picRadar.Invalidate(); //.310
+            }
         }
 
         private void panelRX2Filter_MouseDown(object sender, MouseEventArgs e)
         {
-            if (FWCEEPROM.RX2OK) picRadar.Invalidate(); //.246
+            if (FWCEEPROM.RX2OK)
+            {
+                picRadar.Invalidate(); //.246
+                if (diversityForm != null) diversityForm.picRadar.Invalidate(); //.310
+            }
         }
 
         private void panelFilter_MouseDown(object sender, MouseEventArgs e)
         {
-            if (FWCEEPROM.RX2OK) picRadar.Invalidate(); //.246
+            if (FWCEEPROM.RX2OK)
+            {
+                picRadar.Invalidate(); //.246
+                if (diversityForm != null) diversityForm.picRadar.Invalidate(); //.310
+            }
         }
 
         private void chkVFOSync_MouseDown(object sender, MouseEventArgs me)
         {
-            if (FWCEEPROM.RX2OK) picRadar.Invalidate(); //.246
+            if (FWCEEPROM.RX2OK)
+            {
+                picRadar.Invalidate(); //.246
+                if (diversityForm != null) diversityForm.picRadar.Invalidate(); //.310
+            }
 
             if ((me.Button == System.Windows.Forms.MouseButtons.Right)) //.304
             {
@@ -90082,6 +90129,7 @@ namespace PowerSDR
                 txtVFOAFreq_LostFocus(this, EventArgs.Empty);
               
                 picRadar.Invalidate(); //.297
+                if (diversityForm != null) diversityForm.picRadar.Invalidate(); //.310
 
             } // right click 
         
@@ -90091,22 +90139,41 @@ namespace PowerSDR
 
         private void panelMode_MouseDown(object sender, MouseEventArgs e)
         {
-            if (FWCEEPROM.RX2OK) picRadar.Invalidate(); //.246
+            if (FWCEEPROM.RX2OK)
+            {
+                picRadar.Invalidate(); //.246
+                if (diversityForm != null) diversityForm.picRadar.Invalidate(); //.310
+            }
         }
 
         private void comboRX2Band_MouseDown(object sender, MouseEventArgs e)
         {
-            if (FWCEEPROM.RX2OK) picRadar.Invalidate(); //.246
+            if (FWCEEPROM.RX2OK)
+            {
+                picRadar.Invalidate(); //.246
+                if (diversityForm != null) diversityForm.picRadar.Invalidate(); //.310
+            }
         }
 
         private void btnBump180_Click(object sender, EventArgs e)
         {
-            double _angle = angle1;
-            _angle += Math.PI;
-            if (_angle > 2 * Math.PI) _angle -= 2 * Math.PI;
+                      
+            double _angle = angle1; // rad
+
+            if (angle1 <= 0) _angle = _angle + Math.PI; // PI rad is 180deg
+            else _angle = _angle - Math.PI;
+         
             angle1 = _angle;
+
             UpdateDiversity();
+            int temp7 = (int)(angle1 * 180 / Math.PI); //.310
+
+            if (temp7 > 229) temp7 = 229;
+            if (temp7 < -229) temp7 = -229;
+            udAngle.Value = temp7;
+
             picRadar.Invalidate();
+           
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -90208,13 +90275,13 @@ namespace PowerSDR
             }
         }
 
-        bool Nopresync = false; //.300
+        public bool Nopresync = false; //.300
 
         private void btnEnable_MouseDown(object sender, MouseEventArgs e) //.300 
         {
             MouseEventArgs me = (MouseEventArgs)e;
 
-            if ((me.Button == System.Windows.Forms.MouseButtons.Right))
+            if ((me.Button == System.Windows.Forms.MouseButtons.Right)) // this is to not sync the preamps (but everything else)
             {
                 Nopresync = true; //.300
 
@@ -90298,6 +90365,67 @@ namespace PowerSDR
 
 
             }
+        }
+
+       
+        private void ptbAngle_Scroll(object sender, EventArgs e)
+        {
+            
+            udAngle.Value = ptbAngle.Value; // move slider value into box
+           
+            angle1 = (double)((double)udAngle.Value * Math.PI / 180); // ke9ns convert deg to rad
+
+            int Angle3 = (int)udAngle.Value;
+           
+       //     this.toolTip1.SetToolTip(this.ptbAngle, "RX2 Phase angle +/-227°:  " + Angle3 + "°");
+
+            UpdateDiversity();
+        }
+
+        private void ptbAngle_MouseHover(object sender, EventArgs e) //.310
+        {
+            int Angle3 = (int)udAngle.Value;
+
+            this.toolTip1.SetToolTip(this.ptbAngle, "Changing this value effectively changes the\n" + "length of coax out to the Ant for RX2.\n" +
+              "RX2 Phase angle +/-227°:  " + Angle3 + "°");
+
+        }
+
+        private void ptbAngle_MouseDown(object sender, MouseEventArgs e) //..310
+        {
+            int Angle3 = (int)udAngle.Value;
+
+            this.toolTip1.SetToolTip(this.ptbAngle, "Changing this value effectively changes the\n" + "length of coax out to the Ant for RX2.\n" +
+             "RX2 Phase angle +/-227°:  " + Angle3 + "°");
+
+        }
+
+        private void ptbAngle_MouseMove(object sender, MouseEventArgs e) //.310
+        {
+            
+        }
+
+        private void ptbAngle_MouseUp(object sender, MouseEventArgs e)
+        {
+            int Angle3 = (int)udAngle.Value;
+
+           this.toolTip1.SetToolTip(this.ptbAngle, "Changing this value effectively changes the\n" + "length of coax out to the Ant for RX2.\n" +
+            "RX2 Phase angle +/-227°:  " + Angle3 + "°");
+        }
+
+        private void btnEnable_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkESCRX2Mag_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateDiversity();
+        }
+
+        private void btnSync_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void chkLockR_CheckedChanged(object sender, EventArgs e)

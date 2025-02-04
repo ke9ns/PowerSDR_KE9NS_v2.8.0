@@ -81,7 +81,9 @@ namespace PowerSDR
 
         #region Constructor and Destructor
 
-        public bool CrashProtection = true; // .281  replacing chkBoxPFN.Checked
+        public bool CrashProtection = true; // .281 this is used to add delays during certain operations that cause FireWire to PFN BSOD crash udPFNDelay is the delay teim
+        
+
 
         public Setup(Console c)
         {
@@ -957,7 +959,7 @@ namespace PowerSDR
 
                     PON = true;
                     console.chkPower.Checked = false;
-                    Thread.Sleep(600);
+                    Thread.Sleep((int)udPFNDelay.Value); //.307 was 600
 
                 }
             }
@@ -5081,7 +5083,7 @@ namespace PowerSDR
                 if (power && val != old_val)
                 {
                     console.PowerOn = false;
-                    Thread.Sleep(200);
+                    Thread.Sleep((int)udPFNDelay.Value); //.307  was 200
                 }
             }
 
@@ -5239,7 +5241,7 @@ namespace PowerSDR
                 {
 
                     console.PowerOn = false;
-                    Thread.Sleep(500);
+                    Thread.Sleep((int)udPFNDelay.Value); //.307  was 500
                 }
             }
 
@@ -5274,7 +5276,7 @@ namespace PowerSDR
                 if (power && chkAudioEnableVAC.Checked && old_chan != new_chan)
                 {
                     console.PowerOn = false;
-                    Thread.Sleep(500);
+                    Thread.Sleep((int)udPFNDelay.Value); //.307
                 }
             }
 
@@ -5309,7 +5311,7 @@ namespace PowerSDR
                 if (power && chkAudioEnableVAC.Checked && old_driver != new_driver)
                 {
                     console.PowerOn = false;
-                    Thread.Sleep(500);
+                    Thread.Sleep((int)udPFNDelay.Value); //.307
                 }
             }
 
@@ -5364,7 +5366,7 @@ namespace PowerSDR
                 if (power && chkAudioEnableVAC.Checked && old_driver != new_driver && radVAC1SelectB.Checked)
                 {
                     console.PowerOn = false;
-                    Thread.Sleep(500);
+                    Thread.Sleep((int)udPFNDelay.Value); //.307
                 }
             }
 
@@ -5423,7 +5425,7 @@ namespace PowerSDR
                 if (power && chkVAC2Enable.Checked && old_driver != new_driver)
                 {
                     console.PowerOn = false;
-                    Thread.Sleep(500);
+                    Thread.Sleep((int)udPFNDelay.Value); //.307
                 }
             }
 
@@ -5479,7 +5481,7 @@ namespace PowerSDR
                 if (power && chkAudioEnableVAC.Checked && old_input != new_input)
                 {
                     console.PowerOn = false;
-                    Thread.Sleep(500);
+                    Thread.Sleep((int)udPFNDelay.Value); //.307
                 }
             }
 
@@ -5518,7 +5520,7 @@ namespace PowerSDR
                 if (power && chkAudioEnableVAC.Checked && old_input != new_input && radVAC1SelectB.Checked)
                 {
                     console.PowerOn = false;
-                    Thread.Sleep(500);
+                    Thread.Sleep((int)udPFNDelay.Value); //.307
                 }
             }
 
@@ -5556,7 +5558,7 @@ namespace PowerSDR
                 if (power && chkVAC2Enable.Checked && old_input != new_input)
                 {
                     console.PowerOn = false;
-                    Thread.Sleep(500);
+                    Thread.Sleep((int)udPFNDelay.Value); //.307
                 }
             }
 
@@ -5588,7 +5590,7 @@ namespace PowerSDR
                 if (power && chkAudioEnableVAC.Checked && old_output != new_output)
                 {
                     console.PowerOn = false;
-                    Thread.Sleep(500);
+                    Thread.Sleep((int)udPFNDelay.Value); //.307
                 }
             }
             if (radVAC1SelectA.Checked)
@@ -5626,7 +5628,7 @@ namespace PowerSDR
                 if (power && chkAudioEnableVAC.Checked && old_output != new_output && radVAC1SelectB.Checked)
                 {
                     console.PowerOn = false;
-                    Thread.Sleep(500);
+                    Thread.Sleep((int)udPFNDelay.Value); //.307
                 }
             }
 
@@ -5662,7 +5664,7 @@ namespace PowerSDR
                 if (power && chkVAC2Enable.Checked && old_output != new_output)
                 {
                     console.PowerOn = false;
-                    Thread.Sleep(500);
+                    Thread.Sleep((int)udPFNDelay.Value); //.307
                 }
             }
 
@@ -10847,6 +10849,12 @@ namespace PowerSDR
                 case "TS-440":
                     console.CATRigType = 20;
                     break;
+                case "Flex-6300":
+                    console.CATRigType = 907;
+                    break;
+                case "Flex-6500":
+                    console.CATRigType = 905;
+                    break;
                 default:
                     console.CATRigType = 900;
                     break;
@@ -11326,7 +11334,7 @@ namespace PowerSDR
                     textBoxSAVE.Text = "Radio Paused";
                     PON = true;
                     console.chkPower.Checked = false;
-                    Thread.Sleep(500);
+                    Thread.Sleep((int)udPFNDelay.Value); //.307
 
                 }
             }
@@ -16401,14 +16409,7 @@ namespace PowerSDR
 
         }
 
-        private void chkBoxPFN_CheckedChanged(object sender, EventArgs e)
-        {
-            // used in the Apply and save buttons
-          //  if (chkBoxPFN.Checked) CrashProtection = true; // delay added
-          //  else CrashProtection = false; // no delay
-           
-            CrashProtection = true;
-        }
+      
 
         private void chkCWXOverRide_CheckedChanged(object sender, EventArgs e)
         {

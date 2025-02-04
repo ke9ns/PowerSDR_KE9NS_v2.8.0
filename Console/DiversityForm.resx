@@ -120,12 +120,17 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="chkEnable.ToolTip" xml:space="preserve">
     <value>ENABLE ESC.
 When this button is RED, you can then turn off RX2 and ESC will continue to function as long as you do not turn ESC OFF (disable).
 
 You need 2 seperate antennas for RX1 and RX2.
-When ENABLED, move the cursor around to find a spot to cancel background noise or enhance the signal on interest.</value>
+When ENABLED, move the cursor around to find a spot to cancel background noise or enhance the signal on interest.
+
+Right Click: Toggle RX1-RX2 PreAmps do NOT need to be in the same state.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

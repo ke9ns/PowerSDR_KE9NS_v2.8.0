@@ -1309,6 +1309,7 @@ namespace PowerSDR
             // 
             // menuItem2
             // 
+            this.menuItem2.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.menuItem2.Name = "menuItem2";
             this.menuItem2.Size = new System.Drawing.Size(100, 23);
             // 

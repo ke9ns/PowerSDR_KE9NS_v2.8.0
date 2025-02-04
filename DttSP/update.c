@@ -2469,8 +2469,7 @@ SetSubRXSt(unsigned int thread, unsigned int subrx, BOOLEAN setit)
 }
 
 // Determines the left (0.0) to right (1.0) audio field for this RX.
-DttSP_EXP void
-SetRXPan(unsigned int thread, unsigned int subrx, float pos)
+DttSP_EXP void SetRXPan(unsigned int thread, unsigned int subrx, float pos)
 {
 	float theta, gain_l, gain_r;
 	sem_wait(&top[thread].sync.upd.sem);
@@ -2502,10 +2501,10 @@ SetRXPan(unsigned int thread, unsigned int subrx, float pos)
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-DttSP_EXP void SetDiversity (int setit)
+DttSP_EXP void SetDiversity (unsigned int setit)
 {
 	extern BOOLEAN reset_em;
-	//fprintf(stderr, "SetDiversity: %u\n", setit), fflush(stderr);
+//	fprintf(stderr, "SetDiversity: %u\n", setit), fflush(stderr);
 	sem_wait(&top[0].sync.upd.sem);
 	sem_wait(&top[1].sync.upd.sem);
 	sem_wait(&top[2].sync.upd.sem);
@@ -2524,7 +2523,7 @@ DttSP_EXP void SetDiversityScalar(REAL re, REAL im) //  ke9ns  DttSP.SetDiversit
 	sem_post(&top[2].sync.upd.sem);
 }
 
-DttSP_EXP void SetDiversityGain(REAL gain) // ke9ns gain set to 1.0
+DttSP_EXP void SetDiversityGain(REAL gain) // ke9ns: gain set to 1.0 and never changed
 {
 	//fprintf(stderr, "SetDiversityGain: %f\n", gain), fflush(stderr);
 	sem_wait(&top[2].sync.upd.sem);
