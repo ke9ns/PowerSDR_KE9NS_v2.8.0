@@ -4,7 +4,7 @@
   <description asmv2:iconFile="PowerSDR.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="PowerSDR" version="2.8.0.310" language="neutral" processorArchitecture="x86" />
+    <assemblyIdentity name="PowerSDR" version="2.8.0.311" language="neutral" processorArchitecture="x86" />
     <commandLine file="PowerSDR.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -163,26 +163,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerMate.dll" size="40960">
-      <assemblyIdentity name="PowerMate" version="1.0.8833.36366" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerMate.dll" size="189952">
+      <assemblyIdentity name="PowerMate" version="1.0.9196.39864" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>YtMFG/d+Kbm8azzYFN8d5Hd8A1Kdc6OsHCNYkXvHex0=</dsig:DigestValue>
+        <dsig:DigestValue>BB5+u9MXo1WdMcYLOahkpz5gXWJI5BIF5wVSCi5+sfc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerSDR.exe" size="17477632">
-      <assemblyIdentity name="PowerSDR" version="2.8.0.310" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="PowerSDR.exe" size="17506304">
+      <assemblyIdentity name="PowerSDR" version="2.8.0.311" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>OGGMtbMUaSdliCHJvhskTZ6XEj9vqkeuFbsm4O1JjBs=</dsig:DigestValue>
+        <dsig:DigestValue>O8Wd2MJYSGhAdDf3m7EWsD2jocMscWFlH4wTv+Lc00Q=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -270,13 +270,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="CAT\CATStructs.xml" size="66871" writeableType="applicationData">
+  <file name="CAT\CATStructs.xml" size="67044" writeableType="applicationData">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>5QXNXFZ7fCccsYBvWOae6/QU0VuiEWC6HIRKf/KisE4=</dsig:DigestValue>
+      <dsig:DigestValue>wKuRhptrmVkpoIELpnVoLntbk+0ky6eqpjufEUXCikI=</dsig:DigestValue>
     </hash>
   </file>
   <file name="images\PowerSDR.ico" size="15086">

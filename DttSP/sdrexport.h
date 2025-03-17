@@ -105,7 +105,7 @@ extern struct _uni
 	struct
 	{
 		char *path;
-		int bits;
+		int bits; // set in sdr.c
 	} wisdom;
 
 	struct
@@ -411,7 +411,7 @@ extern struct _top
 	{
 		struct
 		{
-			float *l, *r;
+			float* l, * r;
 		} aux, buf;
 
 		struct
@@ -421,27 +421,27 @@ extern struct _top
 
 	} hold;
 
+//	struct //.310 removed
+//	{
+//		char* path;
+//		HANDLE fd;
+//		HANDLE fp;
+//		char buff[4096];		
+//
+//	} parm;
+
+//	struct // .310
+//	{
+	//	struct
+//		{
+	//		char* path;
+	//		HANDLE fp, fd;
+	//	} mtr, spec;
+//	} meas;
+
 	struct
 	{
-		char *path;
-		HANDLE fd;
-		HANDLE fp;
-		char buff[4096];		// KE9NS LOOK this maybe the limiter for 4096 data points received by display ????? how about 8192
-
-	} parm;
-
-	struct
-	{
-		struct
-		{
-			char *path;
-			HANDLE fp, fd;
-		} mtr, spec;
-	} meas;
-
-	struct
-	{
-		char name[256];
+		// char name[256]; // ke9ns .310 turned off 2/4/25
 
 		struct
 		{
@@ -462,15 +462,15 @@ extern struct _top
 		size_t reset_size;
 		size_t size;
 
-		struct
-		{
-			int cb;
-			struct
-			{
-				int i, o;
-			} rb;
-			int xr;
-		} blow;
+	//	struct //.310 removed
+	//	{
+	//		int cb;
+	//		struct
+	//		{
+	//			int i, o;
+	//		} rb;
+	//		int xr;
+	//	} blow;
 
 	} jack;
 

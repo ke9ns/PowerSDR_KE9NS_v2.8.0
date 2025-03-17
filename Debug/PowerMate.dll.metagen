@@ -17,6 +17,35 @@ Class HidDevice.EventsHelper: AutoLayout, AnsiClass, Class, Public, BeforeFieldI
     Tire(Delegate, Object[]): PrivateScope, Public, Static, HideBySig
 Class HidDevice.PowerMate: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Int32 rotvalue : Public
+    Int32 rotationValue : Public
+    Int32 lastrotation : Public
+    Int32 rotationLowerBound : Public
+    Int32 rotationUpperBound : Public
+    Int32 bandsel : Public
+    Int32 bandsel1 : Public
+    Int32 xxx : Public
+    Int32 txsend : Public
+    Int32 txsend1 : Public
+    Int32 speed : Public
+    Int32 speed1 : Public
+    Int32 RIT : Public
+    Int32 speed4 : Public
+    Int32 RITFreq : Public
+    Int32 qqq : Public
+    Int32 aaa : Public
+    Int32 www : Public
+    Int32 zzz : Public
+    HWND__* hNWnd : Public
+    HWND__* hTWnd : Public
+    UInt32 threadID IsLong : Public
+    Int32 RXM : Public
+    Int32 RXOFF : Public
+    Int32 S2LAST : Public
+    Int32 TIMER_CAT : Public
+    Int32 PTT : Public
+    Int32 TEMP3 : Public, Static
   Properties:
     Byte LedBrightness 'get set' : 
   Events:
@@ -25,6 +54,8 @@ Class HidDevice.PowerMate: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   Methods:
     Initialize(): PrivateScope, Public, HideBySig
     Shutdown(): PrivateScope, Public, HideBySig
+    Look(Int32): PrivateScope, Public, HideBySig
+    Lookflex(Int32): PrivateScope, Public, HideBySig
     set_LedBrightness(Byte): PrivateScope, Public, HideBySig, SpecialName
     get_LedBrightness(): PrivateScope, Public, HideBySig, SpecialName
     add_RotateEvent(RotationHandler): PrivateScope, Public, HideBySig, SpecialName

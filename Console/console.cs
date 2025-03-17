@@ -1088,6 +1088,9 @@ namespace PowerSDR
         private SIOListenerII4 siolisten4 = null;              // ke9ns CAT port4
         private SIOListenerII5 siolisten5 = null;              // ke9ns CAT port5
         private SIOListenerII6 siolisten6 = null;              // ke9ns CAT port6 .200 spoof VFOA to B
+        private SIOListenerII8 siolisten8 = null;              // ke9ns CAT port6 .311 spoof RX to A TX to B
+
+
 
         private bool calibration_running = false;
         private bool displaydidit = false;
@@ -3801,6 +3804,7 @@ namespace PowerSDR
             siolisten4 = new SIOListenerII4(this);    // ke9ns CAT port4
             siolisten5 = new SIOListenerII5(this);    // ke9ns CAT port5
             siolisten6 = new SIOListenerII6(this);    // ke9ns CAT port6 .200 spoof VFOA to B
+            siolisten8 = new SIOListenerII8(this);    // ke9ns CAT port8 .311 spoof RX VFOA, TX VFOB
 
             siolisten1 = new SIOListenerIII(this); // ke9ns add for rotor control
 
@@ -19721,7 +19725,9 @@ namespace PowerSDR
             if (KWAutoInformation4) BroadcastFreqChange4("A", freq);
             if (KWAutoInformation5) BroadcastFreqChange5("A", freq);
             if (KWAutoInformation6) BroadcastFreqChange6("A", freq);
-            
+            if (KWAutoInformation8) BroadcastFreqChange8("A", freq); //.311
+
+
             if (KWAutoInformation7) BroadcastFreqChange7("A", freq); // TCP/IP CAT
 
 
@@ -19729,9 +19735,14 @@ namespace PowerSDR
         } // update vfoA freq
 
 
-        public bool SpoofAB = false; // ke9ns: add .200 use special CAT port to spoof VFOB data as VFOA (to run 2 instances of a digitial mode program and use RX2 VFOB as VFOA
-        public bool LastVFOBTX = false; // ke9ns add .200  true = SpoofAB caused the TX on VFOB, so return TX to VFOA after TX is over.
-        public bool SpoofTX = false; // ke9ns add .200 true=TX in spoof mode, false=not in TX with spoof
+        public bool SpoofAB = false; // .200     use special CAT port to spoof VFOB data as VFOA (to run 2 instances of a digitial mode program and use RX2 VFOB as VFOA
+        public bool LastVFOBTX = false; // .200  true = SpoofAB caused the TX on VFOB, so return TX to VFOA after TX is over.
+        public bool SpoofTX = false; // 200       true=TX in spoof mode, false=not in TX with spoof
+
+        public bool SpoofRXATXB = false; //.311   true = RX to VFOA, RX to VFOB
+        public bool SpoofRXATXBF = false; //.311  flag... true = skimmer sent new split TX freq to vfob, so send END key to skimmer
+        public int SpoofCount = 0; //.311 count down after sending END key waiting for OmniRig to poll PowerSDR a few times b
+       
 
         private void BroadcastFreqChange(string vfo, string freq)
         {
@@ -19812,10 +19823,28 @@ namespace PowerSDR
                 }
                 catch (Exception x)
                 {
-                    Debug.WriteLine("BroadcastFreqChange65 " + x);
+                    Debug.WriteLine("BroadcastFreqChange6 " + x);
                 }
             
         } //BroadcastFreqChange6
+
+        private void BroadcastFreqChange8(string vfo, string freq) // .311
+        {
+
+            if (siolisten8.SIO8 == null) return;
+
+            try
+            {
+                freq = "F" + vfo + freq.Replace(separator, "").PadLeft(11, '0') + ";";  // either FA or FB with frequency passed
+                siolisten8.SIO8.put(freq); // ke9ns .180 port2
+
+            }
+            catch (Exception x)
+            {
+                Debug.WriteLine("BroadcastFreqChange8 " + x);
+            }
+
+        } //BroadcastFreqChange8
 
         private void BroadcastFreqChange7(string vfo, string freq) // ke9ns add .214
         {
@@ -19828,6 +19857,8 @@ namespace PowerSDR
             }
             catch { }
         } //BroadcastFreqChange7
+
+
 
         //=========================================================================
         public void UpdateVFOBFreq(string freq)
@@ -19872,7 +19903,8 @@ namespace PowerSDR
             if (KWAutoInformation4) BroadcastFreqChange4("B", freq);
             if (KWAutoInformation5) BroadcastFreqChange5("B", freq);
             if (KWAutoInformation6) BroadcastFreqChange6("B", freq);
-          
+            if (KWAutoInformation8) BroadcastFreqChange8("B", freq); //.311
+
             if (KWAutoInformation7) BroadcastFreqChange7("B", freq); // TCP/IP CAT
 
         } //   UpdateVFOBFreq
@@ -25151,7 +25183,7 @@ namespace PowerSDR
         }
 
         public float[] tx_image_rejection = new float[(int)Band.LAST];
-        public bool CalibrateTXImage(float freq, Progress progress, bool suppress_errors)
+        public bool CalibrateTXImage(float freq, Progress progress, bool suppress_errors, bool checkBoxLSB) // called form Flex5000prodtestform.cs  .312 add lsb cal option
         {
             if ((!fwc_init || (current_model != Model.FLEX5000 && current_model != Model.FLEX3000)) &&
                 (!hid_init || current_model != Model.FLEX1500))
@@ -25223,8 +25255,10 @@ namespace PowerSDR
             int dsp_buf_size = setupForm.DSPPhoneRXBuffer;	// save current DSP buffer size
             setupForm.DSPPhoneRXBuffer = 4096;				// set DSP Buffer Size to 4096
 
-            DSPMode dsp_mode = rx1_dsp_mode;			    // save current dsp mode
-            RX1DSPMode = DSPMode.USB;					    // set dsp mode to USB
+            DSPMode dsp_mode = rx1_dsp_mode;                // save current dsp mode
+
+            if (checkBoxLSB == true) RX1DSPMode = DSPMode.LSB; //.312
+            else RX1DSPMode = DSPMode.USB;					    // set dsp mode to USB
 
             // Setting filters for TX calibration (optmized for SSB) and we need to fix the VAR filter setting
             // consequence of this action
@@ -25243,11 +25277,15 @@ namespace PowerSDR
 
             UpdateRX1Filters(-3000, 3000);                  // set filter to -3k, -300 ... LSB for image
 
-            int tx_filt_low = setupForm.TXFilterLow;		// save tx filter low cut
-            setupForm.TXFilterLow = 300;					// set low cut to 300Hz
+            int tx_filt_low = setupForm.TXFilterLow;        // save tx filter low cut
 
-            int tx_filt_high = setupForm.TXFilterHigh;		// save tx filter high cut
-            setupForm.TXFilterHigh = 3000;					// set high cut to 3kHz
+            if (checkBoxLSB == true) setupForm.TXFilterLow = -3000; //.312
+            else setupForm.TXFilterLow = 300;					// set low cut to 300Hz
+
+            int tx_filt_high = setupForm.TXFilterHigh;      // save tx filter high cut
+            
+            if (checkBoxLSB == true) setupForm.TXFilterHigh = -300; //.312
+            else    setupForm.TXFilterHigh = 3000;					// set high cut to 3kHz
 
             PreampMode preamp = rx1_preamp_mode;		    // save current preamp setting
             switch (current_model)
@@ -25283,8 +25321,10 @@ namespace PowerSDR
             Audio.TXInputSignal = Audio.SignalSource.SINE;
             double last_scale = Audio.SourceScale;			// saved audio scale
             Audio.SourceScale = 1.0;
-            double tone_freq = Audio.SineFreq1;				// save tone freq
-            Audio.SineFreq1 = 1500.0;						// set freq
+            double tone_freq = Audio.SineFreq1;             // save tone freq
+
+            if (checkBoxLSB == true) Audio.SineFreq1 = -1500.0;
+            else Audio.SineFreq1 = 1500.0;						// set freq
 
             int pwr = ptbPWR.Value;
             ptbPWR.Value = 100;
@@ -25610,8 +25650,7 @@ namespace PowerSDR
             setupForm.ImageGainTX = 0.0f;
 
             double TIMEOUT = 90.0;
-            if (current_model == Model.FLEX1500)
-                TIMEOUT = 40.0;
+            if (current_model == Model.FLEX1500) TIMEOUT = 40.0;
 
             while (progressing)
             {
@@ -30677,7 +30716,12 @@ namespace PowerSDR
             set { siolisten6 = value; }
         }
 
-
+        // ke9ns port8  .311 spoof RX to A TX to B
+        public SIOListenerII8 Siolisten8
+        {
+            get { return siolisten8; }
+            set { siolisten8 = value; }
+        }
         // ke9ns add: ant rotor control
         public SIOListenerIII Siolisten1
         {
@@ -34799,6 +34843,52 @@ namespace PowerSDR
         } // CATEnabled6
 
 
+        private bool cat_enabled8;
+        public bool CATEnabled8 //.311
+        {
+            set
+            {
+                try
+                {
+                    cat_enabled8 = value;
+                    if (siolisten8 != null)  // if we've got a listener tell them about state change 
+                    {
+                        if (cat_enabled8)
+                        {
+                            Siolisten8.enableCAT8();
+                        }
+                        else
+                        {
+                            Siolisten8.disableCAT8();
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    if (cat_port6 != 0)
+                    {
+                        MessageBox.Show(new Form { TopMost = true }, "Error enabling CAT8 on COM" + cat_port8 + ".\n" +
+                            "Please check CAT8 settings and try again.",
+                            "CAT8 Initialization Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        MessageBox.Show(new Form { TopMost = true }, "Error enabling CAT8 comm port.\n" +
+                            "Previously defined CA8 comm port not enumerated.\n" +
+                            "Please check CAT8 settings and try again.",
+                            "CAT8 Initialization Error",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                    }
+
+                    if (setupForm != null) setupForm.CATEnabled8 = false;
+                }
+
+            } // set
+            get { return cat_enabled8; }
+        } // CATEnabled8
 
 
         private int cat_rig_type;
@@ -34845,13 +34935,18 @@ namespace PowerSDR
         }
 
         private int cat_port6;
-        public int CATPort6 // .200
+        public int CATPort6 // .200  commands sent to PowerSDR go to VFOB instead
         {
             get { return cat_port6; }
             set { cat_port6 = value; }
         }
 
-
+        private int cat_port8;
+        public int CATPort8 // .311 TX commands to VFOB, RX go to VFOA
+        {
+            get { return cat_port8; }
+            set { cat_port8 = value; }
+        }
         //========================================================================================
         //========================================================================================
         // ke9ns CXAuto ant switch
@@ -37407,6 +37502,8 @@ namespace PowerSDR
         private bool kw_auto_information5 = false;
         private bool kw_auto_information6 = false;
         private bool kw_auto_information7 = false; // for TCP/IP CAT
+        private bool kw_auto_information8 = false; // .311 for TCP/IP CAT
+
 
         public bool KWAI1 = false; // .214  true = CAT port 1 received an CAT command, check if its AI, false = done checking 
         public bool KWAI2 = false; // .214  
@@ -37415,6 +37512,9 @@ namespace PowerSDR
         public bool KWAI5 = false; // .214
         public bool KWAI6 = false; // .214
         public bool KWAI7 = false; // .214
+
+        public bool KWAI8 = false; // .311
+
         public string CATURLFREQ = ""; // .215
 
         public bool KWAutoInformation
@@ -37465,6 +37565,12 @@ namespace PowerSDR
 
         } // KWAutoInformation7
 
+        public bool KWAutoInformation8 // ke9ns add  .311
+        {
+            get { return kw_auto_information8; }
+            set { kw_auto_information8 = value; }
+
+        } // KWAutoInformation8
 
         #endregion
 
@@ -53019,6 +53125,7 @@ namespace PowerSDR
             //   TimeSpan ts = stopWatch.Elapsed;
             //    Debug.WriteLine("RunTime1 " + ts);
 
+           
 
         } // timer_cpu_meter_Tick
 
@@ -75131,6 +75238,8 @@ namespace PowerSDR
                 if (KWAutoInformation4) BroadcastVFOChange4("0");
                 if (KWAutoInformation5) BroadcastVFOChange5("0");
                 if (KWAutoInformation6) BroadcastVFOChange6("0");
+                if (KWAutoInformation8) BroadcastVFOChange8("0"); //.311
+
 
                 if (KWAutoInformation7) BroadcastVFOChange7("0"); // TCP/IP CAT
 
@@ -75352,7 +75461,7 @@ namespace PowerSDR
         {
             if (siolisten6.SIO6 == null) return;
 
-            string cmd = "ZZSW" + ndx + ";";
+            string cmd = "ZZSW" + ndx + ";"; //zzsw = set/get VFOA or B to TX  0=VFOA, 1=VFOB has TX button
             try
             {
                 siolisten6.SIO6.put(cmd); // ke9ns add: .180 port2
@@ -75361,7 +75470,18 @@ namespace PowerSDR
 
         } //BroadcastVFOChange6
 
+        private void BroadcastVFOChange8(string ndx) // .311 come here when you change VFOB to be TX=1 or uncheck for VFOA to be TX = 0
+        {
+            if (siolisten8.SIO8 == null) return;
 
+            string cmd = "ZZSW" + ndx + ";";   //zzsw = set/get VFOA or B to TX  0=VFOA, 1=VFOB has TX button
+            try
+            {
+                siolisten8.SIO8.put(cmd); // ke9ns add: .180 port2
+            }
+            catch { }
+
+        } //BroadcastVFOChange8
 
         private void BroadcastVFOChange7(string ndx) // ke9ns add .214
         {
@@ -75393,12 +75513,15 @@ namespace PowerSDR
 
                 chkVFOBTX.BackColor = Color.Red;//button_selected_color;
                 swap_vfo_ab_tx = true;
+
                 if (KWAutoInformation) BroadcastVFOChange("1"); // broadcast on CAT
                 if (KWAutoInformation2) BroadcastVFOChange2("1"); // broadcast on CAT .214
                 if (KWAutoInformation3) BroadcastVFOChange3("1"); // broadcast on CAT
                 if (KWAutoInformation4) BroadcastVFOChange4("1"); // broadcast on CAT
                 if (KWAutoInformation5) BroadcastVFOChange5("1"); // broadcast on CAT
                 if (KWAutoInformation6) BroadcastVFOChange6("1"); // broadcast on CAT
+                if (KWAutoInformation8) BroadcastVFOChange8("1"); // broadcast on CAT //.311
+
 
                 if (KWAutoInformation7) BroadcastVFOChange7("1"); // broadcast on TCP/IP CAT
 
@@ -76013,7 +76136,7 @@ namespace PowerSDR
             {
                 Invoke(new MethodInvoker(p.Show));
                 Thread.Sleep(50);
-                CalibrateTXImage(freq_list[i], p, true);
+                CalibrateTXImage(freq_list[i], p, true,false); //.312
 
                 if (p.Text == "")
                     break;
@@ -81355,6 +81478,7 @@ namespace PowerSDR
         [DllImport("User32.dll")]
         public static extern IntPtr SendMessageW(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
+       
 
         public IntPtr FindWindow(string className, string windowName)
         {
@@ -90209,11 +90333,11 @@ namespace PowerSDR
 
             if ((me.Button == System.Windows.Forms.MouseButtons.Right)) 
             {
-
+               
                 try
                 {
                     System.Diagnostics.Process.Start(@"C:\Program Files (x86)\FlexRadio Systems\PowerSDR v2.8.0\PowerSDR_ke9ns_CAT_Commands.pdf");
-                }
+                      }
                 catch (Exception f)
                 {
                     Debug.WriteLine("CAT command file missing " + f);
@@ -90221,11 +90345,14 @@ namespace PowerSDR
 
 
             }
-            else if ((me.Button == System.Windows.Forms.MouseButtons.Middle)) //.271
+            else  if (me.Button == System.Windows.Forms.MouseButtons.Middle)
             {
+
+              
+
                 try
                 {
-                    System.Diagnostics.Process.Start(@"C:\Program Files (x86)\FlexRadio Systems\PowerSDR v2.8.0\PowerSDR ke9ns keyboard shortcuts.pdf");
+                     System.Diagnostics.Process.Start(@"C:\Program Files (x86)\FlexRadio Systems\PowerSDR v2.8.0\PowerSDR ke9ns keyboard shortcuts.pdf");
                 }
                 catch (Exception f)
                 {

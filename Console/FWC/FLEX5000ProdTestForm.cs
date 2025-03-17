@@ -3124,8 +3124,7 @@ namespace PowerSDR
                 Thread.Sleep(500);
             }
 
-            if (console.VFOSync)
-                console.VFOSync = false;
+            if (console.VFOSync) console.VFOSync = false;
 
             double vfoa = console.VFOAFreq;
             double vfob = console.VFOBFreq;
@@ -3166,17 +3165,18 @@ namespace PowerSDR
                     Application.DoEvents();
                     console.VFOAFreq = band_freqs[i];
                     console.VFOBFreq = band_freqs[i];
-                    console.CalibrateTXImage(band_freqs[i], p, true);
+                    
+                    console.CalibrateTXImage(band_freqs[i], p, true, checkBoxLSB.Checked); //.312 add LSB option for image cal
+
                     if (p.Text == "") break;
 
                     if (console.tx_image_rejection[(int)bands[i]] > tol)
                     {
-                        if (!test_tx_image.StartsWith("TX Image Test: Failed ("))
-                            test_tx_image = "TX Image Test: Failed (";
+                        if (!test_tx_image.StartsWith("TX Image Test: Failed ("))  test_tx_image = "TX Image Test: Failed (";
+
                         test_tx_image += BandToString(bands[i]) + ",";
                         btnTXImage.BackColor = Color.Red;
-                        lstDebug.Items.Insert(0, "TX Image - " + BandToString(bands[i]) + ": Failed ("
-                            + console.tx_image_rejection[(int)bands[i]].ToString("f1") + ")");
+                        lstDebug.Items.Insert(0, "TX Image - " + BandToString(bands[i]) + ": Failed (" + console.tx_image_rejection[(int)bands[i]].ToString("f1") + ")");
                     }
                     else
                     {

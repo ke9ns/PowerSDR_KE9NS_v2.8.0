@@ -261,8 +261,6 @@ static void reset_system_audio(size_t nframes)
 		ringb_float_clear (top[thread].jack.ring.i.l, top[thread].jack.size * loc[thread].mult.ring-1);
 		ringb_float_reset (top[thread].jack.ring.i.l);
 		ringb_float_reset (top[thread].jack.ring.i.r);
-//		ringb_float_reset (top[thread].jack.auxr.i.l);
-//		ringb_float_reset (top[thread].jack.auxr.i.r);
 	
 		if (top[thread].offset < 0)
 		{
@@ -611,7 +609,8 @@ PRIVATE void setup_system_audio (unsigned int thread)
 																			// pid is unsigned long (4 bytes)
 	top[thread].jack.size = 2048;
 
-	memset ((char *) &top[thread].jack.blow, 0, sizeof (top[thread].jack.blow));
+//	memset ((char *) &top[thread].jack.blow, 0, sizeof (top[thread].jack.blow)); //.310 remove
+
 	top[thread].jack.ring.i.l = ringb_float_create (top[thread].jack.size * loc[thread].mult.ring);
 	top[thread].jack.ring.i.r = ringb_float_create (top[thread].jack.size * loc[thread].mult.ring);
 	top[thread].jack.ring.o.l = ringb_float_create (top[thread].jack.size * loc[thread].mult.ring);
@@ -638,12 +637,15 @@ PRIVATE void setup_threading (unsigned int thread)
 PRIVATE void setup_defaults (unsigned int thread)
 {
 	//fprintf(stderr,"I am inside setup defaults thread: %0u\n",thread),fflush(stderr);
-	loc[thread].name[0] = 0;		// no default name for jack client
-	sprintf (loc[thread].path.rcfile, "%s%0lu_%0u", RCBASE, top[thread].pid,thread); //  .DttSPrc
-	sprintf (loc[thread].path.parm, "%s%0lu_%0u", PARMPATH, top[thread].pid,thread);    //  \\\\.\\pipe\\SDRcommands    (escape sequence) \\.\SDRcommands (access to a pipe named SDRcommands)
-	sprintf (loc[thread].path.meter, "%s%0lu_%0u", METERPATH, top[thread].pid,thread);  //  \\\\.\\pipe\\SDRmeter                          \\.\SDRmeter
-	sprintf (loc[thread].path.spec, "%s%0lu_%0u", SPECPATH, top[thread].pid,thread);    //  \\\\.\\pipe\\SDRspectrum                       \\.\SDRspectrum
-	sprintf (loc[thread].path.wisdom, "%s%0lu_%0u", WISDOMPATH, top[thread].pid,thread); //  .\\wisdom                                      .\wisdom  (refers to the file wisdom in the current directory)
+	
+	//loc[thread].name[0] = 0;		// no default name for jack client //.310 removed
+
+//	sprintf (loc[thread].path.rcfile, "%s%0lu_%0u", RCBASE, top[thread].pid,thread); //  .DttSPrc
+//	sprintf (loc[thread].path.parm, "%s%0lu_%0u", PARMPATH, top[thread].pid,thread);    //  \\\\.\\pipe\\SDRcommands    (escape sequence) \\.\SDRcommands (access to a pipe named SDRcommands)
+//	sprintf (loc[thread].path.meter, "%s%0lu_%0u", METERPATH, top[thread].pid,thread);  //  \\\\.\\pipe\\SDRmeter                          \\.\SDRmeter
+//	sprintf (loc[thread].path.spec, "%s%0lu_%0u", SPECPATH, top[thread].pid,thread);    //  \\\\.\\pipe\\SDRspectrum                       \\.\SDRspectrum
+//	sprintf (loc[thread].path.wisdom, "%s%0lu_%0u", WISDOMPATH, top[thread].pid,thread); //  .\\wisdom                                      .\wisdom  (refers to the file wisdom in the current directory)
+
 	loc[thread].def.rate = DEFRATE; // 48000
 	loc[thread].def.size = DEFSIZE; // 4096
 	loc[thread].def.nrx = MAXRX; // 2
@@ -679,7 +681,7 @@ void setup (char *app_data_path)
 		top[thread].jack.reset_size = 2048;
 		reset_em =TRUE;
 		setup_defaults (thread);
-		strcpy(loc[thread].path.wisdom,app_data_path);
+		//strcpy(loc[thread].path.wisdom,app_data_path); //.310 removed
 		
 		//fprintf(stderr,"setup: defaults done thread %u\n", thread),fflush(stderr);
 		uni[thread].meter.flag = TRUE;

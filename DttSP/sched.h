@@ -5,7 +5,7 @@
  *      Provides an implementation of POSIX realtime extensions
  *      as defined in 
  *
- *              POSIX 1003.1b-1993      (POSIX.1b)
+ *              POSIX 1003.1b-1993      (POSIX.1b)  Portable Operating System Interface 
  *
  * --------------------------------------------------------------------------
  *
@@ -143,15 +143,15 @@ extern "C"
 {
 #endif                          /* __cplusplus */
 
-PTW32_DLLPORT int __cdecl sched_yield (void);
+// PTW32_DLLPORT int __cdecl sched_yield (void); //.310 remove
 
-PTW32_DLLPORT int __cdecl sched_get_priority_min (int policy);
+// PTW32_DLLPORT int __cdecl sched_get_priority_min (int policy); //.310
 
-PTW32_DLLPORT int __cdecl sched_get_priority_max (int policy);
+// PTW32_DLLPORT int __cdecl sched_get_priority_max (int policy);
 
-PTW32_DLLPORT int __cdecl sched_setscheduler (pid_t pid, int policy);
+// PTW32_DLLPORT int __cdecl sched_setscheduler (pid_t pid, int policy);
 
-PTW32_DLLPORT int __cdecl sched_getscheduler (pid_t pid);
+// PTW32_DLLPORT int __cdecl sched_getscheduler (pid_t pid);
 
 /*
  * Note that this macro returns ENOTSUP rather than

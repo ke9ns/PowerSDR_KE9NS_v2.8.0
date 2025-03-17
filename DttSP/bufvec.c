@@ -46,7 +46,8 @@ PRIVATE size_t _safemem_currcount = 0;
 char * safealloc16(int count, int nbytes, char *tag)
 {	
 	char *p = (char *)_aligned_malloc(count*nbytes, 16);
-	memset(p,0,count*nbytes);
+
+	memset(p,0,count * nbytes);
 
 	if (!p)
 	{

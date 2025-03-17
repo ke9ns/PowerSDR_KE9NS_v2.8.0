@@ -60,6 +60,7 @@ namespace PowerSDR
             this.btnRXFilter = new System.Windows.Forms.ButtonTS();
             this.btnRXLevel = new System.Windows.Forms.ButtonTS();
             this.checkGENBAL = new System.Windows.Forms.CheckBoxTS();
+            this.ckPM2 = new System.Windows.Forms.CheckBoxTS();
             this.lstDebug = new System.Windows.Forms.ListBox();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
@@ -134,7 +135,7 @@ namespace PowerSDR
             this.grpGeneral = new System.Windows.Forms.GroupBoxTS();
             this.grpReceiver = new System.Windows.Forms.GroupBoxTS();
             this.udLevel = new System.Windows.Forms.NumericUpDown();
-            this.ckPM2 = new System.Windows.Forms.CheckBoxTS();
+            this.checkBoxLSB = new System.Windows.Forms.CheckBoxTS();
             this.grpIO.SuspendLayout();
             this.grpComPort.SuspendLayout();
             this.grpTestTransmitter.SuspendLayout();
@@ -268,6 +269,16 @@ namespace PowerSDR
             this.checkGENBAL.TabIndex = 31;
             this.toolTip1.SetToolTip(this.checkGENBAL, "Automatic Repeat of the GEN/BAL test until unchecked.\r\nNOTE: Does not update the " +
         "LOG file");
+            // 
+            // ckPM2
+            // 
+            this.ckPM2.Image = null;
+            this.ckPM2.Location = new System.Drawing.Point(219, 325);
+            this.ckPM2.Name = "ckPM2";
+            this.ckPM2.Size = new System.Drawing.Size(56, 24);
+            this.ckPM2.TabIndex = 32;
+            this.ckPM2.Text = "PM2";
+            this.toolTip1.SetToolTip(this.ckPM2, "Check for PowerMaster II");
             // 
             // lstDebug
             // 
@@ -1000,6 +1011,7 @@ namespace PowerSDR
             this.grpTransmitter.Controls.Add(this.btnTXFilter);
             this.grpTransmitter.Controls.Add(this.btnTXCarrier);
             this.grpTransmitter.Controls.Add(this.btnTXImage);
+            this.grpTransmitter.Controls.Add(this.checkBoxLSB);
             this.grpTransmitter.Location = new System.Drawing.Point(8, 232);
             this.grpTransmitter.Name = "grpTransmitter";
             this.grpTransmitter.Size = new System.Drawing.Size(200, 100);
@@ -1111,15 +1123,15 @@ namespace PowerSDR
             -2147418112});
             this.udLevel.Visible = false;
             // 
-            // ckPM2
+            // checkBoxLSB
             // 
-            this.ckPM2.Image = null;
-            this.ckPM2.Location = new System.Drawing.Point(219, 325);
-            this.ckPM2.Name = "ckPM2";
-            this.ckPM2.Size = new System.Drawing.Size(56, 24);
-            this.ckPM2.TabIndex = 32;
-            this.ckPM2.Text = "PM2";
-            this.toolTip1.SetToolTip(this.ckPM2, "Check for PowerMaster II");
+            this.checkBoxLSB.Image = null;
+            this.checkBoxLSB.Location = new System.Drawing.Point(138, 40);
+            this.checkBoxLSB.Name = "checkBoxLSB";
+            this.checkBoxLSB.Size = new System.Drawing.Size(56, 32);
+            this.checkBoxLSB.TabIndex = 33;
+            this.checkBoxLSB.Text = "LSB";
+            this.toolTip1.SetToolTip(this.checkBoxLSB, "image 160,80,40 on LSB instead of USB");
             // 
             // FLEX5000ProdTestForm
             // 
@@ -1255,8 +1267,6 @@ namespace PowerSDR
         private System.ComponentModel.IContainer components;
         private System.Windows.Forms.CheckBoxTS checkGENBAL;
         public System.Windows.Forms.CheckBoxTS ckPM2;
-        
-      
-
+        public CheckBoxTS checkBoxLSB;
     }
 }

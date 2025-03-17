@@ -141,6 +141,7 @@ namespace PowerSDR
                         break;
                     case "AG":
                         rtncmd = cmdlist.AG(suffix);
+                        console.Siolisten.CATDEF = "set-get Aduio GAIN knob"; //.278
                         break;
                     case "AI":
                         rtncmd = cmdlist.AI(suffix);
@@ -341,10 +342,15 @@ namespace PowerSDR
                         break;
                     case "PR":
                         rtncmd = cmdlist.PR(suffix);
+                        console.Siolisten.CATDEF = "Speech COMP status"; //.278
                         break;
                     case "PS":
                         rtncmd = cmdlist.PS(suffix);
                         console.Siolisten.CATDEF = "Start Button 0=off, 1=on"; //.278
+                        break;
+                    case "PT":
+                        rtncmd = cmdlist.PT(suffix);
+                        console.Siolisten.CATDEF = "CW PITCH"; //.311
                         break;
                     case "QC":
                         console.Siolisten.CATDEF = "-NA-"; //.278

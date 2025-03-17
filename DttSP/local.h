@@ -43,23 +43,22 @@ Bridgewater, NJ 08807
 #define _local_h
 
 #include <common.h>
-//\\.\pipe\pipename
+//   \\.\pipe\pipename
 #define RCBASE ".DttSPrc"
-#define PARMPATH  "\\\\.\\pipe\\SDRcommands"
+#define PARMPATH  "\\\\.\\pipe\\SDRcommands"        //ke9ns: pipes
 #define METERPATH "\\\\.\\pipe\\SDRmeter"
 #define SPECPATH  "\\\\.\\pipe\\SDRspectrum"
-#define WISDOMPATH ".\\wisdom"
+#define WISDOMPATH ".\\wisdom"                      //ke9ns: wisdom file in the current folder
 
 
 extern struct _loc
 {
-  char name[MAXPATHLEN];
-  struct
-  {
-    char rcfile[MAXPATHLEN],
-      parm[MAXPATHLEN],
-      meter[MAXPATHLEN], spec[MAXPATHLEN], wisdom[MAXPATHLEN];
-  } path;
+  // char name[MAXPATHLEN]; // 2048 // .310 removed
+
+ // struct // removed .310
+//  {
+ //   char rcfile[MAXPATHLEN],parm[MAXPATHLEN],meter[MAXPATHLEN], spec[MAXPATHLEN], wisdom[MAXPATHLEN]; // 2048char each
+ // } path;
 
   struct
   {

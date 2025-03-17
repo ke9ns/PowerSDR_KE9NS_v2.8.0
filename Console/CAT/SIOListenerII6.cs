@@ -1,5 +1,5 @@
 //=================================================================
-// SIOListener.cs ke9ns clone port2
+// SIOListener.cs ke9ns clone port6
 //=================================================================
 // Copyright (C) 2006  Bob Tracy
 //
@@ -92,6 +92,9 @@ namespace PowerSDR
 
             Initialize();
         }
+
+      
+
 
         public bool UseForKeyPTT
         {

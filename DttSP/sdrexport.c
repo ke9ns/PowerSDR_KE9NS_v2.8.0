@@ -33,10 +33,10 @@ Bridgewater, NJ 08807
 
 #include <common.h>
 
-struct _uni uni[3]; // max notches = 18
+struct _uni uni[3];          // max notches = 18
 
 struct _rx rx[3][MAXRX];
 
 struct _tx tx[3];
 
-struct _top top[3]; // top ring struct with 3 possible threads
+struct _top top[3];        // top ring struct with 3 possible threads

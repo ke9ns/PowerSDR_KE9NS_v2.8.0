@@ -1833,10 +1833,8 @@ DttSP_EXP void SetGrphRXEQ (unsigned int thread, unsigned int subrx, int *rxeq)
     delFIR_Bandpass_COMPLEX (tmpfilt);
     for (i = 0; i < 257; i++)
 		filtcoef[255 + i] = Cscl(tmpcoef[i],(REAL)(1.0/512.0));
-	ptmp =
-		fftwf_plan_dft_1d (512, (fftwf_complex *) filtcoef,
-		(fftwf_complex *) rx[thread][subrx].grapheq.gen->p->zfvec,
-		FFTW_FORWARD, uni[thread].wisdom.bits);
+
+	ptmp = fftwf_plan_dft_1d (512, (fftwf_complex *) filtcoef,(fftwf_complex *) rx[thread][subrx].grapheq.gen->p->zfvec,FFTW_FORWARD, uni[thread].wisdom.bits);
 
 	fftwf_execute (ptmp);
     fftwf_destroy_plan (ptmp);

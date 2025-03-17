@@ -92,13 +92,7 @@ typedef struct _am_demod
 } AMDDesc, *AMD;       // typedef struct _am_demod
 
 extern void AMDemod (AMD am);
-extern AMD newAMD (REAL samprate,
-		   REAL f_initial,
-		   REAL f_lobound,
-		   REAL f_hibound,
-		   REAL f_bandwid,
-		   int size,
-		   COMPLEX * ivec, COMPLEX * ovec, AMMode mode, char *tag);
+extern AMD newAMD (REAL samprate, REAL f_initial, REAL f_lobound, REAL f_hibound, REAL f_bandwid, int size, COMPLEX * ivec, COMPLEX * ovec, AMMode mode, char *tag);
 extern void delAMD (AMD am);
 
 #ifndef TWOPI

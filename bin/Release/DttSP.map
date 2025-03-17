@@ -1,11 +1,11 @@
  DttSP
 
- Timestamp is 67a049d7 (Sun Feb  2 22:45:11 2025)
+ Timestamp is 67a4346c (Wed Feb  5 22:02:52 2025)
 
  Preferred load address is 10000000
 
  Start         Length     Name                   Class
- 0001:00000000 00019651H .text$mn                CODE
+ 0001:00000000 00019501H .text$mn                CODE
  0002:00000000 00000188H .idata$5                DATA
  0002:00000188 0000000cH .00cfg                  DATA
  0002:00000194 00000004H .CRT$XCA                DATA
@@ -17,24 +17,24 @@
  0002:000001ac 00000004H .CRT$XTA                DATA
  0002:000001b0 00000010H .CRT$XTZ                DATA
  0002:000001b4 00000000H .gfids$y                DATA
- 0002:000001c0 00001780H .rdata                  DATA
- 0002:00001940 00000040H .rdata$CastGuardVftablesA DATA
- 0002:00001980 00000040H .rdata$CastGuardVftablesC DATA
- 0002:000019c0 00000004H .rdata$sxdata           DATA
- 0002:000019c4 0000038cH .rdata$voltmd           DATA
- 0002:00001d50 000002f8H .rdata$zzzdbg           DATA
- 0002:00002048 00000004H .rtc$IAA                DATA
- 0002:0000204c 00000004H .rtc$IZZ                DATA
- 0002:00002050 00000004H .rtc$TAA                DATA
- 0002:00002054 00000004H .rtc$TZZ                DATA
- 0002:00002058 00000088H .xdata$x                DATA
- 0002:000020e0 00001044H .edata                  DATA
- 0002:00003124 00000118H .idata$2                DATA
- 0002:0000323c 00000014H .idata$3                DATA
- 0002:00003250 00000188H .idata$4                DATA
- 0002:000033d8 0000078cH .idata$6                DATA
+ 0002:000001c0 00001740H .rdata                  DATA
+ 0002:00001900 00000040H .rdata$CastGuardVftablesA DATA
+ 0002:00001940 00000040H .rdata$CastGuardVftablesC DATA
+ 0002:00001980 00000004H .rdata$sxdata           DATA
+ 0002:00001984 0000038cH .rdata$voltmd           DATA
+ 0002:00001d10 000002f8H .rdata$zzzdbg           DATA
+ 0002:00002008 00000004H .rtc$IAA                DATA
+ 0002:0000200c 00000004H .rtc$IZZ                DATA
+ 0002:00002010 00000004H .rtc$TAA                DATA
+ 0002:00002014 00000004H .rtc$TZZ                DATA
+ 0002:00002018 00000088H .xdata$x                DATA
+ 0002:000020a0 00001044H .edata                  DATA
+ 0002:000030e4 00000118H .idata$2                DATA
+ 0002:000031fc 00000014H .idata$3                DATA
+ 0002:00003210 00000188H .idata$4                DATA
+ 0002:00003398 0000078cH .idata$6                DATA
  0003:00000000 000007e0H .data                   DATA
- 0003:000007e0 0003dd9cH .bss                    DATA
+ 0003:000007e0 000319fcH .bss                    DATA
  0004:00000000 000000a0H .rsrc$01                DATA
  0004:000000a0 00000498H .rsrc$02                DATA
 
@@ -455,215 +455,215 @@
  0001:000155d0       _SetDiversityGain          100165d0 f   update.obj
  0001:00015600       _makewindow                10016600 f   window.obj
  0001:00015dd0       _Audio_Callback            10016dd0 f   winmain.obj
- 0001:00015f90       _Audio_Callback2           10016f90 f   winmain.obj
- 0001:00016340       _process_samples_thread    10017340 f   winmain.obj
- 0001:00016550       _closeup                   10017550 f   winmain.obj
- 0001:00016600       _setup                     10017600 f   winmain.obj
- 0001:00016a30       _reset_for_buflen          10017a30 f   winmain.obj
- 0001:00016b00       _reset_for_samplerate      10017b00 f   winmain.obj
- 0001:00017170       _WSCompand                 10018170 f   wscompand.obj
- 0001:00017290       _WSCReset                  10018290 f   wscompand.obj
- 0001:00017360       _newWSCompander            10018360 f   wscompand.obj
- 0001:00017480       _delWSCompander            10018480 f   wscompand.obj
- 0001:000174b0       _InitSPEEDTRIG             100184b0 f   fastrig1.obj
- 0001:00017520       _fast_sin                  10018520 f   fastrig1.obj
- 0001:000175a0       _fast_cos                  100185a0 f   fastrig1.obj
- 0001:00017620       _fast_atan2                10018620 f   fastrig1.obj
- 0001:00017780       _phasemod                  10018780 f   fastrig1.obj
- 0001:000177d3       _timeSetEvent@20           100187d3 f   winMM:WINMM.dll
- 0001:000177d9       _timeKillEvent@4           100187d9 f   winMM:WINMM.dll
- 0001:000177df       _fftwf_execute             100187df f   libfftw3f-3:libfftw3f-3.dll
- 0001:000177e5       _fftwf_plan_dft_1d         100187e5 f   libfftw3f-3:libfftw3f-3.dll
- 0001:000177eb       _fftwf_destroy_plan        100187eb f   libfftw3f-3:libfftw3f-3.dll
- 0001:000177f1       _fftwf_import_wisdom_from_string 100187f1 f   libfftw3f-3:libfftw3f-3.dll
- 0001:000177f7       _sem_init                  100187f7 f   pthreadVC:pthreadVC.dll
- 0001:000177fd       _sem_destroy               100187fd f   pthreadVC:pthreadVC.dll
- 0001:00017803       _sem_wait                  10018803 f   pthreadVC:pthreadVC.dll
- 0001:00017809       _sem_post                  10018809 f   pthreadVC:pthreadVC.dll
- 0001:00017810       __alldiv                   10018810 f   MSVCRT:lldiv.obj
- 0001:000178c0       __ftol2_sse_excpt          100188c0 f   MSVCRT:ftol2.obj
- 0001:000178d0       __ftol2_sse                100188d0 f   MSVCRT:ftol2.obj
- 0001:000178e0       __ftoi2                    100188e0 f   MSVCRT:ftol2.obj
- 0001:00017960       __ftoui2                   10018960 f   MSVCRT:ftol2.obj
- 0001:00017a10       __ftol2                    10018a10 f   MSVCRT:ftol2.obj
- 0001:00017ac0       __ftoul2                   10018ac0 f   MSVCRT:ftol2.obj
- 0001:00017b80       __ftoul2_legacy            10018b80 f   MSVCRT:ftol2.obj
- 0001:00017ba0       __alloca_probe             10018ba0 f   MSVCRT:chkstk.obj
- 0001:00017ba0       __chkstk                   10018ba0 f   MSVCRT:chkstk.obj
- 0001:00017bd0       __ftoui3                   10018bd0 f   MSVCRT:ftol3.obj
- 0001:00017c20       __ftoul3                   10018c20 f   MSVCRT:ftol3.obj
- 0001:00017c90       __ftoul3_legacy            10018c90 f   MSVCRT:ftol3.obj
- 0001:00017cc0       __ftol3                    10018cc0 f   MSVCRT:ftol3.obj
- 0001:00017d30       __dtoui3                   10018d30 f   MSVCRT:ftol3.obj
- 0001:00017db0       __dtoul3                   10018db0 f   MSVCRT:ftol3.obj
- 0001:00017e60       __dtoul3_legacy            10018e60 f   MSVCRT:ftol3.obj
- 0001:00017e90       __dtol3                    10018e90 f   MSVCRT:ftol3.obj
- 0001:00017f40       __ultod3                   10018f40 f   MSVCRT:ftol3.obj
- 0001:00017f90       __ltod3                    10018f90 f   MSVCRT:ftol3.obj
- 0001:00017fe0       __ultof3                   10018fe0 f   MSVCRT:ftol3.obj
- 0001:00018060       __ltof3                    10019060 f   MSVCRT:ftol3.obj
- 0001:000183e4       __CRT_INIT@12              100193e4 f   MSVCRT:dll_dllmain.obj
- 0001:000183ed       __DllMainCRTStartup@12     100193ed f   MSVCRT:dll_dllmain.obj
- 0001:00018410       ___isa_available_init      10019410 f   MSVCRT:cpu_disp.obj
- 0001:0001878a       ___security_init_cookie    1001978a f   MSVCRT:gs_support.obj
- 0001:000187d5       _DllMain@12                100197d5 f   MSVCRT:dll_dllmain_stub.obj
- 0001:000187f7       ?__scrt_initialize_type_info@@YAXXZ 100197f7 f   MSVCRT:tncleanup.obj
- 0001:00018803       ?__scrt_uninitialize_type_info@@YAXXZ 10019803 f   MSVCRT:tncleanup.obj
- 0001:0001880f       ___local_stdio_scanf_options 1001980f f i MSVCRT:default_local_stdio_options.obj
- 0001:00018815       ___scrt_initialize_default_local_stdio_options 10019815 f   MSVCRT:default_local_stdio_options.obj
- 0001:00018832       ?configure_argv@__scrt_narrow_argv_policy@@SAHXZ 10019832 f i MSVCRT:utility.obj
- 0001:00018881       ?initialize_environment@__scrt_narrow_environment_policy@@SAHXZ 10019881 f i MSVCRT:utility.obj
- 0001:000188b9       _NtCurrentTeb              100198b9 f i MSVCRT:utility.obj
- 0001:000188c0       ___scrt_acquire_startup_lock 100198c0 f   MSVCRT:utility.obj
- 0001:000188f2       ___scrt_dllmain_after_initialize_c 100198f2 f   MSVCRT:utility.obj
- 0001:0001891d       ___scrt_dllmain_before_initialize_c 1001991d f   MSVCRT:utility.obj
- 0001:0001892b       ___scrt_dllmain_crt_thread_attach 1001992b f   MSVCRT:utility.obj
- 0001:0001894a       ___scrt_dllmain_crt_thread_detach 1001994a f   MSVCRT:utility.obj
- 0001:00018957       ___scrt_dllmain_exception_filter 10019957 f   MSVCRT:utility.obj
- 0001:0001898b       ___scrt_dllmain_uninitialize_c 1001998b f   MSVCRT:utility.obj
- 0001:000189ae       ___scrt_dllmain_uninitialize_critical 100199ae f   MSVCRT:utility.obj
- 0001:000189bb       ___scrt_initialize_crt     100199bb f   MSVCRT:utility.obj
- 0001:000189f4       ___scrt_initialize_onexit_tables 100199f4 f   MSVCRT:utility.obj
- 0001:00018a7b       ___scrt_is_nonwritable_in_current_image 10019a7b f   MSVCRT:utility.obj
- 0001:00018b0f       ___scrt_release_startup_lock 10019b0f f   MSVCRT:utility.obj
- 0001:00018b2c       ___scrt_uninitialize_crt   10019b2c f   MSVCRT:utility.obj
- 0001:00018b54       __onexit                   10019b54 f   MSVCRT:utility.obj
- 0001:00018b82       _at_quick_exit             10019b82 f   MSVCRT:utility.obj
- 0001:00018ba5       _atexit                    10019ba5 f   MSVCRT:utility.obj
- 0001:00018bba       ___scrt_get_dyn_tls_init_callback 10019bba f   MSVCRT:dyn_tls_init.obj
- 0001:00018bc0       ___scrt_fastfail           10019bc0 f   MSVCRT:utility_desktop.obj
- 0001:00018cd5       ___scrt_get_show_window_mode 10019cd5 f   MSVCRT:utility_desktop.obj
- 0001:00018d05       ___scrt_initialize_mta     10019d05 f   MSVCRT:utility_desktop.obj
- 0001:00018d0a       ___scrt_initialize_winrt   10019d0a f   MSVCRT:utility_desktop.obj
- 0001:00018d0d       ___scrt_is_managed_app     10019d0d f   MSVCRT:utility_desktop.obj
- 0001:00018d4f       ___scrt_set_unhandled_exception_filter 10019d4f f   MSVCRT:utility_desktop.obj
- 0001:00018d5b       ___scrt_exe_initialize_mta 10019d5b f   MSVCRT:utility_desktop.obj
- 0001:00018d5b       ___scrt_stub_for_initialize_mta 10019d5b f   MSVCRT:utility_desktop.obj
- 0001:00018d5e       ___scrt_unhandled_exception_filter@4 10019d5e f   MSVCRT:utility_desktop.obj
- 0001:00018db4       __crt_debugger_hook        10019db4 f   MSVCRT:utility_desktop.obj
- 0001:00018dbc       __RTC_Initialize           10019dbc f   MSVCRT:initsect.obj
- 0001:00018de8       __RTC_Terminate            10019de8 f   MSVCRT:initsect.obj
- 0001:00018e20       __SEH_prolog4              10019e20 f   MSVCRT:sehprolg4.obj
- 0001:00018e70       __SEH_epilog4              10019e70 f   MSVCRT:sehprolg4.obj
- 0001:00018e84       __except_handler4          10019e84 f   MSVCRT:chandler4gs.obj
- 0001:00018eb3       @_guard_check_icall_nop@4  10019eb3 f i MSVCRT:guard_support.obj
- 0001:00018eb6       _ReadNoFence               10019eb6 f i MSVCRT:guard_support.obj
- 0001:00018ec0       _ReadPointerNoFence        10019ec0 f i MSVCRT:guard_support.obj
- 0001:00018eca       __InlineInterlockedExchangePointer 10019eca f i MSVCRT:guard_support.obj
- 0001:00018ed7       ___castguard_check_failure_debugbreak 10019ed7 f i MSVCRT:guard_support.obj
- 0001:00018ef2       ___castguard_check_failure_fastfail 10019ef2 f i MSVCRT:guard_support.obj
- 0001:00018f11       ___castguard_check_failure_nop 10019f11 f i MSVCRT:guard_support.obj
- 0001:00018f14       ___castguard_check_failure_os_handled 10019f14 f i MSVCRT:guard_support.obj
- 0001:00018f4b       ___castguard_check_failure_user_handled 10019f4b f i MSVCRT:guard_support.obj
- 0001:00018fb9       ___castguard_set_user_handler 10019fb9 f i MSVCRT:guard_support.obj
- 0001:00018fc8       ___castguard_slow_path_check_debugbreak 10019fc8 f i MSVCRT:guard_support.obj
- 0001:00018ff5       ___castguard_slow_path_check_fastfail 10019ff5 f i MSVCRT:guard_support.obj
- 0001:00019026       ___castguard_slow_path_check_nop 1001a026 f i MSVCRT:guard_support.obj
- 0001:00019029       ___castguard_slow_path_check_os_handled 1001a029 f i MSVCRT:guard_support.obj
- 0001:00019065       ___castguard_slow_path_check_user_handled 1001a065 f i MSVCRT:guard_support.obj
- 0001:000190c6       __guard_icall_checks_enforced 1001a0c6 f i MSVCRT:guard_support.obj
- 0001:000190d8       __get_startup_argv_mode    1001a0d8 f   MSVCRT:argv_mode.obj
- 0001:000190dc       ___scrt_is_ucrt_dll_in_use 1001a0dc f   MSVCRT:ucrt_detection.obj
- 0001:000190e8       @__security_check_cookie@4 1001a0e8 f   MSVCRT:secchk.obj
- 0001:000190f6       ___raise_securityfailure   1001a0f6 f   MSVCRT:gs_report.obj
- 0001:0001911e       ___report_gsfailure        1001a11e f   MSVCRT:gs_report.obj
- 0001:00019219       ___report_rangecheckfailure 1001a219 f   MSVCRT:gs_report.obj
- 0001:00019226       ___report_securityfailure  1001a226 f   MSVCRT:gs_report.obj
- 0001:000192f6       ___report_securityfailureEx 1001a2f6 f   MSVCRT:gs_report.obj
- 0001:0001940c       _GetSystemTimeAsFileTime@4 1001a40c f   kernel32:KERNEL32.dll
- 0001:00019412       _EnterCriticalSection@4    1001a412 f   kernel32:KERNEL32.dll
- 0001:00019418       _LeaveCriticalSection@4    1001a418 f   kernel32:KERNEL32.dll
- 0001:0001941e       _InitializeCriticalSectionAndSpinCount@8 1001a41e f   kernel32:KERNEL32.dll
- 0001:00019424       _DeleteCriticalSection@4   1001a424 f   kernel32:KERNEL32.dll
- 0001:0001942a       _Sleep@4                   1001a42a f   kernel32:KERNEL32.dll
- 0001:00019430       _GetCurrentThreadId@0      1001a430 f   kernel32:KERNEL32.dll
- 0001:00019436       _IsProcessorFeaturePresent@4 1001a436 f   kernel32:KERNEL32.dll
- 0001:0001943c       _QueryPerformanceCounter@4 1001a43c f   kernel32:KERNEL32.dll
- 0001:00019442       _GetCurrentProcessId@0     1001a442 f   kernel32:KERNEL32.dll
- 0001:00019448       _DisableThreadLibraryCalls@4 1001a448 f   kernel32:KERNEL32.dll
- 0001:0001944e       _InitializeSListHead@4     1001a44e f   kernel32:KERNEL32.dll
- 0001:00019454       _IsDebuggerPresent@0       1001a454 f   kernel32:KERNEL32.dll
- 0001:0001945a       _UnhandledExceptionFilter@4 1001a45a f   kernel32:KERNEL32.dll
- 0001:00019460       _SetUnhandledExceptionFilter@4 1001a460 f   kernel32:KERNEL32.dll
- 0001:00019466       _GetStartupInfoW@4         1001a466 f   kernel32:KERNEL32.dll
- 0001:0001946c       _GetModuleHandleW@4        1001a46c f   kernel32:KERNEL32.dll
- 0001:00019472       _GetCurrentProcess@0       1001a472 f   kernel32:KERNEL32.dll
- 0001:00019478       _TerminateProcess@8        1001a478 f   kernel32:KERNEL32.dll
- 0001:0001947e       _memset                    1001a47e f   vcruntime:VCRUNTIME140.dll
- 0001:00019484       _memcpy                    1001a484 f   vcruntime:VCRUNTIME140.dll
- 0001:0001948a       ___std_type_info_destroy_list 1001a48a f   vcruntime:VCRUNTIME140.dll
- 0001:00019490       ___current_exception       1001a490 f   vcruntime:VCRUNTIME140.dll
- 0001:00019496       ___current_exception_context 1001a496 f   vcruntime:VCRUNTIME140.dll
- 0001:0001949c       __except_handler4_common   1001a49c f   vcruntime:VCRUNTIME140.dll
- 0001:000194a2       __libm_sse2_cos_precise    1001a4a2 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:000194a8       __libm_sse2_sin_precise    1001a4a8 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:000194ae       __libm_sse2_sqrt_precise   1001a4ae f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:000194b4       __fstat64i32               1001a4b4 f   ucrt:api-ms-win-crt-filesystem-l1-1-0.dll
- 0001:000194ba       __stat64i32                1001a4ba f   ucrt:api-ms-win-crt-filesystem-l1-1-0.dll
- 0001:000194c0       ___daylight                1001a4c0 f   ucrt:api-ms-win-crt-time-l1-1-0.dll
- 0001:000194c6       ___timezone                1001a4c6 f   ucrt:api-ms-win-crt-time-l1-1-0.dll
- 0001:000194cc       __tzset                    1001a4cc f   ucrt:api-ms-win-crt-time-l1-1-0.dll
- 0001:000194d2       _exit                      1001a4d2 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:000194d8       _getenv                    1001a4d8 f   ucrt:api-ms-win-crt-environment-l1-1-0.dll
- 0001:000194de       ___acrt_iob_func           1001a4de f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:000194e4       _fopen                     1001a4e4 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:000194ea       _freopen                   1001a4ea f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:000194f0       ___stdio_common_vfprintf   1001a4f0 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:000194f6       ___stdio_common_vsprintf   1001a4f6 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:000194fc       _calloc                    1001a4fc f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
- 0001:00019502       _free                      1001a502 f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
- 0001:00019508       __aligned_free             1001a508 f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
- 0001:0001950e       __aligned_malloc           1001a50e f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
- 0001:00019514       _perror                    1001a514 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:0001951a       __libm_sse2_pow_precise    1001a51a f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:00019520       __libm_sse2_exp_precise    1001a520 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:00019526       _malloc                    1001a526 f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
- 0001:0001952c       __CIsinh                   1001a52c f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:00019532       __libm_sse2_log_precise    1001a532 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:00019538       _ceil                      1001a538 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:0001953e       _rand                      1001a53e f   ucrt:api-ms-win-crt-utility-l1-1-0.dll
- 0001:00019544       _fflush                    1001a544 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:0001954a       __libm_sse2_log10_precise  1001a54a f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:00019550       _fclose                    1001a550 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:00019556       _fread                     1001a556 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:0001955c       _fwrite                    1001a55c f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:00019562       _strtok                    1001a562 f   ucrt:api-ms-win-crt-string-l1-1-0.dll
- 0001:00019568       __libm_sse2_atan_precise   1001a568 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:0001956e       _floor                     1001a56e f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:00019574       __except1                  1001a574 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:0001957a       __initterm                 1001a57a f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:00019580       __initterm_e               1001a580 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:00019586       __seh_filter_dll           1001a586 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:0001958c       __configure_narrow_argv    1001a58c f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:00019592       __initialize_narrow_environment 1001a592 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:00019598       __initialize_onexit_table  1001a598 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:0001959e       __register_onexit_function 1001a59e f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:000195a4       __execute_onexit_table     1001a5a4 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:000195aa       __crt_atexit               1001a5aa f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:000195b0       __crt_at_quick_exit        1001a5b0 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:000195b6       __cexit                    1001a5b6 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:000195bc       _terminate                 1001a5bc f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:000195c2       __write                    1001a5c2 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:000195c2       _write                     1001a5c2 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:000195c8       ___acrt_initialize         1001a5c8 f   MSVCRT:ucrt_stubs.obj
- 0001:000195c8       ___scrt_stub_for_acrt_initialize 1001a5c8 f   MSVCRT:ucrt_stubs.obj
- 0001:000195c8       ___vcrt_initialize         1001a5c8 f   MSVCRT:ucrt_stubs.obj
- 0001:000195cb       ___acrt_thread_attach      1001a5cb f   MSVCRT:ucrt_stubs.obj
- 0001:000195cb       ___scrt_stub_for_acrt_thread_attach 1001a5cb f   MSVCRT:ucrt_stubs.obj
- 0001:000195cb       ___vcrt_thread_attach      1001a5cb f   MSVCRT:ucrt_stubs.obj
- 0001:000195ce       ___acrt_thread_detach      1001a5ce f   MSVCRT:ucrt_stubs.obj
- 0001:000195ce       ___scrt_stub_for_acrt_thread_detach 1001a5ce f   MSVCRT:ucrt_stubs.obj
- 0001:000195ce       ___vcrt_thread_detach      1001a5ce f   MSVCRT:ucrt_stubs.obj
- 0001:000195d1       ___acrt_uninitialize       1001a5d1 f   MSVCRT:ucrt_stubs.obj
- 0001:000195d1       ___scrt_stub_for_acrt_uninitialize 1001a5d1 f   MSVCRT:ucrt_stubs.obj
- 0001:000195d1       ___vcrt_uninitialize       1001a5d1 f   MSVCRT:ucrt_stubs.obj
- 0001:000195d4       ___acrt_uninitialize_critical 1001a5d4 f   MSVCRT:ucrt_stubs.obj
- 0001:000195d4       ___scrt_stub_for_acrt_uninitialize_critical 1001a5d4 f   MSVCRT:ucrt_stubs.obj
- 0001:000195d4       ___vcrt_uninitialize_critical 1001a5d4 f   MSVCRT:ucrt_stubs.obj
- 0001:000195d7       ___scrt_stub_for_is_c_termination_complete 1001a5d7 f   MSVCRT:ucrt_stubs.obj
- 0001:000195d7       __is_c_termination_complete 1001a5d7 f   MSVCRT:ucrt_stubs.obj
- 0001:000195da       __filter_x86_sse2_floating_point_exception 1001a5da f   MSVCRT:x86_exception_filter.obj
- 0001:000195da       __filter_x86_sse2_floating_point_exception_default 1001a5da f   MSVCRT:x86_exception_filter.obj
+ 0001:00015f80       _Audio_Callback2           10016f80 f   winmain.obj
+ 0001:00016330       _process_samples_thread    10017330 f   winmain.obj
+ 0001:00016540       _closeup                   10017540 f   winmain.obj
+ 0001:000165f0       _setup                     100175f0 f   winmain.obj
+ 0001:000168e0       _reset_for_buflen          100178e0 f   winmain.obj
+ 0001:000169c0       _reset_for_samplerate      100179c0 f   winmain.obj
+ 0001:00017020       _WSCompand                 10018020 f   wscompand.obj
+ 0001:00017140       _WSCReset                  10018140 f   wscompand.obj
+ 0001:00017210       _newWSCompander            10018210 f   wscompand.obj
+ 0001:00017330       _delWSCompander            10018330 f   wscompand.obj
+ 0001:00017360       _InitSPEEDTRIG             10018360 f   fastrig1.obj
+ 0001:000173d0       _fast_sin                  100183d0 f   fastrig1.obj
+ 0001:00017450       _fast_cos                  10018450 f   fastrig1.obj
+ 0001:000174d0       _fast_atan2                100184d0 f   fastrig1.obj
+ 0001:00017630       _phasemod                  10018630 f   fastrig1.obj
+ 0001:00017683       _timeSetEvent@20           10018683 f   winMM:WINMM.dll
+ 0001:00017689       _timeKillEvent@4           10018689 f   winMM:WINMM.dll
+ 0001:0001768f       _fftwf_execute             1001868f f   libfftw3f-3:libfftw3f-3.dll
+ 0001:00017695       _fftwf_plan_dft_1d         10018695 f   libfftw3f-3:libfftw3f-3.dll
+ 0001:0001769b       _fftwf_destroy_plan        1001869b f   libfftw3f-3:libfftw3f-3.dll
+ 0001:000176a1       _fftwf_import_wisdom_from_string 100186a1 f   libfftw3f-3:libfftw3f-3.dll
+ 0001:000176a7       _sem_init                  100186a7 f   pthreadVC:pthreadVC.dll
+ 0001:000176ad       _sem_destroy               100186ad f   pthreadVC:pthreadVC.dll
+ 0001:000176b3       _sem_wait                  100186b3 f   pthreadVC:pthreadVC.dll
+ 0001:000176b9       _sem_post                  100186b9 f   pthreadVC:pthreadVC.dll
+ 0001:000176c0       __alldiv                   100186c0 f   MSVCRT:lldiv.obj
+ 0001:00017770       __ftol2_sse_excpt          10018770 f   MSVCRT:ftol2.obj
+ 0001:00017780       __ftol2_sse                10018780 f   MSVCRT:ftol2.obj
+ 0001:00017790       __ftoi2                    10018790 f   MSVCRT:ftol2.obj
+ 0001:00017810       __ftoui2                   10018810 f   MSVCRT:ftol2.obj
+ 0001:000178c0       __ftol2                    100188c0 f   MSVCRT:ftol2.obj
+ 0001:00017970       __ftoul2                   10018970 f   MSVCRT:ftol2.obj
+ 0001:00017a30       __ftoul2_legacy            10018a30 f   MSVCRT:ftol2.obj
+ 0001:00017a50       __alloca_probe             10018a50 f   MSVCRT:chkstk.obj
+ 0001:00017a50       __chkstk                   10018a50 f   MSVCRT:chkstk.obj
+ 0001:00017a80       __ftoui3                   10018a80 f   MSVCRT:ftol3.obj
+ 0001:00017ad0       __ftoul3                   10018ad0 f   MSVCRT:ftol3.obj
+ 0001:00017b40       __ftoul3_legacy            10018b40 f   MSVCRT:ftol3.obj
+ 0001:00017b70       __ftol3                    10018b70 f   MSVCRT:ftol3.obj
+ 0001:00017be0       __dtoui3                   10018be0 f   MSVCRT:ftol3.obj
+ 0001:00017c60       __dtoul3                   10018c60 f   MSVCRT:ftol3.obj
+ 0001:00017d10       __dtoul3_legacy            10018d10 f   MSVCRT:ftol3.obj
+ 0001:00017d40       __dtol3                    10018d40 f   MSVCRT:ftol3.obj
+ 0001:00017df0       __ultod3                   10018df0 f   MSVCRT:ftol3.obj
+ 0001:00017e40       __ltod3                    10018e40 f   MSVCRT:ftol3.obj
+ 0001:00017e90       __ultof3                   10018e90 f   MSVCRT:ftol3.obj
+ 0001:00017f10       __ltof3                    10018f10 f   MSVCRT:ftol3.obj
+ 0001:00018294       __CRT_INIT@12              10019294 f   MSVCRT:dll_dllmain.obj
+ 0001:0001829d       __DllMainCRTStartup@12     1001929d f   MSVCRT:dll_dllmain.obj
+ 0001:000182c0       ___isa_available_init      100192c0 f   MSVCRT:cpu_disp.obj
+ 0001:0001863a       ___security_init_cookie    1001963a f   MSVCRT:gs_support.obj
+ 0001:00018685       _DllMain@12                10019685 f   MSVCRT:dll_dllmain_stub.obj
+ 0001:000186a7       ?__scrt_initialize_type_info@@YAXXZ 100196a7 f   MSVCRT:tncleanup.obj
+ 0001:000186b3       ?__scrt_uninitialize_type_info@@YAXXZ 100196b3 f   MSVCRT:tncleanup.obj
+ 0001:000186bf       ___local_stdio_scanf_options 100196bf f i MSVCRT:default_local_stdio_options.obj
+ 0001:000186c5       ___scrt_initialize_default_local_stdio_options 100196c5 f   MSVCRT:default_local_stdio_options.obj
+ 0001:000186e2       ?configure_argv@__scrt_narrow_argv_policy@@SAHXZ 100196e2 f i MSVCRT:utility.obj
+ 0001:00018731       ?initialize_environment@__scrt_narrow_environment_policy@@SAHXZ 10019731 f i MSVCRT:utility.obj
+ 0001:00018769       _NtCurrentTeb              10019769 f i MSVCRT:utility.obj
+ 0001:00018770       ___scrt_acquire_startup_lock 10019770 f   MSVCRT:utility.obj
+ 0001:000187a2       ___scrt_dllmain_after_initialize_c 100197a2 f   MSVCRT:utility.obj
+ 0001:000187cd       ___scrt_dllmain_before_initialize_c 100197cd f   MSVCRT:utility.obj
+ 0001:000187db       ___scrt_dllmain_crt_thread_attach 100197db f   MSVCRT:utility.obj
+ 0001:000187fa       ___scrt_dllmain_crt_thread_detach 100197fa f   MSVCRT:utility.obj
+ 0001:00018807       ___scrt_dllmain_exception_filter 10019807 f   MSVCRT:utility.obj
+ 0001:0001883b       ___scrt_dllmain_uninitialize_c 1001983b f   MSVCRT:utility.obj
+ 0001:0001885e       ___scrt_dllmain_uninitialize_critical 1001985e f   MSVCRT:utility.obj
+ 0001:0001886b       ___scrt_initialize_crt     1001986b f   MSVCRT:utility.obj
+ 0001:000188a4       ___scrt_initialize_onexit_tables 100198a4 f   MSVCRT:utility.obj
+ 0001:0001892b       ___scrt_is_nonwritable_in_current_image 1001992b f   MSVCRT:utility.obj
+ 0001:000189bf       ___scrt_release_startup_lock 100199bf f   MSVCRT:utility.obj
+ 0001:000189dc       ___scrt_uninitialize_crt   100199dc f   MSVCRT:utility.obj
+ 0001:00018a04       __onexit                   10019a04 f   MSVCRT:utility.obj
+ 0001:00018a32       _at_quick_exit             10019a32 f   MSVCRT:utility.obj
+ 0001:00018a55       _atexit                    10019a55 f   MSVCRT:utility.obj
+ 0001:00018a6a       ___scrt_get_dyn_tls_init_callback 10019a6a f   MSVCRT:dyn_tls_init.obj
+ 0001:00018a70       ___scrt_fastfail           10019a70 f   MSVCRT:utility_desktop.obj
+ 0001:00018b85       ___scrt_get_show_window_mode 10019b85 f   MSVCRT:utility_desktop.obj
+ 0001:00018bb5       ___scrt_initialize_mta     10019bb5 f   MSVCRT:utility_desktop.obj
+ 0001:00018bba       ___scrt_initialize_winrt   10019bba f   MSVCRT:utility_desktop.obj
+ 0001:00018bbd       ___scrt_is_managed_app     10019bbd f   MSVCRT:utility_desktop.obj
+ 0001:00018bff       ___scrt_set_unhandled_exception_filter 10019bff f   MSVCRT:utility_desktop.obj
+ 0001:00018c0b       ___scrt_exe_initialize_mta 10019c0b f   MSVCRT:utility_desktop.obj
+ 0001:00018c0b       ___scrt_stub_for_initialize_mta 10019c0b f   MSVCRT:utility_desktop.obj
+ 0001:00018c0e       ___scrt_unhandled_exception_filter@4 10019c0e f   MSVCRT:utility_desktop.obj
+ 0001:00018c64       __crt_debugger_hook        10019c64 f   MSVCRT:utility_desktop.obj
+ 0001:00018c6c       __RTC_Initialize           10019c6c f   MSVCRT:initsect.obj
+ 0001:00018c98       __RTC_Terminate            10019c98 f   MSVCRT:initsect.obj
+ 0001:00018cd0       __SEH_prolog4              10019cd0 f   MSVCRT:sehprolg4.obj
+ 0001:00018d20       __SEH_epilog4              10019d20 f   MSVCRT:sehprolg4.obj
+ 0001:00018d34       __except_handler4          10019d34 f   MSVCRT:chandler4gs.obj
+ 0001:00018d63       @_guard_check_icall_nop@4  10019d63 f i MSVCRT:guard_support.obj
+ 0001:00018d66       _ReadNoFence               10019d66 f i MSVCRT:guard_support.obj
+ 0001:00018d70       _ReadPointerNoFence        10019d70 f i MSVCRT:guard_support.obj
+ 0001:00018d7a       __InlineInterlockedExchangePointer 10019d7a f i MSVCRT:guard_support.obj
+ 0001:00018d87       ___castguard_check_failure_debugbreak 10019d87 f i MSVCRT:guard_support.obj
+ 0001:00018da2       ___castguard_check_failure_fastfail 10019da2 f i MSVCRT:guard_support.obj
+ 0001:00018dc1       ___castguard_check_failure_nop 10019dc1 f i MSVCRT:guard_support.obj
+ 0001:00018dc4       ___castguard_check_failure_os_handled 10019dc4 f i MSVCRT:guard_support.obj
+ 0001:00018dfb       ___castguard_check_failure_user_handled 10019dfb f i MSVCRT:guard_support.obj
+ 0001:00018e69       ___castguard_set_user_handler 10019e69 f i MSVCRT:guard_support.obj
+ 0001:00018e78       ___castguard_slow_path_check_debugbreak 10019e78 f i MSVCRT:guard_support.obj
+ 0001:00018ea5       ___castguard_slow_path_check_fastfail 10019ea5 f i MSVCRT:guard_support.obj
+ 0001:00018ed6       ___castguard_slow_path_check_nop 10019ed6 f i MSVCRT:guard_support.obj
+ 0001:00018ed9       ___castguard_slow_path_check_os_handled 10019ed9 f i MSVCRT:guard_support.obj
+ 0001:00018f15       ___castguard_slow_path_check_user_handled 10019f15 f i MSVCRT:guard_support.obj
+ 0001:00018f76       __guard_icall_checks_enforced 10019f76 f i MSVCRT:guard_support.obj
+ 0001:00018f88       __get_startup_argv_mode    10019f88 f   MSVCRT:argv_mode.obj
+ 0001:00018f8c       ___scrt_is_ucrt_dll_in_use 10019f8c f   MSVCRT:ucrt_detection.obj
+ 0001:00018f98       @__security_check_cookie@4 10019f98 f   MSVCRT:secchk.obj
+ 0001:00018fa6       ___raise_securityfailure   10019fa6 f   MSVCRT:gs_report.obj
+ 0001:00018fce       ___report_gsfailure        10019fce f   MSVCRT:gs_report.obj
+ 0001:000190c9       ___report_rangecheckfailure 1001a0c9 f   MSVCRT:gs_report.obj
+ 0001:000190d6       ___report_securityfailure  1001a0d6 f   MSVCRT:gs_report.obj
+ 0001:000191a6       ___report_securityfailureEx 1001a1a6 f   MSVCRT:gs_report.obj
+ 0001:000192bc       _GetSystemTimeAsFileTime@4 1001a2bc f   kernel32:KERNEL32.dll
+ 0001:000192c2       _EnterCriticalSection@4    1001a2c2 f   kernel32:KERNEL32.dll
+ 0001:000192c8       _LeaveCriticalSection@4    1001a2c8 f   kernel32:KERNEL32.dll
+ 0001:000192ce       _InitializeCriticalSectionAndSpinCount@8 1001a2ce f   kernel32:KERNEL32.dll
+ 0001:000192d4       _DeleteCriticalSection@4   1001a2d4 f   kernel32:KERNEL32.dll
+ 0001:000192da       _Sleep@4                   1001a2da f   kernel32:KERNEL32.dll
+ 0001:000192e0       _GetCurrentThreadId@0      1001a2e0 f   kernel32:KERNEL32.dll
+ 0001:000192e6       _IsProcessorFeaturePresent@4 1001a2e6 f   kernel32:KERNEL32.dll
+ 0001:000192ec       _QueryPerformanceCounter@4 1001a2ec f   kernel32:KERNEL32.dll
+ 0001:000192f2       _GetCurrentProcessId@0     1001a2f2 f   kernel32:KERNEL32.dll
+ 0001:000192f8       _DisableThreadLibraryCalls@4 1001a2f8 f   kernel32:KERNEL32.dll
+ 0001:000192fe       _InitializeSListHead@4     1001a2fe f   kernel32:KERNEL32.dll
+ 0001:00019304       _IsDebuggerPresent@0       1001a304 f   kernel32:KERNEL32.dll
+ 0001:0001930a       _UnhandledExceptionFilter@4 1001a30a f   kernel32:KERNEL32.dll
+ 0001:00019310       _SetUnhandledExceptionFilter@4 1001a310 f   kernel32:KERNEL32.dll
+ 0001:00019316       _GetStartupInfoW@4         1001a316 f   kernel32:KERNEL32.dll
+ 0001:0001931c       _GetModuleHandleW@4        1001a31c f   kernel32:KERNEL32.dll
+ 0001:00019322       _GetCurrentProcess@0       1001a322 f   kernel32:KERNEL32.dll
+ 0001:00019328       _TerminateProcess@8        1001a328 f   kernel32:KERNEL32.dll
+ 0001:0001932e       _memset                    1001a32e f   vcruntime:VCRUNTIME140.dll
+ 0001:00019334       _memcpy                    1001a334 f   vcruntime:VCRUNTIME140.dll
+ 0001:0001933a       ___std_type_info_destroy_list 1001a33a f   vcruntime:VCRUNTIME140.dll
+ 0001:00019340       ___current_exception       1001a340 f   vcruntime:VCRUNTIME140.dll
+ 0001:00019346       ___current_exception_context 1001a346 f   vcruntime:VCRUNTIME140.dll
+ 0001:0001934c       __except_handler4_common   1001a34c f   vcruntime:VCRUNTIME140.dll
+ 0001:00019352       __libm_sse2_cos_precise    1001a352 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:00019358       __libm_sse2_sin_precise    1001a358 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:0001935e       __libm_sse2_sqrt_precise   1001a35e f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:00019364       __fstat64i32               1001a364 f   ucrt:api-ms-win-crt-filesystem-l1-1-0.dll
+ 0001:0001936a       __stat64i32                1001a36a f   ucrt:api-ms-win-crt-filesystem-l1-1-0.dll
+ 0001:00019370       ___daylight                1001a370 f   ucrt:api-ms-win-crt-time-l1-1-0.dll
+ 0001:00019376       ___timezone                1001a376 f   ucrt:api-ms-win-crt-time-l1-1-0.dll
+ 0001:0001937c       __tzset                    1001a37c f   ucrt:api-ms-win-crt-time-l1-1-0.dll
+ 0001:00019382       _exit                      1001a382 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:00019388       _getenv                    1001a388 f   ucrt:api-ms-win-crt-environment-l1-1-0.dll
+ 0001:0001938e       ___acrt_iob_func           1001a38e f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:00019394       _fopen                     1001a394 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:0001939a       _freopen                   1001a39a f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:000193a0       ___stdio_common_vfprintf   1001a3a0 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:000193a6       ___stdio_common_vsprintf   1001a3a6 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:000193ac       _calloc                    1001a3ac f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
+ 0001:000193b2       _free                      1001a3b2 f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
+ 0001:000193b8       __aligned_free             1001a3b8 f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
+ 0001:000193be       __aligned_malloc           1001a3be f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
+ 0001:000193c4       _perror                    1001a3c4 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:000193ca       __libm_sse2_pow_precise    1001a3ca f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:000193d0       __libm_sse2_exp_precise    1001a3d0 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:000193d6       _malloc                    1001a3d6 f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
+ 0001:000193dc       __CIsinh                   1001a3dc f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:000193e2       __libm_sse2_log_precise    1001a3e2 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:000193e8       _ceil                      1001a3e8 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:000193ee       _rand                      1001a3ee f   ucrt:api-ms-win-crt-utility-l1-1-0.dll
+ 0001:000193f4       _fflush                    1001a3f4 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:000193fa       __libm_sse2_log10_precise  1001a3fa f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:00019400       _fclose                    1001a400 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:00019406       _fread                     1001a406 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:0001940c       _fwrite                    1001a40c f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:00019412       _strtok                    1001a412 f   ucrt:api-ms-win-crt-string-l1-1-0.dll
+ 0001:00019418       __libm_sse2_atan_precise   1001a418 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:0001941e       _floor                     1001a41e f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:00019424       __except1                  1001a424 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:0001942a       __initterm                 1001a42a f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:00019430       __initterm_e               1001a430 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:00019436       __seh_filter_dll           1001a436 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:0001943c       __configure_narrow_argv    1001a43c f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:00019442       __initialize_narrow_environment 1001a442 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:00019448       __initialize_onexit_table  1001a448 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:0001944e       __register_onexit_function 1001a44e f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:00019454       __execute_onexit_table     1001a454 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:0001945a       __crt_atexit               1001a45a f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:00019460       __crt_at_quick_exit        1001a460 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:00019466       __cexit                    1001a466 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:0001946c       _terminate                 1001a46c f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:00019472       __write                    1001a472 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:00019472       _write                     1001a472 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:00019478       ___acrt_initialize         1001a478 f   MSVCRT:ucrt_stubs.obj
+ 0001:00019478       ___scrt_stub_for_acrt_initialize 1001a478 f   MSVCRT:ucrt_stubs.obj
+ 0001:00019478       ___vcrt_initialize         1001a478 f   MSVCRT:ucrt_stubs.obj
+ 0001:0001947b       ___acrt_thread_attach      1001a47b f   MSVCRT:ucrt_stubs.obj
+ 0001:0001947b       ___scrt_stub_for_acrt_thread_attach 1001a47b f   MSVCRT:ucrt_stubs.obj
+ 0001:0001947b       ___vcrt_thread_attach      1001a47b f   MSVCRT:ucrt_stubs.obj
+ 0001:0001947e       ___acrt_thread_detach      1001a47e f   MSVCRT:ucrt_stubs.obj
+ 0001:0001947e       ___scrt_stub_for_acrt_thread_detach 1001a47e f   MSVCRT:ucrt_stubs.obj
+ 0001:0001947e       ___vcrt_thread_detach      1001a47e f   MSVCRT:ucrt_stubs.obj
+ 0001:00019481       ___acrt_uninitialize       1001a481 f   MSVCRT:ucrt_stubs.obj
+ 0001:00019481       ___scrt_stub_for_acrt_uninitialize 1001a481 f   MSVCRT:ucrt_stubs.obj
+ 0001:00019481       ___vcrt_uninitialize       1001a481 f   MSVCRT:ucrt_stubs.obj
+ 0001:00019484       ___acrt_uninitialize_critical 1001a484 f   MSVCRT:ucrt_stubs.obj
+ 0001:00019484       ___scrt_stub_for_acrt_uninitialize_critical 1001a484 f   MSVCRT:ucrt_stubs.obj
+ 0001:00019484       ___vcrt_uninitialize_critical 1001a484 f   MSVCRT:ucrt_stubs.obj
+ 0001:00019487       ___scrt_stub_for_is_c_termination_complete 1001a487 f   MSVCRT:ucrt_stubs.obj
+ 0001:00019487       __is_c_termination_complete 1001a487 f   MSVCRT:ucrt_stubs.obj
+ 0001:0001948a       __filter_x86_sse2_floating_point_exception 1001a48a f   MSVCRT:x86_exception_filter.obj
+ 0001:0001948a       __filter_x86_sse2_floating_point_exception_default 1001a48a f   MSVCRT:x86_exception_filter.obj
  0002:00000000       __imp__LeaveCriticalSection@4 1001b000     kernel32:KERNEL32.dll
  0002:00000004       __imp__GetModuleHandleW@4  1001b004     kernel32:KERNEL32.dll
  0002:00000008       __imp__GetStartupInfoW@4   1001b008     kernel32:KERNEL32.dll
@@ -1099,50 +1099,44 @@
  0002:00001698       ??_C@_0BH@KLJCLCII@main?5hold?5buffer?5right@ 1001c698     winmain.obj
  0002:000016b0       ??_C@_0BF@ICAMHHED@aux?5hold?5buffer?5left@ 1001c6b0     winmain.obj
  0002:000016c8       ??_C@_0BG@PFKIBDDE@aux?5hold?5buffer?5right@ 1001c6c8     winmain.obj
- 0002:000016e0       ??_C@_08NLJNPLHL@?4DttSPrc@ 1001c6e0     winmain.obj
- 0002:000016ec       ??_C@_0L@HPBDBCFK@?$CFs?$CF0lu_?$CF0u@ 1001c6ec     winmain.obj
- 0002:000016f8       ??_C@_0BF@IBJDIOPD@?2?2?4?2pipe?2SDRcommands@ 1001c6f8     winmain.obj
- 0002:00001710       ??_C@_0BC@PGLHAHFE@?2?2?4?2pipe?2SDRmeter@ 1001c710     winmain.obj
- 0002:00001724       ??_C@_0BF@PKEHMGFP@?2?2?4?2pipe?2SDRspectrum@ 1001c724     winmain.obj
- 0002:0000173c       ??_C@_08MOJGIHGC@?4?2wisdom@ 1001c73c     winmain.obj
- 0002:00001748       __real@3f747ae147ae147b    1001c748     winmain.obj
- 0002:00001750       __xmm@3fa999999999999a3f747ae147ae147b 1001c750     winmain.obj
- 0002:00001760       ??_C@_0BD@NDOHHLCJ@WSCompander?5struct@ 1001c760     wscompand.obj
- 0002:00001774       ??_C@_0BC@MGFGCHOO@WSCompander?5table@ 1001c774     wscompand.obj
- 0002:00001788       ??_C@_0BB@KKBLCLFB@WSCompander?5buff@ 1001c788     wscompand.obj
- 0002:0000179c       ??_C@_0O@NPMBFNBD@InitSpeedTrig@ 1001c79c     fastrig1.obj
- 0002:000017b0       __real@3f30000000000000    1001c7b0     fastrig1.obj
- 0002:000017b8       __real@3f70101029aa03b0    1001c7b8     fastrig1.obj
- 0002:000017c0       __real@3fc90fdb            1001c7c0     fastrig1.obj
- 0002:000017c4       __real@40490fdb            1001c7c4     fastrig1.obj
- 0002:000017c8       __real@437f8000            1001c7c8     fastrig1.obj
- 0002:000017cc       __real@bfc90fdb            1001c7cc     fastrig1.obj
- 0002:00001810       __pDefaultRawDllMain       1001c810     MSVCRT:dll_dllmain.obj
- 0002:00001810       __pRawDllMain              1001c810     MSVCRT:dll_dllmain.obj
- 0002:00001820       __load_config_used         1001c820     MSVCRT:loadcfg.obj
- 0002:00001940       ___CastGuardVftablesStart  1001c940     MSVCRT:guard_support.obj
- 0002:00001980       ___CastGuardVftablesEnd    1001c980     MSVCRT:guard_support.obj
- 0002:000019c0       ___safe_se_handler_table   1001c9c0     <linker-defined>
- 0002:000019c4       ___volatile_metadata       1001c9c4     <linker-defined>
- 0002:00002048       ___rtc_iaa                 1001d048     MSVCRT:initsect.obj
- 0002:0000204c       ___rtc_izz                 1001d04c     MSVCRT:initsect.obj
- 0002:00002050       ___rtc_taa                 1001d050     MSVCRT:initsect.obj
- 0002:00002054       ___rtc_tzz                 1001d054     MSVCRT:initsect.obj
- 0002:00003124       __IMPORT_DESCRIPTOR_WINMM  1001e124     winMM:WINMM.dll
- 0002:00003138       __IMPORT_DESCRIPTOR_libfftw3f-3 1001e138     libfftw3f-3:libfftw3f-3.dll
- 0002:0000314c       __IMPORT_DESCRIPTOR_pthreadVC 1001e14c     pthreadVC:pthreadVC.dll
- 0002:00003160       __IMPORT_DESCRIPTOR_KERNEL32 1001e160     kernel32:KERNEL32.dll
- 0002:00003174       __IMPORT_DESCRIPTOR_VCRUNTIME140 1001e174     vcruntime:VCRUNTIME140.dll
- 0002:00003188       __IMPORT_DESCRIPTOR_api-ms-win-crt-math-l1-1-0 1001e188     ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0002:0000319c       __IMPORT_DESCRIPTOR_api-ms-win-crt-filesystem-l1-1-0 1001e19c     ucrt:api-ms-win-crt-filesystem-l1-1-0.dll
- 0002:000031b0       __IMPORT_DESCRIPTOR_api-ms-win-crt-time-l1-1-0 1001e1b0     ucrt:api-ms-win-crt-time-l1-1-0.dll
- 0002:000031c4       __IMPORT_DESCRIPTOR_api-ms-win-crt-runtime-l1-1-0 1001e1c4     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0002:000031d8       __IMPORT_DESCRIPTOR_api-ms-win-crt-environment-l1-1-0 1001e1d8     ucrt:api-ms-win-crt-environment-l1-1-0.dll
- 0002:000031ec       __IMPORT_DESCRIPTOR_api-ms-win-crt-stdio-l1-1-0 1001e1ec     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0002:00003200       __IMPORT_DESCRIPTOR_api-ms-win-crt-heap-l1-1-0 1001e200     ucrt:api-ms-win-crt-heap-l1-1-0.dll
- 0002:00003214       __IMPORT_DESCRIPTOR_api-ms-win-crt-utility-l1-1-0 1001e214     ucrt:api-ms-win-crt-utility-l1-1-0.dll
- 0002:00003228       __IMPORT_DESCRIPTOR_api-ms-win-crt-string-l1-1-0 1001e228     ucrt:api-ms-win-crt-string-l1-1-0.dll
- 0002:0000323c       __NULL_IMPORT_DESCRIPTOR   1001e23c     winMM:WINMM.dll
+ 0002:000016e0       __real@3f747ae147ae147b    1001c6e0     winmain.obj
+ 0002:000016f0       __xmm@3fa999999999999a3f747ae147ae147b 1001c6f0     winmain.obj
+ 0002:00001700       ??_C@_0BD@NDOHHLCJ@WSCompander?5struct@ 1001c700     wscompand.obj
+ 0002:00001714       ??_C@_0BC@MGFGCHOO@WSCompander?5table@ 1001c714     wscompand.obj
+ 0002:00001728       ??_C@_0BB@KKBLCLFB@WSCompander?5buff@ 1001c728     wscompand.obj
+ 0002:0000173c       ??_C@_0O@NPMBFNBD@InitSpeedTrig@ 1001c73c     fastrig1.obj
+ 0002:00001750       __real@3f30000000000000    1001c750     fastrig1.obj
+ 0002:00001758       __real@3f70101029aa03b0    1001c758     fastrig1.obj
+ 0002:00001760       __real@3fc90fdb            1001c760     fastrig1.obj
+ 0002:00001764       __real@40490fdb            1001c764     fastrig1.obj
+ 0002:00001768       __real@437f8000            1001c768     fastrig1.obj
+ 0002:0000176c       __real@bfc90fdb            1001c76c     fastrig1.obj
+ 0002:000017b0       __pDefaultRawDllMain       1001c7b0     MSVCRT:dll_dllmain.obj
+ 0002:000017b0       __pRawDllMain              1001c7b0     MSVCRT:dll_dllmain.obj
+ 0002:000017c0       __load_config_used         1001c7c0     MSVCRT:loadcfg.obj
+ 0002:00001900       ___CastGuardVftablesStart  1001c900     MSVCRT:guard_support.obj
+ 0002:00001940       ___CastGuardVftablesEnd    1001c940     MSVCRT:guard_support.obj
+ 0002:00001980       ___safe_se_handler_table   1001c980     <linker-defined>
+ 0002:00001984       ___volatile_metadata       1001c984     <linker-defined>
+ 0002:00002008       ___rtc_iaa                 1001d008     MSVCRT:initsect.obj
+ 0002:0000200c       ___rtc_izz                 1001d00c     MSVCRT:initsect.obj
+ 0002:00002010       ___rtc_taa                 1001d010     MSVCRT:initsect.obj
+ 0002:00002014       ___rtc_tzz                 1001d014     MSVCRT:initsect.obj
+ 0002:000030e4       __IMPORT_DESCRIPTOR_WINMM  1001e0e4     winMM:WINMM.dll
+ 0002:000030f8       __IMPORT_DESCRIPTOR_libfftw3f-3 1001e0f8     libfftw3f-3:libfftw3f-3.dll
+ 0002:0000310c       __IMPORT_DESCRIPTOR_pthreadVC 1001e10c     pthreadVC:pthreadVC.dll
+ 0002:00003120       __IMPORT_DESCRIPTOR_KERNEL32 1001e120     kernel32:KERNEL32.dll
+ 0002:00003134       __IMPORT_DESCRIPTOR_VCRUNTIME140 1001e134     vcruntime:VCRUNTIME140.dll
+ 0002:00003148       __IMPORT_DESCRIPTOR_api-ms-win-crt-math-l1-1-0 1001e148     ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0002:0000315c       __IMPORT_DESCRIPTOR_api-ms-win-crt-filesystem-l1-1-0 1001e15c     ucrt:api-ms-win-crt-filesystem-l1-1-0.dll
+ 0002:00003170       __IMPORT_DESCRIPTOR_api-ms-win-crt-time-l1-1-0 1001e170     ucrt:api-ms-win-crt-time-l1-1-0.dll
+ 0002:00003184       __IMPORT_DESCRIPTOR_api-ms-win-crt-runtime-l1-1-0 1001e184     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0002:00003198       __IMPORT_DESCRIPTOR_api-ms-win-crt-environment-l1-1-0 1001e198     ucrt:api-ms-win-crt-environment-l1-1-0.dll
+ 0002:000031ac       __IMPORT_DESCRIPTOR_api-ms-win-crt-stdio-l1-1-0 1001e1ac     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0002:000031c0       __IMPORT_DESCRIPTOR_api-ms-win-crt-heap-l1-1-0 1001e1c0     ucrt:api-ms-win-crt-heap-l1-1-0.dll
+ 0002:000031d4       __IMPORT_DESCRIPTOR_api-ms-win-crt-utility-l1-1-0 1001e1d4     ucrt:api-ms-win-crt-utility-l1-1-0.dll
+ 0002:000031e8       __IMPORT_DESCRIPTOR_api-ms-win-crt-string-l1-1-0 1001e1e8     ucrt:api-ms-win-crt-string-l1-1-0.dll
+ 0002:000031fc       __NULL_IMPORT_DESCRIPTOR   1001e1fc     winMM:WINMM.dll
  0003:00000000       _IQdoit                    1001f000     correctIQ.obj
  0003:00000004       _cxone                     1001f004     cxops.obj
  0003:0000000c       _cxJ                       1001f00c     cxops.obj
@@ -1178,99 +1172,99 @@
  0003:00000de4       _APP_DATA_PATH             1001fde4     <common>
  0003:00000de8       _reset_em                  1001fde8     <common>
  0003:00000e00       _loc                       1001fe00     <common>
- 0003:00009e54       _thread_com                10028e54     <common>
- 0003:00009e60       _top                       10028e60     <common>
- 0003:0000d4e0       _tx                        1002c4e0     <common>
- 0003:0000d880       _rx                        1002c880     <common>
- 0003:0000e1c0       _uni                       1002d1c0     <common>
- 0003:0003e514       _gen                       1005d514     <common>
- 0003:0003e518       _rring                     1005d518     <common>
- 0003:0003e51c       _lring                     1005d51c     <common>
- 0003:0003e520       _poll_fired                1005d520     <common>
- 0003:0003e524       _keyer_started             1005d524     <common>
- 0003:0003e528       _clock_fired               1005d528     <common>
- 0003:0003e52c       _kl                        1005d52c     <common>
- 0003:0003e530       _ks                        1005d530     <common>
- 0003:0003e540       _diversity                 1005d540     <common>
- 0003:0003e570       ?_OptionsStorage@?1??__local_stdio_printf_options@@9@9 1005d570     <common>
- 0003:0003e578       ___dyn_tls_init_callback   1005d578     <common>
+ 0003:00000e54       _thread_com                1001fe54     <common>
+ 0003:00000e60       _top                       1001fe60     <common>
+ 0003:00001140       _tx                        10020140     <common>
+ 0003:000014e0       _rx                        100204e0     <common>
+ 0003:00001e20       _uni                       10020e20     <common>
+ 0003:00032174       _gen                       10051174     <common>
+ 0003:00032178       _rring                     10051178     <common>
+ 0003:0003217c       _lring                     1005117c     <common>
+ 0003:00032180       _poll_fired                10051180     <common>
+ 0003:00032184       _keyer_started             10051184     <common>
+ 0003:00032188       _clock_fired               10051188     <common>
+ 0003:0003218c       _kl                        1005118c     <common>
+ 0003:00032190       _ks                        10051190     <common>
+ 0003:000321a0       _diversity                 100511a0     <common>
+ 0003:000321d0       ?_OptionsStorage@?1??__local_stdio_printf_options@@9@9 100511d0     <common>
+ 0003:000321d8       ___dyn_tls_init_callback   100511d8     <common>
 
- entry point at        0001:000183ed
+ entry point at        0001:0001829d
 
  Static symbols
 
- 0000:fff9e000       .debug$S                   10000000     DttSP.exp
+ 0000:fffaa000       .debug$S                   10000000     DttSP.exp
  0000:00000000       _volmd                     10000000     ringb.obj
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-environment-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-filesystem-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-filesystem-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-heap-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-heap-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-heap-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-heap-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-heap-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-string-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-time-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-time-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-time-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     ucrt:api-ms-win-crt-utility-l1-1-0.dll
- 0000:fff9e000       .debug$S                   10000000     kernel32:KERNEL32.dll
- 0000:fff9e000       .debug$S                   10000000     kernel32:KERNEL32.dll
- 0000:fff9e000       .debug$S                   10000000     kernel32:KERNEL32.dll
- 0000:fff9e000       .debug$S                   10000000     kernel32:KERNEL32.dll
- 0000:fff9e000       .debug$S                   10000000     kernel32:KERNEL32.dll
- 0000:fff9e000       .debug$S                   10000000     kernel32:KERNEL32.dll
- 0000:fff9e000       .debug$S                   10000000     kernel32:KERNEL32.dll
- 0000:fff9e000       .debug$S                   10000000     kernel32:KERNEL32.dll
- 0000:fff9e000       .debug$S                   10000000     kernel32:KERNEL32.dll
- 0000:fff9e000       .debug$S                   10000000     kernel32:KERNEL32.dll
- 0000:fff9e000       .debug$S                   10000000     kernel32:KERNEL32.dll
- 0000:fff9e000       .debug$S                   10000000     kernel32:KERNEL32.dll
- 0000:fff9e000       .debug$S                   10000000     kernel32:KERNEL32.dll
- 0000:fff9e000       .debug$S                   10000000     kernel32:KERNEL32.dll
- 0000:fff9e000       .debug$S                   10000000     kernel32:KERNEL32.dll
- 0000:fff9e000       .debug$S                   10000000     kernel32:KERNEL32.dll
- 0000:fff9e000       .debug$S                   10000000     kernel32:KERNEL32.dll
- 0000:fff9e000       .debug$S                   10000000     kernel32:KERNEL32.dll
- 0000:fff9e000       .debug$S                   10000000     kernel32:KERNEL32.dll
- 0000:fff9e000       .debug$S                   10000000     winMM:WINMM.dll
- 0000:fff9e000       .debug$S                   10000000     winMM:WINMM.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-environment-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-filesystem-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-filesystem-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-heap-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-heap-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-heap-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-heap-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-heap-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-string-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-time-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-time-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-time-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     ucrt:api-ms-win-crt-utility-l1-1-0.dll
+ 0000:fffaa000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffaa000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffaa000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffaa000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffaa000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffaa000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffaa000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffaa000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffaa000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffaa000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffaa000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffaa000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffaa000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffaa000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffaa000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffaa000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffaa000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffaa000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffaa000       .debug$S                   10000000     kernel32:KERNEL32.dll
+ 0000:fffaa000       .debug$S                   10000000     winMM:WINMM.dll
+ 0000:fffaa000       .debug$S                   10000000     winMM:WINMM.dll
  0002:fffe5000       __guard_fids___except_handler4 10000000     MSVCRT:chandler4gs.obj
  0000:00000000       _volmd                     10000000     MSVCRT:cpu_disp.obj
  0002:fffe5000       __guard_fids_?dllmain_dispatch@@YAHQAUHINSTANCE__@@KQAX@Z 10000000     MSVCRT:dll_dllmain.obj
@@ -1288,20 +1282,20 @@
  0000:00000000       _volmd                     10000000     MSVCRT:guard_support.obj
  0000:00000000       _volmd                     10000000     MSVCRT:guard_support.obj
  0002:fffe5000       __guard_fids____scrt_set_unhandled_exception_filter 10000000     MSVCRT:utility_desktop.obj
- 0000:fff9e000       .debug$S                   10000000     vcruntime:VCRUNTIME140.dll
- 0000:fff9e000       .debug$S                   10000000     vcruntime:VCRUNTIME140.dll
- 0000:fff9e000       .debug$S                   10000000     vcruntime:VCRUNTIME140.dll
- 0000:fff9e000       .debug$S                   10000000     vcruntime:VCRUNTIME140.dll
- 0000:fff9e000       .debug$S                   10000000     vcruntime:VCRUNTIME140.dll
- 0000:fff9e000       .debug$S                   10000000     vcruntime:VCRUNTIME140.dll
- 0000:fff9e000       .debug$S                   10000000     libfftw3f-3:libfftw3f-3.dll
- 0000:fff9e000       .debug$S                   10000000     libfftw3f-3:libfftw3f-3.dll
- 0000:fff9e000       .debug$S                   10000000     libfftw3f-3:libfftw3f-3.dll
- 0000:fff9e000       .debug$S                   10000000     libfftw3f-3:libfftw3f-3.dll
- 0000:fff9e000       .debug$S                   10000000     pthreadVC:pthreadVC.dll
- 0000:fff9e000       .debug$S                   10000000     pthreadVC:pthreadVC.dll
- 0000:fff9e000       .debug$S                   10000000     pthreadVC:pthreadVC.dll
- 0000:fff9e000       .debug$S                   10000000     pthreadVC:pthreadVC.dll
+ 0000:fffaa000       .debug$S                   10000000     vcruntime:VCRUNTIME140.dll
+ 0000:fffaa000       .debug$S                   10000000     vcruntime:VCRUNTIME140.dll
+ 0000:fffaa000       .debug$S                   10000000     vcruntime:VCRUNTIME140.dll
+ 0000:fffaa000       .debug$S                   10000000     vcruntime:VCRUNTIME140.dll
+ 0000:fffaa000       .debug$S                   10000000     vcruntime:VCRUNTIME140.dll
+ 0000:fffaa000       .debug$S                   10000000     vcruntime:VCRUNTIME140.dll
+ 0000:fffaa000       .debug$S                   10000000     libfftw3f-3:libfftw3f-3.dll
+ 0000:fffaa000       .debug$S                   10000000     libfftw3f-3:libfftw3f-3.dll
+ 0000:fffaa000       .debug$S                   10000000     libfftw3f-3:libfftw3f-3.dll
+ 0000:fffaa000       .debug$S                   10000000     libfftw3f-3:libfftw3f-3.dll
+ 0000:fffaa000       .debug$S                   10000000     pthreadVC:pthreadVC.dll
+ 0000:fffaa000       .debug$S                   10000000     pthreadVC:pthreadVC.dll
+ 0000:fffaa000       .debug$S                   10000000     pthreadVC:pthreadVC.dll
+ 0000:fffaa000       .debug$S                   10000000     pthreadVC:pthreadVC.dll
  0000:0000004c       _volmd                     1000004c     ringb.obj
  0000:000000a0       _volmd                     100000a0     ringb.obj
  0000:000000fc       _volmd                     100000fc     ringb.obj
@@ -1337,324 +1331,324 @@
  0001:000150f4       $LN11                      100160f4     update.obj
  0001:00015250       $LN21                      10016250     update.obj
  0001:00015d98       $LN112                     10016d98     window.obj
- 0001:00016534       $LN33                      10017534     winmain.obj
- 0001:00016c60       _reset_system_audio        10017c60 f   winmain.obj
- 0001:00016dc0       _run_swch                  10017dc0 f   winmain.obj
- 0001:000170e0       _setup_local_audio         100180e0 f   winmain.obj
- 0001:00017810       $$000000                   10018810     MSVCRT:lldiv.obj
- 0001:00017831       L1                         10018831     MSVCRT:lldiv.obj
- 0001:0001784d       L2                         1001884d     MSVCRT:lldiv.obj
- 0001:00017869       L3                         10018869     MSVCRT:lldiv.obj
- 0001:00017877       L5                         10018877     MSVCRT:lldiv.obj
- 0001:000178a5       L6                         100188a5     MSVCRT:lldiv.obj
- 0001:000178a6       L7                         100188a6     MSVCRT:lldiv.obj
- 0001:000178aa       L4                         100188aa     MSVCRT:lldiv.obj
- 0001:000178b4       L8                         100188b4     MSVCRT:lldiv.obj
+ 0001:00016524       $LN33                      10017524     winmain.obj
+ 0001:00016b20       _reset_system_audio        10017b20 f   winmain.obj
+ 0001:00016c70       _run_swch                  10017c70 f   winmain.obj
+ 0001:00016f90       _setup_local_audio         10017f90 f   winmain.obj
+ 0001:000176c0       $$000000                   100186c0     MSVCRT:lldiv.obj
+ 0001:000176e1       L1                         100186e1     MSVCRT:lldiv.obj
+ 0001:000176fd       L2                         100186fd     MSVCRT:lldiv.obj
+ 0001:00017719       L3                         10018719     MSVCRT:lldiv.obj
+ 0001:00017727       L5                         10018727     MSVCRT:lldiv.obj
+ 0001:00017755       L6                         10018755     MSVCRT:lldiv.obj
+ 0001:00017756       L7                         10018756     MSVCRT:lldiv.obj
+ 0001:0001775a       L4                         1001875a     MSVCRT:lldiv.obj
+ 0001:00017764       L8                         10018764     MSVCRT:lldiv.obj
+ 0001:00017770       $$000000                   10018770     MSVCRT:ftol2.obj
+ 0001:00017780       $$000000                   10018780     MSVCRT:ftol2.obj
+ 0001:00017790       $$000000                   10018790     MSVCRT:ftol2.obj
+ 0001:000177a1       L3B                        100187a1     MSVCRT:ftol2.obj
+ 0001:000177e4       L3F                        100187e4     MSVCRT:ftol2.obj
+ 0001:000177ec       L40                        100187ec     MSVCRT:ftol2.obj
+ 0001:000177ff       L41                        100187ff     MSVCRT:ftol2.obj
+ 0001:00017810       $$000000                   10018810     MSVCRT:ftol2.obj
+ 0001:0001782b       L8F                        1001882b     MSVCRT:ftol2.obj
+ 0001:0001783c       L90                        1001883c     MSVCRT:ftol2.obj
+ 0001:0001784b       L91                        1001884b     MSVCRT:ftol2.obj
+ 0001:00017851       L92                        10018851     MSVCRT:ftol2.obj
+ 0001:00017857       L93                        10018857     MSVCRT:ftol2.obj
+ 0001:00017896       L96                        10018896     MSVCRT:ftol2.obj
+ 0001:0001789d       L97                        1001889d     MSVCRT:ftol2.obj
+ 0001:000178a5       L99                        100188a5     MSVCRT:ftol2.obj
  0001:000178c0       $$000000                   100188c0     MSVCRT:ftol2.obj
- 0001:000178d0       $$000000                   100188d0     MSVCRT:ftol2.obj
- 0001:000178e0       $$000000                   100188e0     MSVCRT:ftol2.obj
- 0001:000178f1       L3B                        100188f1     MSVCRT:ftol2.obj
- 0001:00017934       L3F                        10018934     MSVCRT:ftol2.obj
- 0001:0001793c       L40                        1001893c     MSVCRT:ftol2.obj
- 0001:0001794f       L41                        1001894f     MSVCRT:ftol2.obj
- 0001:00017960       $$000000                   10018960     MSVCRT:ftol2.obj
- 0001:0001797b       L8F                        1001897b     MSVCRT:ftol2.obj
- 0001:0001798c       L90                        1001898c     MSVCRT:ftol2.obj
- 0001:0001799b       L91                        1001899b     MSVCRT:ftol2.obj
- 0001:000179a1       L92                        100189a1     MSVCRT:ftol2.obj
- 0001:000179a7       L93                        100189a7     MSVCRT:ftol2.obj
- 0001:000179e6       L96                        100189e6     MSVCRT:ftol2.obj
- 0001:000179ed       L97                        100189ed     MSVCRT:ftol2.obj
- 0001:000179f5       L99                        100189f5     MSVCRT:ftol2.obj
- 0001:00017a10       $$000000                   10018a10     MSVCRT:ftol2.obj
- 0001:00017a2e       L51                        10018a2e     MSVCRT:ftol2.obj
- 0001:00017a73       L52                        10018a73     MSVCRT:ftol2.obj
- 0001:00017a87       L53                        10018a87     MSVCRT:ftol2.obj
- 0001:00017a89       L55                        10018a89     MSVCRT:ftol2.obj
- 0001:00017a93       L56                        10018a93     MSVCRT:ftol2.obj
- 0001:00017aac       L57                        10018aac     MSVCRT:ftol2.obj
- 0001:00017ac0       $$000000                   10018ac0     MSVCRT:ftol2.obj
- 0001:00017adb       LA5                        10018adb     MSVCRT:ftol2.obj
- 0001:00017af0       LA6                        10018af0     MSVCRT:ftol2.obj
- 0001:00017b01       LA7                        10018b01     MSVCRT:ftol2.obj
- 0001:00017b0e       LA9                        10018b0e     MSVCRT:ftol2.obj
- 0001:00017b55       LAA                        10018b55     MSVCRT:ftol2.obj
- 0001:00017b5c       LAC                        10018b5c     MSVCRT:ftol2.obj
- 0001:00017b63       LAD                        10018b63     MSVCRT:ftol2.obj
- 0001:00017b6d       LAF                        10018b6d     MSVCRT:ftol2.obj
- 0001:00017b80       $$000000                   10018b80     MSVCRT:ftol2.obj
- 0001:00017ba0       $$000000                   10018ba0     MSVCRT:chkstk.obj
- 0001:00017bb4       cs10                       10018bb4     MSVCRT:chkstk.obj
- 0001:00017bc2       cs20                       10018bc2     MSVCRT:chkstk.obj
- 0001:00017bd0       $$000000                   10018bd0     MSVCRT:ftol3.obj
- 0001:00017be0       _ftoui3_default            10018be0     MSVCRT:ftol3.obj
- 0001:00017bef       _ftoui3_cvt                10018bef     MSVCRT:ftol3.obj
- 0001:00017bf4       _ftoui3_notsafe            10018bf4     MSVCRT:ftol3.obj
- 0001:00017c03       _ftoui3_neg                10018c03     MSVCRT:ftol3.obj
- 0001:00017c0a       _ftoui3_NaN                10018c0a     MSVCRT:ftol3.obj
- 0001:00017c20       $$000000                   10018c20     MSVCRT:ftol3.obj
- 0001:00017c3f       _ftoul3_default            10018c3f     MSVCRT:ftol3.obj
- 0001:00017c4e       _ftoul3_cvt                10018c4e     MSVCRT:ftol3.obj
- 0001:00017c55       _ftoul3_notsafe            10018c55     MSVCRT:ftol3.obj
- 0001:00017c75       _ftoul3_bigshift           10018c75     MSVCRT:ftol3.obj
- 0001:00017c7a       _ftoul3_neg                10018c7a     MSVCRT:ftol3.obj
- 0001:00017c81       _ftoul3_NaN                10018c81     MSVCRT:ftol3.obj
- 0001:00017c90       $$000000                   10018c90     MSVCRT:ftol3.obj
- 0001:00017ca2       _ftoul3l_notsafe           10018ca2     MSVCRT:ftol3.obj
- 0001:00017cc0       $$000000                   10018cc0     MSVCRT:ftol3.obj
- 0001:00017cdf       _ftol3_default             10018cdf     MSVCRT:ftol3.obj
- 0001:00017cf3       _ftol3_notsafe             10018cf3     MSVCRT:ftol3.obj
- 0001:00017d13       _ftol3_mincheck            10018d13     MSVCRT:ftol3.obj
- 0001:00017d19       _ftol3_NaN                 10018d19     MSVCRT:ftol3.obj
- 0001:00017d21       _ftol3_retmin              10018d21     MSVCRT:ftol3.obj
- 0001:00017d30       $$000000                   10018d30     MSVCRT:ftol3.obj
- 0001:00017d40       _dtoui3_default            10018d40     MSVCRT:ftol3.obj
- 0001:00017d69       _dtoui3_notsafe            10018d69     MSVCRT:ftol3.obj
- 0001:00017d80       _dtoui3_exact              10018d80     MSVCRT:ftol3.obj
- 0001:00017d89       _dtoui3_neg                10018d89     MSVCRT:ftol3.obj
- 0001:00017d98       _dtoui3_NaN                10018d98     MSVCRT:ftol3.obj
- 0001:00017db0       $$000000                   10018db0     MSVCRT:ftol3.obj
- 0001:00017dce       _dtoul3_default            10018dce     MSVCRT:ftol3.obj
- 0001:00017df9       _dtoul3_notsafe            10018df9     MSVCRT:ftol3.obj
- 0001:00017e22       _dtoul3_exact              10018e22     MSVCRT:ftol3.obj
- 0001:00017e29       _dtoul3_large              10018e29     MSVCRT:ftol3.obj
- 0001:00017e34       _dtoul3_neg                10018e34     MSVCRT:ftol3.obj
- 0001:00017e45       _dtoul3_NaN                10018e45     MSVCRT:ftol3.obj
- 0001:00017e60       $$000000                   10018e60     MSVCRT:ftol3.obj
- 0001:00017e7e       _dtoul3l_notsafe           10018e7e     MSVCRT:ftol3.obj
+ 0001:000178de       L51                        100188de     MSVCRT:ftol2.obj
+ 0001:00017923       L52                        10018923     MSVCRT:ftol2.obj
+ 0001:00017937       L53                        10018937     MSVCRT:ftol2.obj
+ 0001:00017939       L55                        10018939     MSVCRT:ftol2.obj
+ 0001:00017943       L56                        10018943     MSVCRT:ftol2.obj
+ 0001:0001795c       L57                        1001895c     MSVCRT:ftol2.obj
+ 0001:00017970       $$000000                   10018970     MSVCRT:ftol2.obj
+ 0001:0001798b       LA5                        1001898b     MSVCRT:ftol2.obj
+ 0001:000179a0       LA6                        100189a0     MSVCRT:ftol2.obj
+ 0001:000179b1       LA7                        100189b1     MSVCRT:ftol2.obj
+ 0001:000179be       LA9                        100189be     MSVCRT:ftol2.obj
+ 0001:00017a05       LAA                        10018a05     MSVCRT:ftol2.obj
+ 0001:00017a0c       LAC                        10018a0c     MSVCRT:ftol2.obj
+ 0001:00017a13       LAD                        10018a13     MSVCRT:ftol2.obj
+ 0001:00017a1d       LAF                        10018a1d     MSVCRT:ftol2.obj
+ 0001:00017a30       $$000000                   10018a30     MSVCRT:ftol2.obj
+ 0001:00017a50       $$000000                   10018a50     MSVCRT:chkstk.obj
+ 0001:00017a64       cs10                       10018a64     MSVCRT:chkstk.obj
+ 0001:00017a72       cs20                       10018a72     MSVCRT:chkstk.obj
+ 0001:00017a80       $$000000                   10018a80     MSVCRT:ftol3.obj
+ 0001:00017a90       _ftoui3_default            10018a90     MSVCRT:ftol3.obj
+ 0001:00017a9f       _ftoui3_cvt                10018a9f     MSVCRT:ftol3.obj
+ 0001:00017aa4       _ftoui3_notsafe            10018aa4     MSVCRT:ftol3.obj
+ 0001:00017ab3       _ftoui3_neg                10018ab3     MSVCRT:ftol3.obj
+ 0001:00017aba       _ftoui3_NaN                10018aba     MSVCRT:ftol3.obj
+ 0001:00017ad0       $$000000                   10018ad0     MSVCRT:ftol3.obj
+ 0001:00017aef       _ftoul3_default            10018aef     MSVCRT:ftol3.obj
+ 0001:00017afe       _ftoul3_cvt                10018afe     MSVCRT:ftol3.obj
+ 0001:00017b05       _ftoul3_notsafe            10018b05     MSVCRT:ftol3.obj
+ 0001:00017b25       _ftoul3_bigshift           10018b25     MSVCRT:ftol3.obj
+ 0001:00017b2a       _ftoul3_neg                10018b2a     MSVCRT:ftol3.obj
+ 0001:00017b31       _ftoul3_NaN                10018b31     MSVCRT:ftol3.obj
+ 0001:00017b40       $$000000                   10018b40     MSVCRT:ftol3.obj
+ 0001:00017b52       _ftoul3l_notsafe           10018b52     MSVCRT:ftol3.obj
+ 0001:00017b70       $$000000                   10018b70     MSVCRT:ftol3.obj
+ 0001:00017b8f       _ftol3_default             10018b8f     MSVCRT:ftol3.obj
+ 0001:00017ba3       _ftol3_notsafe             10018ba3     MSVCRT:ftol3.obj
+ 0001:00017bc3       _ftol3_mincheck            10018bc3     MSVCRT:ftol3.obj
+ 0001:00017bc9       _ftol3_NaN                 10018bc9     MSVCRT:ftol3.obj
+ 0001:00017bd1       _ftol3_retmin              10018bd1     MSVCRT:ftol3.obj
+ 0001:00017be0       $$000000                   10018be0     MSVCRT:ftol3.obj
+ 0001:00017bf0       _dtoui3_default            10018bf0     MSVCRT:ftol3.obj
+ 0001:00017c19       _dtoui3_notsafe            10018c19     MSVCRT:ftol3.obj
+ 0001:00017c30       _dtoui3_exact              10018c30     MSVCRT:ftol3.obj
+ 0001:00017c39       _dtoui3_neg                10018c39     MSVCRT:ftol3.obj
+ 0001:00017c48       _dtoui3_NaN                10018c48     MSVCRT:ftol3.obj
+ 0001:00017c60       $$000000                   10018c60     MSVCRT:ftol3.obj
+ 0001:00017c7e       _dtoul3_default            10018c7e     MSVCRT:ftol3.obj
+ 0001:00017ca9       _dtoul3_notsafe            10018ca9     MSVCRT:ftol3.obj
+ 0001:00017cd2       _dtoul3_exact              10018cd2     MSVCRT:ftol3.obj
+ 0001:00017cd9       _dtoul3_large              10018cd9     MSVCRT:ftol3.obj
+ 0001:00017ce4       _dtoul3_neg                10018ce4     MSVCRT:ftol3.obj
+ 0001:00017cf5       _dtoul3_NaN                10018cf5     MSVCRT:ftol3.obj
+ 0001:00017d10       $$000000                   10018d10     MSVCRT:ftol3.obj
+ 0001:00017d2e       _dtoul3l_notsafe           10018d2e     MSVCRT:ftol3.obj
+ 0001:00017d40       $$000000                   10018d40     MSVCRT:ftol3.obj
+ 0001:00017d5e       _dtol3_default             10018d5e     MSVCRT:ftol3.obj
+ 0001:00017d88       _dtol3_getbits             10018d88     MSVCRT:ftol3.obj
+ 0001:00017db1       _dtol3_trunc               10018db1     MSVCRT:ftol3.obj
+ 0001:00017db8       _dtol3_lshift              10018db8     MSVCRT:ftol3.obj
+ 0001:00017dbe       _dtol3_notsafe             10018dbe     MSVCRT:ftol3.obj
+ 0001:00017dd7       _dtol3_large               10018dd7     MSVCRT:ftol3.obj
+ 0001:00017ddf       _dtol3_NaN                 10018ddf     MSVCRT:ftol3.obj
+ 0001:00017de7       _dtol3_retmin              10018de7     MSVCRT:ftol3.obj
+ 0001:00017df0       $$000000                   10018df0     MSVCRT:ftol3.obj
+ 0001:00017e0a       _ultod3_default            10018e0a     MSVCRT:ftol3.obj
+ 0001:00017e38       _ultod3_uint32             10018e38     MSVCRT:ftol3.obj
+ 0001:00017e40       $$000000                   10018e40     MSVCRT:ftol3.obj
+ 0001:00017e5a       _ltod3_default             10018e5a     MSVCRT:ftol3.obj
+ 0001:00017e81       _ltod3_lt33                10018e81     MSVCRT:ftol3.obj
  0001:00017e90       $$000000                   10018e90     MSVCRT:ftol3.obj
- 0001:00017eae       _dtol3_default             10018eae     MSVCRT:ftol3.obj
- 0001:00017ed8       _dtol3_getbits             10018ed8     MSVCRT:ftol3.obj
- 0001:00017f01       _dtol3_trunc               10018f01     MSVCRT:ftol3.obj
- 0001:00017f08       _dtol3_lshift              10018f08     MSVCRT:ftol3.obj
- 0001:00017f0e       _dtol3_notsafe             10018f0e     MSVCRT:ftol3.obj
- 0001:00017f27       _dtol3_large               10018f27     MSVCRT:ftol3.obj
- 0001:00017f2f       _dtol3_NaN                 10018f2f     MSVCRT:ftol3.obj
- 0001:00017f37       _dtol3_retmin              10018f37     MSVCRT:ftol3.obj
- 0001:00017f40       $$000000                   10018f40     MSVCRT:ftol3.obj
- 0001:00017f5a       _ultod3_default            10018f5a     MSVCRT:ftol3.obj
- 0001:00017f88       _ultod3_uint32             10018f88     MSVCRT:ftol3.obj
- 0001:00017f90       $$000000                   10018f90     MSVCRT:ftol3.obj
- 0001:00017faa       _ltod3_default             10018faa     MSVCRT:ftol3.obj
- 0001:00017fd1       _ltod3_lt33                10018fd1     MSVCRT:ftol3.obj
- 0001:00017fe0       $$000000                   10018fe0     MSVCRT:ftol3.obj
- 0001:00017ffa       _ultof3_default            10018ffa     MSVCRT:ftol3.obj
- 0001:00018009       _ultof3_mt31               10019009     MSVCRT:ftol3.obj
- 0001:00018026       _ultof3_mt63               10019026     MSVCRT:ftol3.obj
- 0001:00018060       $$000000                   10019060     MSVCRT:ftol3.obj
- 0001:0001807a       _ltof3_default             1001907a     MSVCRT:ftol3.obj
- 0001:00018089       _ltof3_mt32                10019089     MSVCRT:ftol3.obj
- 0001:000180a6       ?dllmain_crt_dispatch@@YGHQAUHINSTANCE__@@KQAX@Z 100190a6 f   MSVCRT:dll_dllmain.obj
- 0001:000180f9       ?dllmain_crt_process_attach@@YAHQAUHINSTANCE__@@QAX@Z 100190f9 f   MSVCRT:dll_dllmain.obj
- 0001:00018200       ?dllmain_crt_process_detach@@YAH_N@Z 10019200 f   MSVCRT:dll_dllmain.obj
- 0001:000182ae       ?dllmain_dispatch@@YAHQAUHINSTANCE__@@KQAX@Z 100192ae f   MSVCRT:dll_dllmain.obj
- 0001:000183b9       ?dllmain_raw@@YGHQAUHINSTANCE__@@KQAX@Z 100193b9 f   MSVCRT:dll_dllmain.obj
- 0001:0001873d       ___get_entropy             1001973d f   MSVCRT:gs_support.obj
- 0001:0001883f       ?find_pe_section@@YAPAU_IMAGE_SECTION_HEADER@@QAEI@Z 1001983f f   MSVCRT:utility.obj
- 0001:00018886       ?is_potentially_valid_image_base@@YA_NQAX@Z 10019886 f   MSVCRT:utility.obj
- 0001:00018e20       $$000000                   10019e20     MSVCRT:sehprolg4.obj
- 0001:00018e70       $$000000                   10019e70     MSVCRT:sehprolg4.obj
- 0001:00018f3a       ___castguard_check_failure_os_handled_wrapper 10019f3a f   MSVCRT:guard_support.obj
- 0001:00018f7f       ___castguard_check_failure_user_handled_wrapper 10019f7f f   MSVCRT:guard_support.obj
- 0001:00018f9e       ___castguard_compat_check  10019f9e f   MSVCRT:guard_support.obj
- 0001:000190ac       ___castguard_slow_path_compat_check 1001a0ac f   MSVCRT:guard_support.obj
- 0002:000017d0       two32                      1001c7d0     MSVCRT:ftol2.obj
- 0002:000017d4       two63                      1001c7d4     MSVCRT:ftol2.obj
- 0002:000017d8       _NaN                       1001c7d8     MSVCRT:ftol2.obj
- 0002:000017e0       _bias_low                  1001c7e0     MSVCRT:ftol3.obj
- 0002:000017f0       _bias_high                 1001c7f0     MSVCRT:ftol3.obj
- 0002:00001800       _DP2to32                   1001c800     MSVCRT:ftol3.obj
- 0002:00001808       _NaN                       1001c808     MSVCRT:ftol3.obj
- 0002:0000180c       _onept5                    1001c80c     MSVCRT:ftol3.obj
- 0002:00001814       _GS_ExceptionPointers      1001c814     MSVCRT:gs_report.obj
- 0002:00002058       __sehtable$?dllmain_crt_process_attach@@YAHQAUHINSTANCE__@@QAX@Z 1001d058     MSVCRT:dll_dllmain.obj
- 0002:00002078       __sehtable$?dllmain_crt_process_detach@@YAH_N@Z 1001d078     MSVCRT:dll_dllmain.obj
- 0002:000020a0       __sehtable$?dllmain_dispatch@@YAHQAUHINSTANCE__@@KQAX@Z 1001d0a0     MSVCRT:dll_dllmain.obj
- 0002:000020c0       __sehtable$___scrt_is_nonwritable_in_current_image 1001d0c0     MSVCRT:utility.obj
- 0002:000020e0       .edata                     1001d0e0     DttSP.exp
- 0002:00002108       rgpv                       1001d108     DttSP.exp
- 0002:0000239c       rgszName                   1001d39c     DttSP.exp
- 0002:00002630       rgwOrd                     1001d630     DttSP.exp
- 0002:0000277a       szName                     1001d77a     DttSP.exp
- 0002:00002784       $N00001                    1001d784     DttSP.exp
- 0002:0000278f       $N00002                    1001d78f     DttSP.exp
- 0002:0000279e       $N00003                    1001d79e     DttSP.exp
- 0002:000027ae       $N00004                    1001d7ae     DttSP.exp
- 0002:000027bc       $N00005                    1001d7bc     DttSP.exp
- 0002:000027cb       $N00006                    1001d7cb     DttSP.exp
- 0002:000027dc       $N00007                    1001d7dc     DttSP.exp
- 0002:000027ed       $N00008                    1001d7ed     DttSP.exp
- 0002:000027fd       $N00009                    1001d7fd     DttSP.exp
- 0002:0000280e       $N00010                    1001d80e     DttSP.exp
- 0002:0000281a       $N00011                    1001d81a     DttSP.exp
- 0002:00002831       $N00012                    1001d831     DttSP.exp
- 0002:0000283d       $N00013                    1001d83d     DttSP.exp
- 0002:00002849       $N00014                    1001d849     DttSP.exp
- 0002:00002856       $N00015                    1001d856     DttSP.exp
- 0002:00002863       $N00016                    1001d863     DttSP.exp
- 0002:00002874       $N00017                    1001d874     DttSP.exp
- 0002:00002884       $N00018                    1001d884     DttSP.exp
- 0002:00002896       $N00019                    1001d896     DttSP.exp
- 0002:000028a1       $N00020                    1001d8a1     DttSP.exp
- 0002:000028af       $N00021                    1001d8af     DttSP.exp
- 0002:000028c5       $N00022                    1001d8c5     DttSP.exp
- 0002:000028d8       $N00023                    1001d8d8     DttSP.exp
- 0002:000028e5       $N00024                    1001d8e5     DttSP.exp
- 0002:000028f2       $N00025                    1001d8f2     DttSP.exp
- 0002:00002906       $N00026                    1001d906     DttSP.exp
- 0002:00002917       $N00027                    1001d917     DttSP.exp
- 0002:0000292a       $N00028                    1001d92a     DttSP.exp
- 0002:00002933       $N00029                    1001d933     DttSP.exp
- 0002:00002940       $N00030                    1001d940     DttSP.exp
- 0002:0000294e       $N00031                    1001d94e     DttSP.exp
- 0002:0000295f       $N00032                    1001d95f     DttSP.exp
- 0002:0000296d       $N00033                    1001d96d     DttSP.exp
- 0002:0000297a       $N00034                    1001d97a     DttSP.exp
- 0002:00002988       $N00035                    1001d988     DttSP.exp
- 0002:000029a0       $N00036                    1001d9a0     DttSP.exp
- 0002:000029b3       $N00037                    1001d9b3     DttSP.exp
- 0002:000029c1       $N00038                    1001d9c1     DttSP.exp
- 0002:000029cf       $N00039                    1001d9cf     DttSP.exp
- 0002:000029e0       $N00040                    1001d9e0     DttSP.exp
- 0002:000029ef       $N00041                    1001d9ef     DttSP.exp
- 0002:000029f6       $N00042                    1001d9f6     DttSP.exp
- 0002:00002a01       $N00043                    1001da01     DttSP.exp
- 0002:00002a0e       $N00044                    1001da0e     DttSP.exp
- 0002:00002a15       $N00045                    1001da15     DttSP.exp
- 0002:00002a22       $N00046                    1001da22     DttSP.exp
- 0002:00002a2f       $N00047                    1001da2f     DttSP.exp
- 0002:00002a3c       $N00048                    1001da3c     DttSP.exp
- 0002:00002a4f       $N00049                    1001da4f     DttSP.exp
- 0002:00002a60       $N00050                    1001da60     DttSP.exp
- 0002:00002a72       $N00051                    1001da72     DttSP.exp
- 0002:00002a83       $N00052                    1001da83     DttSP.exp
- 0002:00002a93       $N00053                    1001da93     DttSP.exp
- 0002:00002aa7       $N00054                    1001daa7     DttSP.exp
- 0002:00002abb       $N00055                    1001dabb     DttSP.exp
- 0002:00002aca       $N00056                    1001daca     DttSP.exp
- 0002:00002add       $N00057                    1001dadd     DttSP.exp
- 0002:00002aee       $N00058                    1001daee     DttSP.exp
- 0002:00002b02       $N00059                    1001db02     DttSP.exp
- 0002:00002b12       $N00060                    1001db12     DttSP.exp
- 0002:00002b26       $N00061                    1001db26     DttSP.exp
- 0002:00002b33       $N00062                    1001db33     DttSP.exp
- 0002:00002b40       $N00063                    1001db40     DttSP.exp
- 0002:00002b51       $N00064                    1001db51     DttSP.exp
- 0002:00002b64       $N00065                    1001db64     DttSP.exp
- 0002:00002b7a       $N00066                    1001db7a     DttSP.exp
- 0002:00002b86       $N00067                    1001db86     DttSP.exp
- 0002:00002b92       $N00068                    1001db92     DttSP.exp
- 0002:00002ba0       $N00069                    1001dba0     DttSP.exp
- 0002:00002baf       $N00070                    1001dbaf     DttSP.exp
- 0002:00002bbb       $N00071                    1001dbbb     DttSP.exp
- 0002:00002bc9       $N00072                    1001dbc9     DttSP.exp
- 0002:00002bd7       $N00073                    1001dbd7     DttSP.exp
- 0002:00002be5       $N00074                    1001dbe5     DttSP.exp
- 0002:00002bf4       $N00075                    1001dbf4     DttSP.exp
- 0002:00002c01       $N00076                    1001dc01     DttSP.exp
- 0002:00002c0d       $N00077                    1001dc0d     DttSP.exp
- 0002:00002c1f       $N00078                    1001dc1f     DttSP.exp
- 0002:00002c2b       $N00079                    1001dc2b     DttSP.exp
- 0002:00002c3c       $N00080                    1001dc3c     DttSP.exp
- 0002:00002c49       $N00081                    1001dc49     DttSP.exp
- 0002:00002c56       $N00082                    1001dc56     DttSP.exp
- 0002:00002c6d       $N00083                    1001dc6d     DttSP.exp
- 0002:00002c7c       $N00084                    1001dc7c     DttSP.exp
- 0002:00002c89       $N00085                    1001dc89     DttSP.exp
- 0002:00002c9d       $N00086                    1001dc9d     DttSP.exp
- 0002:00002caa       $N00087                    1001dcaa     DttSP.exp
- 0002:00002cbc       $N00088                    1001dcbc     DttSP.exp
- 0002:00002ccb       $N00089                    1001dccb     DttSP.exp
- 0002:00002cde       $N00090                    1001dcde     DttSP.exp
- 0002:00002cec       $N00091                    1001dcec     DttSP.exp
- 0002:00002cfb       $N00092                    1001dcfb     DttSP.exp
- 0002:00002d03       $N00093                    1001dd03     DttSP.exp
- 0002:00002d09       $N00094                    1001dd09     DttSP.exp
- 0002:00002d13       $N00095                    1001dd13     DttSP.exp
- 0002:00002d19       $N00096                    1001dd19     DttSP.exp
- 0002:00002d23       $N00097                    1001dd23     DttSP.exp
- 0002:00002d2f       $N00098                    1001dd2f     DttSP.exp
- 0002:00002d3b       $N00099                    1001dd3b     DttSP.exp
- 0002:00002d46       $N00100                    1001dd46     DttSP.exp
- 0002:00002d4f       $N00101                    1001dd4f     DttSP.exp
- 0002:00002d5e       $N00102                    1001dd5e     DttSP.exp
- 0002:00002d6c       $N00103                    1001dd6c     DttSP.exp
- 0002:00002d79       $N00104                    1001dd79     DttSP.exp
- 0002:00002d8f       $N00105                    1001dd8f     DttSP.exp
- 0002:00002d9d       $N00106                    1001dd9d     DttSP.exp
- 0002:00002da9       $N00107                    1001dda9     DttSP.exp
- 0002:00002db6       $N00108                    1001ddb6     DttSP.exp
- 0002:00002dc7       $N00109                    1001ddc7     DttSP.exp
- 0002:00002dd8       $N00110                    1001ddd8     DttSP.exp
- 0002:00002de4       $N00111                    1001dde4     DttSP.exp
- 0002:00002df7       $N00112                    1001ddf7     DttSP.exp
- 0002:00002e0e       $N00113                    1001de0e     DttSP.exp
- 0002:00002e23       $N00114                    1001de23     DttSP.exp
- 0002:00002e2c       $N00115                    1001de2c     DttSP.exp
- 0002:00002e3c       $N00116                    1001de3c     DttSP.exp
- 0002:00002e45       $N00117                    1001de45     DttSP.exp
- 0002:00002e59       $N00118                    1001de59     DttSP.exp
- 0002:00002e67       $N00119                    1001de67     DttSP.exp
- 0002:00002e70       $N00120                    1001de70     DttSP.exp
- 0002:00002e7d       $N00121                    1001de7d     DttSP.exp
- 0002:00002e8b       $N00122                    1001de8b     DttSP.exp
- 0002:00002ea0       $N00123                    1001dea0     DttSP.exp
- 0002:00002eb0       $N00124                    1001deb0     DttSP.exp
- 0002:00002ebe       $N00125                    1001debe     DttSP.exp
- 0002:00002ec9       $N00126                    1001dec9     DttSP.exp
- 0002:00002ed5       $N00127                    1001ded5     DttSP.exp
- 0002:00002ee7       $N00128                    1001dee7     DttSP.exp
- 0002:00002eee       $N00129                    1001deee     DttSP.exp
- 0002:00002f02       $N00130                    1001df02     DttSP.exp
- 0002:00002f0d       $N00131                    1001df0d     DttSP.exp
- 0002:00002f23       $N00132                    1001df23     DttSP.exp
- 0002:00002f32       $N00133                    1001df32     DttSP.exp
- 0002:00002f3e       $N00134                    1001df3e     DttSP.exp
- 0002:00002f4c       $N00135                    1001df4c     DttSP.exp
- 0002:00002f59       $N00136                    1001df59     DttSP.exp
- 0002:00002f6d       $N00137                    1001df6d     DttSP.exp
- 0002:00002f7a       $N00138                    1001df7a     DttSP.exp
- 0002:00002f89       $N00139                    1001df89     DttSP.exp
- 0002:00002f96       $N00140                    1001df96     DttSP.exp
- 0002:00002fa6       $N00141                    1001dfa6     DttSP.exp
- 0002:00002fb7       $N00142                    1001dfb7     DttSP.exp
- 0002:00002fc3       $N00143                    1001dfc3     DttSP.exp
- 0002:00002fd6       $N00144                    1001dfd6     DttSP.exp
- 0002:00002fe8       $N00145                    1001dfe8     DttSP.exp
- 0002:00002ff9       $N00146                    1001dff9     DttSP.exp
- 0002:00003008       $N00147                    1001e008     DttSP.exp
- 0002:00003018       $N00148                    1001e018     DttSP.exp
- 0002:00003021       $N00149                    1001e021     DttSP.exp
- 0002:00003031       $N00150                    1001e031     DttSP.exp
- 0002:00003040       $N00151                    1001e040     DttSP.exp
- 0002:00003050       $N00152                    1001e050     DttSP.exp
- 0002:0000305d       $N00153                    1001e05d     DttSP.exp
- 0002:00003069       $N00154                    1001e069     DttSP.exp
- 0002:00003081       $N00155                    1001e081     DttSP.exp
- 0002:0000308d       $N00156                    1001e08d     DttSP.exp
- 0002:00003097       $N00157                    1001e097     DttSP.exp
- 0002:000030a1       $N00158                    1001e0a1     DttSP.exp
- 0002:000030ac       $N00159                    1001e0ac     DttSP.exp
- 0002:000030b6       $N00160                    1001e0b6     DttSP.exp
- 0002:000030c7       $N00161                    1001e0c7     DttSP.exp
- 0002:000030da       $N00162                    1001e0da     DttSP.exp
- 0002:000030ea       $N00163                    1001e0ea     DttSP.exp
- 0002:000030fb       $N00164                    1001e0fb     DttSP.exp
- 0002:00003112       $N00165                    1001e112     DttSP.exp
- 0002:000033f8       .idata$6                   1001e3f8     winMM:WINMM.dll
- 0002:0000345e       .idata$6                   1001e45e     libfftw3f-3:libfftw3f-3.dll
- 0002:000034a0       .idata$6                   1001e4a0     pthreadVC:pthreadVC.dll
- 0002:00003670       .idata$6                   1001e670     kernel32:KERNEL32.dll
- 0002:00003700       .idata$6                   1001e700     vcruntime:VCRUNTIME140.dll
- 0002:00003a32       .idata$6                   1001ea32     ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0002:00003a52       .idata$6                   1001ea52     ucrt:api-ms-win-crt-filesystem-l1-1-0.dll
- 0002:00003a78       .idata$6                   1001ea78     ucrt:api-ms-win-crt-time-l1-1-0.dll
- 0002:00003a98       .idata$6                   1001ea98     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0002:00003aba       .idata$6                   1001eaba     ucrt:api-ms-win-crt-environment-l1-1-0.dll
- 0002:00003ae0       .idata$6                   1001eae0     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0002:00003b00       .idata$6                   1001eb00     ucrt:api-ms-win-crt-heap-l1-1-0.dll
- 0002:00003b20       .idata$6                   1001eb20     ucrt:api-ms-win-crt-utility-l1-1-0.dll
- 0002:00003b42       .idata$6                   1001eb42     ucrt:api-ms-win-crt-string-l1-1-0.dll
+ 0001:00017eaa       _ultof3_default            10018eaa     MSVCRT:ftol3.obj
+ 0001:00017eb9       _ultof3_mt31               10018eb9     MSVCRT:ftol3.obj
+ 0001:00017ed6       _ultof3_mt63               10018ed6     MSVCRT:ftol3.obj
+ 0001:00017f10       $$000000                   10018f10     MSVCRT:ftol3.obj
+ 0001:00017f2a       _ltof3_default             10018f2a     MSVCRT:ftol3.obj
+ 0001:00017f39       _ltof3_mt32                10018f39     MSVCRT:ftol3.obj
+ 0001:00017f56       ?dllmain_crt_dispatch@@YGHQAUHINSTANCE__@@KQAX@Z 10018f56 f   MSVCRT:dll_dllmain.obj
+ 0001:00017fa9       ?dllmain_crt_process_attach@@YAHQAUHINSTANCE__@@QAX@Z 10018fa9 f   MSVCRT:dll_dllmain.obj
+ 0001:000180b0       ?dllmain_crt_process_detach@@YAH_N@Z 100190b0 f   MSVCRT:dll_dllmain.obj
+ 0001:0001815e       ?dllmain_dispatch@@YAHQAUHINSTANCE__@@KQAX@Z 1001915e f   MSVCRT:dll_dllmain.obj
+ 0001:00018269       ?dllmain_raw@@YGHQAUHINSTANCE__@@KQAX@Z 10019269 f   MSVCRT:dll_dllmain.obj
+ 0001:000185ed       ___get_entropy             100195ed f   MSVCRT:gs_support.obj
+ 0001:000186ef       ?find_pe_section@@YAPAU_IMAGE_SECTION_HEADER@@QAEI@Z 100196ef f   MSVCRT:utility.obj
+ 0001:00018736       ?is_potentially_valid_image_base@@YA_NQAX@Z 10019736 f   MSVCRT:utility.obj
+ 0001:00018cd0       $$000000                   10019cd0     MSVCRT:sehprolg4.obj
+ 0001:00018d20       $$000000                   10019d20     MSVCRT:sehprolg4.obj
+ 0001:00018dea       ___castguard_check_failure_os_handled_wrapper 10019dea f   MSVCRT:guard_support.obj
+ 0001:00018e2f       ___castguard_check_failure_user_handled_wrapper 10019e2f f   MSVCRT:guard_support.obj
+ 0001:00018e4e       ___castguard_compat_check  10019e4e f   MSVCRT:guard_support.obj
+ 0001:00018f5c       ___castguard_slow_path_compat_check 10019f5c f   MSVCRT:guard_support.obj
+ 0002:00001770       two32                      1001c770     MSVCRT:ftol2.obj
+ 0002:00001774       two63                      1001c774     MSVCRT:ftol2.obj
+ 0002:00001778       _NaN                       1001c778     MSVCRT:ftol2.obj
+ 0002:00001780       _bias_low                  1001c780     MSVCRT:ftol3.obj
+ 0002:00001790       _bias_high                 1001c790     MSVCRT:ftol3.obj
+ 0002:000017a0       _DP2to32                   1001c7a0     MSVCRT:ftol3.obj
+ 0002:000017a8       _NaN                       1001c7a8     MSVCRT:ftol3.obj
+ 0002:000017ac       _onept5                    1001c7ac     MSVCRT:ftol3.obj
+ 0002:000017b4       _GS_ExceptionPointers      1001c7b4     MSVCRT:gs_report.obj
+ 0002:00002018       __sehtable$?dllmain_crt_process_attach@@YAHQAUHINSTANCE__@@QAX@Z 1001d018     MSVCRT:dll_dllmain.obj
+ 0002:00002038       __sehtable$?dllmain_crt_process_detach@@YAH_N@Z 1001d038     MSVCRT:dll_dllmain.obj
+ 0002:00002060       __sehtable$?dllmain_dispatch@@YAHQAUHINSTANCE__@@KQAX@Z 1001d060     MSVCRT:dll_dllmain.obj
+ 0002:00002080       __sehtable$___scrt_is_nonwritable_in_current_image 1001d080     MSVCRT:utility.obj
+ 0002:000020a0       .edata                     1001d0a0     DttSP.exp
+ 0002:000020c8       rgpv                       1001d0c8     DttSP.exp
+ 0002:0000235c       rgszName                   1001d35c     DttSP.exp
+ 0002:000025f0       rgwOrd                     1001d5f0     DttSP.exp
+ 0002:0000273a       szName                     1001d73a     DttSP.exp
+ 0002:00002744       $N00001                    1001d744     DttSP.exp
+ 0002:0000274f       $N00002                    1001d74f     DttSP.exp
+ 0002:0000275e       $N00003                    1001d75e     DttSP.exp
+ 0002:0000276e       $N00004                    1001d76e     DttSP.exp
+ 0002:0000277c       $N00005                    1001d77c     DttSP.exp
+ 0002:0000278b       $N00006                    1001d78b     DttSP.exp
+ 0002:0000279c       $N00007                    1001d79c     DttSP.exp
+ 0002:000027ad       $N00008                    1001d7ad     DttSP.exp
+ 0002:000027bd       $N00009                    1001d7bd     DttSP.exp
+ 0002:000027ce       $N00010                    1001d7ce     DttSP.exp
+ 0002:000027da       $N00011                    1001d7da     DttSP.exp
+ 0002:000027f1       $N00012                    1001d7f1     DttSP.exp
+ 0002:000027fd       $N00013                    1001d7fd     DttSP.exp
+ 0002:00002809       $N00014                    1001d809     DttSP.exp
+ 0002:00002816       $N00015                    1001d816     DttSP.exp
+ 0002:00002823       $N00016                    1001d823     DttSP.exp
+ 0002:00002834       $N00017                    1001d834     DttSP.exp
+ 0002:00002844       $N00018                    1001d844     DttSP.exp
+ 0002:00002856       $N00019                    1001d856     DttSP.exp
+ 0002:00002861       $N00020                    1001d861     DttSP.exp
+ 0002:0000286f       $N00021                    1001d86f     DttSP.exp
+ 0002:00002885       $N00022                    1001d885     DttSP.exp
+ 0002:00002898       $N00023                    1001d898     DttSP.exp
+ 0002:000028a5       $N00024                    1001d8a5     DttSP.exp
+ 0002:000028b2       $N00025                    1001d8b2     DttSP.exp
+ 0002:000028c6       $N00026                    1001d8c6     DttSP.exp
+ 0002:000028d7       $N00027                    1001d8d7     DttSP.exp
+ 0002:000028ea       $N00028                    1001d8ea     DttSP.exp
+ 0002:000028f3       $N00029                    1001d8f3     DttSP.exp
+ 0002:00002900       $N00030                    1001d900     DttSP.exp
+ 0002:0000290e       $N00031                    1001d90e     DttSP.exp
+ 0002:0000291f       $N00032                    1001d91f     DttSP.exp
+ 0002:0000292d       $N00033                    1001d92d     DttSP.exp
+ 0002:0000293a       $N00034                    1001d93a     DttSP.exp
+ 0002:00002948       $N00035                    1001d948     DttSP.exp
+ 0002:00002960       $N00036                    1001d960     DttSP.exp
+ 0002:00002973       $N00037                    1001d973     DttSP.exp
+ 0002:00002981       $N00038                    1001d981     DttSP.exp
+ 0002:0000298f       $N00039                    1001d98f     DttSP.exp
+ 0002:000029a0       $N00040                    1001d9a0     DttSP.exp
+ 0002:000029af       $N00041                    1001d9af     DttSP.exp
+ 0002:000029b6       $N00042                    1001d9b6     DttSP.exp
+ 0002:000029c1       $N00043                    1001d9c1     DttSP.exp
+ 0002:000029ce       $N00044                    1001d9ce     DttSP.exp
+ 0002:000029d5       $N00045                    1001d9d5     DttSP.exp
+ 0002:000029e2       $N00046                    1001d9e2     DttSP.exp
+ 0002:000029ef       $N00047                    1001d9ef     DttSP.exp
+ 0002:000029fc       $N00048                    1001d9fc     DttSP.exp
+ 0002:00002a0f       $N00049                    1001da0f     DttSP.exp
+ 0002:00002a20       $N00050                    1001da20     DttSP.exp
+ 0002:00002a32       $N00051                    1001da32     DttSP.exp
+ 0002:00002a43       $N00052                    1001da43     DttSP.exp
+ 0002:00002a53       $N00053                    1001da53     DttSP.exp
+ 0002:00002a67       $N00054                    1001da67     DttSP.exp
+ 0002:00002a7b       $N00055                    1001da7b     DttSP.exp
+ 0002:00002a8a       $N00056                    1001da8a     DttSP.exp
+ 0002:00002a9d       $N00057                    1001da9d     DttSP.exp
+ 0002:00002aae       $N00058                    1001daae     DttSP.exp
+ 0002:00002ac2       $N00059                    1001dac2     DttSP.exp
+ 0002:00002ad2       $N00060                    1001dad2     DttSP.exp
+ 0002:00002ae6       $N00061                    1001dae6     DttSP.exp
+ 0002:00002af3       $N00062                    1001daf3     DttSP.exp
+ 0002:00002b00       $N00063                    1001db00     DttSP.exp
+ 0002:00002b11       $N00064                    1001db11     DttSP.exp
+ 0002:00002b24       $N00065                    1001db24     DttSP.exp
+ 0002:00002b3a       $N00066                    1001db3a     DttSP.exp
+ 0002:00002b46       $N00067                    1001db46     DttSP.exp
+ 0002:00002b52       $N00068                    1001db52     DttSP.exp
+ 0002:00002b60       $N00069                    1001db60     DttSP.exp
+ 0002:00002b6f       $N00070                    1001db6f     DttSP.exp
+ 0002:00002b7b       $N00071                    1001db7b     DttSP.exp
+ 0002:00002b89       $N00072                    1001db89     DttSP.exp
+ 0002:00002b97       $N00073                    1001db97     DttSP.exp
+ 0002:00002ba5       $N00074                    1001dba5     DttSP.exp
+ 0002:00002bb4       $N00075                    1001dbb4     DttSP.exp
+ 0002:00002bc1       $N00076                    1001dbc1     DttSP.exp
+ 0002:00002bcd       $N00077                    1001dbcd     DttSP.exp
+ 0002:00002bdf       $N00078                    1001dbdf     DttSP.exp
+ 0002:00002beb       $N00079                    1001dbeb     DttSP.exp
+ 0002:00002bfc       $N00080                    1001dbfc     DttSP.exp
+ 0002:00002c09       $N00081                    1001dc09     DttSP.exp
+ 0002:00002c16       $N00082                    1001dc16     DttSP.exp
+ 0002:00002c2d       $N00083                    1001dc2d     DttSP.exp
+ 0002:00002c3c       $N00084                    1001dc3c     DttSP.exp
+ 0002:00002c49       $N00085                    1001dc49     DttSP.exp
+ 0002:00002c5d       $N00086                    1001dc5d     DttSP.exp
+ 0002:00002c6a       $N00087                    1001dc6a     DttSP.exp
+ 0002:00002c7c       $N00088                    1001dc7c     DttSP.exp
+ 0002:00002c8b       $N00089                    1001dc8b     DttSP.exp
+ 0002:00002c9e       $N00090                    1001dc9e     DttSP.exp
+ 0002:00002cac       $N00091                    1001dcac     DttSP.exp
+ 0002:00002cbb       $N00092                    1001dcbb     DttSP.exp
+ 0002:00002cc3       $N00093                    1001dcc3     DttSP.exp
+ 0002:00002cc9       $N00094                    1001dcc9     DttSP.exp
+ 0002:00002cd3       $N00095                    1001dcd3     DttSP.exp
+ 0002:00002cd9       $N00096                    1001dcd9     DttSP.exp
+ 0002:00002ce3       $N00097                    1001dce3     DttSP.exp
+ 0002:00002cef       $N00098                    1001dcef     DttSP.exp
+ 0002:00002cfb       $N00099                    1001dcfb     DttSP.exp
+ 0002:00002d06       $N00100                    1001dd06     DttSP.exp
+ 0002:00002d0f       $N00101                    1001dd0f     DttSP.exp
+ 0002:00002d1e       $N00102                    1001dd1e     DttSP.exp
+ 0002:00002d2c       $N00103                    1001dd2c     DttSP.exp
+ 0002:00002d39       $N00104                    1001dd39     DttSP.exp
+ 0002:00002d4f       $N00105                    1001dd4f     DttSP.exp
+ 0002:00002d5d       $N00106                    1001dd5d     DttSP.exp
+ 0002:00002d69       $N00107                    1001dd69     DttSP.exp
+ 0002:00002d76       $N00108                    1001dd76     DttSP.exp
+ 0002:00002d87       $N00109                    1001dd87     DttSP.exp
+ 0002:00002d98       $N00110                    1001dd98     DttSP.exp
+ 0002:00002da4       $N00111                    1001dda4     DttSP.exp
+ 0002:00002db7       $N00112                    1001ddb7     DttSP.exp
+ 0002:00002dce       $N00113                    1001ddce     DttSP.exp
+ 0002:00002de3       $N00114                    1001dde3     DttSP.exp
+ 0002:00002dec       $N00115                    1001ddec     DttSP.exp
+ 0002:00002dfc       $N00116                    1001ddfc     DttSP.exp
+ 0002:00002e05       $N00117                    1001de05     DttSP.exp
+ 0002:00002e19       $N00118                    1001de19     DttSP.exp
+ 0002:00002e27       $N00119                    1001de27     DttSP.exp
+ 0002:00002e30       $N00120                    1001de30     DttSP.exp
+ 0002:00002e3d       $N00121                    1001de3d     DttSP.exp
+ 0002:00002e4b       $N00122                    1001de4b     DttSP.exp
+ 0002:00002e60       $N00123                    1001de60     DttSP.exp
+ 0002:00002e70       $N00124                    1001de70     DttSP.exp
+ 0002:00002e7e       $N00125                    1001de7e     DttSP.exp
+ 0002:00002e89       $N00126                    1001de89     DttSP.exp
+ 0002:00002e95       $N00127                    1001de95     DttSP.exp
+ 0002:00002ea7       $N00128                    1001dea7     DttSP.exp
+ 0002:00002eae       $N00129                    1001deae     DttSP.exp
+ 0002:00002ec2       $N00130                    1001dec2     DttSP.exp
+ 0002:00002ecd       $N00131                    1001decd     DttSP.exp
+ 0002:00002ee3       $N00132                    1001dee3     DttSP.exp
+ 0002:00002ef2       $N00133                    1001def2     DttSP.exp
+ 0002:00002efe       $N00134                    1001defe     DttSP.exp
+ 0002:00002f0c       $N00135                    1001df0c     DttSP.exp
+ 0002:00002f19       $N00136                    1001df19     DttSP.exp
+ 0002:00002f2d       $N00137                    1001df2d     DttSP.exp
+ 0002:00002f3a       $N00138                    1001df3a     DttSP.exp
+ 0002:00002f49       $N00139                    1001df49     DttSP.exp
+ 0002:00002f56       $N00140                    1001df56     DttSP.exp
+ 0002:00002f66       $N00141                    1001df66     DttSP.exp
+ 0002:00002f77       $N00142                    1001df77     DttSP.exp
+ 0002:00002f83       $N00143                    1001df83     DttSP.exp
+ 0002:00002f96       $N00144                    1001df96     DttSP.exp
+ 0002:00002fa8       $N00145                    1001dfa8     DttSP.exp
+ 0002:00002fb9       $N00146                    1001dfb9     DttSP.exp
+ 0002:00002fc8       $N00147                    1001dfc8     DttSP.exp
+ 0002:00002fd8       $N00148                    1001dfd8     DttSP.exp
+ 0002:00002fe1       $N00149                    1001dfe1     DttSP.exp
+ 0002:00002ff1       $N00150                    1001dff1     DttSP.exp
+ 0002:00003000       $N00151                    1001e000     DttSP.exp
+ 0002:00003010       $N00152                    1001e010     DttSP.exp
+ 0002:0000301d       $N00153                    1001e01d     DttSP.exp
+ 0002:00003029       $N00154                    1001e029     DttSP.exp
+ 0002:00003041       $N00155                    1001e041     DttSP.exp
+ 0002:0000304d       $N00156                    1001e04d     DttSP.exp
+ 0002:00003057       $N00157                    1001e057     DttSP.exp
+ 0002:00003061       $N00158                    1001e061     DttSP.exp
+ 0002:0000306c       $N00159                    1001e06c     DttSP.exp
+ 0002:00003076       $N00160                    1001e076     DttSP.exp
+ 0002:00003087       $N00161                    1001e087     DttSP.exp
+ 0002:0000309a       $N00162                    1001e09a     DttSP.exp
+ 0002:000030aa       $N00163                    1001e0aa     DttSP.exp
+ 0002:000030bb       $N00164                    1001e0bb     DttSP.exp
+ 0002:000030d2       $N00165                    1001e0d2     DttSP.exp
+ 0002:000033b8       .idata$6                   1001e3b8     winMM:WINMM.dll
+ 0002:0000341e       .idata$6                   1001e41e     libfftw3f-3:libfftw3f-3.dll
+ 0002:00003460       .idata$6                   1001e460     pthreadVC:pthreadVC.dll
+ 0002:00003630       .idata$6                   1001e630     kernel32:KERNEL32.dll
+ 0002:000036c0       .idata$6                   1001e6c0     vcruntime:VCRUNTIME140.dll
+ 0002:000039f2       .idata$6                   1001e9f2     ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0002:00003a12       .idata$6                   1001ea12     ucrt:api-ms-win-crt-filesystem-l1-1-0.dll
+ 0002:00003a38       .idata$6                   1001ea38     ucrt:api-ms-win-crt-time-l1-1-0.dll
+ 0002:00003a58       .idata$6                   1001ea58     ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0002:00003a7a       .idata$6                   1001ea7a     ucrt:api-ms-win-crt-environment-l1-1-0.dll
+ 0002:00003aa0       .idata$6                   1001eaa0     ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0002:00003ac0       .idata$6                   1001eac0     ucrt:api-ms-win-crt-heap-l1-1-0.dll
+ 0002:00003ae0       .idata$6                   1001eae0     ucrt:api-ms-win-crt-utility-l1-1-0.dll
+ 0002:00003b02       .idata$6                   1001eb02     ucrt:api-ms-win-crt-string-l1-1-0.dll
  0003:00000024       _EQ_Num_48000              1001f024     graphiceq.obj
  0003:00000030       _EQ_Den_48000              1001f030     graphiceq.obj
  0003:00000038       _EQ_Num_96000              1001f038     graphiceq.obj
@@ -1722,5 +1716,5 @@
  0003:00000ab0       ?module_local_at_quick_exit_table@@3U_onexit_table_t@@A 1001fab0     MSVCRT:utility.obj
  0003:00000ac8       _GS_ExceptionRecord        1001fac8     MSVCRT:gs_report.obj
  0003:00000b18       _GS_ContextRecord          1001fb18     MSVCRT:gs_report.obj
- 0004:000000a0       $R000000                   1005e0a0     DttSP.res
- 0004:000003b8       $R000318                   1005e3b8     DttSP.res
+ 0004:000000a0       $R000000                   100520a0     DttSP.res
+ 0004:000003b8       $R000318                   100523b8     DttSP.res

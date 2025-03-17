@@ -52,7 +52,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>..\..\bin\Debug\</OutputPath>
+    <OutputPath>..\bin\Release\</OutputPath>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <BaseAddress>285212672</BaseAddress>
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
@@ -209,7 +209,7 @@
     </Reference>
     <Reference Include="Interop.TDxInput, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bin\Release\Interop.TDxInput.dll</HintPath>
+      <HintPath>..\bin\Release\Interop.TDxInput.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Build" />
     <Reference Include="Microsoft.JScript" />
@@ -225,19 +225,19 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="Sanford.Collections">
-      <HintPath>..\..\bin\Release\DJ\Sanford.Collections.dll</HintPath>
+      <HintPath>..\bin\Release\Sanford.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Sanford.Multimedia">
-      <HintPath>..\..\bin\Release\DJ\Sanford.Multimedia.dll</HintPath>
+      <HintPath>..\bin\Release\Sanford.Multimedia.dll</HintPath>
     </Reference>
     <Reference Include="Sanford.Multimedia.Midi">
-      <HintPath>..\..\bin\Release\DJ\Sanford.Multimedia.Midi.dll</HintPath>
+      <HintPath>..\bin\Release\Sanford.Multimedia.Midi.dll</HintPath>
     </Reference>
     <Reference Include="Sanford.Multimedia.Timers">
-      <HintPath>..\..\bin\Release\DJ\Sanford.Multimedia.Timers.dll</HintPath>
+      <HintPath>..\bin\Release\Sanford.Multimedia.Timers.dll</HintPath>
     </Reference>
     <Reference Include="Sanford.Threading">
-      <HintPath>..\..\bin\Release\DJ\Sanford.Threading.dll</HintPath>
+      <HintPath>..\bin\Release\Sanford.Threading.dll</HintPath>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -283,7 +283,7 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="TNF, Version=1.0.0.2, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\bin\Release\TNF.dll</HintPath>
+      <HintPath>..\bin\Release\TNF.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -330,6 +330,7 @@
     <Compile Include="CAT\SDRSerialPortII2.cs" />
     <Compile Include="CAT\SDRSerialPortII3.cs" />
     <Compile Include="CAT\SDRSerialPortII4.cs" />
+    <Compile Include="CAT\SDRSerialPortII8.cs" />
     <Compile Include="CAT\SDRSerialPortII6.cs" />
     <Compile Include="CAT\SDRSerialPortII5.cs" />
     <Compile Include="CAT\SDRSerialPortIII.cs" />
@@ -346,6 +347,7 @@
     <Compile Include="CAT\SIOListenerII2.cs" />
     <Compile Include="CAT\SIOListenerII3.cs" />
     <Compile Include="CAT\SIOListenerII4.cs" />
+    <Compile Include="CAT\SIOListenerII8.cs" />
     <Compile Include="CAT\SIOListenerII6.cs" />
     <Compile Include="CAT\SIOListenerII5.cs" />
     <Compile Include="CAT\SIOListenerIII.cs" />
@@ -1020,6 +1022,10 @@
     <None Include="Resources\newvfo.png" />
     <EmbeddedResource Include="Resources\bar1.png" />
     <EmbeddedResource Include="Resources\bar2.png" />
+    <Content Include="atu.dll" />
+    <Content Include="Flex1500USB.dll" />
+    <Content Include="FlexControl.dll" />
+    <Content Include="FlexCW.dll" />
     <Content Include="Resources\blue1.png" />
     <None Include="Resources\DRAP.bmp" />
     <Content Include="Resources\panGray.png" />

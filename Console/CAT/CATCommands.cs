@@ -25,8 +25,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
@@ -320,31 +323,31 @@ namespace PowerSDR
             //string temp;
 
             // Get the rit/xit status
-            if (console.RITOn)
-                rit = "1";
-            else if (console.XITOn)
-                xit = "1";
+            if (console.RITOn)  rit = "1";
+            else if (console.XITOn) xit = "1";
+
             // Get the incremental tuning value for whichever control is selected
-            if (rit == "1")
-                ITValue = console.RITValue;
-            else if (xit == "1")
-                ITValue = console.XITValue;
+            if (rit == "1")  ITValue = console.RITValue;
+            else if (xit == "1")  ITValue = console.XITValue;
+
+
             // Format the IT value
-            if (ITValue < 0)
-                incr = "-" + Convert.ToString(Math.Abs(ITValue)).PadLeft(5, '0');
-            else
-                incr = "+" + Convert.ToString(Math.Abs(ITValue)).PadLeft(5, '0');
+            if (ITValue < 0)  incr = "-" + Convert.ToString(Math.Abs(ITValue)).PadLeft(5, '0');
+            else              incr = "+" + Convert.ToString(Math.Abs(ITValue)).PadLeft(5, '0');
+            
             // Get the rx - tx status
-            if (console.MOX)
-                tx = "1";
+            if (console.MOX)  tx = "1";
+            
             // Get the step size
             int step = console.TuneStepIndex;
             string stepsize = Step2String(step);
+            
             // Get the vfo split status
             string split = "0";
+            
             bool retval = console.VFOSplit;
-            if (retval)
-                split = "1";
+            if (retval) split = "1";
+
             //Get the mode
             //			temp = Mode2KString(console.RX1DSPMode);   //possible fix for SAM problem
             //			if(temp == parser.Error1)
@@ -357,12 +360,19 @@ namespace PowerSDR
                 f = ZZFB("");
             }
 
+          //  if (console.SpoofRXATXB == true) //.311
+          //  {
+          //      f = ZZFB("");
+          //  }
+
             if (f.Length > 11)
             {
                 f = f.Substring(f.Length - 11, 11);
             }
-            rtn += f; // p1
-            //			rtn += StrVFOFreq("A");						// P1 VFO A frequency			11 bytes
+
+            //------------------------------------------------ KE9NS put the IF cat string together below
+
+            rtn += f;                                   // P1 VFO A frequency			11 bytes    	originally rtn += StrVFOFreq("A");	
             rtn += stepsize;                            // P2  Console step frequency	 4 bytes
             rtn += incr;                                // P3 incremental tuning value	 6 bytes
             rtn += rit;                                 // P4 RIT status				 1 byte
@@ -381,12 +391,10 @@ namespace PowerSDR
                 tempmode = Mode2KString(console.RX1DSPMode);
             }
 
-            if (tempmode == "?;")
-                rtn += "2";
-            else
-                rtn += tempmode;                        // P9 (1 byte kenwood, 2 bytes ZZIF)
+            if (tempmode == "?;")  rtn += "2";
+            else rtn += tempmode;                        // P9 (1 byte kenwood, 2 bytes ZZIF)
 
-            rtn += "0";                                 // P10 dummy for FR/FT			 1 byte
+            rtn += "0";                                 // P10 dummy for FR  			 1 byte
             rtn += "0";                                 // P11 dummy for scan status	 1 byte
 
             if (split == "0" && console.chkVFOBTX.Checked) //.278 you are in split mode if the 2nd receiver is on and its in TX mode
@@ -395,7 +403,7 @@ namespace PowerSDR
             }
             else
             {
-                rtn += split;                               // P12 VFO Split status			 1 byte
+                rtn += split;                               // P12 VFO Split status	FT		 1 byte
             }
 
             rtn += "0000";                              // P13,P14,P15 dummy for the balance	 4 bytes
@@ -834,6 +842,34 @@ namespace PowerSDR
             return ZZPS(s);
         }
 
+        // Sets or reads the CW PITCH in 3 digit HZ
+        public string PT(string s) //.311
+        {
+            if(s.Length == parser.nSet)
+            {
+               int i = 0;
+               bool isValid = int.TryParse(s, out i);
+
+               if (isValid)
+               {
+                   console.CWPitch = i;
+               }
+               else
+                    return parser.Error1;
+            }
+            else if(s.Length == parser.nGet)
+            {
+                 return console.CWPitch.ToString("000");
+
+            }
+            else
+            {
+                return parser.Error1;
+            }
+            return parser.Error1;
+        } //PT
+
+
         // Sets the Quick Memory with the current contents of VFO A
         public string QI()
         {
@@ -1058,7 +1094,7 @@ namespace PowerSDR
         }
 
         // Sets the transmitter on, write only
-        // will eventually need eiter Commander change or ZZ code
+        // will eventually need either Commander change or ZZ code
         // since it is not CAT compliant as it is
         public string TX(string s)
         {
@@ -1343,6 +1379,26 @@ namespace PowerSDR
                 else
                     return parser.Error1;
             }
+            else if (console.KWAI8 && console.setupForm.AllowFreqBroadcast8) // ke9ns add .311 (do below if the AI is checked for this port)
+            {
+                if (s.Length == parser.nSet)
+                {
+                    if (s == "0")
+                        console.KWAutoInformation8 = false;
+                    else
+                        console.KWAutoInformation8 = true;
+                    return "";
+                }
+                else if (s.Length == parser.nGet)
+                {
+                    if (console.KWAutoInformation8)
+                        return "1";
+                    else
+                        return "0";
+                }
+                else
+                    return parser.Error1;
+            } //.311
             else if (console.KWAI7 && console.setupForm.AllowFreqBroadcast7) // ke9ns add .214 for TCP/IP CAT
             {
                 if (s.Length == parser.nSet)
@@ -2528,8 +2584,7 @@ namespace PowerSDR
             {
                 if (s.Length == parser.nSet)
                 {
-                    if (console.setupForm.RttyOffsetEnabledB &&
-                        (console.RX1DSPMode == DSPMode.DIGU || console.RX1DSPMode == DSPMode.DIGL))
+                    if (console.setupForm.RttyOffsetEnabledB && (console.RX1DSPMode == DSPMode.DIGU || console.RX1DSPMode == DSPMode.DIGL))
                     {
                         int f = int.Parse(s);
                         if (console.RX1DSPMode == DSPMode.DIGU) f = f - Convert.ToInt32(console.setupForm.RttyOffsetHigh);
@@ -2545,8 +2600,7 @@ namespace PowerSDR
                 }
                 else if (s.Length == parser.nGet)
                 {
-                    if (console.setupForm.RttyOffsetEnabledB &&
-                        (console.RX1DSPMode == DSPMode.DIGU || console.RX1DSPMode == DSPMode.DIGL))
+                    if (console.setupForm.RttyOffsetEnabledB && (console.RX1DSPMode == DSPMode.DIGU || console.RX1DSPMode == DSPMode.DIGL))
                     {
                         int f = Convert.ToInt32(Math.Round(console.CATVFOB, 6) * 1e6);
                         if (console.RX1DSPMode == DSPMode.DIGU)  f = f + Convert.ToInt32(console.setupForm.RttyOffsetHigh);
@@ -2578,9 +2632,17 @@ namespace PowerSDR
                     else
                         s = s.Insert(5, separator);
 
+                    if (console.SpoofRXATXB == true) //.311
+                    {
 
-                    console.VFOAFreq = double.Parse(s);
+                        double tempA = double.Parse(s); // .311
+                    
+                        console.VFOBFreq = tempA; //.311 when mouse click on the CWSkimmer display to move frequency, move VFOB becuase of RX<A, TX>B CAT port
+               
+                    }
 
+
+                    else console.VFOAFreq = double.Parse(s);
 
                     return "";
                 }

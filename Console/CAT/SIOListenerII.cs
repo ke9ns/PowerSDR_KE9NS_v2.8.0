@@ -341,7 +341,7 @@ namespace PowerSDR
         }
 
         int counter1 = 0; //.278
-        public string CATDEF = ""; //.278
+        public string CATDEF = ""; //.278 holds text definition of the last CAT command received from CATParser.cs
 
         StringBuilder CommBuffer = new StringBuilder();//"";				//holds incoming serial data from the port
         private void SerialRXEventHandler(object source, SerialRXEvent e)
