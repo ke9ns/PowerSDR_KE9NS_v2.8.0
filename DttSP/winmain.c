@@ -62,20 +62,16 @@ PRIVATE BOOLEAN gethold (unsigned int proc_thread)
 {
 	if (ringb_float_read_space (top[proc_thread].jack.ring.i.l) >= top[proc_thread].hold.size.frames)
 		{
-			ringb_float_read (top[proc_thread].jack.ring.i.l,
-				top[proc_thread].hold.buf.l, top[proc_thread].hold.size.frames);
-			ringb_float_read (top[proc_thread].jack.ring.i.r,
-				top[proc_thread].hold.buf.r, top[proc_thread].hold.size.frames);
+			ringb_float_read (top[proc_thread].jack.ring.i.l,top[proc_thread].hold.buf.l, top[proc_thread].hold.size.frames);
+			ringb_float_read (top[proc_thread].jack.ring.i.r,top[proc_thread].hold.buf.r, top[proc_thread].hold.size.frames);
 	#ifdef USE_AUXILIARY
 			ringb_float_read (top[proc_thread].jack.auxr.i.l,
 				top[proc_thread].hold.aux.l, top[proc_thread].hold.size.frames);
 			ringb_float_read (top[thread].jack.auxr.i.r,
 				top[proc_thread].hold.aux.r, top[proc_thread].hold.size.frames);
 	#else
-			ringb_float_read (top[proc_thread].jack.auxr.i.l,
-				top[proc_thread].hold.buf.l, top[proc_thread].hold.size.frames);
-			ringb_float_read (top[proc_thread].jack.auxr.i.r,
-				top[proc_thread].hold.buf.r, top[proc_thread].hold.size.frames);
+			ringb_float_read (top[proc_thread].jack.auxr.i.l,top[proc_thread].hold.buf.l, top[proc_thread].hold.size.frames);
+			ringb_float_read (top[proc_thread].jack.auxr.i.r,top[proc_thread].hold.buf.r, top[proc_thread].hold.size.frames);
 	#endif
 			return TRUE;
 		} else return FALSE;
@@ -86,20 +82,16 @@ PRIVATE void puthold(unsigned int proc_thread)
 {
 	   if (ringb_float_write_space (top[proc_thread].jack.ring.o.l) >= top[proc_thread].hold.size.frames)
 		{
-			ringb_float_write (top[proc_thread].jack.ring.o.l, top[proc_thread].hold.buf.l,
-				top[proc_thread].hold.size.frames);
-			ringb_float_write (top[proc_thread].jack.ring.o.r, top[proc_thread].hold.buf.r,
-				top[proc_thread].hold.size.frames);
+			ringb_float_write (top[proc_thread].jack.ring.o.l, top[proc_thread].hold.buf.l,top[proc_thread].hold.size.frames);
+			ringb_float_write (top[proc_thread].jack.ring.o.r, top[proc_thread].hold.buf.r,top[proc_thread].hold.size.frames);
 	#ifdef USE_AUXILIARY
 			ringb_float_write (top[proc_thread].jack.auxr.o.l, top[proc_thread].hold.aux.l,
 				top[proc_thread].hold.size.frames);
 			ringb_float_write (top[proc_thread].jack.auxr.o.r, top[proc_thread].hold.aux.r,
 				top[proc_thread].hold.size.frames);
 	#else
-			ringb_float_write (top[proc_thread].jack.auxr.o.l, top[proc_thread].hold.buf.l,
-				top[proc_thread].hold.size.frames);
-			ringb_float_write (top[proc_thread].jack.auxr.o.r, top[proc_thread].hold.buf.r,
-				top[proc_thread].hold.size.frames);
+			ringb_float_write (top[proc_thread].jack.auxr.o.l, top[proc_thread].hold.buf.l,top[proc_thread].hold.size.frames);
+			ringb_float_write (top[proc_thread].jack.auxr.o.r, top[proc_thread].hold.buf.r,top[proc_thread].hold.size.frames);
 		}
 	#endif
 
@@ -108,15 +100,13 @@ PRIVATE BOOLEAN
 canhold (unsigned int proc_thread)
 {
 
-	return (ringb_float_read_space (top[proc_thread].jack.ring.i.l) >=
-		(size_t) top[proc_thread].hold.size.frames);
+	return (ringb_float_read_space (top[proc_thread].jack.ring.i.l) >= (size_t) top[proc_thread].hold.size.frames);
 }
 
 
 //------------------------------------------------------------------------
 
-PRIVATE void
-run_mute (unsigned int thread)
+PRIVATE void run_mute (unsigned int thread)
 {
 	memset ((char *) top[thread].hold.buf.l, 0, top[thread].hold.size.bytes);
 	memset ((char *) top[thread].hold.buf.r, 0, top[thread].hold.size.bytes);
@@ -125,14 +115,12 @@ run_mute (unsigned int thread)
 	uni[thread].tick++;
 }
 
-PRIVATE void
-run_pass (unsigned int thread)
+PRIVATE void run_pass (unsigned int thread)
 {
 	uni[thread].tick++;
 }
 
-PRIVATE void
-run_play (unsigned int thread)
+PRIVATE void run_play (unsigned int thread)
 {
 	process_samples (top[thread].hold.buf.l, top[thread].hold.buf.r,
 		top[thread].hold.aux.l, top[thread].hold.aux.r, top[thread].hold.size.frames, thread);
@@ -142,8 +130,7 @@ run_play (unsigned int thread)
 // use setSWCH instead
 
 
-PRIVATE void
-run_swch(unsigned int thread)
+PRIVATE void run_swch(unsigned int thread)
 {
 	int i, n = top[thread].hold.size.frames;
 	REAL w;

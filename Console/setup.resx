@@ -117,27 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="udDSPImagePhaseTX.ToolTip" xml:space="preserve">
-    <value>Sets the phase offset between the I and Q channels.  
-
-NOTE: This value will not be saved. Changing bands will
-reload calibration data and override any changes.
-
-use CTRL SHIFT P for automatic calibration
-</value>
-  </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>157, 17</value>
-  </metadata>
-  <data name="tbDSPImageGainTX.ToolTip" xml:space="preserve">
-    <value>Sets the amplitude/gain offset between the I and Q channels.  
-
-NOTE: This value will not be saved. Changing bands will
-reload calibration data and override any changes.
-
-use CTRL SHIFT P for automatic calibration
-</value>
-  </data>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>157, 17</value>
   </metadata>
@@ -314,17 +293,6 @@ See page: http://k3tuf.com/FW.html , for info on FlexWire and UCB
 
 </value>
   </data>
-  <data name="grpGenTuningOptions.ToolTip" xml:space="preserve">
-    <value>When in DIGU/L modes, clicking on a signal will automatially shift the VFO by this amount. 
-This is to help put the signal in the center of your RX/TX Bandpass filter.
-
-2125hz for RTTY (click on the MARK signal closest to the 0hz line)
-1500hz for SSTV, etc
-
-use Setup-&gt;CAT Control-&gt;RTTY/Digital Offset with same value to report correct frequency to logging program
-
-</value>
-  </data>
   <data name="chkClickTuneCatMatch.ToolTip" xml:space="preserve">
     <value>Check this box to set the Setup-&gt;CAT Control-&gt;cat RTTY/DIgital Offset values to equal these Click Tune Offsets.
 
@@ -366,6 +334,17 @@ the RX filter's center frequency
 2125hz for RTTY
 For RTTY, MARK is your reported operating Frequency.
 Use CAT RTTY Offset to properly report the Frequency.
+</value>
+  </data>
+  <data name="grpGenTuningOptions.ToolTip" xml:space="preserve">
+    <value>When in DIGU/L modes, clicking on a signal will automatially shift the VFO by this amount. 
+This is to help put the signal in the center of your RX/TX Bandpass filter.
+
+2125hz for RTTY (click on the MARK signal closest to the 0hz line)
+1500hz for SSTV, etc
+
+use Setup-&gt;CAT Control-&gt;RTTY/Digital Offset with same value to report correct frequency to logging program
+
 </value>
   </data>
   <data name="chkOptCWFilterPitch.ToolTip" xml:space="preserve">
@@ -433,21 +412,6 @@ A modern CPU  of 6 cores or more should be able to handle 256 or 512
 
 Audio Latency is determined by the larger of the DSP or Primary Audio Buffer size   / Sample Rate</value>
   </data>
-  <data name="tpVAC.ToolTip" xml:space="preserve">
-    <value>VAC1: AF Volume Slider &amp; "Mute 1&gt;" box do NOT function in PowerSDR. (VAC2: AF slider &amp; Mute functions DO)
-NOTE: PowerSDR will not get INPUT audio from VAC1 unless you select VFOA as TX
-NOTE: VAC1 will ignore VFOB and Flex-5000 RX2
-
-This allows PowerSDR to send or receive audio to your PC 
-(As though PowerSDR was seperate from your PC and you were using RCA audio cables)
-
-MME:              Multimedia Extensions. Oldest standard with the highest latency (120mSec), but the most compatible drivers.
-DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 90mSec)
-WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec) 
-
-ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR
-</value>
-  </data>
   <data name="radVAC1SelectB.ToolTip" xml:space="preserve">
     <value>Select the Virtual Cable B setup
 
@@ -498,20 +462,19 @@ WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer La
 
 ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR</value>
   </data>
-  <data name="tpVAC2.ToolTip" xml:space="preserve">
-    <value>VAC2: AF Volume Slider &amp; "Mute 1&gt;" box function in PowerSDR and will adjust this volume of RX1 (VAC1 will not). 
-NOTE: PowerSDR will not get VAC MIC INPUT audio from VAC2 unless you select VFOB as TX
-NOTE: If you have a Flex-5000 (with 2nd rec) VAC2 provides audio for RX2 when you enable RX2 &amp; "&lt;2 MUTE" box will function
+  <data name="tpVAC.ToolTip" xml:space="preserve">
+    <value>VAC1: AF Volume Slider &amp; "Mute 1&gt;" box do NOT function in PowerSDR. (VAC2: AF slider &amp; Mute functions DO)
+NOTE: PowerSDR will not get INPUT audio from VAC1 unless you select VFOA as TX
+NOTE: VAC1 will ignore VFOB and Flex-5000 RX2
 
 This allows PowerSDR to send or receive audio to your PC 
 (As though PowerSDR was seperate from your PC and you were using RCA audio cables)
 
 MME:              Multimedia Extensions. Oldest standard with the highest latency (120mSec), but the most compatible drivers.
 DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 90mSec)
-WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec).
+WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec) 
 
 ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR
-
 </value>
   </data>
   <data name="grpAudioDetails3.ToolTip" xml:space="preserve">
@@ -527,6 +490,22 @@ DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 
 WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec).
 
 ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR
+</value>
+  </data>
+  <data name="tpVAC2.ToolTip" xml:space="preserve">
+    <value>VAC2: AF Volume Slider &amp; "Mute 1&gt;" box function in PowerSDR and will adjust this volume of RX1 (VAC1 will not). 
+NOTE: PowerSDR will not get VAC MIC INPUT audio from VAC2 unless you select VFOB as TX
+NOTE: If you have a Flex-5000 (with 2nd rec) VAC2 provides audio for RX2 when you enable RX2 &amp; "&lt;2 MUTE" box will function
+
+This allows PowerSDR to send or receive audio to your PC 
+(As though PowerSDR was seperate from your PC and you were using RCA audio cables)
+
+MME:              Multimedia Extensions. Oldest standard with the highest latency (120mSec), but the most compatible drivers.
+DirectSound: Less latency than MME (Buffer Latency setting can be set as low as 90mSec)
+WDM-KS:       Windows Driver Model Kernal Streaming. Very low latency (Buffer Latency can be set as low as 15mSec).
+
+ASIO:              Audio Stream I/O. Very low (10mSec) latency, but only 1 device allowed and is already being used betwen your Flex and PowerSDR
+
 </value>
   </data>
   <data name="labelTS38.ToolTip" xml:space="preserve">
@@ -586,16 +565,6 @@ In AM or SAM modes, Pan will show if you have any Neg peaks over 100% mod
 
 HOLD F10 to freeze screen</value>
   </data>
-  <data name="grpDisplaySpectrumGrid.ToolTip" xml:space="preserve">
-    <value>Spectrum Grid is mainly for RX mode
-
-In order to see a correct scale on the right side matched to the left side,
-Set Spectrum Grid-&gt;Max = -19, Min = -135, Step = 6 (S signals are 6 dBm apart).
-
-"Auto wtr/pan" box will automatically adjust "Max" for RX mode only, but "Min" works for both RX &amp; TX modes.
-TX mode is set permanently to 10 dBm for its virtual "Max" (since you should not exceed 0 dBm)
-</value>
-  </data>
   <data name="comboDisplayLabelAlign.ToolTip" xml:space="preserve">
     <value>Sets the alignment of the grid callouts on the display.
 
@@ -630,6 +599,16 @@ Set Spectrum Grid-&gt;Max = -19, Min = -135, Step = 6 (S signals are 6 dBm apart
 TX mode is set permanently to 10 dBm for its virtual "Max" (since you should not exceed 0 dBm)
 </value>
   </data>
+  <data name="grpDisplaySpectrumGrid.ToolTip" xml:space="preserve">
+    <value>Spectrum Grid is mainly for RX mode
+
+In order to see a correct scale on the right side matched to the left side,
+Set Spectrum Grid-&gt;Max = -19, Min = -135, Step = 6 (S signals are 6 dBm apart).
+
+"Auto wtr/pan" box will automatically adjust "Max" for RX mode only, but "Min" works for both RX &amp; TX modes.
+TX mode is set permanently to 10 dBm for its virtual "Max" (since you should not exceed 0 dBm)
+</value>
+  </data>
   <data name="chkBoxAutoWtrPan.ToolTip" xml:space="preserve">
     <value>Check to Automatically update the waterfall (brightness), and Panadapter Noise Floor levels (height)
 based on the Sliders.
@@ -646,6 +625,24 @@ High values may not capture noise.
 Strong adjacent signals that invade the passband may 
 prevent the NB from catching noise.</value>
   </data>
+  <data name="udDSPImagePhaseTX.ToolTip" xml:space="preserve">
+    <value>Sets the phase offset between the I and Q channels.  
+
+NOTE: This value will not be saved. Changing bands will
+reload calibration data and override any changes.
+
+use CTRL SHIFT P for automatic calibration
+</value>
+  </data>
+  <data name="tbDSPImageGainTX.ToolTip" xml:space="preserve">
+    <value>Sets the amplitude/gain offset between the I and Q channels.  
+
+NOTE: This value will not be saved. Changing bands will
+reload calibration data and override any changes.
+
+use CTRL SHIFT P for automatic calibration
+</value>
+  </data>
   <data name="chkCWXOverRide.ToolTip" xml:space="preserve">
     <value>When checked ON you can "Minimize" the CWX panel 
 And use the 4 Voice keyer buttons on the main PowerSDR console screen
@@ -658,11 +655,6 @@ VK2  becomes CWX F6
 
 You can now use the Function keys F3,F4,F5,F6 without having the CWX panel open.
 </value>
-  </data>
-  <data name="grpRX2DSPAGC.ToolTip" xml:space="preserve">
-    <value>RX2 only: The AGC is a state of the art, dual track AGC with anticipatory response on both fast and slower tracks.
-Or, stated differently, the AGC is in essence the combination of two AGCs, one with a very fast time
-constant, the other with a much slower time constant</value>
   </data>
   <data name="udRX2DSPAGCMaxGaindB.ToolTip" xml:space="preserve">
     <value>RX2 AGC-T  Max Gain Threshold - Operates similarly to traditional RF Gain (but this way the Panadapter signal does not change when you change the gain)
@@ -682,12 +674,17 @@ AGC-T = 90 (means the AGC will not add more than 90dBm of gain to any signal you
 RIGHT CLICK (on top of AGC-T text): Toggle Panadapter Control (Grab Green line with your Mouse and pull up/down)
 </value>
   </data>
-  <data name="grpDSPLeveler.ToolTip" xml:space="preserve">
+  <data name="grpRX2DSPAGC.ToolTip" xml:space="preserve">
+    <value>RX2 only: The AGC is a state of the art, dual track AGC with anticipatory response on both fast and slower tracks.
+Or, stated differently, the AGC is in essence the combination of two AGCs, one with a very fast time
+constant, the other with a much slower time constant</value>
+  </data>
+  <data name="chkDSPLevelerEnabled.ToolTip" xml:space="preserve">
     <value>The Leveler is intended to even out the sound level variations through your microphone caused by
 varying distance from or angle to it. It is an attempt to level the amplitude presented to the rest of the
 DSP audio processing. The leveler is disabled in DIGU and DIGL modes.</value>
   </data>
-  <data name="chkDSPLevelerEnabled.ToolTip" xml:space="preserve">
+  <data name="grpDSPLeveler.ToolTip" xml:space="preserve">
     <value>The Leveler is intended to even out the sound level variations through your microphone caused by
 varying distance from or angle to it. It is an attempt to level the amplitude presented to the rest of the
 DSP audio processing. The leveler is disabled in DIGU and DIGL modes.</value>
@@ -699,11 +696,6 @@ algorithm we use (similar to the AGC), this ALC will allow very high average pow
 peaks at a controlled level. The Compander (DX and CPDR on the Front Console - see Mode Specific
 Controls – Phone on page 82) work very well together with the ALC to increase average power without
 overdrive.</value>
-  </data>
-  <data name="grpDSPAGC.ToolTip" xml:space="preserve">
-    <value>The AGC is a state of the art, dual track AGC with anticipatory response on both fast and slower tracks.
-Or, stated differently, the AGC is in essence the combination of two AGCs, one with a very fast time
-constant, the other with a much slower time constant</value>
   </data>
   <data name="udDSPAGCMaxGaindB.ToolTip" xml:space="preserve">
     <value>AGC-T  Max Gain Threshold - Operates similarly to traditional RF Gain (but this way the Panadapter signal does not change when you change the gain)
@@ -722,6 +714,11 @@ AGC-T = 90 (means the AGC will not add more than 90dBm of gain to any signal you
 
 RIGHT CLICK (on top of AGC-T text): Toggle Panadapter Control (Grab Green line with your Mouse and pull up/down)
 </value>
+  </data>
+  <data name="grpDSPAGC.ToolTip" xml:space="preserve">
+    <value>The AGC is a state of the art, dual track AGC with anticipatory response on both fast and slower tracks.
+Or, stated differently, the AGC is in essence the combination of two AGCs, one with a very fast time
+constant, the other with a much slower time constant</value>
   </data>
   <data name="chkBandModeSave.ToolTip" xml:space="preserve">
     <value>When Checked, will save Transmit DRIVE Slider setpoint, and Drive Max setpoint per Band and per Mode
@@ -772,6 +769,38 @@ TXProfile will change Modes to whatever mode was saved to the selected TXProfile
 
 Will NOT change modes if "Remember TX Profile on Mode Change is Checked.
 </value>
+  </data>
+  <data name="clrbtnPeakBackground.ToolTip" xml:space="preserve">
+    <value>Color of Background behind Cursor/Peak TEXT (found just below the Pandapter/Waterfall display area)
+
+Mouse CURSOR location (right side):
+1-Frequency offset from Zero hz line to your cursor (horizontal)
+2-Pan:dBm of your cursor (vertical)
+2-Wtr: Seconds of age of waterfall data based on your cursor (vertical)
+3-Frequency of your cursor (horizontal)
+
+Peak Data (left side):
+1-Frequency offset from Zero Hz line to Peak energy signal (as found across entire Pan)
+2- dBm of Peak energy signal (as found across entire Pan)
+3- Frequency of Peak energy signal (as found across entire Pan)
+</value>
+  </data>
+  <data name="clrbtnPeakText.ToolTip" xml:space="preserve">
+    <value>Color of Cursor/Peak Text (found just below the Pandapter/Waterfall display area)
+
+Mouse CURSOR location (right side):
+1-Frequency offset from Zero hz line to your cursor (horizontal)
+2-Pan:dBm of your cursor (vertical)
+2-Wtr: Seconds of age of waterfall data based on your cursor (vertical)
+3-Frequency of your cursor (horizontal)
+
+Peak Data (left side):
+1-Frequency offset from Zero Hz line to Peak energy signal (as found across entire Pan)
+2- dBm of Peak energy signal (as found across entire Pan)
+3- Frequency of Peak energy signal (as found across entire Pan)
+
+
+ </value>
   </data>
   <data name="chkKWAI7.ToolTip" xml:space="preserve">
     <value>Check if your CAT device does not POLL for Frequency
@@ -970,16 +999,6 @@ This uses VAC2
 This requires 2 seperate Virtual Audio Cables (VoiceMeeeter, and VB-Cable will work)
 </value>
   </data>
-  <data name="grpRTTYOffset.ToolTip" xml:space="preserve">
-    <value>CAT will report VFO = VFO +/- RTTY/Digital Offset when checked
-
-NOTE: This does not alter the real VFO freq, only the reported freq via CAT.
-See Setup-&gt;General-&gt;Options-&gt;ClickTune to actually Offset VFO Freq.
-
-You must use this in conjuntion with the Setup-&gt;General-&gt;Options-&gt;Click Tune 
-set to the exact same value.
-</value>
-  </data>
   <data name="chkCDigitalOffsetMatch.ToolTip" xml:space="preserve">
     <value>Check this box to set the Setup-&gt;General-&gt;Options-&gt;Click Tune Offset values to equal these Cat RTTY/Digital Offsets.
 
@@ -1028,6 +1047,16 @@ set to the exact same value.
     <value>CAT VFOA will report VFOA +/- RTTY/Digital Offset
 
 Reported Freq is based on the MARK (which is closer to the 0hz line)
+
+NOTE: This does not alter the real VFO freq, only the reported freq via CAT.
+See Setup-&gt;General-&gt;Options-&gt;ClickTune to actually Offset VFO Freq.
+
+You must use this in conjuntion with the Setup-&gt;General-&gt;Options-&gt;Click Tune 
+set to the exact same value.
+</value>
+  </data>
+  <data name="grpRTTYOffset.ToolTip" xml:space="preserve">
+    <value>CAT will report VFO = VFO +/- RTTY/Digital Offset when checked
 
 NOTE: This does not alter the real VFO freq, only the reported freq via CAT.
 See Setup-&gt;General-&gt;Options-&gt;ClickTune to actually Offset VFO Freq.

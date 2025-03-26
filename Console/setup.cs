@@ -12274,6 +12274,11 @@ namespace PowerSDR
             Display.BandEdgeColor = clrbtnBandEdge.Color;
         }
 
+        private void udBandEdgeLineThick_Changed(object sender, System.EventArgs e) //.312
+        {
+            Display.BandEdgeWidth = (float) udBandEdgeLineThick.Value;
+        }
+
         private void clrbtnBandSegmentBox_Changed(object sender, System.EventArgs e)
         {
             Display.BandBoxColor = clrbtnBandSegmentBox.Color;

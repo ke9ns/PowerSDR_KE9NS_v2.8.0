@@ -1,11 +1,11 @@
  DttSP
 
- Timestamp is 67a4346c (Wed Feb  5 22:02:52 2025)
+ Timestamp is 67e35d42 (Tue Mar 25 20:49:54 2025)
 
  Preferred load address is 10000000
 
  Start         Length     Name                   Class
- 0001:00000000 00019501H .text$mn                CODE
+ 0001:00000000 000194d1H .text$mn                CODE
  0002:00000000 00000188H .idata$5                DATA
  0002:00000188 0000000cH .00cfg                  DATA
  0002:00000194 00000004H .CRT$XCA                DATA
@@ -21,12 +21,12 @@
  0002:00001900 00000040H .rdata$CastGuardVftablesA DATA
  0002:00001940 00000040H .rdata$CastGuardVftablesC DATA
  0002:00001980 00000004H .rdata$sxdata           DATA
- 0002:00001984 0000038cH .rdata$voltmd           DATA
- 0002:00001d10 000002f8H .rdata$zzzdbg           DATA
- 0002:00002008 00000004H .rtc$IAA                DATA
- 0002:0000200c 00000004H .rtc$IZZ                DATA
- 0002:00002010 00000004H .rtc$TAA                DATA
- 0002:00002014 00000004H .rtc$TZZ                DATA
+ 0002:00001984 00000388H .rdata$voltmd           DATA
+ 0002:00001d0c 000002f8H .rdata$zzzdbg           DATA
+ 0002:00002004 00000004H .rtc$IAA                DATA
+ 0002:00002008 00000004H .rtc$IZZ                DATA
+ 0002:0000200c 00000004H .rtc$TAA                DATA
+ 0002:00002010 00000008H .rtc$TZZ                DATA
  0002:00002018 00000088H .xdata$x                DATA
  0002:000020a0 00001044H .edata                  DATA
  0002:000030e4 00000118H .idata$2                DATA
@@ -70,242 +70,242 @@
  0000:00000100       ___guard_flags             00000100     <absolute>
  0000:00000000       ___ImageBase               10000000     <linker-defined>
  0001:00000000       _AMDemod                   10001000 f   am_demod.obj
- 0001:000002f0       _newAMD                    100012f0 f   am_demod.obj
- 0001:000003e0       _delAMD                    100013e0 f   am_demod.obj
- 0001:00000410       _nilfunc                   10001410 f   banal.obj
- 0001:00000420       _popcnt                    10001420 f   banal.obj
- 0001:00000490       _npoof2                    10001490 f   banal.obj
- 0001:000004b0       _nblock2                   100014b0 f   banal.obj
- 0001:000004d0       _in_blocks                 100014d0 f   banal.obj
- 0001:00000510       _efopen                    10001510 f   banal.obj
- 0001:00000550       _efreopen                  10001550 f   banal.obj
- 0001:000005a0       _filesize                  100015a0 f   banal.obj
- 0001:000005d0       _fdsize                    100015d0 f   banal.obj
- 0001:00000600       _now_tv                    10001600 f   banal.obj
- 0001:00000650       _diff_tv                   10001650 f   banal.obj
- 0001:00000690       _sum_tv                    10001690 f   banal.obj
- 0001:000006c0       _fmt_tv                    100016c0 f   banal.obj
- 0001:000006f0       _since                     100016f0 f   banal.obj
- 0001:00000790       _hinterp_vec               10001790 f   banal.obj
- 0001:00000830       _status_message            10001830 f   banal.obj
- 0001:00000860       _find_rcfile               10001860 f   banal.obj
- 0001:00000900       _hash                      10001900 f   banal.obj
- 0001:00000930       _gcd                       10001930 f   banal.obj
- 0001:00000950       _least_common_mul          10001950 f   banal.obj
- 0001:000009c0       ___local_stdio_printf_options 100019c0 f i banal.obj
- 0001:000009d0       __snprintf                 100019d0 f i banal.obj
- 0001:00000a10       _fprintf                   10001a10 f i banal.obj
- 0001:00000a40       _sprintf                   10001a40 f i banal.obj
- 0001:00000a80       _sqr                       10001a80 f i banal.obj
- 0001:00000a90       _safealloc                 10001a90 f   bufvec.obj
- 0001:00000b00       _safefree                  10001b00 f   bufvec.obj
- 0001:00000b20       _safememcurrcount          10001b20 f   bufvec.obj
- 0001:00000b30       _safememreset              10001b30 f   bufvec.obj
- 0001:00000b40       _newvec_REAL               10001b40 f   bufvec.obj
- 0001:00000bb0       _newvec_REAL_16            10001bb0 f   bufvec.obj
- 0001:00000c20       _delvec_REAL               10001c20 f   bufvec.obj
- 0001:00000c40       _newvec_IMAG               10001c40 f   bufvec.obj
- 0001:00000cb0       _delvec_IMAG               10001cb0 f   bufvec.obj
- 0001:00000cd0       _newvec_COMPLEX            10001cd0 f   bufvec.obj
- 0001:00000d40       _delvec_COMPLEX            10001d40 f   bufvec.obj
- 0001:00000d60       _newvec_COMPLEX_16         10001d60 f   bufvec.obj
- 0001:00000de0       _delvec_COMPLEX_16         10001de0 f   bufvec.obj
- 0001:00000df0       _dump_REAL                 10001df0 f   bufvec.obj
- 0001:00000e60       _dump_IMAG                 10001e60 f   bufvec.obj
- 0001:00000ed0       _dump_CX                   10001ed0 f   bufvec.obj
- 0001:00000f50       _newCXB                    10001f50 f   bufvec.obj
- 0001:00001030       _delCXB                    10002030 f   bufvec.obj
- 0001:00001060       _newRLB                    10002060 f   bufvec.obj
- 0001:00001140       _delRLB                    10002140 f   bufvec.obj
- 0001:00001170       _normalize_vec_REAL        10002170 f   bufvec.obj
- 0001:00001290       _normalize_vec_COMPLEX     10002290 f   bufvec.obj
- 0001:000013e0       _safealloc16               100023e0 f   bufvec.obj
- 0001:00001460       _newCorrectIQ              10002460 f   correctIQ.obj
- 0001:00001500       _delCorrectIQ              10002500 f   correctIQ.obj
- 0001:00001530       _correctIQ                 10002530 f   correctIQ.obj
- 0001:00001750       _newCWToneGen              10002750 f   cwtones.obj
- 0001:000017f0       _delCWToneGen              100027f0 f   cwtones.obj
- 0001:00001820       _setCWToneGenVals          10002820 f   cwtones.obj
- 0001:00001850       _CWToneOn                  10002850 f   cwtones.obj
- 0001:00001960       _CWToneOff                 10002960 f   cwtones.obj
- 0001:00001970       _CWTone                    10002970 f   cwtones.obj
- 0001:00001bc0       _CWComplexOSC              10002bc0 f   cwtones.obj
- 0001:00001cc0       _DCBlock                   10002cc0 f   dcblock.obj
- 0001:000022a0       _resetDCBlocker            100032a0 f   dcblock.obj
- 0001:000022e0       _newDCBlocker              100032e0 f   dcblock.obj
- 0001:00002340       _delDCBlocker              10003340 f   dcblock.obj
- 0001:00002360       _DttSPAgc                  10003360 f   dttspagc.obj
- 0001:000026b0       _newDttSPAgc               100036b0 f   dttspagc.obj
- 0001:00002910       _delDttSPAgc               10003910 f   dttspagc.obj
- 0001:00002940       _DttSPAgc_flushbuf         10003940 f   dttspagc.obj
- 0001:00002970       _new_IIR_LPF_2P            10003970 f   filt2p2z.obj
- 0001:000029e0       _del_IIR_LPF_2P            100039e0 f   filt2p2z.obj
- 0001:00002a00       _do_IIR_LPF_2P             10003a00 f   filt2p2z.obj
- 0001:00002aa0       _new_IIR_BPF_2P            10003aa0 f   filt2p2z.obj
- 0001:00002b20       _del_IIR_BPF_2P            10003b20 f   filt2p2z.obj
- 0001:00002b40       _do_IIR_BPF_2P             10003b40 f   filt2p2z.obj
- 0001:00002c00       _new_IIR_HPF_2P            10003c00 f   filt2p2z.obj
- 0001:00002c90       _del_IIR_HPF_2P            10003c90 f   filt2p2z.obj
- 0001:00002cb0       _do_IIR_HPF_2P             10003cb0 f   filt2p2z.obj
- 0001:00002d90       _new_IIR_2P2Z              10003d90 f   filt2p2z.obj
- 0001:000031c0       _del_IIR_2P2Z              100041c0 f   filt2p2z.obj
- 0001:000031e0       _do_IIR_2P2Z               100041e0 f   filt2p2z.obj
- 0001:00003310       _new_IIR_1P1Z              10004310 f   filt2p2z.obj
- 0001:000033e0       _del_IIR_1P1Z              100043e0 f   filt2p2z.obj
- 0001:00003400       _do_IIR_1P1Z               10004400 f   filt2p2z.obj
- 0001:00003480       _newFIR_REAL               10004480 f   filter.obj
- 0001:000034d0       _newFIR_COMPLEX            100044d0 f   filter.obj
- 0001:00003520       _delFIR_REAL               10004520 f   filter.obj
- 0001:00003540       _delFIR_COMPLEX            10004540 f   filter.obj
- 0001:00003560       _newFIR_Lowpass_REAL       10004560 f   filter.obj
- 0001:000036c0       _newFIR_Lowpass_COMPLEX    100046c0 f   filter.obj
- 0001:00003800       _newFIR_Bandpass_REAL      10004800 f   filter.obj
- 0001:000039c0       _newFIR_Bandpass_COMPLEX   100049c0 f   filter.obj
- 0001:00003bc0       _newFIR_Highpass_REAL      10004bc0 f   filter.obj
- 0001:00003e00       _newFIR_Highpass_COMPLEX   10004e00 f   filter.obj
- 0001:00003fa0       _newFIR_Hilbert_REAL       10004fa0 f   filter.obj
- 0001:00004150       _newFIR_Hilbert_COMPLEX    10005150 f   filter.obj
- 0001:00004320       _newFIR_Bandstop_REAL      10005320 f   filter.obj
- 0001:000045e0       _newFIR_Bandstop_COMPLEX   100055e0 f   filter.obj
- 0001:00004850       _newFIRPFBChannelizer      10005850 f   filterbank.obj
- 0001:000049c0       _newFIRHBPFBChannelizer    100059c0 f   filterbank.obj
- 0001:00004b10       _delFIRDownsampler         10005b10 f   filterbank.obj
- 0001:00004b60       _doFIRPFBChannelizer       10005b60 f   filterbank.obj
- 0001:00004c70       _newFIRPDownsampler        10005c70 f   filterbank.obj
- 0001:00004e60       _newFIRPUpsampler          10005e60 f   filterbank.obj
- 0001:00005050       _delFIRPB                  10006050 f   filterbank.obj
- 0001:000050b0       _doFIRPFBUpsampler         100060b0 f   filterbank.obj
- 0001:000051c0       _doFIRPFBdownsampler       100061c0 f   filterbank.obj
- 0001:000052e0       _delFIRUpsample            100062e0 f   filterbank.obj
- 0001:00005330       _FMDemod                   10006330 f   fm_demod.obj
- 0001:00005800       _newFMD                    10006800 f   fm_demod.obj
- 0001:00005b70       _delFMD                    10006b70 f   fm_demod.obj
- 0001:00005bf0       _new_EQ                    10006bf0 f   graphiceq.obj
- 0001:00005dc0       _graphiceq                 10006dc0 f   graphiceq.obj
- 0001:00006150       _delEQ                     10007150 f   graphiceq.obj
- 0001:00006180       _newHilbert                10007180 f   hilbert.obj
- 0001:00006470       _newHilbertsim             10007470 f   hilbert.obj
- 0001:000064e0       _delHilbert                100074e0 f   hilbert.obj
- 0001:00006520       _delHilsim                 10007520 f   hilbert.obj
- 0001:00006550       _hilbert_transform         10007550 f   hilbert.obj
- 0001:00006770       _hilsim_transform          10007770 f   hilbert.obj
- 0001:000068a0       _ISOband_get_nominal       100078a0 f   isoband.obj
- 0001:000068e0       _ISOband_get_exact         100078e0 f   isoband.obj
- 0001:00006920       _ISOband_get_low           10007920 f   isoband.obj
- 0001:00006960       _ISOband_get_high          10007960 f   isoband.obj
- 0001:000069a0       _CWtoneExchange            100079a0 f   keyd.obj
- 0001:00006b30       _send_tone                 10007b30 f   keyd.obj
- 0001:00006c00       _send_silence              10007c00 f   keyd.obj
- 0001:00006c90       _timer_callback@20         10007c90 f   keyd.obj
- 0001:00006ca0       _sound_thread_keyd         10007ca0 f   keyd.obj
- 0001:00006e80       _read_key                  10007e80 f   keyd.obj
- 0001:00006f30       _SetWhichKey               10007f30 f   keyd.obj
- 0001:00006f40       _key_thread_process        10007f40 f   keyd.obj
- 0001:000070b0       _KeyerPlaying              100080b0 f   keyd.obj
- 0001:00007100       _SetKeyerBug               10008100 f   keyd.obj
- 0001:00007170       _SetKeyerSpeed             10008170 f   keyd.obj
- 0001:000071b0       _SetKeyerWeight            100081b0 f   keyd.obj
- 0001:000071e0       _SetKeyerIambic            100081e0 f   keyd.obj
- 0001:00007250       _SetKeyerAutoSpace         10008250 f   keyd.obj
- 0001:00007280       _SetKeyerModeBStrict       10008280 f   keyd.obj
- 0001:000072b0       _SetKeyerFreq              100082b0 f   keyd.obj
- 0001:00007320       _SetKeyerHarmonicRemove    10008320 f   keyd.obj
- 0001:00007370       _SetKeyerGain              10008370 f   keyd.obj
- 0001:00007410       _SetKeyerRamp              10008410 f   keyd.obj
- 0001:00007480       _SetKeyerMode              10008480 f   keyd.obj
- 0001:000074f0       _SetKeyerDeBounce          100084f0 f   keyd.obj
- 0001:00007520       _SetKeyerRevPdl            10008520 f   keyd.obj
- 0001:00007550       _NewKeyer                  10008550 f   keyd.obj
- 0001:00007710       _NewCriticalSection        10008710 f   keyd.obj
- 0001:00007730       _DestroyCriticalSection    10008730 f   keyd.obj
- 0001:00007740       _CWRingRestart             10008740 f   keyd.obj
- 0001:00007750       _StartKeyer                10008750 f   keyd.obj
- 0001:000077b0       _StopKeyer                 100087b0 f   keyd.obj
- 0001:000077f0       _KeyerRunning              100087f0 f   keyd.obj
- 0001:00007800       _DeleteKeyer               10008800 f   keyd.obj
- 0001:000078f0       _KeyerClockFireWait        100088f0 f   keyd.obj
- 0001:00007900       _KeyerClockFireRelease     10008900 f   keyd.obj
- 0001:00007910       _KeyerStartedWait          10008910 f   keyd.obj
- 0001:00007920       _KeyerStartedRelease       10008920 f   keyd.obj
- 0001:00007930       _PollTimerWait             10008930 f   keyd.obj
- 0001:00007940       _PollTimerRelease          10008940 f   keyd.obj
- 0001:00007950       _SetKeyerResetSize         10008950 f   keyd.obj
- 0001:00007970       _SetKeyerSampleRate        10008970 f   keyd.obj
- 0001:00007a00       _newKeyerState             10008a00 f   keyer.obj
- 0001:00007a20       _delKeyerState             10008a20 f   keyer.obj
- 0001:00007a30       _newKeyerLogic             10008a30 f   keyer.obj
- 0001:00007a50       _delKeyerLogic             10008a50 f   keyer.obj
- 0001:00007a60       _klogic                    10008a60 f   keyer.obj
- 0001:00008330       _read_straight_key         10009330 f   keyerio.obj
- 0001:00008440       _read_iambic_key           10009440 f   keyerio.obj
- 0001:000085a0       _new_lmsr                  100095a0 f   lmadf.obj
- 0001:00008640       _del_lmsr                  10009640 f   lmadf.obj
- 0001:00008670       _lmsr_adapt                10009670 f   lmadf.obj
- 0001:000088a0       _new_blms                  100098a0 f   lmadf.obj
- 0001:00008a00       _blms_adapt                10009a00 f   lmadf.obj
- 0001:00008ed0       _del_blms                  10009ed0 f   lmadf.obj
- 0001:00008f60       _dump_filter               10009f60 f   lmadf.obj
- 0001:00008ff0       _dump_delay                10009ff0 f   lmadf.obj
- 0001:00009080       _malloc16Align             1000a080 f   malloc16.obj
- 0001:000090b0       _calloc16Align             1000a0b0 f   malloc16.obj
- 0001:00009100       _free16Align               1000a100 f   malloc16.obj
- 0001:00009120       _new_noiseblanker          1000a120 f   noiseblanker.obj
- 0001:00009190       _del_nb                    1000a190 f   noiseblanker.obj
- 0001:000091b0       _noiseblanker              1000a1b0 f   noiseblanker.obj
- 0001:00009620       _SDROMnoiseblanker         1000a620 f   noiseblanker.obj
- 0001:00009750       _ComplexOSC                1000a750 f   oscillator.obj
- 0001:00009800       _RealOSC                   1000a800 f   oscillator.obj
- 0001:00009870       _newOSC                    1000a870 f   oscillator.obj
- 0001:000098f0       _delOSC                    1000a8f0 f   oscillator.obj
- 0001:00009930       _newFiltOvSv               1000a930 f   ovsv.obj
- 0001:00009a80       _delFiltOvSv               1000aa80 f   ovsv.obj
- 0001:00009ad0       _FiltOvSv_initpoint        1000aad0 f   ovsv.obj
- 0001:00009ae0       _FiltOvSv_initsize         1000aae0 f   ovsv.obj
- 0001:00009af0       _FiltOvSv_fetchpoint       1000aaf0 f   ovsv.obj
- 0001:00009b00       _FiltOvSv_fetchsize        1000ab00 f   ovsv.obj
- 0001:00009b10       _FiltOvSv_storepoint       1000ab10 f   ovsv.obj
- 0001:00009b20       _FiltOvSv_storesize        1000ab20 f   ovsv.obj
- 0001:00009b30       _filter_OvSv               1000ab30 f   ovsv.obj
- 0001:00009be0       _reset_OvSv                1000abe0 f   ovsv.obj
- 0001:00009c10       _newPolyPhaseFIR           1000ac10 f   resample.obj
- 0001:00009cc0       _PolyPhaseFIR              1000acc0 f   resample.obj
- 0001:00009e00       _delPolyPhaseFIR           1000ae00 f   resample.obj
- 0001:00009e30       _newPolyPhaseFIRF          1000ae30 f   resampleF.obj
- 0001:00009ec0       _PolyPhaseFIRF             1000aec0 f   resampleF.obj
- 0001:00009fb0       _delPolyPhaseFIRF          1000afb0 f   resampleF.obj
- 0001:00009fe0       _ringb_create_usemem       1000afe0 f   ringb.obj
- 0001:0000a010       _ringb_create              1000b010 f   ringb.obj
- 0001:0000a060       _ringb_float_create        1000b060 f   ringb.obj
- 0001:0000a0b0       _ringb_free                1000b0b0 f   ringb.obj
- 0001:0000a0d0       _ringb_float_free          1000b0d0 f   ringb.obj
- 0001:0000a0f0       _ringb_get_read_vector     1000b0f0 f   ringb.obj
- 0001:0000a180       _ringb_get_write_vector    1000b180 f   ringb.obj
- 0001:0000a220       _ringb_read                1000b220 f   ringb.obj
- 0001:0000a2f0       _ringb_float_read          1000b2f0 f   ringb.obj
- 0001:0000a3d0       _ringb_peek                1000b3d0 f   ringb.obj
- 0001:0000a490       _ringb_read_advance        1000b490 f   ringb.obj
- 0001:0000a4b0       _ringb_float_read_advance  1000b4b0 f   ringb.obj
- 0001:0000a4d0       _ringb_read_space          1000b4d0 f   ringb.obj
- 0001:0000a500       _ringb_float_read_space    1000b500 f   ringb.obj
- 0001:0000a530       _ringb_reset               1000b530 f   ringb.obj
- 0001:0000a550       _ringb_float_reset         1000b550 f   ringb.obj
- 0001:0000a570       _ringb_write               1000b570 f   ringb.obj
- 0001:0000a650       _ringb_float_write         1000b650 f   ringb.obj
- 0001:0000a730       _ringb_write_advance       1000b730 f   ringb.obj
- 0001:0000a750       _ringb_float_write_advance 1000b750 f   ringb.obj
- 0001:0000a770       _ringb_write_space         1000b770 f   ringb.obj
- 0001:0000a7a0       _ringb_float_write_space   1000b7a0 f   ringb.obj
- 0001:0000a7d0       _ringb_clear               1000b7d0 f   ringb.obj
- 0001:0000a8c0       _ringb_float_clear         1000b8c0 f   ringb.obj
- 0001:0000a9c0       _ringb_restart             1000b9c0 f   ringb.obj
- 0001:0000a9e0       _ringb_float_restart       1000b9e0 f   ringb.obj
- 0001:0000aa00       _reset_meters              1000ba00 f   sdr.obj
- 0001:0000aab0       _reset_spectrum            1000bab0 f   sdr.obj
- 0001:0000aae0       _reset_counters            1000bae0 f   sdr.obj
- 0001:0000ab30       _setup_workspace           1000bb30 f   sdr.obj
- 0001:0000abd0       _destroy_workspace         1000bbd0 f   sdr.obj
- 0001:0000ae10       _dump_buf                  1000be10 f   sdr.obj
- 0001:0000af70       _process_samples           1000bf70 f   sdr.obj
+ 0001:000002e0       _newAMD                    100012e0 f   am_demod.obj
+ 0001:000003d0       _delAMD                    100013d0 f   am_demod.obj
+ 0001:00000400       _nilfunc                   10001400 f   banal.obj
+ 0001:00000410       _popcnt                    10001410 f   banal.obj
+ 0001:00000480       _npoof2                    10001480 f   banal.obj
+ 0001:000004a0       _nblock2                   100014a0 f   banal.obj
+ 0001:000004c0       _in_blocks                 100014c0 f   banal.obj
+ 0001:00000500       _efopen                    10001500 f   banal.obj
+ 0001:00000540       _efreopen                  10001540 f   banal.obj
+ 0001:00000590       _filesize                  10001590 f   banal.obj
+ 0001:000005c0       _fdsize                    100015c0 f   banal.obj
+ 0001:000005f0       _now_tv                    100015f0 f   banal.obj
+ 0001:00000640       _diff_tv                   10001640 f   banal.obj
+ 0001:00000680       _sum_tv                    10001680 f   banal.obj
+ 0001:000006b0       _fmt_tv                    100016b0 f   banal.obj
+ 0001:000006e0       _since                     100016e0 f   banal.obj
+ 0001:00000780       _hinterp_vec               10001780 f   banal.obj
+ 0001:00000820       _status_message            10001820 f   banal.obj
+ 0001:00000850       _find_rcfile               10001850 f   banal.obj
+ 0001:000008f0       _hash                      100018f0 f   banal.obj
+ 0001:00000920       _gcd                       10001920 f   banal.obj
+ 0001:00000940       _least_common_mul          10001940 f   banal.obj
+ 0001:000009b0       ___local_stdio_printf_options 100019b0 f i banal.obj
+ 0001:000009c0       __snprintf                 100019c0 f i banal.obj
+ 0001:00000a00       _fprintf                   10001a00 f i banal.obj
+ 0001:00000a30       _sprintf                   10001a30 f i banal.obj
+ 0001:00000a70       _sqr                       10001a70 f i banal.obj
+ 0001:00000a80       _safealloc                 10001a80 f   bufvec.obj
+ 0001:00000af0       _safefree                  10001af0 f   bufvec.obj
+ 0001:00000b10       _safememcurrcount          10001b10 f   bufvec.obj
+ 0001:00000b20       _safememreset              10001b20 f   bufvec.obj
+ 0001:00000b30       _newvec_REAL               10001b30 f   bufvec.obj
+ 0001:00000ba0       _newvec_REAL_16            10001ba0 f   bufvec.obj
+ 0001:00000c10       _delvec_REAL               10001c10 f   bufvec.obj
+ 0001:00000c30       _newvec_IMAG               10001c30 f   bufvec.obj
+ 0001:00000ca0       _delvec_IMAG               10001ca0 f   bufvec.obj
+ 0001:00000cc0       _newvec_COMPLEX            10001cc0 f   bufvec.obj
+ 0001:00000d30       _delvec_COMPLEX            10001d30 f   bufvec.obj
+ 0001:00000d50       _newvec_COMPLEX_16         10001d50 f   bufvec.obj
+ 0001:00000dd0       _delvec_COMPLEX_16         10001dd0 f   bufvec.obj
+ 0001:00000de0       _dump_REAL                 10001de0 f   bufvec.obj
+ 0001:00000e50       _dump_IMAG                 10001e50 f   bufvec.obj
+ 0001:00000ec0       _dump_CX                   10001ec0 f   bufvec.obj
+ 0001:00000f40       _newCXB                    10001f40 f   bufvec.obj
+ 0001:00001020       _delCXB                    10002020 f   bufvec.obj
+ 0001:00001050       _newRLB                    10002050 f   bufvec.obj
+ 0001:00001130       _delRLB                    10002130 f   bufvec.obj
+ 0001:00001160       _normalize_vec_REAL        10002160 f   bufvec.obj
+ 0001:00001280       _normalize_vec_COMPLEX     10002280 f   bufvec.obj
+ 0001:000013d0       _safealloc16               100023d0 f   bufvec.obj
+ 0001:00001450       _newCorrectIQ              10002450 f   correctIQ.obj
+ 0001:000014f0       _delCorrectIQ              100024f0 f   correctIQ.obj
+ 0001:00001520       _correctIQ                 10002520 f   correctIQ.obj
+ 0001:00001710       _newCWToneGen              10002710 f   cwtones.obj
+ 0001:000017b0       _delCWToneGen              100027b0 f   cwtones.obj
+ 0001:000017e0       _setCWToneGenVals          100027e0 f   cwtones.obj
+ 0001:00001810       _CWToneOn                  10002810 f   cwtones.obj
+ 0001:00001920       _CWToneOff                 10002920 f   cwtones.obj
+ 0001:00001930       _CWTone                    10002930 f   cwtones.obj
+ 0001:00001b80       _CWComplexOSC              10002b80 f   cwtones.obj
+ 0001:00001c70       _DCBlock                   10002c70 f   dcblock.obj
+ 0001:00002240       _resetDCBlocker            10003240 f   dcblock.obj
+ 0001:00002280       _newDCBlocker              10003280 f   dcblock.obj
+ 0001:000022e0       _delDCBlocker              100032e0 f   dcblock.obj
+ 0001:00002300       _DttSPAgc                  10003300 f   dttspagc.obj
+ 0001:00002620       _newDttSPAgc               10003620 f   dttspagc.obj
+ 0001:00002880       _delDttSPAgc               10003880 f   dttspagc.obj
+ 0001:000028b0       _DttSPAgc_flushbuf         100038b0 f   dttspagc.obj
+ 0001:000028e0       _new_IIR_LPF_2P            100038e0 f   filt2p2z.obj
+ 0001:00002950       _del_IIR_LPF_2P            10003950 f   filt2p2z.obj
+ 0001:00002970       _do_IIR_LPF_2P             10003970 f   filt2p2z.obj
+ 0001:00002a00       _new_IIR_BPF_2P            10003a00 f   filt2p2z.obj
+ 0001:00002a80       _del_IIR_BPF_2P            10003a80 f   filt2p2z.obj
+ 0001:00002aa0       _do_IIR_BPF_2P             10003aa0 f   filt2p2z.obj
+ 0001:00002b60       _new_IIR_HPF_2P            10003b60 f   filt2p2z.obj
+ 0001:00002bf0       _del_IIR_HPF_2P            10003bf0 f   filt2p2z.obj
+ 0001:00002c10       _do_IIR_HPF_2P             10003c10 f   filt2p2z.obj
+ 0001:00002cf0       _new_IIR_2P2Z              10003cf0 f   filt2p2z.obj
+ 0001:00003120       _del_IIR_2P2Z              10004120 f   filt2p2z.obj
+ 0001:00003140       _do_IIR_2P2Z               10004140 f   filt2p2z.obj
+ 0001:00003250       _new_IIR_1P1Z              10004250 f   filt2p2z.obj
+ 0001:00003320       _del_IIR_1P1Z              10004320 f   filt2p2z.obj
+ 0001:00003340       _do_IIR_1P1Z               10004340 f   filt2p2z.obj
+ 0001:000033b0       _newFIR_REAL               100043b0 f   filter.obj
+ 0001:00003400       _newFIR_COMPLEX            10004400 f   filter.obj
+ 0001:00003450       _delFIR_REAL               10004450 f   filter.obj
+ 0001:00003470       _delFIR_COMPLEX            10004470 f   filter.obj
+ 0001:00003490       _newFIR_Lowpass_REAL       10004490 f   filter.obj
+ 0001:000035f0       _newFIR_Lowpass_COMPLEX    100045f0 f   filter.obj
+ 0001:00003730       _newFIR_Bandpass_REAL      10004730 f   filter.obj
+ 0001:000038f0       _newFIR_Bandpass_COMPLEX   100048f0 f   filter.obj
+ 0001:00003af0       _newFIR_Highpass_REAL      10004af0 f   filter.obj
+ 0001:00003d30       _newFIR_Highpass_COMPLEX   10004d30 f   filter.obj
+ 0001:00003ed0       _newFIR_Hilbert_REAL       10004ed0 f   filter.obj
+ 0001:00004080       _newFIR_Hilbert_COMPLEX    10005080 f   filter.obj
+ 0001:00004250       _newFIR_Bandstop_REAL      10005250 f   filter.obj
+ 0001:00004510       _newFIR_Bandstop_COMPLEX   10005510 f   filter.obj
+ 0001:00004780       _newFIRPFBChannelizer      10005780 f   filterbank.obj
+ 0001:00004910       _newFIRHBPFBChannelizer    10005910 f   filterbank.obj
+ 0001:00004a60       _delFIRDownsampler         10005a60 f   filterbank.obj
+ 0001:00004ab0       _doFIRPFBChannelizer       10005ab0 f   filterbank.obj
+ 0001:00004bc0       _newFIRPDownsampler        10005bc0 f   filterbank.obj
+ 0001:00004dd0       _newFIRPUpsampler          10005dd0 f   filterbank.obj
+ 0001:00004fe0       _delFIRPB                  10005fe0 f   filterbank.obj
+ 0001:00005040       _doFIRPFBUpsampler         10006040 f   filterbank.obj
+ 0001:00005150       _doFIRPFBdownsampler       10006150 f   filterbank.obj
+ 0001:00005270       _delFIRUpsample            10006270 f   filterbank.obj
+ 0001:000052c0       _FMDemod                   100062c0 f   fm_demod.obj
+ 0001:00005750       _newFMD                    10006750 f   fm_demod.obj
+ 0001:00005ac0       _delFMD                    10006ac0 f   fm_demod.obj
+ 0001:00005b40       _new_EQ                    10006b40 f   graphiceq.obj
+ 0001:00005d10       _graphiceq                 10006d10 f   graphiceq.obj
+ 0001:00006080       _delEQ                     10007080 f   graphiceq.obj
+ 0001:000060b0       _newHilbert                100070b0 f   hilbert.obj
+ 0001:000063a0       _newHilbertsim             100073a0 f   hilbert.obj
+ 0001:00006410       _delHilbert                10007410 f   hilbert.obj
+ 0001:00006450       _delHilsim                 10007450 f   hilbert.obj
+ 0001:00006480       _hilbert_transform         10007480 f   hilbert.obj
+ 0001:000066a0       _hilsim_transform          100076a0 f   hilbert.obj
+ 0001:000067d0       _ISOband_get_nominal       100077d0 f   isoband.obj
+ 0001:00006810       _ISOband_get_exact         10007810 f   isoband.obj
+ 0001:00006850       _ISOband_get_low           10007850 f   isoband.obj
+ 0001:00006890       _ISOband_get_high          10007890 f   isoband.obj
+ 0001:000068d0       _CWtoneExchange            100078d0 f   keyd.obj
+ 0001:00006a60       _send_tone                 10007a60 f   keyd.obj
+ 0001:00006b30       _send_silence              10007b30 f   keyd.obj
+ 0001:00006bc0       _timer_callback@20         10007bc0 f   keyd.obj
+ 0001:00006bd0       _sound_thread_keyd         10007bd0 f   keyd.obj
+ 0001:00006d90       _read_key                  10007d90 f   keyd.obj
+ 0001:00006e40       _SetWhichKey               10007e40 f   keyd.obj
+ 0001:00006e50       _key_thread_process        10007e50 f   keyd.obj
+ 0001:00006fc0       _KeyerPlaying              10007fc0 f   keyd.obj
+ 0001:00007010       _SetKeyerBug               10008010 f   keyd.obj
+ 0001:00007080       _SetKeyerSpeed             10008080 f   keyd.obj
+ 0001:000070c0       _SetKeyerWeight            100080c0 f   keyd.obj
+ 0001:000070f0       _SetKeyerIambic            100080f0 f   keyd.obj
+ 0001:00007160       _SetKeyerAutoSpace         10008160 f   keyd.obj
+ 0001:00007190       _SetKeyerModeBStrict       10008190 f   keyd.obj
+ 0001:000071c0       _SetKeyerFreq              100081c0 f   keyd.obj
+ 0001:00007230       _SetKeyerHarmonicRemove    10008230 f   keyd.obj
+ 0001:00007280       _SetKeyerGain              10008280 f   keyd.obj
+ 0001:00007320       _SetKeyerRamp              10008320 f   keyd.obj
+ 0001:00007390       _SetKeyerMode              10008390 f   keyd.obj
+ 0001:00007400       _SetKeyerDeBounce          10008400 f   keyd.obj
+ 0001:00007430       _SetKeyerRevPdl            10008430 f   keyd.obj
+ 0001:00007460       _NewKeyer                  10008460 f   keyd.obj
+ 0001:00007620       _NewCriticalSection        10008620 f   keyd.obj
+ 0001:00007640       _DestroyCriticalSection    10008640 f   keyd.obj
+ 0001:00007650       _CWRingRestart             10008650 f   keyd.obj
+ 0001:00007660       _StartKeyer                10008660 f   keyd.obj
+ 0001:000076c0       _StopKeyer                 100086c0 f   keyd.obj
+ 0001:00007700       _KeyerRunning              10008700 f   keyd.obj
+ 0001:00007710       _DeleteKeyer               10008710 f   keyd.obj
+ 0001:00007800       _KeyerClockFireWait        10008800 f   keyd.obj
+ 0001:00007810       _KeyerClockFireRelease     10008810 f   keyd.obj
+ 0001:00007820       _KeyerStartedWait          10008820 f   keyd.obj
+ 0001:00007830       _KeyerStartedRelease       10008830 f   keyd.obj
+ 0001:00007840       _PollTimerWait             10008840 f   keyd.obj
+ 0001:00007850       _PollTimerRelease          10008850 f   keyd.obj
+ 0001:00007860       _SetKeyerResetSize         10008860 f   keyd.obj
+ 0001:00007880       _SetKeyerSampleRate        10008880 f   keyd.obj
+ 0001:00007910       _newKeyerState             10008910 f   keyer.obj
+ 0001:00007930       _delKeyerState             10008930 f   keyer.obj
+ 0001:00007940       _newKeyerLogic             10008940 f   keyer.obj
+ 0001:00007960       _delKeyerLogic             10008960 f   keyer.obj
+ 0001:00007970       _klogic                    10008970 f   keyer.obj
+ 0001:00008240       _read_straight_key         10009240 f   keyerio.obj
+ 0001:00008350       _read_iambic_key           10009350 f   keyerio.obj
+ 0001:000084b0       _new_lmsr                  100094b0 f   lmadf.obj
+ 0001:00008550       _del_lmsr                  10009550 f   lmadf.obj
+ 0001:00008580       _lmsr_adapt                10009580 f   lmadf.obj
+ 0001:00008790       _new_blms                  10009790 f   lmadf.obj
+ 0001:000088f0       _blms_adapt                100098f0 f   lmadf.obj
+ 0001:00008dc0       _del_blms                  10009dc0 f   lmadf.obj
+ 0001:00008e50       _dump_filter               10009e50 f   lmadf.obj
+ 0001:00008ed0       _dump_delay                10009ed0 f   lmadf.obj
+ 0001:00008f50       _malloc16Align             10009f50 f   malloc16.obj
+ 0001:00008f80       _calloc16Align             10009f80 f   malloc16.obj
+ 0001:00008fd0       _free16Align               10009fd0 f   malloc16.obj
+ 0001:00008ff0       _new_noiseblanker          10009ff0 f   noiseblanker.obj
+ 0001:00009060       _del_nb                    1000a060 f   noiseblanker.obj
+ 0001:00009080       _noiseblanker              1000a080 f   noiseblanker.obj
+ 0001:000094e0       _SDROMnoiseblanker         1000a4e0 f   noiseblanker.obj
+ 0001:00009610       _ComplexOSC                1000a610 f   oscillator.obj
+ 0001:000096c0       _RealOSC                   1000a6c0 f   oscillator.obj
+ 0001:00009730       _newOSC                    1000a730 f   oscillator.obj
+ 0001:000097b0       _delOSC                    1000a7b0 f   oscillator.obj
+ 0001:000097f0       _newFiltOvSv               1000a7f0 f   ovsv.obj
+ 0001:00009940       _delFiltOvSv               1000a940 f   ovsv.obj
+ 0001:00009990       _FiltOvSv_initpoint        1000a990 f   ovsv.obj
+ 0001:000099a0       _FiltOvSv_initsize         1000a9a0 f   ovsv.obj
+ 0001:000099b0       _FiltOvSv_fetchpoint       1000a9b0 f   ovsv.obj
+ 0001:000099c0       _FiltOvSv_fetchsize        1000a9c0 f   ovsv.obj
+ 0001:000099d0       _FiltOvSv_storepoint       1000a9d0 f   ovsv.obj
+ 0001:000099e0       _FiltOvSv_storesize        1000a9e0 f   ovsv.obj
+ 0001:000099f0       _filter_OvSv               1000a9f0 f   ovsv.obj
+ 0001:00009aa0       _reset_OvSv                1000aaa0 f   ovsv.obj
+ 0001:00009ad0       _newPolyPhaseFIR           1000aad0 f   resample.obj
+ 0001:00009b80       _PolyPhaseFIR              1000ab80 f   resample.obj
+ 0001:00009cb0       _delPolyPhaseFIR           1000acb0 f   resample.obj
+ 0001:00009ce0       _newPolyPhaseFIRF          1000ace0 f   resampleF.obj
+ 0001:00009d70       _PolyPhaseFIRF             1000ad70 f   resampleF.obj
+ 0001:00009e50       _delPolyPhaseFIRF          1000ae50 f   resampleF.obj
+ 0001:00009e80       _ringb_create_usemem       1000ae80 f   ringb.obj
+ 0001:00009eb0       _ringb_create              1000aeb0 f   ringb.obj
+ 0001:00009f00       _ringb_float_create        1000af00 f   ringb.obj
+ 0001:00009f50       _ringb_free                1000af50 f   ringb.obj
+ 0001:00009f70       _ringb_float_free          1000af70 f   ringb.obj
+ 0001:00009f90       _ringb_get_read_vector     1000af90 f   ringb.obj
+ 0001:0000a020       _ringb_get_write_vector    1000b020 f   ringb.obj
+ 0001:0000a0c0       _ringb_read                1000b0c0 f   ringb.obj
+ 0001:0000a190       _ringb_float_read          1000b190 f   ringb.obj
+ 0001:0000a270       _ringb_peek                1000b270 f   ringb.obj
+ 0001:0000a340       _ringb_read_advance        1000b340 f   ringb.obj
+ 0001:0000a360       _ringb_float_read_advance  1000b360 f   ringb.obj
+ 0001:0000a380       _ringb_read_space          1000b380 f   ringb.obj
+ 0001:0000a3b0       _ringb_float_read_space    1000b3b0 f   ringb.obj
+ 0001:0000a3e0       _ringb_reset               1000b3e0 f   ringb.obj
+ 0001:0000a400       _ringb_float_reset         1000b400 f   ringb.obj
+ 0001:0000a420       _ringb_write               1000b420 f   ringb.obj
+ 0001:0000a500       _ringb_float_write         1000b500 f   ringb.obj
+ 0001:0000a5f0       _ringb_write_advance       1000b5f0 f   ringb.obj
+ 0001:0000a610       _ringb_float_write_advance 1000b610 f   ringb.obj
+ 0001:0000a630       _ringb_write_space         1000b630 f   ringb.obj
+ 0001:0000a660       _ringb_float_write_space   1000b660 f   ringb.obj
+ 0001:0000a690       _ringb_clear               1000b690 f   ringb.obj
+ 0001:0000a790       _ringb_float_clear         1000b790 f   ringb.obj
+ 0001:0000a8a0       _ringb_restart             1000b8a0 f   ringb.obj
+ 0001:0000a8c0       _ringb_float_restart       1000b8c0 f   ringb.obj
+ 0001:0000a8e0       _reset_meters              1000b8e0 f   sdr.obj
+ 0001:0000a990       _reset_spectrum            1000b990 f   sdr.obj
+ 0001:0000a9c0       _reset_counters            1000b9c0 f   sdr.obj
+ 0001:0000aa10       _setup_workspace           1000ba10 f   sdr.obj
+ 0001:0000aab0       _destroy_workspace         1000bab0 f   sdr.obj
+ 0001:0000acf0       _dump_buf                  1000bcf0 f   sdr.obj
+ 0001:0000ae50       _process_samples           1000be50 f   sdr.obj
  0001:0000ec40       _init_spectrum             1000fc40 f   spectrum.obj
  0001:0000ed30       _reinit_spectrum           1000fd30 f   spectrum.obj
  0001:0000ed90       _snap_spectrum             1000fd90 f   spectrum.obj
@@ -316,354 +316,354 @@
  0001:0000f4b0       _newSpeechProc             100104b0 f   speechproc.obj
  0001:0000f570       _delSpeechProc             10010570 f   speechproc.obj
  0001:0000f5a0       _SpeechProcessor           100105a0 f   speechproc.obj
- 0001:0000f850       _F                         10010850 f   splitfields.obj
- 0001:0000f860       _Fptr                      10010860 f   splitfields.obj
- 0001:0000f870       _NF                        10010870 f   splitfields.obj
- 0001:0000f880       _splitonto                 10010880 f   splitfields.obj
- 0001:0000f8c0       _spliton                   100108c0 f   splitfields.obj
- 0001:0000f920       _split                     10010920 f   splitfields.obj
- 0001:0000f980       _newSPLIT                  10010980 f   splitfields.obj
- 0001:0000f9a0       _delSPLIT                  100109a0 f   splitfields.obj
- 0001:0000f9c0       _newSpotToneGen            100109c0 f   spottone.obj
- 0001:0000fa60       _delSpotToneGen            10010a60 f   spottone.obj
- 0001:0000fa90       _setSpotToneGenVals        10010a90 f   spottone.obj
- 0001:0000fac0       _SpotToneOn                10010ac0 f   spottone.obj
- 0001:0000fbe0       _SpotToneOff               10010be0 f   spottone.obj
- 0001:0000fbf0       _SpotTone                  10010bf0 f   spottone.obj
- 0001:0000fd40       _Setup_SDR                 10010d40 f   update.obj
- 0001:0000fd50       _Destroy_SDR               10010d50 f   update.obj
- 0001:0000fd60       _SetThreadNo               10010d60 f   update.obj
- 0001:0000fdc0       _SetThreadCom              10010dc0 f   update.obj
- 0001:0000fe10       _SetSwchFlag               10010e10 f   update.obj
- 0001:0000fe40       _SetSwchRiseThresh         10010e40 f   update.obj
- 0001:0000fe80       _SetThreadProcessingMode   10010e80 f   update.obj
- 0001:0000ff30       _SetMode                   10010f30 f   update.obj
- 0001:00010000       _AudioReset                10011000 f   update.obj
- 0001:00010010       _SetRXManualNotchEnable    10011010 f   update.obj
- 0001:00010050       _SetRXManualNotchBW        10011050 f   update.obj
- 0001:000100a0       _SetRXManualNotchFreq      100110a0 f   update.obj
- 0001:000101e0       _SetRXDCBlock              100111e0 f   update.obj
- 0001:00010230       _SetRXDCBlockGain          10011230 f   update.obj
- 0001:00010280       _SetTXDCBlock              10011280 f   update.obj
- 0001:000102c0       _SetTXFMDeviation          100112c0 f   update.obj
- 0001:00010320       _SetTXFMDataMode           10011320 f   update.obj
- 0001:00010360       _SetHiResPan               10011360 f   update.obj
- 0001:000103a0       _SetRXFMDeviation          100113a0 f   update.obj
- 0001:00010420       _SetCTCSSFreq              10011420 f   update.obj
- 0001:00010490       _SetCTCSSFlag              10011490 f   update.obj
- 0001:000104d0       _SetFMSquelchThreshold     100114d0 f   update.obj
- 0001:00010540       _SetTXFilter               10011540 f   update.obj
- 0001:00010710       _SetRXFilter               10011710 f   update.obj
- 0001:000108e0       _Release_Update            100118e0 f   update.obj
- 0001:00010910       _SetRXOutputGain           10011910 f   update.obj
- 0001:00010960       _SetOscPhase               10011960 f   update.obj
- 0001:000109f0       _SetRXOsc                  100119f0 f   update.obj
- 0001:00010a90       _SetTXOsc                  10011a90 f   update.obj
- 0001:00010b30       _SetSampleRate             10011b30 f   update.obj
- 0001:00010be0       _SetNR                     10011be0 f   update.obj
- 0001:00010c40       _SetNRvals                 10011c40 f   update.obj
- 0001:00010ce0       _SetTXCompandSt            10011ce0 f   update.obj
- 0001:00010d20       _SetTXCompand              10011d20 f   update.obj
- 0001:00010d70       _SetTXSquelchSt            10011d70 f   update.obj
- 0001:00010db0       _SetTXSquelchVal           10011db0 f   update.obj
- 0001:00010df0       _SetTXSquelchAtt           10011df0 f   update.obj
- 0001:00010e30       _SetANF                    10011e30 f   update.obj
- 0001:00010e90       _SetANFvals                10011e90 f   update.obj
- 0001:00010f30       _SetNB                     10011f30 f   update.obj
- 0001:00010f70       _SetNBvals                 10011f70 f   update.obj
- 0001:00010fe0       _SetSDROM                  10011fe0 f   update.obj
- 0001:00011020       _SetSDROMvals              10012020 f   update.obj
- 0001:00011070       _SetBIN                    10012070 f   update.obj
- 0001:000110b0       _SetRXAGC                  100120b0 f   update.obj
- 0001:000113a0       _SetRXAGCAttack            100123a0 f   update.obj
- 0001:000114c0       _SetRXAGCDecay             100124c0 f   update.obj
- 0001:00011570       _SetRXAGCHang              10012570 f   update.obj
- 0001:000115d0       _SetRXAGCSlope             100125d0 f   update.obj
- 0001:00011640       _SetRXAGCHangThreshold     10012640 f   update.obj
- 0001:000116a0       _SetTXALCAttack            100126a0 f   update.obj
- 0001:000117c0       _SetTXAMCarrierLevel       100127c0 f   update.obj
- 0001:00011800       _SetTXALCDecay             10012800 f   update.obj
- 0001:000118b0       _SetTXALCBot               100128b0 f   update.obj
- 0001:00011910       _SetTXALCHang              10012910 f   update.obj
- 0001:00011970       _SetTXLevelerSt            10012970 f   update.obj
- 0001:000119b0       _SetTXLevelerAttack        100129b0 f   update.obj
- 0001:00011ad0       _SetTXLevelerDecay         10012ad0 f   update.obj
- 0001:00011b80       _SetTXLevelerHang          10012b80 f   update.obj
- 0001:00011bd0       _SetTXLevelerTop           10012bd0 f   update.obj
- 0001:00011c40       _SetFixedAGC               10012c40 f   update.obj
- 0001:00011cb0       _SetRXAGCTop               10012cb0 f   update.obj
- 0001:00011d30       _GetSAMPLLvals             10012d30 f   update.obj
- 0001:00011d90       _SetSAMPLLvals             10012d90 f   update.obj
- 0001:00011df0       _GetSAMFreq                10012df0 f   update.obj
- 0001:00011e40       _GetFMSquelchBreak         10012e40 f   update.obj
- 0001:00011e90       _SetCorrectIQ              10012e90 f   update.obj
- 0001:00011f10       _SetCorrectIQGain          10012f10 f   update.obj
- 0001:00011f70       _SetCorrectIQPhase         10012f70 f   update.obj
- 0001:00011fc0       _SetCorrectIQEnable        10012fc0 f   update.obj
- 0001:00011ff0       _SetCorrectRXIQMu          10012ff0 f   update.obj
- 0001:00012040       _SetCorrectWBIRState       10013040 f   update.obj
- 0001:00012080       _GetCorrectRXIQMu          10013080 f   update.obj
- 0001:000120a0       _SetCorrectRXIQw           100130a0 f   update.obj
- 0001:00012120       _GetCorrectRXIQw           10013120 f   update.obj
- 0001:00012180       _SetCorrectRXIQwReal       10013180 f   update.obj
- 0001:000121d0       _SetCorrectRXIQwImag       100131d0 f   update.obj
- 0001:00012220       _SetCorrectTXIQ            10013220 f   update.obj
- 0001:00012290       _SetCorrectTXIQGain        10013290 f   update.obj
- 0001:000122f0       _SetCorrectTXIQPhase       100132f0 f   update.obj
- 0001:00012340       _SetCorrectTXIQMu          10013340 f   update.obj
- 0001:00012390       _SetCorrectTXIQW           10013390 f   update.obj
- 0001:000123f0       _SetPWSmode                100133f0 f   update.obj
- 0001:000124d0       _SetWindow                 100134d0 f   update.obj
- 0001:00012530       _SetSpectrumPolyphase      10013530 f   update.obj
- 0001:000126c0       _SetGrphTXEQ               100136c0 f   update.obj
- 0001:00012d50       _SetGrphTXEQ10             10013d50 f   update.obj
- 0001:00013130       _SetGrphTXEQ28             10014130 f   update.obj
- 0001:000134f0       _SetGrphTXEQ37             100144f0 f   update.obj
- 0001:00013a40       _SetGrphTXPEQ              10014a40 f   update.obj
- 0001:00013e10       _SetGrphTXEQcmd            10014e10 f   update.obj
- 0001:00013e50       _SetNotch160               10014e50 f   update.obj
- 0001:00013e60       _SetGrphRXEQ               10014e60 f   update.obj
- 0001:00014510       _SetGrphRXEQ10             10015510 f   update.obj
- 0001:000148f0       _SetGrphRXEQcmd            100158f0 f   update.obj
- 0001:00014930       _SetTXAGCFF                10015930 f   update.obj
- 0001:00014970       _SetTXAGCFFCompression     10015970 f   update.obj
- 0001:00014a10       _SetSquelchVal             10015a10 f   update.obj
- 0001:00014a60       _SetSquelchState           10015a60 f   update.obj
- 0001:00014aa0       _SetTRX                    10015aa0 f   update.obj
- 0001:00014ae0       _FlushAllBufs              10015ae0 f   update.obj
- 0001:00014c00       _SetDSPBuflen              10015c00 f   update.obj
- 0001:00014c50       _SetAudioSize              10015c50 f   update.obj
- 0001:00014d10       _SetTXAGCCompression       10015d10 f   update.obj
- 0001:00014d20       _Process_ComplexSpectrum   10015d20 f   update.obj
- 0001:00014d80       _Process_Spectrum          10015d80 f   update.obj
- 0001:00014de0       _Process_Panadapter        10015de0 f   update.obj
- 0001:00014e60       _Process_Phase             10015e60 f   update.obj
- 0001:00014f00       _Process_Scope             10015f00 f   update.obj
- 0001:00014fe0       _SetRingBufferOffset       10015fe0 f   update.obj
- 0001:00015020       _CalculateRXMeter          10016020 f   update.obj
- 0001:00015110       _CalculateTXMeter          10016110 f   update.obj
- 0001:00015290       _NewResampler              10016290 f   update.obj
- 0001:000152c0       _DoResampler               100162c0 f   update.obj
- 0001:000152f0       _DelPolyPhaseFIR           100162f0 f   update.obj
- 0001:00015300       _NewResamplerF             10016300 f   update.obj
- 0001:00015330       _DoResamplerF              10016330 f   update.obj
- 0001:00015360       _DelPolyPhaseFIRF          10016360 f   update.obj
- 0001:00015370       _SetSubRXSt                10016370 f   update.obj
- 0001:00015450       _SetRXPan                  10016450 f   update.obj
- 0001:00015540       _SetDiversity              10016540 f   update.obj
- 0001:00015590       _SetDiversityScalar        10016590 f   update.obj
- 0001:000155d0       _SetDiversityGain          100165d0 f   update.obj
- 0001:00015600       _makewindow                10016600 f   window.obj
- 0001:00015dd0       _Audio_Callback            10016dd0 f   winmain.obj
- 0001:00015f80       _Audio_Callback2           10016f80 f   winmain.obj
- 0001:00016330       _process_samples_thread    10017330 f   winmain.obj
- 0001:00016540       _closeup                   10017540 f   winmain.obj
- 0001:000165f0       _setup                     100175f0 f   winmain.obj
- 0001:000168e0       _reset_for_buflen          100178e0 f   winmain.obj
- 0001:000169c0       _reset_for_samplerate      100179c0 f   winmain.obj
- 0001:00017020       _WSCompand                 10018020 f   wscompand.obj
- 0001:00017140       _WSCReset                  10018140 f   wscompand.obj
- 0001:00017210       _newWSCompander            10018210 f   wscompand.obj
- 0001:00017330       _delWSCompander            10018330 f   wscompand.obj
- 0001:00017360       _InitSPEEDTRIG             10018360 f   fastrig1.obj
- 0001:000173d0       _fast_sin                  100183d0 f   fastrig1.obj
- 0001:00017450       _fast_cos                  10018450 f   fastrig1.obj
- 0001:000174d0       _fast_atan2                100184d0 f   fastrig1.obj
- 0001:00017630       _phasemod                  10018630 f   fastrig1.obj
- 0001:00017683       _timeSetEvent@20           10018683 f   winMM:WINMM.dll
- 0001:00017689       _timeKillEvent@4           10018689 f   winMM:WINMM.dll
- 0001:0001768f       _fftwf_execute             1001868f f   libfftw3f-3:libfftw3f-3.dll
- 0001:00017695       _fftwf_plan_dft_1d         10018695 f   libfftw3f-3:libfftw3f-3.dll
- 0001:0001769b       _fftwf_destroy_plan        1001869b f   libfftw3f-3:libfftw3f-3.dll
- 0001:000176a1       _fftwf_import_wisdom_from_string 100186a1 f   libfftw3f-3:libfftw3f-3.dll
- 0001:000176a7       _sem_init                  100186a7 f   pthreadVC:pthreadVC.dll
- 0001:000176ad       _sem_destroy               100186ad f   pthreadVC:pthreadVC.dll
- 0001:000176b3       _sem_wait                  100186b3 f   pthreadVC:pthreadVC.dll
- 0001:000176b9       _sem_post                  100186b9 f   pthreadVC:pthreadVC.dll
- 0001:000176c0       __alldiv                   100186c0 f   MSVCRT:lldiv.obj
- 0001:00017770       __ftol2_sse_excpt          10018770 f   MSVCRT:ftol2.obj
- 0001:00017780       __ftol2_sse                10018780 f   MSVCRT:ftol2.obj
- 0001:00017790       __ftoi2                    10018790 f   MSVCRT:ftol2.obj
- 0001:00017810       __ftoui2                   10018810 f   MSVCRT:ftol2.obj
- 0001:000178c0       __ftol2                    100188c0 f   MSVCRT:ftol2.obj
- 0001:00017970       __ftoul2                   10018970 f   MSVCRT:ftol2.obj
- 0001:00017a30       __ftoul2_legacy            10018a30 f   MSVCRT:ftol2.obj
- 0001:00017a50       __alloca_probe             10018a50 f   MSVCRT:chkstk.obj
- 0001:00017a50       __chkstk                   10018a50 f   MSVCRT:chkstk.obj
- 0001:00017a80       __ftoui3                   10018a80 f   MSVCRT:ftol3.obj
- 0001:00017ad0       __ftoul3                   10018ad0 f   MSVCRT:ftol3.obj
- 0001:00017b40       __ftoul3_legacy            10018b40 f   MSVCRT:ftol3.obj
- 0001:00017b70       __ftol3                    10018b70 f   MSVCRT:ftol3.obj
- 0001:00017be0       __dtoui3                   10018be0 f   MSVCRT:ftol3.obj
- 0001:00017c60       __dtoul3                   10018c60 f   MSVCRT:ftol3.obj
- 0001:00017d10       __dtoul3_legacy            10018d10 f   MSVCRT:ftol3.obj
- 0001:00017d40       __dtol3                    10018d40 f   MSVCRT:ftol3.obj
- 0001:00017df0       __ultod3                   10018df0 f   MSVCRT:ftol3.obj
- 0001:00017e40       __ltod3                    10018e40 f   MSVCRT:ftol3.obj
- 0001:00017e90       __ultof3                   10018e90 f   MSVCRT:ftol3.obj
- 0001:00017f10       __ltof3                    10018f10 f   MSVCRT:ftol3.obj
- 0001:00018294       __CRT_INIT@12              10019294 f   MSVCRT:dll_dllmain.obj
- 0001:0001829d       __DllMainCRTStartup@12     1001929d f   MSVCRT:dll_dllmain.obj
- 0001:000182c0       ___isa_available_init      100192c0 f   MSVCRT:cpu_disp.obj
- 0001:0001863a       ___security_init_cookie    1001963a f   MSVCRT:gs_support.obj
- 0001:00018685       _DllMain@12                10019685 f   MSVCRT:dll_dllmain_stub.obj
- 0001:000186a7       ?__scrt_initialize_type_info@@YAXXZ 100196a7 f   MSVCRT:tncleanup.obj
- 0001:000186b3       ?__scrt_uninitialize_type_info@@YAXXZ 100196b3 f   MSVCRT:tncleanup.obj
- 0001:000186bf       ___local_stdio_scanf_options 100196bf f i MSVCRT:default_local_stdio_options.obj
- 0001:000186c5       ___scrt_initialize_default_local_stdio_options 100196c5 f   MSVCRT:default_local_stdio_options.obj
- 0001:000186e2       ?configure_argv@__scrt_narrow_argv_policy@@SAHXZ 100196e2 f i MSVCRT:utility.obj
- 0001:00018731       ?initialize_environment@__scrt_narrow_environment_policy@@SAHXZ 10019731 f i MSVCRT:utility.obj
- 0001:00018769       _NtCurrentTeb              10019769 f i MSVCRT:utility.obj
- 0001:00018770       ___scrt_acquire_startup_lock 10019770 f   MSVCRT:utility.obj
- 0001:000187a2       ___scrt_dllmain_after_initialize_c 100197a2 f   MSVCRT:utility.obj
- 0001:000187cd       ___scrt_dllmain_before_initialize_c 100197cd f   MSVCRT:utility.obj
- 0001:000187db       ___scrt_dllmain_crt_thread_attach 100197db f   MSVCRT:utility.obj
- 0001:000187fa       ___scrt_dllmain_crt_thread_detach 100197fa f   MSVCRT:utility.obj
- 0001:00018807       ___scrt_dllmain_exception_filter 10019807 f   MSVCRT:utility.obj
- 0001:0001883b       ___scrt_dllmain_uninitialize_c 1001983b f   MSVCRT:utility.obj
- 0001:0001885e       ___scrt_dllmain_uninitialize_critical 1001985e f   MSVCRT:utility.obj
- 0001:0001886b       ___scrt_initialize_crt     1001986b f   MSVCRT:utility.obj
- 0001:000188a4       ___scrt_initialize_onexit_tables 100198a4 f   MSVCRT:utility.obj
- 0001:0001892b       ___scrt_is_nonwritable_in_current_image 1001992b f   MSVCRT:utility.obj
- 0001:000189bf       ___scrt_release_startup_lock 100199bf f   MSVCRT:utility.obj
- 0001:000189dc       ___scrt_uninitialize_crt   100199dc f   MSVCRT:utility.obj
- 0001:00018a04       __onexit                   10019a04 f   MSVCRT:utility.obj
- 0001:00018a32       _at_quick_exit             10019a32 f   MSVCRT:utility.obj
- 0001:00018a55       _atexit                    10019a55 f   MSVCRT:utility.obj
- 0001:00018a6a       ___scrt_get_dyn_tls_init_callback 10019a6a f   MSVCRT:dyn_tls_init.obj
- 0001:00018a70       ___scrt_fastfail           10019a70 f   MSVCRT:utility_desktop.obj
- 0001:00018b85       ___scrt_get_show_window_mode 10019b85 f   MSVCRT:utility_desktop.obj
- 0001:00018bb5       ___scrt_initialize_mta     10019bb5 f   MSVCRT:utility_desktop.obj
- 0001:00018bba       ___scrt_initialize_winrt   10019bba f   MSVCRT:utility_desktop.obj
- 0001:00018bbd       ___scrt_is_managed_app     10019bbd f   MSVCRT:utility_desktop.obj
- 0001:00018bff       ___scrt_set_unhandled_exception_filter 10019bff f   MSVCRT:utility_desktop.obj
- 0001:00018c0b       ___scrt_exe_initialize_mta 10019c0b f   MSVCRT:utility_desktop.obj
- 0001:00018c0b       ___scrt_stub_for_initialize_mta 10019c0b f   MSVCRT:utility_desktop.obj
- 0001:00018c0e       ___scrt_unhandled_exception_filter@4 10019c0e f   MSVCRT:utility_desktop.obj
- 0001:00018c64       __crt_debugger_hook        10019c64 f   MSVCRT:utility_desktop.obj
- 0001:00018c6c       __RTC_Initialize           10019c6c f   MSVCRT:initsect.obj
- 0001:00018c98       __RTC_Terminate            10019c98 f   MSVCRT:initsect.obj
- 0001:00018cd0       __SEH_prolog4              10019cd0 f   MSVCRT:sehprolg4.obj
- 0001:00018d20       __SEH_epilog4              10019d20 f   MSVCRT:sehprolg4.obj
- 0001:00018d34       __except_handler4          10019d34 f   MSVCRT:chandler4gs.obj
- 0001:00018d63       @_guard_check_icall_nop@4  10019d63 f i MSVCRT:guard_support.obj
- 0001:00018d66       _ReadNoFence               10019d66 f i MSVCRT:guard_support.obj
- 0001:00018d70       _ReadPointerNoFence        10019d70 f i MSVCRT:guard_support.obj
- 0001:00018d7a       __InlineInterlockedExchangePointer 10019d7a f i MSVCRT:guard_support.obj
- 0001:00018d87       ___castguard_check_failure_debugbreak 10019d87 f i MSVCRT:guard_support.obj
- 0001:00018da2       ___castguard_check_failure_fastfail 10019da2 f i MSVCRT:guard_support.obj
- 0001:00018dc1       ___castguard_check_failure_nop 10019dc1 f i MSVCRT:guard_support.obj
- 0001:00018dc4       ___castguard_check_failure_os_handled 10019dc4 f i MSVCRT:guard_support.obj
- 0001:00018dfb       ___castguard_check_failure_user_handled 10019dfb f i MSVCRT:guard_support.obj
- 0001:00018e69       ___castguard_set_user_handler 10019e69 f i MSVCRT:guard_support.obj
- 0001:00018e78       ___castguard_slow_path_check_debugbreak 10019e78 f i MSVCRT:guard_support.obj
- 0001:00018ea5       ___castguard_slow_path_check_fastfail 10019ea5 f i MSVCRT:guard_support.obj
- 0001:00018ed6       ___castguard_slow_path_check_nop 10019ed6 f i MSVCRT:guard_support.obj
- 0001:00018ed9       ___castguard_slow_path_check_os_handled 10019ed9 f i MSVCRT:guard_support.obj
- 0001:00018f15       ___castguard_slow_path_check_user_handled 10019f15 f i MSVCRT:guard_support.obj
- 0001:00018f76       __guard_icall_checks_enforced 10019f76 f i MSVCRT:guard_support.obj
- 0001:00018f88       __get_startup_argv_mode    10019f88 f   MSVCRT:argv_mode.obj
- 0001:00018f8c       ___scrt_is_ucrt_dll_in_use 10019f8c f   MSVCRT:ucrt_detection.obj
- 0001:00018f98       @__security_check_cookie@4 10019f98 f   MSVCRT:secchk.obj
- 0001:00018fa6       ___raise_securityfailure   10019fa6 f   MSVCRT:gs_report.obj
- 0001:00018fce       ___report_gsfailure        10019fce f   MSVCRT:gs_report.obj
- 0001:000190c9       ___report_rangecheckfailure 1001a0c9 f   MSVCRT:gs_report.obj
- 0001:000190d6       ___report_securityfailure  1001a0d6 f   MSVCRT:gs_report.obj
- 0001:000191a6       ___report_securityfailureEx 1001a1a6 f   MSVCRT:gs_report.obj
- 0001:000192bc       _GetSystemTimeAsFileTime@4 1001a2bc f   kernel32:KERNEL32.dll
- 0001:000192c2       _EnterCriticalSection@4    1001a2c2 f   kernel32:KERNEL32.dll
- 0001:000192c8       _LeaveCriticalSection@4    1001a2c8 f   kernel32:KERNEL32.dll
- 0001:000192ce       _InitializeCriticalSectionAndSpinCount@8 1001a2ce f   kernel32:KERNEL32.dll
- 0001:000192d4       _DeleteCriticalSection@4   1001a2d4 f   kernel32:KERNEL32.dll
- 0001:000192da       _Sleep@4                   1001a2da f   kernel32:KERNEL32.dll
- 0001:000192e0       _GetCurrentThreadId@0      1001a2e0 f   kernel32:KERNEL32.dll
- 0001:000192e6       _IsProcessorFeaturePresent@4 1001a2e6 f   kernel32:KERNEL32.dll
- 0001:000192ec       _QueryPerformanceCounter@4 1001a2ec f   kernel32:KERNEL32.dll
- 0001:000192f2       _GetCurrentProcessId@0     1001a2f2 f   kernel32:KERNEL32.dll
- 0001:000192f8       _DisableThreadLibraryCalls@4 1001a2f8 f   kernel32:KERNEL32.dll
- 0001:000192fe       _InitializeSListHead@4     1001a2fe f   kernel32:KERNEL32.dll
- 0001:00019304       _IsDebuggerPresent@0       1001a304 f   kernel32:KERNEL32.dll
- 0001:0001930a       _UnhandledExceptionFilter@4 1001a30a f   kernel32:KERNEL32.dll
- 0001:00019310       _SetUnhandledExceptionFilter@4 1001a310 f   kernel32:KERNEL32.dll
- 0001:00019316       _GetStartupInfoW@4         1001a316 f   kernel32:KERNEL32.dll
- 0001:0001931c       _GetModuleHandleW@4        1001a31c f   kernel32:KERNEL32.dll
- 0001:00019322       _GetCurrentProcess@0       1001a322 f   kernel32:KERNEL32.dll
- 0001:00019328       _TerminateProcess@8        1001a328 f   kernel32:KERNEL32.dll
- 0001:0001932e       _memset                    1001a32e f   vcruntime:VCRUNTIME140.dll
- 0001:00019334       _memcpy                    1001a334 f   vcruntime:VCRUNTIME140.dll
- 0001:0001933a       ___std_type_info_destroy_list 1001a33a f   vcruntime:VCRUNTIME140.dll
- 0001:00019340       ___current_exception       1001a340 f   vcruntime:VCRUNTIME140.dll
- 0001:00019346       ___current_exception_context 1001a346 f   vcruntime:VCRUNTIME140.dll
- 0001:0001934c       __except_handler4_common   1001a34c f   vcruntime:VCRUNTIME140.dll
- 0001:00019352       __libm_sse2_cos_precise    1001a352 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:00019358       __libm_sse2_sin_precise    1001a358 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:0001935e       __libm_sse2_sqrt_precise   1001a35e f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:00019364       __fstat64i32               1001a364 f   ucrt:api-ms-win-crt-filesystem-l1-1-0.dll
- 0001:0001936a       __stat64i32                1001a36a f   ucrt:api-ms-win-crt-filesystem-l1-1-0.dll
- 0001:00019370       ___daylight                1001a370 f   ucrt:api-ms-win-crt-time-l1-1-0.dll
- 0001:00019376       ___timezone                1001a376 f   ucrt:api-ms-win-crt-time-l1-1-0.dll
- 0001:0001937c       __tzset                    1001a37c f   ucrt:api-ms-win-crt-time-l1-1-0.dll
- 0001:00019382       _exit                      1001a382 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:00019388       _getenv                    1001a388 f   ucrt:api-ms-win-crt-environment-l1-1-0.dll
- 0001:0001938e       ___acrt_iob_func           1001a38e f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:00019394       _fopen                     1001a394 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:0001939a       _freopen                   1001a39a f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:000193a0       ___stdio_common_vfprintf   1001a3a0 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:000193a6       ___stdio_common_vsprintf   1001a3a6 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:000193ac       _calloc                    1001a3ac f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
- 0001:000193b2       _free                      1001a3b2 f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
- 0001:000193b8       __aligned_free             1001a3b8 f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
- 0001:000193be       __aligned_malloc           1001a3be f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
- 0001:000193c4       _perror                    1001a3c4 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:000193ca       __libm_sse2_pow_precise    1001a3ca f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:000193d0       __libm_sse2_exp_precise    1001a3d0 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:000193d6       _malloc                    1001a3d6 f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
- 0001:000193dc       __CIsinh                   1001a3dc f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:000193e2       __libm_sse2_log_precise    1001a3e2 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:000193e8       _ceil                      1001a3e8 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:000193ee       _rand                      1001a3ee f   ucrt:api-ms-win-crt-utility-l1-1-0.dll
- 0001:000193f4       _fflush                    1001a3f4 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:000193fa       __libm_sse2_log10_precise  1001a3fa f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:00019400       _fclose                    1001a400 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:00019406       _fread                     1001a406 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:0001940c       _fwrite                    1001a40c f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:00019412       _strtok                    1001a412 f   ucrt:api-ms-win-crt-string-l1-1-0.dll
- 0001:00019418       __libm_sse2_atan_precise   1001a418 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:0001941e       _floor                     1001a41e f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:00019424       __except1                  1001a424 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
- 0001:0001942a       __initterm                 1001a42a f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:00019430       __initterm_e               1001a430 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:00019436       __seh_filter_dll           1001a436 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:0001943c       __configure_narrow_argv    1001a43c f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:00019442       __initialize_narrow_environment 1001a442 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:00019448       __initialize_onexit_table  1001a448 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:0001944e       __register_onexit_function 1001a44e f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:00019454       __execute_onexit_table     1001a454 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:0001945a       __crt_atexit               1001a45a f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:00019460       __crt_at_quick_exit        1001a460 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:00019466       __cexit                    1001a466 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:0001946c       _terminate                 1001a46c f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:00019472       __write                    1001a472 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:00019472       _write                     1001a472 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
- 0001:00019478       ___acrt_initialize         1001a478 f   MSVCRT:ucrt_stubs.obj
- 0001:00019478       ___scrt_stub_for_acrt_initialize 1001a478 f   MSVCRT:ucrt_stubs.obj
- 0001:00019478       ___vcrt_initialize         1001a478 f   MSVCRT:ucrt_stubs.obj
- 0001:0001947b       ___acrt_thread_attach      1001a47b f   MSVCRT:ucrt_stubs.obj
- 0001:0001947b       ___scrt_stub_for_acrt_thread_attach 1001a47b f   MSVCRT:ucrt_stubs.obj
- 0001:0001947b       ___vcrt_thread_attach      1001a47b f   MSVCRT:ucrt_stubs.obj
- 0001:0001947e       ___acrt_thread_detach      1001a47e f   MSVCRT:ucrt_stubs.obj
- 0001:0001947e       ___scrt_stub_for_acrt_thread_detach 1001a47e f   MSVCRT:ucrt_stubs.obj
- 0001:0001947e       ___vcrt_thread_detach      1001a47e f   MSVCRT:ucrt_stubs.obj
- 0001:00019481       ___acrt_uninitialize       1001a481 f   MSVCRT:ucrt_stubs.obj
- 0001:00019481       ___scrt_stub_for_acrt_uninitialize 1001a481 f   MSVCRT:ucrt_stubs.obj
- 0001:00019481       ___vcrt_uninitialize       1001a481 f   MSVCRT:ucrt_stubs.obj
- 0001:00019484       ___acrt_uninitialize_critical 1001a484 f   MSVCRT:ucrt_stubs.obj
- 0001:00019484       ___scrt_stub_for_acrt_uninitialize_critical 1001a484 f   MSVCRT:ucrt_stubs.obj
- 0001:00019484       ___vcrt_uninitialize_critical 1001a484 f   MSVCRT:ucrt_stubs.obj
- 0001:00019487       ___scrt_stub_for_is_c_termination_complete 1001a487 f   MSVCRT:ucrt_stubs.obj
- 0001:00019487       __is_c_termination_complete 1001a487 f   MSVCRT:ucrt_stubs.obj
- 0001:0001948a       __filter_x86_sse2_floating_point_exception 1001a48a f   MSVCRT:x86_exception_filter.obj
- 0001:0001948a       __filter_x86_sse2_floating_point_exception_default 1001a48a f   MSVCRT:x86_exception_filter.obj
+ 0001:0000f840       _F                         10010840 f   splitfields.obj
+ 0001:0000f850       _Fptr                      10010850 f   splitfields.obj
+ 0001:0000f860       _NF                        10010860 f   splitfields.obj
+ 0001:0000f870       _splitonto                 10010870 f   splitfields.obj
+ 0001:0000f8b0       _spliton                   100108b0 f   splitfields.obj
+ 0001:0000f910       _split                     10010910 f   splitfields.obj
+ 0001:0000f970       _newSPLIT                  10010970 f   splitfields.obj
+ 0001:0000f990       _delSPLIT                  10010990 f   splitfields.obj
+ 0001:0000f9b0       _newSpotToneGen            100109b0 f   spottone.obj
+ 0001:0000fa50       _delSpotToneGen            10010a50 f   spottone.obj
+ 0001:0000fa80       _setSpotToneGenVals        10010a80 f   spottone.obj
+ 0001:0000fab0       _SpotToneOn                10010ab0 f   spottone.obj
+ 0001:0000fbd0       _SpotToneOff               10010bd0 f   spottone.obj
+ 0001:0000fbe0       _SpotTone                  10010be0 f   spottone.obj
+ 0001:0000fd30       _Setup_SDR                 10010d30 f   update.obj
+ 0001:0000fd40       _Destroy_SDR               10010d40 f   update.obj
+ 0001:0000fd50       _SetThreadNo               10010d50 f   update.obj
+ 0001:0000fdb0       _SetThreadCom              10010db0 f   update.obj
+ 0001:0000fe00       _SetSwchFlag               10010e00 f   update.obj
+ 0001:0000fe30       _SetSwchRiseThresh         10010e30 f   update.obj
+ 0001:0000fe70       _SetThreadProcessingMode   10010e70 f   update.obj
+ 0001:0000ff20       _SetMode                   10010f20 f   update.obj
+ 0001:0000fff0       _AudioReset                10010ff0 f   update.obj
+ 0001:00010000       _SetRXManualNotchEnable    10011000 f   update.obj
+ 0001:00010040       _SetRXManualNotchBW        10011040 f   update.obj
+ 0001:00010090       _SetRXManualNotchFreq      10011090 f   update.obj
+ 0001:000101d0       _SetRXDCBlock              100111d0 f   update.obj
+ 0001:00010220       _SetRXDCBlockGain          10011220 f   update.obj
+ 0001:00010270       _SetTXDCBlock              10011270 f   update.obj
+ 0001:000102b0       _SetTXFMDeviation          100112b0 f   update.obj
+ 0001:00010310       _SetTXFMDataMode           10011310 f   update.obj
+ 0001:00010350       _SetHiResPan               10011350 f   update.obj
+ 0001:00010390       _SetRXFMDeviation          10011390 f   update.obj
+ 0001:00010410       _SetCTCSSFreq              10011410 f   update.obj
+ 0001:00010480       _SetCTCSSFlag              10011480 f   update.obj
+ 0001:000104c0       _SetFMSquelchThreshold     100114c0 f   update.obj
+ 0001:00010530       _SetTXFilter               10011530 f   update.obj
+ 0001:00010700       _SetRXFilter               10011700 f   update.obj
+ 0001:000108d0       _Release_Update            100118d0 f   update.obj
+ 0001:00010900       _SetRXOutputGain           10011900 f   update.obj
+ 0001:00010950       _SetOscPhase               10011950 f   update.obj
+ 0001:000109e0       _SetRXOsc                  100119e0 f   update.obj
+ 0001:00010a80       _SetTXOsc                  10011a80 f   update.obj
+ 0001:00010b20       _SetSampleRate             10011b20 f   update.obj
+ 0001:00010bd0       _SetNR                     10011bd0 f   update.obj
+ 0001:00010c30       _SetNRvals                 10011c30 f   update.obj
+ 0001:00010cd0       _SetTXCompandSt            10011cd0 f   update.obj
+ 0001:00010d10       _SetTXCompand              10011d10 f   update.obj
+ 0001:00010d60       _SetTXSquelchSt            10011d60 f   update.obj
+ 0001:00010da0       _SetTXSquelchVal           10011da0 f   update.obj
+ 0001:00010de0       _SetTXSquelchAtt           10011de0 f   update.obj
+ 0001:00010e20       _SetANF                    10011e20 f   update.obj
+ 0001:00010e80       _SetANFvals                10011e80 f   update.obj
+ 0001:00010f20       _SetNB                     10011f20 f   update.obj
+ 0001:00010f60       _SetNBvals                 10011f60 f   update.obj
+ 0001:00010fd0       _SetSDROM                  10011fd0 f   update.obj
+ 0001:00011010       _SetSDROMvals              10012010 f   update.obj
+ 0001:00011060       _SetBIN                    10012060 f   update.obj
+ 0001:000110a0       _SetRXAGC                  100120a0 f   update.obj
+ 0001:00011390       _SetRXAGCAttack            10012390 f   update.obj
+ 0001:000114b0       _SetRXAGCDecay             100124b0 f   update.obj
+ 0001:00011560       _SetRXAGCHang              10012560 f   update.obj
+ 0001:000115c0       _SetRXAGCSlope             100125c0 f   update.obj
+ 0001:00011630       _SetRXAGCHangThreshold     10012630 f   update.obj
+ 0001:00011690       _SetTXALCAttack            10012690 f   update.obj
+ 0001:000117b0       _SetTXAMCarrierLevel       100127b0 f   update.obj
+ 0001:000117f0       _SetTXALCDecay             100127f0 f   update.obj
+ 0001:000118a0       _SetTXALCBot               100128a0 f   update.obj
+ 0001:00011900       _SetTXALCHang              10012900 f   update.obj
+ 0001:00011960       _SetTXLevelerSt            10012960 f   update.obj
+ 0001:000119a0       _SetTXLevelerAttack        100129a0 f   update.obj
+ 0001:00011ac0       _SetTXLevelerDecay         10012ac0 f   update.obj
+ 0001:00011b70       _SetTXLevelerHang          10012b70 f   update.obj
+ 0001:00011bc0       _SetTXLevelerTop           10012bc0 f   update.obj
+ 0001:00011c30       _SetFixedAGC               10012c30 f   update.obj
+ 0001:00011ca0       _SetRXAGCTop               10012ca0 f   update.obj
+ 0001:00011d20       _GetSAMPLLvals             10012d20 f   update.obj
+ 0001:00011d80       _SetSAMPLLvals             10012d80 f   update.obj
+ 0001:00011de0       _GetSAMFreq                10012de0 f   update.obj
+ 0001:00011e30       _GetFMSquelchBreak         10012e30 f   update.obj
+ 0001:00011e80       _SetCorrectIQ              10012e80 f   update.obj
+ 0001:00011f00       _SetCorrectIQGain          10012f00 f   update.obj
+ 0001:00011f60       _SetCorrectIQPhase         10012f60 f   update.obj
+ 0001:00011fb0       _SetCorrectIQEnable        10012fb0 f   update.obj
+ 0001:00011fe0       _SetCorrectRXIQMu          10012fe0 f   update.obj
+ 0001:00012030       _SetCorrectWBIRState       10013030 f   update.obj
+ 0001:00012070       _GetCorrectRXIQMu          10013070 f   update.obj
+ 0001:00012090       _SetCorrectRXIQw           10013090 f   update.obj
+ 0001:00012110       _GetCorrectRXIQw           10013110 f   update.obj
+ 0001:00012170       _SetCorrectRXIQwReal       10013170 f   update.obj
+ 0001:000121c0       _SetCorrectRXIQwImag       100131c0 f   update.obj
+ 0001:00012210       _SetCorrectTXIQ            10013210 f   update.obj
+ 0001:00012280       _SetCorrectTXIQGain        10013280 f   update.obj
+ 0001:000122e0       _SetCorrectTXIQPhase       100132e0 f   update.obj
+ 0001:00012330       _SetCorrectTXIQMu          10013330 f   update.obj
+ 0001:00012380       _SetCorrectTXIQW           10013380 f   update.obj
+ 0001:000123e0       _SetPWSmode                100133e0 f   update.obj
+ 0001:000124c0       _SetWindow                 100134c0 f   update.obj
+ 0001:00012520       _SetSpectrumPolyphase      10013520 f   update.obj
+ 0001:000126a0       _SetGrphTXEQ               100136a0 f   update.obj
+ 0001:00012d30       _SetGrphTXEQ10             10013d30 f   update.obj
+ 0001:00013110       _SetGrphTXEQ28             10014110 f   update.obj
+ 0001:000134d0       _SetGrphTXEQ37             100144d0 f   update.obj
+ 0001:00013a20       _SetGrphTXPEQ              10014a20 f   update.obj
+ 0001:00013df0       _SetGrphTXEQcmd            10014df0 f   update.obj
+ 0001:00013e30       _SetNotch160               10014e30 f   update.obj
+ 0001:00013e40       _SetGrphRXEQ               10014e40 f   update.obj
+ 0001:000144f0       _SetGrphRXEQ10             100154f0 f   update.obj
+ 0001:000148d0       _SetGrphRXEQcmd            100158d0 f   update.obj
+ 0001:00014910       _SetTXAGCFF                10015910 f   update.obj
+ 0001:00014950       _SetTXAGCFFCompression     10015950 f   update.obj
+ 0001:000149f0       _SetSquelchVal             100159f0 f   update.obj
+ 0001:00014a40       _SetSquelchState           10015a40 f   update.obj
+ 0001:00014a80       _SetTRX                    10015a80 f   update.obj
+ 0001:00014ac0       _FlushAllBufs              10015ac0 f   update.obj
+ 0001:00014be0       _SetDSPBuflen              10015be0 f   update.obj
+ 0001:00014c30       _SetAudioSize              10015c30 f   update.obj
+ 0001:00014cf0       _SetTXAGCCompression       10015cf0 f   update.obj
+ 0001:00014d00       _Process_ComplexSpectrum   10015d00 f   update.obj
+ 0001:00014d60       _Process_Spectrum          10015d60 f   update.obj
+ 0001:00014dc0       _Process_Panadapter        10015dc0 f   update.obj
+ 0001:00014e40       _Process_Phase             10015e40 f   update.obj
+ 0001:00014ee0       _Process_Scope             10015ee0 f   update.obj
+ 0001:00014fc0       _SetRingBufferOffset       10015fc0 f   update.obj
+ 0001:00015000       _CalculateRXMeter          10016000 f   update.obj
+ 0001:000150f0       _CalculateTXMeter          100160f0 f   update.obj
+ 0001:00015270       _NewResampler              10016270 f   update.obj
+ 0001:000152a0       _DoResampler               100162a0 f   update.obj
+ 0001:000152d0       _DelPolyPhaseFIR           100162d0 f   update.obj
+ 0001:000152e0       _NewResamplerF             100162e0 f   update.obj
+ 0001:00015310       _DoResamplerF              10016310 f   update.obj
+ 0001:00015340       _DelPolyPhaseFIRF          10016340 f   update.obj
+ 0001:00015350       _SetSubRXSt                10016350 f   update.obj
+ 0001:00015430       _SetRXPan                  10016430 f   update.obj
+ 0001:00015520       _SetDiversity              10016520 f   update.obj
+ 0001:00015570       _SetDiversityScalar        10016570 f   update.obj
+ 0001:000155b0       _SetDiversityGain          100165b0 f   update.obj
+ 0001:000155e0       _makewindow                100165e0 f   window.obj
+ 0001:00015db0       _Audio_Callback            10016db0 f   winmain.obj
+ 0001:00015f60       _Audio_Callback2           10016f60 f   winmain.obj
+ 0001:00016300       _process_samples_thread    10017300 f   winmain.obj
+ 0001:00016510       _closeup                   10017510 f   winmain.obj
+ 0001:000165c0       _setup                     100175c0 f   winmain.obj
+ 0001:000168b0       _reset_for_buflen          100178b0 f   winmain.obj
+ 0001:00016990       _reset_for_samplerate      10017990 f   winmain.obj
+ 0001:00016ff0       _WSCompand                 10017ff0 f   wscompand.obj
+ 0001:00017110       _WSCReset                  10018110 f   wscompand.obj
+ 0001:000171e0       _newWSCompander            100181e0 f   wscompand.obj
+ 0001:00017300       _delWSCompander            10018300 f   wscompand.obj
+ 0001:00017330       _InitSPEEDTRIG             10018330 f   fastrig1.obj
+ 0001:000173a0       _fast_sin                  100183a0 f   fastrig1.obj
+ 0001:00017420       _fast_cos                  10018420 f   fastrig1.obj
+ 0001:000174a0       _fast_atan2                100184a0 f   fastrig1.obj
+ 0001:00017600       _phasemod                  10018600 f   fastrig1.obj
+ 0001:00017653       _timeSetEvent@20           10018653 f   winMM:WINMM.dll
+ 0001:00017659       _timeKillEvent@4           10018659 f   winMM:WINMM.dll
+ 0001:0001765f       _fftwf_execute             1001865f f   libfftw3f-3:libfftw3f-3.dll
+ 0001:00017665       _fftwf_plan_dft_1d         10018665 f   libfftw3f-3:libfftw3f-3.dll
+ 0001:0001766b       _fftwf_destroy_plan        1001866b f   libfftw3f-3:libfftw3f-3.dll
+ 0001:00017671       _fftwf_import_wisdom_from_string 10018671 f   libfftw3f-3:libfftw3f-3.dll
+ 0001:00017677       _sem_init                  10018677 f   pthreadVC:pthreadVC.dll
+ 0001:0001767d       _sem_destroy               1001867d f   pthreadVC:pthreadVC.dll
+ 0001:00017683       _sem_wait                  10018683 f   pthreadVC:pthreadVC.dll
+ 0001:00017689       _sem_post                  10018689 f   pthreadVC:pthreadVC.dll
+ 0001:00017690       __alldiv                   10018690 f   MSVCRT:lldiv.obj
+ 0001:00017740       __ftol2_sse_excpt          10018740 f   MSVCRT:ftol2.obj
+ 0001:00017750       __ftol2_sse                10018750 f   MSVCRT:ftol2.obj
+ 0001:00017760       __ftoi2                    10018760 f   MSVCRT:ftol2.obj
+ 0001:000177e0       __ftoui2                   100187e0 f   MSVCRT:ftol2.obj
+ 0001:00017890       __ftol2                    10018890 f   MSVCRT:ftol2.obj
+ 0001:00017940       __ftoul2                   10018940 f   MSVCRT:ftol2.obj
+ 0001:00017a00       __ftoul2_legacy            10018a00 f   MSVCRT:ftol2.obj
+ 0001:00017a20       __alloca_probe             10018a20 f   MSVCRT:chkstk.obj
+ 0001:00017a20       __chkstk                   10018a20 f   MSVCRT:chkstk.obj
+ 0001:00017a50       __ftoui3                   10018a50 f   MSVCRT:ftol3.obj
+ 0001:00017aa0       __ftoul3                   10018aa0 f   MSVCRT:ftol3.obj
+ 0001:00017b10       __ftoul3_legacy            10018b10 f   MSVCRT:ftol3.obj
+ 0001:00017b40       __ftol3                    10018b40 f   MSVCRT:ftol3.obj
+ 0001:00017bb0       __dtoui3                   10018bb0 f   MSVCRT:ftol3.obj
+ 0001:00017c30       __dtoul3                   10018c30 f   MSVCRT:ftol3.obj
+ 0001:00017ce0       __dtoul3_legacy            10018ce0 f   MSVCRT:ftol3.obj
+ 0001:00017d10       __dtol3                    10018d10 f   MSVCRT:ftol3.obj
+ 0001:00017dc0       __ultod3                   10018dc0 f   MSVCRT:ftol3.obj
+ 0001:00017e10       __ltod3                    10018e10 f   MSVCRT:ftol3.obj
+ 0001:00017e60       __ultof3                   10018e60 f   MSVCRT:ftol3.obj
+ 0001:00017ee0       __ltof3                    10018ee0 f   MSVCRT:ftol3.obj
+ 0001:00018264       __CRT_INIT@12              10019264 f   MSVCRT:dll_dllmain.obj
+ 0001:0001826d       __DllMainCRTStartup@12     1001926d f   MSVCRT:dll_dllmain.obj
+ 0001:00018290       ___isa_available_init      10019290 f   MSVCRT:cpu_disp.obj
+ 0001:0001860a       ___security_init_cookie    1001960a f   MSVCRT:gs_support.obj
+ 0001:00018655       _DllMain@12                10019655 f   MSVCRT:dll_dllmain_stub.obj
+ 0001:00018677       ?__scrt_initialize_type_info@@YAXXZ 10019677 f   MSVCRT:tncleanup.obj
+ 0001:00018683       ?__scrt_uninitialize_type_info@@YAXXZ 10019683 f   MSVCRT:tncleanup.obj
+ 0001:0001868f       ___local_stdio_scanf_options 1001968f f i MSVCRT:default_local_stdio_options.obj
+ 0001:00018695       ___scrt_initialize_default_local_stdio_options 10019695 f   MSVCRT:default_local_stdio_options.obj
+ 0001:000186b2       ?configure_argv@__scrt_narrow_argv_policy@@SAHXZ 100196b2 f i MSVCRT:utility.obj
+ 0001:00018701       ?initialize_environment@__scrt_narrow_environment_policy@@SAHXZ 10019701 f i MSVCRT:utility.obj
+ 0001:00018739       _NtCurrentTeb              10019739 f i MSVCRT:utility.obj
+ 0001:00018740       ___scrt_acquire_startup_lock 10019740 f   MSVCRT:utility.obj
+ 0001:00018772       ___scrt_dllmain_after_initialize_c 10019772 f   MSVCRT:utility.obj
+ 0001:0001879d       ___scrt_dllmain_before_initialize_c 1001979d f   MSVCRT:utility.obj
+ 0001:000187ab       ___scrt_dllmain_crt_thread_attach 100197ab f   MSVCRT:utility.obj
+ 0001:000187ca       ___scrt_dllmain_crt_thread_detach 100197ca f   MSVCRT:utility.obj
+ 0001:000187d7       ___scrt_dllmain_exception_filter 100197d7 f   MSVCRT:utility.obj
+ 0001:0001880b       ___scrt_dllmain_uninitialize_c 1001980b f   MSVCRT:utility.obj
+ 0001:0001882e       ___scrt_dllmain_uninitialize_critical 1001982e f   MSVCRT:utility.obj
+ 0001:0001883b       ___scrt_initialize_crt     1001983b f   MSVCRT:utility.obj
+ 0001:00018874       ___scrt_initialize_onexit_tables 10019874 f   MSVCRT:utility.obj
+ 0001:000188fb       ___scrt_is_nonwritable_in_current_image 100198fb f   MSVCRT:utility.obj
+ 0001:0001898f       ___scrt_release_startup_lock 1001998f f   MSVCRT:utility.obj
+ 0001:000189ac       ___scrt_uninitialize_crt   100199ac f   MSVCRT:utility.obj
+ 0001:000189d4       __onexit                   100199d4 f   MSVCRT:utility.obj
+ 0001:00018a02       _at_quick_exit             10019a02 f   MSVCRT:utility.obj
+ 0001:00018a25       _atexit                    10019a25 f   MSVCRT:utility.obj
+ 0001:00018a3a       ___scrt_get_dyn_tls_init_callback 10019a3a f   MSVCRT:dyn_tls_init.obj
+ 0001:00018a40       ___scrt_fastfail           10019a40 f   MSVCRT:utility_desktop.obj
+ 0001:00018b55       ___scrt_get_show_window_mode 10019b55 f   MSVCRT:utility_desktop.obj
+ 0001:00018b85       ___scrt_initialize_mta     10019b85 f   MSVCRT:utility_desktop.obj
+ 0001:00018b8a       ___scrt_initialize_winrt   10019b8a f   MSVCRT:utility_desktop.obj
+ 0001:00018b8d       ___scrt_is_managed_app     10019b8d f   MSVCRT:utility_desktop.obj
+ 0001:00018bcf       ___scrt_set_unhandled_exception_filter 10019bcf f   MSVCRT:utility_desktop.obj
+ 0001:00018bdb       ___scrt_exe_initialize_mta 10019bdb f   MSVCRT:utility_desktop.obj
+ 0001:00018bdb       ___scrt_stub_for_initialize_mta 10019bdb f   MSVCRT:utility_desktop.obj
+ 0001:00018bde       ___scrt_unhandled_exception_filter@4 10019bde f   MSVCRT:utility_desktop.obj
+ 0001:00018c34       __crt_debugger_hook        10019c34 f   MSVCRT:utility_desktop.obj
+ 0001:00018c3c       __RTC_Initialize           10019c3c f   MSVCRT:initsect.obj
+ 0001:00018c68       __RTC_Terminate            10019c68 f   MSVCRT:initsect.obj
+ 0001:00018ca0       __SEH_prolog4              10019ca0 f   MSVCRT:sehprolg4.obj
+ 0001:00018cf0       __SEH_epilog4              10019cf0 f   MSVCRT:sehprolg4.obj
+ 0001:00018d04       __except_handler4          10019d04 f   MSVCRT:chandler4gs.obj
+ 0001:00018d33       @_guard_check_icall_nop@4  10019d33 f i MSVCRT:guard_support.obj
+ 0001:00018d36       _ReadNoFence               10019d36 f i MSVCRT:guard_support.obj
+ 0001:00018d40       _ReadPointerNoFence        10019d40 f i MSVCRT:guard_support.obj
+ 0001:00018d4a       __InlineInterlockedExchangePointer 10019d4a f i MSVCRT:guard_support.obj
+ 0001:00018d57       ___castguard_check_failure_debugbreak 10019d57 f i MSVCRT:guard_support.obj
+ 0001:00018d72       ___castguard_check_failure_fastfail 10019d72 f i MSVCRT:guard_support.obj
+ 0001:00018d91       ___castguard_check_failure_nop 10019d91 f i MSVCRT:guard_support.obj
+ 0001:00018d94       ___castguard_check_failure_os_handled 10019d94 f i MSVCRT:guard_support.obj
+ 0001:00018dcb       ___castguard_check_failure_user_handled 10019dcb f i MSVCRT:guard_support.obj
+ 0001:00018e39       ___castguard_set_user_handler 10019e39 f i MSVCRT:guard_support.obj
+ 0001:00018e48       ___castguard_slow_path_check_debugbreak 10019e48 f i MSVCRT:guard_support.obj
+ 0001:00018e75       ___castguard_slow_path_check_fastfail 10019e75 f i MSVCRT:guard_support.obj
+ 0001:00018ea6       ___castguard_slow_path_check_nop 10019ea6 f i MSVCRT:guard_support.obj
+ 0001:00018ea9       ___castguard_slow_path_check_os_handled 10019ea9 f i MSVCRT:guard_support.obj
+ 0001:00018ee5       ___castguard_slow_path_check_user_handled 10019ee5 f i MSVCRT:guard_support.obj
+ 0001:00018f46       __guard_icall_checks_enforced 10019f46 f i MSVCRT:guard_support.obj
+ 0001:00018f58       __get_startup_argv_mode    10019f58 f   MSVCRT:argv_mode.obj
+ 0001:00018f5c       ___scrt_is_ucrt_dll_in_use 10019f5c f   MSVCRT:ucrt_detection.obj
+ 0001:00018f68       @__security_check_cookie@4 10019f68 f   MSVCRT:secchk.obj
+ 0001:00018f76       ___raise_securityfailure   10019f76 f   MSVCRT:gs_report.obj
+ 0001:00018f9e       ___report_gsfailure        10019f9e f   MSVCRT:gs_report.obj
+ 0001:00019099       ___report_rangecheckfailure 1001a099 f   MSVCRT:gs_report.obj
+ 0001:000190a6       ___report_securityfailure  1001a0a6 f   MSVCRT:gs_report.obj
+ 0001:00019176       ___report_securityfailureEx 1001a176 f   MSVCRT:gs_report.obj
+ 0001:0001928c       _GetSystemTimeAsFileTime@4 1001a28c f   kernel32:KERNEL32.dll
+ 0001:00019292       _EnterCriticalSection@4    1001a292 f   kernel32:KERNEL32.dll
+ 0001:00019298       _LeaveCriticalSection@4    1001a298 f   kernel32:KERNEL32.dll
+ 0001:0001929e       _InitializeCriticalSectionAndSpinCount@8 1001a29e f   kernel32:KERNEL32.dll
+ 0001:000192a4       _DeleteCriticalSection@4   1001a2a4 f   kernel32:KERNEL32.dll
+ 0001:000192aa       _Sleep@4                   1001a2aa f   kernel32:KERNEL32.dll
+ 0001:000192b0       _GetCurrentThreadId@0      1001a2b0 f   kernel32:KERNEL32.dll
+ 0001:000192b6       _IsProcessorFeaturePresent@4 1001a2b6 f   kernel32:KERNEL32.dll
+ 0001:000192bc       _QueryPerformanceCounter@4 1001a2bc f   kernel32:KERNEL32.dll
+ 0001:000192c2       _GetCurrentProcessId@0     1001a2c2 f   kernel32:KERNEL32.dll
+ 0001:000192c8       _DisableThreadLibraryCalls@4 1001a2c8 f   kernel32:KERNEL32.dll
+ 0001:000192ce       _InitializeSListHead@4     1001a2ce f   kernel32:KERNEL32.dll
+ 0001:000192d4       _IsDebuggerPresent@0       1001a2d4 f   kernel32:KERNEL32.dll
+ 0001:000192da       _UnhandledExceptionFilter@4 1001a2da f   kernel32:KERNEL32.dll
+ 0001:000192e0       _SetUnhandledExceptionFilter@4 1001a2e0 f   kernel32:KERNEL32.dll
+ 0001:000192e6       _GetStartupInfoW@4         1001a2e6 f   kernel32:KERNEL32.dll
+ 0001:000192ec       _GetModuleHandleW@4        1001a2ec f   kernel32:KERNEL32.dll
+ 0001:000192f2       _GetCurrentProcess@0       1001a2f2 f   kernel32:KERNEL32.dll
+ 0001:000192f8       _TerminateProcess@8        1001a2f8 f   kernel32:KERNEL32.dll
+ 0001:000192fe       _memset                    1001a2fe f   vcruntime:VCRUNTIME140.dll
+ 0001:00019304       _memcpy                    1001a304 f   vcruntime:VCRUNTIME140.dll
+ 0001:0001930a       ___std_type_info_destroy_list 1001a30a f   vcruntime:VCRUNTIME140.dll
+ 0001:00019310       ___current_exception       1001a310 f   vcruntime:VCRUNTIME140.dll
+ 0001:00019316       ___current_exception_context 1001a316 f   vcruntime:VCRUNTIME140.dll
+ 0001:0001931c       __except_handler4_common   1001a31c f   vcruntime:VCRUNTIME140.dll
+ 0001:00019322       __libm_sse2_cos_precise    1001a322 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:00019328       __libm_sse2_sin_precise    1001a328 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:0001932e       __libm_sse2_sqrt_precise   1001a32e f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:00019334       __fstat64i32               1001a334 f   ucrt:api-ms-win-crt-filesystem-l1-1-0.dll
+ 0001:0001933a       __stat64i32                1001a33a f   ucrt:api-ms-win-crt-filesystem-l1-1-0.dll
+ 0001:00019340       ___daylight                1001a340 f   ucrt:api-ms-win-crt-time-l1-1-0.dll
+ 0001:00019346       ___timezone                1001a346 f   ucrt:api-ms-win-crt-time-l1-1-0.dll
+ 0001:0001934c       __tzset                    1001a34c f   ucrt:api-ms-win-crt-time-l1-1-0.dll
+ 0001:00019352       _exit                      1001a352 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:00019358       _getenv                    1001a358 f   ucrt:api-ms-win-crt-environment-l1-1-0.dll
+ 0001:0001935e       ___acrt_iob_func           1001a35e f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:00019364       _fopen                     1001a364 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:0001936a       _freopen                   1001a36a f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:00019370       ___stdio_common_vfprintf   1001a370 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:00019376       ___stdio_common_vsprintf   1001a376 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:0001937c       _calloc                    1001a37c f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
+ 0001:00019382       _free                      1001a382 f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
+ 0001:00019388       __aligned_free             1001a388 f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
+ 0001:0001938e       __aligned_malloc           1001a38e f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
+ 0001:00019394       _perror                    1001a394 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:0001939a       __libm_sse2_pow_precise    1001a39a f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:000193a0       __libm_sse2_exp_precise    1001a3a0 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:000193a6       _malloc                    1001a3a6 f   ucrt:api-ms-win-crt-heap-l1-1-0.dll
+ 0001:000193ac       __CIsinh                   1001a3ac f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:000193b2       __libm_sse2_log_precise    1001a3b2 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:000193b8       _ceil                      1001a3b8 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:000193be       _rand                      1001a3be f   ucrt:api-ms-win-crt-utility-l1-1-0.dll
+ 0001:000193c4       _fflush                    1001a3c4 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:000193ca       __libm_sse2_log10_precise  1001a3ca f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:000193d0       _fclose                    1001a3d0 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:000193d6       _fread                     1001a3d6 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:000193dc       _fwrite                    1001a3dc f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:000193e2       _strtok                    1001a3e2 f   ucrt:api-ms-win-crt-string-l1-1-0.dll
+ 0001:000193e8       __libm_sse2_atan_precise   1001a3e8 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:000193ee       _floor                     1001a3ee f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:000193f4       __except1                  1001a3f4 f   ucrt:api-ms-win-crt-math-l1-1-0.dll
+ 0001:000193fa       __initterm                 1001a3fa f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:00019400       __initterm_e               1001a400 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:00019406       __seh_filter_dll           1001a406 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:0001940c       __configure_narrow_argv    1001a40c f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:00019412       __initialize_narrow_environment 1001a412 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:00019418       __initialize_onexit_table  1001a418 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:0001941e       __register_onexit_function 1001a41e f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:00019424       __execute_onexit_table     1001a424 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:0001942a       __crt_atexit               1001a42a f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:00019430       __crt_at_quick_exit        1001a430 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:00019436       __cexit                    1001a436 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:0001943c       _terminate                 1001a43c f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
+ 0001:00019442       __write                    1001a442 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:00019442       _write                     1001a442 f   ucrt:api-ms-win-crt-stdio-l1-1-0.dll
+ 0001:00019448       ___acrt_initialize         1001a448 f   MSVCRT:ucrt_stubs.obj
+ 0001:00019448       ___scrt_stub_for_acrt_initialize 1001a448 f   MSVCRT:ucrt_stubs.obj
+ 0001:00019448       ___vcrt_initialize         1001a448 f   MSVCRT:ucrt_stubs.obj
+ 0001:0001944b       ___acrt_thread_attach      1001a44b f   MSVCRT:ucrt_stubs.obj
+ 0001:0001944b       ___scrt_stub_for_acrt_thread_attach 1001a44b f   MSVCRT:ucrt_stubs.obj
+ 0001:0001944b       ___vcrt_thread_attach      1001a44b f   MSVCRT:ucrt_stubs.obj
+ 0001:0001944e       ___acrt_thread_detach      1001a44e f   MSVCRT:ucrt_stubs.obj
+ 0001:0001944e       ___scrt_stub_for_acrt_thread_detach 1001a44e f   MSVCRT:ucrt_stubs.obj
+ 0001:0001944e       ___vcrt_thread_detach      1001a44e f   MSVCRT:ucrt_stubs.obj
+ 0001:00019451       ___acrt_uninitialize       1001a451 f   MSVCRT:ucrt_stubs.obj
+ 0001:00019451       ___scrt_stub_for_acrt_uninitialize 1001a451 f   MSVCRT:ucrt_stubs.obj
+ 0001:00019451       ___vcrt_uninitialize       1001a451 f   MSVCRT:ucrt_stubs.obj
+ 0001:00019454       ___acrt_uninitialize_critical 1001a454 f   MSVCRT:ucrt_stubs.obj
+ 0001:00019454       ___scrt_stub_for_acrt_uninitialize_critical 1001a454 f   MSVCRT:ucrt_stubs.obj
+ 0001:00019454       ___vcrt_uninitialize_critical 1001a454 f   MSVCRT:ucrt_stubs.obj
+ 0001:00019457       ___scrt_stub_for_is_c_termination_complete 1001a457 f   MSVCRT:ucrt_stubs.obj
+ 0001:00019457       __is_c_termination_complete 1001a457 f   MSVCRT:ucrt_stubs.obj
+ 0001:0001945a       __filter_x86_sse2_floating_point_exception 1001a45a f   MSVCRT:x86_exception_filter.obj
+ 0001:0001945a       __filter_x86_sse2_floating_point_exception_default 1001a45a f   MSVCRT:x86_exception_filter.obj
  0002:00000000       __imp__LeaveCriticalSection@4 1001b000     kernel32:KERNEL32.dll
  0002:00000004       __imp__GetModuleHandleW@4  1001b004     kernel32:KERNEL32.dll
  0002:00000008       __imp__GetStartupInfoW@4   1001b008     kernel32:KERNEL32.dll
@@ -1118,10 +1118,10 @@
  0002:00001940       ___CastGuardVftablesEnd    1001c940     MSVCRT:guard_support.obj
  0002:00001980       ___safe_se_handler_table   1001c980     <linker-defined>
  0002:00001984       ___volatile_metadata       1001c984     <linker-defined>
- 0002:00002008       ___rtc_iaa                 1001d008     MSVCRT:initsect.obj
- 0002:0000200c       ___rtc_izz                 1001d00c     MSVCRT:initsect.obj
- 0002:00002010       ___rtc_taa                 1001d010     MSVCRT:initsect.obj
- 0002:00002014       ___rtc_tzz                 1001d014     MSVCRT:initsect.obj
+ 0002:00002004       ___rtc_iaa                 1001d004     MSVCRT:initsect.obj
+ 0002:00002008       ___rtc_izz                 1001d008     MSVCRT:initsect.obj
+ 0002:0000200c       ___rtc_taa                 1001d00c     MSVCRT:initsect.obj
+ 0002:00002010       ___rtc_tzz                 1001d010     MSVCRT:initsect.obj
  0002:000030e4       __IMPORT_DESCRIPTOR_WINMM  1001e0e4     winMM:WINMM.dll
  0002:000030f8       __IMPORT_DESCRIPTOR_libfftw3f-3 1001e0f8     libfftw3f-3:libfftw3f-3.dll
  0002:0000310c       __IMPORT_DESCRIPTOR_pthreadVC 1001e10c     pthreadVC:pthreadVC.dll
@@ -1189,7 +1189,7 @@
  0003:000321d0       ?_OptionsStorage@?1??__local_stdio_printf_options@@9@9 100511d0     <common>
  0003:000321d8       ___dyn_tls_init_callback   100511d8     <common>
 
- entry point at        0001:0001829d
+ entry point at        0001:0001826d
 
  Static symbols
 
@@ -1296,162 +1296,162 @@
  0000:fffaa000       .debug$S                   10000000     pthreadVC:pthreadVC.dll
  0000:fffaa000       .debug$S                   10000000     pthreadVC:pthreadVC.dll
  0000:fffaa000       .debug$S                   10000000     pthreadVC:pthreadVC.dll
- 0000:0000004c       _volmd                     1000004c     ringb.obj
- 0000:000000a0       _volmd                     100000a0     ringb.obj
- 0000:000000fc       _volmd                     100000fc     ringb.obj
- 0000:00000158       _volmd                     10000158     ringb.obj
- 0000:000001b4       _volmd                     100001b4     ringb.obj
- 0000:00000210       _volmd                     10000210     ringb.obj
- 0000:0000026c       _volmd                     1000026c     ringb.obj
- 0000:000002c8       _volmd                     100002c8     ringb.obj
- 0001:0000228c       $LN118                     1000328c     dcblock.obj
- 0001:000031a8       $LN12                      100041a8     filt2p2z.obj
- 0001:00008310       $LN77                      10009310     keyer.obj
- 0001:0000b39c       $LN135                     1000c39c     sdr.obj
- 0001:0000b3ac       $LN134                     1000c3ac     sdr.obj
- 0001:0000b3b8       $LN137                     1000c3b8     sdr.obj
- 0001:0000b3c4       $LN136                     1000c3c4     sdr.obj
- 0001:0000b3d0       _CXBpeak                   1000c3d0 f   sdr.obj
- 0001:0000b4e0       _do_rx_meter               1000c4e0 f   sdr.obj
- 0001:0000b860       _do_rx_post                1000c860 f   sdr.obj
- 0001:0000bd5c       $LN139                     1000cd5c     sdr.obj
- 0001:0000bd64       $LN138                     1000cd64     sdr.obj
- 0001:0000bd70       _do_rx_pre                 1000cd70 f   sdr.obj
- 0001:0000c210       _do_rx_spectrum            1000d210 f   sdr.obj
- 0001:0000c300       _do_tx_FM                  1000d300 f   sdr.obj
- 0001:0000c7a0       _do_tx_meter               1000d7a0 f   sdr.obj
- 0001:0000cf6c       $LN77                      1000df6c     sdr.obj
- 0001:0000cf90       _do_tx_post                1000df90 f   sdr.obj
- 0001:0000d240       _do_tx_pre                 1000e240 f   sdr.obj
- 0001:0000dd30       _setup_all                 1000ed30 f   sdr.obj
- 0001:0000df20       _setup_rx                  1000ef20 f   sdr.obj
- 0001:0000e4d0       _setup_tx                  1000f4d0 f   sdr.obj
- 0001:00011384       $LN10                      10012384     update.obj
- 0001:000124b0       $LN11                      100134b0     update.obj
- 0001:000150f4       $LN11                      100160f4     update.obj
- 0001:00015250       $LN21                      10016250     update.obj
- 0001:00015d98       $LN112                     10016d98     window.obj
- 0001:00016524       $LN33                      10017524     winmain.obj
- 0001:00016b20       _reset_system_audio        10017b20 f   winmain.obj
- 0001:00016c70       _run_swch                  10017c70 f   winmain.obj
- 0001:00016f90       _setup_local_audio         10017f90 f   winmain.obj
- 0001:000176c0       $$000000                   100186c0     MSVCRT:lldiv.obj
- 0001:000176e1       L1                         100186e1     MSVCRT:lldiv.obj
- 0001:000176fd       L2                         100186fd     MSVCRT:lldiv.obj
- 0001:00017719       L3                         10018719     MSVCRT:lldiv.obj
- 0001:00017727       L5                         10018727     MSVCRT:lldiv.obj
- 0001:00017755       L6                         10018755     MSVCRT:lldiv.obj
- 0001:00017756       L7                         10018756     MSVCRT:lldiv.obj
- 0001:0001775a       L4                         1001875a     MSVCRT:lldiv.obj
- 0001:00017764       L8                         10018764     MSVCRT:lldiv.obj
- 0001:00017770       $$000000                   10018770     MSVCRT:ftol2.obj
- 0001:00017780       $$000000                   10018780     MSVCRT:ftol2.obj
- 0001:00017790       $$000000                   10018790     MSVCRT:ftol2.obj
- 0001:000177a1       L3B                        100187a1     MSVCRT:ftol2.obj
- 0001:000177e4       L3F                        100187e4     MSVCRT:ftol2.obj
- 0001:000177ec       L40                        100187ec     MSVCRT:ftol2.obj
- 0001:000177ff       L41                        100187ff     MSVCRT:ftol2.obj
- 0001:00017810       $$000000                   10018810     MSVCRT:ftol2.obj
- 0001:0001782b       L8F                        1001882b     MSVCRT:ftol2.obj
- 0001:0001783c       L90                        1001883c     MSVCRT:ftol2.obj
- 0001:0001784b       L91                        1001884b     MSVCRT:ftol2.obj
- 0001:00017851       L92                        10018851     MSVCRT:ftol2.obj
- 0001:00017857       L93                        10018857     MSVCRT:ftol2.obj
- 0001:00017896       L96                        10018896     MSVCRT:ftol2.obj
- 0001:0001789d       L97                        1001889d     MSVCRT:ftol2.obj
- 0001:000178a5       L99                        100188a5     MSVCRT:ftol2.obj
- 0001:000178c0       $$000000                   100188c0     MSVCRT:ftol2.obj
- 0001:000178de       L51                        100188de     MSVCRT:ftol2.obj
- 0001:00017923       L52                        10018923     MSVCRT:ftol2.obj
- 0001:00017937       L53                        10018937     MSVCRT:ftol2.obj
- 0001:00017939       L55                        10018939     MSVCRT:ftol2.obj
- 0001:00017943       L56                        10018943     MSVCRT:ftol2.obj
- 0001:0001795c       L57                        1001895c     MSVCRT:ftol2.obj
- 0001:00017970       $$000000                   10018970     MSVCRT:ftol2.obj
- 0001:0001798b       LA5                        1001898b     MSVCRT:ftol2.obj
- 0001:000179a0       LA6                        100189a0     MSVCRT:ftol2.obj
- 0001:000179b1       LA7                        100189b1     MSVCRT:ftol2.obj
- 0001:000179be       LA9                        100189be     MSVCRT:ftol2.obj
- 0001:00017a05       LAA                        10018a05     MSVCRT:ftol2.obj
- 0001:00017a0c       LAC                        10018a0c     MSVCRT:ftol2.obj
- 0001:00017a13       LAD                        10018a13     MSVCRT:ftol2.obj
- 0001:00017a1d       LAF                        10018a1d     MSVCRT:ftol2.obj
- 0001:00017a30       $$000000                   10018a30     MSVCRT:ftol2.obj
- 0001:00017a50       $$000000                   10018a50     MSVCRT:chkstk.obj
- 0001:00017a64       cs10                       10018a64     MSVCRT:chkstk.obj
- 0001:00017a72       cs20                       10018a72     MSVCRT:chkstk.obj
- 0001:00017a80       $$000000                   10018a80     MSVCRT:ftol3.obj
- 0001:00017a90       _ftoui3_default            10018a90     MSVCRT:ftol3.obj
- 0001:00017a9f       _ftoui3_cvt                10018a9f     MSVCRT:ftol3.obj
- 0001:00017aa4       _ftoui3_notsafe            10018aa4     MSVCRT:ftol3.obj
- 0001:00017ab3       _ftoui3_neg                10018ab3     MSVCRT:ftol3.obj
- 0001:00017aba       _ftoui3_NaN                10018aba     MSVCRT:ftol3.obj
- 0001:00017ad0       $$000000                   10018ad0     MSVCRT:ftol3.obj
- 0001:00017aef       _ftoul3_default            10018aef     MSVCRT:ftol3.obj
- 0001:00017afe       _ftoul3_cvt                10018afe     MSVCRT:ftol3.obj
- 0001:00017b05       _ftoul3_notsafe            10018b05     MSVCRT:ftol3.obj
- 0001:00017b25       _ftoul3_bigshift           10018b25     MSVCRT:ftol3.obj
- 0001:00017b2a       _ftoul3_neg                10018b2a     MSVCRT:ftol3.obj
- 0001:00017b31       _ftoul3_NaN                10018b31     MSVCRT:ftol3.obj
+ 0000:00000048       _volmd                     10000048     ringb.obj
+ 0000:0000009c       _volmd                     1000009c     ringb.obj
+ 0000:000000f8       _volmd                     100000f8     ringb.obj
+ 0000:00000154       _volmd                     10000154     ringb.obj
+ 0000:000001b0       _volmd                     100001b0     ringb.obj
+ 0000:0000020c       _volmd                     1000020c     ringb.obj
+ 0000:00000268       _volmd                     10000268     ringb.obj
+ 0000:000002c4       _volmd                     100002c4     ringb.obj
+ 0001:0000222c       $LN118                     1000322c     dcblock.obj
+ 0001:00003108       $LN12                      10004108     filt2p2z.obj
+ 0001:00008228       $LN77                      10009228     keyer.obj
+ 0001:0000b280       $LN135                     1000c280     sdr.obj
+ 0001:0000b290       $LN134                     1000c290     sdr.obj
+ 0001:0000b29c       $LN137                     1000c29c     sdr.obj
+ 0001:0000b2a8       $LN136                     1000c2a8     sdr.obj
+ 0001:0000b2c0       _CXBpeak                   1000c2c0 f   sdr.obj
+ 0001:0000b3d0       _do_rx_meter               1000c3d0 f   sdr.obj
+ 0001:0000b760       _do_rx_post                1000c760 f   sdr.obj
+ 0001:0000bc3c       $LN139                     1000cc3c     sdr.obj
+ 0001:0000bc44       $LN138                     1000cc44     sdr.obj
+ 0001:0000bc50       _do_rx_pre                 1000cc50 f   sdr.obj
+ 0001:0000c0f0       _do_rx_spectrum            1000d0f0 f   sdr.obj
+ 0001:0000c1e0       _do_tx_FM                  1000d1e0 f   sdr.obj
+ 0001:0000c660       _do_tx_meter               1000d660 f   sdr.obj
+ 0001:0000cdd4       $LN77                      1000ddd4     sdr.obj
+ 0001:0000cdf0       _do_tx_post                1000ddf0 f   sdr.obj
+ 0001:0000d0b0       _do_tx_pre                 1000e0b0 f   sdr.obj
+ 0001:0000dd40       _setup_all                 1000ed40 f   sdr.obj
+ 0001:0000df30       _setup_rx                  1000ef30 f   sdr.obj
+ 0001:0000e4e0       _setup_tx                  1000f4e0 f   sdr.obj
+ 0001:00011374       $LN10                      10012374     update.obj
+ 0001:000124a0       $LN11                      100134a0     update.obj
+ 0001:000150d4       $LN11                      100160d4     update.obj
+ 0001:00015230       $LN21                      10016230     update.obj
+ 0001:00015d78       $LN112                     10016d78     window.obj
+ 0001:000164f4       $LN33                      100174f4     winmain.obj
+ 0001:00016af0       _reset_system_audio        10017af0 f   winmain.obj
+ 0001:00016c40       _run_swch                  10017c40 f   winmain.obj
+ 0001:00016f60       _setup_local_audio         10017f60 f   winmain.obj
+ 0001:00017690       $$000000                   10018690     MSVCRT:lldiv.obj
+ 0001:000176b1       L1                         100186b1     MSVCRT:lldiv.obj
+ 0001:000176cd       L2                         100186cd     MSVCRT:lldiv.obj
+ 0001:000176e9       L3                         100186e9     MSVCRT:lldiv.obj
+ 0001:000176f7       L5                         100186f7     MSVCRT:lldiv.obj
+ 0001:00017725       L6                         10018725     MSVCRT:lldiv.obj
+ 0001:00017726       L7                         10018726     MSVCRT:lldiv.obj
+ 0001:0001772a       L4                         1001872a     MSVCRT:lldiv.obj
+ 0001:00017734       L8                         10018734     MSVCRT:lldiv.obj
+ 0001:00017740       $$000000                   10018740     MSVCRT:ftol2.obj
+ 0001:00017750       $$000000                   10018750     MSVCRT:ftol2.obj
+ 0001:00017760       $$000000                   10018760     MSVCRT:ftol2.obj
+ 0001:00017771       L3B                        10018771     MSVCRT:ftol2.obj
+ 0001:000177b4       L3F                        100187b4     MSVCRT:ftol2.obj
+ 0001:000177bc       L40                        100187bc     MSVCRT:ftol2.obj
+ 0001:000177cf       L41                        100187cf     MSVCRT:ftol2.obj
+ 0001:000177e0       $$000000                   100187e0     MSVCRT:ftol2.obj
+ 0001:000177fb       L8F                        100187fb     MSVCRT:ftol2.obj
+ 0001:0001780c       L90                        1001880c     MSVCRT:ftol2.obj
+ 0001:0001781b       L91                        1001881b     MSVCRT:ftol2.obj
+ 0001:00017821       L92                        10018821     MSVCRT:ftol2.obj
+ 0001:00017827       L93                        10018827     MSVCRT:ftol2.obj
+ 0001:00017866       L96                        10018866     MSVCRT:ftol2.obj
+ 0001:0001786d       L97                        1001886d     MSVCRT:ftol2.obj
+ 0001:00017875       L99                        10018875     MSVCRT:ftol2.obj
+ 0001:00017890       $$000000                   10018890     MSVCRT:ftol2.obj
+ 0001:000178ae       L51                        100188ae     MSVCRT:ftol2.obj
+ 0001:000178f3       L52                        100188f3     MSVCRT:ftol2.obj
+ 0001:00017907       L53                        10018907     MSVCRT:ftol2.obj
+ 0001:00017909       L55                        10018909     MSVCRT:ftol2.obj
+ 0001:00017913       L56                        10018913     MSVCRT:ftol2.obj
+ 0001:0001792c       L57                        1001892c     MSVCRT:ftol2.obj
+ 0001:00017940       $$000000                   10018940     MSVCRT:ftol2.obj
+ 0001:0001795b       LA5                        1001895b     MSVCRT:ftol2.obj
+ 0001:00017970       LA6                        10018970     MSVCRT:ftol2.obj
+ 0001:00017981       LA7                        10018981     MSVCRT:ftol2.obj
+ 0001:0001798e       LA9                        1001898e     MSVCRT:ftol2.obj
+ 0001:000179d5       LAA                        100189d5     MSVCRT:ftol2.obj
+ 0001:000179dc       LAC                        100189dc     MSVCRT:ftol2.obj
+ 0001:000179e3       LAD                        100189e3     MSVCRT:ftol2.obj
+ 0001:000179ed       LAF                        100189ed     MSVCRT:ftol2.obj
+ 0001:00017a00       $$000000                   10018a00     MSVCRT:ftol2.obj
+ 0001:00017a20       $$000000                   10018a20     MSVCRT:chkstk.obj
+ 0001:00017a34       cs10                       10018a34     MSVCRT:chkstk.obj
+ 0001:00017a42       cs20                       10018a42     MSVCRT:chkstk.obj
+ 0001:00017a50       $$000000                   10018a50     MSVCRT:ftol3.obj
+ 0001:00017a60       _ftoui3_default            10018a60     MSVCRT:ftol3.obj
+ 0001:00017a6f       _ftoui3_cvt                10018a6f     MSVCRT:ftol3.obj
+ 0001:00017a74       _ftoui3_notsafe            10018a74     MSVCRT:ftol3.obj
+ 0001:00017a83       _ftoui3_neg                10018a83     MSVCRT:ftol3.obj
+ 0001:00017a8a       _ftoui3_NaN                10018a8a     MSVCRT:ftol3.obj
+ 0001:00017aa0       $$000000                   10018aa0     MSVCRT:ftol3.obj
+ 0001:00017abf       _ftoul3_default            10018abf     MSVCRT:ftol3.obj
+ 0001:00017ace       _ftoul3_cvt                10018ace     MSVCRT:ftol3.obj
+ 0001:00017ad5       _ftoul3_notsafe            10018ad5     MSVCRT:ftol3.obj
+ 0001:00017af5       _ftoul3_bigshift           10018af5     MSVCRT:ftol3.obj
+ 0001:00017afa       _ftoul3_neg                10018afa     MSVCRT:ftol3.obj
+ 0001:00017b01       _ftoul3_NaN                10018b01     MSVCRT:ftol3.obj
+ 0001:00017b10       $$000000                   10018b10     MSVCRT:ftol3.obj
+ 0001:00017b22       _ftoul3l_notsafe           10018b22     MSVCRT:ftol3.obj
  0001:00017b40       $$000000                   10018b40     MSVCRT:ftol3.obj
- 0001:00017b52       _ftoul3l_notsafe           10018b52     MSVCRT:ftol3.obj
- 0001:00017b70       $$000000                   10018b70     MSVCRT:ftol3.obj
- 0001:00017b8f       _ftol3_default             10018b8f     MSVCRT:ftol3.obj
- 0001:00017ba3       _ftol3_notsafe             10018ba3     MSVCRT:ftol3.obj
- 0001:00017bc3       _ftol3_mincheck            10018bc3     MSVCRT:ftol3.obj
- 0001:00017bc9       _ftol3_NaN                 10018bc9     MSVCRT:ftol3.obj
- 0001:00017bd1       _ftol3_retmin              10018bd1     MSVCRT:ftol3.obj
- 0001:00017be0       $$000000                   10018be0     MSVCRT:ftol3.obj
- 0001:00017bf0       _dtoui3_default            10018bf0     MSVCRT:ftol3.obj
- 0001:00017c19       _dtoui3_notsafe            10018c19     MSVCRT:ftol3.obj
- 0001:00017c30       _dtoui3_exact              10018c30     MSVCRT:ftol3.obj
- 0001:00017c39       _dtoui3_neg                10018c39     MSVCRT:ftol3.obj
- 0001:00017c48       _dtoui3_NaN                10018c48     MSVCRT:ftol3.obj
- 0001:00017c60       $$000000                   10018c60     MSVCRT:ftol3.obj
- 0001:00017c7e       _dtoul3_default            10018c7e     MSVCRT:ftol3.obj
- 0001:00017ca9       _dtoul3_notsafe            10018ca9     MSVCRT:ftol3.obj
- 0001:00017cd2       _dtoul3_exact              10018cd2     MSVCRT:ftol3.obj
- 0001:00017cd9       _dtoul3_large              10018cd9     MSVCRT:ftol3.obj
- 0001:00017ce4       _dtoul3_neg                10018ce4     MSVCRT:ftol3.obj
- 0001:00017cf5       _dtoul3_NaN                10018cf5     MSVCRT:ftol3.obj
+ 0001:00017b5f       _ftol3_default             10018b5f     MSVCRT:ftol3.obj
+ 0001:00017b73       _ftol3_notsafe             10018b73     MSVCRT:ftol3.obj
+ 0001:00017b93       _ftol3_mincheck            10018b93     MSVCRT:ftol3.obj
+ 0001:00017b99       _ftol3_NaN                 10018b99     MSVCRT:ftol3.obj
+ 0001:00017ba1       _ftol3_retmin              10018ba1     MSVCRT:ftol3.obj
+ 0001:00017bb0       $$000000                   10018bb0     MSVCRT:ftol3.obj
+ 0001:00017bc0       _dtoui3_default            10018bc0     MSVCRT:ftol3.obj
+ 0001:00017be9       _dtoui3_notsafe            10018be9     MSVCRT:ftol3.obj
+ 0001:00017c00       _dtoui3_exact              10018c00     MSVCRT:ftol3.obj
+ 0001:00017c09       _dtoui3_neg                10018c09     MSVCRT:ftol3.obj
+ 0001:00017c18       _dtoui3_NaN                10018c18     MSVCRT:ftol3.obj
+ 0001:00017c30       $$000000                   10018c30     MSVCRT:ftol3.obj
+ 0001:00017c4e       _dtoul3_default            10018c4e     MSVCRT:ftol3.obj
+ 0001:00017c79       _dtoul3_notsafe            10018c79     MSVCRT:ftol3.obj
+ 0001:00017ca2       _dtoul3_exact              10018ca2     MSVCRT:ftol3.obj
+ 0001:00017ca9       _dtoul3_large              10018ca9     MSVCRT:ftol3.obj
+ 0001:00017cb4       _dtoul3_neg                10018cb4     MSVCRT:ftol3.obj
+ 0001:00017cc5       _dtoul3_NaN                10018cc5     MSVCRT:ftol3.obj
+ 0001:00017ce0       $$000000                   10018ce0     MSVCRT:ftol3.obj
+ 0001:00017cfe       _dtoul3l_notsafe           10018cfe     MSVCRT:ftol3.obj
  0001:00017d10       $$000000                   10018d10     MSVCRT:ftol3.obj
- 0001:00017d2e       _dtoul3l_notsafe           10018d2e     MSVCRT:ftol3.obj
- 0001:00017d40       $$000000                   10018d40     MSVCRT:ftol3.obj
- 0001:00017d5e       _dtol3_default             10018d5e     MSVCRT:ftol3.obj
- 0001:00017d88       _dtol3_getbits             10018d88     MSVCRT:ftol3.obj
- 0001:00017db1       _dtol3_trunc               10018db1     MSVCRT:ftol3.obj
- 0001:00017db8       _dtol3_lshift              10018db8     MSVCRT:ftol3.obj
- 0001:00017dbe       _dtol3_notsafe             10018dbe     MSVCRT:ftol3.obj
- 0001:00017dd7       _dtol3_large               10018dd7     MSVCRT:ftol3.obj
- 0001:00017ddf       _dtol3_NaN                 10018ddf     MSVCRT:ftol3.obj
- 0001:00017de7       _dtol3_retmin              10018de7     MSVCRT:ftol3.obj
- 0001:00017df0       $$000000                   10018df0     MSVCRT:ftol3.obj
- 0001:00017e0a       _ultod3_default            10018e0a     MSVCRT:ftol3.obj
- 0001:00017e38       _ultod3_uint32             10018e38     MSVCRT:ftol3.obj
- 0001:00017e40       $$000000                   10018e40     MSVCRT:ftol3.obj
- 0001:00017e5a       _ltod3_default             10018e5a     MSVCRT:ftol3.obj
- 0001:00017e81       _ltod3_lt33                10018e81     MSVCRT:ftol3.obj
- 0001:00017e90       $$000000                   10018e90     MSVCRT:ftol3.obj
- 0001:00017eaa       _ultof3_default            10018eaa     MSVCRT:ftol3.obj
- 0001:00017eb9       _ultof3_mt31               10018eb9     MSVCRT:ftol3.obj
- 0001:00017ed6       _ultof3_mt63               10018ed6     MSVCRT:ftol3.obj
- 0001:00017f10       $$000000                   10018f10     MSVCRT:ftol3.obj
- 0001:00017f2a       _ltof3_default             10018f2a     MSVCRT:ftol3.obj
- 0001:00017f39       _ltof3_mt32                10018f39     MSVCRT:ftol3.obj
- 0001:00017f56       ?dllmain_crt_dispatch@@YGHQAUHINSTANCE__@@KQAX@Z 10018f56 f   MSVCRT:dll_dllmain.obj
- 0001:00017fa9       ?dllmain_crt_process_attach@@YAHQAUHINSTANCE__@@QAX@Z 10018fa9 f   MSVCRT:dll_dllmain.obj
- 0001:000180b0       ?dllmain_crt_process_detach@@YAH_N@Z 100190b0 f   MSVCRT:dll_dllmain.obj
- 0001:0001815e       ?dllmain_dispatch@@YAHQAUHINSTANCE__@@KQAX@Z 1001915e f   MSVCRT:dll_dllmain.obj
- 0001:00018269       ?dllmain_raw@@YGHQAUHINSTANCE__@@KQAX@Z 10019269 f   MSVCRT:dll_dllmain.obj
- 0001:000185ed       ___get_entropy             100195ed f   MSVCRT:gs_support.obj
- 0001:000186ef       ?find_pe_section@@YAPAU_IMAGE_SECTION_HEADER@@QAEI@Z 100196ef f   MSVCRT:utility.obj
- 0001:00018736       ?is_potentially_valid_image_base@@YA_NQAX@Z 10019736 f   MSVCRT:utility.obj
- 0001:00018cd0       $$000000                   10019cd0     MSVCRT:sehprolg4.obj
- 0001:00018d20       $$000000                   10019d20     MSVCRT:sehprolg4.obj
- 0001:00018dea       ___castguard_check_failure_os_handled_wrapper 10019dea f   MSVCRT:guard_support.obj
- 0001:00018e2f       ___castguard_check_failure_user_handled_wrapper 10019e2f f   MSVCRT:guard_support.obj
- 0001:00018e4e       ___castguard_compat_check  10019e4e f   MSVCRT:guard_support.obj
- 0001:00018f5c       ___castguard_slow_path_compat_check 10019f5c f   MSVCRT:guard_support.obj
+ 0001:00017d2e       _dtol3_default             10018d2e     MSVCRT:ftol3.obj
+ 0001:00017d58       _dtol3_getbits             10018d58     MSVCRT:ftol3.obj
+ 0001:00017d81       _dtol3_trunc               10018d81     MSVCRT:ftol3.obj
+ 0001:00017d88       _dtol3_lshift              10018d88     MSVCRT:ftol3.obj
+ 0001:00017d8e       _dtol3_notsafe             10018d8e     MSVCRT:ftol3.obj
+ 0001:00017da7       _dtol3_large               10018da7     MSVCRT:ftol3.obj
+ 0001:00017daf       _dtol3_NaN                 10018daf     MSVCRT:ftol3.obj
+ 0001:00017db7       _dtol3_retmin              10018db7     MSVCRT:ftol3.obj
+ 0001:00017dc0       $$000000                   10018dc0     MSVCRT:ftol3.obj
+ 0001:00017dda       _ultod3_default            10018dda     MSVCRT:ftol3.obj
+ 0001:00017e08       _ultod3_uint32             10018e08     MSVCRT:ftol3.obj
+ 0001:00017e10       $$000000                   10018e10     MSVCRT:ftol3.obj
+ 0001:00017e2a       _ltod3_default             10018e2a     MSVCRT:ftol3.obj
+ 0001:00017e51       _ltod3_lt33                10018e51     MSVCRT:ftol3.obj
+ 0001:00017e60       $$000000                   10018e60     MSVCRT:ftol3.obj
+ 0001:00017e7a       _ultof3_default            10018e7a     MSVCRT:ftol3.obj
+ 0001:00017e89       _ultof3_mt31               10018e89     MSVCRT:ftol3.obj
+ 0001:00017ea6       _ultof3_mt63               10018ea6     MSVCRT:ftol3.obj
+ 0001:00017ee0       $$000000                   10018ee0     MSVCRT:ftol3.obj
+ 0001:00017efa       _ltof3_default             10018efa     MSVCRT:ftol3.obj
+ 0001:00017f09       _ltof3_mt32                10018f09     MSVCRT:ftol3.obj
+ 0001:00017f26       ?dllmain_crt_dispatch@@YGHQAUHINSTANCE__@@KQAX@Z 10018f26 f   MSVCRT:dll_dllmain.obj
+ 0001:00017f79       ?dllmain_crt_process_attach@@YAHQAUHINSTANCE__@@QAX@Z 10018f79 f   MSVCRT:dll_dllmain.obj
+ 0001:00018080       ?dllmain_crt_process_detach@@YAH_N@Z 10019080 f   MSVCRT:dll_dllmain.obj
+ 0001:0001812e       ?dllmain_dispatch@@YAHQAUHINSTANCE__@@KQAX@Z 1001912e f   MSVCRT:dll_dllmain.obj
+ 0001:00018239       ?dllmain_raw@@YGHQAUHINSTANCE__@@KQAX@Z 10019239 f   MSVCRT:dll_dllmain.obj
+ 0001:000185bd       ___get_entropy             100195bd f   MSVCRT:gs_support.obj
+ 0001:000186bf       ?find_pe_section@@YAPAU_IMAGE_SECTION_HEADER@@QAEI@Z 100196bf f   MSVCRT:utility.obj
+ 0001:00018706       ?is_potentially_valid_image_base@@YA_NQAX@Z 10019706 f   MSVCRT:utility.obj
+ 0001:00018ca0       $$000000                   10019ca0     MSVCRT:sehprolg4.obj
+ 0001:00018cf0       $$000000                   10019cf0     MSVCRT:sehprolg4.obj
+ 0001:00018dba       ___castguard_check_failure_os_handled_wrapper 10019dba f   MSVCRT:guard_support.obj
+ 0001:00018dff       ___castguard_check_failure_user_handled_wrapper 10019dff f   MSVCRT:guard_support.obj
+ 0001:00018e1e       ___castguard_compat_check  10019e1e f   MSVCRT:guard_support.obj
+ 0001:00018f2c       ___castguard_slow_path_compat_check 10019f2c f   MSVCRT:guard_support.obj
  0002:00001770       two32                      1001c770     MSVCRT:ftol2.obj
  0002:00001774       two63                      1001c774     MSVCRT:ftol2.obj
  0002:00001778       _NaN                       1001c778     MSVCRT:ftol2.obj

@@ -84,9 +84,6 @@
     <ClCompile Include="resampleF.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ringb.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="sdr.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -127,6 +124,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cwtones.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ringb.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -247,9 +247,6 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ringb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="sched.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -284,6 +281,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cwtones.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ringb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

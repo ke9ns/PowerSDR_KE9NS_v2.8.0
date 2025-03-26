@@ -1198,7 +1198,7 @@ namespace PowerSDR
         public int band_16m_index;
         public int band_14m_index;
         public int band_13m_index;
-        public int band_11m_index;
+        public int band_11m_index; // ke9ns
 
         public int band_vhf0_index;
         public int band_vhf1_index;
@@ -1245,7 +1245,7 @@ namespace PowerSDR
         public int band_16m_register;
         public int band_14m_register;
         public int band_13m_register;
-        public int band_11m_register;
+        public int band_11m_register; // ke9ns
 
         public int band_vhf0_register;
         public int band_vhf1_register;

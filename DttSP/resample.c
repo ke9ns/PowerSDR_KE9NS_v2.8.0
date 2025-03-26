@@ -35,10 +35,7 @@ Bridgewater, NJ 08807
 
 #include <common.h>
 
-DttSP_EXP ResSt
-newPolyPhaseFIR (int filterMemoryBuffLength,
-		 int indexfiltMemBuf,
-		 int interpFactor, int filterPhaseNum, int deciFactor)
+DttSP_EXP ResSt newPolyPhaseFIR (int filterMemoryBuffLength, int indexfiltMemBuf, int interpFactor, int filterPhaseNum, int deciFactor)
 {
   ResSt tmp;
   tmp = (ResSt) safealloc (1, sizeof (resampler), "PF Resampler");
@@ -70,8 +67,7 @@ delPolyPhaseFIR (ResSt resst)
     }
 }
 
-DttSP_EXP void
-PolyPhaseFIR (ResSt resst)
+DttSP_EXP void PolyPhaseFIR (ResSt resst)
 /******************************************************************************
 * CALLING PARAMETERS:
 * Name          Use    Description
@@ -125,6 +121,9 @@ PolyPhaseFIR (ResSt resst)
 *******************************************************************************
 * Type              Name                 Description
 * ____              ____                 ___________                         */
+
+
+
   int i, j, k, jj;		/* counter variables */
   COMPLEX *outptr;
 
