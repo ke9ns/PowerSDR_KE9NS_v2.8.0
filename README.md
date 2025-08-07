@@ -9,7 +9,7 @@ see ke9ns.com\flexpage.html#GPLREV for revision history since 2.7.2 Written in C
 Currently compiled under VS2022 (including C and C++ and C# modules) and .NET 4.8
 
 
-IMPORTANT: To make sure this project will compile and run correctly, go to ke9sn.com/flexpage.html then download and install the full PowerSDR ke9ns v2.8.0 installer (Orange button)
+IMPORTANT: To make sure this project will compile and run correctly, go to ke9ns.com/flexpage.html then download and install the full PowerSDR ke9ns v2.8.0 installer (Orange button)
 This will make sure all DLLs and EXEs are in the correct locations ahead of time.
 
 Then in Visual Studio, Clone this github project (https://github.com/ke9ns/PowerSDR_KE9NS_v2.8.0) 
